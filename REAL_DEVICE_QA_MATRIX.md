@@ -1,6 +1,6 @@
 # Real-device QA matrix — Luisa 24 Heures
 
-Package: prototype-67 / Stage 5B real-device QA package
+Package: prototype-70 / Stage 5C-R4 minute recheck package
 
 Purpose: execute these tests on real devices before public or closed-beta sharing. Record results in REAL_DEVICE_QA_RESULTS_TEMPLATE.csv.
 
@@ -20,7 +20,7 @@ Purpose: execute these tests on real devices before public or closed-beta sharin
 | ID | Test | Expected result |
 |---|---|---|
 | RDQ-001 | Open deployment URL fresh | App loads without visible error. |
-| RDQ-002 | Confirm version from app/about/deploy metadata | prototype-67 / Stage 5B package context is clear. |
+| RDQ-002 | Confirm version from app/about/deploy metadata | prototype-70 / Stage 5C-R4 package context is clear. |
 | RDQ-003 | Add to Home Screen on iPhone | App icon appears; launch opens the app. |
 | RDQ-004 | Add to Home Screen on iPad | App icon appears; launch opens the app. |
 | RDQ-005 | Refresh while online | No blank screen; same content remains usable. |

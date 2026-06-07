@@ -1,6 +1,6 @@
-# Deployment handoff — Stage 5B real-device QA package
+# Deployment handoff — Stage 5C-R4 real-device QA package
 
-Package status: prototype-67 / Stage 5B real-device QA package.
+Package status: prototype-70 / Stage 5C-R4 minute recheck package.
 
 Use deploy/luisa_24h_github_deploy.zip for GitHub Pages deployment testing.
 

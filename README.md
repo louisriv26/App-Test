@@ -1,3 +1,5 @@
-# Luisa 24 Heures — prototype-67 Stage 5C-R1 deep code audit repair
+# Luisa 24 Heures — prototype-70 Stage 5C-R4 minute recheck repair
 
-Current deploy package for Stage 5C-R1. Mobile help button visibility was repaired after a four-pass code audit. No devotional/source text and no Word review packs were changed.
+Deployment package for real-device QA.
+
+Scope: user-facing description/status cleanup, QA/deploy documentation refresh, and evidence reports rebuilt with direct proof after minute recheck. Approved devotional/source text bodies unchanged.
