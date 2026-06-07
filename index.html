@@ -1009,6 +1009,82 @@ html, body, #app, .main, .content,
 @media (min-width:768px) and (max-width:1149px) { .header-actions { gap:0.75rem; } #monEspaceToggle { margin-left:0.85rem; } }
 /* End Stage 5D real-device QA repairs */
 
+/* ── Stage 5E selection action bar repair ── */
+.selection-action-bar {
+  position: fixed;
+  left: max(10px, env(safe-area-inset-left, 0px));
+  right: max(10px, env(safe-area-inset-right, 0px));
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 76px);
+  z-index: 680;
+  background: var(--bg);
+  border: 1px solid var(--accent-soft, var(--bg3));
+  border-radius: 18px;
+  box-shadow: var(--shadow-lg);
+  padding: 0.75rem 0.85rem 0.85rem;
+  transform: translateY(140%);
+  opacity: 0;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+.selection-action-bar.visible { transform: translateY(0); opacity: 1; }
+.selection-action-label {
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink4);
+  text-align: center;
+  margin-bottom: 0.55rem;
+}
+.selection-action-buttons { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.45rem; }
+.selection-action-btn {
+  min-height: 58px;
+  border: 1px solid var(--bg3);
+  border-radius: 12px;
+  background: var(--bg2);
+  color: var(--ink2);
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 750;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.selection-action-btn:active,
+.selection-action-btn:focus-visible,
+.selection-action-btn:hover { background: var(--accent-pale); color: var(--accent); border-color: var(--accent-light); outline: none; }
+.selection-action-btn.close { color: var(--ink4); }
+.selection-action-icon { font-size: 1.25rem; line-height: 1; }
+.colour-picker { z-index: 700; }
+@media (max-width: 420px) {
+  .selection-action-buttons { gap: 0.35rem; }
+  .selection-action-btn { min-height: 54px; font-size: 0.70rem; }
+}
+/* End Stage 5E selection action bar repair */
+
+
+/* Stage 5F — navigation-shell cleanup, help modal, and hour-end actions */
+#menuBtn, #sidebar, #sidebarOverlay { display: none !important; }
+.sidebar.open, .sidebar-overlay.open { display: none !important; transform: none !important; opacity: 0 !important; pointer-events: none !important; }
+.main { grid-template-columns: 1fr !important; }
+.content { width: 100% !important; max-width: 100% !important; }
+.help-modal-overlay { position: fixed; inset: 0; z-index: 5000; background: rgba(44,32,28,0.42); display: flex; align-items: center; justify-content: center; padding: max(1rem, env(safe-area-inset-top,0px)) 1rem max(1rem, env(safe-area-inset-bottom,0px)); }
+.help-modal { width: min(760px, 100%); max-height: min(86svh, 760px); overflow: auto; -webkit-overflow-scrolling: touch; background: var(--bg); color: var(--ink); border: 1px solid var(--bg3); border-radius: 24px; box-shadow: 0 24px 70px rgba(0,0,0,0.28); padding: 1.05rem; }
+.help-modal-topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; position: sticky; top: 0; z-index: 1; background: linear-gradient(var(--bg), var(--bg)); padding-bottom: 0.65rem; border-bottom: 1px solid var(--bg3); margin-bottom: 0.75rem; }
+.help-modal-kicker { font-family: var(--font-ui); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+.help-modal-title { margin: 0.15rem 0 0; font-family: var(--font-display); font-size: 1.35rem; }
+.help-modal-close { min-width: 44px; min-height: 44px; border: 1px solid var(--bg3); border-radius: 999px; background: var(--bg2); color: var(--ink2); font-weight: 700; cursor: pointer; padding: 0 0.9rem; }
+.hour-end-actions { margin: 2rem 0 1.2rem; padding: 1rem; border-radius: 18px; border: 1px solid var(--accent-light); background: linear-gradient(135deg, rgba(246,238,225,0.88), rgba(255,255,255,0.72)); }
+.hour-end-title { font-family: var(--font-display); font-size: 1.08rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--accent); }
+.hour-end-note { color: var(--ink3); font-family: var(--font-ui); font-size: 0.9rem; margin-bottom: 0.75rem; }
+.hour-end-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.hour-end-btn { min-height: 42px; border: 1px solid var(--bg3); border-radius: 999px; padding: 0.5rem 0.85rem; background: var(--bg); color: var(--ink2); font-family: var(--font-ui); font-weight: 650; cursor: pointer; }
+.hour-end-btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
+@media (max-width: 767px) { .help-modal-overlay { align-items: flex-end; padding: 0; } .help-modal { border-radius: 24px 24px 0 0; width: 100%; max-height: 88svh; } .hour-end-buttons { flex-direction: column; } .hour-end-btn { width: 100%; } }
+
 </style>
 </head>
 <body>
@@ -3491,360 +3567,7 @@ const PASSION24_RELATED_BY_HOUR = Object.freeze({
   ]
 });
 
-const SPEECH_DATA = {
-  "PASSION24.HOUR.01.P014":[{"speaker":"JESUS","start":94,"end":117}],
-  "PASSION24.HOUR.02.P009":[{"speaker":"MARY","start":2,"end":92}],
-  "PASSION24.HOUR.02.P012":[{"speaker":"JESUS","start":264,"end":389}],
-  "PASSION24.HOUR.02.P014":[{"speaker":"JESUS","start":2,"end":201}],
-  "PASSION24.HOUR.02.P015":[{"speaker":"JESUS","start":15,"end":145}],
-  "PASSION24.HOUR.03.P003":[{"speaker":"JESUS","start":2,"end":101}],
-  "PASSION24.HOUR.04.P005":[{"speaker":"JESUS","start":2,"end":349}],
-  "PASSION24.HOUR.04.P006":[{"speaker":"JESUS","start":0,"end":84}],
-  "PASSION24.HOUR.04.P007":[{"speaker":"JESUS","start":0,"end":315}],
-  "PASSION24.HOUR.04.P009":[{"speaker":"JESUS","start":0,"end":7}],
-  "PASSION24.HOUR.04.P010":[{"speaker":"JESUS","start":0,"end":137}],
-  "PASSION24.HOUR.04.P020":[{"speaker":"JESUS","start":2,"end":102}],
-  "PASSION24.HOUR.04.P021":[{"speaker":"JESUS","start":0,"end":189}],
-  "PASSION24.HOUR.04.P027":[{"speaker":"JESUS","start":2,"end":222}],
-  "PASSION24.HOUR.04.P028":[{"speaker":"JESUS","start":0,"end":378}],
-  "PASSION24.HOUR.04.P029":[{"speaker":"JESUS","start":0,"end":35}],
-  "PASSION24.HOUR.04.P030":[{"speaker":"JESUS","start":0,"end":123}],
-  "PASSION24.HOUR.04.P031":[{"speaker":"JESUS","start":0,"end":111}],
-  "PASSION24.HOUR.04.P055":[{"speaker":"JESUS","start":21,"end":176}],
-  "PASSION24.HOUR.04.P056":[{"speaker":"JESUS","start":0,"end":209}],
-  "PASSION24.HOUR.04.P057":[{"speaker":"JESUS","start":0,"end":219}],
-  "PASSION24.HOUR.04.P058":[{"speaker":"JESUS","start":0,"end":91}],
-  "PASSION24.HOUR.05.P009":[{"speaker":"JESUS","start":60,"end":170}],
-  "PASSION24.HOUR.05.P010":[{"speaker":"JESUS","start":0,"end":168}],
-  "PASSION24.HOUR.05.P011":[{"speaker":"JESUS","start":0,"end":171}],
-  "PASSION24.HOUR.05.P012":[{"speaker":"JESUS","start":0,"end":135}],
-  "PASSION24.HOUR.05.P021":[{"speaker":"JESUS","start":2,"end":233}],
-  "PASSION24.HOUR.05.P022":[{"speaker":"JESUS","start":0,"end":140}],
-  "PASSION24.HOUR.05.P023":[{"speaker":"JESUS","start":0,"end":480}],
-  "PASSION24.HOUR.06.P011":[{"speaker":"JESUS","start":2,"end":104}],
-  "PASSION24.HOUR.06.P013":[{"speaker":"JESUS","start":2,"end":140}],
-  "PASSION24.HOUR.07.P006":[{"speaker":"JESUS","start":2,"end":163}],
-  "PASSION24.HOUR.07.P010":[{"speaker":"JESUS","start":2,"end":105}],
-  "PASSION24.HOUR.07.P011":[{"speaker":"JESUS","start":0,"end":188}],
-  "PASSION24.HOUR.07.P012":[{"speaker":"JESUS","start":0,"end":145}],
-  "PASSION24.HOUR.07.P013":[{"speaker":"JESUS","start":2,"end":80}],
-  "PASSION24.HOUR.07.P014":[{"speaker":"JESUS","start":0,"end":154}],
-  "PASSION24.HOUR.07.P015":[{"speaker":"JESUS","start":0,"end":229}],
-  "PASSION24.HOUR.07.P067":[{"speaker":"JESUS","start":2,"end":225}],
-  "PASSION24.HOUR.07.P072":[{"speaker":"JESUS","start":2,"end":100}],
-  "PASSION24.HOUR.07.P073":[{"speaker":"JESUS","start":0,"end":219}],
-  "PASSION24.HOUR.07.P074":[{"speaker":"JESUS","start":0,"end":105}],
-  "PASSION24.HOUR.07.P075":[{"speaker":"JESUS","start":0,"end":87}],
-  "PASSION24.HOUR.07.P076":[{"speaker":"JESUS","start":0,"end":126}],
-  "PASSION24.HOUR.08.P006":[{"speaker":"JESUS","start":333,"end":367},{"speaker":"JESUS","start":503,"end":541}],
-  "PASSION24.HOUR.08.P007":[{"speaker":"JESUS","start":14,"end":40},{"speaker":"JESUS","start":112,"end":138}],
-  "PASSION24.HOUR.08.P008":[{"speaker":"JESUS","start":22,"end":47}],
-  "PASSION24.HOUR.08.P010":[{"speaker":"JESUS","start":302,"end":321}],
-  "PASSION24.HOUR.08.P012":[{"speaker":"JESUS","start":22,"end":32}],
-  "PASSION24.HOUR.08.P013":[{"speaker":"JESUS","start":38,"end":48}],
-  "PASSION24.HOUR.09.P005":[{"speaker":"JESUS","start":39,"end":219}],
-  "PASSION24.HOUR.09.P006":[{"speaker":"JESUS","start":0,"end":109}],
-  "PASSION24.HOUR.09.P007":[{"speaker":"JESUS","start":0,"end":121}],
-  "PASSION24.HOUR.09.P008":[{"speaker":"JESUS","start":0,"end":159}],
-  "PASSION24.HOUR.09.P009":[{"speaker":"JESUS","start":0,"end":145}],
-  "PASSION24.HOUR.10.P002":[{"speaker":"JESUS","start":141,"end":204}],
-  "PASSION24.HOUR.11.P005":[{"speaker":"JESUS","start":196,"end":352}],
-  "PASSION24.HOUR.11.P006":[{"speaker":"JESUS","start":0,"end":72}],
-  "PASSION24.HOUR.11.P007":[{"speaker":"JESUS","start":0,"end":100}],
-  "PASSION24.HOUR.11.P008":[{"speaker":"JESUS","start":0,"end":167}],
-  "PASSION24.HOUR.11.P009":[{"speaker":"JESUS","start":0,"end":139}],
-  "PASSION24.HOUR.11.P015":[{"speaker":"JESUS","start":2,"end":128}],
-  "PASSION24.HOUR.11.P016":[{"speaker":"JESUS","start":0,"end":249}],
-  "PASSION24.HOUR.11.P021":[{"speaker":"JESUS","start":138,"end":260}],
-  "PASSION24.HOUR.13.P005":[{"speaker":"JESUS","start":18,"end":145}],
-  "PASSION24.HOUR.13.P006":[{"speaker":"JESUS","start":2,"end":107}],
-  "PASSION24.HOUR.13.P007":[{"speaker":"JESUS","start":0,"end":170}],
-  "PASSION24.HOUR.13.P008":[{"speaker":"JESUS","start":0,"end":159}],
-  "PASSION24.HOUR.14.P004":[{"speaker":"JESUS","start":95,"end":125}],
-  "PASSION24.HOUR.15.P005":[{"speaker":"JESUS","start":2,"end":160}],
-  "PASSION24.HOUR.15.P006":[{"speaker":"JESUS","start":19,"end":86}],
-  "PASSION24.HOUR.16.P022":[{"speaker":"JESUS","start":2,"end":245}],
-  "PASSION24.HOUR.16.P023":[{"speaker":"JESUS","start":0,"end":94}],
-  "PASSION24.HOUR.16.P024":[{"speaker":"JESUS","start":0,"end":74}],
-  "PASSION24.HOUR.16.P035":[{"speaker":"JESUS","start":2,"end":367}],
-  "PASSION24.HOUR.16.P036":[{"speaker":"JESUS","start":0,"end":221}],
-  "PASSION24.HOUR.16.P037":[{"speaker":"JESUS","start":0,"end":105}],
-  "PASSION24.HOUR.16.P038":[{"speaker":"JESUS","start":0,"end":191}],
-  "PASSION24.HOUR.17.P008":[{"speaker":"JESUS","start":2,"end":98}],
-  "PASSION24.HOUR.17.P009":[{"speaker":"JESUS","start":0,"end":235}],
-  "PASSION24.HOUR.17.P010":[{"speaker":"JESUS","start":0,"end":150}],
-  "PASSION24.HOUR.17.P011":[{"speaker":"JESUS","start":0,"end":132}],
-  "PASSION24.HOUR.17.P012":[{"speaker":"JESUS","start":0,"end":136}],
-  "PASSION24.HOUR.17.P013":[{"speaker":"JESUS","start":0,"end":45}],
-  "PASSION24.HOUR.17.P022":[{"speaker":"JESUS","start":183,"end":344}],
-  "PASSION24.HOUR.17.P023":[{"speaker":"JESUS","start":0,"end":163}],
-  "PASSION24.HOUR.17.P024":[{"speaker":"JESUS","start":0,"end":122}],
-  "PASSION24.HOUR.17.P034":[{"speaker":"JESUS","start":2,"end":128}],
-  "PASSION24.HOUR.17.P035":[{"speaker":"JESUS","start":0,"end":92}],
-  "PASSION24.HOUR.17.P036":[{"speaker":"JESUS","start":0,"end":42}],
-  "PASSION24.HOUR.17.P037":[{"speaker":"JESUS","start":0,"end":406}],
-  "PASSION24.HOUR.17.P038":[{"speaker":"JESUS","start":0,"end":148}],
-  "PASSION24.HOUR.17.P039":[{"speaker":"JESUS","start":0,"end":46}],
-  "PASSION24.HOUR.17.P040":[{"speaker":"JESUS","start":0,"end":97}],
-  "PASSION24.HOUR.17.P041":[{"speaker":"JESUS","start":0,"end":291}],
-  "PASSION24.HOUR.17.P045":[{"speaker":"JESUS","start":116,"end":270}],
-  "PASSION24.HOUR.17.P054":[{"speaker":"MARY","start":99,"end":122}],
-  "PASSION24.HOUR.17.P058":[{"speaker":"JESUS","start":2,"end":235}],
-  "PASSION24.HOUR.17.P059":[{"speaker":"JESUS","start":0,"end":108}],
-  "PASSION24.HOUR.17.P060":[{"speaker":"JESUS","start":0,"end":134}],
-  "PASSION24.HOUR.17.P061":[{"speaker":"JESUS","start":0,"end":220}],
-  "PASSION24.HOUR.17.P062":[{"speaker":"JESUS","start":0,"end":174}],
-  "PASSION24.HOUR.17.P063":[{"speaker":"JESUS","start":0,"end":165}],
-  "PASSION24.HOUR.17.REF.P009":[{"speaker":"JESUS","start":2,"end":220}],
-  "PASSION24.HOUR.17.REF.P010":[{"speaker":"JESUS","start":0,"end":172}],
-  "PASSION24.HOUR.17.REF.P011":[{"speaker":"JESUS","start":0,"end":172}],
-  "PASSION24.HOUR.18.P002":[{"speaker":"JESUS","start":52,"end":59}],
-  "PASSION24.HOUR.18.P005":[{"speaker":"JESUS","start":2,"end":114}],
-  "PASSION24.HOUR.18.P012":[{"speaker":"JESUS","start":2,"end":268}],
-  "PASSION24.HOUR.18.P013":[{"speaker":"JESUS","start":0,"end":279}],
-  "PASSION24.HOUR.18.P014":[{"speaker":"JESUS","start":0,"end":161}],
-  "PASSION24.HOUR.18.P015":[{"speaker":"JESUS","start":0,"end":248}],
-  "PASSION24.HOUR.18.P016":[{"speaker":"JESUS","start":0,"end":173}],
-  "PASSION24.HOUR.18.P017":[{"speaker":"JESUS","start":0,"end":83}],
-  "PASSION24.HOUR.18.P018":[{"speaker":"JESUS","start":0,"end":77}],
-  "PASSION24.HOUR.18.P024":[{"speaker":"JESUS","start":119,"end":310}],
-  "PASSION24.HOUR.18.P025":[{"speaker":"JESUS","start":0,"end":447}],
-  "PASSION24.HOUR.18.P026":[{"speaker":"JESUS","start":0,"end":154}],
-  "PASSION24.HOUR.18.P083":[{"speaker":"JESUS","start":201,"end":279}],
-  "PASSION24.HOUR.18.P091":[{"speaker":"JESUS","start":189,"end":480}],
-  "PASSION24.HOUR.18.P092":[{"speaker":"JESUS","start":0,"end":358}],
-  "PASSION24.HOUR.18.P093":[{"speaker":"JESUS","start":0,"end":146}],
-  "PASSION24.HOUR.19.P015":[{"speaker":"JESUS","start":0,"end":110}],
-  "PASSION24.HOUR.19.P016":[{"speaker":"JESUS","start":0,"end":385}],
-  "PASSION24.HOUR.19.P017":[{"speaker":"JESUS","start":0,"end":93}],
-  "PASSION24.HOUR.19.P024":[{"speaker":"JESUS","start":2,"end":111}],
-  "PASSION24.HOUR.19.P025":[{"speaker":"JESUS","start":0,"end":121}],
-  "PASSION24.HOUR.19.P065":[{"speaker":"JESUS","start":2,"end":223}],
-  "PASSION24.HOUR.19.P066":[{"speaker":"JESUS","start":0,"end":299}],
-  "PASSION24.HOUR.19.P078":[{"speaker":"JESUS","start":563,"end":690}],
-  "PASSION24.HOUR.19.P079":[{"speaker":"JESUS","start":0,"end":155}],
-  "PASSION24.HOUR.19.P080":[{"speaker":"JESUS","start":0,"end":195}],
-  "PASSION24.HOUR.19.P088":[{"speaker":"JESUS","start":433,"end":534}],
-  "PASSION24.HOUR.19.P089":[{"speaker":"JESUS","start":0,"end":76}],
-  "PASSION24.HOUR.19.P090":[{"speaker":"JESUS","start":0,"end":171}],
-  "PASSION24.HOUR.19.P091":[{"speaker":"JESUS","start":0,"end":209}],
-  "PASSION24.HOUR.19.P092":[{"speaker":"JESUS","start":0,"end":218}],
-  "PASSION24.HOUR.19.P099":[{"speaker":"JESUS","start":183,"end":237}],
-  "PASSION24.HOUR.19.P101":[{"speaker":"JESUS","start":2,"end":115}],
-  "PASSION24.HOUR.19.P102":[{"speaker":"JESUS","start":0,"end":201}],
-  "PASSION24.HOUR.19.P103":[{"speaker":"JESUS","start":0,"end":143}],
-  "PASSION24.HOUR.19.P109":[{"speaker":"JESUS","start":2,"end":74}],
-  "PASSION24.HOUR.19.P110":[{"speaker":"JESUS","start":0,"end":146}],
-  "PASSION24.HOUR.19.P111":[{"speaker":"JESUS","start":0,"end":236}],
-  "PASSION24.HOUR.19.P112":[{"speaker":"JESUS","start":0,"end":115}],
-  "PASSION24.HOUR.19.P113":[{"speaker":"JESUS","start":0,"end":117}],
-  "PASSION24.HOUR.19.P121":[{"speaker":"JESUS","start":2,"end":178}],
-  "PASSION24.HOUR.19.P122":[{"speaker":"JESUS","start":0,"end":90}],
-  "PASSION24.HOUR.19.P123":[{"speaker":"JESUS","start":0,"end":113}],
-  "PASSION24.HOUR.19.P124":[{"speaker":"JESUS","start":0,"end":167}],
-  "PASSION24.HOUR.19.P139":[{"speaker":"JESUS","start":37,"end":109}],
-  "PASSION24.HOUR.19.P140":[{"speaker":"JESUS","start":0,"end":127}],
-  "PASSION24.HOUR.19.P141":[{"speaker":"JESUS","start":0,"end":98},{"speaker":"JESUS","start":101,"end":378}],
-  "PASSION24.HOUR.19.P142":[{"speaker":"JESUS","start":0,"end":232}],
-  "PASSION24.HOUR.19.P143":[{"speaker":"JESUS","start":0,"end":180}],
-  "PASSION24.HOUR.19.P144":[{"speaker":"JESUS","start":0,"end":157}],
-  "PASSION24.HOUR.19.P145":[{"speaker":"JESUS","start":0,"end":130}],
-  "PASSION24.HOUR.19.P146":[{"speaker":"JESUS","start":0,"end":130}],
-  "PASSION24.HOUR.19.P147":[{"speaker":"JESUS","start":0,"end":105}],
-  "PASSION24.HOUR.19.P148":[{"speaker":"JESUS","start":0,"end":132}],
-  "PASSION24.HOUR.19.P149":[{"speaker":"JESUS","start":0,"end":183}],
-  "PASSION24.HOUR.19.P150":[{"speaker":"JESUS","start":0,"end":61}],
-  "PASSION24.HOUR.19.P151":[{"speaker":"JESUS","start":0,"end":316}],
-  "PASSION24.HOUR.19.P152":[{"speaker":"JESUS","start":0,"end":289}],
-  "PASSION24.HOUR.19.P153":[{"speaker":"JESUS","start":0,"end":121}],
-  "PASSION24.HOUR.19.P154":[{"speaker":"JESUS","start":0,"end":342}],
-  "PASSION24.HOUR.19.P155":[{"speaker":"JESUS","start":0,"end":196}],
-  "PASSION24.HOUR.19.P156":[{"speaker":"JESUS","start":0,"end":104}],
-  "PASSION24.HOUR.19.P157":[{"speaker":"JESUS","start":0,"end":151}],
-  "PASSION24.HOUR.19.P158":[{"speaker":"JESUS","start":0,"end":221}],
-  "PASSION24.HOUR.19.P159":[{"speaker":"JESUS","start":0,"end":120}],
-  "PASSION24.HOUR.19.REF.P011":[{"speaker":"JESUS","start":68,"end":234}],
-  "PASSION24.HOUR.19.REF.P012":[{"speaker":"JESUS","start":0,"end":226}],
-  "PASSION24.HOUR.19.REF.P013":[{"speaker":"JESUS","start":0,"end":188}],
-  "PASSION24.HOUR.19.REF.P014":[{"speaker":"JESUS","start":0,"end":202}],
-  "PASSION24.HOUR.20.P001":[{"speaker":"JESUS","start":0,"end":81}],
-  "PASSION24.HOUR.20.P008":[{"speaker":"JESUS","start":2,"end":61}],
-  "PASSION24.HOUR.20.P012":[{"speaker":"JESUS","start":110,"end":186}],
-  "PASSION24.HOUR.21.P001":[{"speaker":"JESUS","start":20,"end":62}],
-  "PASSION24.HOUR.21.P007":[{"speaker":"JESUS","start":2,"end":55}],
-  "PASSION24.HOUR.21.P016":[{"speaker":"JESUS","start":2,"end":45}],
-  "PASSION24.HOUR.21.P017":[{"speaker":"JESUS","start":44,"end":67},{"speaker":"JESUS","start":84,"end":99}],
-  "PASSION24.HOUR.21.P019":[{"speaker":"JESUS","start":20,"end":135}],
-  "PASSION24.HOUR.21.P021":[{"speaker":"JESUS","start":93,"end":116},{"speaker":"JESUS","start":140,"end":155}],
-  "PASSION24.HOUR.21.P023":[{"speaker":"JESUS","start":2,"end":214}],
-  "PASSION24.HOUR.21.P040":[{"speaker":"JESUS","start":21,"end":69}],
-  "PASSION24.HOUR.21.P041":[{"speaker":"JESUS","start":287,"end":335}],
-  "PASSION24.HOUR.21.P047":[{"speaker":"JESUS","start":2,"end":114}],
-  "PASSION24.HOUR.21.P048":[{"speaker":"JESUS","start":0,"end":134}],
-  "PASSION24.HOUR.21.P049":[{"speaker":"JESUS","start":0,"end":84}],
-  "PASSION24.HOUR.21.P056":[{"speaker":"JESUS","start":2,"end":40}],
-  "PASSION24.HOUR.21.REF.P008":[{"speaker":"JESUS","start":56,"end":104}],
-  "PASSION24.HOUR.22.P001":[{"speaker":"JESUS","start":21,"end":32}],
-  "PASSION24.HOUR.22.P006":[{"speaker":"JESUS","start":147,"end":158}],
-  "PASSION24.HOUR.22.P007":[{"speaker":"JESUS","start":2,"end":193}],
-  "PASSION24.HOUR.22.P008":[{"speaker":"JESUS","start":0,"end":165}],
-  "PASSION24.HOUR.22.P014":[{"speaker":"JESUS","start":19,"end":38}],
-  "PASSION24.HOUR.22.P018":[{"speaker":"JESUS","start":2,"end":21}],
-  "PASSION24.HOUR.22.P020":[{"speaker":"JESUS","start":20,"end":67}],
-  "PASSION24.HOUR.22.P023":[{"speaker":"JESUS","start":98,"end":187}],
-  "PASSION24.HOUR.22.P024":[{"speaker":"JESUS","start":89,"end":96}],
-  "PASSION24.HOUR.22.P025":[{"speaker":"JESUS","start":69,"end":119}],
-  "PASSION24.HOUR.22.P026":[{"speaker":"JESUS","start":145,"end":190}],
-  "PASSION24.HOUR.22.P030":[{"speaker":"JESUS","start":120,"end":184}],
-  "PASSION24.HOUR.22.REF.P001":[{"speaker":"JESUS","start":216,"end":235}],
-  "PASSION24.HOUR.23.P008":[{"speaker":"JESUS","start":14,"end":131}],
-  "PASSION24.HOUR.23.P009":[{"speaker":"JESUS","start":0,"end":92}],
-  "PASSION24.HOUR.23.P010":[{"speaker":"JESUS","start":0,"end":251}],
-  "PASSION24.HOUR.23.P011":[{"speaker":"JESUS","start":0,"end":123}],
-  "PASSION24.HOUR.23.P012":[{"speaker":"JESUS","start":0,"end":132}],
-  "PASSION24.HOUR.23.P013":[{"speaker":"JESUS","start":0,"end":227}],
-  "PASSION24.HOUR.23.P014":[{"speaker":"JESUS","start":0,"end":136}],
-  "PASSION24.HOUR.24.DESOL.P002":[{"speaker":"MARY","start":2,"end":138}],
-  "PASSION24.HOUR.24.DESOL.P010":[{"speaker":"MARY","start":2,"end":186}],
-  "PASSION24.HOUR.24.DESOL.P011":[{"speaker":"MARY","start":0,"end":97}],
-  "PASSION24.HOUR.24.DESOL.P012":[{"speaker":"MARY","start":0,"end":78}],
-  "PASSION24.HOUR.24.DESOL.P013":[{"speaker":"MARY","start":0,"end":72}],
-  "PASSION24.HOUR.24.DESOL.P014":[{"speaker":"MARY","start":0,"end":334}],
-  "PASSION24.HOUR.24.DESOL.P017":[{"speaker":"MARY","start":2,"end":341}],
-  "PASSION24.HOUR.24.DESOL.P018":[{"speaker":"MARY","start":0,"end":174}],
-  "PASSION24.HOUR.24.DESOL.P019":[{"speaker":"MARY","start":430,"end":744}],
-  "PASSION24.HOUR.24.DESOL.P020":[{"speaker":"MARY","start":0,"end":445}],
-  "PASSION24.HOUR.24.DESOL.P021":[{"speaker":"MARY","start":0,"end":77}],
-  "PASSION24.HOUR.24.DESOL.P026":[{"speaker":"MARY","start":2,"end":367}],
-  "PASSION24.HOUR.24.DESOL.P027":[{"speaker":"MARY","start":0,"end":98}],
-  "PASSION24.HOUR.24.DESOL.P028":[{"speaker":"MARY","start":0,"end":65}],
-  "PASSION24.HOUR.24.DESOL.P029":[{"speaker":"MARY","start":0,"end":129}],
-  "PASSION24.HOUR.24.DESOL.P030":[{"speaker":"MARY","start":0,"end":117}],
-  "PASSION24.HOUR.24.DESOL.P031":[{"speaker":"MARY","start":0,"end":204}],
-  "PASSION24.HOUR.24.DESOL.P047":[{"speaker":"MARY","start":26,"end":139}],
-  "PASSION24.HOUR.24.DESOL.P048":[{"speaker":"MARY","start":0,"end":186}],
-  "PASSION24.HOUR.24.DESOL.P049":[{"speaker":"MARY","start":0,"end":321}],
-  "PASSION24.HOUR.24.DESOL.P050":[{"speaker":"MARY","start":0,"end":202}],
-  "PASSION24.HOUR.24.DESOL.P051":[{"speaker":"MARY","start":0,"end":184}],
-  "PASSION24.HOUR.24.DESOL.P056":[{"speaker":"MARY","start":2,"end":120}],
-  "PASSION24.SECTION.BENEFITS.P004":[{"speaker":"JESUS","start":0,"end":175}],
-  "PASSION24.SECTION.BENEFITS.P005":[{"speaker":"JESUS","start":0,"end":239}],
-  "PASSION24.SECTION.BENEFITS.P006":[{"speaker":"JESUS","start":0,"end":74}],
-  "PASSION24.SECTION.BENEFITS.P007":[{"speaker":"JESUS","start":0,"end":155}],
-  "PASSION24.SECTION.BENEFITS.P008":[{"speaker":"JESUS","start":0,"end":162}],
-  "PASSION24.SECTION.BENEFITS.P009":[{"speaker":"JESUS","start":0,"end":94}],
-  "PASSION24.SECTION.BENEFITS.P010":[{"speaker":"JESUS","start":0,"end":124}],
-  "PASSION24.SECTION.BENEFITS.P011":[{"speaker":"JESUS","start":0,"end":345}],
-  "PASSION24.SECTION.BENEFITS.P012":[{"speaker":"JESUS","start":0,"end":159}],
-  "PASSION24.SECTION.BENEFITS.P013":[{"speaker":"JESUS","start":0,"end":155}],
-  "PASSION24.SECTION.BENEFITS.P014":[{"speaker":"JESUS","start":0,"end":81}],
-  "PASSION24.SECTION.BENEFITS.P016":[{"speaker":"JESUS","start":2,"end":207}],
-  "PASSION24.SECTION.BENEFITS.P017":[{"speaker":"JESUS","start":0,"end":249}],
-  "PASSION24.SECTION.BENEFITS.P020":[{"speaker":"JESUS","start":28,"end":155}],
-  "PASSION24.SECTION.BENEFITS.P021":[{"speaker":"JESUS","start":0,"end":122}],
-  "PASSION24.SECTION.BENEFITS.P022":[{"speaker":"JESUS","start":0,"end":217}],
-  "PASSION24.SECTION.BENEFITS.P023":[{"speaker":"JESUS","start":0,"end":98}],
-  "PASSION24.SECTION.BENEFITS.P024":[{"speaker":"JESUS","start":0,"end":284}],
-  "PASSION24.SECTION.BENEFITS.P025":[{"speaker":"JESUS","start":0,"end":149}],
-  "PASSION24.SECTION.BENEFITS.P028":[{"speaker":"JESUS","start":2,"end":73}],
-  "PASSION24.SECTION.BENEFITS.P029":[{"speaker":"JESUS","start":0,"end":123}],
-  "PASSION24.SECTION.BENEFITS.P030":[{"speaker":"JESUS","start":0,"end":151}],
-  "PASSION24.SECTION.BENEFITS.P031":[{"speaker":"JESUS","start":0,"end":174}],
-  "PASSION24.SECTION.BENEFITS.P032":[{"speaker":"JESUS","start":0,"end":217}],
-  "PASSION24.SECTION.BENEFITS.P035":[{"speaker":"JESUS","start":17,"end":124}],
-  "PASSION24.SECTION.BENEFITS.P036":[{"speaker":"JESUS","start":0,"end":139}],
-  "PASSION24.SECTION.BENEFITS.P037":[{"speaker":"JESUS","start":0,"end":78}],
-  "PASSION24.SECTION.BENEFITS.P038":[{"speaker":"JESUS","start":0,"end":182}],
-  "PASSION24.SECTION.BENEFITS.P039":[{"speaker":"JESUS","start":0,"end":144}],
-  "PASSION24.SECTION.BENEFITS.P040":[{"speaker":"JESUS","start":0,"end":150}],
-  "PASSION24.SECTION.BENEFITS.P042":[{"speaker":"JESUS","start":38,"end":237}],
-  "PASSION24.SECTION.BENEFITS.P043":[{"speaker":"JESUS","start":0,"end":190}],
-  "PASSION24.SECTION.BENEFITS.P044":[{"speaker":"JESUS","start":0,"end":208}],
-  "PASSION24.SECTION.BENEFITS.P045":[{"speaker":"JESUS","start":0,"end":137}],
-  "PASSION24.SECTION.BENEFITS.P047":[{"speaker":"JESUS","start":2,"end":145}],
-  "PASSION24.SECTION.BENEFITS.P048":[{"speaker":"JESUS","start":0,"end":141}],
-  "PASSION24.SECTION.BENEFITS.P052":[{"speaker":"JESUS","start":23,"end":179}],
-  "PASSION24.SECTION.BENEFITS.P054":[{"speaker":"JESUS","start":2,"end":493}],
-  "PASSION24.SECTION.BENEFITS.P057":[{"speaker":"JESUS","start":0,"end":152}],
-  "PASSION24.SECTION.BENEFITS.P058":[{"speaker":"JESUS","start":0,"end":165}],
-  "PASSION24.SECTION.BENEFITS.P059":[{"speaker":"JESUS","start":0,"end":208}],
-  "PASSION24.SECTION.BENEFITS.P060":[{"speaker":"JESUS","start":0,"end":45}],
-  "PASSION24.SECTION.BENEFITS.P061":[{"speaker":"JESUS","start":71,"end":223}],
-  "PASSION24.SECTION.BENEFITS.P062":[{"speaker":"JESUS","start":0,"end":192}],
-  "PASSION24.SECTION.BENEFITS.P063":[{"speaker":"JESUS","start":0,"end":376}],
-  "PASSION24.SECTION.BENEFITS.P064":[{"speaker":"JESUS","start":0,"end":210}],
-  "PASSION24.SECTION.BENEFITS.P067":[{"speaker":"JESUS","start":2,"end":149}],
-  "PASSION24.SECTION.BENEFITS.P068":[{"speaker":"JESUS","start":0,"end":166}],
-  "PASSION24.SECTION.BENEFITS.P069":[{"speaker":"JESUS","start":0,"end":202}],
-  "PASSION24.SECTION.BENEFITS.P070":[{"speaker":"JESUS","start":0,"end":157}],
-  "PASSION24.SECTION.BENEFITS.P071":[{"speaker":"JESUS","start":22,"end":233}],
-  "PASSION24.SECTION.BENEFITS.P072":[{"speaker":"JESUS","start":0,"end":183}],
-  "PASSION24.SECTION.BENEFITS.P074":[{"speaker":"JESUS","start":2,"end":11}],
-  "PASSION24.SECTION.BENEFITS.P075":[{"speaker":"JESUS","start":0,"end":128}],
-  "PASSION24.SECTION.BENEFITS.P076":[{"speaker":"JESUS","start":0,"end":156}],
-  "PASSION24.SECTION.BENEFITS.P077":[{"speaker":"JESUS","start":0,"end":54}],
-  "PASSION24.SECTION.BENEFITS.P078":[{"speaker":"JESUS","start":0,"end":69}],
-  "PASSION24.SECTION.BENEFITS.P079":[{"speaker":"JESUS","start":0,"end":103}],
-  "PASSION24.SECTION.BENEFITS.P080":[{"speaker":"JESUS","start":0,"end":169}],
-  "PASSION24.SECTION.BENEFITS.P081":[{"speaker":"JESUS","start":0,"end":84}],
-  "PASSION24.SECTION.BENEFITS.P082":[{"speaker":"JESUS","start":0,"end":118}],
-  "PASSION24.SECTION.BENEFITS.P083":[{"speaker":"JESUS","start":0,"end":101}],
-  "PASSION24.SECTION.BENEFITS.P084":[{"speaker":"JESUS","start":0,"end":102}],
-  "PASSION24.SECTION.BENEFITS.P085":[{"speaker":"JESUS","start":0,"end":202}],
-  "PASSION24.SECTION.BENEFITS.P089":[{"speaker":"JESUS","start":2,"end":231}],
-  "PASSION24.SECTION.BENEFITS.P090":[{"speaker":"JESUS","start":0,"end":91}],
-  "PASSION24.SECTION.BENEFITS.P091":[{"speaker":"JESUS","start":0,"end":239}],
-  "PASSION24.SECTION.BENEFITS.P092":[{"speaker":"JESUS","start":0,"end":91}],
-  "PASSION24.SECTION.BENEFITS.P094":[{"speaker":"JESUS","start":66,"end":167}],
-  "PASSION24.SECTION.BENEFITS.P095":[{"speaker":"JESUS","start":0,"end":543}],
-  "PASSION24.SECTION.BENEFITS.P096":[{"speaker":"JESUS","start":0,"end":111}],
-  "PASSION24.SECTION.BENEFITS.P097":[{"speaker":"JESUS","start":0,"end":77}],
-  "PASSION24.SECTION.BENEFITS.P098":[{"speaker":"JESUS","start":0,"end":194},{"speaker":"JESUS","start":211,"end":413}],
-  "PASSION24.SECTION.BENEFITS.P099":[{"speaker":"JESUS","start":0,"end":61}],
-  "PASSION24.SECTION.BENEFITS.P101":[{"speaker":"JESUS","start":42,"end":119}],
-  "PASSION24.SECTION.BENEFITS.P103":[{"speaker":"JESUS","start":14,"end":369}],
-  "PASSION24.SECTION.BENEFITS.P105":[{"speaker":"JESUS","start":14,"end":245}],
-  "PASSION24.SECTION.BENEFITS.P106":[{"speaker":"JESUS","start":0,"end":150}],
-  "PASSION24.SECTION.BENEFITS.P107":[{"speaker":"JESUS","start":0,"end":133}],
-  "PASSION24.SECTION.BENEFITS.P108":[{"speaker":"JESUS","start":0,"end":427}],
-  "PASSION24.SECTION.BENEFITS.P109":[{"speaker":"JESUS","start":0,"end":74}],
-  "PASSION24.SECTION.BENEFITS.P110":[{"speaker":"JESUS","start":0,"end":185}],
-  "PASSION24.SECTION.BENEFITS.P111":[{"speaker":"JESUS","start":0,"end":216}],
-  "PASSION24.SECTION.BENEFITS.P114":[{"speaker":"JESUS","start":2,"end":121}],
-  "PASSION24.SECTION.BENEFITS.P115":[{"speaker":"JESUS","start":0,"end":154}],
-  "PASSION24.SECTION.BENEFITS.P116":[{"speaker":"JESUS","start":0,"end":142},{"speaker":"JESUS","start":206,"end":223}],
-  "PASSION24.SECTION.BENEFITS.P119":[{"speaker":"JESUS","start":2,"end":156}],
-  "PASSION24.SECTION.BENEFITS.P120":[{"speaker":"JESUS","start":0,"end":189}],
-  "PASSION24.SECTION.BENEFITS.P121":[{"speaker":"JESUS","start":0,"end":233}],
-  "PASSION24.SECTION.BENEFITS.P122":[{"speaker":"JESUS","start":0,"end":142}],
-  "PASSION24.SECTION.BENEFITS.P123":[{"speaker":"JESUS","start":0,"end":78}],
-  "PASSION24.SECTION.BENEFITS.P124":[{"speaker":"JESUS","start":0,"end":133}],
-  "PASSION24.SECTION.BENEFITS.P127":[{"speaker":"JESUS","start":2,"end":316}],
-  "PASSION24.SECTION.BENEFITS.P128":[{"speaker":"JESUS","start":0,"end":202}],
-  "PASSION24.SECTION.BENEFITS.P129":[{"speaker":"JESUS","start":0,"end":157}],
-  "PASSION24.SECTION.BENEFITS.P130":[{"speaker":"JESUS","start":2,"end":213}],
-  "PASSION24.SECTION.BENEFITS.P131":[{"speaker":"JESUS","start":0,"end":104}],
-  "PASSION24.SECTION.BENEFITS.P137":[{"speaker":"JESUS","start":2,"end":270}],
-  "PASSION24.SECTION.BENEFITS.P138":[{"speaker":"JESUS","start":0,"end":126}],
-  "PASSION24.SECTION.BENEFITS.P139":[{"speaker":"JESUS","start":0,"end":58}],
-  "PASSION24.SECTION.BENEFITS.P140":[{"speaker":"JESUS","start":0,"end":72}],
-  "PASSION24.SECTION.BENEFITS.P141":[{"speaker":"JESUS","start":0,"end":115}],
-  "PASSION24.SECTION.BENEFITS.P142":[{"speaker":"JESUS","start":0,"end":139}],
-  "PASSION24.SECTION.BENEFITS.P146":[{"speaker":"JESUS","start":65,"end":217}],
-  "PASSION24.SECTION.BENEFITS.P147":[{"speaker":"JESUS","start":0,"end":102}],
-  "PASSION24.SECTION.BENEFITS.P148":[{"speaker":"JESUS","start":0,"end":137}],
-  "PASSION24.SECTION.BENEFITS.P149":[{"speaker":"JESUS","start":0,"end":626}],
-  "PASSION24.SECTION.BENEFITS.P150":[{"speaker":"JESUS","start":0,"end":211}],
-  "PASSION24.SECTION.BENEFITS.P151":[{"speaker":"JESUS","start":0,"end":187}],
-  "PASSION24.SECTION.BENEFITS.P155":[{"speaker":"JESUS","start":2,"end":338}],
-  "PASSION24.SECTION.BENEFITS.P160":[{"speaker":"JESUS","start":14,"end":231}],
-  "PASSION24.SECTION.BENEFITS.P161":[{"speaker":"JESUS","start":0,"end":124}],
-  "PASSION24.SECTION.BENEFITS.P162":[{"speaker":"JESUS","start":0,"end":83}],
-  "PASSION24.SECTION.BENEFITS.P163":[{"speaker":"JESUS","start":0,"end":45}],
-  "PASSION24.SECTION.BENEFITS.P164":[{"speaker":"JESUS","start":0,"end":100}],
-  "PASSION24.SECTION.BENEFITS.P166":[{"speaker":"JESUS","start":109,"end":355}],
-  "PASSION24.SECTION.BENEFITS.P167":[{"speaker":"JESUS","start":0,"end":255}]
-};
+const SPEECH_DATA = {"PASSION24.HOUR.01.P014":[{"speaker":"JESUS","start":94,"end":117}],"PASSION24.HOUR.02.P009":[{"speaker":"MARY","start":2,"end":92}],"PASSION24.HOUR.02.P012":[{"speaker":"JESUS","start":264,"end":389}],"PASSION24.HOUR.02.P014":[{"speaker":"JESUS","start":2,"end":201}],"PASSION24.HOUR.02.P015":[{"speaker":"JESUS","start":15,"end":145}],"PASSION24.HOUR.03.P003":[{"speaker":"JESUS","start":2,"end":101}],"PASSION24.HOUR.04.P005":[{"speaker":"JESUS","start":2,"end":349}],"PASSION24.HOUR.04.P006":[{"speaker":"JESUS","start":0,"end":84}],"PASSION24.HOUR.04.P007":[{"speaker":"JESUS","start":0,"end":315}],"PASSION24.HOUR.04.P009":[{"speaker":"JESUS","start":0,"end":7}],"PASSION24.HOUR.04.P010":[{"speaker":"JESUS","start":0,"end":137}],"PASSION24.HOUR.04.P020":[{"speaker":"JESUS","start":2,"end":102}],"PASSION24.HOUR.04.P021":[{"speaker":"JESUS","start":0,"end":189}],"PASSION24.HOUR.04.P027":[{"speaker":"JESUS","start":2,"end":222}],"PASSION24.HOUR.04.P028":[{"speaker":"JESUS","start":0,"end":378}],"PASSION24.HOUR.04.P029":[{"speaker":"JESUS","start":0,"end":35}],"PASSION24.HOUR.04.P030":[{"speaker":"JESUS","start":0,"end":123}],"PASSION24.HOUR.04.P031":[{"speaker":"JESUS","start":0,"end":111}],"PASSION24.HOUR.04.P055":[{"speaker":"JESUS","start":21,"end":176}],"PASSION24.HOUR.04.P056":[{"speaker":"JESUS","start":0,"end":209}],"PASSION24.HOUR.04.P057":[{"speaker":"JESUS","start":0,"end":219}],"PASSION24.HOUR.04.P058":[{"speaker":"JESUS","start":0,"end":91}],"PASSION24.HOUR.05.P009":[{"speaker":"JESUS","start":60,"end":170}],"PASSION24.HOUR.05.P010":[{"speaker":"JESUS","start":0,"end":168}],"PASSION24.HOUR.05.P011":[{"speaker":"JESUS","start":0,"end":171}],"PASSION24.HOUR.05.P012":[{"speaker":"JESUS","start":0,"end":135}],"PASSION24.HOUR.05.P021":[{"speaker":"JESUS","start":2,"end":233}],"PASSION24.HOUR.05.P022":[{"speaker":"JESUS","start":0,"end":140}],"PASSION24.HOUR.05.P023":[{"speaker":"JESUS","start":0,"end":480}],"PASSION24.HOUR.06.P011":[{"speaker":"JESUS","start":2,"end":104}],"PASSION24.HOUR.06.P013":[{"speaker":"JESUS","start":2,"end":140}],"PASSION24.HOUR.07.P006":[{"speaker":"JESUS","start":2,"end":163}],"PASSION24.HOUR.07.P010":[{"speaker":"JESUS","start":2,"end":105}],"PASSION24.HOUR.07.P011":[{"speaker":"JESUS","start":0,"end":188}],"PASSION24.HOUR.07.P012":[{"speaker":"JESUS","start":0,"end":145}],"PASSION24.HOUR.07.P013":[{"speaker":"JESUS","start":2,"end":80}],"PASSION24.HOUR.07.P014":[{"speaker":"JESUS","start":0,"end":154}],"PASSION24.HOUR.07.P015":[{"speaker":"JESUS","start":0,"end":229}],"PASSION24.HOUR.07.P067":[{"speaker":"JESUS","start":2,"end":225}],"PASSION24.HOUR.07.P072":[{"speaker":"JESUS","start":2,"end":100}],"PASSION24.HOUR.07.P073":[{"speaker":"JESUS","start":0,"end":219}],"PASSION24.HOUR.07.P074":[{"speaker":"JESUS","start":0,"end":105}],"PASSION24.HOUR.07.P075":[{"speaker":"JESUS","start":0,"end":87}],"PASSION24.HOUR.07.P076":[{"speaker":"JESUS","start":0,"end":126}],"PASSION24.HOUR.08.P006":[{"speaker":"JESUS","start":333,"end":367},{"speaker":"JESUS","start":503,"end":541}],"PASSION24.HOUR.08.P007":[{"speaker":"JESUS","start":14,"end":40},{"speaker":"JESUS","start":112,"end":138}],"PASSION24.HOUR.08.P008":[{"speaker":"JESUS","start":22,"end":47}],"PASSION24.HOUR.08.P010":[{"speaker":"JESUS","start":302,"end":321}],"PASSION24.HOUR.08.P012":[{"speaker":"JESUS","start":22,"end":32}],"PASSION24.HOUR.08.P013":[{"speaker":"JESUS","start":38,"end":48}],"PASSION24.HOUR.09.P005":[{"speaker":"JESUS","start":39,"end":219}],"PASSION24.HOUR.09.P006":[{"speaker":"JESUS","start":0,"end":109}],"PASSION24.HOUR.09.P007":[{"speaker":"JESUS","start":0,"end":121}],"PASSION24.HOUR.09.P008":[{"speaker":"JESUS","start":0,"end":159}],"PASSION24.HOUR.09.P009":[{"speaker":"JESUS","start":0,"end":145}],"PASSION24.HOUR.10.P002":[{"speaker":"JESUS","start":141,"end":204}],"PASSION24.HOUR.11.P005":[{"speaker":"JESUS","start":196,"end":352}],"PASSION24.HOUR.11.P006":[{"speaker":"JESUS","start":0,"end":72}],"PASSION24.HOUR.11.P007":[{"speaker":"JESUS","start":0,"end":100}],"PASSION24.HOUR.11.P008":[{"speaker":"JESUS","start":0,"end":167}],"PASSION24.HOUR.11.P009":[{"speaker":"JESUS","start":0,"end":139}],"PASSION24.HOUR.11.P015":[{"speaker":"JESUS","start":2,"end":128}],"PASSION24.HOUR.11.P016":[{"speaker":"JESUS","start":0,"end":249}],"PASSION24.HOUR.11.P021":[{"speaker":"JESUS","start":138,"end":260}],"PASSION24.HOUR.13.P005":[{"speaker":"JESUS","start":18,"end":145}],"PASSION24.HOUR.13.P006":[{"speaker":"JESUS","start":2,"end":107}],"PASSION24.HOUR.13.P007":[{"speaker":"JESUS","start":0,"end":170}],"PASSION24.HOUR.13.P008":[{"speaker":"JESUS","start":0,"end":159}],"PASSION24.HOUR.14.P004":[{"speaker":"JESUS","start":95,"end":125}],"PASSION24.HOUR.15.P005":[{"speaker":"JESUS","start":2,"end":160}],"PASSION24.HOUR.15.P006":[{"speaker":"JESUS","start":19,"end":86}],"PASSION24.HOUR.16.P022":[{"speaker":"JESUS","start":2,"end":245}],"PASSION24.HOUR.16.P023":[{"speaker":"JESUS","start":0,"end":94}],"PASSION24.HOUR.16.P024":[{"speaker":"JESUS","start":0,"end":74}],"PASSION24.HOUR.16.P035":[{"speaker":"JESUS","start":2,"end":367}],"PASSION24.HOUR.16.P036":[{"speaker":"JESUS","start":0,"end":221}],"PASSION24.HOUR.16.P037":[{"speaker":"JESUS","start":0,"end":105}],"PASSION24.HOUR.16.P038":[{"speaker":"JESUS","start":0,"end":191}],"PASSION24.HOUR.17.P008":[{"speaker":"JESUS","start":2,"end":98}],"PASSION24.HOUR.17.P009":[{"speaker":"JESUS","start":0,"end":235}],"PASSION24.HOUR.17.P010":[{"speaker":"JESUS","start":0,"end":150}],"PASSION24.HOUR.17.P011":[{"speaker":"JESUS","start":0,"end":132}],"PASSION24.HOUR.17.P012":[{"speaker":"JESUS","start":0,"end":136}],"PASSION24.HOUR.17.P013":[{"speaker":"JESUS","start":0,"end":45}],"PASSION24.HOUR.17.P022":[{"speaker":"JESUS","start":183,"end":344}],"PASSION24.HOUR.17.P023":[{"speaker":"JESUS","start":0,"end":163}],"PASSION24.HOUR.17.P024":[{"speaker":"JESUS","start":0,"end":122}],"PASSION24.HOUR.17.P034":[{"speaker":"JESUS","start":2,"end":128}],"PASSION24.HOUR.17.P035":[{"speaker":"JESUS","start":0,"end":92}],"PASSION24.HOUR.17.P036":[{"speaker":"JESUS","start":0,"end":42}],"PASSION24.HOUR.17.P037":[{"speaker":"JESUS","start":0,"end":406}],"PASSION24.HOUR.17.P038":[{"speaker":"JESUS","start":0,"end":148}],"PASSION24.HOUR.17.P039":[{"speaker":"JESUS","start":0,"end":46}],"PASSION24.HOUR.17.P040":[{"speaker":"JESUS","start":0,"end":97}],"PASSION24.HOUR.17.P041":[{"speaker":"JESUS","start":0,"end":291}],"PASSION24.HOUR.17.P045":[{"speaker":"JESUS","start":116,"end":270}],"PASSION24.HOUR.17.P054":[{"speaker":"MARY","start":99,"end":122}],"PASSION24.HOUR.17.P058":[{"speaker":"JESUS","start":2,"end":235}],"PASSION24.HOUR.17.P059":[{"speaker":"JESUS","start":0,"end":108}],"PASSION24.HOUR.17.P060":[{"speaker":"JESUS","start":0,"end":134}],"PASSION24.HOUR.17.P061":[{"speaker":"JESUS","start":0,"end":220}],"PASSION24.HOUR.17.P062":[{"speaker":"JESUS","start":0,"end":174}],"PASSION24.HOUR.17.P063":[{"speaker":"JESUS","start":0,"end":165}],"PASSION24.HOUR.17.REF.P009":[{"speaker":"JESUS","start":2,"end":220}],"PASSION24.HOUR.17.REF.P010":[{"speaker":"JESUS","start":0,"end":172}],"PASSION24.HOUR.17.REF.P011":[{"speaker":"JESUS","start":0,"end":172}],"PASSION24.HOUR.18.P002":[{"speaker":"JESUS","start":52,"end":59}],"PASSION24.HOUR.18.P005":[{"speaker":"JESUS","start":2,"end":114}],"PASSION24.HOUR.18.P012":[{"speaker":"JESUS","start":2,"end":268}],"PASSION24.HOUR.18.P013":[{"speaker":"JESUS","start":0,"end":279}],"PASSION24.HOUR.18.P014":[{"speaker":"JESUS","start":0,"end":161}],"PASSION24.HOUR.18.P015":[{"speaker":"JESUS","start":0,"end":248}],"PASSION24.HOUR.18.P016":[{"speaker":"JESUS","start":0,"end":173}],"PASSION24.HOUR.18.P017":[{"speaker":"JESUS","start":0,"end":83}],"PASSION24.HOUR.18.P018":[{"speaker":"JESUS","start":0,"end":77}],"PASSION24.HOUR.18.P024":[{"speaker":"JESUS","start":119,"end":310}],"PASSION24.HOUR.18.P025":[{"speaker":"JESUS","start":0,"end":447}],"PASSION24.HOUR.18.P026":[{"speaker":"JESUS","start":0,"end":154}],"PASSION24.HOUR.18.P083":[{"speaker":"JESUS","start":201,"end":279}],"PASSION24.HOUR.18.P091":[{"speaker":"JESUS","start":189,"end":480}],"PASSION24.HOUR.18.P092":[{"speaker":"JESUS","start":0,"end":358}],"PASSION24.HOUR.18.P093":[{"speaker":"JESUS","start":0,"end":146}],"PASSION24.HOUR.19.P015":[{"speaker":"JESUS","start":0,"end":110}],"PASSION24.HOUR.19.P016":[{"speaker":"JESUS","start":0,"end":385}],"PASSION24.HOUR.19.P017":[{"speaker":"JESUS","start":0,"end":93}],"PASSION24.HOUR.19.P024":[{"speaker":"JESUS","start":2,"end":111}],"PASSION24.HOUR.19.P025":[{"speaker":"JESUS","start":0,"end":121}],"PASSION24.HOUR.19.P065":[{"speaker":"JESUS","start":2,"end":223}],"PASSION24.HOUR.19.P066":[{"speaker":"JESUS","start":0,"end":299}],"PASSION24.HOUR.19.P078":[{"speaker":"JESUS","start":563,"end":690}],"PASSION24.HOUR.19.P079":[{"speaker":"JESUS","start":0,"end":155}],"PASSION24.HOUR.19.P080":[{"speaker":"JESUS","start":0,"end":195}],"PASSION24.HOUR.19.P088":[{"speaker":"JESUS","start":433,"end":534}],"PASSION24.HOUR.19.P089":[{"speaker":"JESUS","start":0,"end":76}],"PASSION24.HOUR.19.P090":[{"speaker":"JESUS","start":0,"end":171}],"PASSION24.HOUR.19.P091":[{"speaker":"JESUS","start":0,"end":209}],"PASSION24.HOUR.19.P092":[{"speaker":"JESUS","start":0,"end":218}],"PASSION24.HOUR.19.P099":[{"speaker":"JESUS","start":183,"end":237}],"PASSION24.HOUR.19.P101":[{"speaker":"JESUS","start":2,"end":115}],"PASSION24.HOUR.19.P102":[{"speaker":"JESUS","start":0,"end":201}],"PASSION24.HOUR.19.P103":[{"speaker":"JESUS","start":0,"end":143}],"PASSION24.HOUR.19.P109":[{"speaker":"JESUS","start":2,"end":74}],"PASSION24.HOUR.19.P110":[{"speaker":"JESUS","start":0,"end":146}],"PASSION24.HOUR.19.P111":[{"speaker":"JESUS","start":0,"end":236}],"PASSION24.HOUR.19.P112":[{"speaker":"JESUS","start":0,"end":115}],"PASSION24.HOUR.19.P113":[{"speaker":"JESUS","start":0,"end":117}],"PASSION24.HOUR.19.P121":[{"speaker":"JESUS","start":2,"end":178}],"PASSION24.HOUR.19.P122":[{"speaker":"JESUS","start":0,"end":90}],"PASSION24.HOUR.19.P123":[{"speaker":"JESUS","start":0,"end":113}],"PASSION24.HOUR.19.P124":[{"speaker":"JESUS","start":0,"end":167}],"PASSION24.HOUR.19.P139":[{"speaker":"JESUS","start":37,"end":109}],"PASSION24.HOUR.19.P140":[{"speaker":"JESUS","start":0,"end":127}],"PASSION24.HOUR.19.P141":[{"speaker":"JESUS","start":0,"end":98},{"speaker":"JESUS","start":101,"end":378}],"PASSION24.HOUR.19.P142":[{"speaker":"JESUS","start":0,"end":232}],"PASSION24.HOUR.19.P143":[{"speaker":"JESUS","start":0,"end":180}],"PASSION24.HOUR.19.P144":[{"speaker":"JESUS","start":0,"end":157}],"PASSION24.HOUR.19.P145":[{"speaker":"JESUS","start":0,"end":130}],"PASSION24.HOUR.19.P146":[{"speaker":"JESUS","start":0,"end":130}],"PASSION24.HOUR.19.P147":[{"speaker":"JESUS","start":0,"end":105}],"PASSION24.HOUR.19.P148":[{"speaker":"JESUS","start":0,"end":132}],"PASSION24.HOUR.19.P149":[{"speaker":"JESUS","start":0,"end":183}],"PASSION24.HOUR.19.P150":[{"speaker":"JESUS","start":0,"end":61}],"PASSION24.HOUR.19.P151":[{"speaker":"JESUS","start":0,"end":316}],"PASSION24.HOUR.19.P152":[{"speaker":"JESUS","start":0,"end":289}],"PASSION24.HOUR.19.P153":[{"speaker":"JESUS","start":0,"end":121}],"PASSION24.HOUR.19.P154":[{"speaker":"JESUS","start":0,"end":342}],"PASSION24.HOUR.19.P155":[{"speaker":"JESUS","start":0,"end":196}],"PASSION24.HOUR.19.P156":[{"speaker":"JESUS","start":0,"end":104}],"PASSION24.HOUR.19.P157":[{"speaker":"JESUS","start":0,"end":151}],"PASSION24.HOUR.19.P158":[{"speaker":"JESUS","start":0,"end":221}],"PASSION24.HOUR.19.P159":[{"speaker":"JESUS","start":0,"end":120}],"PASSION24.HOUR.19.REF.P011":[{"speaker":"JESUS","start":68,"end":234}],"PASSION24.HOUR.19.REF.P012":[{"speaker":"JESUS","start":0,"end":226}],"PASSION24.HOUR.19.REF.P013":[{"speaker":"JESUS","start":0,"end":188}],"PASSION24.HOUR.19.REF.P014":[{"speaker":"JESUS","start":0,"end":202}],"PASSION24.HOUR.20.P001":[{"speaker":"JESUS","start":0,"end":81}],"PASSION24.HOUR.20.P008":[{"speaker":"JESUS","start":2,"end":61}],"PASSION24.HOUR.20.P012":[{"speaker":"JESUS","start":110,"end":186}],"PASSION24.HOUR.21.P001":[{"speaker":"JESUS","start":20,"end":62}],"PASSION24.HOUR.21.P007":[{"speaker":"JESUS","start":2,"end":55}],"PASSION24.HOUR.21.P016":[{"speaker":"JESUS","start":2,"end":45}],"PASSION24.HOUR.21.P017":[{"speaker":"JESUS","start":44,"end":67},{"speaker":"JESUS","start":84,"end":99}],"PASSION24.HOUR.21.P019":[{"speaker":"JESUS","start":20,"end":135}],"PASSION24.HOUR.21.P021":[{"speaker":"JESUS","start":93,"end":116},{"speaker":"JESUS","start":140,"end":155}],"PASSION24.HOUR.21.P023":[{"speaker":"JESUS","start":2,"end":214}],"PASSION24.HOUR.21.P040":[{"speaker":"JESUS","start":21,"end":69}],"PASSION24.HOUR.21.P041":[{"speaker":"JESUS","start":287,"end":335}],"PASSION24.HOUR.21.P047":[{"speaker":"JESUS","start":2,"end":114}],"PASSION24.HOUR.21.P048":[{"speaker":"JESUS","start":0,"end":134}],"PASSION24.HOUR.21.P049":[{"speaker":"JESUS","start":0,"end":84}],"PASSION24.HOUR.21.P056":[{"speaker":"JESUS","start":2,"end":40}],"PASSION24.HOUR.21.REF.P008":[{"speaker":"JESUS","start":56,"end":104}],"PASSION24.HOUR.22.P001":[{"speaker":"JESUS","start":21,"end":32}],"PASSION24.HOUR.22.P006":[{"speaker":"JESUS","start":147,"end":158}],"PASSION24.HOUR.22.P007":[{"speaker":"JESUS","start":2,"end":193}],"PASSION24.HOUR.22.P008":[{"speaker":"JESUS","start":0,"end":165}],"PASSION24.HOUR.22.P014":[{"speaker":"JESUS","start":19,"end":38}],"PASSION24.HOUR.22.P018":[{"speaker":"JESUS","start":2,"end":21}],"PASSION24.HOUR.22.P020":[{"speaker":"JESUS","start":20,"end":67}],"PASSION24.HOUR.22.P023":[{"speaker":"JESUS","start":98,"end":187}],"PASSION24.HOUR.22.P024":[{"speaker":"JESUS","start":89,"end":96}],"PASSION24.HOUR.22.P025":[{"speaker":"JESUS","start":69,"end":119}],"PASSION24.HOUR.22.P026":[{"speaker":"JESUS","start":145,"end":190}],"PASSION24.HOUR.22.P030":[{"speaker":"JESUS","start":120,"end":184}],"PASSION24.HOUR.22.REF.P001":[{"speaker":"JESUS","start":216,"end":235}],"PASSION24.HOUR.23.P008":[{"speaker":"JESUS","start":14,"end":131}],"PASSION24.HOUR.23.P009":[{"speaker":"JESUS","start":0,"end":92}],"PASSION24.HOUR.23.P010":[{"speaker":"JESUS","start":0,"end":251}],"PASSION24.HOUR.23.P011":[{"speaker":"JESUS","start":0,"end":123}],"PASSION24.HOUR.23.P012":[{"speaker":"JESUS","start":0,"end":132}],"PASSION24.HOUR.23.P013":[{"speaker":"JESUS","start":0,"end":227}],"PASSION24.HOUR.23.P014":[{"speaker":"JESUS","start":0,"end":136}],"PASSION24.HOUR.24.DESOL.P002":[{"speaker":"MARY","start":2,"end":138}],"PASSION24.HOUR.24.DESOL.P010":[{"speaker":"MARY","start":2,"end":186}],"PASSION24.HOUR.24.DESOL.P011":[{"speaker":"MARY","start":0,"end":97}],"PASSION24.HOUR.24.DESOL.P012":[{"speaker":"MARY","start":0,"end":78}],"PASSION24.HOUR.24.DESOL.P013":[{"speaker":"MARY","start":0,"end":72}],"PASSION24.HOUR.24.DESOL.P014":[{"speaker":"MARY","start":0,"end":334}],"PASSION24.HOUR.24.DESOL.P017":[{"speaker":"MARY","start":2,"end":341}],"PASSION24.HOUR.24.DESOL.P018":[{"speaker":"MARY","start":0,"end":174}],"PASSION24.HOUR.24.DESOL.P019":[{"speaker":"MARY","start":430,"end":744}],"PASSION24.HOUR.24.DESOL.P020":[{"speaker":"MARY","start":0,"end":445}],"PASSION24.HOUR.24.DESOL.P021":[{"speaker":"MARY","start":0,"end":77}],"PASSION24.HOUR.24.DESOL.P026":[{"speaker":"MARY","start":2,"end":367}],"PASSION24.HOUR.24.DESOL.P027":[{"speaker":"MARY","start":0,"end":98}],"PASSION24.HOUR.24.DESOL.P028":[{"speaker":"MARY","start":0,"end":65}],"PASSION24.HOUR.24.DESOL.P029":[{"speaker":"MARY","start":0,"end":129}],"PASSION24.HOUR.24.DESOL.P030":[{"speaker":"MARY","start":0,"end":117}],"PASSION24.HOUR.24.DESOL.P031":[{"speaker":"MARY","start":0,"end":204}],"PASSION24.HOUR.24.DESOL.P047":[{"speaker":"MARY","start":26,"end":139}],"PASSION24.HOUR.24.DESOL.P048":[{"speaker":"MARY","start":0,"end":186}],"PASSION24.HOUR.24.DESOL.P049":[{"speaker":"MARY","start":0,"end":321}],"PASSION24.HOUR.24.DESOL.P050":[{"speaker":"MARY","start":0,"end":202}],"PASSION24.HOUR.24.DESOL.P051":[{"speaker":"MARY","start":0,"end":184}],"PASSION24.HOUR.24.DESOL.P056":[{"speaker":"MARY","start":2,"end":120}],"PASSION24.SECTION.BENEFITS.P004":[{"speaker":"JESUS","start":0,"end":175}],"PASSION24.SECTION.BENEFITS.P005":[{"speaker":"JESUS","start":0,"end":239}],"PASSION24.SECTION.BENEFITS.P006":[{"speaker":"JESUS","start":0,"end":74}],"PASSION24.SECTION.BENEFITS.P007":[{"speaker":"JESUS","start":0,"end":155}],"PASSION24.SECTION.BENEFITS.P008":[{"speaker":"JESUS","start":0,"end":162}],"PASSION24.SECTION.BENEFITS.P009":[{"speaker":"JESUS","start":0,"end":94}],"PASSION24.SECTION.BENEFITS.P010":[{"speaker":"JESUS","start":0,"end":124}],"PASSION24.SECTION.BENEFITS.P011":[{"speaker":"JESUS","start":0,"end":345}],"PASSION24.SECTION.BENEFITS.P012":[{"speaker":"JESUS","start":0,"end":159}],"PASSION24.SECTION.BENEFITS.P013":[{"speaker":"JESUS","start":0,"end":155}],"PASSION24.SECTION.BENEFITS.P014":[{"speaker":"JESUS","start":0,"end":81}],"PASSION24.SECTION.BENEFITS.P016":[{"speaker":"JESUS","start":2,"end":207}],"PASSION24.SECTION.BENEFITS.P017":[{"speaker":"JESUS","start":0,"end":249}],"PASSION24.SECTION.BENEFITS.P020":[{"speaker":"JESUS","start":28,"end":155}],"PASSION24.SECTION.BENEFITS.P021":[{"speaker":"JESUS","start":0,"end":122}],"PASSION24.SECTION.BENEFITS.P022":[{"speaker":"JESUS","start":0,"end":217}],"PASSION24.SECTION.BENEFITS.P023":[{"speaker":"JESUS","start":0,"end":98}],"PASSION24.SECTION.BENEFITS.P024":[{"speaker":"JESUS","start":0,"end":284}],"PASSION24.SECTION.BENEFITS.P025":[{"speaker":"JESUS","start":0,"end":149}],"PASSION24.SECTION.BENEFITS.P028":[{"speaker":"JESUS","start":2,"end":73}],"PASSION24.SECTION.BENEFITS.P029":[{"speaker":"JESUS","start":0,"end":123}],"PASSION24.SECTION.BENEFITS.P030":[{"speaker":"JESUS","start":0,"end":151}],"PASSION24.SECTION.BENEFITS.P031":[{"speaker":"JESUS","start":0,"end":174}],"PASSION24.SECTION.BENEFITS.P032":[{"speaker":"JESUS","start":0,"end":217}],"PASSION24.SECTION.BENEFITS.P035":[{"speaker":"JESUS","start":17,"end":124}],"PASSION24.SECTION.BENEFITS.P036":[{"speaker":"JESUS","start":0,"end":139}],"PASSION24.SECTION.BENEFITS.P037":[{"speaker":"JESUS","start":0,"end":78}],"PASSION24.SECTION.BENEFITS.P038":[{"speaker":"JESUS","start":0,"end":182}],"PASSION24.SECTION.BENEFITS.P039":[{"speaker":"JESUS","start":0,"end":144}],"PASSION24.SECTION.BENEFITS.P040":[{"speaker":"JESUS","start":0,"end":150}],"PASSION24.SECTION.BENEFITS.P042":[{"speaker":"JESUS","start":38,"end":237}],"PASSION24.SECTION.BENEFITS.P043":[{"speaker":"JESUS","start":0,"end":190}],"PASSION24.SECTION.BENEFITS.P044":[{"speaker":"JESUS","start":0,"end":208}],"PASSION24.SECTION.BENEFITS.P045":[{"speaker":"JESUS","start":0,"end":137}],"PASSION24.SECTION.BENEFITS.P047":[{"speaker":"JESUS","start":2,"end":145}],"PASSION24.SECTION.BENEFITS.P048":[{"speaker":"JESUS","start":0,"end":141}],"PASSION24.SECTION.BENEFITS.P052":[{"speaker":"JESUS","start":23,"end":179}],"PASSION24.SECTION.BENEFITS.P054":[{"speaker":"JESUS","start":2,"end":493}],"PASSION24.SECTION.BENEFITS.P057":[{"speaker":"JESUS","start":0,"end":152}],"PASSION24.SECTION.BENEFITS.P058":[{"speaker":"JESUS","start":0,"end":165}],"PASSION24.SECTION.BENEFITS.P059":[{"speaker":"JESUS","start":0,"end":208}],"PASSION24.SECTION.BENEFITS.P060":[{"speaker":"JESUS","start":0,"end":45}],"PASSION24.SECTION.BENEFITS.P061":[{"speaker":"JESUS","start":71,"end":223}],"PASSION24.SECTION.BENEFITS.P062":[{"speaker":"JESUS","start":0,"end":192}],"PASSION24.SECTION.BENEFITS.P063":[{"speaker":"JESUS","start":0,"end":376}],"PASSION24.SECTION.BENEFITS.P064":[{"speaker":"JESUS","start":0,"end":210}],"PASSION24.SECTION.BENEFITS.P067":[{"speaker":"JESUS","start":2,"end":149}],"PASSION24.SECTION.BENEFITS.P068":[{"speaker":"JESUS","start":0,"end":166}],"PASSION24.SECTION.BENEFITS.P069":[{"speaker":"JESUS","start":0,"end":202}],"PASSION24.SECTION.BENEFITS.P070":[{"speaker":"JESUS","start":0,"end":157}],"PASSION24.SECTION.BENEFITS.P071":[{"speaker":"JESUS","start":22,"end":233}],"PASSION24.SECTION.BENEFITS.P072":[{"speaker":"JESUS","start":0,"end":183}],"PASSION24.SECTION.BENEFITS.P074":[{"speaker":"JESUS","start":2,"end":11}],"PASSION24.SECTION.BENEFITS.P075":[{"speaker":"JESUS","start":0,"end":128}],"PASSION24.SECTION.BENEFITS.P076":[{"speaker":"JESUS","start":0,"end":156}],"PASSION24.SECTION.BENEFITS.P077":[{"speaker":"JESUS","start":0,"end":54}],"PASSION24.SECTION.BENEFITS.P078":[{"speaker":"JESUS","start":0,"end":69}],"PASSION24.SECTION.BENEFITS.P079":[{"speaker":"JESUS","start":0,"end":103}],"PASSION24.SECTION.BENEFITS.P080":[{"speaker":"JESUS","start":0,"end":169}],"PASSION24.SECTION.BENEFITS.P081":[{"speaker":"JESUS","start":0,"end":84}],"PASSION24.SECTION.BENEFITS.P082":[{"speaker":"JESUS","start":0,"end":118}],"PASSION24.SECTION.BENEFITS.P083":[{"speaker":"JESUS","start":0,"end":101}],"PASSION24.SECTION.BENEFITS.P084":[{"speaker":"JESUS","start":0,"end":102}],"PASSION24.SECTION.BENEFITS.P085":[{"speaker":"JESUS","start":0,"end":202}],"PASSION24.SECTION.BENEFITS.P089":[{"speaker":"JESUS","start":2,"end":231}],"PASSION24.SECTION.BENEFITS.P090":[{"speaker":"JESUS","start":0,"end":91}],"PASSION24.SECTION.BENEFITS.P091":[{"speaker":"JESUS","start":0,"end":239}],"PASSION24.SECTION.BENEFITS.P092":[{"speaker":"JESUS","start":0,"end":91}],"PASSION24.SECTION.BENEFITS.P094":[{"speaker":"JESUS","start":66,"end":167}],"PASSION24.SECTION.BENEFITS.P095":[{"speaker":"JESUS","start":0,"end":543}],"PASSION24.SECTION.BENEFITS.P096":[{"speaker":"JESUS","start":0,"end":111}],"PASSION24.SECTION.BENEFITS.P097":[{"speaker":"JESUS","start":0,"end":77}],"PASSION24.SECTION.BENEFITS.P098":[{"speaker":"JESUS","start":0,"end":194},{"speaker":"JESUS","start":211,"end":413}],"PASSION24.SECTION.BENEFITS.P099":[{"speaker":"JESUS","start":0,"end":61}],"PASSION24.SECTION.BENEFITS.P101":[{"speaker":"JESUS","start":42,"end":119}],"PASSION24.SECTION.BENEFITS.P103":[{"speaker":"JESUS","start":14,"end":369}],"PASSION24.SECTION.BENEFITS.P105":[{"speaker":"JESUS","start":14,"end":245}],"PASSION24.SECTION.BENEFITS.P106":[{"speaker":"JESUS","start":0,"end":150}],"PASSION24.SECTION.BENEFITS.P107":[{"speaker":"JESUS","start":0,"end":133}],"PASSION24.SECTION.BENEFITS.P108":[{"speaker":"JESUS","start":0,"end":427}],"PASSION24.SECTION.BENEFITS.P109":[{"speaker":"JESUS","start":0,"end":74}],"PASSION24.SECTION.BENEFITS.P110":[{"speaker":"JESUS","start":0,"end":185}],"PASSION24.SECTION.BENEFITS.P111":[{"speaker":"JESUS","start":0,"end":216}],"PASSION24.SECTION.BENEFITS.P114":[{"speaker":"JESUS","start":2,"end":121}],"PASSION24.SECTION.BENEFITS.P115":[{"speaker":"JESUS","start":0,"end":154}],"PASSION24.SECTION.BENEFITS.P116":[{"speaker":"JESUS","start":0,"end":142},{"speaker":"JESUS","start":206,"end":223}],"PASSION24.SECTION.BENEFITS.P119":[{"speaker":"JESUS","start":2,"end":156}],"PASSION24.SECTION.BENEFITS.P120":[{"speaker":"JESUS","start":0,"end":189}],"PASSION24.SECTION.BENEFITS.P121":[{"speaker":"JESUS","start":0,"end":233}],"PASSION24.SECTION.BENEFITS.P122":[{"speaker":"JESUS","start":0,"end":142}],"PASSION24.SECTION.BENEFITS.P123":[{"speaker":"JESUS","start":0,"end":78}],"PASSION24.SECTION.BENEFITS.P124":[{"speaker":"JESUS","start":0,"end":133}],"PASSION24.SECTION.BENEFITS.P127":[{"speaker":"JESUS","start":2,"end":316}],"PASSION24.SECTION.BENEFITS.P128":[{"speaker":"JESUS","start":0,"end":202}],"PASSION24.SECTION.BENEFITS.P129":[{"speaker":"JESUS","start":0,"end":157}],"PASSION24.SECTION.BENEFITS.P130":[{"speaker":"JESUS","start":2,"end":213}],"PASSION24.SECTION.BENEFITS.P131":[{"speaker":"JESUS","start":0,"end":104}],"PASSION24.SECTION.BENEFITS.P137":[{"speaker":"JESUS","start":2,"end":270}],"PASSION24.SECTION.BENEFITS.P138":[{"speaker":"JESUS","start":0,"end":126}],"PASSION24.SECTION.BENEFITS.P139":[{"speaker":"JESUS","start":0,"end":58}],"PASSION24.SECTION.BENEFITS.P140":[{"speaker":"JESUS","start":0,"end":72}],"PASSION24.SECTION.BENEFITS.P141":[{"speaker":"JESUS","start":0,"end":115}],"PASSION24.SECTION.BENEFITS.P142":[{"speaker":"JESUS","start":0,"end":139}],"PASSION24.SECTION.BENEFITS.P146":[{"speaker":"JESUS","start":65,"end":217}],"PASSION24.SECTION.BENEFITS.P147":[{"speaker":"JESUS","start":0,"end":102}],"PASSION24.SECTION.BENEFITS.P148":[{"speaker":"JESUS","start":0,"end":137}],"PASSION24.SECTION.BENEFITS.P149":[{"speaker":"JESUS","start":0,"end":626}],"PASSION24.SECTION.BENEFITS.P150":[{"speaker":"JESUS","start":0,"end":211}],"PASSION24.SECTION.BENEFITS.P151":[{"speaker":"JESUS","start":0,"end":187}],"PASSION24.SECTION.BENEFITS.P155":[{"speaker":"JESUS","start":2,"end":338}],"PASSION24.SECTION.BENEFITS.P160":[{"speaker":"JESUS","start":14,"end":231}],"PASSION24.SECTION.BENEFITS.P161":[{"speaker":"JESUS","start":0,"end":124}],"PASSION24.SECTION.BENEFITS.P162":[{"speaker":"JESUS","start":0,"end":83}],"PASSION24.SECTION.BENEFITS.P163":[{"speaker":"JESUS","start":0,"end":45}],"PASSION24.SECTION.BENEFITS.P164":[{"speaker":"JESUS","start":0,"end":100}],"PASSION24.SECTION.BENEFITS.P166":[{"speaker":"JESUS","start":109,"end":355}],"PASSION24.SECTION.BENEFITS.P167":[{"speaker":"JESUS","start":0,"end":255}],"PASSION24.HOUR.16.P006":[{"speaker":"JESUS","start":2,"end":125}],"PASSION24.HOUR.16.P007":[{"speaker":"JESUS","start":0,"end":125}],"PASSION24.HOUR.16.P008":[{"speaker":"JESUS","start":0,"end":413}],"PASSION24.HOUR.16.P009":[{"speaker":"JESUS","start":0,"end":103}],"PASSION24.HOUR.16.P010":[{"speaker":"JESUS","start":0,"end":156}],"PASSION24.HOUR.16.P011":[{"speaker":"JESUS","start":0,"end":103}]};
 
 const state = {
   view: 'home', currentHour: null, currentSection: null, currentPrayer: null,
@@ -3860,7 +3583,7 @@ const state = {
   monEspacePanelOpen: false,
   meditationLog: []
 };
-const APP_VERSION = 'prototype-72';
+const APP_VERSION = 'prototype-74';
 const STORAGE_SCHEMA_VERSION=3;
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -3921,19 +3644,25 @@ function sanitizeFavoritesStore(favs) {
   if (!favs || typeof favs !== 'object' || Array.isArray(favs) || hasDangerousKeyDeep(favs)) return out;
   for (const [k, fav] of Object.entries(favs)) {
     if (!validPersonalId(k) || !fav || typeof fav !== 'object' || hasDangerousKeyDeep(fav)) continue;
-    const id = validPersonalId(String(fav.id || k)) ? String(fav.id || k) : k;
-    if (id !== k) continue;
-    const hourNum = Number(fav.hourNum);
-    if (!Number.isInteger(hourNum) || hourNum < 1 || hourNum > 24) continue;
-    const type = ['meditation','reflection','subsection','library','prayer','unknown'].includes(String(fav.type || ''))
+    const id = validPersonalId(String(fav.id || fav.target_id || k)) ? String(fav.id || fav.target_id || k) : k;
+    if (!validPersonalId(id)) continue;
+    const hourNumRaw = Number(fav.hourNum);
+    const hasHour = Number.isInteger(hourNumRaw) && hourNumRaw >= 1 && hourNumRaw <= 24;
+    const type = ['meditation','reflection','subsection','library','library_text','prayer','section','unknown'].includes(String(fav.type || ''))
       ? String(fav.type || '')
-      : (id.includes('.REF.') ? 'reflection' : (id.includes('.DESOL.') ? 'subsection' : 'meditation'));
+      : (id.includes('.REF.') ? 'reflection' : (id.includes('.DESOL.') || id.includes('.SUBSECTION.') ? 'subsection' : 'unknown'));
     out[k] = {
       id,
-      hourNum,
-      hourTitle: String(fav.hourTitle || '').slice(0,160),
+      target_id: id,
+      hourNum: hasHour ? hourNumRaw : null,
+      hourTitle: String(fav.hourTitle || fav.label || '').slice(0,180),
       type,
-      text: String(fav.text || '').slice(0,300)
+      text: String(fav.text || fav.selected_text_snapshot || '').slice(0,500),
+      selected_text_snapshot: String(fav.selected_text_snapshot || fav.text || '').slice(0,500),
+      start_offset: Number.isFinite(Number(fav.start_offset)) ? Number(fav.start_offset) : null,
+      end_offset: Number.isFinite(Number(fav.end_offset)) ? Number(fav.end_offset) : null,
+      favorite_kind: String(fav.favorite_kind || 'paragraph').slice(0,40),
+      created_at: String(fav.created_at || '').slice(0,40)
     };
   }
   return out;
@@ -10353,8 +10082,14 @@ function buildSidebar() {
   }
 }
 
-function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); document.getElementById('sidebarOverlay').classList.toggle('open'); }
-function closeSidebar() { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').classList.remove('open'); }
+function toggleSidebar() { closeSidebar(); showHoursView(true); }
+function closeSidebar() {
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('sidebarOverlay');
+  if (sb) sb.classList.remove('open');
+  if (ov) ov.classList.remove('open');
+}
+function forceCloseLegacySidebar() { closeSidebar(); }
 
 // ── Prayer Modal ──
 function renderPrayerParagraph(pr, p, modal = false) {
@@ -10462,6 +10197,15 @@ function buildClosingButtons(hour) {
   }).join('');
 
   return `<div class="prayer-buttons-row closing">${buttons}</div>`;
+}
+
+
+function scrollReaderToTop() {
+  resetContentScrollAfterRender();
+}
+function buildHourEndActions(hour, next) {
+  const nextBtn = next ? `<button type="button" class="hour-end-btn" onclick="openHour(${next.hour_number})">Heure suivante</button>` : '';
+  return `<div class="hour-end-actions" id="hourEndActions"><div class="hour-end-title">Fin de cette Heure</div><div class="hour-end-note">Vous pouvez continuer sans remonter tout en haut.</div><div class="hour-end-buttons"><button type="button" class="hour-end-btn" onclick="scrollReaderToTop()">↟ Revenir au début</button><button type="button" class="hour-end-btn primary" onclick="openPrayerModal('PASSION24.PRAYER.AFTER_EACH_HOUR', false)">Prière après cette Heure</button><button type="button" class="hour-end-btn" onclick="switchTab('linked')">Textes liés</button>${nextBtn}</div></div>`;
 }
 
 // ── History ──
@@ -10577,13 +10321,14 @@ function restoreHistoryEntry(prev) {
   else if (prev.view === 'prayer' && prev.data) { state.currentPrayer = prev.data; openPrayer(prev.data, false); }
   else if (prev.view === 'library') { showLibraryView(false, prev.data || null); }
   else if (prev.view === 'libraryText' && prev.data) { openLibraryText(prev.data, false); }
-  else if (prev.view === 'provenance' || prev.view === 'help') { showHelp(); }
+  else if (prev.view === 'provenance' || prev.view === 'help') { showHome(); }
   else if (prev.view === 'search') { showSearchView(false); }
   else if (prev.view === 'hours') { showHoursView(false); }
   else if (prev.view === 'espace') { showEspaceView(false); }
   else { showHome(); }
 }
 function goBack() {
+  forceCloseLegacySidebar();
   if (!state.history.length) return;
   const prev = state.history.pop();
   setBackBtn(state.history.length > 0);
@@ -10665,6 +10410,7 @@ function makeHourGridHtml(compact = false) {
     </button>`).join('');
 }
 function showHoursView(push = true) {
+  forceCloseLegacySidebar();
   if (push) pushHistory(state.view, getHistoryDataForView(state.view));
   state.view = 'hours'; state.currentHour = null; state.currentSection = null; state.currentPrayer = null;
   resetContentScroll();
@@ -10818,6 +10564,7 @@ function renderHome() {
 
 // ── Reader ──
 function openHour(n, push = true, options = {}) {
+  forceCloseLegacySidebar();
   const h = CORPUS.hours.find(x => x.hour_number === n);
   if (!h) return;
   const shouldResume = !!(options && options.resume === true);
@@ -10914,6 +10661,7 @@ function renderReader(hour, scroll = true) {
     </div>
 
     ${closingBtns}
+    ${buildHourEndActions(hour, next)}
 
     <div class="hour-nav">
       <button class="nav-btn" onclick="openHour(${prev?prev.hour_number:-1})" ${!prev?'disabled':''}>
@@ -11323,6 +11071,7 @@ function renderLibraryBreadcrumb(label) {
 }
 
 function showLibraryView(push = true, focusGroupId = null) {
+  forceCloseLegacySidebar();
   if (push) pushHistory(state.view, getHistoryDataForView(state.view));
   state.view = 'library'; state.currentSection = focusGroupId || null; state.currentPrayer = null;
   resetContentScrollAfterRender();
@@ -11641,160 +11390,66 @@ function openHourAtPara(hourNum, paraId, type) {
 }
 
 // ── Help & Guide ──────────────────────────────────────────────
-function showHelp() {
-  if (state.view === 'help') { goBack(); return; }
-  pushHistory(state.view, getHistoryDataForView(state.view));
-  state.view = 'help';
-  const fp = CORPUS.fingerprint_sha256 || '';
-  document.getElementById('content').innerHTML = `
-  <div class="provenance-screen">
-    <div class="reader-header">
-      <div class="reader-eyebrow">Guide d'utilisation &amp; Corpus</div>
-      <h2 class="reader-title">Aide</h2>
-      <p style="color:var(--ink3);font-size:0.9rem;margin:0.5rem 0 0">Appuyez sur ? à nouveau pour fermer et revenir à votre lecture.</p>
-    </div>
-
-    <div class="help-section">
-      <div class="help-section-hd">✝ / ✏ Modes de lecture</div>
-      <div class="help-section-body">
-        <div class="help-row"><span class="help-icon">✝</span><span class="help-row-text"><strong><span class="help-badge prier">✝ Prier</span></strong> — Mode dévotionnel (par défaut). Lecture simple et recueillie : numéros de paragraphes, boutons d'action et repères d'étude sont masqués. Idéal pour la méditation et la prière.</span></div>
-        <div class="help-row"><span class="help-icon">✏</span><span class="help-row-text"><strong><span class="help-badge etude">✏ Étude</span></strong> — Mode étude. Affiche les numéros de paragraphes, les actions (favoris, copie, surlignage) et les badges de locuteur.</span></div>
-        <div class="help-note">Le bouton de mode se trouve dans l'en-tête à gauche des favoris. Appuyez dessus pour basculer entre les deux modes. Le choix est mémorisé.</div>
-      </div>
-    </div>
-
-    <div class="help-section">
-      <div class="help-section-hd">🔆 Navigation</div>
-      <div class="help-section-body">
-        <div class="help-row"><span class="help-icon">🏠</span><span class="help-row-text"><strong>Accueil</strong> — Appuyez sur le titre « Les 24 Heures » dans l'en-tête pour revenir à l'accueil depuis n'importe quelle vue.</span></div>
-        <div class="help-row"><span class="help-icon">←</span><span class="help-row-text"><strong>Retour</strong> — La flèche ← dans l'en-tête remonte d'un niveau dans votre navigation.</span></div>
-        <div class="help-row"><span class="help-icon">≡</span><span class="help-row-text"><strong>Menu latéral</strong> — Accès rapide à toutes les heures, prières, et sections complémentaires.</span></div>
-        <div class="help-row"><span class="help-icon">⏱</span><span class="help-row-text"><strong>Progression</strong> — L'icône horloge affiche votre avancement dans la lecture des 24 Heures.</span></div>
-        <div class="help-note">Sur iPhone et iPad, une barre de navigation est également disponible en bas de l'écran.</div>
-      </div>
-    </div>
-
-    <div class="help-section">
-      <div class="help-section-hd">◐ Surligner du texte</div>
-      <div class="help-section-body">
-        <p style="font-weight:600;font-size:0.9rem;color:var(--ink2);margin:0 0 0.6rem">Sur iPhone / iPad :</p>
-        <div class="help-step"><span class="help-step-n">1</span><span class="help-step-text">Maintenez votre doigt sur un mot, puis faites glisser pour sélectionner le passage souhaité.</span></div>
-        <div class="help-step"><span class="help-step-n">2</span><span class="help-step-text">Une palette de cinq couleurs apparaît en bas de l'écran. Le menu natif d'iOS (Copier, Définir…) peut apparaître en même temps — il ne gêne pas.</span></div>
-        <div class="help-step"><span class="help-step-n">3</span><span class="help-step-text">Appuyez sur une couleur. Le passage est surligné et mémorisé.</span></div>
-        <div class="help-step"><span class="help-step-n">4</span><span class="help-step-text">Pour modifier ou supprimer : appuyez brièvement sur le texte surligné → la palette réapparaît avec un bouton Supprimer.</span></div>
-        <p style="font-weight:600;font-size:0.9rem;color:var(--ink2);margin:0.8rem 0 0.5rem">Sur ordinateur :</p>
-        <div class="help-step"><span class="help-step-n">1</span><span class="help-step-text">Sélectionnez le texte avec la souris.</span></div>
-        <div class="help-step"><span class="help-step-n">2</span><span class="help-step-text">La palette de couleurs apparaît automatiquement près de votre sélection.</span></div>
-        <div class="help-note">Les surlignages sont accessibles dans <strong>Mon Espace</strong> (onglet ◐ Surlignages). Un surlignage permet de retrouver et de relire rapidement les passages retenus.</div>
-      </div>
-    </div>
-
-    <div class="help-section">
-      <div class="help-section-hd">★ Favoris</div>
-      <div class="help-section-body">
-        <div class="help-step"><span class="help-step-n">1</span><span class="help-step-text">Activez le mode <span class="help-badge etude">✏ Étude</span> pour voir les boutons d'action sur chaque paragraphe.</span></div>
-        <div class="help-step"><span class="help-step-n">2</span><span class="help-step-text">Appuyez sur ★ à gauche d'un paragraphe pour l'ajouter à vos favoris. Appuyez à nouveau pour le retirer.</span></div>
-        <div class="help-step"><span class="help-step-n">3</span><span class="help-step-text">Retrouvez tous vos favoris en appuyant sur ★ dans l'en-tête → <strong>Mon Espace</strong>.</span></div>
-        <div class="help-note">Les favoris de méditations et de réflexions sont conservés séparément et accessibles ensemble dans Mon Espace.</div>
-      </div>
-    </div>
-
-    <div class="help-section">
-      <div class="help-section-hd">⎘ Copier un passage</div>
-      <div class="help-section-body">
-        <div class="help-row"><span class="help-icon">⎘</span><span class="help-row-text">En mode <span class="help-badge etude">✏ Étude</span>, chaque paragraphe affiche une icône ⎘. Appuyez dessus pour copier le texte intégral du paragraphe avec sa référence (heure et numéro) dans le presse-papiers.</span></div>
-        <div class="help-note">La copie inclut la citation complète, prête à être partagée ou notée : texte + référence de l'heure.</div>
-      </div>
-    </div>
-
-    <div class="help-section">
-      <div class="help-section-hd">🙏 Prières</div>
-      <div class="help-section-body">
-        <div class="help-row"><span class="help-icon">✦</span><span class="help-row-text"><strong>Prière avant chaque heure</strong> — Au début de chaque heure de lecture, un bouton de prière s'affiche. Appuyez dessus pour ouvrir la prière dans une fenêtre dédiée qui peut défiler indépendamment.</span></div>
-        <div class="help-row"><span class="help-icon">≡</span><span class="help-row-text"><strong>Prières communes</strong> — Les prières avant et après chaque heure, ainsi que les autres prières, sont accessibles depuis le menu latéral (≡) dans la section Prières.</span></div>
-        <div class="help-note">La fenêtre de prière se ferme en appuyant sur ✕ ou en dehors de la fenêtre.</div>
-      </div>
-    </div>
-
-    <div class="help-section">
-      <div class="help-section-hd">🔍 Recherche</div>
-      <div class="help-section-body">
-        <div class="help-step"><span class="help-step-n">1</span><span class="help-step-text">Appuyez sur la loupe 🔍 dans l'en-tête pour accéder à la recherche.</span></div>
-        <div class="help-step"><span class="help-step-n">2</span><span class="help-step-text">Tapez un mot ou une expression. La recherche couvre méditations, réflexions, prières et compléments.</span></div>
-        <div class="help-step"><span class="help-step-n">3</span><span class="help-step-text">Utilisez les filtres (Tout · Méditations · Réflexions · Prières · Compléments) pour affiner les résultats.</span></div>
-        <div class="help-step"><span class="help-step-n">4</span><span class="help-step-text">Appuyez sur un résultat pour aller directement au passage dans le texte.</span></div>
-      </div>
-    </div>
-
-    <div class="help-section">
-      <div class="help-section-hd">T / ☽ Texte et thème</div>
-      <div class="help-section-body">
-        <div class="help-row"><span class="help-icon">T</span><span class="help-row-text"><strong>Taille du texte</strong> — Appuyez sur l'icône T dans l'en-tête. Cinq tailles sont disponibles. La taille choisie s'applique à toute la lecture et est mémorisée.</span></div>
-        <div class="help-row"><span class="help-icon">☽</span><span class="help-row-text"><strong>Mode sombre / clair</strong> — Appuyez sur ☽/☀ pour basculer. Le réglage est mémorisé.</span></div>
-      </div>
-    </div>
-
-    <div class="help-section">
-      <div class="help-section-hd">⬇ Exporter / ⬆ Importer vos données</div>
-      <div class="help-section-body">
-        <p style="font-size:0.9rem;color:var(--ink2);margin:0 0 0.75rem;line-height:1.55">Vos favoris, surlignages et préférences sont enregistrés <strong>sur cet appareil uniquement</strong>. Pour les transférer sur un autre appareil :</p>
-        <p style="font-weight:600;font-size:0.88rem;color:var(--ink2);margin:0 0 0.4rem">Exporter :</p>
-        <div class="help-step"><span class="help-step-n">1</span><span class="help-step-text">Appuyez sur ★ (Mon Espace) dans l'en-tête.</span></div>
-        <div class="help-step"><span class="help-step-n">2</span><span class="help-step-text">En bas du panneau, appuyez sur <strong>⬇ Exporter</strong>. Un fichier <code>.json</code> est téléchargé.</span></div>
-        <div class="help-step"><span class="help-step-n">3</span><span class="help-step-text">Enregistrez ce fichier dans iCloud Drive, Dropbox ou envoyez-vous par e-mail.</span></div>
-        <p style="font-weight:600;font-size:0.88rem;color:var(--ink2);margin:0.75rem 0 0.4rem">Importer sur un nouvel appareil :</p>
-        <div class="help-step"><span class="help-step-n">1</span><span class="help-step-text">Ouvrez Mon Espace (★) sur le nouvel appareil.</span></div>
-        <div class="help-step"><span class="help-step-n">2</span><span class="help-step-text">Appuyez sur <strong>⬆ Importer</strong> et sélectionnez le fichier <code>.json</code>.</span></div>
-        <div class="help-step"><span class="help-step-n">3</span><span class="help-step-text">Confirmez le remplacement. Tous vos favoris, surlignages et préférences sont restaurés.</span></div>
-        <div class="help-note">L'export inclut : favoris, surlignages (couleurs et positions), progression de lecture, taille du texte, thème et mode de lecture.</div>
-      </div>
-    </div>
-
-    <div class="help-section">
-      <div class="help-section-hd">✝ Paroles directes</div>
-      <div class="help-section-body">
-        <div class="help-row"><span class="help-icon" style="color:var(--jesus-color)">✝</span><span class="help-row-text"><strong style="color:var(--jesus-color)">Paroles de Jésus</strong> — Les paroles directes de Jésus apparaissent en <em style="color:var(--jesus-color);font-weight:500">italique brun foncé</em>. ${(()=>{const j=Object.values(SPEECH_DATA).reduce((n,s)=>n+s.filter(x=>x.speaker==='JESUS').length,0);return j;})()}\u00a0passages de J\u00e9sus et ${(()=>{return Object.values(SPEECH_DATA).reduce((n,s)=>n+s.filter(x=>x.speaker==='MARY').length,0);})()}\u00a0de Marie identifi\u00e9s automatiquement. Annotation techniquement valid\u00e9e — revue \u00e9ditoriale en cours.</span></div>
-        <div class="help-row"><span class="help-icon" style="color:var(--mary-color)">✦</span><span class="help-row-text"><strong style="color:var(--mary-color)">Paroles de Marie</strong> — Les paroles directes de la Vierge Marie apparaissent en <em style="color:var(--mary-color)">italique bleu</em>. ${Object.values(SPEECH_DATA).reduce((n,s)=>n+s.filter(x=>x.speaker==='MARY').length,0)} passages identifiés.</span></div>
-        <div class="help-note">Les badges de locuteur (✝ JÉSUS / ✦ MARIE) ne s'affichent qu'en mode <span class="help-badge etude">✏ Étude</span>. Le style italique coloré reste visible dans les deux modes. Identification automatique avec validation contextuelle et audit interne en plusieurs passes (v18). Revue éditoriale en cours ; ne constitue pas une déclaration théologique définitive.</div>
-      </div>
-    </div>
-
-    <div class="help-section">
-      <div class="help-section-hd">📖 À propos du corpus</div>
-      <div class="help-section-body">
-        <div class="prov-block" style="margin-bottom:0.6rem">
-          <div class="prov-label">Version app</div><div class="prov-value"><code>${APP_VERSION}</code> &nbsp;·&nbsp; Build <code>${BUILD_DATE}</code></div>
-        </div>
-        <div class="prov-block" style="margin-bottom:0.6rem">
-          <div class="prov-label">Édition source</div><div class="prov-value">${escHtml(CORPUS.source_edition)}</div>
-        </div>
-        <div class="prov-block" style="margin-bottom:0.6rem">
-          <div class="prov-label">Statut source</div>
-          <div class="prov-value">Édition à usage privé, non officielle. <span style="color:var(--ink3);font-size:0.85rem">Une édition officielle peut différer. Les corrections d’affichage sont documentées ; le texte source reste préservé comme référence d’audit.</span></div>
-        </div>
-        <div class="prov-block" style="margin-bottom:0.6rem">
-          <div class="prov-label">Contenu validé</div>
-          <div class="prov-value">24 Heures · 5 Prières · 4 sections complémentaires<br>1 038 méditations · 183 réflexions · 65 Désolation (H.24) · 178 Promesses<br><span style="font-size:0.85rem;color:var(--ink3)">Correction H.6 : 22h–23h (erreur source documentée). 5 éléments textuels en revue éditoriale.</span></div>
-        </div>
-        <div class="prov-block" style="margin-bottom:0.6rem">
-          <div class="prov-label">Empreinte corpus</div><div class="prov-value"><code style="font-size:0.78rem">${fp.slice(0,32)}…</code></div>
-        </div>
-        <button class="integrity-btn" onclick="manualUpdateCheck()" style="margin-top:0.25rem;margin-right:0.5rem">↻ Rechercher une mise à jour</button>
-        <button class="integrity-btn" onclick="runIntegrityCheck()" style="margin-top:0.25rem">✦ Vérifier l'intégrité du corpus</button>
-        <div class="integrity-result" id="integrityResult"></div>
-      </div>
-    </div>
-
-  </div>`;
-resetContentScrollAfterRender();
-  document.getElementById('progressWrap').style.display = 'none';
+function closeHelpModal() {
+  const overlay = document.getElementById('helpModalOverlay');
+  if (overlay) overlay.remove();
+  document.body.style.overflow = '';
 }
-
-// Kept for history backward-compat
-// ── Provenance (legacy alias) ──
+function showHelp() {
+  const existing = document.getElementById('helpModalOverlay');
+  if (existing) { closeHelpModal(); return; }
+  closeSidebar();
+  const fp = CORPUS.fingerprint_sha256 || '';
+  const overlay = document.createElement('div');
+  overlay.id = 'helpModalOverlay';
+  overlay.className = 'help-modal-overlay';
+  overlay.setAttribute('role','dialog');
+  overlay.setAttribute('aria-modal','true');
+  overlay.setAttribute('aria-label','Aide et À propos');
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) closeHelpModal(); });
+  overlay.innerHTML = `
+    <div class="help-modal" tabindex="-1">
+      <div class="help-modal-topbar">
+        <div><div class="help-modal-kicker">Guide d’utilisation</div><h2 class="help-modal-title">Aide et À propos</h2></div>
+        <button type="button" class="help-modal-close" onclick="closeHelpModal()" aria-label="Fermer l’aide">× Fermer</button>
+      </div>
+      <div class="help-section"><div class="help-section-hd">Accueil · Heures · Textes · Espace</div><div class="help-section-body">
+        <div class="help-row"><span class="help-icon">🏠</span><span class="help-row-text"><strong>Accueil</strong> — Reprendre la lecture, ouvrir les 24 Heures, ou accéder rapidement à Approfondir la Passion.</span></div>
+        <div class="help-row"><span class="help-icon">⏱</span><span class="help-row-text"><strong>Heures</strong> — Affiche les 24 Heures avec le titre et l’horaire. Appuyez sur une carte pour ouvrir la méditation.</span></div>
+        <div class="help-row"><span class="help-icon">📖</span><span class="help-row-text"><strong>Textes</strong> — Préface, pratique des Heures, Approfondir la Passion, et textes liés aux 24 Heures.</span></div>
+        <div class="help-row"><span class="help-icon">★</span><span class="help-row-text"><strong>Espace / Mon Espace</strong> — Vos favoris, surlignages, reprise de lecture, progression, export et import de données.</span></div>
+        <div class="help-note">Le vieux menu latéral n’est plus le chemin principal. Utilisez les onglets du bas sur iPhone/iPad, ou les cartes Accueil / Heures / Textes / Espace.</div>
+      </div></div>
+      <div class="help-section"><div class="help-section-hd">Mon Espace</div><div class="help-section-body">
+        <div class="help-row"><span class="help-icon">☰</span><span class="help-row-text">Sur iPad ou ordinateur, le bouton <strong>Mon Espace</strong> ouvre un panneau personnel. Utilisez <strong>× Fermer</strong> pour le refermer.</span></div>
+        <div class="help-row"><span class="help-icon">▣</span><span class="help-row-text">Sur iPhone, ouvrez <strong>Espace</strong> dans la barre du bas.</span></div>
+        <div class="help-note">Mon Espace ne remplace pas les Textes liés d’une Heure : il regroupe seulement vos éléments personnels.</div>
+      </div></div>
+      <div class="help-section"><div class="help-section-hd">Favoris, surlignages et copie</div><div class="help-section-body">
+        <div class="help-step"><span class="help-step-n">1</span><span class="help-step-text">Sélectionnez un passage du texte.</span></div>
+        <div class="help-step"><span class="help-step-n">2</span><span class="help-step-text">La barre d’action affiche <strong>Favori · Surligner · Copier · Fermer</strong>.</span></div>
+        <div class="help-step"><span class="help-step-n">3</span><span class="help-step-text">Appuyez sur <strong>Favori</strong> pour garder la sélection dans Mon Espace, ou sur <strong>Surligner</strong> puis choisissez une couleur.</span></div>
+        <div class="help-step"><span class="help-step-n">4</span><span class="help-step-text">En mode Étude, certains paragraphes affichent aussi des actions de paragraphe complet.</span></div>
+        <div class="help-note">La palette de couleurs ne doit apparaître qu’après avoir appuyé sur Surligner.</div>
+      </div></div>
+      <div class="help-section"><div class="help-section-hd">Fin d’une Heure</div><div class="help-section-body">
+        <div class="help-row"><span class="help-icon">↟</span><span class="help-row-text">En bas de chaque Heure, utilisez <strong>Revenir au début</strong>, <strong>Prière après cette Heure</strong>, <strong>Textes liés</strong> ou <strong>Heure suivante</strong>.</span></div>
+      </div></div>
+      <div class="help-section"><div class="help-section-hd">Mise à jour</div><div class="help-section-body">
+        <div class="help-row"><span class="help-icon">↻</span><span class="help-row-text">Si une nouvelle version est disponible, l’app doit afficher une bannière de mise à jour. Vous pouvez aussi lancer une vérification manuelle.</span></div>
+        <button class="integrity-btn" onclick="manualUpdateCheck()">↻ Rechercher une mise à jour</button>
+      </div></div>
+      <div class="help-section"><div class="help-section-hd">À propos du corpus</div><div class="help-section-body">
+        <div class="help-row"><span class="help-icon">✦</span><span class="help-row-text">Version : <strong>${escHtml(APP_VERSION)}</strong> · Empreinte corpus : <code>${escHtml(fp.slice(0,16))}</code></span></div>
+        <div class="help-note">Les annotations de paroles directes sont une aide de lecture et restent soumises à validation éditoriale.</div>
+      </div></div>
+    </div>`;
+  document.body.appendChild(overlay);
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(()=>{ const modal = overlay.querySelector('.help-modal'); if (modal) modal.focus(); });
+}
 function showProvenance() { showHelp(); }
 
-// ── Integrity check ──
 function runIntegrityCheck() {
   const btn = document.querySelector('.integrity-btn'); btn.textContent = '… Vérification en cours';
   setTimeout(() => {
@@ -11909,18 +11564,32 @@ function openHighlightTarget(paraId) {
   else if (info.libraryId) { openLibraryText(info.libraryId); setTimeout(()=>{const el=document.getElementById(paraId); if(el)smoothScrollTo(el,{behavior:'smooth',block:'center'});},80); }
   const p=document.getElementById('favPanel'); if(p && p.classList.contains('open')) toggleFavPanel();
 }
+function openFavoriteTarget(targetId) {
+  const info = getTargetInfo(targetId);
+  if (!info) { showToast('Favori introuvable'); return; }
+  if (info.hourNum) openHourAtPara(info.hourNum, targetId, info.openType || getParaTypeFromId(targetId));
+  else if (info.prayerId) { openPrayer(info.prayerId); setTimeout(()=>{const el=document.getElementById(targetId); if(el)smoothScrollTo(el,{behavior:'smooth',block:'center'});},80); }
+  else if (info.sectionId) { openSection(info.sectionId, true, targetId); }
+  else if (info.libraryId) { openLibraryText(info.libraryId); setTimeout(()=>{const el=document.getElementById(targetId); if(el)smoothScrollTo(el,{behavior:'smooth',block:'center'});},80); }
+  const p=document.getElementById('favPanel'); if(p && p.classList.contains('open')) toggleFavPanel();
+}
+
 function renderPanelTab(tab){
   const body=document.getElementById('favPanelBody');
   const resumeCard = buildResumePanelCard();
   if(tab==='fav'){
     const favs=Object.values(state.favorites);
     const favHtml=favs.length
-      ? favs.map(f=>`<button type="button" class="fav-item" aria-label="Ouvrir le favori : ${escHtml(f.hourTitle)}" onclick="openHourAtPara(${f.hourNum},'${f.id}','${f.type||'meditation'}');toggleFavPanel()">
-          <div class="fav-item-ref">${f.hourNum}e Heure — ${escHtml(f.hourTitle)}</div>
-          <div class="fav-item-text">${escHtml(f.text)}</div>
-          <div style="font-size:0.7rem;color:var(--ink4);margin-top:0.2rem;font-style:italic"></div>
-        </button>`).join('')
-      : '<div class="fav-empty">Aucun favori.<br>Utilisez ★ lors de la lecture.</div>';
+      ? favs.map(f=>{
+          const info = getTargetInfo(f.target_id || f.id);
+          const label = f.hourTitle || (info ? info.label : 'Favori');
+          return `<button type="button" class="fav-item" aria-label="Ouvrir le favori : ${escHtml(label)}" onclick="openFavoriteTarget('${escHtml(f.target_id || f.id)}')">
+          <div class="fav-item-ref">${escHtml(label)}</div>
+          <div class="fav-item-text">${escHtml(f.selected_text_snapshot || f.text || '')}</div>
+          <div style="font-size:0.7rem;color:var(--ink4);margin-top:0.2rem;font-style:italic">${f.favorite_kind === 'selection' ? 'Sélection favorite' : 'Passage favori'}</div>
+        </button>`;
+        }).join('')
+      : '<div class="fav-empty">Aucun favori.<br>Utilisez ★ ou sélectionnez un texte puis Favori.</div>';
     body.innerHTML = resumeCard + favHtml;
   } else {
     const allHls=[];
@@ -12003,10 +11672,10 @@ function getCharOffset(container, node, offset) {
 }
 
 function handleSelectionEnd() {
-  // Save selection SYNCHRONOUSLY before iOS can clear it on touchend
+  // Save selection SYNCHRONOUSLY before iOS can clear it on touchend.
   const sel = window.getSelection();
   if (!sel || sel.isCollapsed || !sel.rangeCount) return;
-  const savedRange = sel.getRangeAt(0).cloneRange(); // cloneRange preserves after selection cleared
+  const savedRange = sel.getRangeAt(0).cloneRange();
   const savedRect  = savedRange.getBoundingClientRect();
   setTimeout(() => {
     const selText = savedRange.toString().trim();
@@ -12016,7 +11685,8 @@ function handleSelectionEnd() {
     if (!paraText) return;
     const block = paraText.closest('.para-block') || paraText.closest('.ref-para-block');
     if (!block) return;
-    var _qel=block.querySelector('[data-para-id]');const paraId=block.id||(_qel&&_qel.dataset?_qel.dataset.paraId:undefined);
+    var _qel=block.querySelector('[data-para-id]');
+    const paraId=block.id||(_qel&&_qel.dataset?_qel.dataset.paraId:undefined);
     if (!paraId) return;
     const targetInfo = getTargetInfo(paraId);
     if (!targetInfo || targetInfo.type === 'placeholder') return;
@@ -12025,14 +11695,91 @@ function handleSelectionEnd() {
     if (end <= start) return;
     state._pending = { paraId, start, end, text: selText };
     if (window.matchMedia('(pointer: coarse)').matches) {
-      // Touch device: hide action bar, show colour picker at bottom
-      const _bar = document.getElementById('mobileActionBar');
-      if (_bar) _bar.classList.remove('visible');
-      showColourPickerBottom();
+      showSelectionActionBarBottom();
       return;
     }
     showColourPicker(savedRect.left + savedRect.width/2, savedRect.top, false, null);
-  }, 50); // 50ms: enough for iPad selection to stabilise, fast enough to feel instant
+  }, 80);
+}
+
+function closeSelectionActionBar(clearPending = false) {
+  const bar = document.getElementById('selectionActionBar');
+  if (bar) { bar.classList.remove('visible'); setTimeout(()=>{ if (bar.parentNode) bar.remove(); }, 180); }
+  if (clearPending) {
+    state._pending = null;
+    const ws = window.getSelection(); if (ws) ws.removeAllRanges();
+  }
+}
+
+function showSelectionActionBarBottom() {
+  const pending = state._pending;
+  if (!pending || !pending.paraId || !pending.text) return;
+  const old = document.getElementById('selectionActionBar'); if (old) old.remove();
+  const longPressBar = document.getElementById('mobileActionBar'); if (longPressBar) longPressBar.remove();
+  const picker = document.getElementById('colourPicker'); if (picker) picker.classList.remove('open', 'cp-bottom');
+  const bar = document.createElement('div');
+  bar.id = 'selectionActionBar';
+  bar.className = 'selection-action-bar';
+  bar.setAttribute('role','dialog');
+  bar.setAttribute('aria-label','Actions pour le texte sélectionné');
+  bar.innerHTML = `<div class="selection-action-label">Texte sélectionné</div>
+    <div class="selection-action-buttons">
+      <button type="button" class="selection-action-btn" onclick="addPendingSelectionFavorite();closeSelectionActionBar(true)"><span class="selection-action-icon">★</span><span>Favori</span></button>
+      <button type="button" class="selection-action-btn" onclick="closeSelectionActionBar(false);showColourPickerBottom(false,null)"><span class="selection-action-icon">◐</span><span>Surligner</span></button>
+      <button type="button" class="selection-action-btn" onclick="copyPendingSelection();closeSelectionActionBar(true)"><span class="selection-action-icon">⎘</span><span>Copier</span></button>
+      <button type="button" class="selection-action-btn close" onclick="closeSelectionActionBar(true)"><span class="selection-action-icon">✕</span><span>Fermer</span></button>
+    </div>`;
+  document.body.appendChild(bar);
+  requestAnimationFrame(()=>bar.classList.add('visible'));
+}
+
+function addPendingSelectionFavorite() {
+  const sel = state._pending;
+  if (!sel || !sel.paraId || !sel.text) { showToast('Aucune sélection active'); return; }
+  const info = getTargetInfo(sel.paraId);
+  if (!info) { showToast('Passage introuvable'); return; }
+  const key = sel.paraId;
+  const createdAt = new Date().toISOString();
+  state.favorites[key] = {
+    id: sel.paraId,
+    target_id: sel.paraId,
+    hourNum: info.hourNum || null,
+    hourTitle: info.label || 'Passage',
+    type: info.openType || info.type || getParaTypeFromId(sel.paraId),
+    text: sel.text.slice(0, 300) + (sel.text.length > 300 ? '…' : ''),
+    selected_text_snapshot: sel.text.slice(0, 500),
+    start_offset: sel.start,
+    end_offset: sel.end,
+    favorite_kind: 'selection',
+    created_at: createdAt
+  };
+  saveState();
+  const block = document.getElementById(sel.paraId);
+  if (block) block.classList.add('favorited');
+  showToast('Sélection ajoutée aux favoris ★');
+}
+
+function copyPendingSelection() {
+  const sel = state._pending;
+  if (!sel || !sel.text) { showToast('Aucune sélection active'); return; }
+  const info = getTargetInfo(sel.paraId);
+  const suffix = info && info.label ? `
+
+— ${info.label}` : '';
+  const txt = sel.text + suffix;
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(txt).then(()=>showToast('Sélection copiée ⎘')).catch(()=>fallbackCopyText(txt));
+  } else fallbackCopyText(txt);
+}
+
+function fallbackCopyText(txt) {
+  const ta=document.createElement('textarea');
+  ta.value=txt;
+  ta.style.cssText='position:fixed;top:-9999px;opacity:0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try { document.execCommand('copy'); showToast('Sélection copiée ⎘'); }
+  catch(e) { showToast('Copie non disponible'); }
+  document.body.removeChild(ta);
 }
 
 function showColourPicker(x, y, isExisting, hlId) {
@@ -12049,6 +11796,7 @@ function showColourPicker(x, y, isExisting, hlId) {
 
 function closeColourPicker() {
   document.getElementById('colourPicker').classList.remove('open', 'cp-bottom');
+  closeSelectionActionBar(false);
   state._pending = null;
 }
 
@@ -12169,9 +11917,11 @@ function openMobileHighlight(paraId) {
 }
 
 function showColourPickerBottom(isExisting, hlId) {
-  // Hide the paragraph action bar — it conflicts with the colour picker
+  // Hide action bars — they conflict with the colour picker, but keep pending selection.
   const bar = document.getElementById('mobileActionBar');
   if (bar) bar.classList.remove('visible');
+  const selectionBar = document.getElementById('selectionActionBar');
+  if (selectionBar) selectionBar.remove();
   const picker = document.getElementById('colourPicker');
   const removeBtn = document.getElementById('cpRemoveBtn');
   removeBtn.style.display = isExisting ? 'block' : 'none';

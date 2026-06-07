@@ -1,4 +1,4 @@
-# Real-device QA checklist — prototype-72
+# Real-device QA checklist — prototype-74
 
 Test on iPhone Safari, iPhone installed PWA, iPad Safari portrait, iPad Safari landscape, and iPad installed PWA if used.
 
