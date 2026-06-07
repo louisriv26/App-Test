@@ -1,9 +1,9 @@
-# Luisa 24 Heures — prototype-75 Stage 5G
+# Les 24 Heures de la Passion — prototype-77
 
-Package: `luisa_24_heures_app_v75_stage5g_iphone_bottom_nav_compact_locked.zip`
+Stage: Stage 5I — iPhone bottom-nav responsive repair + Help modal containment
 
-Scope: targeted CSS-only iPhone/mobile bottom-navigation compactness repair, with deployment metadata refreshed.
+This deploy folder contains the app files for GitHub Pages deployment.
 
-Status: `LIMITED_PASS_STATIC` until real iPhone Safari / installed iPhone PWA / iPad Safari validation is performed.
+Final static/package status: LIMITED_PASS_STATIC.
 
-Deploy the contents of this folder or the nested `luisa_24h_github_deploy.zip` to GitHub Pages.
+Real-device validation remains required, especially Samsung/Android main-page scrolling, iPhone Safari regression, iPad Safari regression, highlighting/text selection, update banner, and offline/PWA behaviour.

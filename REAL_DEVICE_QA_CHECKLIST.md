@@ -1,12 +1,27 @@
-# Real-device QA checklist — prototype-75
+# Real-device QA checklist — prototype-77
 
-Test on iPhone Safari, iPhone installed PWA, iPad Safari portrait, iPad Safari landscape, and iPad installed PWA if used.
+## Samsung / Android P0 check
 
-Priority checks:
-1. Update banner appears when `version.json` is newer than the loaded app.
-2. Accueil / Heures / Textes / Espace bottom navigation.
-3. Textes → Approfondir la Passion → live indexes.
-4. Hour reader, scroll/resume, and Textes liés.
-5. Highlight selection, colour, reopen from Espace, delete.
-6. `?` help button and Mon Espace spacing.
-7. Offline/PWA shell after first online load.
+- Confirm the Aide modal still scrolls and closes.
+- Confirm Accueil scrolls vertically.
+- Open a long Hour and confirm it scrolls to the bottom.
+- Confirm Textes scrolls vertically.
+- Confirm Mon Espace scrolls vertically.
+- Confirm bottom navigation buttons remain tappable.
+
+## iPhone / iPad regression check
+
+- iPhone Safari: Accueil, Heure, Textes, Mon Espace, Aide.
+- Installed iPhone PWA: same checks.
+- iPad Safari portrait and landscape: same checks.
+
+Static package status before real-device validation: LIMITED_PASS_STATIC.
+
+
+## Stage 5I required checks
+
+- iPhone portrait: bottom navigation remains visible, labels visible, and perceived band height reduced.
+- iPhone landscape: bottom navigation labels Accueil / Heures / Textes / Espace are visible.
+- iPhone Aide / À propos: content no longer passes behind the modal title/close area while scrolling/bouncing.
+- Samsung/Android: Accueil, full Hour, Textes, Mon Espace still scroll.
+- iPad: portrait and landscape regressions not detected.

@@ -1,8 +1,10 @@
-# Real-device QA matrix — prototype-75
+# Real-device QA matrix — prototype-77
 
-| Device | Browser/mode | Orientation | Required result | Status | Notes |
-|---|---|---|---|---|---|
-| iPhone | Safari | Portrait | Navigation, update banner, indexes, highlighting | NOT_TESTED | |
-| iPhone | Installed PWA | Portrait | Offline shell, update refresh | NOT_TESTED | |
-| iPad | Safari | Portrait | Header spacing, Mon Espace, library panes | NOT_TESTED | |
-| iPad | Safari | Landscape | Header spacing, Mon Espace, library panes | NOT_TESTED | |
+| Device/browser | Accueil scroll | Hour scroll | Textes scroll | Mon Espace scroll | Aide scroll | Result |
+|---|---|---|---|---|---|---|
+| Samsung Android / Samsung Internet | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | REQUIRED |
+| Samsung Android / Chrome | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | REQUIRED |
+| iPhone Safari | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | REQUIRED |
+| iPhone installed PWA | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | REQUIRED |
+| iPad Safari portrait | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | REQUIRED |
+| iPad Safari landscape | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | NOT_TESTED | REQUIRED |
