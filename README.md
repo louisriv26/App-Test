@@ -1,5 +1,5 @@
-# Luisa 24 Heures — prototype-70 Stage 5C-R4 minute recheck repair
+# Luisa 24 Heures — prototype-72 Stage 5D deep re-audit repair
 
 Deployment package for real-device QA.
 
-Scope: user-facing description/status cleanup, QA/deploy documentation refresh, and evidence reports rebuilt with direct proof after minute recheck. Approved devotional/source text bodies unchanged.
+Scope: metadata/report/package consistency repair after four-pass audit. Approved devotional/source text bodies unchanged.

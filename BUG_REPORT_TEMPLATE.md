@@ -1,27 +1,10 @@
-# Bug report template
+# Bug report — prototype-72
 
-## Summary
-
-## Device / browser / mode
-- Device:
-- OS version:
-- Browser or installed PWA:
-- Orientation:
-
-## Steps to reproduce
-1. 
-2. 
-3. 
-
-## Expected result
-
-## Actual result
-
-## Severity
-- Blocker / Major / Minor / Cosmetic
-
-## Evidence
-- Screenshot/video filename:
-- Console error if available:
-
-## Notes
+Device:
+Browser/mode:
+Orientation:
+Steps:
+Expected:
+Actual:
+Severity:
+Screenshot/video:

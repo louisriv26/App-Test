@@ -1,16 +1,7 @@
-# Deployment handoff — Stage 5C-R4 real-device QA package
+# Deployment handoff — prototype-72
 
-Package status: prototype-70 / Stage 5C-R4 minute recheck package.
+Package: luisa_24_heures_app_v71_stage5cr5_deep4_audit_metadata_repaired_locked.zip
 
-Use deploy/luisa_24h_github_deploy.zip for GitHub Pages deployment testing.
+Deploy the contents of this folder or the nested `luisa_24h_github_deploy.zip` to GitHub Pages.
 
-Included QA files:
-- REAL_DEVICE_QA_MATRIX.md
-- REAL_DEVICE_QA_RESULTS_TEMPLATE.csv
-- REAL_DEVICE_QA_CHECKLIST.md
-- REAL_DEVICE_QA_INTAKE_GUIDE.md
-- BUG_REPORT_TEMPLATE.md
-
-This package adds QA documentation only. App code and devotional/source text are unchanged from the Stage 5A release-candidate baseline.
-
-Automated package audits pass, but real iPhone/iPad Safari and installed-PWA behaviour remains NOT_TESTED until physical-device QA is completed.
+Real-device validation remains required for iPhone Safari, iPad Safari, installed PWA, highlighting/text selection, update banner, and offline behaviour.

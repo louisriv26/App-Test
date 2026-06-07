@@ -986,6 +986,29 @@ html, body, #app, .main, .content,
 }
 @media (min-width: 768px) and (max-width: 1149px) { .library-dashboard-grid { grid-template-columns:1fr 1fr; } }
 
+/* ── Stage 5D real-device QA repairs ── */
+.update-banner { z-index: 9999; max-width: 720px; margin: 0 auto; left: max(12px, env(safe-area-inset-left, 0px)); right: max(12px, env(safe-area-inset-right, 0px)); }
+.update-refresh-btn { font-weight: 800; }
+.hours-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.85rem; }
+.hour-list-card { border:1px solid var(--bg3); background:var(--bg2); color:var(--ink); border-radius:var(--radius); padding:0.9rem 1rem; text-align:left; display:grid; grid-template-columns:auto 1fr; gap:0.15rem 0.75rem; align-items:start; cursor:pointer; box-shadow:var(--shadow-soft); }
+.hour-list-card:hover,.hour-list-card:focus-visible { border-color:var(--accent-soft); box-shadow:0 0 0 3px rgba(146,105,68,0.13); outline:none; }
+.hour-list-num { grid-row:1 / span 2; color:var(--accent); font-family:var(--font-display); font-weight:900; font-size:1.3rem; min-width:2.1rem; text-align:center; }
+.hour-list-title { font-family:var(--font-display); font-weight:800; font-size:1.05rem; line-height:1.22; color:var(--ink); }
+.hour-list-time { font-family:var(--font-ui); color:var(--ink3); font-style:italic; font-size:0.86rem; margin-top:0.18rem; }
+.hour-list-card.gethsemani .hour-list-title::after { content:' · Heure Sainte'; color:#6a3a9a; font-family:var(--font-ui); font-size:0.78rem; font-weight:800; }
+.library-extract-heading { font-size:calc(var(--reading-size, 20px) * 0.92) !important; font-weight:900 !important; line-height:1.28 !important; color:var(--ink) !important; background:linear-gradient(90deg,var(--accent-pale),rgba(255,255,255,0)); border-top:none !important; border-left:4px solid var(--accent) !important; border-radius:0.75rem !important; padding:0.75rem 0.9rem !important; margin:1.75rem 0 0.85rem !important; letter-spacing:0.01em; scroll-margin-top:96px; }
+.library-live-index-btn { font-size:0.9rem; padding:0.58rem 0.72rem; }
+.right-context-panel .panel-topbar { display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.8rem; }
+.panel-close-btn { border:1px solid var(--accent-soft); background:var(--accent-pale); color:var(--accent); border-radius:999px; padding:0.42rem 0.7rem; font-family:var(--font-ui); font-weight:850; cursor:pointer; }
+.panel-close-btn:focus-visible,.panel-close-btn:hover { outline:3px solid rgba(146,105,68,0.16); background:var(--accent); color:#fff; }
+.panel-mini-list { display:grid; gap:0.4rem; margin-top:0.55rem; }
+.panel-mini-item { border:1px solid var(--bg3); background:var(--bg); border-radius:0.7rem; padding:0.55rem 0.65rem; text-align:left; color:var(--ink); font-family:var(--font-ui); cursor:pointer; }
+.panel-mini-item:focus-visible,.panel-mini-item:hover { outline:3px solid rgba(146,105,68,0.12); border-color:var(--accent-soft); }
+.mon-espace-toggle { margin-left:0.8rem; margin-right:0.35rem; }
+@media (max-width: 900px) { .hours-list { grid-template-columns:1fr; } .library-extract-heading { font-size:1.15rem !important; } }
+@media (min-width:768px) and (max-width:1149px) { .header-actions { gap:0.75rem; } #monEspaceToggle { margin-left:0.85rem; } }
+/* End Stage 5D real-device QA repairs */
+
 </style>
 </head>
 <body>
@@ -3837,7 +3860,7 @@ const state = {
   monEspacePanelOpen: false,
   meditationLog: []
 };
-const APP_VERSION = 'prototype-70';
+const APP_VERSION = 'prototype-72';
 const STORAGE_SCHEMA_VERSION=3;
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -10097,7 +10120,7 @@ const TEXT_LIBRARY = [
     "title": "La Vierge Marie dans le Royaume de la Divine Volonté",
     "type": "mary_divine_will_complement",
     "group": "Hors périmètre",
-    "status": "removed_scope_excluded",
+    "status": "hidden_scope_excluded",
     "source_language": "fr",
     "preferred_display_language": "fr",
     "language": "fr",
@@ -10116,8 +10139,8 @@ const TEXT_LIBRARY = [
       "metadata_final_status": "PASS_WITH_SOURCE_ANOMALY_DOCUMENTED",
       "human_review_items": 0
     },
-    "highlightable": true,
-    "searchable": true,
+    "highlightable": false,
+    "searchable": false,
     "hidden_reason": "Full Mary Divine Will standalone text excluded from the app package; only Passion/Hour-related excerpts may be used.",
     "practice_options": []
   }
@@ -10625,12 +10648,21 @@ function buildDailyCard() {
 }
 
 function makeHourGridHtml(compact = false) {
+  if (compact) {
+    return CORPUS.hours.map(h => `
+      <button type="button" class="hour-card ${state.readHours.has(h.hour_number)?'read':''} ${[5,6,7].includes(h.hour_number)?'gethsemani':''}"
+        onclick="openHour(${h.hour_number})" title="${escHtml(h.title)} — ${h.display_time}${[5,6,7].includes(h.hour_number)?' · Heure Sainte':''}" aria-label="Ouvrir la ${h.hour_number}e Heure : ${escHtml(h.title)} — ${h.display_time}">
+        <span class="hc-num">${h.hour_number}</span>
+        <span class="hc-time">${h.display_time}</span>
+      </button>`).join('');
+  }
   return CORPUS.hours.map(h => `
-    <div class="hour-card ${state.readHours.has(h.hour_number)?'read':''} ${[5,6,7].includes(h.hour_number)?'gethsemani':''}"
-      onclick="openHour(${h.hour_number})" title="${escHtml(h.title)} — ${h.display_time}${[5,6,7].includes(h.hour_number)?' · Heure Sainte':''}">
-      <span class="hc-num">${h.hour_number}</span>
-      <span class="hc-time">${h.display_time}</span>
-    </div>`).join('');
+    <button type="button" class="hour-list-card ${state.readHours.has(h.hour_number)?'read':''} ${[5,6,7].includes(h.hour_number)?'gethsemani':''}"
+      onclick="openHour(${h.hour_number})" aria-label="Ouvrir la ${h.hour_number}e Heure : ${escHtml(h.title)} — ${h.display_time}">
+      <span class="hour-list-num">${h.hour_number}</span>
+      <span class="hour-list-title">${escHtml(h.title)}</span>
+      <span class="hour-list-time">${escHtml(h.display_time)}</span>
+    </button>`).join('');
 }
 function showHoursView(push = true) {
   if (push) pushHistory(state.view, getHistoryDataForView(state.view));
@@ -10642,7 +10674,7 @@ function showHoursView(push = true) {
       <h2 class="library-title">Les 24 Heures</h2>
       <p class="library-subtitle">Choisissez une Heure pour entrer dans la méditation. Les textes liés restent accessibles dans chaque Heure.</p>
     </div>
-    <div class="hours-grid">${makeHourGridHtml()}</div>
+    <div class="hours-list">${makeHourGridHtml(false)}</div>
   </div>`;
   document.getElementById('progressWrap').style.display = 'none';
   setBottomNav('hours'); buildSidebar(); updateRightContextPanel();
@@ -10650,10 +10682,15 @@ function showHoursView(push = true) {
 function getRecentLibraryTextIds() {
   try {
     const arr = JSON.parse(SafeStorage.get('lp24_recent_texts','[]'));
-    if (!Array.isArray(arr)) return [];
+    if (!Array.isArray(arr)) { SafeStorage.remove('lp24_recent_texts'); return []; }
     const seen = new Set();
-    return arr.filter(id => { const item = getLibraryItem(id); return typeof id === 'string' && isLibraryItemUserVisible(item) && item.type !== 'library_group' && !seen.has(id) && seen.add(id); }).slice(0,4);
-  } catch(e) { return []; }
+    const clean = arr.filter(id => {
+      const item = getLibraryItem(id);
+      return typeof id === 'string' && isLibraryItemUserVisible(item) && item.type !== 'library_group' && !seen.has(id) && seen.add(id);
+    }).slice(0,4);
+    if (clean.length !== arr.length || clean.some((id, i) => id !== arr[i])) SafeStorage.set('lp24_recent_texts', JSON.stringify(clean));
+    return clean;
+  } catch(e) { SafeStorage.remove('lp24_recent_texts'); return []; }
 }
 function rememberLibraryText(id) {
   const item = getLibraryItem(id);
@@ -10723,7 +10760,7 @@ function renderHome() {
       </div>
       <div class="progress-count">${state.readHours.size}/24</div>
     </div>` : '';
-  const hoursGrid = makeHourGridHtml();
+  const hoursGrid = makeHourGridHtml(true);
   const prayerIcons = {'BEFORE_EACH_HOUR':'🕯','AFTER_EACH_HOUR':'🙏','HOLY_HOUR_PREPARATION':'✝','HOLY_HOUR_THANKSGIVING':'💛','DE_PROFUNDIS':'📿'};
   const sectionIcons = {'INTRODUCTION':'📖','BENEFITS':'✨','PRACTICE_METHODS':'🗝','GETHSEMANI':'🌿'};
   const extrasGrid = [
@@ -11182,7 +11219,13 @@ function openSection(id, push = true, scrollToAnchor = null) {
 // ── Search ──
 
 function getLibraryItem(id) { return TEXT_LIBRARY.find(item => item.id === id) || null; }
-function isLibraryItemUserVisible(item) { return !!item && item.status !== 'hidden_scope_excluded' && item.status !== 'hidden_empty_navigation_group'; }
+function isLibraryItemUserVisible(item) {
+  if (!item) return false;
+  const status = String(item.status || '');
+  if (status.startsWith('hidden') || status.startsWith('removed')) return false;
+  if (item.type === 'library_group' && (!item.items || !item.items.length)) return false;
+  return true;
+}
 function getLibraryRenderableItems() { return TEXT_LIBRARY.filter(item => item.type !== 'library_group' && isLibraryItemUserVisible(item)); }
 function getLibraryGroups() { return TEXT_LIBRARY.filter(item => item.type === 'library_group' && (item.items||[]).length > 0 && isLibraryItemUserVisible(item)); }
 function getLinkedTextsForHour(hourNum) { return (HOUR_LINKED_TEXTS[hourNum] || []).map(getLibraryItem).filter(isLibraryItemUserVisible); }
@@ -11396,12 +11439,23 @@ function renderLinkedTextsForHour(hourNum) {
 }
 function updateRightContextPanel(context) {
   const panel = document.getElementById('rightContextPanel'); if (!panel) return;
-  const h = state.currentHour ? CORPUS.hours.find(x => x.hour_number === state.currentHour) : getLastHourForResume();
-  const linked = h ? getLinkedTextsForHour(h.hour_number) : [];
-  panel.innerHTML = `<div class="responsive-pane-label">Mon Espace</div>
-    <button type="button" class="resume-panel-btn" onclick="toggleMonEspacePanel()" aria-label="Masquer Mon Espace">Fermer Mon Espace</button>
+  const h = getLastHourForResume();
+  const favs = Object.values(state.favorites || {}).slice(0,3);
+  const highlights = [];
+  for (const [paraId, arr] of Object.entries(state.textHighlights || {})) {
+    for (const raw of (arr || [])) {
+      const hl = migrateHighlightRecord(paraId, raw);
+      const info = getTargetInfo(paraId);
+      if (info) highlights.push({paraId, hl, info});
+    }
+  }
+  const favMini = favs.length ? favs.map(f => `<button type="button" class="panel-mini-item" onclick="openHourAtPara(${f.hourNum},'${f.id}','${f.type||'meditation'}')"><strong>${f.hourNum}e Heure</strong><br>${escHtml(f.text || '')}</button>`).join('') : '<div class="right-context-meta">Aucun favori pour le moment.</div>';
+  const hlMini = highlights.length ? highlights.slice(0,3).map(item => `<button type="button" class="panel-mini-item" onclick="openHighlightTarget('${item.paraId}')"><strong>${escHtml(item.info.label || 'Passage')}</strong><br>${escHtml(item.hl.selected_text_snapshot || item.hl.text || '')}</button>`).join('') : '<div class="right-context-meta">Aucun surlignage pour le moment.</div>';
+  panel.innerHTML = `<div class="panel-topbar"><div class="responsive-pane-label">Mon Espace</div><button type="button" class="panel-close-btn" onclick="toggleMonEspacePanel()" aria-label="Fermer Mon Espace">× Fermer</button></div>
     <div class="right-context-card"><div class="right-context-title">Reprendre</div><div class="right-context-meta">${h ? `${h.hour_number}e Heure — ${escHtml(h.title)}<br>${escHtml(describeSavedPara(getSavedParaForHour(h.hour_number)))}` : 'Aucune position enregistrée.'}</div>${h ? `<button type="button" class="resume-panel-btn primary" onclick="openHour(${h.hour_number}, true, { resume: true })">Reprendre</button> <button type="button" class="resume-panel-btn" onclick="openHour(${h.hour_number})">Ouvrir au début</button>` : ''}</div>
-    <div class="right-context-card"><div class="right-context-title">Textes liés</div><div class="right-context-meta">${linked.length ? linked.map(item => `<button type="button" class="linked-text-card" onclick="openLibraryText('${item.id}')"><div class="linked-text-card-meta">${escHtml(getLibraryKindLabel(item))}</div><div class="linked-text-title">${escHtml(item.title)}</div><div class="linked-text-source">${escHtml(getLinkedTextReferenceLabel(item))}</div></button>`).join('') : 'Aucun texte lié n’est encore intégré pour cette vue.'}</div></div>`;
+    <div class="right-context-card"><div class="right-context-title">Favoris</div><div class="panel-mini-list">${favMini}</div></div>
+    <div class="right-context-card"><div class="right-context-title">Surlignages</div><div class="panel-mini-list">${hlMini}</div></div>
+    <div class="right-context-card"><button type="button" class="resume-panel-btn primary" onclick="showEspaceView()">Ouvrir tout Mon Espace</button></div>`;
   applyMonEspacePanelState();
 }
 
@@ -11725,6 +11779,7 @@ function showHelp() {
         <div class="prov-block" style="margin-bottom:0.6rem">
           <div class="prov-label">Empreinte corpus</div><div class="prov-value"><code style="font-size:0.78rem">${fp.slice(0,32)}…</code></div>
         </div>
+        <button class="integrity-btn" onclick="manualUpdateCheck()" style="margin-top:0.25rem;margin-right:0.5rem">↻ Rechercher une mise à jour</button>
         <button class="integrity-btn" onclick="runIntegrityCheck()" style="margin-top:0.25rem">✦ Vérifier l'intégrité du corpus</button>
         <div class="integrity-result" id="integrityResult"></div>
       </div>
@@ -12202,37 +12257,43 @@ try {
   checkForUpdate(); // runs async, silent on failure
 } catch(err) { showFatalError(err); }
 // ─── Update check (fetches version.json from same domain) ───────
-async function checkForUpdate() {
+async function checkForUpdate(manual = false) {
   try {
-    const r = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' });
-    if (!r.ok) return;
+    const versionUrl = new URL('version.json', window.location.href);
+    versionUrl.searchParams.set('t', String(Date.now()));
+    const r = await fetch(versionUrl.href, { cache: 'no-store', headers: { 'Cache-Control': 'no-cache' } });
+    if (!r.ok) { if (manual) showToast('Vérification impossible pour le moment'); return false; }
     const data = await r.json();
     const remoteVersion = data.app_version || data.version;
     const remoteDate = data.build_date || data.date || '';
     if (remoteVersion && remoteVersion !== APP_VERSION) {
-      autoReloadUpdate(remoteVersion, remoteDate);
+      showUpdateBanner(remoteVersion, remoteDate);
+      return true;
     }
-  } catch(e) { /* offline or file missing — silent */ }
+    if (manual) showToast('Vous avez déjà la dernière version disponible');
+    return false;
+  } catch(e) { if (manual) showToast('Vérification impossible hors ligne'); return false; }
 }
 async function refreshAppForUpdate() {
   try {
     if ('serviceWorker' in navigator) {
       const regs = await navigator.serviceWorker.getRegistrations();
       await Promise.all(regs.map(r => r.update().catch(()=>null)));
+      await Promise.all(regs.map(r => r.unregister().catch(()=>null)));
+    }
+    if (window.caches && caches.keys) {
+      const keys = await caches.keys();
+      await Promise.all(keys.filter(k => k.startsWith('luisa-24h-')).map(k => caches.delete(k)));
     }
   } catch(e) { /* continue with reload */ }
-  window.location.reload();
+  const u = new URL(window.location.href);
+  u.searchParams.set('refresh', String(Date.now()));
+  window.location.replace(u.href);
 }
+function manualUpdateCheck() { checkForUpdate(true); }
 
 function dismissUpdate(btn) { btn.parentElement.remove(); }
-function autoReloadUpdate(newVer, newDate) {
-  // Manual update — user must tap; never interrupt reading
-  if (document.querySelector('.update-banner')) return;
-  const el = document.createElement('div');
-  el.className = 'update-banner';
-  el.innerHTML = '<div class="update-banner-text"><strong>Mise à jour disponible — ' + escHtml(newVer) + '</strong>Appuyez pour obtenir la nouvelle version.</div><button class="update-refresh-btn" onclick="refreshAppForUpdate()">↻ Actualiser</button><button class="update-dismiss-btn" onclick="dismissUpdate(this)" aria-label="Fermer">×</button>';
-  document.body.appendChild(el);
-}
+function autoReloadUpdate(newVer, newDate) { showUpdateBanner(newVer, newDate); }
 
 function showUpdateBanner(newVer, newDate) {
   // Don't stack multiple banners
