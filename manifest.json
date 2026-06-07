@@ -1,0 +1,42 @@
+{
+  "name": "Les 24 Heures de la Passion de Luisa Piccarreta",
+  "short_name": "24 Heures",
+  "description": "Les 24 Heures de la Passion — méditations de Luisa Piccarreta",
+  "start_url": "./luisa_24_heures.html",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#3D1212",
+  "theme_color": "#3D1212",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "id": "./",
+  "scope": "./",
+  "categories": [
+    "books",
+    "education",
+    "lifestyle"
+  ],
+  "display_override": [
+    "standalone",
+    "browser"
+  ]
+}
