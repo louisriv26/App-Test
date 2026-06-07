@@ -619,7 +619,7 @@ mark.hl-pink   { background: #fce7f3; color: inherit; }
   body { touch-action: pan-y; } /* prevent horizontal rubber-banding */
   .header-actions { gap: 0.2rem; }
   .icon-btn { padding: 4px; }
-  #helpBtn { display: none; }
+  #helpBtn { display: flex; } /* Stage 5C-R1: keep help visible on iPhone/touch screens */
   .header-logo { font-size: 0.72rem; letter-spacing: 0.08em; }
   .header-logo span { display: none; }
   .extras-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -933,6 +933,42 @@ html, body, #app, .main, .content,
 /* End Stage 4S accessibility additions */
 /* End Stage 4Q additions */
 
+
+
+/* ── Stage 5C-R1 deep 4-pass code audit repair: mobile help visibility ── */
+.help-round { width:44px; height:44px; min-width:44px; border-radius:999px; border:1px solid var(--accent-soft); background:var(--accent-pale); color:var(--accent); font-family:var(--font-display); font-weight:900; font-size:1.25rem; line-height:1; }
+.help-round:hover, .help-round:focus-visible { background:var(--accent); color:#fff; outline:3px solid rgba(146,105,68,0.16); outline-offset:2px; }
+.mon-espace-toggle { min-height:40px; padding:0 0.75rem; border:1px solid var(--accent-soft); border-radius:999px; }
+.home-action-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.75rem; margin:1.2rem 0 1.35rem; }
+.home-action-card { border:1px solid var(--bg3); background:var(--bg2); color:var(--ink); border-radius:var(--radius); padding:1rem; text-align:left; font-family:var(--font-ui); cursor:pointer; box-shadow:var(--shadow-soft); }
+.home-action-card:hover, .home-action-card:focus-visible { border-color:var(--accent-soft); box-shadow:0 0 0 3px rgba(146,105,68,0.12); outline:none; }
+.home-action-card.primary { background:linear-gradient(135deg,var(--accent-pale),var(--bg)); border-color:var(--accent-soft); }
+.home-action-kicker { color:var(--accent); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:900; margin-bottom:0.25rem; }
+.home-action-title { font-family:var(--font-display); font-weight:800; color:var(--ink); font-size:1.02rem; margin-bottom:0.2rem; }
+.home-action-desc { color:var(--ink3); font-size:0.82rem; line-height:1.35; }
+.home-recent-row { display:grid; gap:0.45rem; margin:0.6rem 0 1rem; }
+.library-dashboard-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.9rem; }
+.library-card.featured { border-color:var(--accent-soft); background:linear-gradient(135deg,var(--accent-pale),var(--bg2)); }
+.library-card-subitems { margin-top:0.45rem; color:var(--accent); font-size:0.78rem; font-weight:750; line-height:1.35; }
+.library-breadcrumb { font-family:var(--font-ui); font-size:0.78rem; color:var(--ink4); margin-bottom:0.75rem; }
+.library-breadcrumb button { border:none; background:none; color:var(--accent); font:inherit; font-weight:800; cursor:pointer; padding:0; }
+.library-section-filter { position:relative; margin:0.8rem 0 1rem; }
+.library-section-filter input { width:100%; border:1px solid var(--bg3); border-radius:999px; padding:0.65rem 0.9rem; font-family:var(--font-ui); font-size:0.95rem; background:var(--bg); color:var(--ink); }
+.library-section-filter input:focus { outline:3px solid rgba(146,105,68,0.13); border-color:var(--accent-soft); }
+.see-also-card { background:linear-gradient(135deg,var(--accent-pale),var(--bg)); border-color:var(--accent-soft); }
+.hours-screen, .espace-screen { width:100%; max-width:var(--col-max); }
+.espace-section { background:var(--bg2); border:1px solid var(--bg3); border-radius:var(--radius); padding:1rem; margin-bottom:1rem; }
+.espace-section-title { font-family:var(--font-display); font-weight:800; color:var(--ink); margin-bottom:0.65rem; }
+.espace-actions { display:flex; flex-wrap:wrap; gap:0.5rem; }
+@media (max-width: 767px) {
+  .header-actions button[title="Recherche"], .header-actions button[title="Favoris"], #menuBtn, #monEspaceToggle { display:none !important; }
+  .header-actions { gap:0.35rem; }
+  .help-round { width:44px !important; height:44px !important; min-width:44px !important; }
+  .home-action-grid, .library-dashboard-grid { grid-template-columns:1fr; }
+  .bn-item { font-size:0.72rem; min-height:54px; }
+}
+@media (min-width: 768px) and (max-width: 1149px) { .library-dashboard-grid { grid-template-columns:1fr 1fr; } }
+
 </style>
 </head>
 <body>
@@ -967,9 +1003,7 @@ html, body, #app, .main, .content,
       <button id="monEspaceToggle" class="icon-btn mon-espace-toggle" onclick="toggleMonEspacePanel()" title="Mon Espace" aria-label="Afficher ou masquer Mon Espace" aria-controls="rightContextPanel" aria-expanded="false">
         <span aria-hidden="true">▣</span><span class="mon-espace-toggle-text">Mon Espace</span>
       </button>
-      <button class="icon-btn" onclick="showHelp()" title="Aide &amp; À propos" aria-label="Aide et À propos" id="helpBtn">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      </button>
+      <button class="icon-btn help-round" onclick="showHelp()" title="Aide et À propos" aria-label="Aide et À propos" id="helpBtn"><span aria-hidden="true">?</span></button>
       <button id="menuBtn" class="icon-btn" onclick="toggleSidebar()" title="Menu" aria-label="Menu de navigation">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
@@ -1024,21 +1058,17 @@ html, body, #app, .main, .content,
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
       Accueil
     </button>
-    <button class="bn-item" id="bnSearch" onclick="showSearchView()" aria-label="Recherche">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      Chercher
+    <button class="bn-item" id="bnHours" onclick="showHoursView()" aria-label="Heures">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      Heures
     </button>
-    <button class="bn-item" onclick="toggleFavPanel()" aria-label="Mes favoris">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      Favoris
-    </button>
-    <button class="bn-item" id="bnLibrary" onclick="showLibraryView()" aria-label="Textes autour des Heures">
+    <button class="bn-item" id="bnLibrary" onclick="showLibraryView()" aria-label="Textes">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       Textes
     </button>
-    <button class="bn-item" onclick="toggleSidebar()" aria-label="Menu de navigation">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      Menu
+    <button class="bn-item" id="bnEspace" onclick="showEspaceView()" aria-label="Espace">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Espace
     </button>
   </nav>
 
@@ -3790,7 +3820,7 @@ const state = {
   monEspacePanelOpen: false,
   meditationLog: []
 };
-const APP_VERSION = 'prototype-64';
+const APP_VERSION = 'prototype-67';
 const STORAGE_SCHEMA_VERSION=3;
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -4064,103 +4094,36 @@ const BUILD_DATE = '2026-06-07';
 const TEXT_LIBRARY = [
   {
     "id": "PASSION24.LIBRARY.BEFORE",
-    "title": "Avant les Heures",
+    "title": "Découvrir et pratiquer les Heures",
     "type": "library_group",
     "status": "active",
-    "description": "Textes de préparation et d’introduction avant la prière des Heures.",
+    "description": "Préface, introduction, manière de pratiquer, promesses et Gethsémani : les textes pour comprendre comment entrer dans les 24 Heures.",
     "items": [
+      "PASSION24.TEXT.PREFACE_ANNIBALE",
       "PASSION24.TEXT.INTRODUCTION_PURPOSE",
-      "PASSION24.TEXT.PREFACE_ANNIBALE"
-    ]
-  },
-  {
-    "id": "PASSION24.TEXT.PREFACE_ANNIBALE",
-    "title": "Préface de Saint Annibale",
-    "type": "preface",
-    "group": "Avant les Heures",
-    "status": "french_translation_pending_placeholder",
-    "description": "Préface validée en source anglaise, mais non affichée en anglais dans l’app française. Traduction française à intégrer après validation.",
-    "body": [
-      "Préface française à intégrer après validation d’une source française complète ou traduction française approuvée."
-    ],
-    "source_status": "SOURCE_VALIDATED_ENGLISH_RETAINED_AS_NON_USER_FACING_REFERENCE",
-    "source_language": "en",
-    "translation_status": "french_translation_pending",
-    "source_path": "hours_of_passion.pdf::physical_pages_11_15",
-    "source_sha256": "17eae08659d765903e4d50a84bfafd64a214a5591da06867f93b89bb06ed626d",
-    "source_pages": "PDF physical pages 11-15 (printed pages 1-5 of Preface)",
-    "paragraph_count": 42,
-    "import_stage": "Stage 4L",
-    "source_note": "The uploaded English PDF identifies this as the Preface by Saint Annibale M. di Francia. No French translation was invented in this stage.",
-    "language": "fr",
-    "placeholder_retained_reason": "Aucune source française complète validée localement pendant Stage 4O-FR."
-  },
-  {
-    "id": "PASSION24.TEXT.INTRODUCTION_PURPOSE",
-    "title": "Introduction / but des Heures",
-    "type": "introduction",
-    "group": "Avant les Heures",
-    "status": "imported_source_text",
-    "description": "Introduction actuellement validée dans le corpus Stage 4G.",
-    "body": [
-      "INTRODUCTION",
-      "Avec toute la réserve nécessaire, dans la soumission la plus parfaite au jugement de la sainte Église, sans faire appel à une autre foi que la foi humaine et conformément au décret du Pape Urbain VIII, nous transcrivons ici des révélations privées que Notre-Seigneur Jésus-Christ a faites à la servante de Dieu Luisa Piccarreta, à qui il inspira cet ouvrage.",
-      "Citons ici une lettre envoyée par Luisa au Révérend Canon Di Francia :",
-      "« Mon très Révérend Père,",
-      "Enfin, voici que je vous remets le texte des Heures de la Passion. Je l'ai écrit tout à la gloire de Notre-Seigneur. Je joins à la présente un autre feuillet qui mentionne l'affection toute particulière et les belles promesses de Jésus envers ceux qui pratiqueront ces Heures.",
-      "Je crois que si celui qui les médite est un pécheur, il se convertira, s'il est imparfait, il deviendra parfait, s'il est saint, il deviendra plus saint, s'il est tenté, il trouvera la victoire, s'il est souffrant, il trouvera la force, le remède, le réconfort ; et si son âme est faible et pauvre, il trouvera un aliment spirituel et un miroir où il pourra se regarder continuellement pour s'embellir et se rendre semblable à Jésus notre modèle.",
-      "Le contentement qu'éprouve Jésus lorsqu'on médite ces Heures est si grand qu'Il voudrait qu'il y en ait au moins une copie dans chaque village ou cité pour qu'on puisse en faire la méditation.",
-      "À travers ces méditations, Jésus entend sa propre voix et ses propres Prières telles qu'Il les adressait à son Père durant les 24 Heures de sa Passion.",
-      "Et si un assez grand nombre d'âmes s'y adonnent dans chaque village ou cité, il semble que Jésus me fait savoir que la Justice divine en sera partiellement apaisée. Et, en cette triste époque de calamités et d'effusion de sang,",
-      "ces fléaux seront partiellement arrêtés.",
-      "Faites appel à tous, Révérend Père, et propagez ce petit ouvrage que mon aimable Jésus m'a demandé de rédiger.",
-      "Je vous dis aussi que le but de ces écrits\n- n'est pas tant de raconter l'histoire de la Passion de Notre-Seigneur\ncar il y a beaucoup de livres qui traitent de ce sujet et il ne serait pas\nnécessaire d'en écrire un autre,",
-      "c’est d'inciter le lecteur à la réparation, ce que nous avons fait en adjoignant aux divers points de la Passion des suggestions à ce sujet.",
-      "Par exemple,\n- dans certains passages, on bénit Jésus,\n- dans d'autres, on compatit avec Lui,\n- dans d'autres, on Le loue,\n- dans d'autres on Le réconforte,\n- dans d'autres on rachète à ses côtés,\n- dans d'autres on prie, on demande, on supplie.",
-      "Par conséquent, je vous laisse le soin, Révérend Père, de faire connaître le but de ces Écrits dans une préface. »"
-    ],
-    "source_status": "SOURCE_VALIDATED",
-    "source_path": "app/luisa_24_heures.html::CORPUS.sections[PASSION24.SECTION.INTRODUCTION]",
-    "source_sha256": "57e0df1e9ff21df198e1f58a0fd671beb4f52dad525ca1e0b75fcf2e9704a889",
-    "source_section_id": "PASSION24.SECTION.INTRODUCTION",
-    "source_title": "Introduction"
-  },
-  {
-    "id": "PASSION24.LIBRARY.PRAYERS",
-    "title": "Prières",
-    "type": "library_group",
-    "status": "active",
-    "description": "Prières liées aux Heures et à leur pratique.",
-    "items": []
-  },
-  {
-    "id": "PASSION24.LIBRARY.HOURS",
-    "title": "Les 24 Heures",
-    "type": "library_group",
-    "status": "active",
-    "description": "Accès principal aux vingt-quatre Heures de la Passion.",
-    "items": []
-  },
-  {
-    "id": "PASSION24.LIBRARY.LINKED_BY_HOUR",
-    "title": "Textes liés par Heure",
-    "type": "library_group",
-    "status": "active",
-    "description": "Compléments rattachés à des Heures précises.",
-    "items": [
-      "PASSION24.TEXT.GETHSEMANE_THREE_HOURS",
-      "PASSION24.LIBRARY.PART_III"
+      "PASSION24.TEXT.HOW_TO_PRACTICE",
+      "PASSION24.TEXT.PROMISES_BENEFITS",
+      "PASSION24.TEXT.GETHSEMANE_THREE_HOURS"
     ]
   },
   {
     "id": "PASSION24.LIBRARY.PART_III",
-    "title": "Partie III — Textes liés aux Heures",
+    "title": "Approfondir la Passion",
     "type": "library_group",
     "status": "active",
-    "description": "Références complémentaires à remplacer par les passages français validés du Livre du Ciel. Les textes non encore rapprochés restent masqués derrière un statut de source française à intégrer.",
+    "description": "La Passion divine de Jésus et les douleurs de Marie Très Sainte : textes du Livre du Ciel pour approfondir la Passion.",
     "items": [
       "PASSION24.TEXT.PART_III_DIVINE_PASSION",
-      "PASSION24.TEXT.PART_III_MARY_SORROWS",
+      "PASSION24.TEXT.PART_III_MARY_SORROWS"
+    ]
+  },
+  {
+    "id": "PASSION24.LIBRARY.LINKED_BY_HOUR",
+    "title": "Textes liés aux 24 Heures",
+    "type": "library_group",
+    "status": "active",
+    "description": "Textes du Livre du Ciel classés Heure par Heure pour accompagner chaque méditation.",
+    "items": [
       "PASSION24.TEXT.PART_III_HOUR_SELECTION_INTRO",
       "PASSION24.TEXT.RELATED_HOUR_01",
       "PASSION24.TEXT.RELATED_HOUR_02",
@@ -4190,18 +4153,139 @@ const TEXT_LIBRARY = [
     ]
   },
   {
+    "id": "PASSION24.LIBRARY.COMPLEMENTS",
+    "title": "La Vierge Marie dans le Royaume de la Divine Volonté",
+    "type": "library_group",
+    "status": "active",
+    "description": "Les 31 jours, appendices et prières finales de La Vierge Marie dans le Royaume de la Divine Volonté.",
+    "items": [
+      "PASSION24.TEXT.MARY_DIVINE_WILL"
+    ]
+  },
+  {
+    "id": "PASSION24.LIBRARY.PRAYERS",
+    "title": "Prières",
+    "type": "library_group",
+    "status": "hidden_empty_navigation_group",
+    "description": "Prières liées aux Heures et à leur pratique.",
+    "items": []
+  },
+  {
+    "id": "PASSION24.LIBRARY.HOURS",
+    "title": "Les 24 Heures",
+    "type": "library_group",
+    "status": "hidden_empty_navigation_group",
+    "description": "Accès principal aux vingt-quatre Heures de la Passion.",
+    "items": []
+  },
+  {
+    "id": "PASSION24.TEXT.PREFACE_ANNIBALE",
+    "title": "Préface de Saint Annibale",
+    "type": "preface",
+    "group": "Découvrir et pratiquer les Heures",
+    "status": "french_translation_validated_from_english_source_user_approved",
+    "description": "Traduction française intégrée à partir de la préface anglaise validée de Saint Annibale M. di Francia.",
+    "body": [
+      "Préface de Saint Annibale M. di Francia",
+      "J.M.J.A.",
+      "Messine, le 29 octobre 1926",
+      "Intelligentes quae sit voluntas Dei.",
+      "Nous commençons, avec cette première impression, la publication de plus de vingt volumes manuscrits de sublimes révélations que, toujours sauf le jugement de la Sainte Église, nous croyons pieusement avoir été données par Notre-Seigneur Jésus-Christ à une âme, très chère fille et disciple de son Cœur, qui est la pieuse auteure des Heures de la Passion.",
+      "Dès maintenant, nous faisons connaître que ces révélations, qui continuent et continueront — nous ne savons pour combien de temps encore — ont pour but l’établissement du triomphe complet du Royaume de la Divine Volonté sur la terre.",
+      "Qui est cette fille et disciple bien-aimée de Notre-Seigneur, l’auteure des Heures de la Passion, qui, jusqu’à présent, a écrit vingt volumes de révélations divines ?",
+      "Nous ne pouvons révéler ni son nom ni son adresse, car cela signifierait l’exposer à une très grave affliction et à un écrasement très douloureusement ressenti de l’âme et du corps.",
+      "Elle veut vivre solitaire, cachée et inconnue. Pour rien au monde elle n’aurait mis par écrit les communications intimes et prolongées avec l’adorable Jésus, depuis son âge le plus tendre jusqu’à aujourd’hui, communications qui continuent encore, qui sait jusqu’à quand, si Notre-Seigneur lui-même ne l’y avait obligée à plusieurs reprises, personnellement et par la sainte obéissance envers ses directeurs. À cette obéissance elle se soumet toujours avec une extrême violence faite à elle-même, mais aussi avec une grande force et générosité, car son idée de la sainte obéissance la ferait même renoncer à une entrée au Paradis, comme cela est réellement arrivé et comme on le verra dans les révélations du 11 et du 30 octobre 1909.",
+      "Ses discours et dialogues avec Dame Obéissance, comme elle l’appelle, sont d’une grâce très particulière, presque comme si elle voulait prendre sa revanche sur la sujétion à laquelle elle est contrainte. Tantôt elle lui parle comme à une grande Princesse et Reine qui s’impose sévèrement ; tantôt elle la représente comme un très puissant Guerrier, armé de pied en cap, prêt à frapper dès que l’on ose le contredire.",
+      "En substance, cette âme se trouve dans un combat terrible entre un amour irrésistible de la vie cachée et l’empire inexorable de l’Obéissance, à laquelle elle doit absolument se rendre ; et l’Obéissance remporte toujours la victoire. Voilà l’un des traits les plus importants d’un véritable esprit, d’une vertu solide et éprouvée : depuis environ quarante ans, elle se soumet, avec la plus grande violence faite à elle-même, à l’empire de la grande Dame Obéissance.",
+      "Cette âme solitaire est une vierge très pure, toute à Dieu, qui semble être l’objet d’une singulière prédilection de Jésus, divin Rédempteur. Il semble que Notre-Seigneur, qui de siècle en siècle augmente toujours plus les merveilles de son Amour, ait voulu faire de cette vierge sans instruction, qu’il appelle la plus petite qu’il ait trouvée sur la terre, l’instrument d’une mission si sublime qu’aucune autre ne peut lui être comparée : le triomphe de la Divine Volonté sur toute la terre, conformément à ce qui est dit dans le Notre Père : Fiat voluntas tua sicut in caelo et in terra.",
+      "Cette vierge du Seigneur est clouée au lit comme victime de l’Amour divin depuis plus de quarante ans, depuis l’époque où elle était encore adolescente. C’est un état formé d’une longue série de souffrances, naturelles et surnaturelles, et d’ivresses de l’éternelle Charité du Cœur de Jésus. L’origine de ces peines, qui dépassent tout ordre naturel, a été presque continuellement une privation intermittente de Dieu, qui constitue cette nuit obscure de l’âme que le mystique et docteur saint Jean de la Croix appelle amère et terrible, au point de la comparer aux peines que les âmes du Purgatoire souffrent par la privation de Dieu. Il la compare d’une certaine manière à une suffocation de l’âme, comme lorsque quelqu’un manque de souffle, car le souffle de l’âme est Dieu : Christus spiritus oris nostri, Jésus-Christ, le souffle de notre bouche.",
+      "Au cours de ces publications, on pourra lire les plaintes de cette colombe blessée qui cherche son Bien-Aimé : plaintes si intimes, si aiguës, si sensibles, qu’elles laissent une impression profonde de cette victime de l’Amour divin. Mais parfois le voile épais se déchire, l’âme voit Jésus, ils s’embrassent, ils se délectent l’un de l’autre, et l’âme demande le baiser mystique de l’Époux sacré du Cantique. Parfois l’ivresse est telle que, dans un délire d’amour, sa résistance humaine faiblit, et l’âme s’écrie : Assez, assez ! Seigneur, je n’en puis plus ! comme saint François Xavier s’écria autrefois en de semblables circonstances.",
+      "Toutes ces opérations de l’Amour divin se produisent le plus souvent dans le silence de la nuit et, le matin, après la sainte Communion, lorsqu’elle demeure recluse et recueillie pendant quelques heures.",
+      "Les souffrances du corps s’ajoutent à celles de l’âme, et elles se produisent pour la plupart à un niveau mystique. Sans qu’aucun signe apparaisse sur ses mains, ses pieds, son côté ou son front, elle reçoit de fréquentes crucifixions de Notre-Seigneur lui-même. Jésus lui-même l’étend sur une croix et la perce de clous. Alors se passe en elle ce que sainte Thérèse décrit lorsqu’elle reçut la blessure du Séraphin : une douleur très aiguë, capable de la faire défaillir, et en même temps un ravissement d’amour.",
+      "Mais si Jésus ne faisait pas cela, ce serait pour cette âme une souffrance spirituelle infiniment plus grande, car, avec la Séraphique du Carmel, elle dit elle aussi : souffrir ou mourir.",
+      "Voici encore un autre signe de son véritable esprit. Souvent, lorsque Notre-Seigneur lui apparaît couronné d’épines, après l’avoir abstraite de ses sens, elle ôte avec grâce la couronne d’épines de sa tête et l’enfonce sur la sienne, éprouvant des spasmes atroces, mais aussi des contentements mystiques.",
+      "Au cours de ces publications, on restera étonné en constatant l’intimité extraordinaire de Notre-Seigneur avec cette âme, intimité qui n’est en rien inférieure à celles de sainte Gertrude, de sainte Mechtilde, de sainte Marguerite ou de toute autre sainte. Souvent, comme le mystique et docteur déjà mentionné l’observe dans des cas semblables, la familiarité et l’intimité avec lesquelles Notre-Seigneur traite cette âme la rendent hardie dans certaines expressions et dans certaines demandes, qui paraîtraient excessives si l’on ne considérait pas que l’adorable Jésus, dans les choses de la foi, nous a donné des preuves de son amour encore plus grandes que celles que l’on peut trouver dans les conversations intimes entre Jésus et une âme privilégiée. Il suffit surtout de considérer qu’il s’est donné à nous comme nourriture dans la très sainte Eucharistie.",
+      "Après avoir mentionné son long et continuel séjour au lit comme victime, pendant des années et des années, avec l’expérience de nombreuses souffrances spirituelles et physiques, on pourrait croire que la vue de cette vierge inconnue serait affligeante, comme celle d’une personne portant toutes les marques de douleurs passées, de souffrances présentes et autres choses semblables.",
+      "Pourtant, il y a là quelque chose d’admirable. En voyant cette épouse de Jésus crucifié, qui passe la nuit dans des extases douloureuses et dans des souffrances de toute sorte, on ne voit, durant le jour, lorsqu’elle est assise sur son lit et fait ses travaux d’aiguille, absolument rien qui révèle une personne ayant tant souffert pendant la nuit. Rien, absolument rien d’extraordinaire ou de surnaturel n’apparaît dans son aspect. Au contraire, elle apparaît comme une personne saine, heureuse et joviale. Elle parle, converse, rit quand il convient, mais reçoit peu d’amies.",
+      "Parfois un cœur troublé se confie à elle et demande ses prières. Elle écoute avec bonté et réconforte, mais ne se permet jamais de prophétiser, jamais une parole qui pourrait faire allusion à des révélations. Le grand réconfort qu’elle présente est toujours un, toujours le même : la Divine Volonté.",
+      "Bien qu’elle ne possède aucune science humaine, elle est abondamment dotée d’une sagesse toute céleste, de la science des saints. Ses paroles illuminent et consolent. Par nature, son intelligence n’est pas pauvre. Elle n’a étudié que jusqu’à la première classe lorsqu’elle était enfant ; son écriture est remplie de fautes, bien qu’elle ne manque pas de termes appropriés, conformes aux révélations, termes qui semblent lui être infusés par Notre-Seigneur.",
+      "Les Heures de la Passion",
+      "En même temps que les sublimes révélations sur les vertus en général et sur la Divine Volonté en particulier, pendant de nombreuses années, la nuit, cette âme est entrée dans la contemplation des souffrances de Notre-Seigneur Jésus-Christ, avec l’ajout d’indications distinctes sur de nombreuses scènes de la Passion.",
+      "La méthode était de parcourir les vingt-quatre heures de l’adorable Passion de Notre-Seigneur Jésus-Christ, qui commencent à la Cène légale et se terminent par sa mort sur la Croix. Ces visions étaient parfois accompagnées de révélations correspondantes de Notre-Seigneur.",
+      "Comme rien n’était publié des visions et révélations de cette âme, dans son désir excessif de tout garder caché, craignant qu’une publication, même anonyme, ne la découvre, elle voulait ensevelir en elle-même ce trésor de connaissances divines, de compassion surhumaine et de source surhumaine des affections les plus aimantes.",
+      "Mais son Père spirituel plaça devant elle la majestueuse Dame Obéissance, le puissant Guerrier armé de pied en cap ; et Notre-Seigneur lui-même la poussa à les manifester pour le bien de beaucoup d’âmes.",
+      "Elle se rendit, et à l’auteur de cette préface fut confiée l’impression des écrits qu’elle avait mis sur le papier concernant un sujet si important.",
+      "Lorsque parut la première édition de cet admirable traité des vingt-quatre Heures de la Passion de Notre-Seigneur, la bénédiction de Dieu sembla évidente. En peu de temps, tous les exemplaires furent épuisés ; ils étaient alors au nombre de cinq mille, sans avoir été envoyés à des adresses particulières. Il suffisait d’envoyer un exemplaire à quelque personne pieuse pour que les demandes commencent à arriver. Une annonce fut publiée dans le périodique de nos Orphelinats antoniens, Dio e il Prossimo, sous le nom de Livre d’or, et les demandes augmentèrent aussitôt, de sorte que l’édition fut bientôt épuisée.",
+      "L’éminent cardinal Cassetta, à qui rien n’avait été envoyé directement, demanda aussitôt cinquante exemplaires.",
+      "Puis vint la deuxième édition, plus ample, et ensuite la troisième. Toutes deux furent rapidement épuisées.",
+      "Pour favoriser la diffusion, les ventes furent faites à prix modéré, uniquement pour couvrir les frais.",
+      "À cette époque se produisit une circonstance agréable que nous rappelons avec plaisir. Une lettre, adressée directement à moi, arriva du Vatican. Elle était écrite par cet angélique évêque, aujourd’hui nonce apostolique au Venezuela, alors secrétaire de Monseigneur Tacci — devenu depuis cardinal émérite —, Monseigneur Cento, nommé ensuite évêque d’Acireale et qui sera peut-être cardinal de la Sainte Église. Il n’y avait eu auparavant aucun contact entre cette personne aimable et moi-même. Dans cette lettre, il se montrait enthousiaste à la lecture des Heures de la Passion d’une auteure inconnue et me priait de lui révéler son nom et son adresse, parce qu’il désirait correspondre avec elle sur les choses de l’esprit.",
+      "En vérité, je ne pus refuser. Mais il ne se contenta pas d’une correspondance épistolaire et voulut aller visiter en personne cette élue du Seigneur. Plus encore, pour justifier un voyage si long, il offrit de prêcher un triduum en l’honneur du Très Sacré-Cœur de Jésus dans l’église mère. Chaque jour, il se rendit auprès du lit de la pieuse auteure pour des conversations spirituelles, à son grand contentement. Après son départ, il conserva toujours le souvenir le plus agréable de cette âme si chère à Jésus.",
+      "La troisième édition étant épuisée, vint la quatrième, enrichie d’autres écrits de la Servante de Dieu. Cette fois, l’impression fut exécutée dans notre imprimerie dirigée par les Sœurs de ma fidèle collaboratrice à Messine, et quinze mille exemplaires furent imprimés. Dès que l’annonce fut renouvelée, les demandes arrivèrent à toutes nos maisons.",
+      "Ce n’est pas sans raison que ce livre a suscité tant d’enthousiasme. En effet, il est dicté avec de tels élans d’amour, avec une telle pénétration dans les souffrances du Verbe incarné, qu’il ravit l’âme de celui qui le lit, et plus encore de celui qui le médite.",
+      "Mais il y a plus encore : il existe un concours indéniable de la grâce qui, pourrait-on dire, demande deux choses. La première est une vaste réparation pour tous les péchés du monde, de toute espèce, semblable aux réparations mêmes que Notre-Seigneur Jésus-Christ présenta intérieurement à son Père éternel au temps de sa très amère Passion. En raison de ces réparations de l’auteure des Heures, Notre-Seigneur promit — comme on le croit pieusement — de nombreuses exemptions des châtiments divins à ceux qui méditent ces Heures et aux lieux où elles sont méditées. L’autre but divin est précisément d’apaiser la Justice divine en retenant les fléaux que le Seigneur prépare.",
+      "Au cours des publications que nous commençons, il y a des chapitres qui annoncent des fléaux divins : tremblements de terre, guerres, incendies, pluies torrentielles, dévastations des terres, épidémies, famines et choses semblables. Tout, absolument tout, a été prédit plusieurs années auparavant ; tout s’est réalisé, et beaucoup reste encore à se réaliser. Mais l’état de victime de cette âme, ses prières, ses larmes, ses souffrances et son audace d’amour avec Jésus ont retenu une partie de ces fléaux, et en retiendront encore davantage.",
+      "Un signe du grand détachement de cette âme à l’égard de toute chose terrestre est sa fermeté et sa constance à n’accepter aucun don, ni d’argent ni d’autre chose. Plus d’une fois, des personnes qui lisaient les Heures de la Passion et chez qui naissait une affection sacrée pour cette âme solitaire et inconnue m’écrivirent qu’elles voulaient lui envoyer de l’argent. Mais elle s’y opposa si fermement que c’était comme si on l’avait offensée.",
+      "Sa manière de vivre est très modeste. Elle possède peu de chose et vit avec une parente affectueuse qui l’assiste. Comme le peu qu’elles ont ne suffit ni au loyer ni à leur subsistance en ces temps tristes de vie chère, elle travaille paisiblement, comme on l’a dit, et gagne quelque chose par son travail, ce qui doit surtout servir à sa parente aimante, car elle-même n’a aucune dépense de vêtements ni de chaussures. Sa nourriture se réduit à quelques onces par jour, et elle lui est offerte par son assistante, car elle ne demande jamais rien. De plus, quelques heures après avoir pris cette petite nourriture, elle la rejette. Cependant, son apparence n’est pas celle d’une mourante, mais pas non plus celle d’une personne parfaitement saine. Pourtant, elle n’est pas inactive ; au contraire, elle consume ses forces, tant dans les événements surnaturels de souffrances et d’efforts pendant la nuit que dans son travail pendant le jour. Sa vie est donc presque un miracle perpétuel.",
+      "À son grand détachement de tout gain qui ne serait pas procuré par ses mains, il faut ajouter sa fermeté à ne jamais accepter quoi que ce soit provenant de la publication et de la vente des Heures de la Passion, ce qui lui serait pourtant dû en droit comme propriété littéraire. Comme j’insistais pour qu’elle ne le refuse pas, elle répondit : Je n’y ai aucun droit, car l’œuvre n’est pas mienne, mais de Dieu.",
+      "Je ne continuerai pas davantage. La vie de cette vierge, épouse de Jésus, est plus céleste que terrestre. Elle veut être ignorée et inconnue dans le monde, ne cherchant rien d’autre que son Jésus et sa Très Sainte Mère, qu’elle appelle Maman, et qui a une prédilection spéciale pour cette âme choisie.",
+      "À mesure que seront publiés les volumineux manuscrits que Notre-Seigneur lui a dictés, par la tendresse avec laquelle Jésus la traite, par les douces paroles dont il l’appelle, par ses embrassements célestes et par sa correspondance aimante, des choses admirables seront révélées sur les vertus singulières de cette âme qui, qui sait, un jour, sortant triomphante des jugements infaillibles de l’Église, sera placée sur les autels pour la protection de beaucoup."
+    ],
+    "source_status": "SOURCE_VALIDATED_ENGLISH_TRANSLATED_TO_FRENCH_USER_APPROVED",
+    "source_language": "en",
+    "translation_status": "french_translation_user_approved",
+    "source_path": "hours_of_passion.pdf::physical_pages_11_15",
+    "source_sha256": "17eae08659d765903e4d50a84bfafd64a214a5591da06867f93b89bb06ed626d",
+    "source_pages": "PDF physical pages 11-15 (printed pages 1-5 of Preface)",
+    "paragraph_count": 44,
+    "import_stage": "Stage 5B-R",
+    "source_note": "Traduction française réalisée depuis la préface anglaise validée du document Hours of the Passion. À relire éditorialement si une source française officielle est fournie ultérieurement.",
+    "language": "fr",
+    "placeholder_retained_reason": "Aucune source française complète validée localement pendant Stage 4O-FR."
+  },
+  {
+    "id": "PASSION24.TEXT.INTRODUCTION_PURPOSE",
+    "title": "Introduction / but des Heures",
+    "type": "introduction",
+    "group": "Découvrir et pratiquer les Heures",
+    "status": "imported_source_text",
+    "description": "Introduction actuellement validée dans le corpus Stage 4G.",
+    "body": [
+      "INTRODUCTION",
+      "Avec toute la réserve nécessaire, dans la soumission la plus parfaite au jugement de la sainte Église, sans faire appel à une autre foi que la foi humaine et conformément au décret du Pape Urbain VIII, nous transcrivons ici des révélations privées que Notre-Seigneur Jésus-Christ a faites à la servante de Dieu Luisa Piccarreta, à qui il inspira cet ouvrage.",
+      "Citons ici une lettre envoyée par Luisa au Révérend Canon Di Francia :",
+      "« Mon très Révérend Père,",
+      "Enfin, voici que je vous remets le texte des Heures de la Passion. Je l'ai écrit tout à la gloire de Notre-Seigneur. Je joins à la présente un autre feuillet qui mentionne l'affection toute particulière et les belles promesses de Jésus envers ceux qui pratiqueront ces Heures.",
+      "Je crois que si celui qui les médite est un pécheur, il se convertira, s'il est imparfait, il deviendra parfait, s'il est saint, il deviendra plus saint, s'il est tenté, il trouvera la victoire, s'il est souffrant, il trouvera la force, le remède, le réconfort ; et si son âme est faible et pauvre, il trouvera un aliment spirituel et un miroir où il pourra se regarder continuellement pour s'embellir et se rendre semblable à Jésus notre modèle.",
+      "Le contentement qu'éprouve Jésus lorsqu'on médite ces Heures est si grand qu'Il voudrait qu'il y en ait au moins une copie dans chaque village ou cité pour qu'on puisse en faire la méditation.",
+      "À travers ces méditations, Jésus entend sa propre voix et ses propres Prières telles qu'Il les adressait à son Père durant les 24 Heures de sa Passion.",
+      "Et si un assez grand nombre d'âmes s'y adonnent dans chaque village ou cité, il semble que Jésus me fait savoir que la Justice divine en sera partiellement apaisée. Et, en cette triste époque de calamités et d'effusion de sang,",
+      "ces fléaux seront partiellement arrêtés.",
+      "Faites appel à tous, Révérend Père, et propagez ce petit ouvrage que mon aimable Jésus m'a demandé de rédiger.",
+      "Je vous dis aussi que le but de ces écrits\n- n'est pas tant de raconter l'histoire de la Passion de Notre-Seigneur\ncar il y a beaucoup de livres qui traitent de ce sujet et il ne serait pas\nnécessaire d'en écrire un autre,",
+      "c’est d'inciter le lecteur à la réparation, ce que nous avons fait en adjoignant aux divers points de la Passion des suggestions à ce sujet.",
+      "Par exemple,\n- dans certains passages, on bénit Jésus,\n- dans d'autres, on compatit avec Lui,\n- dans d'autres, on Le loue,\n- dans d'autres on Le réconforte,\n- dans d'autres on rachète à ses côtés,\n- dans d'autres on prie, on demande, on supplie.",
+      "Par conséquent, je vous laisse le soin, Révérend Père, de faire connaître le but de ces Écrits dans une préface. »"
+    ],
+    "source_status": "SOURCE_VALIDATED",
+    "source_path": "app/luisa_24_heures.html::CORPUS.sections[PASSION24.SECTION.INTRODUCTION]",
+    "source_sha256": "57e0df1e9ff21df198e1f58a0fd671beb4f52dad525ca1e0b75fcf2e9704a889",
+    "source_section_id": "PASSION24.SECTION.INTRODUCTION",
+    "source_title": "Introduction"
+  },
+  {
     "id": "PASSION24.TEXT.PART_III_DIVINE_PASSION",
     "title": "Partie III — La Passion divine de Jésus",
     "type": "part_iii_global",
-    "group": "Textes liés par Heure",
-    "status": "french_source_imported_with_part_intro",
+    "group": "Approfondir la Passion",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Texte français validé du Livre du Ciel. Les extraits sont présentés avec un index et des titres par Tome/date.",
     "body": [
       "SÉLECTIONS DE CHAPITRES AU SUJET DE LA PASSION DE NOTRE-SEIGNEUR",
       "des Écrits de Luisa Piccarreta",
@@ -4209,6 +4293,16 @@ const TEXT_LIBRARY = [
       "Note introductive : La Passion divine de Notre-Seigneur, telle que Jésus nous l’enseigne dans ces Écrits, est la Passion que la Divinité elle-même infligea à l’Humanité de Jésus.",
       "Cette Passion, qui dépasse la compréhension humaine, est révélée par Jésus à Luisa et ouvre un horizon nouveau et immense pour l’intelligence, la contemplation et la méditation des souffrances inouïes du Verbe incarné pour la Rédemption de l’humanité, souffrances qui dépassent de beaucoup sa Passion corporelle du dernier jour de sa vie et sa Passion morale due à l’ingratitude et au rejet de l’homme.",
       "La Passion divine de Jésus commença au moment de son Incarnation et dura toute sa vie. Marie Très Sainte, qui vivait de cette même Divine Volonté laquelle, par amour pour l’homme, infligeait ces douleurs au Verbe incarné, en avait pleinement conscience et y prit part.",
+      "Index des extraits",
+      "• Tome 12 — 4 février 1919 — La Passion intérieure que la Divinité fit souffrir à l'Humanité de Jésus tout au cours de sa Vie terrestre.",
+      "• Tome 12 — 18 mars 1919 — Les souffrances de Jésus au moment de son Incarnation. Luisa partage ces Souffrances de Jésus.",
+      "• Tome 12 — 20 mars 1919 — Les Souffrances et les Morts imposées à Jésus par la Divinité n'était pas que des intentions, mais réelles.",
+      "• Tome 12 — 8 mai 1919 — Jésus souffrit sa Passion intérieurement de la part de sa Divinité et extérieurement de la part des hommes pour réparer à la fois les péchés intérieurs et les péchés extérieurs de l'homme.",
+      "• Tome 12 — 4 juin 1919 — Pour que la Rédemption soit complète, Jésus a dû subir l'injustice, la trahison et les moqueries de la part des hommes.",
+      "• Tome 14 — 19 août 1922 — Les souffrances infligées à Jésus par la Divinité.",
+      "• Tome 15 — 16 février 1923 — Luisa doit agir dans la Divine Volonté en unissant ses actes à ceux de Jésus et de Marie. Jésus a tout réalisé dans la Divine Volonté. La Croix de Jésus. Il désire infuser sa Divinité dans les créatures pour en faire d'autres lui-même.",
+      "• Tome 15 — 29 mai 1923 — L'harmonie et la félicité que Dieu déposa dans l'homme en le créant. Ce que le péché a fait et la raison des souffrances de Jésus.",
+      "Textes du Livre du Ciel",
       "Tome 12 — 4 février 1919 — La Passion intérieure que la Divinité fit souffrir à l'Humanité de Jésus tout au cours de sa Vie terrestre.",
       "Alors que j'étais dans mon état habituel et pendant à peu près trois jours, j'ai senti mon esprit absorbé en Dieu. Le bon Jésus m'entraîna plusieurs fois dans sa très sainte Humanité où je pouvais nager dans l'immense océan de sa Divinité. Oh! que de choses je pouvais voir! Comme je voyais clairement tout ce que fit sa Divinité dans son Humanité! Plusieurs fois, au milieu de mes surprises, Jésus me parla. Il m'a dit entre autres:",
       "«Vois-tu, ma fille, avec quels excès d'Amour J'ai aimé les créatures? Ma Divinité était trop jalouse pour confier à une créature l'accomplissement de la Rédemption; ainsi, Je me suis infligé à Moi-même la Passion.",
@@ -4537,23 +4631,31 @@ const TEXT_LIBRARY = [
     "pending_references": [],
     "highlightable": true,
     "searchable": true,
-    "section_intro_status": "user_approved_french_translation_from_english_source_intro"
+    "section_intro_status": "user_approved_french_translation_from_english_source_intro",
+    "index_count": 8
   },
   {
     "id": "PASSION24.TEXT.PART_III_MARY_SORROWS",
     "title": "Partie III — Douleurs et souffrances de Marie Très Sainte",
     "type": "part_iii_global",
-    "group": "Textes liés par Heure",
-    "status": "french_source_boundary_validated_user_decision",
+    "group": "Approfondir la Passion",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Texte français validé du Livre du Ciel. Les extraits sont présentés avec un index et des titres par Tome/date.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Douleurs et souffrances de Marie Très Sainte",
+      "Index des extraits",
+      "• Tome 14 — 3 octobre 1922 — La Très Sainte Vierge Marie était consciente des souffrances intérieures de Jésus.",
+      "• Tome 15 — 23 mars 1923 — La céleste Maman est la vraie Reine des Douleurs parce qu'elle a vécu toutes les peines de Jésus et que le divin Fiat l'habitait complètement.",
+      "• Tome 19 — 28 avril 1926 — La Création et la Mère Céleste sont les modèles les plus parfaits de la • Vie dans la Volonté Divine. La souffrance de la Vierge dépassa celle de tous les autres.",
+      "• Tome 19 — 11 juillet 1926 — Jésus et sa Mère sont ceux qui souffrirent le plus pour former le Règne de la Rédemption. Il sera nécessaire de connaitre celle qui souffrit pour le FIAT Suprême.",
+      "• Tome 19 — 22 août 1926 — Les actes accomplis dans la Volonté Suprême sont à l'Image de la Qualité divine. Ce que représente le fait d'être responsable d'une mission.",
+      "Textes du Livre du Ciel",
       "Tome 14 — 3 octobre 1922 — La Très Sainte Vierge Marie était consciente des souffrances intérieures de Jésus.",
       "J'étais dans mon état habituel et me sentais accablée parce que le bon Jésus permettait que je vive ses souffrances en présence de mon confesseur.",
       "Je me plaignis à Jésus et lui dis:",
@@ -4941,15 +5043,16 @@ const TEXT_LIBRARY = [
         "paragraph_count": 146
       }
     ],
-    "boundary_decision": "Row 13 trimmed to end before second section introduction; ends at pure faith sentence."
+    "boundary_decision": "Row 13 trimmed to end before second section introduction; ends at pure faith sentence.",
+    "index_count": 5
   },
   {
     "id": "PASSION24.TEXT.PART_III_HOUR_SELECTION_INTRO",
     "title": "Introduction — Textes liés à chaque Heure",
     "type": "part_iii_hour_selection_intro",
-    "group": "Textes liés par Heure",
-    "status": "user_approved_french_translation_from_source_intro",
-    "description": "Introduction française à la section des chapitres rattachés à chaque Heure de la Passion.",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_introduction_section",
+    "description": "Introduction française validée pour la section des chapitres rattachés à chaque Heure de la Passion.",
     "body": [
       "Sélection de chapitres se rapportant à chacune des Heures de la Passion",
       "Note introductive : Les Écrits de Luisa contiennent plusieurs chapitres dans lesquels Notre-Seigneur développe et enrichit le sens et l’enseignement des différentes Heures de la Passion.",
@@ -4966,17 +5069,21 @@ const TEXT_LIBRARY = [
     "id": "PASSION24.TEXT.RELATED_HOUR_01",
     "title": "Textes liés à la 1e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 5 — 3 octobre 1903 — Jésus poursuit sa Vie sur la terre, non seulement dans le très Saint Sacrement, mais aussi dans les âmes en état de Grâce.",
+      "• Tome 12 — 28 novembre 1920 — Quand Jésus veut donner, Il commence par demander. Effets de la Bénédiction que Jésus donna à Marie.",
+      "• Tome 14 — 6 juillet 1922 — Les Adieux de Jésus à sa sainte Mère. [MATCHED_TITLE_HOUR_DISAMBIGUATED ]",
+      "Textes du Livre du Ciel",
       "Tome 5 — 3 octobre 1903 — Jésus poursuit sa Vie sur la terre, non seulement dans le très Saint Sacrement, mais aussi dans les âmes en état de Grâce.",
       "Je méditais sur l'Heure de la Passion - où Jésus quitta sa Mère pour aller à la mort, - plus précisément au moment où Jésus et Marie se bénirent l'un l'autre.",
       "Je fis réparation pour ceux - qui ne bénissent pas le Seigneur en toute chose et - qui, même, l'offensent.",
@@ -5089,23 +5196,26 @@ const TEXT_LIBRARY = [
     "highlightable": true,
     "searchable": true,
     "boundary_decision_row_22": "English row 22 excerpt was matched to the existing Hour 1 Tome 14 / 6 juillet 1922 blessing-before-Passion passage; no duplicate imported under Hour 4.",
-    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d"
+    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d",
+    "index_count": 3
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_02",
     "title": "Textes liés à la 2e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 11 — 9 mai 1913 — « Il ne pouvait y avoir de séparation entre Moi et ma douce Maman. »",
+      "Textes du Livre du Ciel",
       "Tome 11 — 9 mai 1913 — « Il ne pouvait y avoir de séparation entre Moi et ma douce Maman. »",
       "Pendant que je priais, je pensais au moment où Jésus quitta sa très sainte Mère pour aller souffrir sa Passion.",
       "Je me disais: «Comment était-il possible que Jésus se sépare de sa chère Maman, et elle de Jésus?»",
@@ -5144,23 +5254,26 @@ const TEXT_LIBRARY = [
     ],
     "pending_references": [],
     "highlightable": true,
-    "searchable": true
+    "searchable": true,
+    "index_count": 1
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_03",
     "title": "Textes liés à la 3e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 13 — 9 octobre 1921 — Au dernier repas, Jésus accorde la place d'honneur à Luisa, entre Jean et lui. Il s'est donné à tous en nourriture sous la figure de l'agneau, voulant que chaque chose soit convertie par nous en nourriture d'Amour pour Lui. Notre volonté est la responsable de chaque chose que nous faisons.",
+      "Textes du Livre du Ciel",
       "Tome 13 — 9 octobre 1921 — Au dernier repas, Jésus accorde la place d'honneur à Luisa, entre Jean et lui. Il s'est donné à tous en nourriture sous la figure de l'agneau, voulant que chaque chose soit convertie par nous en nourriture d'Amour pour Lui. Notre volonté est la responsable de chaque chose que nous faisons.",
       "Je pensais à la dernière Cène de Jésus avec ses disciples. Dans mon cœur, mon aimable Jésus me dit:",
       "«Ma fille, quand Je mangeais avec mes disciples à la dernière Cène, J'étais entouré",
@@ -5232,23 +5345,30 @@ const TEXT_LIBRARY = [
         "source_reason": "Exact volume/date match in corrected French source package",
         "paragraph_count": 47
       }
-    ]
+    ],
+    "index_count": 1
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_04",
     "title": "Textes liés à la 4e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 20 — 4 novembre 1926 — la Très Sainte Vierge était la copie fidèle de son Créateur et de toute la Création. La Volonté Divine a la vertu de changer les gouttes d’eau en mer. La Volonté Divine est voilée dans les choses créées.",
+      "• Tome 15 — 18 juin 1923 — Quand Il a institué l'Eucharistie, Jésus a voulu se recevoir Lui-même sous la forme sacramentelle. La manière d'opérer de Dieu est d'effectuer un Acte Unique qui englobe toutes ses répétitions subséquentes.",
+      "• Tome 14 — 24 mars 1922 — Chaque acte réalisé dans la Divine Volonté reproduit la Vie sacramentelle de Jésus.",
+      "• Tome 14 — 6 juillet 1922 — Celui qui vit dans la Divine Volonté est dépositaire de la Vie sacramentelle de Jésus. [MATCHED_TITLE_HOUR_DISAMBIGUATED ]",
+      "• Tome 21 — 16 avril 1927 — Notre Seigneur a déposé sa Vie sacramentelle dans le Cœur de la Très Sainte Vierge Marie. Le grand bien que peut faire une vie animée par la Volonté Divine. Dans ses souffrances, la Très Sainte Vierge Marie trouvait le secret de la force dans la Volonté Divine.",
+      "Textes du Livre du Ciel",
       "Tome 20 — 4 novembre 1926 — la Très Sainte Vierge était la copie fidèle de son Créateur et de toute la Création. La Volonté Divine a la vertu de changer les gouttes d’eau en mer. La Volonté Divine est voilée dans les choses créées.",
       "J’étais dans mon état continuel, dans la Volonté Suprême.",
       "Je priais sans cesse ma Maman Reine de m’aider à demander ce Royaume du Fiat éternel.",
@@ -5657,23 +5777,28 @@ const TEXT_LIBRARY = [
     ],
     "boundary_decision_row_23": "Trimmed Tome 21 / 16 avril 1927 Hour 4 span to the user-approved Sacramental Life / Kingdom of my Will endpoint.",
     "boundary_decision_row_22": "Current Hour 4 Tome 14 / 6 juillet 1922 Eucharistic/Divine Will entry retained as distinct; row 22 English excerpt belongs to Hour 1 blessing passage.",
-    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d"
+    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d",
+    "index_count": 5
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_05",
     "title": "Textes liés à la 5e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 9 — 25 novembre 1909 — Autant pour Jésus que pour l'âme, le travail principal est fait par l'Amour.",
+      "• Tome 14 — 20 novembre 1922 — Courants d'Amour entre Dieu et les hommes.",
+      "• Tome 17 — 30 octobre 1924 — Les souffrances d'Amour de Jésus étaient plus douloureuses que sa Mort physique sur la Croix. Pourquoi Jésus veut la réciprocité en Amour. [MATCHED_TITLE_HOUR_DISAMBIGUATED ]",
+      "Textes du Livre du Ciel",
       "Tome 9 — 25 novembre 1909 — Autant pour Jésus que pour l'âme, le travail principal est fait par l'Amour.",
       "Me trouvant dans mon état habituel, je réfléchissais sur l'agonie de Jésus au Jardin. Se montrant brièvement à moi, mon aimable Jésus me dit:",
       "«Ma fille, les hommes n'ont agi que sur l'écorce de mon Humanité. Alors que l'Amour éternel agissait sur tout mon intérieur. Ainsi, durant mon Agonie, ce ne furent pas les hommes, - mais l'Amour éternel, - l'Amour immense, - l'Amour incalculable, - l'Amour caché qui - ouvrit en Moi de grandes blessures, - Me transperça avec des clous enflammés, - Me couronna d'épines brûlantes et - M'abreuva de fiel bouillant. Et, incapable de supporter autant de martyres en même temps, - mon Humanité fit jaillir de grands ruisseaux de sang, Elle se contorsionnait et en vint à dire: \"Père, si c'est possible, retire de Moi ce calice. Cependant, que soit faite non pas ma Volonté, mais la Tienne.\"",
@@ -5780,23 +5905,27 @@ const TEXT_LIBRARY = [
     ],
     "pending_references": [],
     "highlightable": true,
-    "searchable": true
+    "searchable": true,
+    "index_count": 3
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_06",
     "title": "Textes liés à la 6e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 14 — 28 juillet 1922 — L'âme reproduit Jésus, non seulement par ses morts causées par la souffrance, mais aussi par celles causées par l'amour.",
+      "• Tome 16 — 4 janvier 1924 — Par les mots: «Que non pas ma Volonté mais la Tienne soit faite» prononcés au Jardin, Jésus établit avec son Père Céleste l'accord pour la venue du Royaume de Dieu sur la terre.",
+      "Textes du Livre du Ciel",
       "Tome 14 — 28 juillet 1922 — L'âme reproduit Jésus, non seulement par ses morts causées par la souffrance, mais aussi par celles causées par l'amour.",
       "Je me sentais complètement submergée dans la très sainte Volonté de mon doux Jésus, quand il vint vers moi et Il me dit:",
       "Ma fille, fusionne ton intelligence avec la mienne de telle sorte",
@@ -5943,23 +6072,27 @@ const TEXT_LIBRARY = [
         "source_reason": "Exact volume/date match in corrected French source package",
         "paragraph_count": 59
       }
-    ]
+    ],
+    "index_count": 2
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_07",
     "title": "Textes liés à la 7e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 13 — 19 novembre 1921 — Pendant son Agonie à Gethsémani, Jésus a eu l'assistance de sa très sainte Mère ainsi que celle de Luisa. Pour être libéré par la Vérité, il est nécessaire de vouloir et d'agir en conséquence. La vérité est simple.",
+      "• Tome 14 — 8 avril 1922 — La peine éprouvée par Jésus à la vue de la volonté, de l'intelligence et de la mémoire des humains déformées.",
+      "Textes du Livre du Ciel",
       "Tome 13 — 19 novembre 1921 — Pendant son Agonie à Gethsémani, Jésus a eu l'assistance de sa très sainte Mère ainsi que celle de Luisa. Pour être libéré par la Vérité, il est nécessaire de vouloir et d'agir en conséquence. La vérité est simple.",
       "Je tenais compagnie à Jésus qui agonisait dans le jardin de Gethsémani. Autant qu'il m'était possible,",
       "- je sympathisais avec Lui et",
@@ -6097,23 +6230,27 @@ const TEXT_LIBRARY = [
         "source_reason": "Exact volume/date match in corrected French source package",
         "paragraph_count": 21
       }
-    ]
+    ],
+    "index_count": 2
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_08",
     "title": "Textes liés à la 8e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 13 — 16 novembre 1921 — Jésus a été enchaîné au cours de sa Passion afin de libérer l'homme des liens et des chaînes du péché.",
+      "• Tome 14 — 18 mars 1922 — Je sens de la compassion quand Je vois les hommes enchaînés par leurs fautes! Je l'ai voulue pour libérer les hommes de leurs chaînes.",
+      "Textes du Livre du Ciel",
       "Tome 13 — 16 novembre 1921 — Jésus a été enchaîné au cours de sa Passion afin de libérer l'homme des liens et des chaînes du péché.",
       "Ce matin, mon toujours aimable Jésus s'est montré complètement ligoté: ses mains, ses pieds et sa taille De son cou, pendait une chaîne de fer. Il était si fermement ligoté que sa divine Personne ne pouvait absolument pas bouger. Quelle position pénible, assez pour tirer des larmes d'une pierre!",
       "Et Jésus, mon plus grand bien, me dit:",
@@ -6227,23 +6364,26 @@ const TEXT_LIBRARY = [
         "source_reason": "Exact volume/date match in corrected French source package",
         "paragraph_count": 39
       }
-    ]
+    ],
+    "index_count": 2
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_09",
     "title": "Textes liés à la 9e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 11 — 22 janvier 1913 — La triple Passion de Jésus: celle de l'Amour, celle pour les péchés et celle des Juifs. Jésus est projeté dans le torrent du Cédron.",
+      "Textes du Livre du Ciel",
       "Tome 11 — 22 janvier 1913 — La triple Passion de Jésus: celle de l'Amour, celle pour les péchés et celle des Juifs. Jésus est projeté dans le torrent du Cédron.",
       "J'étais immergée en Jésus et je pensais à sa Passion, spécialement à ce qu'Il a souffert dans le Jardin.",
       "Il me dit: «Ma fille, ma première Passion en fut une d'Amour Car la première raison pour laquelle l'homme pèche, - c'est son manque d'Amour.",
@@ -6285,23 +6425,26 @@ const TEXT_LIBRARY = [
     ],
     "pending_references": [],
     "highlightable": true,
-    "searchable": true
+    "searchable": true,
+    "index_count": 1
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_10",
     "title": "Textes liés à la 10e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 2 — 31 mai 1899 — L'opposition a pour conséquence de faire briller la Vérité au temps voulu.",
+      "Textes du Livre du Ciel",
       "Tome 2 — 31 mai 1899 — L'opposition a pour conséquence de faire briller la Vérité au temps voulu.",
       "Ce matin, alors que j'étais dans mon état habituel, mon adorable Jésus est venu en compagnie de mon confesseur.",
       "Jésus semblait un peu déçu de ce dernier. Car, apparemment, il voulait que tout le monde soit d'avis - que mon état était l'œuvre de Dieu. Il essayait de convaincre d'autres prêtres - en leur dévoilant des choses de ma vie intérieure. Jésus se tourna vers le confesseur et Il lui dit: «Cela est impossible. Moi-même, Je fus en proie à l'opposition, même de la part - de gens très distingués, de prêtres et d'autres personnes en autorité.",
@@ -6331,23 +6474,29 @@ const TEXT_LIBRARY = [
     ],
     "pending_references": [],
     "highlightable": true,
-    "searchable": true
+    "searchable": true,
+    "index_count": 1
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_11",
     "title": "Textes liés à la 11e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 10 — 22 décembre 1910 — Afin de pouvoir accomplir de grandes choses pour Dieu, il est nécessaire de détruire son estime de soi, son respect humain et sa propre nature. Ainsi il sera possible de vivre la Vie divine et reconnaître uniquement l'estime de Notre-Seigneur et ce qui regarde son Honneur et sa Gloire. Les Maisons de Rencontres des prêtres.",
+      "• Tome 10 — 28 janvier 1911 — L'Amour fait en sorte que les âmes bien-aimées de Jésus anticipent déjà le Paradis même sur cette terre.",
+      "• Tome 12 — 4 septembre 1918 — Plaintes de Jésus au sujet des prêtres.",
+      "• Tome 12 — 7 avril 1919 — Luisa donne à Dieu réparations et gloire au nom de tous. Les désordres dans le monde et dans l'Église sont causés par leurs chefs.",
+      "Textes du Livre du Ciel",
       "Tome 10 — 22 décembre 1910 — Afin de pouvoir accomplir de grandes choses pour Dieu, il est nécessaire de détruire son estime de soi, son respect humain et sa propre nature. Ainsi il sera possible de vivre la Vie divine et reconnaître uniquement l'estime de Notre-Seigneur et ce qui regarde son Honneur et sa Gloire. Les Maisons de Rencontres des prêtres.",
       "En continuant dans mon état habituel, j'ai vu dans mon esprit plusieurs prêtres et le bienheureux Jésus qui disait:",
       "«Afin de pouvoir accomplir de grandes choses pour Dieu, il est nécessaire de détruire - son estime de soi, - son respect humain et - sa propre nature pour vivre la Vie divine et reconnaître uniquement - l'estime de Notre-Seigneur et - ce qui regarde son Honneur et sa Gloire.",
@@ -6481,23 +6630,27 @@ const TEXT_LIBRARY = [
     ],
     "pending_references": [],
     "highlightable": true,
-    "searchable": true
+    "searchable": true,
+    "index_count": 4
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_12",
     "title": "Textes liés à la 12e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 4 — 19 mars 1901 — Jésus explique à Luisa la manière de souffrir.",
+      "• Tome 12 — 2 janvier 1919 — Pendant sa Passion, tout était silencieux en Jésus.",
+      "Textes du Livre du Ciel",
       "Tome 4 — 19 mars 1901 — Jésus explique à Luisa la manière de souffrir.",
       "Ce matin, je me trouvais tout opprimée et souffrante, surtout à cause de ma privation de mon doux Jésus. Après une longue attente, dès que je le vis, Il me dit: «Ma fille, la vraie manière de souffrir consiste à ne pas regarder - de qui viennent les souffrances, - ni ce que l'on souffre, mais à regarder le bien qui doit en résulter.",
       "Cela a été ma façon de souffrir. Je ne me suis arrêté - ni aux bourreaux, - ni aux souffrances, mais au bien que J'avais l'intention de faire par le moyen de ces souffrances.",
@@ -6551,23 +6704,29 @@ const TEXT_LIBRARY = [
     ],
     "pending_references": [],
     "highlightable": true,
-    "searchable": true
+    "searchable": true,
+    "index_count": 2
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_13",
     "title": "Textes liés à la 13e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 12 — 4 décembre 1918 — \"Pendant ma Passion, J'ai voulu souffrir la prison pour libérer les créatures de la prison du péché.\"",
+      "• Tome 13 — 29 octobre 1921 — Jésus confiné et seul dans une sombre prison.",
+      "• Tome 20 — 3 décembre 1926 — La Volonté Divine éclipse l’Humanité de Jésus dans l’âme. La volonté humaine met de la distance entre Dieu et l’âme. Nous sommes des rayons de Lumière issus de Dieu. L’emprisonnement de Jésus symbolise la prison de la volonté humaine.",
+      "• Tome 20 — 25 décembre 1926 — Le petit Bébé s’est fait voir, nouveau-né, à sa Maman. La Lumière que le petit Bébé irradiait apportait à tous le Salut de sa venue sur la terre. Différence entre la grotte et la prison de la Passion.",
+      "Textes du Livre du Ciel",
       "Tome 12 — 4 décembre 1918 — \"Pendant ma Passion, J'ai voulu souffrir la prison pour libérer les créatures de la prison du péché.\"",
       "J'ai passé cette nuit avec Jésus en prison. J'ai eu pitié de Lui. J'ai saisi ses genoux pour Le réconforter.",
       "Il me dit: «Ma fille, pendant ma Passion, J'ai voulu souffrir la prison pour libérer les créatures de la prison du péché. Oh! quelle horrible prison est le péché pour l'homme! Ses passions l'enchaînent comme s'il était un vil esclave. Ma prison et mes chaînes le libèrent.",
@@ -6904,23 +7063,26 @@ const TEXT_LIBRARY = [
     ],
     "pending_references": [],
     "highlightable": true,
-    "searchable": true
+    "searchable": true,
+    "index_count": 4
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_14",
     "title": "Textes liés à la 14e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 13 — 21 septembre 1921 — L'immense chagrin que Jésus éprouve parce que ses enfants refusent ses Bienfaits. Les révolutions entre les partis et contre l'Église. Jésus devant Caïphe: chaque peine et chaque bonté forment une journée lumineuse.",
+      "Textes du Livre du Ciel",
       "Tome 13 — 21 septembre 1921 — L'immense chagrin que Jésus éprouve parce que ses enfants refusent ses Bienfaits. Les révolutions entre les partis et contre l'Église. Jésus devant Caïphe: chaque peine et chaque bonté forment une journée lumineuse.",
       "Me trouvant dans mon état habituel, mon toujours aimable Jésus vint vers moi et Il me dit:",
       "«Ma fille, dans quel état lamentable les créatures m'ont mis!",
@@ -6983,23 +7145,32 @@ const TEXT_LIBRARY = [
         "source_reason": "Exact volume/date match in corrected French source package",
         "paragraph_count": 38
       }
-    ]
+    ],
+    "index_count": 1
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_15",
     "title": "Textes liés à la 15e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 13 — 22 novembre 1921 — Les actes accomplis dans la Divine Volonté sont des Jours de lumière pour Jésus. Perversité de l'hypocrisie.",
+      "• Tome 14 — 1 juin 1922 — Qu'est-ce que la Vérité?",
+      "• Tome 15 — 1 décembre 1922 — Ma fille, j'ai souffert toutes les peines de ma Passion dans ma Volonté. Ma Volonté amena toutes les créatures à Moi. Aucune ne fut absente. Tout ce qui est accompli dans la Divine Volonté est universel et rejoint toutes les générations.",
+      "• Tome 15 — 5 juillet 1923 — Jésus accusé par les Juifs devant Pilate. Ce qu'est son Royaume.",
+      "• Tome 13 — 16 septembre 1921 — Hérode se moqua de Jésus. Les créatures renouvellent les peines de Jésus. L'Humanité de Jésus, avec ses Actes réalisés dans sa Volonté, a préparé la place pour nos propres actes dans sa Volonté.",
+      "• Tome 14 — 24 novembre 1922 — Les effets d'une Parole ou d'un Regard de Jésus.",
+      "• Tome 20 — 4 janvier 1927 — Chaque acte de Volonté Divine apporte une Vie divine. Celle qui veut entendre la vérité, mais refuse de l’exécuter, en demeure brûlée. Difficultés de la Volonté Divine dans les âmes.",
+      "Textes du Livre du Ciel",
       "Tome 13 — 22 novembre 1921 — Les actes accomplis dans la Divine Volonté sont des Jours de lumière pour Jésus. Perversité de l'hypocrisie.",
       "Me trouvant dans mon état habituel, je restai éveillée presque toute la nuit.",
       "Mes pensées volaient souvent vers mon Jésus prisonnier.",
@@ -7428,23 +7599,29 @@ const TEXT_LIBRARY = [
         "source_reason": "Exact volume/date match in corrected French source package",
         "paragraph_count": 85
       }
-    ]
+    ],
+    "index_count": 7
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_16",
     "title": "Textes liés à la 16e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 14 — 1 avril 1922 — La peine causée par la privation de Jésus peut être plus grande que celle du Purgatoire. La laideur du Péché.",
+      "• Tome 14 — 9 février 1922 — Pendant sa flagellation, Jésus s'est dépouillé de tout pour tout donner à l'humanité.",
+      "• Tome 16 — 14 janvier 1924 — La Volonté Divine était tout pour l'homme avant sa chute. Avec Elle, il n'avait besoin de rien. Avant d'être flagellé, Jésus voulut être dévêtu afin de redonner à la créature le vêtement royal de la Volonté Divine.",
+      "• Tome 17 — 1 juillet 1924 — Le Sang de Jésus prend la défense des créatures devant la Justice divine. Celui qui se donne totalement à Dieu perd ses droits personnels.",
+      "Textes du Livre du Ciel",
       "Tome 14 — 1 avril 1922 — La peine causée par la privation de Jésus peut être plus grande que celle du Purgatoire. La laideur du Péché.",
       "Mes jours sont pleins d'amères souffrances parce que je ne vois que rarement Jésus. Même lorsqu'il se manifeste, c'est comme un éclair qui s'évanouit à l'instant. Quelle souffrance! Quelle peine effroyable!",
       "Mon esprit devient désolé par la pensée que ma Vie, mon Tout, ne reviendra jamais:",
@@ -7665,23 +7842,31 @@ const TEXT_LIBRARY = [
         "source_reason": "Exact volume/date match in corrected French source package",
         "paragraph_count": 27
       }
-    ]
+    ],
+    "index_count": 4
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_17",
     "title": "Textes liés à la 17e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 5 — 12 octobre 1903 — Jésus parle du Couronnement d'Epines et explique comment la Paix et le Bonheur nous viennent par les précieuses épines de la Mortification. [source corrigée : 12 octobre 1905] [MATCHED_SOURCE_CORRECTED_DATE_VARIANT ]",
+      "• Tome 11 — 24 avril 1915 — Les douleurs que Jésus souffrit pendant son Couronnement d'épines sont incompréhensibles pour un esprit créé.",
+      "• Tome 14 — 19 août 1922 — Les souffrances infligées à Jésus par la Divinité.",
+      "• Tome 4 — 6 mars 1903 — Jésus emmène Luisa pour voir le monde. Il se présente en disant: « Ecce Homo ! » «Voici l'Homme ! »",
+      "• Tome 19 — 20 juin 1926 — « Voici l'Homme » Jésus ressentit autant de morts que le nombre de cris « crucifie-Le ». Qui vit de la Volonté Divinecueille le Fruit des Peines de Jésus. Pour Jésus, son idéal dans la Création, fut le Règne de sa Volonté dans l'âme.",
+      "• Tome 24 — 3 octobre 1928 — Échange entre Jérusalem et Rome. En créant l’homme, Dieu a placé en lui autant de semences de Bonheur que de choses qu’Il a créées.",
+      "Textes du Livre du Ciel",
       "Tome 5 — 12 octobre 1903 — Jésus parle du Couronnement d'Epines et explique comment la Paix et le Bonheur nous viennent par les précieuses épines de la Mortification. [source corrigée : 12 octobre 1905] [MATCHED_SOURCE_CORRECTED_DATE_VARIANT ]",
       "Ce matin, j'ai vu à l'intérieur de moi mon adorable Jésus couronné d'épines. Le voyant ainsi, je Lui ai dit:",
       "«Mon doux Seigneur, pourquoi ta tête - a-t-elle envié ton corps flagellé qui avait tant souffert et tant répandu de Sang - et n'a-t-elle pas voulu être moins honorée que lui par la souffrance, au point d'avoir instigué tes ennemis - à Te couronner d'une couronne d'épines aussi douloureuse?»",
@@ -8070,23 +8255,32 @@ const TEXT_LIBRARY = [
     ],
     "pending_references": [],
     "highlightable": true,
-    "searchable": true
+    "searchable": true,
+    "index_count": 6
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_18",
     "title": "Textes liés à la 18e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 7 — 27 juillet 1906 — Par sa Croix, Jésus donna une dot aux âmes. Qui accepte les croix dans sa vie accepte de se fiancer avec Jésus. Qui les refuse perd les deux: la dot et les fiançailles.",
+      "• Tome 14 — 24 février 1922 — Quand nous portons notre croix dans la Divine Volonté, elle devient aussi grande que celle de Jésus.",
+      "• Tome 6 — 17 décembre 1903 — L'adoration de la très Sainte Vierge quand elle rencontra Jésus portant sa Croix. Le véritable esprit d'adoration.",
+      "• Tome 6 — 28 mars 1905 — Les effets du trouble dans l'âme. La rencontre continuelle de Jésus avec l'âme.",
+      "• Tome 10 — 12 novembre 1910 — Luisa voit Jésus, dans toutes les particules de son Être, à l'intérieur d'une flamme. Cette flamme dit: «Amour».",
+      "• Tome 9 — 2 septembre 1910 — On doit être attentif à ce qu'on doit faire et non aux commérages.",
+      "• Tome 11 — 10 avril 1914 — La Couronne d'épines. Jésus trouve son Centre terrestre dans l'âme qui vit dans sa Volonté. L'Amour a besoin de la Volonté Divine pour être au repos.",
+      "Textes du Livre du Ciel",
       "Tome 7 — 27 juillet 1906 — Par sa Croix, Jésus donna une dot aux âmes. Qui accepte les croix dans sa vie accepte de se fiancer avec Jésus. Qui les refuse perd les deux: la dot et les fiançailles.",
       "Ce matin, pendant que je voyais mon adorable Jésus cloué à la Croix, je me questionnais intérieurement: « Quelles pouvaient être les pensées de Jésus quand il reçut la Croix?»",
       "Jésus me dit: «Ma fille, J'ai embrassé la Croix comme si elle était mon plus cher trésor. Par la Croix, J'ai donné une dot aux âmes. Je les ai épousées.",
@@ -8292,23 +8486,29 @@ const TEXT_LIBRARY = [
     ],
     "pending_references": [],
     "highlightable": true,
-    "searchable": true
+    "searchable": true,
+    "index_count": 7
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_19",
     "title": "Textes liés à la 19e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 11 — 18 novembre 1913 — Quand la volonté humaine et la Volonté Divine s'opposent, l'une forme la croix de l'autre.",
+      "• Tome 12 — 15 mai 1920 — La Divine Volonté effectue la crucifixion complète dans l'âme.",
+      "• Tome 14 — 6 juin 1922 — La croix et la sainteté des âmes qui vivent dans la Divine Volonté ressemblent à la Croix et à la Sainteté de Jésus.",
+      "• Tome 14 — 1 septembre 1922 — Souffrances de l'Amour rejeté.",
+      "Textes du Livre du Ciel",
       "Tome 11 — 18 novembre 1913 — Quand la volonté humaine et la Volonté Divine s'opposent, l'une forme la croix de l'autre.",
       "Je pensais à mon pauvre état; même la croix m'avait quitté. Jésus me dit en mon intérieur:",
       "«Ma fille, quand deux volontés sont opposées, elles forment une croix. Il en va ainsi entre Moi et la créature: si sa volonté est opposée à la mienne, - Je forme sa croix et elle forme la mienne. Je suis la barre longue de la croix et elle la barre courte. En se croisant, les barres forment la croix.",
@@ -8457,23 +8657,27 @@ const TEXT_LIBRARY = [
     ],
     "pending_references": [],
     "highlightable": true,
-    "searchable": true
+    "searchable": true,
+    "index_count": 4
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_20",
     "title": "Textes liés à la 20e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 14 — 16 novembre 1922 — La Divine Volonté veut agir de nouveau comme Elle l'a fait dans la Création et dans la Rédemption.",
+      "• Tome 18 — 21 octobre 1925 — La grandeur d'un acte fait dans la Volonté Divine. Pour chaque faute commise par un humain, Jésus a éprouvé une peine particulière, laquelle se trouve en suspens dans la Volonté Divine, en attente de la contrition du coupable.",
+      "Textes du Livre du Ciel",
       "Tome 14 — 16 novembre 1922 — La Divine Volonté veut agir de nouveau comme Elle l'a fait dans la Création et dans la Rédemption.",
       "J'étais dans mon état habituel. Mon toujours aimable Jésus vint et m'immergea complètement dans sa très sainte Volonté. J'avais l'impression de voir l'œuvre de la Création se dérouler devant mes yeux et je suivais tout ce que mon cher Jésus avait réalisé pour les créatures.",
       "Après que nous eûmes contemplé tout cela ensemble, Il me dit:",
@@ -8551,23 +8755,32 @@ const TEXT_LIBRARY = [
         "source_reason": "Exact volume/date match in corrected French source package",
         "paragraph_count": 23
       }
-    ]
+    ],
+    "index_count": 2
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_21",
     "title": "Textes liés à la 21e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "french_source_imported_tomes_01_36_complete",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_fr_livre_du_ciel_tomes_01_36",
-    "translation_status": "not_translation_french_source",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 36 du Livre du Ciel.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 20 — 21 novembre 1926 — La Tendresse de Jésus au moment de la mort. La créature qui vit dans la Volonté Divine à la primauté sur toutes choses.",
+      "• Tome 12 — 18 décembre 1920 — Action de grâces rendue à Jésus pour tout ce qu'Il a fait en la Très Sainte Vierge.",
+      "• Tome 18 — 10 octobre 1925 — Échange de Volontés entre le Père céleste, la Vierge Marie et Luisa. La Vierge Marie répète pour ceux qui vivent dans la Volonté Divine ce qu'elle fit pour son fils.",
+      "• Tome 12 — 4 janvier 1919 — Les souffrances de Luisa portent les mêmes fruits que Celles de Jésus.",
+      "• Tome 14 — 2 août 1922 — La ressemblance avec Jésus dans sa plus grande affliction: l'aliénation de sa Divinité. J'étais dans mon état habituel et me sentais si confuse et séparée de mon doux",
+      "• Tome 15 — 12 mars 1923 — La peine mortelle que causait à Luisa la privation de",
+      "• Tome 35 — 22 mars 1938 — Dès que la créature se décide de vivre dans notre Vouloir, tout change pour elle, parce qu’elle est mise dans les mêmes conditions que la Divinité. Ce à quoi serviront les enfants du divin Fiat qui auront en eux la Vie de leur Père céleste. L’ultime regard d’Amour au moment de la mort.",
+      "Textes du Livre du Ciel",
       "Tome 20 — 21 novembre 1926 — La Tendresse de Jésus au moment de la mort. La créature qui vit dans la Volonté Divine à la primauté sur toutes choses.",
       "J’étais tout affligée à cause de la mort soudaine d’une de mes sœurs.",
       "La crainte que mon aimable Jésus ne la garde pas avec lui, tourmentait mon âme. Jésus, mon très grand Bien, vint et je lui fis part de ma souffrance.",
@@ -8917,15 +9130,16 @@ const TEXT_LIBRARY = [
     "highlightable": true,
     "searchable": true,
     "boundary_decision_row_82": "Tome 35 / 22 mars 1938 explicitly tied to the 21e Heure.",
-    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d"
+    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d",
+    "index_count": 7
   },
   {
     "id": "PASSION24.TEXT.SHARED_T09_1910_07_04_AGONY_CROSS_LAST_BREATH",
     "title": "Tome 9 — 4 juillet 1910 — Agonie au Jardin et Agonie sur la Croix",
     "type": "part_iii_shared_hour_text",
-    "group": "Textes liés par Heure",
-    "status": "french_source_boundary_validated_shared_cross_link",
-    "description": "Sélection commune liée à la 22e et à la 23e Heure.",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel_shared_cross_link",
+    "description": "Texte français validé du Livre du Ciel, partagé entre plusieurs Heures.",
     "linked_hours": [
       22,
       23
@@ -8953,7 +9167,7 @@ const TEXT_LIBRARY = [
       "Et c'est Moi-même qui permets cela afin que soit préservée la vertu de mes chers enfants.",
       "Mais, dès qu'ils meurent, comme ces voiles ne sont plus nécessaires, Je les retire et - les doutes deviennent des certitudes, - la lumière se fait pleine et fait apprécier leur héroïsme. On commence alors à tout estimer en eux, même les plus petites choses. Par conséquent, ce qui ne peut être fait durant la vie, la mort y supplée. C'est ainsi que les choses se passent ici-bas Mais ce qui arrive là-haut - est vraiment surprenant et digne de l'envie de tous les mortels.»"
     ],
-    "source_status": "SOURCE_VALIDATED_FRENCH_LIVRE_DU_CIEL",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
     "source_volume": "Tome 9",
     "source_date": "4 juillet 1910",
     "boundary_decision": "Rows 83 and 89 use one shared cross-linked item instead of duplicate Hour 22 / Hour 23 copies.",
@@ -8963,17 +9177,23 @@ const TEXT_LIBRARY = [
     "id": "PASSION24.TEXT.RELATED_HOUR_22",
     "title": "Textes liés à la 22e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "french_source_imported_tomes_01_36_complete",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_fr_livre_du_ciel_tomes_01_36",
-    "translation_status": "not_translation_french_source",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 36 du Livre du Ciel.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 11 — 9 mai 1912 — Comment être consumé dans l'Amour.",
+      "• Tome 11 — 21 mai 1913 — Comment se consumer en Dieu.",
+      "• Tome 12 — 7 août 1918 — Dans l'âme qui L'accueille, Jésus continue l'immolation qu'Il a soufferte sur la Croix.",
+      "• Tome 13 — 16 octobre 1921 — Toutes les créatures renaissent à travers la très sainte Humanité de Jésus, ayant été conçues avec Lui dans son Incarnation et délivrées au moment où Il a donné sa Vie sur la Croix.",
+      "• Tome 36 — 20 avril 1938 — Le « J’ai soif » de Jésus sur la croix continue à crier « J’ai soif » à chaque cœur. La vraie Résurrection est dans Celle du divin Vouloir. Rien n’est refusé à celle qui vit en Lui.",
+      "Textes du Livre du Ciel",
       "Tome 11 — 9 mai 1912 — Comment être consumé dans l'Amour.",
       "Ce matin, me trouvant dans mon état habituel, je pensais à la manière d'être consumée dans l'Amour. Mon Jésus béni vint et Il me dit: «Ma fille, - si la volonté ne veut que Moi, - si l'intelligence ne s'intéresse qu'à Me connaître, - si la mémoire ne se remémore que Moi, voilà la manière d'être consumé dans l'Amour par les trois facultés de l'âme.",
       "Même chose pour les sens: si une personne - ne parle que de Moi, - ne prêtre l'oreille qu'à ce qui Me concerne, - ne se réjouit que de mes choses, - ne travaille et ne marche que pour Moi, - si son cœur n'aime que Moi, ne désire que Moi, voilà la consommation dans l'Amour par les sens.",
@@ -9172,23 +9392,28 @@ const TEXT_LIBRARY = [
     "searchable": true,
     "boundary_decision_row_88": "Tome 36 / 20 avril 1938 explicitly tied to the 22e Heure and retained in full per user decision.",
     "boundary_decision_row_83": "Tome 9 / 4 juillet 1910 moved to shared cross-linked item for Hours 22 and 23.",
-    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d"
+    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d",
+    "index_count": 5
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_23",
     "title": "Textes liés à la 23e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 12 — 27 janvier 1919 — Parmi toutes les blessures de mon Cœur il y en a trois dont la Douleur dépasse celle de toutes les autres ensemble.",
+      "• Tome 14 — 26 février 1922 — Par sa Rédemption, Jésus nous a couverts de beauté.",
+      "• Tome 24 — 12 avril 1928 — Analogie entre le Paradis et le Calvaire. Un royaume ne peut pas être formé par un seul acte. Nécessité de la Mort et de la Résurrection de Notre Seigneur.",
+      "Textes du Livre du Ciel",
       "Tome 12 — 27 janvier 1919 — Parmi toutes les blessures de mon Cœur il y en a trois dont la Douleur dépasse celle de toutes les autres ensemble.",
       "Je me trouvais dans mon état habituel. Mon toujours aimable Jésus vint. II me fit voir son adorable Cœur couvert de blessures sanglantes. Plein de chagrin, il me dit:",
       "«Ma fille, parmi toutes les blessures de mon Cœur, il y en a trois dont la douleur dépasse celle de toutes les autres ensemble.",
@@ -9388,23 +9613,28 @@ const TEXT_LIBRARY = [
     "highlightable": true,
     "searchable": true,
     "boundary_decision_row_89": "Tome 9 / 4 juillet 1910 moved to shared cross-linked item for Hours 22 and 23.",
-    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d"
+    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d",
+    "index_count": 3
   },
   {
     "id": "PASSION24.TEXT.RELATED_HOUR_24",
     "title": "Textes liés à la 24e Heure",
     "type": "hour_linked_supplement",
-    "group": "Textes liés par Heure",
-    "status": "partial_french_source_imported_tomes_01_24",
+    "group": "Textes liés aux 24 Heures",
+    "status": "texte_francais_valide_livre_du_ciel",
     "source_language": "en",
     "preferred_display_language": "fr",
-    "source_status": "source_validated_tomes_01_24_partial",
-    "translation_status": "french_source_imported_partial",
+    "source_status": "FRENCH_LIVRE_DU_CIEL_VALIDATED",
+    "translation_status": "not_translation_uses_french_source",
     "source_path": "hours_of_passion.pdf",
     "source_part": "Part III - Selections of Chapters About The Passion of Our Lord",
-    "description": "Textes français validés intégrés depuis les Tomes 1 à 24 du Livre du Ciel. Les références non couvertes restent à intégrer.",
+    "description": "Textes français validés du Livre du Ciel, liés à cette Heure de la Passion.",
     "body": [
-      "Textes français intégrés depuis le Livre du Ciel validé pour les références disponibles dans les Tomes 1 à 24. Les références non encore couvertes par les tomes validés restent à intégrer dans une étape ultérieure.",
+      "Index des extraits",
+      "• Tome 11 — octobre 1914 — La Valeur des Heures de la Passion et les récompenses qui y sont attachées. [source corrigée : 14 octobre 1914] [MATCHED_MONTH_ONLY_TITLE_DISAMBIGUATED ]",
+      "• Tome 21 — 16 avril 1927 — Dans ses souffrances, la Très Sainte Vierge Marie trouvait le secret de la force dans la Volonté Divine. [BOUNDARY_VALIDATED_ROW_94]",
+      "• Tome 16 — 24 novembre 1923 — L'histoire de la Volonté Divine. Comment, dans l'Œuvre de la Rédemption, la Très Sainte Vierge se fit solidaire de tous les Actes de la Volonté Divine et prépara la nourriture pour ses enfants. C'est pourquoi elle est \"la Mère et la Reine de la Volonté Divine \".",
+      "Textes du Livre du Ciel",
       "Tome 11 — octobre 1914 — La Valeur des Heures de la Passion et les récompenses qui y sont attachées. [source corrigée : 14 octobre 1914] [MATCHED_MONTH_ONLY_TITLE_DISAMBIGUATED ]",
       "Pendant que j'écrivais les Heures de la Passion, je me disais: «Que de sacrifices il me faut faire pour écrire ces Heures bénies de la Passion, surtout quand je dois mentionner certaines choses intérieures qui se sont passées entre moi et Jésus! Quelle récompense me donnera-t-Il?»",
       "D'une voix tendre et douce, Il me dit: «Ma fille, pour chaque mot que tu as écrit, Je te donnerai un baiser, une âme.»",
@@ -9581,26 +9811,14 @@ const TEXT_LIBRARY = [
       }
     ],
     "boundary_decision_row_94": "Reassigned Tome 21 / 16 avril 1927 Hour 24 span to the Mary-strength subsection only.",
-    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d"
-  },
-  {
-    "id": "PASSION24.LIBRARY.COMPLEMENTS",
-    "title": "Compléments",
-    "type": "library_group",
-    "status": "active",
-    "description": "Promesses, bienfaits, méthodes et textes complémentaires.",
-    "items": [
-      "PASSION24.TEXT.PROMISES_BENEFITS",
-      "PASSION24.TEXT.GETHSEMANE_THREE_HOURS",
-      "PASSION24.TEXT.COMPLEMENTS_AFTER_HOURS",
-      "PASSION24.TEXT.MARY_DIVINE_WILL"
-    ]
+    "boundary_review_status": "problem_cases_resolved_or_held_by_user_decision_stage4ofr4d",
+    "index_count": 3
   },
   {
     "id": "PASSION24.TEXT.PROMISES_BENEFITS",
     "title": "Promesses et bienfaits",
     "type": "complement",
-    "group": "Compléments",
+    "group": "Découvrir et pratiquer les Heures",
     "status": "imported_source_text",
     "description": "Texte déjà présent dans le corpus et repris dans la Bibliothèque.",
     "body": [
@@ -9793,7 +10011,7 @@ const TEXT_LIBRARY = [
     "id": "PASSION24.TEXT.GETHSEMANE_THREE_HOURS",
     "title": "Les trois Heures de Gethsémani",
     "type": "complement",
-    "group": "Textes liés par Heure",
+    "group": "Découvrir et pratiquer les Heures",
     "status": "imported_source_text",
     "description": "Règle spéciale pour les Heures 5, 6 et 7.",
     "body": [
@@ -9806,22 +10024,10 @@ const TEXT_LIBRARY = [
     "source_title": "Les trois Heures de Gethsémani"
   },
   {
-    "id": "PASSION24.TEXT.COMPLEMENTS_AFTER_HOURS",
-    "title": "Compléments après les Heures",
-    "type": "complement",
-    "group": "Compléments",
-    "status": "placeholder",
-    "description": "Textes finaux et compléments non importés : aucune source validée complète n’a été trouvée à cette étape.",
-    "body": [
-      "Texte à intégrer dans une prochaine étape après validation de la source."
-    ],
-    "source_status": "SOURCE_NOT_FOUND"
-  },
-  {
     "id": "PASSION24.TEXT.HOW_TO_PRACTICE",
     "title": "Comment pratiquer les Heures",
     "type": "practice",
-    "group": "Comment pratiquer",
+    "group": "Découvrir et pratiquer les Heures",
     "status": "imported_source_text",
     "description": "Méthodes de pratique déjà présentes dans le corpus et reprises dans la Bibliothèque.",
     "practice_options": [
@@ -9875,7 +10081,7 @@ const TEXT_LIBRARY = [
     "id": "PASSION24.TEXT.MARY_DIVINE_WILL",
     "title": "La Vierge Marie dans le Royaume de la Divine Volonté",
     "type": "mary_divine_will_complement",
-    "group": "complements",
+    "group": "La Vierge Marie dans le Royaume de la Divine Volonté",
     "status": "imported_source_text_fr_validated",
     "source_language": "fr",
     "preferred_display_language": "fr",
@@ -10945,7 +11151,7 @@ function buildSidebar() {
     </button>`).join('');
   const sideLibraryEl=document.getElementById('sideLibrary');
   if(sideLibraryEl){
-    sideLibraryEl.innerHTML = TEXT_LIBRARY.filter(item => item.type === 'library_group').map(item => `
+    sideLibraryEl.innerHTML = getLibraryGroups().map(item => `
       <button class="sidebar-item ${state.view==='library'&&state.currentSection===item.id?'active':''}"
         onclick="showLibraryView(true,'${item.id}'); closeSidebar()">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -11180,6 +11386,8 @@ function restoreHistoryEntry(prev) {
   else if (prev.view === 'libraryText' && prev.data) { openLibraryText(prev.data, false); }
   else if (prev.view === 'provenance' || prev.view === 'help') { showHelp(); }
   else if (prev.view === 'search') { showSearchView(false); }
+  else if (prev.view === 'hours') { showHoursView(false); }
+  else if (prev.view === 'espace') { showEspaceView(false); }
   else { showHome(); }
 }
 function goBack() {
@@ -11246,6 +11454,79 @@ function buildDailyCard() {
   return '<div class="daily-card" onclick="openHour(' + nextNum + ')"><div class="dc-meta"><div class="dc-prev">' + timeLabel + '\u00a0: ' + last.hour + 'e\u00a0Heure \u2014 ' + escHtml(lastH.short_title||lastH.title) + '</div><div class="dc-label">Aujourd\u2019hui</div><div class="dc-title">' + nextNum + 'e\u00a0Heure \u2014 ' + escHtml(nextH.title) + '</div><div class="dc-time">' + nextH.display_time + '</div></div><svg class="dc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>';
 }
 
+function makeHourGridHtml(compact = false) {
+  return CORPUS.hours.map(h => `
+    <div class="hour-card ${state.readHours.has(h.hour_number)?'read':''} ${[5,6,7].includes(h.hour_number)?'gethsemani':''}"
+      onclick="openHour(${h.hour_number})" title="${escHtml(h.title)} — ${h.display_time}${[5,6,7].includes(h.hour_number)?' · Heure Sainte':''}">
+      <span class="hc-num">${h.hour_number}</span>
+      <span class="hc-time">${h.display_time}</span>
+    </div>`).join('');
+}
+function showHoursView(push = true) {
+  if (push) pushHistory(state.view, getHistoryDataForView(state.view));
+  state.view = 'hours'; state.currentHour = null; state.currentSection = null; state.currentPrayer = null;
+  resetContentScroll();
+  document.getElementById('content').innerHTML = `<div class="hours-screen">
+    <div class="library-hero">
+      <div class="library-eyebrow">Prier les Heures</div>
+      <h2 class="library-title">Les 24 Heures</h2>
+      <p class="library-subtitle">Choisissez une Heure pour entrer dans la méditation. Les textes liés restent accessibles dans chaque Heure.</p>
+    </div>
+    <div class="hours-grid">${makeHourGridHtml()}</div>
+  </div>`;
+  document.getElementById('progressWrap').style.display = 'none';
+  setBottomNav('hours'); buildSidebar(); updateRightContextPanel();
+}
+function getRecentLibraryTextIds() {
+  try {
+    const arr = JSON.parse(SafeStorage.get('lp24_recent_texts','[]'));
+    if (!Array.isArray(arr)) return [];
+    const seen = new Set();
+    return arr.filter(id => typeof id === 'string' && getLibraryItem(id) && getLibraryItem(id).type !== 'library_group' && !seen.has(id) && seen.add(id)).slice(0,4);
+  } catch(e) { return []; }
+}
+function rememberLibraryText(id) {
+  const item = getLibraryItem(id);
+  if (!item || item.type === 'library_group') return;
+  const current = getRecentLibraryTextIds().filter(x => x !== id);
+  current.unshift(id);
+  SafeStorage.set('lp24_recent_texts', JSON.stringify(current.slice(0,6)));
+}
+function renderRecentLibraryCards() {
+  const ids = getRecentLibraryTextIds();
+  if (!ids.length) return '';
+  return `<div class="section-title">Derniers textes consultés</div><div class="home-recent-row">${ids.map(id => {
+    const item = getLibraryItem(id);
+    return `<button type="button" class="library-card" onclick="openLibraryText('${id}')"><div class="library-card-title">${escHtml(item.title)}</div><div class="library-card-desc">${escHtml(item.group || 'Textes')}</div></button>`;
+  }).join('')}</div>`;
+}
+function showEspaceView(push = true) {
+  if (push) pushHistory(state.view, getHistoryDataForView(state.view));
+  state.view = 'espace'; state.currentHour = null; state.currentSection = null; state.currentPrayer = null;
+  resetContentScroll();
+  const lastH = getLastHourForResume();
+  const favs = Object.values(state.favorites || {}).slice(0,8);
+  const hls = [];
+  for (const [paraId, arr] of Object.entries(state.textHighlights || {})) {
+    for (const raw of (arr || [])) {
+      const hl = migrateHighlightRecord(paraId, raw);
+      const info = getTargetInfo(paraId);
+      if (info) hls.push({paraId, hl, info});
+    }
+  }
+  const favHtml = favs.length ? favs.map(f => `<button type="button" class="fav-item" onclick="openHourAtPara(${f.hourNum},'${f.id}','${f.type||'meditation'}')"><div class="fav-item-ref">${f.hourNum}e Heure — ${escHtml(f.hourTitle||'')}</div><div class="fav-item-text">${escHtml(f.text||'')}</div></button>`).join('') : '<div class="fav-empty">Aucun favori pour le moment.</div>';
+  const hlHtml = hls.length ? hls.slice(0,8).map(item => `<button type="button" class="hl-item" onclick="openHighlightTarget('${item.paraId}')"><div class="hl-dot hl-${escHtml(item.hl.color||'yellow')}"></div><div class="hl-item-content"><div class="hl-item-ref">${escHtml(item.info.label||'Passage')}</div><div class="hl-item-text">${escHtml(item.hl.selected_text_snapshot || item.hl.text || '')}</div></div></button>`).join('') : '<div class="fav-empty">Aucun surlignage pour le moment.</div>';
+  document.getElementById('content').innerHTML = `<div class="espace-screen">
+    <div class="library-hero"><div class="library-eyebrow">Espace personnel</div><h2 class="library-title">Mon Espace</h2><p class="library-subtitle">Retrouvez votre progression, vos favoris, vos surlignages et vos données personnelles.</p></div>
+    <div class="espace-section"><div class="espace-section-title">Continuer</div>${lastH ? `<div class="resume-panel-card"><div class="resume-panel-eyebrow">Dernière lecture</div><div class="resume-panel-title">${lastH.hour_number}e Heure — ${escHtml(lastH.title)}</div><div class="resume-panel-meta">${escHtml(describeSavedPara(getSavedParaForHour(lastH.hour_number)))}</div><div class="resume-panel-actions"><button class="resume-panel-btn primary" onclick="openHour(${lastH.hour_number}, true, { resume: true })">Reprendre</button><button class="resume-panel-btn" onclick="openHour(${lastH.hour_number})">Ouvrir au début</button></div></div>` : '<div class="fav-empty">Aucune lecture enregistrée.</div>'}</div>
+    <div class="espace-section"><div class="espace-section-title">Favoris</div>${favHtml}</div>
+    <div class="espace-section"><div class="espace-section-title">Surlignages</div>${hlHtml}</div>
+    <div class="espace-section"><div class="espace-section-title">Exporter / importer mes données</div><div class="espace-actions"><button class="resume-panel-btn primary" onclick="exportUserData()">⬇ Exporter</button><button class="resume-panel-btn" onclick="triggerImport()">⬆ Importer</button></div></div>
+  </div>`;
+  document.getElementById('progressWrap').style.display = 'none';
+  setBottomNav('espace'); buildSidebar(); updateRightContextPanel();
+}
+
 function renderHome() {
   const lastH = CORPUS.hours.find(h => h.hour_number === parseInt(SafeStorage.get('lp24_lastHour','0')));
   const readPct = Math.round(state.readHours.size / 24 * 100);
@@ -11272,12 +11553,7 @@ function renderHome() {
       </div>
       <div class="progress-count">${state.readHours.size}/24</div>
     </div>` : '';
-  const hoursGrid = CORPUS.hours.map(h => `
-    <div class="hour-card ${state.readHours.has(h.hour_number)?'read':''} ${[5,6,7].includes(h.hour_number)?'gethsemani':''}"
-      onclick="openHour(${h.hour_number})" title="${escHtml(h.title)} — ${h.display_time}${[5,6,7].includes(h.hour_number)?' · Heure Sainte':''}">
-      <span class="hc-num">${h.hour_number}</span>
-      <span class="hc-time">${h.display_time}</span>
-    </div>`).join('');
+  const hoursGrid = makeHourGridHtml();
   const prayerIcons = {'BEFORE_EACH_HOUR':'🕯','AFTER_EACH_HOUR':'🙏','HOLY_HOUR_PREPARATION':'✝','HOLY_HOUR_THANKSGIVING':'💛','DE_PROFUNDIS':'📿'};
   const sectionIcons = {'INTRODUCTION':'📖','BENEFITS':'✨','PRACTICE_METHODS':'🗝','GETHSEMANI':'🌿'};
   const extrasGrid = [
@@ -11303,6 +11579,13 @@ function renderHome() {
         </div>
       </div>` : ''}
       ${buildDailyCard()}${continueCard}${progressStrip}
+      <div class="home-action-grid" aria-label="Actions principales">
+        <button type="button" class="home-action-card primary" onclick="${lastH ? `openHour(${lastH.hour_number}, true, { resume: true })` : `openHour(1)`}"><div class="home-action-kicker">Continuer</div><div class="home-action-title">${lastH ? 'Reprendre la lecture' : 'Commencer les Heures'}</div><div class="home-action-desc">${lastH ? `${lastH.hour_number}e Heure · ${escHtml(describeSavedPara(getSavedParaForHour(lastH.hour_number)))}` : 'Ouvrir la 1re Heure.'}</div></button>
+        <button type="button" class="home-action-card" onclick="showHoursView()"><div class="home-action-kicker">Prier</div><div class="home-action-title">Ouvrir les 24 Heures</div><div class="home-action-desc">Accéder directement à la liste des Heures.</div></button>
+        <button type="button" class="home-action-card primary" onclick="showLibraryView(true,'PASSION24.LIBRARY.PART_III')"><div class="home-action-kicker">Approfondir</div><div class="home-action-title">Approfondir la Passion</div><div class="home-action-desc">Passion divine de Jésus · Douleurs de Marie.</div></button>
+        <button type="button" class="home-action-card" onclick="showEspaceView()"><div class="home-action-kicker">Personnel</div><div class="home-action-title">Mon Espace</div><div class="home-action-desc">Favoris · Surlignages · progression.</div></button>
+      </div>
+      ${renderRecentLibraryCards()}
       <div class="search-wrap">
         <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="search" class="search-input" placeholder="Rechercher dans les 24 Heures..." id="homeSearchInput" oninput="onSearchInput(this.value)" autocomplete="off">
@@ -11730,7 +12013,7 @@ function openSection(id, push = true, scrollToAnchor = null) {
 
 function getLibraryItem(id) { return TEXT_LIBRARY.find(item => item.id === id) || null; }
 function getLibraryRenderableItems() { return TEXT_LIBRARY.filter(item => item.type !== 'library_group'); }
-function getLibraryGroups() { return TEXT_LIBRARY.filter(item => item.type === 'library_group'); }
+function getLibraryGroups() { return TEXT_LIBRARY.filter(item => item.type === 'library_group' && (item.items||[]).length > 0 && item.status !== 'hidden_empty_navigation_group'); }
 function getLinkedTextsForHour(hourNum) { return (HOUR_LINKED_TEXTS[hourNum] || []).map(getLibraryItem).filter(Boolean); }
 function openLinkedTextFromHour(textId) { openLibraryText(textId, true); }
 
@@ -11760,6 +12043,7 @@ function getLibraryStatusLabel(item) {
   const s = String(item.status || '');
   if (s === 'placeholder') return 'À intégrer';
   if (s.includes('pending')) return 'À valider';
+  if (s.includes('texte_francais_valide')) return 'Texte français validé';
   if (s.includes('boundary')) return 'Limites validées';
   if (s.includes('imported') || s.includes('validated') || s.includes('complete') || s.includes('source')) return 'Source validée';
   return 'Texte';
@@ -11802,13 +12086,29 @@ function renderLibraryCard(item) {
   const label = item.status === 'placeholder' ? '<span class="placeholder-badge">À intégrer</span>' : '';
   const open = item.type === 'library_group' ? `showLibraryView(true, '${item.id}')` : `openLibraryText('${item.id}')`;
   const sourceLine = getLibrarySourceLine(item);
-  return `<button type="button" class="library-card" onclick="${open}" aria-label="Ouvrir : ${escHtml(item.title)}">
+  const isFeatured = item.id === 'PASSION24.LIBRARY.PART_III';
+  const subitems = item.type === 'library_group' ? getLibraryGroupItems(item).slice(0,3).map(x=>x.title.replace(/^Partie III —\s*/,'')).join(' · ') : '';
+  const searchText = escHtml([item.title, item.description, item.group, subitems].join(' ')).toLowerCase();
+  return `<button type="button" class="library-card ${isFeatured?'featured':''}" data-library-card="true" data-search="${searchText}" onclick="${open}" aria-label="Ouvrir : ${escHtml(item.title)}">
     ${renderLibrarySourceBadges(item)}
     <div class="library-card-title">${escHtml(item.title)}${label}</div>
     <div class="library-card-desc">${escHtml(item.description || '')}</div>
+    ${subitems ? `<div class="library-card-subitems">${escHtml(subitems)}</div>` : ''}
     ${sourceLine ? `<div class="library-source-line">${escHtml(sourceLine)}</div>` : ''}
   </button>`;
 }
+function filterLibraryCards(value) {
+  const q = norm(value || '');
+  document.querySelectorAll('[data-library-card="true"]').forEach(card => {
+    const hay = norm(card.getAttribute('data-search') || card.textContent || '');
+    card.style.display = (!q || hay.includes(q)) ? '' : 'none';
+  });
+}
+function renderLibraryBreadcrumb(label) {
+  if (!label) return '';
+  return `<div class="library-breadcrumb"><button type="button" onclick="showLibraryView(true,null)">Textes</button> &gt; ${escHtml(label)}</div>`;
+}
+
 function showLibraryView(push = true, focusGroupId = null) {
   if (push) pushHistory(state.view, getHistoryDataForView(state.view));
   state.view = 'library'; state.currentSection = focusGroupId || null; state.currentPrayer = null;
@@ -11818,10 +12118,12 @@ function showLibraryView(push = true, focusGroupId = null) {
   const renderItems = focusedGroup ? getLibraryGroupItems(focusedGroup) : groups;
   const cards = renderItems.length ? renderItems.map(renderLibraryCard).join('') : '<div class="library-placeholder-note">Aucun texte n’est encore intégré dans cette section.</div>';
   const countText = `${getLibraryRenderableItems().length} textes ou compléments · ${groups.length} sections`;
-  const title = focusedGroup ? focusedGroup.title : 'Textes autour des Heures';
-  const subtitle = focusedGroup ? (focusedGroup.description || getLibrarySourceLine(focusedGroup)) : 'Préface, introductions, conseils de pratique, Partie III, textes liés à chaque Heure et compléments marials, organisés pour ne pas encombrer la prière des 24 Heures.';
-  const back = focusedGroup ? `<div class="library-back-row"><button type="button" class="library-back-btn" onclick="showLibraryView(true,null)">← Toutes les sections</button></div>` : '';
+  const title = focusedGroup ? focusedGroup.title : 'Textes';
+  const subtitle = focusedGroup ? (focusedGroup.description || getLibrarySourceLine(focusedGroup)) : 'Bibliothèque des textes pour découvrir, pratiquer et approfondir les 24 Heures de la Passion.';
+  const back = focusedGroup ? `<div class="library-back-row"><button type="button" class="library-back-btn" onclick="showLibraryView(true,null)">← Textes</button></div>` : '';
+  const filter = `<div class="library-section-filter"><input type="search" placeholder="Rechercher dans cette section…" oninput="filterLibraryCards(this.value)" aria-label="Rechercher dans cette section"></div>`;
   document.getElementById('content').innerHTML = `<div class="library-screen" data-library-screen="true">
+    ${renderLibraryBreadcrumb(focusedGroup ? focusedGroup.title : '')}
     <div class="library-hero">
       <div class="library-eyebrow">Bibliothèque · ${escHtml(countText)}</div>
       <h2 class="library-title">${escHtml(title)}</h2>
@@ -11829,9 +12131,10 @@ function showLibraryView(push = true, focusGroupId = null) {
     </div>
     ${renderLibraryGroupNav(focusGroupId)}
     ${back}
-    <h3 class="library-section-heading">${focusedGroup ? 'Textes de cette section' : 'Sections principales'}</h3>
-    <p class="library-section-note">Les textes longs restent séparés de la méditation principale. Les passages liés à une Heure sont aussi accessibles depuis l’onglet « Textes liés » de cette Heure.</p>
-    <div class="library-grid enhanced">${cards}</div>
+    <h3 class="library-section-heading">${focusedGroup ? 'Textes de cette section' : 'Que souhaitez-vous faire ?'}</h3>
+    <p class="library-section-note">${focusedGroup ? 'Utilisez l’index ou la recherche interne pour retrouver rapidement un passage.' : 'Choisissez un parcours : découvrir et pratiquer, approfondir la Passion, consulter les textes liés à chaque Heure, ou lire Marie dans le Royaume.'}</p>
+    ${filter}
+    <div class="library-grid ${focusedGroup ? 'enhanced' : 'library-dashboard-grid'}">${cards}</div>
   </div>`;
   document.getElementById('progressWrap').style.display = 'none';
   setBottomNav('library');
@@ -11840,6 +12143,7 @@ function showLibraryView(push = true, focusGroupId = null) {
 }
 function openLibraryText(id, push = true) {
   const item = getLibraryItem(id); if (!item) return;
+  rememberLibraryText(id);
   if (item.type === 'library_group') { showLibraryView(push, item.id); return; }
   if (push) pushHistory(state.view, getHistoryDataForView(state.view));
   state.view = 'libraryText'; state.currentSection = id;
@@ -11847,8 +12151,9 @@ function openLibraryText(id, push = true) {
   const body = renderLibraryItemBody(item);
   const sourceLine = getLibrarySourceLine(item);
   document.getElementById('content').innerHTML = `<div class="section-screen library-text-screen" data-library-text-id="${escHtml(id)}">
+    ${renderLibraryBreadcrumb(item.group || '')}
     <div class="reader-header">
-      <div class="reader-eyebrow">${escHtml(item.group || 'Textes autour des Heures')}</div>
+      <div class="reader-eyebrow">${escHtml(item.group || 'Textes')}</div>
       <h2 class="reader-title">${escHtml(item.title)}${item.status==='placeholder'?'<span class="placeholder-badge">À intégrer</span>':''}</h2>
       <div class="library-text-source-box">${renderLibrarySourceBadges(item)}${sourceLine ? `<div>${escHtml(sourceLine)}</div>` : ''}</div>
       <div class="library-back-row"><button type="button" class="library-back-btn" onclick="showLibraryView(true,null)">← Bibliothèque</button>${item.group ? `<button type="button" class="library-back-btn" onclick="showLibraryView(true, ${(getLibraryGroups().find(g => (g.items||[]).includes(item.id)) ? `'${getLibraryGroups().find(g => (g.items||[]).includes(item.id)).id}'` : 'null')})">Voir la section</button>` : ''}</div>
@@ -11880,8 +12185,9 @@ function renderLibraryItemBody(item) {
 }
 function renderLinkedTextsForHour(hourNum) {
   const items = getLinkedTextsForHour(hourNum);
-  if (!items.length) return `<div class="linked-texts-wrap" data-linked-texts="empty"><div class="linked-texts-title">Textes liés</div><div class="library-placeholder-note">Aucun texte lié n’est encore intégré pour cette Heure.</div></div>`;
-  return `<div class="linked-texts-wrap" data-linked-texts="hour-${hourNum}"><div class="linked-texts-title">Textes liés à cette Heure</div><div class="linked-text-count">${items.length} texte${items.length>1?'s':''} complémentaire${items.length>1?'s':''} pour approfondir cette Heure.</div>${items.map(item => `<button type="button" class="linked-text-card" onclick="openLinkedTextFromHour('${item.id}')" aria-label="Ouvrir le texte lié : ${escHtml(item.title)}"><div class="linked-text-card-meta">${escHtml(getLibraryKindLabel(item))}</div><div class="linked-text-title">${escHtml(item.title)}${item.status==='placeholder'?'<span class="placeholder-badge">À intégrer</span>':''}</div><div class="linked-text-desc">${escHtml(item.description || '')}</div><div class="linked-text-source">${escHtml(getLinkedTextReferenceLabel(item))}</div></button>`).join('')}</div>`;
+  const seeAlso = `<button type="button" class="linked-text-card see-also-card" onclick="showLibraryView(true,'PASSION24.LIBRARY.PART_III')" aria-label="Voir aussi : Approfondir la Passion"><div class="linked-text-card-meta">Voir aussi</div><div class="linked-text-title">Approfondir la Passion</div><div class="linked-text-desc">La Passion divine de Jésus · Les douleurs et souffrances de Marie Très Sainte</div></button>`;
+  if (!items.length) return `<div class="linked-texts-wrap" data-linked-texts="empty"><div class="linked-texts-title">Textes liés</div><div class="library-placeholder-note">Aucun texte lié n’est intégré pour cette Heure.</div>${seeAlso}</div>`;
+  return `<div class="linked-texts-wrap" data-linked-texts="hour-${hourNum}"><div class="linked-texts-title">Textes liés à cette Heure</div><div class="linked-text-count">${items.length} texte${items.length>1?'s':''} complémentaire${items.length>1?'s':''} pour approfondir cette Heure.</div>${items.map(item => `<button type="button" class="linked-text-card" onclick="openLinkedTextFromHour('${item.id}')" aria-label="Ouvrir le texte lié : ${escHtml(item.title)}"><div class="linked-text-card-meta">${escHtml(getLibraryKindLabel(item))}</div><div class="linked-text-title">${escHtml(item.title)}${item.status==='placeholder'?'<span class="placeholder-badge">À intégrer</span>':''}</div><div class="linked-text-desc">${escHtml(item.description || '')}</div><div class="linked-text-source">${escHtml(getLinkedTextReferenceLabel(item))}</div></button>`).join('')}${seeAlso}</div>`;
 }
 function updateRightContextPanel(context) {
   const panel = document.getElementById('rightContextPanel'); if (!panel) return;
@@ -11919,7 +12225,7 @@ function showSearchView() {
   requestAnimationFrame(() => { (function(){var _si=document.getElementById('homeSearchInput');if(_si)_si.focus();})(); });
   if (state.searchQuery) { document.getElementById('homeSearchInput').value = state.searchQuery; performSearch(state.searchQuery); }
   document.getElementById('progressWrap').style.display = 'none';
-  setBottomNav('search');
+  setBottomNav('none');
 }
 function onSearchInput(v) { state.searchQuery = v; performSearch(v); }
 function performSearch(query) {
@@ -12620,7 +12926,7 @@ function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').rep
 function norm(s){return(s||'').toLowerCase().replace(/[\u0152\u0153]/g,'oe').replace(/[\u00c6\u00e6]/g,'ae').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['']/g,"'").replace(/[«»""]/g,'"');}
 function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
-function setBottomNav(a){['bnHome','bnSearch','bnLibrary'].forEach(function(id){var _e=document.getElementById(id);if(_e){_e.classList.remove('active');_e.removeAttribute('aria-current');}});if(a==='home'){var _bh=document.getElementById('bnHome');if(_bh){_bh.classList.add('active');_bh.setAttribute('aria-current','page');}}if(a==='search'){var _bs=document.getElementById('bnSearch');if(_bs){_bs.classList.add('active');_bs.setAttribute('aria-current','page');}}if(a==='library'){var _bl=document.getElementById('bnLibrary');if(_bl){_bl.classList.add('active');_bl.setAttribute('aria-current','page');}}}
+function setBottomNav(a){['bnHome','bnHours','bnLibrary','bnEspace'].forEach(function(id){var _e=document.getElementById(id);if(_e){_e.classList.remove('active');_e.removeAttribute('aria-current');}});const map={home:'bnHome',hours:'bnHours',library:'bnLibrary',espace:'bnEspace'};const id=map[a];if(id){var _b=document.getElementById(id);if(_b){_b.classList.add('active');_b.setAttribute('aria-current','page');}}}
 
 let _scrollTimer = null;
 function isContentScrollRoot(contentEl) {

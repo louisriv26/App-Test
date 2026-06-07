@@ -1,5 +1,5 @@
-/* Stage 4V service worker — prototype-64 */
-const CACHE_NAME = 'luisa-24h-prototype-64';
+/* Stage 5C-R1 service worker — prototype-67 */
+const CACHE_NAME = 'luisa-24h-prototype-67';
 const APP_SHELL = [
   './',
   './index.html',
