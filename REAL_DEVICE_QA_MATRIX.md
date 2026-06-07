@@ -1,4 +1,4 @@
-# Real-device QA matrix — prototype-74
+# Real-device QA matrix — prototype-75
 
 | Device | Browser/mode | Orientation | Required result | Status | Notes |
 |---|---|---|---|---|---|

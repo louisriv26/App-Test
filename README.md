@@ -1,5 +1,9 @@
-# Luisa 24 Heures — prototype-74 Stage 5F deep re-audit repair
+# Luisa 24 Heures — prototype-75 Stage 5G
 
-Deployment package for real-device QA.
+Package: `luisa_24_heures_app_v75_stage5g_iphone_bottom_nav_compact_locked.zip`
 
-Scope: metadata/report/package consistency repair after four-pass audit. Approved devotional/source text bodies unchanged.
+Scope: targeted CSS-only iPhone/mobile bottom-navigation compactness repair, with deployment metadata refreshed.
+
+Status: `LIMITED_PASS_STATIC` until real iPhone Safari / installed iPhone PWA / iPad Safari validation is performed.
+
+Deploy the contents of this folder or the nested `luisa_24h_github_deploy.zip` to GitHub Pages.
