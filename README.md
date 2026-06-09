@@ -1,9 +1,5 @@
-# Les 24 Heures de la Passion — prototype-77
+# Les 24 Heures de la Passion — prototype-95
 
-Stage: Stage 5I — iPhone bottom-nav responsive repair + Help modal containment
+Stage 6K — source-backed internal subheader restoration.
 
-This deploy folder contains the app files for GitHub Pages deployment.
-
-Final static/package status: LIMITED_PASS_STATIC.
-
-Real-device validation remains required, especially Samsung/Android main-page scrolling, iPhone Safari regression, iPad Safari regression, highlighting/text selection, update banner, and offline/PWA behaviour.
+Status: LIMITED_PASS_STATIC. Real-device Samsung/iPhone/iPad validation remains required.

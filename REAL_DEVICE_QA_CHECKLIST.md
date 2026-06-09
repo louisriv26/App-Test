@@ -1,27 +1,34 @@
-# Real-device QA checklist — prototype-77
+# Real-device QA checklist — prototype-95
 
-## Samsung / Android P0 check
+Status before QA: `LIMITED_PASS_STATIC`
 
-- Confirm the Aide modal still scrolls and closes.
-- Confirm Accueil scrolls vertically.
-- Open a long Hour and confirm it scrolls to the bottom.
-- Confirm Textes scrolls vertically.
-- Confirm Mon Espace scrolls vertically.
-- Confirm bottom navigation buttons remain tappable.
+## Samsung paragraph highlight
 
-## iPhone / iPad regression check
+- [ ] Open the latest deployed link.
+- [ ] Confirm **Paragraphe** appears in the top bar.
+- [ ] Tap **Paragraphe**.
+- [ ] Do not tap **Annuler** unless cancelling.
+- [ ] Tap one meditation paragraph.
+- [ ] Confirm the hint disappears.
+- [ ] Confirm colour picker label: **Surligner ce paragraphe en**.
+- [ ] Choose a colour directly.
+- [ ] Confirm the whole paragraph is highlighted.
+- [ ] Repeat on a reflection/practice paragraph.
+- [ ] Reload or reopen.
+- [ ] Confirm persistence.
+- [ ] Confirm the highlighted paragraph appears in **Mon Espace**.
+- [ ] Confirm no Samsung/Google Translate/Search/Copy overlay appears.
 
-- iPhone Safari: Accueil, Heure, Textes, Mon Espace, Aide.
-- Installed iPhone PWA: same checks.
-- iPad Safari portrait and landscape: same checks.
+## iPhone/iPad exact highlight
 
-Static package status before real-device validation: LIMITED_PASS_STATIC.
+- [ ] Select exact text.
+- [ ] Tap **Surligner**.
+- [ ] Choose a colour.
+- [ ] Confirm only the selected text is highlighted.
+- [ ] Reload and confirm persistence.
 
+## Update/orientation
 
-## Stage 5I required checks
-
-- iPhone portrait: bottom navigation remains visible, labels visible, and perceived band height reduced.
-- iPhone landscape: bottom navigation labels Accueil / Heures / Textes / Espace are visible.
-- iPhone Aide / À propos: content no longer passes behind the modal title/close area while scrolling/bouncing.
-- Samsung/Android: Accueil, full Hour, Textes, Mon Espace still scroll.
-- iPad: portrait and landscape regressions not detected.
+- [ ] Confirm version shown as `prototype-95`.
+- [ ] Test portrait and landscape.
+- [ ] Test installed PWA separately from browser.
