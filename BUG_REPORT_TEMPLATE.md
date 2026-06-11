@@ -1,34 +1,33 @@
-# Real-device QA checklist — prototype-95
+# Stage 6L-B bug report template — prototype-97
 
-Status before QA: `LIMITED_PASS_STATIC`
+## Summary
 
-## Samsung paragraph highlight
+## Device / environment
+- Device:
+- OS version:
+- Browser or installed PWA:
+- URL/source package:
+- Network state:
+- Orientation:
 
-- [ ] Open the latest deployed link.
-- [ ] Confirm **Paragraphe** appears in the top bar.
-- [ ] Tap **Paragraphe**.
-- [ ] Do not tap **Annuler** unless cancelling.
-- [ ] Tap one meditation paragraph.
-- [ ] Confirm the hint disappears.
-- [ ] Confirm colour picker label: **Surligner ce paragraphe en**.
-- [ ] Choose a colour directly.
-- [ ] Confirm the whole paragraph is highlighted.
-- [ ] Repeat on a reflection/practice paragraph.
-- [ ] Reload or reopen.
-- [ ] Confirm persistence.
-- [ ] Confirm the highlighted paragraph appears in **Mon Espace**.
-- [ ] Confirm no Samsung/Google Translate/Search/Copy overlay appears.
+## App evidence
+- Visible app version:
+- Screen/Hour/section:
+- Screenshot/video attached:
 
-## iPhone/iPad exact highlight
+## Steps to reproduce
+1.
+2.
+3.
 
-- [ ] Select exact text.
-- [ ] Tap **Surligner**.
-- [ ] Choose a colour.
-- [ ] Confirm only the selected text is highlighted.
-- [ ] Reload and confirm persistence.
+## Expected result
 
-## Update/orientation
+## Actual result
 
-- [ ] Confirm version shown as `prototype-95`.
-- [ ] Test portrait and landscape.
-- [ ] Test installed PWA separately from browser.
+## Severity
+- P0 blocks core prayer/reading/highlighting/offline use
+- P1 serious user-facing defect
+- P2 polish/accessibility/usability issue
+
+## Notes
+

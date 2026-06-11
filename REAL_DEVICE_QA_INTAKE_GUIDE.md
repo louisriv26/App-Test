@@ -1,34 +1,19 @@
-# Real-device QA checklist — prototype-95
+# Stage 6L-B QA intake guide — prototype-97
 
-Status before QA: `LIMITED_PASS_STATIC`
+## Required submission per tester
+1. Device model.
+2. OS version.
+3. Browser/app mode.
+4. URL or install source used.
+5. App version visible in the app.
+6. Completed CSV rows from `REAL_DEVICE_QA_RESULTS_TEMPLATE.csv`.
+7. Screenshots or short screen recording for each PASS/FAIL area.
+8. Exact reproduction steps for each FAIL.
 
-## Samsung paragraph highlight
+## Result vocabulary
+- PASS: physically tested on the stated device and passed.
+- FAIL: physically tested and failed; attach proof.
+- BLOCKED: tester could not complete because of environment or access issue.
+- NOT_TESTED: no real-device evidence.
 
-- [ ] Open the latest deployed link.
-- [ ] Confirm **Paragraphe** appears in the top bar.
-- [ ] Tap **Paragraphe**.
-- [ ] Do not tap **Annuler** unless cancelling.
-- [ ] Tap one meditation paragraph.
-- [ ] Confirm the hint disappears.
-- [ ] Confirm colour picker label: **Surligner ce paragraphe en**.
-- [ ] Choose a colour directly.
-- [ ] Confirm the whole paragraph is highlighted.
-- [ ] Repeat on a reflection/practice paragraph.
-- [ ] Reload or reopen.
-- [ ] Confirm persistence.
-- [ ] Confirm the highlighted paragraph appears in **Mon Espace**.
-- [ ] Confirm no Samsung/Google Translate/Search/Copy overlay appears.
-
-## iPhone/iPad exact highlight
-
-- [ ] Select exact text.
-- [ ] Tap **Surligner**.
-- [ ] Choose a colour.
-- [ ] Confirm only the selected text is highlighted.
-- [ ] Reload and confirm persistence.
-
-## Update/orientation
-
-- [ ] Confirm version shown as `prototype-95`.
-- [ ] Test portrait and landscape.
-- [ ] Test installed PWA separately from browser.
+Do not promote the package above LIMITED_PASS_STATIC until required real-device rows are PASS or explicitly accepted as risk.

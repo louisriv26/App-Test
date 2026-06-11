@@ -1,7 +1,18 @@
-# Deployment handoff — prototype-95
+# Deployment handoff — Stage 6O
 
-Package: luisa_24_heures_app_v95_stage6k_source_backed_internal_subheaders_locked.zip
+Use the files in this deploy folder or the nested `luisa_24h_github_deploy.zip`.
 
-Stage: Stage 6K — source-backed internal subheader restoration.
+Package: `luisa_24_heures_app_v98_stage6o_live_device_pwa_validation_pack_locked.zip`
+Status: `LIMITED_PASS_STATIC`
+App version: `prototype-98`
+Generated: `2026-06-11T16:44:00Z`
 
-Deploy the contents of this folder to GitHub Pages. Confirm Aide / À propos shows prototype-95.
+Required live checks after deployment:
+- installed PWA open;
+- GitHub Pages update/Actualiser;
+- offline open after first successful load;
+- iPhone/iPad orientation and scroll;
+- reader/home/settings/Approfondir/help flows;
+- Samsung/iPhone/iPad highlighting only as deferred preserve/smoke test.
+
+Record results in `STAGE6O_LIVE_DEVICE_RESULTS_TEMPLATE.csv`.
