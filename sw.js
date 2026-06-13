@@ -1,5 +1,5 @@
-/* Stage 6N — non-highlighting PWA/offline/update hardening — prototype-98 */
-const CACHE_NAME = 'luisa-24h-prototype-98';
+/* Stage 6T.4R2 — four-pass deep-audited evidence-clean package — prototype-100r2-stage6t4-final-deep-audited */
+const CACHE_NAME = 'luisa-24h-prototype-100r2-stage6t4-final-deep-audited';
 const CACHE_PREFIX = 'luisa-24h-';
 const APP_SHELL = [
   './',
