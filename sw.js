@@ -1,5 +1,5 @@
-/* Stage 6T.4R2 — four-pass deep-audited evidence-clean package — prototype-100r2-stage6t4-final-deep-audited */
-const CACHE_NAME = 'luisa-24h-prototype-100r2-stage6t4-final-deep-audited';
+/* Stage 7B-R3 — deep rechecked text-boundary repaired — prototype-101r3-stage7b-clean-rebuild-from-v98-text-boundary-repaired */
+const CACHE_NAME = 'luisa-24h-prototype-101r3-stage7b-clean-rebuild-from-v98-text-boundary-repaired';
 const CACHE_PREFIX = 'luisa-24h-';
 const APP_SHELL = [
   './',

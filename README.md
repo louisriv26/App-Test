@@ -1,3 +1,5 @@
-# Luisa 24 Heures PWA — prototype-100r2-stage6t4-final-deep-audited
+# Luisa 24 Heures — Stage 6R
 
-Use this package for QA and deployment. Runtime corpus is Stage 6T.4 final human-row patched and Stage 6T.4R2 four-pass deep-audited. Real-device QA remains not performed in this environment.
+Package: luisa_24_heures_app_v98_stage6r_validated_corpus_patch_locked.zip
+Status: LIMITED_PASS_STATIC
+Real device status: NOT_TESTED.
