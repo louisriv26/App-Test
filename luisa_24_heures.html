@@ -67,17 +67,33 @@
   --reading-line: 1.75; --col-max: 880px;
   --jesus-color: #5e3319; --jesus-pale: #fdf5ec; --jesus-border: #c9a06a;
   --mary-color: #1e3d5c; --mary-pale: #edf3fa; --mary-border: #7fa8cc;
+  --father-color: #5a3a6b; --father-pale: #f5f0f8; --father-border: #a888bd;
+  /* v101.5 CSS1/CSS2/CSS3 fix: these tokens were referenced (~40 uses) but never
+     defined anywhere, so every rule using them was silently dropped (border,
+     shadow, radius, card background, and Father speaker styling all lost their
+     intended look — see audit CSS1/CSS2/CSS3). accent-soft/card/border are
+     defined via var()/color-mix() so they inherit theme-awareness automatically
+     from the tokens they reference, with no separate dark-theme override needed. */
+  --accent-soft: color-mix(in srgb, var(--accent-light) 40%, var(--bg3));
+  --shadow-soft: 0 1px 8px rgba(26,23,20,0.06);
+  --radius-lg: 18px;
+  --card: var(--bg2);
+  --border: var(--bg3);
+  --cream: #f7f0dc;
+  --navy: #1a2f4a;
 }
 [data-theme="dark"] {
   --bg: #16140f; --bg2: #1e1c16; --bg3: #262318;
   --ink: #f0ede6; --ink2: #ccc7bc; --ink3: #948e84; --ink4: #858078;
   --jesus-color: #c9a66e; --jesus-pale: #231608; --jesus-border: #7a5830;
   --mary-color: #8ab8d8; --mary-pale: #091522; --mary-border: #2a5070;
+  --father-color: #b79ad0; --father-pale: #1a1222; --father-border: #6a5080;
   --accent: #d4a843; --accent-light: #e8c574; --accent-pale: #2a2516;
   --cross: #d4807a; --cross-pale: #2a1a1a; --gold-pale: #231f14;
   --ref-bg: #131e26; --ref-border: #2a5070; --ref-text: #a0c8e0;
   --prayer-bg: #1e1a14; --prayer-border: #8a6a30;
   --holy-bg: #1a1520; --holy-border: #6a4a8a;
+  --cream: #2a2410; --navy: #b8cbe0;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { height: 100%; box-sizing: border-box; overflow-x: hidden; overscroll-behavior-x: none; }
@@ -4549,8 +4565,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.4';
-const APP_EVIDENCE_STAGE = 'v101.4 — storage-quota handling: user content persisted first, one-time full-storage toast, note-save rollback on failure, meditationLog capped (audit PS1/PS2/PS3)';
+const APP_VERSION = 'v101.5';
+const APP_EVIDENCE_STAGE = 'v101.5 — define missing CSS tokens (--father-*, --accent-soft, --shadow-soft, --radius-lg, --card, --border, --cream, --navy) that were silently dropping borders/shadows/Father-speech styling (audit CSS1/CSS2/CSS3)';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
