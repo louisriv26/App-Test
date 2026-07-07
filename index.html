@@ -778,9 +778,15 @@ mark.hl-pink   { background: #fce7f3; color: inherit; }
 .daily-card { display: flex; align-items: center; gap: 0.8rem;
   padding: 0.9rem 1rem; background: var(--bg2); border: 1px solid var(--bg3);
   border-radius: var(--radius); margin-bottom: 0.65rem; cursor: pointer;
-  transition: background 0.15s, border-color 0.15s; }
+  transition: background 0.15s, border-color 0.15s;
+  /* v101.6 A11Y1/A11Y2 fix: this is now a real <button>, not a div — reset the
+     UA button defaults (font, alignment, width) so it renders identically to
+     before. Child elements without their own font-family (.dc-label/.dc-time/
+     .dc-next/.dc-prev) rely on inheriting this. */
+  width: 100%; text-align: left; font: inherit; color: inherit; }
 .daily-card:active { background: var(--bg3); }
 .daily-card.done { cursor: default; border-color: var(--accent-light); background: var(--accent-pale); }
+.dc-next-btn { background: none; border: none; padding: 0; font: inherit; color: var(--accent); cursor: pointer; margin-top: 0.5rem; font-family: var(--font-ui); font-size: 0.85rem; }
 .dc-check { font-size: 1.2rem; color: var(--accent); flex-shrink: 0; }
 .dc-meta { flex: 1; min-width: 0; }
 .dc-prev { font-size: 0.78rem; color: var(--ink3); margin-bottom: 0.18rem;
@@ -4565,8 +4571,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.5';
-const APP_EVIDENCE_STAGE = 'v101.5 — define missing CSS tokens (--father-*, --accent-soft, --shadow-soft, --radius-lg, --card, --border, --cream, --navy) that were silently dropping borders/shadows/Father-speech styling (audit CSS1/CSS2/CSS3)';
+const APP_VERSION = 'v101.6';
+const APP_EVIDENCE_STAGE = 'v101.6 — un-mark meditee now removes today’s log entry (audit RN1); home daily-card + cycle-restart are now real keyboard/screen-reader-operable buttons (audit A11Y1/A11Y2)';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -5693,13 +5699,13 @@ function buildDailyCard() {
   if (last.date === today) {
     const cycleComplete = last.hour === 24;
     if (cycleComplete) {
-      return '<div class="daily-card done cycle-complete"><div class="dc-check">\u2713</div><div class="dc-meta"><div class="dc-label">Cycle accompli</div><div class="dc-title">Vous avez pri\u00e9 les 24\u00a0Heures</div><div class="dc-next-btn" onclick="restartTwentyFourHours()" style="cursor:pointer;margin-top:0.5rem;color:var(--accent);font-family:var(--font-ui);font-size:0.85rem;">\u21ba\u00a0Recommencer le cycle</div></div></div>';
+      return '<div class="daily-card done cycle-complete"><div class="dc-check">\u2713</div><div class="dc-meta"><div class="dc-label">Cycle accompli</div><div class="dc-title">Vous avez pri\u00e9 les 24\u00a0Heures</div><button type="button" class="dc-next-btn" onclick="restartTwentyFourHours()">\u21ba\u00a0Recommencer le cycle</button></div></div>';
     }
-    return '<div class="daily-card done" onclick="openHour(' + nextNum + ')" style="cursor:pointer"><div class="dc-check">\u2713</div><div class="dc-meta"><div class="dc-label">M\u00e9dit\u00e9e aujourd\u2019hui</div><div class="dc-title">' + escHtml(lastH.hour_number + 'e\u00a0Heure \u2014 ' + lastH.title) + '</div><div class="dc-next">Suivante\u00a0\u2192\u00a0' + nextNum + 'e\u00a0Heure \u2014 ' + escHtml(nextH.short_title||nextH.title) + '</div></div><svg class="dc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>';
+    return '<button type="button" class="daily-card done" onclick="openHour(' + nextNum + ')" style="cursor:pointer" aria-label="' + escHtml('M\u00e9dit\u00e9e aujourd\u2019hui : ' + lastH.hour_number + 'e Heure \u2014 ' + lastH.title + '. Suivante : ' + nextNum + 'e Heure \u2014 ' + (nextH.short_title||nextH.title)) + '"><div class="dc-check">\u2713</div><div class="dc-meta"><div class="dc-label">M\u00e9dit\u00e9e aujourd\u2019hui</div><div class="dc-title">' + escHtml(lastH.hour_number + 'e\u00a0Heure \u2014 ' + lastH.title) + '</div><div class="dc-next">Suivante\u00a0\u2192\u00a0' + nextNum + 'e\u00a0Heure \u2014 ' + escHtml(nextH.short_title||nextH.title) + '</div></div><svg class="dc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>';
   }
   const MOIS = ['jan','f\u00e9v','mar','avr','mai','jun','jul','ao\u00fb','sep','oct','nov','d\u00e9c'];
   let timeLabel = last.date === yesterday ? 'Hier' : (function(){ const [,m,d]=last.date.split('-'); return parseInt(d)+'\u00a0'+MOIS[parseInt(m)-1]; })();
-  return '<div class="daily-card" onclick="openHour(' + nextNum + ')"><div class="dc-meta"><div class="dc-prev">' + timeLabel + '\u00a0: ' + last.hour + 'e\u00a0Heure \u2014 ' + escHtml(lastH.short_title||lastH.title) + '</div><div class="dc-label">Aujourd\u2019hui</div><div class="dc-title">' + nextNum + 'e\u00a0Heure \u2014 ' + escHtml(nextH.title) + '</div><div class="dc-time">' + nextH.display_time + '</div></div><svg class="dc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>';
+  return '<button type="button" class="daily-card" onclick="openHour(' + nextNum + ')" aria-label="' + escHtml('Aujourd\u2019hui : ' + nextNum + 'e Heure \u2014 ' + nextH.title) + '"><div class="dc-meta"><div class="dc-prev">' + timeLabel + '\u00a0: ' + last.hour + 'e\u00a0Heure \u2014 ' + escHtml(lastH.short_title||lastH.title) + '</div><div class="dc-label">Aujourd\u2019hui</div><div class="dc-title">' + nextNum + 'e\u00a0Heure \u2014 ' + escHtml(nextH.title) + '</div><div class="dc-time">' + nextH.display_time + '</div></div><svg class="dc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>';
 }
 
 function makeHourGridHtml(compact = false) {
@@ -7263,6 +7269,11 @@ function copyReflection(paraId, hourNum) {
 function markMeditee(n) {
   if (state.readHours.has(n)) {
     state.readHours.delete(n);
+    // v101.6 RN1 fix: un-marking must also drop today's log entry for this hour,
+    // otherwise the home daily card keeps reporting it as meditated today (and
+    // can keep showing "Cycle accompli" after un-marking Hour 24).
+    const today = getLocalDateStr();
+    state.meditationLog = state.meditationLog.filter(e => !(e.date === today && e.hour === n));
     showToast('Progression retirée');
   } else {
     state.readHours.add(n);
