@@ -104,7 +104,9 @@ body { font-family: var(--font-body); background: var(--bg); color: var(--ink); 
 /* ── Header ── */
 .header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--bg3); padding: 0 1.5rem; padding-top: env(safe-area-inset-top, 0px); height: calc(58px + env(safe-area-inset-top, 0px)); display: flex; align-items: center; justify-content: space-between; }
 .header-left { display: flex; align-items: center; gap: 0.6rem; flex: 1; min-width: 0; overflow: hidden; }
-.header-logo { font-family: var(--font-display); font-size: 0.82rem; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; line-height: 1.2; cursor: pointer; overflow: hidden; min-width: 0; white-space: nowrap; text-overflow: ellipsis; }
+.header-logo { font-family: var(--font-display); font-size: 0.82rem; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; line-height: 1.2; cursor: pointer; overflow: hidden; min-width: 0; white-space: nowrap; text-overflow: ellipsis;
+  /* v101.7 A11Y3 fix: now a real <button>, not a div — reset UA button defaults. */
+  background: none; border: none; padding: 0; text-align: left; }
 .header-logo span { display: block; font-size: 0.62rem; letter-spacing: 0.18em; color: var(--ink4); font-family: var(--font-ui); font-style: italic; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .back-btn { display: none; align-items: center; gap: 0.2rem; background: none; border: none; cursor: pointer; color: var(--accent); padding: 5px 8px 5px 2px; border-radius: 6px; flex-shrink: 0; font-family: var(--font-ui); font-size: 0.88rem; font-weight: 500; white-space: nowrap; }
 .back-btn:hover, .back-btn:active { background: var(--accent-pale); }
@@ -184,7 +186,18 @@ body { font-family: var(--font-body); background: var(--bg); color: var(--ink); 
 .search-wrap { position: relative; margin-bottom: 1.5rem; }
 .search-input { width: 100%; padding: 0.7rem 1rem 0.7rem 2.6rem; background: var(--bg2); border: 1px solid var(--bg3); border-radius: var(--radius); font-family: var(--font-ui); font-size: 1rem; color: var(--ink); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
 .search-input:focus{outline:none;}
-:focus-visible{outline:3px solid var(--accent-light);outline-offset:2px;border-radius:4px;}
+/* v101.7 A11Y4 fix: --accent-light gives ~1.9:1 contrast on the light-theme
+   background (below the WCAG 1.4.11 non-text 3:1 minimum) — audit finding.
+   --accent (~5.5:1 in light theme) is used for both themes since it also
+   reads clearly in dark theme. */
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px;}
+@media (prefers-contrast: more) {
+  /* v101.7 A11Y5 fix: strengthen borders/outlines for users who request more
+     contrast at the OS level. This app's base contrast is already good; this
+     is a small additional nicety, not a rewrite. */
+  :focus-visible{outline-width:4px;}
+  .daily-card,.hour-card,.hour-list-card,.progress-summary-card,.note-textarea{border-width:2px;}
+}
 .icon-btn:focus-visible,.nav-btn:focus-visible,.mark-read-btn:focus-visible,
 .tab-btn:focus-visible,.prayer-trigger-btn:focus-visible,.font-btn:focus-visible,
 .sidebar-item:focus-visible,.bn-item:focus-visible,.hour-card:focus-visible,
@@ -629,7 +642,7 @@ mark.hl-pink   { background: #fce7f3; color: inherit; }
 
 
 .onboarding-card{background:linear-gradient(135deg,var(--accent-pale) 0%,var(--bg2) 100%);border:1px solid var(--accent-light);border-radius:var(--radius);padding:1.5rem;margin-bottom:1.5rem;}
-.onboarding-card h3{font-family:var(--font-display);font-size:1rem;letter-spacing:0.04em;color:var(--ink);margin-bottom:0.5rem;}
+.onboarding-card h2,.onboarding-card h3{font-family:var(--font-display);font-size:1rem;letter-spacing:0.04em;color:var(--ink);margin-bottom:0.5rem;}
 .onboarding-card p{font-family:var(--font-ui);font-size:0.95rem;color:var(--ink2);line-height:1.65;margin-bottom:1rem;}
 .onboarding-actions{display:flex;gap:0.6rem;flex-wrap:wrap;}
 .onboarding-primary{background:var(--accent);color:white;border:none;border-radius:var(--radius);padding:0.65rem 1.2rem;font-family:var(--font-ui);font-size:0.95rem;cursor:pointer;transition:opacity 0.15s;}
@@ -2020,10 +2033,10 @@ html.android-highlight-mode .android-paragraph-highlight-target {
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
         <span>Retour</span>
       </button>
-      <div class="header-logo" onclick="showHome()">
+      <button type="button" class="header-logo" onclick="showHome()" aria-label="Accueil — Les 24 Heures de la Passion">
         Les 24 Heures de la Passion
         <span>Luisa Piccarreta</span>
-      </div>
+      </button>
     </div>
     <div class="header-actions">
       <button class="icon-btn" onclick="showSearchView()" title="Recherche" aria-label="Recherche">
@@ -4571,8 +4584,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.6';
-const APP_EVIDENCE_STAGE = 'v101.6 — un-mark meditee now removes today’s log entry (audit RN1); home daily-card + cycle-restart are now real keyboard/screen-reader-operable buttons (audit A11Y1/A11Y2)';
+const APP_VERSION = 'v101.7';
+const APP_EVIDENCE_STAGE = 'v101.7 — French ordinal consistency (audit RN2), header logo is now a real button (A11Y3), focus-ring contrast + prefers-contrast support (A11Y4/A11Y5), heading hierarchy fix (A11Y6). No corpus/speech change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -5387,7 +5400,7 @@ function buildHourEndActions(hour, next) {
     return `<div class="hour-end-actions cycle" id="hourEndActions"><div class="hour-end-title">Le cycle des 24 Heures</div><div class="hour-end-note">Vous avez atteint la 24e Heure. Vous pouvez revoir votre parcours ou recommencer un nouveau cycle de prière.</div><div class="hour-end-buttons"><button type="button" class="hour-end-btn primary" onclick="restartTwentyFourHours()">↻ Recommencer les 24 Heures</button><button type="button" class="hour-end-btn" onclick="showHome()">⌂ Revenir à l’Accueil</button><button type="button" class="hour-end-btn" onclick="showProgressView()">Voir ma progression</button><button type="button" class="hour-end-btn" onclick="showCompletedHoursView()">Revoir les Heures terminées</button></div></div>`;
   }
   const nextHour = next;
-  const nextLabel = nextHour ? ('Prier la ' + nextHour.hour_number + 'e Heure') : '';
+  const nextLabel = nextHour ? ('Prier la ' + ordinalHeure(nextHour.hour_number)) : '';
   const nextBtn = nextHour ? `<button type="button" class="hour-end-btn primary" onclick="openHour(${nextHour.hour_number})">${escHtml(nextLabel)}</button>` : '';
   return `<div class="hour-end-actions" id="hourEndActions"><div class="hour-end-title">Continuer le chemin des Heures</div><div class="hour-end-note">Après cette méditation, vous pouvez réfléchir, approfondir ou poursuivre vers l’Heure suivante.</div><div class="hour-end-buttons"><button type="button" class="hour-end-btn" onclick="goToHourTab('reflections', 'reflectionsContent')">Réflexion et pratique</button><button type="button" class="hour-end-btn" onclick="goToHourTab('linked', 'linkedTextsContent')">Approfondir</button><button type="button" class="hour-end-btn" onclick="scrollReaderToTop()">↟ Revenir au début</button>${nextBtn}</div></div>`;
 }
@@ -5701,11 +5714,11 @@ function buildDailyCard() {
     if (cycleComplete) {
       return '<div class="daily-card done cycle-complete"><div class="dc-check">\u2713</div><div class="dc-meta"><div class="dc-label">Cycle accompli</div><div class="dc-title">Vous avez pri\u00e9 les 24\u00a0Heures</div><button type="button" class="dc-next-btn" onclick="restartTwentyFourHours()">\u21ba\u00a0Recommencer le cycle</button></div></div>';
     }
-    return '<button type="button" class="daily-card done" onclick="openHour(' + nextNum + ')" style="cursor:pointer" aria-label="' + escHtml('M\u00e9dit\u00e9e aujourd\u2019hui : ' + lastH.hour_number + 'e Heure \u2014 ' + lastH.title + '. Suivante : ' + nextNum + 'e Heure \u2014 ' + (nextH.short_title||nextH.title)) + '"><div class="dc-check">\u2713</div><div class="dc-meta"><div class="dc-label">M\u00e9dit\u00e9e aujourd\u2019hui</div><div class="dc-title">' + escHtml(lastH.hour_number + 'e\u00a0Heure \u2014 ' + lastH.title) + '</div><div class="dc-next">Suivante\u00a0\u2192\u00a0' + nextNum + 'e\u00a0Heure \u2014 ' + escHtml(nextH.short_title||nextH.title) + '</div></div><svg class="dc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>';
+    return '<button type="button" class="daily-card done" onclick="openHour(' + nextNum + ')" style="cursor:pointer" aria-label="' + escHtml('M\u00e9dit\u00e9e aujourd\u2019hui : ' + lastH.hour_number + 'e Heure \u2014 ' + lastH.title + '. Suivante : ' + nextNum + 'e Heure \u2014 ' + (nextH.short_title||nextH.title)) + '"><div class="dc-check">\u2713</div><div class="dc-meta"><div class="dc-label">M\u00e9dit\u00e9e aujourd\u2019hui</div><div class="dc-title">' + escHtml(ordinalHeure(lastH.hour_number) + ' \u2014 ' + lastH.title) + '</div><div class="dc-next">Suivante \u2192 ' + escHtml(ordinalHeure(nextNum) + ' \u2014 ' + (nextH.short_title||nextH.title)) + '</div></div><svg class="dc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>';
   }
   const MOIS = ['jan','f\u00e9v','mar','avr','mai','jun','jul','ao\u00fb','sep','oct','nov','d\u00e9c'];
   let timeLabel = last.date === yesterday ? 'Hier' : (function(){ const [,m,d]=last.date.split('-'); return parseInt(d)+'\u00a0'+MOIS[parseInt(m)-1]; })();
-  return '<button type="button" class="daily-card" onclick="openHour(' + nextNum + ')" aria-label="' + escHtml('Aujourd\u2019hui : ' + nextNum + 'e Heure \u2014 ' + nextH.title) + '"><div class="dc-meta"><div class="dc-prev">' + timeLabel + '\u00a0: ' + last.hour + 'e\u00a0Heure \u2014 ' + escHtml(lastH.short_title||lastH.title) + '</div><div class="dc-label">Aujourd\u2019hui</div><div class="dc-title">' + nextNum + 'e\u00a0Heure \u2014 ' + escHtml(nextH.title) + '</div><div class="dc-time">' + nextH.display_time + '</div></div><svg class="dc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>';
+  return '<button type="button" class="daily-card" onclick="openHour(' + nextNum + ')" aria-label="' + escHtml('Aujourd\u2019hui : ' + nextNum + 'e Heure \u2014 ' + nextH.title) + '"><div class="dc-meta"><div class="dc-prev">' + timeLabel + ' : ' + escHtml(ordinalHeure(last.hour) + ' \u2014 ' + (lastH.short_title||lastH.title)) + '</div><div class="dc-label">Aujourd\u2019hui</div><div class="dc-title">' + escHtml(ordinalHeure(nextNum) + ' \u2014 ' + nextH.title) + '</div><div class="dc-time">' + nextH.display_time + '</div></div><svg class="dc-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>';
 }
 
 function makeHourGridHtml(compact = false) {
@@ -5911,10 +5924,10 @@ function renderHome() {
     </div>
     <div style="margin-top:1.1rem">
       ${isFirstTime ? `<div class="onboarding-card">
-        <h3>✝ Bienvenue dans les 24 Heures de la Passion</h3>
+        <h2>✝ Bienvenue dans les 24 Heures de la Passion</h2>
         <p>Accompagnez Jésus heure par heure, de 17h à 17h le lendemain. Le chemin proposé est simple : prier une Heure, puis continuer la suivante.</p>
         <div class="onboarding-actions">
-          <button class="onboarding-primary" onclick="openHour(1);dismissOnboarding()">Commencer la 1ère Heure →</button>
+          <button class="onboarding-primary" onclick="openHour(1);dismissOnboarding()">Commencer la 1re Heure →</button>
           <button class="onboarding-dismiss" onclick="dismissOnboarding()">Parcourir librement</button>
         </div>
       </div>` : ''}
@@ -6038,7 +6051,7 @@ function renderReader(hour, scroll = true) {
   document.getElementById('content').innerHTML = `
   <div class="reader-screen">
     <div class="reader-header">
-      <div class="reader-eyebrow">${hour.hour_number}e Heure · Les 24 Heures de la Passion</div>
+      <div class="reader-eyebrow">${ordinalHeure(hour.hour_number)} · Les 24 Heures de la Passion</div>
       <h2 class="reader-title">${escHtml(hour.title)}</h2>
       <div class="reader-time">${hour.display_time}</div>
       ${hour.source_pages&&hour.source_pages.length?`<div class="reader-pages">Source p. ${hour.source_pages[0]}${hour.source_pages.length>1?'–'+hour.source_pages[hour.source_pages.length-1]:''}</div>`:''}
@@ -6261,7 +6274,7 @@ function openPlanSheet(hourNum) {
     .filter(([id, meta]) => meta.hour === hourNum)
     .sort((a, b) => parseInt(a[0].match(/P(\d+)$/)[1]) - parseInt(b[0].match(/P(\d+)$/)[1]));
   const hour = CORPUS.hours.find(h => h.hour_number === hourNum);
-  document.getElementById('planSheetTitle').textContent = hour ? hour.hour_number + 'e Heure — Plan' : 'Plan';
+  document.getElementById('planSheetTitle').textContent = hour ? ordinalHeure(hour.hour_number) + ' — Plan' : 'Plan';
   document.getElementById('planSceneList').innerHTML = scenes.map(([id, meta]) => {
     const pNum = parseInt(id.match(/P(\d+)$/)[1]);
     // R49T fix: derive the heading live from the paragraph's own text (same source
@@ -7281,7 +7294,7 @@ function markMeditee(n) {
     state.meditationLog = state.meditationLog.filter(e => e.date !== today);
     state.meditationLog.push({ date: today, hour: n });
     if (state.meditationLog.length > 100) state.meditationLog = state.meditationLog.slice(-100);
-    showToast('✓ ' + n + 'e Heure méditée');
+    showToast('✓ ' + ordinalHeure(n) + ' méditée');
   }
   saveState();
   const btn = document.getElementById('markReadBtn');
@@ -8319,6 +8332,11 @@ function showColourPickerBottom(isExisting, hlId) {
 
 // ── Utils ──
 function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+// v101.7 RN2 fix: centralized French ordinal for hour numbers ("1re Heure", "5e Heure").
+// Several call sites built "Ne Heure" without the n===1 special case (rendering the
+// grammatically wrong "1e Heure"), and one used the inconsistent spelling "1ère".
+// This is the single source of truth going forward — see the audit RN2 finding.
+function ordinalHeure(n){ return (n === 1 ? '1re' : n + 'e') + ' Heure'; }
 function norm(s){return(s||'').toLowerCase().replace(/[\u0152\u0153]/g,'oe').replace(/[\u00c6\u00e6]/g,'ae').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['']/g,"'").replace(/[«»""]/g,'"');}
 function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
