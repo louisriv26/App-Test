@@ -4583,18 +4583,19 @@ window.onerror = function(msg, src, line, col, err) {
   // always rendered with its detail line blank, no matter what actually threw.
   // Pass the real diagnostic through instead, so a crash is actually debuggable
   // from a user's screenshot (see the July 2026 iPad "Add to Home Screen" report).
-  if (typeof showFatalError === 'function') {
-    const detail = (err && err.message) ? err.message : String(msg || 'Erreur inconnue');
-    const where = (src ? String(src).split('/').pop() : '') + (line ? ':' + line + (col ? ':' + col : '') : '');
-    showFatalError({ message: detail + (where ? ' (' + where + ')' : '') });
-  }
-  return false;
+  // v101.10 fix: do NOT blank the whole app for a post-init runtime error.
+  // Once init has succeeded (see try/catch at bottom of script) the app is
+  // usable; a stray async / event-handler error (e.g. one fired during the
+  // iOS Share / Add-to-Home-Screen visibility+focus churn) must be logged,
+  // never escalated to the fatal-error screen. Only genuine INIT failure
+  // justifies replacing the UI, and that path is handled separately below.
+    return false;
 };
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.9';
-const APP_EVIDENCE_STAGE = 'v101.9 — robustness fix: background convenience features (scroll-position memory, update-checking) that fire on visibilitychange/pageshow (exactly when iOS Add-to-Home-Screen triggers) are now wrapped so a failure inside them logs and no-ops instead of crashing the whole app with the fatal-error screen. Prompted by a reported crash showing browser-sanitized \'Script error.\' (no further detail obtainable). No corpus/speech change.';
+const APP_VERSION = 'v101.10';
+const APP_EVIDENCE_STAGE = 'v101.10 - crash-containment fix: window.onerror no longer escalates a post-init runtime error to the full-screen fatal error; it only logs. The fatal screen is now reserved for genuine init failure (the try/catch around loadState/buildSidebar/showHome/etc). This targets the reported iPad Share / Add-to-Home-Screen crash, which was a stray error thrown during the visibility/focus churn of the share sheet blanking the whole app. Also adds an init-step breadcrumb shown on the fatal screen so any remaining init crash is pinpointed despite browser-sanitized error text. No corpus/speech change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -8421,10 +8422,11 @@ window.addEventListener('scroll', function(){
 // ── Init ──
 function showFatalError(err) {
   const safeMsg = (err&&err.message)?String(err.message).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):'';
+  const step = window.__lp24Init ? (' [init:' + window.__lp24Init + ']') : '';
   document.getElementById('app').innerHTML =
     '<div style="padding:2rem;font-family:sans-serif;color:#c00;text-align:center">' +
     '<p style="font-size:1.2rem;font-weight:bold">Une erreur est survenue</p>' +
-    '<p style="font-size:0.9rem;color:#555;margin-top:1rem">' + safeMsg + '</p>' +
+    '<p style="font-size:0.9rem;color:#555;margin-top:1rem">' + safeMsg + step + '</p>' +
     '<p style="font-size:0.85rem;color:#888;margin-top:0.5rem">Veuillez recharger la page.</p></div>';
 }
 function registerGlobalErrorHandlers() {
@@ -8435,7 +8437,13 @@ function registerGlobalErrorHandlers() {
 }
 registerGlobalErrorHandlers();
 try {
-  loadState(); buildSidebar(); showHome(); applyStudyMode(); updateAndroidHighlightModeUi(); stage6aInstallRuntime();
+  window.__lp24Init='loadState'; loadState();
+  window.__lp24Init='buildSidebar'; buildSidebar();
+  window.__lp24Init='showHome'; showHome();
+  window.__lp24Init='applyStudyMode'; applyStudyMode();
+  window.__lp24Init='updateAndroidHighlightModeUi'; updateAndroidHighlightModeUi();
+  window.__lp24Init='stage6aInstallRuntime'; stage6aInstallRuntime();
+  window.__lp24Init='done';
   setTimeout(function(){ scheduleUpdateCheck('init', 500); }, 0);
 } catch(err) { showFatalError(err); }
 // ─── Stage 6N PWA/offline update recovery: controlled service-worker registration with version.json as source of truth ───────
