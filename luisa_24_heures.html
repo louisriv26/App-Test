@@ -358,7 +358,6 @@ body { font-family: var(--font-body); background: var(--bg); color: var(--ink); 
 .tab-btn { flex: 1; padding: 0.6rem 0.5rem; border: none; background: var(--bg2); cursor: pointer; font-family: var(--font-ui); font-size: var(--ui-size, 16px); color: var(--ink3); transition: background 0.15s, color 0.15s; border-right: 1px solid var(--bg3); }
 .tab-btn:last-child { border-right: none; }
 .tab-btn.active { background: var(--accent-pale); color: var(--accent); font-weight: 500; }
-.tab-btn .tab-count { font-size: 0.72rem; opacity: 0.7; margin-left: 0.3rem; }
 
 /* ── Paragraphs ── */
 .para-block { display: flex; gap: 1rem; margin-bottom: 1.15em; position: relative; animation: fadeIn 0.25s ease both; -webkit-touch-callout: none; }
@@ -4594,8 +4593,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.10';
-const APP_EVIDENCE_STAGE = 'v101.10 - crash-containment fix: window.onerror no longer escalates a post-init runtime error to the full-screen fatal error; it only logs. The fatal screen is now reserved for genuine init failure (the try/catch around loadState/buildSidebar/showHome/etc). This targets the reported iPad Share / Add-to-Home-Screen crash, which was a stray error thrown during the visibility/focus churn of the share sheet blanking the whole app. Also adds an init-step breadcrumb shown on the fatal screen so any remaining init crash is pinpointed despite browser-sanitized error text. No corpus/speech change.';
+const APP_VERSION = 'v101.11';
+const APP_EVIDENCE_STAGE = 'v101.11 - UI cleanup: removed the paragraph-count badges next to the Meditation and Reflexions et pratiques tab labels (e.g. "Meditation (26)"). These were implementation detail with no value to a reader deciding what to open; the tabs now show clean labels only. The existing hasRefl guard (which hides the Reflexions tab entirely when an Hour has none) already covers the one legitimately useful signal these counts provided. No corpus/speech/behaviour change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -6033,10 +6032,10 @@ function renderReader(hour, scroll = true) {
   const tabsHtml = `
     <div class="tabs">
       <button class="tab-btn ${state.activeTab==='meditation'?'active':''}" data-tab="meditation" onclick="switchTab('meditation')">
-        Méditation<span class="tab-count">(${displayParagraphs.length})</span>
+        Méditation
       </button>
       ${hasRefl ? `<button class="tab-btn ${state.activeTab==='reflections'?'active':''}" data-tab="reflections" onclick="switchTab('reflections')">
-        Réflexions et pratiques<span class="tab-count">(${hour.reflections.length})</span>
+        Réflexions et pratiques
       </button>` : ''}
       <button class="tab-btn ${state.activeTab==='linked'?'active':''}" data-tab="linked" onclick="switchTab('linked')">
         Textes liés
