@@ -4578,14 +4578,23 @@ const SPEECH_END_VISUAL_BREAKS = {"PASSION24.HOUR.01.P014":[119],"PASSION24.HOUR
 // R44 — global error handlers
 window.onerror = function(msg, src, line, col, err) {
   console.error('App error:', msg, src + ':' + line + ':' + col, err);
-  if (typeof showFatalError === 'function') showFatalError('Une erreur inattendue s’est produite. Rechargez la page.');
+  // v101.8 fix: this used to call showFatalError() with a hardcoded generic
+  // string, discarding the real error entirely — the on-screen crash message
+  // always rendered with its detail line blank, no matter what actually threw.
+  // Pass the real diagnostic through instead, so a crash is actually debuggable
+  // from a user's screenshot (see the July 2026 iPad "Add to Home Screen" report).
+  if (typeof showFatalError === 'function') {
+    const detail = (err && err.message) ? err.message : String(msg || 'Erreur inconnue');
+    const where = (src ? String(src).split('/').pop() : '') + (line ? ':' + line + (col ? ':' + col : '') : '');
+    showFatalError({ message: detail + (where ? ' (' + where + ')' : '') });
+  }
   return false;
 };
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.7';
-const APP_EVIDENCE_STAGE = 'v101.7 — French ordinal consistency (audit RN2), header logo is now a real button (A11Y3), focus-ring contrast + prefers-contrast support (A11Y4/A11Y5), heading hierarchy fix (A11Y6). No corpus/speech change.';
+const APP_VERSION = 'v101.8';
+const APP_EVIDENCE_STAGE = 'v101.8 — diagnostic fix: window.onerror now passes the real error message/location to the crash screen instead of a hardcoded generic string (was blank on every real crash, incl. a reported iPad Add-to-Home-Screen crash — cause still unknown pending a reproducible detailed report). No corpus/speech change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
