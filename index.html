@@ -4593,8 +4593,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.8';
-const APP_EVIDENCE_STAGE = 'v101.8 — diagnostic fix: window.onerror now passes the real error message/location to the crash screen instead of a hardcoded generic string (was blank on every real crash, incl. a reported iPad Add-to-Home-Screen crash — cause still unknown pending a reproducible detailed report). No corpus/speech change.';
+const APP_VERSION = 'v101.9';
+const APP_EVIDENCE_STAGE = 'v101.9 — robustness fix: background convenience features (scroll-position memory, update-checking) that fire on visibilitychange/pageshow (exactly when iOS Add-to-Home-Screen triggers) are now wrapped so a failure inside them logs and no-ops instead of crashing the whole app with the fatal-error screen. Prompted by a reported crash showing browser-sanitized \'Script error.\' (no further detail obtainable). No corpus/speech change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -5535,17 +5535,29 @@ function stage6aJumpToTabStart(targetId) {
   resetContentScroll();
   return false;
 }
+// v101.9 fix: a user reported a crash screen ("Script error." — a browser-
+// sanitized message with no file/line, given with no further detail regardless
+// of any fix on our side) when tapping iPad Safari's Share/Add-to-Home-Screen
+// button. That action is exactly when these background convenience features
+// (remembering scroll position, checking for app updates) fire, via the
+// visibilitychange/pageshow events Safari dispatches around the share sheet.
+// None of them are critical to reading the app — a failure in any one of them
+// must never bring down the whole app with a fatal-error screen. safeRun()
+// catches and logs instead of letting an exception reach window.onerror.
+function safeRun(fn, label) {
+  try { fn(); } catch(e) { console.warn('[safeRun:' + label + ']', e); }
+}
 function stage6aInstallRuntime() {
   document.documentElement.classList.add('stage6a-runtime');
   const root = stage6aGetScrollRoot();
   if (root && !root.dataset.stage6aScrollListener) {
     root.dataset.stage6aScrollListener = 'true';
-    root.addEventListener('scroll', function(){ stage6aRememberSoon('content-scroll'); }, { passive: true });
+    root.addEventListener('scroll', function(){ safeRun(function(){ stage6aRememberSoon('content-scroll'); }, 'stage6a-scroll'); }, { passive: true });
   }
-  window.addEventListener('orientationchange', function(){ stage6aScheduleOrientationRestore('orientationchange'); }, { passive: true });
-  window.addEventListener('resize', function(){ stage6aScheduleOrientationRestore('resize'); }, { passive: true });
-  document.addEventListener('visibilitychange', function(){ if (document.hidden) stage6aCaptureAnchor('visibility-hidden'); }, { passive: true });
-  setTimeout(function(){ stage6aCaptureAnchor('initial'); }, 600);
+  window.addEventListener('orientationchange', function(){ safeRun(function(){ stage6aScheduleOrientationRestore('orientationchange'); }, 'stage6a-orientationchange'); }, { passive: true });
+  window.addEventListener('resize', function(){ safeRun(function(){ stage6aScheduleOrientationRestore('resize'); }, 'stage6a-resize'); }, { passive: true });
+  document.addEventListener('visibilitychange', function(){ safeRun(function(){ if (document.hidden) stage6aCaptureAnchor('visibility-hidden'); }, 'stage6a-visibilitychange'); }, { passive: true });
+  setTimeout(function(){ safeRun(function(){ stage6aCaptureAnchor('initial'); }, 'stage6a-initial'); }, 600);
 }
 function stage6aDebugSnapshot() {
   const root = stage6aGetScrollRoot();
@@ -8552,9 +8564,9 @@ function showUpdateBanner(newVer, newDate) {
     '<button class="update-dismiss-btn" onclick="this.parentElement.remove()" aria-label="Fermer">×</button>';
 }
 window.addEventListener('focus', function(){ scheduleUpdateCheck('focus', 200); }, { passive: true });
-window.addEventListener('pageshow', function(){ scheduleUpdateCheck('pageshow', 200); }, { passive: true });
+window.addEventListener('pageshow', function(){ safeRun(function(){ scheduleUpdateCheck('pageshow', 200); }, 'pageshow-updatecheck'); }, { passive: true });
 window.addEventListener('online', function(){ scheduleUpdateCheck('online', 200); }, { passive: true });
-document.addEventListener('visibilitychange', function(){ if (!document.hidden) scheduleUpdateCheck('visibilitychange', 200); }, { passive: true });
+document.addEventListener('visibilitychange', function(){ safeRun(function(){ if (!document.hidden) scheduleUpdateCheck('visibilitychange', 200); }, 'visibilitychange-updatecheck'); }, { passive: true });
 // Stage 6N: service workers are registered for offline use, while version.json remains the update source of truth.
 // ─── End Stage 6N PWA/offline update recovery ───────
 

@@ -1,9 +1,7 @@
-# App-Test — shared staging repo
+# Luisa — 24 Heures de la Passion
 
-Live at: https://louisriv26.github.io/App-Test/
+Version: `v101.9`
 
-This is a **staging/test-only** GitHub Pages deployment. Deploy a build here first, test it on real devices, and only push the same payload to the app's production repo once it checks out.
+Notes: robustness fix — background convenience features (remembering scroll position, checking for app updates) that fire exactly when iOS's Share/Add-to-Home-Screen triggers a visibilitychange/pageshow event are now wrapped so a failure inside them can never crash the whole app. This responds to a reported iPad Safari crash that showed the browser's own sanitized "Script error." with no further detail obtainable — a known WebKit behaviour in that context, not something fixable by improving our own error display. No corpus, speech-attribution, or reading-behaviour change. Carries all prior v101.x fixes (v101.2 through v101.8). Internal history is tracked in `luisa-24h-state_1.md`.
 
-Currently staged: **Les 24 Heures de la Passion**, v101.4 (production is at v101.3 — see that project's `luisa-24h-state_1.md` for the split-state record and promotion path).
-
-No formal QA-gate documents are kept here; they go stale faster than they're useful for this fast-iteration workflow. Test notes and bug reports for the current staged build should go directly to the app owner.
+Status: `LIMITED_PASS_STATIC` — static/package checks (JS/CSS syntax, replica parity, corpus/speech structure) pass. Real-device validation is NOT_TESTED; the Android install path (a Play Protect "compatibility too low" warning on a browser-minted WebAPK) is under investigation — see `REAL_DEVICE_QA_CHECKLIST.md`.
