@@ -4593,8 +4593,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.11';
-const APP_EVIDENCE_STAGE = 'v101.11 - UI cleanup: removed the paragraph-count badges next to the Meditation and Reflexions et pratiques tab labels (e.g. "Meditation (26)"). These were implementation detail with no value to a reader deciding what to open; the tabs now show clean labels only. The existing hasRefl guard (which hides the Reflexions tab entirely when an Hour has none) already covers the one legitimately useful signal these counts provided. No corpus/speech/behaviour change.';
+const APP_VERSION = 'v101.12';
+const APP_EVIDENCE_STAGE = 'v101.12 - Hour 24 Plan sheet fix: the Plan for Hour 24 was missing La Desolation de la Vierge Marie entirely, showing only La sepulture de Jesus. Root cause: openPlanSheet() only read INTERNAL_SUBHEADINGS, which never had an entry for the Desolation heading because it is a subsection title (sub.title), not a standalone heading-paragraph like the burial heading. The reader itself already rendered both headings correctly (verified unchanged); only the Plan sheet listing was incomplete. openPlanSheet now also lists each hour.subsections entry, jumping to its first paragraph. General fix, not Hour-24-specific, so any future hour with subsections is covered automatically. No corpus/speech change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -6296,8 +6296,9 @@ function openPlanSheet(hourNum) {
     .sort((a, b) => parseInt(a[0].match(/P(\d+)$/)[1]) - parseInt(b[0].match(/P(\d+)$/)[1]));
   const hour = CORPUS.hours.find(h => h.hour_number === hourNum);
   document.getElementById('planSheetTitle').textContent = hour ? ordinalHeure(hour.hour_number) + ' — Plan' : 'Plan';
-  document.getElementById('planSceneList').innerHTML = scenes.map(([id, meta]) => {
-    const pNum = parseInt(id.match(/P(\d+)$/)[1]);
+  let sceneNum = 0;
+  const sceneItems = scenes.map(([id, meta]) => {
+    sceneNum++;
     // R49T fix: derive the heading live from the paragraph's own text (same source
     // the reader itself renders via renderStructuredParaText/heading_end), instead of
     // the separately-stored meta.heading copy — the R49O bug class (10 typography
@@ -6306,8 +6307,21 @@ function openPlanSheet(hourNum) {
     const text = getParaTextById(hourNum, id);
     const headingEnd = Math.max(0, Math.min(Number(meta.heading_end || 0), (text || '').length));
     const heading = (text ? text.slice(0, headingEnd) : '') || meta.heading;
-    return `<button class="plan-scene-item" onclick="jumpToScene('${id}')"><span class="plan-scene-num">§ ${pNum}</span><span class="plan-scene-text">${escHtml(heading)}</span></button>`;
-  }).join('');
+    return `<button class="plan-scene-item" onclick="jumpToScene('${id}')"><span class="plan-scene-num">§ ${sceneNum}</span><span class="plan-scene-text">${escHtml(heading)}</span></button>`;
+  });
+  // v101.12 fix: an hour.subsections entry (e.g. Hour 24's "La Désolation de la Vierge
+  // Marie") carries its own heading via sub.title, rendered directly in the reader —
+  // it never has an INTERNAL_SUBHEADINGS entry, because there is no single paragraph
+  // whose full text IS that heading (unlike "La sépulture de Jésus", a standalone
+  // heading-paragraph). The Plan sheet silently omitted it. Add it here, in reader DOM
+  // order (after the main scenes), jumping to the subsection's first paragraph.
+  ((hour && hour.subsections) || []).forEach(sub => {
+    if (!sub.paragraphs || !sub.paragraphs.length) return;
+    sceneNum++;
+    const firstId = sub.paragraphs[0].id;
+    sceneItems.push(`<button class="plan-scene-item" onclick="jumpToScene('${firstId}')"><span class="plan-scene-num">§ ${sceneNum}</span><span class="plan-scene-text">${escHtml(sub.title)}</span></button>`);
+  });
+  document.getElementById('planSceneList').innerHTML = sceneItems.join('');
   document.getElementById('planSheetOverlay').classList.add('open');
   const sheet = document.getElementById('planSheet');
   sheet.classList.add('open');
