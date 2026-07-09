@@ -4582,8 +4582,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.13';
-const APP_EVIDENCE_STAGE = 'v101.13 - Hour 24 heading style consistency fix: La sepulture de Jesus and La Desolation de la Vierge Marie were rendered with a bespoke plain-text divider style (small caps, top border, no box) used nowhere else in the app, instead of the standard gold boxed-callout heading style every other Hour uses for its scene headings (27 other entries app-wide). Root cause: these were the only INTERNAL_SUBHEADINGS entry ever marked status subsection_heading (a parallel, one-off styling path) plus a hardcoded plain h3 for the subsection title, both bypassing the shared boxed .internal-subheading treatment. Changed PASSION24.HOUR.24.P003 to status standalone_paragraph (the same status the other 27 headings use) and switched the subsection-title render to the same boxed markup; removed the now-dead one-off CSS/JS. Both headings now visually match every other Hour. No text/speech change - INTERNAL_SUBHEADINGS hash changed only because of the status field.';
+const APP_VERSION = 'v101.14';
+const APP_EVIDENCE_STAGE = 'v101.14 - Hour 24 Plan-sheet scroll fix: tapping La Desolation de la Vierge Marie in the Plan sheet scrolled past the heading, landing on its first paragraph instead, so the heading itself was not visible after the jump. Root cause: the v101.12 Plan-sheet fix jumped to the subsections first paragraph id (no separate id existed for the heading itself), so scrolling that paragraph to the top pushed the heading above it out of view. Fixed by giving the subsection heading block its own id and jumping there instead. La sepulture de Jesus was already correct (it jumps to its own paragraph, which IS the heading) and is unaffected. Verified live: both Plan entries now land with their heading visible near the top of the viewport. No corpus/speech change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -6053,7 +6053,7 @@ function renderReader(hour, scroll = true) {
   if (hasSub) {
     let subOffset = displayParagraphs.length;
     hour.subsections.forEach(sub => {
-      subHtml += `<div class="para-block internal-subheading-block"><span class="internal-subheading" data-internal-heading="true">${escHtml(sub.title)}</span></div>`;
+      subHtml += `<div class="para-block internal-subheading-block" id="${sub.id}__heading"><span class="internal-subheading" data-internal-heading="true">${escHtml(sub.title)}</span></div>`;
       subHtml += sub.paragraphs.map((p, i) => buildParaBlock({...p, n: subOffset + i + 1}, hour.hour_number, getDashListRhythmClass(sub.paragraphs, i))).join('');
     });
   }
@@ -6301,8 +6301,10 @@ function openPlanSheet(hourNum) {
   ((hour && hour.subsections) || []).forEach(sub => {
     if (!sub.paragraphs || !sub.paragraphs.length) return;
     sceneNum++;
-    const firstId = sub.paragraphs[0].id;
-    sceneItems.push(`<button class="plan-scene-item" onclick="jumpToScene('${firstId}')"><span class="plan-scene-num">§ ${sceneNum}</span><span class="plan-scene-text">${escHtml(sub.title)}</span></button>`);
+    // v101.14 fix: jump to the heading block itself (id="${sub.id}__heading", set in
+    // renderReader), not the subsection's first paragraph — jumping to the first paragraph
+    // scrolled it to the top of the viewport, pushing the heading above it out of view.
+    sceneItems.push(`<button class="plan-scene-item" onclick="jumpToScene('${sub.id}__heading')"><span class="plan-scene-num">§ ${sceneNum}</span><span class="plan-scene-text">${escHtml(sub.title)}</span></button>`);
   });
   document.getElementById('planSceneList').innerHTML = sceneItems.join('');
   document.getElementById('planSheetOverlay').classList.add('open');
