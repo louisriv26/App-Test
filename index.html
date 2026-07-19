@@ -175,6 +175,12 @@ body { font-family: var(--font-body); background: var(--bg); color: var(--ink); 
 .hour-card.gethsemani { border-color: rgba(138,106,170,0.5); }
 .hour-card.gethsemani .hc-num { color: #6a3a9a; }
 [data-theme="dark"] .hour-card.gethsemani .hc-num { color: #b090d4; }
+/* v101.20 fix: .gethsemani's border-color was silently overriding .read's (same specificity,
+   later in stylesheet), so a completed Gethsemani hour (5/6/7) never showed the border-colour
+   change every other hour gets on completion — only the checkmark badge still worked. A thicker,
+   deeper-purple border on the combined state fixes this without losing the Gethsemani identity. */
+.hour-card.gethsemani.read { border-width: 2px; border-color: #6a3a9a; }
+[data-theme="dark"] .hour-card.gethsemani.read { border-color: #b090d4; }
 .hour-card.read::after { content: '✓'; position: absolute; top: 3px; right: 5px; font-size: 0.58rem; color: var(--accent-light); }
 .extras-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; margin-bottom: 1.5rem; max-width: 100%; }
 .extra-card { background: var(--bg2); border: 1px solid var(--bg3); border-radius: 8px; padding: 0.9rem 1rem; cursor: pointer; transition: background 0.15s, box-shadow 0.15s, transform 0.12s; }
@@ -4582,8 +4588,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.19';
-const APP_EVIDENCE_STAGE = 'v101.19 - grammar/punctuation corrections from a mechanical corpus audit (all 1671 paragraphs) for objective error classes. The corpus was clean on doubled punctuation, spacing, and run-ons. Two genuine issues fixed: (1) Hour 11 P001 les Souffrance to les Souffrances (missing plural); (2) Hour 2 reflection P003, a question (est-ce que nous nourrissons...) that ended with a period now ends with a question mark. No other text, offset, or speaker attribution touched.';
+const APP_VERSION = 'v101.20';
+const APP_EVIDENCE_STAGE = 'v101.20 - home-grid completion-indicator fix for Gethsemani hours (5, 6, 7): the meditee checkmark always applied correctly, but the outer card border never changed colour on completion the way it does for every other hour, because .hour-card.gethsemani and .hour-card.read have equal CSS specificity and .gethsemani came later in the stylesheet, so it silently won regardless of read state. Added a higher-specificity .hour-card.gethsemani.read rule: thicker (2px) border in a deeper purple, reusing the existing Gethsemani accent colour already used for the hour number, in both light and dark themes. Verified live in both themes via computed style; the hour-list view (Approfondir) was unaffected, since it never set a border-color for .gethsemani in the first place. No corpus/speech change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
