@@ -1,5 +1,5 @@
-/* v101.21 */
-const CACHE_NAME = 'luisa-24h-v101-21';
+/* v101.22 */
+const CACHE_NAME = 'luisa-24h-v101-22';
 const CACHE_PREFIX = 'luisa-24h-';
 const ASSETS = ['./','./index.html','./luisa_24_heures.html','./manifest.json','./icon-180.png','./icon-192.png','./icon-512.png'];
 self.addEventListener('install', event => { event.waitUntil((async()=>{ const cache=await caches.open(CACHE_NAME); await cache.addAll(ASSETS); await self.skipWaiting(); })()); });

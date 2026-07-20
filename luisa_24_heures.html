@@ -4588,8 +4588,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.21';
-const APP_EVIDENCE_STAGE = 'v101.21 - RN3 fix: the home daily card next-hour suggestion could go backward when Hours were completed out of order on the same day (e.g. Hour 7 then later Hour 5) - markMeditee() wiped ALL of todays log entries before adding the newest one, so only the last-tapped hour survived, and buildDailyCard() picked the last-PUSHED array entry as the reference point regardless of hour number. Fixed both: markMeditee() now only dedupes the single hour being marked, keeping other same-day entries intact; buildDailyCard() now uses the HIGHEST hour number logged on the most recent date, not array order. Also removed a dead, unused duplicate function (markHourMeditated) that had the same wipe-all-today bug and was never called. Verified live: marking 7 then 5 then 6 out of order correctly suggests Hour 8 next; un-marking the most recent tap correctly falls back to the next-highest remaining hour; out-of-order completion through Hour 24 still correctly shows cycle-complete. No corpus/speech change.';
+const APP_VERSION = 'v101.22';
+const APP_EVIDENCE_STAGE = 'v101.22 - IF1 fix: search highlighting now correctly marks matches when the query and corpus text differ only by accents (e.g. typing eglise finds AND highlights Eglise). Root cause: search MATCHING already accent-folded via norm(), so results were always found - but HIGHLIGHTING built its mark regex from the raw, un-folded query and matched it against the raw text, so an accent-mismatched query found the paragraph with nothing visibly highlighted. Added normWithMap(), which runs the same per-character folding as norm() but also returns a map from each normalized character back to its source index, so a match found in normalized space can be translated back to the exact character range in the original text and wrapped precisely. Replaced the old raw-query regex highlighting entirely (escRe/reRx removed, confirmed unused elsewhere). Verified live: unaccented, accented, uppercase, and oe-ligature queries (Coeur finding Coeur with the ligature) all highlight the correct exact substring; no-match state unaffected; this was the only <mark> highlighting implementation in the app (a query like Coeur correctly highlights the Cœur ligature in the corpus text). No corpus/speech change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -7033,7 +7033,6 @@ function performSearch(query) {
     b.setAttribute('aria-pressed', active ? 'true' : 'false');
   });
   if (!allFiltered.length) { resultsEl.innerHTML=`<div class="no-results">${hasQuery ? `Aucun résultat pour « ${escHtml(query)} »` : 'Aucune parole directe trouvée.'}</div>`; resultsEl.classList.add('visible'); return; }
-  const reRx = hasQuery ? new RegExp(escRe(query.trim()), 'gi') : null;
   const badgeClass = {hour:'hour', prayer:'prayer', section:'section', speech:'speech'};
   const countLabel = hasQuery ? `${allFiltered.length}${allFiltered.length>SEARCH_RESULT_LIMIT?'+':''} résultat${allFiltered.length>1?'s':''} pour « ${escHtml(query)} »` : `${allFiltered.length}${allFiltered.length>SEARCH_RESULT_LIMIT?'+':''} parole${allFiltered.length>1?'s':''} directe${allFiltered.length>1?'s':''}`;
   resultsEl.innerHTML = `
@@ -7041,13 +7040,20 @@ function performSearch(query) {
     ${allFiltered.length>SEARCH_RESULT_LIMIT?`<div class="search-limit-note">Affichage limité aux ${SEARCH_RESULT_LIMIT} premiers résultats. Affinez la recherche pour cibler un passage précis.</div>`:''}
     ${filtered.map(r => {
       const raw = r.para.t || '';
-      const normRaw = norm(raw);
-      const idx = hasQuery ? normRaw.indexOf(q) : -1;
-      const start = idx >= 0 ? Math.max(0, idx-55) : 0;
-      const end = idx >= 0 ? Math.min(raw.length, idx+q.length+90) : Math.min(raw.length, 145);
-      let snip = raw.slice(start, end).replace(/\n/g,' ');
-      if (start>0) snip='…'+snip; if (end<raw.length) snip+='…';
-      const marked = reRx ? escHtml(snip).replace(reRx, m=>`<mark>${m}</mark>`) : escHtml(snip);
+      // IF1 fix: locate the match in normalized (accent-folded) space via normWithMap,
+      // then translate back to the exact raw character range - so an accent-folded query
+      // finds AND highlights correctly (e.g. a query with no accents matching accented
+      // corpus text), instead of finding the paragraph but never wrapping anything in <mark>.
+      const {normalized: normRaw, map: rawMap} = normWithMap(raw);
+      const nIdx = hasQuery ? normRaw.indexOf(q) : -1;
+      const matchStart = nIdx >= 0 ? rawMap[nIdx] : -1;
+      const matchEnd = nIdx >= 0 ? (rawMap[Math.min(nIdx+q.length-1, rawMap.length-1)] + 1) : -1;
+      const start = matchStart >= 0 ? Math.max(0, matchStart-55) : 0;
+      const end = matchStart >= 0 ? Math.min(raw.length, matchEnd+90) : Math.min(raw.length, 145);
+      const before = raw.slice(start, matchStart >= 0 ? matchStart : end).replace(/\n/g,' ');
+      const mid = matchStart >= 0 ? raw.slice(matchStart, matchEnd).replace(/\n/g,' ') : '';
+      const after = matchStart >= 0 ? raw.slice(matchEnd, end).replace(/\n/g,' ') : '';
+      const marked = (start>0?'…':'') + escHtml(before) + (matchStart>=0?'<mark>'+escHtml(mid)+'</mark>':'') + escHtml(after) + (end<raw.length?'…':'');
       const badge = `<span class="sr-badge ${badgeClass[r.type] || 'hour'}">${escHtml(r.kindLabel || 'Résultat')}</span>`;
       const onclick = r.target.kind==='hour'
         ? `openHourAtPara(${r.target.n},'${r.target.paraId || r.para.id}','${r.target.tab || 'meditation'}')`
@@ -8363,7 +8369,26 @@ function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').rep
 // This is the single source of truth going forward — see the audit RN2 finding.
 function ordinalHeure(n){ return (n === 1 ? '1re' : n + 'e') + ' Heure'; }
 function norm(s){return(s||'').toLowerCase().replace(/[\u0152\u0153]/g,'oe').replace(/[\u00c6\u00e6]/g,'ae').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['']/g,"'").replace(/[«»""]/g,'"');}
-function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
+// IF1 fix: normWithMap runs the same per-character folding as norm() above, but also
+// returns a map from each normalized character back to its index in the original string.
+// Search MATCHING already accent-folds via norm() and always found the right paragraph;
+// only HIGHLIGHTING the match didn't - it built its <mark> regex from the raw, un-folded
+// query, so a query like "eglise" matched "eglise" (accented) for search purposes but the
+// highlight regex never matched the accented text, leaving the result unhighlighted. This
+// lets highlighting locate the match in normalized space (same as matching does), then
+// translate that span back to the exact character range in the original string to wrap.
+function normWithMap(s){
+  s = s || '';
+  const chars = Array.from(s);
+  let normalized = '';
+  const map = [];
+  for (let i = 0; i < chars.length; i++){
+    const piece = norm(chars[i]);
+    for (let k = 0; k < piece.length; k++) map.push(i);
+    normalized += piece;
+  }
+  return {normalized, map};
+}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}
 function setBottomNav(a){['bnHome','bnHours','bnLibrary','bnEspace'].forEach(function(id){var _e=document.getElementById(id);if(_e){_e.classList.remove('active');_e.removeAttribute('aria-current');}});const map={home:'bnHome',hours:'bnHours',library:'bnLibrary',espace:'bnEspace'};const id=map[a];if(id){var _b=document.getElementById(id);if(_b){_b.classList.add('active');_b.setAttribute('aria-current','page');}}}
 
