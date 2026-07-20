@@ -4588,8 +4588,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.20';
-const APP_EVIDENCE_STAGE = 'v101.20 - home-grid completion-indicator fix for Gethsemani hours (5, 6, 7): the meditee checkmark always applied correctly, but the outer card border never changed colour on completion the way it does for every other hour, because .hour-card.gethsemani and .hour-card.read have equal CSS specificity and .gethsemani came later in the stylesheet, so it silently won regardless of read state. Added a higher-specificity .hour-card.gethsemani.read rule: thicker (2px) border in a deeper purple, reusing the existing Gethsemani accent colour already used for the hour number, in both light and dark themes. Verified live in both themes via computed style; the hour-list view (Approfondir) was unaffected, since it never set a border-color for .gethsemani in the first place. No corpus/speech change.';
+const APP_VERSION = 'v101.21';
+const APP_EVIDENCE_STAGE = 'v101.21 - RN3 fix: the home daily card next-hour suggestion could go backward when Hours were completed out of order on the same day (e.g. Hour 7 then later Hour 5) - markMeditee() wiped ALL of todays log entries before adding the newest one, so only the last-tapped hour survived, and buildDailyCard() picked the last-PUSHED array entry as the reference point regardless of hour number. Fixed both: markMeditee() now only dedupes the single hour being marked, keeping other same-day entries intact; buildDailyCard() now uses the HIGHEST hour number logged on the most recent date, not array order. Also removed a dead, unused duplicate function (markHourMeditated) that had the same wipe-all-today bug and was never called. Verified live: marking 7 then 5 then 6 out of order correctly suggests Hour 8 next; un-marking the most recent tap correctly falls back to the next-highest remaining hour; out-of-order completion through Hour 24 still correctly shows cycle-complete. No corpus/speech change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -5705,20 +5705,16 @@ function getLocalDateYesterday() {
     String(d.getMonth()+1).padStart(2,'0') + '-' +
     String(d.getDate()).padStart(2,'0');
 }
-function markHourMeditated(hourNum) {
-  const today = getLocalDateStr();
-  state.meditationLog = state.meditationLog.filter(e => e.date !== today);
-  state.meditationLog.push({ date: today, hour: hourNum });
-  if (state.meditationLog.length > 100) state.meditationLog = state.meditationLog.slice(-100);
-  saveState();
-  showToast('\u2713\u00a0' + hourNum + 'e\u00a0Heure m\u00e9dit\u00e9e');
-  const bar = document.getElementById('markMeditatedBar');
-  if (bar) bar.outerHTML = buildMarkBar(hourNum);
-}
 function buildMarkBar(hourNum) { return ''; }
 function buildDailyCard() {
   if (!state.meditationLog || !state.meditationLog.length) return '';
-  const last = state.meditationLog[state.meditationLog.length-1];
+  // v101.21 RN3 fix: out-of-order same-day taps (e.g. Hour 7 then later Hour 5) made this
+  // pick the last-PUSHED array entry as "last", which could be a lower hour number than one
+  // already completed earlier the same day - making the "next hour" suggestion go backward.
+  // Use the highest hour number logged on the most recent date instead of array order.
+  const mostRecentDate = state.meditationLog.reduce((d, e) => (!d || e.date > d) ? e.date : d, null);
+  const entriesOnDate = state.meditationLog.filter(e => e.date === mostRecentDate);
+  const last = { date: mostRecentDate, hour: Math.max(...entriesOnDate.map(e => e.hour)) };
   const today = getLocalDateStr();
   const yesterday = getLocalDateYesterday();
   const lastH = CORPUS.hours.find(h => h.hour_number === last.hour);
@@ -7317,7 +7313,10 @@ function markMeditee(n) {
   } else {
     state.readHours.add(n);
     const today = getLocalDateStr();
-    state.meditationLog = state.meditationLog.filter(e => e.date !== today);
+    // v101.21 RN3 fix: this used to wipe ALL of today's log entries before pushing the new
+    // one, so completing hours out of order (e.g. Hour 7, then later Hour 5) erased Hour 7's
+    // entry entirely. Only dedupe THIS hour's own entry for today, keeping the rest intact.
+    state.meditationLog = state.meditationLog.filter(e => !(e.date === today && e.hour === n));
     state.meditationLog.push({ date: today, hour: n });
     if (state.meditationLog.length > 100) state.meditationLog = state.meditationLog.slice(-100);
     showToast('✓ ' + ordinalHeure(n) + ' méditée');
