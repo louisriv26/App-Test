@@ -4588,8 +4588,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.22';
-const APP_EVIDENCE_STAGE = 'v101.22 - IF1 fix: search highlighting now correctly marks matches when the query and corpus text differ only by accents (e.g. typing eglise finds AND highlights Eglise). Root cause: search MATCHING already accent-folded via norm(), so results were always found - but HIGHLIGHTING built its mark regex from the raw, un-folded query and matched it against the raw text, so an accent-mismatched query found the paragraph with nothing visibly highlighted. Added normWithMap(), which runs the same per-character folding as norm() but also returns a map from each normalized character back to its source index, so a match found in normalized space can be translated back to the exact character range in the original text and wrapped precisely. Replaced the old raw-query regex highlighting entirely (escRe/reRx removed, confirmed unused elsewhere). Verified live: unaccented, accented, uppercase, and oe-ligature queries (Coeur finding Coeur with the ligature) all highlight the correct exact substring; no-match state unaffected; this was the only <mark> highlighting implementation in the app (a query like Coeur correctly highlights the Cœur ligature in the corpus text). No corpus/speech change.';
+const APP_VERSION = 'v101.23';
+const APP_EVIDENCE_STAGE = 'v101.23 - three backlog fixes from the audit: (1) search input is now debounced (140ms) instead of doing a full-corpus scan on every keystroke; (2) the service worker now bounds its runtime cache to 40 entries, evicting oldest first, since manual Actualiser refreshes previously added a never-evicted entry each time; (3) five view-transition functions (showHome, showHoursView, showLibraryView, showEspaceView, openHour) now move focus to the content region after rendering, since focus previously fell back to document.body with no announcement to keyboard/screen-reader users - verified live that this was a real, reproducible gap. showSearchView already handled its own focus correctly and needed no change. All three fixes are covered by the new automated test harness (44 data-integrity tests + 26 behaviour tests, both mutation-proven). No corpus/speech change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -5691,6 +5691,7 @@ function showHome() {
   document.getElementById('progressWrap').style.display = 'none';
   setBottomNav('home');
   updateRightContextPanel();
+  focusContentRegion();
 }
 // ─── Daily meditation tracking ────────────────────────────────
 function getLocalDateStr() {
@@ -5765,6 +5766,7 @@ function showHoursView(push = true) {
   </div>`;
   document.getElementById('progressWrap').style.display = 'none';
   setBottomNav('hours'); buildSidebar(); updateRightContextPanel();
+  focusContentRegion();
 }function getRecentLibraryTextIds() {
   try {
     const arr = JSON.parse(SafeStorage.get('lp24_recent_texts','[]'));
@@ -5907,6 +5909,7 @@ function showEspaceView(push = true) {
   </div>`;
   document.getElementById('progressWrap').style.display = 'none';
   setBottomNav('espace'); buildSidebar(); updateRightContextPanel();
+  focusContentRegion();
 }
 
 function renderHome() {
@@ -6004,6 +6007,7 @@ function openHour(n, push = true, options = {}) {
   } else {
     resetContentScrollAfterRender();
   }
+  focusContentRegion();
 }
 function renderReader(hour, scroll = true) {
   if (typeof hour === 'number') hour = CORPUS.hours.find(h => h.hour_number === hour);
@@ -6740,6 +6744,7 @@ function showLibraryView(push = true, focusGroupId = null) {
   setBottomNav('library');
   buildSidebar();
   updateRightContextPanel();
+  focusContentRegion();
 }
 function openLibraryText(id, push = true, scrollToAnchor = null) {
   const item = getLibraryItem(id); if (!item) return;
@@ -6886,7 +6891,17 @@ function showSearchView() {
   document.getElementById('progressWrap').style.display = 'none';
   setBottomNav('none');
 }
-function onSearchInput(v) { state.searchQuery = v; performSearch(v); }
+let _searchDebounceTimer = null;
+// P2 perf fix: performSearch() does a full-corpus scan (24 Hours' paragraphs/reflections/
+// subsections + all prayers/sections/library items, each run through norm()'s NFD-based
+// accent-folding) on every keystroke with no debounce - fine on modern hardware, but can
+// jank while typing on a slow/old Android. A short debounce is imperceptible while typing
+// but skips the scan entirely for keystrokes superseded within 140ms.
+function onSearchInput(v) {
+  state.searchQuery = v;
+  clearTimeout(_searchDebounceTimer);
+  _searchDebounceTimer = setTimeout(function(){ performSearch(v); }, 140);
+}
 function performSearch(query) {
   const resultsEl = document.getElementById('homeSearchResults');
   const homeMain = document.getElementById('homeMain');
@@ -8368,6 +8383,18 @@ function escHtml(s){return(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').rep
 // grammatically wrong "1e Heure"), and one used the inconsistent spelling "1ère".
 // This is the single source of truth going forward — see the audit RN2 finding.
 function ordinalHeure(n){ return (n === 1 ? '1re' : n + 'e') + ' Heure'; }
+// P2 accessibility fix: view-transition functions replaced #content's innerHTML but never
+// moved focus, so a keyboard/screen-reader user's focus silently fell back to <body> after
+// navigating (verified live: focus a nav element, call a view transition, activeElement ends
+// up on <body> with no announcement of where the user landed). #content already carries
+// tabindex="-1" for exactly this purpose - it just was never used. focusContentRegion() moves
+// focus there after a transition renders; showSearchView() already focuses its own input
+// directly (a better target for that view) and does not need this.
+function focusContentRegion() {
+  const el = document.getElementById('content');
+  if (!el) return;
+  try { el.focus({preventScroll:true}); } catch(e) { try { el.focus(); } catch(e2) {} }
+}
 function norm(s){return(s||'').toLowerCase().replace(/[\u0152\u0153]/g,'oe').replace(/[\u00c6\u00e6]/g,'ae').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/['']/g,"'").replace(/[«»""]/g,'"');}
 // IF1 fix: normWithMap runs the same per-character folding as norm() above, but also
 // returns a map from each normalized character back to its index in the original string.
