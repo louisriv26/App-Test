@@ -4588,8 +4588,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.23';
-const APP_EVIDENCE_STAGE = 'v101.23 - three backlog fixes from the audit: (1) search input is now debounced (140ms) instead of doing a full-corpus scan on every keystroke; (2) the service worker now bounds its runtime cache to 40 entries, evicting oldest first, since manual Actualiser refreshes previously added a never-evicted entry each time; (3) five view-transition functions (showHome, showHoursView, showLibraryView, showEspaceView, openHour) now move focus to the content region after rendering, since focus previously fell back to document.body with no announcement to keyboard/screen-reader users - verified live that this was a real, reproducible gap. showSearchView already handled its own focus correctly and needed no change. All three fixes are covered by the new automated test harness (44 data-integrity tests + 26 behaviour tests, both mutation-proven). No corpus/speech change.';
+const APP_VERSION = 'v101.24';
+const APP_EVIDENCE_STAGE = 'v101.24 - search: added a Reflexions filter, positioned between Heures and Prieres, so a reader can search within Reflexions et pratiques text specifically. Reflection paragraphs previously shared the same internal result type as regular meditation paragraphs (both hour), so they could not be filtered separately even though a dedicated sr-badge.reflection style already existed unused; reflections now get their own result type. Verified live: filter order is Tout, Heures, Reflexions, Prieres, Complements, Paroles directes; filtering to Reflexions shows only Reflexion-badged results and correctly narrows the set (checked against an uncapped query after an initial capped-both-ways false reading). Covered by a new behaviour-harness test. No corpus/speech change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -5970,6 +5970,7 @@ function renderHome() {
         <div class="search-filters" id="searchFilters" role="group" aria-label="Filtrer les résultats" style="margin-top:0.6rem">
           <button type="button" class="sf-btn active" data-filter="all" aria-pressed="true" onclick="setSearchFilter('all')">Tout</button>
           <button type="button" class="sf-btn" data-filter="hour" aria-pressed="false" onclick="setSearchFilter('hour')">Heures</button>
+          <button type="button" class="sf-btn" data-filter="reflection" aria-pressed="false" onclick="setSearchFilter('reflection')">Réflexions</button>
           <button type="button" class="sf-btn" data-filter="prayer" aria-pressed="false" onclick="setSearchFilter('prayer')">Prières</button>
           <button type="button" class="sf-btn" data-filter="section" aria-pressed="false" onclick="setSearchFilter('section')">Compléments</button>
           <button type="button" class="sf-btn" data-filter="speech" aria-pressed="false" onclick="setSearchFilter('speech')">Paroles directes</button>
@@ -6874,6 +6875,7 @@ function showSearchView() {
     <div class="search-filters" id="searchFilters" role="group" aria-label="Filtrer les résultats" style="margin-top:0.6rem">
       <button type="button" class="sf-btn active" data-filter="all" aria-pressed="true" onclick="setSearchFilter('all')">Tout</button>
       <button type="button" class="sf-btn" data-filter="hour" aria-pressed="false" onclick="setSearchFilter('hour')">Heures</button>
+      <button type="button" class="sf-btn" data-filter="reflection" aria-pressed="false" onclick="setSearchFilter('reflection')">Réflexions</button>
       <button type="button" class="sf-btn" data-filter="prayer" aria-pressed="false" onclick="setSearchFilter('prayer')">Prières</button>
       <button type="button" class="sf-btn" data-filter="section" aria-pressed="false" onclick="setSearchFilter('section')">Compléments</button>
       <button type="button" class="sf-btn" data-filter="speech" aria-pressed="false" onclick="setSearchFilter('speech')">Paroles directes</button>
@@ -6949,7 +6951,7 @@ function performSearch(query) {
     }
     for (const p of (hour.reflections||[])) {
       const target = {kind:'hour', n:hour.hour_number, paraId:p.id, tab:'reflection'};
-      addResult(`${hour.hour_number}e Heure — ${hour.title}`, p, 'hour', 'Réflexion', target);
+      addResult(`${hour.hour_number}e Heure — ${hour.title}`, p, 'reflection', 'Réflexion', target);
       addSpeechResults(`${hour.hour_number}e Heure — ${hour.title}`, p, target);
     }
     for (const sub of (hour.subsections||[])) {
@@ -7048,7 +7050,7 @@ function performSearch(query) {
     b.setAttribute('aria-pressed', active ? 'true' : 'false');
   });
   if (!allFiltered.length) { resultsEl.innerHTML=`<div class="no-results">${hasQuery ? `Aucun résultat pour « ${escHtml(query)} »` : 'Aucune parole directe trouvée.'}</div>`; resultsEl.classList.add('visible'); return; }
-  const badgeClass = {hour:'hour', prayer:'prayer', section:'section', speech:'speech'};
+  const badgeClass = {hour:'hour', reflection:'reflection', prayer:'prayer', section:'section', speech:'speech'};
   const countLabel = hasQuery ? `${allFiltered.length}${allFiltered.length>SEARCH_RESULT_LIMIT?'+':''} résultat${allFiltered.length>1?'s':''} pour « ${escHtml(query)} »` : `${allFiltered.length}${allFiltered.length>SEARCH_RESULT_LIMIT?'+':''} parole${allFiltered.length>1?'s':''} directe${allFiltered.length>1?'s':''}`;
   resultsEl.innerHTML = `
     <div class="search-count">${countLabel}</div>
