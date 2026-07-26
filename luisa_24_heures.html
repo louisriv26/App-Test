@@ -4588,8 +4588,8 @@ window.onerror = function(msg, src, line, col, err) {
 window.addEventListener('unhandledrejection', function(e) {
   console.error('Unhandled promise rejection:', e.reason);
 });
-const APP_VERSION = 'v101.24';
-const APP_EVIDENCE_STAGE = 'v101.24 - search: added a Reflexions filter, positioned between Heures and Prieres, so a reader can search within Reflexions et pratiques text specifically. Reflection paragraphs previously shared the same internal result type as regular meditation paragraphs (both hour), so they could not be filtered separately even though a dedicated sr-badge.reflection style already existed unused; reflections now get their own result type. Verified live: filter order is Tout, Heures, Reflexions, Prieres, Complements, Paroles directes; filtering to Reflexions shows only Reflexion-badged results and correctly narrows the set (checked against an uncapped query after an initial capped-both-ways false reading). Covered by a new behaviour-harness test. No corpus/speech change.';
+const APP_VERSION = 'v101.25';
+const APP_EVIDENCE_STAGE = 'v101.25 - Help content update: the Aide et A propos search section only ever documented the Paroles directes speaker filter (Jesus/Pere/Marie) and never mentioned the basic filter row at all - not Heures, not Prieres, not Complements - a pre-existing gap, not something the v101.24 Reflexions filter broke. Renamed the section from Recherche - Paroles directes to Recherche and added a line listing the full filter set (Tout, Heures, Reflexions, Prieres, Complements, Paroles directes) before the existing Paroles directes detail. No corpus/speech/behaviour change.';
 const STORAGE_SCHEMA_VERSION=4; const R41_TEXT_ANCHOR_RESET_VERSION='1';
 const SEARCH_RESULT_LIMIT = 60;
 
@@ -7244,8 +7244,9 @@ function showHelp() {
       <div class="help-section"><div class="help-section-hd">Plan de l'Heure</div><div class="help-section-body">
         <div class="help-row"><span class="help-icon">≡</span><span class="help-row-text"><strong>≡ Plan</strong> — Pour les Heures 15 à 24, un bouton <strong>≡ Plan</strong> apparaît dans l'en-tête de l'Heure. Il ouvre la liste des scènes de cette Heure (ex. : La Flagellation, Le Chemin au Calvaire, Jésus rencontre sa Mère…). Appuyez sur une scène pour y aller directement.</span></div>
       </div></div>
-      <div class="help-section"><div class="help-section-hd">Recherche — Paroles directes</div><div class="help-section-body">
-        <div class="help-row"><span class="help-icon">🔍</span><span class="help-row-text">Dans <strong>Recherche</strong>, l'onglet <strong>Paroles directes</strong> affiche immédiatement toutes les paroles prononcées par Jésus, le Père ou Marie dans les 24 Heures — sans avoir besoin de taper un mot. Filtrez par orateur avec les boutons <strong>✝ Jésus · ◆ Père · ✦ Marie</strong>. Vous pouvez aussi taper un mot pour chercher à l'intérieur de ces paroles.</span></div>
+      <div class="help-section"><div class="help-section-hd">Recherche</div><div class="help-section-body">
+        <div class="help-row"><span class="help-icon">🔍</span><span class="help-row-text">Tapez un mot ou une expression pour chercher dans toute l'app. Affinez avec les filtres <strong>Tout · Heures · Réflexions · Prières · Compléments · Paroles directes</strong> pour limiter les résultats à un seul type de contenu.</span></div>
+        <div class="help-row"><span class="help-icon">🔍</span><span class="help-row-text">Le filtre <strong>Paroles directes</strong> affiche immédiatement toutes les paroles prononcées par Jésus, le Père ou Marie dans les 24 Heures — sans avoir besoin de taper un mot. Filtrez par orateur avec les boutons <strong>✝ Jésus · ◆ Père · ✦ Marie</strong>. Vous pouvez aussi taper un mot pour chercher à l'intérieur de ces paroles.</span></div>
       </div></div>
       <div class="help-section"><div class="help-section-hd">Mise à jour</div><div class="help-section-body">
         <div class="help-row"><span class="help-icon">↻</span><span class="help-row-text">Si une mise à jour est disponible, une bannière apparaît en haut de l’Accueil. Appuyez sur <strong>Actualiser</strong> pour charger la nouvelle version. Si la bannière reste après l’actualisation, fermez complètement l’app et rouvrez-la.</span></div>

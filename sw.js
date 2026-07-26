@@ -1,5 +1,5 @@
-/* v101.24 */
-const CACHE_NAME = 'luisa-24h-v101-24';
+/* v101.25 */
+const CACHE_NAME = 'luisa-24h-v101-25';
 const CACHE_PREFIX = 'luisa-24h-';
 const ASSETS = ['./','./index.html','./luisa_24_heures.html','./manifest.json','./icon-180.png','./icon-192.png','./icon-512.png'];
 /* P2/SW5 fix: cache.put() keys on the full request URL including its query string, and the
