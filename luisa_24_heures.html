@@ -7607,10 +7607,21 @@ function getSpeechQuoteSuppressionRanges(text, paraId, start, end) {
   for (const seg of speechSegs) {
     const s = Number(seg.start), e = Number(seg.end);
     if (!Number.isFinite(s) || !Number.isFinite(e) || e <= s || e <= start || s >= end) continue;
-    // Narrative immediately before speech: hide optional whitespace/colon + opening guillemet + spaces.
+    /* Narrative immediately before speech: hide the opening guillemet and the space that
+       follows it — and NOTHING else.
+
+       v101.27 P2-COLON fix. This previously matched /(\s*(?::\s*)?«\s*)$/, i.e. it also
+       swallowed the introducing colon and the space before the guillemet. That was latent
+       while SPEECH_DATA segments started AT the guillemet (the pre-text then did not end in
+       '«', so this branch never fired and the guillemet was hidden by the speech_leading_quote
+       rule below instead). v101.26 moved 189 paragraphs' boundaries to exclude the delimiters,
+       which put the guillemet before `s` and made this branch fire — deleting the colon and
+       the preceding space from the rendered text in 79 paragraphs, e.g.
+       "après le péché : « Viens..." rendered as "après le péchéViens...".
+       Only guillemets are delimiters; ':' is French punctuation and must stay visible. */
     const preStart = Math.max(start, s - 12);
     const pre = text.slice(preStart, Math.max(start, Math.min(s, end)));
-    const preMatch = pre.match(/(\s*(?::\s*)?«\s*)$/);
+    const preMatch = pre.match(/(«\s*)$/);
     if (preMatch) addRange(preStart + preMatch.index, s, 'pre_narrative_quote_intro');
 
     // Opening guillemet inside the speech span, with any redundant leading spaces.
@@ -7631,10 +7642,15 @@ function getSpeechQuoteSuppressionRanges(text, paraId, start, end) {
       addRange(a, e, 'speech_trailing_quote');
     }
 
-    // Narrative immediately after speech: hide closing guillemet and surrounding spaces.
+    /* Narrative immediately after speech: hide the closing guillemet and the space that
+       precedes it (the inner side), but KEEP the space that follows it, which separates the
+       speech from the narrative that resumes.
+
+       v101.27 P2-COLON fix, same root cause as above: this previously matched /^(\s*»\s*)/ and
+       swallowed the trailing space too, so "aussi ! » Ô Jésus" rendered as "aussi !Ô Jésus". */
     const postEnd = Math.min(end, e + 12);
     const post = text.slice(Math.max(start, Math.min(e, end)), postEnd);
-    const postMatch = post.match(/^(\s*»\s*)/);
+    const postMatch = post.match(/^(\s*»)/);
     if (postMatch) addRange(e, e + postMatch[1].length, 'post_narrative_closing_quote');
   }
   ranges.sort((a, b) => a.start - b.start || a.end - b.end);
