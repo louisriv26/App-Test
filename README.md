@@ -1,10 +1,26 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.45` — **staging / test build. NOT authorised for production.**
+Version: `v101.46` — **STAGE 2 UPDATE-FLOW TEST BUILD. NOT authorised for production.**
 
-App SHA-256: `82a7d0de9a878d31881261c37a0ffcacf53a35bb9eea93a230885ef499b7b05e` (1,745,711 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-45`.
+App SHA-256: `213b5d6290a4e9c57c3ee02d2619c2a2fdc8274ba9aeac92e6153bf7fd68a45d` (1,745,711 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-46`.
 
-Production remains at **v101.25**. This build is 20 versions ahead of it.
+Production remains at **v101.25**. This build is 21 versions ahead of it.
+
+> ## What v101.46 is, and why it exists
+>
+> **v101.46 differs from v101.45 by exactly one line** — the `APP_VERSION` string — confirmed by a
+> line-by-line diff (9,156 lines each, 1 differing). Identity strings in `sw.js` `CACHE_NAME`,
+> `manifest.json` and `version.json` follow it. **No logic, corpus, CSS or behaviour change.**
+>
+> Its only purpose is to give the device test something to update *to*, so the FINDING-01
+> service-worker fix can actually be validated. Because nothing else differs, a successful
+> single-press update to v101.46 cannot be explained by anything other than the update path
+> working correctly. That makes it a clean control.
+>
+> **Press Actualiser once. It should land on v101.46 immediately.**
+>
+> The corpus, the persistence work and every other fix below are carried through from v101.45
+> byte-identical. v101.46 is not a content release.
 
 ## Corpus status — frozen and complete
 
@@ -50,8 +66,8 @@ Trade-off accepted: `addAll` is all-or-nothing, so an update now needs real netw
 
 Because a client already pinned by the old bug can be served the *old* `sw.js` from its HTTP cache, installing this build on a device that already has an older one requires deleting the icon and re-adding from Safari — and **that step bypasses the update path entirely**. So:
 
-- **Stage 1 — install.** Long-press the icon → Remove App → Delete App. Open Safari, go to this URL, confirm it reports v101.45. Then Share → Add to Home Screen. *This proves v101.45 runs. It does not test the fix.*
-- **Stage 2 — the actual update test.** Once a successor build is staged, press **Actualiser** once. It should land on the successor immediately. *This is the test that matters.* Do it on both iPhone and iPad — each home-screen icon has its own separate storage partition, so fixing one does not fix the other.
+- **Stage 1 — install. DONE** on iPhone and iPad (2026-07-31). Icon deleted, v101.45 confirmed in Safari, re-added to Home Screen. The app then offered Actualiser and the update succeeded — an encouraging real-device signal, because the *incoming* worker’s install code is what runs, and v101.45 carries the fix.
+- **Stage 2 — the actual update test. THIS BUILD.** From v101.45, press **Actualiser** once. It must land on **v101.46** immediately. *This is the test that matters*, because the starting state is known and the only difference is identity. Do it on both iPhone and iPad — each home-screen icon has its own storage partition, so one does not validate the other.
 
 Then, in order of risk:
 
