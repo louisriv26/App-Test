@@ -1,26 +1,36 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.46` — **STAGE 2 UPDATE-FLOW TEST BUILD. NOT authorised for production.**
+Version: `v101.47` — **staging / test build. NOT authorised for production.**
 
-App SHA-256: `213b5d6290a4e9c57c3ee02d2619c2a2fdc8274ba9aeac92e6153bf7fd68a45d` (1,745,711 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-46`.
+App SHA-256: `0c51ed9c4c2604ec6bd27cb0b68623872500148580c08750c2cd7eb7c98d9c19` (1,747,291 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-47`.
 
-Production remains at **v101.25**. This build is 21 versions ahead of it.
+Production remains at **v101.25**. This build is 22 versions ahead of it.
 
-> ## What v101.46 is, and why it exists
+> ## What v101.47 adds — notes finally work on phone and tablet
 >
-> **v101.46 differs from v101.45 by exactly one line** — the `APP_VERSION` string — confirmed by a
-> line-by-line diff (9,156 lines each, 1 differing). Identity strings in `sw.js` `CACHE_NAME`,
-> `manifest.json` and `version.json` follow it. **No logic, corpus, CSS or behaviour change.**
+> **Notes were impossible to create on a touch device.** Not hard to find — absent. Three
+> independent rules each blocked the only note button: `.para-actions` is `display:none` under
+> `max-width:768px`, it is additionally gated behind `.mode-etude` (study mode), and it is revealed
+> by `:hover`, which touch devices do not have. The fallback `✎` dot is `display:none` unless the
+> paragraph *already* has a note, so it could never create the first one. The long-press action bar
+> — the only remaining mobile route — offered Surligner, Copier and Fermer, with no note entry.
 >
-> Its only purpose is to give the device test something to update *to*, so the FINDING-01
-> service-worker fix can actually be validated. Because nothing else differs, a successful
-> single-press update to v101.46 cannot be explained by anything other than the update path
-> working correctly. That makes it a clean control.
+> **This was not a regression.** Production v101.25 behaves identically. Notes have never been
+> reachable on a phone or tablet.
 >
-> **Press Actualiser once. It should land on v101.46 immediately.**
+> **Fix:** the long-press bar now reads **Surligner · Copier · Note · Fermer**. Long-press any
+> paragraph, tap **Note**, write. It works in Prier mode as well as Étudier, deliberately: that bar
+> has always been mode-agnostic, and highlighting — the *more* intrusive act, since it marks the
+> sacred text itself — was already offered there. A note changes nothing about how the passage
+> reads. Personal devotional response is not study apparatus.
 >
-> The corpus, the persistence work and every other fix below are carried through from v101.45
-> byte-identical. v101.46 is not a content release.
+> **The help text was also wrong,** and actively misleading: it told users to enable study marks and
+> look for a per-paragraph `✎` button that never appears on mobile. Both affected help rows now
+> describe the phone/tablet route and the desktop route separately.
+>
+> Verified at a 375×812 viewport: long-press → bar shows Note → modal opens → note saved →
+> persisted to the canonical snapshot → survived a reload → indicator dot appeared. Confirmed in
+> both Prier and Étudier modes, and desktop behaviour is unchanged.
 
 ## Corpus status — frozen and complete
 
@@ -67,7 +77,7 @@ Trade-off accepted: `addAll` is all-or-nothing, so an update now needs real netw
 Because a client already pinned by the old bug can be served the *old* `sw.js` from its HTTP cache, installing this build on a device that already has an older one requires deleting the icon and re-adding from Safari — and **that step bypasses the update path entirely**. So:
 
 - **Stage 1 — install. DONE** on iPhone and iPad (2026-07-31). Icon deleted, v101.45 confirmed in Safari, re-added to Home Screen. The app then offered Actualiser and the update succeeded — an encouraging real-device signal, because the *incoming* worker’s install code is what runs, and v101.45 carries the fix.
-- **Stage 2 — the actual update test. THIS BUILD.** From v101.45, press **Actualiser** once. It must land on **v101.46** immediately. *This is the test that matters*, because the starting state is known and the only difference is identity. Do it on both iPhone and iPad — each home-screen icon has its own storage partition, so one does not validate the other.
+- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.47 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
 
 Then, in order of risk:
 
@@ -77,7 +87,7 @@ Then, in order of risk:
 4. **Speech punctuation.** Hour 20 should read `La première Parole : Père, pardonne-leur car ils ne savent pas ce qu'ils font !` — colon present, spaces either side, no guillemets. Hours 8, 17, 19, 21, 22 have the most instances.
 5. **Upgrade with real data.** On a device holding real notes, highlights and progress, confirm nothing is lost. Highest-risk untested path.
 6. **Dark mode.** "· Heure Sainte" on Hours 5–7 in the Heures list must be readable.
-7. Notes/highlights/progress survive a reopen; export–import round-trip; offline launch after first load.
+7. **Notes (new — please test).** Long-press a paragraph → **Note** → write → save. Confirm it survives a full close and reopen, that a small ✎ appears beside that paragraph afterwards, and that it is listed in **Mon Espace**. Then highlights/progress survive a reopen; export–import round-trip; offline launch after first load.
 8. General reading, search including the Réflexions filter, Hour 24 burial + Désolation structure.
 
 ## Known limits — not defects
