@@ -1,63 +1,92 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.32` — **staging / test build. NOT authorised for production.**
+Version: `v101.45` — **staging / test build. NOT authorised for production.**
 
-App SHA-256: `76f6cba7649167715374132e90fac0420d769b4cf50629b6fa49e69d9aeb08b6` (1,733,939 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas.
+App SHA-256: `82a7d0de9a878d31881261c37a0ffcacf53a35bb9eea93a230885ef499b7b05e` (1,745,711 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-45`.
 
-## What's in this build
+Production remains at **v101.25**. This build is 20 versions ahead of it.
 
-Three changes stacked on production v101.25.
+## Corpus status — frozen and complete
 
-**(1) The accepted v101.26 corpus.** 48 R3A text operations across 44 paragraphs — reverence capitalisation per the documented referent policy, grammar/agreement/punctuation fixes, and 9 substantive editorial items individually approved by Louis on 2026-07-27.
+The corpus is frozen at the **v101.44** content and carried into v101.45 **byte-identical**: all six protected declarations (`CORPUS`, `TEXT_LIBRARY`, `HOUR_LINKED_TEXTS`, `SPEECH_DATA`, `INTERNAL_SUBHEADINGS`, `SPEECH_END_VISUAL_BREAKS`) verified against the v101.44 hash contract, twice — once in the work tree and again from the reopened package.
 
-**(2) The v101.32 persistence correction.** v101.26 introduced `lp24_snapshot_v2` as the canonical personal-data snapshot but left three mutation paths writing only the old legacy keys, so the canonical snapshot went stale and won on the next load. Fixed by adding `state.lastHour` as the single live source for the resume Hour, making `applyPersonalSnapshot()` a pure in-memory apply (it previously wrote legacy storage, which is what overwrote newer values with older ones), and committing `openHour`, study mode and cycle reset through the canonical snapshot. `lp24_lastHour` and `lp24_mode` are now migration/mirror-only — live call sites dropped from 12 to 3. Production v101.25 never had these defects: it has no canonical snapshot layer, so no divergence was possible.
+It contains the full accumulated editorial line:
 
-**(3) A speech-punctuation fix (P2-COLON).** v101.26 also deleted the introducing colon and its adjacent spaces from the *rendered* text of 99 paragraphs across 22 Hours plus the Approfondir section — "après le péché : « Viens dans mes Bras" displayed as "après le péchéViens dans mes Bras", and "qui Lui dit : « Fils, bénis-moi aussi ! » Ô Jésus" displayed as "qui Lui ditFils, bénis-moi aussi !Ô Jésus". Reported by Louis from screenshots of Hours 20 and 21. Cause: v101.26 moved 189 paragraphs' speech boundaries to exclude the guillemets, which made a quote-hiding regex fire that also swallowed the colon. Renderer-only fix — `CORPUS` and `SPEECH_DATA` are untouched. 98 of the 99 paragraphs now render byte-identically to production v101.25; the remaining one is an improvement (production left a narrow no-break space where a normal space belongs).
+- **R3A** — 48 text operations across 44 paragraphs (reverence capitalisation per the documented referent policy, grammar/agreement/punctuation fixes, and 9 substantive editorial items individually approved by Louis).
+- **R3B — complete, all 24 Hours.** 24 operations across 23 records; 13 Hours corrected, 11 with no substantive change; every Hour `SOURCE_CONTENT_RECONCILED`, none pending. Reconciled against **both** complete Italian witnesses (`IT_COMPLETE_364` and `IT_REFLECTIONS_174`) plus the English witness.
+- **v101.40–v101.42** — full-text convergence across every `TEXT_LIBRARY.body` record and all active textual layers; 94/94 Book-of-Heaven extracts reconciled.
+- **v101.43–v101.44** — two independent blind adversarial revalidation passes.
 
-**(4) Meditated-hour boxes are easier to see.** The completed-Hour border goes from 1px to 2px in both light and dark, so border thickness now consistently means “meditated”. Until now only completed Holy Hours (5–7) got a 2px border — a side effect of the v101.20 fix — so the other 21 read as a faint edge. Border colour is unchanged in both themes. The completion tick also goes from 0.58rem to 0.66rem and from --accent-light to --accent, lifting it from 2.0:1 to 5.5:1 contrast in light mode. CSS only — no corpus, speech or behaviour change.
+Independently reproduced at takeover: 24 Hours, 5 prayers, 4 sections, 40 library objects, 2,735 body records, 381 speech segments, 30 internal subheadings, 94 extracts, 4,501 runtime-addressable DOM targets, 0 duplicate paragraph IDs.
 
-**(5) The Heures list view now matches the home grid,** with the same 2px meditated border and darker tick. While doing that I found and fixed a pre-existing dark-mode contrast failure: the « · Heure Sainte » label was hardcoded dark purple with no dark override, giving 2.18:1 against the dark card (WCAG AA needs 4.5:1). It now uses the lightened purple the home grid already used, measured at 6.32:1. Light mode was already 6.88:1 and is unchanged.
+> **Correction to earlier versions of this file.** Every README up to v101.32 carried the line *"R3B reflection completeness is not certified — the supplied Italian edition does not contain the complete Riflessioni e Pratiche."* **That statement is obsolete and was wrong to carry forward.** It described the *initial* Stage S0 attempt, which halted before any modification because the complete Italian binaries were not then available. Once they were supplied, Stage S0 was rerun and R3B was completed at v101.37. The witness in question — `IT_Luisa_Piccarreta_Le_24_Ore_complete_con_Riflessioni_e_Pratiche.pdf`, SHA-256 `7af33d29854078366a4cb0fabafb8b547370faef20997178c91e2bbe84f3d671` — was bound and used in that process. The stale line caused a closed question to be reopened in error during the v101.45 takeover; supersession markers have now been added to the two v101.26-era decision documents that carried it.
 
-**(6) Theme option renamed.** The Automatique/Clair/Sombre (previously « Système ») theme-preference option now reads « Automatique » throughout - button label, settings-sheet description, quick-toggle tooltip, and the confirmation toast. Copy only; the stored preference value is still 'system', so no migration and no behaviour change.
+## What's new in v101.45 — one fix
 
-**(7) A misplaced blurb was removed from a Complément.** « Les trois Heures de Gethsémani » (linked from Hours 5/6/7 and in Compléments) had two sentences that did not belong there - « Approfondir la Passion » and its description - left over from import. Removed; the item now shows only its genuine « Règle spéciale » sentence. This is a TEXT_LIBRARY content change, not CORPUS/SPEECH_DATA - no Hour text or speech attribution is affected. Verified live via the actual Hour 5 -> Approfondir path.
+**Service-worker update flow (FINDING-01).** Pressing "Actualiser" could complete and leave the client still running the **old** version — permanently, not just for one reload. Reproduced end-to-end, then fixed.
 
-Carries all prior v101.x fixes (v101.2 through v101.26). Internal history is tracked in `luisa-24h-state_1.md`.
+`sw.js`'s install handler precached with `cache.addAll(ASSETS)`, whose fetches consult the browser's HTTP cache. A newly installing worker could therefore pull the *previous* version's files out of the HTTP cache and store them into its *own new* cache. The cache name flipped to the new version while its contents were still the old build; because the fetch handler is cache-first with `{ignoreSearch: true}`, the `?lp_force_reload=` parameter could not escape it. Fixed with:
 
-Status: `LIMITED_PASS_STATIC` — static/package checks (JS/CSS syntax, replica parity, corpus/speech structure, protected declaration hashes) pass; the persistence correction is proven by executable browser tests using genuine reload cycles; the punctuation fix is proven by simulating the renderer over the whole corpus. Real-device validation is `NOT_TESTED` — that is what this staging build is for. The Android install path (a Play Protect "compatibility too low" warning on a browser-minted WebAPK) remains under investigation.
+```js
+await cache.addAll(ASSETS.map(u => new Request(u, { cache: 'reload' })));
+```
 
-## What to test on device — priority order
+This is the defect behind the reported iOS symptom ("it actualises but stays on the old version", surviving a hard close on iPhone and iPad) and why deleting the home-screen icon and re-adding from Safari was the only reliable remedy — that clears both the service-worker registration and the origin's HTTP cache.
 
-Items 1–3 are the persistence fix. Each needs a **full app close and reopen** (not just backgrounding) between the action and the check.
+Trade-off accepted: `addAll` is all-or-nothing, so an update now needs real network at install time. If it fails, the old worker keeps serving and the app stays usable — the update simply waits.
 
-1. **Resume Hour is remembered.** Open an Hour, read a little, close the app completely, reopen. The home screen must offer "Reprendre la lecture" pointing at that same Hour.
-2. **Study mode sticks.** Toggle the `#` study-marks button on, close the app completely, reopen. Study marks must still be on.
-3. **Reset stays reset.** With some progress recorded, use "Recommencer les 24 Heures" / "Réinitialiser ma progression" and confirm. Close the app completely, reopen. There must be **no** "Reprendre la lecture" card — the home screen should offer "Prier la 1re Heure". *This was the worst defect: the old resume Hour came back after a reset.*
-4. **Speech punctuation reads correctly.** Spot-check the Seven Words headings in Hours 20–22 and any "Il te dit : …" lead-in. Expected: `La première Parole : Père, pardonne-leur car ils ne savent pas ce qu'ils font !` — colon present, a space either side of the speech, and **no** guillemets. Hours 8, 17, 19, 21 and 22 have the most instances; the Approfondir section has 20.
+## Everything carried forward from v101.26–v101.44
 
-Then, in rough order of risk:
+- **Canonical personal-state persistence.** `state.lastHour` is the single live source for the resume Hour; `applyPersonalSnapshot()` is a pure in-memory apply; `openHour`, study mode and cycle reset commit through the canonical snapshot. Fixes the last-opened Hour being forgotten, study mode reverting, and a completed reset resurrecting the old resume Hour.
+- **Speech punctuation (P2-COLON).** The introducing colon and its adjacent spaces are no longer deleted from rendered text; 99 paragraphs across 22 Hours plus the Approfondir section restored.
+- **Meditated-hour boxes.** 2px border in both themes on the home grid *and* the Heures list, so thickness consistently means "meditated"; completion tick darkened and enlarged.
+- **Dark-mode accessibility.** The "· Heure Sainte" label was 2.18:1 against the dark card (WCAG AA needs 4.5:1); now 6.32:1.
+- **Theme option** reads "Automatique" rather than "Système".
+- **Compléments cleanup.** "Les trois Heures de Gethsémani" shows only its genuine "Règle spéciale" sentence.
 
-5. **Upgrade with existing data.** On a device that already has the production build installed with real notes, highlights and progress, upgrade to this build and confirm nothing is lost. This is the highest-risk untested path — every existing user will take it.
-6. Notes, highlights and progress still save and survive a reopen.
-7. Export / import round-trip.
-8. Offline launch after first load; the "Actualiser" update flow.
-9. General reading, search (including the Réflexions filter), Hour 24 burial + Désolation structure.
+## What to test on device
+
+**Read this first — a single-stage test will not test the update fix.**
+
+Because a client already pinned by the old bug can be served the *old* `sw.js` from its HTTP cache, installing this build on a device that already has an older one requires deleting the icon and re-adding from Safari — and **that step bypasses the update path entirely**. So:
+
+- **Stage 1 — install.** Long-press the icon → Remove App → Delete App. Open Safari, go to this URL, confirm it reports v101.45. Then Share → Add to Home Screen. *This proves v101.45 runs. It does not test the fix.*
+- **Stage 2 — the actual update test.** Once a successor build is staged, press **Actualiser** once. It should land on the successor immediately. *This is the test that matters.* Do it on both iPhone and iPad — each home-screen icon has its own separate storage partition, so fixing one does not fix the other.
+
+Then, in order of risk:
+
+1. **Resume Hour is remembered.** Open an Hour, read a little, close the app completely, reopen. Home should offer "Reprendre la lecture" pointing at that Hour.
+2. **Study mode sticks.** Toggle the `#` button on, close completely, reopen — still on.
+3. **Reset stays reset.** With progress recorded, use "Réinitialiser ma progression" and confirm. Close completely, reopen. There must be **no** "Reprendre la lecture" card.
+4. **Speech punctuation.** Hour 20 should read `La première Parole : Père, pardonne-leur car ils ne savent pas ce qu'ils font !` — colon present, spaces either side, no guillemets. Hours 8, 17, 19, 21, 22 have the most instances.
+5. **Upgrade with real data.** On a device holding real notes, highlights and progress, confirm nothing is lost. Highest-risk untested path.
+6. **Dark mode.** "· Heure Sainte" on Hours 5–7 in the Heures list must be readable.
+7. Notes/highlights/progress survive a reopen; export–import round-trip; offline launch after first load.
+8. General reading, search including the Réflexions filter, Hour 24 burial + Désolation structure.
 
 ## Known limits — not defects
 
-- **Deliberately not fixed in v101.32**, deferred to a later candidate: behaviour when device storage is full or unavailable, malformed/future snapshot recovery, atomic R41 highlight-anchor reset, and honest "not saved" messaging across all mutation paths. If a save fails because storage is full, the app may still report success. Known and out of scope.
-- **R3B reflection completeness is not certified** — the supplied Italian edition does not contain the complete *Riflessioni e Pratiche*.
+- **Real-device QA is `NOT_TESTED`.** That is the remaining release blocker and the purpose of this build.
+- **The update fix is verified on desktop Chrome only**, on a real HTTP origin with a genuine before/after reproduction. It is *not* yet verified on an installed iOS PWA, where storage partitioning differs. Stage 2 above is what closes that gap.
+- **Deliberately deferred:** storage-full / storage-unavailable recovery, malformed or future-snapshot recovery, atomic R41 highlight-anchor reset, and honest "not saved" messaging across all mutation paths. If a save fails because storage is full, the app may still report success.
+- **`stored_text_units = 4577`** is a hardcoded literal in the v101.44 build script and does not reconcile with an independent recount (4,574 / 4,579). Corpus integrity is unaffected — the declarations hash-match — but that figure is unverified.
+- **One stray bare LF** at offset 959303 is pre-existing in the v101.44 baseline and carried forward unchanged. Outside all protected declarations.
+- **Android Play Protect** "compatibility too low" on a browser-minted WebAPK: one unreproduced report, deprioritised.
 
-## Desktop verification already completed
+## Verification completed
 
 ```text
-Semantic preservation         PASS   CORPUS/SPEECH_DATA/INTERNAL_SUBHEADINGS byte-identical to accepted v101.26
-Speech-quote suppression      PASS   378 paragraphs, 270 ranges; hides only guillemets and whitespace
-                                     (same guard FAILS with 67 findings on v101.26)
-Persistence tests             6/6 PASS post-fix; 3/6 pre-fix (suite proven to detect the defects)
-Static resilience guards      16/16
-Corpus integrity              44/44
-Mutation teeth                11/11 caught
-Storage-contract audit        20/20 keys, 0 unclassified
-Predeploy check               all passed, 0 warnings
+Input binding (FP2 baseline)   PASS   both ZIPs exact on bytes + members + SHA-256
+Package integrity              PASS   760/760 manifest records, 0 missing, 0 mismatch, 0 unaccounted
+Protected declarations         PASS   6/6 byte-identical to the v101.44 contract (verified twice)
+Replica parity                 PASS   app == deploy/luisa == deploy/index
+Packaged suites                6/6    11/11, 6/6, 7/7, 29/29, 14/14, 4501-target map
+Reopened-ZIP gate              PASS   CRC, no duplicates, no unsafe paths, 73/73 records
+Live HTTP load                 PASS   0 console errors on a served origin
+SW registration + activation   PASS   cache luisa-24h-v101-45
+DOM target sweep               PASS   4501/4501, 0 missing, 0 page errors
+Offline cold start             PASS   booted and rendered with the HTTP server stopped
+Update flow (before)           FAIL   reproduced on v101.44 — pinned to old version
+Update flow (after)            PASS   single Actualiser press landed on the successor
+Real-device QA                 NOT_TESTED
 ```
