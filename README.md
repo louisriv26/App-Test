@@ -1,12 +1,44 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.48` — **staging / test build. NOT authorised for production.**
+Version: `v101.49` — **staging / test build. NOT authorised for production.**
 
-App SHA-256: `da363f0a5373a90f27da060dbadd070f8942dba2d012576b214884afe400b655` (1,763,864 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-48`.
+App SHA-256: `7170c65d3b2e0e0ef4c2add58eb906cfb31ffb8b3b9350ed3f23ea7ee65742ac` (1,765,115 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-49`.
 
-Production remains at **v101.25**. This build is 23 versions ahead of it.
+Production remains at **v101.25**. This build is 24 versions ahead of it.
 
-> ## What v101.48 adds — highlights stop silently disappearing
+> ## What v101.49 adds — Note on the text-selection bar
+>
+> **Reported by Louis:** selecting part of a passage still offered only Surligner, Copier and Fermer.
+> He was right, and v101.47's claim that "notes now work on mobile" was too broad.
+>
+> There are **two** distinct mobile action bars, and v101.47 only fixed one of them:
+>
+> | Bar | Raised by | Buttons before v101.49 |
+> |---|---|---|
+> | `#mobileActionBar` | long-pressing a paragraph | Surligner · Copier · **Note** · Fermer |
+> | `#selectionActionBar` | **selecting text** | Surligner · Copier · Fermer |
+>
+> So the most natural way to annotate a passage — select the words you want to write about — had no
+> route to a note at all. The bar's own stylesheet has declared
+> `grid-template-columns: repeat(4, minmax(0, 1fr))` since it was written, for three buttons: the
+> fourth slot existed and had simply never been filled.
+>
+> **Fix:** the selection bar now reads **Surligner · Copier · Note · Fermer**. The note attaches to
+> the paragraph containing the selection, matching what long-press already did. The paragraph id is
+> read *before* the bar closes, because closing it clears the pending selection.
+>
+> Verified at 375×812 on two different Hours: a real text selection raised the bar with four buttons
+> (77.5px per column, no overflow), Note opened the modal titled for the correct Hour, the note saved
+> to the canonical snapshot, survived a reload, showed its ✎ indicator beside the paragraph and was
+> listed in Mon Espace. The long-press bar was re-checked for regression and still carries Note.
+>
+> **Also corrected: provenance comments.** The inherited build script bumps versions with a blanket
+> string replace, which had been silently rewriting historical `/* v101.NN: … */` comments to the
+> current version on every release — so v101.48's explanatory comments claimed to be v101.49, and
+> v101.47's claimed the same. Each comment I could attribute has been restored to its true version,
+> and the reopened-ZIP gate now asserts on identity sites only, so genuine history survives the bump.
+
+> ## What v101.48 added — highlights stop silently disappearing
 >
 > **Reported symptom:** Mon Espace listed highlights that were no longer in the text, with no way to
 > remove them. The underlying problem was larger than the listing.
@@ -119,7 +151,7 @@ Trade-off accepted: `addAll` is all-or-nothing, so an update now needs real netw
 Because a client already pinned by the old bug can be served the *old* `sw.js` from its HTTP cache, installing this build on a device that already has an older one requires deleting the icon and re-adding from Safari — and **that step bypasses the update path entirely**. So:
 
 - **Stage 1 — install. DONE** on iPhone and iPad (2026-07-31). Icon deleted, v101.45 confirmed in Safari, re-added to Home Screen. The app then offered Actualiser and the update succeeded — an encouraging real-device signal, because the *incoming* worker’s install code is what runs, and v101.45 carries the fix.
-- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.48 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
+- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.49 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
 
 Then, in order of risk:
 
@@ -135,7 +167,10 @@ Then, in order of risk:
    open to the right passage. Any that could not be recovered appear first, with a "⚠ le texte de ce
    passage a changé" note and a **✕ Retirer** button — pressing it must remove that entry and keep it
    removed after a full close and reopen.
-9. General reading, search including the Réflexions filter, Hour 24 burial + Désolation structure.
+9. **Notes from a text selection (new — please test).** Select part of a paragraph with your
+   finger. The bar must read **Surligner · Copier · Note · Fermer**. Tap **Note**, write, save, and
+   confirm it survives a full close and reopen. Test the long-press route too — both should work.
+10. General reading, search including the Réflexions filter, Hour 24 burial + Désolation structure.
 
 ## Known limits — not defects
 
@@ -156,9 +191,11 @@ Replica parity                 PASS   app == deploy/luisa == deploy/index
 Packaged suites                6/9    3 suites could not run here - see below
 Reopened-ZIP gate              PASS   41/41 checks incl. 75/75 manifest records
 Live HTTP load                 PASS   0 console errors on a served origin
-SW registration + activation   PASS   cache luisa-24h-v101-48
+SW registration + activation   PASS   cache luisa-24h-v101-49
 Highlight recovery             PASS   53/56 on a real v101.25 export (was 38/56 unrecovered)
 Stale-entry removal            PASS   Retirer removed 1 of 3 and persisted (56 -> 55)
+Selection-bar Note             PASS   4 buttons at 375px; note saved, reloaded, listed in Mon Espace
+Long-press Note (regression)   PASS   still Surligner/Copier/Note/Fermer
 DOM target sweep               PASS   4501/4501, 0 missing, 0 page errors
 Offline cold start             PASS   booted and rendered with the HTTP server stopped
 Update flow (before)           FAIL   reproduced on v101.44 — pinned to old version
@@ -171,7 +208,7 @@ passing: `test_v10144_syntax_and_json.py` and `test_v10144_service_worker_contra
 to `node --check`, and `test_v10144_persistence_runtime.py` needs `playwright`; neither Node nor
 Playwright is installed here. In their place the same properties were established against a real
 browser on a served origin, which is a stronger check for this build than a static parse: the app and
-`sw.js` were both parsed, executed and activated (cache `luisa-24h-v101-48`), and persistence was
+`sw.js` were both parsed, executed and activated (cache `luisa-24h-v101-49`), and persistence was
 driven directly — schema 4→5 migration, recovery written back to the canonical snapshot, and a
 highlight removal that survived. `manifest.json` and `version.json` were validated as JSON
-separately. The gap is recorded in `L24H_v10148_Decision_Lock.json`.
+separately. The gap is recorded in `L24H_v10149_Decision_Lock.json`.
