@@ -1,12 +1,54 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.47` — **staging / test build. NOT authorised for production.**
+Version: `v101.48` — **staging / test build. NOT authorised for production.**
 
-App SHA-256: `0c51ed9c4c2604ec6bd27cb0b68623872500148580c08750c2cd7eb7c98d9c19` (1,747,291 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-47`.
+App SHA-256: `da363f0a5373a90f27da060dbadd070f8942dba2d012576b214884afe400b655` (1,763,864 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-48`.
 
-Production remains at **v101.25**. This build is 22 versions ahead of it.
+Production remains at **v101.25**. This build is 23 versions ahead of it.
 
-> ## What v101.47 adds — notes finally work on phone and tablet
+> ## What v101.48 adds — highlights stop silently disappearing
+>
+> **Reported symptom:** Mon Espace listed highlights that were no longer in the text, with no way to
+> remove them. The underlying problem was larger than the listing.
+>
+> A highlight is anchored to three things at once: the paragraph id, character offsets, and a
+> `text_hash` of the whole paragraph. Editorial work invalidates all three. Change a single
+> character anywhere in a paragraph and its hash no longer matches, so the highlight is **not drawn
+> at all** — silently, with no message. Merge a paragraph away and the record becomes unreachable,
+> leaving exactly the un-removable Mon Espace entry that was reported.
+>
+> **Measured on a real 56-highlight export from the live v101.25 app:** 48 of 56 still render on
+> production today; on the new corpus that falls to **38**, because the accumulated R3A/R3B
+> corrections touched paragraphs that carried highlights. Nothing was corrupt — the text was still
+> there. Only the anchor could no longer see it.
+>
+> **Recovery, on load.** Each stale record's stored passage text is located in the current corpus
+> using a normalised comparison (NFC, narrow/no-break spaces folded, typographic apostrophes
+> folded, punctuation and case ignored, whitespace collapsed and trimmed), and re-anchored — but
+> **only when the location is unambiguous**: either the whole passage occurs exactly once, or, for
+> long passages whose middle was edited, both of its ends do, with a length sanity check. A
+> multi-paragraph selection whose target disappeared is moved to a surviving sibling *of the same
+> selection only*, never anywhere else in the corpus. Ambiguous or short matches are refused rather
+> than guessed, because silently moving a highlight onto the wrong passage is worse than leaving it
+> stale. **Nothing is ever deleted automatically.**
+>
+> **Result: 53 of 56.** 13 re-anchored in place, 2 moved to a sibling. The 3 remaining are listed in
+> Mon Espace with a plain explanation and a working **✕ Retirer** button — and **2 of those 3
+> already fail to render on production v101.25**, because their stored text predates earlier corpus
+> corrections. So no highlight is worse off than it is today.
+>
+> **Two further fixes found while testing this.** Mon Espace shows at most 8 highlights, ordered by
+> passage label — so 2 of the 3 stale entries fell outside the visible list and their Remove buttons
+> could never be pressed. Stale entries are now listed first, ahead of that cap. And the matcher's
+> own normaliser left a trailing space when a passage ended in a narrow no-break space before a
+> closing guillemet, which blocked two otherwise-perfect matches.
+>
+> Verified end-to-end in a browser against a seeded v101.25 install (canonical snapshot at schema 4,
+> R41 anchor-reset marker present): schema migrated 4→5, 53/56 renderable, every recovered span
+> re-checked independently, and the Retirer button exercised (56→55 records, persisted, view
+> refreshed).
+
+> ## What v101.47 added — notes finally work on phone and tablet
 >
 > **Notes were impossible to create on a touch device.** Not hard to find — absent. Three
 > independent rules each blocked the only note button: `.para-actions` is `display:none` under
@@ -77,7 +119,7 @@ Trade-off accepted: `addAll` is all-or-nothing, so an update now needs real netw
 Because a client already pinned by the old bug can be served the *old* `sw.js` from its HTTP cache, installing this build on a device that already has an older one requires deleting the icon and re-adding from Safari — and **that step bypasses the update path entirely**. So:
 
 - **Stage 1 — install. DONE** on iPhone and iPad (2026-07-31). Icon deleted, v101.45 confirmed in Safari, re-added to Home Screen. The app then offered Actualiser and the update succeeded — an encouraging real-device signal, because the *incoming* worker’s install code is what runs, and v101.45 carries the fix.
-- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.47 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
+- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.48 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
 
 Then, in order of risk:
 
@@ -88,7 +130,12 @@ Then, in order of risk:
 5. **Upgrade with real data.** On a device holding real notes, highlights and progress, confirm nothing is lost. Highest-risk untested path.
 6. **Dark mode.** "· Heure Sainte" on Hours 5–7 in the Heures list must be readable.
 7. **Notes (new — please test).** Long-press a paragraph → **Note** → write → save. Confirm it survives a full close and reopen, that a small ✎ appears beside that paragraph afterwards, and that it is listed in **Mon Espace**. Then highlights/progress survive a reopen; export–import round-trip; offline launch after first load.
-8. General reading, search including the Réflexions filter, Hour 24 burial + Désolation structure.
+8. **Highlights after upgrade (new — please test).** This matters most on a device that already
+   holds real highlights. Open **Mon Espace** and confirm your highlights are still listed and still
+   open to the right passage. Any that could not be recovered appear first, with a "⚠ le texte de ce
+   passage a changé" note and a **✕ Retirer** button — pressing it must remove that entry and keep it
+   removed after a full close and reopen.
+9. General reading, search including the Réflexions filter, Hour 24 burial + Désolation structure.
 
 ## Known limits — not defects
 
@@ -96,7 +143,7 @@ Then, in order of risk:
 - **The update fix is verified on desktop Chrome only**, on a real HTTP origin with a genuine before/after reproduction. It is *not* yet verified on an installed iOS PWA, where storage partitioning differs. Stage 2 above is what closes that gap.
 - **Deliberately deferred:** storage-full / storage-unavailable recovery, malformed or future-snapshot recovery, atomic R41 highlight-anchor reset, and honest "not saved" messaging across all mutation paths. If a save fails because storage is full, the app may still report success.
 - **`stored_text_units = 4577`** is a hardcoded literal in the v101.44 build script and does not reconcile with an independent recount (4,574 / 4,579). Corpus integrity is unaffected — the declarations hash-match — but that figure is unverified.
-- **One stray bare LF** at offset 959303 is pre-existing in the v101.44 baseline and carried forward unchanged. Outside all protected declarations.
+- **The stray bare LF** at offset 959303, carried unchanged since the v101.44 baseline, was incidentally normalised to CRLF while editing v101.47. It sat outside all protected declarations, all six of which still hash-match the v101.44 contract, so the corpus is unaffected. The file is now uniformly CRLF (0 bare LF).
 - **Android Play Protect** "compatibility too low" on a browser-minted WebAPK: one unreproduced report, deprioritised.
 
 ## Verification completed
@@ -106,13 +153,25 @@ Input binding (FP2 baseline)   PASS   both ZIPs exact on bytes + members + SHA-2
 Package integrity              PASS   760/760 manifest records, 0 missing, 0 mismatch, 0 unaccounted
 Protected declarations         PASS   6/6 byte-identical to the v101.44 contract (verified twice)
 Replica parity                 PASS   app == deploy/luisa == deploy/index
-Packaged suites                6/6    11/11, 6/6, 7/7, 29/29, 14/14, 4501-target map
-Reopened-ZIP gate              PASS   CRC, no duplicates, no unsafe paths, 73/73 records
+Packaged suites                6/9    3 suites could not run here - see below
+Reopened-ZIP gate              PASS   41/41 checks incl. 75/75 manifest records
 Live HTTP load                 PASS   0 console errors on a served origin
-SW registration + activation   PASS   cache luisa-24h-v101-45
+SW registration + activation   PASS   cache luisa-24h-v101-48
+Highlight recovery             PASS   53/56 on a real v101.25 export (was 38/56 unrecovered)
+Stale-entry removal            PASS   Retirer removed 1 of 3 and persisted (56 -> 55)
 DOM target sweep               PASS   4501/4501, 0 missing, 0 page errors
 Offline cold start             PASS   booted and rendered with the HTTP server stopped
 Update flow (before)           FAIL   reproduced on v101.44 — pinned to old version
 Update flow (after)            PASS   single Actualiser press landed on the successor
 Real-device QA                 NOT_TESTED
 ```
+
+Three packaged suites could not be executed in this environment and were **not** silently counted as
+passing: `test_v10144_syntax_and_json.py` and `test_v10144_service_worker_contract.py` both shell out
+to `node --check`, and `test_v10144_persistence_runtime.py` needs `playwright`; neither Node nor
+Playwright is installed here. In their place the same properties were established against a real
+browser on a served origin, which is a stronger check for this build than a static parse: the app and
+`sw.js` were both parsed, executed and activated (cache `luisa-24h-v101-48`), and persistence was
+driven directly — schema 4→5 migration, recovery written back to the canonical snapshot, and a
+highlight removal that survived. `manifest.json` and `version.json` were validated as JSON
+separately. The gap is recorded in `L24H_v10148_Decision_Lock.json`.
