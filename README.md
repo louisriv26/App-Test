@@ -1,10 +1,39 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.50` — **staging / test build. NOT authorised for production.**
+Version: `v101.51` — **staging / test build. NOT authorised for production.**
 
-App SHA-256: `8584d790d5b2196a6bb282d477bb047a50cbe5f60f2d5329e937dc4a7c69e5ab` (1,765,968 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-50`.
+App SHA-256: `86debe3a285984709179da609c5d0ace50521762d9404f34a831b95ecf6e8828` (1,769,909 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-51`.
 
-**Production is now at v101.49** (promoted 1 August 2026). This build is one version ahead and fixes an iOS defect found in it.
+**Production is at v101.49** (promoted 1 August 2026). This build is two versions ahead and fixes two defects found in it.
+
+> ## What v101.51 fixes — highlights that existed but were never shown
+>
+> **Reported by Louis:** a highlight made in "Prière avant chaque Heure" never appeared in Mon Espace.
+>
+> The record was fine. It saved correctly, resolved correctly through `getTargetInfo()` as
+> `Prière — Prière avant chaque Heure`, and was not stale. It was simply **never rendered**: the
+> highlight list was sorted by passage label and then cut to the first 8 entries. Labels beginning
+> with a letter — `Prière — …`, `Complément — …` — sort after every `Ne Heure` label, so a prayer
+> highlight always landed at the end of the list. Measured on Louis's real data it sat **35th of 39
+> groups**, so it was structurally unreachable. This was never specific to his device or his data:
+> *no* prayer or complement highlight could ever be seen by anyone with more than a handful of marks.
+>
+> The same cap was silently hiding **31 of his 39 highlight groups**, with nothing on screen to
+> suggest anything was missing. Two further prayer highlights already in his live export —
+> "Prière de remerciement pour l'Heure Sainte" and "Prière à la fin de chaque Heure" — had therefore
+> never been visible to him either.
+>
+> **Fix, two parts:**
+> 1. **Order by recency, not by label.** Newest first, which is what the notes list already did and
+>    what you want when looking for the highlight you just made.
+> 2. **The cap is now a preview, not a ceiling.** A "Voir mes N surlignages" button expands to the
+>    full list and collapses again. Notes had the identical silent cap and got the identical
+>    treatment. Stale entries still come first, since those are the ones needing action.
+>
+> Verified against Louis's real 56-highlight export plus one added prayer highlight: the prayer went
+> from invisible to 4th in the list (the three above it are his stale entries, deliberately first);
+> the expander goes 11 cards → 39 → 11; 11 seeded notes preview 8 newest-first and expand to 11,
+> persisted through `persistPersonalSnapshot`; 0 console errors.
 
 > ## What v101.50 fixes — the iPhone note panel and the sideways scroll
 >
@@ -180,7 +209,7 @@ Trade-off accepted: `addAll` is all-or-nothing, so an update now needs real netw
 Because a client already pinned by the old bug can be served the *old* `sw.js` from its HTTP cache, installing this build on a device that already has an older one requires deleting the icon and re-adding from Safari — and **that step bypasses the update path entirely**. So:
 
 - **Stage 1 — install. DONE** on iPhone and iPad (2026-07-31). Icon deleted, v101.45 confirmed in Safari, re-added to Home Screen. The app then offered Actualiser and the update succeeded — an encouraging real-device signal, because the *incoming* worker’s install code is what runs, and v101.45 carries the fix.
-- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.50 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
+- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.51 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
 
 Then, in order of risk:
 
@@ -203,7 +232,11 @@ Then, in order of risk:
     panel. The app must NOT be left zoomed in or scrollable sideways. Then do the same in
     **Approfondir** → section search box. Both were sub-16px fonts and both should now leave the
     layout exactly as it was.
-11. General reading, search including the Réflexions filter, Hour 24 burial + Désolation structure.
+11. **Mon Espace shows everything (new).** Highlight something in **Prières & compléments** and
+    confirm it appears in Mon Espace — it should be at or near the top, since the list is now
+    newest-first. Then press **Voir mes N surlignages** and confirm the full list opens and collapses
+    again. Same for notes.
+12. General reading, search including the Réflexions filter, Hour 24 burial + Désolation structure.
 
 ## Known limits — not defects
 
@@ -224,7 +257,8 @@ Replica parity                 PASS   app == deploy/luisa == deploy/index
 Packaged suites                6/9    3 suites could not run here - see below
 Reopened-ZIP gate              PASS   41/41 checks incl. 75/75 manifest records
 Live HTTP load                 PASS   0 console errors on a served origin
-SW registration + activation   PASS   cache luisa-24h-v101-50
+SW registration + activation   PASS   cache luisa-24h-v101-51
+Mon Espace reachability        PASS   prayer highlight now 4th, not 35th; 11 -> 39 -> 11 on expand
 Text-entry fonts (iOS zoom)    PASS   note textarea, section search and search input all >= 16px
 Layout overflow at 390x844     PASS   0px, masking removed, incl. note modal open and after close
 Highlight recovery             PASS   53/56 on a real v101.25 export (was 38/56 unrecovered)
@@ -243,7 +277,7 @@ passing: `test_v10144_syntax_and_json.py` and `test_v10144_service_worker_contra
 to `node --check`, and `test_v10144_persistence_runtime.py` needs `playwright`; neither Node nor
 Playwright is installed here. In their place the same properties were established against a real
 browser on a served origin, which is a stronger check for this build than a static parse: the app and
-`sw.js` were both parsed, executed and activated (cache `luisa-24h-v101-50`), and persistence was
+`sw.js` were both parsed, executed and activated (cache `luisa-24h-v101-51`), and persistence was
 driven directly — schema 4→5 migration, recovery written back to the canonical snapshot, and a
 highlight removal that survived. `manifest.json` and `version.json` were validated as JSON
-separately. The gap is recorded in `L24H_v10150_Decision_Lock.json`.
+separately. The gap is recorded in `L24H_v10151_Decision_Lock.json`.
