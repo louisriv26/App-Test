@@ -1,12 +1,41 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.49` — **staging / test build. NOT authorised for production.**
+Version: `v101.50` — **staging / test build. NOT authorised for production.**
 
-App SHA-256: `7170c65d3b2e0e0ef4c2add58eb906cfb31ffb8b3b9350ed3f23ea7ee65742ac` (1,765,115 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-49`.
+App SHA-256: `8584d790d5b2196a6bb282d477bb047a50cbe5f60f2d5329e937dc4a7c69e5ab` (1,765,968 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-50`.
 
-Production remains at **v101.25**. This build is 24 versions ahead of it.
+**Production is now at v101.49** (promoted 1 August 2026). This build is one version ahead and fixes an iOS defect found in it.
 
-> ## What v101.49 adds — Note on the text-selection bar
+> ## What v101.50 fixes — the iPhone note panel and the sideways scroll
+>
+> **Reported by Louis on iPhone against v101.49:** opening a note showed a panel slightly wider than
+> the screen, and after closing it the whole app stayed pannable sideways.
+>
+> **Cause: iOS Safari auto-zoom, not a layout overflow.** iOS zooms the page in whenever a text field
+> with a font smaller than 16px receives focus — and it never zooms back out. The layout viewport
+> then stays wider than the visual viewport, so the page pans horizontally and a `position:fixed`
+> panel reads as wider than the screen. `.note-textarea` was `0.9rem` (14.4px) and the Approfondir
+> section search was `0.95rem` (15.2px). `.search-input` was already 16px, which is exactly why
+> searching never triggered this and only the note panel did.
+>
+> This was verified *not* to be an overflow: at 390×844 in desktop Chrome, with the `html`/`body`
+> `overflow-x: hidden` masking removed, `scrollWidth` equalled `innerWidth` on the home screen, in
+> the reader, with the note modal open, and after closing it — zero overflowing elements outside
+> intentional horizontal scrollers.
+>
+> **Fix:** both fields raised to `1rem` (16px). The viewport meta deliberately carries no
+> `maximum-scale` or `user-scalable`, so pinch-zoom stays available; suppressing zoom would have
+> hidden the symptom at the cost of a real accessibility regression.
+>
+> **Guard added:** the build and the reopened-ZIP gate now parse the shipped stylesheet (with CSS
+> comments stripped, so a comment above a rule is not mistaken for its selector) and fail if any
+> text-entry selector declares a font under 16px. This cannot be reintroduced silently.
+>
+> **Honest limitation:** iOS focus-zoom cannot be reproduced in desktop Chrome. The mechanism and the
+> font sizes are verified, and the note panel now measures exactly 0–390px with 0px overflow, but
+> that the *symptom* is gone needs confirming on a real iPhone.
+
+> ## What v101.49 added — Note on the text-selection bar
 >
 > **Reported by Louis:** selecting part of a passage still offered only Surligner, Copier and Fermer.
 > He was right, and v101.47's claim that "notes now work on mobile" was too broad.
@@ -151,7 +180,7 @@ Trade-off accepted: `addAll` is all-or-nothing, so an update now needs real netw
 Because a client already pinned by the old bug can be served the *old* `sw.js` from its HTTP cache, installing this build on a device that already has an older one requires deleting the icon and re-adding from Safari — and **that step bypasses the update path entirely**. So:
 
 - **Stage 1 — install. DONE** on iPhone and iPad (2026-07-31). Icon deleted, v101.45 confirmed in Safari, re-added to Home Screen. The app then offered Actualiser and the update succeeded — an encouraging real-device signal, because the *incoming* worker’s install code is what runs, and v101.45 carries the fix.
-- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.49 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
+- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.50 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
 
 Then, in order of risk:
 
@@ -170,7 +199,11 @@ Then, in order of risk:
 9. **Notes from a text selection (new — please test).** Select part of a paragraph with your
    finger. The bar must read **Surligner · Copier · Note · Fermer**. Tap **Note**, write, save, and
    confirm it survives a full close and reopen. Test the long-press route too — both should work.
-10. General reading, search including the Réflexions filter, Hour 24 burial + Désolation structure.
+10. **iPhone zoom/pan (new — the reason for this build).** Open a note, type something, close the
+    panel. The app must NOT be left zoomed in or scrollable sideways. Then do the same in
+    **Approfondir** → section search box. Both were sub-16px fonts and both should now leave the
+    layout exactly as it was.
+11. General reading, search including the Réflexions filter, Hour 24 burial + Désolation structure.
 
 ## Known limits — not defects
 
@@ -191,7 +224,9 @@ Replica parity                 PASS   app == deploy/luisa == deploy/index
 Packaged suites                6/9    3 suites could not run here - see below
 Reopened-ZIP gate              PASS   41/41 checks incl. 75/75 manifest records
 Live HTTP load                 PASS   0 console errors on a served origin
-SW registration + activation   PASS   cache luisa-24h-v101-49
+SW registration + activation   PASS   cache luisa-24h-v101-50
+Text-entry fonts (iOS zoom)    PASS   note textarea, section search and search input all >= 16px
+Layout overflow at 390x844     PASS   0px, masking removed, incl. note modal open and after close
 Highlight recovery             PASS   53/56 on a real v101.25 export (was 38/56 unrecovered)
 Stale-entry removal            PASS   Retirer removed 1 of 3 and persisted (56 -> 55)
 Selection-bar Note             PASS   4 buttons at 375px; note saved, reloaded, listed in Mon Espace
@@ -208,7 +243,7 @@ passing: `test_v10144_syntax_and_json.py` and `test_v10144_service_worker_contra
 to `node --check`, and `test_v10144_persistence_runtime.py` needs `playwright`; neither Node nor
 Playwright is installed here. In their place the same properties were established against a real
 browser on a served origin, which is a stronger check for this build than a static parse: the app and
-`sw.js` were both parsed, executed and activated (cache `luisa-24h-v101-49`), and persistence was
+`sw.js` were both parsed, executed and activated (cache `luisa-24h-v101-50`), and persistence was
 driven directly — schema 4→5 migration, recovery written back to the canonical snapshot, and a
 highlight removal that survived. `manifest.json` and `version.json` were validated as JSON
-separately. The gap is recorded in `L24H_v10149_Decision_Lock.json`.
+separately. The gap is recorded in `L24H_v10150_Decision_Lock.json`.
