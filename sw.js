@@ -1,5 +1,5 @@
-/* v101.52 */
-const CACHE_NAME = 'luisa-24h-v101-52';
+/* v101.53 */
+const CACHE_NAME = 'luisa-24h-v101-53';
 const CACHE_PREFIX = 'luisa-24h-';
 const ASSETS = ['./','./index.html','./luisa_24_heures.html','./manifest.json','./icon-180.png','./icon-192.png','./icon-512.png'];
 /* P2/SW5 fix: cache.put() keys on the full request URL including its query string, and the
@@ -16,7 +16,7 @@ async function trimCache(cache) {
   const excess = keys.length - MAX_CACHE_ENTRIES;
   if (excess > 0) await Promise.all(keys.slice(0, excess).map(k => cache.delete(k)));
 }
-/* v101.52 FINDING-01 fix: cache.addAll() fetches with the DEFAULT cache mode, which consults the
+/* v101.53 FINDING-01 fix: cache.addAll() fetches with the DEFAULT cache mode, which consults the
    browser HTTP cache. A newly installing worker could therefore pull the PREVIOUS version's files
    out of the HTTP cache and store them into its OWN, new CACHE_NAME - so the cache name flipped to
    the new version while its contents were still the old build. Because the fetch handler below is

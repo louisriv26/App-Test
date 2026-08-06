@@ -1,10 +1,35 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.52` — **staging / test build. NOT authorised for production.**
+Version: `v101.53` — **staging / test build. NOT authorised for production.**
 
-App SHA-256: `c3829558ee083bccac59d62f383f1afd19688cff6d5a73adcaad41d7ae61fe68` (1,782,686 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-52`.
+App SHA-256: `25715fca859d67c473c0645edadc3621b982118e3cbfce729ff1138acf55aab6` (1,783,611 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-53`.
 
 **Production is at v101.51** (promoted 3 August 2026). This build carries the approved targeted corpus change set on top of it.
+
+> ## What v101.53 fixes — the bottom bar covering the end of a view on iPad
+>
+> **Reported by Louis on iPad, Approfondir screen:** the bottom navigation partly hid the text of the
+> last card and it could not be scrolled any further.
+>
+> **Cause: an iOS Safari flex bug, not missing padding.** `html.ios-device .content` is a flex column
+> with `overflow-y: auto`, and iOS Safari **excludes such a container's `padding-bottom` from its
+> scrollable overflow**. The app does reserve 84–104px for the bar, and Chrome honours it — but on
+> device that reservation evaporated, so the last card sat flush against the viewport bottom with the
+> bar on top of it and nothing left to scroll. That is why this only ever appeared on iPad.
+>
+> **Fix:** on iOS the padding is zeroed and the space is reserved by a `#content::after` flex-item
+> spacer instead. A flex item is laid out in flow and is always counted in scrollable overflow, in
+> every engine, so the reservation cannot be dropped. Zeroing the padding guarantees the two never
+> add up to a double gap.
+>
+> Measured in a browser with the iPad runtime class applied and the Approfondir view open: scroll
+> range **146px → 177px**, and the last card ends **53px clear** of the bar instead of underneath it.
+>
+> Corpus untouched: still byte-identical to the v101.52 contract.
+>
+> **Honest limitation:** the underlying Safari behaviour cannot be reproduced in desktop Chrome, so
+> what is verified here is that the spacer reserves reachable space and that nothing double-spaces.
+> That the symptom is gone needs confirming on your iPad.
 
 > ## What v101.52 is — the approved targeted corpus change set
 >
@@ -256,7 +281,7 @@ Trade-off accepted: `addAll` is all-or-nothing, so an update now needs real netw
 Because a client already pinned by the old bug can be served the *old* `sw.js` from its HTTP cache, installing this build on a device that already has an older one requires deleting the icon and re-adding from Safari — and **that step bypasses the update path entirely**. So:
 
 - **Stage 1 — install. DONE** on iPhone and iPad (2026-07-31). Icon deleted, v101.45 confirmed in Safari, re-added to Home Screen. The app then offered Actualiser and the update succeeded — an encouraging real-device signal, because the *incoming* worker’s install code is what runs, and v101.45 carries the fix.
-- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.52 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
+- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.53 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
 
 Then, in order of risk:
 
@@ -304,7 +329,8 @@ Replica parity                 PASS   app == deploy/luisa == deploy/index
 Packaged suites                6/9    3 suites could not run here - see below
 Reopened-ZIP gate              PASS   41/41 checks incl. 75/75 manifest records
 Live HTTP load                 PASS   0 console errors on a served origin
-SW registration + activation   PASS   cache luisa-24h-v101-52
+SW registration + activation   PASS   cache luisa-24h-v101-53
+iPad bottom-bar clearance      PASS   scroll range 146->177px, last card 53px clear of the bar
 Wording corrections            PASS   21/21 CHANGED, 0 unrelated records touched
 Display segmentations          PASS   65/65 records, 180 units, concatenation exact
 Continuity operations          PASS   4/4, both stable ids preserved in each group
@@ -329,7 +355,7 @@ passing: `test_v10144_syntax_and_json.py` and `test_v10144_service_worker_contra
 to `node --check`, and `test_v10144_persistence_runtime.py` needs `playwright`; neither Node nor
 Playwright is installed here. In their place the same properties were established against a real
 browser on a served origin, which is a stronger check for this build than a static parse: the app and
-`sw.js` were both parsed, executed and activated (cache `luisa-24h-v101-52`), and persistence was
+`sw.js` were both parsed, executed and activated (cache `luisa-24h-v101-53`), and persistence was
 driven directly — schema 4→5 migration, recovery written back to the canonical snapshot, and a
 highlight removal that survived. `manifest.json` and `version.json` were validated as JSON
-separately. The gap is recorded in `L24H_v10152_Decision_Lock.json`.
+separately. The gap is recorded in `L24H_v10153_Decision_Lock.json`.
