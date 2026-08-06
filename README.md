@@ -1,12 +1,59 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.51` — **staging / test build. NOT authorised for production.**
+Version: `v101.52` — **staging / test build. NOT authorised for production.**
 
-App SHA-256: `86debe3a285984709179da609c5d0ace50521762d9404f34a831b95ecf6e8828` (1,769,909 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-51`.
+App SHA-256: `c3829558ee083bccac59d62f383f1afd19688cff6d5a73adcaad41d7ae61fe68` (1,782,686 bytes). `index.html` and `luisa_24_heures.html` are byte-identical replicas. Service-worker cache: `luisa-24h-v101-52`.
 
-**Production is at v101.49** (promoted 1 August 2026). This build is two versions ahead and fixes two defects found in it.
+**Production is at v101.51** (promoted 3 August 2026). This build carries the approved targeted corpus change set on top of it.
 
-> ## What v101.51 fixes — highlights that existed but were never shown
+> ## What v101.52 is — the approved targeted corpus change set
+>
+> **This is the first release since v101.44 in which the corpus itself changes.** Everything from
+> v101.45 to v101.51 was app-only, gated on the corpus being byte-identical. That gate is
+> deliberately re-baselined here, not dropped — see below.
+>
+> **Part A — 21 mandatory wording corrections.** All 21 targets located, all 21 required correcting
+> (`CHANGED = 21, ALREADY_PRESENT = 0, UNMAPPED = 0`). Applied as minimal clause-level edits, never
+> whole-paragraph overwrites, each asserted to occur exactly once in its own record and exactly once
+> in the whole file. Measured against the untouched production copy: **exactly 21 of 1,839 records
+> changed, 0 unrelated**, record-ID set identical.
+>
+> **Part C — 65 non-destructive display segmentations, 180 display units.** Canonical ids, order and
+> text are untouched; each record's segment slices concatenate back to its canonical text exactly.
+> Units are rendered through the app's existing `renderParaTextRange()` in **canonical coordinates**,
+> which already maps highlights, speech spans, visual breaks and quote suppression — so notes,
+> highlights, favourites and saved positions keep resolving through the canonical parent id with no
+> migration. Verified in-browser: 65/65 unit counts, 65/65 exact concatenation, 65/65 canonical DOM
+> text length, 0 duplicate DOM ids, and a highlight deliberately straddling a segment boundary
+> (250–300 across the 269 boundary) renders as two pieces that reassemble to the exact canonical
+> slice with status `ok`.
+>
+> **Part E — 4 cross-record continuity operations.** D03 and D04 already read continuously once Part
+> A landed. D01 and D02 additionally needed the small text adjustments the instruction prescribes for
+> them. Both stable ids are preserved in every group; the join is presentational plus copy, so
+> copying either member yields the whole grammatical unit.
+>
+> **Part F — the 3 excluded stylistic rows are untouched**, all three still carrying
+> `Elle est si grande…`.
+>
+> **Speech offsets were recalculated, not guessed.** Ten of the 21 corrected records carry speech
+> ranges; offsets shift by the exact replacement delta, and a boundary falling *inside* a replaced
+> span is refused outright rather than approximated — none did. 7 entries changed, 3 correctly
+> unchanged, 0 added or removed.
+>
+> **Independent corroboration.** The segment boundaries computed from the authorised anchors match
+> the instruction's own "historical implementation context" offsets exactly for four of the five
+> speech-sensitive records. The fifth, `08.P015`, computes 146|484|620 against a historical
+> 146|485|621 — off by exactly −1 on the last two, which is precisely the delta of A16's comma
+> removal at char 249. The change set validates itself.
+>
+> **Protected-declaration contract re-baselined.** `CORPUS` and `SPEECH_DATA` change by design, so
+> the v101.44 contract that gated v101.45–v101.51 can no longer hold. It is superseded by
+> `L24H_v10152_Protected_Declaration_Hash_Contract.json`, which records that exactly those two
+> declarations moved and that `TEXT_LIBRARY`, `HOUR_LINKED_TEXTS`, `INTERNAL_SUBHEADINGS` and
+> `SPEECH_END_VISUAL_BREAKS` are unchanged. The gate keeps working for every later release.
+
+> ## What v101.51 fixed — highlights that existed but were never shown
 >
 > **Reported by Louis:** a highlight made in "Prière avant chaque Heure" never appeared in Mon Espace.
 >
@@ -209,7 +256,7 @@ Trade-off accepted: `addAll` is all-or-nothing, so an update now needs real netw
 Because a client already pinned by the old bug can be served the *old* `sw.js` from its HTTP cache, installing this build on a device that already has an older one requires deleting the icon and re-adding from Safari — and **that step bypasses the update path entirely**. So:
 
 - **Stage 1 — install. DONE** on iPhone and iPad (2026-07-31). Icon deleted, v101.45 confirmed in Safari, re-added to Home Screen. The app then offered Actualiser and the update succeeded — an encouraging real-device signal, because the *incoming* worker’s install code is what runs, and v101.45 carries the fix.
-- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.51 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
+- **Stage 2 — the update-flow test.** From the previously installed build, press **Actualiser** once; it must land on v101.52 immediately. Do it on both iPhone and iPad — each home-screen icon has its own storage partition.
 
 Then, in order of risk:
 
@@ -257,7 +304,12 @@ Replica parity                 PASS   app == deploy/luisa == deploy/index
 Packaged suites                6/9    3 suites could not run here - see below
 Reopened-ZIP gate              PASS   41/41 checks incl. 75/75 manifest records
 Live HTTP load                 PASS   0 console errors on a served origin
-SW registration + activation   PASS   cache luisa-24h-v101-51
+SW registration + activation   PASS   cache luisa-24h-v101-52
+Wording corrections            PASS   21/21 CHANGED, 0 unrelated records touched
+Display segmentations          PASS   65/65 records, 180 units, concatenation exact
+Continuity operations          PASS   4/4, both stable ids preserved in each group
+Excluded stylistic rows        PASS   0/3 changed
+Highlight across a boundary    PASS   reassembles to the exact canonical slice
 Mon Espace reachability        PASS   prayer highlight now 4th, not 35th; 11 -> 39 -> 11 on expand
 Text-entry fonts (iOS zoom)    PASS   note textarea, section search and search input all >= 16px
 Layout overflow at 390x844     PASS   0px, masking removed, incl. note modal open and after close
@@ -277,7 +329,7 @@ passing: `test_v10144_syntax_and_json.py` and `test_v10144_service_worker_contra
 to `node --check`, and `test_v10144_persistence_runtime.py` needs `playwright`; neither Node nor
 Playwright is installed here. In their place the same properties were established against a real
 browser on a served origin, which is a stronger check for this build than a static parse: the app and
-`sw.js` were both parsed, executed and activated (cache `luisa-24h-v101-51`), and persistence was
+`sw.js` were both parsed, executed and activated (cache `luisa-24h-v101-52`), and persistence was
 driven directly — schema 4→5 migration, recovery written back to the canonical snapshot, and a
 highlight removal that survived. `manifest.json` and `version.json` were validated as JSON
-separately. The gap is recorded in `L24H_v10151_Decision_Lock.json`.
+separately. The gap is recorded in `L24H_v10152_Decision_Lock.json`.
