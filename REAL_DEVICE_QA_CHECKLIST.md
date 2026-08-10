@@ -1,23 +1,43 @@
-# v101.60 / 24H-F — staging and owner usability checklist
+# 24H-G / v101.61 — physical device, installed-PWA and live-origin checklist
 
-Test the exact packaged candidate. Do not rebuild it for staging.
+Use the exact v101.61 candidate bytes. Record PASS/FAIL/NOT_TESTED for every row.
 
-## Navigation grammar
-1. Confirm the bottom bar reads **Accueil · Heures · Recherche · Mon Espace**.
-2. Confirm the top-header Search/loupe shortcut is still present.
-3. Tap Recherche in the bottom bar; confirm Recherche is visibly active.
-4. Search for a phrase, set a filter, open a result, then Retour; confirm query/filter/result scroll return.
-5. Tap Mon Espace; confirm the label and destination are Mon Espace.
+## iPhone Safari / installed PWA
+- 16 / 19 / 22 / 26 px reader sizes; no clipping.
+- Automatique / Clair / Sombre.
+- Exact selected-text Surligner, Copier, Lien and Note.
+- Existing-highlight colour picker remains fully on-screen.
+- Note textarea does not trigger focus zoom; keyboard dismissal is usable.
+- Repères OFF/ON preserves passage and actions.
+- Portrait ↔ landscape rotation preserves a usable reader.
+- With a non-empty unsaved Note open, an available-update Actualiser action must NOT reload; the draft must remain and receive focus.
+- Existing installed build → v101.61 update preserves personal data.
+- Offline reopen after one successful online load works.
+- A copied deep link opens the expected Hour/paragraph.
 
-## Approfondir preservation
-6. Accueil: confirm the Approfondir / Livre du Ciel card remains present and opens correctly.
-7. Heures: confirm **Approfondir la Passion** is visible and opens Approfondir; Retour must return to Heures.
-8. Reader: confirm linked texts / Approfondir remain available and Retour restores the Hour.
-9. Réglages: confirm Approfondir remains available.
+## iPad Safari portrait / landscape
+- Reader width, bottom navigation, exact selection and long-scroll remain usable.
+- Repères, 26 px, Mon Espace, rotation/split-view.
+- Installed-PWA update and offline reopen.
 
-## Inherited open gates
-10. Run the inherited Stage-E staging/live deep-link round trip if staging is available.
-11. iPhone/iPad exact-selection and existing-highlight picker retest remain inherited.
-12. Samsung/Android paragraph-mode validation remains inherited / NOT_TESTED if unavailable.
+## Samsung / Android Chrome
+- Paragraphe mode only; no expectation of native word selection.
+- Whole-paragraph Surligner, Note and Copier.
+- Reload persistence, installed update and offline reopen.
+- No Google Translate/Search overlay from the app highlighting workflow.
 
-Owner/user acceptance of the navigation prototype is required before production or 24H-G.
+## Desktop keyboard / accessibility smoke
+- Tab order reaches primary navigation and reader actions.
+- Visible focus indication on controls.
+- Dialogs/sheets trap Tab/Shift+Tab, Escape closes, focus returns to trigger.
+- 200% browser zoom: no essential horizontal scrolling.
+- Reduced-motion OS preference removes non-essential animation.
+
+## Live GitHub Pages
+- Visible version v101.61.
+- Service worker controls the page after activation.
+- Cache generation is luisa-24h-v101-61.
+- Existing install updates to v101.61 without personal-data loss.
+- Offline reopen succeeds after successful online load.
+- Old app cache generations are removed only within the luisa-24h- namespace.
+- Root/deploy bytes correspond to the audited candidate.

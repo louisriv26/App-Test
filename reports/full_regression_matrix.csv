@@ -1,24 +1,27 @@
-gate,status,result,evidence
-STATIC:identity,PASS,v101.60 identities agree,audit/stageF_static.json
-STATIC:protected_declarations,PASS,6/6 unchanged,audit/stageF_static.json
-NAV:primary_grammar,PASS,Accueil/Heures/Recherche/Mon Espace,audit/stageF_browser_navigation.json
-NAV:search_active,PASS,Bottom Recherche opens Search and is active,audit/stageF_browser_navigation.json
-NAV:search_back_context,PASS,Query/filter/scroll restored,audit/stageF_browser_navigation.json
-NAV:mon_espace,PASS,Exact Mon Espace label/destination,audit/stageF_browser_navigation.json
-NAV:approfondir_home_hours_reader_settings,PASS,All four secondary access paths present,audit/stageF_browser_navigation.json
-NAV:home_back_active_restore,PASS,Found/fixed in redo 1,audit/stageF_browser_navigation.json
-LAYOUT:bottom_nav_320_375_430_820_1180,PASS,No bottom-nav overflow,audit/stageF_browser_navigation.json
-MUTATION:StageF,PASS,4/4 defects detected,audit/stageF_mutation_proof.json
-REGRESSION:StageE_search_links_support,PASS,Inherited H5 matrix,audit/stageF_inherited_stageE_browser.json
-REGRESSION:StageD_personal_data,PASS,Inherited H4 matrix,audit/stageF_inherited_stageD_browser.json
-REGRESSION:StageC_context_actions,PASS,Inherited H3 matrix,audit/stageF_inherited_stageC_browser.json
-MUTATION:StageD,PASS,Inherited,audit/stageF_inherited_stageD_mutations.json
-MUTATION:StageC,PASS,Inherited,audit/stageF_inherited_stageC_mutations.json
-REGRESSION:all_24_hours,PASS,All 24 Hours route regression,audit/stageF_route_regression.json
-REGRESSION:iPhone_picker_emulation,PASS,Inherited edge-clamp regression,audit/stageF_picker_viewport_regression.json
-STAGING:24H-F_usability,NOT_TESTED,No staging deployment executed; owner/user review required,NOT_TESTED
-OWNER:24H-F_navigation_acceptance,NOT_TESTED,Requires product-owner/current-user acceptance of changed muscle memory,NOT_TESTED
-STAGING:24H-E_live_deep_link,NOT_TESTED,Inherited Stage-E live/staging route test open,NOT_TESTED
-DEVICE:iPhone_iPad_StageC,NOT_TESTED,Inherited physical-device matrix incomplete,NOT_TESTED
-DEVICE:Samsung_StageC,NOT_TESTED,Samsung unavailable / inherited open gate,NOT_TESTED
-DEPLOY:production,NOT_TESTED,No production deployment,NOT_TESTED
+gate,status,evidence
+CORPUS-24H-01,PASS,6 protected declarations byte-identical
+RELEASE-24H-01,PASS,v101.61 HTML/manifest/version/SW/README identities aligned; HTML replicas identical
+A11Y-24H-01 touch targets,PASS,frequent visible buttons >=43.5px measured
+A11Y names/states,PASS,visible buttons named; aria-current/pressed present
+A11Y focus/modal,PASS,Settings/Help/Note focus trap + Escape + return focus
+A11Y editable inputs,PASS,visible input/textarea >=16px
+A11Y 200% reflow,PASS,"640px equivalent + 320px stress, no essential horizontal overflow"
+A11Y reduced motion,PASS,dedicated reduced-motion context
+CONTRAST-24H-01,PASS,48/48 role×highlight×theme combinations >=4.5; min 4.689
+TEXT/THEME/REPERES matrix,PASS,"120/120 width×size×theme×Repères cases, no overflow"
+UPDATE-24H-01 contract,PASS_WITH_EXTERNAL_GATE,SW harness proves reload precache/new namespace/bounded cache; installed PWA exact update NOT_TESTED
+UPDATE-24H-02,PASS,non-empty note draft blocks Actualiser before navigation
+SW-24H-01,PASS_WITH_EXTERNAL_GATE,runtime cache <=40; namespace-only cleanup; installed/live NOT_TESTED
+Offline fallback contract,PASS_WITH_EXTERNAL_GATE,deterministic fetch harness; physical installed offline reopen NOT_TESTED
+Inherited all 24 Hours,PASS,24/24 routes rendered
+Inherited search normalizer,PASS,all fixtures incl église/cœur
+Inherited deep-link parser,PASS,hour/search request parsing
+Inherited 24H-F navigation,PASS,Accueil/Heures/Recherche/Mon Espace; Approfondir reachable
+Inherited RN3 progress,PASS,7→5→6 suggests Hour 8
+Inherited contextual policy,PASS,range remains exact; paragraph remains paragraph target
+Inherited iPhone picker clamp,PASS_STATIC_BROWSER,20 edge/viewport cases after 44px swatch change; physical iPhone v101.61 NOT_TESTED
+Speech renderer,PASS,375 targets / 381 segments / 375 rendered / 0 missing / 0 invalid
+Stage-G mutation suite,PASS,4/4 injected faults detected
+Physical iPhone/iPad/Samsung,NOT_TESTED,requires exact v101.61 candidate on real devices
+Installed-PWA fresh/update/offline,NOT_TESTED,browser local/virtual origin navigation blocked by execution environment
+Live GitHub Pages candidate,NOT_TESTED,candidate not deployed in this stage

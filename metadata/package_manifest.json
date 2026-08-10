@@ -1,175 +1,44 @@
 {
-  "package": "L24H_v10160_24H-F_Navigation_Prototype_Candidate_OWNER_STAGING_PENDING.zip",
-  "app_version": "v101.60",
-  "stage": "24H-F navigation prototype",
-  "candidate_status": "LIMITED_PASS_OWNER_STAGING_ACCEPTANCE_PENDING_INHERITED_STAGE_E_STAGE_C_PENDING",
+  "schema": "l24h-package-manifest-v1",
+  "stage": "24H-G",
+  "app_version": "v101.61",
+  "status": "LIMITED_PASS_PHYSICAL_DEVICE_INSTALLED_PWA_LIVE_ORIGIN_PENDING",
+  "manifest_policy": "files lists every file in the final ZIP including this manifest and hash_manifest; no per-file hashes here to avoid circularity.",
   "files": [
-    {
-      "path": ".nojekyll",
-      "bytes": 0
-    },
-    {
-      "path": "README.md",
-      "bytes": 12431
-    },
-    {
-      "path": "REAL_DEVICE_QA_CHECKLIST.md",
-      "bytes": 1313
-    },
-    {
-      "path": "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
-      "bytes": 255
-    },
-    {
-      "path": "audit/independent_four_pass_audit.json",
-      "bytes": 452
-    },
-    {
-      "path": "audit/independent_four_pass_audit.md",
-      "bytes": 216
-    },
-    {
-      "path": "audit/stageF_browser_navigation.json",
-      "bytes": 11661
-    },
-    {
-      "path": "audit/stageF_exact_diff.patch",
-      "bytes": 1081528
-    },
-    {
-      "path": "audit/stageF_inherited_stageC_browser.json",
-      "bytes": 13822
-    },
-    {
-      "path": "audit/stageF_inherited_stageC_mutations.json",
-      "bytes": 558
-    },
-    {
-      "path": "audit/stageF_inherited_stageD_browser.json",
-      "bytes": 3607
-    },
-    {
-      "path": "audit/stageF_inherited_stageD_mutations.json",
-      "bytes": 556
-    },
-    {
-      "path": "audit/stageF_inherited_stageE_browser.json",
-      "bytes": 54326
-    },
-    {
-      "path": "audit/stageF_line_by_line_review.md",
-      "bytes": 1113
-    },
-    {
-      "path": "audit/stageF_mutation_proof.json",
-      "bytes": 591
-    },
-    {
-      "path": "audit/stageF_picker_viewport_regression.json",
-      "bytes": 30884
-    },
-    {
-      "path": "audit/stageF_route_regression.json",
-      "bytes": 5354
-    },
-    {
-      "path": "audit/stageF_static.json",
-      "bytes": 1936
-    },
-    {
-      "path": "icon-180.png",
-      "bytes": 2699
-    },
-    {
-      "path": "icon-192.png",
-      "bytes": 2902
-    },
-    {
-      "path": "icon-512.png",
-      "bytes": 7894
-    },
-    {
-      "path": "index.html",
-      "bytes": 1815847
-    },
-    {
-      "path": "luisa_24_heures.html",
-      "bytes": 1815847
-    },
-    {
-      "path": "manifest.json",
-      "bytes": 889
-    },
-    {
-      "path": "reports/full_regression_matrix.csv",
-      "bytes": 2229
-    },
-    {
-      "path": "reports/nested_zip_consistency_report.md",
-      "bytes": 94
-    },
-    {
-      "path": "reports/no_regression_fix_ledger.csv",
-      "bytes": 667
-    },
-    {
-      "path": "reports/report_claims_vs_evidence_audit.md",
-      "bytes": 352
-    },
-    {
-      "path": "reports/root_deploy_consistency_report.md",
-      "bytes": 342
-    },
-    {
-      "path": "reports/stage_completion_report.md",
-      "bytes": 1563
-    },
-    {
-      "path": "reports/stale_reference_scan.txt",
-      "bytes": 36374
-    },
-    {
-      "path": "sw.js",
-      "bytes": 3780
-    },
-    {
-      "path": "version.json",
-      "bytes": 546
-    }
-  ],
-  "manifest_artifacts": [
-    "metadata/package_manifest.json",
-    "metadata/hash_manifest.json"
-  ],
-  "required_evidence": [
-    "audit/stageF_static.json",
-    "audit/stageF_browser_navigation.json",
-    "audit/stageF_mutation_proof.json",
-    "audit/stageF_inherited_stageE_browser.json",
-    "audit/stageF_inherited_stageD_browser.json",
-    "audit/stageF_inherited_stageC_browser.json",
-    "audit/stageF_inherited_stageD_mutations.json",
-    "audit/stageF_inherited_stageC_mutations.json",
-    "audit/stageF_route_regression.json",
-    "audit/stageF_picker_viewport_regression.json",
-    "audit/stageF_exact_diff.patch",
-    "audit/stageF_line_by_line_review.md",
-    "audit/independent_four_pass_audit.json",
+    ".nojekyll",
+    "README.md",
+    "REAL_DEVICE_QA_CHECKLIST.md",
+    "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
     "audit/independent_four_pass_audit.md",
-    "reports/no_regression_fix_ledger.csv",
+    "audit/stageG_a11y_baseline_scan.json",
+    "audit/stageG_a11y_candidate_scan.json",
+    "audit/stageG_browser_results.json",
+    "audit/stageG_contrast_matrix.json",
+    "audit/stageG_display_matrix.json",
+    "audit/stageG_exact_diff.patch",
+    "audit/stageG_inherited_regression.json",
+    "audit/stageG_line_by_line_review.md",
+    "audit/stageG_mutation_results.json",
+    "audit/stageG_speech_runtime_audit.json",
+    "audit/stageG_static.json",
+    "audit/stageG_sw_contract_results.json",
+    "icon-180.png",
+    "icon-192.png",
+    "icon-512.png",
+    "index.html",
+    "luisa_24_heures.html",
+    "manifest.json",
+    "metadata/hash_manifest.json",
+    "metadata/package_manifest.json",
     "reports/full_regression_matrix.csv",
-    "reports/stale_reference_scan.txt",
-    "reports/root_deploy_consistency_report.md",
     "reports/nested_zip_consistency_report.md",
+    "reports/no_regression_fix_ledger.csv",
     "reports/report_claims_vs_evidence_audit.md",
-    "reports/stage_completion_report.md"
+    "reports/root_deploy_consistency_report.md",
+    "reports/stage_completion_report.md",
+    "reports/stale_reference_scan.txt",
+    "sw.js",
+    "version.json"
   ],
-  "not_tested": [
-    "24H-F staging usability review",
-    "24H-F owner/current-user navigation acceptance",
-    "inherited 24H-E live/staging deep-link route",
-    "physical iPhone/iPad inherited Stage-C matrix",
-    "physical Samsung/Android inherited Stage-C matrix",
-    "production deployment"
-  ]
+  "file_count": 34
 }

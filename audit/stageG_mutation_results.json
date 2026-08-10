@@ -1,0 +1,95 @@
+[
+  {
+    "mutation": "remove_44px_hardening",
+    "detected": true,
+    "evidence": [
+      {
+        "id": "backBtn",
+        "cls": "back-btn",
+        "w": 76.984375,
+        "h": 29,
+        "text": "Retour"
+      },
+      {
+        "id": "modeBtn",
+        "cls": "icon-btn mode-pill",
+        "w": 38,
+        "h": 38,
+        "text": "#"
+      },
+      {
+        "id": "stage6mSettingsBtn",
+        "cls": "icon-btn stage6m-settings-toggle",
+        "w": 38,
+        "h": 38,
+        "text": "⚙"
+      },
+      {
+        "id": "",
+        "cls": "sf-btn active",
+        "w": 52.5,
+        "h": 29.59375,
+        "text": "Tout"
+      },
+      {
+        "id": "",
+        "cls": "sf-btn ",
+        "w": 69,
+        "h": 29.59375,
+        "text": "Heures"
+      },
+      {
+        "id": "",
+        "cls": "sf-btn ",
+        "w": 87.703125,
+        "h": 29.59375,
+        "text": "Réflexions"
+      },
+      {
+        "id": "",
+        "cls": "sf-btn ",
+        "w": 67.9375,
+        "h": 29.59375,
+        "text": "Prières"
+      },
+      {
+        "id": "",
+        "cls": "sf-btn ",
+        "w": 110.03125,
+        "h": 29.59375,
+        "text": "Compléments"
+      },
+      {
+        "id": "",
+        "cls": "sf-btn ",
+        "w": 121.203125,
+        "h": 29.59375,
+        "text": "Paroles directes"
+      }
+    ]
+  },
+  {
+    "mutation": "break_unsaved_note_detector",
+    "detected": true,
+    "evidence": {
+      "hasUnsavedNoteDraft": false
+    }
+  },
+  {
+    "mutation": "hardwire_help_focus_return",
+    "detected": true,
+    "evidence": {
+      "returnedToInvoker": false,
+      "activeId": ""
+    }
+  },
+  {
+    "mutation": "remove_update_live_region",
+    "detected": true,
+    "evidence": {
+      "role": null,
+      "live": null,
+      "atomic": null
+    }
+  }
+]

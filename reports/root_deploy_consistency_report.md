@@ -1,6 +1,8 @@
 # Root/deploy consistency
 
-- `luisa_24_heures.html`: 1815847 bytes · `413319212d8eb8e89abe6f739740d6b7f2b324b02bcc74bfab2f3ed3b7670461`
-- `index.html`: 1815847 bytes · `413319212d8eb8e89abe6f739740d6b7f2b324b02bcc74bfab2f3ed3b7670461`
-- Byte identity: **PASS**
-- PWA id/scope/start_url preserved: **PASS** (see `audit/stageF_static.json`).
+PASS. This package uses two deployment HTML replicas at package root. `index.html` and `luisa_24_heures.html` are byte-identical.
+
+SHA-256: `bebb7efd9e54501e6a625048506478b1da9dac2044fb8787d453561fcfe906f7`
+Bytes: `1818106` each.
+
+No separate deploy directory is present in this package contract.

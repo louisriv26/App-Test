@@ -1,0 +1,71 @@
+[
+  {
+    "gate": "SW_INSTALL_CACHE_RELOAD",
+    "pass": true,
+    "evidence": {
+      "count": 7,
+      "modes": [
+        "reload",
+        "reload",
+        "reload",
+        "reload",
+        "reload",
+        "reload",
+        "reload"
+      ],
+      "skipped": true
+    }
+  },
+  {
+    "gate": "SW_ACTIVATE_NAMESPACE_CLEANUP",
+    "pass": true,
+    "evidence": {
+      "keys": [
+        "other-app-v9",
+        "luisa-24h-v101-61"
+      ],
+      "claimed": true
+    }
+  },
+  {
+    "gate": "SW_VERSION_BYPASS",
+    "pass": true,
+    "evidence": {
+      "responded": false
+    }
+  },
+  {
+    "gate": "SW_QUERY_CACHE_MATCH",
+    "pass": true,
+    "evidence": {
+      "responded": true
+    }
+  },
+  {
+    "gate": "SW_RUNTIME_CACHE_BOUND",
+    "pass": true,
+    "evidence": {
+      "entries": 40,
+      "max": 40
+    }
+  },
+  {
+    "gate": "SW_OFFLINE_NAV_FALLBACK",
+    "pass": true,
+    "evidence": {
+      "responded": true,
+      "hasValue": true
+    }
+  },
+  {
+    "gate": "SW_INTERRUPTED_UPDATE_PRESERVES_PREDECESSOR",
+    "pass": true,
+    "evidence": {
+      "rejected": true,
+      "keys": [
+        "luisa-24h-v101-60",
+        "luisa-24h-v101-61"
+      ]
+    }
+  }
+]

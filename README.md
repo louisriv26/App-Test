@@ -1,10 +1,16 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.60`
+Version: `v101.61`
 
-Input baseline: **v101.59 / 24H-E**, explicitly authorised by the product owner as the input to 24H-F. Stage F changes navigation grammar only; corpus, storage schemas, Repères, contextual actions, deep-link contracts and platform highlighting semantics remain unchanged.
+Input baseline: **v101.60 / 24H-F**, explicitly approved by the product owner as the immutable input to 24H-G. Stage G changes accessibility/PWA hardening only; corpus, storage schemas, Repères, contextual actions, deep-link contracts, navigation decisions and platform highlighting semantics remain unchanged.
 
-## 24H-F candidate (v101.60) — navigation prototype
+## 24H-G candidate (v101.61) — accessibility / PWA hardening
+
+Stage G keeps the approved 24H-F navigation and hardens cross-cutting release behavior: frequent interactive hit areas target 44×44 CSS px, reduced-motion behavior is reinforced, an unsaved Note draft blocks Actualiser, and the dynamic update banner is exposed as a polite status region. The service-worker strategy itself is preserved and re-certified rather than redesigned.
+
+Physical iPhone/iPad/Samsung, installed-PWA and live GitHub Pages checks remain release-critical and must not be inferred from local browser/static evidence.
+
+## Historical input baseline — 24H-F candidate (v101.60) — navigation prototype
 
 - Primary bottom navigation is now **Accueil · Heures · Recherche · Mon Espace**.
 - The existing top-header Search shortcut is deliberately preserved during the transition.

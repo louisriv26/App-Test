@@ -1,3 +1,3 @@
 # Nested ZIP consistency
 
-No nested ZIP is part of the 24H-F package. `NO_NESTED_ZIP = PASS`.
+PASS / NOT_APPLICABLE. No nested ZIP is present in the Stage-G candidate package.
