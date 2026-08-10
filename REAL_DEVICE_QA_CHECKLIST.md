@@ -1,30 +1,30 @@
-# Real-device QA checklist — v101.54 / 24H-A
+# Real-device QA checklist — v101.56 / 24H-C
 
-Target candidate HTML SHA-256: `c6ba8f15c052ac86b5227ac0a4a22e21200ec926d24b86c861a2f7dc61cccbb2`
+Target HTML SHA-256: `db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44`
 
-Status at package creation: **NOT TESTED — PHYSICAL DEVICE GATE PENDING**.
+Physical-device validation is release-critical for this stage.
 
-This checklist certifies only the 24H-A display-settings changes. Historical v101.53 device evidence does not certify this candidate.
+## iPhone / iPad Safari
 
-## Release-critical affected-device smoke
+1. Select an exact phrase inside a meditation paragraph. Confirm one contextual bar appears with **Surligner · Copier · Note · Fermer**.
+2. Tap **Surligner**, choose a colour, and confirm only the exact selected range is highlighted. Reload and confirm persistence.
+3. Repeat on a Réflexion.
+4. Select across two adjacent paragraphs; confirm the shared bar appears and the resulting grouped highlight survives reload without losing either segment.
+5. From a selected range, tap **Note**; save two notes on the same paragraph, reload, and confirm both survive.
+6. Long-press a paragraph. Confirm the same contextual component appears. Copy and Note must work. Surligner must not silently convert an ordinary Apple paragraph target into whole-paragraph highlighting; exact selection remains the Apple policy.
+7. Open an existing highlight and change its colour; stale/recovery behavior must remain intact.
+8. Confirm the note textarea does not trigger iOS auto-zoom and the app does not become horizontally pannable.
 
-Test on **real iPhone Safari / installed PWA** and **real iPad Safari / installed PWA** (iPad portrait and landscape):
+## Samsung / Android Chrome
 
-1. Open Taille du texte and confirm the visible choices are exactly **Petit 16 px · Normal 19 px · Grand 22 px · Très grand 26 px**.
-2. Confirm the live preview changes immediately and matches the reader size/rhythm.
-3. On a fresh profile, confirm **Normal 19 px** is selected by default.
-4. Select each size in turn; confirm the reader changes but header, bottom navigation and tool chrome do not grow with the reader text.
-5. At **Très grand 26 px**, read/scroll a long Hour and confirm there is no clipped text, horizontal page scroll, inaccessible bottom navigation or blocked end-of-view content.
-6. On iPad, repeat 26 px in portrait and landscape.
-7. Where native text selection permits, select text, change size, and confirm the same passage remains selected/visible; if Safari clears the native selection, record that exact device behavior rather than marking PASS by assumption.
-8. Confirm existing Note / Surligner / Copier behavior still works after changing size.
-9. Confirm **Automatique · Clair · Sombre**. In Automatique, change the OS appearance and confirm the app follows it; in Clair/Sombre, the app must not follow the OS change.
-10. Reload the app and confirm the chosen text size and theme persist.
-11. Confirm no iOS focus auto-zoom is introduced in editable fields (note textarea/search remain at least 16 CSS px).
-12. For installed PWA, close/reopen and confirm the same settings persist and the app starts normally.
+1. Tap **Paragraphe**. Confirm native word selection/search/translate does not appear.
+2. Tap one paragraph. Confirm it becomes the visual paragraph target and the same contextual bar appears.
+3. Tap **Surligner**, choose a colour, and confirm the whole paragraph is highlighted. Reload and confirm persistence and Mon Espace visibility.
+4. Repeat **Copier** and **Note** from the same paragraph-target contextual bar.
+5. Confirm cancelling the contextual bar or colour picker clears the visual target without leaving a stuck mode.
 
-## Optional Android/Samsung smoke for this stage
+## Regression
 
-Confirm all four reader sizes, preview, fixed chrome size, theme persistence and existing Samsung whole-paragraph highlighting still work. This is regression evidence, not a replacement for the iPhone/iPad release-critical gate above.
-
-Record device, OS, browser/install mode, candidate SHA, test result, evidence and defect reference in `REAL_DEVICE_QA_RESULTS_TEMPLATE.csv`.
+- Repères OFF/ON must not hide contextual actions.
+- Existing highlights from v101.55 must render/recover or remain visibly stale; none may silently disappear.
+- Search, progression, update flow, theme and 16/19/22/26 px settings remain unchanged.

@@ -1,0 +1,104 @@
+# 24H-C recursive stale-reference scan
+
+Scope: every textual file in the sealed candidate tree except this scan file itself; binary PNG files skipped.
+
+PATTERN: v101.55
+COUNT: 14
+HISTORICAL_ALLOWED	README.md:5	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	Input baseline: **v101.55 / 24H-B**, explicitly authorised as the input to 24H-C. **v101.56 / 24H-C is the shared contextual-actions candidate; 24H-D has not started.**
+HISTORICAL_ALLOWED	README.md:15	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	- The six protected corpus declarations remain byte-identical to v101.55.
+HISTORICAL_ALLOWED	README.md:18	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	Input baseline: **v101.54 / 24H-A**, owner-confirmed as working before explicit authorisation to begin 24H-B. **v101.55 / 24H-B is the audited Repères baseline carried into 24H-C.**
+HISTORICAL_ALLOWED	README.md:20	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	## 24H-B candidate (v101.55) — calm reader + optional Repères
+HISTORICAL_ALLOWED	REAL_DEVICE_QA_CHECKLIST.md:29	Explicit Stage-C input-baseline/protected-data comparison.	- Existing highlights from v101.55 must render/recover or remain visibly stale; none may silently disappear.
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:1	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	--- v101.55/luisa_24_heures.html
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:8	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-const APP_VERSION = 'v101.55';
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:21	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-const BUILD_DATE = '2026-08-10'; // v101.55 / 24H-B Repères migration candidate
+HISTORICAL_ALLOWED	reports/nested_zip_consistency_report.md:3	Explicit Stage-C input-baseline/protected-data comparison.	No nested ZIP/package exists in the bound v101.55 payload or the v101.56 candidate. Gate status: **NOT_APPLICABLE**. The final outer ZIP will be reopened from disk and audited independently.
+HISTORICAL_ALLOWED	reports/no_regression_fix_ledger.csv:12	Explicit Stage-C input-baseline/protected-data comparison.	QA01,Initial generated common helper syntax,REDO_PASS,1,"First generator output contained an invalid escaped newline; caught by syntax gate, generator corrected, rebuilt from immutable v101.55.",audit/stageC_static_audit.json
+HISTORICAL_ALLOWED	reports/report_claims_vs_evidence_audit.md:8	Explicit Stage-C input-baseline/protected-data comparison.	- Protected declarations: all six byte-identical to v101.55.
+HISTORICAL_ALLOWED	reports/root_deploy_consistency_report.md:3	Explicit Stage-C input-baseline/protected-data comparison.	- Package layout inherited from v101.55 is root-only; no separate `deploy/` directory exists in the supplied production payload.
+HISTORICAL_ALLOWED	reports/stage_completion_report.md:7	Explicit Stage-C input-baseline/protected-data comparison.	v101.55 / 24H-B, explicitly owner-authorised.
+HISTORICAL_ALLOWED	reports/stage_completion_report.md:16	Explicit Stage-C input-baseline/protected-data comparison.	All six governed declarations byte-identical to v101.55. See `audit/stageC_static_audit.json`.
+
+PATTERN: 24H-B
+COUNT: 10
+HISTORICAL_ALLOWED	README.md:5	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	Input baseline: **v101.55 / 24H-B**, explicitly authorised as the input to 24H-C. **v101.56 / 24H-C is the shared contextual-actions candidate; 24H-D has not started.**
+HISTORICAL_ALLOWED	README.md:18	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	Input baseline: **v101.54 / 24H-A**, owner-confirmed as working before explicit authorisation to begin 24H-B. **v101.55 / 24H-B is the audited Repères baseline carried into 24H-C.**
+HISTORICAL_ALLOWED	README.md:20	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	## 24H-B candidate (v101.55) — calm reader + optional Repères
+HISTORICAL_ALLOWED	README.md:39	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	- 24H-A static/runtime/package qualification was documented in its evidence bundle; the product owner subsequently confirmed that the candidate works and explicitly authorised 24H-B. Device details were not supplied in that confirmation.
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:9	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-const APP_EVIDENCE_STAGE = '24H-B Repères migration candidate: neutral Repères UI, technical-marker-only gating, Note/Surligner/Copier parity with Repères off/on, scroll/selection preservation, and backward-compatible studyMode/lp24_mode export-import bridge;
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:21	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-const BUILD_DATE = '2026-08-10'; // v101.55 / 24H-B Repères migration candidate
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:572	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-// Stage 24H-B keeps the persisted studyMode/lp24_mode fields for one compatibility window.
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:583	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  clean.studyMode = clean.showReperes; // persisted compatibility field remains authoritative in 24H-B
+HISTORICAL_ALLOWED	reports/stage_completion_report.md:7	Explicit Stage-C input-baseline/protected-data comparison.	v101.55 / 24H-B, explicitly owner-authorised.
+HISTORICAL_ALLOWED	version.json:6	Current device-status field records owner-authorised input baseline while explicitly requiring v101.56 physical tests.	"real_device_status": "24H-B was owner-authorised as input. v101.56 must still pass release-critical physical iPhone/iPad exact-range and Samsung/Android paragraph-mode tests before production certification."
+
+PATTERN: v101.54
+COUNT: 3
+HISTORICAL_ALLOWED	README.md:18	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	Input baseline: **v101.54 / 24H-A**, owner-confirmed as working before explicit authorisation to begin 24H-B. **v101.55 / 24H-B is the audited Repères baseline carried into 24H-C.**
+HISTORICAL_ALLOWED	README.md:27	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	- The six protected corpus declarations remain byte-identical to v101.54.
+HISTORICAL_ALLOWED	README.md:30	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	## Carried forward from 24H-A (v101.54) — display settings contract
+
+PATTERN: 24H-A
+COUNT: 3
+HISTORICAL_ALLOWED	README.md:18	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	Input baseline: **v101.54 / 24H-A**, owner-confirmed as working before explicit authorisation to begin 24H-B. **v101.55 / 24H-B is the audited Repères baseline carried into 24H-C.**
+HISTORICAL_ALLOWED	README.md:30	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	## Carried forward from 24H-A (v101.54) — display settings contract
+HISTORICAL_ALLOWED	README.md:39	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	- 24H-A static/runtime/package qualification was documented in its evidence bundle; the product owner subsequently confirmed that the candidate works and explicitly authorised 24H-B. Device details were not supplied in that confirmation.
+
+PATTERN: v101.53
+COUNT: 19
+HISTORICAL_ALLOWED	README.md:43	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	v101.53 promoted v101.52 and v101.53 in one step.
+HISTORICAL_ALLOWED	README.md:67	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	## App fix (v101.53) — iPad bottom bar no longer covers the end of a view
+HISTORICAL_ALLOWED	index.html:997	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: one approved display unit. Block-level only - it contributes no characters, so
+HISTORICAL_ALLOWED	index.html:1012	Historical provenance comment attached to earlier shipped fixes.	note panel was closed. Reported on iPhone against v101.53, where this was 0.9rem (14.4px). The
+HISTORICAL_ALLOWED	index.html:1690	Historical provenance comment attached to earlier shipped fixes.	/* v101.53 — iPad/iOS: reserve the bottom-bar space with a flex-item spacer, not padding.
+HISTORICAL_ALLOWED	index.html:6772	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: a continuity follower carries no paragraph break, so the pair reads as one unit. */
+HISTORICAL_ALLOWED	index.html:7923	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: copying either member of a continuity group copies the whole grammatical
+HISTORICAL_ALLOWED	index.html:8212	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: a speech-end break sitting on a display-segment boundary would double the gap,
+HISTORICAL_ALLOWED	index.html:8278	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: approved display segmentation is applied HERE, not only in
+HISTORICAL_ALLOWED	index.html:8293	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: segmentation is handled in renderParaText below. No record carries both a
+HISTORICAL_ALLOWED	luisa_24_heures.html:997	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: one approved display unit. Block-level only - it contributes no characters, so
+HISTORICAL_ALLOWED	luisa_24_heures.html:1012	Historical provenance comment attached to earlier shipped fixes.	note panel was closed. Reported on iPhone against v101.53, where this was 0.9rem (14.4px). The
+HISTORICAL_ALLOWED	luisa_24_heures.html:1690	Historical provenance comment attached to earlier shipped fixes.	/* v101.53 — iPad/iOS: reserve the bottom-bar space with a flex-item spacer, not padding.
+HISTORICAL_ALLOWED	luisa_24_heures.html:6772	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: a continuity follower carries no paragraph break, so the pair reads as one unit. */
+HISTORICAL_ALLOWED	luisa_24_heures.html:7923	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: copying either member of a continuity group copies the whole grammatical
+HISTORICAL_ALLOWED	luisa_24_heures.html:8212	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: a speech-end break sitting on a display-segment boundary would double the gap,
+HISTORICAL_ALLOWED	luisa_24_heures.html:8278	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: approved display segmentation is applied HERE, not only in
+HISTORICAL_ALLOWED	luisa_24_heures.html:8293	Historical provenance comment attached to earlier shipped fixes.	/* v101.53: segmentation is handled in renderParaText below. No record carries both a
+HISTORICAL_ALLOWED	sw.js:19	Historical provenance comment for the v101.53 service-worker fix.	/* v101.53 FINDING-01 fix: cache.addAll() fetches with the DEFAULT cache mode, which consults the
+
+PATTERN: PASS_DEVICE_CONFIRMED
+COUNT: 0
+CLASSIFICATION: CLEAN
+
+PATTERN: mobileActionBar
+COUNT: 8
+HISTORICAL_ALLOWED	README.md:10	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	- The historical `#mobileActionBar` and `#selectionActionBar` business-logic paths are retired; compatibility wrapper function names feed `#contextActionBar`.
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:32	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  (function(){var _m=document.getElementById('mobileActionBar');if(_m)_m.remove();})();
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:36	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  bar.id = 'mobileActionBar';
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:74	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  const bar = document.getElementById('mobileActionBar');
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:284	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  return !!(target && target.closest && target.closest('#selectionActionBar, #colourPicker, #mobileActionBar, #androidHighlightHint, #androidHighlightModeBtn, .android-highlight-hint, [data-highlight-ui="true"]'));
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:330	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  const longPressBar = document.getElementById('mobileActionBar'); if (longPressBar) longPressBar.remove();
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:442	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-   long-press paragraph bar (#mobileActionBar) and stopped there, but selecting text raises
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:557	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  const bar = document.getElementById('mobileActionBar');
+
+PATTERN: selectionActionBar
+COUNT: 7
+HISTORICAL_ALLOWED	README.md:10	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	- The historical `#mobileActionBar` and `#selectionActionBar` business-logic paths are retired; compatibility wrapper function names feed `#contextActionBar`.
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:284	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  return !!(target && target.closest && target.closest('#selectionActionBar, #colourPicker, #mobileActionBar, #androidHighlightHint, #androidHighlightModeBtn, .android-highlight-hint, [data-highlight-ui="true"]'));
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:317	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  const bar = document.getElementById('selectionActionBar');
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:329	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  const old = document.getElementById('selectionActionBar'); if (old) old.remove();
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:414	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  bar.id = 'selectionActionBar';
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:443	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-   #selectionActionBar instead - and that one offered only Surligner, Copier and Fermer. So the
+HISTORICAL_ALLOWED	audit/stageC_html_exact_diff.patch:559	Exact before/after diff intentionally contains removed v101.55/legacy identifiers as evidence.	-  const selectionBar = document.getElementById('selectionActionBar');
+
+PATTERN: 24H-D
+COUNT: 2
+HISTORICAL_ALLOWED	README.md:5	README lineage/input-baseline or explicit retired-component explanation; current version remains v101.56.	Input baseline: **v101.55 / 24H-B**, explicitly authorised as the input to 24H-C. **v101.56 / 24H-C is the shared contextual-actions candidate; 24H-D has not started.**
+CURRENT_GUARD_ALLOWED	reports/stage_completion_report.md:34	Explicit statement that Stage D has not started; prevents accidental scope expansion.	24H-D has not started and is not authorised.
+
+PATTERN: Prier/Étudier
+COUNT: 0
+CLASSIFICATION: CLEAN
+
+UNCLASSIFIED_FAILURES: 0
+GATE: PASS

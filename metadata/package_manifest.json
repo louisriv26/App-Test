@@ -1,0 +1,127 @@
+{
+  "stage": "24H-C",
+  "app_version": "v101.56",
+  "status": "LIMITED_PASS_STATIC_DEVICE_PENDING",
+  "manifest_scope": "all package files except metadata/package_manifest.json and metadata/hash_manifest.json, which are declared below to avoid self-reference",
+  "files": [
+    {
+      "path": ".nojekyll",
+      "bytes": 0
+    },
+    {
+      "path": "README.md",
+      "bytes": 7536
+    },
+    {
+      "path": "REAL_DEVICE_QA_CHECKLIST.md",
+      "bytes": 2072
+    },
+    {
+      "path": "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
+      "bytes": 1659
+    },
+    {
+      "path": "audit/independent_candidate_four_pass_audit.json",
+      "bytes": 3169
+    },
+    {
+      "path": "audit/independent_four_pass_audit.md",
+      "bytes": 1216
+    },
+    {
+      "path": "audit/stageC_browser_runtime.json",
+      "bytes": 13655
+    },
+    {
+      "path": "audit/stageC_html_exact_diff.patch",
+      "bytes": 564233
+    },
+    {
+      "path": "audit/stageC_mutation_tests.json",
+      "bytes": 558
+    },
+    {
+      "path": "audit/stageC_route_regression.json",
+      "bytes": 5354
+    },
+    {
+      "path": "audit/stageC_static_audit.json",
+      "bytes": 2498
+    },
+    {
+      "path": "icon-180.png",
+      "bytes": 2699
+    },
+    {
+      "path": "icon-192.png",
+      "bytes": 2902
+    },
+    {
+      "path": "icon-512.png",
+      "bytes": 7894
+    },
+    {
+      "path": "index.html",
+      "bytes": 1796097
+    },
+    {
+      "path": "luisa_24_heures.html",
+      "bytes": 1796097
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 889
+    },
+    {
+      "path": "reports/full_regression_matrix.csv",
+      "bytes": 3631
+    },
+    {
+      "path": "reports/nested_zip_consistency_report.md",
+      "bytes": 227
+    },
+    {
+      "path": "reports/no_regression_fix_ledger.csv",
+      "bytes": 2261
+    },
+    {
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "bytes": 995
+    },
+    {
+      "path": "reports/root_deploy_consistency_report.md",
+      "bytes": 508
+    },
+    {
+      "path": "reports/stage_completion_report.md",
+      "bytes": 1635
+    },
+    {
+      "path": "reports/stale_reference_scan.txt",
+      "bytes": 16374
+    },
+    {
+      "path": "sw.js",
+      "bytes": 3780
+    },
+    {
+      "path": "version.json",
+      "bytes": 585
+    }
+  ],
+  "manifest_artifacts": [
+    "metadata/package_manifest.json",
+    "metadata/hash_manifest.json"
+  ],
+  "required_evidence": [
+    "reports/no_regression_fix_ledger.csv",
+    "reports/full_regression_matrix.csv",
+    "reports/stale_reference_scan.txt",
+    "reports/root_deploy_consistency_report.md",
+    "reports/nested_zip_consistency_report.md",
+    "reports/report_claims_vs_evidence_audit.md",
+    "audit/independent_four_pass_audit.md",
+    "metadata/hash_manifest.json",
+    "metadata/package_manifest.json"
+  ]
+}

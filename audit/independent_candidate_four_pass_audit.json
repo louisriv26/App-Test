@@ -1,0 +1,117 @@
+{
+  "gate": "24H-C_INDEPENDENT_CANDIDATE_FOUR_PASS",
+  "passes": {
+    "pass1_static": {
+      "checks": {
+        "html_replicas_equal": true,
+        "version_html": true,
+        "version_json": true,
+        "manifest": true,
+        "sw": true,
+        "readme": true,
+        "protected_equal": true,
+        "old_context_dom_ids_absent": true,
+        "context_component_present": true,
+        "syntax": true
+      },
+      "protected": [
+        {
+          "name": "CORPUS",
+          "equal": true,
+          "sha256": "4bdcb3bb8b55375854b7e4fd80d693ced3024785c428a662ce7b7178ee50f878"
+        },
+        {
+          "name": "TEXT_LIBRARY",
+          "equal": true,
+          "sha256": "8912faff465b73d67c7c1e5113d04d848c991902ccaa6fe1914accad0da91983"
+        },
+        {
+          "name": "HOUR_LINKED_TEXTS",
+          "equal": true,
+          "sha256": "abffddceeaf11cd74f043bea1d97568f2bd1ba28fb1fbc541610d282039c0095"
+        },
+        {
+          "name": "SPEECH_DATA",
+          "equal": true,
+          "sha256": "4c535a3263728ea5c37fbb247300e330e6e83136fa72ce15421f02f618a3d833"
+        },
+        {
+          "name": "INTERNAL_SUBHEADINGS",
+          "equal": true,
+          "sha256": "2cdc80893e8afad04d8990d3f7cbd240367fbbac51a360a1d12dcf46636708ae"
+        },
+        {
+          "name": "SPEECH_END_VISUAL_BREAKS",
+          "equal": true,
+          "sha256": "d3236ade48c811447acd7c2c79659e05b49928e86f90b61d35c1f53775b5b3ad"
+        }
+      ],
+      "pass": true
+    },
+    "pass2_runtime": {
+      "checks": {
+        "range_shared": true,
+        "range_exact": true,
+        "note_same_route": true,
+        "android_shared": true,
+        "android_whole": true,
+        "no_errors": true
+      },
+      "details": {
+        "range": {
+          "bar": true,
+          "mode": "range",
+          "oldMobile": false,
+          "oldSelection": false,
+          "h": {
+            "start": 6,
+            "end": 28,
+            "whole": false
+          },
+          "noteTarget": "PASSION24.HOUR.05.P005",
+          "errors": []
+        },
+        "android": {
+          "mode": "paragraph",
+          "android": true,
+          "wholeFlag": true,
+          "native": "",
+          "h": {
+            "start": 0,
+            "end": 227,
+            "whole": true,
+            "len": 227
+          },
+          "errors": []
+        }
+      },
+      "pass": true
+    },
+    "pass3_claims": {
+      "checks": {
+        "machine_evidence_all_pass": true,
+        "device_not_tested_rows": true,
+        "stage_report_limited": true,
+        "stage_report_no_production_pass_claim": true
+      },
+      "evidence": {
+        "stageC_static_audit.json": true,
+        "stageC_browser_runtime.json": true,
+        "stageC_mutation_tests.json": true,
+        "stageC_route_regression.json": true
+      },
+      "pass": true
+    },
+    "pass4_contradictions": {
+      "checks": {
+        "no_device_confirmed_claim": true,
+        "no_stage_d_started": true,
+        "no_old_bar_dom_ids": true,
+        "device_status_pending": true
+      },
+      "pass": true
+    }
+  },
+  "pass": true,
+  "recommendation": "LIMITED_PASS_STATIC_DEVICE_PENDING"
+}

@@ -1,0 +1,74 @@
+{
+  "checks": {
+    "root_index_equal": true,
+    "bare_lf": 0,
+    "app_version": true,
+    "evidence_stage_current": true,
+    "version_json": true,
+    "manifest": true,
+    "sw": true,
+    "readme": true,
+    "schema_unchanged": true,
+    "single_context_dom_id": true,
+    "shared_target_contract": true,
+    "compat_wrappers_only": true,
+    "pure_range_helper": true,
+    "pure_overlap_helper": true,
+    "android_shared_component": true,
+    "apple_paragraph_not_whole_by_default": true,
+    "note_schema_unchanged": true,
+    "stale_recovery_present": true,
+    "text_hash_preserved": true,
+    "protected_all_equal": true,
+    "js_syntax": true,
+    "sw_syntax": true,
+    "pass": true
+  },
+  "protected": [
+    {
+      "declaration": "CORPUS",
+      "baseline_sha256": "4bdcb3bb8b55375854b7e4fd80d693ced3024785c428a662ce7b7178ee50f878",
+      "candidate_sha256": "4bdcb3bb8b55375854b7e4fd80d693ced3024785c428a662ce7b7178ee50f878",
+      "equal": true,
+      "byte_equal": true
+    },
+    {
+      "declaration": "TEXT_LIBRARY",
+      "baseline_sha256": "8912faff465b73d67c7c1e5113d04d848c991902ccaa6fe1914accad0da91983",
+      "candidate_sha256": "8912faff465b73d67c7c1e5113d04d848c991902ccaa6fe1914accad0da91983",
+      "equal": true,
+      "byte_equal": true
+    },
+    {
+      "declaration": "HOUR_LINKED_TEXTS",
+      "baseline_sha256": "abffddceeaf11cd74f043bea1d97568f2bd1ba28fb1fbc541610d282039c0095",
+      "candidate_sha256": "abffddceeaf11cd74f043bea1d97568f2bd1ba28fb1fbc541610d282039c0095",
+      "equal": true,
+      "byte_equal": true
+    },
+    {
+      "declaration": "SPEECH_DATA",
+      "baseline_sha256": "4c535a3263728ea5c37fbb247300e330e6e83136fa72ce15421f02f618a3d833",
+      "candidate_sha256": "4c535a3263728ea5c37fbb247300e330e6e83136fa72ce15421f02f618a3d833",
+      "equal": true,
+      "byte_equal": true
+    },
+    {
+      "declaration": "INTERNAL_SUBHEADINGS",
+      "baseline_sha256": "2cdc80893e8afad04d8990d3f7cbd240367fbbac51a360a1d12dcf46636708ae",
+      "candidate_sha256": "2cdc80893e8afad04d8990d3f7cbd240367fbbac51a360a1d12dcf46636708ae",
+      "equal": true,
+      "byte_equal": true
+    },
+    {
+      "declaration": "SPEECH_END_VISUAL_BREAKS",
+      "baseline_sha256": "d3236ade48c811447acd7c2c79659e05b49928e86f90b61d35c1f53775b5b3ad",
+      "candidate_sha256": "d3236ade48c811447acd7c2c79659e05b49928e86f90b61d35c1f53775b5b3ad",
+      "equal": true,
+      "byte_equal": true
+    }
+  ],
+  "js_stderr": "",
+  "sw_stderr": "",
+  "diff_lines": 588
+}

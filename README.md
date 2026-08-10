@@ -1,10 +1,33 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.54`
+Version: `v101.56`
 
-Prior production remains v101.53 (5 August 2026). **v101.54 / 24H-A is a candidate only; it is not production-authorised.**
+Input baseline: **v101.55 / 24H-B**, explicitly authorised as the input to 24H-C. **v101.56 / 24H-C is the shared contextual-actions candidate; 24H-D has not started.**
 
-## 24H-A candidate (v101.54) — display settings contract
+## 24H-C candidate (v101.56) — one contextual action component
+
+- Range selections and paragraph targets now feed one internal target contract and one rendered contextual-action component: **Surligner · Copier · Note · Fermer**.
+- The historical `#mobileActionBar` and `#selectionActionBar` business-logic paths are retired; compatibility wrapper function names feed `#contextActionBar`.
+- iPhone/iPad/desktop exact selected-text offsets are preserved. Multi-paragraph range selections retain their per-paragraph canonical offsets.
+- Samsung/Android explicit **Paragraphe** mode still avoids native word selection; tapping a paragraph now opens the same contextual component, and choosing Surligner then highlights the whole paragraph.
+- Highlight range normalization and overlap detection have pure helpers with mutation/adversarial tests. Existing text hashes, paragraph fingerprints, grouped-highlight behavior and conservative stale-recovery logic remain unchanged.
+- Notes remain paragraph-anchored and retain the existing transactional save/rollback schema; no note schema migration is introduced.
+- The six protected corpus declarations remain byte-identical to v101.55.
+- Physical-device validation of iPhone/iPad exact range and Samsung paragraph mode is release-critical for Stage C; static/browser PASS alone cannot certify production.
+
+Input baseline: **v101.54 / 24H-A**, owner-confirmed as working before explicit authorisation to begin 24H-B. **v101.55 / 24H-B is the audited Repères baseline carried into 24H-C.**
+
+## 24H-B candidate (v101.55) — calm reader + optional Repères
+
+- The former user-facing binary mode is retired. The neutral **Repères** control now governs only technical/source markers.
+- Repères OFF hides paragraph numbers, source/page cues and speaker-attribution badges; direct-speech colours remain visible.
+- **Note · Surligner · Copier remain available with Repères OFF or ON**, including desktop paragraph actions and existing mobile selection/long-press routes.
+- Toggling Repères changes CSS classes only; it does not rebuild the reader. A semantic visible-anchor offset is restored after the layout change, while the DOM selection is preserved where the browser permits.
+- Persisted `studyMode` / `lp24_mode` storage remains unchanged for this compatibility release. New exports include both `showReperes` and `studyMode`; old exports containing only `studyMode` restore the equivalent Repères preference.
+- The six protected corpus declarations remain byte-identical to v101.54.
+- Stage-B static/runtime acceptance passed before packaging. This payload is designated the audited-candidate target; immutable reopened-package and independent audit results remain the final authority and no production deployment is claimed.
+
+## Carried forward from 24H-A (v101.54) — display settings contract
 
 - Four semantic reading levels: **Petit 16 px · Normal 19 px · Grand 22 px · Très grand 26 px**.
 - Fresh/untouched profiles default to **Normal 19 px**; old numeric `fontSize` values migrate once to semantic `fontLevel` while the numeric legacy mirror remains compatible.
@@ -13,7 +36,7 @@ Prior production remains v101.53 (5 August 2026). **v101.54 / 24H-A is a candida
 - Theme contract remains **Automatique · Clair · Sombre**; Automatique alone follows OS changes.
 - Direct-speech spans now expose non-colour speaker semantics to assistive technology; dark Father colour is adjusted to pass the tested speaker/highlight contrast matrix.
 - `CORPUS`, `TEXT_LIBRARY`, `HOUR_LINKED_TEXTS`, `SPEECH_DATA`, `INTERNAL_SUBHEADINGS` and `SPEECH_END_VISUAL_BREAKS` are unchanged.
-- Static/runtime/package qualification is documented in the 24H-A evidence bundle. **Real iPhone/iPad smoke and installed-PWA/live-origin checks remain pending**, so this candidate must not be represented as production-certified.
+- 24H-A static/runtime/package qualification was documented in its evidence bundle; the product owner subsequently confirmed that the candidate works and explicitly authorised 24H-B. Device details were not supplied in that confirmation.
 
 ### Historical production note
 

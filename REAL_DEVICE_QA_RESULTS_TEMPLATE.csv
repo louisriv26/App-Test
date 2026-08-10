@@ -1,1 +1,11 @@
-device,os_version,browser_or_install_mode,checkpoint_sha256,test_date,tester,text_sizes_16_19_22_26,live_preview,chrome_stable_at_26px,theme_system_light_dark,selection_or_passage_preserved,persistence,notes_highlights_copy_regression,rotation,installed_pwa,result,notes
+device,os_version,browser_or_install_mode,checkpoint_sha256,scenario,expected,result,evidence,notes
+iPhone,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,exact_range_highlight,Only exact selected text highlighted and persists,,,
+iPhone,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,two_paragraph_grouped_highlight,Both exact segments persist as one group,,,
+iPhone,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,selection_note_two_notes,Two notes on same paragraph survive reload,,,
+iPhone,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,note_input_zoom,Textarea remains 16px and no stuck horizontal pan,,,
+iPad,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,exact_range_highlight,Only exact selected text highlighted and persists,,,
+iPad,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,orientation_reader,Selection and reader remain usable portrait and landscape,,,
+Samsung,,Chrome,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,paragraph_mode,No native word-selection overlay; shared contextual bar opens,,,
+Samsung,,Chrome,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,whole_paragraph_highlight,Whole paragraph highlights and persists in Mon Espace,,,
+Samsung,,Chrome,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,paragraph_copy_note,Copy and Note work from same shared contextual bar,,,
+All,,Browser/PWA,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,reperes_parity,Note Surligner Copier available with Repères OFF and ON,,,
