@@ -1,7 +1,0 @@
-item,finding,change,status,redo_count,evidence
-G-A11Y-01,Frequent touch targets below 44px,CSS-only 44px minimum hit-area hardening,PASS,0,Browser measurements on home/hours/reader/search/espace; mutation removes hardening and is detected
-G-UPDATE-01,Unsaved note could be silently lost on Actualiser,Guard refreshAppForUpdate before SW/update/navigation,PASS,0,"Browser seeded non-empty note; update returns false, draft remains/focused"
-G-A11Y-02,Help returned focus to hidden desktop Help button when invoked elsewhere,Capture actual invoking control,PASS,1,Keyboard smoke initially failed; corrected; Tab trap/Escape/return now passes
-G-A11Y-03,Update banner lacked explicit live-region semantics,role=status + aria-live polite + aria-atomic,PASS,0,Settled banner semantics and 44px controls measured; mutation detected
-G-A11Y-04,Reduced motion needed ecosystem-level hardening,Near-zero transitions/animations and auto scroll under prefers-reduced-motion,PASS,0,Dedicated reduced-motion browser context
-G-PWA-01,PWA/update certification,No behavior rewrite; v101.61 cache identity only,LIMITED_PASS,0,Deterministic SW contract passes; physical installed-PWA/live-origin NOT_TESTED

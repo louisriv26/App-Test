@@ -1,8 +1,19 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.61`
+Version: `v101.62`
 
-Input baseline: **v101.60 / 24H-F**, explicitly approved by the product owner as the immutable input to 24H-G. Stage G changes accessibility/PWA hardening only; corpus, storage schemas, Repères, contextual actions, deep-link contracts, navigation decisions and platform highlighting semantics remain unchanged.
+Stage-G programme baseline: **v101.60 / 24H-F**, explicitly approved by the product owner as the immutable input to 24H-G.
+
+Corrective repair input: the exact audited **v101.61 / 24H-G** candidate. v101.62 changes only reader-history continuity and progress-strip restoration after leaving the reader; corpus, storage schemas, Repères, contextual actions, deep-link contracts, navigation decisions and platform highlighting semantics remain unchanged.
+
+
+## 24H-G corrective repair (v101.62) — Mon Espace → Retour reader continuity
+
+- Fixes the owner-reproduced v101.61 defect where leaving an Hour for **Mon Espace** and pressing **Retour** reopened only the Hour start instead of the exact reading position.
+- Reader history now carries the Hour, active reader tab and a stable visible paragraph/visual offset snapshot.
+- Returning to the reader restores that exact context and immediately re-enables/recalculates the top reading-progress strip.
+- Legacy numeric reader-history entries remain accepted for compatibility.
+- This repair does not change corpus declarations, note/highlight schemas, Repères, search/deep links, navigation structure, Apple exact-range highlighting or Samsung paragraph policy.
 
 ## 24H-G candidate (v101.61) — accessibility / PWA hardening
 

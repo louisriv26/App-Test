@@ -1,6 +1,14 @@
-# 24H-G / v101.61 — physical device, installed-PWA and live-origin checklist
+# 24H-G repair / v101.62 — physical device, installed-PWA and live-origin checklist
 
-Use the exact v101.61 candidate bytes. Record PASS/FAIL/NOT_TESTED for every row.
+Use the exact v101.62 candidate bytes. Record PASS/FAIL/NOT_TESTED for every row.
+
+
+## Owner-reported reader-continuity regression — release-critical retest
+- On iPhone, open an Hour and scroll to a clearly identifiable paragraph around the middle of the meditation.
+- Tap **Mon Espace**, then **Retour**.
+- PASS only if the same reader tab and the same paragraph/reading position are restored (not the beginning of the Hour).
+- Confirm the thin reading-progress strip at the top is visible immediately after Retour and reflects approximately the restored position.
+- Scroll further and confirm the strip continues to update normally.
 
 ## iPhone Safari / installed PWA
 - 16 / 19 / 22 / 26 px reader sizes; no clipping.
@@ -11,7 +19,7 @@ Use the exact v101.61 candidate bytes. Record PASS/FAIL/NOT_TESTED for every row
 - Repères OFF/ON preserves passage and actions.
 - Portrait ↔ landscape rotation preserves a usable reader.
 - With a non-empty unsaved Note open, an available-update Actualiser action must NOT reload; the draft must remain and receive focus.
-- Existing installed build → v101.61 update preserves personal data.
+- Existing installed build → v101.62 update preserves personal data.
 - Offline reopen after one successful online load works.
 - A copied deep link opens the expected Hour/paragraph.
 
@@ -34,10 +42,10 @@ Use the exact v101.61 candidate bytes. Record PASS/FAIL/NOT_TESTED for every row
 - Reduced-motion OS preference removes non-essential animation.
 
 ## Live GitHub Pages
-- Visible version v101.61.
+- Visible version v101.62.
 - Service worker controls the page after activation.
-- Cache generation is luisa-24h-v101-61.
-- Existing install updates to v101.61 without personal-data loss.
+- Cache generation is luisa-24h-v101-62.
+- Existing install updates to v101.62 without personal-data loss.
 - Offline reopen succeeds after successful online load.
 - Old app cache generations are removed only within the luisa-24h- namespace.
 - Root/deploy bytes correspond to the audited candidate.
