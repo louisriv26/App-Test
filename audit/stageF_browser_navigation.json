@@ -1,0 +1,219 @@
+{
+  "gate": "24H-F_BROWSER_NAVIGATION",
+  "identity": {
+    "v": "v101.60",
+    "stage": "24H-F navigation prototype: Accueil and Heures retained, Recherche promoted to the bottom navigation, Espace renamed Mon Espace, and Approfondir preserved as a prominent secondary destination; protected corpus and prior data/reader contracts preserved",
+    "view": "home"
+  },
+  "bottom_initial": {
+    "labels": [
+      "Accueil",
+      "Heures",
+      "Recherche",
+      "Mon Espace"
+    ],
+    "ids": [
+      "bnHome",
+      "bnHours",
+      "bnSearch",
+      "bnEspace"
+    ],
+    "active": "bnHome",
+    "aria": [
+      "Accueil",
+      "Heures",
+      "Recherche",
+      "Mon Espace"
+    ],
+    "scrollWidth": 390,
+    "clientWidth": 390
+  },
+  "search_entry": {
+    "view": "search",
+    "active": "bnSearch",
+    "q": ""
+  },
+  "search_back": {
+    "before": {
+      "q": "Jésus",
+      "f": "hour",
+      "scroll": 400
+    },
+    "opened": {
+      "view": "reader",
+      "hour": 1
+    },
+    "after": {
+      "view": "search",
+      "q": "Jésus",
+      "f": "hour",
+      "scroll": 400,
+      "active": "bnSearch"
+    }
+  },
+  "espace": {
+    "view": "espace",
+    "title": "Mon Espace",
+    "active": "bnEspace",
+    "label": "Mon Espace"
+  },
+  "home_approfondir": {
+    "present": true,
+    "topSearchInDom": true,
+    "opened": {
+      "view": "library",
+      "title": "Approfondir la Passion",
+      "active": ""
+    },
+    "back": {
+      "view": "home",
+      "active": "bnHome"
+    }
+  },
+  "hours_approfondir": {
+    "present": true,
+    "active": "bnHours",
+    "opened": {
+      "view": "library",
+      "title": "Approfondir la Passion"
+    },
+    "back": {
+      "view": "hours",
+      "active": "bnHours"
+    }
+  },
+  "reader_approfondir": {
+    "view": "reader",
+    "tab": "linked",
+    "linked": true,
+    "seeAlso": true,
+    "opened": {
+      "view": "library",
+      "title": "Approfondir la Passion"
+    },
+    "back": {
+      "view": "reader",
+      "hour": 17,
+      "tab": "linked",
+      "linked": true
+    }
+  },
+  "settings_approfondir": true,
+  "help": {
+    "text": "\n    \n      \n        Guide d’utilisationAide et À propos\n        × Fermer\n      \n      \n      Accueil · Heures · Recherche · Mon Espace\n        🏠Accueil — Reprendre la lecture, accéder aux prières, ou approfondir la Passion. La grille des 24 Heures est toujours visible en accueil — appuyez sur le titre ou une tuile pour naviguer. La carte du haut affiche l’Heure méditée du jour et propose la suivante.\n        ⏱Heures — Affiche les 24 Heures avec le titre et l’horaire. Appuyez sur une carte pour ouvrir la méditation.\n        🔎Recherche — Accès direct dans la barre du bas, avec le raccourci loupe du haut conservé pendant cette transition.\n        📖Approfondir — Destination secondaire toujours disponible depuis l’Accueil, la page Heures, chaque Heure et les Réglages.\n        ◈Mon Espace — Reprendre là où vous en étiez, vos surlignages, notes personnelles, progression, export et import de données.\n        ⚙Réglages — Sur iPad et ordinateur, le bouton ⚙ en haut à droite donne accès à la navigation complète : Les 24 Heures par titre, Prières, Approfondir, Mon Espace, aide et préférences.\n\n      \n      Comment pratiquer\n        ✝Flux conseillé — Priez une Heure par jour, dans l’ordre, puis continuez l’Heure suivante.\n        ⏱Vous pouvez aussi choisir une Heure selon le moment de la journée ou approfondir librement une Heure particulière.\n        📖Approfondir ouvre les textes du Livre du Ciel liés à la Passion et aux Heures.\n        ✓Méditée — Après avoir prié une Heure, appuyez sur Méditée en bas de la page. Cela enregistre votre méditation du jour et met à jour la grille des 24 Heures sur l’Accueil.\n      \n      Progression et cycle\n        ✓Enregistrer une méditation — Le bouton Méditée en bas de chaque Heure enregistre la méditation du jour et met à jour la grille des 24 Heures. Un deuxième appui l’annule.\n        📊Carte du jour — Sur l’Accueil, la carte du haut affiche l’Heure méditée du jour et propose la suivante. Appuyez dessus pour y accéder directement.\n        ↺Nouveau cycle — Une fois les 24 Heures priées, la carte indique « Cycle accompli ». Appuyez sur ↺ Recommencer le cycle, ou sur le bouton ↺ dans l’en-tète de la grille des 24 Heures, pour démarrer un nouveau cycle.\n      \n      Mon Espace\n        ☰Sur iPad ou ordinateur, appuyez sur ⚙ Réglages en haut à droite, puis Mon Espace dans la section Parcours.\n        ▣Sur iPhone, ouvrez Mon Espace dans la barre du bas.\n        Mon Espace ne remplace pas Approfondir dans une Heure : il regroupe seulement vos éléments personnels.\n      \n      Surlignages et copie\n        1Sélectionnez un passage du texte.\n        2La barre d’action affiche Surligner · Copier · Lien · Note · Fermer.\n        3Appuyez sur Surligner puis choisissez une couleur.\n        4Les actions de paragraphe Surligner · Copier · Note restent disponibles avec les Repères affichés ou masqués. Les Repères ne commandent que les indications techniques.\n        La palette de couleurs ne doit apparaître qu’après avoir appuyé sur Surligner.Sur Samsung/Android, utilisez Paragraphe : touchez un paragraphe, puis choisissez Surligner dans la même barre contextuelle. Le surlignage porte sur le paragraphe entier ; la sélection mot à mot n’est pas utilisée.\n      \n      Fin d’une Heure\n        ↟Après avoir prié une Heure, appuyez sur Méditée en bas de la page pour l’enregistrer. La prière de fin est proposée dans le grand encadré de prière. Dans Continuer le chemin des Heures, utilisez Réflexion et pratique, Approfondir, Revenir au début ou Prier l’Heure suivante pour poursuivre sans remonter aux onglets. À la 24e Heure, vous pouvez revoir votre progression ou recommencer un nouveau cycle.\n      \n      Repères d'étude et notes\n        #Repères — Le bouton # affiche ou masque uniquement les indications techniques : numéros de paragraphe, références de source et badges d’attribution (Jésus, Père, Marie). Désactivés par défaut pour une lecture plus sobre. Les couleurs des paroles directes restent visibles. Note, Surligner et Copier restent disponibles dans les deux états.\n        ✎Notes personnelles — La même barre contextuelle Surligner · Copier · Lien · Note · Fermer sert aux passages sélectionnés et aux paragraphes ciblés. Sur iPhone/iPad, utilisez la sélection native pour choisir exactement les mots voulus ; le surlignage reste limité à cette sélection. Sur Samsung/Android, le mode Paragraphe cible le paragraphe entier. Sur ordinateur, une sélection ouvre la même barre et les actions de paragraphe restent disponibles à droite. Lien copie une adresse stable sans inclure le texte sélectionné ni vos données personnelles. Appuyez sur Note pour écrire (2 000 caractères max). Vos notes sont consultables dans Mon Espace.\n      \n      Plan de l'Heure\n        ≡≡ Plan — Pour les Heures 15 à 24, un bouton ≡ Plan apparaît dans l'en-tête de l'Heure. Il ouvre la liste des scènes de cette Heure (ex. : La Flagellation, Le Chemin au Calvaire, Jésus rencontre sa Mère…). Appuyez sur une scène pour y aller directement.\n      \n      Recherche\n        🔍Tapez un mot ou une expression pour chercher dans toute l'app. Affinez avec les filtres Tout · Heures · Réflexions · Prières · Compléments · Paroles directes pour limiter les résultats à un seul type de contenu.\n        🔍Le filtre Paroles directes affiche immédiatement toutes les paroles prononcées par Jésus, le Père ou Marie dans les 24 Heures — sans avoir besoin de taper un mot. Filtrez par orateur avec les boutons ✝ Jésus · ◆ Père · ✦ Marie. Vous pouvez aussi taper un mot pour chercher à l'intérieur de ces paroles.\n      \n      Mise à jour\n        ↻Si une mise à jour est disponible, une bannière apparaît en haut de l’Accueil. Appuyez sur Actualiser pour charger la nouvelle version. Si la bannière reste après l’actualisation, fermez complètement l’app et rouvrez-la.\n        ↻ Rechercher une mise à jour\n      \n      Assistance et liens\n        ↗Copier le lien — Dans la barre contextuelle d’un passage, Lien copie une adresse stable vers l’Heure et le paragraphe, la prière ou le texte lié. Le lien ne contient ni votre note ni le contenu de vos surlignages.\n        !Signaler un problème de texte prépare les informations techniques utiles (version, empreinte du corpus, route et ID stable visible) sans copier vos notes ou vos surlignages.\n        ⌘Diagnostics copie la version, l’état PWA/cache/stockage et vos réglages d’affichage, sans contenu personnel.\n        ! Signaler un problème de texte\n        ⌘ Copier les diagnostics\n      \n      À propos du corpus\n        ✦Version : v101.60 · Empreinte corpus : 53a6d16e33ca5497\n        Les annotations de paroles directes sont une aide de lecture et restent soumises à validation éditoriale.\n      \n      \n    ",
+    "heading": [
+      "Accueil · Heures · Recherche · Mon Espace",
+      "Comment pratiquer",
+      "Progression et cycle",
+      "Mon Espace",
+      "Surlignages et copie",
+      "Fin d’une Heure",
+      "Repères d'étude et notes",
+      "Plan de l'Heure",
+      "Recherche",
+      "Mise à jour",
+      "Assistance et liens",
+      "À propos du corpus"
+    ]
+  },
+  "phone_errors": [],
+  "phone_console_errors": [],
+  "layouts": [
+    {
+      "vw": 320,
+      "navVisible": true,
+      "navSW": 320,
+      "navCW": 320,
+      "labels": [
+        "Accueil",
+        "Heures",
+        "Recherche",
+        "Mon Espace"
+      ],
+      "buttonOverflow": false,
+      "topSearchDisplay": "none",
+      "errors": [],
+      "console_errors": []
+    },
+    {
+      "vw": 375,
+      "navVisible": true,
+      "navSW": 375,
+      "navCW": 375,
+      "labels": [
+        "Accueil",
+        "Heures",
+        "Recherche",
+        "Mon Espace"
+      ],
+      "buttonOverflow": false,
+      "topSearchDisplay": "none",
+      "errors": [],
+      "console_errors": []
+    },
+    {
+      "vw": 430,
+      "navVisible": true,
+      "navSW": 430,
+      "navCW": 430,
+      "labels": [
+        "Accueil",
+        "Heures",
+        "Recherche",
+        "Mon Espace"
+      ],
+      "buttonOverflow": false,
+      "topSearchDisplay": "none",
+      "errors": [],
+      "console_errors": []
+    },
+    {
+      "vw": 820,
+      "navVisible": true,
+      "navSW": 598,
+      "navCW": 598,
+      "labels": [
+        "Accueil",
+        "Heures",
+        "Recherche",
+        "Mon Espace"
+      ],
+      "buttonOverflow": false,
+      "topSearchDisplay": "flex",
+      "errors": [],
+      "console_errors": []
+    },
+    {
+      "vw": 1180,
+      "navVisible": true,
+      "navSW": 598,
+      "navCW": 598,
+      "labels": [
+        "Accueil",
+        "Heures",
+        "Recherche",
+        "Mon Espace"
+      ],
+      "buttonOverflow": false,
+      "topSearchDisplay": "flex",
+      "errors": [],
+      "console_errors": []
+    }
+  ],
+  "acceptance": {
+    "identity": true,
+    "bottom_labels_exact": true,
+    "bottom_no_overflow": true,
+    "search_primary_active": true,
+    "search_back_context": true,
+    "mon_espace_exact": true,
+    "top_search_preserved": true,
+    "approfondir_home": true,
+    "approfondir_hours": true,
+    "approfondir_reader": true,
+    "approfondir_settings": true,
+    "help_current": true,
+    "no_page_errors": true
+  },
+  "pass": true
+}

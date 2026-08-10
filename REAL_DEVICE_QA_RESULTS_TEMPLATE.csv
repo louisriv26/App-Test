@@ -1,11 +1,6 @@
-device,os_version,browser_or_install_mode,checkpoint_sha256,scenario,expected,result,evidence,notes
-iPhone,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,exact_range_highlight,Only exact selected text highlighted and persists,,,
-iPhone,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,two_paragraph_grouped_highlight,Both exact segments persist as one group,,,
-iPhone,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,selection_note_two_notes,Two notes on same paragraph survive reload,,,
-iPhone,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,note_input_zoom,Textarea remains 16px and no stuck horizontal pan,,,
-iPad,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,exact_range_highlight,Only exact selected text highlighted and persists,,,
-iPad,,Safari,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,orientation_reader,Selection and reader remain usable portrait and landscape,,,
-Samsung,,Chrome,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,paragraph_mode,No native word-selection overlay; shared contextual bar opens,,,
-Samsung,,Chrome,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,whole_paragraph_highlight,Whole paragraph highlights and persists in Mon Espace,,,
-Samsung,,Chrome,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,paragraph_copy_note,Copy and Note work from same shared contextual bar,,,
-All,,Browser/PWA,db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44,reperes_parity,Note Surligner Copier available with Repères OFF and ON,,,
+scenario,status,evidence
+24H-F owner navigation acceptance,NOT_TESTED,
+24H-F staging usability/back-context,NOT_TESTED,
+24H-E live/staging deep-link route,NOT_TESTED,
+iPhone/iPad inherited Stage-C,NOT_TESTED,
+Samsung/Android inherited Stage-C,NOT_TESTED,

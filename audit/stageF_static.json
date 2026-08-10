@@ -1,0 +1,53 @@
+{
+  "gate": "24H-F_STATIC",
+  "checks": {
+    "identity": true,
+    "replicas": true,
+    "crlf": true,
+    "syntax": true,
+    "protected": true,
+    "bottom_primary_grammar": true,
+    "top_search_preserved": true,
+    "search_active_mapping": true,
+    "approfondir_preserved": true,
+    "help_current": true,
+    "pwa_identity_preserved": true,
+    "snapshot_schema_unchanged": true,
+    "deep_link_contract_preserved": true
+  },
+  "protected": {
+    "CORPUS": {
+      "same": true,
+      "baseline_sha256": "4bdcb3bb8b55375854b7e4fd80d693ced3024785c428a662ce7b7178ee50f878",
+      "candidate_sha256": "4bdcb3bb8b55375854b7e4fd80d693ced3024785c428a662ce7b7178ee50f878"
+    },
+    "TEXT_LIBRARY": {
+      "same": true,
+      "baseline_sha256": "8912faff465b73d67c7c1e5113d04d848c991902ccaa6fe1914accad0da91983",
+      "candidate_sha256": "8912faff465b73d67c7c1e5113d04d848c991902ccaa6fe1914accad0da91983"
+    },
+    "HOUR_LINKED_TEXTS": {
+      "same": true,
+      "baseline_sha256": "abffddceeaf11cd74f043bea1d97568f2bd1ba28fb1fbc541610d282039c0095",
+      "candidate_sha256": "abffddceeaf11cd74f043bea1d97568f2bd1ba28fb1fbc541610d282039c0095"
+    },
+    "SPEECH_DATA": {
+      "same": true,
+      "baseline_sha256": "4c535a3263728ea5c37fbb247300e330e6e83136fa72ce15421f02f618a3d833",
+      "candidate_sha256": "4c535a3263728ea5c37fbb247300e330e6e83136fa72ce15421f02f618a3d833"
+    },
+    "INTERNAL_SUBHEADINGS": {
+      "same": true,
+      "baseline_sha256": "2cdc80893e8afad04d8990d3f7cbd240367fbbac51a360a1d12dcf46636708ae",
+      "candidate_sha256": "2cdc80893e8afad04d8990d3f7cbd240367fbbac51a360a1d12dcf46636708ae"
+    },
+    "SPEECH_END_VISUAL_BREAKS": {
+      "same": true,
+      "baseline_sha256": "d3236ade48c811447acd7c2c79659e05b49928e86f90b61d35c1f53775b5b3ad",
+      "candidate_sha256": "d3236ade48c811447acd7c2c79659e05b49928e86f90b61d35c1f53775b5b3ad"
+    }
+  },
+  "js_check": "",
+  "sw_check": "",
+  "pass": true
+}

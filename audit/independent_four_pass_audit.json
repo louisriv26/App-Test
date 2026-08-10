@@ -1,0 +1,17 @@
+{
+  "gate": "24H-F_INDEPENDENT_FOUR_PASS_PREPACKAGE",
+  "passes": {
+    "pass1_static_navigation": true,
+    "pass2_inherited_regression": true,
+    "pass3_claims_vs_evidence": true,
+    "pass4_contradictions_stale": true
+  },
+  "pending_external": [
+    "24H-F staging usability review",
+    "24H-F owner/user acceptance",
+    "inherited Stage-E live route",
+    "inherited Stage-C physical devices",
+    "production deployment"
+  ],
+  "pass": true
+}

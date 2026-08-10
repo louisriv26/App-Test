@@ -1,8 +1,8 @@
 {
-  "gate": "24H-C_BROWSER_RUNTIME",
+  "gate": "24H-E_INHERITED_STAGE_C_BROWSER_REGRESSION",
   "identity": {
-    "version": "v101.56",
-    "evidence": "24H-C shared contextual actions candidate: one target contract/component for range and paragraph actions; exact-range Apple/desktop behavior and Samsung whole-paragraph mode preserved; protected corpus unchanged",
+    "version": "v101.60",
+    "evidence": "24H-F navigation prototype: Accueil and Heures retained, Recherche promoted to the bottom navigation, Espace renamed Mon Espace, and Approfondir preserved as a prominent secondary destination; protected corpus and prior data/reader contracts preserved",
     "schema": 6,
     "snapshot": 3
   },
@@ -28,6 +28,7 @@
       "buttons": [
         "◐\nSurligner",
         "⎘\nCopier",
+        "↗\nLien",
         "✎\nNote",
         "✕\nFermer"
       ],
@@ -61,7 +62,7 @@
     },
     "exact_highlight": {
       "record": {
-        "id": "hl_1786332332726",
+        "id": "hl_1786337479095",
         "target_id": "PASSION24.HOUR.01.P002",
         "target_type": "hour_meditation",
         "start_offset": 5,
@@ -76,8 +77,8 @@
         "paragraph_fingerprint": "40e34c2d42d72ea1094eecff0d5fffe3578257f60c23ca3c4644425a4ffa0ac5",
         "corpus_version": "2021-GE-LumenLuminis",
         "schema_version": 6,
-        "created_at": "2026-08-10T03:25:32.726Z",
-        "updated_at": "2026-08-10T03:25:32.726Z",
+        "created_at": "2026-08-10T04:51:19.095Z",
+        "updated_at": "2026-08-10T04:51:19.095Z",
         "stale": false,
         "whole_paragraph": false,
         "android_paragraph_mode": false,
@@ -94,6 +95,7 @@
       "buttons": [
         "◐\nSurligner",
         "⎘\nCopier",
+        "↗\nLien",
         "✎\nNote",
         "✕\nFermer"
       ],
@@ -163,8 +165,8 @@
     "multi_result": {
       "a": [
         {
-          "id": "hlg_1786332333363_0",
-          "group": "hlg_1786332333363",
+          "id": "hlg_1786337479722_0",
+          "group": "hlg_1786337479722",
           "start": 3,
           "end": 21,
           "count": 2,
@@ -173,8 +175,8 @@
       ],
       "b": [
         {
-          "id": "hlg_1786332333363_1",
-          "group": "hlg_1786332333363",
+          "id": "hlg_1786337479722_1",
+          "group": "hlg_1786337479722",
           "start": 4,
           "end": 24,
           "count": 2,
@@ -247,12 +249,14 @@
       "off": [
         "◐\nSurligner",
         "⎘\nCopier",
+        "↗\nLien",
         "✎\nNote",
         "✕\nFermer"
       ],
       "on": [
         "◐\nSurligner",
         "⎘\nCopier",
+        "↗\nLien",
         "✎\nNote",
         "✕\nFermer"
       ]
@@ -278,7 +282,7 @@
   },
   "mobile_range": {
     "result": {
-      "actions": "TEXTE SÉLECTIONNÉ\n◐\nSurligner\n⎘\nCopier\n✎\nNote\n✕\nFermer",
+      "actions": "TEXTE SÉLECTIONNÉ\n◐\nSurligner\n⎘\nCopier\n↗\nLien\n✎\nNote\n✕\nFermer",
       "target": {
         "mode": "range",
         "paragraphId": "PASSION24.HOUR.02.P003",
@@ -304,7 +308,7 @@
   "android": {
     "setup": {
       "ok": true,
-      "bar": "PARAGRAPHE SÉLECTIONNÉ\n◐\nSurligner\n⎘\nCopier\n✎\nNote\n✕\nFermer",
+      "bar": "PARAGRAPHE SÉLECTIONNÉ\n◐\nSurligner\n⎘\nCopier\n↗\nLien\n✎\nNote\n✕\nFermer",
       "target": {
         "mode": "paragraph",
         "paragraphId": "PASSION24.HOUR.03.P004",
@@ -340,7 +344,7 @@
     },
     "highlight": {
       "record": {
-        "id": "hl_1786332335183",
+        "id": "hl_1786337481592",
         "target_id": "PASSION24.HOUR.03.P004",
         "target_type": "hour_meditation",
         "start_offset": 0,
@@ -355,8 +359,8 @@
         "paragraph_fingerprint": "be3da80f82d05aff9c05fe07fc24cabe6683d0015324950a22c0dd21578e2929",
         "corpus_version": "2021-GE-LumenLuminis",
         "schema_version": 6,
-        "created_at": "2026-08-10T03:25:35.183Z",
-        "updated_at": "2026-08-10T03:25:35.183Z",
+        "created_at": "2026-08-10T04:51:21.592Z",
+        "updated_at": "2026-08-10T04:51:21.592Z",
         "stale": false,
         "whole_paragraph": true,
         "android_paragraph_mode": true,

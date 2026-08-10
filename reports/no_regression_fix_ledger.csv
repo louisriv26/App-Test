@@ -1,13 +1,6 @@
-item,scope,status,redo_count,evidence_summary,evidence_paths
-C01,Shared contextual target/component,IMPLEMENTED,1,Replaced duplicate mobile/selection business logic with one #contextActionBar; compatibility wrappers only.,audit/stageC_static_audit.json; audit/stageC_browser_runtime.json
-C02,Pure range normalization,IMPLEMENTED,0,normalizeHighlightRange introduced and used by selection paths.,audit/stageC_mutation_tests.json; audit/stageC_browser_runtime.json
-C03,Exact range and multi-range routing,IMPLEMENTED,0,Range targets retain canonical per-paragraph offsets.,audit/stageC_browser_runtime.json
-C04,Samsung paragraph targeting,IMPLEMENTED,0,Samsung/Android explicit paragraph mode feeds same component and avoids native selection.,audit/stageC_browser_runtime.json
-C05,Selection protection integration,IMPLEMENTED,1,Initial generic suppression blocked explicit rapid follow-up actions; suppression removed from explicit component entry while automatic capture guards remain.,audit/stageC_browser_runtime.json
-C06,One rendered contextual component,IMPLEMENTED,0,Surligner/Copier/Note/Fermer are one component for range and paragraph target modes.,audit/stageC_static_audit.json; audit/stageC_browser_runtime.json
-C07,Colour picker handoff,IMPLEMENTED,0,Context target converts to pending highlight contract without schema downgrade.,audit/stageC_browser_runtime.json
-C08,Pure overlap-removal plan,IMPLEMENTED,0,Overlap/group removal calculation isolated and mutation-tested.,audit/stageC_mutation_tests.json
-C09,Help copy,IMPLEMENTED,0,Help describes shared contextual actions and Samsung paragraph flow.,audit/stageC_html_exact_diff.patch
-C10,Version/evidence identity,IMPLEMENTED,0,APP_VERSION/version.json/manifest/SW/README moved to v101.56 and current evidence comments.,audit/stageC_static_audit.json
-QA01,Initial generated common helper syntax,REDO_PASS,1,"First generator output contained an invalid escaped newline; caught by syntax gate, generator corrected, rebuilt from immutable v101.55.",audit/stageC_static_audit.json
-QA02,Copy-route assertion,TEST_HARNESS_CORRECTED,0,Harness expected 1re while baseline citation emits 1e; assertion narrowed to copy contract without changing app wording.,audit/stageC_browser_runtime.json
+item,scope,status,redo_count,result,evidence
+F01,Bottom navigation grammar,PASS,0,Accueil · Heures · Recherche · Mon Espace; top Search retained,audit/stageF_browser_navigation.json
+F02,Approfondir secondary accessibility,PASS,0,"Present from Home, Heures, reader, Settings",audit/stageF_browser_navigation.json
+F03,Back/context restoration,PASS,1,First run exposed Home active-state loss; fixed and rerun,audit/stageF_browser_navigation.json
+F04,Mon Espace exact label,PASS,0,Primary label and destination exact,audit/stageF_browser_navigation.json
+F05,Stage-F mutation proof,PASS,0,4/4 injected navigation defects detected,audit/stageF_mutation_proof.json

@@ -1,3 +1,3 @@
-# Nested ZIP consistency — 24H-C
+# Nested ZIP consistency
 
-No nested ZIP/package exists in the bound v101.55 payload or the v101.56 candidate. Gate status: **NOT_APPLICABLE**. The final outer ZIP will be reopened from disk and audited independently.
+No nested ZIP is part of the 24H-F package. `NO_NESTED_ZIP = PASS`.

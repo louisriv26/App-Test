@@ -1,34 +1,34 @@
-# 24H-C Stage Completion Report — pre-final-reopen
+# 24H-F Stage Completion Report — pre-final-reopen
 
 ## STAGE
-24H-C — contextual actions / highlight / note unification
+24H-F — navigation harmonisation prototype.
 
 ## INPUT BASELINE
-v101.55 / 24H-B, explicitly owner-authorised.
+v101.59 / 24H-E immutable candidate, owner-authorised as input to 24H-F.
 
 ## SCOPE EXECUTED
-One shared contextual target contract/component for range and paragraph actions; pure highlight range/overlap helpers; existing Apple exact-range and Samsung whole-paragraph policies preserved; notes routed through the same component.
+Primary bottom navigation prototype: Accueil · Heures · Recherche · Mon Espace. Top Search shortcut retained. Approfondir removed only from the primary bottom slot and preserved prominently from Home, Heures, reader, Settings/sidebar. Back/context restoration verified and one Home active-state defect fixed.
 
 ## FILES CHANGED
-README.md; REAL_DEVICE_QA_CHECKLIST.md; REAL_DEVICE_QA_RESULTS_TEMPLATE.csv; index.html; luisa_24_heures.html; manifest.json; sw.js; version.json. Icons and .nojekyll unchanged. Evidence files added under reports/, audit/, metadata/.
+`luisa_24_heures.html`, `index.html`, `README.md`, `version.json`, `manifest.json`, `sw.js`, Stage-F QA checklist/results template; Stage-F reports/evidence added.
 
 ## PROTECTED DATA
-All six governed declarations byte-identical to v101.55. See `audit/stageC_static_audit.json`.
+All six protected declaration hashes are byte-identical to v101.59. Stable IDs and speech offsets unchanged.
 
 ## MIGRATION
-No user-data schema bump. Note and highlight schemas preserved.
+No user-data or PWA identity migration.
 
 ## TESTS
-Static/syntax, shared-component runtime, exact/multi-range highlights, Samsung paragraph mode emulation, notes, storage-denial rollback, stale recovery, Repères parity, mutation tests, all-24-Hour route smoke, search normalization, speech offset validation, RN3 progression.
+Stage-F browser navigation matrix PASS; Stage-F mutation proof 4/4 PASS; inherited Stage-E/D/C and all-24-Hour/picker regressions PASS.
 
 ## NOT TESTED
-Physical iPhone Safari, iPad Safari and Samsung/Android Chrome Stage-C interaction matrix; live staging/production deployment.
+24H-F staging usability review and owner/current-user acceptance; inherited Stage-E live route; inherited Stage-C physical iPhone/iPad/Samsung; production deployment.
 
 ## FINAL PACKAGE
-Pending final ZIP write/reopen. Current app HTML SHA-256: `db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44`.
+PENDING until immutable ZIP is written and reopened.
 
-## PROVISIONAL STATUS
-`LIMITED_PASS_STATIC_DEVICE_PENDING` — subject to immutable-package reopen and independent audit.
+## FINAL STATUS
+`FINAL_PACKAGE_REOPEN_GATE = PENDING`. No production PASS is claimed.
 
-## STOP
-24H-D has not started and is not authorised.
+## NEXT RECOMMENDATION
+Reopen immutable ZIP, independently audit it, then present the navigation prototype to the owner/current user. Do not start 24H-G without explicit approval.

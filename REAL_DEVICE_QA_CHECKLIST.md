@@ -1,30 +1,23 @@
-# Real-device QA checklist — v101.56 / 24H-C
+# v101.60 / 24H-F — staging and owner usability checklist
 
-Target HTML SHA-256: `db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44`
+Test the exact packaged candidate. Do not rebuild it for staging.
 
-Physical-device validation is release-critical for this stage.
+## Navigation grammar
+1. Confirm the bottom bar reads **Accueil · Heures · Recherche · Mon Espace**.
+2. Confirm the top-header Search/loupe shortcut is still present.
+3. Tap Recherche in the bottom bar; confirm Recherche is visibly active.
+4. Search for a phrase, set a filter, open a result, then Retour; confirm query/filter/result scroll return.
+5. Tap Mon Espace; confirm the label and destination are Mon Espace.
 
-## iPhone / iPad Safari
+## Approfondir preservation
+6. Accueil: confirm the Approfondir / Livre du Ciel card remains present and opens correctly.
+7. Heures: confirm **Approfondir la Passion** is visible and opens Approfondir; Retour must return to Heures.
+8. Reader: confirm linked texts / Approfondir remain available and Retour restores the Hour.
+9. Réglages: confirm Approfondir remains available.
 
-1. Select an exact phrase inside a meditation paragraph. Confirm one contextual bar appears with **Surligner · Copier · Note · Fermer**.
-2. Tap **Surligner**, choose a colour, and confirm only the exact selected range is highlighted. Reload and confirm persistence.
-3. Repeat on a Réflexion.
-4. Select across two adjacent paragraphs; confirm the shared bar appears and the resulting grouped highlight survives reload without losing either segment.
-5. From a selected range, tap **Note**; save two notes on the same paragraph, reload, and confirm both survive.
-6. Long-press a paragraph. Confirm the same contextual component appears. Copy and Note must work. Surligner must not silently convert an ordinary Apple paragraph target into whole-paragraph highlighting; exact selection remains the Apple policy.
-7. Open an existing highlight and change its colour; stale/recovery behavior must remain intact.
-8. Confirm the note textarea does not trigger iOS auto-zoom and the app does not become horizontally pannable.
+## Inherited open gates
+10. Run the inherited Stage-E staging/live deep-link round trip if staging is available.
+11. iPhone/iPad exact-selection and existing-highlight picker retest remain inherited.
+12. Samsung/Android paragraph-mode validation remains inherited / NOT_TESTED if unavailable.
 
-## Samsung / Android Chrome
-
-1. Tap **Paragraphe**. Confirm native word selection/search/translate does not appear.
-2. Tap one paragraph. Confirm it becomes the visual paragraph target and the same contextual bar appears.
-3. Tap **Surligner**, choose a colour, and confirm the whole paragraph is highlighted. Reload and confirm persistence and Mon Espace visibility.
-4. Repeat **Copier** and **Note** from the same paragraph-target contextual bar.
-5. Confirm cancelling the contextual bar or colour picker clears the visual target without leaving a stuck mode.
-
-## Regression
-
-- Repères OFF/ON must not hide contextual actions.
-- Existing highlights from v101.55 must render/recover or remain visibly stale; none may silently disappear.
-- Search, progression, update flow, theme and 16/19/22/26 px settings remain unchanged.
+Owner/user acceptance of the navigation prototype is required before production or 24H-G.

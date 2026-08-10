@@ -1,7 +1,6 @@
-# Root/deploy consistency — 24H-C
+# Root/deploy consistency
 
-- Package layout inherited from v101.55 is root-only; no separate `deploy/` directory exists in the supplied production payload.
-- `luisa_24_heures.html`: `db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44` (1796097 bytes)
-- `index.html`: `db1ddb644bcdf7e34254c7645b2381ea15c558cdadaf8cd6311ec0c693071b44` (1796097 bytes)
-- Root HTML byte parity: **PASS**
-- Separate deploy replica: **NOT_APPLICABLE — absent in bound input and not invented by Stage C**
+- `luisa_24_heures.html`: 1815847 bytes · `413319212d8eb8e89abe6f739740d6b7f2b324b02bcc74bfab2f3ed3b7670461`
+- `index.html`: 1815847 bytes · `413319212d8eb8e89abe6f739740d6b7f2b324b02bcc74bfab2f3ed3b7670461`
+- Byte identity: **PASS**
+- PWA id/scope/start_url preserved: **PASS** (see `audit/stageF_static.json`).

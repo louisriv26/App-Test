@@ -1,6 +1,49 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.56`
+Version: `v101.60`
+
+Input baseline: **v101.59 / 24H-E**, explicitly authorised by the product owner as the input to 24H-F. Stage F changes navigation grammar only; corpus, storage schemas, Repères, contextual actions, deep-link contracts and platform highlighting semantics remain unchanged.
+
+## 24H-F candidate (v101.60) — navigation prototype
+
+- Primary bottom navigation is now **Accueil · Heures · Recherche · Mon Espace**.
+- The existing top-header Search shortcut is deliberately preserved during the transition.
+- **Approfondir is not deleted**: it remains prominent on Accueil, gains a direct entry on Heures, remains available within each Hour through linked texts/end actions, and stays in Réglages/sidebar.
+- Search now owns the bottom-nav active state; Back from a result must restore query/filter/scroll context.
+- `Espace` is renamed to the exact ecosystem label **Mon Espace**.
+- This is a staging/user-acceptance prototype. Production certification requires owner/user acceptance and staging usability review; inherited Stage-E live-route and Stage-C device gates remain open.
+
+Input baseline: **v101.58 / 24H-D**, explicitly authorised by the product owner as the input to 24H-E. Stage E changes only search normalisation, stable routing/linking, and privacy-safe support hooks. Protected corpus, personal-data schema, Repères and Stage-C selection/highlighting policies remain unchanged.
+
+## 24H-E candidate (v101.59) — search, deep links and support
+
+- Preserves the six search filters and 140 ms debounce, while formalising a versioned **French search normalizer (`fr-v1`)** with fixtures for accents, `œ/oe`, `æ/ae`, apostrophes, NBSP/narrow spaces and case.
+- Adds validated startup routes for `?open=hour&hour=<n>&pid=<stable-id>`, `?open=prayer&id=<stable-id>`, `?open=text&id=<stable-id>` and `?open=search&q=<query>`, with recoverable fallbacks for invalid targets.
+- Adds **Lien** to the shared contextual action bar. It copies only a stable route; it never embeds selected text, notes or highlight content.
+- Search-result opening continues to push the full Search state (query/filter/speaker/scroll/focus) so Back restores context.
+- Adds **Signaler un problème de texte** and **Copier les diagnostics** in Aide/À propos. Both payloads are deliberately privacy-safe and exclude notes/highlight contents.
+- No corpus declarations, stable IDs, speech offsets, personal-data schema, Apple exact-range policy, Samsung whole-paragraph policy, PWA `id/scope/start_url`, or navigation structure are changed.
+- Local served-origin route/runtime tests and immutable-package audits are required. The roadmap also requires a live/staging-origin route test for production release; that remains pending unless separately executed.
+
+Input baseline: **v101.57 / 24H-C repaired candidate**, explicitly authorised by the product owner as the input to 24H-D. Stage D changes only Mon Espace/personal-data UX. The inherited Stage-C physical-device gaps remain open and are not represented as passed.
+
+## 24H-D candidate (v101.58) — Mon Espace completeness and backup UX
+
+- Separates **Passages à vérifier**, healthy **Surlignages**, **Notes**, and **Progression** rather than mixing stale records into the highlight preview.
+- Every stale/recovery record, highlight group and note is reachable: each section has an explicit count and an expandable preview; there is no hard personal-data ceiling.
+- Adds a local **Dernier export de sauvegarde** timestamp plus a gentle reminder only when meaningful personal data exists and no recent export is recorded.
+- Keeps the machine-readable JSON export/import contract and adds a separate human-readable **Markdown journal export**, which is never accepted as a restore format.
+- Does not change the canonical personal snapshot schema, corpus, stable IDs, speech offsets, highlighting schema, Repères, Apple exact-range policy or Samsung whole-paragraph policy.
+- Stage-D package/browser gates must prove all records reachable and JSON round-trip preservation. Production certification remains limited by inherited Stage-C device evidence.
+
+## 24H-C iPhone picker repair (v101.57)
+
+- Replaces the historical hard-coded `220 × 110 px` existing-highlight picker assumption with measurement of the actual rendered picker.
+- Clamps the picker to the current `visualViewport`/viewport bounds with an 8 px margin and chooses an above/below position that fits.
+- Adds a CSS `max-width`/`box-sizing` safety bound.
+- Does **not** change highlight offsets, colours, persistence, note schema, contextual-action semantics, Apple exact-range policy or Samsung whole-paragraph policy.
+- Product-owner evidence from v101.56: iPhone exact selection/highlighting works; Samsung/Android was not available for testing.
+- v101.57 requires targeted real-iPhone confirmation of the repaired existing-highlight picker. Samsung/Android Stage-C remains `NOT_TESTED`.
 
 Input baseline: **v101.55 / 24H-B**, explicitly authorised as the input to 24H-C. **v101.56 / 24H-C is the shared contextual-actions candidate; 24H-D has not started.**
 
