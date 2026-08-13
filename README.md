@@ -1,6 +1,6 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.76`
+Version: `v101.79`
 
 Stage-G programme baseline: **v101.60 / 24H-F**, explicitly approved by the product owner as the immutable input to 24H-G.
 
@@ -43,7 +43,40 @@ Historical extreme-deep restore-safety input: the exact **v101.73 / 24H-G canoni
 Historical build input: the exact **v101.74 / 24H-G restore identity repair** bytes (HTML SHA-256 `ff47a2e0db334c9c4d166f4da0ba0ad1fb91f18f5d78a7c14a6f3c06f4a2c140`). A still-deeper persistence probe found that a post-write verification failure followed by a rollback-write failure could leave new canonical bytes durable while the UI rolled back and said the change was not saved. A separate malformed-backup probe found that one invalid text-highlight sibling could make the validator silently discard the entire paragraph's otherwise valid highlight array and still report import success. v101.75 classifies rollback-failure durability instead of making a false claim and rejects malformed personal-record structures before any replace-import. No corpus or canonical storage-schema change.
 
 
-Immediate build input: the exact **v101.75 / 24H-G storage/import integrity repair** bytes (HTML SHA-256 `8aa71a3a6859a09d2d4e3fc2781830766d30637c4aead5706de09f1ac6aa0d61`). An auxiliary-storage honesty probe found two smaller session-state contradictions: a failed `lp24_recent_texts` write claimed the recent text remained visible for the session even though it disappeared immediately, and a failed `lp24_onboarded` write claimed the dismissal remained valid for the session even though the welcome card reappeared on the next Home render. v101.76 adds real in-memory session fallbacks and dedicated warning state. No corpus or canonical personal-data schema change.
+Historical build input: the exact **v101.75 / 24H-G storage/import integrity repair** bytes (HTML SHA-256 `8aa71a3a6859a09d2d4e3fc2781830766d30637c4aead5706de09f1ac6aa0d61`). An auxiliary-storage honesty probe found two smaller session-state contradictions: a failed `lp24_recent_texts` write claimed the recent text remained visible for the session even though it disappeared immediately, and a failed `lp24_onboarded` write claimed the dismissal remained valid for the session even though the welcome card reappeared on the next Home render. v101.76 adds real in-memory session fallbacks and dedicated warning state. No corpus or canonical personal-data schema change.
+
+
+Historical build input: the exact **v101.76 / 24H-G auxiliary-storage honesty repair** bytes (HTML SHA-256 `b1be16d1242c9770f17673049a81534c448a1925ded26cac8a0c324e452b1a2a`). Owner review found the Aide function materially incomplete: the contextual bar named Surligner · Copier · Lien · Note · Fermer without explaining each action where users encounter it, and several current features (note lifecycle, paragraph marks versus coloured highlights, backup/journal distinction, display controls, update draft protection) were either scattered, duplicated or insufficiently explained. v101.77 is a help/documentation-only correction: no runtime behavior, corpus, stable ID, persistence schema or annotation data is changed.
+
+Historical build input: the exact **v101.77 / 24H-G help completeness repair** bytes (HTML SHA-256 `8e4b534c399c4bd35e0d516cfda77b31a0838cc5fbcf9612d7dee7a16c81857e`). The final claim-by-claim Help review found one stale inherited status in two Help locations: the direct-speech attribution layer was described as still subject to editorial validation even though the project state records that the speech-attribution review was already fully closed before the A–G programme. v101.78 preserves the entire v101.77 Help rewrite and corrects only that status wording plus release identity. No runtime behavior, corpus, SPEECH_DATA, stable ID or persistence schema is changed.
+
+Immediate build input: the exact **v101.78 / 24H-G help completeness finalization** bytes (HTML SHA-256 `60e67f3b4b298e5a15c12be8f76203254099a37cb8267b3bb77ce3d1a040408f`). Physical iPad screenshots exposed the legacy desktop paragraph-action rail (◈ Marquer le paragraphe / ⎘ Copier la citation; meditation also has ✎ Note) half-clipped at the right edge of the reader. The rail is positioned outside the text column and is intended for fine-pointer desktop hover, not for iPad or Samsung. v101.79 suppresses that rail on iOS/touch/coarse-pointer and Android runtime classes while preserving the intended iPad exact-selection contextual bar, Samsung whole-paragraph mode and desktop hover actions. No corpus, SPEECH_DATA, stable ID or persistence schema changes.
+
+## 24H-G iPad paragraph-side action repair (v101.79)
+
+- Hides the legacy `.para-actions` / `.ref-actions` side rail on iOS and touch/coarse-pointer runtimes.
+- Explicitly hides the same legacy rail on the Android/Samsung runtime class; Android continues to use the dedicated **Paragraphe** workflow.
+- Leaves the rail available on non-iOS fine-pointer desktop, where its outboard hover placement is intentional.
+- Does not change the shared contextual action bar **Surligner · Copier · Lien · Note · Fermer** used by exact selection / explicit paragraph targeting.
+- Protected corpus declarations, reader-return repair, Help v101.78, persistence and PWA behavior remain unchanged.
+
+## 24H-G help completeness finalization (v101.78)
+
+- Preserves the complete v101.77 Aide rewrite and all action-by-action guidance.
+- Replaces the stale `reste soumise à validation éditoriale` wording with current-status wording: the search filter uses the corpus's current attribution layer, and the Help states that its editorial review is already closed.
+- Does not modify `SPEECH_DATA`; this is documentation/status alignment only.
+- Protected corpus declarations and all runtime/persistence behavior remain unchanged.
+
+## 24H-G help completeness repair (v101.77)
+
+- Rewrote the complete Aide modal against the exact active runtime rather than appending isolated lines.
+- Added a dedicated action-by-action explanation of **Surligner · Copier · Lien · Note · Fermer**.
+- Clarified that **Lien** copies a privacy-safe stable route; for selected text in an Hour it targets the containing paragraph and does not transmit the selected words, notes or highlight contents.
+- Added a full note workflow: open, write, 2,000-character limit, Enregistrer, multiple notes per paragraph, delete, Mon Espace retrieval, and the unsaved-draft update guard.
+- Distinguished coloured text **surlignage** from the separate whole-paragraph **◈ marquage** action.
+- Documented edit/delete of existing highlights, Passages à vérifier, Samsung/Android paragraph mode, Repères, four semantic text-size levels, theme preferences, Search, Mon Espace JSON backup/import versus readable Markdown journal, update behavior, support diagnostics and privacy boundaries.
+- Removed stale/ambiguous help wording such as paragraph actions being described as Surligner when the persistent paragraph action is actually ◈ Marquer.
+- Protected corpus declarations and all runtime/persistence behavior are unchanged.
 
 ## 24H-G auxiliary-storage honesty repair (v101.76)
 

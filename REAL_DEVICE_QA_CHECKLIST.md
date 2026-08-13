@@ -1,6 +1,6 @@
-# 24H-G extreme-deep recheck / v101.76 — physical device, installed-PWA and live-origin checklist
+# 24H-G extreme-deep recheck / v101.79 — physical device, installed-PWA and live-origin checklist
 
-Use the exact v101.76 candidate bytes. Record PASS/FAIL/NOT_TESTED for every numbered scenario.
+Use the exact v101.79 candidate bytes. Record PASS/FAIL/NOT_TESTED for every numbered scenario.
 
 ## iPhone Safari / installed PWA
 1. Mid-Hour → Mon Espace → Retour restores the same reader tab, paragraph/reading position and visible/updating progress strip.
@@ -15,7 +15,7 @@ Use the exact v101.76 candidate bytes. Record PASS/FAIL/NOT_TESTED for every num
 10. Repères OFF/ON preserves passage and actions.
 11. Portrait ↔ landscape rotation preserves a usable reader.
 12. With a non-empty unsaved Note open, an available-update Actualiser action must NOT reload; the draft remains and receives focus.
-13. Existing installed build → v101.76 update preserves personal data.
+13. Existing installed build → v101.79 update preserves personal data.
 14. Offline reopen after one successful online load works.
 15. A copied deep link opens the expected Hour/paragraph.
 
@@ -43,10 +43,10 @@ Use the exact v101.76 candidate bytes. Record PASS/FAIL/NOT_TESTED for every num
 32. On-demand controls (theme, Plan, prayer close, note indicator, Approfondir back/index) remain keyboard reachable and visibly focused.
 
 ## Live GitHub Pages / installed PWA
-33. Visible version v101.76.
+33. Visible version v101.79.
 34. Service worker controls the page after activation.
-35. Cache generation is luisa-24h-v101-76.
-36. Existing install updates to v101.76 without personal-data loss.
+35. Cache generation is luisa-24h-v101-79.
+36. Existing install updates to v101.79 without personal-data loss.
 37. Offline reopen succeeds after successful online load.
 38. Old app cache generations are removed only within the luisa-24h- namespace.
 39. Root/deploy bytes correspond exactly to the audited GitHub payload.
@@ -95,3 +95,11 @@ Use the exact v101.76 candidate bytes. Record PASS/FAIL/NOT_TESTED for every num
 64. Storage/import integrity: a simulated canonical post-write verification failure whose rollback also fails must never produce a false 'not saved' state; malformed backups containing invalid personal records must be rejected without replacing current data.
 
 65. Auxiliary storage honesty: if recent-text or onboarding preference storage is unavailable, the UI must keep the stated choice/list effective for the current session and must not falsely claim session persistence.
+
+66. Help completeness: open Aide and confirm the dedicated contextual-actions section explains Surligner, Copier, Lien, Note and Fermer; confirm Note explains Enregistrer/2 000 chars/multiple notes/delete/Mon Espace; confirm backup JSON vs journal Markdown and unsaved-note update protection are explained.
+
+67. Help attribution-status honesty: open Aide → Recherche and À propos du corpus; confirm it does NOT say the direct-speech review is still pending, and states that the editorial review of the current attribution layer is already closed.
+
+68. iPad paragraph-side controls: in Méditation and Réflexions, scroll/tap paragraphs in portrait and landscape. Confirm no half-hidden ◈/⎘/✎ side buttons appear at the right edge. Select exact text and confirm the contextual action bar remains available.
+69. Desktop regression: on a fine-pointer desktop, hover a meditation/reflection paragraph and confirm the legacy paragraph-side actions remain fully available and clickable.
+70. Samsung regression: confirm no legacy side rail appears; use Paragraphe mode and confirm the shared contextual action bar opens for the tapped whole paragraph.
