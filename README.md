@@ -1,6 +1,30 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.79`
+Version: `v101.82`
+
+## v101.82 — Minute-detail corrective (15 August 2026)
+
+- Corrects the reference-action defect found during the prior four-pass recheck: **Partager** / **Copier le lien** now resolve strictly from the passage actually visible in the reader, never from stale contextual-selection state.
+- Corrects reader text-size continuity: changing among **Petit 16 / Normal 19 / Grand 22 / Très grand 26 px** captures the active selected passage when present, otherwise the visible passage nearest the reading position, and restores its visual offset with the same reader-offset restoration mechanism used by Repères.
+- Replaces a stale migration-failure message that incorrectly referred only to a text-size preference with a generic, truthful personal-data migration message.
+- Replaces internal development wording in the Samsung/Android settings with user-facing explanation of the existing **Paragraphe** workflow.
+- Corrects focus restoration when **Note** or the colour picker is opened from the temporary contextual toolbar: if that trigger disappears, focus returns to the stable main reading region instead of falling to the document body.
+- No corpus text, speech data, stable IDs, storage schema, snapshot version, notes, coloured highlight model, search, navigation, Repères semantics, theme semantics or PWA identity changed.
+- Exact v101.82 physical iPhone/iPad/Samsung, installed-PWA, offline, assistive-technology and live-origin certification remain external gates.
+
+## Historical release lineage — v101.80 and earlier (superseded by v101.82)
+
+The entries below are retained as historical provenance only. They do not describe the current v101.82 interaction contract.
+
+## v101.80 — Ecosystem interaction closure (15 August 2026)
+
+- Contextual passage actions are now **Surligner · Note · Copier · Fermer**.
+- Stable reference actions moved to reader Réglages as **Partager** and **Copier le lien**.
+- `Partager` uses native Web Share where available; user cancellation is silent; genuine failure falls back to copying the stable link with truthful feedback.
+- The obsolete desktop `◈` paragraph-mark rail and its separate `state.highlights` persistence/export/Mon Espace path are retired. Existing legacy marks are intentionally discarded on migration.
+- Samsung/Android **Paragraphe** remains supported as an ordinary coloured whole-paragraph `textHighlights` workflow. iPhone/iPad/desktop exact-selection highlighting remains unchanged.
+- Storage schema advances **6 → 7** and personal snapshot **3 → 4** solely to remove the retired paragraph-mark state safely. Protected corpus declarations are unchanged.
+- Exact v101.80 physical iPhone/iPad/Samsung, installed-PWA, offline and live-origin certification remain external gates.
 
 Stage-G programme baseline: **v101.60 / 24H-F**, explicitly approved by the product owner as the immutable input to 24H-G.
 
@@ -50,7 +74,7 @@ Historical build input: the exact **v101.76 / 24H-G auxiliary-storage honesty re
 
 Historical build input: the exact **v101.77 / 24H-G help completeness repair** bytes (HTML SHA-256 `8e4b534c399c4bd35e0d516cfda77b31a0838cc5fbcf9612d7dee7a16c81857e`). The final claim-by-claim Help review found one stale inherited status in two Help locations: the direct-speech attribution layer was described as still subject to editorial validation even though the project state records that the speech-attribution review was already fully closed before the A–G programme. v101.78 preserves the entire v101.77 Help rewrite and corrects only that status wording plus release identity. No runtime behavior, corpus, SPEECH_DATA, stable ID or persistence schema is changed.
 
-Immediate build input: the exact **v101.78 / 24H-G help completeness finalization** bytes (HTML SHA-256 `60e67f3b4b298e5a15c12be8f76203254099a37cb8267b3bb77ce3d1a040408f`). Physical iPad screenshots exposed the legacy desktop paragraph-action rail (◈ Marquer le paragraphe / ⎘ Copier la citation; meditation also has ✎ Note) half-clipped at the right edge of the reader. The rail is positioned outside the text column and is intended for fine-pointer desktop hover, not for iPad or Samsung. v101.79 suppresses that rail on iOS/touch/coarse-pointer and Android runtime classes while preserving the intended iPad exact-selection contextual bar, Samsung whole-paragraph mode and desktop hover actions. No corpus, SPEECH_DATA, stable ID or persistence schema changes.
+Historical build input: the exact **v101.78 / 24H-G help completeness finalization** bytes (HTML SHA-256 `60e67f3b4b298e5a15c12be8f76203254099a37cb8267b3bb77ce3d1a040408f`). Physical iPad screenshots exposed the legacy desktop paragraph-action rail (◈ Marquer le paragraphe / ⎘ Copier la citation; meditation also has ✎ Note) half-clipped at the right edge of the reader. The rail is positioned outside the text column and is intended for fine-pointer desktop hover, not for iPad or Samsung. v101.79 suppresses that rail on iOS/touch/coarse-pointer and Android runtime classes while preserving the intended iPad exact-selection contextual bar, Samsung whole-paragraph mode and desktop hover actions. No corpus, SPEECH_DATA, stable ID or persistence schema changes.
 
 ## 24H-G iPad paragraph-side action repair (v101.79)
 

@@ -1,12 +1,12 @@
-# 24H-G extreme-deep recheck / v101.79 — physical device, installed-PWA and live-origin checklist
+# 24H interaction closure / v101.82 — physical device, installed-PWA and live-origin checklist
 
-Use the exact v101.79 candidate bytes. Record PASS/FAIL/NOT_TESTED for every numbered scenario.
+Use the exact v101.82 candidate bytes. Record PASS/FAIL/NOT_TESTED for every numbered scenario.
 
 ## iPhone Safari / installed PWA
 1. Mid-Hour → Mon Espace → Retour restores the same reader tab, paragraph/reading position and visible/updating progress strip.
-2. 16 / 19 / 22 / 26 px reader sizes; no clipping.
+2. Change among 16 / 19 / 22 / 26 px while mid-Hour: the same visible passage/visual offset is preserved and no clipping appears.
 3. Automatique / Clair / Sombre; each theme choice has a comfortable touch target.
-4. Exact selected-text Surligner, Copier, Lien and Note.
+4. Exact selected-text Surligner, Note, Copier and Fermer; then Réglages → Partager / Copier le lien.
 5. Existing-highlight colour picker remains fully on-screen; all five colours and remove action are usable.
 6. A visible paragraph note indicator is easy to tap and opens the expected note.
 7. Plan button and Plan close control are easy to tap where Plan exists.
@@ -15,7 +15,7 @@ Use the exact v101.79 candidate bytes. Record PASS/FAIL/NOT_TESTED for every num
 10. Repères OFF/ON preserves passage and actions.
 11. Portrait ↔ landscape rotation preserves a usable reader.
 12. With a non-empty unsaved Note open, an available-update Actualiser action must NOT reload; the draft remains and receives focus.
-13. Existing installed build → v101.79 update preserves personal data.
+13. Existing installed build → v101.82 update preserves notes, coloured highlights, reading position and progress; obsolete legacy ◈ marks may be discarded.
 14. Offline reopen after one successful online load works.
 15. A copied deep link opens the expected Hour/paragraph.
 
@@ -37,23 +37,23 @@ Use the exact v101.79 candidate bytes. Record PASS/FAIL/NOT_TESTED for every num
 ## Desktop keyboard / accessibility smoke
 27. Tab order reaches primary navigation and reader actions; no hidden zero-size control receives focus.
 28. Visible focus indication on controls.
-29. Dialogs/sheets trap Tab/Shift+Tab, Escape closes, focus returns to trigger.
+29. Dialogs/sheets trap Tab/Shift+Tab and Escape closes them; focus returns to the trigger, or to the stable reading region when a transient contextual Note/colour-picker trigger has already disappeared.
 30. 200% browser zoom: no essential horizontal scrolling.
 31. Reduced-motion OS preference removes non-essential animation.
 32. On-demand controls (theme, Plan, prayer close, note indicator, Approfondir back/index) remain keyboard reachable and visibly focused.
 
 ## Live GitHub Pages / installed PWA
-33. Visible version v101.79.
+33. Visible version v101.82.
 34. Service worker controls the page after activation.
-35. Cache generation is luisa-24h-v101-79.
-36. Existing install updates to v101.79 without personal-data loss.
+35. Cache generation is luisa-24h-v101-82.
+36. Existing install updates to v101.82 without loss of supported personal data; retired legacy ◈ marks are intentionally not preserved.
 37. Offline reopen succeeds after successful online load.
 38. Old app cache generations are removed only within the luisa-24h- namespace.
 39. Root/deploy bytes correspond exactly to the audited GitHub payload.
 40. Root and copied deep-link URLs reach the expected screen/target on the live origin.
 
 ## Downgrade / future-snapshot safety (machine fixture; device spot-check optional)
-41. A canonical snapshot with `snapshot_version` greater than 3 remains byte-for-byte unchanged after boot, even when legacy mirrors and the R41 marker are absent.
+41. A canonical snapshot with `snapshot_version` greater than 4 remains byte-for-byte unchanged after boot, even when legacy mirrors and the R41 marker are absent.
 42. While that future snapshot is present, Note or other durable writes must not replace it; user feedback must say the change was not saved / the newer snapshot is preserved.
 
 43. A canonical snapshot at current `snapshot_version` but future `schema_version` remains byte-for-byte unchanged after boot and attempted writes.
@@ -62,23 +62,23 @@ Use the exact v101.79 candidate bytes. Record PASS/FAIL/NOT_TESTED for every num
 ## High-count personal-data completeness (machine fixture; device spot-check optional)
 45. A seeded snapshot with 250 valid notes on one paragraph loads all 250; after an ordinary saved preference change all 250 remain in the canonical snapshot and machine export.
 46. A seeded snapshot with 250 valid text-highlight records on one paragraph loads all 250; after an ordinary saved preference change all 250 remain in the canonical snapshot and machine export.
-47. A seeded legacy list with 5,001 distinct valid highlight IDs is not silently truncated during sanitisation/load/save/export.
+47. A v101.79 snapshot containing legacy `highlights` / `lp24_hl` upgrades to schema 7/snapshot 4 with the retired marks discarded while notes, coloured textHighlights, progress and positions remain intact.
 48. Mon Espace may preview high-count notes/highlights only with the exact total and an explicit `Voir tout`; expansion makes every record reachable.
 
 ## Legacy whole-paragraph mark reachability
-49. A current valid `◈` whole-paragraph mark is listed in Mon Espace → Surlignages and opens the correct paragraph.
-50. A stored `◈` mark whose paragraph no longer exists is listed in Passages à vérifier and can be removed there.
-51. If persistence fails while removing a legacy mark, the mark remains in state/storage and no success message is shown.
+49. No `◈` paragraph-mark creation control exists on desktop, iPhone, iPad or Samsung.
+50. Legacy `highlights` records from an older canonical snapshot are ignored/removed during migration and do not appear in Mon Espace or Passages à vérifier.
+51. The retired `lp24_hl` mirror key is removed when supported state is successfully synchronised; failure to remove it is reported as a mirror failure rather than a false success.
 
 ## Legacy mark backup/journal completeness
-52. Twelve whole-paragraph `◈` marks with no other annotations trigger the normal backup-reminder threshold.
-53. The human-readable journal lists every whole-paragraph mark and never says `Aucun surlignage` while any such mark exists.
-54. A missing-target whole-paragraph mark is represented in the journal as a passage to verify, without inventing replacement text.
+52. Backup-reminder counts use supported coloured highlights and notes only; retired paragraph marks do not affect the count.
+53. The human-readable journal contains supported coloured highlights only and contains no legacy paragraph-mark category.
+54. New machine exports do not contain a `highlights` legacy paragraph-mark field.
 
 ## Wide/tablet annotation preview truth
-55. With only a resolved whole-paragraph `◈` mark present, the wide Mon Espace preview shows that mark and does not say `Aucun surlignage`.
-56. Stale/missing annotation records are disclosed in the wide preview as passages to verify, while full details/removal remain in Mon Espace.
-57. With no text-highlight or whole-paragraph-mark records at all, the wide preview may correctly show `Aucun surlignage`.
+55. With only a Samsung whole-paragraph coloured `textHighlights` record present, Mon Espace and the wide preview show it as an ordinary coloured surlignage.
+56. Stale/missing supported textHighlights remain disclosed as passages to verify, while full details/removal remain in Mon Espace.
+57. With no supported textHighlight records, the wide preview may correctly show `Aucun surlignage`.
 
 
 ## Extreme-deep backup / route fixtures
@@ -96,10 +96,10 @@ Use the exact v101.79 candidate bytes. Record PASS/FAIL/NOT_TESTED for every num
 
 65. Auxiliary storage honesty: if recent-text or onboarding preference storage is unavailable, the UI must keep the stated choice/list effective for the current session and must not falsely claim session persistence.
 
-66. Help completeness: open Aide and confirm the dedicated contextual-actions section explains Surligner, Copier, Lien, Note and Fermer; confirm Note explains Enregistrer/2 000 chars/multiple notes/delete/Mon Espace; confirm backup JSON vs journal Markdown and unsaved-note update protection are explained.
+66. Help completeness: open Aide and confirm the contextual-actions section explains Surligner, Note, Copier and Fermer; confirm a separate reference section explains Partager and Copier le lien plus privacy/cancellation semantics; confirm Note, backup JSON vs journal Markdown and unsaved-note update protection remain explained.
 
 67. Help attribution-status honesty: open Aide → Recherche and À propos du corpus; confirm it does NOT say the direct-speech review is still pending, and states that the editorial review of the current attribution layer is already closed.
 
-68. iPad paragraph-side controls: in Méditation and Réflexions, scroll/tap paragraphs in portrait and landscape. Confirm no half-hidden ◈/⎘/✎ side buttons appear at the right edge. Select exact text and confirm the contextual action bar remains available.
-69. Desktop regression: on a fine-pointer desktop, hover a meditation/reflection paragraph and confirm the legacy paragraph-side actions remain fully available and clickable.
-70. Samsung regression: confirm no legacy side rail appears; use Paragraphe mode and confirm the shared contextual action bar opens for the tapped whole paragraph.
+68. iPad paragraph-side controls: in Méditation and Réflexions, confirm no legacy paragraph-side rail appears. Select exact text and confirm Surligner · Note · Copier · Fermer; verify Réglages → Partager / Copier le lien.
+69. Desktop regression: on a fine-pointer desktop, hover meditation/reflection paragraphs and confirm no legacy paragraph-side rail appears; exact text selection still opens Surligner · Note · Copier · Fermer.
+70. Samsung regression: confirm no legacy side rail appears; use Paragraphe mode and confirm Surligner · Note · Copier · Fermer opens for the tapped whole paragraph and creates a normal coloured whole-paragraph highlight.
