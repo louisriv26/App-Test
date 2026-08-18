@@ -1,0 +1,31 @@
+test_id,status,test,evidence
+B001,PASS,identity tuple,v101.85|8|5
+B002,PASS,invalid library mark colour rejected,invalid orange -> empty
+B003,PASS,invalid library mark ID rejected,invalid id -> empty
+B004,PASS,prototype pollution rejected,"{""keys"": [], ""polluted"": false}"
+B005,PASS,nested dangerous keys rejected,"{""keys"": [], ""polluted"": false}"
+B006,PASS,title button semantics,"{""label"": ""Surligner le titre"", ""aria_pressed"": ""false""}"
+B007,PASS,picker semantics and initial focus,"{""role"": ""dialog"", ""label"": ""Surligner le titre d’une lecture"", ""focus"": ""Jaune""}"
+B008,PASS,picker Escape focus return,libraryTitleMarkBtn
+B009,PASS,title colour yellow,"{""stored"": ""yellow"", ""class"": ""reader-title library-title-mark-yellow""}"
+B010,PASS,title colour blue,"{""stored"": ""blue"", ""class"": ""reader-title library-title-mark-blue""}"
+B011,PASS,title colour green,"{""stored"": ""green"", ""class"": ""reader-title library-title-mark-green""}"
+B012,PASS,title colour purple,"{""stored"": ""purple"", ""class"": ""reader-title library-title-mark-purple""}"
+B013,PASS,title colour pink,"{""stored"": ""pink"", ""class"": ""reader-title library-title-mark-pink""}"
+B014,PASS,body highlights remain independent,{}
+B015,PASS,canonical snapshot stores libraryMarks,"{""snapshot_version"":5,""schema_version"":8,""notes"":{},""textHighlights"":{},""libraryMarks"":{""PASSION24.TEXT.HOW_TO_PRACTICE"":{""color"":""pink"",""created_at"":""<RUNTIME_TIMESTAMP>"",""up"
+B016,PASS,reload restores title mark,pink
+B017,PASS,current export includes mark,"{""PASSION24.TEXT.HOW_TO_PRACTICE"": {""color"": ""pink"", ""created_at"": ""<RUNTIME_TIMESTAMP>"", ""updated_at"": ""<RUNTIME_TIMESTAMP>""}}"
+B018,PASS,current backup roundtrip,"{""PASSION24.TEXT.HOW_TO_PRACTICE"": {""color"": ""pink"", ""created_at"": ""<RUNTIME_TIMESTAMP>"", ""updated_at"": ""<RUNTIME_TIMESTAMP>""}}"
+B019,PASS,schema7 migration preserves prior fields,"{""marks"": {}, ""read"": [2, 9], ""notes"": [""PASSION24.HOUR.15.P014""]}"
+B020,PASS,dangerous backup rejected,true
+B021,PASS,remove and Undo exact restoration,restored pink
+B022,PASS,Mon Espace marked reading accessibility,Retirer le surlignage du titre : Comment pratiquer les Heures
+B023,PASS,marked reading opens at top,0
+B024,PASS,H15 runtime search resolves P014,"{""text"": ""1 résultat pour « humilié par ton silence »\n15E HEURE — JÉSUS EST DEVANT PILATE, PUIS DEVANT HÉRODEHEURE\n…s curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,"", ""id"": true}"
+B025,PASS,H15 stable IDs accepted,true
+B026,PASS,H15 approved runtime continuation,"Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence, / il proclame devant tous que Tu es un fou. Il ordonne que Tu sois trait"
+B027,PASS,H17 contiguous et + narration break,"{""breaks"": 1, ""text"": ""Va chez tous les cœurs et, en les piquant, fais-en sortir toutes les fumées d’orgueil et la pourriture qu’ils contiennent, et constitue-Moi Roi de tous. » \nMon Amour, je Te prie de me piquer les oreilles de tes épines, a""}"
+B028,PASS,existing note sanitizer valid record,ok
+B029,PASS,existing note sanitizer dangerous-key rejection,0
+B030,PASS,existing text-highlight sanitizer path present,true

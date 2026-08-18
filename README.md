@@ -1,6 +1,58 @@
 # Luisa — 24 Heures de la Passion
 
-Version: `v101.82`
+Version: `v101.85`
+
+## v101.85 — R4 audit-evidence reconciliation (18 August 2026)
+
+- **Runtime HTML is byte-for-byte unchanged from R3** (`c43ff8934c12b24668c9c0cf55ebb12a9eb6ecd8ed265e68e4d78aaf0fd86050`).
+- Corrects the R3 evidence-provenance defect: the prepackage four-pass report is now produced by a separately implemented auditor, not by the assembly script.
+- Packages the executed build, independent four-pass, primary reopen and independent reopen auditor scripts required by the governing script.
+- Adds adversarial runtime evidence for invalid IDs/colours, prototype-pollution rejection, schema-7 migration, title-marker focus semantics, H15 runtime search and H17 render-boundary behaviour.
+- Adds a line-by-line active-report claim ledger and an independent contradiction/stale-evidence scan.
+- No devotional text, CORPUS structure, TEXT_LIBRARY, HOUR_LINKED_TEXTS, SPEECH_DATA, INTERNAL_SUBHEADINGS, title-marker runtime code, highlighting runtime code, navigation, service worker or icon byte is changed in R4.
+- The 11 physical-device/PWA/AT/live/rollback gates remain NOT_TESTED; public release remains prohibited.
+
+## R3 runtime-correction lineage (superseded as evidence package, retained as runtime provenance)
+
+## v101.85 — Real-user feedback corrective R3 (18 August 2026)
+
+- Fixes the 17e Heure mid-word display split by moving the erroneous visual-break metadata from the middle of `et` to the verified direct-speech boundary; devotional wording and speech offsets are unchanged.
+- Applies the approved 15e Heure continuation: `ton silence,` followed by lowercase `il proclame...`, while preserving `P014` and `P015` IDs and order.
+- Adds a separate five-colour **Surligner le titre** / whole-reading marker for Approfondir texts, keyed to stable library item IDs and surfaced in **Mon Espace → Lectures marquées**.
+- Adds persistent `libraryMarks` with schema **8** / personal snapshot **5**, backward migration from schema 7/snapshot 4, machine backup export/import, removal Undo, and updated help.
+- Existing body-text highlighting, Samsung Paragraphe mode, iPhone/iPad exact selection, notes, navigation, speaker annotations and protected library text remain separate and preserved.
+- Physical iPhone/iPad/Samsung, installed-PWA/offline, assistive-technology, constrained-device performance, live exact-byte binding and verified rollback remain external release gates.
+
+## Historical release lineage — v101.84 and earlier (superseded by v101.85)
+
+The entries below are retained as historical provenance only. They do not describe the current v101.85 release identity.
+
+## v101.84 — Pre-public consolidated release corrective (18 August 2026)
+
+- Restores the missing `renderHighlightGroup` renderer so **Mon Espace** renders highlighted passages again.
+- Adds an 8-second, conflict-aware **Annuler** path for individual note/highlight deletion while preserving transactional persistence rollback.
+- Standardises keyboard focus indicators on a high-contrast focus token and raises the skip-link target to the 44 CSS-px floor.
+- Adds release evidence for a syntax-aware undefined-call/reachability gate and safe shared-origin audit cleanup.
+- Preserves `text_hash`, `para_hash` and `paragraph_fingerprint` across highlight sanitisation/export/import; the pre-corrective sanitizer stripped the two compatibility hashes.
+- Corrects the residual transient contextual-Note focus path: after the temporary toolbar disappears, closing the dialog returns to the stable reading region rather than `<body>`.
+- H9 text-size and H12 reader-return semantic-anchor defects were **not reproduced** in a visible rAF-qualified browser; reader restoration code was not changed.
+- Corpus, TEXT_LIBRARY, HOUR_LINKED_TEXTS, SPEECH_DATA, internal subheadings, speech-end visual breaks, stable IDs, storage schema/snapshot and locked icon bytes remain protected.
+- Physical iPhone/iPad/Samsung, installed-PWA/offline, assistive-technology, constrained-device performance and final live exact-byte binding remain external public-release gates until separately recorded.
+
+## v101.83 — Final locked Collection Luisa icon family v1 (17 August 2026)
+
+- Replaces the old 24H icon set with the **final locked Collection Luisa family v1** identity for Les 24 Heures de la Passion.
+- Browser favicon coverage: 16 px, 32 px and `.ico`.
+- Apple touch coverage: 60 px, 120 px and 180 px.
+- PWA manifest coverage: 192 px and 512 px `any` icons plus a dedicated 512 px `maskable` icon.
+- PWA installed identity (`id`, `scope`, `start_url`, name, short name, orientation and display) is unchanged.
+- No corpus, TEXT_LIBRARY, HOUR_LINKED_TEXTS, SPEECH_DATA, internal-subheading, visual-break, stable-ID, storage-schema, highlighting, notes, search, navigation, Repères, theme or reader-history behavior changed.
+- v101.82 minute-detail corrections remain cumulative and protected.
+- Exact v101.83 physical iPhone/iPad/Samsung, installed-PWA/offline/live-origin and assistive-technology certification remains an external gate.
+
+## Historical release lineage — v101.82 and earlier (superseded by v101.83)
+
+The entries below are retained as historical provenance only. They do not describe the current v101.83 release identity.
 
 ## v101.82 — Minute-detail corrective (15 August 2026)
 
@@ -8,7 +60,7 @@ Version: `v101.82`
 - Corrects reader text-size continuity: changing among **Petit 16 / Normal 19 / Grand 22 / Très grand 26 px** captures the active selected passage when present, otherwise the visible passage nearest the reading position, and restores its visual offset with the same reader-offset restoration mechanism used by Repères.
 - Replaces a stale migration-failure message that incorrectly referred only to a text-size preference with a generic, truthful personal-data migration message.
 - Replaces internal development wording in the Samsung/Android settings with user-facing explanation of the existing **Paragraphe** workflow.
-- Corrects focus restoration when **Note** or the colour picker is opened from the temporary contextual toolbar: if that trigger disappears, focus returns to the stable main reading region instead of falling to the document body.
+- Introduced the focus-restoration fallback used by transient Note/colour-picker paths. Later v101.84 testing found one delayed-removal edge case in the contextual Note path and completes that correction.
 - No corpus text, speech data, stable IDs, storage schema, snapshot version, notes, coloured highlight model, search, navigation, Repères semantics, theme semantics or PWA identity changed.
 - Exact v101.82 physical iPhone/iPad/Samsung, installed-PWA, offline, assistive-technology and live-origin certification remain external gates.
 

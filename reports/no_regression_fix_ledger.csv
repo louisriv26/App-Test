@@ -1,0 +1,7 @@
+item,status,changed_files,evidence,redo_count
+UF-17-01,PASS,index.html / luisa_24_heures.html,Mid-word visual break 124 (between e/t) moved to 155 (after closing guillemet + following space); package-wide mid-word break count 1→0,0
+UF-15-01,PASS,index.html / luisa_24_heures.html,P014 period→comma; P015 initial Il→il; IDs/order/count unchanged; no speech target on either record; all other corpus bytes semantically unchanged,0
+UF-APPROF-01,PASS,index.html / luisa_24_heures.html,Separate libraryMarks store; schema 8/snapshot 5 migration; dedicated 5-colour title picker; Mon Espace section; durable remove+Undo; export/import/help/right-panel integration; textHighlights untouched as data model,0
+AUDIT-R4-01,PASS,audit/reports/scripts/metadata only,R3 false-independence provenance removed; separate four-pass auditor script packaged and hash-bound; runtime HTML unchanged,0
+AUDIT-R4-02,PASS,reports/full_regression_matrix.csv + runtime_behaviour_matrix.csv,"Governing sanitizer/migration/search/accessibility runtime requirements executed, including prototype-pollution payloads; no runtime defect found",0
+AUDIT-R4-03,PASS,reports/pass3_claim_ledger.csv + pass4_contradiction_stale_scan.txt,Every active report claim is rebound to current evidence; stale/contradictory R3 PASS evidence removed or historical-labelled,0

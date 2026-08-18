@@ -1,0 +1,61 @@
+test_id,category,test,status,evidence
+R001,pass1,R3 baseline ZIP hash,PASS,98852b3e347d0754fbf48c42c356e88bcb41301527f9a43308f73f00e7caf522
+R002,pass1,runtime HTML frozen from R3,PASS,c43ff8934c12b24668c9c0cf55ebb12a9eb6ecd8ed265e68e4d78aaf0fd86050
+R003,pass1,governing executed build + independent auditor scripts packaged,PASS,"[""L24H_v10185_USER_FEEDBACK_CORRECTIVE_HARDGATED_SCRIPT_2026-08-18.md"", ""l24h_v10185_r4_audit_reconciliation_build.py"", ""l24h_v10185_r4_final_reopen_audit.py"", ""l24h_v10185_r4_independent_four_pass_audit.py"", ""l24h_v10185_r4_independent_reopen_audit.py""]"
+R004,pass1,independent four-pass auditor hash binding,PASS,"{""declared"": ""ae19f22b1bb40180a8d0f5b91d67f65c8d85ff7d74f192ba68ea027184310b8a"", ""actual"": ""ae19f22b1bb40180a8d0f5b91d67f65c8d85ff7d74f192ba68ea027184310b8a""}"
+R005,pass1,R3 runtime structure unchanged CORPUS,PASS,54f4ff0508b055bbe9e5dad6286e97e49cb796203b0fbda7c2eb539e7e1169b0
+R006,pass1,R3 runtime structure unchanged TEXT_LIBRARY,PASS,3c9042f09757def35f312e08b1008a0c439b8ff416210cf20a5f0a9480fd37cb
+R007,pass1,R3 runtime structure unchanged HOUR_LINKED_TEXTS,PASS,37fe7b5c2d2ac15489ae84e72028283197419320a7566e6b9e6e62a0cc021918
+R008,pass1,R3 runtime structure unchanged SPEECH_DATA,PASS,4b6565f5646ba6431381dd4c28505bbdb3cae3699066fc0a115fa6b88ed144a4
+R009,pass1,R3 runtime structure unchanged INTERNAL_SUBHEADINGS,PASS,31c84fcafef360b7e61392ffa99679960b4fc43d5a398a216832b77e942de5a3
+R010,pass1,R3 runtime structure unchanged SPEECH_END_VISUAL_BREAKS,PASS,71a6a85871df5c3416cab201e9814c9a7a1811b50215bf1df3498cedb5b07d33
+R011,pass1,APP_VERSION/schema/snapshot unchanged,PASS,v101.85 / 8 / 5
+R012,pass2,JavaScript syntax,PASS,node --check PASS
+R013,pass2,service worker syntax,PASS,node --check PASS
+R014,pass2,actual render target/speech validation,PASS,"{""targets"": 4579, ""speech_targets"": 375, ""segments"": 381, ""errors"": []}"
+R015,pass2,visual break validity / no midword split,PASS,[]
+R016,pass2,24 Hours exact count,PASS,24
+R017,pass2,paragraph IDs unique and order preserved,PASS,"{""count"": 1302, ""unique"": 1302, ""order_equal"": true}"
+R018,pass2,embedded runtime JSON parse,PASS,"{""CORPUS"": true, ""TEXT_LIBRARY"": true, ""HOUR_LINKED_TEXTS"": true, ""SPEECH_DATA"": true, ""INTERNAL_SUBHEADINGS"": true, ""SPEECH_END_VISUAL_BREAKS"": true}"
+R019,pass2,adversarial Chromium runtime scenarios,PASS,"{""tests"": 30, ""failures"": []}"
+R020,runtime,identity tuple,PASS,v101.85|8|5
+R021,runtime,invalid library mark colour rejected,PASS,invalid orange -> empty
+R022,runtime,invalid library mark ID rejected,PASS,invalid id -> empty
+R023,runtime,prototype pollution rejected,PASS,"{""keys"": [], ""polluted"": false}"
+R024,runtime,nested dangerous keys rejected,PASS,"{""keys"": [], ""polluted"": false}"
+R025,runtime,title button semantics,PASS,"{""label"": ""Surligner le titre"", ""aria_pressed"": ""false""}"
+R026,runtime,picker semantics and initial focus,PASS,"{""role"": ""dialog"", ""label"": ""Surligner le titre d’une lecture"", ""focus"": ""Jaune""}"
+R027,runtime,picker Escape focus return,PASS,libraryTitleMarkBtn
+R028,runtime,title colour yellow,PASS,"{""stored"": ""yellow"", ""class"": ""reader-title library-title-mark-yellow""}"
+R029,runtime,title colour blue,PASS,"{""stored"": ""blue"", ""class"": ""reader-title library-title-mark-blue""}"
+R030,runtime,title colour green,PASS,"{""stored"": ""green"", ""class"": ""reader-title library-title-mark-green""}"
+R031,runtime,title colour purple,PASS,"{""stored"": ""purple"", ""class"": ""reader-title library-title-mark-purple""}"
+R032,runtime,title colour pink,PASS,"{""stored"": ""pink"", ""class"": ""reader-title library-title-mark-pink""}"
+R033,runtime,body highlights remain independent,PASS,{}
+R034,runtime,canonical snapshot stores libraryMarks,PASS,"{""snapshot_version"":5,""schema_version"":8,""notes"":{},""textHighlights"":{},""libraryMarks"":{""PASSION24.TEXT.HOW_TO_PRACTICE"":{""color"":""pink"",""created_at"":""<RUNTIME_TIMESTAMP>"",""up"
+R035,runtime,reload restores title mark,PASS,pink
+R036,runtime,current export includes mark,PASS,"{""PASSION24.TEXT.HOW_TO_PRACTICE"": {""color"": ""pink"", ""created_at"": ""<RUNTIME_TIMESTAMP>"", ""updated_at"": ""<RUNTIME_TIMESTAMP>""}}"
+R037,runtime,current backup roundtrip,PASS,"{""PASSION24.TEXT.HOW_TO_PRACTICE"": {""color"": ""pink"", ""created_at"": ""<RUNTIME_TIMESTAMP>"", ""updated_at"": ""<RUNTIME_TIMESTAMP>""}}"
+R038,runtime,schema7 migration preserves prior fields,PASS,"{""marks"": {}, ""read"": [2, 9], ""notes"": [""PASSION24.HOUR.15.P014""]}"
+R039,runtime,dangerous backup rejected,PASS,true
+R040,runtime,remove and Undo exact restoration,PASS,restored pink
+R041,runtime,Mon Espace marked reading accessibility,PASS,Retirer le surlignage du titre : Comment pratiquer les Heures
+R042,runtime,marked reading opens at top,PASS,0
+R043,runtime,H15 runtime search resolves P014,PASS,"{""text"": ""1 résultat pour « humilié par ton silence »\n15E HEURE — JÉSUS EST DEVANT PILATE, PUIS DEVANT HÉRODEHEURE\n…s curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,"", ""id"": true}"
+R044,runtime,H15 stable IDs accepted,PASS,true
+R045,runtime,H15 approved runtime continuation,PASS,"Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence, / il proclame devant tous que Tu es un fou. Il ordonne que Tu sois trait"
+R046,runtime,H17 contiguous et + narration break,PASS,"{""breaks"": 1, ""text"": ""Va chez tous les cœurs et, en les piquant, fais-en sortir toutes les fumées d’orgueil et la pourriture qu’ils contiennent, et constitue-Moi Roi de tous. » \nMon Amour, je Te prie de me piquer les oreilles de tes épines, a""}"
+R047,runtime,existing note sanitizer valid record,PASS,ok
+R048,runtime,existing note sanitizer dangerous-key rejection,PASS,0
+R049,runtime,existing text-highlight sanitizer path present,PASS,true
+R050,external,PHYSICAL-IPHONE,NOT_TESTED,Requires exact R4 physical/installed/live/AT/rollback evidence; not inferred from Chromium/static checks
+R051,external,PHYSICAL-IPAD,NOT_TESTED,Requires exact R4 physical/installed/live/AT/rollback evidence; not inferred from Chromium/static checks
+R052,external,PHYSICAL-SAMSUNG,NOT_TESTED,Requires exact R4 physical/installed/live/AT/rollback evidence; not inferred from Chromium/static checks
+R053,external,PWA-MIGRATION-OFFLINE,NOT_TESTED,Requires exact R4 physical/installed/live/AT/rollback evidence; not inferred from Chromium/static checks
+R054,external,H6-IOS-OVERSCROLL,NOT_TESTED,Requires exact R4 physical/installed/live/AT/rollback evidence; not inferred from Chromium/static checks
+R055,external,VOICEOVER,NOT_TESTED,Requires exact R4 physical/installed/live/AT/rollback evidence; not inferred from Chromium/static checks
+R056,external,TALKBACK,NOT_TESTED,Requires exact R4 physical/installed/live/AT/rollback evidence; not inferred from Chromium/static checks
+R057,external,NVDA,NOT_TESTED,Requires exact R4 physical/installed/live/AT/rollback evidence; not inferred from Chromium/static checks
+R058,external,CONSTRAINED-PERFORMANCE,NOT_TESTED,Requires exact R4 physical/installed/live/AT/rollback evidence; not inferred from Chromium/static checks
+R059,external,LIVE-V10185-BYTE-BINDING,NOT_TESTED,Requires exact R4 physical/installed/live/AT/rollback evidence; not inferred from Chromium/static checks
+R060,external,VERIFIED-ROLLBACK,NOT_TESTED,Requires exact R4 physical/installed/live/AT/rollback evidence; not inferred from Chromium/static checks

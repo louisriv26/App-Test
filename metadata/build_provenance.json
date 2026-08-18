@@ -1,0 +1,45 @@
+{
+  "app_version": "v101.85",
+  "audit_revision": "R4",
+  "build_date": "2026-08-18",
+  "change_class": "EVIDENCE_RELEASE_ENGINEERING_ONLY",
+  "r3_baseline_zip": "L24H_v10185_GITHUB_DEPLOY_USER_FEEDBACK_CORRECTED_HARDENED_R3.zip",
+  "r3_baseline_sha256": "98852b3e347d0754fbf48c42c356e88bcb41301527f9a43308f73f00e7caf522",
+  "r3_runtime_html_sha256": "c43ff8934c12b24668c9c0cf55ebb12a9eb6ecd8ed265e68e4d78aaf0fd86050",
+  "postprepare_runtime_html_sha256": "c43ff8934c12b24668c9c0cf55ebb12a9eb6ecd8ed265e68e4d78aaf0fd86050",
+  "runtime_html_changed": false,
+  "governing_script_sha256": "da5994df79dad3b7fdbfee70c8e37843281bd8fddbcd36ff49aa918d147c6eec",
+  "executed_build_script": "l24h_v10185_r4_audit_reconciliation_build.py",
+  "executed_build_script_sha256": "26c2efc5f170c3020b6c8ca465cdb11f927f260ac27c67c45bca59bcc9fccb39",
+  "required_independent_auditor_hashes": {
+    "l24h_v10185_r4_independent_four_pass_audit.py": "ae19f22b1bb40180a8d0f5b91d67f65c8d85ff7d74f192ba68ea027184310b8a",
+    "l24h_v10185_r4_final_reopen_audit.py": "e103b60a583e6e1adfc2f0efe4f0437999aed4746aaa3c69b7c2f408b013fdf4",
+    "l24h_v10185_r4_independent_reopen_audit.py": "1eb9e75799fa7a83420935272a1e2038349e413cb4afc4764ee7c8859a79978f"
+  },
+  "r3_failures_corrected": [
+    "FALSE_INDEPENDENCE_LABEL",
+    "MISSING_PACKAGED_INDEPENDENT_AUDITOR_SCRIPTS",
+    "MISSING_PROTOTYPE_POLLUTION_RUNTIME_EVIDENCE",
+    "NO_LINE_BY_LINE_ACTIVE_REPORT_CLAIM_LEDGER"
+  ],
+  "protected_runtime_assets": [
+    "index.html",
+    "luisa_24_heures.html",
+    "manifest.json",
+    "sw.js",
+    "icons/favicon assets"
+  ],
+  "external_gates_not_tested": [
+    "PHYSICAL-IPHONE",
+    "PHYSICAL-IPAD",
+    "PHYSICAL-SAMSUNG",
+    "PWA-MIGRATION-OFFLINE",
+    "H6-IOS-OVERSCROLL",
+    "VOICEOVER",
+    "TALKBACK",
+    "NVDA",
+    "CONSTRAINED-PERFORMANCE",
+    "LIVE-V10185-BYTE-BINDING",
+    "VERIFIED-ROLLBACK"
+  ]
+}
