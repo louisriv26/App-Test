@@ -1,8 +1,15 @@
-# v101.90 Independent Four-Pass Audit
+# Four-pass frozen-tree audit — v101.99
 
-- Pass 1: PASS — baseline exact, runtime twins identical, six protected structures unchanged, 94 headings / 27 indexed readings confirmed.
-- Pass 2: PASS — 9/9 targeted runtime test groups PASS, including all 94 headings and both screenshot IDs.
-- Pass 3: PASS — 183 active lines classified against current evidence; physical QA remains NOT_TESTED.
-- Pass 4: PASS — 0 unjustified stale current-facing v101.89/cache references.
+## Pass 1 — files vs build authority — PASS
+Baseline v101.98 and RA19B source ZIP hashes verified; authorized change surface is release/source-governance metadata only.
 
-Prepackage status: **LIMITED_PASS**. Physical iPhone/iPad extract-heading selection remains NOT_TESTED on exact v101.90.
+## Pass 2 — runtime/data behaviour — PASS
+Protected LDC flow layout and speaker/library data are exact to v101.98. Chromium regression remains 66 surfaces / 1,584 visual groups / 145 Promesses Jesus spans.
+
+## Pass 3 — active report claims — PASS
+Current authority object, Promesses `ldc_sync`, all 21 Promesses source maps, Version 29 source SHA, flow counts and external NOT_TESTED gates are cross-checked.
+
+## Pass 4 — contradictions/staleness — PASS
+Active HTML contains no stale RA18 current-source authority identity. Historical RA18 implementation/provenance references are classified separately.
+
+Mandatory final-ZIP reopen and separately implemented independent reopened-ZIP audits remain separate gates and are not pre-claimed by this frozen-tree report.

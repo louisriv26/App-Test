@@ -1,0 +1,19 @@
+# Stale/current-authority scan — v101.99
+
+BLOCKING_UNJUSTIFIED_HITS=0
+ALLOWED_HISTORICAL_HITS=5
+
+## Blocking
+- none
+
+## Allowed historical/provenance hits
+- scripts/v10199_static_package_test.py — stale current source-map status
+- scripts/v10199_static_package_test.py — stale current source reason
+- scripts/v10199_static_package_test.py — RA18 authority SHA
+- scripts/L24H_v10199_RA19B_AUTHORITY_METADATA_REPAIR_HARDGATED_SCRIPT_2026-08-22.md — stale current source-map status
+- scripts/L24H_v10199_RA19B_AUTHORITY_METADATA_REPAIR_HARDGATED_SCRIPT_2026-08-22.md — stale current source reason
+
+Current-authority hard assertions:
+- active HTML contains no `SYNCED_CURRENT_LDC_RA18` / `Current LDC RA18`.
+- active HTML contains no RA18 authority SHA or Version 28 current-source identity.
+- all active release identity files are v101.99.

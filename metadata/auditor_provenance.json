@@ -1,8 +1,5 @@
 {
-  "build_script": "scripts/l24h_v10190_build.py",
-  "build_script_sha256": "cb67e986ce01d19cd03f4648f63ebe197703e4340793f5c91fec020f643dfc36",
-  "runtime_auditor": "scripts/l24h_v10190_extract_heading_runtime_audit.py",
-  "runtime_auditor_sha256": "d83da38fe5b129f5da7de8188a2148cedb232cd6519f779d9cb2f1ec36a48bbd",
-  "governing_script": "scripts/L24H_v10190_EXTRACT_HEADING_ANNOTATION_HARDGATED_SCRIPT_2026-08-20.md",
-  "governing_script_sha256": "8fd3fd33dd8f1882705f93b7ae4e503a22a014238d46cbf101d6ca8407b62bcd"
+  "version": "v101.99",
+  "audit_methods": "self-relative static + Chromium runtime; primary sealed-ZIP reopen; separate independent sealed-ZIP implementation",
+  "final_external_device_gates": "NOT_TESTED"
 }
