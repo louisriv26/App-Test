@@ -1,14 +1,13 @@
-gate,status,evidence
-CURRENT_LDC_AUTHORITY_METADATA,PASS,"Version 29 / v2.19.29-R1B in all active source-governance objects"
-PROMESSES_CORPUS_SOURCE_MAPS,PASS,21/21 RA19B
-RA19B_SOURCE_BLOCKS,PASS,115/115
-RA19B_CHANGED_BLOCKS,PASS,61/61
-PARAGRAPH_BREAKS,PASS,2179
-PRESERVE_BREAKS,PASS,100
-PRESERVE_LIST_BREAKS,PASS,0
-RUNTIME_OVERRIDES,PASS,66
-RUNTIME_FLOW_GROUPS,PASS,1584/1584
-PROMESSES_JESUS,PASS,145
-REAL_DEVICE,NOT_TESTED,external gate
-LIVE_PWA,NOT_TESTED,external gate
-TRUE_OFFLINE,NOT_TESTED,external gate
+﻿gate,status,evidence
+baseline SHA,PASS,77f7577b20dc4bb06ba403bc97074e0f9326f7c37d6ed68a0b756018b2da476e
+LDC v31 authority SHA,PASS,b91aabf84803685cb5a86379c2a76c6239c2882bc1fa8b4277479f978c025441
+protected declarations,PASS,6/6 unchanged; see protected_data_diff_report.csv
+quotation classification,PASS,1026 events; 0 unresolved
+French speaker adjudications,PASS,H19 P019 and H21 P059; Chromium + projection ledger
+JavaScript syntax,PASS,reports/prepackage_release_engineering_checks.json
+Chromium interaction/topology,PASS,reports/chromium_interaction_topology_results.json
+highlight/rerender,PASS,Chromium canonical rerender + historical-highlight compatibility scenarios
+release-evidence lifecycle,PASS,no final reopen/decision artifacts embedded; metadata/release_evidence_lifecycle.json
+deterministic ZIP A/B,POST_PACKAGE_EXTERNAL,must be proven after writing byte-identical immutable candidate ZIPs
+final reopened ZIP,POST_PACKAGE_EXTERNAL,must be generated after immutable ZIP freeze
+independent reopened ZIP,POST_PACKAGE_EXTERNAL,must be separately generated after immutable ZIP freeze

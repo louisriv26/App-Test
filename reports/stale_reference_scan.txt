@@ -1,19 +1,324 @@
-# Stale/current-authority scan — v101.99
+# Stale-reference scan — pre-package evidence universe
 
-BLOCKING_UNJUSTIFIED_HITS=0
-ALLOWED_HISTORICAL_HITS=5
+Files scanned: 56 (self-referential stale-scan outputs excluded).
+Hits classified: 316.
+Blocking active stale hits: 0.
 
-## Blocking
-- none
+Classification rules: CURRENT_AUTHORITY_PROVENANCE / BASELINE_PROVENANCE / HISTORICAL_ALLOWED / SPECIFICATION_OR_HISTORICAL_ALLOWED / FAIL_STALE_ACTIVE.
 
-## Allowed historical/provenance hits
-- scripts/v10199_static_package_test.py — stale current source-map status
-- scripts/v10199_static_package_test.py — stale current source reason
-- scripts/v10199_static_package_test.py — RA18 authority SHA
-- scripts/L24H_v10199_RA19B_AUTHORITY_METADATA_REPAIR_HARDGATED_SCRIPT_2026-08-22.md — stale current source-map status
-- scripts/L24H_v10199_RA19B_AUTHORITY_METADATA_REPAIR_HARDGATED_SCRIPT_2026-08-22.md — stale current source reason
-
-Current-authority hard assertions:
-- active HTML contains no `SYNCED_CURRENT_LDC_RA18` / `Current LDC RA18`.
-- active HTML contains no RA18 authority SHA or Version 28 current-source identity.
-- all active release identity files are v101.99.
+BASELINE_PROVENANCE | README.md | v101.101 | offset 460
+BASELINE_PROVENANCE | README.md | v101.101 | offset 573
+CURRENT_AUTHORITY_PROVENANCE | README.md | Version 29 | offset 289
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 769291
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1580223
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1613306
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1625533
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1629876
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1635783
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1666745
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1679163
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1693070
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1705338
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1714030
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1718727
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1722271
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1737650
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1742781
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1768361
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1774731
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1810360
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1831643
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1864734
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1885335
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1902079
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1911130
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1948393
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1953376
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1974407
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1989523
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 2009037
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 2056435
+CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 2124077
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 769291
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1580223
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1613306
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1625533
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1629876
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1635783
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1666745
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1679163
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1693070
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1705338
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1714030
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1718727
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1722271
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1737650
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1742781
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1768361
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1774731
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1810360
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1831643
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1864734
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1885335
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1902079
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1911130
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1948393
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1953376
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1974407
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1989523
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 2009037
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 2056435
+CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 2124077
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 944
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 7433
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 12435
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 17761
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 23966
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 28091
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 31215
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 38829
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 42802
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 46980
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 53016
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 70834
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 82940
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 91873
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 95298
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 99738
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 103433
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 107513
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 115110
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 129833
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 137732
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 142584
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 148085
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 153607
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 155855
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 159116
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 162206
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 169723
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 178256
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 189231
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 193438
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 198203
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 204511
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 208735
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 210454
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 213060
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 217770
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 220384
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 227173
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 228696
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 231226
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 233651
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 242295
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 256831
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 268060
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 274678
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 282698
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 286922
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 292136
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 299116
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 302357
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 307845
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 320439
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 325760
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 333792
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 339859
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 343716
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 348787
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 350324
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 353061
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 359471
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 385659
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 393354
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 396089
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 399806
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 401499
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 403715
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 406611
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 410270
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 414830
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 417774
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 421927
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 427206
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 432653
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 435952
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 439742
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 447305
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 450673
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 456295
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 459150
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 462129
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 467369
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 478736
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 480453
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 482945
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 486853
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 492281
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 500549
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 506654
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 510622
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 520054
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 524623
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 530264
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 541344
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 546163
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 548480
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 549799
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 551566
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 553752
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 555452
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 556895
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 557761
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 559205
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 560562
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 562340
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 564162
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 566400
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 570745
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 572942
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 575169
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 577864
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 581075
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 584245
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 585725
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 587319
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_presentation_parity_report.md | Version 29 | offset 319
+BASELINE_PROVENANCE | reports/ldc_ra19b_flow_boundary_summary.json | v101.101 | offset 16
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_summary.json | Version 29 | offset 137
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 944
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 7433
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 12435
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 17761
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 23966
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 28091
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 31215
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 38829
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 42802
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 46980
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 53016
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 70834
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 82940
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 91873
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 95298
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 99738
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 103433
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 107513
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 115110
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 129833
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 137732
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 142584
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 148085
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 153607
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 155855
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 159116
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 162206
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 169723
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 178256
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 189231
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 193438
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 198203
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 204511
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 208735
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 210454
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 213060
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 217770
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 220384
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 227173
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 228696
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 231226
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 233651
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 242295
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 256831
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 268060
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 274678
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 282698
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 286922
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 292136
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 299116
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 302357
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 307845
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 320439
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 325760
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 333792
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 339859
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 343716
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 348787
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 350324
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 353061
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 359471
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 385659
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 393354
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 396089
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 399806
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 401499
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 403715
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 406611
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 410270
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 414830
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 417774
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 421927
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 427206
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 432653
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 435952
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 439742
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 447305
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 450673
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 456295
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 459150
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 462129
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 467369
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 478736
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 480453
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 482945
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 486853
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 492281
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 500549
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 506654
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 510622
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 520054
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 524623
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 530264
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 541344
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 546163
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 548480
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 549799
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 551566
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 553752
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 555452
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 556895
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 557761
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 559205
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 560562
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 562340
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 564162
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 566400
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 570745
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 572942
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 575169
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 577864
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 581075
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 584245
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 585725
+CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 587319
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 405
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 2027
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 2288
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 2356
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 2472
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 3202
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 5701
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 6096
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 13032
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 21677
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 23469
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 28572
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 31124
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 36646
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 36795
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 37032
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | RA18 | offset 28813
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | Version 29 | offset 5076
+SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | L24H_v101101 | offset 2102
+CURRENT_AUTHORITY_PROVENANCE | version.json | Version 29 | offset 208

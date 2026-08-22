@@ -1,9 +1,21 @@
-# Report claims versus evidence — v101.99
+# Report claims vs evidence audit — pre-package
 
-- RA19B source-block count 115 / changed-block count 61 / 2,179 paragraph + 100 preserve + 0 list boundaries remain unchanged from the validated v101.98 RA19B flow model.
-- `LDC_CURRENT_SYNC_AUTHORITY` is RA19B Version 29 and reports 115 / 61 / 100 / 0 / 66.
-- Promesses `CORPUS.ldc_sync` is RA19B Version 29 and all 21 Promesses source maps are `SYNCED_CURRENT_LDC_RA19B`.
-- `TEXT_LIBRARY` source maps remain RA19B.
-- Runtime layout remains 66 overrides and 1,584 visual groups; Promesses remains 145 Jesus spans in Chromium.
-- Real-device, live-PWA and true-offline gates remain NOT_TESTED.
-- Final reopened-ZIP gates are governed by `metadata/final_decision_lock.json` and external reopened-ZIP evidence.
+Active report files scanned: **29**.
+PASS-like evidence tokens found: **79**.
+Premature final-reopen PASS claims in active reports: **0**.
+Prohibited embedded final PASS claims outside specification scripts: **0**.
+PENDING tokens in active reports: **0**.
+
+Evidence basis:
+
+- syntax claims → `reports/prepackage_release_engineering_checks.json`;
+- Chromium/runtime/topology/highlight claims → `reports/chromium_interaction_topology_results.json`;
+- protected-data claims → `reports/protected_data_diff_report.csv` and release-scope parity checks;
+- quotation claims → `reports/quotation_role_ledger.csv` + `reports/presentation_projection_summary.json`;
+- root HTML identity → `reports/root_deploy_consistency_report.md`;
+- stale references → `reports/stale_reference_scan.csv` / `.txt`;
+- post-package deterministic/reopen/independent outcomes → deliberately `POST_PACKAGE_EXTERNAL`, never PASS inside this ZIP.
+
+`PREPACKAGE_REPORT_INTEGRITY_GATE = PASS`
+
+This is not the final release decision. The final decision lock is written externally only after both immutable-ZIP audits.

@@ -1,15 +1,8 @@
-# Four-pass frozen-tree audit — v101.99
+# Independent four-pass audit — v101.102 — pre-package evidence
 
-## Pass 1 — files vs build authority — PASS
-Baseline v101.98 and RA19B source ZIP hashes verified; authorized change surface is release/source-governance metadata only.
+1. **Files vs build inputs:** PASS — source candidate hash, baseline/LDC authority hashes, and protected app/runtime hashes are bound in `metadata/build_provenance.json` and `reports/prepackage_release_engineering_checks.json`.
+2. **Runtime behaviour available before freeze:** PASS — Chromium harness results are packaged at `reports/chromium_interaction_topology_results.json`; physical devices remain NOT_TESTED.
+3. **Reports vs pre-package evidence:** PASS — active package reports do not claim post-package reopened-ZIP outcomes.
+4. **Contradiction/stale scan:** PASS — no unexplained active stale reference in the pre-package tree.
 
-## Pass 2 — runtime/data behaviour — PASS
-Protected LDC flow layout and speaker/library data are exact to v101.98. Chromium regression remains 66 surfaces / 1,584 visual groups / 145 Promesses Jesus spans.
-
-## Pass 3 — active report claims — PASS
-Current authority object, Promesses `ldc_sync`, all 21 Promesses source maps, Version 29 source SHA, flow counts and external NOT_TESTED gates are cross-checked.
-
-## Pass 4 — contradictions/staleness — PASS
-Active HTML contains no stale RA18 current-source authority identity. Historical RA18 implementation/provenance references are classified separately.
-
-Mandatory final-ZIP reopen and separately implemented independent reopened-ZIP audits remain separate gates and are not pre-claimed by this frozen-tree report.
+This file does **not** assert final ZIP reopen or independent reopened-ZIP PASS. Those gates are intentionally external and can only be decided after immutable ZIP freeze.

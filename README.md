@@ -1,14 +1,28 @@
-# Les 24 Heures de la Passion — v101.99
+# Les 24 Heures de la Passion — v101.102
 
 Build date: 2026-08-22  
-Cache: `luisa-24h-v101-99`
+Cache: `luisa-24h-v101-102`
 
-## LDC authority
+## LDC methodology authority
 
-All identifiable Livre du Ciel text surfaces are synchronized to **Version 29 / v2.19.29-R1B (RA19B)**, package SHA-256 `eb2fa6abce1525399547f469ad1c2d64e818ff8685fe11cc20a57571c59f92fc`. RA19B changes flow adjudication only; canonical wording and speaker data are preserved.
+The exact Version 31 / RA19D package supplies the latest shipped LDC presentation implementation. Its `speech_model.js` and `display_map.js` are byte-identical to Version 29 / RA19B. RA19B remains the governing corpus-flow authority; RA19D did not alter speaker geometry/display transforms/flow decisions.
 
-RA19B result inside 24H remains: 115 source blocks, 61 presentation changes versus RA18, 2,179 ordinary paragraph boundaries, 100 source-backed preserved breaks, 0 list-preserve breaks, 66 runtime overrides.
+## This stage
 
-This v101.99 stage repairs stale current-source authority metadata only. It does not modify LDC wording, flow layout, speaker data, stable IDs or interaction logic.
+Baseline: **v101.101**, SHA-256 `77f7577b20dc4bb06ba403bc97074e0f9326f7c37d6ed68a0b756018b2da476e`.
 
-Static package candidate only. Real iPhone/iPad/Samsung, live PWA/update and true offline reopening remain NOT_TESTED.
+This successor replaces v101.101's ad-hoc quote suppression and split Android topology with one build-time frozen LDC-style presentation projection. It:
+
+1. preserves meaningful nested/reported/non-divine/formula quotations;
+2. suppresses only validated redundant outer divine wrappers in the reader;
+3. separates divine speaking turns from narration/other turns using deterministic presentation boundaries;
+4. makes Samsung `Paragraphe` consume the same visible-boundary model as rendering;
+5. explicitly presents the two user-confirmed French-attribution cases as Luisa without modifying canonical `SPEECH_DATA`.
+
+Canonical devotional text, paragraph IDs/order, RA19B flow actions, highlights/notes storage and raw speaker metadata are preserved.
+
+Static/package candidate only until physical-device/live/offline gates are completed.
+
+## Release-evidence lifecycle (RE1)
+
+This ZIP intentionally contains only evidence that exists before immutable package freeze. `FINAL_REOPEN_AUDIT.md`, `INDEPENDENT_REOPEN_AUDIT.md`, and `FINAL_DECISION_LOCK.json` are intentionally **not embedded**: they are generated afterward as external companion evidence against the exact frozen ZIP. This prevents a circular claim in which the package asserts that its own future reopen audit has already passed.

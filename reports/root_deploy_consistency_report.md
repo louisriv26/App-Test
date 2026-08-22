@@ -1,7 +1,10 @@
-# Root/deploy consistency — v101.99
+# Root/deploy consistency — v101.102
 
-- `index.html` and `luisa_24_heures.html` are byte-identical.
-- Active app version: `v101.99`.
-- Active service-worker cache: `luisa-24h-v101-99`.
-- LDC authority: Version 29 / v2.19.29-R1B.
-- `LDC_CURRENT_SYNC_AUTHORITY`, Promesses `CORPUS.ldc_sync`, and 21 Promesses current-source-map records all identify RA19B.
+Pre-package evidence:
+
+- `index.html` SHA-256: `e53bbdd0fe1a9d7779fd732f8e4cb1c7fa23c72841ede000151428c464a74cad`
+- `luisa_24_heures.html` SHA-256: `e53bbdd0fe1a9d7779fd732f8e4cb1c7fa23c72841ede000151428c464a74cad`
+- byte-identical: **PASS**
+- nested ZIP members in candidate tree: **0**
+
+Final immutable-ZIP consistency is intentionally a post-package external audit gate.

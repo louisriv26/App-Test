@@ -1,8 +1,6 @@
-item,status,evidence
-RA19B_AUTHORITY_METADATA_REPAIR,PASS,"LDC_CURRENT_SYNC_AUTHORITY + Promesses ldc_sync + 21 source maps now RA19B"
-PROTECTED_FLOW_LAYOUT,PASS,"exact semantic equality to v101.98"
-PROTECTED_TEXT_LIBRARY,PASS,"exact semantic equality to v101.98"
-PROTECTED_SPEAKER_DATA,PASS,"exact semantic equality to v101.98"
-RERENDER_ACTION_PERSISTENCE,PASS,"runtime actions unchanged after rerender"
-SAMSUNG_GROUPING,PASS,"1584/1584 true visual paragraphs"
-PROMESSES_SPEAKER,PASS,"145 Jesus spans"
+﻿item,change,diff_review,protected_data,targeted_test,mini_regression,independent_recheck,redo_count
+1,Build-time LDC-style presentation projection + 2 explicit French adjudications,PASS,PASS,PASS_STATIC_GENERATOR,PASS_CHROMIUM,POST_PACKAGE_EXTERNAL,0
+2,Quote role map replaces runtime adjacency heuristic,PASS,PASS,PASS_1026_EVENTS_0_UNRESOLVED,PASS_CHROMIUM,POST_PACKAGE_EXTERNAL,0
+3,Speech block boundaries generated from presentation runs,PASS,PASS,PASS_LOCAL_243_CROSS_4,PASS_CHROMIUM,POST_PACKAGE_EXTERNAL,0
+4,Shared visible paragraph resolver for renderer/Samsung/Mon Espace,PASS,PASS,PASS_CHROMIUM_TOPOLOGY,PASS_HIGHLIGHT_RERENDER,POST_PACKAGE_EXTERNAL,0
+5,Release-evidence lifecycle rebuild only; no app/runtime mutation,PASS,PASS_RUNTIME_HASH_PARITY,PASS_NO_CIRCULAR_FINAL_CLAIMS,PASS_SYNTAX_AND_PREPACKAGE_REPORT_AUDIT,POST_PACKAGE_EXTERNAL,0

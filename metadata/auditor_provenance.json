@@ -1,5 +1,9 @@
 {
-  "version": "v101.99",
-  "audit_methods": "self-relative static + Chromium runtime; primary sealed-ZIP reopen; separate independent sealed-ZIP implementation",
-  "final_external_device_gates": "NOT_TESTED"
+  "version": "v101.102",
+  "release_evidence_revision": "RE1",
+  "prepackage_audit": "packaged evidence limited to pre-freeze facts",
+  "primary_final_audit": "external fresh extraction of exact immutable ZIP",
+  "independent_final_audit": "external separately implemented fresh extraction/auditor; no shared primary audit code",
+  "final_decision_lock": "external, written only after both final audits complete",
+  "date": "2026-08-22"
 }

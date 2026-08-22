@@ -1,0 +1,153 @@
+{
+  "scenarios": [
+    {
+      "name": "runtime_projection_loaded",
+      "status": "PASS",
+      "evidence": {
+        "v": "v101.102",
+        "proj": 2197,
+        "topo": 206,
+        "cross": 4
+      }
+    },
+    {
+      "name": "H19_Luisa_adjudication",
+      "status": "PASS",
+      "evidence": {
+        "text": "Je me plaignais à mon doux Jésus en lui disant : «Où sont tes promesses ? Je n'ai plus de croix ni de similarité avec toi. Tout s'est écroulé. Il ne Me reste qu'à pleurer sur Mon triste sort.»",
+        "runs": [],
+        "hidden": [],
+        "quote": " «Où sont tes promesses ? Je n'ai plus de croix ni de similarité avec toi. Tout s'est écroulé. Il ne Me reste qu'à pleurer sur Mon triste sort.»"
+      }
+    },
+    {
+      "name": "H21_turn_switch",
+      "status": "PASS",
+      "evidence": {
+        "t": "À l'instant, Il me dit : «Aurais-Tu par hasard cessé de M'aimer et de vivre dans Ma Volonté ?» Je repris : «Non ! Et que cela ne soit jamais !»",
+        "runs": [
+          {
+            "start": 26,
+            "end": 93,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 25,
+            "end": 26,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_ATTRIBUTION"
+          },
+          {
+            "start": 93,
+            "end": 94,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_ATTRIBUTION"
+          }
+        ],
+        "first": true,
+        "second": false,
+        "luisaOpen": 107
+      }
+    },
+    {
+      "name": "meaningful_quotes_preserved",
+      "status": "PASS",
+      "evidence": [
+        {
+          "id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P067",
+          "t": "Ma fille, au moment où Ponce Pilate dit : «Voici l'homme», Ils crièrent tous : «Crucifie-Le, crucifie-Le, nous Le voulons mort.»",
+          "q": 42,
+          "hidden": [],
+          "visible": true
+        },
+        {
+          "id": "PASSION24.TEXT.RELATED_HOUR_22.BODY.P063",
+          "t": "Ces plaies, comme autant de bouches, brûlaient et ressentaient une soif ardente qui voulait se satisfaire, et incapable de Me contenir, Je criai : « J’ai soif ! » Ce « J’ai soif » est resté et continue de dire « J’ai soif ». Je n’arrête jamais de le dire. Avec Mes plaies ouvertes et Ma Bouche brûlante, Je dis toujours : « Je brûle, J’ai soif ! »",
+          "q": 147,
+          "hidden": [],
+          "visible": true
+        },
+        {
+          "id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P069",
+          "t": "Ma Mère est donc la Reine de la Création, pour avoir dépassé «le Tout».",
+          "q": 61,
+          "hidden": [],
+          "visible": true
+        }
+      ]
+    },
+    {
+      "name": "father_fixture_found_and_separated",
+      "status": "PASS",
+      "evidence": {
+        "id": "PASSION24.HOUR.19.P165",
+        "t": "Ah ! Fils, Je ne peux plus contenir mon Indignation devant l’ingratitude de ces âmes qui M’affligent plus que toutes les autres créatures ensemble ! » Mais Toi, ô mon Jésus, triomphant de tout, Tu défends même ces âmes, Tu endigues par l’Amour immense de ton Cœur les vagues des amertumes et des blessures qu’elles Te procurent.",
+        "p": {
+          "runs": [
+            {
+              "start": 0,
+              "end": 148,
+              "speaker": "FATHER"
+            }
+          ],
+          "hidden": [
+            {
+              "start": 148,
+              "end": 150,
+              "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+              "reason": "OUTER_DIVINE_TARGET_START"
+            }
+          ],
+          "breaks": [
+            151
+          ]
+        }
+      }
+    },
+    {
+      "name": "topology_static_exhaustive",
+      "status": "PASS",
+      "evidence": {
+        "targets": 206,
+        "bad": []
+      }
+    },
+    {
+      "name": "H21_DOM_render",
+      "status": "PASS",
+      "evidence": {
+        "text": "À l'instant, Il me dit : «\nAurais-Tu par hasard cessé de M'aimer et de vivre dans Ma Volonté ?» \nJe repris : «Non ! Et que cela ne soit jamais !»",
+        "html": "À l'instant, Il me dit : <span class=\"speech-quote-hidden\" aria-hidden=\"true\" data-speech-quote-suppressed=\"OUTER_DIVINE_OPEN_WRAPPER_HIDE\">«</span><span class=\"speech-end-visual-break speech-presentation-visual-break\" aria-hidden=\"true\" data-presentation-boundary=\"true\"></span><span class=\"sp-jesus\" role=\"group\" aria-label=\"Paroles de Jésus\">Aurais-Tu par hasard cessé de M'aimer et de vivre dans Ma Volonté ?</span><span class=\"speech-quote-hidden\" aria-hidden=\"true\" data-speech-quote-suppressed=\"OUTER_DIVINE_CLOSE_WRAPPER_HIDE\">»</span> <span class=\"speech-end-visual-break speech-presentation-visual-break\" aria-hidden=\"true\" data-presentation-boundary=\"true\"></span>Je repris : «Non ! Et que cela ne soit jamais !»",
+        "jesus": [
+          "Aurais-Tu par hasard cessé de M'aimer et de vivre dans Ma Volonté ?"
+        ]
+      }
+    },
+    {
+      "name": "rerender_canonical_text_invariant",
+      "status": "PASS",
+      "evidence": {
+        "tested": 206,
+        "bad": []
+      }
+    },
+    {
+      "name": "existing_highlight_non_destructive_topology_relabel",
+      "status": "PASS",
+      "evidence": {
+        "id": "PASSION24.HOUR.01.P008",
+        "cut": 87,
+        "count": 2,
+        "unchanged": true
+      }
+    },
+    {
+      "name": "no_runtime_console_errors",
+      "status": "PASS",
+      "evidence": []
+    }
+  ],
+  "console_errors": []
+}

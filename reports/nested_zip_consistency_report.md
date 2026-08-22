@@ -1,3 +1,3 @@
-# Nested ZIP consistency — v101.99
+# Nested ZIP consistency — pre-package
 
-Nested ZIP members in deploy package: **0**.
+Candidate tree contains **0** nested `.zip` files. `PREPACKAGE_NESTED_ZIP_GATE = PASS`. Final immutable-ZIP verification is external after freeze.

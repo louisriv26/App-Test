@@ -1,7 +1,7 @@
-# REAL DEVICE QA — v101.99
+# REAL DEVICE QA — v101.102
 
-Build: `v101.99`  
-Cache: `luisa-24h-v101-99`
+Build: `v101.102`  
+Cache: `luisa-24h-v101-102`
 
 All scenarios are NOT_TESTED until executed on the exact final bytes.
 
@@ -16,7 +16,7 @@ All scenarios are NOT_TESTED until executed on the exact final bytes.
 - G-09 Search/deep link stable anchor.
 - G-10 Notes/favourites persistence.
 - G-11 Portrait/landscape scroll.
-- G-12 Installed PWA update to v101.99.
+- G-12 Installed PWA update to v101.102.
 - G-13 Live GitHub Pages byte binding.
 - G-14 True offline/airplane reopen.
 - G-15 VoiceOver/TalkBack representative navigation.
