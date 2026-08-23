@@ -1,0 +1,112 @@
+{
+  "harness": "v101105_phaseE_functional",
+  "scenarios": [
+    {
+      "name": "fresh_runtime_corpus_counts",
+      "status": "PASS",
+      "evidence": {
+        "hours": 24,
+        "prayers": 5,
+        "sections": 4,
+        "library": 40,
+        "linked": 24,
+        "internal": 30,
+        "speechTargets": 2197,
+        "speechSegments": 3293
+      }
+    },
+    {
+      "name": "library_mark_add_remove",
+      "status": "PASS",
+      "evidence": {
+        "added": {
+          "color": "yellow",
+          "created_at": "2026-08-23T08:17:30.549Z",
+          "updated_at": "2026-08-23T08:17:30.549Z"
+        },
+        "removed": true,
+        "remaining": null
+      }
+    },
+    {
+      "name": "search_matrix",
+      "status": "PASS",
+      "evidence": [
+        {
+          "count": 4,
+          "needle": "couronné",
+          "name": "accent_insensitive",
+          "ok": true,
+          "sample": "\n    4 résultats pour « Jesus est couronne d'epines »\n    \n    \n        17e Heure — Le couronnement d’épines – La condamnation à mortHeure\n        Jésus est couronné d’épines\n        17e Heure — Le couronnement d’épines – La condamnation à "
+        },
+        {
+          "count": 1,
+          "needle": "peine",
+          "name": "linked_ldc",
+          "ok": true,
+          "sample": "\n    1 résultat pour « peine, pardon »\n    \n    \n        Textes liés à la 20e HeureComplément\n        s Mes peines et Mes pardons, crie pour chaque offense \"peine, pardon\", de sorte que Je ne sois pas seul à M'affliger et à pardonner, mais "
+        },
+        {
+          "count": 7,
+          "needle": "Voici",
+          "name": "quoted_phrase",
+          "ok": true,
+          "sample": "\n    7 résultats pour « Voici l'homme »\n    \n    \n        Textes liés à la 17e HeureComplément\n        le monde. Il Se présente en disant : « Ecce Homo ! » « Voici l’Homme ! »\n        Textes liés à la 17e HeureComplément\n        • Tome 19 —"
+        },
+        {
+          "count": 4,
+          "needle": "couronné",
+          "name": "internal_subheading",
+          "ok": true,
+          "sample": "\n    4 résultats pour « Jésus est couronné d’épines »\n    \n    \n        17e Heure — Le couronnement d’épines – La condamnation à mortHeure\n        Jésus est couronné d’épines\n        17e Heure — Le couronnement d’épines – La condamnation à "
+        }
+      ]
+    },
+    {
+      "name": "hour_espace_back_restore",
+      "status": "PASS",
+      "evidence": {
+        "before": {
+          "view": "reader",
+          "hour": 20
+        },
+        "after": {
+          "view": "reader",
+          "hour": 20
+        },
+        "progressDisplay": "block"
+      }
+    },
+    {
+      "name": "help_modal_preserves_reader_state",
+      "status": "PASS",
+      "evidence": {
+        "before": {
+          "view": "reader",
+          "hour": 20
+        },
+        "after": {
+          "view": "reader",
+          "hour": 20
+        },
+        "open": false
+      }
+    },
+    {
+      "name": "accessibility_static_core",
+      "status": "PASS",
+      "evidence": {
+        "missingNav": 0,
+        "dialogs": 7,
+        "hiddenQuoteRender": true
+      }
+    },
+    {
+      "name": "phaseE_no_console_errors",
+      "status": "PASS",
+      "evidence": []
+    }
+  ],
+  "console_errors": [],
+  "status": "PASS"
+}

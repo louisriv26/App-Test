@@ -1,21 +1,15 @@
-# Report claims vs evidence audit — pre-package
+# Report claims vs evidence audit — v101.105 prepackage
 
-Active report files scanned: **29**.
-PASS-like evidence tokens found: **79**.
-Premature final-reopen PASS claims in active reports: **0**.
-Prohibited embedded final PASS claims outside specification scripts: **0**.
-PENDING tokens in active reports: **0**.
+Every current status-bearing report was parsed from the current tree. Historical witness reports are evidence inputs, not current release-decision reports.
 
-Evidence basis:
+- `reports/chromium_interaction_topology_results.json` — status=PASS: **PASS** — scenario_count=20; failures=0
+- `reports/extended_interaction_results.json` — status=PASS: **PASS** — scenario_count=13; failures=0
+- `reports/phaseE_functional_results.json` — status=PASS: **PASS** — scenario_count=7; failures=0
+- `reports/no_regression_fix_ledger.csv` — all items PASS: **PASS** — items=4
+- `reports/protected_data_diff_report.csv` — all protected declarations unchanged: **PASS** — declarations=8
+- `reports/root_deploy_consistency_report.md` — root runtime parity PASS: **PASS** — index=62e232cfbc6b154305d0cb2987daf6f4d71aea05b5eb40af3d273a7c7ab31f9f app=62e232cfbc6b154305d0cb2987daf6f4d71aea05b5eb40af3d273a7c7ab31f9f
+- `reports/stale_reference_scan.txt` — active stale failures=0: **PASS** — hits=346 active=0
+- `syntax` — inline JS + service worker syntax PASS: **PASS** — js_rc=0 sw_rc=0
+- `audit/independent_four_pass_audit.md` — four-pass status=PASS: **PASS** — checks=25; failures=0
 
-- syntax claims → `reports/prepackage_release_engineering_checks.json`;
-- Chromium/runtime/topology/highlight claims → `reports/chromium_interaction_topology_results.json`;
-- protected-data claims → `reports/protected_data_diff_report.csv` and release-scope parity checks;
-- quotation claims → `reports/quotation_role_ledger.csv` + `reports/presentation_projection_summary.json`;
-- root HTML identity → `reports/root_deploy_consistency_report.md`;
-- stale references → `reports/stale_reference_scan.csv` / `.txt`;
-- post-package deterministic/reopen/independent outcomes → deliberately `POST_PACKAGE_EXTERNAL`, never PASS inside this ZIP.
-
-`PREPACKAGE_REPORT_INTEGRITY_GATE = PASS`
-
-This is not the final release decision. The final decision lock is written externally only after both immutable-ZIP audits.
+No embedded report claims the future immutable ZIP has passed a reopen audit.

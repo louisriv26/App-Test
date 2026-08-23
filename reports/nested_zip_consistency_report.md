@@ -1,3 +1,3 @@
-# Nested ZIP consistency — pre-package
+# Nested ZIP consistency — v101.105 prepackage
 
-Candidate tree contains **0** nested `.zip` files. `PREPACKAGE_NESTED_ZIP_GATE = PASS`. Final immutable-ZIP verification is external after freeze.
+No nested ZIP exists in the prepackage tree. Status: **NOT_APPLICABLE_NO_NESTED_ZIP**. The immutable final ZIP will be reopened externally after freeze.

@@ -1,31 +1,14 @@
 {
-  "version": "v101.102",
-  "ldc_methodology_version": "Version 31 shipped implementation; RA19B corpus/flow authority",
-  "ldc_speech_model_sha256": "595a156cc8d2ad88731e23a1ecf4b44405831f08f909a72051f9be6ad19e1be9",
-  "ldc_display_map_sha256": "60f6a77d40a37f3cc678fb5940fc7904f593c9518ee398808aa4206a337b07f3",
-  "speech_data_targets": 2197,
-  "presentation_targets": 2196,
-  "presentation_runs": 2206,
-  "presentation_speakers": {
-    "MARY": 39,
-    "JESUS": 2164,
-    "FATHER": 3
-  },
-  "quotation_events": 1026,
-  "quotation_roles": {
-    "QUOTED_FORMULA_OR_TITLE_KEEP": 90,
-    "NARRATIVE_QUOTE_KEEP": 280,
-    "OUTER_DIVINE_OPEN_WRAPPER_HIDE": 267,
-    "OUTER_DIVINE_CLOSE_WRAPPER_HIDE": 269,
-    "REPORTED_QUOTE_KEEP": 98,
-    "MEANINGFUL_NESTED_QUOTE_KEEP": 18,
-    "NON_DIVINE_DIRECT_QUOTE_KEEP": 4
-  },
-  "unresolved_quotation_roles": 0,
-  "local_presentation_boundaries": 243,
-  "cross_record_presentation_boundaries": 4,
-  "explicit_french_speaker_adjudications": 2,
-  "mapped_blocks": 115,
-  "boundary_source_refs_checked": 4558,
-  "missing_source_refs": 0
+  "version": "v101.105",
+  "stage": "NATIVE_24H_PARAGRAPH_LDC_SEMANTIC_HYBRID_PRESENTATION_R1",
+  "semantic_projection_targets": 2197,
+  "local_break_targets": 125,
+  "local_break_count": 139,
+  "cross_record_break_count": 1,
+  "quote_edge_integrity_join_count": 24,
+  "quote_event_count": 1026,
+  "unresolved_quote_roles": 0,
+  "protected_declarations_unchanged": true,
+  "final_package_reopen_gate": "POST_PACKAGE_EXTERNAL",
+  "independent_reopen_gate": "POST_PACKAGE_EXTERNAL"
 }

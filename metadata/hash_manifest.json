@@ -1,67 +1,358 @@
 {
-  "version": "v101.102",
-  "release_evidence_revision": "RE1",
-  "algorithm": "sha256",
-  "excluded": [
-    "metadata/hash_manifest.json"
-  ],
-  "entries": {
-    ".gitattributes": "9b2013ab32eedf38f84f9cffb7bbd35790b2e224d3ba7a956758b4435a02bfbc",
-    ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "README.md": "27da2c5dd237171f49902a4d196251c439985765d48e53d38c17580c82eab33a",
-    "REAL_DEVICE_QA_CHECKLIST.md": "4dd70bf66192d30d2d1846a31386a665cfa5c27def7f4bd73a92fa64f30eda70",
-    "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv": "8de3867217f5f3167150758b8e63db7c89aa899aaf1ff0bc8f54f8788c8113fe",
-    "apple-touch-icon.png": "dd8efc8111a51b98c4c93dcab7357ecc4c2d5448b8a08aa97da7381dc0b56864",
-    "audit/independent_four_pass_audit.md": "c6dbc8b494dffb8b3265da7cbd6c5c2c78d3d8ab8297ec3d47012a130fb65597",
-    "favicon-16.png": "18ea7f82b0a52d3ab2e5f89eb294fb06f0057b72f890aa66ada9e0f3ff4beaa8",
-    "favicon-32.png": "49d3cd0fdf71b21076d3117b352422730ebc0d0e99749ed4e3b1d230c71ed008",
-    "favicon.ico": "d0b29e153e5783bfd36522c1dc9cabff9817275553b9a2db80db477a1fca53ec",
-    "icon-120.png": "12151620d8cf4ff5f9e8b8c4e2ecf5bdb739142613f7d41dc3d8e22d10f43f17",
-    "icon-192.png": "6c3f6c4771a505d06efc5f8d9f3da877bb599ec14c45509b185d0749fd83bff4",
-    "icon-512.png": "a0c9e8ab677750ca096adfb2748a4f4de8707b01a914faeafbf2ae94ec7da4f7",
-    "icon-60.png": "303a69b4d594ca2a22df35bce029cbdb8a143cbda41bbf83199b0f9ac0ea2fb4",
-    "icon-maskable-512.png": "2c15d684b3c37e62b342f8a2041daa0038fa2280a3c3dafea02ccd10bec4716a",
-    "index.html": "e53bbdd0fe1a9d7779fd732f8e4cb1c7fa23c72841ede000151428c464a74cad",
-    "luisa_24_heures.html": "e53bbdd0fe1a9d7779fd732f8e4cb1c7fa23c72841ede000151428c464a74cad",
-    "manifest.json": "fa81163282e12a759b013b09494506a96817336b2c4080aabe2cf6947698a479",
-    "metadata/auditor_provenance.json": "e9414a51d466777c807554ee365b9063dfe85c7177fb86c87d4479d052059cf5",
-    "metadata/build_provenance.json": "d16aa1b81df91868296aec4201bc225c005ead7bd7ef3d620a86edfc3bb1e7f6",
-    "metadata/package_manifest.json": "bff722e2676a220ec0113ae6f79ed2f294a96b6f753cce0a7114db6e74d530fc",
-    "metadata/release_evidence_lifecycle.json": "a51ca46695ad673027760395ea9aae01cc30c893b98ea7b5aea2cda0fcdd1b2e",
-    "metadata/user_feedback_authority.md": "49e6b06d64ca86115c619e7a8c557e2224f4980d48eca9434681a44fc424b094",
-    "reports/affected_ra19b_flow_offset_reprojection.csv": "cf63d7e6c53ef09970575828af2d2cc033629c195633622f59c3282c81f01ed3",
-    "reports/affected_speech_offset_reprojection.csv": "ce9d0fcb4cb275edf39c5fa86d0d3cd8fc16dbda1fc566b9be294d63a14ca324",
-    "reports/android_visible_paragraph_groups.csv": "fc73c36dbfddaa2b479c8bc069dba16f3788878305e400ee17345555f2fca33e",
-    "reports/chromium_interaction_topology_results.json": "efcb8e59bc357d6fe00f21eaf9a9fd7c4f7756985c92dea6db19264eba6d1055",
-    "reports/full_regression_matrix.csv": "fc61779122b661cc83385d1c3624b1dc5a5c5b726513271b1178431c1305a4da",
-    "reports/historical_lineage_reconciliation.csv": "af587b40bb5ebef8503ca492be875b4c8126ae50ff9545cab0c33983430ecb41",
-    "reports/ldc_flow_layout_runtime.json": "2015423fabf158e0c1e8b4a5929294b7dfd920262bcfccedaf012465cb6661ed",
-    "reports/ldc_flow_reconciliation_ledger.json": "6f75ff96ddff9a136e8fd353b2fe1ee6f2633feea0135b0f87098dd668d94a2a",
-    "reports/ldc_presentation_parity_report.md": "14243dfc7ab149530641bbc747e5c475612076826a361474a3cc1b3fff63d1ac",
-    "reports/ldc_ra19b_flow_boundary_summary.json": "1b1ec682d712673d7e7b22628c57a0d8e367a2dd68481ba642ab3d3190cea4b2",
-    "reports/ldc_ra19b_flow_boundary_sync_ledger.json": "6f75ff96ddff9a136e8fd353b2fe1ee6f2633feea0135b0f87098dd668d94a2a",
-    "reports/nested_zip_consistency_report.md": "597324cca37f29978a0537822f75c146ca41582c775b009e55c27eb9ce3f2e97",
-    "reports/no_regression_fix_ledger.csv": "748b2afabe9c3cff7577aa88a593d15733501db1d8ef2881c6005980f9430220",
-    "reports/prepackage_release_engineering_checks.json": "10b88a2aea7dfaa4a15a99784f74a71e7e6aa5fb3f40e84b3549c8994ec94a80",
-    "reports/presentation_projection_summary.json": "5b03a4c66022962851d46fb6a53d6c8ad1cc37da1723d184741143f8e54851a3",
-    "reports/presentation_turn_ledger.csv": "11659909791900d8da860bd88debbc82d3644e7cd80bd05485297c1e0fef41a6",
-    "reports/protected_data_diff_report.csv": "f1d608342c373fabf0934e91225dbcd2931aabfa5807f9a9e3e1488aee89782b",
-    "reports/protected_data_diff_report.md": "1164d8a3822a4b7fa7988ea023b4a5dc572fecc74f543c4495dbf20bd1f80731",
-    "reports/quotation_role_ledger.csv": "5b992028dc7bf14e1e8b9d818b49f4f367211032ac05af8e30d2312bd0e65886",
-    "reports/quote_suppression_ledger.csv": "6e933bef7fccf49ba847dee3f26cee3c621e924b4b73bb4f605841c28fed48cd",
-    "reports/real_device_status.md": "a95bd0f5437fe100118b20a3b11a610f20fa03e44054ebecad9e2f54543d19cb",
-    "reports/release_evidence_diff_ledger.csv": "97b61d460c186089821f649489934229df84a06e9f7bf389cad5c3e4b5fb1a40",
-    "reports/release_evidence_scope_report.md": "1357a0af1353ff5d8ebd25c17b0ae6e0d725adb059032eb319d75978a1a1cca1",
-    "reports/report_claims_vs_evidence_audit.md": "4ae19e98278765d4b00ccb460aa3fd980d7077014a1a7d241d8114721eb9b81d",
-    "reports/root_deploy_consistency_report.md": "2317867dce0f9281d40a10d3aba70321b0aae85ae52d841598b0720c96b2d96d",
-    "reports/speech_block_boundary_ledger.csv": "3290b348b19800e9099244e4e38c8ebb1cabc17d8170de894331f4086b96210a",
-    "reports/stale_reference_scan.csv": "f527326a5908d7fa1e25eabf0128f2e6516f156cece3f09603d6f947c01aa047",
-    "reports/stale_reference_scan.txt": "433ab17e4093c5b8c12175cd7fb34a20dc4ea97d555ed2cfbef5cad8886713a2",
-    "reports/v10143_reconciliation_ledger.csv": "77f38e83890b06f28f2c48cd30c7fe6729d0f4b4b722675e6e0ac1361df4e886",
-    "reports/visible_paragraph_topology_report.md": "cf1f5c495f2dccb661ffef310c71122632fd59c4c5b14668cc703984e4d989a3",
-    "scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md": "d6080ff8fff117f203a693f4bd5e06ae762545802aa7e9cfea03798c6dcd1485",
-    "scripts/L24H_v101102_RELEASE_EVIDENCE_REBUILD_SPEC_2026-08-22.md": "caa5a42a9bad529d769722301d7ea82f81dea54498630dd5ebd349a05ebd308e",
-    "sw.js": "80f9f88aa61575fb1d4a048fed702eb834b05cd69d13b8e13358c1e063623e6b",
-    "version.json": "ac4e15d23ee67c4ed0adaf13e6100ed2ac324c317ff00c4dc0578231001e1f53"
-  }
+  "version": "v101.105",
+  "algorithm": "SHA-256",
+  "generated_prepackage": true,
+  "self_excluded": true,
+  "entries": [
+    {
+      "path": ".gitattributes",
+      "sha256": "9b2013ab32eedf38f84f9cffb7bbd35790b2e224d3ba7a956758b4435a02bfbc",
+      "size": 65
+    },
+    {
+      "path": ".nojekyll",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    {
+      "path": "README.md",
+      "sha256": "ca8c5c05ae8ef0b1b9a0d91d7bafe403795e04b2c424a411797e4ed854ef8cce",
+      "size": 663
+    },
+    {
+      "path": "REAL_DEVICE_QA_CHECKLIST.md",
+      "sha256": "7bef8198356c1c618f00b9e96b93fc62ecf9a3196cb980bf22db1762451f86b2",
+      "size": 1653
+    },
+    {
+      "path": "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
+      "sha256": "02d029196898cc78ac2e62972d9f2a0325b84707130b95fcf23b658645cacd63",
+      "size": 644
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "sha256": "dd8efc8111a51b98c4c93dcab7357ecc4c2d5448b8a08aa97da7381dc0b56864",
+      "size": 34805
+    },
+    {
+      "path": "audit/independent_four_pass_audit.json",
+      "sha256": "0b503168f649c04bcabf6851d79da7e14113551e1aa3ca983891db9bebb774b8",
+      "size": 11386
+    },
+    {
+      "path": "audit/independent_four_pass_audit.md",
+      "sha256": "81b4c83a5bec670e62b467d3322cc5f483ea29c4fbdd8e9c1470dee07a4c9d67",
+      "size": 7251
+    },
+    {
+      "path": "favicon-16.png",
+      "sha256": "18ea7f82b0a52d3ab2e5f89eb294fb06f0057b72f890aa66ada9e0f3ff4beaa8",
+      "size": 629
+    },
+    {
+      "path": "favicon-32.png",
+      "sha256": "49d3cd0fdf71b21076d3117b352422730ebc0d0e99749ed4e3b1d230c71ed008",
+      "size": 1686
+    },
+    {
+      "path": "favicon.ico",
+      "sha256": "d0b29e153e5783bfd36522c1dc9cabff9817275553b9a2db80db477a1fca53ec",
+      "size": 95715
+    },
+    {
+      "path": "icon-120.png",
+      "sha256": "12151620d8cf4ff5f9e8b8c4e2ecf5bdb739142613f7d41dc3d8e22d10f43f17",
+      "size": 15798
+    },
+    {
+      "path": "icon-192.png",
+      "sha256": "6c3f6c4771a505d06efc5f8d9f3da877bb599ec14c45509b185d0749fd83bff4",
+      "size": 39884
+    },
+    {
+      "path": "icon-512.png",
+      "sha256": "a0c9e8ab677750ca096adfb2748a4f4de8707b01a914faeafbf2ae94ec7da4f7",
+      "size": 250617
+    },
+    {
+      "path": "icon-60.png",
+      "sha256": "303a69b4d594ca2a22df35bce029cbdb8a143cbda41bbf83199b0f9ac0ea2fb4",
+      "size": 4628
+    },
+    {
+      "path": "icon-maskable-512.png",
+      "sha256": "2c15d684b3c37e62b342f8a2041daa0038fa2280a3c3dafea02ccd10bec4716a",
+      "size": 176211
+    },
+    {
+      "path": "index.html",
+      "sha256": "62e232cfbc6b154305d0cb2987daf6f4d71aea05b5eb40af3d273a7c7ab31f9f",
+      "size": 2530140
+    },
+    {
+      "path": "luisa_24_heures.html",
+      "sha256": "62e232cfbc6b154305d0cb2987daf6f4d71aea05b5eb40af3d273a7c7ab31f9f",
+      "size": 2530140
+    },
+    {
+      "path": "manifest.json",
+      "sha256": "946e5af362e1ece33fe4119a98ac4ecfb0e72a979db355ad7702dbab30c72779",
+      "size": 886
+    },
+    {
+      "path": "metadata/build_provenance.json",
+      "sha256": "96b51f5f553651456bf2fca361eb1aee62cc8912df229345e126dc2fe8c335a4",
+      "size": 522
+    },
+    {
+      "path": "metadata/package_manifest.json",
+      "sha256": "6c2db3186d4483246791ea8b223e1d00e9216f5835db99ed6a083031d025f948",
+      "size": 6106
+    },
+    {
+      "path": "metadata/release_evidence_lifecycle.json",
+      "sha256": "0d95734f9c51a5cfdc2d0812e43216671e51a7d1582ed0b4c71ae570318cd686",
+      "size": 274
+    },
+    {
+      "path": "metadata/scope_escalation_authority.md",
+      "sha256": "64e36594292267e548cf2831a6f3edc89f0506b76d6fe23bdc09b5e223d70f05",
+      "size": 493
+    },
+    {
+      "path": "metadata/user_feedback_authority.md",
+      "sha256": "9901a4c1c142b866041ab345a345509d5f21bd06aaea4e91c05e016d0b24a06b",
+      "size": 459
+    },
+    {
+      "path": "prior_scripts/v101102/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md",
+      "sha256": "d6080ff8fff117f203a693f4bd5e06ae762545802aa7e9cfea03798c6dcd1485",
+      "size": 41243
+    },
+    {
+      "path": "prior_scripts/v101102/L24H_v101102_RELEASE_EVIDENCE_REBUILD_SPEC_2026-08-22.md",
+      "sha256": "caa5a42a9bad529d769722301d7ea82f81dea54498630dd5ebd349a05ebd308e",
+      "size": 1306
+    },
+    {
+      "path": "prior_scripts/v101102/README.md",
+      "sha256": "94fd818ae8fb42eac6b15cfc5c8228fe00bb90d8ba5ec53c05f692379251f1c9",
+      "size": 95
+    },
+    {
+      "path": "reports/G_PRES_002_IMG4532_REPAIR.png",
+      "sha256": "5c0c2f0ad01870b08330822e20c1d5f60f1081ceff08311210e72999f962ac22",
+      "size": 18786
+    },
+    {
+      "path": "reports/allowed_runtime_diff_report.csv",
+      "sha256": "0210e8a532f49ff3960c7e9e7da6b1515fc3292aa1e482c9cc35124b69165c24",
+      "size": 1328060
+    },
+    {
+      "path": "reports/android_visible_paragraph_groups.csv",
+      "sha256": "3991947df5c8a6af61b3a206bb838a5a6a6f5c2313a64645d653a93e1253a5e9",
+      "size": 700011
+    },
+    {
+      "path": "reports/appwide_prepackage_regression.json",
+      "sha256": "51e95b71634edfb841f681057eebdafa258dec70615cf6f611d67876c812d34c",
+      "size": 438
+    },
+    {
+      "path": "reports/chromium_interaction_topology_results.json",
+      "sha256": "2bb54bda862f597c786299af2a7f1300e3a7ea8cf415fc94c3045ed73c2727a9",
+      "size": 10291
+    },
+    {
+      "path": "reports/extended_interaction_results.json",
+      "sha256": "e3d54f32d87dadef280e731e16c11584dca8943b48b9770cf0b8bb75a310a331",
+      "size": 6975
+    },
+    {
+      "path": "reports/full_regression_matrix.csv",
+      "sha256": "0ab627e47d20161e20686197fd46c0c5aa9cb42b5532d8fecb90442a466ec118",
+      "size": 14391
+    },
+    {
+      "path": "reports/hybrid_boundary_decision_ledger.csv",
+      "sha256": "147d1d7ba8d72f9ec703bdcaa7157ced3e99847fa5d771385f370cc4fc1c18df",
+      "size": 132789
+    },
+    {
+      "path": "reports/nested_zip_consistency_report.md",
+      "sha256": "83503d3c6817b5ca227e15f42bc466ca3d6af24e8e67f107a056155f577627df",
+      "size": 203
+    },
+    {
+      "path": "reports/no_regression_fix_ledger.csv",
+      "sha256": "e8ef3e64369ad068b79d30e42c44016d2e310c77da80c93ee9f99ad76c8bb1f3",
+      "size": 3230
+    },
+    {
+      "path": "reports/phaseE_functional_results.json",
+      "sha256": "545ed8beb9d5fb008d8f7cec6f469f0b19b9f5b647dc84a564cf5bb702435077",
+      "size": 3423
+    },
+    {
+      "path": "reports/prepackage_release_engineering_checks.json",
+      "sha256": "b55a384f972a693e2857bbb42d8be20164810d93e541c7f574412e4372629cc2",
+      "size": 471
+    },
+    {
+      "path": "reports/presentation_projection_summary.json",
+      "sha256": "be7d30d11852da798f5a9da075dcf42857dbc0e60e0a5a18ad26bd3c0f1bd8cd",
+      "size": 484
+    },
+    {
+      "path": "reports/protected_data_diff_report.csv",
+      "sha256": "110648e4e9f8cd9228fa982a5f0ba6a4c1ba7de1eacdd77ee0f479d8c6808475",
+      "size": 1292
+    },
+    {
+      "path": "reports/quotation_role_ledger.csv",
+      "sha256": "1c5702c237c53477472f7b75bf14c182bc12dd1f2afea87e2f2fe73d5140b4c6",
+      "size": 144553
+    },
+    {
+      "path": "reports/quote_edge_hybrid_reconciliation.csv",
+      "sha256": "3b2a86580dec9e302e1615e282f272d7e0ad746da405a572348e9bfb79c908bb",
+      "size": 7100
+    },
+    {
+      "path": "reports/report_claims_vs_evidence_audit.csv",
+      "sha256": "3b6da89f74d31f905d62e2091b0a20e3158691649c1659fdd320ac5247de52ca",
+      "size": 920
+    },
+    {
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "sha256": "c7372ce2db5b72dfecf81ff19367a48d6e86afdc28eb161ba463d38af22f2540",
+      "size": 1326
+    },
+    {
+      "path": "reports/root_deploy_consistency_report.md",
+      "sha256": "028b5cb969cb98f214c5e3c6933602bf9e2cdbc1238ca99aed63aea461ca42c7",
+      "size": 567
+    },
+    {
+      "path": "reports/stale_reference_scan.csv",
+      "sha256": "18f191c2db47947e99476f6df22972a095ac3bfb276c21299d823477fa470876",
+      "size": 114772
+    },
+    {
+      "path": "reports/stale_reference_scan.txt",
+      "sha256": "9e785708c9ffa4edd7b8db8a571529ea09a7655b5f820218c2a6308065cf5162",
+      "size": 30861
+    },
+    {
+      "path": "reports/v101101_native_visual_topology_reconciliation.csv",
+      "sha256": "46b652e5546954a2319fd60c4162edaf8f7082315cb0c504dfc72b473965da8e",
+      "size": 26607
+    },
+    {
+      "path": "reports/v101101_native_visual_topology_reconciliation.json",
+      "sha256": "f21066d6088c6805fa29611be6e7c9e1c63ca1f4f1be146bf9ce7e6f50902017",
+      "size": 46507
+    },
+    {
+      "path": "reports/v101101_native_visual_topology_reconciliation.md",
+      "sha256": "a45695297d07aa03d0248aeabfc3151ef3c27ce355451f32783f36017af4f789",
+      "size": 900
+    },
+    {
+      "path": "reports/v101101_native_visual_topology_witness.csv",
+      "sha256": "f6a3d2095f08f0e4d0fe7624ad72664b684fd084d21baa0b0d3eb2840a2bcc4d",
+      "size": 2842563
+    },
+    {
+      "path": "reports/v101101_native_visual_topology_witness.json",
+      "sha256": "fbfb0dd7fd7aed9d910d850b1f1e50a2fd93a42c8db7d6c5e8fd564081b11d5b",
+      "size": 5467153
+    },
+    {
+      "path": "reports/v101103_quote_role_witness.csv",
+      "sha256": "1c5702c237c53477472f7b75bf14c182bc12dd1f2afea87e2f2fe73d5140b4c6",
+      "size": 144553
+    },
+    {
+      "path": "reports/v101103_semantic_presentation_witness.json",
+      "sha256": "dbed30f6b23f1ee1a1cc1fc1c60630626fdddd5780d1d01ec59c43fc0bff4021",
+      "size": 554335
+    },
+    {
+      "path": "reports/v101105_visible_paragraph_topology_witness.json",
+      "sha256": "cae376ec4056496da5552578070d6fadb84e2b5ce4a17b6bd7accad70e726c92",
+      "size": 5455369
+    },
+    {
+      "path": "reports/visible_paragraph_topology_report.md",
+      "sha256": "f55dcd983acc325f1b9ec20be7b820676e7ba727b5b07336208556f032a92af3",
+      "size": 527
+    },
+    {
+      "path": "scripts/EXECUTION_SPEC.md",
+      "sha256": "3412dc776ef85b63743a196464ff1b0596ada784aa7ea481e82313a86f7f3940",
+      "size": 44821
+    },
+    {
+      "path": "scripts/build_v101105_hybrid.py",
+      "sha256": "a3441bc11cc76ecd7e2a02fa6029007ec15bd4a0e13b9c2f8b4e26e6db822903",
+      "size": 27372
+    },
+    {
+      "path": "scripts/chromium_hybrid_harness.py",
+      "sha256": "40c3fe72292b6da9cf54ad56e714e201432d11d9bf7edb417a1980076fb25d00",
+      "size": 19523
+    },
+    {
+      "path": "scripts/extended_interaction_harness.py",
+      "sha256": "13712936a0967581ffbba679ed48d1f60ddd5932383a6d374b0a46bd5276e933",
+      "size": 10058
+    },
+    {
+      "path": "scripts/independent_prepackage_audit.py",
+      "sha256": "3c658e8805fd893e50eeb07387ebeca1b8d393e2e0c56f30c8f2c5bad3dfe699",
+      "size": 12983
+    },
+    {
+      "path": "scripts/per_fix_reexecution.py",
+      "sha256": "927fd603b5f05df12b86db128a0e689362c4a69e45c6a46af099293d7003414e",
+      "size": 8544
+    },
+    {
+      "path": "scripts/phaseE_functional_harness.py",
+      "sha256": "96d05881963c0d2766da3820deab12bda5c18bb10e8b7e1591f0dc5125f06171",
+      "size": 5571
+    },
+    {
+      "path": "scripts/prepackage_finalize.py",
+      "sha256": "e274b76b6ec33d7425453bb378140f69da23c2fdb57ee101f929591199c48c2a",
+      "size": 13273
+    },
+    {
+      "path": "sw.js",
+      "sha256": "41bb457ae0dc555ed8d6a498f24914e577c93d8066a7624daf8b44f8625b00a8",
+      "size": 3903
+    },
+    {
+      "path": "version.json",
+      "sha256": "263adbcf2cee4455a55d6c4b0700fe72b2ddf023da9545df1abbce8f7592f8c8",
+      "size": 962
+    },
+    {
+      "path": "visual_evidence/H20_P016_v101103_CHROMIUM_RENDER.png",
+      "sha256": "4792d7fb9c2c8d8d9c4c5955561dd63475e36ddfcb6be569160ff17e22fe218a",
+      "size": 17035
+    },
+    {
+      "path": "visual_evidence/physical_ipad_v101102_failure_H20_P016.png",
+      "sha256": "b12ad05cc13b7516ab22819a9b207089563b855e59dd057ac63914cc5ab610db",
+      "size": 439791
+    },
+    {
+      "path": "visual_evidence/user_supplied_prior_render_comparison.png",
+      "sha256": "e3c79710ecd3a312d9c4c62202f55287e5a6962f3a6027080386fbb7183ff0b2",
+      "size": 476566
+    }
+  ]
 }

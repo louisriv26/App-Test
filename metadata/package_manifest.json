@@ -1,72 +1,286 @@
 {
-  "version": "v101.102",
-  "release_evidence_revision": "RE1",
-  "file_count": 58,
+  "version": "v101.105",
+  "generated_prepackage": true,
   "files": [
-    ".gitattributes",
-    ".nojekyll",
-    "README.md",
-    "REAL_DEVICE_QA_CHECKLIST.md",
-    "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
-    "apple-touch-icon.png",
-    "audit/independent_four_pass_audit.md",
-    "favicon-16.png",
-    "favicon-32.png",
-    "favicon.ico",
-    "icon-120.png",
-    "icon-192.png",
-    "icon-512.png",
-    "icon-60.png",
-    "icon-maskable-512.png",
-    "index.html",
-    "luisa_24_heures.html",
-    "manifest.json",
-    "metadata/auditor_provenance.json",
-    "metadata/build_provenance.json",
-    "metadata/hash_manifest.json",
+    {
+      "path": ".gitattributes",
+      "size": 65
+    },
+    {
+      "path": ".nojekyll",
+      "size": 0
+    },
+    {
+      "path": "README.md",
+      "size": 663
+    },
+    {
+      "path": "REAL_DEVICE_QA_CHECKLIST.md",
+      "size": 1653
+    },
+    {
+      "path": "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
+      "size": 644
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "size": 34805
+    },
+    {
+      "path": "audit/independent_four_pass_audit.json",
+      "size": 11386
+    },
+    {
+      "path": "audit/independent_four_pass_audit.md",
+      "size": 7251
+    },
+    {
+      "path": "favicon-16.png",
+      "size": 629
+    },
+    {
+      "path": "favicon-32.png",
+      "size": 1686
+    },
+    {
+      "path": "favicon.ico",
+      "size": 95715
+    },
+    {
+      "path": "icon-120.png",
+      "size": 15798
+    },
+    {
+      "path": "icon-192.png",
+      "size": 39884
+    },
+    {
+      "path": "icon-512.png",
+      "size": 250617
+    },
+    {
+      "path": "icon-60.png",
+      "size": 4628
+    },
+    {
+      "path": "icon-maskable-512.png",
+      "size": 176211
+    },
+    {
+      "path": "index.html",
+      "size": 2530140
+    },
+    {
+      "path": "luisa_24_heures.html",
+      "size": 2530140
+    },
+    {
+      "path": "manifest.json",
+      "size": 886
+    },
+    {
+      "path": "metadata/build_provenance.json",
+      "size": 522
+    },
+    {
+      "path": "metadata/release_evidence_lifecycle.json",
+      "size": 274
+    },
+    {
+      "path": "metadata/scope_escalation_authority.md",
+      "size": 493
+    },
+    {
+      "path": "metadata/user_feedback_authority.md",
+      "size": 459
+    },
+    {
+      "path": "prior_scripts/v101102/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md",
+      "size": 41243
+    },
+    {
+      "path": "prior_scripts/v101102/L24H_v101102_RELEASE_EVIDENCE_REBUILD_SPEC_2026-08-22.md",
+      "size": 1306
+    },
+    {
+      "path": "prior_scripts/v101102/README.md",
+      "size": 95
+    },
+    {
+      "path": "reports/G_PRES_002_IMG4532_REPAIR.png",
+      "size": 18786
+    },
+    {
+      "path": "reports/allowed_runtime_diff_report.csv",
+      "size": 1328060
+    },
+    {
+      "path": "reports/android_visible_paragraph_groups.csv",
+      "size": 700011
+    },
+    {
+      "path": "reports/appwide_prepackage_regression.json",
+      "size": 438
+    },
+    {
+      "path": "reports/chromium_interaction_topology_results.json",
+      "size": 10291
+    },
+    {
+      "path": "reports/extended_interaction_results.json",
+      "size": 6975
+    },
+    {
+      "path": "reports/full_regression_matrix.csv",
+      "size": 14391
+    },
+    {
+      "path": "reports/hybrid_boundary_decision_ledger.csv",
+      "size": 132789
+    },
+    {
+      "path": "reports/nested_zip_consistency_report.md",
+      "size": 203
+    },
+    {
+      "path": "reports/no_regression_fix_ledger.csv",
+      "size": 3230
+    },
+    {
+      "path": "reports/phaseE_functional_results.json",
+      "size": 3423
+    },
+    {
+      "path": "reports/prepackage_release_engineering_checks.json",
+      "size": 471
+    },
+    {
+      "path": "reports/presentation_projection_summary.json",
+      "size": 484
+    },
+    {
+      "path": "reports/protected_data_diff_report.csv",
+      "size": 1292
+    },
+    {
+      "path": "reports/quotation_role_ledger.csv",
+      "size": 144553
+    },
+    {
+      "path": "reports/quote_edge_hybrid_reconciliation.csv",
+      "size": 7100
+    },
+    {
+      "path": "reports/report_claims_vs_evidence_audit.csv",
+      "size": 920
+    },
+    {
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "size": 1326
+    },
+    {
+      "path": "reports/root_deploy_consistency_report.md",
+      "size": 567
+    },
+    {
+      "path": "reports/stale_reference_scan.csv",
+      "size": 114772
+    },
+    {
+      "path": "reports/stale_reference_scan.txt",
+      "size": 30861
+    },
+    {
+      "path": "reports/v101101_native_visual_topology_reconciliation.csv",
+      "size": 26607
+    },
+    {
+      "path": "reports/v101101_native_visual_topology_reconciliation.json",
+      "size": 46507
+    },
+    {
+      "path": "reports/v101101_native_visual_topology_reconciliation.md",
+      "size": 900
+    },
+    {
+      "path": "reports/v101101_native_visual_topology_witness.csv",
+      "size": 2842563
+    },
+    {
+      "path": "reports/v101101_native_visual_topology_witness.json",
+      "size": 5467153
+    },
+    {
+      "path": "reports/v101103_quote_role_witness.csv",
+      "size": 144553
+    },
+    {
+      "path": "reports/v101103_semantic_presentation_witness.json",
+      "size": 554335
+    },
+    {
+      "path": "reports/v101105_visible_paragraph_topology_witness.json",
+      "size": 5455369
+    },
+    {
+      "path": "reports/visible_paragraph_topology_report.md",
+      "size": 527
+    },
+    {
+      "path": "scripts/EXECUTION_SPEC.md",
+      "size": 44821
+    },
+    {
+      "path": "scripts/build_v101105_hybrid.py",
+      "size": 27372
+    },
+    {
+      "path": "scripts/chromium_hybrid_harness.py",
+      "size": 19523
+    },
+    {
+      "path": "scripts/extended_interaction_harness.py",
+      "size": 10058
+    },
+    {
+      "path": "scripts/independent_prepackage_audit.py",
+      "size": 12983
+    },
+    {
+      "path": "scripts/per_fix_reexecution.py",
+      "size": 8544
+    },
+    {
+      "path": "scripts/phaseE_functional_harness.py",
+      "size": 5571
+    },
+    {
+      "path": "scripts/prepackage_finalize.py",
+      "size": 13273
+    },
+    {
+      "path": "sw.js",
+      "size": 3903
+    },
+    {
+      "path": "version.json",
+      "size": 962
+    },
+    {
+      "path": "visual_evidence/H20_P016_v101103_CHROMIUM_RENDER.png",
+      "size": 17035
+    },
+    {
+      "path": "visual_evidence/physical_ipad_v101102_failure_H20_P016.png",
+      "size": 439791
+    },
+    {
+      "path": "visual_evidence/user_supplied_prior_render_comparison.png",
+      "size": 476566
+    }
+  ],
+  "self_exclusion": [
     "metadata/package_manifest.json",
-    "metadata/release_evidence_lifecycle.json",
-    "metadata/user_feedback_authority.md",
-    "reports/affected_ra19b_flow_offset_reprojection.csv",
-    "reports/affected_speech_offset_reprojection.csv",
-    "reports/android_visible_paragraph_groups.csv",
-    "reports/chromium_interaction_topology_results.json",
-    "reports/full_regression_matrix.csv",
-    "reports/historical_lineage_reconciliation.csv",
-    "reports/ldc_flow_layout_runtime.json",
-    "reports/ldc_flow_reconciliation_ledger.json",
-    "reports/ldc_presentation_parity_report.md",
-    "reports/ldc_ra19b_flow_boundary_summary.json",
-    "reports/ldc_ra19b_flow_boundary_sync_ledger.json",
-    "reports/nested_zip_consistency_report.md",
-    "reports/no_regression_fix_ledger.csv",
-    "reports/prepackage_release_engineering_checks.json",
-    "reports/presentation_projection_summary.json",
-    "reports/presentation_turn_ledger.csv",
-    "reports/protected_data_diff_report.csv",
-    "reports/protected_data_diff_report.md",
-    "reports/quotation_role_ledger.csv",
-    "reports/quote_suppression_ledger.csv",
-    "reports/real_device_status.md",
-    "reports/release_evidence_diff_ledger.csv",
-    "reports/release_evidence_scope_report.md",
-    "reports/report_claims_vs_evidence_audit.md",
-    "reports/root_deploy_consistency_report.md",
-    "reports/speech_block_boundary_ledger.csv",
-    "reports/stale_reference_scan.csv",
-    "reports/stale_reference_scan.txt",
-    "reports/v10143_reconciliation_ledger.csv",
-    "reports/visible_paragraph_topology_report.md",
-    "scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md",
-    "scripts/L24H_v101102_RELEASE_EVIDENCE_REBUILD_SPEC_2026-08-22.md",
-    "sw.js",
-    "version.json"
-  ],
-  "post_package_external_evidence": [
-    "FINAL_REOPEN_AUDIT.md",
-    "INDEPENDENT_REOPEN_AUDIT.md",
-    "FINAL_DECISION_LOCK.json",
-    "EXECUTION_SUMMARY.md"
-  ],
-  "post_package_external_evidence_note": "These artifacts are intentionally external because they can only be valid after the immutable ZIP exists."
+    "metadata/hash_manifest.json"
+  ]
 }

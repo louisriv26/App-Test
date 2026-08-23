@@ -1,14 +1,8 @@
 {
-  "version": "v101.102",
-  "release_evidence_revision": "RE1",
-  "rule": "pre-package reports may contain only evidence available before immutable ZIP freeze",
-  "embedded_post_package_final_evidence": false,
-  "intentionally_external_after_freeze": [
-    "FINAL_REOPEN_AUDIT.md",
-    "INDEPENDENT_REOPEN_AUDIT.md",
-    "FINAL_DECISION_LOCK.json",
-    "EXECUTION_SUMMARY.md"
-  ],
-  "internal_status_for_post_package_gates": "POST_PACKAGE_EXTERNAL",
-  "reason": "avoid circular evidence in which a ZIP embeds claims that the same immutable ZIP has already been reopened and passed before it existed"
+  "model": "non_circular_external_final_audits",
+  "prepackage_reports_inside_zip": true,
+  "final_reopen_reports_inside_zip": false,
+  "final_decision_lock_inside_zip": false,
+  "primary_reopen": "POST_PACKAGE_EXTERNAL",
+  "independent_reopen": "POST_PACKAGE_EXTERNAL"
 }

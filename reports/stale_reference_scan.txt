@@ -1,324 +1,353 @@
-# Stale-reference scan — pre-package evidence universe
+v101.105 prepackage stale-reference scan (before final manifests)
+files_scanned=69
+patterns=9
+hits=346
+active_stale_failures=0
+HISTORICAL_PROVENANCE_ALLOWED | README.md:5 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | audit/independent_four_pass_audit.json:394 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | audit/independent_four_pass_audit.json:395 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | audit/independent_four_pass_audit.json:396 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | audit/independent_four_pass_audit.md:41 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | audit/independent_four_pass_audit.md:41 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | audit/independent_four_pass_audit.md:41 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | index.html:4792 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | luisa_24_heures.html:4792 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | metadata/build_provenance.json:7 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | metadata/build_provenance.json:4 | DIVINE_QUOTE_PRESENTATION_REGRESSION_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | metadata/user_feedback_authority.md:3 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | prior_scripts/v101102/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md:5 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | prior_scripts/v101102/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md:1087 | FINAL_PACKAGE_REOPEN_GATE = PASS
+HISTORICAL_PROVENANCE_ALLOWED | prior_scripts/v101102/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md:1117 | INDEPENDENT_REOPENED_ZIP_AUDIT_GATE = PASS
+HISTORICAL_PROVENANCE_ALLOWED | prior_scripts/v101102/L24H_v101102_RELEASE_EVIDENCE_REBUILD_SPEC_2026-08-22.md:1 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | prior_scripts/v101102/README.md:1 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | prior_scripts/v101102/README.md:1 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/allowed_runtime_diff_report.csv:14 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/allowed_runtime_diff_report.csv:15 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/allowed_runtime_diff_report.csv:28 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/allowed_runtime_diff_report.csv:39 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/allowed_runtime_diff_report.csv:29 | DIVINE_QUOTE_PRESENTATION_REGRESSION_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | reports/full_regression_matrix.csv:42 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/full_regression_matrix.csv:42 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:2 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:3 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:4 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:5 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:6 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:7 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:8 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:9 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:10 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:11 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:12 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:13 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:14 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:15 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:16 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:17 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:18 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:19 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:20 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:21 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:22 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:23 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:24 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:25 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:26 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:27 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:28 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:29 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:30 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:31 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:32 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:33 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:34 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:35 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:36 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:37 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:38 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:40 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:41 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:42 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:43 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:44 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:45 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:46 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:47 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:48 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:49 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:51 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:52 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:53 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:54 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:55 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:56 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:57 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:58 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:59 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:60 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:61 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:62 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:63 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:64 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:65 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:66 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:67 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:68 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:69 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:70 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:71 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:72 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:73 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:74 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:75 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:76 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:77 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:78 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:79 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:80 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:81 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:82 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:83 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:84 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:85 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:86 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:87 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:88 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:89 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:90 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:91 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:92 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:93 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:94 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:95 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:96 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:97 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:98 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:99 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:100 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:101 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:102 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:103 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:104 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:105 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:106 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:107 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:108 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:109 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:110 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:111 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:112 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:113 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:114 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:115 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:117 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:119 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:120 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:121 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:122 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:123 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:124 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:125 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:126 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:127 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:128 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:129 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:130 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:131 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:132 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:133 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:134 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:135 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:136 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:137 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:138 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:139 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:140 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:141 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:142 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:143 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:144 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:145 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:146 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:147 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:148 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:149 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:150 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:151 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:152 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:153 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:154 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:155 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:156 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:157 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:158 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:159 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:160 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:161 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:162 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:163 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:164 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:165 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:166 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:167 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:168 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:169 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:170 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:171 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:172 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:173 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:174 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:175 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:176 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:177 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:178 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:179 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:180 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:181 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:182 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:183 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:184 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:185 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:186 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:187 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:188 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:189 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:190 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:191 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:192 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:193 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:194 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:195 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:196 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:197 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:198 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:199 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:200 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:201 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:202 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:203 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:204 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:205 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:206 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:207 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:208 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:209 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:211 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:212 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:213 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:214 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:215 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:216 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:217 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:218 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:219 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/hybrid_boundary_decision_ledger.csv:220 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/no_regression_fix_ledger.csv:2 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/no_regression_fix_ledger.csv:2 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/no_regression_fix_ledger.csv:2 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | reports/visible_paragraph_topology_report.md:5 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:18 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:63 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:456 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:592 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:829 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1062 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1182 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1390 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:18 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:25 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:59 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:76 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:123 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:201 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:239 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:315 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:347 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:383 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:393 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:397 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:398 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:399 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:400 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:416 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:456 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:495 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:524 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:524 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:542 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:557 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:568 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:569 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:608 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:629 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:747 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:752 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:784 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:797 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1031 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1033 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1063 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1362 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1379 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1386 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1388 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1392 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:105 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:107 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:118 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:235 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:604 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:608 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1064 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1134 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1269 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1366 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:39 | DIVINE_QUOTE_PRESENTATION_REGRESSION_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:110 | CROSS_RECORD_QUOTE_EDGE_PRESENTATION_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:119 | MOVE_VISUAL_BOUNDARY_BEFORE_OPENING_GUILLEMET
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:625 | MOVE_VISUAL_BOUNDARY_BEFORE_OPENING_GUILLEMET
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1071 | MOVE_VISUAL_BOUNDARY_BEFORE_OPENING_GUILLEMET
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:53 | FINAL_PACKAGE_REOPEN_GATE = PASS
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:1068 | FINAL_PACKAGE_REOPEN_GATE = PASS
+HISTORICAL_PROVENANCE_ALLOWED | scripts/EXECUTION_SPEC.md:54 | INDEPENDENT_REOPENED_ZIP_AUDIT_GATE = PASS
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:57 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:233 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:269 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:62 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:73 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:79 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:81 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:82 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:82 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:210 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:249 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:252 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:253 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:266 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:11 | DIVINE_QUOTE_PRESENTATION_REGRESSION_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | scripts/build_v101105_hybrid.py:80 | DIVINE_QUOTE_PRESENTATION_REGRESSION_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | scripts/independent_prepackage_audit.py:69 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/independent_prepackage_audit.py:7 | DIVINE_QUOTE_PRESENTATION_REGRESSION_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | scripts/independent_prepackage_audit.py:71 | MOVE_VISUAL_BOUNDARY_BEFORE_OPENING_GUILLEMET
+HISTORICAL_PROVENANCE_ALLOWED | scripts/per_fix_reexecution.py:12 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/per_fix_reexecution.py:21 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/per_fix_reexecution.py:23 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/per_fix_reexecution.py:34 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/per_fix_reexecution.py:34 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/per_fix_reexecution.py:21 | DIVINE_QUOTE_PRESENTATION_REGRESSION_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | scripts/per_fix_reexecution.py:23 | DIVINE_QUOTE_PRESENTATION_REGRESSION_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:43 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:54 | v101.102
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:43 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:54 | v101.103
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:43 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:54 | v101.104
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:43 | DIVINE_QUOTE_PRESENTATION_REGRESSION_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:43 | CROSS_RECORD_QUOTE_EDGE_PRESENTATION_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:43 | LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_R1
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:43 | MOVE_VISUAL_BOUNDARY_BEFORE_OPENING_GUILLEMET
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:43 | FINAL_PACKAGE_REOPEN_GATE = PASS
+HISTORICAL_PROVENANCE_ALLOWED | scripts/prepackage_finalize.py:43 | INDEPENDENT_REOPENED_ZIP_AUDIT_GATE = PASS
+HISTORICAL_PROVENANCE_ALLOWED | version.json:11 | v101.103
 
-Files scanned: 56 (self-referential stale-scan outputs excluded).
-Hits classified: 316.
-Blocking active stale hits: 0.
-
-Classification rules: CURRENT_AUTHORITY_PROVENANCE / BASELINE_PROVENANCE / HISTORICAL_ALLOWED / SPECIFICATION_OR_HISTORICAL_ALLOWED / FAIL_STALE_ACTIVE.
-
-BASELINE_PROVENANCE | README.md | v101.101 | offset 460
-BASELINE_PROVENANCE | README.md | v101.101 | offset 573
-CURRENT_AUTHORITY_PROVENANCE | README.md | Version 29 | offset 289
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 769291
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1580223
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1613306
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1625533
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1629876
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1635783
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1666745
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1679163
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1693070
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1705338
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1714030
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1718727
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1722271
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1737650
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1742781
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1768361
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1774731
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1810360
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1831643
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1864734
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1885335
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1902079
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1911130
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1948393
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1953376
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1974407
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 1989523
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 2009037
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 2056435
-CURRENT_AUTHORITY_PROVENANCE | index.html | Version 29 | offset 2124077
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 769291
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1580223
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1613306
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1625533
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1629876
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1635783
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1666745
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1679163
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1693070
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1705338
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1714030
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1718727
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1722271
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1737650
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1742781
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1768361
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1774731
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1810360
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1831643
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1864734
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1885335
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1902079
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1911130
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1948393
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1953376
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1974407
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 1989523
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 2009037
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 2056435
-CURRENT_AUTHORITY_PROVENANCE | luisa_24_heures.html | Version 29 | offset 2124077
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 944
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 7433
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 12435
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 17761
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 23966
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 28091
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 31215
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 38829
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 42802
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 46980
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 53016
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 70834
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 82940
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 91873
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 95298
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 99738
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 103433
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 107513
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 115110
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 129833
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 137732
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 142584
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 148085
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 153607
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 155855
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 159116
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 162206
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 169723
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 178256
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 189231
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 193438
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 198203
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 204511
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 208735
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 210454
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 213060
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 217770
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 220384
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 227173
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 228696
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 231226
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 233651
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 242295
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 256831
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 268060
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 274678
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 282698
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 286922
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 292136
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 299116
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 302357
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 307845
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 320439
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 325760
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 333792
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 339859
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 343716
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 348787
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 350324
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 353061
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 359471
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 385659
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 393354
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 396089
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 399806
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 401499
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 403715
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 406611
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 410270
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 414830
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 417774
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 421927
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 427206
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 432653
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 435952
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 439742
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 447305
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 450673
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 456295
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 459150
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 462129
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 467369
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 478736
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 480453
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 482945
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 486853
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 492281
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 500549
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 506654
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 510622
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 520054
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 524623
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 530264
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 541344
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 546163
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 548480
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 549799
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 551566
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 553752
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 555452
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 556895
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 557761
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 559205
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 560562
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 562340
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 564162
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 566400
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 570745
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 572942
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 575169
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 577864
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 581075
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 584245
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 585725
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_flow_reconciliation_ledger.json | Version 29 | offset 587319
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_presentation_parity_report.md | Version 29 | offset 319
-BASELINE_PROVENANCE | reports/ldc_ra19b_flow_boundary_summary.json | v101.101 | offset 16
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_summary.json | Version 29 | offset 137
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 944
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 7433
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 12435
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 17761
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 23966
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 28091
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 31215
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 38829
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 42802
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 46980
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 53016
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 70834
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 82940
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 91873
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 95298
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 99738
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 103433
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 107513
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 115110
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 129833
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 137732
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 142584
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 148085
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 153607
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 155855
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 159116
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 162206
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 169723
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 178256
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 189231
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 193438
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 198203
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 204511
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 208735
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 210454
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 213060
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 217770
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 220384
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 227173
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 228696
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 231226
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 233651
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 242295
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 256831
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 268060
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 274678
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 282698
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 286922
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 292136
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 299116
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 302357
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 307845
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 320439
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 325760
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 333792
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 339859
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 343716
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 348787
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 350324
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 353061
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 359471
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 385659
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 393354
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 396089
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 399806
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 401499
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 403715
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 406611
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 410270
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 414830
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 417774
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 421927
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 427206
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 432653
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 435952
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 439742
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 447305
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 450673
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 456295
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 459150
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 462129
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 467369
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 478736
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 480453
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 482945
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 486853
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 492281
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 500549
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 506654
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 510622
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 520054
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 524623
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 530264
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 541344
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 546163
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 548480
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 549799
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 551566
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 553752
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 555452
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 556895
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 557761
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 559205
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 560562
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 562340
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 564162
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 566400
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 570745
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 572942
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 575169
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 577864
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 581075
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 584245
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 585725
-CURRENT_AUTHORITY_PROVENANCE | reports/ldc_ra19b_flow_boundary_sync_ledger.json | Version 29 | offset 587319
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 405
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 2027
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 2288
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 2356
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 2472
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 3202
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 5701
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 6096
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 13032
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 21677
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 23469
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 28572
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 31124
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 36646
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 36795
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | v101.101 | offset 37032
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | RA18 | offset 28813
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | Version 29 | offset 5076
-SPECIFICATION_OR_HISTORICAL_ALLOWED | scripts/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md | L24H_v101101 | offset 2102
-CURRENT_AUTHORITY_PROVENANCE | version.json | Version 29 | offset 208
+Final manifest files are generated after this embedded report to preserve a non-circular evidence lifecycle; they are subject to a read-only post-manifest scan before ZIP freeze and both external immutable-ZIP audits.

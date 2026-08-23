@@ -1,3 +1,3 @@
-# User adjudication authority
+# User feedback authority
 
-On 2026-08-22 the user explicitly confirmed the French attribution in the two known LDC shard errors: `Je me plaignais ... en lui disant` and `Je repris` are Luisa. These two presentation adjudications override the current upstream shard until the corrected LDC package is synchronized.
+Physical iPad screenshots supplied for v101.102 demonstrate orphan opening-guillemet defects, including Luisa's visible quotation in IMG_4532. On 23 August 2026 the user approved the final architecture: **native 24H paragraph presentation + LDC semantic quotation/speaker intelligence + shared renderer/Samsung topology**, and explicitly authorized the narrow renderer/topology scope escalation after the strict pre-edit hard stop.

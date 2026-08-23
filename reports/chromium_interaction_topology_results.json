@@ -1,146 +1,374 @@
 {
+  "harness": "v101105_native24h_ldc_semantic_hybrid",
   "scenarios": [
     {
-      "name": "runtime_projection_loaded",
+      "name": "core_static_identity",
       "status": "PASS",
       "evidence": {
-        "v": "v101.102",
-        "proj": 2197,
-        "topo": 206,
-        "cross": 4
+        "hours": 24,
+        "library": 40,
+        "projection_targets": 2197,
+        "speech_targets": 2197,
+        "speech_segments": 3293,
+        "local_breaks": 139,
+        "cross_breaks": 1,
+        "joins": 24
       }
     },
     {
-      "name": "H19_Luisa_adjudication",
+      "name": "speech_offsets_all_valid",
       "status": "PASS",
       "evidence": {
-        "text": "Je me plaignais à mon doux Jésus en lui disant : «Où sont tes promesses ? Je n'ai plus de croix ni de similarité avec toi. Tout s'est écroulé. Il ne Me reste qu'à pleurer sur Mon triste sort.»",
-        "runs": [],
-        "hidden": [],
-        "quote": " «Où sont tes promesses ? Je n'ai plus de croix ni de similarité avec toi. Tout s'est écroulé. Il ne Me reste qu'à pleurer sur Mon triste sort.»"
+        "tested_targets": 2197,
+        "segments": 3293,
+        "bad": []
       }
     },
     {
-      "name": "H21_turn_switch",
+      "name": "quotation_semantics_locked",
       "status": "PASS",
       "evidence": {
-        "t": "À l'instant, Il me dit : «Aurais-Tu par hasard cessé de M'aimer et de vivre dans Ma Volonté ?» Je repris : «Non ! Et que cela ne soit jamais !»",
-        "runs": [
+        "events": 1026,
+        "unresolved": 0,
+        "catchall": 0
+      }
+    },
+    {
+      "name": "runtime_identity",
+      "status": "PASS",
+      "evidence": {
+        "v": "v101.105",
+        "stage": "NATIVE_24H_PARAGRAPH_LDC_SEMANTIC_HYBRID_PRESENTATION_R1",
+        "breaks": 139,
+        "cross": 1,
+        "joins": 24
+      }
+    },
+    {
+      "name": "G_PRES_001_projection",
+      "status": "PASS",
+      "evidence": {
+        "t": "Ce n’est pas seulement ta Voix, mais aussi ton Sang et tes Plaies qui crient à chaque cœur après le péché : « Viens dans mes Bras que Je te pardonne. Le sceau de mon Pardon est mon Sang. »",
+        "p": {
+          "runs": [
+            {
+              "start": 110,
+              "end": 186,
+              "speaker": "JESUS"
+            }
+          ],
+          "hidden": [
+            {
+              "start": 108,
+              "end": 110,
+              "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+              "reason": "OUTER_DIVINE_DIRECT_TURN_ADJUDICATED"
+            },
+            {
+              "start": 186,
+              "end": 188,
+              "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+              "reason": "OUTER_DIVINE_DIRECT_TURN_ADJUDICATED"
+            }
+          ],
+          "breaks": []
+        },
+        "open": 108,
+        "viens": 110
+      }
+    },
+    {
+      "name": "G_PRES_001_actual_DOM",
+      "status": "PASS",
+      "evidence": {
+        "text": "Ce n’est pas seulement ta Voix, mais aussi ton Sang et tes Plaies qui crient à chaque cœur après le péché : « Viens dans mes Bras que Je te pardonne. Le sceau de mon Pardon est mon Sang. »",
+        "inner": "Ce n’est pas seulement ta Voix, mais aussi ton Sang et tes Plaies qui crient à chaque cœur après le péché : <span class=\"speech-quote-hidden\" aria-hidden=\"true\" data-speech-quote-suppressed=\"OUTER_DIVINE_OPEN_WRAPPER_HIDE\">« </span><span class=\"sp-jesus\" role=\"group\" aria-label=\"Paroles de Jésus\">Viens dans mes Bras que Je te pardonne. Le sceau de mon Pardon est mon Sang.</span><span class=\"speech-quote-hidden\" aria-hidden=\"true\" data-speech-quote-suppressed=\"OUTER_DIVINE_CLOSE_WRAPPER_HIDE\"> »</span>",
+        "breaks": 0,
+        "hidden": [
+          "« ",
+          " »"
+        ],
+        "jesus": [
+          "Viens dans mes Bras que Je te pardonne. Le sceau de mon Pardon est mon Sang."
+        ]
+      }
+    },
+    {
+      "name": "H19_H21_explicit_adjudications",
+      "status": "PASS",
+      "evidence": {
+        "h19": [],
+        "h21": [
           {
             "start": 26,
             "end": 93,
             "speaker": "JESUS"
           }
-        ],
-        "hidden": [
-          {
-            "start": 25,
-            "end": 26,
-            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
-            "reason": "OUTER_DIVINE_DIRECT_ATTRIBUTION"
-          },
-          {
-            "start": 93,
-            "end": 94,
-            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
-            "reason": "OUTER_DIVINE_DIRECT_ATTRIBUTION"
-          }
-        ],
-        "first": true,
-        "second": false,
-        "luisaOpen": 107
-      }
-    },
-    {
-      "name": "meaningful_quotes_preserved",
-      "status": "PASS",
-      "evidence": [
-        {
-          "id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P067",
-          "t": "Ma fille, au moment où Ponce Pilate dit : «Voici l'homme», Ils crièrent tous : «Crucifie-Le, crucifie-Le, nous Le voulons mort.»",
-          "q": 42,
-          "hidden": [],
-          "visible": true
-        },
-        {
-          "id": "PASSION24.TEXT.RELATED_HOUR_22.BODY.P063",
-          "t": "Ces plaies, comme autant de bouches, brûlaient et ressentaient une soif ardente qui voulait se satisfaire, et incapable de Me contenir, Je criai : « J’ai soif ! » Ce « J’ai soif » est resté et continue de dire « J’ai soif ». Je n’arrête jamais de le dire. Avec Mes plaies ouvertes et Ma Bouche brûlante, Je dis toujours : « Je brûle, J’ai soif ! »",
-          "q": 147,
-          "hidden": [],
-          "visible": true
-        },
-        {
-          "id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P069",
-          "t": "Ma Mère est donc la Reine de la Création, pour avoir dépassé «le Tout».",
-          "q": 61,
-          "hidden": [],
-          "visible": true
-        }
-      ]
-    },
-    {
-      "name": "father_fixture_found_and_separated",
-      "status": "PASS",
-      "evidence": {
-        "id": "PASSION24.HOUR.19.P165",
-        "t": "Ah ! Fils, Je ne peux plus contenir mon Indignation devant l’ingratitude de ces âmes qui M’affligent plus que toutes les autres créatures ensemble ! » Mais Toi, ô mon Jésus, triomphant de tout, Tu défends même ces âmes, Tu endigues par l’Amour immense de ton Cœur les vagues des amertumes et des blessures qu’elles Te procurent.",
-        "p": {
-          "runs": [
-            {
-              "start": 0,
-              "end": 148,
-              "speaker": "FATHER"
-            }
-          ],
-          "hidden": [
-            {
-              "start": 148,
-              "end": 150,
-              "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
-              "reason": "OUTER_DIVINE_TARGET_START"
-            }
-          ],
-          "breaks": [
-            151
-          ]
-        }
-      }
-    },
-    {
-      "name": "topology_static_exhaustive",
-      "status": "PASS",
-      "evidence": {
-        "targets": 206,
-        "bad": []
-      }
-    },
-    {
-      "name": "H21_DOM_render",
-      "status": "PASS",
-      "evidence": {
-        "text": "À l'instant, Il me dit : «\nAurais-Tu par hasard cessé de M'aimer et de vivre dans Ma Volonté ?» \nJe repris : «Non ! Et que cela ne soit jamais !»",
-        "html": "À l'instant, Il me dit : <span class=\"speech-quote-hidden\" aria-hidden=\"true\" data-speech-quote-suppressed=\"OUTER_DIVINE_OPEN_WRAPPER_HIDE\">«</span><span class=\"speech-end-visual-break speech-presentation-visual-break\" aria-hidden=\"true\" data-presentation-boundary=\"true\"></span><span class=\"sp-jesus\" role=\"group\" aria-label=\"Paroles de Jésus\">Aurais-Tu par hasard cessé de M'aimer et de vivre dans Ma Volonté ?</span><span class=\"speech-quote-hidden\" aria-hidden=\"true\" data-speech-quote-suppressed=\"OUTER_DIVINE_CLOSE_WRAPPER_HIDE\">»</span> <span class=\"speech-end-visual-break speech-presentation-visual-break\" aria-hidden=\"true\" data-presentation-boundary=\"true\"></span>Je repris : «Non ! Et que cela ne soit jamais !»",
-        "jesus": [
-          "Aurais-Tu par hasard cessé de M'aimer et de vivre dans Ma Volonté ?"
         ]
       }
     },
     {
-      "name": "rerender_canonical_text_invariant",
+      "name": "G_PRES_002_and_all_quote_edge_integrity_joins",
       "status": "PASS",
       "evidence": {
-        "tested": 206,
+        "tested": 24,
         "bad": []
       }
     },
     {
-      "name": "existing_highlight_non_destructive_topology_relabel",
+      "name": "G_PRES_002_exact_Luisa_group",
+      "status": "PASS",
+      "evidence": [
+        [
+          {
+            "id": "PASSION24.TEXT.RELATED_HOUR_20.BODY.P015",
+            "start": 105,
+            "end": 177,
+            "text": " Plus tard, en recevant l'absolution de mon confesseur, je me disais : «"
+          },
+          {
+            "id": "PASSION24.TEXT.RELATED_HOUR_20.BODY.P016",
+            "start": 0,
+            "end": 120,
+            "text": "Mon Jésus, je veux recevoir l'absolution dans Ta Volonté.» Avant que j'aie pu dire un seul mot de plus, Jésus me dit : «"
+          }
+        ]
+      ]
+    },
+    {
+      "name": "G_PRES_003_004_005_no_mechanical_divine_start_break",
+      "status": "PASS",
+      "evidence": [
+        {
+          "id": "PASSION24.TEXT.RELATED_HOUR_20.BODY.P021",
+          "breaks": [],
+          "runs": [
+            {
+              "start": 0,
+              "end": 49,
+              "speaker": "JESUS"
+            }
+          ]
+        },
+        {
+          "id": "PASSION24.TEXT.RELATED_HOUR_20.BODY.P023",
+          "breaks": [
+            108
+          ],
+          "runs": [
+            {
+              "start": 0,
+              "end": 107,
+              "speaker": "JESUS"
+            }
+          ]
+        },
+        {
+          "id": "PASSION24.TEXT.RELATED_HOUR_20.BODY.P031",
+          "breaks": [],
+          "runs": [
+            {
+              "start": 0,
+              "end": 319,
+              "speaker": "JESUS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "exhaustive_divine_start_policy",
       "status": "PASS",
       "evidence": {
-        "id": "PASSION24.HOUR.01.P008",
-        "cut": 87,
-        "count": 2,
-        "unchanged": true
+        "projection_targets": 2197,
+        "coincident_native_boundaries": [],
+        "speech_start_only_added": 0
+      }
+    },
+    {
+      "name": "exhaustive_same_record_visible_quote_integrity",
+      "status": "PASS",
+      "evidence": {
+        "tested": 186,
+        "bad": []
+      }
+    },
+    {
+      "name": "meaningful_quote_fixtures_visible",
+      "status": "PASS",
+      "evidence": [
+        {
+          "id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P067",
+          "n": "Voici l'homme",
+          "o": 42,
+          "c": 56,
+          "openHidden": false,
+          "closeHidden": false,
+          "hits": []
+        },
+        {
+          "id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P067",
+          "n": "Crucifie-Le",
+          "o": 79,
+          "c": 127,
+          "openHidden": false,
+          "closeHidden": false,
+          "hits": []
+        },
+        {
+          "id": "PASSION24.TEXT.RELATED_HOUR_22.BODY.P063",
+          "n": "J’ai soif",
+          "o": 147,
+          "c": 161,
+          "openHidden": false,
+          "closeHidden": false,
+          "hits": []
+        },
+        {
+          "id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P069",
+          "n": "le Tout",
+          "o": 61,
+          "c": 69,
+          "openHidden": false,
+          "closeHidden": false,
+          "hits": []
+        }
+      ]
+    },
+    {
+      "name": "seven_words_headings_unchanged_visible",
+      "status": "PASS",
+      "evidence": [
+        {
+          "id": "PASSION24.HOUR.20.P001",
+          "o": 21,
+          "c": 82,
+          "hidden": false
+        },
+        {
+          "id": "PASSION24.HOUR.21.P001",
+          "o": 18,
+          "c": 63,
+          "hidden": false
+        },
+        {
+          "id": "PASSION24.HOUR.21.P020",
+          "o": 42,
+          "c": 100,
+          "hidden": false
+        },
+        {
+          "id": "PASSION24.HOUR.21.P058",
+          "o": 19,
+          "c": 70,
+          "hidden": false
+        },
+        {
+          "id": "PASSION24.HOUR.22.P001",
+          "o": 19,
+          "c": 33,
+          "hidden": false
+        },
+        {
+          "id": "PASSION24.HOUR.22.P017",
+          "o": 17,
+          "c": 39,
+          "hidden": false
+        },
+        {
+          "id": "PASSION24.HOUR.22.P024",
+          "o": 18,
+          "c": 68,
+          "hidden": false
+        }
+      ]
+    },
+    {
+      "name": "all_projection_targets_canonical_DOM_text",
+      "status": "PASS",
+      "evidence": {
+        "n": 2197,
+        "bad": []
+      }
+    },
+    {
+      "name": "geometry_no_orphan_opening_guillemet_all_24_edges_all_viewports",
+      "status": "PASS",
+      "evidence": {
+        "tested": 144,
+        "bad": []
+      }
+    },
+    {
+      "name": "Samsung_and_MonEspace_shared_joined_topology",
+      "status": "PASS",
+      "evidence": {
+        "ranges": [
+          {
+            "paraId": "PASSION24.TEXT.RELATED_HOUR_20.BODY.P015",
+            "start": 106,
+            "end": 177,
+            "text": "Plus tard, en recevant l'absolution de mon confesseur, je me disais : «"
+          },
+          {
+            "paraId": "PASSION24.TEXT.RELATED_HOUR_20.BODY.P016",
+            "start": 0,
+            "end": 120,
+            "text": "Mon Jésus, je veux recevoir l'absolution dans Ta Volonté.» Avant que j'aie pu dire un seul mot de plus, Jésus me dit : «"
+          }
+        ],
+        "count": 1,
+        "selectedText": "Plus tard, en recevant l'absolution de mon confesseur, je me disais : « Mon Jésus, je veux recevoir l'absolution dans Ta Volonté.» Avant que j'aie pu dire un seul mot de plus, Jésus me dit : «",
+        "targetNull": false
+      }
+    },
+    {
+      "name": "full_visible_topology_reconciliation",
+      "status": "PASS",
+      "evidence": {
+        "surfaces": 82,
+        "visual_paragraph_rows": 4408,
+        "flow_group_rows": 1750,
+        "multi_record_flow_groups": 183
+      }
+    },
+    {
+      "name": "appwide_render_and_primary_function_smoke",
+      "status": "PASS",
+      "evidence": {
+        "bad": [],
+        "hours": 24,
+        "libraryRendered": 33,
+        "functions": [
+          [
+            "showHome",
+            "function"
+          ],
+          [
+            "showHoursView",
+            "function"
+          ],
+          [
+            "showSearchView",
+            "function"
+          ],
+          [
+            "showEspaceView",
+            "function"
+          ],
+          [
+            "openHour",
+            "function"
+          ],
+          [
+            "openLibraryText",
+            "function"
+          ],
+          [
+            "renderParaText",
+            "function"
+          ]
+        ]
       }
     },
     {
@@ -149,5 +377,15 @@
       "evidence": []
     }
   ],
-  "console_errors": []
+  "console_errors": [],
+  "metrics": {
+    "visible_topology_expected_native_minus_quote_edges": {
+      "native_rows": 4431,
+      "removed_actual_boundaries": 23,
+      "final_rows": 4408,
+      "declared_join_pairs": 24,
+      "one_pair_already_joined_native": 1
+    }
+  },
+  "status": "PASS"
 }
