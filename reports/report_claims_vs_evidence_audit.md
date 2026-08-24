@@ -1,15 +1,3 @@
-# Report claims vs evidence audit — v101.105 prepackage
+# Report claims vs evidence — v101.110
 
-Every current status-bearing report was parsed from the current tree. Historical witness reports are evidence inputs, not current release-decision reports.
-
-- `reports/chromium_interaction_topology_results.json` — status=PASS: **PASS** — scenario_count=20; failures=0
-- `reports/extended_interaction_results.json` — status=PASS: **PASS** — scenario_count=13; failures=0
-- `reports/phaseE_functional_results.json` — status=PASS: **PASS** — scenario_count=7; failures=0
-- `reports/no_regression_fix_ledger.csv` — all items PASS: **PASS** — items=4
-- `reports/protected_data_diff_report.csv` — all protected declarations unchanged: **PASS** — declarations=8
-- `reports/root_deploy_consistency_report.md` — root runtime parity PASS: **PASS** — index=62e232cfbc6b154305d0cb2987daf6f4d71aea05b5eb40af3d273a7c7ab31f9f app=62e232cfbc6b154305d0cb2987daf6f4d71aea05b5eb40af3d273a7c7ab31f9f
-- `reports/stale_reference_scan.txt` — active stale failures=0: **PASS** — hits=346 active=0
-- `syntax` — inline JS + service worker syntax PASS: **PASS** — js_rc=0 sw_rc=0
-- `audit/independent_four_pass_audit.md` — four-pass status=PASS: **PASS** — checks=25; failures=0
-
-No embedded report claims the future immutable ZIP has passed a reopen audit.
+Prepackage reports claim only executed static checks. Mandatory final reopened-ZIP, separately implemented independent reopened-ZIP and runtime DOM audits are post-package external evidence and are not claimed as passed inside this ZIP.

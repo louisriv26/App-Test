@@ -1,3 +1,3 @@
-# Nested ZIP consistency — v101.105 prepackage
+# Nested ZIP consistency — v101.110
 
-No nested ZIP exists in the prepackage tree. Status: **NOT_APPLICABLE_NO_NESTED_ZIP**. The immutable final ZIP will be reopened externally after freeze.
+No nested ZIP is present. Gate: **NOT_APPLICABLE_NO_NESTED_ZIP**.

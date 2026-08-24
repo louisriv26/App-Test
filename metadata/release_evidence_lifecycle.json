@@ -1,8 +1,6 @@
 {
-  "model": "non_circular_external_final_audits",
-  "prepackage_reports_inside_zip": true,
-  "final_reopen_reports_inside_zip": false,
-  "final_decision_lock_inside_zip": false,
-  "primary_reopen": "POST_PACKAGE_EXTERNAL",
-  "independent_reopen": "POST_PACKAGE_EXTERNAL"
+  "version": "v101.110",
+  "prepackage_evidence_inside_zip": true,
+  "postpackage_reopen_evidence": "external only",
+  "immutable_final_zip_required": true
 }

@@ -1,18 +1,6 @@
-﻿scenario,app_version,device,status,evidence,notes
-G-00A,v101.105,,NOT_TESTED,,H20.P016 quote suppression + clean speech boundary
-G-00B,v101.105,,NOT_TESTED,,kept meaningful quotation regression fixtures
-G-01,v101.105,,NOT_TESTED,,
-G-02,v101.105,,NOT_TESTED,,
-G-03,v101.105,,NOT_TESTED,,
-G-04,v101.105,,NOT_TESTED,,
-G-05,v101.105,,NOT_TESTED,,
-G-06,v101.105,,NOT_TESTED,,
-G-07,v101.105,,NOT_TESTED,,
-G-08,v101.105,,NOT_TESTED,,
-G-09,v101.105,,NOT_TESTED,,
-G-10,v101.105,,NOT_TESTED,,
-G-11,v101.105,,NOT_TESTED,,
-G-12,v101.105,,NOT_TESTED,,
-G-13,v101.105,,NOT_TESTED,,
-G-14,v101.105,,NOT_TESTED,,
-G-15,v101.105,,NOT_TESTED,,
+gate_id,build,device,status,evidence,notes
+DQ-01,v101.110,iPad,NOT_TESTED,,P094 nested closing quote colour
+DQ-02,v101.110,iPad,NOT_TESTED,,P134 nested closing quote colour / outer wrapper hidden
+SPK-01,v101.110,Samsung,NOT_TESTED,,RA19E speaker regression
+PWA-01,v101.110,installed PWA,NOT_TESTED,,update/offline
+A11Y-01,v101.110,VoiceOver/TalkBack,NOT_TESTED,,representative test

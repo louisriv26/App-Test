@@ -1,9 +1,7 @@
-# Les 24 Heures de la Passion — v101.105
+# Les 24 Heures de la Passion — v101.110
 
-Stage: `NATIVE_24H_PARAGRAPH_LDC_SEMANTIC_HYBRID_PRESENTATION_R1`
+Stage: `RA19E_NESTED_QUOTE_DELIMITER_DISPLAY_CONTINUITY_R1`
 
-This successor restores the native v101.101 24H visual paragraph rhythm while retaining v101.103 semantic quotation/speaker intelligence. It adds a narrowly scoped presentation-only cross-record join capability for visible opening-guillemet edges; canonical text, raw `SPEECH_DATA`, IDs/order and RA19B flow authority are unchanged.
+This successor repairs two residual nested quotation delimiter colour discontinuities found only by the v101.109 runtime DOM gate. Meaningful nested quotation marks remain visible and inline and now inherit the active outer Jesus display through the closing delimiter. Raw RA19E speaker metadata, canonical text and RA19B flow are unchanged.
 
-Release ceiling before physical-device/live/offline validation: `LIMITED_PASS_STATIC`.
-
-Final reopened-ZIP audits and the final decision lock are external post-package evidence and are intentionally not embedded here.
+Post-package audits are external. Physical/live/offline/accessibility gates remain NOT_TESTED.

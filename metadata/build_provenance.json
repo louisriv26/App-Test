@@ -1,10 +1,12 @@
 {
-  "version": "v101.105",
-  "stage": "NATIVE_24H_PARAGRAPH_LDC_SEMANTIC_HYBRID_PRESENTATION_R1",
-  "baseline_zip": "L24H_v101103_GITHUB_DEPLOY_DIVINE_QUOTE_PRESENTATION_REGRESSION_REPAIR_R1_LOCKED.zip",
-  "baseline_sha256": "d08fa70a4931f8c2e997bc8bae46a8292ed9b14725346727852361a84cfdb664",
-  "native_topology_witness": "v101.101 exact runtime",
-  "semantic_witness": "v101.103 exact projection/quotation roles",
+  "version": "v101.110",
+  "stage": "RA19E_NESTED_QUOTE_DELIMITER_DISPLAY_CONTINUITY_R1",
+  "baseline_zip": "L24H_v101109_GITHUB_DEPLOY_LDC_RA19E_SPEAKER_AUTHORITY_RECONCILIATION_R1_LOCKED.zip",
+  "baseline_sha256": "3194039889e7de1303c77172eedf32ddf225c75bb35d1aad3be9d86c70c5033d",
   "date": "2026-08-23",
-  "scope_escalation": "user explicit do it after FAIL_SCOPE_ESCALATION_REQUIRED"
+  "scope": "presentation-only nested quotation delimiter inheritance; raw speaker metadata and canonical text immutable",
+  "speaker_authority_zip": "LDC_v2.19.32-R1B_GITHUB_DEPLOY_RA19E_SPEAKER_INTEGRITY_RECONCILIATION_LOCKED(1).zip",
+  "speaker_authority_sha256": "a5e6a0d76e4e7e7e93eff5583c304d5be9c64fc6370449a2f0634cb067a6aa78",
+  "speaker_authority": "LDC RA19E / v2.19.32-R1B",
+  "predecessor_runtime_gate": "FAIL — P094/P134 closing delimiter colour continuity"
 }

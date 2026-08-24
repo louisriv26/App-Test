@@ -1,6 +1,10 @@
 {
-  "version": "v101.105",
+  "version": "v101.110",
   "generated_prepackage": true,
+  "self_exclusion": [
+    "metadata/hash_manifest.json",
+    "metadata/package_manifest.json"
+  ],
   "files": [
     {
       "path": ".gitattributes",
@@ -12,27 +16,23 @@
     },
     {
       "path": "README.md",
-      "size": 663
+      "size": 543
     },
     {
       "path": "REAL_DEVICE_QA_CHECKLIST.md",
-      "size": 1653
+      "size": 659
     },
     {
       "path": "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
-      "size": 644
+      "size": 382
     },
     {
       "path": "apple-touch-icon.png",
       "size": 34805
     },
     {
-      "path": "audit/independent_four_pass_audit.json",
-      "size": 11386
-    },
-    {
       "path": "audit/independent_four_pass_audit.md",
-      "size": 7251
+      "size": 481
     },
     {
       "path": "favicon-16.png",
@@ -68,11 +68,11 @@
     },
     {
       "path": "index.html",
-      "size": 2530140
+      "size": 2557926
     },
     {
       "path": "luisa_24_heures.html",
-      "size": 2530140
+      "size": 2557926
     },
     {
       "path": "manifest.json",
@@ -80,183 +80,75 @@
     },
     {
       "path": "metadata/build_provenance.json",
-      "size": 522
+      "size": 784
     },
     {
       "path": "metadata/release_evidence_lifecycle.json",
-      "size": 274
+      "size": 160
     },
     {
       "path": "metadata/scope_escalation_authority.md",
-      "size": 493
+      "size": 245
     },
     {
       "path": "metadata/user_feedback_authority.md",
-      "size": 459
-    },
-    {
-      "path": "prior_scripts/v101102/L24H_v101102_LDC_PRESENTATION_PROJECTION_PARITY_REPAIR_HARDGATED_SCRIPT_2026-08-22.md",
-      "size": 41243
-    },
-    {
-      "path": "prior_scripts/v101102/L24H_v101102_RELEASE_EVIDENCE_REBUILD_SPEC_2026-08-22.md",
-      "size": 1306
-    },
-    {
-      "path": "prior_scripts/v101102/README.md",
-      "size": 95
-    },
-    {
-      "path": "reports/G_PRES_002_IMG4532_REPAIR.png",
-      "size": 18786
-    },
-    {
-      "path": "reports/allowed_runtime_diff_report.csv",
-      "size": 1328060
-    },
-    {
-      "path": "reports/android_visible_paragraph_groups.csv",
-      "size": 700011
-    },
-    {
-      "path": "reports/appwide_prepackage_regression.json",
-      "size": 438
-    },
-    {
-      "path": "reports/chromium_interaction_topology_results.json",
-      "size": 10291
-    },
-    {
-      "path": "reports/extended_interaction_results.json",
-      "size": 6975
+      "size": 417
     },
     {
       "path": "reports/full_regression_matrix.csv",
-      "size": 14391
+      "size": 756
     },
     {
-      "path": "reports/hybrid_boundary_decision_ledger.csv",
-      "size": 132789
+      "path": "reports/javascript_syntax_check.json",
+      "size": 68
+    },
+    {
+      "path": "reports/nested_quote_delimiter_display_continuity.md",
+      "size": 852
     },
     {
       "path": "reports/nested_zip_consistency_report.md",
-      "size": 203
+      "size": 105
     },
     {
       "path": "reports/no_regression_fix_ledger.csv",
-      "size": 3230
-    },
-    {
-      "path": "reports/phaseE_functional_results.json",
-      "size": 3423
-    },
-    {
-      "path": "reports/prepackage_release_engineering_checks.json",
-      "size": 471
-    },
-    {
-      "path": "reports/presentation_projection_summary.json",
-      "size": 484
+      "size": 657
     },
     {
       "path": "reports/protected_data_diff_report.csv",
-      "size": 1292
+      "size": 1995
     },
     {
       "path": "reports/quotation_role_ledger.csv",
       "size": 144553
     },
     {
-      "path": "reports/quote_edge_hybrid_reconciliation.csv",
-      "size": 7100
-    },
-    {
-      "path": "reports/report_claims_vs_evidence_audit.csv",
-      "size": 920
+      "path": "reports/quotation_wrapper_regression.md",
+      "size": 294
     },
     {
       "path": "reports/report_claims_vs_evidence_audit.md",
-      "size": 1326
+      "size": 279
     },
     {
       "path": "reports/root_deploy_consistency_report.md",
-      "size": 567
+      "size": 186
     },
     {
       "path": "reports/stale_reference_scan.csv",
-      "size": 114772
+      "size": 1966
     },
     {
       "path": "reports/stale_reference_scan.txt",
-      "size": 30861
-    },
-    {
-      "path": "reports/v101101_native_visual_topology_reconciliation.csv",
-      "size": 26607
-    },
-    {
-      "path": "reports/v101101_native_visual_topology_reconciliation.json",
-      "size": 46507
-    },
-    {
-      "path": "reports/v101101_native_visual_topology_reconciliation.md",
-      "size": 900
-    },
-    {
-      "path": "reports/v101101_native_visual_topology_witness.csv",
-      "size": 2842563
-    },
-    {
-      "path": "reports/v101101_native_visual_topology_witness.json",
-      "size": 5467153
-    },
-    {
-      "path": "reports/v101103_quote_role_witness.csv",
-      "size": 144553
-    },
-    {
-      "path": "reports/v101103_semantic_presentation_witness.json",
-      "size": 554335
-    },
-    {
-      "path": "reports/v101105_visible_paragraph_topology_witness.json",
-      "size": 5455369
-    },
-    {
-      "path": "reports/visible_paragraph_topology_report.md",
-      "size": 527
+      "size": 2012
     },
     {
       "path": "scripts/EXECUTION_SPEC.md",
-      "size": 44821
+      "size": 453
     },
     {
-      "path": "scripts/build_v101105_hybrid.py",
-      "size": 27372
-    },
-    {
-      "path": "scripts/chromium_hybrid_harness.py",
-      "size": 19523
-    },
-    {
-      "path": "scripts/extended_interaction_harness.py",
-      "size": 10058
-    },
-    {
-      "path": "scripts/independent_prepackage_audit.py",
-      "size": 12983
-    },
-    {
-      "path": "scripts/per_fix_reexecution.py",
-      "size": 8544
-    },
-    {
-      "path": "scripts/phaseE_functional_harness.py",
-      "size": 5571
-    },
-    {
-      "path": "scripts/prepackage_finalize.py",
-      "size": 13273
+      "path": "scripts/build_v101110_nested_quote_delimiter_continuity.py",
+      "size": 22777
     },
     {
       "path": "sw.js",
@@ -264,23 +156,7 @@
     },
     {
       "path": "version.json",
-      "size": 962
-    },
-    {
-      "path": "visual_evidence/H20_P016_v101103_CHROMIUM_RENDER.png",
-      "size": 17035
-    },
-    {
-      "path": "visual_evidence/physical_ipad_v101102_failure_H20_P016.png",
-      "size": 439791
-    },
-    {
-      "path": "visual_evidence/user_supplied_prior_render_comparison.png",
-      "size": 476566
+      "size": 1155
     }
-  ],
-  "self_exclusion": [
-    "metadata/package_manifest.json",
-    "metadata/hash_manifest.json"
   ]
 }

@@ -1,5 +1,3 @@
-# v101.105 narrow scope escalation authority
+# v101.110 scope authority
 
-On 23 August 2026, after the strict pre-edit hard stop `FAIL_SCOPE_ESCALATION_REQUIRED`, the user explicitly instructed: **“do it”**.
-
-Authorized expansion is limited to the renderer/topology capability required to implement `QUOTE_EDGE_INTEGRITY_JOIN` while preserving canonical text, protected declarations, raw `SPEECH_DATA`, IDs/order, RA19B flow authority, Apple exact-selection semantics, storage schema, and unrelated runtime behavior.
+Continuation after the v101.109 immutable runtime audit exposed two residual display-only failures. This stage is restricted to P094/P134 presentation delimiter continuity and the causally dependent P134 local break.

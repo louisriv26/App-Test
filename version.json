@@ -1,13 +1,22 @@
 {
-  "app_version": "v101.105",
+  "app_version": "v101.110",
   "build_date": "2026-08-23",
-  "cache_name": "luisa-24h-v101-105",
+  "cache_name": "luisa-24h-v101-110",
   "storage_schema": 8,
   "personal_snapshot": 5,
   "ldc_source_public_version": "Version 31 implementation / Version 29 RA19B corpus-flow authority",
   "ldc_source_app_version": "v2.19.31-R1B implementation; v2.19.29-R1B corpus-flow",
   "ldc_source_package_sha256": "b91aabf84803685cb5a86379c2a76c6239c2882bc1fa8b4277479f978c025441",
   "ldc_ra19b_corpus_flow_sha256": "eb2fa6abce1525399547f469ad1c2d64e818ff8685fe11cc20a57571c59f92fc",
-  "release_scope": "Native 24H paragraph rhythm restored from exact v101.101 runtime witness while retaining v101.103 LDC-derived semantic speaker/quotation projection; all 24 visible terminal-opening cross-record quotation edges use explicit presentation-only integrity joins; renderer/Samsung share the same topology.",
-  "real_device_status": "v101.105 physical Samsung/iPhone/iPad/live-PWA/offline validation NOT_TESTED"
+  "release_scope": "Repair two runtime-proven nested-quote delimiter colour discontinuities while preserving RA19E semantic speaker authority and all protected text/flow data.",
+  "real_device_status": "v101.110 physical Samsung/iPhone/iPad/live-PWA/offline validation NOT_TESTED",
+  "overall_release_status": "PREPACKAGE_STATIC_CANDIDATE_PENDING_POSTPACKAGE_REOPEN_AUDITS",
+  "known_blockers": [],
+  "external_open_gates": [
+    "physical iPad/iPhone/Samsung",
+    "live GitHub Pages exact-byte binding",
+    "installed PWA update",
+    "true offline cold reopen",
+    "VoiceOver/TalkBack representative testing"
+  ]
 }
