@@ -1,0 +1,5 @@
+action_id,target,finding,correction,status
+AUD-117-001,metadata/scope_escalation_authority.md,STALE_RA19E2_SCOPE_WORDING,replace with current v101.117 release/evidence-only scope authority,PASS
+AUD-117-002,version.json.release_scope,STALE_V101115_STAGE_DESCRIPTION,replace with current semantic metadata/report-integrity scope,PASS
+AUD-117-003,reports/no_regression_fix_ledger.csv,CURRENT_STAGE_REPAIR_OMITTED,record v101.116 and v101.117 evidence-integrity repairs explicitly,PASS
+AUD-117-004,scripts/run_independent_prefreeze_audit.py,HARDCODED_V101116_EVIDENCE_PATH,derive evidence folder from requested VERSION,PASS

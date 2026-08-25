@@ -1,6 +1,22 @@
-gate_id,build,device,status,evidence,notes
-DQ-01,v101.110,iPad,NOT_TESTED,,P094 nested closing quote colour
-DQ-02,v101.110,iPad,NOT_TESTED,,P134 nested closing quote colour / outer wrapper hidden
-SPK-01,v101.110,Samsung,NOT_TESTED,,RA19E speaker regression
-PWA-01,v101.110,installed PWA,NOT_TESTED,,update/offline
-A11Y-01,v101.110,VoiceOver/TalkBack,NOT_TESTED,,representative test
+test_id,platform,scenario,device,os,browser,app_version,zip_sha256,result,notes
+RD01,Samsung,Hour 3 duplicate regression,,,,v101.118,,NOT_TESTED,
+RD02,Samsung,Hour 22 punctuation/visible paragraph,,,,v101.118,,NOT_TESTED,
+RD03,Samsung,Paragraphe boundary parity,,,,v101.118,,NOT_TESTED,
+RD04,Samsung,highlight persist/recolour/delete,,,,v101.118,,NOT_TESTED,
+RD05,Samsung,native overlay non-interference,,,,v101.118,,NOT_TESTED,
+RD06,Samsung,scroll/orientation,,,,v101.118,,NOT_TESTED,
+RD07,iPhone,Hour 3/Hour 22 regression,,,,v101.118,,NOT_TESTED,
+RD08,iPhone,exact highlighting persistence,,,,v101.118,,NOT_TESTED,
+RD09,iPhone,nested quotation/wrapper presentation,,,,v101.118,,NOT_TESTED,
+RD10,iPhone,scroll/navigation/progress,,,,v101.118,,NOT_TESTED,
+RD11,iPad,Hour 3 duplicate regression,,,,v101.118,,NOT_TESTED,
+RD12,iPad,Hour 22 10/10 + 9/9 visible split,,,,v101.118,,NOT_TESTED,
+RD13,iPad,exact highlighting/orientation,,,,v101.118,,NOT_TESTED,
+RD14,iPad,control clipping/layout,,,,v101.118,,NOT_TESTED,
+RD15,Live origin,exact served-byte/version binding,,,,v101.118,,NOT_TESTED,
+RD16,Installed PWA,older version update + data survival,,,,v101.118,,NOT_TESTED,
+RD17,Installed PWA,close/reopen continuity,,,,v101.118,,NOT_TESTED,
+RD18,Offline,warm reopen,,,,v101.118,,NOT_TESTED,
+RD19,Offline,cold reopen,,,,v101.118,,NOT_TESTED,
+RD20,VoiceOver,representative navigation/reading,,,,v101.118,,NOT_TESTED,
+RD21,TalkBack,representative navigation/reading/Paragraphe,,,,v101.118,,NOT_TESTED,

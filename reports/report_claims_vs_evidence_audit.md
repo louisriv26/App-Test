@@ -1,3 +1,3 @@
-# Report claims vs evidence — v101.110
+# Report claims vs evidence — v101.118
 
-Prepackage reports claim only executed static checks. Mandatory final reopened-ZIP, separately implemented independent reopened-ZIP and runtime DOM audits are post-package external evidence and are not claimed as passed inside this ZIP.
+The generic current execution specification, current builder and three audit runners are aligned to v101.118; the superseded v101.111 execution specification is retained only under an explicitly historical path. Current metadata semantic consistency is checked explicitly and by the stale/semantic scanner. Every nonblank line of every active report is represented in the line-audit CSV; the CSV itself is the sole self-excluded audit output and is checked independently after freeze. Broad Chromium and isolated service-worker PASS claims bind to packaged prefreeze JSON evidence. Physical-device, live-origin PWA/offline and screen-reader tests remain `NOT_TESTED`; final reopened-ZIP PASS is not claimed inside the package.

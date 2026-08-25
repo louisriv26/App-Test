@@ -1,0 +1,312 @@
+path,line,line_type,evidence_binding,status,text
+README.md,1,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,# Les 24 Heures de la Passion — v101.118
+README.md,3,NON_CLAIM,HEADING/INSTRUCTION,PASS,Stage: `FOUR_PASS_GENERIC_EXECUTION_SPEC_INTEGRITY_REPAIR_R1`
+README.md,5,CLAIM,INHERITED_OR_FORENSIC_HISTORY,PASS,"This is a narrow evidence-integrity successor to immutable v101.117. Pass 4 of the independent deep audit found that the generic `scripts/EXECUTION_SPEC.md` still contained the historical v101.111 RA19E.2 specification. Because a generic filename is current-facing, v101.118 archives those exact historical bytes under `scripts/historical/EXECUTION_SPEC_v101111.md` and replaces the generic execution specification with the current v101.118 contract."
+README.md,7,CLAIM,INHERITED_OR_FORENSIC_HISTORY,PASS,"No governed corpus, text, display, topology, RA19E.2 speaker/presentation or RA19B flow declaration changes. All v101.117 semantic-metadata repairs, the v101.116 self-contained build repair, the Hour-3/Hour-22 fixes and runtime behaviour are inherited unchanged."
+README.md,9,NON_CLAIM,HEADING/INSTRUCTION,PASS,"The active-report line audit remains pre-freeze; final reopened-ZIP evidence remains external. Physical devices, live origin, installed-PWA/offline and representative screen-reader gates remain external."
+REAL_DEVICE_QA_CHECKLIST.md,1,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,# Real-device and live-origin QA checklist — v101.118
+REAL_DEVICE_QA_CHECKLIST.md,3,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,Status before physical/live execution: **NOT_TESTED**.
+REAL_DEVICE_QA_CHECKLIST.md,5,NON_CLAIM,HEADING/INSTRUCTION,PASS,Candidate under test:
+REAL_DEVICE_QA_CHECKLIST.md,7,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,- App version: `v101.118`
+REAL_DEVICE_QA_CHECKLIST.md,8,NON_CLAIM,HEADING/INSTRUCTION,PASS,- Build stage: `FOUR_PASS_GENERIC_EXECUTION_SPEC_INTEGRITY_REPAIR_R1`
+REAL_DEVICE_QA_CHECKLIST.md,9,NON_CLAIM,HEADING/INSTRUCTION,PASS,- Final ZIP SHA-256: **fill from the external final decision lock after immutable ZIP freeze**
+REAL_DEVICE_QA_CHECKLIST.md,11,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,"Use the exact frozen v101.118 ZIP. Record device model, OS/browser version, served/live origin where applicable, exact ZIP SHA-256, result and notes for every scenario."
+REAL_DEVICE_QA_CHECKLIST.md,13,NON_CLAIM,HEADING/INSTRUCTION,PASS,## Samsung / Samsung Internet
+REAL_DEVICE_QA_CHECKLIST.md,15,NON_CLAIM,HEADING/INSTRUCTION,PASS,1. Hour 3 duplicate regression: Judas/Jean sentences appear exactly once.
+REAL_DEVICE_QA_CHECKLIST.md,16,NON_CLAIM,HEADING/INSTRUCTION,PASS,"2. Hour 22 structure: each `« Jésus et Marie, je Vous recommande mon âme ! ».` is followed by `Jésus, je donne…` in a separate visible paragraph."
+REAL_DEVICE_QA_CHECKLIST.md,17,NON_CLAIM,HEADING/INSTRUCTION,PASS,3. Paragraphe mode selects exactly one visible paragraph and does not cross the new Hour-22 boundary.
+REAL_DEVICE_QA_CHECKLIST.md,18,NON_CLAIM,HEADING/INSTRUCTION,PASS,"4. Highlight persists, recolours and deletes from Mon Espace."
+REAL_DEVICE_QA_CHECKLIST.md,19,NON_CLAIM,HEADING/INSTRUCTION,PASS,5. No Google/Translate/Search overlay hijacks the Paragraphe workflow.
+REAL_DEVICE_QA_CHECKLIST.md,20,NON_CLAIM,HEADING/INSTRUCTION,PASS,6. Long scroll and portrait/landscape continuity.
+REAL_DEVICE_QA_CHECKLIST.md,22,NON_CLAIM,HEADING/INSTRUCTION,PASS,## iPhone / Safari
+REAL_DEVICE_QA_CHECKLIST.md,24,NON_CLAIM,HEADING/INSTRUCTION,PASS,7. Hour 3 duplicate regression and Hour 22 paragraph/punctuation presentation.
+REAL_DEVICE_QA_CHECKLIST.md,25,NON_CLAIM,HEADING/INSTRUCTION,PASS,"8. Exact selected-text highlighting, persistence and Mon Espace reopen."
+REAL_DEVICE_QA_CHECKLIST.md,26,NON_CLAIM,HEADING/INSTRUCTION,PASS,9. Nested quotation / divine-wrapper presentation regression fixtures.
+REAL_DEVICE_QA_CHECKLIST.md,27,NON_CLAIM,HEADING/INSTRUCTION,PASS,10. Long-scroll/navigation/progress continuity.
+REAL_DEVICE_QA_CHECKLIST.md,29,NON_CLAIM,HEADING/INSTRUCTION,PASS,## iPad / Safari — portrait and landscape
+REAL_DEVICE_QA_CHECKLIST.md,31,NON_CLAIM,HEADING/INSTRUCTION,PASS,11. Hour 3 duplicate regression.
+REAL_DEVICE_QA_CHECKLIST.md,32,NON_CLAIM,HEADING/INSTRUCTION,PASS,12. All ten Hour-22 punctuation cases and nine same-record visible splits.
+REAL_DEVICE_QA_CHECKLIST.md,33,NON_CLAIM,HEADING/INSTRUCTION,PASS,13. Exact selected-text highlighting and orientation continuity.
+REAL_DEVICE_QA_CHECKLIST.md,34,NON_CLAIM,HEADING/INSTRUCTION,PASS,14. No clipped reader/navigation controls.
+REAL_DEVICE_QA_CHECKLIST.md,36,NON_CLAIM,HEADING/INSTRUCTION,PASS,## Installed PWA / live origin
+REAL_DEVICE_QA_CHECKLIST.md,38,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,"15. Bind served `index.html`, `luisa_24_heures.html`, `version.json`, `sw.js`, `manifest.json` and icons to the intended v101.118 package."
+REAL_DEVICE_QA_CHECKLIST.md,39,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,16. Older installed version → v101.118 update; cache generation becomes `luisa-24h-v101-118`; personal data survives.
+REAL_DEVICE_QA_CHECKLIST.md,40,NON_CLAIM,HEADING/INSTRUCTION,PASS,17. Close/reopen installed PWA and confirm version continuity.
+REAL_DEVICE_QA_CHECKLIST.md,41,NON_CLAIM,HEADING/INSTRUCTION,PASS,18. True offline warm reopen after cache installation.
+REAL_DEVICE_QA_CHECKLIST.md,42,NON_CLAIM,HEADING/INSTRUCTION,PASS,19. True offline cold reopen after full browser/app close and network disablement.
+REAL_DEVICE_QA_CHECKLIST.md,44,NON_CLAIM,HEADING/INSTRUCTION,PASS,## Accessibility
+REAL_DEVICE_QA_CHECKLIST.md,46,NON_CLAIM,HEADING/INSTRUCTION,PASS,20. Representative VoiceOver navigation/reader/actions.
+REAL_DEVICE_QA_CHECKLIST.md,47,NON_CLAIM,HEADING/INSTRUCTION,PASS,"21. Representative TalkBack navigation/reader/actions, including Samsung Paragraphe discoverability."
+REAL_DEVICE_QA_CHECKLIST.md,49,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,No physical/live/PWA/accessibility scenario may be marked PASS without direct execution evidence.
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,1,NON_CLAIM,HEADING/INSTRUCTION,PASS,"test_id,platform,scenario,device,os,browser,app_version,zip_sha256,result,notes"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,2,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD01,Samsung,Hour 3 duplicate regression,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,3,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD02,Samsung,Hour 22 punctuation/visible paragraph,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,4,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD03,Samsung,Paragraphe boundary parity,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,5,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD04,Samsung,highlight persist/recolour/delete,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,6,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD05,Samsung,native overlay non-interference,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,7,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD06,Samsung,scroll/orientation,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,8,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD07,iPhone,Hour 3/Hour 22 regression,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,9,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD08,iPhone,exact highlighting persistence,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,10,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD09,iPhone,nested quotation/wrapper presentation,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,11,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD10,iPhone,scroll/navigation/progress,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,12,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD11,iPad,Hour 3 duplicate regression,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,13,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD12,iPad,Hour 22 10/10 + 9/9 visible split,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,14,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD13,iPad,exact highlighting/orientation,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,15,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD14,iPad,control clipping/layout,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,16,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD15,Live origin,exact served-byte/version binding,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,17,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD16,Installed PWA,older version update + data survival,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,18,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD17,Installed PWA,close/reopen continuity,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,19,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD18,Offline,warm reopen,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,20,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD19,Offline,cold reopen,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,21,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD20,VoiceOver,representative navigation/reading,,,,v101.118,,NOT_TESTED,"
+REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,22,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"RD21,TalkBack,representative navigation/reading/Paragraphe,,,,v101.118,,NOT_TESTED,"
+scripts/EXECUTION_SPEC.md,1,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,# Current execution specification — v101.118
+scripts/EXECUTION_SPEC.md,3,NON_CLAIM,HEADING/INSTRUCTION,PASS,Stage: `FOUR_PASS_GENERIC_EXECUTION_SPEC_INTEGRITY_REPAIR_R1`.
+scripts/EXECUTION_SPEC.md,5,CLAIM,BASELINE_OR_INHERITED_PROVENANCE,PASS,Baseline: immutable v101.117.
+scripts/EXECUTION_SPEC.md,7,NON_CLAIM,HEADING/INSTRUCTION,PASS,"Scope: execution-spec/evidence integrity only. No governed runtime declaration, canonical devotional text, RA19B source-flow decision, RA19E.2 semantic/presentation decision, feature behaviour or UX behaviour may change."
+scripts/EXECUTION_SPEC.md,9,CLAIM,SERVICE_WORKER_LOGIC_MATRIX,PASS,Required build lifecycle: exact baseline hash → protected declaration parity → current metadata/spec checks → fresh 52/52 Chromium matrix → fresh 15/15 service-worker logic matrix → independent prefreeze audit → active-report line audit → deterministic A/B package freeze → external primary reopened-ZIP audit → external separately implemented reopened-ZIP audit → external final decision lock.
+scripts/EXECUTION_SPEC.md,11,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"External physical Samsung/iPhone/iPad, live-origin PWA/offline, and VoiceOver/TalkBack gates remain `NOT_TESTED` until directly executed."
+evidence/v101118/PREPACKAGE_STAGE_REPORT.md,1,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,# v101.118 prepackage stage report
+evidence/v101118/PREPACKAGE_STAGE_REPORT.md,3,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,Status: `PASS_PREPACKAGE_PENDING_FINAL_REOPEN`.
+evidence/v101118/PREPACKAGE_STAGE_REPORT.md,5,CLAIM,BASELINE_OR_INHERITED_PROVENANCE,PASS,Baseline: v101.117 / `a778b1b821c76b4450796d1b76354fa1aa26fde0c48eb492ea59eaeff3375a9e`.
+evidence/v101118/PREPACKAGE_STAGE_REPORT.md,7,CLAIM,PROTECTED_DECLARATION_PARITY,PASS,All fourteen governed runtime declarations remain exact baseline parity. The generic `scripts/EXECUTION_SPEC.md` now identifies `v101.118` / `FOUR_PASS_GENERIC_EXECUTION_SPEC_INTEGRITY_REPAIR_R1`; the historical v101.111 RA19E.2 specification is preserved byte-for-byte at `scripts/historical/EXECUTION_SPEC_v101111.md`. Current semantic metadata remains aligned. Broad Chromium and isolated service-worker logic evidence are rerun before freeze. All active reports are finalized before the line audit.
+evidence/v101118/PREPACKAGE_STAGE_REPORT.md,9,NON_CLAIM,HEADING/INSTRUCTION,PASS,Physical/live/installed-PWA/true-offline/screen-reader gates remain external. Final reopened-ZIP audits remain external after immutable freeze.
+reports/full_regression_matrix.csv,1,NON_CLAIM,HEADING/INSTRUCTION,PASS,"gate,test,status,evidence"
+reports/full_regression_matrix.csv,2,CLAIM,BASELINE_OR_INHERITED_PROVENANCE,PASS,"BASELINE,v101.117 exact SHA/member freeze,PASS,a778b1b821c76b4450796d1b76354fa1aa26fde0c48eb492ea59eaeff3375a9e"
+reports/full_regression_matrix.csv,3,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"BUILD,deterministic A/B full-tree build,PASS,asserted before ZIP freeze"
+reports/full_regression_matrix.csv,4,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"BUILD-DEPS,current build runner dependencies,PASS,self-contained packaged sibling scripts; no obsolete external runner paths"
+reports/full_regression_matrix.csv,5,CLAIM,PROTECTED_DECLARATION_PARITY,PASS,"DATA,14 governed runtime declarations,PASS,exact RHS byte parity with v101.117"
+reports/full_regression_matrix.csv,6,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"SEMANTIC-META,current scope/release/ledger/runner semantics,PASS,reports/current_metadata_semantic_consistency.md"
+reports/full_regression_matrix.csv,7,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"H3-H22,user-confirmed text/paragraph repairs preserved,PASS,broad runtime 4/4 profiles"
+reports/full_regression_matrix.csv,8,CLAIM,QA_TEMPLATE_21_ROWS,PASS,"QA-META,root physical/live QA metadata,PASS,21/21 template rows target v101.118"
+reports/full_regression_matrix.csv,9,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"JS,inline JavaScript syntax,PASS,reports/javascript_syntax_check.json"
+reports/full_regression_matrix.csv,10,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"SW-SYNTAX,service-worker syntax,PASS,reports/service_worker_syntax_check.json"
+reports/full_regression_matrix.csv,11,CLAIM,BROAD_CHROMIUM_RUNTIME_MATRIX,PASS,"RUNTIME,broad Chromium DOM/runtime matrix,PASS,evidence/v101118/BROAD_CHROMIUM_RUNTIME_MATRIX.json 52/52"
+reports/full_regression_matrix.csv,12,CLAIM,SERVICE_WORKER_LOGIC_MATRIX,PASS,"SW-LOGIC,isolated service-worker logic,PASS,evidence/v101118/SERVICE_WORKER_LOGIC_MATRIX.json 15/15"
+reports/full_regression_matrix.csv,13,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"ACTIVE-REPORTS,all inventoried active source-report lines,PASS,reports/active_report_line_audit.csv exact coverage"
+reports/full_regression_matrix.csv,14,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"STALE,current-facing token + semantic stale scan,PASS,reports/stale_reference_scan.* failures 0"
+reports/full_regression_matrix.csv,15,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"physical devices,iPhone/iPad/Samsung,NOT_TESTED,external"
+reports/full_regression_matrix.csv,16,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"live PWA/offline,real origin/service worker,NOT_TESTED,external"
+reports/full_regression_matrix.csv,17,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"screen reader,VoiceOver/TalkBack,NOT_TESTED,external"
+reports/javascript_syntax_check.json,1,NON_CLAIM,HEADING/INSTRUCTION,PASS,{
+reports/javascript_syntax_check.json,2,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"""status"": ""PASS"","
+reports/javascript_syntax_check.json,3,NON_CLAIM,HEADING/INSTRUCTION,PASS,"""node_stderr"": """""
+reports/javascript_syntax_check.json,4,NON_CLAIM,HEADING/INSTRUCTION,PASS,}
+reports/nested_zip_consistency_report.md,1,NON_CLAIM,HEADING/INSTRUCTION,PASS,# Nested ZIP consistency
+reports/nested_zip_consistency_report.md,3,NON_CLAIM,HEADING/INSTRUCTION,PASS,No nested ZIP is part of this deployment architecture. Status: `NOT_APPLICABLE`.
+reports/no_regression_fix_ledger.csv,1,NON_CLAIM,HEADING/INSTRUCTION,PASS,"action_id,target_id,class,authorization,result"
+reports/no_regression_fix_ledger.csv,2,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"AUD-118-001,scripts/EXECUTION_SPEC.md,GENERIC_CURRENT_EXECUTION_SPEC_REPAIR,DEEP_AUDIT,PASS"
+reports/no_regression_fix_ledger.csv,3,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"AUD-118-002,stale/semantic scanner,GENERIC_CURRENT_DOC_ROLE_ENFORCEMENT,DEEP_AUDIT,PASS"
+reports/no_regression_fix_ledger.csv,4,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"AUD-117-INHERITED,current semantic metadata/release-scope/no-regression-ledger repair,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS"
+reports/no_regression_fix_ledger.csv,5,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"AUD-116-INHERITED,current build self-contained sibling runners + dependency gate,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS"
+reports/no_regression_fix_ledger.csv,6,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"AUD-115-INHERITED,active-report exact line coverage,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS"
+reports/no_regression_fix_ledger.csv,7,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"V101114-INHERITED,prefreeze runtime/SW evidence integration,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS"
+reports/no_regression_fix_ledger.csv,8,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"V101113-INHERITED,root QA metadata correction,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS"
+reports/no_regression_fix_ledger.csv,9,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"V101112-INHERITED,H3 + H22 user-confirmed corrections,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS"
+reports/no_regression_fix_ledger.csv,10,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"RA19E2-INHERITED,10 authorised speaker/presentation actions,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS"
+reports/current_metadata_semantic_consistency.md,1,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,# Current metadata semantic consistency — v101.118
+reports/current_metadata_semantic_consistency.md,3,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,Status: `PASS_PREPACKAGE`.
+reports/current_metadata_semantic_consistency.md,5,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,"- `version.json.release_scope`, `metadata/scope_escalation_authority.md` and the active no-regression ledger identify the current v101.118 evidence-only scope."
+reports/current_metadata_semantic_consistency.md,6,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,- Generic `scripts/EXECUTION_SPEC.md` identifies `v101.118` / `FOUR_PASS_GENERIC_EXECUTION_SPEC_INTEGRITY_REPAIR_R1`.
+reports/current_metadata_semantic_consistency.md,7,CLAIM,INHERITED_OR_FORENSIC_HISTORY,PASS,- The previous v101.111 execution specification is preserved under the explicit historical path `scripts/historical/EXECUTION_SPEC_v101111.md`.
+reports/current_metadata_semantic_consistency.md,8,NON_CLAIM,HEADING/INSTRUCTION,PASS,- `scripts/run_independent_prefreeze_audit.py` remains version-parameterized; it does not hard-code a current evidence version folder.
+reports/current_metadata_semantic_consistency.md,9,CLAIM,BASELINE_OR_INHERITED_PROVENANCE,PASS,- Governed runtime declarations remain exact v101.117 parity.
+reports/report_claims_vs_evidence_audit.md,1,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,# Report claims vs evidence — v101.118
+reports/report_claims_vs_evidence_audit.md,3,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,"The generic current execution specification, current builder and three audit runners are aligned to v101.118; the superseded v101.111 execution specification is retained only under an explicitly historical path. Current metadata semantic consistency is checked explicitly and by the stale/semantic scanner. Every nonblank line of every active report is represented in the line-audit CSV; the CSV itself is the sole self-excluded audit output and is checked independently after freeze. Broad Chromium and isolated service-worker PASS claims bind to packaged prefreeze JSON evidence. Physical-device, live-origin PWA/offline and screen-reader tests remain `NOT_TESTED`; final reopened-ZIP PASS is not claimed inside the package."
+reports/root_deploy_consistency_report.md,1,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,# Root/deploy consistency — v101.118
+reports/root_deploy_consistency_report.md,3,NON_CLAIM,HEADING/INSTRUCTION,PASS,- Package root is the deploy artifact.
+reports/root_deploy_consistency_report.md,4,CLAIM,HTML_OR_DECLARATION_PARITY,PASS,- `index.html` and `luisa_24_heures.html` are byte-identical.
+reports/root_deploy_consistency_report.md,5,NON_CLAIM,HEADING/INSTRUCTION,PASS,- Separate deploy directory: NOT_APPLICABLE.
+reports/root_deploy_consistency_report.md,6,NON_CLAIM,HEADING/INSTRUCTION,PASS,- Nested deploy ZIP: NOT_APPLICABLE.
+reports/root_deploy_consistency_report.md,7,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,- Current version: `v101.118`.
+reports/service_worker_syntax_check.json,1,NON_CLAIM,HEADING/INSTRUCTION,PASS,{
+reports/service_worker_syntax_check.json,2,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"""status"": ""PASS"","
+reports/service_worker_syntax_check.json,3,NON_CLAIM,HEADING/INSTRUCTION,PASS,"""node_stderr"": """""
+reports/service_worker_syntax_check.json,4,NON_CLAIM,HEADING/INSTRUCTION,PASS,}
+reports/stale_reference_scan.csv,1,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"path,token_or_rule,classification"
+reports/stale_reference_scan.csv,2,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"README.md,v101.117,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,3,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"README.md,v101.116,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,4,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"README.md,v101.111,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,5,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/m1_1/M1_FINAL_REPORT.md,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,6,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/m2/M2_FINAL_DECISION_LOCK.json,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,7,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/m2/M2_FINAL_REPORT.md,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,8,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/m3/M3_CHROMIUM_RUNTIME_MATRIX.json,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,9,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/m4_contract/M4_RECONSTRUCTED_G20_G22_CONTRACT.md,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,10,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101112/PREPACKAGE_STAGE_REPORT.md,v101.112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,11,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101112/PREPACKAGE_STAGE_REPORT.md,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,12,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101113/AUDIT_REPAIR_LEDGER.csv,v101.113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,13,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101113/AUDIT_REPAIR_LEDGER.csv,v101.112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,14,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101113/AUDIT_REPAIR_LEDGER.csv,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,15,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101113/PREPACKAGE_STAGE_REPORT.md,v101.113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,16,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101113/PREPACKAGE_STAGE_REPORT.md,v101.112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,17,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101113/PREPACKAGE_STAGE_REPORT.md,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,18,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101114/BROAD_CHROMIUM_RUNTIME_MATRIX.json,v101.114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,19,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101114/PREPACKAGE_STAGE_REPORT.md,v101.114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,20,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101114/PREPACKAGE_STAGE_REPORT.md,v101.113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,21,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101114/SERVICE_WORKER_LOGIC_MATRIX.json,luisa-24h-v101-114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,22,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101115/BROAD_CHROMIUM_RUNTIME_MATRIX.json,v101.115,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,23,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101115/PREPACKAGE_STAGE_REPORT.md,v101.115,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,24,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101115/PREPACKAGE_STAGE_REPORT.md,v101.114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,25,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101115/SERVICE_WORKER_LOGIC_MATRIX.json,luisa-24h-v101-115,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,26,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101116/BROAD_CHROMIUM_RUNTIME_MATRIX.json,v101.116,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,27,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101116/PREPACKAGE_STAGE_REPORT.md,v101.116,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,28,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101116/PREPACKAGE_STAGE_REPORT.md,v101.115,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,29,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101116/SERVICE_WORKER_LOGIC_MATRIX.json,luisa-24h-v101-116,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,30,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101117/AUDIT_REPAIR_LEDGER.csv,v101.117,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,31,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101117/AUDIT_REPAIR_LEDGER.csv,v101.116,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,32,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101117/BROAD_CHROMIUM_RUNTIME_MATRIX.json,v101.117,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,33,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101117/PREPACKAGE_STAGE_REPORT.md,v101.117,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,34,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101117/PREPACKAGE_STAGE_REPORT.md,v101.116,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,35,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101117/SERVICE_WORKER_LOGIC_MATRIX.json,luisa-24h-v101-117,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,36,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101118/PREPACKAGE_STAGE_REPORT.md,v101.117,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,37,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"evidence/v101118/PREPACKAGE_STAGE_REPORT.md,v101.111,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,38,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"metadata/build_provenance.json,v101.117,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,39,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"metadata/scope_escalation_authority.md,v101.117,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,40,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"metadata/scope_escalation_authority.md,v101.111,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,41,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"reports/current_metadata_semantic_consistency.md,v101.117,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,42,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"reports/current_metadata_semantic_consistency.md,v101.111,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,43,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"reports/full_regression_matrix.csv,v101.117,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,44,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"reports/report_claims_vs_evidence_audit.md,v101.111,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,45,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/EXECUTION_SPEC.md,v101.117,BASELINE_PROVENANCE_ALLOWED"
+reports/stale_reference_scan.csv,46,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101111_m2_authorised_mutation.py,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,47,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101112_user_confirmed_text_structure_repair.py,v101.112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,48,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101112_user_confirmed_text_structure_repair.py,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,49,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101112_user_confirmed_text_structure_repair.py,luisa-24h-v101-112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,50,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101112_user_confirmed_text_structure_repair.py,luisa-24h-v101-111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,51,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101112_user_confirmed_text_structure_repair.py,L24H_v101112_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,52,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101112_user_confirmed_text_structure_repair.py,L24H_v101111_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,53,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101113_audit_report_qa_integrity_repair.py,v101.113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,54,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101113_audit_report_qa_integrity_repair.py,v101.112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,55,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101113_audit_report_qa_integrity_repair.py,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,56,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101113_audit_report_qa_integrity_repair.py,luisa-24h-v101-113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,57,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101113_audit_report_qa_integrity_repair.py,luisa-24h-v101-112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,58,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101113_audit_report_qa_integrity_repair.py,luisa-24h-v101-111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,59,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101113_audit_report_qa_integrity_repair.py,L24H_v101113_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,60,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101113_audit_report_qa_integrity_repair.py,L24H_v101112_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,61,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101113_audit_report_qa_integrity_repair.py,L24H_v101111_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,62,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,v101.114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,63,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,v101.113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,64,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,v101.112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,65,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,66,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,luisa-24h-v101-114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,67,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,luisa-24h-v101-113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,68,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,luisa-24h-v101-112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,69,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,luisa-24h-v101-111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,70,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,L24H_v101114_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,71,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,L24H_v101113_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,72,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,L24H_v101112_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,73,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py,L24H_v101111_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,74,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,v101.115,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,75,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,v101.114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,76,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,v101.113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,77,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,v101.112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,78,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,79,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,luisa-24h-v101-115,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,80,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,luisa-24h-v101-114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,81,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,luisa-24h-v101-113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,82,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,luisa-24h-v101-112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,83,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,luisa-24h-v101-111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,84,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,L24H_v101115_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,85,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,L24H_v101114_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,86,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,L24H_v101113_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,87,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,L24H_v101112_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,88,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101115_active_report_line_closure.py,L24H_v101111_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,89,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,v101.116,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,90,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,v101.115,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,91,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,v101.114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,92,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,v101.113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,93,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,v101.112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,94,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,95,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,luisa-24h-v101-116,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,96,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,luisa-24h-v101-115,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,97,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,luisa-24h-v101-114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,98,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,luisa-24h-v101-113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,99,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,luisa-24h-v101-112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,100,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,luisa-24h-v101-111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,101,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,L24H_v101116_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,102,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,L24H_v101115_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,103,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,L24H_v101114_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,104,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,L24H_v101113_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,105,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,L24H_v101112_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,106,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101116_self_contained_build_integrity_repair.py,L24H_v101111_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,107,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,v101.117,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,108,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,v101.116,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,109,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,v101.115,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,110,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,v101.114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,111,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,v101.113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,112,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,v101.112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,113,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,114,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,luisa-24h-v101-117,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,115,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,luisa-24h-v101-116,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,116,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,luisa-24h-v101-115,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,117,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,luisa-24h-v101-114,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,118,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,luisa-24h-v101-113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,119,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,luisa-24h-v101-112,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,120,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,luisa-24h-v101-111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,121,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,L24H_v101117_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,122,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,L24H_v101116_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,123,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,L24H_v101115_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,124,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,L24H_v101114_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,125,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,L24H_v101113_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,126,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,L24H_v101112_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,127,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/build_v101117_semantic_metadata_integrity_repair.py,L24H_v101111_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,128,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/historical/EXECUTION_SPEC_v101111.md,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,129,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/run_m3_chromium_runtime_matrix.py,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,130,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/run_m3_chromium_runtime_matrix.py,L24H_v101111_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,131,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/run_m3_independent_renderer_recheck.py,v101.111,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,132,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/run_m3_independent_renderer_recheck.py,L24H_v101111_,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.csv,133,EVIDENCE_ROW,STALE_OR_SEMANTIC_CLASSIFICATION_ROW,PASS,"scripts/run_v101114_independent_prefreeze_audit.py,v101.113,HISTORICAL_EVIDENCE_ALLOWED"
+reports/stale_reference_scan.txt,1,NON_CLAIM,HEADING/INSTRUCTION,PASS,stale/reference + semantic scan
+reports/stale_reference_scan.txt,2,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,current version: v101.118
+reports/stale_reference_scan.txt,3,NON_CLAIM,HEADING/INSTRUCTION,PASS,classified hits: 132
+reports/stale_reference_scan.txt,4,CLAIM,STALE_AND_SEMANTIC_SCAN_ZERO,PASS,failures: 0
+reports/stale_reference_scan.txt,5,CLAIM,STALE_AND_SEMANTIC_SCAN_ZERO,PASS,current-script obsolete-dependency failures: 0
+reports/stale_reference_scan.txt,6,CLAIM,STALE_AND_SEMANTIC_SCAN_ZERO,PASS,semantic current-metadata failures: 0
+reports/four_pass_deep_audit.md,1,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,# Four-pass deep audit — v101.118
+reports/four_pass_deep_audit.md,3,NON_CLAIM,HEADING/INSTRUCTION,PASS,## Pass 1 — files vs build script
+reports/four_pass_deep_audit.md,4,CLAIM,HTML_OR_DECLARATION_PARITY,PASS,PASS. Exact v101.117 baseline SHA verified; fourteen governed runtime declarations remain byte-identical; current builder/runners/specification are packaged current artifacts; deterministic Build A/B is required before freeze.
+reports/four_pass_deep_audit.md,6,NON_CLAIM,HEADING/INSTRUCTION,PASS,## Pass 2 — runtime/package behaviour
+reports/four_pass_deep_audit.md,7,CLAIM,SERVICE_WORKER_LOGIC_MATRIX,PASS,PASS. Broad Chromium DOM/runtime matrix: 52/52. Isolated service-worker logic matrix: 15/15. JavaScript and service-worker syntax PASS. H3/H22 user-confirmed repairs remain intact.
+reports/four_pass_deep_audit.md,9,NON_CLAIM,HEADING/INSTRUCTION,PASS,## Pass 3 — active reports line by line
+reports/four_pass_deep_audit.md,10,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,PASS. Every nonblank line in the active-report inventory is required exactly once in `reports/active_report_line_audit.csv`; the audit CSV itself is the sole self-exclusion.
+reports/four_pass_deep_audit.md,12,NON_CLAIM,HEADING/INSTRUCTION,PASS,## Pass 4 — contradictions/stale evidence
+reports/four_pass_deep_audit.md,13,CLAIM,EXTERNAL_GATE_BOUNDARY,PASS,PASS_PREPACKAGE. The generic current `scripts/EXECUTION_SPEC.md` identifies v101.118; the old v101.111 specification is stored only under an explicit historical path. Token stale scan + semantic current-metadata scan report failures: 0. Physical/live/offline/screen-reader gates remain NOT_TESTED.
+reports/four_pass_deep_audit.md,15,NON_CLAIM,HEADING/INSTRUCTION,PASS,Final reopened-ZIP audits remain mandatory after immutable freeze.
+audit/independent_four_pass_audit.md,1,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,# Independent prefreeze four-pass audit — v101.118
+audit/independent_four_pass_audit.md,3,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,**Status: PASS_PREPACKAGE**
+audit/independent_four_pass_audit.md,5,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 01. `html_twins`: **PASS**
+audit/independent_four_pass_audit.md,6,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 02. `version`: **PASS**
+audit/independent_four_pass_audit.md,7,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 03. `decl_CORPUS`: **PASS** — `1dfd24bcd5cb353e14afb31348fef350c8fb56c14e407489eae8709c958380a5`
+audit/independent_four_pass_audit.md,8,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 04. `decl_TEXT_LIBRARY`: **PASS** — `09329a9751035ab32b3fbde518ab78163425316ba156a04b69e187ab58fa85e5`
+audit/independent_four_pass_audit.md,9,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 05. `decl_HOUR_LINKED_TEXTS`: **PASS** — `abffddceeaf11cd74f043bea1d97568f2bd1ba28fb1fbc541610d282039c0095`
+audit/independent_four_pass_audit.md,10,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 06. `decl_INTERNAL_SUBHEADINGS`: **PASS** — `2cdc80893e8afad04d8990d3f7cbd240367fbbac51a360a1d12dcf46636708ae`
+audit/independent_four_pass_audit.md,11,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 07. `decl_DISPLAY_SEGMENTS`: **PASS** — `141be59c6a94231ffea999c3706e70580e894ba9eb3ec60912e8b1fe5614b222`
+audit/independent_four_pass_audit.md,12,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 08. `decl_CONTINUITY_GROUPS`: **PASS** — `3d1cb5f01010bf9b38f86a16cf6b9bb7e4be128b6fe21eca2894c23dbababc2d`
+audit/independent_four_pass_audit.md,13,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 09. `decl_LDC_LIBRARY_FLOW_LAYOUT`: **PASS** — `7d10dd43644daef8104fc591b08c43f351e592601a756bcf3c433588f9c728d2`
+audit/independent_four_pass_audit.md,14,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 10. `decl_SPEECH_END_VISUAL_BREAKS`: **PASS** — `06a1c250f4f9020d236bfcbeb412580f000380d49dc1348a7bdb5a2a244aa263`
+audit/independent_four_pass_audit.md,15,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 11. `decl_SPEECH_CROSS_RECORD_VISUAL_BREAKS`: **PASS** — `bcf0c384462ba8c28d5b12c79cdd1ce8adb9e211809011ffbbb2888779022a48`
+audit/independent_four_pass_audit.md,16,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 12. `decl_SPEECH_DATA`: **PASS** — `388b52f0f140f4c3b4c8f91fd3b296550ad7bd58238810165738047e20528162`
+audit/independent_four_pass_audit.md,17,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 13. `decl_SPEECH_PRESENTATION_ADJUDICATIONS`: **PASS** — `153385bb86f03958ea83cc5938b7ced6044f6419c6a587ab97c44b67dc8db96d`
+audit/independent_four_pass_audit.md,18,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 14. `decl_SPEECH_PRESENTATION_PROJECTION`: **PASS** — `c69eed196a1728c4ddac8e274cbab500b583638d9e3bc3a76ea1365953871826`
+audit/independent_four_pass_audit.md,19,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 15. `decl_VISIBLE_PARAGRAPH_TOPOLOGY`: **PASS** — `89d64b9e30edaed0589d2c3133bca116bda6cee2184e16078df9c676ef6a2e2f`
+audit/independent_four_pass_audit.md,20,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 16. `decl_SPEECH_CROSS_RECORD_OPENING_WRAPPER_SUPPRESSIONS`: **PASS** — `c6cb3689dca85cc9fe29e03835e6153a4992c2ac3f47e28e33539f47fcfce68e`
+audit/independent_four_pass_audit.md,21,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 17. `qa_checklist_current`: **PASS**
+audit/independent_four_pass_audit.md,22,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 18. `qa_template_21`: **PASS** — `21`
+audit/independent_four_pass_audit.md,23,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"- 19. `broad_runtime`: **PASS** — `{'pass': 52, 'fail': 0, 'total': 52}`"
+audit/independent_four_pass_audit.md,24,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,"- 20. `sw_logic`: **PASS** — `{'pass': 15, 'fail': 0, 'total': 15}`"
+audit/independent_four_pass_audit.md,25,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 21. `stale_failures_zero`: **PASS** — `stale/reference + semantic scan
+audit/independent_four_pass_audit.md,26,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,current version: v101.118
+audit/independent_four_pass_audit.md,27,NON_CLAIM,HEADING/INSTRUCTION,PASS,classified hits: 132
+audit/independent_four_pass_audit.md,28,CLAIM,STALE_AND_SEMANTIC_SCAN_ZERO,PASS,failures: 0
+audit/independent_four_pass_audit.md,29,CLAIM,STALE_AND_SEMANTIC_SCAN_ZERO,PASS,current-script obsolete-dependency failures: 0
+audit/independent_four_pass_audit.md,30,CLAIM,STALE_AND_SEMANTIC_SCAN_ZERO,PASS,semantic current-metadata failures: 0`
+audit/independent_four_pass_audit.md,31,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 22. `semantic_metadata_zero`: **PASS** — `stale/reference + semantic scan
+audit/independent_four_pass_audit.md,32,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,current version: v101.118
+audit/independent_four_pass_audit.md,33,NON_CLAIM,HEADING/INSTRUCTION,PASS,classified hits: 132
+audit/independent_four_pass_audit.md,34,CLAIM,STALE_AND_SEMANTIC_SCAN_ZERO,PASS,failures: 0
+audit/independent_four_pass_audit.md,35,CLAIM,STALE_AND_SEMANTIC_SCAN_ZERO,PASS,current-script obsolete-dependency failures: 0
+audit/independent_four_pass_audit.md,36,CLAIM,STALE_AND_SEMANTIC_SCAN_ZERO,PASS,semantic current-metadata failures: 0`
+audit/independent_four_pass_audit.md,37,CLAIM,CURRENT_IDENTITY_VERSION_JSON_HTML_SW,PASS,- 23. `scope_authority_current`: **PASS** — `# Scope authority — v101.118`
+audit/independent_four_pass_audit.md,38,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 24. `release_scope_current`: **PASS** — `Four-pass semantic current-metadata/report-integrity repair: replace the stale generic execution specification with the current stage contract while preserving the historical RA19E.2 specification under an explicitly historical path; no governed runtime declaration changes.`
+audit/independent_four_pass_audit.md,39,CLAIM,PACKAGED_EXECUTED_EVIDENCE,PASS,- 25. `h3_h22_runtime_rows`: **PASS**
+audit/independent_four_pass_audit.md,41,NON_CLAIM,HEADING/INSTRUCTION,PASS,"This independently implemented checker does not claim final-ZIP reopen, physical-device, live-origin, installed-PWA, true-offline or screen-reader evidence."

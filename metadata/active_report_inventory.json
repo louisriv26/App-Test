@@ -1,0 +1,24 @@
+{
+  "schema": "L24H_ACTIVE_REPORT_INVENTORY_V1",
+  "version": "v101.118",
+  "source_reports": [
+    "README.md",
+    "REAL_DEVICE_QA_CHECKLIST.md",
+    "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
+    "scripts/EXECUTION_SPEC.md",
+    "evidence/v101118/PREPACKAGE_STAGE_REPORT.md",
+    "reports/full_regression_matrix.csv",
+    "reports/javascript_syntax_check.json",
+    "reports/nested_zip_consistency_report.md",
+    "reports/no_regression_fix_ledger.csv",
+    "reports/current_metadata_semantic_consistency.md",
+    "reports/report_claims_vs_evidence_audit.md",
+    "reports/root_deploy_consistency_report.md",
+    "reports/service_worker_syntax_check.json",
+    "reports/stale_reference_scan.csv",
+    "reports/stale_reference_scan.txt",
+    "reports/four_pass_deep_audit.md",
+    "audit/independent_four_pass_audit.md"
+  ],
+  "self_excluded_audit_output": "reports/active_report_line_audit.csv"
+}

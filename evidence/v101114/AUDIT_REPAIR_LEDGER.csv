@@ -1,0 +1,4 @@
+action_id,target,finding,correction,status
+AUD-114-001,audit/independent_four_pass_audit.md,PREFREEZE_RUNTIME_CLAIM_TEMPORALLY_UNSUPPORTED,execute/package broad runtime matrix before freeze,PASS
+AUD-114-002,reports/full_regression_matrix.csv,PREFREEZE_RUNTIME_EVIDENCE_TEMPORALLY_UNSUPPORTED,execute/package service-worker logic matrix before freeze,PASS
+AUD-114-003,reports/active_report_line_audit.csv,V101113_LINE_AUDIT_TOO_SHALLOW,regenerate after all active prefreeze evidence with explicit evidence bindings,PASS

@@ -1,6 +1,7 @@
 {
-  "version": "v101.110",
-  "prepackage_evidence_inside_zip": true,
-  "postpackage_reopen_evidence": "external only",
-  "immutable_final_zip_required": true
+  "package_internal_evidence": "PREPACKAGE_ONLY",
+  "final_zip_source_of_truth": true,
+  "final_reopen_audit": "EXTERNAL_REQUIRED",
+  "independent_final_reopen_audit": "EXTERNAL_REQUIRED",
+  "final_decision_lock": "EXTERNAL_REQUIRED_AFTER_REOPEN_PASS"
 }

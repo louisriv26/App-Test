@@ -1,12 +1,17 @@
-﻿gate,result,evidence
-BASELINE_SHA,PASS,3194039889e7de1303c77172eedf32ddf225c75bb35d1aad3be9d86c70c5033d
-RA19E_SHA,PASS,a5e6a0d76e4e7e7e93eff5583c304d5be9c64fc6370449a2f0634cb067a6aa78
-RAW_SPEECH_DATA,PASS,RHS byte-identical to v101.109
-RA19E_ADJUDICATIONS,PASS,RHS byte-identical to v101.109
-P094_NESTED_DELIMITER,PASS,final quote offset 267 now inside Jesus run 0-268
-P134_NESTED_DELIMITER,PASS,quote offset 76 inside Jesus run 0-77; hidden outer » remains 77-78
-P134_DERIVATIVE_BREAK,PASS,projection/local break 77 removed
-OUTER_WRAPPERS,PASS,283/283 opens; 285/285 closes hidden
-MEANINGFUL_GUILLEMETS,PASS,0/458 hidden
-REAL_DEVICE,NOT_TESTED,physical iPad/iPhone/Samsung required
-LIVE_PWA_OFFLINE_A11Y,NOT_TESTED,external gates required
+gate,test,status,evidence
+BASELINE,v101.117 exact SHA/member freeze,PASS,a778b1b821c76b4450796d1b76354fa1aa26fde0c48eb492ea59eaeff3375a9e
+BUILD,deterministic A/B full-tree build,PASS,asserted before ZIP freeze
+BUILD-DEPS,current build runner dependencies,PASS,self-contained packaged sibling scripts; no obsolete external runner paths
+DATA,14 governed runtime declarations,PASS,exact RHS byte parity with v101.117
+SEMANTIC-META,current scope/release/ledger/runner semantics,PASS,reports/current_metadata_semantic_consistency.md
+H3-H22,user-confirmed text/paragraph repairs preserved,PASS,broad runtime 4/4 profiles
+QA-META,root physical/live QA metadata,PASS,21/21 template rows target v101.118
+JS,inline JavaScript syntax,PASS,reports/javascript_syntax_check.json
+SW-SYNTAX,service-worker syntax,PASS,reports/service_worker_syntax_check.json
+RUNTIME,broad Chromium DOM/runtime matrix,PASS,evidence/v101118/BROAD_CHROMIUM_RUNTIME_MATRIX.json 52/52
+SW-LOGIC,isolated service-worker logic,PASS,evidence/v101118/SERVICE_WORKER_LOGIC_MATRIX.json 15/15
+ACTIVE-REPORTS,all inventoried active source-report lines,PASS,reports/active_report_line_audit.csv exact coverage
+STALE,current-facing token + semantic stale scan,PASS,reports/stale_reference_scan.* failures 0
+physical devices,iPhone/iPad/Samsung,NOT_TESTED,external
+live PWA/offline,real origin/service worker,NOT_TESTED,external
+screen reader,VoiceOver/TalkBack,NOT_TESTED,external

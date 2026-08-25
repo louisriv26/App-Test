@@ -1,3 +1,7 @@
-# Root/deploy consistency — v101.110
+# Root/deploy consistency — v101.118
 
-Root `index.html` and `luisa_24_heures.html` are required byte-identical. Separate deploy directory: NOT_APPLICABLE (root GitHub Pages artifact).
+- Package root is the deploy artifact.
+- `index.html` and `luisa_24_heures.html` are byte-identical.
+- Separate deploy directory: NOT_APPLICABLE.
+- Nested deploy ZIP: NOT_APPLICABLE.
+- Current version: `v101.118`.

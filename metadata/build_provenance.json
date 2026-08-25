@@ -1,12 +1,22 @@
 {
-  "version": "v101.110",
-  "stage": "RA19E_NESTED_QUOTE_DELIMITER_DISPLAY_CONTINUITY_R1",
-  "baseline_zip": "L24H_v101109_GITHUB_DEPLOY_LDC_RA19E_SPEAKER_AUTHORITY_RECONCILIATION_R1_LOCKED.zip",
-  "baseline_sha256": "3194039889e7de1303c77172eedf32ddf225c75bb35d1aad3be9d86c70c5033d",
-  "date": "2026-08-23",
-  "scope": "presentation-only nested quotation delimiter inheritance; raw speaker metadata and canonical text immutable",
-  "speaker_authority_zip": "LDC_v2.19.32-R1B_GITHUB_DEPLOY_RA19E_SPEAKER_INTEGRITY_RECONCILIATION_LOCKED(1).zip",
-  "speaker_authority_sha256": "a5e6a0d76e4e7e7e93eff5583c304d5be9c64fc6370449a2f0634cb067a6aa78",
-  "speaker_authority": "LDC RA19E / v2.19.32-R1B",
-  "predecessor_runtime_gate": "FAIL — P094/P134 closing delimiter colour continuity"
+  "version": "v101.118",
+  "build_date": "2026-08-25",
+  "stage": "FOUR_PASS_GENERIC_EXECUTION_SPEC_INTEGRITY_REPAIR_R1",
+  "baseline_version": "v101.117",
+  "baseline_zip_sha256": "a778b1b821c76b4450796d1b76354fa1aa26fde0c48eb492ea59eaeff3375a9e",
+  "baseline_html_sha256": "a596411423113475a6661d42dc8dcd4701671d10c228245f5e9067df02de58f0",
+  "candidate_html_sha256": "6ae204041b7f51a74bf856f5000a5aba8b6b5ac84a57c33032b2752b04c32c69",
+  "scope": {
+    "governed_runtime_declarations_changed": 0,
+    "semantic_current_metadata_repairs_inherited": 3,
+    "generic_execution_spec_repaired": true,
+    "independent_prefreeze_runner_parameterized": true,
+    "active_source_reports_written_before_line_audit": true,
+    "active_report_line_audit_self_exclusion": [
+      "reports/active_report_line_audit.csv"
+    ],
+    "qa_template_scenarios": 21,
+    "build_runner_dependencies": "SELF_CONTAINED_SIBLING_SCRIPTS"
+  },
+  "final_reopen_evidence": "EXTERNAL_AFTER_ZIP_FREEZE"
 }

@@ -1,0 +1,3 @@
+action_id,target,finding,correction,status
+AUD-115-001,reports/active_report_line_audit.csv,FOUR_PASS_SUMMARY_NOT_COVERED,write all active reports before line-audit generation; assert exact line coverage,PASS
+AUD-115-002,reports/report_claims_vs_evidence_audit.md,OVERBROAD_ALL_ACTIVE_REPORTS_CLAIM,bind claim to explicit active-report inventory and self-exclusion,PASS

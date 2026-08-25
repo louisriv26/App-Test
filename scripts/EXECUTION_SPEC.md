@@ -1,3 +1,11 @@
-# v101.110 execution spec
+# Current execution specification — v101.118
 
-Starting from failed-runtime candidate v101.109 (`3194039889e7de1303c77172eedf32ddf225c75bb35d1aad3be9d86c70c5033d`), repair only the two residual nested-quote delimiter colour discontinuities exposed by immutable Chromium DOM audit. Preserve canonical text, RA19E semantic speaker data/adjudications, RA19B flow, wrapper suppression and all prior quote joins. Freeze deterministic ZIP, then audit from fresh reopened copies.
+Stage: `FOUR_PASS_GENERIC_EXECUTION_SPEC_INTEGRITY_REPAIR_R1`.
+
+Baseline: immutable v101.117.
+
+Scope: execution-spec/evidence integrity only. No governed runtime declaration, canonical devotional text, RA19B source-flow decision, RA19E.2 semantic/presentation decision, feature behaviour or UX behaviour may change.
+
+Required build lifecycle: exact baseline hash → protected declaration parity → current metadata/spec checks → fresh 52/52 Chromium matrix → fresh 15/15 service-worker logic matrix → independent prefreeze audit → active-report line audit → deterministic A/B package freeze → external primary reopened-ZIP audit → external separately implemented reopened-ZIP audit → external final decision lock.
+
+External physical Samsung/iPhone/iPad, live-origin PWA/offline, and VoiceOver/TalkBack gates remain `NOT_TESTED` until directly executed.

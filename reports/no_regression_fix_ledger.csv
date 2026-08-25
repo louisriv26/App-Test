@@ -1,3 +1,10 @@
-﻿target_id,defect,before,after,authority,status
-PASSION24.TEXT.RELATED_HOUR_21.BODY.P094,final meaningful nested closing quote at offset 267 rendered outside Jesus span,JESUS display 0-267,JESUS display 0-268,user outer-speaker display rule + RA19E semantic OTHER nested quote,PASS
-PASSION24.TEXT.PROMISES_BENEFITS.BODY.P134,meaningful nested closing quote at offset 76 rendered outside Jesus span; derivative break at 77 before hidden outer wrapper,JESUS display 0-76; break 77; local_break 77,JESUS display 0-77; no display/local break 77; outer » 77-78 remains hidden,user outer-speaker display rule + RA19E semantic GENERIC_SOUL nested quote,PASS
+action_id,target_id,class,authorization,result
+AUD-118-001,scripts/EXECUTION_SPEC.md,GENERIC_CURRENT_EXECUTION_SPEC_REPAIR,DEEP_AUDIT,PASS
+AUD-118-002,stale/semantic scanner,GENERIC_CURRENT_DOC_ROLE_ENFORCEMENT,DEEP_AUDIT,PASS
+AUD-117-INHERITED,current semantic metadata/release-scope/no-regression-ledger repair,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS
+AUD-116-INHERITED,current build self-contained sibling runners + dependency gate,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS
+AUD-115-INHERITED,active-report exact line coverage,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS
+V101114-INHERITED,prefreeze runtime/SW evidence integration,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS
+V101113-INHERITED,root QA metadata correction,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS
+V101112-INHERITED,H3 + H22 user-confirmed corrections,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS
+RA19E2-INHERITED,10 authorised speaker/presentation actions,PROTECTED_INHERITED_BASELINE,NO_CHANGE,PASS

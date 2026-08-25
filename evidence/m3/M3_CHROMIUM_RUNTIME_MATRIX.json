@@ -1,0 +1,1596 @@
+{
+  "stage": "RA19E2_M3_CHROMIUM_RUNTIME_PRESENTATION_MATRIX",
+  "contract_origin": "RECONSTRUCTED_NOT_HISTORICALLY_RECOVERED",
+  "browser": "system Chromium / Playwright set_content content-injection harness",
+  "navigation_limitation": "Normal URL/file navigation is blocked by environment policy; service-worker/origin behaviour is not claimed here.",
+  "viewports": [
+    [
+      "phone",
+      390,
+      844
+    ],
+    [
+      "tablet",
+      820,
+      1180
+    ],
+    [
+      "desktop",
+      1200,
+      900
+    ]
+  ],
+  "gates": {
+    "G17": "PASS",
+    "G18": "PASS",
+    "G19": "PASS"
+  },
+  "rows_total": 90,
+  "rows_pass": 90,
+  "status": "PASS_RUNTIME_PRESENTATION_MATRIX",
+  "rows": [
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA001_meaningful_open_quote_visible_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P053",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "«",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 122,
+        "textNode": "Les fruits de la Rédemption sont apparus en premier, mais c'est en vertu de ce contrat que J'ai fait avec Mon Divin Père. «"
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA002_meaningful_open_quote_visible_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P068",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "«",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 312,
+        "textNode": "Je veillerai à ce que la paix demeure en toi afin que Je puisse diriger tout en toi en accord avec Ma Volonté. Sur la terre, Je ne M'occupais que de faire la Volonté de Mon Père. Puisque toutes choses s'y trouvent, Je ne Me préoccupais de rien d'autre. Si Je Me mettais en prière, c'était pour une seule chose : «"
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA003_et_jesus_no_break",
+      "target": "PASSION24.TEXT.RELATED_HOUR_13.BODY.P056",
+      "status": "PASS",
+      "evidence": {
+        "char": {
+          "missing": false,
+          "char": "e",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 129,
+          "textNode": "Ne vois-tu pas que la Lumière de Mon Vouloir Suprême s’écoule de ton cœur, de ta bouche, de tes yeux, de tes mains, de tes pieds et de"
+        },
+        "breaks": 0
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA004_final_open_quote",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P096",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "\"",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 225,
+        "textNode": "Dans Mon Royaume, il y a une Vie véritable.\" Que de profonds mystères se cachent dans Mes Paroles ! Dans ses souffrances, ses humiliations et l'abandon de tous, dans sa pratique des vertus véritables, l'âme devrait se dire : \""
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA005_outer_display",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P097",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "C",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 0,
+        "textNode": "Ceci est mon royaume qui ne périra pas. Personne ne peut me l'enlever ni y toucher."
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA006_outer_display",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P098",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "I",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 0,
+        "textNode": "Il est éternel et divin, semblable à celui de mon doux Jésus."
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA007_final_close_quote",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P099",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "\"",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 113,
+        "textNode": "Mes souffrances le fortifient. Personne ne peut me combattre à cause de la forteresse dans laquelle je me trouve.\""
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA005_007_semantic_generic_soul",
+      "target": "H15 P097-P099",
+      "status": "PASS",
+      "evidence": {
+        "p97": null,
+        "p98": null,
+        "p99": null,
+        "a97": [
+          {
+            "start": 0,
+            "end": 83,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 source-backed T15.E0036 nested generic-soul quotation; semantic voice remains distinct while the active outer JESUS turn governs display."
+          }
+        ],
+        "a98": [
+          {
+            "start": 0,
+            "end": 61,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 source-backed T15.E0036 nested generic-soul quotation; semantic voice remains distinct while the active outer JESUS turn governs display."
+          }
+        ],
+        "a99": [
+          {
+            "start": 0,
+            "end": 113,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 source-backed T15.E0036 nested generic-soul quotation; semantic voice remains distinct while the active outer JESUS turn governs display."
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA008_mirror_quote_and_hidden_outer",
+      "target": "PASSION24.SECTION.BENEFITS.P139",
+      "status": "PASS",
+      "evidence": {
+        "quote": {
+          "missing": false,
+          "char": "\"",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 76,
+          "textNode": "Me voici, je veux réparer pour tous, implorer pour tous et répondre de tous.\""
+        },
+        "outer": {
+          "missing": false,
+          "char": "»",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": true,
+          "classes": "speech-quote-hidden",
+          "localOffset": 0,
+          "textNode": "»"
+        },
+        "breaks": 0
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA008_semantic_generic_soul",
+      "target": "PASSION24.SECTION.BENEFITS.P139",
+      "status": "PASS",
+      "evidence": {
+        "raw": null,
+        "adj": [
+          {
+            "start": 0,
+            "end": 76,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 mirror reconciliation to source-correct PROMISES_BENEFITS P134 / ldc_t11_1914_11_06_e001_p007."
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA009_luisa_stays_non_jesus_no_stale_active_adj",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P059",
+      "status": "PASS",
+      "evidence": {
+        "char": {
+          "missing": false,
+          "char": "N",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "para-text",
+          "localOffset": 14,
+          "textNode": " Je repris : «Non ! Et que cela ne soit jamais !»"
+        },
+        "adjudications": null
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G17",
+      "test": "SA010_personified_semantic_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P147",
+      "status": "PASS",
+      "evidence": {
+        "char": {
+          "missing": false,
+          "char": "J",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 167,
+          "textNode": "Ces enfants seront notre vie, nos cieux et nos soleils. Oh ! comme nous prendrons plaisir à créer en eux des vents qui soufflent l’amour et des mers qui murmurent : « Je vous aime, je vous aime. »"
+        },
+        "adj": [
+          {
+            "start": 167,
+            "end": 194,
+            "semantic_speaker": "PERSONIFIED_VOICE",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 1,
+            "reason": "RA19E.2 M1.1 exact A16 LDC.T35.E0040.P023 correction: winds/seas personified voice “Je vous aime, je vous aime.” remains visually within the JESUS outer presentation turn."
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G18",
+      "test": "P134_existing_mirror_control",
+      "target": "PASSION24.TEXT.PROMISES_BENEFITS.BODY.P134",
+      "status": "PASS",
+      "evidence": {
+        "q": {
+          "missing": false,
+          "char": "\"",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 76,
+          "textNode": "Me voici, je veux réparer pour tous, implorer pour tous et répondre de tous.\""
+        },
+        "outer": {
+          "missing": false,
+          "char": "»",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": true,
+          "classes": "speech-quote-hidden",
+          "localOffset": 0,
+          "textNode": "»"
+        }
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G18",
+      "test": "nested_OTHER_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P067",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "V",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 43,
+        "textNode": "Ma fille, au moment où Ponce Pilate dit : «Voici l'homme», Ils crièrent tous : «Crucifie-Le, crucifie-Le, nous Le voulons mort.»"
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G18",
+      "test": "nested_OTHER_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P073",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "C",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 55,
+        "textNode": "Et Je ressentis autant de morts que le nombre de cris «Crucifie-Le»"
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G18",
+      "test": "P094_nested_OTHER_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P094",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "Â",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 115,
+        "textNode": "De plus, comme Ma Volonté habite tous les anges et les saints, ils ont tous ensemble réclamé des âmes en criant : \"Âmes, âmes !\" Ma Volonté coula aussi dans toutes les créatures. Et ta souffrance a touché tous les coeurs en disant à chacun : \"Sois sauvé, sois sauvé !\""
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G18",
+      "test": "P059_Luisa_control",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P059",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "N",
+        "jesus": false,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "para-text",
+        "localOffset": 14,
+        "textNode": " Je repris : «Non ! Et que cela ne soit jamais !»"
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G18",
+      "test": "P019_Luisa_control",
+      "target": "PASSION24.TEXT.RELATED_HOUR_19.BODY.P019",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "O",
+        "jesus": false,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "para-text",
+        "localOffset": 50,
+        "textNode": "Je me plaignais à mon doux Jésus en lui disant : «Où sont tes promesses ? Je n'ai plus de croix ni de similarité avec toi. Tout s'est écroulé. Il ne Me reste qu'à pleurer sur Mon triste sort.»"
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P053",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 123,
+        "source_len": 123
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P068",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 313,
+        "source_len": 313
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_13.BODY.P056",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 134,
+        "source_len": 134
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P096",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 226,
+        "source_len": 226
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P097",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 83,
+        "source_len": 83
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P098",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 61,
+        "source_len": 61
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P099",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 114,
+        "source_len": 114
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.SECTION.BENEFITS.P139",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 78,
+        "source_len": 78
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P059",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 143,
+        "source_len": 143
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P147",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 196,
+        "source_len": 196
+      }
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "APP_VERSION",
+      "target": "global",
+      "status": "PASS",
+      "evidence": "v101.111"
+    },
+    {
+      "viewport": "phone",
+      "gate": "G19",
+      "test": "PAGE_ERRORS_ZERO",
+      "target": "global",
+      "status": "PASS",
+      "evidence": []
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA001_meaningful_open_quote_visible_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P053",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "«",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 122,
+        "textNode": "Les fruits de la Rédemption sont apparus en premier, mais c'est en vertu de ce contrat que J'ai fait avec Mon Divin Père. «"
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA002_meaningful_open_quote_visible_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P068",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "«",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 312,
+        "textNode": "Je veillerai à ce que la paix demeure en toi afin que Je puisse diriger tout en toi en accord avec Ma Volonté. Sur la terre, Je ne M'occupais que de faire la Volonté de Mon Père. Puisque toutes choses s'y trouvent, Je ne Me préoccupais de rien d'autre. Si Je Me mettais en prière, c'était pour une seule chose : «"
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA003_et_jesus_no_break",
+      "target": "PASSION24.TEXT.RELATED_HOUR_13.BODY.P056",
+      "status": "PASS",
+      "evidence": {
+        "char": {
+          "missing": false,
+          "char": "e",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 129,
+          "textNode": "Ne vois-tu pas que la Lumière de Mon Vouloir Suprême s’écoule de ton cœur, de ta bouche, de tes yeux, de tes mains, de tes pieds et de"
+        },
+        "breaks": 0
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA004_final_open_quote",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P096",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "\"",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 225,
+        "textNode": "Dans Mon Royaume, il y a une Vie véritable.\" Que de profonds mystères se cachent dans Mes Paroles ! Dans ses souffrances, ses humiliations et l'abandon de tous, dans sa pratique des vertus véritables, l'âme devrait se dire : \""
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA005_outer_display",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P097",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "C",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 0,
+        "textNode": "Ceci est mon royaume qui ne périra pas. Personne ne peut me l'enlever ni y toucher."
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA006_outer_display",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P098",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "I",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 0,
+        "textNode": "Il est éternel et divin, semblable à celui de mon doux Jésus."
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA007_final_close_quote",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P099",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "\"",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 113,
+        "textNode": "Mes souffrances le fortifient. Personne ne peut me combattre à cause de la forteresse dans laquelle je me trouve.\""
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA005_007_semantic_generic_soul",
+      "target": "H15 P097-P099",
+      "status": "PASS",
+      "evidence": {
+        "p97": null,
+        "p98": null,
+        "p99": null,
+        "a97": [
+          {
+            "start": 0,
+            "end": 83,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 source-backed T15.E0036 nested generic-soul quotation; semantic voice remains distinct while the active outer JESUS turn governs display."
+          }
+        ],
+        "a98": [
+          {
+            "start": 0,
+            "end": 61,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 source-backed T15.E0036 nested generic-soul quotation; semantic voice remains distinct while the active outer JESUS turn governs display."
+          }
+        ],
+        "a99": [
+          {
+            "start": 0,
+            "end": 113,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 source-backed T15.E0036 nested generic-soul quotation; semantic voice remains distinct while the active outer JESUS turn governs display."
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA008_mirror_quote_and_hidden_outer",
+      "target": "PASSION24.SECTION.BENEFITS.P139",
+      "status": "PASS",
+      "evidence": {
+        "quote": {
+          "missing": false,
+          "char": "\"",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 76,
+          "textNode": "Me voici, je veux réparer pour tous, implorer pour tous et répondre de tous.\""
+        },
+        "outer": {
+          "missing": false,
+          "char": "»",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": true,
+          "classes": "speech-quote-hidden",
+          "localOffset": 0,
+          "textNode": "»"
+        },
+        "breaks": 0
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA008_semantic_generic_soul",
+      "target": "PASSION24.SECTION.BENEFITS.P139",
+      "status": "PASS",
+      "evidence": {
+        "raw": null,
+        "adj": [
+          {
+            "start": 0,
+            "end": 76,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 mirror reconciliation to source-correct PROMISES_BENEFITS P134 / ldc_t11_1914_11_06_e001_p007."
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA009_luisa_stays_non_jesus_no_stale_active_adj",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P059",
+      "status": "PASS",
+      "evidence": {
+        "char": {
+          "missing": false,
+          "char": "N",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "para-text",
+          "localOffset": 14,
+          "textNode": " Je repris : «Non ! Et que cela ne soit jamais !»"
+        },
+        "adjudications": null
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G17",
+      "test": "SA010_personified_semantic_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P147",
+      "status": "PASS",
+      "evidence": {
+        "char": {
+          "missing": false,
+          "char": "J",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 167,
+          "textNode": "Ces enfants seront notre vie, nos cieux et nos soleils. Oh ! comme nous prendrons plaisir à créer en eux des vents qui soufflent l’amour et des mers qui murmurent : « Je vous aime, je vous aime. »"
+        },
+        "adj": [
+          {
+            "start": 167,
+            "end": 194,
+            "semantic_speaker": "PERSONIFIED_VOICE",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 1,
+            "reason": "RA19E.2 M1.1 exact A16 LDC.T35.E0040.P023 correction: winds/seas personified voice “Je vous aime, je vous aime.” remains visually within the JESUS outer presentation turn."
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G18",
+      "test": "P134_existing_mirror_control",
+      "target": "PASSION24.TEXT.PROMISES_BENEFITS.BODY.P134",
+      "status": "PASS",
+      "evidence": {
+        "q": {
+          "missing": false,
+          "char": "\"",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 76,
+          "textNode": "Me voici, je veux réparer pour tous, implorer pour tous et répondre de tous.\""
+        },
+        "outer": {
+          "missing": false,
+          "char": "»",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": true,
+          "classes": "speech-quote-hidden",
+          "localOffset": 0,
+          "textNode": "»"
+        }
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G18",
+      "test": "nested_OTHER_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P067",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "V",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 43,
+        "textNode": "Ma fille, au moment où Ponce Pilate dit : «Voici l'homme», Ils crièrent tous : «Crucifie-Le, crucifie-Le, nous Le voulons mort.»"
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G18",
+      "test": "nested_OTHER_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P073",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "C",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 55,
+        "textNode": "Et Je ressentis autant de morts que le nombre de cris «Crucifie-Le»"
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G18",
+      "test": "P094_nested_OTHER_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P094",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "Â",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 115,
+        "textNode": "De plus, comme Ma Volonté habite tous les anges et les saints, ils ont tous ensemble réclamé des âmes en criant : \"Âmes, âmes !\" Ma Volonté coula aussi dans toutes les créatures. Et ta souffrance a touché tous les coeurs en disant à chacun : \"Sois sauvé, sois sauvé !\""
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G18",
+      "test": "P059_Luisa_control",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P059",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "N",
+        "jesus": false,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "para-text",
+        "localOffset": 14,
+        "textNode": " Je repris : «Non ! Et que cela ne soit jamais !»"
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G18",
+      "test": "P019_Luisa_control",
+      "target": "PASSION24.TEXT.RELATED_HOUR_19.BODY.P019",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "O",
+        "jesus": false,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "para-text",
+        "localOffset": 50,
+        "textNode": "Je me plaignais à mon doux Jésus en lui disant : «Où sont tes promesses ? Je n'ai plus de croix ni de similarité avec toi. Tout s'est écroulé. Il ne Me reste qu'à pleurer sur Mon triste sort.»"
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P053",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 123,
+        "source_len": 123
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P068",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 313,
+        "source_len": 313
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_13.BODY.P056",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 134,
+        "source_len": 134
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P096",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 226,
+        "source_len": 226
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P097",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 83,
+        "source_len": 83
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P098",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 61,
+        "source_len": 61
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P099",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 114,
+        "source_len": 114
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.SECTION.BENEFITS.P139",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 78,
+        "source_len": 78
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P059",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 143,
+        "source_len": 143
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P147",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 196,
+        "source_len": 196
+      }
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "APP_VERSION",
+      "target": "global",
+      "status": "PASS",
+      "evidence": "v101.111"
+    },
+    {
+      "viewport": "tablet",
+      "gate": "G19",
+      "test": "PAGE_ERRORS_ZERO",
+      "target": "global",
+      "status": "PASS",
+      "evidence": []
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA001_meaningful_open_quote_visible_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P053",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "«",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 122,
+        "textNode": "Les fruits de la Rédemption sont apparus en premier, mais c'est en vertu de ce contrat que J'ai fait avec Mon Divin Père. «"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA002_meaningful_open_quote_visible_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P068",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "«",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 312,
+        "textNode": "Je veillerai à ce que la paix demeure en toi afin que Je puisse diriger tout en toi en accord avec Ma Volonté. Sur la terre, Je ne M'occupais que de faire la Volonté de Mon Père. Puisque toutes choses s'y trouvent, Je ne Me préoccupais de rien d'autre. Si Je Me mettais en prière, c'était pour une seule chose : «"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA003_et_jesus_no_break",
+      "target": "PASSION24.TEXT.RELATED_HOUR_13.BODY.P056",
+      "status": "PASS",
+      "evidence": {
+        "char": {
+          "missing": false,
+          "char": "e",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 129,
+          "textNode": "Ne vois-tu pas que la Lumière de Mon Vouloir Suprême s’écoule de ton cœur, de ta bouche, de tes yeux, de tes mains, de tes pieds et de"
+        },
+        "breaks": 0
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA004_final_open_quote",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P096",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "\"",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 225,
+        "textNode": "Dans Mon Royaume, il y a une Vie véritable.\" Que de profonds mystères se cachent dans Mes Paroles ! Dans ses souffrances, ses humiliations et l'abandon de tous, dans sa pratique des vertus véritables, l'âme devrait se dire : \""
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA005_outer_display",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P097",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "C",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 0,
+        "textNode": "Ceci est mon royaume qui ne périra pas. Personne ne peut me l'enlever ni y toucher."
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA006_outer_display",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P098",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "I",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 0,
+        "textNode": "Il est éternel et divin, semblable à celui de mon doux Jésus."
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA007_final_close_quote",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P099",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "\"",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 113,
+        "textNode": "Mes souffrances le fortifient. Personne ne peut me combattre à cause de la forteresse dans laquelle je me trouve.\""
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA005_007_semantic_generic_soul",
+      "target": "H15 P097-P099",
+      "status": "PASS",
+      "evidence": {
+        "p97": null,
+        "p98": null,
+        "p99": null,
+        "a97": [
+          {
+            "start": 0,
+            "end": 83,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 source-backed T15.E0036 nested generic-soul quotation; semantic voice remains distinct while the active outer JESUS turn governs display."
+          }
+        ],
+        "a98": [
+          {
+            "start": 0,
+            "end": 61,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 source-backed T15.E0036 nested generic-soul quotation; semantic voice remains distinct while the active outer JESUS turn governs display."
+          }
+        ],
+        "a99": [
+          {
+            "start": 0,
+            "end": 113,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 source-backed T15.E0036 nested generic-soul quotation; semantic voice remains distinct while the active outer JESUS turn governs display."
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA008_mirror_quote_and_hidden_outer",
+      "target": "PASSION24.SECTION.BENEFITS.P139",
+      "status": "PASS",
+      "evidence": {
+        "quote": {
+          "missing": false,
+          "char": "\"",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 76,
+          "textNode": "Me voici, je veux réparer pour tous, implorer pour tous et répondre de tous.\""
+        },
+        "outer": {
+          "missing": false,
+          "char": "»",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": true,
+          "classes": "speech-quote-hidden",
+          "localOffset": 0,
+          "textNode": "»"
+        },
+        "breaks": 0
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA008_semantic_generic_soul",
+      "target": "PASSION24.SECTION.BENEFITS.P139",
+      "status": "PASS",
+      "evidence": {
+        "raw": null,
+        "adj": [
+          {
+            "start": 0,
+            "end": 76,
+            "semantic_speaker": "GENERIC_SOUL",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 2,
+            "reason": "RA19E.2 M1 mirror reconciliation to source-correct PROMISES_BENEFITS P134 / ldc_t11_1914_11_06_e001_p007."
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA009_luisa_stays_non_jesus_no_stale_active_adj",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P059",
+      "status": "PASS",
+      "evidence": {
+        "char": {
+          "missing": false,
+          "char": "N",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "para-text",
+          "localOffset": 14,
+          "textNode": " Je repris : «Non ! Et que cela ne soit jamais !»"
+        },
+        "adjudications": null
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G17",
+      "test": "SA010_personified_semantic_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P147",
+      "status": "PASS",
+      "evidence": {
+        "char": {
+          "missing": false,
+          "char": "J",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 167,
+          "textNode": "Ces enfants seront notre vie, nos cieux et nos soleils. Oh ! comme nous prendrons plaisir à créer en eux des vents qui soufflent l’amour et des mers qui murmurent : « Je vous aime, je vous aime. »"
+        },
+        "adj": [
+          {
+            "start": 167,
+            "end": 194,
+            "semantic_speaker": "PERSONIFIED_VOICE",
+            "presentation_speaker": "JESUS",
+            "quotation_depth": 1,
+            "reason": "RA19E.2 M1.1 exact A16 LDC.T35.E0040.P023 correction: winds/seas personified voice “Je vous aime, je vous aime.” remains visually within the JESUS outer presentation turn."
+          }
+        ]
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G18",
+      "test": "P134_existing_mirror_control",
+      "target": "PASSION24.TEXT.PROMISES_BENEFITS.BODY.P134",
+      "status": "PASS",
+      "evidence": {
+        "q": {
+          "missing": false,
+          "char": "\"",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "classes": "sp-jesus",
+          "localOffset": 76,
+          "textNode": "Me voici, je veux réparer pour tous, implorer pour tous et répondre de tous.\""
+        },
+        "outer": {
+          "missing": false,
+          "char": "»",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": true,
+          "classes": "speech-quote-hidden",
+          "localOffset": 0,
+          "textNode": "»"
+        }
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G18",
+      "test": "nested_OTHER_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P067",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "V",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 43,
+        "textNode": "Ma fille, au moment où Ponce Pilate dit : «Voici l'homme», Ils crièrent tous : «Crucifie-Le, crucifie-Le, nous Le voulons mort.»"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G18",
+      "test": "nested_OTHER_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P073",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "C",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 55,
+        "textNode": "Et Je ressentis autant de morts que le nombre de cris «Crucifie-Le»"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G18",
+      "test": "P094_nested_OTHER_outer_jesus",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P094",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "Â",
+        "jesus": true,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "sp-jesus",
+        "localOffset": 115,
+        "textNode": "De plus, comme Ma Volonté habite tous les anges et les saints, ils ont tous ensemble réclamé des âmes en criant : \"Âmes, âmes !\" Ma Volonté coula aussi dans toutes les créatures. Et ta souffrance a touché tous les coeurs en disant à chacun : \"Sois sauvé, sois sauvé !\""
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G18",
+      "test": "P059_Luisa_control",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P059",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "N",
+        "jesus": false,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "para-text",
+        "localOffset": 14,
+        "textNode": " Je repris : «Non ! Et que cela ne soit jamais !»"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G18",
+      "test": "P019_Luisa_control",
+      "target": "PASSION24.TEXT.RELATED_HOUR_19.BODY.P019",
+      "status": "PASS",
+      "evidence": {
+        "missing": false,
+        "char": "O",
+        "jesus": false,
+        "father": false,
+        "mary": false,
+        "hidden": false,
+        "classes": "para-text",
+        "localOffset": 50,
+        "textNode": "Je me plaignais à mon doux Jésus en lui disant : «Où sont tes promesses ? Je n'ai plus de croix ni de similarité avec toi. Tout s'est écroulé. Il ne Me reste qu'à pleurer sur Mon triste sort.»"
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P053",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 123,
+        "source_len": 123
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P068",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 313,
+        "source_len": 313
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_13.BODY.P056",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 134,
+        "source_len": 134
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P096",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 226,
+        "source_len": 226
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P097",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 83,
+        "source_len": 83
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P098",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 61,
+        "source_len": 61
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P099",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 114,
+        "source_len": 114
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.SECTION.BENEFITS.P139",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 78,
+        "source_len": 78
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P059",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 143,
+        "source_len": 143
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "rendered_textContent_exact",
+      "target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P147",
+      "status": "PASS",
+      "evidence": {
+        "render_len": 196,
+        "source_len": 196
+      }
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "APP_VERSION",
+      "target": "global",
+      "status": "PASS",
+      "evidence": "v101.111"
+    },
+    {
+      "viewport": "desktop",
+      "gate": "G19",
+      "test": "PAGE_ERRORS_ZERO",
+      "target": "global",
+      "status": "PASS",
+      "evidence": []
+    }
+  ]
+}

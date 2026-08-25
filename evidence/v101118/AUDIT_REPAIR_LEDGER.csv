@@ -1,0 +1,3 @@
+action_id,target,finding,correction,status
+AUD-118-001,scripts/EXECUTION_SPEC.md,GENERIC_CURRENT_FACING_SPEC_STALE_V101111,archive old bytes under scripts/historical/EXECUTION_SPEC_v101111.md and write current v101.118 execution spec,PASS
+AUD-118-002,stale/semantic scanner,GENERIC_CURRENT_DOC_ROLE_NOT_ENFORCED,treat scripts/EXECUTION_SPEC.md as current-facing and require current version/stage identity,PASS

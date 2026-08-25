@@ -1,3 +1,3 @@
-# Nested ZIP consistency — v101.110
+# Nested ZIP consistency
 
-No nested ZIP is present. Gate: **NOT_APPLICABLE_NO_NESTED_ZIP**.
+No nested ZIP is part of this deployment architecture. Status: `NOT_APPLICABLE`.

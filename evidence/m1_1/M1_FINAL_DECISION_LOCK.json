@@ -1,0 +1,47 @@
+{
+  "stage": "RA19E2_MACRO_M1_1_CORRECTED_FINAL_2026-08-25",
+  "macro_gate": "M1_PRE_EDIT_EVIDENCE_FIXED_POINT",
+  "macro_gate_status": "PASS_EVIDENCE_FIXED_POINT",
+  "baseline_version": "v101.110",
+  "baseline_zip_sha256": "4e204832023ff8d6d71319caf854a94bda53f148258df700b8792789597294a8",
+  "baseline_mutated": false,
+  "v101111_created": false,
+  "upstream_authority": {
+    "stage": "RA19E.1-B-v7.10/A17",
+    "RA19E1_A": "PASS_EVIDENCE_FIXED_POINT_A17_NARROW_REOPEN",
+    "RA19E1_B": "PASS_EVIDENCE_FIXED_POINT",
+    "semantic_segments": 65012,
+    "parent_ledger_rows": 2086,
+    "projection_rows": 65012,
+    "seed_controls_pass": "39/39",
+    "final_status": "PASS_EVIDENCE_FIXED_POINT"
+  },
+  "atomic_gates": {
+    "G1": "PASS",
+    "G2": "PASS",
+    "G3": "PASS",
+    "G4": "PASS",
+    "G5": "PASS_IN_SHADOW",
+    "G6": "PASS_IN_SHADOW",
+    "G7": "PASS_IN_SHADOW",
+    "G8": "PASS",
+    "G9": "PASS",
+    "G10": "PASS"
+  },
+  "G3_straight_quote_candidates": 40,
+  "G4_unique_parent_candidates": 48,
+  "G4_primary_changes": 0,
+  "G4_independent_mismatches": 0,
+  "source_backed_shadow_actions": 10,
+  "mutation_authorized_actions": 0,
+  "m2_entry_condition_satisfied": true,
+  "m2_started": false,
+  "new_exact_semantic_intersection": {
+    "source_segment": "LDC.T35.E0040.P023 PERSONIFIED_VOICE “Je vous aime, je vous aime.”",
+    "24h_target": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P147",
+    "presentation_parent": "JESUS"
+  },
+  "final_status": "PASS_EVIDENCE_FIXED_POINT",
+  "supersedes_m1_evidence_zip_sha256": "326502bcdb60796b59eecb0250fe3d9f9dae67f824523b0f77cc5eecdf7e59e8",
+  "correction": "SA-010 runtime target corrected P146→P147 by exact H21 source-map paragraph arithmetic and exact 167–194 text-offset match."
+}
