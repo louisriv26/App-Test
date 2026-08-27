@@ -1,13 +1,13 @@
 {
-  "app_version": "v2.19.52-R1B",
-  "public_version": "52",
-  "build_date": "2026-08-26",
+  "app_version": "v2.19.54-R1B",
+  "public_version": "54",
+  "build_date": "2026-08-27",
   "corpus_version": "G036-AFLP-R2-SUP-T2",
-  "stage": "LDC-V52-USER-DATA-RESTORE-COMPATIBILITY-AND-BINDING-REPAIR",
-  "baseline_candidate_version": "v2.19.51-R1B",
-  "baseline_candidate_sha256": "f210fee480f33443a46da846fef397dbcc0842b04e8d1b9fc7e2ca509f193794",
-  "owner_stage_start_authorisation": "USER_REQUESTED_V52_REPAIR_AFTER_REAL_BACKUP_RESTORE_FAILURE",
-  "owner_override_note": "v52 is a minimal successor to locked v51. It repairs backward-compatible user-data restore/preflight migration, preserves unresolved stale anchors instead of silently activating them, adds rollback protection, and reconciles v51 current public/offline binding contradictions discovered during the repair audit. Canonical corpus/search/speaker/display/flow/supplement text payloads are unchanged.",
+  "stage": "LDC-V54-PROTECTED-LECTURE-SUIVIE-STATE-MACHINE",
+  "baseline_candidate_version": "v2.19.53-R1B",
+  "baseline_candidate_sha256": "8eb546ceb9c8bc9d778c2c4d3912be1736d523dd94d427ade713a20f2cdb28d7",
+  "owner_stage_start_authorisation": "MASTER_SCRIPT_STAGE_B_PROTECTED_LECTURE_SUIVIE",
+  "owner_override_note": "v54 is a narrowly scoped functional successor to locked v53. It replaces navigation-origin inference with an explicit protected Ma lecture suivie state machine and reading-position v3 while preserving corpus/search/speaker/display/flow/SUP content and unrelated user-data semantics.",
   "reader_contract": "ONE_CALM_READER_PLUS_OPTIONAL_REPERES",
   "context_action_contract": "SELECTION_OR_PARAGRAPH_SINGLE_CONTEXT_SURFACE",
   "vector_binding": "RETIRED_FROM_DEPLOY__LEXICAL_BM25_METADATA_SEARCH_AUTHORITATIVE__FUTURE_VECTOR_SEARCH_REQUIRES_FULL_COMPOSITE_REBUILD_AND_BUNDLED_OR_SELF_HOSTED_RUNTIME",
@@ -18,8 +18,8 @@
   "deep_link_schema": "ldc-deep-link-v1",
   "support_privacy_contract": "REPORT_AND_DIAGNOSTICS_PUBLIC_METADATA_ONLY__SELECTED_TEXT_OPT_IN__NO_PRIVATE_NOTES",
   "collection_link_contract": "LOCAL_COLLECTION_ID_LINK_DOES_NOT_TRANSFER_USER_DATA",
-  "reading_position_schema": "ldc-reading-position-v2",
-  "navigation_origin_contract": "STRUCTURED_CONTEXT__ENTRIES_SEARCH_ESPACE_DATE_TOMES_RELATED_READER_STACK",
+  "reading_position_schema": "ldc-reading-position-v3",
+  "navigation_origin_contract": "STRUCTURED_CONTEXT_FOR_BACK_NAVIGATION_ONLY__NEVER_MAIN_READING_AUTHORITY__EXPLICIT_SEQUENTIAL_OR_CONSULTATION_SESSION_INTENT",
   "primary_navigation": [
     "Accueil",
     "Tomes",
@@ -30,11 +30,11 @@
   "owner_user_acceptance": "NOT_A_DEPLOYMENT_AUTHORITY__EXTERNAL_DEVICE_VALIDATION_PENDING",
   "offline_state_schema": "ldc-offline-state-v2",
   "offline_manifest_schema": "ldc-offline-manifest-v2",
-  "offline_cache_version": "ldc-le-livre-du-ciel-offline-v2.19.52-R1B",
+  "offline_cache_version": "ldc-le-livre-du-ciel-offline-v2.19.54-R1B",
   "offline_scope": "COMPLETE_36_TOME_READING_PLUS_ALIGNE_R2_PLUS_ACTIVE_SUP_T1_SUP_T2_COMPLEMENTS_PLUS_LEXICAL_BM25_METADATA_SPEAKER_SEARCH_PLUS_USER_STATE_MIGRATION_V4__VECTOR_EMBEDDING_SUBSYSTEM_RETIRED",
   "volume_lru_max": 4,
-  "offline_content_binding_sha256": "abfcfa0b8086ba90922e189bc415143761377bbfd69c2e5229397437db81d303",
-  "offline_corpus_manifest_sha256": "41d21d868ccdca3ea6b4cf6371542133ab35d6a9d3f58f8dc941d8b9e8234056",
+  "offline_content_binding_sha256": "4fa504084722700c317576a4935f96e2a1324d43e454e3fbf2c4ff56a1b0c893",
+  "offline_corpus_manifest_sha256": "d461f5e69c888f3416405f03b9853573ae70a5a5d8886582fca4fda137ced78c",
   "offline_integrity_contract": "EVERY_OFFLINE_ASSET_BYTE_LENGTH_AND_SHA256_VERIFIED_BEFORE_CACHE_ACCEPTANCE__READY_REQUIRES_VERIFIED_CACHE_MARKERS_AND_EXACT_CONTENT_BINDING",
   "owner_acceptance_findings_2026_08_12": [
     "existing-highlight palette inconsistent with original highlight palette",
@@ -95,10 +95,10 @@
     "speaker_segments": 117
   },
   "supplement_provenance_contract": "AFLP_SCOPE_FIXED__HISTORICAL_R1B_IMMUTABLE__ACTIVE_R2_CRITICALLY_CORRECTED__SUP_T1_IMMUTABLE_PROVENANCE__SUP_T2_M3_LOCKED__CASE_SPECIFIC_FRENCH_WORDING_PROVENANCE",
-  "reading_source_mode_contract": "THREE_STATE_PERSISTED__ALIGNE_R2_FIXED_AFLP_SCOPE__COMPLEMENT_ACTIVE_SUP_T1_SUP_T2__ENRICHI_ALIGNE_R2_PLUS_ACTIVE_COMPLEMENTS__DEFAULT_ENRICHI",
+  "reading_source_mode_contract": "JOURNEY_MAIN_PERSISTS_SOURCE_MODE__SEQUENTIAL_MODE_CHANGES_MAY_UPDATE_JOURNEY__CONSULTATION_MODE_CHANGES_CANNOT_UPDATE_MAIN__THREE_USER_MODES_ALIGNE_COMPLEMENT_ENRICHI",
   "vector_search_authorised": false,
   "offline_asset_count": 225,
-  "offline_total_bytes": 193269116,
+  "offline_total_bytes": 193269355,
   "supplement_provenance_fields_embedded": true,
   "supplement_runtime_schema": "ldc-supplement-registry-v2",
   "static_audit_scope": "PACKAGE_BYTES_AND_BUILD_BINDINGS_ONLY__POST_FREEZE_REOPEN_RESULTS_EXTERNAL__PHYSICAL_DEVICE_LIVE_ORIGIN_PWA_OFFLINE_SCREEN_READER_NOT_CLAIMED",
@@ -583,10 +583,10 @@
     "highlight_storage_changed": false,
     "user_data_schema_changed": false
   },
-  "physical_samsung_android_gate": "NOT_TESTED_CURRENT_V52_CANDIDATE",
-  "physical_iphone_gate": "NOT_TESTED_CURRENT_V52_CANDIDATE",
-  "physical_ipad_gate": "NOT_TESTED_CURRENT_V52_CANDIDATE",
-  "wide_public_release": "NOT_AUTHORIZED__CURRENT_V52_PHYSICAL_DEVICE_PWA_ACCESSIBILITY_GATES_OPEN",
+  "physical_samsung_android_gate": "NOT_TESTED_CURRENT_V54_CANDIDATE",
+  "physical_iphone_gate": "NOT_TESTED_CURRENT_V54_CANDIDATE",
+  "physical_ipad_gate": "NOT_TESTED_CURRENT_V54_CANDIDATE",
+  "wide_public_release": "NOT_AUTHORIZED__CURRENT_V54_PHYSICAL_DEVICE_PWA_ACCESSIBILITY_AND_LECTURE_SUIVIE_PHYSICAL_GATES_OPEN",
   "ra19d_mobile_shell_integrity": {
     "date": "2026-08-22",
     "baseline_app_version": "v2.19.30-R1B",
@@ -747,7 +747,7 @@
     "PRIEST": 19,
     "SAINT": 24
   },
-  "corpus_cache_epoch": "cm-41d21d868ccdca3e",
+  "corpus_cache_epoch": "cm-d461f5e69c888f34",
   "corpus_cache_integrity_contract": "CORPUS_CACHE_EPOCH_DERIVED_FROM_CORPUS_MANIFEST_SHA256__RUNTIME_MISS_FETCH_CACHE_RELOAD__BYTES_AND_SHA256_VERIFIED_AGAINST_FROZEN_OFFLINE_MANIFEST_BEFORE_RUNTIME_CACHE_ADOPTION",
   "f1_poisoned_http_cache_regression_gate": "REQUIRED_AND_EXTERNAL_EVIDENCE",
   "f7_release_metadata_generation": "CURRENT_RELEASE_COUNTS_AND_BINDINGS_GENERATED_AFTER_CORPUS_PAYLOAD_FREEZE__V32_VALUES_RETAINED_ONLY_UNDER_HISTORICAL_KEYS",
@@ -787,9 +787,9 @@
     "speaker_offsets_changed": false,
     "normal_reader_reperes_off_changed": false
   },
-  "package_state_at_freeze": "V52_USER_DATA_RESTORE_REPAIR_CANDIDATE__NO_POST_FREEZE_PASS_CLAIM_INSIDE_DEPLOY_PACKAGE",
+  "package_state_at_freeze": "V54_PROTECTED_LECTURE_SUIVIE_CANDIDATE__NO_POST_FREEZE_PASS_CLAIM_INSIDE_DEPLOY_PACKAGE",
   "external_decision_authority": "FINAL_DECISION_LOCK_EXTERNAL_TO_DEPLOY_ZIP__WRITTEN_LAST_AFTER_PRIMARY_AND_INDEPENDENT_REOPEN_AUDITS",
-  "external_validation_status": "NOT_ASSERTED_BY_PACKAGE__PHYSICAL_DEVICE_PWA_ACCESSIBILITY_NOT_TESTED_CURRENT_V52",
+  "external_validation_status": "NOT_ASSERTED_BY_PACKAGE__PHYSICAL_DEVICE_PWA_ACCESSIBILITY_AND_LECTURE_SUIVIE_DEVICE_GATES_NOT_TESTED_CURRENT_V54",
   "rejected_predecessor_version": "v2.19.37-R1B",
   "rejected_predecessor_sha256": "0e26740387911fe15a9a275c3ff04d08ba9cbb28f46c2ec74670eb795fbe22d6",
   "rejected_predecessor_status": "FAIL_HIGHLIGHT_ANCHOR_COMPATIBILITY",
@@ -945,7 +945,7 @@
   "protected_v45_runtime": "CORPUS_SPEAKERS_PRESENTATION_SEARCH_FLOW_DISPLAY_SUPPLEMENTS_USER_STATE_HIGHLIGHTING_OFFLINE_CACHE_ALGORITHM_NAVIGATION_LOGIC_UNCHANGED",
   "historical_external_validation_for_v46": "NOT_STARTED__V45_E1_E2_DO_NOT_TRANSFER_TO_NEW_BYTES__BEGIN_WITH_V46_E1_CONTROLLED_ORIGIN_THEN_E2_EXACT_SERVED_BYTE_BINDING",
   "v46_release_disposition": "FAIL_REPORT_INTEGRITY_SUPERSEDED__STALE_CURRENT_PACKAGE_STATE_AT_FREEZE_METADATA_AND_CONTRADICTORY_FOUR_PASS_EVIDENCE_JSON__HELP_ONBOARDING_CONTENT_INHERITED_UNCHANGED",
-  "report_integrity_successor": "V52_REPAIRS_V51_USER_DATA_RESTORE_BLOCKER_AND_RECONCILES_ACTIVE_PUBLIC_OFFLINE_BINDINGS__EXTERNAL_REOPENED_ZIP_AUDITS_REQUIRED",
+  "report_integrity_successor": "V54_PROTECTED_LECTURE_SUIVIE__EXTERNAL_REOPENED_ZIP_STATE_MACHINE_REPORT_AND_EVIDENCE_AUDITS_REQUIRED",
   "m4_critical_reconciliation": {
     "m3_status": "PASS_WITH_WARNINGS_VALIDLY_LOCKED",
     "aligned_generation": "G036-AFLP-R2-UWR2",
@@ -965,7 +965,7 @@
     "corpus_generation_from": "G036-AFLP-R1B-SUP-T1",
     "corpus_generation_to": "G036-AFLP-R2-SUP-T2"
   },
-  "m4_status": "V52_USER_DATA_RESTORE_AND_BINDING_REPAIR__EXTERNAL_FINAL_REOPEN_AUTHORITY_REQUIRED",
+  "m4_status": "R2_SUP_T2_FIXED_POINT_PRESERVED__V54_PROTECTED_LECTURE_SUIVIE__EXTERNAL_FINAL_REOPEN_AUTHORITY_REQUIRED",
   "current_release_authority": "M3_DECISION_LOCK__M4_AUTHORISED_46_CASE_MUTATION_UNIVERSE",
   "historical_backbone_generation": "G036-AFLP-R1B-UWR2",
   "historical_sup_t1_items": 14,
@@ -1030,5 +1030,7 @@
     "restore keeps a pre-write local snapshot and restores it if post-write migration fails",
     "v51 index public-version and offline/corpus binding constants found inconsistent with version.json/offline_manifest/sw are reconciled in v52",
     "canonical corpus/search/speaker/display/flow/supplement payloads remain byte-identical to locked v51"
-  ]
+  ],
+  "protected_lecture_suivie_contract": "ONE_PROTECTED_MAIN_JOURNEY__ONLY_EXPLICIT_SEQUENTIAL_START_RESUME_INHERITED_PREV_NEXT_OR_CONFIRMED_RELOCATION_MAY_WRITE_MAIN__CONSULTATIONS_NEVER_WRITE_MAIN__LU_INDEPENDENT",
+  "reading_persistence_contract": "SESSION_SCOPED_IMMUTABLE_SNAPSHOTS__MONOTONIC_SAVE_SEQUENCE__SERIALIZED_ATOMIC_WRITES__STALE_CALLBACK_REJECTION__NAVIGATION_FLUSH__INITIAL_SEQUENTIAL_SAVE__VISIBILITY_PAGEHIDE_SAFETY_FLUSH"
 }

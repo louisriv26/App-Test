@@ -1,13 +1,13 @@
 {
   "schema": "ldc-offline-manifest-v2",
-  "app_version": "v2.19.52-R1B",
-  "cache_version": "ldc-le-livre-du-ciel-offline-v2.19.52-R1B",
+  "app_version": "v2.19.54-R1B",
+  "cache_version": "ldc-le-livre-du-ciel-offline-v2.19.54-R1B",
   "corpus_generation": "G036-AFLP-R2-SUP-T2",
   "scope": "36 tomes ALIGNÉ R2 + active SUP-T1/SUP-T2 complements + lexical/BM25 search + user-state migration map",
   "semantic_vector_search_included": false,
   "semantic_vector_search_note": "Vector/embedding search remains retired; semantic_index.json is lexical BM25 metadata.",
   "asset_count": 225,
-  "total_bytes": 193269405,
+  "total_bytes": 193269355,
   "families": {
     "display": 36,
     "display_titles": 1,
@@ -393,8 +393,8 @@
     },
     {
       "path": "corpus/manifest.json",
-      "bytes": 30958,
-      "sha256": "85cb8b0b8095f47583fef851f7305d6819be7f3e6ee12b5c7212ca90c94062fc"
+      "bytes": 30934,
+      "sha256": "d461f5e69c888f3416405f03b9853573ae70a5a5d8886582fca4fda137ced78c"
     },
     {
       "path": "corpus/paragraphs_01.json",
@@ -948,8 +948,8 @@
     },
     {
       "path": "corpus/supplement_manifest.json",
-      "bytes": 1906,
-      "sha256": "65b4797a4ed1b5b94b8330a22b7c2118d1b23f2ac6de5e18a5268f8245fe077f"
+      "bytes": 1880,
+      "sha256": "a44d568a641758411299c98d97451000dce555d398c657ecb8f293a8a1f90b50"
     },
     {
       "path": "corpus/supplement_search.json",
@@ -1153,7 +1153,7 @@
     }
   ],
   "content_binding_schema": "ldc-offline-content-binding-v1",
-  "corpus_manifest_sha256": "85cb8b0b8095f47583fef851f7305d6819be7f3e6ee12b5c7212ca90c94062fc",
-  "rebuild_status": "V52_USER_DATA_RESTORE_REPAIR_BINDINGS_REBUILT_FROM_FINAL_STAGE_BYTES",
-  "content_binding_sha256": "ab447e7372d3708b964fbc05f6aebb223a72a4474e4853661b6c943fbece7a71"
+  "corpus_manifest_sha256": "d461f5e69c888f3416405f03b9853573ae70a5a5d8886582fca4fda137ced78c",
+  "rebuild_status": "V54_PROTECTED_LECTURE_SUIVIE_REBUILT_FROM_FINAL_STAGE_BYTES",
+  "content_binding_sha256": "4fa504084722700c317576a4935f96e2a1324d43e454e3fbf2c4ff56a1b0c893"
 }

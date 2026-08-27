@@ -1,7 +1,7 @@
 {
   "version": "G036-AFLP-R2-UWR2",
   "corpus": "livre_du_ciel",
-  "generated": "2026-08-26",
+  "generated": "2026-08-27",
   "total_paragraphs": 74348,
   "total_entries": 2312,
   "total_corrections": 20885,
@@ -45,11 +45,11 @@
     36
   ],
   "volumes_total": 36,
-  "status": "R2_CRITICAL_RECONCILIATION__V52_USER_DATA_RESTORE_AND_BINDING_REPAIR__EXTERNAL_FINAL_REOPEN_AUTHORITY_REQUIRED",
+  "status": "R2_CRITICAL_RECONCILIATION__V54_PROTECTED_LECTURE_SUIVIE__EXTERNAL_FINAL_REOPEN_AUTHORITY_REQUIRED",
   "speech_resynced": true,
   "notes": "Current ALIGNÉ generation R2 is restricted to the fixed AFLP reference scope and contains exactly 8 M3-authorised paragraph rewrites. Historical R1B is preserved separately. Active COMPLÉMENT comprises immutable SUP-T1 plus M3-authorised SUP-T2. Final release authority requires reopened-ZIP and independent audits.",
   "speech_layer_note": "Current R2 speaker layer preserves the locked semantic-speaker authority except for exact offset/text resynchronisation required by the 8 authorised ALIGNÉ paragraph rewrites; supplement speakers are governed separately by the active SUP-T1/SUP-T2 registry.",
-  "app_version": "v2.19.52-R1B",
+  "app_version": "v2.19.54-R1B",
   "speaker_layer": {
     "total_segments": 65012,
     "speaker_counts": {
@@ -118,7 +118,7 @@
     "note": "Display-only token projection. Suppressed and replaced tokens keep their canonical [start,end) so highlights, notes and bookmarks stay anchored."
   },
   "reader_architecture": {
-    "version": "v2.19.52-R1B",
+    "version": "v2.19.54-R1B",
     "flow_aware_dom": true,
     "post_render_structural_mutation": false,
     "paragraph_local_styled_runs": 57966,
@@ -718,7 +718,7 @@
     "total_speaker_segments": 65129,
     "user_data_schema_version": 4,
     "within_paragraph_placements": 22,
-    "release_status": "EXTERNAL_FINAL_REOPEN_AUTHORITY_REQUIRED__V52_USER_DATA_RESTORE_AND_BINDING_REPAIR",
+    "release_status": "EXTERNAL_FINAL_REOPEN_AUTHORITY_REQUIRED__V54_PROTECTED_LECTURE_SUIVIE",
     "v49_reaudit_repairs": {
       "canonical_text_changed_from_v48": false,
       "flow_19_member_metadata_rebound": 2,

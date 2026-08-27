@@ -443,6 +443,8 @@ h2.dn-section-title{margin-bottom:0;}
 .mode-pill.reperes-active{background:var(--accent-fill);color:var(--accent-fill-ink);border-color:var(--accent-fill);}
 
 .reader-header{padding:20px 22px 10px;}
+.journey-intent-indicator{display:inline-flex;align-items:center;gap:5px;margin:0 0 8px;padding:3px 8px;border-radius:999px;font:600 10px var(--body);letter-spacing:.04em;background:var(--gold-pale);color:#7A5A20;}
+.journey-intent-indicator.consultation{background:var(--accent-fill);color:var(--accent-fill-ink);}
 .rh-vol{font-size:10px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--gold-text);font-family:var(--body);margin-bottom:6px;}
 .rh-title{font-family:var(--serif);font-size:20px;color:var(--night);
@@ -1335,6 +1337,7 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
       <button class="reader-menu-btn" type="button" onclick="closeReaderMore();copyDiagnostics()"><i class="ti ti-stethoscope"></i><span>Copier le diagnostic</span></button>
       <button class="reader-menu-btn" type="button" onclick="openReaderInfoFromMore()"><i class="ti ti-info-circle"></i><span>Infos et source</span></button>
       <button class="reader-menu-btn" id="reader-supplement-mode-action" type="button" onclick="focusReaderSourceMode()"><i class="ti ti-layers-intersect"></i><span>Version du texte : Enrichi</span></button>
+      <button class="reader-menu-btn" id="reader-journey-relocate-action" type="button" onclick="requestRelocateReadingJourney()"><i class="ti ti-bookmark"></i><span>Continuer ma lecture suivie à partir d’ici</span></button>
       <button class="reader-menu-btn" type="button" onclick="openSizeFromReaderMore()"><i class="ti ti-letter-a"></i><span>Taille du texte</span></button>
       <button class="reader-menu-btn" type="button" onclick="openThemeFromReaderMore()"><i class="ti ti-sun-moon"></i><span>Thème</span></button>
     </div>
@@ -1505,7 +1508,7 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
     <button class="entry-door" onclick="startReading()">
       <i class="ti ti-book-2 door-icon"></i>
       <div class="door-text">
-        <div class="dt">Commencer au Tome I</div>
+        <div class="dt">Commencer ma lecture suivie</div>
         <div class="ds">Lire depuis la première entrée</div>
       </div>
     </button>
@@ -1536,10 +1539,17 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
       <div class="fq-ref" id="fq-ref">—</div>
     </div>
     <div class="resume-card" id="resume-card">
-      <div class="rc-label">Continuer la lecture</div>
+      <div class="rc-label">Ma lecture suivie</div>
       <div class="rc-ref" id="rc-ref">—</div>
       <div class="rc-excerpt" id="rc-excerpt">—</div>
-      <button class="rc-btn" type="button" onclick="resumeReading()"><i class="ti ti-player-play" style="font-size:14px;"></i> Reprendre</button>
+      <button class="rc-btn" id="resume-reading-btn" type="button" onclick="resumeReading()"><i class="ti ti-player-play" style="font-size:14px;"></i> Reprendre</button>
+      <div id="journey-confirmation" style="display:none;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.22);">
+        <div style="font-size:12px;line-height:1.5;margin-bottom:8px;">Confirmez votre position de lecture suivie héritée de la version précédente.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="rc-btn" type="button" onclick="confirmLegacyMainReadingPosition()">C'est correct</button>
+          <button class="rc-btn" type="button" onclick="chooseDifferentMainReadingPosition()">Choisir une autre position</button>
+        </div>
+      </div>
     </div>
     <div class="home-actions">
       <button class="ha-btn" onclick="goSearch()">
@@ -1623,6 +1633,7 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
   <div class="source-mode-caption" data-source-mode-caption></div>
   <div class="scroll" id="reader-scroll" onscroll="onReaderScroll()">
     <div class="reader-header">
+      <div class="journey-intent-indicator" id="journey-intent-indicator">Consultation</div>
       <div class="rh-vol" id="rh-vol"></div>
       <h1 class="rh-title" id="rh-title"></h1>
       <div class="rh-date" id="rh-date"></div>
@@ -1946,14 +1957,14 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.52-R1B'; // technical update/audit identifier
-const PUBLIC_VERSION = '52';        // single user-facing release number
+const APP_VERSION = 'v2.19.54-R1B'; // technical update/audit identifier
+const PUBLIC_VERSION = '54';        // single user-facing release number
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD   = '2026-08-26';
-const SW_CACHE_VERSION = 'ldc-v2.19.52-R1B';
-const CORPUS_MANIFEST_SHA256 = '85cb8b0b8095f47583fef851f7305d6819be7f3e6ee12b5c7212ca90c94062fc';
+const APP_BUILD   = '2026-08-27';
+const SW_CACHE_VERSION = 'ldc-v2.19.54-R1B';
+const CORPUS_MANIFEST_SHA256 = 'd461f5e69c888f3416405f03b9853573ae70a5a5d8886582fca4fda137ced78c';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
-const READING_POSITION_SCHEMA = 'ldc-reading-position-v2';
+const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
 
 /* ═══════════════════════════════════════════════════════
    STATE
@@ -2002,8 +2013,44 @@ function touchVolumeLru(vol) {
 // Reader state
 let currentEntry   = null;
 let currentVolume  = null;
-let readerBack     = 'entries'; // compatibility label; authoritative origin is readerOriginContext
+let readerBack     = 'entries'; // compatibility/navigation label only; NEVER reading-progress authority
 let readerOriginContext = null; // LDC-F structured origin/restoration context
+const READER_INTENT = Object.freeze({SEQUENTIAL:'SEQUENTIAL', CONSULTATION:'CONSULTATION'});
+let readerSessionSerial = 0;
+let activeReaderSession = null; // ephemeral logical reader session; persistence authority will be switched to intent at B26
+function normalizeReaderIntent(intent){return intent===READER_INTENT.SEQUENTIAL?READER_INTENT.SEQUENTIAL:READER_INTENT.CONSULTATION;}
+function readerIntentForAction(action,currentIntent=READER_INTENT.CONSULTATION){
+  const a=String(action||'').toUpperCase();
+  if(['START','RESUME','RELOCATE'].includes(a))return READER_INTENT.SEQUENTIAL;
+  if(['NEXT','PREVIOUS','RERENDER','RESTORE_PARENT'].includes(a))return normalizeReaderIntent(currentIntent);
+  return READER_INTENT.CONSULTATION;
+}
+function readerIntentMayWriteMain(intent){return normalizeReaderIntent(intent)===READER_INTENT.SEQUENTIAL;}
+function createReaderSession(intent,vol,entryId,supplementId=null){
+  return {session_id:`reader-${Date.now()}-${++readerSessionSerial}`,intent:normalizeReaderIntent(intent),vol:Number(vol)||null,entry_id:entryId||null,supplement_id:supplementId||null,source_mode:supplementMode,save_sequence:0,opened_at:Date.now()};
+}
+function currentReaderIntent(){return activeReaderSession?normalizeReaderIntent(activeReaderSession.intent):READER_INTENT.CONSULTATION;}
+function updateReaderIntentIndicator(){
+  const intent=currentReaderIntent(),el=document.getElementById('journey-intent-indicator');
+  if(el){const sequential=intent===READER_INTENT.SEQUENTIAL;el.textContent=sequential?'Lecture suivie':'Consultation';el.classList.toggle('consultation',!sequential);el.title=sequential?'Cette lecture met à jour Ma lecture suivie.':'Cette consultation ne déplace pas Ma lecture suivie.';}
+  const action=document.getElementById('reader-journey-relocate-action');
+  if(action){const sequential=intent===READER_INTENT.SEQUENTIAL;action.disabled=sequential;const span=action.querySelector('span');if(span)span.textContent=sequential?'Lecture suivie active':'Continuer ma lecture suivie à partir d’ici';}
+}
+function makeReaderPositionSnapshot(pos,advanceSequence=true){
+  const session=activeReaderSession;
+  if(!pos||!session)return null;
+  const seq=advanceSequence?(++session.save_sequence):Number(session.save_sequence||0);
+  return Object.freeze(Object.assign({},pos,{
+    session_id:String(session.session_id),
+    reader_intent:normalizeReaderIntent(session.intent),
+    source_mode:String(session.source_mode||supplementMode||'enriched'),
+    save_sequence:seq,
+    captured_at:Date.now()
+  }));
+}
+function readingSnapshotBelongsToActiveSession(snapshot){
+  return !!(snapshot&&activeReaderSession&&String(snapshot.session_id)===String(activeReaderSession.session_id));
+}
 let readerTemporarySourceModeRestore = null; // prior in-memory mode for automatic target-opening overrides; never persisted
 let autourOrigin   = null;  // compatibility alias; related navigation now uses readerOriginContext stack
 let pendingSemanticPosition = null; // semantic reader restore, never raw pixels only
@@ -2212,7 +2259,7 @@ function isStaleRecord(r) {
 /* ═══════════════════════════════════════════════════════
    CORPUS LOADING
 ═══════════════════════════════════════════════════════ */
-const CORPUS_CV = 'cv=cm-85cb8b0b8095f475'; // derived from corpus/manifest.json SHA-256
+const CORPUS_CV = 'cv=cm-d461f5e69c888f34'; // derived from corpus/manifest.json SHA-256
 
 function sourceModeShowsBackbone() { return supplementMode !== 'additions'; }
 function sourceModeShowsSupplements() { return supplementMode !== 'aflp'; }
@@ -2360,7 +2407,7 @@ async function openUserRecordTarget(r,backDest='espace'){
   if(r.supplement_id){
     await loadSupplementRegistryData();
     const sp=supplementById(r.supplement_id);
-    if(sp){pendingParaId=r.para_id||null;await openSupplementItem(sp,backDest);return;}
+    if(sp){pendingParaId=r.para_id||null;await openSupplementItem(sp,backDest,{intent:READER_INTENT.CONSULTATION});return;}
   }
   return goToEntry(r.volume||volumeOfStableRef(r.stable_ref),r.host_entry_id||r.entry_id,r.para_id||null);
 }
@@ -2421,6 +2468,7 @@ async function initialiseSupplementMode() {
 
 async function openSupplementItem(s,backDest='tomes',opts={}){
   if(!s)return;
+  if(activeReaderSession&&opts.preserveSession!==true)await flushActiveReaderSession({invalidate:true});
   // Reader data is loaded exactly once by openEntry(); do not pre-load it here.
   currentSupplementFocusId=s.supplement_id;
   if(isInternalSupplementItem(s))pendingParaId=(s.paragraphs&&s.paragraphs[0]&&s.paragraphs[0].id)||null;
@@ -2438,6 +2486,7 @@ async function setSupplementMode(mode, opts={}) {
   const oldMode=supplementMode, semantic=document.getElementById('screen-reader')?.classList.contains('active')?captureSemanticReadingPosition():null;
   const oldEntry=currentEntry, oldFocus=currentSupplementFocusId, focusItem=oldFocus?supplementById(oldFocus):null;
   supplementMode=next;
+  if(activeReaderSession)activeReaderSession.source_mode=next;
   await dbPut('settings',{key:SUPPLEMENT_MODE_KEY,val:next,ts:Date.now()}).catch(()=>{});
   Object.keys(corpusCache).forEach(v=>rebuildLoadedVolumeView(Number(v)));
   resetSupplementDependentIndexes();syncSupplementModeUI();
@@ -2449,15 +2498,15 @@ async function setSupplementMode(mode, opts={}) {
       if(!target&&oldEntry.is_supplement)target=supplementById(oldEntry.supplement_id);
       if(!target){const inline=inlineSupplementsForEntry(currentVolume,oldEntry.id);target=inline[0]||null;}
       if(!target){currentSupplementFocusId=null;await openTome(currentVolume);if(!opts.silent)showToast('COMPLÉMENT — aucun complément dans ce texte.');return;}
-      await openSupplementItem(target,readerBack,{preserveOrigin:true,originContext:readerOriginContext});
+      await openSupplementItem(target,readerBack,{preserveOrigin:true,originContext:readerOriginContext,preserveSession:true,intent:currentReaderIntent()});
     } else if(next==='aflp'){
       if(oldEntry.is_supplement){currentSupplementFocusId=null;await openTome(currentVolume);if(!opts.silent)showToast('ALIGNÉ — cette date complémentaire n’appartient pas au périmètre aligné.');return;}
       const anchor=focusItem&&isInternalSupplementItem(focusItem)?supplementPrimaryContextParaId(focusItem,'before'):null;
       currentSupplementFocusId=null;if(anchor)pendingParaId=anchor;
-      await openEntry(currentVolume,oldEntry.id,readerBack,{preserveOrigin:true,originContext:readerOriginContext,restorePosition:anchor?null:semantic});
+      await openEntry(currentVolume,oldEntry.id,readerBack,{preserveOrigin:true,originContext:readerOriginContext,restorePosition:anchor?null:semantic,preserveSession:true,intent:currentReaderIntent()});
     } else {
       if(focusItem&&isInternalSupplementItem(focusItem))pendingParaId=(focusItem.paragraphs&&focusItem.paragraphs[0]&&focusItem.paragraphs[0].id)||null;
-      await openEntry(currentVolume,oldEntry.id,readerBack,{preserveOrigin:true,originContext:readerOriginContext,restorePosition:pendingParaId?null:semantic,supplementId:focusItem&&focusItem.supplement_id});
+      await openEntry(currentVolume,oldEntry.id,readerBack,{preserveOrigin:true,originContext:readerOriginContext,restorePosition:pendingParaId?null:semantic,supplementId:focusItem&&focusItem.supplement_id,preserveSession:true,intent:currentReaderIntent()});
     }
   } else if(active==='screen-entries'&&currentVolume) await openTome(currentVolume);
   else if(active==='screen-tomes') await renderTomes();
@@ -2832,7 +2881,7 @@ async function openParcoursEntry(parcours, idx) {
   await ensureVolumeIndex(entry.vol);
   const entries = corpusCache[entry.vol].baseEntries || corpusCache[entry.vol].entries;
   const target = entries[Math.min(entry.seq - 1, entries.length - 1)] || entries[0];
-  if(target)openEntry(entry.vol, target.id, 'parcours');
+  if(target)openEntry(entry.vol, target.id, 'parcours',{intent:READER_INTENT.CONSULTATION});
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -2893,7 +2942,9 @@ function clamp01(v){const n=Number(v);return Number.isFinite(n)?Math.max(0,Math.
 function readingPosKey(vol,entryId,supplementId=null){return supplementId?`supplement:${String(supplementId)}`:`entry:${Number(vol)}:${String(entryId||'')}`;}
 function currentScreenName(){const el=document.querySelector('.screen.active');return el?el.id.replace('screen-',''):'home';}
 function currentReaderLabel(){const sp=activeReaderSupplement();return currentEntry?`Tome ${currentVolume} · ${currentEntry.date_display||currentEntry.title||''}${sp?' · COMPLÉMENT':''}`:'—';}
-function readerUpdatesMainPosition(){return ['entries','tomes','home','parcours'].includes(readerBack);}
+function readerSessionMayWriteMain(){return readerIntentMayWriteMain(currentReaderIntent());}
+function validJourneySourceMode(mode){return ['aflp','additions','enriched'].includes(String(mode||''));}
+async function restoreJourneySourceMode(pos){if(pos&&validJourneySourceMode(pos.source_mode)&&supplementMode!==pos.source_mode)await setSupplementMode(pos.source_mode,{rerender:false,silent:true});return supplementMode;}
 
 function captureSemanticReadingPosition(){
   const sc=document.getElementById('reader-scroll');
@@ -2934,9 +2985,65 @@ async function persistSemanticReadingPosition(pos,updateMain){
   if(!pos||!pos.entry_id||!pos.vol)return false;
   const per=Object.assign({},pos,{key:readingPosKey(pos.vol,pos.entry_id,pos.supplement_id||null),schema:READING_POSITION_SCHEMA});
   const rows=[per];
-  if(updateMain)rows.push(Object.assign({},pos,{key:'main',schema:READING_POSITION_SCHEMA}));
+  if(updateMain)rows.push(Object.assign({},pos,{key:'main',schema:READING_POSITION_SCHEMA,confirmation_status:'confirmed',journey_provenance:pos.journey_provenance||'explicit_sequential'}));
   await dbPutManyAtomic('reading_pos',rows);
   return true;
+}
+
+let readingPositionWriteChain=Promise.resolve();
+const readingPositionCommittedSequence=new Map();
+async function persistReaderSnapshot(snapshot,opts={}){
+  if(!snapshot||!snapshot.session_id||!snapshot.entry_id||!snapshot.vol)return {written:false,reason:'invalid_snapshot'};
+  const requireActive=opts.requireActive!==false;
+  const forceMain=opts.forceMain;
+  if(requireActive&&!readingSnapshotBelongsToActiveSession(snapshot))return {written:false,reason:'inactive_session'};
+  const sessionId=String(snapshot.session_id),seq=Number(snapshot.save_sequence)||0;
+  const updateMain=forceMain===true?true:(forceMain===false?false:readerIntentMayWriteMain(snapshot.reader_intent));
+  const task=async()=>{
+    if(requireActive&&!readingSnapshotBelongsToActiveSession(snapshot))return {written:false,reason:'inactive_session'};
+    const committed=Number(readingPositionCommittedSequence.get(sessionId)||0);
+    if(seq<=committed)return {written:false,reason:'stale_sequence',committed_sequence:committed};
+    await persistSemanticReadingPosition(snapshot,updateMain);
+    readingPositionCommittedSequence.set(sessionId,seq);
+    return {written:true,reason:'committed',save_sequence:seq,update_main:updateMain};
+  };
+  const run=readingPositionWriteChain.catch(()=>{}).then(task);
+  readingPositionWriteChain=run.then(()=>undefined,()=>undefined);
+  return run;
+}
+
+async function flushActiveReaderSession(opts={}){
+  const session=activeReaderSession;
+  if(!session)return {flushed:false,reason:'no_active_session'};
+  if(typeof scrollTimer!=='undefined'&&scrollTimer){clearTimeout(scrollTimer);scrollTimer=null;}
+  const pos=captureSemanticReadingPosition();
+  const snapshot=makeReaderPositionSnapshot(pos,true);
+  let result={written:false,reason:'no_position'};
+  if(snapshot)result=await persistReaderSnapshot(snapshot,{requireActive:true});
+  if(opts.invalidate!==false&&activeReaderSession&&activeReaderSession.session_id===session.session_id)activeReaderSession=null;
+  return {flushed:true,persist_result:result,session_id:session.session_id};
+}
+
+function scheduleInitialSequentialPositionPersistence(){
+  const sessionId=activeReaderSession&&activeReaderSession.session_id;
+  if(!sessionId||!readerSessionMayWriteMain())return;
+  requestAnimationFrame(()=>requestAnimationFrame(async()=>{
+    if(!activeReaderSession||activeReaderSession.session_id!==sessionId||!readerSessionMayWriteMain())return;
+    const pos=captureSemanticReadingPosition();
+    const snapshot=makeReaderPositionSnapshot(pos,true);
+    if(!snapshot)return;
+    liveSemanticPosition=snapshot;
+    try{await persistReaderSnapshot(snapshot,{requireActive:true});}
+    catch(e){console.warn('LDC: initial sequential reading position not persisted',e);}
+  }));
+}
+function flushReadingPositionForLifecycle(reason){
+  if(!activeReaderSession)return;
+  const pos=captureSemanticReadingPosition();
+  const snapshot=makeReaderPositionSnapshot(pos,true);
+  if(!snapshot)return;
+  liveSemanticPosition=snapshot;
+  persistReaderSnapshot(snapshot,{requireActive:true}).catch(e=>console.warn('LDC: lifecycle reading-position flush failed',reason,e));
 }
 
 function captureScrollContext(el,selector,keyAttr){
@@ -2966,15 +3073,16 @@ function captureNavigationContext(kind){
   return {screen:screen||'tomes'};
 }
 
-function captureReaderOriginContext(){return {screen:'reader',vol:currentVolume,entryId:currentEntry?currentEntry.id:null,position:captureSemanticReadingPosition(),parent:readerOriginContext};}
+function captureReaderOriginContext(){return {screen:'reader',vol:currentVolume,entryId:currentEntry?currentEntry.id:null,position:captureSemanticReadingPosition(),intent:currentReaderIntent(),source_mode:supplementMode,parent:readerOriginContext};}
 
 async function restoreNavigationContext(ctx){
   if(!ctx){goTomes();return;}
   if(ctx.screen==='reader'){
     if(!ctx.entryId){goTomes();return;}
+    if(validJourneySourceMode(ctx.source_mode)&&supplementMode!==ctx.source_mode)await setSupplementMode(ctx.source_mode,{rerender:false,silent:true});
     readerOriginContext=ctx.parent||null;
     pendingSemanticPosition=ctx.position||null;
-    await openEntry(ctx.vol,ctx.entryId,ctx.parent&&ctx.parent.screen?ctx.parent.screen:'tomes',{preserveOrigin:true,originContext:ctx.parent||null,restorePosition:ctx.position||null,supplementId:ctx.position&&ctx.position.supplement_id||null});
+    await openEntry(ctx.vol,ctx.entryId,ctx.parent&&ctx.parent.screen?ctx.parent.screen:'tomes',{preserveOrigin:true,originContext:ctx.parent||null,restorePosition:ctx.position||null,supplementId:ctx.position&&ctx.position.supplement_id||null,intent:readerIntentForAction('RESTORE_PARENT',ctx.intent||READER_INTENT.CONSULTATION)});
     return;
   }
   if(ctx.screen==='entries'){
@@ -3002,6 +3110,38 @@ function scheduleSemanticLayoutRestore(){
 window.addEventListener('resize',scheduleSemanticLayoutRestore,{passive:true});
 window.addEventListener('orientationchange',scheduleSemanticLayoutRestore,{passive:true});
 if(window.visualViewport)window.visualViewport.addEventListener('resize',scheduleSemanticLayoutRestore,{passive:true});
+
+let readingPositionV3MigrationDone=false;
+async function migrateReadingPositionsV3(){
+  if(readingPositionV3MigrationDone)return {skipped:true};
+  const rows=await dbGetAll('reading_pos').catch(()=>[]);
+  const changed=[];
+  for(const row of (rows||[])){
+    if(!row||!row.key)continue;
+    const legacy=String(row.schema||'')!=='ldc-reading-position-v3';
+    const next=Object.assign({},row,{schema:READING_POSITION_SCHEMA});
+    if(!validJourneySourceMode(next.source_mode))next.source_mode=supplementMode;
+    if(next.key==='main'){
+      if(!next.confirmation_status)next.confirmation_status=legacy?'needs_confirmation':'confirmed';
+      if(!next.journey_provenance)next.journey_provenance=legacy?'legacy_v2':'explicit_sequential';
+      if(legacy&&!next.source_mode_provenance)next.source_mode_provenance='legacy_current_setting';
+    }
+    if(JSON.stringify(next)!==JSON.stringify(row))changed.push(next);
+  }
+  if(changed.length)await dbPutManyAtomic('reading_pos',changed);
+  readingPositionV3MigrationDone=true;
+  return {skipped:false,changed:changed.length,legacy_main:changed.some(r=>r.key==='main'&&r.confirmation_status==='needs_confirmation')};
+}
+async function confirmLegacyMainReadingPosition(){
+  const pos=await dbGet('reading_pos','main');
+  if(!pos)return false;
+  const next=Object.assign({},pos,{schema:READING_POSITION_SCHEMA,confirmation_status:'confirmed',journey_provenance:pos.journey_provenance||'legacy_v2_confirmed',confirmed_at:Date.now()});
+  await dbPut('reading_pos',next);
+  await renderHome();
+  showToast('Lecture suivie confirmée.');
+  return true;
+}
+function chooseDifferentMainReadingPosition(){goTomes();showToast('Ouvrez le texte souhaité puis choisissez « Continuer ma lecture suivie à partir d’ici ».');}
 
 /* ═══════════════════════════════════════════════════════
    HOME
@@ -3031,6 +3171,7 @@ function getDailyQuote() {
 }
 
 async function renderHome() {
+  await migrateReadingPositionsV3();
   const pos = await dbGet('reading_pos', 'main');
   if (!pos) {
     document.getElementById('home-first').style.display  = 'block';
@@ -3040,6 +3181,9 @@ async function renderHome() {
     document.getElementById('home-return').style.display = 'block';
     document.getElementById('rc-ref').textContent     = pos.label   || '—';
     document.getElementById('rc-excerpt').textContent = pos.excerpt || '—';
+    const needsConfirmation=pos.confirmation_status==='needs_confirmation';
+    const confirmation=document.getElementById('journey-confirmation');if(confirmation)confirmation.style.display=needsConfirmation?'block':'none';
+    const resumeBtn=document.getElementById('resume-reading-btn');if(resumeBtn){resumeBtn.disabled=needsConfirmation;resumeBtn.setAttribute('aria-disabled',needsConfirmation?'true':'false');}
     // Featured quote
     const q = getDailyQuote();
     document.getElementById('fq-text').textContent = q.t;
@@ -3051,20 +3195,22 @@ async function startReading() {
   await loadSupplementRegistryData();
   if(supplementsOnly()){
     const first=sortedSupplementItems()[0];
-    if(first){await openSupplementItem(first,'tomes');return;}
+    if(first){await openSupplementItem(first,'tomes',{intent:readerIntentForAction('START')});return;}
     showToast('Aucun complément disponible.');return;
   }
   await ensureVolumeIndex(1);
   const first = corpusCache[1].entries[0];
-  if(first)openEntry(1, first.id, 'tomes');
+  if(first)openEntry(1, first.id, 'tomes', {intent:readerIntentForAction('START')});
 }
 
 async function resumeReading() {
   const pos = await dbGet('reading_pos', 'main');
   if (!pos) return;
+  if(pos.confirmation_status==='needs_confirmation'){showToast('Confirmez d’abord votre position de lecture suivie.');return;}
+  await restoreJourneySourceMode(pos);
   pendingSemanticPosition = pos;
   await ensureVolumeIndex(pos.vol);
-  openEntry(pos.vol, pos.entry_id, 'home', { restorePosition:pos, supplementId:pos.supplement_id||null });
+  openEntry(pos.vol, pos.entry_id, 'home', { restorePosition:pos, supplementId:pos.supplement_id||null, intent:readerIntentForAction('RESUME') });
 }
 
 // Open the featured quote at its frozen exact paragraph target.
@@ -3073,7 +3219,7 @@ async function openFeaturedQuote() {
   if (!q || !q.vol || !q.entry || !q.para) return;
   showReperes = false; applyReperesState();
   pendingParaId = q.para;
-  await openEntry(q.vol, q.entry, 'home');
+  await openEntry(q.vol, q.entry, 'home',{intent:READER_INTENT.CONSULTATION});
 }
 
 // Open reader with calm defaults (Repères off) on first Jesus-speech entry of T02
@@ -3082,14 +3228,14 @@ async function openJesusSpeech() {
   showReperes = false; applyReperesState();
   if(supplementsOnly()){
     const hit=sortedSupplementItems().find(s=>(s.speakers||[]).some(x=>x.speaker==='JESUS'));
-    if(hit){await openSupplementItem(hit,'home');return;}
+    if(hit){await openSupplementItem(hit,'home',{intent:READER_INTENT.CONSULTATION});return;}
     showToast('Aucune parole de Jésus dans les compléments.');return;
   }
   await ensureVolumeIndex(2);
   const entries = corpusCache[2].entries;
   if (!entries || !entries.length) return;
   const speechEntry = entries.find(e => e.has_speech) || entries[0];
-  openEntry(2, speechEntry.id, 'home');
+  openEntry(2, speechEntry.id, 'home',{intent:READER_INTENT.CONSULTATION});
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -3184,7 +3330,7 @@ async function renderSupplementRegistryList(container,items,opts={}){
     const statuses=(favMark||readMark)?`<span class="ei-statuses">${favMark}${readMark}</span>`:'';
     btn.classList.toggle('read',readIds.has(userId));
     btn.innerHTML=`<div class="sri-top"><span>Tome ${s.volume}</span><span>·</span><span>${escapeHtml(s.display_date||s.date_iso||'')}</span><span class="sri-type">${kind}</span><span class="ei-supp-badge">COMPLÉMENT</span>${statuses}</div><div class="sri-title">${escapeHtml(supplementRegistryTitle(s))}</div><div class="sri-excerpt">${escapeHtml(supplementRegistryExcerpt(s))}</div>`;
-    btn.onclick=()=>openSupplementItem(s,opts.global?'tomes':'entries');container.appendChild(btn);
+    btn.onclick=()=>openSupplementItem(s,opts.global?'tomes':'entries',{intent:READER_INTENT.CONSULTATION});container.appendChild(btn);
   });
 }
 
@@ -3224,7 +3370,7 @@ async function openTome(vol) {
         ${inlineHostAdd?`<span class="ei-supp-badge" title="Cette entrée alignée contient un complément approuvé ; sa provenance est indiquée dans Infos et source." aria-label="Cette entrée alignée contient un complément approuvé ; sa provenance est indiquée dans Infos et source.">+ COMPL.</span>`:''}
       </div>
       ${statusMarks}`;
-    btn.onclick = () => openEntry(vol, e.id, 'entries');
+    btn.onclick = () => openEntry(vol, e.id, 'entries',{intent:READER_INTENT.CONSULTATION});
     list.appendChild(btn);
   });
   if(Number(vol)===1 && supplementMode!=='additions'){
@@ -3408,7 +3554,10 @@ function rebaseSpeechSegmentsForSlice(segments,start,end){
 async function openEntry(vol, entryId, backDest, opts={}) {
   const editorialNoteNo=Number(vol)===1?tome1EditorialNoteNumber(entryId):null;
   if(editorialNoteNo)return openTome1EditorialAppendix(backDest||'entries',editorialNoteNo);
+  const priorReaderSession=activeReaderSession;
+  const requestedIntent=normalizeReaderIntent(opts.intent||(opts.inheritIntent&&priorReaderSession?priorReaderSession.intent:READER_INTENT.CONSULTATION));
   const sameReaderRerender = !!(currentEntry && currentEntry.id===entryId && currentVolume===vol && document.getElementById('screen-reader')?.classList.contains('active'));
+  if(priorReaderSession&&!sameReaderRerender&&opts.skipSessionFlush!==true)await flushActiveReaderSession({invalidate:true});
   if (opts.originContext !== undefined) readerOriginContext = opts.originContext;
   else if (!opts.preserveOrigin && !sameReaderRerender) readerOriginContext = backDest==='autour' ? captureReaderOriginContext() : captureNavigationContext(backDest);
   readerBack     = backDest;
@@ -3431,6 +3580,16 @@ async function openEntry(vol, entryId, backDest, opts={}) {
   else currentSupplementFocusId=null;
   currentEntry = corpusCache[vol].byId[entryId] || (supplementMode==='additions'&&focusedSupplement&&isInternalSupplementItem(focusedSupplement)?requestedEntry:null);
   if (!currentEntry) return;
+  if(sameReaderRerender&&priorReaderSession&&opts.preserveSession!==false){
+    activeReaderSession=priorReaderSession;
+    activeReaderSession.vol=Number(vol)||null;
+    activeReaderSession.entry_id=currentEntry.id;
+    activeReaderSession.supplement_id=focusedSupplement&&focusedSupplement.supplement_id||null;
+    activeReaderSession.source_mode=supplementMode;
+  }else{
+    activeReaderSession=createReaderSession(requestedIntent,vol,currentEntry.id,focusedSupplement&&focusedSupplement.supplement_id||null);
+  }
+  updateReaderIntentIndicator();
 
   // Populate header
   const headerSupplement=activeReaderSupplement();
@@ -3751,11 +3910,11 @@ async function openEntry(vol, entryId, backDest, opts={}) {
     document.getElementById('reader-scroll').scrollTop = 0;
     requestAnimationFrame(()=>{liveSemanticPosition=captureSemanticReadingPosition();});
   }
+  scheduleInitialSequentialPositionPersistence();
 }
 
 async function backFromReader() {
-  const pos=captureSemanticReadingPosition();
-  if(pos){liveSemanticPosition=pos;try{await persistSemanticReadingPosition(pos,readerUpdatesMainPosition());}catch(e){console.warn('LDC: reading position not persisted on exit',e);}}
+  try{await flushActiveReaderSession({invalidate:true});}catch(e){console.warn('LDC: reading position not persisted on exit',e);}
   const ctx=readerOriginContext;
   readerOriginContext=null;
   await restoreAutomaticReaderSourceMode();
@@ -3774,24 +3933,25 @@ async function navEntry(dir) {
   if(supplementMode==='additions'){
     const items=sortedSupplementItems(supplementItemsForVolume(currentVolume));
     const idx=items.findIndex(s=>s.supplement_id===currentSupplementFocusId),next=items[idx+dir];
-    if(next)await openSupplementItem(next,readerBack,{preserveOrigin:true,originContext:readerOriginContext});
+    if(next)await openSupplementItem(next,readerBack,{preserveOrigin:true,originContext:readerOriginContext,inheritIntent:true});
     return;
   }
   const entries = corpusCache[currentVolume].entries;
   const idx     = entries.findIndex(e => e.id === currentEntry.id);
   const next    = entries[idx + dir];
-  if (next) await openEntry(currentVolume, next.id, readerBack, { preserveOrigin:true, originContext:readerOriginContext });
+  if (next) await openEntry(currentVolume, next.id, readerBack, { preserveOrigin:true, originContext:readerOriginContext, inheritIntent:true });
 }
 
 let scrollTimer = null;
 async function onReaderScroll() {
   if (semanticRestoreInProgress) return;
+  const pos=captureSemanticReadingPosition();
+  const snapshot=makeReaderPositionSnapshot(pos,true);
   clearTimeout(scrollTimer);
+  if(!snapshot)return;
   scrollTimer = setTimeout(async () => {
-    const pos=captureSemanticReadingPosition();
-    if(!pos)return;
-    liveSemanticPosition=pos;
-    try{await persistSemanticReadingPosition(pos,readerUpdatesMainPosition());}
+    liveSemanticPosition=snapshot;
+    try{await persistReaderSnapshot(snapshot,{requireActive:true});}
     catch(e){console.warn('LDC: semantic reading position not persisted',e);}
   }, 400);
 }
@@ -3799,7 +3959,9 @@ async function onReaderScroll() {
 // Backward-compatible wrapper used only by legacy/import code if encountered.
 async function saveReadingPos(vol, entryId, paraId, label, excerpt) {
   const pos={schema:READING_POSITION_SCHEMA,vol,entry_id:entryId,para_id:paraId,fraction_within_paragraph:0,fallback_entry_fraction:0,label,excerpt,updated_at:Date.now()};
-  return persistSemanticReadingPosition(pos,true);
+  const snapshot=makeReaderPositionSnapshot(pos,true);
+  if(!snapshot)return false;
+  return persistReaderSnapshot(snapshot,{requireActive:true});
 }
 
 /* ═══ REPÈRES TOGGLE — one reader, technical markers only ═══ */
@@ -4208,7 +4370,7 @@ async function deleteHighlightFromReader(id) {
   catch(e){ console.warn('LDC: highlight delete failed',e); showToast('Surlignage non supprimé — stockage local indisponible'); return; }
   parts.forEach(part => document.querySelectorAll('mark.hl[data-hl-id="'+part.id+'"]').forEach(unwrapHighlightMark));
   closeHighlightPicker({restoreFocus:true});
-  stageUndo('highlights',parts,parts.length>1?`Surlignage supprimé (${parts.length} parties)`:'Surlignage supprimé',async()=>{if(currentEntry)await openEntry(currentVolume,currentEntry.id,'reader',{preserveNavOrigin:true});await updateEspaceBadges();});
+  stageUndo('highlights',parts,parts.length>1?`Surlignage supprimé (${parts.length} parties)`:'Surlignage supprimé',async()=>{if(currentEntry)await openEntry(currentVolume,currentEntry.id,'reader',{preserveNavOrigin:true,preserveSession:true,intent:currentReaderIntent()});await updateEspaceBadges();});
 }
 
 // Walk text nodes of paraEl, skipping .speech-label spans, to get canonical text
@@ -4691,9 +4853,42 @@ async function refreshUserDataStaleness() {
   window.__ldcStaleRefresh=result;return result;
 }
 
+async function requestRelocateReadingJourney(){
+  if(!currentEntry||!activeReaderSession)return false;
+  const pos=captureSemanticReadingPosition();
+  const snapshot=makeReaderPositionSnapshot(pos,true);
+  if(!snapshot)return false;
+  const oldMain=await dbGet('reading_pos','main');
+  const oldLabel=oldMain&&oldMain.label?oldMain.label:'aucune position';
+  const newLabel=snapshot.label||`Tome ${snapshot.vol}`;
+  if(oldMain&&oldMain.entry_id===snapshot.entry_id&&oldMain.vol===snapshot.vol&&oldMain.para_id===snapshot.para_id&&Math.abs(Number(oldMain.fraction_within_paragraph||0)-Number(snapshot.fraction_within_paragraph||0))<0.01){showToast('Cette position est déjà votre lecture suivie.');return false;}
+  const ok=window.confirm(`Déplacer votre lecture suivie ?\n\nActuellement : ${oldLabel}\nNouvelle position : ${newLabel}`);
+  if(!ok)return false;
+  const per=Object.assign({},snapshot,{key:readingPosKey(snapshot.vol,snapshot.entry_id,snapshot.supplement_id||null),schema:READING_POSITION_SCHEMA});
+  const previous=oldMain?Object.assign({},oldMain,{key:'main_previous',saved_for_relocation_at:Date.now()}):{key:'main_previous',schema:READING_POSITION_SCHEMA,no_previous:true,saved_for_relocation_at:Date.now()};
+  const main=Object.assign({},snapshot,{key:'main',schema:READING_POSITION_SCHEMA,confirmation_status:'confirmed',journey_provenance:'explicit_relocation',relocated_at:Date.now()});
+  await dbPutManyAtomic('reading_pos',[per,previous,main]);
+  if(activeReaderSession&&activeReaderSession.session_id===snapshot.session_id){activeReaderSession.intent=READER_INTENT.SEQUENTIAL;activeReaderSession.source_mode=snapshot.source_mode;}
+  updateReaderIntentIndicator();
+  showToastWithAction('Lecture suivie déplacée','Annuler',undoLastReadingJourneyRelocation,15000);
+  return true;
+}
+async function undoLastReadingJourneyRelocation(){
+  const prev=await dbGet('reading_pos','main_previous');
+  if(!prev)return false;
+  if(prev.no_previous)await dbDelete('reading_pos','main');
+  else await dbPut('reading_pos',Object.assign({},prev,{key:'main'}));
+  await dbDelete('reading_pos','main_previous');
+  if(activeReaderSession)activeReaderSession.intent=READER_INTENT.CONSULTATION;
+  updateReaderIntentIndicator();
+  await renderHome().catch(()=>{});
+  return 'Lecture suivie restaurée';
+}
+
 /* ═══ CALM READER: MORE + INFOS/SOURCE ═══ */
 function openReaderMore() {
   if (!currentEntry) return;
+  updateReaderIntentIndicator();
   openModalOverlay('reader-more-overlay','closeReaderMore');
 }
 function closeReaderMore() {
@@ -5897,7 +6092,7 @@ async function openFromSearch(item) {
   const editorialNo=tome1EditorialNoteNumber(item&&item.entry_id);
   if(editorialNo)return openTome1EditorialAppendix('search',editorialNo);
   pendingParaId = item.id;
-  return openEntry(item.volume, item.entry_id, 'search');
+  return openEntry(item.volume, item.entry_id, 'search',{intent:READER_INTENT.CONSULTATION});
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -6047,7 +6242,7 @@ async function deleteHighlight(id){const hl=await dbGet('highlights',id);if(!hl)
 
 async function renderFavorites(){
   const favs=(await dbGetAll('favorites')).sort((a,b)=>b.ts-a.ts),el=document.getElementById('ep-favorites');el.innerHTML='';if(!favs.length){el.innerHTML='<div class="empty-state"><i class="ti ti-heart-off"></i>Aucun favori pour l\'instant.</div>';return;}
-  favs.forEach(f=>{const d=document.createElement('div');d.className='espace-item';d.dataset.filterText=[f.stable_ref,f.title,f.date_display,'tome '+f.volume].join(' ');d.innerHTML=`<i class="ti ti-heart-filled ei-icon"></i><div class="ei-content"><div class="ei-ref">${escapeHtml(f.stable_ref||'—')} · Tome ${f.volume||'—'}</div><div class="ei-text">${escapeHtml(f.title||'')}</div><div class="ei-date">${escapeHtml(f.date_display||'')}</div>${supplementBadgeForUserRecord(f)}${staleBadge(f)}</div><button class="ei-del" onclick="deleteFav('${f.entry_id}')" aria-label="Retirer des favoris"><i class="ti ti-trash"></i></button>`;const openFavorite=async()=>{if(f.supplement_id){await loadSupplementRegistryData();const sp=supplementById(f.supplement_id);if(sp){await openSupplementItem(sp,'espace');return;}}goToEntry(f.volume||volumeOfStableRef(f.stable_ref),f.host_entry_id||f.entry_id,null);};d.onclick=async e=>{if(e.target.closest('.ei-del'))return;await openFavorite();};addKeyboardActivation(d.querySelector('.ei-content'),openFavorite,'Ouvrir le favori');el.appendChild(d);});applyEspaceFilter();
+  favs.forEach(f=>{const d=document.createElement('div');d.className='espace-item';d.dataset.filterText=[f.stable_ref,f.title,f.date_display,'tome '+f.volume].join(' ');d.innerHTML=`<i class="ti ti-heart-filled ei-icon"></i><div class="ei-content"><div class="ei-ref">${escapeHtml(f.stable_ref||'—')} · Tome ${f.volume||'—'}</div><div class="ei-text">${escapeHtml(f.title||'')}</div><div class="ei-date">${escapeHtml(f.date_display||'')}</div>${supplementBadgeForUserRecord(f)}${staleBadge(f)}</div><button class="ei-del" onclick="deleteFav('${f.entry_id}')" aria-label="Retirer des favoris"><i class="ti ti-trash"></i></button>`;const openFavorite=async()=>{if(f.supplement_id){await loadSupplementRegistryData();const sp=supplementById(f.supplement_id);if(sp){await openSupplementItem(sp,'espace',{intent:READER_INTENT.CONSULTATION});return;}}goToEntry(f.volume||volumeOfStableRef(f.stable_ref),f.host_entry_id||f.entry_id,null);};d.onclick=async e=>{if(e.target.closest('.ei-del'))return;await openFavorite();};addKeyboardActivation(d.querySelector('.ei-content'),openFavorite,'Ouvrir le favori');el.appendChild(d);});applyEspaceFilter();
 }
 async function deleteFav(entryId){const rec=await dbGet('favorites',entryId);if(!rec)return;try{await dbDelete('favorites',entryId);}catch(e){showToast('Favori non supprimé — stockage local indisponible');return;}updateEntryFavoriteIndicator(entryId,false);await renderFavorites();await updateEspaceBadges();stageUndo('favorites',[rec],'Favori supprimé',async()=>{updateEntryFavoriteIndicator(entryId,true);await renderFavorites();await updateEspaceBadges();});}
 
@@ -6076,7 +6271,7 @@ async function copyCollectionItemLink(itemId){const item=await dbGet('col_items'
 async function openCollectionItem(itemId){const item=await dbGet('col_items',itemId);if(!item)return;await openUserRecordTarget(item,'espace');}
 async function exportCollection(colId){const col=await dbGet('collections',colId);if(!col)return;const text=await buildCollectionExportText(colId);try{if(navigator.share)await navigator.share({title:col.name,text});else{await copyPlainText(text);showToast('Collection copiée');}}catch(e){await copyPlainText(text);showToast('Collection copiée');}}
 
-async function collectUserDataEnvelope(){const state={};for(const store of USER_DATA_STORES)state[store]=await dbGetAll(store);const settings=state.settings||[],getSetting=key=>settings.find(x=>x.key===key)||null;return{schema:USER_DATA_ENVELOPE_SCHEMA,version:USER_DATA_ENVELOPE_VERSION,app_version:APP_VERSION,corpus_generation:CORPUS_GENERATION,exported_at:new Date().toISOString(),backup_metadata:{db_name:DB_NAME,db_version:DB_VER,authority:'IndexedDB ldc_user_v1 is authoritative for user-owned state; localStorage only stores onboarding acknowledgement; CacheStorage/service-worker caches are not restore data.',coverage:['highlights','notes','favorites','collections','col_items','reading_pos','read_entries','settings.theme','settings.textLevel','settings.showReperes','settings.supplement_mode','settings.offline_completion when present','backup metadata'],theme:getSetting('theme'),text_level:getSetting('textLevel'),reperes:getSetting('showReperes'),offline_completion:getSetting('offline_completion')},state};}
+async function collectUserDataEnvelope(){const state={};for(const store of USER_DATA_STORES)state[store]=await dbGetAll(store);const settings=state.settings||[],getSetting=key=>settings.find(x=>x.key===key)||null;return{schema:USER_DATA_ENVELOPE_SCHEMA,version:USER_DATA_ENVELOPE_VERSION,app_version:APP_VERSION,corpus_generation:CORPUS_GENERATION,exported_at:new Date().toISOString(),backup_metadata:{db_name:DB_NAME,db_version:DB_VER,authority:'IndexedDB ldc_user_v1 is authoritative for user-owned state; localStorage only stores onboarding acknowledgement; CacheStorage/service-worker caches are not restore data.',coverage:['highlights','notes','favorites','collections','col_items','reading_pos','read_entries','settings.theme','settings.textLevel','settings.showReperes','settings.supplement_mode','settings.offline_completion when present','backup metadata'],reading_position_schema:READING_POSITION_SCHEMA,theme:getSetting('theme'),text_level:getSetting('textLevel'),reperes:getSetting('showReperes'),offline_completion:getSetting('offline_completion')},state};}
 function downloadBlob(name,type,text){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),0);}
 async function exportBackupJson(){try{const env=await collectUserDataEnvelope();env.backup_metadata.current_single_file_import_ceiling_bytes=USER_DATA_MAX_IMPORT_BYTES;env.backup_metadata.export_bytes=0;let finalJson='',finalBytes=0,stable=false;for(let i=0;i<10;i++){finalJson=JSON.stringify(env,null,2);finalBytes=new Blob([finalJson],{type:'application/json'}).size;if(env.backup_metadata.export_bytes===finalBytes){stable=true;break;}env.backup_metadata.export_bytes=finalBytes;}if(!stable)throw new Error('backup export byte-size metadata did not converge');downloadBlob(`ldc-backup-${new Date().toISOString().slice(0,10)}.json`,'application/json',finalJson);await dbPut('settings',{key:'last_backup_export_at',val:env.exported_at,bytes:finalBytes,ts:Date.now()}).catch(()=>{});if(finalBytes>USER_DATA_MAX_IMPORT_BYTES)showToast('Sauvegarde créée, mais trop volumineuse pour une restauration unique sur cette version — conservez-la et contactez le support.');else if(finalBytes>USER_DATA_MAX_IMPORT_BYTES*.8)showToast('Sauvegarde volumineuse — proche de la limite de restauration de cette version.');else showToast('Sauvegarde JSON exportée');}catch(e){console.warn(e);showToast('Sauvegarde impossible');}}
 async function exportJournalTxt(){const notes=await dbGetAll('notes'),cols=await dbGetAll('collections'),items=await dbGetAll('col_items'),lines=['Livre du Ciel — Journal de lecture','═'.repeat(40),''];for(const n of notes.sort((a,b)=>a.ts-b.ts)){lines.push(`${n.entry_title||''} · ${n.stable_ref||''}${n.supplement_id?' · COMPLÉMENT':''}`.trim(),new Date(n.ts).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}));if(n.quote)lines.push('',`« ${n.quote} »`);lines.push('',n.text,'','─'.repeat(30),'');}for(const c of cols.sort((a,b)=>a.ts-b.ts)){lines.push('',`COLLECTION — ${c.name}`,'─'.repeat(30));for(const it of items.filter(i=>i.col_id===c.id).sort((a,b)=>a.order-b.order)){lines.push(`${it.stable_ref||''} · ${it.title||''}${it.supplement_id?' · COMPLÉMENT':''}`,`« ${it.text||''} »`);if(it.note)lines.push(`[Note : ${it.note}]`);lines.push('');}}downloadBlob(`ldc-journal-${new Date().toISOString().slice(0,10)}.txt`,'text/plain;charset=utf-8',lines.join('\n'));showToast('Journal lisible exporté');}
@@ -6098,9 +6293,9 @@ async function handleImportFile(input){const file=input&&input.files&&input.file
 function closeImportPreview(){closeModalOverlay('backup-preview-overlay');pendingBackupImport=null;}
 function dbReplaceUserDataAtomic(state){return dbWriteStoresAtomic(USER_DATA_STORES,(tx,fail)=>{for(const store of USER_DATA_STORES)tx.objectStore(store).clear();for(const store of USER_DATA_STORES){const os=tx.objectStore(store);for(const row of (state[store]||[])){const r=os.put(row);r.onerror=()=>fail(r.error);}}});}
 async function applyImportedPreferences(){const theme=await dbGet('settings','theme').catch(()=>null);const tv=theme&&THEME_VALUES.includes(theme.val)?theme.val:'system';document.documentElement.setAttribute('data-theme',tv);updateThemeBtn(tv);const level=await dbGet('settings','textLevel').catch(()=>null);applyTextLevel(level&&TEXT_LEVELS[level.val]?level.val:'normal');const rp=await dbGet('settings','showReperes').catch(()=>null);showReperes=!!(rp&&rp.val===true);applyReperesState();await initialiseSupplementMode();}
-async function confirmImportBackup(){if(!pendingBackupImport||!pendingBackupImport.validation.ok)return;const env=pendingBackupImport.env,previous=await snapshotUserDataState();let replaced=false;try{await dbReplaceUserDataAtomic(env.state);replaced=true;await dbPut('settings',{key:'user_data_schema_version',value:2,ts:Date.now()});await migrateUserDataV4();await dbPut('settings',{key:'last_backup_import_at',val:new Date().toISOString(),source_version:env.version,ts:Date.now()});await refreshUserDataStaleness();await applyImportedPreferences();closeImportPreview();await renderEspace();showToast('Sauvegarde restaurée');}catch(e){console.error('LDC: import failed',e);if(replaced){try{await dbReplaceUserDataAtomic(previous);await applyImportedPreferences();}catch(rollbackError){console.error('LDC: import rollback failed',rollbackError);showToast('Échec critique de restauration — conservez votre fichier de sauvegarde');return;}}showToast('Restauration annulée — données précédentes rétablies');}}
+async function confirmImportBackup(){if(!pendingBackupImport||!pendingBackupImport.validation.ok)return;const env=pendingBackupImport.env,previous=await snapshotUserDataState();let replaced=false;try{await dbReplaceUserDataAtomic(env.state);replaced=true;readingPositionV3MigrationDone=false;await migrateReadingPositionsV3();await dbPut('settings',{key:'user_data_schema_version',value:2,ts:Date.now()});await migrateUserDataV4();await dbPut('settings',{key:'last_backup_import_at',val:new Date().toISOString(),source_version:env.version,reading_position_schema:READING_POSITION_SCHEMA,ts:Date.now()});await refreshUserDataStaleness();await applyImportedPreferences();closeImportPreview();await renderEspace();await renderHome();showToast('Sauvegarde restaurée');}catch(e){console.error('LDC: import failed',e);if(replaced){try{await dbReplaceUserDataAtomic(previous);readingPositionV3MigrationDone=false;await applyImportedPreferences();await renderHome();}catch(rollbackError){console.error('LDC: import rollback failed',rollbackError);showToast('Échec critique de restauration — conservez votre fichier de sauvegarde');return;}}showToast('Restauration annulée — données précédentes rétablies');}}
 
-async function goToEntry(vol,entryId,paraId){if(paraId)pendingParaId=paraId;return openEntry(vol,entryId,'espace');}
+async function goToEntry(vol,entryId,paraId){if(paraId)pendingParaId=paraId;return openEntry(vol,entryId,'espace',{intent:READER_INTENT.CONSULTATION});}
 
 /* ═══════════════════════════════════════════════════════
    LDC-E — STABLE DEEP LINKS + SUPPORT / PRIVACY HOOKS
@@ -6194,7 +6389,7 @@ async function applyInitialDeepLink(){
   const r=parseDeepLink(window.location.href);if(!r.ok)return routeFail(r.error);if(r.view==='root')return true;
   try{
     if(r.view==='tome'){await openTome(r.vol);return true;}
-    if(['entry','paragraph','related'].includes(r.view)){await ensureVolumeIndex(r.vol);const c=corpusCache[r.vol],e=c&&(((c.allById||{})[r.entry])||c.byId[r.entry]);if(!e)return routeFail('entrée absente');if(r.para){await ensureVolumeReaderData(r.vol);const p=paragraphRecordById(r.vol,r.para);if(!p||p.entry_id!==r.entry)return routeFail('paragraphe absent');pendingParaId=r.para;}await openEntry(r.vol,r.entry,r.view==='related'?'tomes':'tomes');return true;}
+    if(['entry','paragraph','related'].includes(r.view)){await ensureVolumeIndex(r.vol);const c=corpusCache[r.vol],e=c&&(((c.allById||{})[r.entry])||c.byId[r.entry]);if(!e)return routeFail('entrée absente');if(r.para){await ensureVolumeReaderData(r.vol);const p=paragraphRecordById(r.vol,r.para);if(!p||p.entry_id!==r.entry)return routeFail('paragraphe absent');pendingParaId=r.para;}await openEntry(r.vol,r.entry,r.view==='related'?'tomes':'tomes',{intent:READER_INTENT.CONSULTATION});return true;}
     if(r.view==='search'){goSearch();document.getElementById('search-input').value=r.q;await runSearch();return true;}
     if(r.view==='date'){await openDateNav();const [y,m,d]=r.date.split('-').map(Number);dnYear=y;dnMonth=m;dnDay=d;renderDnYearStrip();renderDnMonthGrid();renderDnDayGrid();renderDnResultCard();const k=`${y}-${m}-${d}`;if(!DN_BY_YMD[k]||!DN_BY_YMD[k].length)return routeFail('date sans entrée','search');return true;}
     if(r.view==='collection'){await goCollections();const col=await dbGet('collections',r.collection).catch(()=>null);if(!col){showToast('Collection absente sur cet appareil');return true;}requestAnimationFrame(()=>{const el=document.querySelector(`.col-section[data-col-id="${r.collection}"]`);if(el)el.scrollIntoView({block:'start'});});return true;}
@@ -6320,8 +6515,8 @@ function renderAutourSection(container, label, icon, type, items) {
       closeAutour();
       autourOrigin = captureReaderOriginContext();
       if (item.para_id) pendingParaId = item.para_id;
-      if(itemSupp)await openSupplementItem(itemSupp,'autour',{originContext:autourOrigin});
-      else await openEntry(item.vol,item.entry_id,'autour',{originContext:autourOrigin});
+      if(itemSupp)await openSupplementItem(itemSupp,'autour',{originContext:autourOrigin,intent:READER_INTENT.CONSULTATION});
+      else await openEntry(item.vol,item.entry_id,'autour',{originContext:autourOrigin,intent:READER_INTENT.CONSULTATION});
     };
     card.onclick = openAutourCard;
     addKeyboardActivation(card.querySelector('.autour-card-main'),openAutourCard,`Ouvrir ${item.ref} · Tome ${item.vol}`);
@@ -6610,6 +6805,7 @@ async function boot() {
   setShellState('boot');
   await openDB();
   await initialiseSupplementMode();
+  await migrateReadingPositionsV3().catch(e=>console.warn('LDC: reading-position v3 migration deferred',e));
 
   // M4 schema-v4 migration is idempotent and non-destructive. It preserves
   // unresolved records and never silently relocates an ambiguous exact-text anchor.
@@ -6651,6 +6847,10 @@ async function boot() {
   renderSpeakerFilterRow();
   renderVolFilterRow();
   await renderHome();
+
+  // Reading-position lifecycle persistence is independent of service-worker availability.
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flushReadingPositionForLifecycle('visibility-hidden'); });
+  window.addEventListener('pagehide', () => { flushReadingPositionForLifecycle('pagehide'); });
 
   document.getElementById('loading').style.display = 'none';
   setShellState('normal');
@@ -6888,7 +7088,7 @@ function dnSelectDay(d) {
 }
 
 
-async function openDateNavRecordByIds(vol,entryId,supplementId=''){if(supplementId){const sp=supplementById(supplementId);if(sp)return openSupplementItem(sp,'date-nav');}return openEntry(vol,entryId,'date-nav');}
+async function openDateNavRecordByIds(vol,entryId,supplementId=''){if(supplementId){const sp=supplementById(supplementId);if(sp)return openSupplementItem(sp,'date-nav',{intent:READER_INTENT.CONSULTATION});}return openEntry(vol,entryId,'date-nav',{intent:READER_INTENT.CONSULTATION});}
 function dnSelectUndated() {
   dnMonth = null; dnDay = null;
   renderDnMonthGrid(); renderDnDayGrid();
@@ -6951,10 +7151,10 @@ function renderDnResultCard() {
    CacheStorage contains public app/corpus bytes only. IndexedDB settings holds
    the user-visible completion record; it is not itself the offline payload.
 ═══════════════════════════════════════════════════════ */
-const OFFLINE_CACHE_VERSION = 'ldc-le-livre-du-ciel-offline-v2.19.52-R1B';
+const OFFLINE_CACHE_VERSION = 'ldc-le-livre-du-ciel-offline-v2.19.54-R1B';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v2';
-const OFFLINE_CONTENT_BINDING = 'ab447e7372d3708b964fbc05f6aebb223a72a4474e4853661b6c943fbece7a71';
-const OFFLINE_CORPUS_MANIFEST_SHA256 = '85cb8b0b8095f47583fef851f7305d6819be7f3e6ee12b5c7212ca90c94062fc';
+const OFFLINE_CONTENT_BINDING = '4fa504084722700c317576a4935f96e2a1324d43e454e3fbf2c4ff56a1b0c893';
+const OFFLINE_CORPUS_MANIFEST_SHA256 = 'd461f5e69c888f3416405f03b9853573ae70a5a5d8886582fca4fda137ced78c';
 const OFFLINE_STATES = Object.freeze(['NOT_PREPARED','CHECKING','DOWNLOADING','READY','PARTIAL','ERROR','CANCELLED']);
 let offlineUiState = {state:'NOT_PREPARED',completed:0,total:0,failed:[],total_bytes:0,job_id:null,message:'',content_binding_sha256:OFFLINE_CONTENT_BINDING,corpus_manifest_sha256:OFFLINE_CORPUS_MANIFEST_SHA256};
 let runtimeCacheUiState = {entries:0,bytes:0,max_entries:48,max_bytes:50331648};

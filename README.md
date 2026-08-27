@@ -1,14 +1,42 @@
-# Livre du Ciel — v2.19.52-R1B / Public 52 — user-data restore compatibility + active binding repair successor
+# Livre du Ciel — v2.19.54-R1B / Public 54 — Protected Ma lecture suivie successor
 
-**Current candidate:** v2.19.52-R1B · Public version 52 · build date 2026-08-26.
+**Current candidate:** v2.19.54-R1B · Public version 54 · build date 2026-08-27.
 
-**Baseline:** immutable v2.19.51-R1B ZIP SHA-256 `f210fee480f33443a46da846fef397dbcc0842b04e8d1b9fc7e2ca509f193794`.
+**Baseline:** immutable locked v2.19.53-R1B ZIP SHA-256 `8eb546ceb9c8bc9d778c2c4d3912be1736d523dd94d427ade713a20f2cdb28d7`.
 
-**v52 repair scope:** backward-compatible restore of older valid user-data backups, safe multi-paragraph highlight re-anchoring, fail-closed preservation of unresolved anchors, restore rollback protection, and reconciliation of current public/offline binding contradictions detected in v51 during this repair. Canonical corpus wording, paragraph IDs, search, speakers, display, flow, SUP-T1/SUP-T2 content and the eight R2 text corrections remain unchanged.
+**v54 functional scope:** protected `Ma lecture suivie` state machine only: explicit SEQUENTIAL/CONSULTATION reader intent, session-scoped immutable position snapshots, ordered/atomic persistence, stale-callback rejection, navigation flush/invalidation, immediate sequential persistence, lifecycle safety flushes, journey source-mode binding, v2→v3 reading-position migration/confirmation, explicit confirmed/undoable relocation, minimal journey/consultation UX, and backup/import compatibility.
 
-**Release status inside package:** no final PASS claim. Final authority requires reopened-ZIP and separately implemented independent audit. Physical Samsung/iPhone/iPad/PWA/offline/VoiceOver/TalkBack gates remain external.
+**Protected content:** canonical corpus/search/speaker/display/flow/SUP-T1/SUP-T2 content, paragraph IDs/order, notes semantics, highlight anchoring semantics, favourites semantics, Lu semantics, and Collection Luisa architecture are not intentionally changed.
 
-> Everything below this line is historical predecessor documentation. Any older wording such as “current”, “governing”, “PASS”, “next stage” or release instruction applies only to its historical version and is superseded by the current v52 authority section above.
+**Release status inside package:** candidate bytes only; no final PASS claim. Final authority requires deterministic Build A/B, primary and independent reopened-ZIP audits, executable state-machine evidence, report/stale-reference reconciliation, reopened evidence ZIP, and final decision lock written last. Physical Samsung/iPhone/iPad/PWA/offline/VoiceOver/TalkBack gates remain external.
+
+> Everything below this line is historical predecessor documentation. Any older wording such as “current”, “governing”, “PASS”, “next stage” or release instruction applies only to its historical version and is superseded by the current v54 authority section above.
+
+---
+
+# Historical predecessor — Livre du Ciel v2.19.53-R1B / Public 53 — package-binding & current-metadata reconciliation successor
+
+**Historical v53 status:** locked `LIMITED_PASS`; package/binding consistency repaired. Superseded as the functional baseline by v54.
+
+# Livre du Ciel — v2.19.53-R1B / Public 53 — package-binding & current-metadata reconciliation successor
+
+**Current candidate:** v2.19.53-R1B · Public version 53 · build date 2026-08-27.
+
+**Baseline:** immutable failed-evidence v2.19.52-R1B ZIP SHA-256 `c49da37d61e83164071fad4f8596233aac479dfe74ea07b05b687beb56d27025`.
+
+**v53 repair scope:** release/package metadata and binding consistency only. No intentional change to corpus wording, paragraph IDs/order, search text/IDs, speaker data/offsets, display/flow/SUP payloads, user-data restore logic, reading-position runtime logic, highlights, notes, favourites, Lu semantics, or Collection Luisa architecture.
+
+**Release status inside package:** candidate bytes only; no final PASS claim. Final authority requires deterministic Build A/B, reopened-ZIP audit, separately implemented independent reopen, report/evidence reconciliation, reopened evidence ZIP, and decision lock written last. Physical Samsung/iPhone/iPad/PWA/offline/VoiceOver/TalkBack gates remain external.
+
+> Everything below this line is historical predecessor documentation. Any older wording such as “current”, “governing”, “PASS”, “next stage” or release instruction applies only to its historical version and is superseded by the current v53 authority section above.
+
+---
+
+# Historical immediate predecessor — Livre du Ciel v2.19.52-R1B / Public 52 — user-data restore compatibility + active binding repair successor
+
+**Historical status:** frozen failed evidence. Deep reconciliation found active `version.json` binding contradictions; v52 must not be deployed.
+
+**Historical v52 scope:** backward-compatible restore of older valid user-data backups, safe multi-paragraph highlight re-anchoring, fail-closed preservation of unresolved anchors, restore rollback protection, and attempted current binding reconciliation. Canonical corpus/search/speaker/display/flow/SUP payloads were preserved.
 
 ---
 
