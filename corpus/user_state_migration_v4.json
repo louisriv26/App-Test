@@ -1,0 +1,667 @@
+{
+  "schema": "ldc-user-state-migration-v4",
+  "from_generation": "G036-AFLP-R1B-SUP-T1",
+  "to_generation": "G036-AFLP-R2-SUP-T2",
+  "changed_paragraph_count": 8,
+  "paragraphs": [
+    {
+      "paragraph_id": "LDC.T19.E0049.P042",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0049",
+      "old_text": "Avant que l'acte ne commence, Je fais couler sur elle la Lumière et la Vertu de Ma Volonté pour qu'Elle le forme.",
+      "new_text": "Avant que l’acte ne commence, Je fais couler en lui la Lumière et la Vertu de Ma Volonté, afin que l’acte prenne son principe sur la Vertu que contient Ma Volonté.",
+      "old_sha256": "bf3d2269dedb62924c43b8076510911c1a4737cffd13dd598d13fd221ca9227c",
+      "new_sha256": "e4072081055c3ee095cd3dc6261666a479eb74282a0d7726be0105a806011518",
+      "old_fingerprint_v3": "fnv1a32:113:b3f11968",
+      "new_fingerprint_v3": "fnv1a32:163:4472858e",
+      "old_normalized": "avant que l acte ne commence je fais couler sur elle la lumiere et la vertu de ma volonte pour qu elle le forme",
+      "new_normalized": "avant que l acte ne commence je fais couler en lui la lumiere et la vertu de ma volonte afin que l acte prenne son principe sur la vertu que contient ma volonte",
+      "changed_ranges": [
+        {
+          "op": "replace",
+          "old_start": 11,
+          "old_end": 12,
+          "new_start": 11,
+          "new_end": 12,
+          "old_text": "'",
+          "new_text": "’"
+        },
+        {
+          "op": "replace",
+          "old_start": 45,
+          "old_end": 46,
+          "new_start": 45,
+          "new_end": 49,
+          "old_text": "s",
+          "new_text": "en l"
+        },
+        {
+          "op": "replace",
+          "old_start": 47,
+          "old_end": 53,
+          "new_start": 50,
+          "new_end": 51,
+          "old_text": "r elle",
+          "new_text": "i"
+        },
+        {
+          "op": "insert",
+          "old_start": 90,
+          "old_end": 90,
+          "new_start": 88,
+          "new_end": 105,
+          "old_text": "",
+          "new_text": ", afin que l’acte"
+        },
+        {
+          "op": "insert",
+          "old_start": 92,
+          "old_end": 92,
+          "new_start": 107,
+          "new_end": 114,
+          "old_text": "",
+          "new_text": "renne s"
+        },
+        {
+          "op": "insert",
+          "old_start": 93,
+          "old_end": 93,
+          "new_start": 115,
+          "new_end": 127,
+          "old_text": "",
+          "new_text": "n principe s"
+        },
+        {
+          "op": "insert",
+          "old_start": 96,
+          "old_end": 96,
+          "new_start": 130,
+          "new_end": 139,
+          "old_text": "",
+          "new_text": "la Vertu "
+        },
+        {
+          "op": "delete",
+          "old_start": 98,
+          "old_end": 102,
+          "new_start": 141,
+          "new_end": 141,
+          "old_text": "'Ell",
+          "new_text": ""
+        },
+        {
+          "op": "insert",
+          "old_start": 104,
+          "old_end": 104,
+          "new_start": 143,
+          "new_end": 157,
+          "old_text": "",
+          "new_text": "contient Ma Vo"
+        },
+        {
+          "op": "delete",
+          "old_start": 105,
+          "old_end": 108,
+          "new_start": 158,
+          "new_end": 158,
+          "old_text": "e f",
+          "new_text": ""
+        },
+        {
+          "op": "replace",
+          "old_start": 109,
+          "old_end": 112,
+          "new_start": 159,
+          "new_end": 162,
+          "old_text": "rme",
+          "new_text": "nté"
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "paragraph_id": "LDC.T19.E0049.P043",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0049",
+      "old_text": "Ainsi investi, Elle le transforme en Acte divin.",
+      "new_text": "À mesure qu’il se forme, la Lumière et la Vertu divines l’investissent et le développent ; et lorsqu’il s’achève, la Lumière le scelle et lui donne la forme d’un Acte divin.",
+      "old_sha256": "7602542f6fad5a4ebc0641f50b36f709e80472a83444df35b392fe7401dd8000",
+      "new_sha256": "e9748602d3f4ba690f3c2f8406c6f60c99d8a27f441a0cf61cbbc725fae32dcc",
+      "old_fingerprint_v3": "fnv1a32:48:cbcd2089",
+      "new_fingerprint_v3": "fnv1a32:173:a8ecba59",
+      "old_normalized": "ainsi investi elle le transforme en acte divin",
+      "new_normalized": "a mesure qu il se forme la lumiere et la vertu divines l investissent et le developpent et lorsqu il s acheve la lumiere le scelle et lui donne la forme d un acte divin",
+      "changed_ranges": [
+        {
+          "op": "replace",
+          "old_start": 0,
+          "old_end": 1,
+          "new_start": 0,
+          "new_end": 51,
+          "old_text": "A",
+          "new_text": "À mesure qu’il se forme, la Lumière et la Vertu div"
+        },
+        {
+          "op": "insert",
+          "old_start": 3,
+          "old_end": 3,
+          "new_start": 53,
+          "new_end": 54,
+          "old_text": "",
+          "new_text": "e"
+        },
+        {
+          "op": "delete",
+          "old_start": 4,
+          "old_end": 5,
+          "new_start": 55,
+          "new_end": 55,
+          "old_text": "i",
+          "new_text": ""
+        },
+        {
+          "op": "insert",
+          "old_start": 6,
+          "old_end": 6,
+          "new_start": 56,
+          "new_end": 58,
+          "old_text": "",
+          "new_text": "l’"
+        },
+        {
+          "op": "insert",
+          "old_start": 13,
+          "old_end": 13,
+          "new_start": 65,
+          "new_end": 112,
+          "old_text": "",
+          "new_text": "ssent et le développent ; et lorsqu’il s’achève"
+        },
+        {
+          "op": "delete",
+          "old_start": 15,
+          "old_end": 16,
+          "new_start": 114,
+          "new_end": 114,
+          "old_text": "E",
+          "new_text": ""
+        },
+        {
+          "op": "replace",
+          "old_start": 17,
+          "old_end": 18,
+          "new_start": 115,
+          "new_end": 123,
+          "old_text": "l",
+          "new_text": "a Lumièr"
+        },
+        {
+          "op": "insert",
+          "old_start": 23,
+          "old_end": 23,
+          "new_start": 128,
+          "new_end": 136,
+          "old_text": "",
+          "new_text": "scelle e"
+        },
+        {
+          "op": "replace",
+          "old_start": 24,
+          "old_end": 25,
+          "new_start": 137,
+          "new_end": 149,
+          "old_text": "r",
+          "new_text": " lui donne l"
+        },
+        {
+          "op": "replace",
+          "old_start": 26,
+          "old_end": 28,
+          "new_start": 150,
+          "new_end": 151,
+          "old_text": "ns",
+          "new_text": " "
+        },
+        {
+          "op": "replace",
+          "old_start": 34,
+          "old_end": 35,
+          "new_start": 157,
+          "new_end": 160,
+          "old_text": "e",
+          "new_text": "d’u"
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "paragraph_id": "LDC.T19.E0049.P044",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0049",
+      "old_text": "Ma Suprême Bonté se réjouit tellement",
+      "new_text": "Oh ! comme Ma Suprême Bonté se réjouit",
+      "old_sha256": "3a7416eb1c91d994857ed57a52c4fecadcaad083af04bb5e9605691981d63a42",
+      "new_sha256": "24f6f6fdaac83a4b9256a053eccc594f179faf1039c5cee5445b3c34bb4b039e",
+      "old_fingerprint_v3": "fnv1a32:37:c99749c1",
+      "new_fingerprint_v3": "fnv1a32:38:9e195506",
+      "old_normalized": "ma supreme bonte se rejouit tellement",
+      "new_normalized": "oh comme ma supreme bonte se rejouit",
+      "changed_ranges": [
+        {
+          "op": "insert",
+          "old_start": 0,
+          "old_end": 0,
+          "new_start": 0,
+          "new_end": 11,
+          "old_text": "",
+          "new_text": "Oh ! comme "
+        },
+        {
+          "op": "delete",
+          "old_start": 27,
+          "old_end": 37,
+          "new_start": 38,
+          "new_end": 38,
+          "old_text": " tellement",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "paragraph_id": "LDC.T19.E0049.P045",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0049",
+      "old_text": "- lorsque Je vois la créature en possession de cet Acte divin.",
+      "new_text": "- de voir que la créature possède cet Acte divin.",
+      "old_sha256": "bfa3be054ffd69e0158701e8ddd439fdeef6dd1443ecc9d008321ae6d46c9be2",
+      "new_sha256": "c1ab2c4afd0df0ad5f20fc71eedf081638274bf06dbec778b0b27c5a90e1021b",
+      "old_fingerprint_v3": "fnv1a32:62:6fd629c0",
+      "new_fingerprint_v3": "fnv1a32:49:9e5c9055",
+      "old_normalized": "lorsque je vois la creature en possession de cet acte divin",
+      "new_normalized": "de voir que la creature possede cet acte divin",
+      "changed_ranges": [
+        {
+          "op": "replace",
+          "old_start": 2,
+          "old_end": 11,
+          "new_start": 2,
+          "new_end": 3,
+          "old_text": "lorsque J",
+          "new_text": "d"
+        },
+        {
+          "op": "replace",
+          "old_start": 16,
+          "old_end": 17,
+          "new_start": 8,
+          "new_end": 13,
+          "old_text": "s",
+          "new_text": "r que"
+        },
+        {
+          "op": "delete",
+          "old_start": 30,
+          "old_end": 33,
+          "new_start": 26,
+          "new_end": 26,
+          "old_text": "en ",
+          "new_text": ""
+        },
+        {
+          "op": "replace",
+          "old_start": 37,
+          "old_end": 44,
+          "new_start": 30,
+          "new_end": 31,
+          "old_text": "ession ",
+          "new_text": "è"
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "paragraph_id": "LDC.T19.E0049.P046",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0049",
+      "old_text": "Mon éternel Amour ne se lasse jamais de distribuer sans limites ces Actes divins.",
+      "new_text": "À ces Actes, Mon éternel Amour ne dit jamais : « assez » ; Il donne, Il donne toujours,",
+      "old_sha256": "7ac2dd2a1a0d597b8fb1acb9adbc24a2c0029adf7eeab3cc4b0132e7ad921e6e",
+      "new_sha256": "31142e42a245fdba0926af089126b15dd1ddd50e72030137c3c4beaf1a480213",
+      "old_fingerprint_v3": "fnv1a32:81:71c6cbf4",
+      "new_fingerprint_v3": "fnv1a32:87:0fbcae42",
+      "old_normalized": "mon eternel amour ne se lasse jamais de distribuer sans limites ces actes divins",
+      "new_normalized": "a ces actes mon eternel amour ne dit jamais assez il donne il donne toujours",
+      "changed_ranges": [
+        {
+          "op": "insert",
+          "old_start": 0,
+          "old_end": 0,
+          "new_start": 0,
+          "new_end": 13,
+          "old_text": "",
+          "new_text": "À ces Actes, "
+        },
+        {
+          "op": "replace",
+          "old_start": 21,
+          "old_end": 29,
+          "new_start": 34,
+          "new_end": 37,
+          "old_text": "se lasse",
+          "new_text": "dit"
+        },
+        {
+          "op": "insert",
+          "old_start": 37,
+          "old_end": 37,
+          "new_start": 45,
+          "new_end": 62,
+          "old_text": "",
+          "new_text": ": « assez » ; Il "
+        },
+        {
+          "op": "insert",
+          "old_start": 38,
+          "old_end": 38,
+          "new_start": 63,
+          "new_end": 76,
+          "old_text": "",
+          "new_text": "onne, Il donn"
+        },
+        {
+          "op": "replace",
+          "old_start": 40,
+          "old_end": 42,
+          "new_start": 78,
+          "new_end": 85,
+          "old_text": "di",
+          "new_text": "toujour"
+        },
+        {
+          "op": "replace",
+          "old_start": 43,
+          "old_end": 81,
+          "new_start": 86,
+          "new_end": 87,
+          "old_text": "tribuer sans limites ces Actes divins.",
+          "new_text": ","
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "paragraph_id": "LDC.T19.E0049.P047",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0049",
+      "old_text": "Elle doit les regagner, sans aucune limite, à travers son Amour.",
+      "new_text": "parce que, devant ces Actes divins formés par la créature dans Ma Volonté, Mon Amour ne sait pas se limiter : puisqu’ils sont divins, Il doit les récompenser par un Amour infini et sans limites.",
+      "old_sha256": "c67e5898e8cbc54da05510b669143f564e8470c254f6e94101df57593bec2c2e",
+      "new_sha256": "c5f9c3b09d888f9c7b54d536bc8076234b6c9115bf66c9c5b9ac67aae176ec5c",
+      "old_fingerprint_v3": "fnv1a32:64:45664247",
+      "new_fingerprint_v3": "fnv1a32:194:c3fcf592",
+      "old_normalized": "elle doit les regagner sans aucune limite a travers son amour",
+      "new_normalized": "parce que devant ces actes divins formes par la creature dans ma volonte mon amour ne sait pas se limiter puisqu ils sont divins il doit les recompenser par un amour infini et sans limites",
+      "changed_ranges": [
+        {
+          "op": "replace",
+          "old_start": 0,
+          "old_end": 1,
+          "new_start": 0,
+          "new_end": 46,
+          "old_text": "E",
+          "new_text": "parce que, devant ces Actes divins formés par "
+        },
+        {
+          "op": "insert",
+          "old_start": 2,
+          "old_end": 2,
+          "new_start": 47,
+          "new_end": 68,
+          "old_text": "",
+          "new_text": "a créature dans Ma Vo"
+        },
+        {
+          "op": "insert",
+          "old_start": 3,
+          "old_end": 3,
+          "new_start": 69,
+          "new_end": 86,
+          "old_text": "",
+          "new_text": "onté, Mon Amour n"
+        },
+        {
+          "op": "insert",
+          "old_start": 4,
+          "old_end": 4,
+          "new_start": 87,
+          "new_end": 136,
+          "old_text": "",
+          "new_text": " sait pas se limiter : puisqu’ils sont divins, Il"
+        },
+        {
+          "op": "insert",
+          "old_start": 15,
+          "old_end": 15,
+          "new_start": 147,
+          "new_end": 152,
+          "old_text": "",
+          "new_text": "écomp"
+        },
+        {
+          "op": "delete",
+          "old_start": 16,
+          "old_end": 19,
+          "new_start": 153,
+          "new_end": 153,
+          "old_text": "gag",
+          "new_text": ""
+        },
+        {
+          "op": "insert",
+          "old_start": 20,
+          "old_end": 20,
+          "new_start": 154,
+          "new_end": 155,
+          "old_text": "",
+          "new_text": "s"
+        },
+        {
+          "op": "replace",
+          "old_start": 22,
+          "old_end": 23,
+          "new_start": 157,
+          "new_end": 180,
+          "old_text": ",",
+          "new_text": " par un Amour infini et"
+        },
+        {
+          "op": "delete",
+          "old_start": 28,
+          "old_end": 35,
+          "new_start": 185,
+          "new_end": 185,
+          "old_text": " aucune",
+          "new_text": ""
+        },
+        {
+          "op": "delete",
+          "old_start": 42,
+          "old_end": 52,
+          "new_start": 192,
+          "new_end": 192,
+          "old_text": ", à traver",
+          "new_text": ""
+        },
+        {
+          "op": "delete",
+          "old_start": 53,
+          "old_end": 63,
+          "new_start": 193,
+          "new_end": 193,
+          "old_text": " son Amour",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "paragraph_id": "LDC.T21.E0009.P043",
+      "volume": 21,
+      "entry_id": "LDC.T21.E0009",
+      "old_text": "Mais le soleil vient montrer la diversité et la vivacité de leurs couleurs.",
+      "new_text": "Mais dès que le soleil se lève, ses rayons chassent la crainte et, les pénétrant jusqu’au fond, y forment un fond d’or et d’argent, cristallisent les eaux et y produisent le plus bel enchantement. Ainsi toute la nature ressuscite par le soleil ; sans le soleil, on pourrait l’appeler une œuvre sans vie.",
+      "old_sha256": "534e2c9cb75a3cacc9694cfc5280151a34930a0a26daf4bcddca419615de6243",
+      "new_sha256": "25beda40b56638792d597ff36bffcb4e24faac9f8bf0c4785fb0246d2b67055a",
+      "old_fingerprint_v3": "fnv1a32:75:34132976",
+      "new_fingerprint_v3": "fnv1a32:303:f50c3935",
+      "old_normalized": "mais le soleil vient montrer la diversite et la vivacite de leurs couleurs",
+      "new_normalized": "mais des que le soleil se leve ses rayons chassent la crainte et les penetrant jusqu au fond y forment un fond d or et d argent cristallisent les eaux et y produisent le plus bel enchantement ainsi toute la nature ressuscite par le soleil sans le soleil on pourrait l appeler une uvre sans vie",
+      "changed_ranges": [
+        {
+          "op": "insert",
+          "old_start": 3,
+          "old_end": 3,
+          "new_start": 3,
+          "new_end": 249,
+          "old_text": "",
+          "new_text": "s dès que le soleil se lève, ses rayons chassent la crainte et, les pénétrant jusqu’au fond, y forment un fond d’or et d’argent, cristallisent les eaux et y produisent le plus bel enchantement. Ainsi toute la nature ressuscite par le soleil ; san"
+        },
+        {
+          "op": "insert",
+          "old_start": 14,
+          "old_end": 14,
+          "new_start": 260,
+          "new_end": 298,
+          "old_text": "",
+          "new_text": ", on pourrait l’appeler une œuvre sans"
+        },
+        {
+          "op": "delete",
+          "old_start": 18,
+          "old_end": 74,
+          "new_start": 302,
+          "new_end": 302,
+          "old_text": "nt montrer la diversité et la vivacité de leurs couleurs",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "paragraph_id": "LDC.T33.E0030.P002",
+      "volume": 33,
+      "entry_id": "LDC.T33.E0030",
+      "old_text": "Et son Amour est si grand qu'Il me dit avec des actes et avec des paroles : « C'est pour toi que J'ai fait cela. » J'ai fait mon tour dans la Création et le soleil, les étoiles. Le soleil ainsi que toute chose semblaient venir vers moi avec leur petit refrain : « C'est pour toi que notre Créateur nous a créés, parce qu'Il t'aime. Alors viens aimer Celui qui t'aime tant. »",
+      "new_text": "Et son Amour est si grand qu'Il me dit avec des actes et avec des paroles : « C’est pour toi que Je fais cela. » J'ai fait mon tour dans la Création et le soleil, les étoiles. Le soleil ainsi que toute chose semblaient venir vers moi avec leur petit refrain : « C'est pour toi que notre Créateur nous a créés, parce qu'Il t'aime. Alors viens aimer Celui qui t'aime tant. »",
+      "old_sha256": "d5d0bf4edf9dadd5f83bbf72462db6602c7acd41df071cc6039e4274b2cad3e9",
+      "new_sha256": "2a1e47624546d9f408df7ce0858fcb9e5b33928b45d91e7a718dfef329d13c77",
+      "old_fingerprint_v3": "fnv1a32:374:2341841e",
+      "new_fingerprint_v3": "fnv1a32:372:4fbd5b59",
+      "old_normalized": "et son amour est si grand qu il me dit avec des actes et avec des paroles c est pour toi que j ai fait cela j ai fait mon tour dans la creation et le soleil les etoiles le soleil ainsi que toute chose semblaient venir vers moi avec leur petit refrain c est pour toi que notre createur nous a crees parce qu il t aime alors viens aimer celui qui t aime tant",
+      "new_normalized": "et son amour est si grand qu il me dit avec des actes et avec des paroles c est pour toi que je fais cela j ai fait mon tour dans la creation et le soleil les etoiles le soleil ainsi que toute chose semblaient venir vers moi avec leur petit refrain c est pour toi que notre createur nous a crees parce qu il t aime alors viens aimer celui qui t aime tant",
+      "changed_ranges": [
+        {
+          "op": "replace",
+          "old_start": 79,
+          "old_end": 80,
+          "new_start": 79,
+          "new_end": 80,
+          "old_text": "'",
+          "new_text": "’"
+        },
+        {
+          "op": "replace",
+          "old_start": 98,
+          "old_end": 101,
+          "new_start": 98,
+          "new_end": 99,
+          "old_text": "'ai",
+          "new_text": "e"
+        },
+        {
+          "op": "replace",
+          "old_start": 105,
+          "old_end": 106,
+          "new_start": 103,
+          "new_end": 104,
+          "old_text": "t",
+          "new_text": "s"
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    }
+  ]
+}
