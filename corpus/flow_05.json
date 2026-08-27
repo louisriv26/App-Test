@@ -1,0 +1,441 @@
+{
+  "schema_version": "ldc-display-flow-v2",
+  "volume": 5,
+  "corpus_version": "G036-AFLP-R2-UWR2",
+  "group_count": 13,
+  "groups": [
+    {
+      "flow_id": "FLOW.T05.P005-P006.9_e001",
+      "entry_id": "ldc_t05_1903_03_19_e001",
+      "classification": "sentence_continuation",
+      "confidence": "high",
+      "origin": "approved_non_dash_continuation",
+      "review_status": "approved_for_display",
+      "reason": "function_word; prev ends ''aux fruits qui en'; curr starts 'résultent.'",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_03_19_e001_p005",
+          "stable_ref": "LDC.T05.1903-03-19.E001.P005",
+          "source_text_sha256": "094745b79110da6fc0514b501e6935b4738d100c76f8e057f4e0b7ff4f065d2e",
+          "canonical_length": 108,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B05.00045.ldc_t05_1903_03_19_e001_p005__ldc_t05_1903_03_19_e001_p006",
+            "evidence_sha256": "a23ab407d18644d95cfe200c024cd797dd2f7583703212d11ef8eb84626a5e2b"
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_03_19_e001_p006",
+          "stable_ref": "LDC.T05.1903-03-19.E001.P006",
+          "source_text_sha256": "59ab4b2f3f9b15e7e72d6bd544305da49a15002661c52c9a4acb3ab1e93cc65f",
+          "canonical_length": 10,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.P008-P009.6_e001",
+      "entry_id": "ldc_t05_1903_06_16_e001",
+      "classification": "sentence_continuation",
+      "confidence": "high",
+      "origin": "approved_non_dash_continuation",
+      "review_status": "approved_for_display",
+      "reason": "function_word; prev ends 'elle à Mes yeux et'; curr starts 'la plus intime ave'",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_06_16_e001_p008",
+          "stable_ref": "LDC.T05.1903-06-16.E001.P008",
+          "source_text_sha256": "0d592ede246a037b480e545becaede505703d8a9c1e25c32def75f6b53ca5d09",
+          "canonical_length": 71,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B05.00047.ldc_t05_1903_06_16_e001_p008__ldc_t05_1903_06_16_e001_p009",
+            "evidence_sha256": "9e13d2e6735471a295804c783e3287d01501a5c0c0066487a4f7f872b3b03533"
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_06_16_e001_p009",
+          "stable_ref": "LDC.T05.1903-06-16.E001.P009",
+          "source_text_sha256": "7a703da5717ea496ec973cbb3a89361dd927e499969ce5cd2af90d0d4be409df",
+          "canonical_length": 84,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.P010-P011.2_e001",
+      "entry_id": "ldc_t05_1903_10_02_e001",
+      "classification": "sentence_continuation",
+      "confidence": "high",
+      "origin": "approved_non_dash_continuation",
+      "review_status": "approved_for_display",
+      "reason": "function_word; prev ends ', une fraîcheur et'; curr starts 'une constance qui '",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_10_02_e001_p010",
+          "stable_ref": "LDC.T05.1903-10-02.E001.P010",
+          "source_text_sha256": "34a4451627f01c5cc027aed11c526f5674771059dfa34499ac84ebbcc2d9b883",
+          "canonical_length": 46,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": []
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_10_02_e001_p011",
+          "stable_ref": "LDC.T05.1903-10-02.E001.P011",
+          "source_text_sha256": "9e6f6142a06e8978ffb86208b8d3acece821985f0853fee2c907c569a383ae49",
+          "canonical_length": 75,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.P001-P002.7_e001",
+      "entry_id": "ldc_t05_1903_10_07_e001",
+      "classification": "sentence_continuation",
+      "confidence": "high",
+      "origin": "approved_non_dash_continuation",
+      "review_status": "approved_for_display",
+      "reason": "function_word; prev ends 'ent leur office et'; curr starts 'ils ne délaissent '",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_10_07_e001_p001",
+          "stable_ref": "LDC.T05.1903-10-07.E001.P001",
+          "source_text_sha256": "b51452de17a2b82a2774387d5bf537d873e0afc70f6635e47e030645e0f40841",
+          "canonical_length": 160,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B05.00048.ldc_t05_1903_10_07_e001_p001__ldc_t05_1903_10_07_e001_p002",
+            "evidence_sha256": "6895e2bf4bc7cdaabab71389814a61c7967dda036037993c6c599c58c4ef331d"
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_10_07_e001_p002",
+          "stable_ref": "LDC.T05.1903-10-07.E001.P002",
+          "source_text_sha256": "4f97a19b4d181c5b38a327daec6c74252e99a233d26e9d0661cd086458288c40",
+          "canonical_length": 69,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.P007-P008.ce_001",
+      "entry_id": "ldc_t05_intro_preface_001",
+      "classification": "sentence_continuation",
+      "confidence": "high",
+      "origin": "approved_non_dash_continuation",
+      "review_status": "approved_for_display",
+      "reason": "short_lower; prev ends 'Pour usage privé'; curr starts 'http://volontedivi'",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_intro_preface_001_p007",
+          "stable_ref": "LDC.T05.INTRO.PREFACE.001.P007",
+          "source_text_sha256": "39b92be342fc7e9a5c4855d81c1ed96fc1481c59e1f357e247a88a39de2143aa",
+          "canonical_length": 16,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": []
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_intro_preface_001_p008",
+          "stable_ref": "LDC.T05.INTRO.PREFACE.001.P008",
+          "source_text_sha256": "b0c2132239c361e6ac8b802926426380d8fd317b4b0a6e7e679849ba5de81bb5",
+          "canonical_length": 64,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.RA10.001.LDC_T05_1903_03_24_E001_P004__1903_03_24_E001_P005",
+      "entry_id": "ldc_t05_1903_03_24_e001",
+      "classification": "source_layout_sentence_continuation",
+      "confidence": "high",
+      "origin": "RA10_HISTORICAL_125_CLASS_REVALIDATED_CURRENT_LINEAGE",
+      "review_status": "approved_for_display",
+      "reason": "short comma-ended fragment continues into lowercase next fragment",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_03_24_e001_p004",
+          "stable_ref": "LDC.T05.1903-03-24.E001.P004",
+          "source_text_sha256": "1ec34cd8868e6f50a759de24ebe489ababf1b70721d81fb7e78b4b744caca4a2",
+          "canonical_length": 57,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": []
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_03_24_e001_p005",
+          "stable_ref": "LDC.T05.1903-03-24.E001.P005",
+          "source_text_sha256": "159fdeb12fc6ccf6ee2017a2397371cd2c17e83eb309a102122428d74ca919bc",
+          "canonical_length": 61,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.RA10.002.LDC_T05_1903_06_06_E001_P016__1903_06_06_E001_P017",
+      "entry_id": "ldc_t05_1903_06_06_e001",
+      "classification": "source_layout_sentence_continuation",
+      "confidence": "high",
+      "origin": "RA10_HISTORICAL_125_CLASS_REVALIDATED_CURRENT_LINEAGE",
+      "review_status": "approved_for_display",
+      "reason": "previous fragment has no terminal punctuation and next begins lowercase",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_06_06_e001_p016",
+          "stable_ref": "LDC.T05.1903-06-06.E001.P016",
+          "source_text_sha256": "a0ab022f505384195dc38641ee9f9b2bd2b149963d9713326ddb4f2d31e3daba",
+          "canonical_length": 170,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": []
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_06_06_e001_p017",
+          "stable_ref": "LDC.T05.1903-06-06.E001.P017",
+          "source_text_sha256": "12149b32cf2bc3ed5183350f7aa8fc1a6eafdf612d8c2cfda3610d52bbd098b6",
+          "canonical_length": 39,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.RA10.003.LDC_T05_1903_06_15_E001_P008__1903_06_15_E001_P009",
+      "entry_id": "ldc_t05_1903_06_15_e001",
+      "classification": "source_layout_sentence_continuation",
+      "confidence": "high",
+      "origin": "RA10_HISTORICAL_125_CLASS_REVALIDATED_CURRENT_LINEAGE",
+      "review_status": "approved_for_display",
+      "reason": "previous fragment has no terminal punctuation and next begins lowercase",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_06_15_e001_p008",
+          "stable_ref": "LDC.T05.1903-06-15.E001.P008",
+          "source_text_sha256": "ed6b3296b1ca9a7c6e8919a64ff0c96ba70371c1941e6fdb052f44bbe34abe49",
+          "canonical_length": 32,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B05.00046.ldc_t05_1903_06_15_e001_p008__ldc_t05_1903_06_15_e001_p009",
+            "evidence_sha256": "c4e58079d26894572fd30c584cce54e1c02f3dcc9445f01f51c47b7a9781704a"
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_06_15_e001_p009",
+          "stable_ref": "LDC.T05.1903-06-15.E001.P009",
+          "source_text_sha256": "f94911b376cef0d3f4a6fc3ffee3472b04d2c9911fd40bcbe6a5567be5ff9060",
+          "canonical_length": 95,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.RA10.004.LDC_T05_1903_10_12_E001_P004__1903_10_12_E001_P005",
+      "entry_id": "ldc_t05_1903_10_12_e001",
+      "classification": "source_layout_sentence_continuation",
+      "confidence": "high",
+      "origin": "RA10_HISTORICAL_125_CLASS_REVALIDATED_CURRENT_LINEAGE",
+      "review_status": "approved_for_display",
+      "reason": "short comma-ended fragment continues into lowercase next fragment",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_10_12_e001_p004",
+          "stable_ref": "LDC.T05.1903-10-12.E001.P004",
+          "source_text_sha256": "52d6566d9de24972cc7e1c9558ce41954ec2093a7f9d8e5157f91b931161251f",
+          "canonical_length": 10,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B05.00049.ldc_t05_1903_10_12_e001_p004__ldc_t05_1903_10_12_e001_p005",
+            "evidence_sha256": "7addab3d9482aa82fdbeca26483036e60e644945d70f9bcf6d51beb4aaf40c9d"
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_10_12_e001_p005",
+          "stable_ref": "LDC.T05.1903-10-12.E001.P005",
+          "source_text_sha256": "ca1b9d2be25728f94cd5e8e2c2d78112a0a2f92eaf43abf7e0dcbe41209ee453",
+          "canonical_length": 123,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.RA10.005.LDC_T05_1903_10_12_E001_P016__1903_10_12_E001_P017",
+      "entry_id": "ldc_t05_1903_10_12_e001",
+      "classification": "source_layout_sentence_continuation",
+      "confidence": "high",
+      "origin": "RA10_HISTORICAL_125_CLASS_REVALIDATED_CURRENT_LINEAGE",
+      "review_status": "approved_for_display",
+      "reason": "previous fragment has no terminal punctuation and next begins lowercase",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_10_12_e001_p016",
+          "stable_ref": "LDC.T05.1903-10-12.E001.P016",
+          "source_text_sha256": "ef54050460b5c0535a9cad84f22d2878c59b85eda14f20fd3bfdd2e93a28a1ce",
+          "canonical_length": 46,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B05.00050.ldc_t05_1903_10_12_e001_p016__ldc_t05_1903_10_12_e001_p017",
+            "evidence_sha256": "d491facd08c2234b0466844c78334ba7dfafa8cb2566d24d6eb68ae5824ce7f0"
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_10_12_e001_p017",
+          "stable_ref": "LDC.T05.1903-10-12.E001.P017",
+          "source_text_sha256": "5d26632640ebacbac3c85ed5434c432e532d9f54d65271e3e4f7d8150b502397",
+          "canonical_length": 72,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.RA10.006.LDC_T05_1903_10_25_E001_P008__1903_10_25_E001_P009",
+      "entry_id": "ldc_t05_1903_10_25_e001",
+      "classification": "source_layout_sentence_continuation",
+      "confidence": "high",
+      "origin": "RA10_HISTORICAL_125_CLASS_REVALIDATED_CURRENT_LINEAGE",
+      "review_status": "approved_for_display",
+      "reason": "previous fragment has no terminal punctuation and next begins lowercase",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_10_25_e001_p008",
+          "stable_ref": "LDC.T05.1903-10-25.E001.P008",
+          "source_text_sha256": "ec23d18432821e8caa434b4e43a22211a4d3fc46c8667d2b126d7e209b4ce688",
+          "canonical_length": 131,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B05.00051.ldc_t05_1903_10_25_e001_p008__ldc_t05_1903_10_25_e001_p009",
+            "evidence_sha256": "6c207a03eb03e79e05eda3a8cc51378b69bfd5771f8110ae0d43819aa7b12c80"
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_10_25_e001_p009",
+          "stable_ref": "LDC.T05.1903-10-25.E001.P009",
+          "source_text_sha256": "bee985d8889be2e92adcbeeac5085df98b2ac8f2df76a504f8c57204d08b65b5",
+          "canonical_length": 26,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.RA10.007.LDC_T05_1903_10_25_E001_P028__1903_10_25_E001_P029",
+      "entry_id": "ldc_t05_1903_10_25_e001",
+      "classification": "source_layout_sentence_continuation",
+      "confidence": "high",
+      "origin": "RA10_HISTORICAL_125_CLASS_REVALIDATED_CURRENT_LINEAGE",
+      "review_status": "approved_for_display",
+      "reason": "previous fragment has no terminal punctuation and next begins lowercase",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_10_25_e001_p028",
+          "stable_ref": "LDC.T05.1903-10-25.E001.P028",
+          "source_text_sha256": "e46d63149b5cc485f7b9c4415b97b79463cc4524b0a73735d1eebb1307f3ccac",
+          "canonical_length": 67,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": []
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_10_25_e001_p029",
+          "stable_ref": "LDC.T05.1903-10-25.E001.P029",
+          "source_text_sha256": "6160baff993d1dbf9aeb13f177de825a85d0fc44a1f0317ae760afb1a1ec3adc",
+          "canonical_length": 233,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T05.RA10.008.LDC_T05_1903_10_30_E001_P003__1903_10_30_E001_P004",
+      "entry_id": "ldc_t05_1903_10_30_e001",
+      "classification": "source_layout_sentence_continuation",
+      "confidence": "high",
+      "origin": "RA10_HISTORICAL_125_CLASS_REVALIDATED_CURRENT_LINEAGE",
+      "review_status": "approved_for_display",
+      "reason": "previous fragment has no terminal punctuation and next begins lowercase",
+      "members": [
+        {
+          "paragraph_id": "ldc_t05_1903_10_30_e001_p003",
+          "stable_ref": "LDC.T05.1903-10-30.E001.P003",
+          "source_text_sha256": "12974142826b9ed353b1ed418e00203309428bff250ee1d7d6950d1402267297",
+          "canonical_length": 152,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B05.00052.ldc_t05_1903_10_30_e001_p003__ldc_t05_1903_10_30_e001_p004",
+            "evidence_sha256": "493611ac21ec5a4f18122849b6c3642d9e858ebf9d1d2184b678766e04b27055"
+          }
+        },
+        {
+          "paragraph_id": "ldc_t05_1903_10_30_e001_p004",
+          "stable_ref": "LDC.T05.1903-10-30.E001.P004",
+          "source_text_sha256": "074a51521d5b8e1df462233dee6735bf73be83ebfb42d207fafe3a8b888a9922",
+          "canonical_length": 89,
+          "boundary_after": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,633 @@
+{
+  "schema_version": "ldc-display-flow-v2",
+  "volume": 33,
+  "corpus_version": "G036-AFLP-R2-UWR2",
+  "group_count": 18,
+  "groups": [
+    {
+      "flow_id": "FLOW.T33.P009-P010..E0015",
+      "entry_id": "LDC.T33.E0015",
+      "classification": "inherited_dash_continuation",
+      "confidence": "inherited_not_source_verified",
+      "origin": "legacy_runtime_inference",
+      "review_status": "preserved_pending_structural_review",
+      "reason": "runtime dash-merger inheritance",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0015.P009",
+          "stable_ref": "LDC.T33.E0015.P009",
+          "source_text_sha256": "f2705c25c4a0754742124826a91c82e9dbefca12cccadad60747fbdf9e1c4fc1",
+          "canonical_length": 304,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [
+              [
+                0,
+                2
+              ]
+            ],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20716.LDC.T33.E0015.P009__LDC.T33.E0015.P010",
+            "evidence_sha256": "9b26fe8b6d9bff8449863d72db6a36abc95a91734b6a6dfe9b521dc7b75132ac"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0015.P010",
+          "stable_ref": "LDC.T33.E0015.P010",
+          "source_text_sha256": "a0fe7d432e7fa5d12416b23deaaae354f84297217eed5862f8a635be14a44525",
+          "canonical_length": 64,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T33.P023-P024..E0047",
+      "entry_id": "LDC.T33.E0047",
+      "classification": "inherited_dash_continuation",
+      "confidence": "inherited_not_source_verified",
+      "origin": "legacy_runtime_inference",
+      "review_status": "preserved_pending_structural_review",
+      "reason": "runtime dash-merger inheritance",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0047.P023",
+          "stable_ref": "LDC.T33.E0047.P023",
+          "source_text_sha256": "f999c58e040012cf876983398f4406ab8753bbf5baeb665f17f337a5cb4943a3",
+          "canonical_length": 87,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [
+              [
+                0,
+                2
+              ]
+            ],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20727.LDC.T33.E0047.P023__LDC.T33.E0047.P024",
+            "evidence_sha256": "6142d139762adc9c35f5cb2fdef0b0c0d676595ed639567a831b2c19300820a6"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0047.P024",
+          "stable_ref": "LDC.T33.E0047.P024",
+          "source_text_sha256": "286a5e0d15735a163937a2700372f57e7d135887388b00113a81892884bb97f2",
+          "canonical_length": 105,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T33.P019-P020..E0051",
+      "entry_id": "LDC.T33.E0051",
+      "classification": "sentence_continuation",
+      "confidence": "high",
+      "origin": "approved_non_dash_continuation",
+      "review_status": "approved_for_display",
+      "reason": "function_word; prev ends 'tu dois savoir que'; curr starts 'dès l’instant où l'",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0051.P019",
+          "stable_ref": "LDC.T33.E0051.P019",
+          "source_text_sha256": "6052a3411d30aef2d191fa67ec18c68180561fda7abb9ac45c89897a3e79c0ea",
+          "canonical_length": 32,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20730.LDC.T33.E0051.P019__LDC.T33.E0051.P020",
+            "evidence_sha256": "3959961bd619ef466a5846563b00734a682f79843eec748b27078dd64466ac7c"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0051.P020",
+          "stable_ref": "LDC.T33.E0051.P020",
+          "source_text_sha256": "5d0630b222b6d78b38b9d45dc85cbd25a2d78c363199acbf95411cd3655af238",
+          "canonical_length": 453,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T33.RA10.001.LDC_T33_E0021_P007__LDC_T33_E0021_P008",
+      "entry_id": "LDC.T33.E0021",
+      "classification": "source_layout_sentence_continuation",
+      "confidence": "high",
+      "origin": "RA10_HISTORICAL_125_CLASS_REVALIDATED_CURRENT_LINEAGE",
+      "review_status": "approved_for_display",
+      "reason": "previous fragment has no terminal punctuation and next begins lowercase",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0021.P007",
+          "stable_ref": "LDC.T33.E0021.P007",
+          "source_text_sha256": "cda549d451ffcd66940eeb48bfe035b16f64d7d7f7c5b4ed9bc01c5021c19561",
+          "canonical_length": 73,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20719.LDC.T33.E0021.P007__LDC.T33.E0021.P008",
+            "evidence_sha256": "c3109bfbe32dc796de2cf898323be726517c160a0e322c5009c48b87bc0b29b8"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0021.P008",
+          "stable_ref": "LDC.T33.E0021.P008",
+          "source_text_sha256": "2a3de2efafe200c320029c106a40e5742bf8c88390e05a4a68741baad4e2dcac",
+          "canonical_length": 286,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.T33.RA10.002.LDC_T33_E0039_P009__LDC_T33_E0039_P010",
+      "entry_id": "LDC.T33.E0039",
+      "classification": "source_layout_sentence_continuation",
+      "confidence": "high",
+      "origin": "RA10_HISTORICAL_125_CLASS_REVALIDATED_CURRENT_LINEAGE",
+      "review_status": "approved_for_display",
+      "reason": "previous fragment has no terminal punctuation and next begins lowercase",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0039.P009",
+          "stable_ref": "LDC.T33.E0039.P009",
+          "source_text_sha256": "35926d1f0e5c0337d71514541cd599dc34c141c2ff0fde99a18cd9a2bdadde01",
+          "canonical_length": 114,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20723.LDC.T33.E0039.P009__LDC.T33.E0039.P010",
+            "evidence_sha256": "bc93fdd7186e60b0630fe93963446c2201ab4ddfcc8b8995edeb528994e72c80"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0039.P010",
+          "stable_ref": "LDC.T33.E0039.P010",
+          "source_text_sha256": "4bb42fbfe2d29b2ff6661e16c00f7101ecc7545735f6f23eae0ed1ea19a556cf",
+          "canonical_length": 123,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0002.P001-P002",
+      "entry_id": "LDC.T33.E0002",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0002.P001",
+          "stable_ref": "LDC.T33.E0002.P001",
+          "source_text_sha256": "6f2dafaeae179f3b251fa80ff75b2a6285fca5b9309086abf2b6b6c7570f18c4",
+          "canonical_length": 378,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0002.P002",
+          "stable_ref": "LDC.T33.E0002.P002",
+          "source_text_sha256": "ea756f041a10f542e4096d92aa1634efc0bb7db78bb14ee206df60f08c44872a",
+          "canonical_length": 128
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0009.P024-P025",
+      "entry_id": "LDC.T33.E0009",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0009.P024",
+          "stable_ref": "LDC.T33.E0009.P024",
+          "source_text_sha256": "2ce95b63815d7462f22ad3616d9ba7c43c509e65d7979bf1465feee83d3591ff",
+          "canonical_length": 203,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20715.LDC.T33.E0009.P024__LDC.T33.E0009.P025",
+            "evidence_sha256": "8a472518b6a2cc08cf7de253b50c90dc934ebcca482ed742b5cae813037948ed"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0009.P025",
+          "stable_ref": "LDC.T33.E0009.P025",
+          "source_text_sha256": "fbf003ddc22beb4d6eb6e28888a8d1969773f374ea9c3f2d01ba915e2bb40772",
+          "canonical_length": 87
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0017.P031-P032",
+      "entry_id": "LDC.T33.E0017",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0017.P031",
+          "stable_ref": "LDC.T33.E0017.P031",
+          "source_text_sha256": "5b6a89ced614d123551be7f1fe8675afc644512858686c1fe5cf20865f30bcce",
+          "canonical_length": 180,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20717.LDC.T33.E0017.P031__LDC.T33.E0017.P032",
+            "evidence_sha256": "d6db69e172a8a7a6376369a476cca2674baa0274dbd26559a4c772edd91d7601"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0017.P032",
+          "stable_ref": "LDC.T33.E0017.P032",
+          "source_text_sha256": "f20c88eebc89c3de889afe21409675c8b8563addb12b2b64ebe59cf2ffe605a8",
+          "canonical_length": 208
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0019.P013-P014",
+      "entry_id": "LDC.T33.E0019",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0019.P013",
+          "stable_ref": "LDC.T33.E0019.P013",
+          "source_text_sha256": "c1cd576db0ab1c978fa69d1cac69b3be1a568c784987da94a7ee2b988bf83bb2",
+          "canonical_length": 145,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20718.LDC.T33.E0019.P013__LDC.T33.E0019.P014",
+            "evidence_sha256": "6c0db4c6631174a108106a7978b9e9ae99c96ea8f83f1fb83660cb7c99e67fbd"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0019.P014",
+          "stable_ref": "LDC.T33.E0019.P014",
+          "source_text_sha256": "32ceb397cae7b4fda85ef4d8afb49b32c55a1b6f7dc3018e1dce83c3b0910725",
+          "canonical_length": 400
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0022.P027-P028",
+      "entry_id": "LDC.T33.E0022",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0022.P027",
+          "stable_ref": "LDC.T33.E0022.P027",
+          "source_text_sha256": "30f8c882d480d62015b07b7c598804c2d0538f37fc2e8a2be4ac5c7bc7245222",
+          "canonical_length": 162,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20720.LDC.T33.E0022.P027__LDC.T33.E0022.P028",
+            "evidence_sha256": "21d91b5501b312b6d8d3ec9c407a81d647e5d44d41a77e386099779f68a2a3cd"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0022.P028",
+          "stable_ref": "LDC.T33.E0022.P028",
+          "source_text_sha256": "3bddd8a3fbc48f836087e8f8ca55788cb3ffe34b624a03513465f5a48a95fef7",
+          "canonical_length": 455
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0024.P016-P017",
+      "entry_id": "LDC.T33.E0024",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0024.P016",
+          "stable_ref": "LDC.T33.E0024.P016",
+          "source_text_sha256": "674fcfec21909c72e964cc086ecc5a6811fa79c2ca5c3fd38c959c2f350ad44f",
+          "canonical_length": 284,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20721.LDC.T33.E0024.P016__LDC.T33.E0024.P017",
+            "evidence_sha256": "15f3cfce90d678bd1ee2fef4fb23a82c1a86f3bc74877d9e7535f703c6be6c08"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0024.P017",
+          "stable_ref": "LDC.T33.E0024.P017",
+          "source_text_sha256": "c0d32ffa112d5fbd865baa74bb5f0aec26482145d4f035c5764821fad9437bfa",
+          "canonical_length": 167
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0035.P006-P007",
+      "entry_id": "LDC.T33.E0035",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0035.P006",
+          "stable_ref": "LDC.T33.E0035.P006",
+          "source_text_sha256": "b7d38bfdaee38055e0be5e8bb1df98c6f71131337d85741014921c88b128a799",
+          "canonical_length": 124,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20722.LDC.T33.E0035.P006__LDC.T33.E0035.P007",
+            "evidence_sha256": "9fbe0babeeabb7bcd832ccd1aa5d36ea2d1f35d3af77ce9c69b18d3028a8e70d"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0035.P007",
+          "stable_ref": "LDC.T33.E0035.P007",
+          "source_text_sha256": "3f92a862f3b7ffbfc5de226313f8d7b21f6aff7f9f52d87a353b2860fbf13390",
+          "canonical_length": 168
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0041.P011-P012",
+      "entry_id": "LDC.T33.E0041",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0041.P011",
+          "stable_ref": "LDC.T33.E0041.P011",
+          "source_text_sha256": "f17c6829af616b8f4aa2fb70f6bb742e7ccad3b85f2796961be166dbe4f4e051",
+          "canonical_length": 78,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20724.LDC.T33.E0041.P011__LDC.T33.E0041.P012",
+            "evidence_sha256": "77a46c45c4e239cad3d4f490443fd49b16ff0c0ec57ae2250aef40d24c49407b"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0041.P012",
+          "stable_ref": "LDC.T33.E0041.P012",
+          "source_text_sha256": "7352e2e949edb2942fa29ab37bc77ff1da99dfb08acd30f261cafdcd5123121c",
+          "canonical_length": 110
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0046.P024-P025",
+      "entry_id": "LDC.T33.E0046",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0046.P024",
+          "stable_ref": "LDC.T33.E0046.P024",
+          "source_text_sha256": "59c6f35c8dd0c0d18567239fec2a97cf404814ccee6fd98881a18fd0fe946ea0",
+          "canonical_length": 100,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20725.LDC.T33.E0046.P024__LDC.T33.E0046.P025",
+            "evidence_sha256": "f0efd9bc7df0a14ab4f1583cd7f7c4de38ef95890c52eed336103c187bcc6d96"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0046.P025",
+          "stable_ref": "LDC.T33.E0046.P025",
+          "source_text_sha256": "a3ecdb453b27f7e8366e09a03658db4e10fb2acfe89ca6badf530c287a3004d1",
+          "canonical_length": 220
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0046.P028-P029",
+      "entry_id": "LDC.T33.E0046",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0046.P028",
+          "stable_ref": "LDC.T33.E0046.P028",
+          "source_text_sha256": "6cca1dd370db7975aabdef194de1cb027fd4ff69cc8b7ee904a1fdeae0c4097e",
+          "canonical_length": 168,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.J3.CHECKPOINT_ITPM_SINGLE_WITNESS_UNIT",
+            "evidence_ref": "RA19B:B33.20726.LDC.T33.E0046.P028__LDC.T33.E0046.P029",
+            "evidence_sha256": "649b6733059809f9dc7b5d6e2ae7a8b5697b75c4bfade9492b92ab442f0adf62"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0046.P029",
+          "stable_ref": "LDC.T33.E0046.P029",
+          "source_text_sha256": "bc380ec5b2540819d276fb7dc2f6b9db3d8a61c2881964eaed55e316e5f418b2",
+          "canonical_length": 97
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0048.P010-P011",
+      "entry_id": "LDC.T33.E0048",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0048.P010",
+          "stable_ref": "LDC.T33.E0048.P010",
+          "source_text_sha256": "81ecedb49889a55e39415bedac4decb4f0f3877fa7b9235770d5dfa72662fa98",
+          "canonical_length": 65,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20728.LDC.T33.E0048.P010__LDC.T33.E0048.P011",
+            "evidence_sha256": "268b271e56db90b60b5f33a45516744ddc88eb437d1a2ced5f354be381ab62c8"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0048.P011",
+          "stable_ref": "LDC.T33.E0048.P011",
+          "source_text_sha256": "41636ad3960126df1ecc22c8e605f58d141d3309bc0d35c977c0bf99e07aa996",
+          "canonical_length": 264
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0050.P004-P005",
+      "entry_id": "LDC.T33.E0050",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0050.P004",
+          "stable_ref": "LDC.T33.E0050.P004",
+          "source_text_sha256": "86cbb2bfaab763a1f1d1df13162bd4464e372570cf8aebe7941daa9a3f527218",
+          "canonical_length": 210,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20729.LDC.T33.E0050.P004__LDC.T33.E0050.P005",
+            "evidence_sha256": "853f777b8189de5d6ae5f392069908e0a58b7f3d52d1c6cd7018e52e8f31afdd"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0050.P005",
+          "stable_ref": "LDC.T33.E0050.P005",
+          "source_text_sha256": "2e42c0b761e3c1f118877897d5efe778d30818d4001cf3c42d485ca7f70d823c",
+          "canonical_length": 102
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T33.LDC_T33_E0053.P007-P008",
+      "entry_id": "LDC.T33.E0053",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "LDC.T33.E0053.P007",
+          "stable_ref": "LDC.T33.E0053.P007",
+          "source_text_sha256": "4548de10816f78ece4c353717ea1b7c95974d8e8b21947d250e88680e8f5dbac",
+          "canonical_length": 201,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_policy": "continuous_prose",
+            "visual_action": "join_inline",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.JOIN.DIRECT_ITPM_CONTINUITY",
+            "evidence_ref": "RA19B:B33.20731.LDC.T33.E0053.P007__LDC.T33.E0053.P008",
+            "evidence_sha256": "daeacaacfdf63b6d00457105dd5e4f177094dc44b1a1b9d3ff8803434dbac3ee"
+          }
+        },
+        {
+          "paragraph_id": "LDC.T33.E0053.P008",
+          "stable_ref": "LDC.T33.E0053.P008",
+          "source_text_sha256": "287bf54fb26d503696a99b50e5af31432ba6d415e7040b4b99f3fec9a7de0676",
+          "canonical_length": 123
+        }
+      ]
+    }
+  ]
+}

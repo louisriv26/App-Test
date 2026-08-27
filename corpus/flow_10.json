@@ -1,0 +1,71 @@
+{
+  "schema_version": "ldc-display-flow-v2",
+  "volume": 10,
+  "corpus_version": "G036-AFLP-R2-UWR2",
+  "group_count": 2,
+  "groups": [
+    {
+      "flow_id": "FLOW.T10.RA10.001.LDC_T10_1911_01_15_E001_P011__1911_01_15_E001_P012",
+      "entry_id": "ldc_t10_1911_01_15_e001",
+      "classification": "source_layout_sentence_continuation",
+      "confidence": "high",
+      "origin": "RA10_HISTORICAL_125_CLASS_REVALIDATED_CURRENT_LINEAGE",
+      "review_status": "approved_for_display",
+      "reason": "previous fragment has no terminal punctuation and next begins lowercase",
+      "members": [
+        {
+          "paragraph_id": "ldc_t10_1911_01_15_e001_p011",
+          "stable_ref": "LDC.T10.1911-01-15.E001.P011",
+          "source_text_sha256": "f44172c7178e5b7fd6c3edcc285b45b50b01f7d802482437a3ef2f1b41788886",
+          "canonical_length": 27,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only",
+            "suppress_next_leading_ranges": [],
+            "visual_policy": "preserve_break_ambiguous",
+            "visual_action": "preserve_break",
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "adjudication_rule_id": "RA19B.KEEP.DIRECT_ITPM_PARAGRAPH_BOUNDARY",
+            "evidence_ref": "RA19B:B10.00088.ldc_t10_1911_01_15_e001_p011__ldc_t10_1911_01_15_e001_p012",
+            "evidence_sha256": "ba3465a7ce40ec1a23c028577570fa997ea0233694e654344d33ca4ed3e5ed29"
+          }
+        },
+        {
+          "paragraph_id": "ldc_t10_1911_01_15_e001_p012",
+          "stable_ref": "LDC.T10.1911-01-15.E001.P012",
+          "source_text_sha256": "c2fe517b7afc68cf8ff04e0284a590f52df10e96d27e0c02a5e83143c2dbf6ce",
+          "canonical_length": 164,
+          "boundary_after": null
+        }
+      ]
+    },
+    {
+      "flow_id": "FLOW.RA11.T10.ldc_t10_1911_10_26_e001.P007-P008",
+      "entry_id": "ldc_t10_1911_10_26_e001",
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "origin": "RA11_226_CASE_ADJUDICATION",
+      "review_status": "source_or_grammar_discourse_adjudicated",
+      "reason": "RA11 broader-boundary adjudication: canonical punctuation/grammar proves continuous prose; display-flow repair preserves canonical records.",
+      "members": [
+        {
+          "paragraph_id": "ldc_t10_1911_10_26_e001_p007",
+          "stable_ref": "LDC.T10.1911-10-26.E001.P007",
+          "source_text_sha256": "7cea11e01339923f5f879f48559b4cf1f951be24dc972a60da2d9fff459b2cd6",
+          "canonical_length": 81,
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only"
+          }
+        },
+        {
+          "paragraph_id": "ldc_t10_1911_10_26_e001_p008",
+          "stable_ref": "LDC.T10.1911-10-26.E001.P008",
+          "source_text_sha256": "acbb99fc06a273982fdf9db0cd7a02cca393dd24d1b6070217e5c1d9b1716760",
+          "canonical_length": 185
+        }
+      ]
+    }
+  ]
+}
