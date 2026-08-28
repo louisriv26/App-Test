@@ -1,3 +1,39 @@
+# Livre du Ciel — v2.19.59-R1B / Public 59 — M12 atomic bootstrap successor
+
+**Current candidate:** v2.19.59-R1B · Public version 59 · build date 2026-08-28.
+
+**Baseline:** exact locked v55 deploy SHA-256 `a7ac741f28b243c86c7c58d21ea5ae24120cd45a287ae8384fddc2df0bd76dc4`.
+
+**M9 authorised scope:** exactly 6 R3 fidelity cases / 10 existing paragraphs plus 15 SUP-T4 cases / 22 internal complement fragments, as locked by M8. No other corpus mutation is authorised.
+
+**Current corpus architecture:** ALIGNÉ `G036-AFLP-R3-UWR2` = 2,312 entries / 74,348 paragraphs; COMPLÉMENT = 74 items / 176 paragraphs / 142 speaker segments; ENRICHI `G036-AFLP-R3-SUP-T4` = 2,325 entries / 74,524 paragraphs.
+
+**Protected:** existing paragraph IDs/order, user-data schema v4, `ldc-reading-position-v3`, Ma lecture suivie SEQUENTIAL/CONSULTATION model, Lu independence, inherited SUP-T1/SUP-T2/SUP-T3 payloads/placements, and excluded/held M8 cases.
+
+**External status:** real browser/physical/PWA/accessibility validation remains successor-specific and is not inherited from v54/v55.
+
+> Everything below this line is the byte-preserved v55 README and inherited historical release documentation. Older “current”/PASS/count/version wording below is historical only.
+
+---
+
+# Livre du Ciel — v2.19.55-R1B / Public 55 — M6 bounded corpus-metadata successor
+
+**Current candidate:** v2.19.55-R1B · Public version 55 · build date 2026-08-28.
+
+**Baseline:** exact locked v54 deploy SHA-256 `c860ee3c1f722135a84abdd66d5f0b9bea2ca611fd6b3a1cb7121cc83f66e0fc`.
+
+**M6 authorised scope:** exactly the six M5/G17 bounded candidates: three AFLP display-date restorations; one COMPLÉMENT-only SUP-T3 recovery of the historically bound T15/T16 “three columns” discourse at 2 December 1922; M2-0105 identifier/provenance reconciliation with legacy alias; M2-0113 post-R2 anchor-authority reconciliation.
+
+**Current corpus architecture:** ALIGNÉ `G036-AFLP-R2-UWR2` = 2,312 entries / 74,348 paragraphs; COMPLÉMENT = 59 items / 154 paragraphs / 120 speaker segments; ENRICHI `G036-AFLP-R2-SUP-T3` = 2,325 entries / 74,502 paragraphs.
+
+**Protected:** ALIGNÉ paragraph wording/IDs/order, R2 speaker layer, display/flow topology, all inherited SUP-T1/SUP-T2 textual payloads/placements, user-data schema v4, `ldc-reading-position-v3`, protected Ma lecture suivie state machine, notes/highlights/favourites/Lu and Collection Luisa contracts.
+
+**Physical/browser authority:** not promoted by this package. Real browser IndexedDB and physical Samsung/iPhone/iPad/PWA/offline/accessibility tests remain external gates.
+
+> Everything below this line is the byte-preserved v54 README and its inherited historical release documentation. Any older “current”, PASS, release, count, generation, or next-stage wording below is historical only and is not current v55 authority.
+
+---
+
 # Livre du Ciel — v2.19.54-R1B / Public 54 — Protected Ma lecture suivie successor
 
 **Current candidate:** v2.19.54-R1B · Public version 54 · build date 2026-08-27.
@@ -641,3 +677,18 @@ Les validations physiques iPhone/iPad/Samsung, PWA installée/mode avion, origin
 RA2C part du ZIP exact v2.19.6-R1B (SHA-256 `64872f494449c2be5e54da67e0b14acb8825fe0a5b6cafb7fd78d86348f92638`). Cette tranche est limitée à l'interface : elle fusionne **À propos** dans la fin de **Aide** sous **À propos et sources**, sans réécrire la provenance éditoriale, et réduit la barre contextuelle primaire à **Surligner · Note · Copier · Fermer**. **Partager la référence** et **Copier le lien** restent dans les outils du lecteur ; **Ajouter à une collection** reste une action secondaire propre au Livre du Ciel.
 
 Aucun fichier `corpus/`, aucune traduction Translation Set 1, aucun ID, aucun segment de locuteur, aucun index de recherche, aucun schéma de données utilisateur et aucun comportement de sélection Android/iPhone/iPad n'est modifié par RA2C. La palette reste **Jaune · Bleu · Vert · Violet · Rose**. Les validations physiques iPhone/iPad/Samsung, PWA installée, mode avion, origine GitHub Pages exacte et lecteurs d'écran restent externes à cette tranche.
+
+
+## M10 v57 runtime hotfix
+
+Version 57 preserves the exact R3/SUP-T4 corpus content from the corrected v56 baseline. It moves service-worker synchronisation ahead of the first corpus request so an older installed worker cannot mix predecessor corpus files with a newer index. If boot still cannot synchronise, the loading screen becomes a visible repair action that clears app caches/service-worker state only; IndexedDB user data is preserved.
+
+
+## M11 v58 bootstrap hardening
+
+v58 supersedes v57 after deep re-audit. It preserves the exact R3/SUP-T4 corpus payload, extends service-worker install tolerance for the ~7.5 MB/35-asset atomic shell, prevents destructive repair while offline, distinguishes service-worker/corpus failures from IndexedDB/other boot failures, and corrects active current-state metadata that still referred to v56.
+
+
+## M12 v59 atomic bootstrap hardening
+
+v59 supersedes v58 after an additional adversarial service-worker review. The installed shell cache is now immutable for its release; network navigation no longer overwrites an older shell with a newer HTML document. Corpus files that the fetch handler never reads from SHELL_CACHE were removed from the install shell. Instead, the two boot-critical registry files (`corpus/supplements.json` and `corpus/supplement_manifest.json`) are fetched by the installing worker, SHA/size/content-binding verified against the new offline manifest, and staged in the new versioned runtime cache before activation. Thus a successful worker installation carries the exact registry needed for the next boot. Generic corpus timeouts now default to retry rather than cache deletion; repair remains available only for an identified version/integrity conflict.

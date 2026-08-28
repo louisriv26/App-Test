@@ -1,13 +1,13 @@
 {
-  "app_version": "v2.19.54-R1B",
-  "public_version": "54",
-  "build_date": "2026-08-27",
-  "corpus_version": "G036-AFLP-R2-SUP-T2",
-  "stage": "LDC-V54-PROTECTED-LECTURE-SUIVIE-STATE-MACHINE",
-  "baseline_candidate_version": "v2.19.53-R1B",
-  "baseline_candidate_sha256": "8eb546ceb9c8bc9d778c2c4d3912be1736d523dd94d427ade713a20f2cdb28d7",
-  "owner_stage_start_authorisation": "MASTER_SCRIPT_STAGE_B_PROTECTED_LECTURE_SUIVIE",
-  "owner_override_note": "v54 is a narrowly scoped functional successor to locked v53. It replaces navigation-origin inference with an explicit protected Ma lecture suivie state machine and reading-position v3 while preserving corpus/search/speaker/display/flow/SUP content and unrelated user-data semantics.",
+  "app_version": "v2.19.59-R1B",
+  "public_version": "59",
+  "build_date": "2026-08-28",
+  "corpus_version": "G036-AFLP-R3-SUP-T4",
+  "stage": "LDC-V59-M12-ATOMIC-BOOTSTRAP",
+  "baseline_candidate_version": "v2.19.58-R1B",
+  "baseline_candidate_sha256": "a63eb58b6c7165e2d6d0a812d39d0d6c58a36fc9d33c94c3cd03473fa14a787d",
+  "owner_stage_start_authorisation": "M12_RUNTIME_HARDENING__ATOMIC_BOOT_CRITICAL_CACHE_AND_IMMUTABLE_SHELL",
+  "owner_override_note": "v59 preserves the exact v58 R3/SUP-T4 corpus payload while making the installed shell immutable across future network navigations, atomically staging and SHA-verifying the two boot-critical corpus registry files in the versioned runtime cache before worker activation, narrowing cache repair to proven version/integrity conflicts, and removing stale supplement fallback counts.",
   "reader_contract": "ONE_CALM_READER_PLUS_OPTIONAL_REPERES",
   "context_action_contract": "SELECTION_OR_PARAGRAPH_SINGLE_CONTEXT_SURFACE",
   "vector_binding": "RETIRED_FROM_DEPLOY__LEXICAL_BM25_METADATA_SEARCH_AUTHORITATIVE__FUTURE_VECTOR_SEARCH_REQUIRES_FULL_COMPOSITE_REBUILD_AND_BUNDLED_OR_SELF_HOSTED_RUNTIME",
@@ -30,11 +30,11 @@
   "owner_user_acceptance": "NOT_A_DEPLOYMENT_AUTHORITY__EXTERNAL_DEVICE_VALIDATION_PENDING",
   "offline_state_schema": "ldc-offline-state-v2",
   "offline_manifest_schema": "ldc-offline-manifest-v2",
-  "offline_cache_version": "ldc-le-livre-du-ciel-offline-v2.19.54-R1B",
-  "offline_scope": "COMPLETE_36_TOME_READING_PLUS_ALIGNE_R2_PLUS_ACTIVE_SUP_T1_SUP_T2_COMPLEMENTS_PLUS_LEXICAL_BM25_METADATA_SPEAKER_SEARCH_PLUS_USER_STATE_MIGRATION_V4__VECTOR_EMBEDDING_SUBSYSTEM_RETIRED",
+  "offline_cache_version": "ldc-le-livre-du-ciel-offline-v2.19.59-R1B",
+  "offline_scope": "COMPLETE_36_TOME_READING_PLUS_ALIGNE_R3_PLUS_ACTIVE_SUP_T1_SUP_T2_SUP_T3_SUP_T4_COMPLEMENTS_PLUS_LEXICAL_BM25_METADATA_SPEAKER_SEARCH_PLUS_USER_STATE_MIGRATION_V4_AND_R3__VECTOR_EMBEDDING_SUBSYSTEM_RETIRED",
   "volume_lru_max": 4,
-  "offline_content_binding_sha256": "4fa504084722700c317576a4935f96e2a1324d43e454e3fbf2c4ff56a1b0c893",
-  "offline_corpus_manifest_sha256": "d461f5e69c888f3416405f03b9853573ae70a5a5d8886582fca4fda137ced78c",
+  "offline_content_binding_sha256": "c0faf7784b7a6011a3010e562438eeece14023811a1eed1edd087c8740843e21",
+  "offline_corpus_manifest_sha256": "0ed5db715f73ab0174ed2af8eabb5c970593a662c710cd05b01ebefcd2ebbe26",
   "offline_integrity_contract": "EVERY_OFFLINE_ASSET_BYTE_LENGTH_AND_SHA256_VERIFIED_BEFORE_CACHE_ACCEPTANCE__READY_REQUIRES_VERIFIED_CACHE_MARKERS_AND_EXACT_CONTENT_BINDING",
   "owner_acceptance_findings_2026_08_12": [
     "existing-highlight palette inconsistent with original highlight palette",
@@ -83,22 +83,28 @@
       "speaker projection"
     ]
   },
-  "backbone_corpus_version": "G036-AFLP-R2-UWR2",
-  "supplement_programme": "LDC-AFLP-SUP-T1-SUP-T2",
+  "backbone_corpus_version": "G036-AFLP-R3-UWR2",
+  "supplement_programme": "LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4",
   "supplement_counts": {
-    "items": 58,
+    "items": 74,
     "sup_t1_items": 14,
     "sup_t2_items": 44,
-    "complete_entries": 12,
-    "internal_supplements": 46,
-    "paragraphs": 149,
-    "speaker_segments": 117
+    "complete_entries": 13,
+    "internal_supplements": 61,
+    "legacy_sup_t1_inline_supplements": 2,
+    "paragraphs": 176,
+    "search_records": 176,
+    "speaker_segments": 142,
+    "sup_t2_speaker_segments": 65,
+    "sup_t3_items": 1,
+    "sup_t4_items": 15,
+    "sup_t4_speaker_segments": 22
   },
-  "supplement_provenance_contract": "AFLP_SCOPE_FIXED__HISTORICAL_R1B_IMMUTABLE__ACTIVE_R2_CRITICALLY_CORRECTED__SUP_T1_IMMUTABLE_PROVENANCE__SUP_T2_M3_LOCKED__CASE_SPECIFIC_FRENCH_WORDING_PROVENANCE",
+  "supplement_provenance_contract": "AFLP_SCOPE_FIXED__HISTORICAL_R1B_IMMUTABLE__ACTIVE_R3_M8_FIDELITY_CORRECTED__SUP_T1_SUP_T2_SUP_T3_LOCKED__SUP_T4_M8_ENGINEERED__NO_MAJORITY_VOTE__CASE_SPECIFIC_FRENCH_WORDING_PROVENANCE",
   "reading_source_mode_contract": "JOURNEY_MAIN_PERSISTS_SOURCE_MODE__SEQUENTIAL_MODE_CHANGES_MAY_UPDATE_JOURNEY__CONSULTATION_MODE_CHANGES_CANNOT_UPDATE_MAIN__THREE_USER_MODES_ALIGNE_COMPLEMENT_ENRICHI",
   "vector_search_authorised": false,
-  "offline_asset_count": 225,
-  "offline_total_bytes": 193269355,
+  "offline_asset_count": 226,
+  "offline_total_bytes": 193718135,
   "supplement_provenance_fields_embedded": true,
   "supplement_runtime_schema": "ldc-supplement-registry-v2",
   "static_audit_scope": "PACKAGE_BYTES_AND_BUILD_BINDINGS_ONLY__POST_FREEZE_REOPEN_RESULTS_EXTERNAL__PHYSICAL_DEVICE_LIVE_ORIGIN_PWA_OFFLINE_SCREEN_READER_NOT_CLAIMED",
@@ -583,10 +589,10 @@
     "highlight_storage_changed": false,
     "user_data_schema_changed": false
   },
-  "physical_samsung_android_gate": "NOT_TESTED_CURRENT_V54_CANDIDATE",
-  "physical_iphone_gate": "NOT_TESTED_CURRENT_V54_CANDIDATE",
-  "physical_ipad_gate": "NOT_TESTED_CURRENT_V54_CANDIDATE",
-  "wide_public_release": "NOT_AUTHORIZED__CURRENT_V54_PHYSICAL_DEVICE_PWA_ACCESSIBILITY_AND_LECTURE_SUIVIE_PHYSICAL_GATES_OPEN",
+  "physical_samsung_android_gate": "NOT_TESTED_CURRENT_V59_CANDIDATE",
+  "physical_iphone_gate": "NOT_TESTED_CURRENT_V59_CANDIDATE",
+  "physical_ipad_gate": "NOT_TESTED_CURRENT_V59_CANDIDATE",
+  "wide_public_release": "NOT_AUTHORIZED__CURRENT_V59_PHYSICAL_DEVICE_PWA_ACCESSIBILITY_AND_LECTURE_SUIVIE_PHYSICAL_GATES_OPEN",
   "ra19d_mobile_shell_integrity": {
     "date": "2026-08-22",
     "baseline_app_version": "v2.19.30-R1B",
@@ -787,9 +793,9 @@
     "speaker_offsets_changed": false,
     "normal_reader_reperes_off_changed": false
   },
-  "package_state_at_freeze": "V54_PROTECTED_LECTURE_SUIVIE_CANDIDATE__NO_POST_FREEZE_PASS_CLAIM_INSIDE_DEPLOY_PACKAGE",
+  "package_state_at_freeze": "V59_M12_ATOMIC_BOOTSTRAP_STATIC_SUCCESSOR__EXTERNAL_VALIDATION_REQUIRED",
   "external_decision_authority": "FINAL_DECISION_LOCK_EXTERNAL_TO_DEPLOY_ZIP__WRITTEN_LAST_AFTER_PRIMARY_AND_INDEPENDENT_REOPEN_AUDITS",
-  "external_validation_status": "NOT_ASSERTED_BY_PACKAGE__PHYSICAL_DEVICE_PWA_ACCESSIBILITY_AND_LECTURE_SUIVIE_DEVICE_GATES_NOT_TESTED_CURRENT_V54",
+  "external_validation_status": "NOT_ASSERTED_BY_PACKAGE__CURRENT_V59_PHYSICAL_DEVICE_PWA_ACCESSIBILITY_AND_LECTURE_SUIVIE_DEVICE_GATES_NOT_TESTED",
   "rejected_predecessor_version": "v2.19.37-R1B",
   "rejected_predecessor_sha256": "0e26740387911fe15a9a275c3ff04d08ba9cbb28f46c2ec74670eb795fbe22d6",
   "rejected_predecessor_status": "FAIL_HIGHLIGHT_ANCHOR_COMPATIBILITY",
@@ -966,19 +972,19 @@
     "corpus_generation_to": "G036-AFLP-R2-SUP-T2"
   },
   "m4_status": "R2_SUP_T2_FIXED_POINT_PRESERVED__V54_PROTECTED_LECTURE_SUIVIE__EXTERNAL_FINAL_REOPEN_AUTHORITY_REQUIRED",
-  "current_release_authority": "M3_DECISION_LOCK__M4_AUTHORISED_46_CASE_MUTATION_UNIVERSE",
+  "current_release_authority": "M12_V59_ATOMIC_BOOTSTRAP__STATIC_AND_REOPEN_AUDIT_REQUIRED__EXTERNAL_INSTALLED_PWA_VALIDATION_REQUIRED",
   "historical_backbone_generation": "G036-AFLP-R1B-UWR2",
   "historical_sup_t1_items": 14,
   "current_counts": {
     "aligne_entries": 2312,
     "aligne_paragraphs": 74348,
-    "complement_items": 58,
-    "complement_paragraphs": 149,
-    "enrichi_entries": 2324,
-    "enrichi_paragraphs": 74497,
+    "complement_items": 74,
+    "complement_paragraphs": 176,
+    "enrichi_entries": 2325,
+    "enrichi_paragraphs": 74524,
     "backbone_speaker_segments": 65012,
-    "complement_speaker_segments": 117,
-    "total_speaker_segments": 65129
+    "complement_speaker_segments": 142,
+    "total_speaker_segments": 65154
   },
   "user_data_envelope_schema": "ldc-user-data-envelope",
   "current_m4_authorised_scope": {
@@ -995,8 +1001,9 @@
   },
   "current_generation_contract": {
     "historical_r1b": "G036-AFLP-R1B-UWR2",
-    "active_aligne": "G036-AFLP-R2-UWR2",
-    "active_enrichi": "G036-AFLP-R2-SUP-T2"
+    "predecessor_aligne": "G036-AFLP-R2-UWR2",
+    "active_aligne": "G036-AFLP-R3-UWR2",
+    "active_enrichi": "G036-AFLP-R3-SUP-T4"
   },
   "v2_19_49_deep_four_pass_reaudit_repairs": [
     "flow_19 derived metadata synchronized for LDC.T19.E0049.P044/P045 after authorised ALIGNÉ text correction; boundary policy/group membership unchanged",
@@ -1032,5 +1039,100 @@
     "canonical corpus/search/speaker/display/flow/supplement payloads remain byte-identical to locked v51"
   ],
   "protected_lecture_suivie_contract": "ONE_PROTECTED_MAIN_JOURNEY__ONLY_EXPLICIT_SEQUENTIAL_START_RESUME_INHERITED_PREV_NEXT_OR_CONFIRMED_RELOCATION_MAY_WRITE_MAIN__CONSULTATIONS_NEVER_WRITE_MAIN__LU_INDEPENDENT",
-  "reading_persistence_contract": "SESSION_SCOPED_IMMUTABLE_SNAPSHOTS__MONOTONIC_SAVE_SEQUENCE__SERIALIZED_ATOMIC_WRITES__STALE_CALLBACK_REJECTION__NAVIGATION_FLUSH__INITIAL_SEQUENTIAL_SAVE__VISIBILITY_PAGEHIDE_SAFETY_FLUSH"
+  "reading_persistence_contract": "SESSION_SCOPED_IMMUTABLE_SNAPSHOTS__MONOTONIC_SAVE_SEQUENCE__SERIALIZED_ATOMIC_WRITES__STALE_CALLBACK_REJECTION__NAVIGATION_FLUSH__INITIAL_SEQUENTIAL_SAVE__VISIBILITY_PAGEHIDE_SAFETY_FLUSH",
+  "m6_bounded_candidates": [
+    "DATE-T06-1905-12-12",
+    "DATE-T12-1917-10-20",
+    "DATE-T12-1917-10-23",
+    "T15T16-THREE-COLUMNS",
+    "M2-0105-PROVENANCE",
+    "M2-0113-ANCHOR"
+  ],
+  "m6_baseline_v54_sha256": "c860ee3c1f722135a84abdd66d5f0b9bea2ca611fd6b3a1cb7121cc83f66e0fc",
+  "m6_protected_contracts": [
+    "user-data schema v4",
+    "ldc-reading-position-v3",
+    "protected Ma lecture suivie state machine",
+    "ALIGNÉ paragraph IDs/order/text",
+    "R2 backbone speaker layer",
+    "display/flow topology",
+    "SUP-T1/SUP-T2 textual payloads and governed placements"
+  ],
+  "m6_report_integrity_requirement": "DETERMINISTIC_BUILD__PRIMARY_REOPEN__SEPARATE_PROGRAM_INDEPENDENT_REOPEN__EVIDENCE_UNIVERSE_STALE_SCAN__DECISION_LOCK_WRITTEN_LAST",
+  "m9_authorized_r3_cases": [
+    "M2-0347",
+    "M2-0350",
+    "M2-0358",
+    "M2-0361",
+    "M2-0365",
+    "M2-0368"
+  ],
+  "m9_authorized_supt4_cases": [
+    "M2-0015",
+    "M2-0047",
+    "M2-0099",
+    "M2-0100",
+    "M2-0101",
+    "M2-0115",
+    "M2-0117",
+    "M2-0120",
+    "M2-0124",
+    "M2-0127",
+    "M2-0131",
+    "M2-0163",
+    "M2-0345",
+    "M2-0362",
+    "M2-0363"
+  ],
+  "m9_excluded_cases": [
+    "M2-0021",
+    "M2-0134",
+    "M2-0351",
+    "M2-0364",
+    "M2-0366",
+    "M2-0052"
+  ],
+  "post_four_pass_metadata_reconciliation": {
+    "status": "PASS",
+    "active_envelopes_rebound_to_r3": 109,
+    "corpus_text_mutated": false,
+    "paragraph_ids_mutated": false,
+    "speaker_semantics_mutated": false,
+    "display_flow_payload_mutated": false,
+    "offline_binding_rebuilt": true
+  },
+  "m10_bootstrap_update_recovery": {
+    "trigger": "USER_REPORTED_APP_STUCK_ON_CHARGEMENT_DU_CORPUS_AFTER_V56_UPLOAD",
+    "root_cause": "NEW_INDEX_CAN_RUN_UNDER_PREDECESSOR_SERVICE_WORKER_WHICH_CACHE_FIRST_SERVES_OLD_CORPUS__SUPPLEMENT_GENERATION_COUNT_ASSERTION_THEN_ABORTS_BOOT",
+    "fix": [
+      "SERVICE_WORKER_PREFLIGHT_BEFORE_ANY_CORPUS_FETCH",
+      "OLD_OR_UNKNOWN_CONTROLLER_FORCES_UPDATE_ACTIVATION_AND_RELOAD",
+      "TOP_LEVEL_BOOT_FAILURE_UI",
+      "CACHE_SW_REPAIR_ACTION_PRESERVES_INDEXEDDB_USER_DATA",
+      "SERVICE_WORKER_VERSION_MESSAGE_PROTOCOL"
+    ],
+    "corpus_text_mutated": false,
+    "user_data_schema_mutated": false,
+    "reading_position_schema_mutated": false
+  },
+  "m11_bootstrap_hardening": {
+    "register_timeout_ms": 20000,
+    "install_timeout_ms": 60000,
+    "controller_timeout_ms": 20000,
+    "db_timeout_ms": 20000,
+    "corpus_timeout_ms": 30000,
+    "offline_repair_is_non_destructive": true,
+    "repair_is_stage_specific": true,
+    "corpus_text_mutated": false
+  },
+  "m12_atomic_bootstrap": {
+    "immutable_installed_shell": true,
+    "boot_critical_runtime_assets": [
+      "corpus/supplements.json",
+      "corpus/supplement_manifest.json"
+    ],
+    "boot_critical_assets_sha_verified_before_worker_activation": true,
+    "corpus_timeout_repair_only_for_identified_version_or_integrity_conflict": true,
+    "corpus_text_mutated": false
+  }
 }

@@ -1,44 +1,49 @@
 {
   "schema": "ldc-supplement-manifest-v2",
-  "programme": "LDC-AFLP-SUP-T1-SUP-T2",
-  "status": "M4_CANONICAL_RUNTIME_STATIC_DERIVED_GATES_PASS__V54_PROTECTED_LECTURE_SUIVIE__EXTERNAL_FINAL_REOPEN_AUTHORITY_REQUIRED",
-  "backbone_generation": "G036-AFLP-R2-UWR2",
-  "composite_generation": "G036-AFLP-R2-SUP-T2",
+  "programme": "LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4",
+  "status": "M9_R3_SUPT4_MUTATION_STATIC_SUCCESSOR_CANDIDATE__EXTERNAL_VALIDATION_REQUIRED",
+  "backbone_generation": "G036-AFLP-R3-UWR2",
+  "composite_generation": "G036-AFLP-R3-SUP-T4",
   "counts": {
-    "items": 58,
+    "items": 74,
     "sup_t1_items": 14,
     "sup_t2_items": 44,
-    "complete_entries": 12,
-    "internal_supplements": 46,
+    "complete_entries": 13,
+    "internal_supplements": 61,
     "legacy_sup_t1_inline_supplements": 2,
-    "paragraphs": 149,
-    "search_records": 149,
-    "speaker_segments": 117,
-    "sup_t2_speaker_segments": 65
+    "paragraphs": 176,
+    "search_records": 176,
+    "speaker_segments": 142,
+    "sup_t2_speaker_segments": 65,
+    "sup_t3_items": 1,
+    "sup_t4_items": 15,
+    "sup_t4_speaker_segments": 22
   },
   "files": {
     "supplements.json": {
-      "bytes": 871840,
-      "sha256": "e55ada67191a4971423026a4c46f05e88091cd9e8bceef5671bb2e069261492e"
+      "bytes": 1071669,
+      "sha256": "7ee4c17c289903a4df850e20b921130b8c5db36676017471d12d8942ec72aa3e"
     },
     "supplement_search.json": {
-      "bytes": 247585,
-      "sha256": "2eb2b3a5d22d3663359fe84cd74d4b39d7ef047e57878776d7f8fd99e95aaec7"
+      "bytes": 284559,
+      "sha256": "a115d3960538b77f4464428c238cd9c8cde44e28914d3ca298c727d931262ebd"
     },
     "supplement_speakers.json": {
-      "bytes": 104869,
-      "sha256": "4cbd8f0676d035a423800f3309ca1e2bf694c86034e7b53cbc9692eda88c98c2"
+      "bytes": 126739,
+      "sha256": "7f2e71063592cd6704e0016dbb03c45644b22960df3d929aac854e8f5bc2bb80"
     }
   },
   "sup_t1_snapshot_sha256": "ee568d8857b3e38b4a2b536de146c3b54f876ab93478e66f327bdaaf0768a1e0",
   "m3_decision_lock_sha256": "bb4a5c772b3eafdfe6eb857bc303a724a4bdb0cb0cef97c0ee5f088dfd65ab83",
   "sup_t2_segmentation_ledger_sha256": "f3345d58d2c12625c46cb92466012755c070fa84aef04da8cbcf2f9caa705f77",
-  "provenance_contract": "AFLP_REFERENCE_SCOPE__SUP_T1_IMMUTABLE__SUP_T2_M3_LOCKED__ITPM_PRIMARY_WITH_CASE_SPECIFIC_FRENCH_WORDING_PROVENANCE__QUEEN_HUGH_ONE_COMPARATIVE_FAMILY",
+  "provenance_contract": "AFLP_REFERENCE_SCOPE__SUP_T1_IMMUTABLE__SUP_T2_M3_LOCKED__SUP_T3_M6_LOCKED__SUP_T4_M8_ENGINEERED_M9_EXECUTED__NO_MAJORITY_VOTE",
   "within_paragraph_contract": {
     "placements": 22,
     "dependent_after_aligne_correction": 1,
     "runtime_requirement": "CANONICAL_HOST_ID_AND_OFFSETS_PRESERVED__DISPLAY_SLICES_ONLY__CANONICAL_USER_OFFSETS"
   },
-  "release_status": "EXTERNAL_FINAL_REOPEN_AUTHORITY_REQUIRED__V54_PROTECTED_LECTURE_SUIVIE",
-  "user_state_schema": 4
+  "release_status": "STATIC_SUCCESSOR_CANDIDATE__EXTERNAL_VALIDATION_REQUIRED__WIDE_RELEASE_NOT_AUTHORIZED",
+  "user_state_schema": 4,
+  "m6_authority": "M5_G17_REOPEN_SPECIFIC_CANDIDATES__EXACT_V54_BRANCH",
+  "m9_authority": "M8_MUTATION_AUTHORIZATION_R3_SUPT4_2026-08-28"
 }

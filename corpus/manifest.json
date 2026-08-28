@@ -1,11 +1,11 @@
 {
-  "version": "G036-AFLP-R2-UWR2",
+  "version": "G036-AFLP-R3-UWR2",
   "corpus": "livre_du_ciel",
-  "generated": "2026-08-27",
+  "generated": "2026-08-28",
   "total_paragraphs": 74348,
   "total_entries": 2312,
   "total_corrections": 20885,
-  "correction_ledger": "All 36 tomes completed source-boundary reconciliation. EB-17 corrects only two source-page provenance records: Tome 3 / 10 June 1900 ends at PDF page 102, and Tome 5 preface spans pages 1–6 with pages 1;3;5;6 evidenced. Tome 17 23 November 1924 remains title-only/body-not-proven. EB-20 normalises three malformed semicolon source-page records: T3 16 April 1900 = 77–79; T3 27 April 1900 = 82–84; T17 17 May 1925 = 113–119. M4/R2 applies exactly 8 M3-authorised ALIGNÉ paragraph rewrites under stable IDs and introduces no other backbone paragraph mutation.",
+  "correction_ledger": "All 36 tomes completed source-boundary reconciliation. EB-17 corrects only two source-page provenance records: Tome 3 / 10 June 1900 ends at PDF page 102, and Tome 5 preface spans pages 1–6 with pages 1;3;5;6 evidenced. Tome 17 23 November 1924 remains title-only/body-not-proven. EB-20 normalises three malformed semicolon source-page records: T3 16 April 1900 = 77–79; T3 27 April 1900 = 82–84; T17 17 May 1925 = 113–119. M4/R2 applies exactly 8 M3-authorised ALIGNÉ paragraph rewrites under stable IDs and introduces no other backbone paragraph mutation. M6/V55 restores three AFLP display-layer dates under stable IDs, preserves IT-PM alternatives as provenance, reconciles M2-0105/M2-0113 metadata, and adds one source-bound SUP-T3 complete entry for the historically bound T15/T16 three-columns discourse at 2 Dec 1922; ALIGNÉ paragraph wording remains unchanged. M9/V56 applies exactly 10 M8-authorized same-slot R3 paragraph replacements across 6 cases and 22 SUP-T4 controlled fragments across 15 cases. Existing paragraph IDs/order remain stable; M2-0021/M2-0134/M2-0351/M2-0364 remain held, M2-0366 no-change, M2-0052 historical hold.",
   "volumes_available": [
     1,
     2,
@@ -45,11 +45,11 @@
     36
   ],
   "volumes_total": 36,
-  "status": "R2_CRITICAL_RECONCILIATION__V54_PROTECTED_LECTURE_SUIVIE__EXTERNAL_FINAL_REOPEN_AUTHORITY_REQUIRED",
+  "status": "R3_BOUNDED_FIDELITY_CORRECTIONS__SUP_T4_FIXED__M12_V59_ATOMIC_BOOTSTRAP__EXTERNAL_VALIDATION_REQUIRED",
   "speech_resynced": true,
-  "notes": "Current ALIGNÉ generation R2 is restricted to the fixed AFLP reference scope and contains exactly 8 M3-authorised paragraph rewrites. Historical R1B is preserved separately. Active COMPLÉMENT comprises immutable SUP-T1 plus M3-authorised SUP-T2. Final release authority requires reopened-ZIP and independent audits.",
-  "speech_layer_note": "Current R2 speaker layer preserves the locked semantic-speaker authority except for exact offset/text resynchronisation required by the 8 authorised ALIGNÉ paragraph rewrites; supplement speakers are governed separately by the active SUP-T1/SUP-T2 registry.",
-  "app_version": "v2.19.54-R1B",
+  "notes": "Active ALIGNÉ is R3 after six bounded fidelity cases (10 paragraph replacements). Active COMPLÉMENT adds exactly 15 SUP-T4 internal items / 22 paragraphs. No unauthorized corpus mutation.",
+  "speech_layer_note": "Backbone speaker segment identities are preserved; offsets/previews rebuilt only for R3 paragraphs that already carried segments. SUP-T4 adds 22 full-fragment speaker segments.",
+  "app_version": "v2.19.59-R1B",
   "speaker_layer": {
     "total_segments": 65012,
     "speaker_counts": {
@@ -118,7 +118,7 @@
     "note": "Display-only token projection. Suppressed and replaced tokens keep their canonical [start,end) so highlights, notes and bookmarks stay anchored."
   },
   "reader_architecture": {
-    "version": "v2.19.54-R1B",
+    "version": "v2.19.59-R1B",
     "flow_aware_dom": true,
     "post_render_structural_mutation": false,
     "paragraph_local_styled_runs": 57966,
@@ -758,5 +758,79 @@
     "user_data_schema_version": 4
   },
   "historical_help_layer_note_v46": "V46 changes Help/onboarding wording, information architecture and semantic Help headings only. Canonical corpus, speaker/presentation data, search, flow, display, supplements, user-state schemas and runtime behaviour are unchanged from locked V45.",
-  "historical_release_metadata_note_v47": "V47 is a package/report-integrity metadata successor to frozen V46. Help/onboarding content and all canonical/runtime data are inherited unchanged from V46; V47 corrects stale current package-state metadata and restarts the release evidence chain."
+  "historical_release_metadata_note_v47": "V47 is a package/report-integrity metadata successor to frozen V46. Help/onboarding content and all canonical/runtime data are inherited unchanged from V46; V47 corrects stale current package-state metadata and restarts the release evidence chain.",
+  "m6_date_layer_reconciliation": [
+    {
+      "stable_ref": "LDC.T06.1905-12-12",
+      "display_date": "12 décembre 1905",
+      "itpm_variant": "12 novembre 1905"
+    },
+    {
+      "stable_ref": "LDC.T12.1917-10-20",
+      "display_date": "20 octobre 1917",
+      "itpm_variant": "12 octobre 1917"
+    },
+    {
+      "stable_ref": "LDC.T12.1917-10-23",
+      "display_date": "23 octobre 1917",
+      "itpm_variant": "17 octobre 1917"
+    }
+  ],
+  "m6_supplement_recovery": {
+    "supplement_id": "LDCSUP.T15.1922-12-02.E001",
+    "historical_bindings": [
+      "M2-0270",
+      "M2-0282"
+    ],
+    "placement": "1922-12-02",
+    "aligned_backbone_mutated": false
+  },
+  "m6_generation_contract": {
+    "historical_r1b": "G036-AFLP-R1B-UWR2",
+    "active_aligne": "G036-AFLP-R2-UWR2",
+    "active_enrichi": "G036-AFLP-R2-SUP-T3",
+    "supplement_programme": "LDC-AFLP-SUP-T1-SUP-T2-SUP-T3"
+  },
+  "m6_current_counts": {
+    "aligne_entries": 2312,
+    "aligne_paragraphs": 74348,
+    "complement_items": 59,
+    "complement_paragraphs": 154,
+    "enrichi_entries": 2325,
+    "enrichi_paragraphs": 74502,
+    "backbone_speaker_segments": 65012,
+    "supplement_speaker_segments": 120,
+    "total_speaker_segments": 65132,
+    "sup_t3_items": 1,
+    "user_data_schema_version": 4
+  },
+  "m9_generation_contract": {
+    "historical_r1b": "G036-AFLP-R1B-UWR2",
+    "predecessor_aligne": "G036-AFLP-R2-UWR2",
+    "active_aligne": "G036-AFLP-R3-UWR2",
+    "active_enrichi": "G036-AFLP-R3-SUP-T4",
+    "supplement_programme": "LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4"
+  },
+  "m9_current_counts": {
+    "aligne_entries": 2312,
+    "aligne_paragraphs": 74348,
+    "r3_changed_paragraphs": 10,
+    "complement_items": 74,
+    "complement_paragraphs": 176,
+    "enrichi_entries": 2325,
+    "enrichi_paragraphs": 74524,
+    "backbone_speaker_segments": 65012,
+    "supplement_speaker_segments": 142,
+    "total_speaker_segments": 65154,
+    "sup_t4_items": 15,
+    "user_data_schema_version": 4
+  },
+  "m9_exclusions": [
+    "M2-0021",
+    "M2-0134",
+    "M2-0351",
+    "M2-0364",
+    "M2-0366",
+    "M2-0052"
+  ]
 }

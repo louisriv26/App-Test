@@ -1785,7 +1785,7 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
       <div class="help-section-head"><div class="help-section-icon hsi-amber"><i class="ti ti-adjustments-horizontal"></i></div><h2 class="help-section-title">Version du texte</h2></div>
       <div class="help-card">
         <div class="help-row"><span class="help-chip light">ALIGNÉ</span><span class="help-text">Affiche le corpus français correspondant au périmètre de l’édition AFLP de référence. « Aligné » décrit les textes et dates retenus ; cela ne signifie pas que chaque phrase reproduit mot pour mot la traduction imprimée AFLP.</span></div>
-        <div class="help-row"><span class="help-chip">COMPLÉMENT</span><span class="help-text">Isole les 58 compléments approuvés actifs : 12 entrées datées complètes et 46 compléments internes. Le libellé français suit la provenance propre à chaque complément : témoin français direct lorsqu’il est disponible et retenu, sinon traduction contrôlée depuis IT-PM. Queen et Hugh Owen servent comme une seule famille comparative, sauf preuve contraire propre à un cas.</span></div>
+        <div class="help-row"><span class="help-chip">COMPLÉMENT</span><span class="help-text">Isole les 74 compléments approuvés actifs : 13 entrées complètes et 61 compléments internes. Le libellé français suit la provenance propre à chaque complément : témoin français direct lorsqu’il est disponible et retenu, sinon traduction contrôlée depuis IT-PM. Queen et Hugh Owen servent comme une seule famille comparative, sauf preuve contraire propre à un cas.</span></div>
         <div class="help-row"><span class="help-chip light">ENRICHI</span><span class="help-text">Réunit ALIGNÉ et les COMPLÉMENTS à leur position de lecture. Le choix est mémorisé et ne supprime ni favoris, ni notes, ni surlignages.</span></div>
       </div>
     </div>
@@ -1878,7 +1878,7 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
         <div class="help-text">Cette application propose les 36 Tomes du <b>Livre du Ciel</b> de Luisa Piccarreta dans une édition française de lecture et d’étude. Le corpus aligné est conservé séparément des compléments afin que leur provenance reste visible et réversible.</div>
         <div class="help-divider"></div>
         <div class="help-row"><span class="help-chip">COMPLÉMENT</span><span class="help-text">Signale un contenu substantiel absent du périmètre AFLP de référence et intégré comme complément approuvé. La fiche du passage indique séparément la provenance du contenu et celle du libellé français.</span></div>
-        <div class="help-row"><span class="help-chip light">SUP-T1 + SUP-T2</span><span class="help-text">La couche active comprend 58 compléments approuvés : les 14 éléments historiques SUP-T1, conservés avec leur provenance, et 44 nouveaux cas SUP-T2 issus de la réconciliation critique multi-témoins. Cette intégration n’affirme pas que toute différence possible entre tous les témoins est résolue.</span></div>
+        <div class="help-row"><span class="help-chip light">SUP-T1 + SUP-T2 + SUP-T3 + SUP-T4</span><span class="help-text">La couche active comprend 74 compléments approuvés : 14 éléments historiques SUP-T1, 44 cas SUP-T2, 1 entrée SUP-T3 source-liée issue de M6, et 15 cas SUP-T4 (22 fragments) issus de l’ingénierie M8 et exécutés en M9. Cette intégration n’affirme pas que toute différence possible entre tous les témoins est résolue.</span></div>
         <div class="help-row"><span class="help-chip light">Infos et source</span><span class="help-text">Affiche la référence stable, l’édition et les pages source disponibles, le statut du texte, le corpus et la précision de date de l’entrée courante.</span></div>
         <div class="help-row"><span class="help-chip light">Signaler un problème de texte</span><span class="help-text">Prépare un signalement que vous pouvez relire, copier et transmettre. <b>Rien n’est envoyé automatiquement.</b> Le passage sélectionné n’est inclus que si vous choisissez de l’ajouter.</span></div>
         <div class="help-row"><span class="help-chip light">Copier le diagnostic</span><span class="help-text">Copie des informations techniques publiques sur l’application et le passage courant pour faciliter un dépannage. Vos notes privées n’y sont pas incluses.</span></div>
@@ -1957,12 +1957,12 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.54-R1B'; // technical update/audit identifier
-const PUBLIC_VERSION = '54';        // single user-facing release number
+const APP_VERSION = 'v2.19.59-R1B'; // technical update/audit identifier
+const PUBLIC_VERSION = '59';        // single user-facing release number
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD   = '2026-08-27';
-const SW_CACHE_VERSION = 'ldc-v2.19.54-R1B';
-const CORPUS_MANIFEST_SHA256 = 'd461f5e69c888f3416405f03b9853573ae70a5a5d8886582fca4fda137ced78c';
+const APP_BUILD   = '2026-08-28';
+const SW_CACHE_VERSION = 'ldc-v2.19.59-R1B';
+const CORPUS_MANIFEST_SHA256 = '0ed5db715f73ab0174ed2af8eabb5c970593a662c710cd05b01ebefcd2ebbe26';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
 
@@ -2259,7 +2259,7 @@ function isStaleRecord(r) {
 /* ═══════════════════════════════════════════════════════
    CORPUS LOADING
 ═══════════════════════════════════════════════════════ */
-const CORPUS_CV = 'cv=cm-d461f5e69c888f34'; // derived from corpus/manifest.json SHA-256
+const CORPUS_CV = 'cv=cm-0ed5db715f73ab01'; // derived from corpus/manifest.json SHA-256
 
 function sourceModeShowsBackbone() { return supplementMode !== 'additions'; }
 function sourceModeShowsSupplements() { return supplementMode !== 'aflp'; }
@@ -2271,7 +2271,7 @@ function enrichedMode() { return supplementMode === 'enriched'; }
 function sourceModeLabel(mode=supplementMode) { return mode==='aflp'?'ALIGNÉ':(mode==='additions'?'COMPLÉMENT':'ENRICHI'); }
 function sourceModeCaption(mode=supplementMode) {
   if(mode==='aflp') return 'Corpus aligné sur le périmètre AFLP';
-  if(mode==='additions') { const c=(supplementRegistry&&supplementRegistry.counts)||{}; return `${c.items||58} compléments approuvés · ${c.complete_entries||12} entrées + ${c.internal_supplements||46} compléments internes`; }
+  if(mode==='additions') { const c=(supplementRegistry&&supplementRegistry.counts)||{}; return `${c.items||74} compléments approuvés · ${c.complete_entries||13} entrées + ${c.internal_supplements||61} compléments internes`; }
   return 'ALIGNÉ + compléments approuvés';
 }
 
@@ -2288,8 +2288,8 @@ async function loadSupplementRegistryData() {
     if(registry.backbone_generation!==BACKBONE_GENERATION||registry.composite_generation!==CORPUS_GENERATION)reasons.push('registry generation');
     if(manifest.schema!=='ldc-supplement-manifest-v2'||manifest.programme!==SUPPLEMENT_PROGRAMME||manifest.backbone_generation!==BACKBONE_GENERATION||manifest.composite_generation!==CORPUS_GENERATION)reasons.push('manifest identity');
     const counts=registry.counts||{};
-    if(counts.items!==58||counts.sup_t1_items!==14||counts.sup_t2_items!==44||counts.complete_entries!==12||counts.internal_supplements!==46||counts.paragraphs!==149||counts.search_records!==149||counts.speaker_segments!==117)reasons.push('registry counts');
-    if(!Array.isArray(registry.supplements)||registry.supplements.length!==58)reasons.push('scope count');
+    if(counts.items!==74||counts.sup_t1_items!==14||counts.sup_t2_items!==44||counts.sup_t3_items!==1||counts.sup_t4_items!==15||counts.complete_entries!==13||counts.internal_supplements!==61||counts.paragraphs!==176||counts.search_records!==176||counts.speaker_segments!==142)reasons.push('registry counts');
+    if(!Array.isArray(registry.supplements)||registry.supplements.length!==74)reasons.push('scope count');
     const commonProv=['decision_id','source_evidence_ids','translation_hash','translation_confidence','provenance_badge'];
     if(Array.isArray(registry.supplements)&&registry.supplements.some(s=>commonProv.some(k=>s[k]==null)||!s.aflp_status||!s.source_origin))reasons.push('supplement provenance contract');
     if(!manifest.counts||manifest.counts.items!==counts.items||manifest.counts.paragraphs!==counts.paragraphs||manifest.counts.speaker_segments!==counts.speaker_segments)reasons.push('manifest count parity');
@@ -2307,7 +2307,7 @@ async function loadSupplementSearchData() {
   if (supplementSearchLoading) return supplementSearchLoading;
   supplementSearchLoading = (async () => {
     const search=await fetch(`corpus/supplement_search.json?${CORPUS_CV}`).then(r=>{if(!r.ok)throw new Error('supplement search HTTP '+r.status);return r.json();});
-    if(search.schema!=='ldc-supplement-search-v2'||search.programme!==SUPPLEMENT_PROGRAMME||search.composite_generation!==CORPUS_GENERATION||!Array.isArray(search.records)||search.records.length!==149)throw new Error('supplement search evidence mismatch');
+    if(search.schema!=='ldc-supplement-search-v2'||search.programme!==SUPPLEMENT_PROGRAMME||search.composite_generation!==CORPUS_GENERATION||!Array.isArray(search.records)||search.records.length!==176)throw new Error('supplement search evidence mismatch');
     supplementSearchData=search; return search;
   })();
   try { return await supplementSearchLoading; } finally { supplementSearchLoading=null; }
@@ -2319,7 +2319,7 @@ async function loadSupplementSpeakerData() {
   if (supplementSpeakerLoading) return supplementSpeakerLoading;
   supplementSpeakerLoading = (async () => {
     const speakers=await fetch(`corpus/supplement_speakers.json?${CORPUS_CV}`).then(r=>{if(!r.ok)throw new Error('supplement speakers HTTP '+r.status);return r.json();});
-    if(speakers.schema!=='ldc-supplement-speakers-v2'||speakers.programme!==SUPPLEMENT_PROGRAMME||speakers.composite_generation!==CORPUS_GENERATION||!Array.isArray(speakers.segments)||speakers.segments.length!==117)throw new Error('supplement speaker evidence mismatch');
+    if(speakers.schema!=='ldc-supplement-speakers-v2'||speakers.programme!==SUPPLEMENT_PROGRAMME||speakers.composite_generation!==CORPUS_GENERATION||!Array.isArray(speakers.segments)||speakers.segments.length!==142)throw new Error('supplement speaker evidence mismatch');
     supplementSpeakerData=speakers; return speakers;
   })();
   try { return await supplementSpeakerLoading; } finally { supplementSpeakerLoading=null; }
@@ -2360,7 +2360,7 @@ function sortedSupplementItems(items=null) {
   const list=(items||((supplementRegistry&&supplementRegistry.supplements)||[])).slice();
   return list.sort((a,b)=>Number(a.volume)-Number(b.volume)||String(a.date_iso||'').localeCompare(String(b.date_iso||''))||(isInternalSupplementItem(a)?-1:1));
 }
-function supplementById(id) { return supplementRegistry ? supplementRegistry.supplements.find(s=>s.supplement_id===id)||null : null; }
+function supplementById(id) { return supplementRegistry ? supplementRegistry.supplements.find(s=>s.supplement_id===id||(Array.isArray(s.legacy_supplement_ids)&&s.legacy_supplement_ids.includes(id)))||null : null; }
 function inlineSupplementsForEntry(vol,entryId) { return internalSupplementItemsForVolume(vol).filter(s=>s.target_entry_id===entryId); }
 function supplementForTarget(vol,entryId,paraId=null) {
   if(!supplementRegistry)return null;
@@ -2387,7 +2387,7 @@ function effectiveEntryCountForVolume(vol, baseCount) {
   const visibleBase=Math.max(0,Number(baseCount||0)-(Number(vol)===1?TOME1_EDITORIAL_NOTE_COUNT:0));
   return visibleBase+(supplementMode==='enriched'?completeSupplementCountForVolume(vol):0);
 }
-function effectiveGlobalEntryCount() { const c=(supplementRegistry&&supplementRegistry.counts)||{}; return supplementMode==='enriched'?USER_VISIBLE_COMPOSITE_ENTRY_COUNT:(supplementMode==='additions'?(c.items||58):USER_VISIBLE_BACKBONE_ENTRY_COUNT); }
+function effectiveGlobalEntryCount() { const c=(supplementRegistry&&supplementRegistry.counts)||{}; return supplementMode==='enriched'?USER_VISIBLE_COMPOSITE_ENTRY_COUNT:(supplementMode==='additions'?(c.items||74):USER_VISIBLE_BACKBONE_ENTRY_COUNT); }
 function recordIsSupplementOwned(r){return !!(r&&(r.supplement_id||isSupplementEntryId(r.entry_id)));}
 function readRecordVisibleInSourceMode(r){if(r&&isTome1EditorialEntryId(r.entry_id))return false;const isSupp=recordIsSupplementOwned(r);return supplementMode==='enriched'?true:(supplementMode==='additions'?isSupp:!isSupp);}
 function activeReaderSupplement(){
@@ -3252,7 +3252,7 @@ async function renderTomes() {
   list.innerHTML = '';
   syncSupplementModeUI();
   if(supplementsOnly()){
-    document.getElementById('tomes-count').textContent=((supplementRegistry&&supplementRegistry.counts&&supplementRegistry.counts.items)||58)+' compléments';
+    document.getElementById('tomes-count').textContent=((supplementRegistry&&supplementRegistry.counts&&supplementRegistry.counts.items)||74)+' compléments';
     await renderSupplementRegistryList(list,sortedSupplementItems(),{global:true});
     return;
   }
@@ -3314,7 +3314,7 @@ function supplementRegistryExcerpt(s){const p=s.paragraphs&&s.paragraphs[0];retu
 async function renderSupplementRegistryList(container,items,opts={}){
   container.innerHTML='';
   const intro=document.createElement('div');intro.className='supp-registry-intro';
-  { const c=(supplementRegistry&&supplementRegistry.counts)||{}; intro.innerHTML=opts.global?`<b>${c.items||58} compléments approuvés</b> · ${c.complete_entries||12} entrées datées complètes + ${c.internal_supplements||46} compléments internes. Chaque complément reste distinct du corpus aligné et peut être masqué.`:'<b>COMPLÉMENTS de ce tome</b> · seuls les compléments approuvés par la réconciliation critique sont affichés.'; }
+  { const c=(supplementRegistry&&supplementRegistry.counts)||{}; intro.innerHTML=opts.global?`<b>${c.items||74} compléments approuvés</b> · ${c.complete_entries||13} entrées datées complètes + ${c.internal_supplements||61} compléments internes. Chaque complément reste distinct du corpus aligné et peut être masqué.`:'<b>COMPLÉMENTS de ce tome</b> · seuls les compléments approuvés par la réconciliation critique sont affichés.'; }
   container.appendChild(intro);
   if(!items.length){const empty=document.createElement('div');empty.className='empty-state';empty.innerHTML='<i class="ti ti-layers-off"></i>Aucun complément approuvé dans ce tome.';container.appendChild(empty);return;}
   const [favoriteRows,readRows]=await Promise.all([dbGetAll('favorites'),dbGetAll('read_entries')]);
@@ -4826,6 +4826,33 @@ async function migrateUserDataV4(){
   window.__ldcUserDataMigrationV4=log;return log;
 }
 
+/* ═══════════════════════════════════════════════════════
+   M9 / ALIGNÉ R3 targeted user-state migration — schema remains 4.
+   This is generation-scoped, not a schema bump. Existing paragraph IDs remain stable.
+═══════════════════════════════════════════════════════ */
+let __ldcUserStateR3MapPromise=null;
+async function loadUserStateR3Map(){
+  if(__ldcUserStateR3MapPromise)return __ldcUserStateR3MapPromise;
+  __ldcUserStateR3MapPromise=fetch(`corpus/user_state_migration_r3.json?${CORPUS_CV}`)
+    .then(r=>{if(!r.ok)throw new Error('R3 migration map HTTP '+r.status);return r.json();})
+    .then(m=>{if(!m||m.schema!=='ldc-user-state-r3-migration-v1'||m.changed_paragraph_count!==10||!Array.isArray(m.paragraphs)||m.paragraphs.length!==10)throw new Error('R3 migration map integrity');const ids=new Set();m.paragraphs.forEach(x=>{if(!x.paragraph_id||ids.has(x.paragraph_id))throw new Error('R3 migration duplicate/missing paragraph id');ids.add(x.paragraph_id);});return m;});
+  return __ldcUserStateR3MapPromise;
+}
+async function migrateUserDataR3Once(){
+  const markerKey='user_data_aligne_r3_migration_v1';
+  const marker=await dbGet('settings',markerKey);if(marker&&marker.to_generation===CORPUS_GENERATION)return{skipped:true,reason:'already '+CORPUS_GENERATION};
+  const map=await loadUserStateR3Map(),byId=new Map(map.paragraphs.map(x=>[x.paragraph_id,x]));
+  const log={schema:4,migration:'ALIGNÉ_R3',from_generation:map.from_generation,to_generation:map.to_generation,highlights:0,notes:0,col_items:0,reading_pos:0,android_whole_paragraph:0,exact_reanchored:0,context_reanchored:0,normalized_reanchored:0,paragraph_identity:0,stale_unresolved:0,entries:[]};
+  for(const h of await dbGetAll('highlights')){const spec=byId.get(h.para_id);if(!spec)continue;const oldText=spec.old_text,newText=spec.new_text,before={start_char:h.start_char,end_char:h.end_char,text:h.text||h.selected_text_snapshot||'',stale_status:h.stale_status||null};
+    if(migrationV4IsWholeParagraphHighlight(h,oldText)){Object.assign(h,{start_char:0,end_char:newText.length,text:newText,selected_text_snapshot:newText,para_fingerprint:newText.slice(0,32),para_fingerprint_v3:paragraphFingerprint(newText),corpus_generation:CORPUS_GENERATION,anchor_schema:4,stale_status:'active',needs_reanchor:false,migrated_reason:'r3_android_whole_paragraph_stable_identity'});log.android_whole_paragraph++;}
+    else{const start=Number.isInteger(h.start_char)?h.start_char:0,end=Number.isInteger(h.end_char)?h.end_char:start,snap=String(h.text||h.selected_text_snapshot||oldText.slice(start,end)),hit=migrationV4FindSelection(oldText,newText,start,end,snap);if(hit){Object.assign(h,{start_char:hit.start,end_char:hit.end,text:newText.slice(hit.start,hit.end),selected_text_snapshot:newText.slice(hit.start,hit.end),para_fingerprint:newText.slice(0,32),para_fingerprint_v3:paragraphFingerprint(newText),corpus_generation:CORPUS_GENERATION,anchor_schema:4,stale_status:'active',needs_reanchor:false,migrated_reason:'r3_'+hit.method});if(hit.method.startsWith('exact_selected'))log.exact_reanchored++;else if(hit.method.startsWith('exact_text'))log.context_reanchored++;else log.normalized_reanchored++;}else{Object.assign(h,{corpus_generation:CORPUS_GENERATION,anchor_schema:4,stale_status:'stale_unresolved_r2_to_r3',needs_reanchor:true,migrated_reason:'r3_preserved_unresolved_no_silent_move'});log.stale_unresolved++;}}
+    await dbPut('highlights',h);log.highlights++;log.entries.push({store:'highlights',id:h.id,para_id:h.para_id,before,after:{start_char:h.start_char,end_char:h.end_char,stale_status:h.stale_status,reason:h.migrated_reason}});}
+  for(const n of await dbGetAll('notes')){const spec=byId.get(n.para_id);if(!spec)continue;const q=String(n.quote||'').trim();if(!q){Object.assign(n,{corpus_generation:CORPUS_GENERATION,para_fingerprint_v3:paragraphFingerprint(spec.new_text),anchor_schema:4,stale_status:'active',needs_reanchor:false,migrated_reason:'r3_paragraph_note_stable_identity'});log.paragraph_identity++;}else{let os=spec.old_text.indexOf(q);if(os<0&&Array.isArray(n.anchor_parts)&&n.anchor_parts.length){const a=n.anchor_parts[0];if(a.para_id===n.para_id&&Number.isInteger(a.start_char))os=a.start_char;}const oe=os>=0?os+q.length:0,hit=os>=0?migrationV4FindSelection(spec.old_text,spec.new_text,os,oe,q):migrationV4UniqueRaw(spec.new_text,q);if(hit){n.quote=spec.new_text.slice(hit.start,hit.end);Object.assign(n,{corpus_generation:CORPUS_GENERATION,para_fingerprint_v3:paragraphFingerprint(spec.new_text),anchor_schema:4,stale_status:'active',needs_reanchor:false,migrated_reason:'r3_note_'+hit.method});if(Array.isArray(n.anchor_parts)&&n.anchor_parts.length===1&&n.anchor_parts[0].para_id===n.para_id)n.anchor_parts[0]={...n.anchor_parts[0],start_char:hit.start,end_char:hit.end,text:n.quote};}else{Object.assign(n,{corpus_generation:CORPUS_GENERATION,anchor_schema:4,stale_status:'stale_unresolved_r2_to_r3',needs_reanchor:true,migrated_reason:'r3_note_preserved_unresolved_no_silent_move'});log.stale_unresolved++;}}await dbPut('notes',n);log.notes++;}
+  for(const it of await dbGetAll('col_items')){const spec=byId.get(it.para_id);if(!spec)continue;const snap=String(it.text||'');if(!snap){Object.assign(it,{corpus_generation:CORPUS_GENERATION,para_fingerprint_v3:paragraphFingerprint(spec.new_text),stale_status:'active',migrated_reason:'r3_collection_paragraph_identity'});log.paragraph_identity++;}else{const os=spec.old_text.indexOf(snap),hit=os>=0?migrationV4FindSelection(spec.old_text,spec.new_text,os,os+snap.length,snap):migrationV4UniqueRaw(spec.new_text,snap);if(hit){it.text=spec.new_text.slice(hit.start,hit.end);Object.assign(it,{corpus_generation:CORPUS_GENERATION,para_fingerprint_v3:paragraphFingerprint(spec.new_text),stale_status:'active',migrated_reason:'r3_collection_'+hit.method});}else{Object.assign(it,{corpus_generation:CORPUS_GENERATION,stale_status:'stale_unresolved_r2_to_r3',migrated_reason:'r3_collection_preserved_unresolved_no_silent_move'});log.stale_unresolved++;}}await dbPut('col_items',it);log.col_items++;}
+  for(const r of await dbGetAll('reading_pos')){const spec=byId.get(r.para_id);if(!spec)continue;const frac=clamp01(r.fraction_within_paragraph);Object.assign(r,{corpus_generation:CORPUS_GENERATION,approx_char:Math.round(frac*spec.new_text.length),excerpt:spec.new_text.slice(0,80)+(spec.new_text.length>80?'…':''),migrated_reason:'r3_reading_position_stable_paragraph_fraction'});if(r.stale_status!=='entry_missing')r.stale_status='active';await dbPut('reading_pos',r);log.reading_pos++;}
+  await dbPut('settings',{key:markerKey,to_generation:CORPUS_GENERATION,value:'done',ts:Date.now()});await dbPut('settings',{key:'user_data_migration_log_r3',value:JSON.stringify(log).slice(0,60000),ts:Date.now()});window.__ldcUserDataMigrationR3=log;return log;
+}
+
 async function refreshUserDataStaleness() {
   const result={checked:0,recovered:0,stale:0};
   const hls=await dbGetAll('highlights');
@@ -5423,9 +5450,9 @@ let searchMetadataByEntry = new Map();
 let searchRunSeq = 0, activeSearchAbort = null;
 const SEARCH_RESULT_CAP = 30;
 const SEARCH_POOL_CAP = 500;
-const BACKBONE_GENERATION = 'G036-AFLP-R2-UWR2';
-const CORPUS_GENERATION = 'G036-AFLP-R2-SUP-T2';
-const SUPPLEMENT_PROGRAMME = 'LDC-AFLP-SUP-T1-SUP-T2';
+const BACKBONE_GENERATION = 'G036-AFLP-R3-UWR2';
+const CORPUS_GENERATION = 'G036-AFLP-R3-SUP-T4';
+const SUPPLEMENT_PROGRAMME = 'LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4';
 const SUPPLEMENT_MODE_KEY = 'supplement_mode';
 const SUPPLEMENT_BADGE = 'COMPLÉMENT';
 const SUPPLEMENT_PROVENANCE_TEXT = 'Complément au corpus aligné : proposition absente du périmètre AFLP de référence. La provenance exacte du contenu et du libellé français est indiquée dans les informations du passage.';
@@ -6293,7 +6320,7 @@ async function handleImportFile(input){const file=input&&input.files&&input.file
 function closeImportPreview(){closeModalOverlay('backup-preview-overlay');pendingBackupImport=null;}
 function dbReplaceUserDataAtomic(state){return dbWriteStoresAtomic(USER_DATA_STORES,(tx,fail)=>{for(const store of USER_DATA_STORES)tx.objectStore(store).clear();for(const store of USER_DATA_STORES){const os=tx.objectStore(store);for(const row of (state[store]||[])){const r=os.put(row);r.onerror=()=>fail(r.error);}}});}
 async function applyImportedPreferences(){const theme=await dbGet('settings','theme').catch(()=>null);const tv=theme&&THEME_VALUES.includes(theme.val)?theme.val:'system';document.documentElement.setAttribute('data-theme',tv);updateThemeBtn(tv);const level=await dbGet('settings','textLevel').catch(()=>null);applyTextLevel(level&&TEXT_LEVELS[level.val]?level.val:'normal');const rp=await dbGet('settings','showReperes').catch(()=>null);showReperes=!!(rp&&rp.val===true);applyReperesState();await initialiseSupplementMode();}
-async function confirmImportBackup(){if(!pendingBackupImport||!pendingBackupImport.validation.ok)return;const env=pendingBackupImport.env,previous=await snapshotUserDataState();let replaced=false;try{await dbReplaceUserDataAtomic(env.state);replaced=true;readingPositionV3MigrationDone=false;await migrateReadingPositionsV3();await dbPut('settings',{key:'user_data_schema_version',value:2,ts:Date.now()});await migrateUserDataV4();await dbPut('settings',{key:'last_backup_import_at',val:new Date().toISOString(),source_version:env.version,reading_position_schema:READING_POSITION_SCHEMA,ts:Date.now()});await refreshUserDataStaleness();await applyImportedPreferences();closeImportPreview();await renderEspace();await renderHome();showToast('Sauvegarde restaurée');}catch(e){console.error('LDC: import failed',e);if(replaced){try{await dbReplaceUserDataAtomic(previous);readingPositionV3MigrationDone=false;await applyImportedPreferences();await renderHome();}catch(rollbackError){console.error('LDC: import rollback failed',rollbackError);showToast('Échec critique de restauration — conservez votre fichier de sauvegarde');return;}}showToast('Restauration annulée — données précédentes rétablies');}}
+async function confirmImportBackup(){if(!pendingBackupImport||!pendingBackupImport.validation.ok)return;const env=pendingBackupImport.env,previous=await snapshotUserDataState();let replaced=false;try{await dbReplaceUserDataAtomic(env.state);replaced=true;readingPositionV3MigrationDone=false;await migrateReadingPositionsV3();await dbPut('settings',{key:'user_data_schema_version',value:2,ts:Date.now()});await migrateUserDataV4();await migrateUserDataR3Once();await dbPut('settings',{key:'last_backup_import_at',val:new Date().toISOString(),source_version:env.version,reading_position_schema:READING_POSITION_SCHEMA,ts:Date.now()});await refreshUserDataStaleness();await applyImportedPreferences();closeImportPreview();await renderEspace();await renderHome();showToast('Sauvegarde restaurée');}catch(e){console.error('LDC: import failed',e);if(replaced){try{await dbReplaceUserDataAtomic(previous);readingPositionV3MigrationDone=false;await applyImportedPreferences();await renderHome();}catch(rollbackError){console.error('LDC: import rollback failed',rollbackError);showToast('Échec critique de restauration — conservez votre fichier de sauvegarde');return;}}showToast('Restauration annulée — données précédentes rétablies');}}
 
 async function goToEntry(vol,entryId,paraId){if(paraId)pendingParaId=paraId;return openEntry(vol,entryId,'espace',{intent:READER_INTENT.CONSULTATION});}
 
@@ -6801,16 +6828,154 @@ function setShellState(state){
   });
 }
 
+/* M12_ATOMIC_BOOTSTRAP_BEGIN */
+const BOOT_SW_REGISTER_TIMEOUT_MS = 20000;
+const BOOT_SW_INSTALL_TIMEOUT_MS = 60000;
+const BOOT_SW_CONTROLLER_TIMEOUT_MS = 20000;
+const BOOT_DB_TIMEOUT_MS = 20000;
+const BOOT_CORPUS_TIMEOUT_MS = 30000;
+let bootSwRegistration = null;
+let bootStage = 'INIT';
+
+function bootWithTimeout(promise, timeoutMs, label) {
+  return new Promise((resolve,reject)=>{
+    const timer=setTimeout(()=>reject(new Error(label||'délai dépassé')),timeoutMs);
+    Promise.resolve(promise).then(v=>{clearTimeout(timer);resolve(v);},e=>{clearTimeout(timer);reject(e);});
+  });
+}
+function queryWorkerVersion(worker,timeoutMs=1000) {
+  return new Promise(resolve=>{
+    if(!worker||typeof MessageChannel==='undefined'){resolve(null);return;}
+    const ch=new MessageChannel();let done=false;
+    const finish=v=>{if(done)return;done=true;clearTimeout(timer);try{ch.port1.close();ch.port2.close();}catch(e){}resolve(v||null);};
+    const timer=setTimeout(()=>finish(null),timeoutMs);
+    ch.port1.onmessage=e=>{const d=e&&e.data||{};finish(d.type==='LDC_SW_VERSION'?String(d.version||''):null);};
+    try{worker.postMessage({type:'LDC_GET_VERSION'},[ch.port2]);}catch(e){finish(null);}
+  });
+}
+function queryControllerVersion(timeoutMs=1000) {
+  return queryWorkerVersion(navigator.serviceWorker&&navigator.serviceWorker.controller,timeoutMs);
+}
+function waitForWorkerInstalled(worker, timeoutMs=BOOT_SW_INSTALL_TIMEOUT_MS) {
+  if(!worker)return Promise.resolve(null);
+  if(worker.state==='installed'||worker.state==='activated')return Promise.resolve(worker);
+  return new Promise((resolve,reject)=>{
+    const timer=setTimeout(()=>{cleanup();reject(new Error('installation du Service Worker trop longue'));},timeoutMs);
+    const onState=()=>{if(worker.state==='installed'||worker.state==='activated'){cleanup();resolve(worker);}else if(worker.state==='redundant'){cleanup();reject(new Error('nouveau Service Worker devenu redondant'));}};
+    const cleanup=()=>{clearTimeout(timer);try{worker.removeEventListener('statechange',onState);}catch(e){}};
+    worker.addEventListener('statechange',onState);onState();
+  });
+}
+function waitForControllerChange(timeoutMs=BOOT_SW_CONTROLLER_TIMEOUT_MS) {
+  return new Promise((resolve,reject)=>{
+    const timer=setTimeout(()=>{cleanup();reject(new Error('prise de contrôle du Service Worker trop longue'));},timeoutMs);
+    const onChange=()=>{cleanup();resolve(navigator.serviceWorker.controller||null);};
+    const cleanup=()=>{clearTimeout(timer);try{navigator.serviceWorker.removeEventListener('controllerchange',onChange);}catch(e){}};
+    navigator.serviceWorker.addEventListener('controllerchange',onChange,{once:true});
+  });
+}
+async function ensureCurrentServiceWorkerBeforeCorpus() {
+  if(!('serviceWorker' in navigator))return {status:'UNSUPPORTED',registration:null};
+  const hadController=!!navigator.serviceWorker.controller;
+  if(hadController){
+    const current=await queryControllerVersion();
+    if(current===SW_CACHE_VERSION){bootSwRegistration=await navigator.serviceWorker.getRegistration().catch(()=>null);return {status:'CURRENT',registration:bootSwRegistration};}
+  }
+  const reg=await bootWithTimeout(navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}),BOOT_SW_REGISTER_TIMEOUT_MS,'enregistrement du Service Worker trop long');
+  bootSwRegistration=reg;
+  try{await bootWithTimeout(reg.update(),BOOT_SW_REGISTER_TIMEOUT_MS,'vérification du Service Worker trop longue');}
+  catch(e){if(hadController)throw e;}
+  if(!hadController)return {status:'FIRST_LOAD',registration:reg};
+  let current=await queryControllerVersion(500);
+  if(current===SW_CACHE_VERSION)return {status:'CURRENT_AFTER_UPDATE',registration:reg};
+  let candidate=reg.waiting||reg.installing;
+  if(candidate&&candidate.state!=='installed'&&candidate.state!=='activated')await waitForWorkerInstalled(candidate);
+  candidate=reg.waiting||candidate;
+  if(reg.waiting||(candidate&&candidate.state==='installed')){
+    const changing=waitForControllerChange();
+    (reg.waiting||candidate).postMessage({type:'SKIP_WAITING'});
+    await changing;
+    const after=await queryControllerVersion(1000);
+    if(after!==SW_CACHE_VERSION)throw new Error('nouveau Service Worker activé mais version de contrôle inattendue');
+    return {status:'RELOAD_REQUIRED',registration:reg};
+  }
+  // Rare lifecycle race: the replacement may already be active while this page still has the predecessor controller.
+  if(reg.active){
+    const activeVersion=await queryWorkerVersion(reg.active,750);
+    if(activeVersion===SW_CACHE_VERSION){
+      try{await waitForControllerChange(5000);}catch(e){}
+      const after=await queryControllerVersion(1000);
+      if(after===SW_CACHE_VERSION)return {status:'RELOAD_REQUIRED',registration:reg};
+    }
+  }
+  current=await queryControllerVersion(1000);
+  if(current===SW_CACHE_VERSION)return {status:'CURRENT_AFTER_ACTIVATION',registration:reg};
+  throw new Error('ancienne version du cache encore active; synchronisation impossible avant le corpus');
+}
+function reloadBoot(){
+  const u=new URL(window.location.href);u.searchParams.set('ldc_retry',Date.now().toString(36));window.location.replace(u.href);
+}
+function bootErrorNeedsCacheRepair(err){
+  if(bootStage==='SW_SYNC')return true;
+  if(bootStage!=='CORPUS_INIT')return false;
+  const m=String(err&&err.message||err||'').toLowerCase();
+  return /(evidence mismatch|registry identity|registry generation|manifest identity|registry counts|scope count|provenance contract|manifest count parity|incompatible|integrity|content binding|ancienne version|cache encore active)/.test(m);
+}
+async function repairBootCacheAndReload(){
+  const btn=document.getElementById('boot-repair-btn');
+  if(navigator.onLine===false){
+    const d=document.getElementById('boot-failure-detail');if(d)d.textContent='Une connexion est nécessaire pour réparer la mise à jour. Aucun cache n’a été supprimé.';
+    if(btn){btn.disabled=false;btn.textContent='Réessayer';btn.onclick=reloadBoot;}return;
+  }
+  if(btn){btn.disabled=true;btn.textContent='Réparation…';}
+  try{
+    if('serviceWorker' in navigator){
+      const reg=await navigator.serviceWorker.getRegistration().catch(()=>null);
+      const expectedScope=new URL('./',window.location.href).href;
+      if(reg&&reg.scope===expectedScope)await reg.unregister().catch(()=>{});
+    }
+    if('caches' in window){const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('ldc-le-livre-du-ciel-')||/^ldc-v\d/.test(k)).map(k=>caches.delete(k)));}
+  }catch(e){console.warn('LDC boot cache repair partial',e);}
+  const u=new URL('./',window.location.href);u.searchParams.set('ldc_recovery',Date.now().toString(36));window.location.replace(u.href);
+}
+function showBootFailure(err){
+  const rec=recordLocalDiagnostic('boot',err);console.error('LDC boot failed',bootStage,err);
+  setShellState('boot');const box=document.getElementById('loading');if(!box)return;
+  const sub=box.querySelector('.l-sub');if(sub)sub.textContent='Le corpus n’a pas pu être chargé.';
+  let detail=document.getElementById('boot-failure-detail');if(!detail){detail=document.createElement('div');detail.id='boot-failure-detail';detail.style.cssText='max-width:520px;padding:0 24px;text-align:center;font-size:12px;line-height:1.5;color:var(--muted)';box.appendChild(detail);}
+  const repairable=bootErrorNeedsCacheRepair(err);
+  const dbFailure=bootStage==='DB_OPEN';
+  if(repairable)detail.textContent=navigator.onLine===false?'La mise à jour ne peut pas être vérifiée hors connexion. Reconnectez-vous puis réessayez. Aucun cache ne sera supprimé hors connexion.':'La mise à jour locale et les fichiers publiés ne sont pas synchronisés. Vos notes, surlignages et favoris ne seront pas effacés.';
+  else if(dbFailure)detail.textContent='Le stockage local n’a pas pu être ouvert. Aucun cache ni donnée personnelle ne sera supprimé automatiquement.';
+  else if(bootStage==='CORPUS_INIT')detail.textContent='Le registre du corpus n’a pas pu être chargé. Réessayez d’abord; une réparation du cache n’est proposée que pour un conflit de version ou d’intégrité identifié.';
+  else detail.textContent='L’initialisation a été interrompue. Vos données personnelles ne seront pas supprimées automatiquement.';
+  let btn=document.getElementById('boot-repair-btn');if(!btn){btn=document.createElement('button');btn.id='boot-repair-btn';btn.type='button';btn.className='btn-primary';btn.style.marginTop='4px';box.appendChild(btn);}
+  btn.disabled=false;
+  if(repairable&&navigator.onLine!==false){btn.textContent='Réparer et recharger';btn.onclick=repairBootCacheAndReload;}else{btn.textContent='Réessayer';btn.onclick=reloadBoot;}
+  btn.focus();
+  let code=document.getElementById('boot-error-code');if(!code){code=document.createElement('div');code.id='boot-error-code';code.style.cssText='font-size:10px;color:var(--muted);max-width:520px;padding:0 24px;text-align:center;word-break:break-word';box.appendChild(code);}code.textContent=`Diagnostic : ${bootStage} · ${rec.name||'Erreur'} · ${rec.message||'chargement interrompu'}`;
+}
+/* M12_ATOMIC_BOOTSTRAP_END */
+
 async function boot() {
   setShellState('boot');
-  await openDB();
-  await initialiseSupplementMode();
+  const loadingSub=document.querySelector('#loading .l-sub');if(loadingSub)loadingSub.textContent='Vérification de la mise à jour…';
+  bootStage='SW_SYNC';
+  const swSync=await ensureCurrentServiceWorkerBeforeCorpus();
+  if(swSync&&swSync.status==='RELOAD_REQUIRED'){window.location.reload();return;}
+  if(loadingSub)loadingSub.textContent='Chargement du corpus…';
+  bootStage='DB_OPEN';
+  await bootWithTimeout(openDB(),BOOT_DB_TIMEOUT_MS,'ouverture du stockage local trop longue');
+  bootStage='CORPUS_INIT';
+  await bootWithTimeout(initialiseSupplementMode(),BOOT_CORPUS_TIMEOUT_MS,'chargement du registre des compléments trop long');
+  bootStage='POST_INIT';
   await migrateReadingPositionsV3().catch(e=>console.warn('LDC: reading-position v3 migration deferred',e));
 
   // M4 schema-v4 migration is idempotent and non-destructive. It preserves
   // unresolved records and never silently relocates an ambiguous exact-text anchor.
   migrateUserDataV4()
-    .then(r => { if (r && !r.skipped) console.info('LDC: user data migrated to schema 4', r); })
+    .then(r => { if (r && !r.skipped) console.info('LDC: user data migrated to schema 4', r); return migrateUserDataR3Once(); })
+    .then(r => { if (r && !r.skipped) console.info('LDC: user data migrated across ALIGNÉ R3', r); })
     .catch(e => console.warn('LDC: user-data migration deferred', e));
 
   // LDC-A: migrate the legacy 14–22 slider once, then restore one of the
@@ -7151,10 +7316,10 @@ function renderDnResultCard() {
    CacheStorage contains public app/corpus bytes only. IndexedDB settings holds
    the user-visible completion record; it is not itself the offline payload.
 ═══════════════════════════════════════════════════════ */
-const OFFLINE_CACHE_VERSION = 'ldc-le-livre-du-ciel-offline-v2.19.54-R1B';
+const OFFLINE_CACHE_VERSION = 'ldc-le-livre-du-ciel-offline-v2.19.59-R1B';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v2';
-const OFFLINE_CONTENT_BINDING = '4fa504084722700c317576a4935f96e2a1324d43e454e3fbf2c4ff56a1b0c893';
-const OFFLINE_CORPUS_MANIFEST_SHA256 = 'd461f5e69c888f3416405f03b9853573ae70a5a5d8886582fca4fda137ced78c';
+const OFFLINE_CONTENT_BINDING = 'c0faf7784b7a6011a3010e562438eeece14023811a1eed1edd087c8740843e21';
+const OFFLINE_CORPUS_MANIFEST_SHA256 = '0ed5db715f73ab0174ed2af8eabb5c970593a662c710cd05b01ebefcd2ebbe26';
 const OFFLINE_STATES = Object.freeze(['NOT_PREPARED','CHECKING','DOWNLOADING','READY','PARTIAL','ERROR','CANCELLED']);
 let offlineUiState = {state:'NOT_PREPARED',completed:0,total:0,failed:[],total_bytes:0,job_id:null,message:'',content_binding_sha256:OFFLINE_CONTENT_BINDING,corpus_manifest_sha256:OFFLINE_CORPUS_MANIFEST_SHA256};
 let runtimeCacheUiState = {entries:0,bytes:0,max_entries:48,max_bytes:50331648};
@@ -7202,7 +7367,7 @@ function renderOfflineUi(){
   const st=offlineUiState, total=Number(st.total||0), completed=Number(st.completed||0), failed=Array.isArray(st.failed)?st.failed:[];
   const pct=total?Math.max(0,Math.min(100,Math.round(completed/total*100))):0;
   label.textContent=`${offlineStateLabel(st.state)}${st.message?' — '+st.message:''}`;
-  detail.textContent=total?`${completed}/${total} fichiers · ${pct}% · ${offlineMb(st.total_bytes)}${failed.length?' · '+failed.length+' échec(s)':''}`:`Périmètre : 36 tomes + 58 compléments SUP-T1/SUP-T2 + recherche textuelle/BM25.`;
+  detail.textContent=total?`${completed}/${total} fichiers · ${pct}% · ${offlineMb(st.total_bytes)}${failed.length?' · '+failed.length+' échec(s)':''}`:`Périmètre : 36 tomes + 74 compléments SUP-T1/SUP-T2/SUP-T3/SUP-T4 + recherche textuelle/BM25.`;
   const rt=runtimeCacheUiState||{}, rtEntries=Number(rt.entries||0), rtBytes=Number(rt.bytes||0), rtMaxEntries=Number(rt.max_entries||48), rtMaxBytes=Number(rt.max_bytes||50331648);
   runtimeEl.textContent=`Cache temporaire lecture/recherche : ${rtEntries} fichier${rtEntries===1?'':'s'} · ${offlineMb(rtBytes)} · limite ${rtMaxEntries} fichiers / ${offlineMb(rtMaxBytes)}.`;
   if(failed.length){failedEl.style.display='block';failedEl.textContent='Fichiers en échec :\n'+failed.map(f=>`• ${f.path||'fichier inconnu'}${f.error?' — '+f.error:''}`).join('\n');}else{failedEl.style.display='none';failedEl.textContent='';}
@@ -7401,7 +7566,7 @@ async function manualCheckForUpdate() {
   } finally {btn.disabled=false;btn.innerHTML=originalBtnHtml;}
 }
 
-boot();
+boot().catch(showBootFailure);
 </script>
 </body>
 </html>

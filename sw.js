@@ -1,12 +1,12 @@
-const VERSION = 'ldc-v2.19.54-R1B';
+const VERSION = 'ldc-v2.19.59-R1B';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
-const SHELL_CACHE = `${CACHE_PREFIX}shell-v2.19.54-R1B`;
-const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-v2.19.54-R1B`;
-const OFFLINE_CACHE = 'ldc-le-livre-du-ciel-offline-v2.19.54-R1B';
+const SHELL_CACHE = `${CACHE_PREFIX}shell-v2.19.59-R1B`;
+const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-v2.19.59-R1B`;
+const OFFLINE_CACHE = 'ldc-le-livre-du-ciel-offline-v2.19.59-R1B';
 const OFFLINE_MANIFEST_URL = './offline_manifest.json';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v2';
-const OFFLINE_CONTENT_BINDING = '4fa504084722700c317576a4935f96e2a1324d43e454e3fbf2c4ff56a1b0c893';
-const OFFLINE_CORPUS_MANIFEST_SHA256 = 'd461f5e69c888f3416405f03b9853573ae70a5a5d8886582fca4fda137ced78c';
+const OFFLINE_CONTENT_BINDING = 'c0faf7784b7a6011a3010e562438eeece14023811a1eed1edd087c8740843e21';
+const OFFLINE_CORPUS_MANIFEST_SHA256 = '0ed5db715f73ab0174ed2af8eabb5c970593a662c710cd05b01ebefcd2ebbe26';
 const OFFLINE_META_PATH = '__ldc_offline_meta__.json';
 const RUNTIME_META_PATH = '__ldc_runtime_meta__.json';
 const RUNTIME_MAX_ENTRIES = 48;
@@ -16,16 +16,7 @@ let runtimeMutationQueue = Promise.resolve();
 // Keep install small and atomic. If any shell/index resource cannot be cached, the
 // installation fails and the previous active worker remains in control.
 const SHELL = [
-  './', './index.html', './manifest.json', './offline_manifest.json', './sw.js',
-  './speech_model.js', './display_map.js', './interaction_anchor.js', './search_normalizer.js',
-  './icons/favicon-16.png', './icons/favicon-32.png', './icons/favicon.ico', './icons/icon-60.png', './icons/icon-120.png',
-  './icons/apple-touch-icon.png', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png',
-  './assets/fonts/fonts.css',
-  './assets/fonts/im-fell-english-latin-400-normal.woff2', './assets/fonts/im-fell-english-latin-400-italic.woff2',
-  './assets/fonts/crimson-text-latin-400-normal.woff2', './assets/fonts/crimson-text-latin-400-italic.woff2', './assets/fonts/crimson-text-latin-600-normal.woff2',
-  './assets/icons/tabler-icons.min.css', './assets/icons/tabler-icons.woff2', './assets/js/sortable.min.js',
-  './corpus/manifest.json', './corpus/search_metadata_index.json', './corpus/display_titles.json',
-  './corpus/supplements.json', './corpus/supplement_search.json', './corpus/supplement_speakers.json', './corpus/supplement_manifest.json', './corpus/user_state_migration_v4.json'
+  './', './index.html', './manifest.json', './offline_manifest.json', './sw.js', './speech_model.js', './display_map.js', './interaction_anchor.js', './search_normalizer.js', './icons/favicon-16.png', './icons/favicon-32.png', './icons/favicon.ico', './icons/icon-60.png', './icons/icon-120.png', './icons/apple-touch-icon.png', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './assets/fonts/fonts.css', './assets/fonts/im-fell-english-latin-400-normal.woff2', './assets/fonts/im-fell-english-latin-400-italic.woff2', './assets/fonts/crimson-text-latin-400-normal.woff2', './assets/fonts/crimson-text-latin-400-italic.woff2', './assets/fonts/crimson-text-latin-600-normal.woff2', './assets/icons/tabler-icons.min.css', './assets/icons/tabler-icons.woff2', './assets/js/sortable.min.js'
 ];
 
 let offlineJob = null;
@@ -67,7 +58,7 @@ async function loadOfflineManifest() {
   if(!r){r=await fetch(OFFLINE_MANIFEST_URL,{cache:'reload'});if(r&&r.ok)await shell.put(OFFLINE_MANIFEST_URL,r.clone());}
   if(!r||!r.ok)throw new Error('offline manifest indisponible');
   const m=await r.json();
-  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.54-R1B'||m.cache_version!==OFFLINE_CACHE)throw new Error('offline manifest incompatible');
+  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.59-R1B'||m.cache_version!==OFFLINE_CACHE)throw new Error('offline manifest incompatible');
   if(m.content_binding_schema!=='ldc-offline-content-binding-v1'||m.content_binding_sha256!==OFFLINE_CONTENT_BINDING)throw new Error('offline manifest binding incompatible');
   if(m.corpus_manifest_sha256!==OFFLINE_CORPUS_MANIFEST_SHA256)throw new Error('offline corpus manifest binding incompatible');
   const unique=[...new Set((m.assets||[]).map(a=>a.path))];
@@ -228,10 +219,12 @@ async function handleOfflineMessage(event) {
 }
 
 self.addEventListener('message',e=>{
+  if(e.data&&e.data.type==='LDC_GET_VERSION'){const p=e.ports&&e.ports[0];if(p)p.postMessage({type:'LDC_SW_VERSION',version:VERSION});else if(e.source)e.source.postMessage({type:'LDC_SW_VERSION',version:VERSION});return;}
   if(e.data&&e.data.type==='SKIP_WAITING'){self.skipWaiting();return;}
   if(e.data&&String(e.data.type||'').startsWith('OFFLINE_'))e.waitUntil(handleOfflineMessage(e));
 });
 
+const BOOT_CRITICAL_CORPUS = ['corpus/supplements.json','corpus/supplement_manifest.json'];
 async function installFreshShell() {
   await caches.delete(SHELL_CACHE);
   const c=await caches.open(SHELL_CACHE);
@@ -239,7 +232,21 @@ async function installFreshShell() {
   try{await c.addAll(requests);}
   catch(e){await caches.delete(SHELL_CACHE);throw e;}
 }
-self.addEventListener('install',e=>{e.waitUntil(installFreshShell());});
+async function installVerifiedBootCorpus() {
+  const m=await loadOfflineManifest();
+  await caches.delete(RUNTIME_CACHE);
+  const cache=await caches.open(RUNTIME_CACHE), entries=[];
+  try{
+    for(const path of BOOT_CRITICAL_CORPUS){
+      const asset=m.assetMap.get(path);if(!asset)throw new Error(`boot-critical asset absent du manifeste: ${path}`);
+      const raw=await fetch(cacheUrl(path),{cache:'reload'});
+      const verified=await verifiedNetworkResponse(raw,asset,m);
+      await cache.put(cacheUrl(path),verified.clone());entries.push({path,bytes:Number(asset.bytes)});
+    }
+    await writeRuntimeMeta(cache,m,entries);
+  }catch(e){await caches.delete(RUNTIME_CACHE);throw e;}
+}
+self.addEventListener('install',e=>{e.waitUntil((async()=>{await installFreshShell();await installVerifiedBootCorpus();})());});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{
   const keep=new Set([SHELL_CACHE,RUNTIME_CACHE,OFFLINE_CACHE]);
   const keys=await caches.keys();
@@ -286,10 +293,10 @@ self.addEventListener('fetch',e=>{
   }
   if(e.request.mode==='navigate'){
     const freshNav=new Request(e.request,{cache:'reload'});
-    e.respondWith(fetch(freshNav).then(async res=>{if(res&&res.ok){const c=await caches.open(SHELL_CACHE);await c.put('./index.html',res.clone());}return res;}).catch(async()=>{const c=await caches.open(SHELL_CACHE);return (await c.match('./index.html'))||(await c.match('./'));}));return;
+    e.respondWith(fetch(freshNav).catch(async()=>{const c=await caches.open(SHELL_CACHE);return (await c.match('./index.html'))||(await c.match('./'));}));return;
   }
   if(path.includes('/corpus/')){
     e.respondWith(cachedCorpusResponse(e.request,false));return;
   }
-  e.respondWith(fetch(e.request).then(async res=>{if(res&&res.ok){const c=await caches.open(SHELL_CACHE);await c.put(e.request,res.clone());}return res;}).catch(async()=>{const c=await caches.open(SHELL_CACHE);return (await c.match(e.request,{ignoreSearch:true}))||Response.error();}));
+  e.respondWith(fetch(e.request).catch(async()=>{const c=await caches.open(SHELL_CACHE);return (await c.match(e.request,{ignoreSearch:true}))||Response.error();}));
 });
