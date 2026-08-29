@@ -45,11 +45,11 @@
     36
   ],
   "volumes_total": 36,
-  "status": "R3_BOUNDED_FIDELITY_CORRECTIONS__SUP_T4_FIXED__M12_V59_ATOMIC_BOOTSTRAP__EXTERNAL_VALIDATION_REQUIRED",
+  "status": "R3_BOUNDED_FIDELITY_CORRECTIONS__SUP_T4_FIXED__M13_V60_GENERATION_AWARE_SUPPLEMENT_PROVENANCE_VALIDATOR__EXTERNAL_VALIDATION_REQUIRED",
   "speech_resynced": true,
   "notes": "Active ALIGNÉ is R3 after six bounded fidelity cases (10 paragraph replacements). Active COMPLÉMENT adds exactly 15 SUP-T4 internal items / 22 paragraphs. No unauthorized corpus mutation.",
   "speech_layer_note": "Backbone speaker segment identities are preserved; offsets/previews rebuilt only for R3 paragraphs that already carried segments. SUP-T4 adds 22 full-fragment speaker segments.",
-  "app_version": "v2.19.59-R1B",
+  "app_version": "v2.19.60-R1B",
   "speaker_layer": {
     "total_segments": 65012,
     "speaker_counts": {
@@ -118,7 +118,7 @@
     "note": "Display-only token projection. Suppressed and replaced tokens keep their canonical [start,end) so highlights, notes and bookmarks stay anchored."
   },
   "reader_architecture": {
-    "version": "v2.19.59-R1B",
+    "version": "v2.19.60-R1B",
     "flow_aware_dom": true,
     "post_render_structural_mutation": false,
     "paragraph_local_styled_runs": 57966,

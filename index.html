@@ -1957,12 +1957,12 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.59-R1B'; // technical update/audit identifier
-const PUBLIC_VERSION = '59';        // single user-facing release number
+const APP_VERSION = 'v2.19.60-R1B'; // technical update/audit identifier
+const PUBLIC_VERSION = '60';        // single user-facing release number
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD   = '2026-08-28';
-const SW_CACHE_VERSION = 'ldc-v2.19.59-R1B';
-const CORPUS_MANIFEST_SHA256 = '0ed5db715f73ab0174ed2af8eabb5c970593a662c710cd05b01ebefcd2ebbe26';
+const SW_CACHE_VERSION = 'ldc-v2.19.60-R1B';
+const CORPUS_MANIFEST_SHA256 = '2aa33eb3e96ca719a7e4778e1505b075a3a6bd6d283b1f63c95552bead31f9c1';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
 
@@ -2259,7 +2259,7 @@ function isStaleRecord(r) {
 /* ═══════════════════════════════════════════════════════
    CORPUS LOADING
 ═══════════════════════════════════════════════════════ */
-const CORPUS_CV = 'cv=cm-0ed5db715f73ab01'; // derived from corpus/manifest.json SHA-256
+const CORPUS_CV = 'cv=cm-2aa33eb3e96ca719'; // derived from corpus/manifest.json SHA-256
 
 function sourceModeShowsBackbone() { return supplementMode !== 'additions'; }
 function sourceModeShowsSupplements() { return supplementMode !== 'aflp'; }
@@ -2290,8 +2290,24 @@ async function loadSupplementRegistryData() {
     const counts=registry.counts||{};
     if(counts.items!==74||counts.sup_t1_items!==14||counts.sup_t2_items!==44||counts.sup_t3_items!==1||counts.sup_t4_items!==15||counts.complete_entries!==13||counts.internal_supplements!==61||counts.paragraphs!==176||counts.search_records!==176||counts.speaker_segments!==142)reasons.push('registry counts');
     if(!Array.isArray(registry.supplements)||registry.supplements.length!==74)reasons.push('scope count');
-    const commonProv=['decision_id','source_evidence_ids','translation_hash','translation_confidence','provenance_badge'];
-    if(Array.isArray(registry.supplements)&&registry.supplements.some(s=>commonProv.some(k=>s[k]==null)||!s.aflp_status||!s.source_origin))reasons.push('supplement provenance contract');
+    const hasSha256=v=>typeof v==='string'&&/^[0-9a-f]{64}$/.test(v);
+    const hasText=v=>typeof v==='string'&&v.trim().length>0;
+    function supplementSet(s){return String((s&&s.supplement_set)||((s&&Array.isArray(s.paragraphs)&&s.paragraphs[0]&&s.paragraphs[0].source_batch)||''));}
+    function supplementProvenanceValid(s){
+      if(!s||!hasText(s.translation_hash)||!hasText(s.translation_confidence)||!hasText(s.provenance_badge)||!hasText(s.aflp_status)||!hasText(s.source_origin))return false;
+      const set=supplementSet(s);
+      if(set==='SUP-T3'){
+        const p=s.primary_text_authority||{}, a=s.placement_authority||{};
+        return s.supplement_id==='LDCSUP.T15.1922-12-02.E001'
+          && Array.isArray(s.historical_binding_ids)&&s.historical_binding_ids.includes('M2-0270')&&s.historical_binding_ids.includes('M2-0282')
+          && hasText(s.source_evidence_contract)&&s.translation_status==='APPROVED_M6_SUP_T3'
+          && hasText(p.source)&&p.date==='1923-07-17'&&hasSha256(p.source_sha256)&&hasSha256(p.bound_span_sha256)
+          && a.canonical_supplement_date==='1922-12-02'&&hasText(a.basis)&&hasSha256(a.itdv15_sha256)&&hasSha256(a.itdv16_sha256);
+      }
+      return hasText(s.decision_id)&&Array.isArray(s.source_evidence_ids)&&s.source_evidence_ids.length>0&&s.source_evidence_ids.every(hasText);
+    }
+    const invalidProv=Array.isArray(registry.supplements)?registry.supplements.filter(s=>!supplementProvenanceValid(s)).map(s=>s&&s.supplement_id||'UNKNOWN'):['REGISTRY_NOT_ARRAY'];
+    if(invalidProv.length)reasons.push(`supplement provenance contract [${invalidProv.join(', ')}]`);
     if(!manifest.counts||manifest.counts.items!==counts.items||manifest.counts.paragraphs!==counts.paragraphs||manifest.counts.speaker_segments!==counts.speaker_segments)reasons.push('manifest count parity');
     if(reasons.length) throw new Error('supplement registry evidence mismatch: '+reasons.join(', '));
     supplementRegistry=registry; supplementManifest=manifest;
@@ -7316,10 +7332,10 @@ function renderDnResultCard() {
    CacheStorage contains public app/corpus bytes only. IndexedDB settings holds
    the user-visible completion record; it is not itself the offline payload.
 ═══════════════════════════════════════════════════════ */
-const OFFLINE_CACHE_VERSION = 'ldc-le-livre-du-ciel-offline-v2.19.59-R1B';
+const OFFLINE_CACHE_VERSION = 'ldc-le-livre-du-ciel-offline-v2.19.60-R1B';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v2';
-const OFFLINE_CONTENT_BINDING = 'c0faf7784b7a6011a3010e562438eeece14023811a1eed1edd087c8740843e21';
-const OFFLINE_CORPUS_MANIFEST_SHA256 = '0ed5db715f73ab0174ed2af8eabb5c970593a662c710cd05b01ebefcd2ebbe26';
+const OFFLINE_CONTENT_BINDING = '704dd1aa51805c1b4bb9a569b63e7f8db44c9c3d2bb8099f1b15b2d539ee487c';
+const OFFLINE_CORPUS_MANIFEST_SHA256 = '2aa33eb3e96ca719a7e4778e1505b075a3a6bd6d283b1f63c95552bead31f9c1';
 const OFFLINE_STATES = Object.freeze(['NOT_PREPARED','CHECKING','DOWNLOADING','READY','PARTIAL','ERROR','CANCELLED']);
 let offlineUiState = {state:'NOT_PREPARED',completed:0,total:0,failed:[],total_bytes:0,job_id:null,message:'',content_binding_sha256:OFFLINE_CONTENT_BINDING,corpus_manifest_sha256:OFFLINE_CORPUS_MANIFEST_SHA256};
 let runtimeCacheUiState = {entries:0,bytes:0,max_entries:48,max_bytes:50331648};

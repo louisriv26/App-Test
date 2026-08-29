@@ -1,3 +1,21 @@
+# Livre du Ciel — v2.19.60-R1B / Public 60 — M13 supplement provenance validator repair
+
+**Current candidate:** v2.19.60-R1B · Public version 60 · build date 2026-08-29.
+
+**Baseline:** exact locked v59 deploy SHA-256 `703cb893a5fb3a558569bdd5cbb53c678a5b0d5767d17e66cd36b9a6103c5c9e`.
+
+**Current corpus architecture:** ALIGNÉ `G036-AFLP-R3-UWR2` = 2,312 entries / 74,348 paragraphs; COMPLÉMENT = 74 items / 176 paragraphs / 142 speaker segments; ENRICHI `G036-AFLP-R3-SUP-T4` = 2,325 entries / 74,524 paragraphs.
+
+**M13 runtime repair:** the live v59 diagnostic proved that CORPUS_INIT rejected the sole SUP-T3 item because the loader incorrectly required `decision_id` and `source_evidence_ids` on every supplement. Those fields belong to the SUP-T1/SUP-T2/SUP-T4 provenance model and were never part of the M6 SUP-T3 record. v60 validates SUP-T3 against its genuine M6 evidence (`M2-0270`/`M2-0282`, IT-PM primary source/span hashes, reciprocal IT-DV placement hashes, translation hash/confidence and provenance contract) while retaining the existing common contract for the other 73 items. No corpus wording or supplement record is changed.
+
+**Protected:** all corpus text, paragraph IDs/order, supplement payloads, search/speaker/display/flow data, user-data schema v4, `ldc-reading-position-v3`, protected Ma lecture suivie state machine, and the M12 atomic bootstrap/service-worker architecture.
+
+**External status:** live v59 CORPUS_INIT failed; v60 requires a fresh live deployment/retest. Wide/public release is not authorized.
+
+> Everything below this line is the byte-preserved v59 README and inherited historical documentation. Older “current”/PASS/count/version wording below is historical only.
+
+---
+
 # Livre du Ciel — v2.19.59-R1B / Public 59 — M12 atomic bootstrap successor
 
 **Current candidate:** v2.19.59-R1B · Public version 59 · build date 2026-08-28.

@@ -1,13 +1,13 @@
 {
   "schema": "ldc-offline-manifest-v2",
-  "app_version": "v2.19.59-R1B",
-  "cache_version": "ldc-le-livre-du-ciel-offline-v2.19.59-R1B",
+  "app_version": "v2.19.60-R1B",
+  "cache_version": "ldc-le-livre-du-ciel-offline-v2.19.60-R1B",
   "corpus_generation": "G036-AFLP-R3-SUP-T4",
   "scope": "36 tomes ALIGNÉ R3 + active SUP-T1/SUP-T2/SUP-T3/SUP-T4 complements + lexical/BM25 search + schema-v4/R3 user-state migration",
   "semantic_vector_search_included": false,
   "semantic_vector_search_note": "Vector/embedding search remains retired; semantic_index.json is lexical BM25 metadata.",
   "asset_count": 226,
-  "total_bytes": 193718144,
+  "total_bytes": 193718176,
   "families": {
     "display": 36,
     "display_titles": 1,
@@ -393,8 +393,8 @@
     },
     {
       "path": "corpus/manifest.json",
-      "bytes": 33422,
-      "sha256": "0ed5db715f73ab0174ed2af8eabb5c970593a662c710cd05b01ebefcd2ebbe26"
+      "bytes": 33454,
+      "sha256": "2aa33eb3e96ca719a7e4778e1505b075a3a6bd6d283b1f63c95552bead31f9c1"
     },
     {
       "path": "corpus/paragraphs_01.json",
@@ -1158,7 +1158,7 @@
     }
   ],
   "content_binding_schema": "ldc-offline-content-binding-v1",
-  "corpus_manifest_sha256": "0ed5db715f73ab0174ed2af8eabb5c970593a662c710cd05b01ebefcd2ebbe26",
-  "rebuild_status": "V59_M12_ATOMIC_BOOTSTRAP",
-  "content_binding_sha256": "c0faf7784b7a6011a3010e562438eeece14023811a1eed1edd087c8740843e21"
+  "corpus_manifest_sha256": "2aa33eb3e96ca719a7e4778e1505b075a3a6bd6d283b1f63c95552bead31f9c1",
+  "rebuild_status": "V60_M13_GENERATION_AWARE_SUPPLEMENT_PROVENANCE_VALIDATOR",
+  "content_binding_sha256": "704dd1aa51805c1b4bb9a569b63e7f8db44c9c3d2bb8099f1b15b2d539ee487c"
 }
