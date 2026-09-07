@@ -55,6 +55,17 @@ def hour_layer_records(c):
             for p in sub.get('paragraphs',[]): d[p['id']]=p['t']
     return d
 
+def hour_original_locations(c):
+    loc={}
+    for h in c['hours']:
+        for k in ('paragraphs','reflections'):
+            for i,p in enumerate(h.get(k,[])):
+                loc[p['id']]={'hour':h['hour_number'],'container':k,'subsection_id':None,'index':i}
+        for sub in h.get('subsections',[]):
+            for i,p in enumerate(sub.get('paragraphs',[])):
+                loc[p['id']]={'hour':h['hour_number'],'container':'subsections','subsection_id':sub.get('id') or sub.get('subsection_id'),'index':i}
+    return loc
+
 def remove_record(c,sid):
     for h in c['hours']:
         for k in ('paragraphs','reflections'):
@@ -143,6 +154,7 @@ def build(base_zip,ledger_csv,out):
     src=(out/'index.html').read_text(encoding='utf-8'); assert src==(out/'luisa_24_heures.html').read_text(encoding='utf-8')
     C,_,_=extract(src,'CORPUS'); C0=copy.deepcopy(C)
     base_hour_text=hour_layer_records(C0)
+    base_hour_locations=hour_original_locations(C0)
     rows=list(csv.DictReader(ledger_csv.open(encoding='utf-8-sig')))
     assert len(rows)==79 and len({r['candidate_id'] for r in rows})==79 and len({r['r5_record_id'] for r in rows})==79
     from collections import Counter
@@ -192,7 +204,8 @@ def build(base_zip,ledger_csv,out):
     for r in rows:
         sid=r['r5_record_id'];op=r['final_operation']
         if op not in ('MOVE_OUT_OF_CANONICAL_LAYER','DELETE_FROM_CANONICAL_LAYER'): continue
-        obj,loc=remove_record(C,sid)
+        obj,_shifted_loc=remove_record(C,sid)
+        loc=copy.deepcopy(base_hour_locations[sid])
         assert obj['t']==r['current_text']
         entry={'candidate_id':r['candidate_id'],'record_id':sid,'hour':int(r['hour']),'layer':r['layer'],'original_record':obj,'original_location':loc,'classification':r['classification'],'decision_basis':r['decision_basis'],'aflp27_status':r['aflp27_status'],'aflp27_evidence':r['aflp27_evidence'],'preservation_requirement':r['preservation_requirement']}
         if op=='MOVE_OUT_OF_CANONICAL_LAYER':
@@ -256,17 +269,154 @@ def build(base_zip,ledger_csv,out):
     report=out/'reports/V101137_R1_AUTHORIZED_79_MUTATION.md'
     report.write_text(f'''# v101.137 R1 — Authorized 79-row meditation/reflection successor\n\n- Immutable predecessor: v101.136 R5 `{BASE_SHA}`.\n- Exact authorization ledger: `{LEDGER_SHA}`.\n- Applied universe: **79/79** = 41 `REPLACE_RECORD` + 12 `TRIM_RECORD` + 24 `MOVE_OUT_OF_CANONICAL_LAYER` + 2 `DELETE_FROM_CANONICAL_LAYER`.\n- The 24 preserve-move records are retained byte-for-byte in `evidence/v101137_r1/PRESERVE_MOVE_ARCHIVE_24.json` and are **not user-visible in this version**, by explicit user decision. Their later UI placement is deferred.\n- Trimmed non-core spans are retained in `TRIMMED_PARATEXT_ARCHIVE_12.json`.\n- Deferred/recension-sensitive loci are unchanged. H23 Forms A/B are not synthesized. H24 burial/deposition placement is unchanged. Desolation remains inside H24 meditation scope.\n- Public app version advances to **v101.137** so the existing in-app update checker can detect the successor from v101.136. Cache generation is `{CACHE}`.\n- Stable IDs of retained canonical records are unchanged. No storage or personal-snapshot schema change is introduced.\n- Final public deployment remains unauthorized until the exact frozen ZIP has passed package/runtime checks and controlled real-device testing.\n''',encoding='utf-8')
     (out/'README.md').write_text(f'''# Les 24 Heures de la Passion — v101.137 R1\n\nControlled device-test candidate built only from immutable v101.136 R5 SHA-256 `{BASE_SHA}` and exact authorized 79-row ledger SHA-256 `{LEDGER_SHA}`.\n\nThe canonical meditation/reflection corpus applies exactly 79 authorized operations. The 24 preserve-move records are retained in package evidence for later use but are intentionally not displayed in the current UI. No deferred/recension-sensitive locus is moved or changed beyond the exact authorized text-only rows.\n\nFinal public deployment remains unauthorized pending exact-package validation and controlled device/PWA/offline/accessibility checks.\n''',encoding='utf-8')
-    # Keep QA docs current without changing test semantics.
+    # Current real-device QA instructions for this successor. Write explicitly rather than
+    # mechanically replacing predecessor strings, because update origin and targeted controls changed.
     q=out/'REAL_DEVICE_QA_CHECKLIST.md'
-    if q.exists():
-        s=q.read_text(encoding='utf-8')
-        s=s.replace('v101.136 R5','v101.137 R1').replace('v101.136 / R5','v101.137 / R1').replace('`build_revision = R5`','`build_revision = R1`').replace('luisa-24h-v101-136-r5',CACHE)
-        s=s.replace('INTERIM_CLOSED_97_SUCCESSOR_R5_FOUR_PASS_RELEASE_RECONCILED',STAGE)
-        q.write_text(s,encoding='utf-8')
+    q.write_text("""# Real-device QA checklist — v101.137 R1
+
+Use only the exact **v101.137 R1** controlled device-test candidate whose SHA-256 is supplied in the external final-validation receipt.
+
+Package identity to verify before testing:
+- `app_version = v101.137`
+- `build_revision = R1`
+- `cache_name = luisa-24h-v101-137-r1`
+- `APP_EVIDENCE_STAGE = AUTHORIZED_79_MEDITATION_REFLECTION_SUCCESSOR_R1`
+
+The immutable update predecessor for this test is **v101.136 R5**. Do not substitute v101.135 or an earlier v101.136 revision when testing the in-place update path.
+
+## A. Live-origin binding immediately after test deployment
+- Confirm the deployed ZIP SHA-256 matches the external **v101.137 R1** final-validation receipt.
+- Open the site normally and confirm **v101.137** in Aide / À propos.
+- Confirm `version.json` reports `app_version = v101.137`, `build_revision = R1`, and `cache_name = luisa-24h-v101-137-r1`.
+- Hard refresh once and confirm the same identity.
+- Confirm no blank/stuck/bootstrap screen.
+
+## B. Existing-PWA update — mandatory
+Test an installation currently running **v101.136 R5**; do not uninstall first.
+- Before update record: at least one Heure méditée, one note, one highlight, one favourite/library mark if used, last reading position, theme and font size.
+- Open installed v101.136 R5 online and trigger/allow the normal update.
+- Confirm it becomes **v101.137 / R1**.
+- Close completely and reopen **three times**.
+- Confirm no fallback to v101.136 R5 or an older cache, blank screen, or repair loop.
+- Confirm all pre-existing user data and last-place state remain coherent.
+
+## C. Core functional smoke on each physical device
+Run on iPhone, iPad portrait, iPad landscape, and Samsung/Android. On each:
+- home renders/scrolls; all 24 Heures open; search works; Mon Espace opens; Aide opens;
+- light/dark theme and normal/large font work;
+- Méditée top/bottom controls remain synchronized;
+- notes/highlights can be created and persist after close/reopen;
+- no horizontal clipping/overflow; back navigation and last-place restore work.
+
+## D. Targeted v101.137 R1 corpus controls
+These are representative physical-device checks of the newly authorized 79-row universe; the package validator separately checks all 79 rows exactly.
+- H1: the first meditation includes `Afflictions, tes Affections et tes Réparations`; the standalone final `Gloire au Père,…` record is absent.
+- H7 reflection: `Terminer par la prière de remerciement de l’Heure Sainte.` is not displayed as reflection prose in this version.
+- H15: the authorized angel-defense wording is visible; the moved body-part devotional expansion is not displayed.
+- H16: the moved body-part flagellation-prayer block is not displayed.
+- H18 reflection: the corrected sentence ends `afin qu’elles soient comme un voile qui essuie ses Sueurs et Le réconforte` without malformed syntax.
+- H19 reflection: it ends before the documentary letters; the ten moved documentary records are not displayed in the reflection.
+- H20 meditation: the Psalm 116 / `Gloire au Père` insertion is absent from canonical meditation prose.
+- H23: representative corrected wording includes `Défends-Moi, fais-Moi réparation, conduis-les tous dans mon Cœur`; no Form-A/Form-B synthesis is visible.
+- H24: the burial/deposition block is still located in H24; the authorized burial wording corrections render normally; Desolation remains present; the leading duplicate Desolation sentence and final Latin Marian paratext are not displayed.
+
+## E. Inherited regression controls from v101.136 R5
+- H19 P118 repaired French sentence: no truncation/garbling.
+- H22 authorized quote/punctuation loci: no stale period after the closing guillemet where v101.136 removed it.
+- `RELATED_HOUR_06.P013`: paragraph flow normal; historical breaks preserved.
+- `RELATED_HOUR_16.P038`: no break splitting the word `en`.
+- `RELATED_HOUR_04.P127`: remapped break visually natural.
+- H24 end-of-cycle panel, Méditée toggle and restart behaviour correct.
+- Tome 20 — 25 décembre 1926 linked text: verify `à la porte de leur cœur` (with `de`).
+
+## F. Offline gate
+After a complete online load of v101.137 R1:
+- close the PWA, disconnect network/enable airplane mode, cold-open it;
+- confirm **v101.137 R1** opens normally; open two Heures, one linked text, Mon Espace and Aide;
+- close/reopen once more offline; restore network and confirm no downgrade or repair loop.
+
+## G. Accessibility gate
+- iPhone/iPad: representative VoiceOver navigation of main nav, Aide, Méditée, search and back controls.
+- Samsung: corresponding TalkBack checks.
+- No visible actionable button unnamed; focus restoration after modal/Aide closure sensible.
+
+## Release rule
+Any failure involving version/update identity, user-data loss, blank/stuck startup, true-offline cold reopen, text corruption, H23 recension contamination, H24 scope/placement, or persistent navigation/rendering regression is a **release blocker**. Final public release remains unauthorized until all mandatory physical/live gates are closed.
+""",encoding='utf-8')
     q=out/'REAL_DEVICE_QA_RESULTS_TEMPLATE.csv'
-    if q.exists():
-        s=q.read_text(encoding='utf-8-sig').replace('v101.136 R5','v101.137 R1').replace('build_revision R5','build_revision R1').replace('luisa-24h-v101-136-r5',CACHE)
-        q.write_text(s,encoding='utf-8-sig')
+    q.write_text("""section,test_id,devices,release_blocker_if_fail,expected,result,notes,package_sha256
+LIVE,LIVE-01,browser,YES,Aide shows v101.137,,,
+LIVE,LIVE-02,browser,YES,version.json = v101.137; build_revision R1; cache luisa-24h-v101-137-r1,,,
+UPDATE,UPD-01,iPhone;iPad;Samsung,YES,installed v101.136 R5 updates in place to v101.137 R1,,,
+UPDATE,UPD-02,iPhone;iPad;Samsung,YES,notes/highlights/read state/last place/theme/font preserved,,,
+UPDATE,UPD-03,iPhone;iPad;Samsung,YES,3 close/reopen cycles stay on v101.137 R1; no repair loop,,,
+CORE,iPhone:CORE-01,iPhone,YES,home renders/scrolls,,,
+CORE,iPhone:CORE-02,iPhone,YES,all 24 hours open,,,
+CORE,iPhone:CORE-03,iPhone,NO,search works,,,
+CORE,iPhone:CORE-04,iPhone,NO,Mon Espace works,,,
+CORE,iPhone:CORE-05,iPhone,NO,Aide shows v101.137,,,
+CORE,iPhone:CORE-06,iPhone,NO,theme/font controls work,,,
+CORE,iPhone:CORE-07,iPhone,NO,Méditée controls synchronized,,,
+CORE,iPhone:CORE-08,iPhone,YES,notes/highlights persist,,,
+CORE,iPhone:CORE-09,iPhone,NO,no horizontal overflow,,,
+CORE,iPhone:CORE-10,iPhone,YES,back/last-place restore coherent,,,
+CORE,iPad portrait:CORE-01,iPad portrait,YES,home renders/scrolls,,,
+CORE,iPad portrait:CORE-02,iPad portrait,YES,all 24 hours open,,,
+CORE,iPad portrait:CORE-03,iPad portrait,NO,search works,,,
+CORE,iPad portrait:CORE-04,iPad portrait,NO,Mon Espace works,,,
+CORE,iPad portrait:CORE-05,iPad portrait,NO,Aide shows v101.137,,,
+CORE,iPad portrait:CORE-06,iPad portrait,NO,theme/font controls work,,,
+CORE,iPad portrait:CORE-07,iPad portrait,NO,Méditée controls synchronized,,,
+CORE,iPad portrait:CORE-08,iPad portrait,YES,notes/highlights persist,,,
+CORE,iPad portrait:CORE-09,iPad portrait,NO,no horizontal overflow,,,
+CORE,iPad portrait:CORE-10,iPad portrait,YES,back/last-place restore coherent,,,
+CORE,iPad landscape:CORE-01,iPad landscape,YES,home renders/scrolls,,,
+CORE,iPad landscape:CORE-02,iPad landscape,YES,all 24 hours open,,,
+CORE,iPad landscape:CORE-03,iPad landscape,NO,search works,,,
+CORE,iPad landscape:CORE-04,iPad landscape,NO,Mon Espace works,,,
+CORE,iPad landscape:CORE-05,iPad landscape,NO,Aide shows v101.137,,,
+CORE,iPad landscape:CORE-06,iPad landscape,NO,theme/font controls work,,,
+CORE,iPad landscape:CORE-07,iPad landscape,NO,Méditée controls synchronized,,,
+CORE,iPad landscape:CORE-08,iPad landscape,YES,notes/highlights persist,,,
+CORE,iPad landscape:CORE-09,iPad landscape,NO,no horizontal overflow,,,
+CORE,iPad landscape:CORE-10,iPad landscape,YES,back/last-place restore coherent,,,
+CORE,Samsung:CORE-01,Samsung,YES,home renders/scrolls,,,
+CORE,Samsung:CORE-02,Samsung,YES,all 24 hours open,,,
+CORE,Samsung:CORE-03,Samsung,NO,search works,,,
+CORE,Samsung:CORE-04,Samsung,NO,Mon Espace works,,,
+CORE,Samsung:CORE-05,Samsung,NO,Aide shows v101.137,,,
+CORE,Samsung:CORE-06,Samsung,NO,theme/font controls work,,,
+CORE,Samsung:CORE-07,Samsung,NO,Méditée controls synchronized,,,
+CORE,Samsung:CORE-08,Samsung,YES,notes/highlights persist,,,
+CORE,Samsung:CORE-09,Samsung,NO,no horizontal overflow,,,
+CORE,Samsung:CORE-10,Samsung,YES,back/last-place restore coherent,,,
+TARGETED,NEW-01,at least iPhone + Samsung,YES,H1 corrected Affections triad visible and standalone final Gloria absent,,,
+TARGETED,NEW-02,at least iPhone + Samsung,YES,H7 closing instruction not displayed as reflection prose,,,
+TARGETED,NEW-03,at least iPhone + Samsung,YES,H15 angel correction visible and moved devotional block hidden,,,
+TARGETED,NEW-04,at least iPhone + Samsung,YES,H16 moved devotional block hidden,,,
+TARGETED,NEW-05,at least iPhone + Samsung,YES,H18 corrected reflection syntax renders normally,,,
+TARGETED,NEW-06,at least iPhone + Samsung,YES,H19 documentary letters absent from reflection,,,
+TARGETED,NEW-07,at least iPhone + Samsung,YES,H20 Psalm/Gloria insertion absent from canonical meditation,,,
+TARGETED,NEW-08,at least iPhone + Samsung,YES,H23 corrected reparative wording visible; no A/B synthesis,,,
+TARGETED,NEW-09,at least iPhone + Samsung,YES,H24 burial remains in H24; Desolation present; moved/deleted paratext absent,,,
+REGRESSION,REG-01,at least iPhone + Samsung,YES,H19 P118 repaired sentence intact,,,
+REGRESSION,REG-02,at least iPhone + Samsung,YES,H22 authorized punctuation displayed correctly,,,
+REGRESSION,REG-03,at least iPhone + Samsung,YES,RELATED_HOUR_06 P013 flow preserved,,,
+REGRESSION,REG-04,at least iPhone + Samsung,YES,RELATED_HOUR_16 P038 no split inside “en”,,,
+REGRESSION,REG-05,at least iPhone + Samsung,YES,RELATED_HOUR_04 P127 break visually natural,,,
+REGRESSION,REG-06,at least iPhone + Samsung,YES,H24 cycle controls correct,,,
+REGRESSION,REG-07,at least iPhone + Samsung,YES,Tome 20 — 25 décembre 1926 linked text displays “à la porte de leur cœur”,,,
+OFFLINE,OFF-01,iPhone;iPad;Samsung,YES,true offline cold reopen works after online load,,,
+OFFLINE,OFF-02,iPhone;iPad;Samsung,YES,v101.137 R1 hours/linked text/space/help usable offline,,,
+ACCESS,ACC-01,iPhone/iPad VoiceOver,YES,representative controls named and navigable,,,
+ACCESS,ACC-02,Samsung TalkBack,YES,representative controls named and navigable,,,
+""",encoding='utf-8-sig')
+    (ev/'EVIDENCE_README.md').write_text("""# v101.137 R1 evidence reading order
+
+`PREAUTHORIZATION_GATE_STATEMENT.md` is an immutable historical snapshot of the gate **before** the user authorized mutation. It is intentionally retained for provenance and is superseded for current state by `USER_AUTHORIZATION_2026-09-08.md`, `AUTHORIZATION_RECEIPT.json`, and `INTERNAL_VALIDATION_RECEIPT.json`.
+
+The 24 `PRESERVE_MOVE` records are retained in `PRESERVE_MOVE_ARCHIVE_24.json` and intentionally are not rendered in the v101.137 R1 UI, by explicit user decision.
+""",encoding='utf-8')
     active=['README.md','REAL_DEVICE_QA_CHECKLIST.md','reports/V101137_R1_AUTHORIZED_79_MUTATION.md','version.json','metadata/build_provenance.json','metadata/current_evidence_lineage.json','metadata/scope_escalation_authority.md']
     writej(out/'metadata/active_report_inventory.json',{'version':VERSION,'build_revision':REV,'stage':STAGE,'active_documents':active,'active_test_artifacts':['REAL_DEVICE_QA_RESULTS_TEMPLATE.csv'],'historical_reports_root':'reports/historical/','rule':'Only listed active documents are current; predecessor/superseded reports are historical.'})
     writej(out/'metadata/build_provenance.json',{'version':VERSION,'build_revision':REV,'stage':STAGE,'build_date':DATE,'baseline_version':'v101.136 R5','baseline_zip_sha256':BASE_SHA,'authorized_ledger_sha256':LEDGER_SHA,'italian_r3_authority_sha256':ITALIAN_R3_SHA,'frozen_r4_authority_sha256':R4_SHA,'canonical_authorized_operations':79,'text_replace_or_trim_records':53,'canonical_records_removed':26,'preserve_move_records_archived':24,'preserve_move_user_visible':False,'stable_retained_record_ids_unchanged':True,'storage_schema_unchanged':True,'personal_snapshot_schema_unchanged':True,'corpus_fingerprint_sha256':C['fingerprint_sha256'],'final_validation':'EXTERNAL_EXACT_ZIP_RECHECK_REQUIRED'})
@@ -296,6 +446,8 @@ def build(base_zip,ledger_csv,out):
     for sid,old in base_hour_text.items():
         if sid not in row_by_id: assert after.get(sid)==old,sid
     assert len(preserved)==24 and all(x['original_record']['t']==row_by_id[x['record_id']]['current_text'] for x in preserved)
+    assert all(x['original_location']==base_hour_locations[x['record_id']] for x in preserved), 'PRESERVE_MOVE original location drift'
+    assert all(x['original_location']==base_hour_locations[x['record_id']] for x in deleted), 'DELETE original location drift'
     # Specific recension/scope gates.
     for cid in ('C0095','C0096','C0097','C0098'):
         r=next(x for x in rows if x['candidate_id']==cid);assert r['r5_record_id'] in after and '.DESOL.' not in r['r5_record_id']
@@ -314,6 +466,12 @@ def build(base_zip,ledger_csv,out):
     assert "const APP_VERSION = 'v101.137';" in cand and f"const APP_EVIDENCE_STAGE = '{STAGE}';" in cand
     assert CACHE in (out/'sw.js').read_text(encoding='utf-8')
     assert json.loads((out/'version.json').read_text())['app_version']==VERSION
+    qa_text=(out/'REAL_DEVICE_QA_CHECKLIST.md').read_text(encoding='utf-8')
+    assert '`app_version = v101.137`' in qa_text and 'Aide / À propos.\n- Confirm `version.json` reports `app_version = v101.137`' in qa_text
+    assert 'currently running **v101.136 R5**' in qa_text and 'confirm **v101.137 R1** opens normally' in qa_text
+    qa_csv=(out/'REAL_DEVICE_QA_RESULTS_TEMPLATE.csv').read_text(encoding='utf-8-sig')
+    assert 'Aide shows v101.136' not in qa_csv and 'installed v101.135 updates' not in qa_csv
+    assert 'Aide shows v101.137' in qa_csv and 'installed v101.136 R5 updates in place to v101.137 R1' in qa_csv
     # Internal validation receipt.
     writej(ev/'INTERNAL_VALIDATION_RECEIPT.json',{'schema':'L24H_V101137_R1_INTERNAL_VALIDATION_RECEIPT_V1','status':'PASS','checks':{'baseline_sha256':BASE_SHA,'ledger_sha256':LEDGER_SHA,'authorized_rows':79,'observed_canonical_delta_ids':79,'replacement_trim_exact':53,'removed_from_canonical_exact':26,'preserve_move_archived_exact':24,'delete_exact':2,'unlisted_hour_text_mutations':0,'h23_authorized_delta_rows':10,'h23_ab_synthesis':False,'h24_burial_moved':False,'h24_desolation_scope_preserved':True,'derived_offsets_valid':True,'html_mirror_identical':True,'preserve_move_not_user_visible':True,'storage_schema_unchanged':True,'personal_snapshot_schema_unchanged':True},'corpus_fingerprint_sha256':C1['fingerprint_sha256']})
     # Overlay + manifests.
