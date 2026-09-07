@@ -1,0 +1,79 @@
+{
+  "schema": "L24H_SW_LOGIC_MATRIX_V1",
+  "cache_name": "luisa-24h-v101-125",
+  "scope": "isolated worker logic; not real browser registration/cache lifecycle",
+  "summary": {
+    "pass": 15,
+    "fail": 0,
+    "total": 15
+  },
+  "results": [
+    {
+      "check": "cache_name",
+      "status": "PASS",
+      "detail": "luisa-24h-v101-125"
+    },
+    {
+      "check": "asset_count",
+      "status": "PASS",
+      "detail": 13
+    },
+    {
+      "check": "install_cache_created",
+      "status": "PASS"
+    },
+    {
+      "check": "install_precache_13",
+      "status": "PASS",
+      "detail": 13
+    },
+    {
+      "check": "install_reload_mode",
+      "status": "PASS"
+    },
+    {
+      "check": "skip_waiting",
+      "status": "PASS"
+    },
+    {
+      "check": "old_cache_deleted",
+      "status": "PASS",
+      "detail": [
+        "luisa-24h-old"
+      ]
+    },
+    {
+      "check": "unrelated_cache_preserved",
+      "status": "PASS"
+    },
+    {
+      "check": "clients_claimed",
+      "status": "PASS"
+    },
+    {
+      "check": "version_bypass",
+      "status": "PASS"
+    },
+    {
+      "check": "ignore_search_cache_hit",
+      "status": "PASS"
+    },
+    {
+      "check": "runtime_cache_insert",
+      "status": "PASS"
+    },
+    {
+      "check": "trim_cache_40",
+      "status": "PASS",
+      "detail": 40
+    },
+    {
+      "check": "navigate_fallback",
+      "status": "PASS"
+    },
+    {
+      "check": "non_get_bypass",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schema": "L24H_V101132_RELEASE_INTEGRITY_V1",
+  "version": "v101.132",
+  "summary": {
+    "pass": 21,
+    "fail": 0,
+    "total": 21
+  },
+  "rows": [
+    {
+      "check": "predecessor_identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "candidate_identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_CORPUS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_TEXT_LIBRARY_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_HOUR_LINKED_TEXTS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_INTERNAL_SUBHEADINGS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_DISPLAY_SEGMENTS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_CONTINUITY_GROUPS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_LDC_LIBRARY_FLOW_LAYOUT_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_LDC_CURRENT_SYNC_AUTHORITY_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "functional_SPEECH_DATA_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "functional_SPEECH_PRESENTATION_ADJUDICATIONS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "functional_SPEECH_END_VISUAL_BREAKS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "functional_SPEECH_PRESENTATION_PROJECTION_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "functional_VISIBLE_PARAGRAPH_TOPOLOGY_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "html_diff_release_identity_only",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "candidate_html_mirror_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "storage_schema_unchanged",
+      "status": "PASS",
+      "detail": [
+        8,
+        8
+      ]
+    },
+    {
+      "check": "personal_snapshot_unchanged",
+      "status": "PASS",
+      "detail": [
+        5,
+        5
+      ]
+    },
+    {
+      "check": "ldc_source_bindings_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "manifest_functional_contract_unchanged",
+      "status": "PASS",
+      "detail": null
+    }
+  ]
+}

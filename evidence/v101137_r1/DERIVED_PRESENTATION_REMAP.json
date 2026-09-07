@@ -1,0 +1,602 @@
+{
+  "schema": "L24H_V101137_R1_DERIVED_PRESENTATION_REMAP_V1",
+  "text_changed_records": 53,
+  "remap_actions": [
+    {
+      "record_id": "PASSION24.HOUR.02.P011",
+      "layer": "DISPLAY_SEGMENTS",
+      "before": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 367
+        },
+        {
+          "segment": 2,
+          "start": 367,
+          "end": 520
+        }
+      ],
+      "after": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 491
+        },
+        {
+          "segment": 2,
+          "start": 491,
+          "end": 644
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.03.P001",
+      "layer": "DISPLAY_SEGMENTS",
+      "before": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 279
+        },
+        {
+          "segment": 2,
+          "start": 279,
+          "end": 512
+        }
+      ],
+      "after": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 488
+        },
+        {
+          "segment": 2,
+          "start": 488,
+          "end": 721
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.07.REF.P003",
+      "layer": "DISPLAY_SEGMENTS",
+      "before": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 306
+        },
+        {
+          "segment": 2,
+          "start": 306,
+          "end": 632
+        }
+      ],
+      "after": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 312
+        },
+        {
+          "segment": 2,
+          "start": 312,
+          "end": 638
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.10.REF.P005",
+      "layer": "DISPLAY_SEGMENTS",
+      "before": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 136
+        },
+        {
+          "segment": 2,
+          "start": 136,
+          "end": 165
+        },
+        {
+          "segment": 3,
+          "start": 165,
+          "end": 539
+        },
+        {
+          "segment": 4,
+          "start": 539,
+          "end": 739
+        },
+        {
+          "segment": 5,
+          "start": 739,
+          "end": 845
+        }
+      ],
+      "after": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 136
+        },
+        {
+          "segment": 2,
+          "start": 136,
+          "end": 165
+        },
+        {
+          "segment": 3,
+          "start": 165,
+          "end": 682
+        },
+        {
+          "segment": 4,
+          "start": 682,
+          "end": 882
+        },
+        {
+          "segment": 5,
+          "start": 882,
+          "end": 988
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.14.REF.P002",
+      "layer": "DISPLAY_SEGMENTS",
+      "before": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 239
+        },
+        {
+          "segment": 2,
+          "start": 239,
+          "end": 294
+        },
+        {
+          "segment": 3,
+          "start": 294,
+          "end": 566
+        },
+        {
+          "segment": 4,
+          "start": 566,
+          "end": 684
+        },
+        {
+          "segment": 5,
+          "start": 684,
+          "end": 796
+        }
+      ],
+      "after": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 200
+        },
+        {
+          "segment": 2,
+          "start": 200,
+          "end": 255
+        },
+        {
+          "segment": 3,
+          "start": 255,
+          "end": 527
+        },
+        {
+          "segment": 4,
+          "start": 527,
+          "end": 645
+        },
+        {
+          "segment": 5,
+          "start": 645,
+          "end": 757
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.15.P005",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 2,
+          "end": 160
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 2,
+          "end": 95
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.15.P005",
+      "layer": "SPEECH_END_VISUAL_BREAKS",
+      "before": [
+        162
+      ],
+      "after": [
+        97
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.15.P005",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 2,
+            "end": 160,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 0,
+            "end": 2,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          },
+          {
+            "start": 160,
+            "end": 162,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          }
+        ],
+        "breaks": [
+          162
+        ]
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 2,
+            "end": 95,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 0,
+            "end": 2,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          },
+          {
+            "start": 95,
+            "end": 97,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          }
+        ],
+        "breaks": [
+          97
+        ]
+      }
+    },
+    {
+      "record_id": "PASSION24.HOUR.15.P005",
+      "layer": "VISIBLE_PARAGRAPH_TOPOLOGY.local_breaks",
+      "before": [
+        162
+      ],
+      "after": [
+        97
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.17.P010",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 235
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 265
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.17.P010",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 235,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 265,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "record_id": "PASSION24.HOUR.18.REF.P002",
+      "layer": "DISPLAY_SEGMENTS",
+      "before": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 166
+        },
+        {
+          "segment": 2,
+          "start": 166,
+          "end": 431
+        },
+        {
+          "segment": 3,
+          "start": 431,
+          "end": 683
+        }
+      ],
+      "after": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 174
+        },
+        {
+          "segment": 2,
+          "start": 174,
+          "end": 439
+        },
+        {
+          "segment": 3,
+          "start": 439,
+          "end": 691
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.23.P013",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 155
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 179
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.23.P013",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 155,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 179,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "record_id": "PASSION24.HOUR.23.P015",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 119
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 127
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.23.P015",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 119,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 127,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "record_id": "PASSION24.HOUR.23.P016",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 126
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 138
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.23.P016",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 126,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 138,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "record_id": "PASSION24.HOUR.23.P018",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 132
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 124
+        }
+      ]
+    },
+    {
+      "record_id": "PASSION24.HOUR.23.P018",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 132,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 132,
+            "end": 134,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_ATTRIBUTION"
+          }
+        ],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 124,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 124,
+            "end": 126,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_ATTRIBUTION"
+          }
+        ],
+        "breaks": []
+      }
+    },
+    {
+      "record_id": "PASSION24.HOUR.24.REF.P003",
+      "layer": "DISPLAY_SEGMENTS",
+      "before": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 406
+        },
+        {
+          "segment": 2,
+          "start": 406,
+          "end": 536
+        }
+      ],
+      "after": [
+        {
+          "segment": 1,
+          "start": 0,
+          "end": 396
+        },
+        {
+          "segment": 2,
+          "start": 396,
+          "end": 526
+        }
+      ]
+    }
+  ],
+  "removed_runtime_records": 26,
+  "rule": "Only offsets for authorized changed texts were remapped; derived entries for authorized removed canonical records were pruned."
+}

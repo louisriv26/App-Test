@@ -1,0 +1,123 @@
+{
+  "schema": "L24H_V101131_DEEP_PASS1_V1",
+  "summary": {
+    "pass": 9,
+    "fail": 5,
+    "total": 14
+  },
+  "rows": [
+    {
+      "case": "zip_integrity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "zip_sha_expected",
+      "status": "PASS",
+      "detail": "2932131da56ed1c02efb1507b5529f4cbb51bfa370691944cf0bd6c34fb01fa2"
+    },
+    {
+      "case": "zip_members_659",
+      "status": "PASS",
+      "detail": 659
+    },
+    {
+      "case": "build_script_exact_rebuild_paths",
+      "status": "PASS",
+      "detail": {
+        "package": 659,
+        "rebuilt": 659,
+        "only_package": [],
+        "only_rebuilt": []
+      }
+    },
+    {
+      "case": "build_script_exact_rebuild_bytes",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "case": "hash_manifest_path_universe_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": 657,
+        "listed": 657
+      }
+    },
+    {
+      "case": "hash_manifest_bytes_exact",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "case": "package_manifest_count_exact",
+      "status": "PASS",
+      "detail": {
+        "manifest": 657,
+        "actual": 657
+      }
+    },
+    {
+      "case": "overlay_changed_set_exact",
+      "status": "FAIL",
+      "detail": {
+        "actual_count": 62,
+        "listed_count": 60,
+        "missing_from_manifest": [
+          "metadata/hash_manifest.json",
+          "metadata/package_manifest.json"
+        ],
+        "extra_in_manifest": []
+      }
+    },
+    {
+      "case": "overlay_removed_set_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [
+          "reports/FOUR_PASS_FINAL_PACKAGE_RECONCILIATION.md"
+        ],
+        "listed": [
+          "reports/FOUR_PASS_FINAL_PACKAGE_RECONCILIATION.md"
+        ]
+      }
+    },
+    {
+      "case": "execution_spec_current_v101131",
+      "status": "FAIL",
+      "detail": [
+        "# Execution specification — v101.122",
+        "",
+        "Stage: `HOUR24_END_OF_CYCLE_STATE_AND_ACTION_HIERARCHY_R1`",
+        "",
+        "Cycle: close immutable v101.121 baseline → freeze Hour-24 product contract → H24-01…H24-08 one-by-one → 16-state matrix → five-profile UX → Help/broad/fixed-point/presentation/SW regressions → mutation tests → Pass 1 files/build → Pass 2 runtime/package → Pass 3 direct line evidence → Pass 4 version + semantic stale scans → fresh recheck → manifests → deterministic Build A/B → primary reopened ZIP → separately implemented independent reopened ZIP → external decision lock last."
+      ]
+    },
+    {
+      "case": "real_device_checklist_current_v101131",
+      "status": "FAIL",
+      "detail": [
+        "# Real-device QA checklist — v101.122",
+        "",
+        "Package under test must match the final locked ZIP SHA-256 and report `v101.122` in Aide.",
+        ""
+      ]
+    },
+    {
+      "case": "raw_gate_frozen_input_embedded",
+      "status": "FAIL",
+      "detail": "/mnt/data/l24h_v101131_deep_four_pass_audit/package/evidence/v101131/m1/02_ALL_TEXT_RECORD_UNIVERSE.csv"
+    },
+    {
+      "case": "tooling_inventory_covers_actual_gate_harnesses",
+      "status": "FAIL",
+      "detail": {
+        "missing": [
+          "scripts/run_broad_runtime_matrix.py",
+          "scripts/run_v101119_exhaustive_presentation_matrix.py"
+        ],
+        "listed_runtime_smoke": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "gates": {
+    "G01": {
+      "check": "Baseline ZIP hash",
+      "status": "PASS",
+      "evidence": "66b5fbff29865faa9a2cf55aad28c090de86fefe1ea8911feaf124f3eff97d5d"
+    },
+    "G02": {
+      "check": "Build reverse-diff + Help parity",
+      "status": "PASS",
+      "evidence": "evidence/v101121/BUILD_SCOPE_AUDIT.json"
+    },
+    "G03": {
+      "check": "Protected declarations",
+      "status": "PASS",
+      "evidence": "14/14; reports/protected_declaration_parity.csv"
+    },
+    "G04": {
+      "check": "JavaScript syntax",
+      "status": "PASS",
+      "evidence": "evidence/v101121/JAVASCRIPT_SYNTAX_CHECK.json"
+    },
+    "G05": {
+      "check": "Service worker syntax",
+      "status": "PASS",
+      "evidence": "evidence/v101121/SERVICE_WORKER_SYNTAX_CHECK.json"
+    },
+    "G06": {
+      "check": "Help content preserved",
+      "status": "PASS",
+      "evidence": "8/8"
+    },
+    "G07": {
+      "check": "Help browser matrix",
+      "status": "PASS",
+      "evidence": "70/70"
+    },
+    "G08": {
+      "check": "Broad Chromium runtime",
+      "status": "PASS",
+      "evidence": "52/52"
+    },
+    "G09": {
+      "check": "Quoted-span fixed point",
+      "status": "PASS",
+      "evidence": "A=0 B=0 spans=398"
+    },
+    "G10": {
+      "check": "Exhaustive presentation matrix",
+      "status": "PASS",
+      "evidence": "1990/1990"
+    },
+    "G11": {
+      "check": "Service-worker logic",
+      "status": "PASS",
+      "evidence": "15/15"
+    },
+    "G12": {
+      "check": "Real iPhone/iPad/Samsung",
+      "status": "NOT_TESTED",
+      "evidence": "external physical-device gate"
+    },
+    "G13": {
+      "check": "Installed PWA / offline cold reopen",
+      "status": "NOT_TESTED",
+      "evidence": "external live-origin/device gate"
+    },
+    "G14": {
+      "check": "VoiceOver/TalkBack",
+      "status": "NOT_TESTED",
+      "evidence": "external physical-device gate"
+    }
+  }
+}

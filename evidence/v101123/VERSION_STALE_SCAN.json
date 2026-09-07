@@ -1,0 +1,1055 @@
+{
+  "schema": "L24H_V101123_VERSION_STALE_SCAN_V1",
+  "version": "v101.123",
+  "stage": "FOUR_PASS_BUILD_REPRODUCIBILITY_AND_SELF_AUDIT_RECONCILIATION_R1",
+  "status": "PASS",
+  "classified_count": 146,
+  "unexplained_count": 0,
+  "runtime_identity_checks": [
+    {
+      "check": "html_app_version",
+      "status": "PASS"
+    },
+    {
+      "check": "html_stage",
+      "status": "PASS"
+    },
+    {
+      "check": "sw_cache",
+      "status": "PASS"
+    },
+    {
+      "check": "version_json",
+      "status": "PASS"
+    },
+    {
+      "check": "manifest_json",
+      "status": "PASS"
+    }
+  ],
+  "hits": [
+    {
+      "path": "README.md",
+      "line": 1,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "# Les 24 Heures de la Passion — v101.123"
+    },
+    {
+      "path": "README.md",
+      "line": 5,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "Immutable functional baseline: v101.122 / `039f7ad95bced983b5deb1613bacb92ababf75e2a162462b4389a3a028bf8565`."
+    },
+    {
+      "path": "README.md",
+      "line": 9,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "It corrects four-pass audit defects discovered by a fresh package-source-of-truth review: the v101.122 build script reproduced only runtime/release files rather than the full package; the v101.122 independent prefreeze checker depended on a transient `/mnt/data` working path; the active-report line universe omitted the current independent audit; and the semantic stale scan did not challenge those transient current-tool assumptions."
+    },
+    {
+      "path": "version.json",
+      "line": 2,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "  \"app_version\": \"v101.123\","
+    },
+    {
+      "path": "version.json",
+      "line": 11,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "  \"release_scope\": \"Narrow release-engineering successor only: reconciles full-package build reproducibility, removes transient working-directory dependencies from current audit tooling/provenance, expands the active-report universe to include the current independent audit, and hardens line-by-line/stale semantic checks. Hour-24 behaviour and all protected app/corpus/speech/presentation/highlighting/storage authorities are unchanged from v101.122.\","
+    },
+    {
+      "path": "version.json",
+      "line": 12,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "  \"real_device_status\": \"Physical Samsung/iPhone/iPad, installed-PWA, true offline cold reopen, VoiceOver/TalkBack and live GitHub Pages exact-byte binding NOT_TESTED for v101.123.\","
+    },
+    {
+      "path": "manifest.json",
+      "line": 42,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "  \"version\": \"v101.123\""
+    },
+    {
+      "path": "sw.js",
+      "line": 1,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "/* v101.123 */"
+    },
+    {
+      "path": "sw.js",
+      "line": 19,
+      "token": "v101.53",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.53 FINDING-01 fix: cache.addAll() fetches with the DEFAULT cache mode, which consults the"
+    },
+    {
+      "path": "sw.js",
+      "line": 35,
+      "token": "v101.7",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "self.addEventListener('fetch', event => { if(event.request.method!=='GET') return; if(event.request.url.includes('version.json')) return; event.respondWith((async()=>{ const cache=await caches.open(CACHE_NAME); const cached=await cache.match(event.request, {ignoreSearch:true}); if(cached) return cached; try { const response=await fetch(event.request); if(response&&response.status===200&&response.type!=='opaque') { await cache.put(event.request,response.clone()); await trimCache(cache); } return response; } catch(error) { /* v101.7 SW3 fix: fall back to the manifest start_url (luisa_24_heures.html), not index.html — they are byte-identical today but this is the file the manifest actually decl"
+    },
+    {
+      "path": "index.html",
+      "line": 75,
+      "token": "v101.5",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.5 CSS1/CSS2/CSS3 fix: these tokens were referenced (~40 uses) but never"
+    },
+    {
+      "path": "index.html",
+      "line": 112,
+      "token": "v101.7",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.7 A11Y3 fix: now a real <button>, not a div — reset UA button defaults. */"
+    },
+    {
+      "path": "index.html",
+      "line": 175,
+      "token": "v101.20",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.32: border-width now means \"meditated\", hue means \"Holy Hour\". The v101.20 fix below"
+    },
+    {
+      "path": "index.html",
+      "line": 175,
+      "token": "v101.32",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.32: border-width now means \"meditated\", hue means \"Holy Hour\". The v101.20 fix below"
+    },
+    {
+      "path": "index.html",
+      "line": 188,
+      "token": "v101.20",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.20 fix: .gethsemani's border-color was silently overriding .read's (same specificity,"
+    },
+    {
+      "path": "index.html",
+      "line": 194,
+      "token": "v101.32",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.32: the tick was 0.58rem in --accent-light, i.e. 2.0:1 against the card in light mode —"
+    },
+    {
+      "path": "index.html",
+      "line": 208,
+      "token": "v101.7",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.7 A11Y4 fix: --accent-light gives ~1.9:1 contrast on the light-theme"
+    },
+    {
+      "path": "index.html",
+      "line": 214,
+      "token": "v101.7",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.7 A11Y5 fix: strengthen borders/outlines for users who request more"
+    },
+    {
+      "path": "index.html",
+      "line": 651,
+      "token": "v101.48",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.48 — stale highlight, i.e. one whose anchor could not be recovered after editorial"
+    },
+    {
+      "path": "index.html",
+      "line": 827,
+      "token": "v101.6",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.6 A11Y1/A11Y2 fix: this is now a real <button>, not a div — reset the"
+    },
+    {
+      "path": "index.html",
+      "line": 998,
+      "token": "v101.51",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.51: \"voir tout\" expander in Mon Espace, so no highlight or note is ever unreachable. */"
+    },
+    {
+      "path": "index.html",
+      "line": 1001,
+      "token": "v101.53",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.53: one approved display unit. Block-level only - it contributes no characters, so"
+    },
+    {
+      "path": "index.html",
+      "line": 1013,
+      "token": "v101.50",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.50: font-size MUST stay at or above 16px. iOS Safari auto-zooms the page when a text field"
+    },
+    {
+      "path": "index.html",
+      "line": 1016,
+      "token": "v101.53",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "   note panel was closed. Reported on iPhone against v101.53, where this was 0.9rem (14.4px). The"
+    },
+    {
+      "path": "index.html",
+      "line": 1205,
+      "token": "v101.50",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.50: 16px minimum - see the note on .note-textarea. This was 0.95rem (15.2px), which would"
+    },
+    {
+      "path": "index.html",
+      "line": 1237,
+      "token": "v101.32",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.32 accessibility fix, found while making this view consistent with the home grid: this"
+    },
+    {
+      "path": "index.html",
+      "line": 1244,
+      "token": "v101.32",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.32: match the home grid — border-width means \"meditated\" here too, so the Heures list"
+    },
+    {
+      "path": "index.html",
+      "line": 1710,
+      "token": "v101.53",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.53 — iPad/iOS: reserve the bottom-bar space with a flex-item spacer, not padding."
+    },
+    {
+      "path": "index.html",
+      "line": 2086,
+      "token": "v101.95",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.95 — exact Approfondir title-text selection + WebKit boundary repair; reading marker remains separate. */"
+    },
+    {
+      "path": "index.html",
+      "line": 2108,
+      "token": "v101.3",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.3 CSS4 fix: restore persistent bottom navigation on tablet/desktop (>=769px)."
+    },
+    {
+      "path": "index.html",
+      "line": 2124,
+      "token": "v101.95",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.95 — precise Samsung current-LDC visual paragraph target overlay. */"
+    },
+    {
+      "path": "index.html",
+      "line": 2156,
+      "token": "v101.63",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.63 four-pass closure: the first Stage-G scan exercised primary views but did not"
+    },
+    {
+      "path": "index.html",
+      "line": 2372,
+      "token": "v101.95",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "<!-- v101.95 — whole-reading marker picker remains separate from exact title text highlighting. -->"
+    },
+    {
+      "path": "index.html",
+      "line": 4770,
+      "token": "v101.32",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.32 P1-01: canonical in-memory resume Hour. `currentHour` is view state and is"
+    },
+    {
+      "path": "index.html",
+      "line": 4793,
+      "token": "v101.119",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "const SPEECH_PRESENTATION_ADJUDICATIONS = {\"PASSION24.TEXT.RELATED_HOUR_17.BODY.P067\":[{\"start\":43,\"end\":56,\"semantic_speaker\":\"OTHER\",\"presentation_speaker\":\"JESUS\",\"quotation_depth\":2,\"reason\":\"RA19E LDC.T19.E0029.P006; meaningful nested reported quotation keeps guillemets and inherits active outer Jesus display.\"},{\"start\":80,\"end\":127,\"semantic_speaker\":\"OTHER\",\"presentation_speaker\":\"JESUS\",\"quotation_depth\":2,\"reason\":\"RA19E LDC.T19.E0029.P006; meaningful nested reported quotation keeps guillemets and inherits active outer Jesus display.\"}],\"PASSION24.TEXT.RELATED_HOUR_17.BODY.P073\":[{\"start\":55,\"end\":66,\"semantic_speaker\":\"OTHER\",\"presentation_speaker\":\"JESUS\",\"quotation_depth\":2,\"rea"
+    },
+    {
+      "path": "index.html",
+      "line": 4800,
+      "token": "v101.8",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  // v101.8 fix: this used to call showFatalError() with a hardcoded generic"
+    },
+    {
+      "path": "index.html",
+      "line": 4805,
+      "token": "v101.10",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  // v101.10 fix: do NOT blank the whole app for a post-init runtime error."
+    },
+    {
+      "path": "index.html",
+      "line": 4816,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "const APP_VERSION = 'v101.123';"
+    },
+    {
+      "path": "index.html",
+      "line": 5083,
+      "token": "v101.95",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  // v101.95: preserve Samsung/current-LDC visual-paragraph semantics across save/export/import."
+    },
+    {
+      "path": "index.html",
+      "line": 5087,
+      "token": "v101.48",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.48: this sanitiser whitelists fields (prototype-pollution guard), so recovery provenance"
+    },
+    {
+      "path": "index.html",
+      "line": 5132,
+      "token": "v101.48",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* ── v101.48 stale-highlight recovery ──────────────────────────────────────────────────"
+    },
+    {
+      "path": "index.html",
+      "line": 5141,
+      "token": "v101.15",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "   2026-07-09. v101.15 changed a period to a comma in P021, v101.16 merged P022 INTO P021,"
+    },
+    {
+      "path": "index.html",
+      "line": 5141,
+      "token": "v101.16",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "   2026-07-09. v101.15 changed a period to a comma in P021, v101.16 merged P022 INTO P021,"
+    },
+    {
+      "path": "index.html",
+      "line": 5191,
+      "token": "v101.25",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "   to render on the current production build, because their snapshots hold pre-v101.25 wording"
+    },
+    {
+      "path": "index.html",
+      "line": 5204,
+      "token": "v101.58",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.58 / 24H-D: every personal record must be reachable. Preview sizes are never ceilings. */"
+    },
+    {
+      "path": "index.html",
+      "line": 5328,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "const BUILD_DATE = '2026-08-28'; // v101.123 / four-pass build reproducibility and self-audit reconciliation R1"
+    },
+    {
+      "path": "index.html",
+      "line": 5336,
+      "token": "v101.52",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.52 — approved non-destructive display segmentation (65 records, 180 display units)."
+    },
+    {
+      "path": "index.html",
+      "line": 5359,
+      "token": "v101.52",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.52 — the four approved cross-record continuity operations (Part E)."
+    },
+    {
+      "path": "index.html",
+      "line": 5590,
+      "token": "v101.73",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  // v101.73: obtain rollback bytes BEFORE touching the canonical snapshot. If the existing"
+    },
+    {
+      "path": "index.html",
+      "line": 5792,
+      "token": "v101.48",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.48: recover highlights whose anchor was invalidated by editorial changes. Runs after"
+    },
+    {
+      "path": "index.html",
+      "line": 6373,
+      "token": "v101.9",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "// v101.9 fix: a user reported a crash screen (\"Script error.\" — a browser-"
+    },
+    {
+      "path": "index.html",
+      "line": 6446,
+      "token": "v101.32",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.32 P1-01: read canonical in-memory state, not the legacy mirror. */"
+    },
+    {
+      "path": "index.html",
+      "line": 6589,
+      "token": "v101.21",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  // v101.21 RN3 fix: out-of-order same-day taps (e.g. Hour 7 then later Hour 5) made this"
+    },
+    {
+      "path": "index.html",
+      "line": 7009,
+      "token": "v101.32",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.32 P1-02: commit the resume Hour through the canonical snapshot. Previously this"
+    },
+    {
+      "path": "index.html",
+      "line": 7167,
+      "token": "v101.53",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.53: a continuity follower carries no paragraph break, so the pair reads as one unit. */"
+    },
+    {
+      "path": "index.html",
+      "line": 7334,
+      "token": "v101.12",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  // v101.12 fix: an hour.subsections entry (e.g. Hour 24's \"La Désolation de la Vierge"
+    },
+    {
+      "path": "index.html",
+      "line": 7343,
+      "token": "v101.14",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "    // v101.14 fix: jump to the heading block itself (id=\"${sub.id}__heading\", set in"
+    },
+    {
+      "path": "index.html",
+      "line": 7776,
+      "token": "v101.95",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  // v101.95: whole-reading marking remains controlled by the separate button."
+    },
+    {
+      "path": "index.html",
+      "line": 7937,
+      "token": "v101.95",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "// v101.95 — interaction helpers for the authoritative LDC visual paragraph model."
+    },
+    {
+      "path": "index.html",
+      "line": 9129,
+      "token": "v101.48",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "/* v101.48: removal path for a stale highlight reached from Mon Espace. deleteHighlightFromPanel()"
+    },
+    {
+      "path": "index.html",
+      "line": 9267,
+      "token": "v101.53",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.53: approved display segmentation is applied HERE, not only in"
+    },
+    {
+      "path": "index.html",
+      "line": 9282,
+      "token": "v101.53",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  /* v101.53: segmentation is handled in renderParaText below. No record carries both a"
+    },
+    {
+      "path": "index.html",
+      "line": 9414,
+      "token": "v101.95",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "// v101.95 — WebKit/iPhone Range-boundary normalisation for owned Approfondir annotation surfaces."
+    },
+    {
+      "path": "index.html",
+      "line": 10040,
+      "token": "v101.56",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  // Measure the picker that is actually rendered. v101.56 assumed 220 x 110 px here,"
+    },
+    {
+      "path": "index.html",
+      "line": 10200,
+      "token": "v101.95",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  // v101.95: preserve the authoritative current-LDC intra-paragraph cuts when a highlight"
+    },
+    {
+      "path": "index.html",
+      "line": 10271,
+      "token": "v101.7",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "// v101.7 RN2 fix: centralized French ordinal for hour numbers (\"1re Heure\", \"5e Heure\")."
+    },
+    {
+      "path": "index.html",
+      "line": 10844,
+      "token": "v101.74",
+      "classification": "INHERITED_IMPLEMENTATION_OR_PROTECTED_PROVENANCE_ALLOWED",
+      "excerpt": "  // v101.74: a replace-import must prove it is a 24 Heures machine backup, not merely"
+    },
+    {
+      "path": "metadata/release_evidence_lifecycle.json",
+      "line": 2,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "  \"version\": \"v101.123\","
+    },
+    {
+      "path": "metadata/scope_escalation_authority.md",
+      "line": 1,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "# v101.123 scope escalation authority"
+    },
+    {
+      "path": "metadata/hash_manifest.json",
+      "line": 3,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "  \"version\": \"v101.123\","
+    },
+    {
+      "path": "metadata/active_report_inventory.json",
+      "line": 2,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "  \"version\": \"v101.123\","
+    },
+    {
+      "path": "metadata/package_manifest.json",
+      "line": 3,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "  \"version\": \"v101.123\","
+    },
+    {
+      "path": "metadata/full_build_overlay_manifest.json",
+      "line": 3,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "  \"version\": \"v101.123\","
+    },
+    {
+      "path": "metadata/full_build_overlay_manifest.json",
+      "line": 4,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "  \"baseline_version\": \"v101.122\","
+    },
+    {
+      "path": "metadata/build_provenance.json",
+      "line": 2,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "  \"version\": \"v101.123\","
+    },
+    {
+      "path": "metadata/build_provenance.json",
+      "line": 5,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "  \"baseline_version\": \"v101.122\","
+    },
+    {
+      "path": "metadata/build_provenance.json",
+      "line": 14,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "  \"baseline_finality_evidence\": \"historical v101.122 external decision lock; superseded for report/tooling integrity by current deep re-audit\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 2,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "  \"version\": \"v101.123\","
+    },
+    {
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 1,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "# v101.123 four-pass deep audit"
+    },
+    {
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 6,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "- v101.122 four-pass re-audit reproduced a build/report/tooling integrity failure; v101.122 is superseded for current continuation by this narrow successor."
+    },
+    {
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 7,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "- v101.123 full-package build contract: PASS."
+    },
+    {
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 8,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "- Functional app parity versus v101.122 after release-identity normalisation: PASS."
+    },
+    {
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 27,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "- Current root report inventory is explicit and complete; historical v101.122 reports/audits are under explicit historical paths."
+    },
+    {
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 1,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "# Current metadata and semantic consistency — v101.123"
+    },
+    {
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 6,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "- APP_VERSION: v101.123."
+    },
+    {
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 10,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "- Functional HTML parity versus v101.122 after identity normalisation: PASS."
+    },
+    {
+      "path": "reports/no_regression_fix_ledger.csv",
+      "line": 2,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "R123-01,v101.122 builder reproduced only 185/257 files,full-package overlay builder with exact tree/hash-manifest verification,NO,evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json,PASS"
+    },
+    {
+      "path": "reports/no_regression_fix_ledger.csv",
+      "line": 3,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "R123-02,v101.122 independent prefreeze depended on transient /mnt/data working path,current checker executes packaged independent Hour-24 probe fresh in isolated temp,NO,scripts/run_v101123_independent_prefreeze_audit.py,PASS"
+    },
+    {
+      "path": "reports/no_regression_fix_ledger.csv",
+      "line": 4,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "R123-03,v101.122 active report universe omitted current independent audit,v101.122 audit moved to explicit historical path; current report universe is exact root reports and self-excluded line audit,NO,metadata/active_report_inventory.json,PASS"
+    },
+    {
+      "path": "reports/no_regression_fix_ledger.csv",
+      "line": 5,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "R123-04,v101.122 provenance/stale scan allowed transient current paths,package-relative provenance and semantic stale transient-path gate,NO,scripts/run_v101123_stale_scans.py,PASS"
+    },
+    {
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "line": 1,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "# Report claims vs evidence audit — v101.123"
+    },
+    {
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "line": 5,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "- v101.122 deep re-audit findings: `evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json`."
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 2,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/HOUR24_PRODUCT_CONTRACT.md,1,# Hour 24 product contract — v101.123 inherited unchanged from v101.122,STRUCTURE,PASS,STRUCTURE,SELF:reports/HOUR24_PRODUCT_CONTRACT.md,document/table structure; no execution result asserted"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 2,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "reports/HOUR24_PRODUCT_CONTRACT.md,1,# Hour 24 product contract — v101.123 inherited unchanged from v101.122,STRUCTURE,PASS,STRUCTURE,SELF:reports/HOUR24_PRODUCT_CONTRACT.md,document/table structure; no execution result asserted"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 21,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "reports/build_script_vs_files_audit.md,1,# Build script vs files audit — v101.123,STRUCTURE,PASS,STRUCTURE,SELF:reports/build_script_vs_files_audit.md,document/table structure; no execution result asserted"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 23,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/build_script_vs_files_audit.md,5,- Immutable v101.122 baseline SHA-256 `039f7ad95bced983b5deb1613bacb92ababf75e2a162462b4389a3a028bf8565` is the verified functional baseline.,CLAIM,PASS,BUILD_REPRODUCTION,evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + scripts/build_v101123_full_package_reconciliation.py + metadata/full_build_overlay_manifest.json,full-package reconstruction contract and successful full-tree reproduction"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 26,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/build_script_vs_files_audit.md,8,- v101.123 functional HTML differs from v101.122 only by release identity/build comment after normalisation.,CLAIM,PASS,BUILD_REPRODUCTION,evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + scripts/build_v101123_full_package_reconciliation.py + metadata/full_build_overlay_manifest.json,full-package reconstruction contract and successful full-tree reproduction"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 26,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "reports/build_script_vs_files_audit.md,8,- v101.123 functional HTML differs from v101.122 only by release identity/build comment after normalisation.,CLAIM,PASS,BUILD_REPRODUCTION,evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + scripts/build_v101123_full_package_reconciliation.py + metadata/full_build_overlay_manifest.json,full-package reconstruction contract and successful full-tree reproduction"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 27,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/build_script_vs_files_audit.md,9,- Protected declarations: 14/14 byte-identical to v101.122.,CLAIM,PASS,BUILD_REPRODUCTION,evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + scripts/build_v101123_full_package_reconciliation.py + metadata/full_build_overlay_manifest.json,full-package reconstruction contract and successful full-tree reproduction"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 28,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/build_script_vs_files_audit.md,10,- `showHelp()` block: byte-identical to v101.122.,CLAIM,PASS,BUILD_REPRODUCTION,evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + scripts/build_v101123_full_package_reconciliation.py + metadata/full_build_overlay_manifest.json,full-package reconstruction contract and successful full-tree reproduction"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 30,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "reports/current_metadata_semantic_consistency.md,1,# Current metadata and semantic consistency — v101.123,STRUCTURE,PASS,STRUCTURE,SELF:reports/current_metadata_semantic_consistency.md,document/table structure; no execution result asserted"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 33,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "reports/current_metadata_semantic_consistency.md,6,- APP_VERSION: v101.123.,CLAIM,PASS,METADATA_PARITY,evidence/v101123/FUNCTIONAL_HTML_PARITY.json + evidence/v101123/PROTECTED_DECLARATION_PARITY.json + evidence/v101123/HELP_PARITY.json + version.json,current identity and protected parity evidence"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 37,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/current_metadata_semantic_consistency.md,10,- Functional HTML parity versus v101.122 after identity normalisation: PASS.,CLAIM,PASS,METADATA_PARITY,evidence/v101123/FUNCTIONAL_HTML_PARITY.json + evidence/v101123/PROTECTED_DECLARATION_PARITY.json + evidence/v101123/HELP_PARITY.json + version.json,current identity and protected parity evidence"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 40,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "reports/four_pass_deep_audit.md,1,# v101.123 four-pass deep audit,STRUCTURE,PASS,STRUCTURE,SELF:reports/four_pass_deep_audit.md,document/table structure; no execution result asserted"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 43,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/four_pass_deep_audit.md,6,- v101.122 four-pass re-audit reproduced a build/report/tooling integrity failure; v101.122 is superseded for current continuation by this narrow successor.,CLAIM,PASS,PASS1,evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json + evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + evidence/v101123/FUNCTIONAL_HTML_PARITY.json,build/tooling and parity evidence"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 44,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "reports/four_pass_deep_audit.md,7,- v101.123 full-package build contract: PASS.,CLAIM,PASS,PASS1,evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json + evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + evidence/v101123/FUNCTIONAL_HTML_PARITY.json,build/tooling and parity evidence"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 45,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/four_pass_deep_audit.md,8,- Functional app parity versus v101.122 after release-identity normalisation: PASS.,CLAIM,PASS,PASS1,evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json + evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + evidence/v101123/FUNCTIONAL_HTML_PARITY.json,build/tooling and parity evidence"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 62,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/four_pass_deep_audit.md,27,- Current root report inventory is explicit and complete; historical v101.122 reports/audits are under explicit historical paths.,CLAIM,PASS,PASS1,evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json + evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + evidence/v101123/FUNCTIONAL_HTML_PARITY.json,build/tooling and parity evidence"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 100,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/no_regression_fix_ledger.csv,2,\"R123-01,v101.122 builder reproduced only 185/257 files,full-package overlay builder with exact tree/hash-manifest verification,NO,evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json,PASS\",CLAIM,PASS,CORRECTION_LEDGER,evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json + evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + evidence/v101123/SEMANTIC_STALE_SCAN.json,reproduced defect and correction closure evidence"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 101,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/no_regression_fix_ledger.csv,3,\"R123-02,v101.122 independent prefreeze depended on transient /mnt/data working path,current checker executes packaged independent Hour-24 probe fresh in isolated temp,NO,scripts/run_v101123_independent_prefreeze_audit.py,PASS\",CLAIM,PASS,CORRECTION_LEDGER,evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json + evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + evidence/v101123/SEMANTIC_STALE_SCAN.json,reproduced defect and correction closure evidence"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 102,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/no_regression_fix_ledger.csv,4,\"R123-03,v101.122 active report universe omitted current independent audit,v101.122 audit moved to explicit historical path; current report universe is exact root reports and self-excluded line audit,NO,metadata/active_report_inventory.json,PASS\",CLAIM,PASS,CORRECTION_LEDGER,evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json + evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + evidence/v101123/SEMANTIC_STALE_SCAN.json,reproduced defect and correction closure evidence"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 103,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/no_regression_fix_ledger.csv,5,\"R123-04,v101.122 provenance/stale scan allowed transient current paths,package-relative provenance and semantic stale transient-path gate,NO,scripts/run_v101123_stale_scans.py,PASS\",CLAIM,PASS,CORRECTION_LEDGER,evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json + evidence/v101123/FULL_PACKAGE_BUILD_REPRODUCTION.json + evidence/v101123/SEMANTIC_STALE_SCAN.json,reproduced defect and correction closure evidence"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 119,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "reports/report_claims_vs_evidence_audit.md,1,# Report claims vs evidence audit — v101.123,STRUCTURE,PASS,STRUCTURE,SELF:reports/report_claims_vs_evidence_audit.md,document/table structure; no execution result asserted"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 121,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "reports/report_claims_vs_evidence_audit.md,5,- v101.122 deep re-audit findings: `evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json`.,CLAIM,PASS,CLAIM_EVIDENCE,evidence/v101123/V101122_DEEP_FOUR_PASS_FINDINGS.json,claim names direct current supporting evidence or explicit limitation"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 140,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "reports/semantic_stale_scan.txt,1,v101.123 semantic stale-assumption scan: PASS,CLAIM,PASS,SEMANTIC_STALE,evidence/v101123/SEMANTIC_STALE_SCAN.json,fresh semantic/current-tool assumption scan"
+    },
+    {
+      "path": "reports/active_report_line_audit.csv",
+      "line": 144,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "reports/stale_reference_scan.txt,1,v101.123 version/reference stale scan: PASS,CLAIM,PASS,STALE_SCAN,evidence/v101123/VERSION_STALE_SCAN.json,fresh version/reference scan"
+    },
+    {
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 1,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "# Build script vs files audit — v101.123"
+    },
+    {
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 5,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "- Immutable v101.122 baseline SHA-256 `039f7ad95bced983b5deb1613bacb92ababf75e2a162462b4389a3a028bf8565` is the verified functional baseline."
+    },
+    {
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 8,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "- v101.123 functional HTML differs from v101.122 only by release identity/build comment after normalisation."
+    },
+    {
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 8,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "- v101.123 functional HTML differs from v101.122 only by release identity/build comment after normalisation."
+    },
+    {
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 9,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "- Protected declarations: 14/14 byte-identical to v101.122."
+    },
+    {
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 10,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "- `showHelp()` block: byte-identical to v101.122."
+    },
+    {
+      "path": "reports/HOUR24_PRODUCT_CONTRACT.md",
+      "line": 1,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "# Hour 24 product contract — v101.123 inherited unchanged from v101.122"
+    },
+    {
+      "path": "reports/HOUR24_PRODUCT_CONTRACT.md",
+      "line": 1,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "# Hour 24 product contract — v101.123 inherited unchanged from v101.122"
+    },
+    {
+      "path": "reports/stale_reference_scan.txt",
+      "line": 1,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "v101.123 version/reference stale scan: PASS"
+    },
+    {
+      "path": "reports/semantic_stale_scan.txt",
+      "line": 1,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "v101.123 semantic stale-assumption scan: PASS"
+    },
+    {
+      "path": "scripts/run_v101123_independent_hour24_probe.py",
+      "line": 5,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "HTML=Path(sys.argv[1]).read_text(encoding='utf-8');OUT=Path(sys.argv[2]);VER=sys.argv[3] if len(sys.argv)>3 else 'v101.123'"
+    },
+    {
+      "path": "scripts/run_v101123_independent_reopen_audit.py",
+      "line": 5,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "VER='v101.123';STAGE='FOUR_PASS_BUILD_REPRODUCIBILITY_AND_SELF_AUDIT_RECONCILIATION_R1';sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();rows=[]"
+    },
+    {
+      "path": "scripts/run_v101123_independent_reopen_audit.py",
+      "line": 38,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "summary={'pass':sum(r['status']=='PASS' for r in rows),'fail':sum(r['status']=='FAIL' for r in rows),'total':len(rows)};obj={'schema':'L24H_V101123_INDEPENDENT_REOPEN_V1','version':VER,'zip_sha256':sha(ZIP),'summary':summary,'checks':rows};(OUT/'INDEPENDENT_FINAL_REOPEN_AUDIT_v101123.json').write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\\n');(OUT/'INDEPENDENT_FINAL_REOPEN_AUDIT_v101123.md').write_text('# Independent final reopened-ZIP audit — v101.123\\n\\n**'+('PASS' if summary['fail']==0 else 'FAIL')+'**\\n\\n'+'\\n'.join(f'- `{r[\"check\"]}` — **{r[\"status\"]}** — `{str(r[\"detail\"])[:1000]}`' for r in rows)+'\\n');print(json.dumps(summary));raise SystemExit(0 if summary['fail']==0 else 2)"
+    },
+    {
+      "path": "scripts/run_v101123_hour24_state_matrix.py",
+      "line": 5,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "HTML=Path(sys.argv[1]).read_text(encoding='utf-8'); OUT=Path(sys.argv[2]); VERSION=sys.argv[3] if len(sys.argv)>3 else 'v101.123'"
+    },
+    {
+      "path": "scripts/run_v101123_independent_prefreeze_audit.py",
+      "line": 5,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "VER='v101.123';STAGE='FOUR_PASS_BUILD_REPRODUCIBILITY_AND_SELF_AUDIT_RECONCILIATION_R1';BASE_SHA='039f7ad95bced983b5deb1613bacb92ababf75e2a162462b4389a3a028bf8565';CACHE='luisa-24h-v101-123'"
+    },
+    {
+      "path": "scripts/run_v101123_independent_prefreeze_audit.py",
+      "line": 16,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "norm=html.replace(\"const APP_VERSION = 'v101.123';\",\"const APP_VERSION = 'v101.122';\").replace(\"const APP_EVIDENCE_STAGE = 'FOUR_PASS_BUILD_REPRODUCIBILITY_AND_SELF_AUDIT_RECONCILIATION_R1';\",\"const APP_EVIDENCE_STAGE = 'HOUR24_END_OF_CYCLE_STATE_AND_ACTION_HIERARCHY_R1';\").replace(\"const BUILD_DATE = '2026-08-28'; // v101.123 / four-pass build reproducibility and self-audit reconciliation R1\",\"const BUILD_DATE = '2026-08-25'; // v101.122 / Hour-24 end-of-cycle state and action hierarchy R1\")"
+    },
+    {
+      "path": "scripts/run_v101123_independent_prefreeze_audit.py",
+      "line": 16,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "norm=html.replace(\"const APP_VERSION = 'v101.123';\",\"const APP_VERSION = 'v101.122';\").replace(\"const APP_EVIDENCE_STAGE = 'FOUR_PASS_BUILD_REPRODUCIBILITY_AND_SELF_AUDIT_RECONCILIATION_R1';\",\"const APP_EVIDENCE_STAGE = 'HOUR24_END_OF_CYCLE_STATE_AND_ACTION_HIERARCHY_R1';\").replace(\"const BUILD_DATE = '2026-08-28'; // v101.123 / four-pass build reproducibility and self-audit reconciliation R1\",\"const BUILD_DATE = '2026-08-25'; // v101.122 / Hour-24 end-of-cycle state and action hierarchy R1\")"
+    },
+    {
+      "path": "scripts/run_v101123_independent_prefreeze_audit.py",
+      "line": 83,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "OJ.parent.mkdir(parents=True,exist_ok=True);OJ.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\\n');OM.write_text('# Independent prefreeze audit — v101.123\\n\\n**'+status+'**\\n\\n'+'\\n'.join(f'- `{x[\"check\"]}` — **{x[\"status\"]}** — `{str(x[\"detail\"])[:900]}`' for x in C)+'\\n')"
+    },
+    {
+      "path": "scripts/run_v101123_help_browser_matrix.py",
+      "line": 5,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "HTML=Path(sys.argv[1]).read_text(encoding='utf-8'); OUT=Path(sys.argv[2]); VERSION='v101.123'; STAGE='FOUR_PASS_BUILD_REPRODUCIBILITY_AND_SELF_AUDIT_RECONCILIATION_R1'"
+    },
+    {
+      "path": "scripts/run_v101123_five_profile_ux_matrix.py",
+      "line": 5,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "HTML=Path(sys.argv[1]).read_text(encoding='utf-8');OUT=Path(sys.argv[2]);VERSION=sys.argv[3] if len(sys.argv)>3 else 'v101.123'"
+    },
+    {
+      "path": "scripts/run_v101123_stale_scans.py",
+      "line": 4,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "ROOT=Path(sys.argv[1]);OV=Path(sys.argv[2]);OS=Path(sys.argv[3]);VER='v101.123';STAGE='FOUR_PASS_BUILD_REPRODUCIBILITY_AND_SELF_AUDIT_RECONCILIATION_R1'"
+    },
+    {
+      "path": "scripts/run_v101123_stale_scans.py",
+      "line": 16,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "   elif tok=='v101.122' and (p.name in {'README.md','version.json','build_v101123_full_package_reconciliation.py','run_v101123_independent_prefreeze_audit.py','run_v101123_stale_scans.py'} or p.name.startswith('build_provenance') or 'baseline' in line.lower() or 'v101.122' in line and any(w in line.lower() for w in ['supersed','parity','unchanged','historical','re-audit','reproduced','omitted','depended','allowed transient','functional html','byte-identical'])):cl='IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED'"
+    },
+    {
+      "path": "scripts/run_v101123_stale_scans.py",
+      "line": 17,
+      "token": "v101.119",
+      "classification": "REUSED_VALIDATED_LINEAGE_ALLOWED",
+      "excerpt": "   elif tok=='v101.119' and (p.name.startswith('run_v101119_') or p.name=='run_v101123_stale_scans.py'):cl='REUSED_VALIDATED_LINEAGE_ALLOWED'"
+    },
+    {
+      "path": "scripts/run_v101123_stale_scans.py",
+      "line": 25,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": " {'check':'html_app_version','status':'PASS' if \"const APP_VERSION = 'v101.123';\" in html else 'FAIL'},"
+    },
+    {
+      "path": "scripts/run_v101123_stale_scans.py",
+      "line": 48,
+      "token": "v101.122",
+      "classification": "IMMUTABLE_BASELINE_OR_REAUDIT_REFERENCE_ALLOWED",
+      "excerpt": "# Current reports must not claim v101.122 is current PASS."
+    },
+    {
+      "path": "scripts/run_v101123_primary_reopen_audit.py",
+      "line": 5,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "VER='v101.123';STAGE='FOUR_PASS_BUILD_REPRODUCIBILITY_AND_SELF_AUDIT_RECONCILIATION_R1';FIXED=(2026,8,28,0,0,0)"
+    },
+    {
+      "path": "scripts/run_v101123_primary_reopen_audit.py",
+      "line": 34,
+      "token": "v101.123",
+      "classification": "CURRENT",
+      "excerpt": "summary={'pass':sum(r['status']=='PASS' for r in rows),'fail':sum(r['status']=='FAIL' for r in rows),'total':len(rows)};obj={'schema':'L24H_V101123_PRIMARY_REOPEN_V1','version':VER,'zip_sha256':sha(ZIP),'summary':summary,'checks':rows};(OUT/'PRIMARY_FINAL_REOPEN_AUDIT_v101123.json').write_text(json.dumps(obj,ensure_ascii=False,indent=2)+'\\n');(OUT/'PRIMARY_FINAL_REOPEN_AUDIT_v101123.md').write_text('# Primary final reopened-ZIP audit — v101.123\\n\\n**'+('PASS' if summary['fail']==0 else 'FAIL')+'**\\n\\n'+'\\n'.join(f'- `{r[\"check\"]}` — **{r[\"status\"]}** — `{str(r[\"detail\"])[:1000]}`' for r in rows)+'\\n');print(json.dumps(summary));raise SystemExit(0 if summary['fail']==0 else 2)"
+    },
+    {
+      "path": "scripts/run_v101119_quoted_span_fixed_point.py",
+      "line": 318,
+      "token": "v101.119",
+      "classification": "REUSED_VALIDATED_LINEAGE_ALLOWED",
+      "excerpt": " 'PASSION24.TEXT.RELATED_HOUR_22.BODY.P090':[{'start':217,'end':238,'semantic_speaker':'GENERIC_SOUL','presentation_speaker':'JESUS','quotation_depth':1,'reason':'v101.119 quoted-span closure: governing handover identifies source-supported GENERIC_SOUL nested speech inside active JESUS turn; canonical text and raw SPEECH_DATA remain unchanged.'}],"
+    },
+    {
+      "path": "scripts/run_v101119_quoted_span_fixed_point.py",
+      "line": 319,
+      "token": "v101.119",
+      "classification": "REUSED_VALIDATED_LINEAGE_ALLOWED",
+      "excerpt": " 'PASSION24.HOUR.24.DESOL.P033':[{'start':1,'end':163,'semantic_speaker':'PERSONIFIED_VOICE','presentation_speaker':'MARY','quotation_depth':2,'reason':'v101.119 quoted-span closure: P032 says the remembered arrows \"me disent\" and P033 is their quoted voice inside the continuing MARY turn; semantic voice remains distinct while MARY governs display.'}]"
+    },
+    {
+      "path": "scripts/run_v101119_quoted_span_fixed_point.py",
+      "line": 364,
+      "token": "v101.119",
+      "classification": "REUSED_VALIDATED_LINEAGE_ALLOWED",
+      "excerpt": "lines=['# v101.119 M1 — QUOTED_SPAN_PRESENTATION_CLOSURE_R1 evidence fixed point','',f\"Baseline HTML SHA-256: `{summary['baseline_html_sha256']}`\",f\"Presentation-relevant quoted spans derived dynamically: **{len(ledger)}**\",f\"Scanner A defects: **{len(ADEF)}**\",f\"Scanner B defects: **{len(BDEF)}**\",f\"Independent convergence: **{'PASS' if a_set==b_set else 'FAIL'}**\",f\"Hidden ranges checked: **{hidden_ranges}**; lexical-text hiding violations: **{len(hidden_bad)}**\",'',f\"## Fixed-point decision: {summary['fixed_point_status']}\",'','The prior nine-defect hypothesis was not exhaustive. The fixed-point scan reproduces all nine and additionally finds cross-record opening/both-edge failures plus o"
+    }
+  ],
+  "unexplained": []
+}

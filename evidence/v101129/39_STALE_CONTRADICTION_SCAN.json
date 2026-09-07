@@ -1,0 +1,103 @@
+{
+  "schema": "L24H_V101129_STALE_CONTRADICTION_SCAN_V1",
+  "version": "v101.129",
+  "stage": "INTRA_RECORD_QUOTE_HOST_SENTENCE_CONTINUITY_R1",
+  "summary": {
+    "pass": 18,
+    "fail": 0,
+    "total": 18
+  },
+  "checks": [
+    {
+      "case": "no_pending_validation_file_in_current_root",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "m1_report_authority_current",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "stage_lock_authority_current",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "OP01_no_stale_break_authority",
+      "status": "PASS",
+      "detail": "('PASSION24.HOUR.08.P009', 42, 93)"
+    },
+    {
+      "case": "OP02_no_stale_break_authority",
+      "status": "PASS",
+      "detail": "('PASSION24.HOUR.08.P009', 140, 210)"
+    },
+    {
+      "case": "OP03_no_stale_break_authority",
+      "status": "PASS",
+      "detail": "('PASSION24.HOUR.08.P010', 49, None)"
+    },
+    {
+      "case": "OP04_no_stale_break_authority",
+      "status": "PASS",
+      "detail": "('PASSION24.HOUR.08.P015', 50, 145)"
+    },
+    {
+      "case": "OP05_no_stale_break_authority",
+      "status": "PASS",
+      "detail": "('PASSION24.HOUR.21.P020', 69, None)"
+    },
+    {
+      "case": "OP06_no_stale_break_authority",
+      "status": "PASS",
+      "detail": "('PASSION24.HOUR.21.P025', 118, None)"
+    },
+    {
+      "case": "OP07_no_stale_break_authority",
+      "status": "PASS",
+      "detail": "('PASSION24.TEXT.RELATED_HOUR_06.BODY.P043', 49, None)"
+    },
+    {
+      "case": "OP08_no_stale_break_authority",
+      "status": "PASS",
+      "detail": "('PASSION24.TEXT.RELATED_HOUR_06.BODY.P058', 49, None)"
+    },
+    {
+      "case": "no_stale_app_version_binding",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "no_stale_stage_binding",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "no_stale_sw_cache",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "active_report_inventory_current",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "external_gate_overclaim_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "independent_probe_current_tooling",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "predecessor_reference_explicitly_classified",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "historical_reference_policy": "Explicit v101.128 predecessor/historical lineage references are valid and are not treated as stale current claims."
+}

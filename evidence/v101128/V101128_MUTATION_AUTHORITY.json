@@ -1,0 +1,11 @@
+{
+  "schema": "L24H_V101128_MUTATION_AUTHORITY_V1",
+  "version": "v101.128",
+  "stage": "MEDITEE_RECOVERY_ACCESS_AND_SINGLE_STATE_SYNC_R1",
+  "authority": "MEDITEE_RECOVERY_ACCESS_ONLY",
+  "single_state_authority": "state.readHours",
+  "single_mutation_function": "markMeditee(hourNum)",
+  "new_storage_keys": 0,
+  "canonical_text_operations": 0,
+  "forbidden_scope_preserved": true
+}

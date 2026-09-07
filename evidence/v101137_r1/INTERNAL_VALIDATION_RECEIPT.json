@@ -1,0 +1,25 @@
+{
+  "schema": "L24H_V101137_R1_INTERNAL_VALIDATION_RECEIPT_V1",
+  "status": "PASS",
+  "checks": {
+    "baseline_sha256": "7ef830738ff5665ae5b880d52bde029e4b9ba092d834f81b008d24615e1ab9e7",
+    "ledger_sha256": "f9a9c4c74df33b3f96909e3611acb74c448deed5fa367fa86072d2e27cbfef49",
+    "authorized_rows": 79,
+    "observed_canonical_delta_ids": 79,
+    "replacement_trim_exact": 53,
+    "removed_from_canonical_exact": 26,
+    "preserve_move_archived_exact": 24,
+    "delete_exact": 2,
+    "unlisted_hour_text_mutations": 0,
+    "h23_authorized_delta_rows": 10,
+    "h23_ab_synthesis": false,
+    "h24_burial_moved": false,
+    "h24_desolation_scope_preserved": true,
+    "derived_offsets_valid": true,
+    "html_mirror_identical": true,
+    "preserve_move_not_user_visible": true,
+    "storage_schema_unchanged": true,
+    "personal_snapshot_schema_unchanged": true
+  },
+  "corpus_fingerprint_sha256": "87733d22b5e899e23da263c37a2c2b30d85585b7a40f3dbf5b9ab4c05ae496d7"
+}

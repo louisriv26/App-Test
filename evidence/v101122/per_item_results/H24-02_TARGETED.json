@@ -1,0 +1,25 @@
+{
+  "mode": "H24-02",
+  "rows": [
+    {
+      "check": "hour24_0_incomplete",
+      "status": "PASS",
+      "detail": "VOTRE PARCOURS\n0/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "check": "hour24_23_incomplete",
+      "status": "PASS",
+      "detail": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "check": "hour24_24_complete",
+      "status": "PASS",
+      "detail": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées"
+    }
+  ],
+  "summary": {
+    "pass": 3,
+    "fail": 0,
+    "total": 3
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schema": "L24H_V101124_PROTECTED_PARITY_V1",
+  "version": "v101.124",
+  "baseline": "v101.123",
+  "unchanged": 13,
+  "authorized_delta": 1,
+  "rows": [
+    {
+      "declaration": "CORPUS",
+      "baseline_sha256": "1dfd24bcd5cb353e14afb31348fef350c8fb56c14e407489eae8709c958380a5",
+      "current_sha256": "1dfd24bcd5cb353e14afb31348fef350c8fb56c14e407489eae8709c958380a5",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "TEXT_LIBRARY",
+      "baseline_sha256": "09329a9751035ab32b3fbde518ab78163425316ba156a04b69e187ab58fa85e5",
+      "current_sha256": "09329a9751035ab32b3fbde518ab78163425316ba156a04b69e187ab58fa85e5",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "HOUR_LINKED_TEXTS",
+      "baseline_sha256": "abffddceeaf11cd74f043bea1d97568f2bd1ba28fb1fbc541610d282039c0095",
+      "current_sha256": "abffddceeaf11cd74f043bea1d97568f2bd1ba28fb1fbc541610d282039c0095",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "INTERNAL_SUBHEADINGS",
+      "baseline_sha256": "2cdc80893e8afad04d8990d3f7cbd240367fbbac51a360a1d12dcf46636708ae",
+      "current_sha256": "2cdc80893e8afad04d8990d3f7cbd240367fbbac51a360a1d12dcf46636708ae",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "DISPLAY_SEGMENTS",
+      "baseline_sha256": "141be59c6a94231ffea999c3706e70580e894ba9eb3ec60912e8b1fe5614b222",
+      "current_sha256": "141be59c6a94231ffea999c3706e70580e894ba9eb3ec60912e8b1fe5614b222",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "CONTINUITY_GROUPS",
+      "baseline_sha256": "3d1cb5f01010bf9b38f86a16cf6b9bb7e4be128b6fe21eca2894c23dbababc2d",
+      "current_sha256": "1ab140d3c155fa2dde654af4c1095678b6c8d02acb0351e8e9441fe7652aa702",
+      "status": "AUTHORIZED_DELTA",
+      "detail": "add exactly PASSION24.HOUR.15.P014 \u2192 PASSION24.HOUR.15.P015; retain four baseline groups"
+    },
+    {
+      "declaration": "LDC_LIBRARY_FLOW_LAYOUT",
+      "baseline_sha256": "7d10dd43644daef8104fc591b08c43f351e592601a756bcf3c433588f9c728d2",
+      "current_sha256": "7d10dd43644daef8104fc591b08c43f351e592601a756bcf3c433588f9c728d2",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "SPEECH_END_VISUAL_BREAKS",
+      "baseline_sha256": "06a1c250f4f9020d236bfcbeb412580f000380d49dc1348a7bdb5a2a244aa263",
+      "current_sha256": "06a1c250f4f9020d236bfcbeb412580f000380d49dc1348a7bdb5a2a244aa263",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "SPEECH_CROSS_RECORD_VISUAL_BREAKS",
+      "baseline_sha256": "bcf0c384462ba8c28d5b12c79cdd1ce8adb9e211809011ffbbb2888779022a48",
+      "current_sha256": "bcf0c384462ba8c28d5b12c79cdd1ce8adb9e211809011ffbbb2888779022a48",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "SPEECH_DATA",
+      "baseline_sha256": "388b52f0f140f4c3b4c8f91fd3b296550ad7bd58238810165738047e20528162",
+      "current_sha256": "388b52f0f140f4c3b4c8f91fd3b296550ad7bd58238810165738047e20528162",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "VISIBLE_PARAGRAPH_TOPOLOGY",
+      "baseline_sha256": "89d64b9e30edaed0589d2c3133bca116bda6cee2184e16078df9c676ef6a2e2f",
+      "current_sha256": "89d64b9e30edaed0589d2c3133bca116bda6cee2184e16078df9c676ef6a2e2f",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "SPEECH_CROSS_RECORD_OPENING_WRAPPER_SUPPRESSIONS",
+      "baseline_sha256": "c6cb3689dca85cc9fe29e03835e6153a4992c2ac3f47e28e33539f47fcfce68e",
+      "current_sha256": "c6cb3689dca85cc9fe29e03835e6153a4992c2ac3f47e28e33539f47fcfce68e",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "SPEECH_PRESENTATION_PROJECTION",
+      "baseline_sha256": "f631ad843e3f82bbdd7f467366834a164e291e936853557fcbef6baacc473e1b",
+      "current_sha256": "f631ad843e3f82bbdd7f467366834a164e291e936853557fcbef6baacc473e1b",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    },
+    {
+      "declaration": "SPEECH_PRESENTATION_ADJUDICATIONS",
+      "baseline_sha256": "889410835c99cbb54964c300d59a095dc169d3384c34386280bbdab8fe529d68",
+      "current_sha256": "889410835c99cbb54964c300d59a095dc169d3384c34386280bbdab8fe529d68",
+      "status": "PASS",
+      "detail": "byte-identical expression"
+    }
+  ]
+}

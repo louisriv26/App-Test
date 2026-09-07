@@ -1,0 +1,147 @@
+{
+  "schema": "L24H_V101134_RELEASE_INTEGRITY_V1",
+  "version": "v101.134",
+  "summary": {
+    "pass": 26,
+    "fail": 0,
+    "total": 26
+  },
+  "rows": [
+    {
+      "check": "baseline_identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "candidate_identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "full_app_html_functionally_identical_after_release_identity_normalisation",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_CORPUS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_TEXT_LIBRARY_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_HOUR_LINKED_TEXTS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_INTERNAL_SUBHEADINGS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_DISPLAY_SEGMENTS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_CONTINUITY_GROUPS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_LDC_LIBRARY_FLOW_LAYOUT_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_LDC_CURRENT_SYNC_AUTHORITY_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_SPEECH_DATA_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_SPEECH_PRESENTATION_ADJUDICATIONS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_SPEECH_END_VISUAL_BREAKS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_SPEECH_CROSS_RECORD_VISUAL_BREAKS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_SPEECH_PRESENTATION_PROJECTION_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_VISIBLE_PARAGRAPH_TOPOLOGY_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_SPEECH_CROSS_RECORD_OPENING_WRAPPER_SUPPRESSIONS_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "renderer_marker_preserved_V101133_SPEECH_BOUNDARY_SPAC",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "renderer_marker_preserved_V101133_LDC_BOUNDARY_SPACE_A",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "renderer_marker_preserved_.visual-boundary-separator-s",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "html_mirror_identical",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "storage_schema_unchanged",
+      "status": "PASS",
+      "detail": [
+        8,
+        8
+      ]
+    },
+    {
+      "check": "personal_snapshot_unchanged",
+      "status": "PASS",
+      "detail": [
+        5,
+        5
+      ]
+    },
+    {
+      "check": "ldc_source_bindings_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "release_scope_declared_nonfunctional",
+      "status": "PASS",
+      "detail": null
+    }
+  ]
+}

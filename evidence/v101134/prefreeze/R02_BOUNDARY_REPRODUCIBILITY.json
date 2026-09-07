@@ -1,0 +1,216 @@
+{
+  "schema": "L24H_V101134_BOUNDARY_REPRODUCIBILITY_V1",
+  "version": "v101.134",
+  "summary": {
+    "pass": 15,
+    "fail": 0,
+    "total": 15
+  },
+  "rows": [
+    {
+      "check": "scanner_exit_zero",
+      "status": "PASS",
+      "detail": {
+        "stdout": "{\n  \"schema\": \"L24H_RUNTIME_BOUNDARY_UNIVERSE_RECONCILIATION_R2\",\n  \"raw_dom_markers\": 1858,\n  \"effective_runtime_boundaries\": 1748,\n  \"excluded_markers\": 110,\n  \"effective_families\": {\n    \"speech_presentation_break\": 80,\n    \"display_segment\": 122,\n    \"ldc_cross_record\": 1467,\n    \"ldc_intra_break\": 78,\n    \"speech_cross_record\": 1\n  },\n  \"excluded_reasons\": {\n    \"NON_BLOCK_MARKER\": 105,\n    \"NO_VISIBLE_CONTENT_AFTER_LOCAL_BOUNDARY\": 5\n  },\n  \"excluded_families\": {\n    \"display_segment\": 2,\n    \"ldc_intra_break\": 100,\n    \"ldc_cross_record\": 3,\n    \"speech_presentation_break\": 5\n  },\n  \"page_errors\": []\n}\n",
+        "stderr": ""
+      }
+    },
+    {
+      "check": "raw_markers_1858",
+      "status": "PASS",
+      "detail": {
+        "schema": "L24H_RUNTIME_BOUNDARY_UNIVERSE_RECONCILIATION_R2",
+        "raw_dom_markers": 1858,
+        "effective_runtime_boundaries": 1748,
+        "excluded_markers": 110,
+        "effective_families": {
+          "speech_presentation_break": 80,
+          "display_segment": 122,
+          "ldc_cross_record": 1467,
+          "ldc_intra_break": 78,
+          "speech_cross_record": 1
+        },
+        "excluded_reasons": {
+          "NON_BLOCK_MARKER": 105,
+          "NO_VISIBLE_CONTENT_AFTER_LOCAL_BOUNDARY": 5
+        },
+        "excluded_families": {
+          "display_segment": 2,
+          "ldc_intra_break": 100,
+          "ldc_cross_record": 3,
+          "speech_presentation_break": 5
+        },
+        "page_errors": []
+      }
+    },
+    {
+      "check": "effective_boundaries_1748",
+      "status": "PASS",
+      "detail": {
+        "schema": "L24H_RUNTIME_BOUNDARY_UNIVERSE_RECONCILIATION_R2",
+        "raw_dom_markers": 1858,
+        "effective_runtime_boundaries": 1748,
+        "excluded_markers": 110,
+        "effective_families": {
+          "speech_presentation_break": 80,
+          "display_segment": 122,
+          "ldc_cross_record": 1467,
+          "ldc_intra_break": 78,
+          "speech_cross_record": 1
+        },
+        "excluded_reasons": {
+          "NON_BLOCK_MARKER": 105,
+          "NO_VISIBLE_CONTENT_AFTER_LOCAL_BOUNDARY": 5
+        },
+        "excluded_families": {
+          "display_segment": 2,
+          "ldc_intra_break": 100,
+          "ldc_cross_record": 3,
+          "speech_presentation_break": 5
+        },
+        "page_errors": []
+      }
+    },
+    {
+      "check": "excluded_markers_110",
+      "status": "PASS",
+      "detail": {
+        "schema": "L24H_RUNTIME_BOUNDARY_UNIVERSE_RECONCILIATION_R2",
+        "raw_dom_markers": 1858,
+        "effective_runtime_boundaries": 1748,
+        "excluded_markers": 110,
+        "effective_families": {
+          "speech_presentation_break": 80,
+          "display_segment": 122,
+          "ldc_cross_record": 1467,
+          "ldc_intra_break": 78,
+          "speech_cross_record": 1
+        },
+        "excluded_reasons": {
+          "NON_BLOCK_MARKER": 105,
+          "NO_VISIBLE_CONTENT_AFTER_LOCAL_BOUNDARY": 5
+        },
+        "excluded_families": {
+          "display_segment": 2,
+          "ldc_intra_break": 100,
+          "ldc_cross_record": 3,
+          "speech_presentation_break": 5
+        },
+        "page_errors": []
+      }
+    },
+    {
+      "check": "excluded_nonblock_105",
+      "status": "PASS",
+      "detail": {
+        "schema": "L24H_RUNTIME_BOUNDARY_UNIVERSE_RECONCILIATION_R2",
+        "raw_dom_markers": 1858,
+        "effective_runtime_boundaries": 1748,
+        "excluded_markers": 110,
+        "effective_families": {
+          "speech_presentation_break": 80,
+          "display_segment": 122,
+          "ldc_cross_record": 1467,
+          "ldc_intra_break": 78,
+          "speech_cross_record": 1
+        },
+        "excluded_reasons": {
+          "NON_BLOCK_MARKER": 105,
+          "NO_VISIBLE_CONTENT_AFTER_LOCAL_BOUNDARY": 5
+        },
+        "excluded_families": {
+          "display_segment": 2,
+          "ldc_intra_break": 100,
+          "ldc_cross_record": 3,
+          "speech_presentation_break": 5
+        },
+        "page_errors": []
+      }
+    },
+    {
+      "check": "excluded_wrapper_only_5",
+      "status": "PASS",
+      "detail": {
+        "schema": "L24H_RUNTIME_BOUNDARY_UNIVERSE_RECONCILIATION_R2",
+        "raw_dom_markers": 1858,
+        "effective_runtime_boundaries": 1748,
+        "excluded_markers": 110,
+        "effective_families": {
+          "speech_presentation_break": 80,
+          "display_segment": 122,
+          "ldc_cross_record": 1467,
+          "ldc_intra_break": 78,
+          "speech_cross_record": 1
+        },
+        "excluded_reasons": {
+          "NON_BLOCK_MARKER": 105,
+          "NO_VISIBLE_CONTENT_AFTER_LOCAL_BOUNDARY": 5
+        },
+        "excluded_families": {
+          "display_segment": 2,
+          "ldc_intra_break": 100,
+          "ldc_cross_record": 3,
+          "speech_presentation_break": 5
+        },
+        "page_errors": []
+      }
+    },
+    {
+      "check": "effective_family_decomposition_exact",
+      "status": "PASS",
+      "detail": {
+        "speech_presentation_break": 80,
+        "display_segment": 122,
+        "ldc_cross_record": 1467,
+        "ldc_intra_break": 78,
+        "speech_cross_record": 1
+      }
+    },
+    {
+      "check": "page_errors_zero",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "effective_csv_byte_exact_package_authority",
+      "status": "PASS",
+      "detail": {
+        "current_sha": "846956e3e9fbd96860c4a43de2b4a7ed953691fc4c1e6f5492de39b66faa7f6d",
+        "frozen_sha": "846956e3e9fbd96860c4a43de2b4a7ed953691fc4c1e6f5492de39b66faa7f6d"
+      }
+    },
+    {
+      "check": "positive_82_all_contained",
+      "status": "PASS",
+      "detail": {
+        "positive": 82,
+        "missing": []
+      }
+    },
+    {
+      "check": "required_reconciliation_artifacts_present",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "scanner_explicitly_in_tool_inventory",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "boundary_gate_explicitly_in_tool_inventory",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "boundary_gate_mapped",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "accessibility_gate_mapped",
+      "status": "PASS",
+      "detail": null
+    }
+  ]
+}

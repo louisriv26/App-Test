@@ -1,0 +1,132 @@
+{
+  "version": "v101.134",
+  "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1",
+  "summary": {
+    "pass": 15,
+    "fail": 0,
+    "total": 15
+  },
+  "rows": [
+    {
+      "check": "baseline_zip_sha_exact",
+      "status": "PASS",
+      "detail": "1479ac5f1de0a425f3c7f2e5cd9ce7340ba1465dccac817cd27cb93f49f09b9a"
+    },
+    {
+      "check": "baseline_members_751",
+      "status": "PASS",
+      "detail": 751
+    },
+    {
+      "check": "build_provenance_current",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.134",
+        "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1",
+        "build_date": "2026-09-04",
+        "baseline_version": "v101.133",
+        "baseline_zip_sha256": "1479ac5f1de0a425f3c7f2e5cd9ce7340ba1465dccac817cd27cb93f49f09b9a",
+        "baseline_members": 751,
+        "mutation_scope": "release-engineering-only boundary-universe evidence/tooling reproducibility reconciliation",
+        "functional_renderer_changed": false,
+        "canonical_text_changed": false,
+        "speaker_adjudication_changed": false,
+        "topology_offsets_changed": false,
+        "continuity_changed": false,
+        "storage_schema_unchanged": true,
+        "personal_snapshot_schema_unchanged": true,
+        "candidate_html_sha256": "e0e954e6ec526c8b4dea6b52ff4a47cc71937df95978dd69c05c74116d8416e5"
+      }
+    },
+    {
+      "check": "build_provenance_baseline_exact",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.134",
+        "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1",
+        "build_date": "2026-09-04",
+        "baseline_version": "v101.133",
+        "baseline_zip_sha256": "1479ac5f1de0a425f3c7f2e5cd9ce7340ba1465dccac817cd27cb93f49f09b9a",
+        "baseline_members": 751,
+        "mutation_scope": "release-engineering-only boundary-universe evidence/tooling reproducibility reconciliation",
+        "functional_renderer_changed": false,
+        "canonical_text_changed": false,
+        "speaker_adjudication_changed": false,
+        "topology_offsets_changed": false,
+        "continuity_changed": false,
+        "storage_schema_unchanged": true,
+        "personal_snapshot_schema_unchanged": true,
+        "candidate_html_sha256": "e0e954e6ec526c8b4dea6b52ff4a47cc71937df95978dd69c05c74116d8416e5"
+      }
+    },
+    {
+      "check": "overlay_changed_set_exact",
+      "status": "PASS",
+      "detail": {
+        "actual_n": 72,
+        "manifest_n": 72,
+        "missing": [],
+        "extra": []
+      }
+    },
+    {
+      "check": "overlay_removed_set_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "manifest": []
+      }
+    },
+    {
+      "check": "hash_manifest_path_set_exact",
+      "status": "PASS",
+      "detail": {
+        "manifest": 802,
+        "actual": 802
+      }
+    },
+    {
+      "check": "package_manifest_path_set_exact",
+      "status": "PASS",
+      "detail": {
+        "manifest": 802,
+        "actual": 802
+      }
+    },
+    {
+      "check": "hash_manifest_all_bytes_exact",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "package_manifest_all_sizes_exact",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "all_inventoried_tools_exist",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "all_current_added_tools_in_inventory",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "all_nonpredecessor_gate_dependencies_resolve",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "corrected_scanner_current_and_mapped",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "required_reconciliation_deliverables_present",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+gate,result,status,evidence
+hour24_state,16/16,PASS,evidence/v101123/HOUR24_STATE_TRANSITION_MATRIX.json
+five_profile_ux,70/70,PASS,evidence/v101123/HOUR24_FIVE_PROFILE_UX_MATRIX.json
+help,70/70,PASS,evidence/v101123/HELP_BROWSER_MATRIX.json
+broad_runtime,52/52,PASS,evidence/v101123/BROAD_CHROMIUM_RUNTIME_MATRIX.json
+quoted_fixed_point,A=0;B=0;398 spans,PASS,evidence/v101123/fixed/M1_FIXED_POINT_SUMMARY.json
+presentation,1990/1990,PASS,evidence/v101123/EXHAUSTIVE_PRESENTATION_RUNTIME_MATRIX.json
+service_worker,15/15,PASS,evidence/v101123/SERVICE_WORKER_LOGIC_MATRIX.json
+mutation_detection,12/12,PASS,evidence/v101123/MUTATION_TEST_MATRIX.json
+independent_hour24,55/55,PASS,evidence/v101123/INDEPENDENT_HOUR24_PROBE.json
+independent_runtime,50/50,PASS,evidence/v101123/INDEPENDENT_RUNTIME_SMOKE.json
+independent_presentation,1990/1990;257 cross-record,PASS,evidence/v101123/INDEPENDENT_PRESENTATION_MATRIX.json

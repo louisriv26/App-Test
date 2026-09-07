@@ -1,0 +1,71 @@
+{
+  "schema": "L24H_V101133_GLOBAL_RAW_QUOTE_MUTATION_TESTS_V1",
+  "version": "v101.133",
+  "summary": {
+    "pass": 10,
+    "fail": 0,
+    "total": 10
+  },
+  "rows": [
+    {
+      "mutant": "A",
+      "description": "reintroduce H08 P009 old @42 false break",
+      "status": "PASS",
+      "detected": true
+    },
+    {
+      "mutant": "B",
+      "description": "reintroduce RELATED_HOUR_06 P043 old @49 false break",
+      "status": "PASS",
+      "detected": true
+    },
+    {
+      "mutant": "C",
+      "description": "remove valid H08 P008 break",
+      "status": "PASS",
+      "detected": true
+    },
+    {
+      "mutant": "D",
+      "description": "new direct Jesus quote in metadata-unmapped fixture with host continuation",
+      "status": "PASS",
+      "detected": true
+    },
+    {
+      "mutant": "E",
+      "description": "uppercase host continuation after quote",
+      "status": "PASS",
+      "detected": true
+    },
+    {
+      "mutant": "F",
+      "description": "cross-record quotation continuation",
+      "status": "PASS",
+      "detected": true
+    },
+    {
+      "mutant": "G",
+      "description": "speaker metadata omits approved raw direct-Jesus quote",
+      "status": "PASS",
+      "detected": true
+    },
+    {
+      "mutant": "H",
+      "description": "projection correct but topology stale",
+      "status": "PASS",
+      "detected": true
+    },
+    {
+      "mutant": "I",
+      "description": "move approved P073 break to non-host-sentence offset",
+      "status": "PASS",
+      "detected": true
+    },
+    {
+      "mutant": "J",
+      "description": "alter canonical text while claiming topology-only repair",
+      "status": "PASS",
+      "detected": true
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+--- before
++++ after
+@@ -7107,10 +7107,10 @@
+       <button class="mark-read-btn ${isRead?'done':''}" onclick="markMeditee(${hour.hour_number})" id="markReadBtn">
+         <span>${isRead?'✓ Méditée':'Méditée'}</span>${isRead?'':'<span class="mark-btn-hint">Appuyez après avoir médité</span>'}
+       </button>
+-      <button class="nav-btn" onclick="openHour(${next?next.hour_number:-1})" ${!next?'disabled':''}>
+-        <span><span class="nav-label">Suivante</span>${next?escHtml(next.short_title.slice(0,28)):''}</span>
++      ${next ? `<button class="nav-btn" onclick="openHour(${next.hour_number})">
++        <span><span class="nav-label">Suivante</span>${escHtml(next.short_title.slice(0,28))}</span>
+         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+-      </button>
++      </button>` : ''}
+     </div>
+     ${Number(hour.hour_number) === 24 ? `<div id="hour24CyclePanelHost">${buildHour24CyclePanel(hour)}</div>` : ''}
+   </div>`;

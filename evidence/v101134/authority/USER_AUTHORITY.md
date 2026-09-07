@@ -1,0 +1,1 @@
+User explicitly authorised the bounded v101.133 renderer-only repair and execution of M2–M4 with no expansion beyond scope. The governing script requires release-engineering defects discovered within M4 to be corrected and M4 restarted; v101.134 performs only that release-engineering correction.

@@ -1,0 +1,39 @@
+{
+  "schema": "L24H_V101122_FOUR_PASS_PREFREEZE_SUMMARY_V1",
+  "version": "v101.122",
+  "stage": "HOUR24_END_OF_CYCLE_STATE_AND_ACTION_HIERARCHY_R1",
+  "status": "PASS_PREFREEZE",
+  "pass1": {
+    "builder_runtime_parity": "PASS",
+    "protected_declarations": "14/14 PASS",
+    "help_parity": "PASS"
+  },
+  "pass2": {
+    "hour24_state": "16/16 PASS",
+    "hour24_ux": "70/70 PASS",
+    "help": "70/70 PASS",
+    "broad": "52/52 PASS",
+    "quoted_span": "A=0 B=0 spans=398",
+    "presentation": "1990/1990 PASS",
+    "sw": "15/15 PASS",
+    "mutation": "12/12 PASS",
+    "ind_hour24": "55/55 PASS",
+    "ind_runtime": "50/50 PASS",
+    "ind_presentation": "1990/1990 PASS; cross_record=257"
+  },
+  "pass3": {
+    "active_nonblank_lines": 154,
+    "status": "PASS"
+  },
+  "pass4": {
+    "version_unexplained": 0,
+    "semantic_unexplained": 0,
+    "status": "PASS"
+  },
+  "limitations": {
+    "physical_devices": "NOT_TESTED",
+    "installed_pwa_true_offline": "NOT_TESTED",
+    "voiceover_talkback": "NOT_TESTED",
+    "deployment_authorized": false
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "schema": "L24H_V101123_HOUR24_STATE_TRANSITION_MATRIX_V1",
+  "version": "v101.123",
+  "browser": "system Chromium via Playwright content injection",
+  "real_device_limitation": "browser emulation only; physical-device gates not claimed",
+  "summary": {
+    "pass": 16,
+    "fail": 0,
+    "total": 16
+  },
+  "rows": [
+    {
+      "case": "S01",
+      "status": "PASS",
+      "detail": {
+        "actions": [
+          [
+            "Réflexion et pratique",
+            true
+          ],
+          [
+            "Approfondir",
+            true
+          ],
+          [
+            "Revenir au début",
+            true
+          ],
+          [
+            "Prier la 24e Heure",
+            true
+          ]
+        ],
+        "progress": false,
+        "review": false
+      }
+    },
+    {
+      "case": "S02",
+      "status": "PASS",
+      "detail": {
+        "panel": "VOTRE PARCOURS\n0/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "restart": false
+      }
+    },
+    {
+      "case": "S03",
+      "status": "PASS",
+      "detail": {
+        "panel": "VOTRE PARCOURS\n22/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "restart": false
+      }
+    },
+    {
+      "case": "S04",
+      "status": "PASS",
+      "detail": {
+        "before": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "after": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "count": 24,
+        "has24": true
+      }
+    },
+    {
+      "case": "S05",
+      "status": "PASS",
+      "detail": {
+        "before": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "after": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "count": 23,
+        "has24": false
+      }
+    },
+    {
+      "case": "S06",
+      "status": "PASS",
+      "detail": {
+        "panel": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "count": 23,
+        "has24": true,
+        "complete": false
+      }
+    },
+    {
+      "case": "S07",
+      "status": "PASS",
+      "detail": {
+        "ret": false,
+        "same": true,
+        "count": 24,
+        "lastHour": 24,
+        "view": "home"
+      }
+    },
+    {
+      "case": "S08",
+      "status": "PASS",
+      "detail": {
+        "ret": true,
+        "count": 0,
+        "lastParas": 0,
+        "hourTabs": 0,
+        "log": 0,
+        "currentHour": 1,
+        "lastHour": 1,
+        "view": "reader",
+        "protectedSame": true
+      }
+    },
+    {
+      "case": "S09",
+      "status": "PASS",
+      "detail": {
+        "ret": false,
+        "same": true,
+        "count": 23
+      }
+    },
+    {
+      "case": "S10",
+      "status": "PASS",
+      "detail": {
+        "tab": "reflections",
+        "display": "block",
+        "hash": ""
+      }
+    },
+    {
+      "case": "S11",
+      "status": "PASS",
+      "detail": {
+        "tab": "linked",
+        "display": "block"
+      }
+    },
+    {
+      "case": "S12",
+      "status": "PASS",
+      "detail": {
+        "hour": 24,
+        "view": "reader",
+        "scroll": 0
+      }
+    },
+    {
+      "case": "S13",
+      "status": "PASS",
+      "detail": {
+        "home": true,
+        "view": "home"
+      }
+    },
+    {
+      "case": "S14",
+      "status": "PASS",
+      "detail": {
+        "home": true,
+        "view": "home"
+      }
+    },
+    {
+      "case": "S15",
+      "status": "PASS",
+      "detail": {
+        "raw": true,
+        "has6": true,
+        "count": 1,
+        "log": true
+      }
+    },
+    {
+      "case": "S16",
+      "status": "PASS",
+      "detail": {
+        "ret": true,
+        "raw": true,
+        "snapRead": [],
+        "snapLast": "1",
+        "loadedCount": 0,
+        "loadedLast": 1
+      }
+    }
+  ]
+}

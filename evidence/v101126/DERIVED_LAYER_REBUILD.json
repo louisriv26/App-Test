@@ -1,0 +1,1250 @@
+{
+  "schema": "L24H_V101126_DERIVED_REBUILD_V1",
+  "version": "v101.126",
+  "stage": "DUAL_SUCCESSOR_R5_15_LDC_SYNC_PLUS_19_NATIVE_R1",
+  "changed_stable_text_records": [
+    "PASSION24.HOUR.03.P003",
+    "PASSION24.HOUR.06.P004",
+    "PASSION24.HOUR.06.P022",
+    "PASSION24.HOUR.11.P034",
+    "PASSION24.HOUR.16.P010",
+    "PASSION24.HOUR.16.P036",
+    "PASSION24.HOUR.16.P045",
+    "PASSION24.HOUR.18.REF.P001",
+    "PASSION24.HOUR.19.P073",
+    "PASSION24.HOUR.19.P124",
+    "PASSION24.HOUR.19.P145",
+    "PASSION24.HOUR.19.P147",
+    "PASSION24.HOUR.19.P199",
+    "PASSION24.HOUR.21.P046",
+    "PASSION24.HOUR.21.P082",
+    "PASSION24.PRAYER.HOLY_HOUR_THANKSGIVING.P004",
+    "PASSION24.PRAYER.HOLY_HOUR_THANKSGIVING.P009",
+    "PASSION24.SECTION.BENEFITS.P121",
+    "PASSION24.SECTION.BENEFITS.P146",
+    "PASSION24.TEXT.PART_III_DIVINE_PASSION.BODY.P120",
+    "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P180",
+    "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P211",
+    "PASSION24.TEXT.PROMISES_BENEFITS.BODY.P116",
+    "PASSION24.TEXT.PROMISES_BENEFITS.BODY.P141",
+    "PASSION24.TEXT.RELATED_HOUR_15.BODY.P163",
+    "PASSION24.TEXT.RELATED_HOUR_17.BODY.P072",
+    "PASSION24.TEXT.RELATED_HOUR_17.BODY.P084",
+    "PASSION24.TEXT.RELATED_HOUR_17.BODY.P087",
+    "PASSION24.TEXT.RELATED_HOUR_17.BODY.P088",
+    "PASSION24.TEXT.RELATED_HOUR_17.BODY.P089",
+    "PASSION24.TEXT.RELATED_HOUR_17.BODY.P097",
+    "PASSION24.TEXT.RELATED_HOUR_17.BODY.P218",
+    "PASSION24.TEXT.RELATED_HOUR_21.BODY.P119",
+    "PASSION24.TEXT.RELATED_HOUR_22.BODY.P010",
+    "PASSION24.TEXT.RELATED_HOUR_24.BODY.P022"
+  ],
+  "speech_presentation_topology_remaps": [
+    {
+      "stable_id": "PASSION24.SECTION.BENEFITS.P146",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 127
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 129
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.SECTION.BENEFITS.P146",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 127,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 129,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P072",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 64
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 63
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P072",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 64,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 63,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P084",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 32
+        },
+        {
+          "speaker": "JESUS",
+          "start": 33,
+          "end": 103
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 35
+        },
+        {
+          "speaker": "JESUS",
+          "start": 36,
+          "end": 106
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P084",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 103,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 106,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P087",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 58
+        },
+        {
+          "speaker": "JESUS",
+          "start": 59,
+          "end": 106
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 61
+        },
+        {
+          "speaker": "JESUS",
+          "start": 62,
+          "end": 109
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P087",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 106,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 109,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P088",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 23
+        },
+        {
+          "speaker": "JESUS",
+          "start": 24,
+          "end": 50
+        },
+        {
+          "speaker": "JESUS",
+          "start": 51,
+          "end": 103
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 23
+        },
+        {
+          "speaker": "JESUS",
+          "start": 24,
+          "end": 50
+        },
+        {
+          "speaker": "JESUS",
+          "start": 51,
+          "end": 101
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P088",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 103,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 101,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P089",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 154
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 153
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P089",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 154,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 153,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P119",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 147
+        },
+        {
+          "speaker": "JESUS",
+          "start": 148,
+          "end": 172
+        },
+        {
+          "speaker": "JESUS",
+          "start": 173,
+          "end": 215
+        },
+        {
+          "speaker": "JESUS",
+          "start": 216,
+          "end": 237
+        },
+        {
+          "speaker": "JESUS",
+          "start": 238,
+          "end": 311
+        },
+        {
+          "speaker": "JESUS",
+          "start": 312,
+          "end": 343
+        },
+        {
+          "speaker": "JESUS",
+          "start": 344,
+          "end": 413
+        },
+        {
+          "speaker": "JESUS",
+          "start": 414,
+          "end": 458
+        },
+        {
+          "speaker": "JESUS",
+          "start": 459,
+          "end": 535
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 148
+        },
+        {
+          "speaker": "JESUS",
+          "start": 149,
+          "end": 173
+        },
+        {
+          "speaker": "JESUS",
+          "start": 174,
+          "end": 217
+        },
+        {
+          "speaker": "JESUS",
+          "start": 218,
+          "end": 239
+        },
+        {
+          "speaker": "JESUS",
+          "start": 240,
+          "end": 313
+        },
+        {
+          "speaker": "JESUS",
+          "start": 314,
+          "end": 340
+        },
+        {
+          "speaker": "JESUS",
+          "start": 341,
+          "end": 410
+        },
+        {
+          "speaker": "JESUS",
+          "start": 411,
+          "end": 454
+        },
+        {
+          "speaker": "JESUS",
+          "start": 455,
+          "end": 531
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P119",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 535,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 531,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P180",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 68
+        },
+        {
+          "speaker": "JESUS",
+          "start": 69,
+          "end": 89
+        },
+        {
+          "speaker": "JESUS",
+          "start": 90,
+          "end": 126
+        },
+        {
+          "speaker": "JESUS",
+          "start": 127,
+          "end": 187
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 68
+        },
+        {
+          "speaker": "JESUS",
+          "start": 69,
+          "end": 88
+        },
+        {
+          "speaker": "JESUS",
+          "start": 89,
+          "end": 115
+        },
+        {
+          "speaker": "JESUS",
+          "start": 117,
+          "end": 192
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P180",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 187,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 192,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P211",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 187
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 186
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P211",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 187,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 186,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_22.BODY.P010",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 277
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 276
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_22.BODY.P010",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 277,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 276,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P218",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 157
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 158
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P218",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 157,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 158,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P163",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 40
+        },
+        {
+          "speaker": "JESUS",
+          "start": 41,
+          "end": 66
+        },
+        {
+          "speaker": "JESUS",
+          "start": 67,
+          "end": 132
+        },
+        {
+          "speaker": "JESUS",
+          "start": 133,
+          "end": 204
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 40
+        },
+        {
+          "speaker": "JESUS",
+          "start": 41,
+          "end": 66
+        },
+        {
+          "speaker": "JESUS",
+          "start": 67,
+          "end": 132
+        },
+        {
+          "speaker": "JESUS",
+          "start": 133,
+          "end": 203
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P163",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 204,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 203,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.PART_III_DIVINE_PASSION.BODY.P120",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 117
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 116
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.PART_III_DIVINE_PASSION.BODY.P120",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 117,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 116,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.HOUR.03.P003",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 2,
+          "end": 101
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 2,
+          "end": 100
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.HOUR.03.P003",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 2,
+            "end": 101,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 0,
+            "end": 2,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          },
+          {
+            "start": 101,
+            "end": 103,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          }
+        ],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 2,
+            "end": 100,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 0,
+            "end": 2,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          },
+          {
+            "start": 100,
+            "end": 102,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          }
+        ],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.HOUR.16.P010",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 121
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 120
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.HOUR.16.P010",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 121,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 120,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.HOUR.16.P045",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 191
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 191
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.HOUR.16.P045",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 191,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 191,
+            "end": 193,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          }
+        ],
+        "breaks": [
+          193
+        ]
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 191,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 191,
+            "end": 193,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          }
+        ],
+        "breaks": [
+          193
+        ]
+      }
+    },
+    {
+      "stable_id": "PASSION24.HOUR.16.P045",
+      "layer": "SPEECH_END_VISUAL_BREAKS",
+      "before": [
+        193
+      ],
+      "after": [
+        193
+      ]
+    },
+    {
+      "stable_id": "PASSION24.HOUR.16.P045",
+      "layer": "VISIBLE_PARAGRAPH_TOPOLOGY.local_breaks",
+      "before": [
+        193
+      ],
+      "after": [
+        193
+      ]
+    },
+    {
+      "stable_id": "PASSION24.HOUR.19.P124",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 2,
+          "end": 115
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 2,
+          "end": 114
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.HOUR.19.P124",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 2,
+            "end": 115,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 0,
+            "end": 2,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          }
+        ],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 2,
+            "end": 114,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 0,
+            "end": 2,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_TARGET_START"
+          }
+        ],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.HOUR.19.P147",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 90
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 86
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.HOUR.19.P147",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 90,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 86,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_24.BODY.P022",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 201,
+          "end": 218
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 200,
+          "end": 217
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_24.BODY.P022",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 201,
+            "end": 218,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 200,
+            "end": 201,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_TURN_ADJUDICATED"
+          },
+          {
+            "start": 218,
+            "end": 219,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_TURN_ADJUDICATED"
+          }
+        ],
+        "breaks": [
+          219
+        ]
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 200,
+            "end": 217,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 199,
+            "end": 200,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_TURN_ADJUDICATED"
+          },
+          {
+            "start": 217,
+            "end": 218,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_TURN_ADJUDICATED"
+          }
+        ],
+        "breaks": [
+          218
+        ]
+      }
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_24.BODY.P022",
+      "layer": "SPEECH_END_VISUAL_BREAKS",
+      "before": [
+        219
+      ],
+      "after": [
+        218
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.RELATED_HOUR_24.BODY.P022",
+      "layer": "VISIBLE_PARAGRAPH_TOPOLOGY.local_breaks",
+      "before": [
+        219
+      ],
+      "after": [
+        218
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.PROMISES_BENEFITS.BODY.P141",
+      "layer": "SPEECH_DATA",
+      "before": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 127
+        }
+      ],
+      "after": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 129
+        }
+      ]
+    },
+    {
+      "stable_id": "PASSION24.TEXT.PROMISES_BENEFITS.BODY.P141",
+      "layer": "SPEECH_PRESENTATION_PROJECTION",
+      "before": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 127,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      },
+      "after": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 129,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [],
+        "breaks": []
+      }
+    }
+  ],
+  "ldc_library_flow_offset_remaps": [
+    {
+      "stable_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P211",
+      "entry_id": "LDC.T19.E0050",
+      "old_cuts": [
+        71
+      ],
+      "new_cuts": [
+        70
+      ]
+    }
+  ],
+  "search": "RUNTIME_DERIVED_FROM_FINAL_CORPUS_AND_TEXT_LIBRARY_NO_SERIALIZED_INDEX",
+  "corpus_fingerprint_sha256": "ab55fe5dbd4859ffac02f6547bd19abfd23f735ed0e0f68f6a97a5a99393808b",
+  "corpus_fingerprint_algorithm": "sha256_canonical_json_without_fingerprint_sha256_v101126",
+  "storage_schema": 8,
+  "personal_snapshot": 5,
+  "highlight_reanchor": "EXISTING_v101.48_SELECTED_TEXT_SNAPSHOT_RECOVERY_PRESERVED; stable paragraph ids unchanged"
+}

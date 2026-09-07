@@ -1,0 +1,11 @@
+line,text,assertion,direct_evidence,status
+1,# v101.128 Méditée Recovery Access / Single-State Synchronisation,heading/current report identity,package:reports/MEDITEE_RECOVERY_ACCESS.md,PASS
+3,- Predecessor: immutable `v101.127` / `d2614307d3335d4e76a3b9559cb4d8267549b9a5a4adf4ec616344f2b98664d6` / 440 members.,baseline identity,evidence/v101128/V101128_BASELINE_BINDING.json,PASS
+4,"- User need: after forgetting the bottom `Méditée` action, reopening an Hour from the list currently starts at the top and otherwise requires scrolling through the complete Hour again.",problem statement,runtime:openHour normal-open behavior + existing bottom control,PASS
+5,- UX repair: activates the existing `buildMarkBar(hourNum)` slot below the Hour header as a discreet recovery/status control while preserving the existing bottom action.,upper recovery control,index.html:buildMarkBar + renderReader insertion,PASS
+6,- Single authority: `state.readHours`. Single state-changing action: `markMeditee(hourNum)`.,single state/mutation path,evidence/v101128/V101128_STATIC_SCOPE_AUDIT.json,PASS
+7,- The two visual controls are synchronized by `refreshMediteeControls(hourNum)`; no new progression state or storage key exists.,dual sync,evidence/v101128/V101128_MEDITEE_DUAL_CONTROL_MATRIX.json,PASS
+8,- Toggle refresh is DOM-only: `renderReader()` is not called by `markMeditee()`.,no rerender,evidence/v101128/V101128_MEDITEE_SCROLL_FOCUS_MATRIX.json,PASS
+9,- Hour-24 completion remains exactly 24 explicit `Méditée` states via `getProgressSnapshot()`.,24/24 logic,evidence/v101128/V101128_HOUR24_MEDITEE_RECOVERY_MATRIX.json,PASS
+10,- Canonical/devotional text changes: **0**. Speaker/presentation/continuity data changes: **0**. Storage/snapshot schema changes: **0**.,protected scope,evidence/v101128/V101128_STATIC_SCOPE_AUDIT.json,PASS
+11,- Physical-device/PWA/offline/live-origin/screen-reader evidence remains external.,external limits,version.json:external_open_gates,PASS

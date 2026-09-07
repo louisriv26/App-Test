@@ -1,0 +1,9 @@
+﻿fix_id,target,r2_finding,r3_action,status
+R3-FIX-001,REAL_DEVICE_QA_CHECKLIST.md,STALE_V101135_DEVICE_CHECKLIST,Replace with v101.136 R3 device-testing checklist based on v101.135→v101.136 in-place update.,APPLIED
+R3-FIX-002,reports/V101135_MASTER_SCRIPT_VALIDATION_COMPLETION.md,OBSOLETE_CURRENT_ROOT_REPORT,Move to reports/historical/v101135/.,APPLIED
+R3-FIX-003,reports/V101136_INTERIM_CLOSED_SUCCESSOR.md,STALE_R2_STATUS_REPORT,Move R2 report to reports/historical/v101136_r2/ and replace with current R3 report.,APPLIED
+R3-FIX-004,version.json.overall_release_status,STALE_INTERNAL_VALIDATION_PENDING,Replace with external-SHA-bound internal-evidence/device-test status; final public release remains unauthorized.,APPLIED
+R3-FIX-005,version.json.known_blockers,CONTRADICTED_BY_R2_PACKAGE_AUDIT,Clear only after the documentary/package defects are repaired; external gates remain separate.,APPLIED
+R3-FIX-006,metadata/active_report_inventory.json,CURRENT_REPORT_INVENTORY_GAP,Make current docs/test artifacts explicit and ensure obsolete reports are under historical namespace.,APPLIED
+R3-FIX-007,metadata/current_gate_map.json + metadata/release_evidence_lifecycle.json,OBSOLETE_VALIDATION_LIFECYCLE_WORDING,"Model exact-ZIP four-pass evidence as external SHA-bound, while keeping physical/live gates open.",APPLIED
+R3-FIX-008,REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,INADEQUATE_HEADER_ONLY_TEMPLATE,Replace with enumerated v101.136 device/update/targeted/offline/accessibility test matrix.,APPLIED

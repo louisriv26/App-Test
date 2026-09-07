@@ -1,0 +1,48 @@
+{
+  "schema": "L24H_V101122_SEMANTIC_STALE_SCAN_V1",
+  "status": "PASS",
+  "obsolete_current_tool_assumptions": 0,
+  "unexplained_count": 0,
+  "checks": [
+    {
+      "check": "hour24_not_completion_by_number",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "hours_1_23_no_cycle_controls",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "incomplete_no_restart",
+      "status": "PASS",
+      "detail": "<div class=\"hour-end-actions cycle\" id=\"hour24CyclePanel\"><div class=\"hour-end-title\">VOTRE PARCOURS</div><div class=\"hour-end-note\"><strong>${p.count}/24</strong> Heures marquées comme méditées.</div><div class=\"hour-end-buttons\"><button type=\"button\" class=\"hour-end-btn primary\" onclick=\"showProgressView()\">Voir ma progression</button><button type=\"button\" class=\"hour-end-btn\" onclick=\"showCompl"
+    },
+    {
+      "check": "completed_restart_guard",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no_redundant_home_current_runtime",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "current_progress_terms",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "storage_schema_unchanged",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no_obsolete_qa_assumptions",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

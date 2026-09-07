@@ -1,0 +1,142 @@
+{
+  "schema": "L24H_V101129_SHADOW_EXPECTED_DELTA_V2",
+  "changed_or_added": 20,
+  "removed": 0,
+  "rows": [
+    {
+      "path": "README.md",
+      "delta": "CHANGED",
+      "before_sha256": "6e27241ec54834ce5e2e74b8f5713beff9ece10ca9eb63b5cadd20555532fb28",
+      "after_sha256": "b6b44ff6fb99c13c32319d398f7c22c5a4c0f6cd3837fc07348fed450a31a7b8"
+    },
+    {
+      "path": "index.html",
+      "delta": "CHANGED",
+      "before_sha256": "194712efeb6d695ce26d362bbcf54ed3b0605a0214cd5aba0a6c80fd88b8ddd0",
+      "after_sha256": "88d51c469652feb95900223a3f257979c578c20c6924631bb3c408fba0814675"
+    },
+    {
+      "path": "luisa_24_heures.html",
+      "delta": "CHANGED",
+      "before_sha256": "194712efeb6d695ce26d362bbcf54ed3b0605a0214cd5aba0a6c80fd88b8ddd0",
+      "after_sha256": "88d51c469652feb95900223a3f257979c578c20c6924631bb3c408fba0814675"
+    },
+    {
+      "path": "manifest.json",
+      "delta": "CHANGED",
+      "before_sha256": "c826e9d09a370f27297b25659a061200e4e0ac2ba662d92091ccb7e5e6c4980d",
+      "after_sha256": "6f8241d199d4a31037fb09c6cf825382ee5b769ae569827ba789671eeaa20c3f"
+    },
+    {
+      "path": "metadata/active_report_inventory.json",
+      "delta": "CHANGED",
+      "before_sha256": "5fe8d33ad6b23ddc4e0c4b30e667f2a74463f2bbdc9f9fdc0a0d28c3b468dff3",
+      "after_sha256": "48b1e87b717c524f72d309486e32e68b788ab523039a50de53800ef4831424e4"
+    },
+    {
+      "path": "metadata/build_provenance.json",
+      "delta": "CHANGED",
+      "before_sha256": "8ff9380a7cb562b253e7bafc57701d50715cada274984f17071d4bfa8b758c4d",
+      "after_sha256": "0552f8a6dd234accca09e28399eaa523136e7bf9eeac10054b243f45d9080951"
+    },
+    {
+      "path": "metadata/current_evidence_lineage.json",
+      "delta": "CHANGED",
+      "before_sha256": "ffac24c5d4cd7bfca3e7608b91d7a098052aa8723747920b7ad9054fb2e517b5",
+      "after_sha256": "8911ce95613f5d76f899a5285bef2a9e85fd1d40921d2a9b5348fc0fc420ae06"
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "delta": "CHANGED",
+      "before_sha256": "7faafab9f808b54adba3f3411abb0e713ccd87fd5f2051cff7e0896f42087a45",
+      "after_sha256": "ee9e80fd7a4ebdde634bc6f7c768ac82eb9ee8827f7f080b802cd57f707e514c"
+    },
+    {
+      "path": "metadata/hash_manifest.json",
+      "delta": "CHANGED",
+      "before_sha256": "1380f9f5f3e5ac6fcd8d2e69733ced59fc0a6f564a0727e279d21cac1825dd8f",
+      "after_sha256": "4b6d7b8a75f690f4599514217b48fbde6abe5902611a89cb0d2ebb19aacde05e"
+    },
+    {
+      "path": "metadata/package_manifest.json",
+      "delta": "CHANGED",
+      "before_sha256": "7570baf602699ce644956af2f5e1e9ccc7b12accba31d84b0785a0f5c7a751f5",
+      "after_sha256": "722fc9aea6aa4784a3b9e214c9885613b6a57183fe9f92a294ea578ba1abed56"
+    },
+    {
+      "path": "metadata/release_evidence_lifecycle.json",
+      "delta": "CHANGED",
+      "before_sha256": "53f82df15599067d59f2020fed68775eec0522cedd88e01825f6aa84e3667033",
+      "after_sha256": "863b0e407d847ca0663243d387e2e5c892204985df89d2b9f90d6a7b1a77dd54"
+    },
+    {
+      "path": "reports/QUOTE_HOST_SENTENCE_CONTINUITY.md",
+      "delta": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "f30943a422e5194b212ba17d31edec25713dd0531286425d8b1fd2ef2f4982ec"
+    },
+    {
+      "path": "scripts/build_m1_adjudication.py",
+      "delta": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "530087e0dc0cd8a7ee22f1c2a72b365837fd63f4f1f431ecc2fe5c0f079ed61c"
+    },
+    {
+      "path": "scripts/build_v101129_quote_host_topology.py",
+      "delta": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "cb4a27c1039f36bcff407332fceb2118099b458a43278fb2028fcb118fcf1f07"
+    },
+    {
+      "path": "scripts/create_m1_addendum_docx.py",
+      "delta": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "9ea918fbe33067cb76088228d8f75a8a38f0735920204be4fc99120ccc5de894"
+    },
+    {
+      "path": "scripts/freeze_v101129_ledger.py",
+      "delta": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "51708398060912945052152a008371e4c4d32aaed6dd349473dd3be0adcfabd7"
+    },
+    {
+      "path": "scripts/independent_exit_probe.py",
+      "delta": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "4a92118610e1679548854f47628c06b59449c5aa4706d243d913aa7fd82bdc63"
+    },
+    {
+      "path": "scripts/reconstruct_m1_universe.py",
+      "delta": "ADDED",
+      "before_sha256": null,
+      "after_sha256": "9fc30dc3b3025c32e823140bce9dec066932f78e79e12370fe518ea5831e12b6"
+    },
+    {
+      "path": "sw.js",
+      "delta": "CHANGED",
+      "before_sha256": "51120a7636b59e940ba8ed7e2b306933afbbb82310675c66b09534bf2617faf3",
+      "after_sha256": "879845ebcc32a0f10cab12ae7a3c39c7ec7fb44d624fa9ac4f1dbbb11ddc8d0f"
+    },
+    {
+      "path": "version.json",
+      "delta": "CHANGED",
+      "before_sha256": "f39dd52c0742f4460ceec928e4a9f1378798728f50b71da385c1206eb4ec8721",
+      "after_sha256": "242de9409dcee5f7262b1e3a5e1d8cce2e12ac6c66abb29a7a11089f207309fa"
+    }
+  ],
+  "authorised_current_tooling": [
+    "scripts/build_m1_adjudication.py",
+    "scripts/build_v101129_quote_host_topology.py",
+    "scripts/create_m1_addendum_docx.py",
+    "scripts/freeze_v101129_ledger.py",
+    "scripts/independent_exit_probe.py",
+    "scripts/reconstruct_m1_universe.py",
+    "scripts/run_v101129_anchor_selection.py",
+    "scripts/run_v101129_hour24_regression.py",
+    "scripts/run_v101129_meditee_regression.py",
+    "scripts/run_v101129_meditee_responsive_regression.py",
+    "scripts/run_v101129_quote_host_matrices.py"
+  ],
+  "unexplained": [],
+  "status": "PASS"
+}

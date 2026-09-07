@@ -1,0 +1,380 @@
+{
+  "version": "v101.134",
+  "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1",
+  "summary": {
+    "pass": 17,
+    "fail": 0,
+    "total": 17
+  },
+  "rows": [
+    {
+      "check": "gate_summary_zero_fail",
+      "status": "PASS",
+      "detail": {
+        "schema": "L24H_V101134_GATE_SUMMARY_V1",
+        "version": "v101.134",
+        "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1",
+        "gate_families": [
+          {
+            "gate": "R-1",
+            "evidence": "R01_RELEASE_INTEGRITY.json",
+            "assertions": 26,
+            "pass": 26,
+            "fail": 0
+          },
+          {
+            "gate": "R-2",
+            "evidence": "R02_BOUNDARY_REPRODUCIBILITY.json",
+            "assertions": 15,
+            "pass": 15,
+            "fail": 0
+          },
+          {
+            "gate": "R-3",
+            "evidence": "R03_ACCESSIBILITY_STRUCTURE.json",
+            "assertions": 31,
+            "pass": 31,
+            "fail": 0
+          },
+          {
+            "gate": "A-1",
+            "evidence": "A01_ALIGNMENT_GEOMETRY.json",
+            "assertions": 2050,
+            "pass": 2050,
+            "fail": 0
+          },
+          {
+            "gate": "A-2",
+            "evidence": "A02_STATIC_CONTROLS.json",
+            "assertions": 10,
+            "pass": 10,
+            "fail": 0
+          },
+          {
+            "gate": "A-3",
+            "evidence": "A03_MUTANTS.json",
+            "assertions": 5,
+            "pass": 5,
+            "fail": 0
+          },
+          {
+            "gate": "A-4",
+            "evidence": "A04_SOURCE_SELECTION_STATE.json",
+            "assertions": 24,
+            "pass": 24,
+            "fail": 0
+          },
+          {
+            "gate": "I-1",
+            "evidence": "I01_GLOBAL_RAW_QUOTE.json",
+            "assertions": 14,
+            "pass": 14,
+            "fail": 0
+          },
+          {
+            "gate": "I-2",
+            "evidence": "I02_RUNTIME_PRESENTATION.json",
+            "assertions": 29,
+            "pass": 29,
+            "fail": 0
+          },
+          {
+            "gate": "I-3",
+            "evidence": "I03_MUTATION_TESTS.json",
+            "assertions": 10,
+            "pass": 10,
+            "fail": 0
+          },
+          {
+            "gate": "I-4",
+            "evidence": "I04_STRICT_GLYPH_FLOW.json",
+            "assertions": 185,
+            "pass": 185,
+            "fail": 0
+          },
+          {
+            "gate": "I-5",
+            "evidence": "I05_LEGACY_CONTINUITY.json",
+            "assertions": 215,
+            "pass": 215,
+            "fail": 0
+          },
+          {
+            "gate": "I-6",
+            "evidence": "I06_MEDITEE.json",
+            "assertions": 164,
+            "pass": 164,
+            "fail": 0
+          },
+          {
+            "gate": "I-7",
+            "evidence": "I07_RESPONSIVE.json",
+            "assertions": 245,
+            "pass": 245,
+            "fail": 0
+          },
+          {
+            "gate": "I-8",
+            "evidence": "I08_HOUR24.json",
+            "assertions": 17,
+            "pass": 17,
+            "fail": 0
+          },
+          {
+            "gate": "I-9",
+            "evidence": "I09_HELP.json",
+            "assertions": 70,
+            "pass": 70,
+            "fail": 0
+          },
+          {
+            "gate": "I-10",
+            "evidence": "I10_PRESENTATION_PRIMARY.json",
+            "assertions": 2000,
+            "pass": 2000,
+            "fail": 0
+          },
+          {
+            "gate": "I-11",
+            "evidence": "I11_PRESENTATION_INDEPENDENT.json",
+            "assertions": 2000,
+            "pass": 2000,
+            "fail": 0
+          },
+          {
+            "gate": "I-12",
+            "evidence": "I12_BROAD_RUNTIME.json",
+            "assertions": 52,
+            "pass": 52,
+            "fail": 0
+          },
+          {
+            "gate": "I-13",
+            "evidence": "I13_SW_LOGIC.json",
+            "assertions": 15,
+            "pass": 15,
+            "fail": 0
+          }
+        ],
+        "aggregate_assertions": 7177,
+        "aggregate_pass": 7177,
+        "aggregate_failures": 0,
+        "status": "PASS"
+      }
+    },
+    {
+      "check": "html_identity_current",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "html_mirror_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "v101133_renderer_css_preserved",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "v101133_renderer_arms_preserved",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "gate_R01_RELEASE_INTEGRITY.json_zero_fail",
+      "status": "PASS",
+      "detail": {
+        "pass": 26,
+        "fail": 0,
+        "total": 26
+      }
+    },
+    {
+      "check": "gate_R02_BOUNDARY_REPRODUCIBILITY.json_zero_fail",
+      "status": "PASS",
+      "detail": {
+        "pass": 15,
+        "fail": 0,
+        "total": 15
+      }
+    },
+    {
+      "check": "gate_R03_ACCESSIBILITY_STRUCTURE.json_zero_fail",
+      "status": "PASS",
+      "detail": {
+        "pass": 31,
+        "fail": 0,
+        "total": 31
+      }
+    },
+    {
+      "check": "gate_A01_ALIGNMENT_GEOMETRY.json_zero_fail",
+      "status": "PASS",
+      "detail": {
+        "pass": 2050,
+        "fail": 0,
+        "total": 2050,
+        "loci": 82,
+        "profiles": 5,
+        "font_sizes": 5
+      }
+    },
+    {
+      "check": "gate_A02_STATIC_CONTROLS.json_zero_fail",
+      "status": "PASS",
+      "detail": {
+        "pass": 10,
+        "fail": 0,
+        "total": 10
+      }
+    },
+    {
+      "check": "gate_A03_MUTANTS.json_zero_fail",
+      "status": "PASS",
+      "detail": {
+        "pass": 5,
+        "fail": 0,
+        "total": 5
+      }
+    },
+    {
+      "check": "gate_A04_SOURCE_SELECTION_STATE.json_zero_fail",
+      "status": "PASS",
+      "detail": {
+        "pass": 24,
+        "fail": 0,
+        "total": 24
+      }
+    },
+    {
+      "check": "boundary_summary_1858_to_1748",
+      "status": "PASS",
+      "detail": {
+        "schema": "L24H_RUNTIME_BOUNDARY_UNIVERSE_RECONCILIATION_R2",
+        "raw_dom_markers": 1858,
+        "effective_runtime_boundaries": 1748,
+        "excluded_markers": 110,
+        "effective_families": {
+          "speech_presentation_break": 80,
+          "display_segment": 122,
+          "ldc_cross_record": 1467,
+          "ldc_intra_break": 78,
+          "speech_cross_record": 1
+        },
+        "excluded_reasons": {
+          "NON_BLOCK_MARKER": 105,
+          "NO_VISIBLE_CONTENT_AFTER_LOCAL_BOUNDARY": 5
+        },
+        "excluded_families": {
+          "display_segment": 2,
+          "ldc_intra_break": 100,
+          "ldc_cross_record": 3,
+          "speech_presentation_break": 5
+        },
+        "page_errors": []
+      }
+    },
+    {
+      "check": "per_locus_82_all_pass",
+      "status": "PASS",
+      "detail": {
+        "rows": 82,
+        "fail": 0
+      }
+    },
+    {
+      "check": "inherited_5016_reconciled",
+      "status": "PASS",
+      "detail": {
+        "schema": "L24H_V101133_INHERITED_GATE_SUMMARY_RECONSTRUCTION_V1",
+        "provenance": "Reconstructed in v101.134 from frozen v101.133 prefreeze gate evidence.",
+        "aggregate_assertions": 5016,
+        "aggregate_failures": 0,
+        "expected_inherited_assertions": 5016,
+        "families": [
+          {
+            "file": "I01_GLOBAL_RAW_QUOTE.json",
+            "total": 14,
+            "fail": 0
+          },
+          {
+            "file": "I02_RUNTIME_PRESENTATION.json",
+            "total": 29,
+            "fail": 0
+          },
+          {
+            "file": "I03_MUTATION_TESTS.json",
+            "total": 10,
+            "fail": 0
+          },
+          {
+            "file": "I04_STRICT_GLYPH_FLOW.json",
+            "total": 185,
+            "fail": 0
+          },
+          {
+            "file": "I05_LEGACY_CONTINUITY.json",
+            "total": 215,
+            "fail": 0
+          },
+          {
+            "file": "I06_MEDITEE.json",
+            "total": 164,
+            "fail": 0
+          },
+          {
+            "file": "I07_RESPONSIVE.json",
+            "total": 245,
+            "fail": 0
+          },
+          {
+            "file": "I08_HOUR24.json",
+            "total": 17,
+            "fail": 0
+          },
+          {
+            "file": "I09_HELP.json",
+            "total": 70,
+            "fail": 0
+          },
+          {
+            "file": "I10_PRESENTATION_PRIMARY.json",
+            "total": 2000,
+            "fail": 0
+          },
+          {
+            "file": "I11_PRESENTATION_INDEPENDENT.json",
+            "total": 2000,
+            "fail": 0
+          },
+          {
+            "file": "I12_BROAD_RUNTIME.json",
+            "total": 52,
+            "fail": 0
+          },
+          {
+            "file": "I13_SW_LOGIC.json",
+            "total": 15,
+            "fail": 0
+          }
+        ],
+        "status": "PASS"
+      }
+    },
+    {
+      "check": "service_worker_cache_current",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "report_gate_aggregate_matches",
+      "status": "PASS",
+      "detail": {
+        "agg": 7177,
+        "fail": 0
+      }
+    }
+  ]
+}

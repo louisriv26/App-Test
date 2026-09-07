@@ -1,0 +1,232 @@
+{
+  "schema": "L24H_V101125_CURRENT_EVIDENCE_SCHEMA_AUDIT_V1",
+  "version": "v101.125",
+  "status": "PASS",
+  "summary": {
+    "pass": 27,
+    "fail": 0,
+    "total": 27
+  },
+  "allowed_reused_lineage": {
+    "evidence/v101125/fixed/M1_FIXED_POINT_SUMMARY.json": "L24H_V101119_QUOTED_SPAN_FIXED_POINT_R1",
+    "evidence/v101125/EXHAUSTIVE_PRESENTATION_RUNTIME_MATRIX.json": "L24H_V101119_EXHAUSTIVE_PRESENTATION_MATRIX_V1"
+  },
+  "rows": [
+    {
+      "path": "evidence/v101125/ACTIVE_REPORT_LINE_AUDIT_SUMMARY.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_ACTIVE_REPORT_LINE_AUDIT_SUMMARY_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/BROAD_CHROMIUM_RUNTIME_MATRIX.json",
+      "status": "PASS",
+      "schema": "L24H_BROAD_RUNTIME_MATRIX_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/CONTINUITY_CANDIDATE_AUDIT.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_CONTINUITY_CANDIDATE_AUDIT_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/CONTINUITY_MUTATION_TESTS.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_CONTINUITY_MUTATION_TESTS_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/CONTINUITY_RUNTIME_MATRIX.json",
+      "status": "PASS",
+      "schema": null,
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/CONTINUITY_SPEAKER_HEADER_AUDIT.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_CONTINUITY_SPEAKER_HEADER_AUDIT_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/CURRENT_EVIDENCE_SCHEMA_AUDIT.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_CURRENT_EVIDENCE_SCHEMA_AUDIT_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/EXHAUSTIVE_PRESENTATION_RUNTIME_MATRIX.json",
+      "status": "PASS",
+      "schema": "L24H_V101119_EXHAUSTIVE_PRESENTATION_MATRIX_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": "L24H_V101119_EXHAUSTIVE_PRESENTATION_MATRIX_V1"
+    },
+    {
+      "path": "evidence/v101125/FULL_PACKAGE_BUILD_REPRODUCTION.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_FULL_PACKAGE_BUILD_REPRODUCTION_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/FUNCTIONAL_HTML_PARITY.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_FUNCTIONAL_HTML_PARITY_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/HELP_BROWSER_MATRIX.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_HELP_BROWSER_MATRIX_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/HOUR24_FIVE_PROFILE_UX_MATRIX.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_FIVE_PROFILE_UX_MATRIX_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/HOUR24_MUTATION_TEST_MATRIX.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_MUTATION_TEST_MATRIX_V1",
+      "version": null,
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/HOUR24_STATE_TRANSITION_MATRIX.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_HOUR24_STATE_TRANSITION_MATRIX_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/INDEPENDENT_CONTINUITY_PROBE.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_INDEPENDENT_CONTINUITY_PROBE_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/INDEPENDENT_HOUR24_PROBE.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_INDEPENDENT_HOUR24_PROBE_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/INDEPENDENT_PRESENTATION_MATRIX.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_INDEPENDENT_PRESENTATION_MATRIX_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/INDEPENDENT_RUNTIME_SMOKE.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_INDEPENDENT_RUNTIME_SMOKE_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_PROTECTED_PARITY_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/REPORT_CLAIM_ASSERTIONS.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_REPORT_CLAIM_ASSERTIONS_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/SEMANTIC_STALE_SCAN.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_SEMANTIC_STALE_SCAN_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/SERVICE_WORKER_LOGIC_MATRIX.json",
+      "status": "PASS",
+      "schema": "L24H_SW_LOGIC_MATRIX_V1",
+      "version": null,
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/V101124_DEEP_FOUR_PASS_FINDINGS.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_V101124_DEEP_FOUR_PASS_FINDINGS_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/VERSION_STALE_SCAN.json",
+      "status": "PASS",
+      "schema": "L24H_V101125_VERSION_STALE_SCAN_V1",
+      "version": "v101.125",
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/fixed/M1_FIXED_POINT_SUMMARY.json",
+      "status": "PASS",
+      "schema": "L24H_V101119_QUOTED_SPAN_FIXED_POINT_R1",
+      "version": null,
+      "issues": [],
+      "lineage_allowance": "L24H_V101119_QUOTED_SPAN_FIXED_POINT_R1"
+    },
+    {
+      "path": "evidence/v101125/fixed/M1_HIDDEN_RANGE_LEXICAL_SAFETY.json",
+      "status": "PASS",
+      "schema": null,
+      "version": null,
+      "issues": [],
+      "lineage_allowance": null
+    },
+    {
+      "path": "evidence/v101125/fixed/M1_MUTATION_PAYLOAD.json",
+      "status": "PASS",
+      "schema": null,
+      "version": null,
+      "issues": [],
+      "lineage_allowance": null
+    }
+  ]
+}

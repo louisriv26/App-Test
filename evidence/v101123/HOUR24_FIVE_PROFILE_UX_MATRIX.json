@@ -1,0 +1,1044 @@
+{
+  "schema": "L24H_V101123_FIVE_PROFILE_UX_MATRIX_V1",
+  "version": "v101.123",
+  "browser": "system Chromium via Playwright content injection",
+  "physical_device_limitation": "NOT physical-device evidence",
+  "summary": {
+    "pass": 70,
+    "fail": 0,
+    "total": 70,
+    "profiles": 5
+  },
+  "results": [
+    {
+      "profile": "phone",
+      "check": "incomplete_identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "phone",
+      "check": "incomplete_no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 390,
+        "inner": 390,
+        "contentScroll": 390,
+        "contentClient": 390
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "incomplete_hour_actions",
+      "status": "PASS",
+      "detail": "Après cette Heure\nVous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.\nRéflexion et pratique\nApprofondir\n↟ Revenir au début"
+    },
+    {
+      "profile": "phone",
+      "check": "incomplete_panel_truth",
+      "status": "PASS",
+      "detail": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "profile": "phone",
+      "check": "incomplete_no_suivante",
+      "status": "PASS",
+      "detail": "Précédente\nJésus transpercé par la lanc\nMéditée\nAppuyez après avoir médité"
+    },
+    {
+      "profile": "phone",
+      "check": "incomplete_button_geometry",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "Réflexion et pratique",
+          "w": 324,
+          "h": 44,
+          "right": 357,
+          "left": 33
+        },
+        {
+          "text": "Approfondir",
+          "w": 324,
+          "h": 44,
+          "right": 357,
+          "left": 33
+        },
+        {
+          "text": "↟ Revenir au début",
+          "w": 324,
+          "h": 44,
+          "right": 357,
+          "left": 33
+        },
+        {
+          "text": "Précédente\nJésus transpercé par la lanc",
+          "w": 358,
+          "h": 54.59375,
+          "right": 374,
+          "left": 16
+        },
+        {
+          "text": "Méditée\nAppuyez après avoir médité",
+          "w": 358,
+          "h": 56.578125,
+          "right": 374,
+          "left": 16
+        },
+        {
+          "text": "Voir ma progression",
+          "w": 324,
+          "h": 44,
+          "right": 357,
+          "left": 33
+        },
+        {
+          "text": "Revoir les Heures méditées",
+          "w": 324,
+          "h": 44,
+          "right": 357,
+          "left": 33
+        }
+      ]
+    },
+    {
+      "profile": "phone",
+      "check": "complete_identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "phone",
+      "check": "complete_no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 390,
+        "inner": 390,
+        "contentScroll": 390,
+        "contentClient": 390
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "complete_hour_actions",
+      "status": "PASS",
+      "detail": "Après cette Heure\nVous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.\nRéflexion et pratique\nApprofondir\n↟ Revenir au début"
+    },
+    {
+      "profile": "phone",
+      "check": "complete_panel_truth",
+      "status": "PASS",
+      "detail": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "profile": "phone",
+      "check": "complete_no_suivante",
+      "status": "PASS",
+      "detail": "Précédente\nJésus transpercé par la lanc\n✓ Méditée"
+    },
+    {
+      "profile": "phone",
+      "check": "complete_button_geometry",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "Réflexion et pratique",
+          "w": 324,
+          "h": 44,
+          "right": 357,
+          "left": 33
+        },
+        {
+          "text": "Approfondir",
+          "w": 324,
+          "h": 44,
+          "right": 357,
+          "left": 33
+        },
+        {
+          "text": "↟ Revenir au début",
+          "w": 324,
+          "h": 44,
+          "right": 357,
+          "left": 33
+        },
+        {
+          "text": "Précédente\nJésus transpercé par la lanc",
+          "w": 358,
+          "h": 54.59375,
+          "right": 374,
+          "left": 16
+        },
+        {
+          "text": "✓ Méditée",
+          "w": 358,
+          "h": 44,
+          "right": 374,
+          "left": 16
+        },
+        {
+          "text": "↻ Recommencer depuis la 1re Heure",
+          "w": 324,
+          "h": 44,
+          "right": 357,
+          "left": 33
+        },
+        {
+          "text": "Voir ma progression",
+          "w": 324,
+          "h": 44,
+          "right": 357,
+          "left": 33
+        },
+        {
+          "text": "Revoir les Heures méditées",
+          "w": 324,
+          "h": 44,
+          "right": 357,
+          "left": 33
+        }
+      ]
+    },
+    {
+      "profile": "phone",
+      "check": "dark_mode_terminal",
+      "status": "PASS",
+      "detail": {
+        "theme": "dark",
+        "panel": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "body": 390,
+        "inner": 390
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "incomplete_identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "incomplete_no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 820,
+        "inner": 820,
+        "contentScroll": 820,
+        "contentClient": 820
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "incomplete_hour_actions",
+      "status": "PASS",
+      "detail": "Après cette Heure\nVous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.\nRéflexion et pratique\nApprofondir\n↟ Revenir au début"
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "incomplete_panel_truth",
+      "status": "PASS",
+      "detail": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "incomplete_no_suivante",
+      "status": "PASS",
+      "detail": "Précédente\nJésus transpercé par la lanc\nMéditée\nAppuyez après avoir médité"
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "incomplete_button_geometry",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "Réflexion et pratique",
+          "w": 169.265625,
+          "h": 44,
+          "right": 210.265625,
+          "left": 41
+        },
+        {
+          "text": "Approfondir",
+          "w": 110.015625,
+          "h": 44,
+          "right": 328.28125,
+          "left": 218.265625
+        },
+        {
+          "text": "↟ Revenir au début",
+          "w": 157.59375,
+          "h": 44,
+          "right": 493.875,
+          "left": 336.28125
+        },
+        {
+          "text": "Précédente\nJésus transpercé par la lanc",
+          "w": 257.078125,
+          "h": 60.1875,
+          "right": 281.078125,
+          "left": 24
+        },
+        {
+          "text": "Méditée\nAppuyez après avoir médité",
+          "w": 174.859375,
+          "h": 56.578125,
+          "right": 796,
+          "left": 621.140625
+        },
+        {
+          "text": "Voir ma progression",
+          "w": 162.921875,
+          "h": 44,
+          "right": 203.921875,
+          "left": 41
+        },
+        {
+          "text": "Revoir les Heures méditées",
+          "w": 209.25,
+          "h": 44,
+          "right": 421.171875,
+          "left": 211.921875
+        }
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "complete_identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "complete_no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 820,
+        "inner": 820,
+        "contentScroll": 820,
+        "contentClient": 820
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "complete_hour_actions",
+      "status": "PASS",
+      "detail": "Après cette Heure\nVous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.\nRéflexion et pratique\nApprofondir\n↟ Revenir au début"
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "complete_panel_truth",
+      "status": "PASS",
+      "detail": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "complete_no_suivante",
+      "status": "PASS",
+      "detail": "Précédente\nJésus transpercé par la lanc\n✓ Méditée"
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "complete_button_geometry",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "Réflexion et pratique",
+          "w": 169.265625,
+          "h": 44,
+          "right": 210.265625,
+          "left": 41
+        },
+        {
+          "text": "Approfondir",
+          "w": 110.015625,
+          "h": 44,
+          "right": 328.28125,
+          "left": 218.265625
+        },
+        {
+          "text": "↟ Revenir au début",
+          "w": 157.59375,
+          "h": 44,
+          "right": 493.875,
+          "left": 336.28125
+        },
+        {
+          "text": "Précédente\nJésus transpercé par la lanc",
+          "w": 257.078125,
+          "h": 60.1875,
+          "right": 281.078125,
+          "left": 24
+        },
+        {
+          "text": "✓ Méditée",
+          "w": 112.90625,
+          "h": 44,
+          "right": 796,
+          "left": 683.09375
+        },
+        {
+          "text": "↻ Recommencer depuis la 1re Heure",
+          "w": 271.140625,
+          "h": 44,
+          "right": 312.140625,
+          "left": 41
+        },
+        {
+          "text": "Voir ma progression",
+          "w": 162.921875,
+          "h": 44,
+          "right": 483.0625,
+          "left": 320.140625
+        },
+        {
+          "text": "Revoir les Heures méditées",
+          "w": 209.25,
+          "h": 44,
+          "right": 700.3125,
+          "left": 491.0625
+        }
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "dark_mode_terminal",
+      "status": "PASS",
+      "detail": {
+        "theme": "dark",
+        "panel": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "body": 820,
+        "inner": 820
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "incomplete_identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "incomplete_no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 1180,
+        "inner": 1180,
+        "contentScroll": 1180,
+        "contentClient": 1180
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "incomplete_hour_actions",
+      "status": "PASS",
+      "detail": "Après cette Heure\nVous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.\nRéflexion et pratique\nApprofondir\n↟ Revenir au début"
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "incomplete_panel_truth",
+      "status": "PASS",
+      "detail": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "incomplete_no_suivante",
+      "status": "PASS",
+      "detail": "Précédente\nJésus transpercé par la lanc\nMéditée\nAppuyez après avoir médité"
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "incomplete_button_geometry",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "Réflexion et pratique",
+          "w": 169.265625,
+          "h": 44,
+          "right": 336.265625,
+          "left": 167
+        },
+        {
+          "text": "Approfondir",
+          "w": 110.015625,
+          "h": 44,
+          "right": 454.28125,
+          "left": 344.265625
+        },
+        {
+          "text": "↟ Revenir au début",
+          "w": 157.59375,
+          "h": 44,
+          "right": 619.875,
+          "left": 462.28125
+        },
+        {
+          "text": "Précédente\nJésus transpercé par la lanc",
+          "w": 257.078125,
+          "h": 60.1875,
+          "right": 407.078125,
+          "left": 150
+        },
+        {
+          "text": "Méditée\nAppuyez après avoir médité",
+          "w": 174.859375,
+          "h": 56.578125,
+          "right": 1030,
+          "left": 855.140625
+        },
+        {
+          "text": "Voir ma progression",
+          "w": 162.921875,
+          "h": 44,
+          "right": 329.921875,
+          "left": 167
+        },
+        {
+          "text": "Revoir les Heures méditées",
+          "w": 209.25,
+          "h": 44,
+          "right": 547.171875,
+          "left": 337.921875
+        }
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "complete_identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "complete_no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 1180,
+        "inner": 1180,
+        "contentScroll": 1180,
+        "contentClient": 1180
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "complete_hour_actions",
+      "status": "PASS",
+      "detail": "Après cette Heure\nVous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.\nRéflexion et pratique\nApprofondir\n↟ Revenir au début"
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "complete_panel_truth",
+      "status": "PASS",
+      "detail": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "complete_no_suivante",
+      "status": "PASS",
+      "detail": "Précédente\nJésus transpercé par la lanc\n✓ Méditée"
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "complete_button_geometry",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "Réflexion et pratique",
+          "w": 169.265625,
+          "h": 44,
+          "right": 336.265625,
+          "left": 167
+        },
+        {
+          "text": "Approfondir",
+          "w": 110.015625,
+          "h": 44,
+          "right": 454.28125,
+          "left": 344.265625
+        },
+        {
+          "text": "↟ Revenir au début",
+          "w": 157.59375,
+          "h": 44,
+          "right": 619.875,
+          "left": 462.28125
+        },
+        {
+          "text": "Précédente\nJésus transpercé par la lanc",
+          "w": 257.078125,
+          "h": 60.1875,
+          "right": 407.078125,
+          "left": 150
+        },
+        {
+          "text": "✓ Méditée",
+          "w": 112.90625,
+          "h": 44,
+          "right": 1030,
+          "left": 917.09375
+        },
+        {
+          "text": "↻ Recommencer depuis la 1re Heure",
+          "w": 271.140625,
+          "h": 44,
+          "right": 438.140625,
+          "left": 167
+        },
+        {
+          "text": "Voir ma progression",
+          "w": 162.921875,
+          "h": 44,
+          "right": 609.0625,
+          "left": 446.140625
+        },
+        {
+          "text": "Revoir les Heures méditées",
+          "w": 209.25,
+          "h": 44,
+          "right": 826.3125,
+          "left": 617.0625
+        }
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "dark_mode_terminal",
+      "status": "PASS",
+      "detail": {
+        "theme": "dark",
+        "panel": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "body": 1180,
+        "inner": 1180
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "desktop",
+      "check": "incomplete_identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "desktop",
+      "check": "incomplete_no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 1200,
+        "inner": 1200,
+        "contentScroll": 1200,
+        "contentClient": 1200
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "incomplete_hour_actions",
+      "status": "PASS",
+      "detail": "Après cette Heure\nVous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.\nRéflexion et pratique\nApprofondir\n↟ Revenir au début"
+    },
+    {
+      "profile": "desktop",
+      "check": "incomplete_panel_truth",
+      "status": "PASS",
+      "detail": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "profile": "desktop",
+      "check": "incomplete_no_suivante",
+      "status": "PASS",
+      "detail": "Précédente\nJésus transpercé par la lanc\nMéditée\nAppuyez après avoir médité"
+    },
+    {
+      "profile": "desktop",
+      "check": "incomplete_button_geometry",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "Réflexion et pratique",
+          "w": 169.265625,
+          "h": 44,
+          "right": 346.265625,
+          "left": 177
+        },
+        {
+          "text": "Approfondir",
+          "w": 110.015625,
+          "h": 44,
+          "right": 464.28125,
+          "left": 354.265625
+        },
+        {
+          "text": "↟ Revenir au début",
+          "w": 157.59375,
+          "h": 44,
+          "right": 629.875,
+          "left": 472.28125
+        },
+        {
+          "text": "Précédente\nJésus transpercé par la lanc",
+          "w": 257.078125,
+          "h": 60.1875,
+          "right": 417.078125,
+          "left": 160
+        },
+        {
+          "text": "Méditée\nAppuyez après avoir médité",
+          "w": 174.859375,
+          "h": 56.578125,
+          "right": 1040,
+          "left": 865.140625
+        },
+        {
+          "text": "Voir ma progression",
+          "w": 162.921875,
+          "h": 44,
+          "right": 339.921875,
+          "left": 177
+        },
+        {
+          "text": "Revoir les Heures méditées",
+          "w": 209.25,
+          "h": 44,
+          "right": 557.171875,
+          "left": 347.921875
+        }
+      ]
+    },
+    {
+      "profile": "desktop",
+      "check": "complete_identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "desktop",
+      "check": "complete_no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 1200,
+        "inner": 1200,
+        "contentScroll": 1200,
+        "contentClient": 1200
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "complete_hour_actions",
+      "status": "PASS",
+      "detail": "Après cette Heure\nVous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.\nRéflexion et pratique\nApprofondir\n↟ Revenir au début"
+    },
+    {
+      "profile": "desktop",
+      "check": "complete_panel_truth",
+      "status": "PASS",
+      "detail": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "profile": "desktop",
+      "check": "complete_no_suivante",
+      "status": "PASS",
+      "detail": "Précédente\nJésus transpercé par la lanc\n✓ Méditée"
+    },
+    {
+      "profile": "desktop",
+      "check": "complete_button_geometry",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "Réflexion et pratique",
+          "w": 169.265625,
+          "h": 44,
+          "right": 346.265625,
+          "left": 177
+        },
+        {
+          "text": "Approfondir",
+          "w": 110.015625,
+          "h": 44,
+          "right": 464.28125,
+          "left": 354.265625
+        },
+        {
+          "text": "↟ Revenir au début",
+          "w": 157.59375,
+          "h": 44,
+          "right": 629.875,
+          "left": 472.28125
+        },
+        {
+          "text": "Précédente\nJésus transpercé par la lanc",
+          "w": 257.078125,
+          "h": 60.1875,
+          "right": 417.078125,
+          "left": 160
+        },
+        {
+          "text": "✓ Méditée",
+          "w": 112.90625,
+          "h": 44,
+          "right": 1040,
+          "left": 927.09375
+        },
+        {
+          "text": "↻ Recommencer depuis la 1re Heure",
+          "w": 271.140625,
+          "h": 44,
+          "right": 448.140625,
+          "left": 177
+        },
+        {
+          "text": "Voir ma progression",
+          "w": 162.921875,
+          "h": 44,
+          "right": 619.0625,
+          "left": 456.140625
+        },
+        {
+          "text": "Revoir les Heures méditées",
+          "w": 209.25,
+          "h": 44,
+          "right": 836.3125,
+          "left": 627.0625
+        }
+      ]
+    },
+    {
+      "profile": "desktop",
+      "check": "dark_mode_terminal",
+      "status": "PASS",
+      "detail": {
+        "theme": "dark",
+        "panel": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "body": 1200,
+        "inner": 1200
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "samsung",
+      "check": "incomplete_identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "samsung",
+      "check": "incomplete_no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 412,
+        "inner": 412,
+        "contentScroll": 412,
+        "contentClient": 412
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "incomplete_hour_actions",
+      "status": "PASS",
+      "detail": "Après cette Heure\nVous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.\nRéflexion et pratique\nApprofondir\n↟ Revenir au début"
+    },
+    {
+      "profile": "samsung",
+      "check": "incomplete_panel_truth",
+      "status": "PASS",
+      "detail": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "profile": "samsung",
+      "check": "incomplete_no_suivante",
+      "status": "PASS",
+      "detail": "Précédente\nJésus transpercé par la lanc\nMéditée\nAppuyez après avoir médité"
+    },
+    {
+      "profile": "samsung",
+      "check": "incomplete_button_geometry",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "Réflexion et pratique",
+          "w": 346,
+          "h": 44,
+          "right": 379,
+          "left": 33
+        },
+        {
+          "text": "Approfondir",
+          "w": 346,
+          "h": 44,
+          "right": 379,
+          "left": 33
+        },
+        {
+          "text": "↟ Revenir au début",
+          "w": 346,
+          "h": 44,
+          "right": 379,
+          "left": 33
+        },
+        {
+          "text": "Précédente\nJésus transpercé par la lanc",
+          "w": 380,
+          "h": 54.59375,
+          "right": 396,
+          "left": 16
+        },
+        {
+          "text": "Méditée\nAppuyez après avoir médité",
+          "w": 380,
+          "h": 56.578125,
+          "right": 396,
+          "left": 16
+        },
+        {
+          "text": "Voir ma progression",
+          "w": 346,
+          "h": 44,
+          "right": 379,
+          "left": 33
+        },
+        {
+          "text": "Revoir les Heures méditées",
+          "w": 346,
+          "h": 44,
+          "right": 379,
+          "left": 33
+        }
+      ]
+    },
+    {
+      "profile": "samsung",
+      "check": "complete_identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "samsung",
+      "check": "complete_no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 412,
+        "inner": 412,
+        "contentScroll": 412,
+        "contentClient": 412
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "complete_hour_actions",
+      "status": "PASS",
+      "detail": "Après cette Heure\nVous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.\nRéflexion et pratique\nApprofondir\n↟ Revenir au début"
+    },
+    {
+      "profile": "samsung",
+      "check": "complete_panel_truth",
+      "status": "PASS",
+      "detail": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "profile": "samsung",
+      "check": "complete_no_suivante",
+      "status": "PASS",
+      "detail": "Précédente\nJésus transpercé par la lanc\n✓ Méditée"
+    },
+    {
+      "profile": "samsung",
+      "check": "complete_button_geometry",
+      "status": "PASS",
+      "detail": [
+        {
+          "text": "Réflexion et pratique",
+          "w": 346,
+          "h": 44,
+          "right": 379,
+          "left": 33
+        },
+        {
+          "text": "Approfondir",
+          "w": 346,
+          "h": 44,
+          "right": 379,
+          "left": 33
+        },
+        {
+          "text": "↟ Revenir au début",
+          "w": 346,
+          "h": 44,
+          "right": 379,
+          "left": 33
+        },
+        {
+          "text": "Précédente\nJésus transpercé par la lanc",
+          "w": 380,
+          "h": 54.59375,
+          "right": 396,
+          "left": 16
+        },
+        {
+          "text": "✓ Méditée",
+          "w": 380,
+          "h": 44,
+          "right": 396,
+          "left": 16
+        },
+        {
+          "text": "↻ Recommencer depuis la 1re Heure",
+          "w": 346,
+          "h": 44,
+          "right": 379,
+          "left": 33
+        },
+        {
+          "text": "Voir ma progression",
+          "w": 346,
+          "h": 44,
+          "right": 379,
+          "left": 33
+        },
+        {
+          "text": "Revoir les Heures méditées",
+          "w": 346,
+          "h": 44,
+          "right": 379,
+          "left": 33
+        }
+      ]
+    },
+    {
+      "profile": "samsung",
+      "check": "dark_mode_terminal",
+      "status": "PASS",
+      "detail": {
+        "theme": "dark",
+        "panel": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "body": 412,
+        "inner": 412
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

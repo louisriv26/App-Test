@@ -1,0 +1,35 @@
+{
+  "schema": "L24H_V101135_BUILDER_INPUT_MANIFEST_GATE_V1",
+  "summary": {
+    "pass": 5,
+    "fail": 0,
+    "total": 5
+  },
+  "rows": [
+    {
+      "check": "baseline_sha_exact",
+      "status": "PASS",
+      "detail": "241ef8b3953e840cc321d07fe3186e41cd4a772e449268381416575a5f60471a"
+    },
+    {
+      "check": "baseline_members_exact",
+      "status": "PASS",
+      "detail": 809
+    },
+    {
+      "check": "all_source_inputs_package_local",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "all_source_inputs_sha_bound",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "input_manifest_nonempty",
+      "status": "PASS",
+      "detail": 22
+    }
+  ]
+}
