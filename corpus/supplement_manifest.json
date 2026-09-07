@@ -1,7 +1,7 @@
 {
   "schema": "ldc-supplement-manifest-v2",
   "programme": "LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4-SUP-T5",
-  "status": "LDC_INTERIM_SUCCESSOR_REV6_AUTHORIZED_BUILD__POSTAUTH_CERTIFICATION_REQUIRED__NOT_PUBLICLY_DEPLOYED",
+  "status": "LDC_V67_FOUR_PASS_REPORT_METADATA_RECONCILIATION__FINAL_CERTIFICATION_AUTHORITY_EXTERNAL_TO_ZIP__NOT_PUBLICLY_DEPLOYED",
   "backbone_generation": "G036-AFLP-R7-UWR2",
   "composite_generation": "G036-AFLP-R7-SUP-T5",
   "counts": {
@@ -44,11 +44,16 @@
     "dependent_after_aligne_correction": 1,
     "runtime_requirement": "CANONICAL_HOST_ID_AND_OFFSETS_PRESERVED__DISPLAY_SLICES_ONLY__CANONICAL_USER_OFFSETS"
   },
-  "release_status": "INTERIM_SUCCESSOR_AUTHORIZED_BUILD__NOT_PUBLIC_DEPLOYMENT_AUTHORITY",
+  "release_status": "V67_METADATA_REPORT_SUCCESSOR__EXTERNAL_FINAL_CERTIFICATION_AUTHORITY__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED_BY_PACKAGE",
   "user_state_schema": 4,
   "m6_authority": "M5_G17_REOPEN_SPECIFIC_CANDIDATES__EXACT_V54_BRANCH",
   "m9_authority": "M8_MUTATION_AUTHORIZATION_R3_SUPT4_2026-08-28",
-  "r6_authority": "AWAITING_EXPLICIT_M7_RUNTIME_COMPLETE_HASH_AUTHORIZATION",
+  "r6_authority": "AUTHORIZED_RUNTIME_LEDGER_SHA256_5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906__OFFICIAL_R6_PREDECESSOR",
   "m7rc_existing_complement_replacements": 9,
-  "authorized_runtime_ledger_sha256": "5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906"
+  "authorized_runtime_ledger_sha256": "5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906",
+  "v67_four_pass_metadata_reconciliation": {
+    "predecessor_zip_sha256": "4317d041ec9475b52850c7ec7cd374eb0b2b980e115f841eebaafe10df7ddcd6",
+    "supplement_content_changes": 0,
+    "status_and_authority_wrapper_only": true
+  }
 }

@@ -5,7 +5,7 @@
   "total_paragraphs": 74346,
   "total_entries": 2312,
   "total_corrections": 20900,
-  "correction_ledger": "All 36 tomes completed source-boundary reconciliation. EB-17 corrects only two source-page provenance records: Tome 3 / 10 June 1900 ends at PDF page 102, and Tome 5 preface spans pages 1–6 with pages 1;3;5;6 evidenced. Tome 17 23 November 1924 remains title-only/body-not-proven. EB-20 normalises three malformed semicolon source-page records: T3 16 April 1900 = 77–79; T3 27 April 1900 = 82–84; T17 17 May 1925 = 113–119. M4/R2 applies exactly 8 M3-authorised ALIGNÉ paragraph rewrites under stable IDs and introduces no other backbone paragraph mutation. M6/V55 restores three AFLP display-layer dates under stable IDs, preserves IT-PM alternatives as provenance, reconciles M2-0105/M2-0113 metadata, and adds one source-bound SUP-T3 complete entry for the historically bound T15/T16 three-columns discourse at 2 Dec 1922; ALIGNÉ paragraph wording remains unchanged. M9/V56 applies exactly 10 M8-authorized same-slot R3 paragraph replacements across 6 cases and 22 SUP-T4 controlled fragments across 15 cases. Existing paragraph IDs/order remain stable; M2-0021/M2-0134/M2-0351/M2-0364 remain held, M2-0366 no-change, M2-0052 historical hold.",
+  "correction_ledger": "All 36 tomes completed source-boundary reconciliation. EB-17 corrects only two source-page provenance records: Tome 3 / 10 June 1900 ends at PDF page 102, and Tome 5 preface spans pages 1–6 with pages 1;3;5;6 evidenced. Tome 17 23 November 1924 remains title-only/body-not-proven. EB-20 normalises three malformed semicolon source-page records: T3 16 April 1900 = 77–79; T3 27 April 1900 = 82–84; T17 17 May 1925 = 113–119. M4/R2 applies exactly 8 M3-authorised ALIGNÉ paragraph rewrites under stable IDs and introduces no other backbone paragraph mutation. M6/V55 restores three AFLP display-layer dates under stable IDs, preserves IT-PM alternatives as provenance, reconciles M2-0105/M2-0113 metadata, and adds one source-bound SUP-T3 complete entry for the historically bound T15/T16 three-columns discourse at 2 Dec 1922; ALIGNÉ paragraph wording remains unchanged. M9/V56 applies exactly 10 M8-authorized same-slot R3 paragraph replacements across 6 cases and 22 SUP-T4 controlled fragments across 15 cases. Existing paragraph IDs/order remain stable; M2-0021/M2-0134/M2-0351/M2-0364 remain held, M2-0366 no-change, M2-0052 historical hold. Official R6 subsequently applied the exact authorized 169-operation source-critical successor. The post-R6 Date/ID+A2 fixed point made zero French-text mutations. REV6 then applied exactly 16 retained paragraph text changes, 2 governed deletions, 6 speaker reattributions, 1 title update, 34 first-Jesus pointer rebuilds and the governed migration/derived-state rebuilds under authority d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4. v67 adds zero corpus/semantic mutations and only reconciles active report/release metadata.",
   "volumes_available": [
     1,
     2,
@@ -45,11 +45,11 @@
     36
   ],
   "volumes_total": 36,
-  "status": "LDC_INTERIM_SUCCESSOR_REV6_AUTHORIZED_BUILD__POSTAUTH_CERTIFICATION_REQUIRED__NOT_PUBLICLY_DEPLOYED",
+  "status": "LDC_V67_FOUR_PASS_REPORT_METADATA_RECONCILIATION__FINAL_CERTIFICATION_AUTHORITY_EXTERNAL_TO_ZIP__NOT_PUBLICLY_DEPLOYED",
   "speech_resynced": true,
-  "notes": "R5 canonical wording and all v63 speaker data are byte-identical to locked v63. v64 only reclassifies one leftover top-level historical M4 scope key from current_m4_authorised_scope to historical_m4_authorised_scope and updates release/cache trust bindings. No devotional, search, speaker, display, flow, supplement, paragraph-ID/order or user-state payload changes.",
-  "speech_layer_note": "Backbone speaker segment identities are preserved; offsets/previews rebuilt only for R3 paragraphs that already carried segments. SUP-T4 adds 22 full-fragment speaker segments.",
-  "app_version": "v2.19.66-R1B",
+  "notes": "Current v67 is a metadata/report-only successor of certified v66. Canonical R7 wording and paragraph/search/speaker/display/flow semantics are unchanged from v66. v67 corrects stale current status/predecessor/report metadata and regenerates only release/cache/offline bindings required by those metadata corrections.",
+  "speech_layer_note": "Final R7 backbone speaker layer contains 65,099 segments. REV6 includes exactly six governed A1-A6 reattributions, exactly two governed entry speaker-array updates, 127 unrelated array mismatches deferred, and 34 first_jesus_para_id changes. v67 changes no speaker identity, offsets, previews, presentation parents or runtime speech logic.",
+  "app_version": "v2.19.67-R1B",
   "speaker_layer": {
     "total_segments": 65099,
     "speaker_counts": {
@@ -81,10 +81,10 @@
     "runtime_and_build_shared_authority": true,
     "ci_gate": "validate_corpus.py independently asserts stored search norm == canonical normalisation of body text",
     "records_consistent": true,
-    "records_total": 74348,
+    "records_total": 74346,
     "metadata_index": "corpus/search_metadata_index.json",
     "metadata_index_entries": 2312,
-    "search_shard_mutations": "R6_REBUILD_ALL_NORMALIZATION__5_INHERITED_STALE_BACKBONE_RECORDS_REPAIRED",
+    "search_shard_mutations": "R6_FULL_REBUILD__REV6_REBUILD_AFTER_16_TEXT_CHANGES_AND_2_DELETIONS__74346_FINAL_ROWS__ZERO_STALE_SEARCH_BLOBS",
     "m4_note": "Exactly 8 search records were text/fingerprint-resynchronised to the 8 M3-authorised ALIGNÉ rewrites; all other backbone search records retain their prior stable IDs/content."
   },
   "embedding_manifest": {
@@ -118,7 +118,7 @@
     "note": "Display-only token projection. Suppressed and replaced tokens keep their canonical [start,end) so highlights, notes and bookmarks stay anchored."
   },
   "reader_architecture": {
-    "version": "R6_RUNTIME_COMPLETE_PREAUTH",
+    "version": "R7_REV6_CERTIFIED__V67_REPORT_METADATA_SUCCESSOR",
     "flow_aware_dom": true,
     "post_render_structural_mutation": false,
     "paragraph_local_styled_runs": 57966,
@@ -128,8 +128,8 @@
     "flow_speech_visual_continuity": "RA19B_MULTI_SOURCE_EXPLICIT_SOURCE_BACKED_BOUNDARY_ACTIONS__RA18_HEURISTIC_FALLBACK_LEGACY_ONLY__CANONICAL_TEXT_UNCHANGED",
     "flow_boundary_action_contract": "continuous_prose:join_inline__preserve_break_ambiguous:preserve_break__preserve_break_enumeration:preserve_list_break",
     "within_paragraph_complement_contract": "CANONICAL_HOST_UNSPLIT_AUTHORITY__DISPLAY_SLICES_ONLY__CANONICAL_USER_OFFSETS__22_WITHIN_PLACEMENTS",
-    "user_state_migration": "schema-v4 + generation-scoped ALIGNÉ R3, R4 and R5 targeted migrations",
-    "migration": "schema-v4 + R3/R4/R5/R6 generation migrations"
+    "user_state_migration": "schema-v4 + generation-scoped ALIGNÉ R3/R4/R5/R6 + R7 Date/ID/REV6 migration and re-anchor preservation",
+    "migration": "schema-v4 + R3/R4/R5/R6/R7-DateID/REV6 generation migrations"
   },
   "ldc_0r": {
     "date": "2026-08-12",
@@ -1009,5 +1009,21 @@
     "user_state_migration_map_sha256": "7509bce5c0a74bf9f024e7a52caf9b7f114dfc0066e55148c42e3ae7974b3378",
     "public_deployment_authorized": false,
     "partial_linguistic_qa_consumed": false
+  },
+  "v67_four_pass_metadata_reconciliation": {
+    "predecessor_zip_sha256": "4317d041ec9475b52850c7ec7cd374eb0b2b980e115f841eebaafe10df7ddcd6",
+    "semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
+    "canonical_text_changes": 0,
+    "status_wrapper_corrections": 39,
+    "volume_predecessor_generation_corrections": 36,
+    "search_norm_records_total_corrected_from": 74348,
+    "search_norm_records_total_corrected_to": 74346,
+    "current_generation_contract_corrected": true,
+    "offline_scope_corrected": true,
+    "supplement_provenance_contract_corrected": true,
+    "reader_architecture_current_wrapper_corrected": true,
+    "report_field_classification_exhaustive": true,
+    "public_deployment_authorized": false,
+    "external_certification_authority": "OUTSIDE_IMMUTABLE_ZIP"
   }
 }

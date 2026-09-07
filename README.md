@@ -1,3 +1,21 @@
+# Livre du Ciel — v2.19.67-R1B / Public 67 — four-pass report/metadata reconciliation successor
+
+**Exact predecessor:** certified v2.19.66-R1B ZIP `4317d041ec9475b52850c7ec7cd374eb0b2b980e115f841eebaafe10df7ddcd6`.
+
+**Semantic authority:** `d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4` — unchanged from v66.
+
+**Corrective scope:** report/release metadata only. Canonical/devotional text, paragraph/search/speaker/display/flow semantics, supplements content and user-data migration/runtime logic are unchanged from v66.
+
+**Counts:** 2,312 entries · 74,346 ALIGNÉ paragraphs · 65,099 backbone speaker segments · 75 COMPLÉMENTS / 177 paragraphs / 141 supplement speaker segments.
+
+**Certification model:** this immutable ZIP does not self-promote external live/device gates. Current package certification and live/device results are governed by external receipts/state. Public deployment is **NOT AUTHORIZED BY THIS PACKAGE** and requires a separate user decision.
+
+See `CURRENT_REPORT_AUTHORITY_INDEX.json` for the machine-readable current-vs-historical report boundary.
+
+---
+
+> Everything below this line is predecessor/historical documentation. Any older current/PASS/FAIL/count/version/generation/release wording below is historical only and is superseded for current interpretation by the v67 section above and the external current-state receipt.
+
 # Livre du Ciel — v2.19.66-R1B / Public 66 — authorized interim R7 successor
 
 **Build authority:** `d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4`.

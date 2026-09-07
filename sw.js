@@ -1,12 +1,12 @@
-const VERSION = 'ldc-v2.19.66-R1B-interim-rev6';
+const VERSION = 'ldc-v2.19.67-R1B-four-pass-r1';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
-const SHELL_CACHE = `${CACHE_PREFIX}shell-v2.19.66-R1B-interim-rev6`;
-const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-v2.19.66-R1B-interim-rev6`;
-const OFFLINE_CACHE = 'ldc-le-livre-du-ciel-offline-v2.19.66-R1B-interim-rev6';
+const SHELL_CACHE = `${CACHE_PREFIX}shell-v2.19.67-R1B-four-pass-r1`;
+const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-v2.19.67-R1B-four-pass-r1`;
+const OFFLINE_CACHE = 'ldc-le-livre-du-ciel-offline-v2.19.67-R1B-four-pass-r1';
 const OFFLINE_MANIFEST_URL = './offline_manifest.json';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v2';
-const OFFLINE_CONTENT_BINDING = '05d34fd49c2116d37f3ab897d027f2d979b6eb2ed1d432438311a65072732eb7';
-const OFFLINE_CORPUS_MANIFEST_SHA256 = '8330f6463fb80c8794c50323192fe7bebc96b65366572050e52a7817cc11d13b';
+const OFFLINE_CONTENT_BINDING = 'f3e41c19cec1e99c6ac485c1eb3f49eb8edfa829502cb2e6e49337c07a568f8c';
+const OFFLINE_CORPUS_MANIFEST_SHA256 = '96f8c54253e08f8cf50b5a583761ca17b1d27403c5329b88f5db26f64221aca6';
 const OFFLINE_META_PATH = '__ldc_offline_meta__.json';
 const RUNTIME_META_PATH = '__ldc_runtime_meta__.json';
 const RUNTIME_MAX_ENTRIES = 48;
@@ -58,7 +58,7 @@ async function loadOfflineManifest() {
   if(!r){r=await fetch(OFFLINE_MANIFEST_URL,{cache:'reload'});if(r&&r.ok)await shell.put(OFFLINE_MANIFEST_URL,r.clone());}
   if(!r||!r.ok)throw new Error('offline manifest indisponible');
   const m=await r.json();
-  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.66-R1B'||m.cache_version!==OFFLINE_CACHE)throw new Error('offline manifest incompatible');
+  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.67-R1B'||m.cache_version!==OFFLINE_CACHE)throw new Error('offline manifest incompatible');
   if(m.content_binding_schema!=='ldc-offline-content-binding-v1'||m.content_binding_sha256!==OFFLINE_CONTENT_BINDING)throw new Error('offline manifest binding incompatible');
   if(m.corpus_manifest_sha256!==OFFLINE_CORPUS_MANIFEST_SHA256)throw new Error('offline corpus manifest binding incompatible');
   const unique=[...new Set((m.assets||[]).map(a=>a.path))];
