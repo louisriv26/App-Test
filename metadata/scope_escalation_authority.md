@@ -1,3 +1,0 @@
-# v101.137 R1 Scope Authority
-
-The only authorized meditation/reflection corpus operations are the exact 79 rows in ledger SHA-256 `f9a9c4c74df33b3f96909e3611acb74c448deed5fa367fa86072d2e27cbfef49` applied to immutable v101.136 R5 `7ef830738ff5665ae5b880d52bde029e4b9ba092d834f81b008d24615e1ab9e7`. The 24 `PRESERVE_MOVE` records must be retained in evidence but need not be user-visible in this version. Deferred/recension-sensitive loci remain unchanged; H23 Forms A/B must not be synthesized; H24 burial/deposition placement must not move; Desolation remains within H24 meditation scope. No associated Livre du Ciel or unrelated UI text mutation is authorized.

@@ -1,0 +1,984 @@
+{
+  "schema": "ldc-user-state-r4-migration-v1",
+  "from_generation": "G036-AFLP-R3-SUP-T4",
+  "to_generation": "G036-AFLP-R4-SUP-T4",
+  "changed_paragraph_count": 21,
+  "paragraphs": [
+    {
+      "operation_id": "OP-L22-010-01",
+      "paragraph_id": "ldc_t11_1912_05_09_e001_p002",
+      "stable_ref": "LDC.T11.1912-05-09.E001.P002",
+      "volume": 11,
+      "entry_id": "ldc_t11_1912_05_09_e001",
+      "old_text": "Même chose pour les sens : si une personne ne parle que de Moi, ne prêtre l'oreille qu'à ce qui Me concerne, ne se réjouit que de Mes choses, ne travaille et ne marche que pour Moi, si son cœur n'aime que Moi, ne désire que Moi, voilà la consommation dans l'Amour par les sens.",
+      "new_text": "Même chose pour les sens : si une personne ne parle que de Moi, ne prête l'oreille qu'à ce qui Me concerne, ne se réjouit que de Mes choses, ne travaille et ne marche que pour Moi, si son cœur n'aime que Moi, ne désire que Moi, voilà la consommation dans l'Amour par les sens.",
+      "old_sha256": "977930afd6a1d4bc31a33ea0470c58a828e0251bb9a246b49d448bb684232cf6",
+      "new_sha256": "7c0819229912554ea1b1576385cc9b5a8c1991845a77643154b75cd63157ceef",
+      "old_fingerprint_v3": "fnv1a32:277:e1a15995",
+      "new_fingerprint_v3": "fnv1a32:276:42e5d8b3",
+      "old_normalized": "meme chose pour les sens si une personne ne parle que de moi ne pretre l oreille qu a ce qui me concerne ne se rejouit que de mes choses ne travaille et ne marche que pour moi si son coeur n aime que moi ne desire que moi voila la consommation dans l amour par les sens",
+      "new_normalized": "meme chose pour les sens si une personne ne parle que de moi ne prete l oreille qu a ce qui me concerne ne se rejouit que de mes choses ne travaille et ne marche que pour moi si son coeur n aime que moi ne desire que moi voila la consommation dans l amour par les sens",
+      "changed_ranges": [
+        {
+          "op": "delete",
+          "old_start": 71,
+          "old_end": 72,
+          "new_start": 71,
+          "new_end": 71,
+          "old_text": "r",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-BEN-121-01",
+      "paragraph_id": "ldc_t11_1914_10_14_e001_p016",
+      "stable_ref": "LDC.T11.1914-10-14.E001.P016",
+      "volume": 11,
+      "entry_id": "ldc_t11_1914_10_14_e001",
+      "old_text": "Quant à Moi, Je ressens, sa tendresse maternelle, son amour, et toute la gloire qu'elle Me donnait. De plus, Je Te considère comme une mère. Ensuite, Il m'embrassa et me dit avec une grande douceur : «Ma maman, maman !» Et Il me murmura tout ce que sa douce Maman fit et souffrit durant cette Heure.",
+      "new_text": "Quant à Moi, Je ressens sa tendresse maternelle, son amour, et toute la gloire qu'elle Me donnait. De plus, Je Te considère comme une mère. Ensuite, Il m'embrassa et me dit avec une grande douceur : «Ma maman, maman !» Et Il me murmura tout ce que sa douce Maman fit et souffrit durant cette Heure.",
+      "old_sha256": "c1a761a5b89e072599ec25319a5f681e49ed892a32c26de5ecd22974c310eff3",
+      "new_sha256": "eeb0a08a26255af4a997b65f5037e53c05636623c99e429ca3596565c2e2471b",
+      "old_fingerprint_v3": "fnv1a32:299:0435e65b",
+      "new_fingerprint_v3": "fnv1a32:298:aa79b001",
+      "old_normalized": "quant a moi je ressens sa tendresse maternelle son amour et toute la gloire qu elle me donnait de plus je te considere comme une mere ensuite il m embrassa et me dit avec une grande douceur ma maman maman et il me murmura tout ce que sa douce maman fit et souffrit durant cette heure",
+      "new_normalized": "quant a moi je ressens sa tendresse maternelle son amour et toute la gloire qu elle me donnait de plus je te considere comme une mere ensuite il m embrassa et me dit avec une grande douceur ma maman maman et il me murmura tout ce que sa douce maman fit et souffrit durant cette heure",
+      "changed_ranges": [
+        {
+          "op": "delete",
+          "old_start": 23,
+          "old_end": 24,
+          "new_start": 23,
+          "new_end": 23,
+          "old_text": ",",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-BEN-146-01",
+      "paragraph_id": "ldc_t11_1916_12_09_e001_p007",
+      "stable_ref": "LDC.T11.1916-12-09.E001.P007",
+      "volume": 11,
+      "entry_id": "ldc_t11_1916_12_09_e001",
+      "old_text": "Ce que le Père trouvait en Moi : Gloire, Délices, Amour, satisfactions complètes pour le Bien de tous Il le trouve en ces âmes.",
+      "new_text": "Ce que le Père trouvait en Moi — Gloire, Délices, Amour, satisfactions complètes pour le Bien de tous — Il le trouve en ces âmes.",
+      "old_sha256": "7b574e079489ccff321cc18577a44d606484f350c143f1a0ccdba3cd72c8f794",
+      "new_sha256": "7f545029713165dafaaf330e0a32cbac0fb489217ad548e02911a2c64dd2b50a",
+      "old_fingerprint_v3": "fnv1a32:127:0d3c2166",
+      "new_fingerprint_v3": "fnv1a32:129:69c98fe8",
+      "old_normalized": "ce que le pere trouvait en moi gloire delices amour satisfactions completes pour le bien de tous il le trouve en ces ames",
+      "new_normalized": "ce que le pere trouvait en moi gloire delices amour satisfactions completes pour le bien de tous il le trouve en ces ames",
+      "changed_ranges": [
+        {
+          "op": "replace",
+          "old_start": 31,
+          "old_end": 32,
+          "new_start": 31,
+          "new_end": 32,
+          "old_text": ":",
+          "new_text": "—"
+        },
+        {
+          "op": "insert",
+          "old_start": 102,
+          "old_end": 102,
+          "new_start": 102,
+          "new_end": 104,
+          "old_text": "",
+          "new_text": "— "
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-LDIV-120-01",
+      "paragraph_id": "ldc_t12_1919_06_04_e001_p008",
+      "stable_ref": "LDC.T12.1919-06-04.E001.P008",
+      "volume": 12,
+      "entry_id": "ldc_t12_1919_06_04_e001",
+      "old_text": "Les créatures étaient incapables, de multiplier en Moi les souffrances et les morts, autant de morts que de pécheurs.",
+      "new_text": "Les créatures étaient incapables de multiplier en Moi les souffrances et les morts, autant de morts que de pécheurs.",
+      "old_sha256": "0bdac2efedec8125b7e79893c47469f014ccd05a8f6cd983c041b0897d625557",
+      "new_sha256": "5cf720438515d8f1bf8124c3ddde7bb2d92d5ee8624295335fb3332ce91ac8b6",
+      "old_fingerprint_v3": "fnv1a32:117:d90ad470",
+      "new_fingerprint_v3": "fnv1a32:116:1434faaa",
+      "old_normalized": "les creatures etaient incapables de multiplier en moi les souffrances et les morts autant de morts que de pecheurs",
+      "new_normalized": "les creatures etaient incapables de multiplier en moi les souffrances et les morts autant de morts que de pecheurs",
+      "changed_ranges": [
+        {
+          "op": "delete",
+          "old_start": 32,
+          "old_end": 33,
+          "new_start": 32,
+          "new_end": 32,
+          "old_text": ",",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L21-119-01",
+      "paragraph_id": "LDC.T15.E0014.P020",
+      "stable_ref": "LDC.T15.E0014.P020",
+      "volume": 15,
+      "entry_id": "LDC.T15.E0014",
+      "old_text": "Et Je suis la Tête d'où proviennent tous les bienfaits qui descendent sur toutes les générations, Maintenant Je cherche des âmes qui Me ressemblent",
+      "new_text": "Et Je suis la Tête d'où proviennent tous les bienfaits qui descendent sur toutes les générations. Maintenant, Je cherche des âmes qui Me ressemblent",
+      "old_sha256": "e48554f3c0eba2d2dd8e42e73bea8449e37c39e96e1c4d623d11a822949b1ccb",
+      "new_sha256": "1698d8d2ddfe928d6fb5cd7154aacf07a288a6c0cffd9fa5c2286ff0646656cb",
+      "old_fingerprint_v3": "fnv1a32:147:f626332d",
+      "new_fingerprint_v3": "fnv1a32:148:2c67828f",
+      "old_normalized": "et je suis la tete d ou proviennent tous les bienfaits qui descendent sur toutes les generations maintenant je cherche des ames qui me ressemblent",
+      "new_normalized": "et je suis la tete d ou proviennent tous les bienfaits qui descendent sur toutes les generations maintenant je cherche des ames qui me ressemblent",
+      "changed_ranges": [
+        {
+          "op": "replace",
+          "old_start": 96,
+          "old_end": 97,
+          "new_start": 96,
+          "new_end": 97,
+          "old_text": ",",
+          "new_text": "."
+        },
+        {
+          "op": "insert",
+          "old_start": 108,
+          "old_end": 108,
+          "new_start": 108,
+          "new_end": 109,
+          "old_text": "",
+          "new_text": ","
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L21-119-01",
+      "paragraph_id": "LDC.T15.E0014.P022",
+      "stable_ref": "LDC.T15.E0014.P022",
+      "volume": 15,
+      "entry_id": "LDC.T15.E0014",
+      "old_text": "- par leurs œuvres pour les faire participer",
+      "new_text": "- par leurs œuvres, pour les faire participer",
+      "old_sha256": "d982af4c1fcb4bfd0beb29617780c9d512f16c9d27bf181df3059ab84817360e",
+      "new_sha256": "3abf209bd8c6060bb569d1a9fa96a4e84b7105548325ef48ef4e0e234ace3236",
+      "old_fingerprint_v3": "fnv1a32:44:4e2a28b4",
+      "new_fingerprint_v3": "fnv1a32:45:0f0153ac",
+      "old_normalized": "par leurs oeuvres pour les faire participer",
+      "new_normalized": "par leurs oeuvres pour les faire participer",
+      "changed_ranges": [
+        {
+          "op": "insert",
+          "old_start": 18,
+          "old_end": 18,
+          "new_start": 18,
+          "new_end": 19,
+          "old_text": "",
+          "new_text": ","
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L21-119-01",
+      "paragraph_id": "LDC.T15.E0014.P025",
+      "stable_ref": "LDC.T15.E0014.P025",
+      "volume": 15,
+      "entry_id": "LDC.T15.E0014",
+      "old_text": "- qui veulent profiter de cela et",
+      "new_text": "- qui veulent en profiter et",
+      "old_sha256": "0a0c3120f672bcf7cd7903775fd61db37724115b0dc2081f0c990467dd922457",
+      "new_sha256": "c2c89f7eede970308b648b277719b8496e4bd282c09d242cc23b67516856feb6",
+      "old_fingerprint_v3": "fnv1a32:33:94b4ea38",
+      "new_fingerprint_v3": "fnv1a32:28:09212315",
+      "old_normalized": "qui veulent profiter de cela et",
+      "new_normalized": "qui veulent en profiter et",
+      "changed_ranges": [
+        {
+          "op": "insert",
+          "old_start": 14,
+          "old_end": 14,
+          "new_start": 14,
+          "new_end": 17,
+          "old_text": "",
+          "new_text": "en "
+        },
+        {
+          "op": "delete",
+          "old_start": 23,
+          "old_end": 31,
+          "new_start": 26,
+          "new_end": 26,
+          "old_text": "de cela ",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L21-119-01",
+      "paragraph_id": "LDC.T15.E0014.P027",
+      "stable_ref": "LDC.T15.E0014.P027",
+      "volume": 15,
+      "entry_id": "LDC.T15.E0014",
+      "old_text": "- avec lesquelles Je puisse devenir intimes et",
+      "new_text": "- avec lesquelles Je puisse devenir intime et",
+      "old_sha256": "61f8fa903d8416573fe8d7d7aa2dd7bd1086ef2144dcd99a413d7bf7ef9d77ad",
+      "new_sha256": "19ed77f816e66b77ff85e445cb5241142716f44e86f99f3b5da46d002c7fcfb3",
+      "old_fingerprint_v3": "fnv1a32:46:98884319",
+      "new_fingerprint_v3": "fnv1a32:45:866aa028",
+      "old_normalized": "avec lesquelles je puisse devenir intimes et",
+      "new_normalized": "avec lesquelles je puisse devenir intime et",
+      "changed_ranges": [
+        {
+          "op": "delete",
+          "old_start": 42,
+          "old_end": 43,
+          "new_start": 42,
+          "new_end": 42,
+          "old_text": "s",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L17-072-01",
+      "paragraph_id": "LDC.T19.E0029.P014",
+      "stable_ref": "LDC.T19.E0029.P014",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0029",
+      "old_text": "Ce cris de mort de la part de tous fut très douloureux pour Moi.",
+      "new_text": "Ce cri de mort de la part de tous fut très douloureux pour Moi.",
+      "old_sha256": "d5f5d013fd9f965c4a4cc003ab4bb7419f131cc97f78e5e3ffce7e6c9e3fa642",
+      "new_sha256": "6eae842cabed0650f1d44155dfc6e1084962fde9e2463bad0e328bc51d851d8c",
+      "old_fingerprint_v3": "fnv1a32:64:0d73134b",
+      "new_fingerprint_v3": "fnv1a32:63:aa6687d2",
+      "old_normalized": "ce cris de mort de la part de tous fut tres douloureux pour moi",
+      "new_normalized": "ce cri de mort de la part de tous fut tres douloureux pour moi",
+      "changed_ranges": [
+        {
+          "op": "delete",
+          "old_start": 6,
+          "old_end": 7,
+          "new_start": 6,
+          "new_end": 6,
+          "old_text": "s",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L17-084-01",
+      "paragraph_id": "LDC.T19.E0029.P036",
+      "stable_ref": "LDC.T19.E0029.P036",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0029",
+      "old_text": "Tandis que où Elle ne règne pas,",
+      "new_text": "Tandis que là où Elle ne règne pas,",
+      "old_sha256": "a2ca578fe4e3b87519aa35d43cef52a706f88bd0bacb54c5b5a4d6d52ec1d2c2",
+      "new_sha256": "568036bdc5f61c5ea4d0932b2f361ac4d63538a1ed992d95f64e56f72bff82d3",
+      "old_fingerprint_v3": "fnv1a32:32:a65aaf22",
+      "new_fingerprint_v3": "fnv1a32:35:ef447a88",
+      "old_normalized": "tandis que ou elle ne regne pas",
+      "new_normalized": "tandis que la ou elle ne regne pas",
+      "changed_ranges": [
+        {
+          "op": "insert",
+          "old_start": 10,
+          "old_end": 10,
+          "new_start": 10,
+          "new_end": 13,
+          "old_text": "",
+          "new_text": " là"
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L17-087-01",
+      "paragraph_id": "LDC.T19.E0029.P041",
+      "stable_ref": "LDC.T19.E0029.P041",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0029",
+      "old_text": "C'est pourquoi, le peu de bien qu'Ils font, est laborieux,",
+      "new_text": "C'est pourquoi le peu de bien qu'ils font est laborieux ;",
+      "old_sha256": "969477654ef6c1168f7f5dbb0dcc9a9e249c73365909ea0b928c78816d990b28",
+      "new_sha256": "cf2522586ba84a36ab69d18abeaf6369a79feaaa15a42a87afdd69ae9fd67ed4",
+      "old_fingerprint_v3": "fnv1a32:58:087ace9a",
+      "new_fingerprint_v3": "fnv1a32:57:9010d41f",
+      "old_normalized": "c est pourquoi le peu de bien qu ils font est laborieux",
+      "new_normalized": "c est pourquoi le peu de bien qu ils font est laborieux",
+      "changed_ranges": [
+        {
+          "op": "delete",
+          "old_start": 14,
+          "old_end": 15,
+          "new_start": 14,
+          "new_end": 14,
+          "old_text": ",",
+          "new_text": ""
+        },
+        {
+          "op": "replace",
+          "old_start": 34,
+          "old_end": 35,
+          "new_start": 33,
+          "new_end": 34,
+          "old_text": "I",
+          "new_text": "i"
+        },
+        {
+          "op": "delete",
+          "old_start": 42,
+          "old_end": 43,
+          "new_start": 41,
+          "new_end": 41,
+          "old_text": ",",
+          "new_text": ""
+        },
+        {
+          "op": "replace",
+          "old_start": 57,
+          "old_end": 58,
+          "new_start": 55,
+          "new_end": 57,
+          "old_text": ",",
+          "new_text": " ;"
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L17-087-01",
+      "paragraph_id": "LDC.T19.E0029.P042",
+      "stable_ref": "LDC.T19.E0029.P042",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0029",
+      "old_text": "- se sentant écrasés par le peu de bien accompli.",
+      "new_text": "- ils se sentent écrasés par le peu de bien accompli.",
+      "old_sha256": "36eb110b1c34c41e5573eb3b371663032acc1176626d7ca25e54cfa4f54b6d3b",
+      "new_sha256": "5d06275e963f486935bcefadb5ad6a395ca3be1dae60bdaaa37ef442fd0f13f6",
+      "old_fingerprint_v3": "fnv1a32:49:6be3bc22",
+      "new_fingerprint_v3": "fnv1a32:53:668c3314",
+      "old_normalized": "se sentant ecrases par le peu de bien accompli",
+      "new_normalized": "ils se sentent ecrases par le peu de bien accompli",
+      "changed_ranges": [
+        {
+          "op": "insert",
+          "old_start": 1,
+          "old_end": 1,
+          "new_start": 1,
+          "new_end": 5,
+          "old_text": "",
+          "new_text": " ils"
+        },
+        {
+          "op": "replace",
+          "old_start": 9,
+          "old_end": 10,
+          "new_start": 13,
+          "new_end": 14,
+          "old_text": "a",
+          "new_text": "e"
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L17-088-01",
+      "paragraph_id": "LDC.T19.E0029.P045",
+      "stable_ref": "LDC.T19.E0029.P045",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0029",
+      "old_text": "- la remplisse de Force divine et de Vie dans le Bien.",
+      "new_text": "- la remplit de Force divine et de Vie dans le Bien.",
+      "old_sha256": "08425384c009afa3d841902f461f53b3136fd8d925efce63875c5b073f48af7b",
+      "new_sha256": "a6d591a759b2f6820e2fbd34df9fa1f76c32d532b56c5c366ec1dc7bae8eb6f3",
+      "old_fingerprint_v3": "fnv1a32:54:4b499d0f",
+      "new_fingerprint_v3": "fnv1a32:52:a60bced2",
+      "old_normalized": "la remplisse de force divine et de vie dans le bien",
+      "new_normalized": "la remplit de force divine et de vie dans le bien",
+      "changed_ranges": [
+        {
+          "op": "replace",
+          "old_start": 11,
+          "old_end": 14,
+          "new_start": 11,
+          "new_end": 12,
+          "old_text": "sse",
+          "new_text": "t"
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L17-089-01",
+      "paragraph_id": "LDC.T19.E0029.P046",
+      "stable_ref": "LDC.T19.E0029.P046",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0029",
+      "old_text": "Par conséquent, qui La fait régner en elle, fait le Bien sans difficulté. La Vie qu'Elle contient lui permet d'opérer le Bien avec une Force irrésistible.",
+      "new_text": "Par conséquent, qui La fait régner en elle fait le Bien sans difficulté. La Vie qu'Elle contient lui permet d'opérer le Bien avec une Force irrésistible.",
+      "old_sha256": "2813007d681e198cfa3453fb98978154770938e2d950104ac97a19b15441367c",
+      "new_sha256": "aad54007eafca2b4c474a427aa758b821f3214e2a7760f0822cd3dbe96b5e8f1",
+      "old_fingerprint_v3": "fnv1a32:154:636eb405",
+      "new_fingerprint_v3": "fnv1a32:153:0ce957b7",
+      "old_normalized": "par consequent qui la fait regner en elle fait le bien sans difficulte la vie qu elle contient lui permet d operer le bien avec une force irresistible",
+      "new_normalized": "par consequent qui la fait regner en elle fait le bien sans difficulte la vie qu elle contient lui permet d operer le bien avec une force irresistible",
+      "changed_ranges": [
+        {
+          "op": "delete",
+          "old_start": 42,
+          "old_end": 43,
+          "new_start": 42,
+          "new_end": 42,
+          "old_text": ",",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L17-097-01",
+      "paragraph_id": "LDC.T19.E0029.P059",
+      "stable_ref": "LDC.T19.E0029.P059",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0029",
+      "old_text": "Pris d'un excès d'Amour Il me serra sur son cœur et Il me disait :",
+      "new_text": "Pris d'un excès d'Amour, Il me serra sur son cœur et Il me disait :",
+      "old_sha256": "66e595dfc4229238e44233c9301625ce62c9e48fcab8ede3abf35fbd4f5f2b27",
+      "new_sha256": "3b3f4f5cf7877973792c32c3ef32cf09dad0424826a8337f05db88d8a0cc3d1f",
+      "old_fingerprint_v3": "fnv1a32:66:8089c4b8",
+      "new_fingerprint_v3": "fnv1a32:67:64c97be2",
+      "old_normalized": "pris d un exces d amour il me serra sur son coeur et il me disait",
+      "new_normalized": "pris d un exces d amour il me serra sur son coeur et il me disait",
+      "changed_ranges": [
+        {
+          "op": "insert",
+          "old_start": 23,
+          "old_end": 23,
+          "new_start": 23,
+          "new_end": 24,
+          "old_text": "",
+          "new_text": ","
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-LMARY-180-01",
+      "paragraph_id": "LDC.T19.E0037.P077",
+      "stable_ref": "LDC.T19.E0037.P077",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0037",
+      "old_text": "Ainsi, d'après le coût, ils puissent réaliser à quel point Je désire",
+      "new_text": "Ainsi, à partir de ce coût, ils pourront connaître combien Je désire",
+      "old_sha256": "76dfd68cde77c2fd1835a58320ab32929fbdec99b5105d5ab46d0fe950bbb523",
+      "new_sha256": "5dd1f3c4bbd943182c751297bf5cafe34d68d2cb4d6a2208ec8ccaab8201b0e9",
+      "old_fingerprint_v3": "fnv1a32:68:8cf3957c",
+      "new_fingerprint_v3": "fnv1a32:68:88a9fdf4",
+      "old_normalized": "ainsi d apres le cout ils puissent realiser a quel point je desire",
+      "new_normalized": "ainsi a partir de ce cout ils pourront connaitre combien je desire",
+      "changed_ranges": [
+        {
+          "op": "insert",
+          "old_start": 7,
+          "old_end": 7,
+          "new_start": 7,
+          "new_end": 16,
+          "old_text": "",
+          "new_text": "à partir "
+        },
+        {
+          "op": "replace",
+          "old_start": 8,
+          "old_end": 14,
+          "new_start": 17,
+          "new_end": 18,
+          "old_text": "'après",
+          "new_text": "e"
+        },
+        {
+          "op": "replace",
+          "old_start": 15,
+          "old_end": 16,
+          "new_start": 19,
+          "new_end": 20,
+          "old_text": "l",
+          "new_text": "c"
+        },
+        {
+          "op": "insert",
+          "old_start": 29,
+          "old_end": 29,
+          "new_start": 33,
+          "new_end": 34,
+          "old_text": "",
+          "new_text": "o"
+        },
+        {
+          "op": "replace",
+          "old_start": 30,
+          "old_end": 34,
+          "new_start": 35,
+          "new_end": 38,
+          "old_text": "isse",
+          "new_text": "rro"
+        },
+        {
+          "op": "insert",
+          "old_start": 37,
+          "old_end": 37,
+          "new_start": 41,
+          "new_end": 48,
+          "old_text": "",
+          "new_text": "connaît"
+        },
+        {
+          "op": "replace",
+          "old_start": 38,
+          "old_end": 41,
+          "new_start": 49,
+          "new_end": 55,
+          "old_text": "éal",
+          "new_text": "e comb"
+        },
+        {
+          "op": "delete",
+          "old_start": 42,
+          "old_end": 43,
+          "new_start": 56,
+          "new_end": 56,
+          "old_text": "s",
+          "new_text": ""
+        },
+        {
+          "op": "delete",
+          "old_start": 44,
+          "old_end": 56,
+          "new_start": 57,
+          "new_end": 57,
+          "old_text": "r à quel poi",
+          "new_text": ""
+        },
+        {
+          "op": "delete",
+          "old_start": 57,
+          "old_end": 58,
+          "new_start": 58,
+          "new_end": 58,
+          "old_text": "t",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-LMARY-180-01",
+      "paragraph_id": "LDC.T19.E0037.P078",
+      "stable_ref": "LDC.T19.E0037.P078",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0037",
+      "old_text": "- qu'ils l’acquissent,",
+      "new_text": "- qu’ils l’acquièrent ;",
+      "old_sha256": "15e1be8cf7f3200de333821cbeeff9506bb222d376617a6c16c6a4fada1e25d4",
+      "new_sha256": "78ffb6fdbc50f28e16d4c3b271806076f0b25902bcfa9256877fe538d35eda72",
+      "old_fingerprint_v3": "fnv1a32:22:33c72596",
+      "new_fingerprint_v3": "fnv1a32:23:1f9879e9",
+      "old_normalized": "qu ils l acquissent",
+      "new_normalized": "qu ils l acquierent",
+      "changed_ranges": [
+        {
+          "op": "replace",
+          "old_start": 4,
+          "old_end": 5,
+          "new_start": 4,
+          "new_end": 5,
+          "old_text": "'",
+          "new_text": "’"
+        },
+        {
+          "op": "replace",
+          "old_start": 16,
+          "old_end": 18,
+          "new_start": 16,
+          "new_end": 18,
+          "old_text": "ss",
+          "new_text": "èr"
+        },
+        {
+          "op": "replace",
+          "old_start": 21,
+          "old_end": 22,
+          "new_start": 21,
+          "new_end": 23,
+          "old_text": ",",
+          "new_text": " ;"
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-LMARY-180-01",
+      "paragraph_id": "LDC.T19.E0037.P079",
+      "stable_ref": "LDC.T19.E0037.P079",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0037",
+      "old_text": "- qu’ils puissent l'aimer, l'apprécier",
+      "new_text": "- ils pourront l’apprécier, l’aimer et aspirer à entrer et",
+      "old_sha256": "550235c32b948cf81075ae196ef5f990651eb80a9ecf1ba485f1341997c9b102",
+      "new_sha256": "42364a392debddb59ed12bbf4193abc259fff5fc36f469495198a820a6dbb76c",
+      "old_fingerprint_v3": "fnv1a32:38:e4f21e8f",
+      "new_fingerprint_v3": "fnv1a32:58:3bae9812",
+      "old_normalized": "qu ils puissent l aimer l apprecier",
+      "new_normalized": "ils pourront l apprecier l aimer et aspirer a entrer et",
+      "changed_ranges": [
+        {
+          "op": "delete",
+          "old_start": 2,
+          "old_end": 5,
+          "new_start": 2,
+          "new_end": 2,
+          "old_text": "qu’",
+          "new_text": ""
+        },
+        {
+          "op": "insert",
+          "old_start": 10,
+          "old_end": 10,
+          "new_start": 7,
+          "new_end": 8,
+          "old_text": "",
+          "new_text": "o"
+        },
+        {
+          "op": "replace",
+          "old_start": 11,
+          "old_end": 15,
+          "new_start": 9,
+          "new_end": 12,
+          "old_text": "isse",
+          "new_text": "rro"
+        },
+        {
+          "op": "replace",
+          "old_start": 19,
+          "old_end": 29,
+          "new_start": 16,
+          "new_end": 17,
+          "old_text": "'aimer, l'",
+          "new_text": "’"
+        },
+        {
+          "op": "insert",
+          "old_start": 38,
+          "old_end": 38,
+          "new_start": 26,
+          "new_end": 58,
+          "old_text": "",
+          "new_text": ", l’aimer et aspirer à entrer et"
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-LMARY-180-01",
+      "paragraph_id": "LDC.T19.E0037.P080",
+      "stable_ref": "LDC.T19.E0037.P080",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0037",
+      "old_text": "- qu’ils aspirent à vivre dans ce Règne de Ma Volonté Suprême.\"",
+      "new_text": "- à vivre dans le Règne de Ma Volonté Suprême. »",
+      "old_sha256": "55cb5911e7b7c6144fcee1a3a10415db45c6570cf2213d82f9a467cf3a6d2414",
+      "new_sha256": "ffd9db23136edd293f333bbde9c21a9d9a87dc517039b5aedaa1501690706bef",
+      "old_fingerprint_v3": "fnv1a32:63:8c96818f",
+      "new_fingerprint_v3": "fnv1a32:48:6286ed6a",
+      "old_normalized": "qu ils aspirent a vivre dans ce regne de ma volonte supreme",
+      "new_normalized": "a vivre dans le regne de ma volonte supreme",
+      "changed_ranges": [
+        {
+          "op": "delete",
+          "old_start": 1,
+          "old_end": 17,
+          "new_start": 1,
+          "new_end": 1,
+          "old_text": " qu’ils aspirent",
+          "new_text": ""
+        },
+        {
+          "op": "replace",
+          "old_start": 31,
+          "old_end": 32,
+          "new_start": 15,
+          "new_end": 16,
+          "old_text": "c",
+          "new_text": "l"
+        },
+        {
+          "op": "replace",
+          "old_start": 62,
+          "old_end": 63,
+          "new_start": 46,
+          "new_end": 48,
+          "old_text": "\"",
+          "new_text": " »"
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-LMARY-211-01",
+      "paragraph_id": "LDC.T19.E0050.P040",
+      "stable_ref": "LDC.T19.E0050.P040",
+      "volume": 19,
+      "entry_id": "LDC.T19.E0050",
+      "old_text": "L'âme souffrant de peines mortelles, est donc gratifiée par une nouvelle Vie Divine. Car, si ce n'était pas le cas, Je serais vaincu par l'amour de la créature et cela n’est pas possible.",
+      "new_text": "L'âme souffrant de peines mortelles est donc gratifiée par une nouvelle Vie Divine. Car, si ce n'était pas le cas, Je serais vaincu par l'amour de la créature et cela n’est pas possible.",
+      "old_sha256": "62f5af363e740b6de19553a21ea48338c3b21f5086a003fe562f9c87c8d507f9",
+      "new_sha256": "338e143aa63b7bb8d9a7261efa5f844b7bb1e25848ed62b1a6e27aab94fe1934",
+      "old_fingerprint_v3": "fnv1a32:187:cb0e885d",
+      "new_fingerprint_v3": "fnv1a32:186:62032585",
+      "old_normalized": "l ame souffrant de peines mortelles est donc gratifiee par une nouvelle vie divine car si ce n etait pas le cas je serais vaincu par l amour de la creature et cela n est pas possible",
+      "new_normalized": "l ame souffrant de peines mortelles est donc gratifiee par une nouvelle vie divine car si ce n etait pas le cas je serais vaincu par l amour de la creature et cela n est pas possible",
+      "changed_ranges": [
+        {
+          "op": "delete",
+          "old_start": 35,
+          "old_end": 36,
+          "new_start": 35,
+          "new_end": 35,
+          "old_text": ",",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    },
+    {
+      "operation_id": "OP-L15-163-01",
+      "paragraph_id": "LDC.T20.E0044.P043",
+      "stable_ref": "LDC.T20.E0044.P043",
+      "volume": 20,
+      "entry_id": "LDC.T20.E0044",
+      "old_text": "- que la Lumière de Mes Vérités apporte avec elles, est absente de l’âme.",
+      "new_text": "- que la Lumière de Mes Vérités apporte avec elles est absente de l’âme.",
+      "old_sha256": "af955225ef5ed2f6f16ea219578125a5400da735df0411dd058b5491b03c6672",
+      "new_sha256": "34ef1c0ab889f45461d84098822efda068e5b361ae19d375f2a8a9baf8b9f6b8",
+      "old_fingerprint_v3": "fnv1a32:73:8cd320fb",
+      "new_fingerprint_v3": "fnv1a32:72:77700e6d",
+      "old_normalized": "que la lumiere de mes verites apporte avec elles est absente de l ame",
+      "new_normalized": "que la lumiere de mes verites apporte avec elles est absente de l ame",
+      "changed_ranges": [
+        {
+          "op": "delete",
+          "old_start": 50,
+          "old_end": 51,
+          "new_start": 50,
+          "new_end": 50,
+          "old_text": ",",
+          "new_text": ""
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    }
+  ],
+  "user_data_schema": 4,
+  "policy": "GENERATION_SCOPED_TARGETED_REANCHOR__NO_SCHEMA_BUMP__AMBIGUOUS_ANCHORS_PRESERVED_STALE",
+  "blocked_operation": "OP-L17-218-01",
+  "blocked_operation_policy": "NO_MUTATION_UNDER_CURRENT_AUTHORITY"
+}

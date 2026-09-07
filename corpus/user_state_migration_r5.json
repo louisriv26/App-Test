@@ -1,0 +1,48 @@
+{
+  "schema": "ldc-user-state-r5-migration-v1",
+  "from_generation": "G036-AFLP-R4-SUP-T4",
+  "to_generation": "G036-AFLP-R5-SUP-T4",
+  "changed_paragraph_count": 1,
+  "paragraphs": [
+    {
+      "operation_id": "OP-L17-218-01",
+      "paragraph_id": "LDC.T24.E0048.P045",
+      "stable_ref": "LDC.T24.E0048.P045",
+      "volume": 24,
+      "entry_id": "LDC.T24.E0048",
+      "old_text": "La nourriture elle-même se transforme en souffrance. Tout lui donne la nausée S’il prend de la nourriture, ce n’est pas par plaisir, mais pour ne pas mourir.",
+      "new_text": "La nourriture elle-même se transforme en souffrance. Tout lui donne la nausée. S’il prend de la nourriture, ce n’est pas par plaisir, mais pour ne pas mourir.",
+      "old_sha256": "ce77714227c9000af02011784b07842cfcb47896dc4f3c94365909f4c82f2cbc",
+      "new_sha256": "6a06ecf991f42cc97b6ad0a73ff6df2883045140b7ca4de2c2483d162e9cbc41",
+      "old_fingerprint_v3": "fnv1a32:157:5faac373",
+      "new_fingerprint_v3": "fnv1a32:158:d6ffe84f",
+      "old_normalized": "la nourriture elle meme se transforme en souffrance tout lui donne la nausee s il prend de la nourriture ce n est pas par plaisir mais pour ne pas mourir",
+      "new_normalized": "la nourriture elle meme se transforme en souffrance tout lui donne la nausee s il prend de la nourriture ce n est pas par plaisir mais pour ne pas mourir",
+      "changed_ranges": [
+        {
+          "op": "insert",
+          "old_start": 77,
+          "old_end": 77,
+          "new_start": 77,
+          "new_end": 78,
+          "old_text": "",
+          "new_text": "."
+        }
+      ],
+      "exact_selection_reanchor_strategy": [
+        "EXACT_SELECTED_TEXT_UNIQUE_SAME_PARAGRAPH",
+        "EXACT_TEXT_WITH_DERIVED_OLD_LEFT_RIGHT_CONTEXT",
+        "UNIQUE_NORMALIZED_MATCH_WITH_STRICT_CONTEXT",
+        "STALE_UNRESOLVED"
+      ],
+      "android_whole_paragraph_strategy": "STABLE_PARAGRAPH_IDENTITY__MAP_0_OLD_LENGTH_TO_0_NEW_LENGTH",
+      "notes_strategy": "QUOTE_EXACT_CONTEXT_NORMALIZED_OR_STALE__PARAGRAPH_NOTE_WITHOUT_QUOTE_FOLLOWS_STABLE_PARAGRAPH_ID",
+      "fallback_if_ambiguous": "PRESERVE_RECORD__MARK_STALE_UNRESOLVED__NEVER_SILENTLY_MOVE",
+      "migration_confidence": "HIGH_FOR_ID_AND_WHOLE_PARAGRAPH__CONDITIONAL_FOR_EXACT_SELECTIONS"
+    }
+  ],
+  "user_data_schema": 4,
+  "policy": "GENERATION_SCOPED_TARGETED_REANCHOR__NO_SCHEMA_BUMP__AMBIGUOUS_ANCHORS_PRESERVED_STALE",
+  "authority_reopen": "OP-L17-218-01",
+  "authorized_span_only": "nausée S’il prend → nausée. S’il prend"
+}

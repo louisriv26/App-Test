@@ -1,0 +1,102 @@
+{
+  "authorized_runtime_ledger_sha256": "5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906",
+  "backbone_generation": "G036-AFLP-R7-UWR2",
+  "composite_generation": "G036-AFLP-R7-SUP-T5",
+  "counts": {
+    "complete_entries": 13,
+    "internal_supplements": 62,
+    "items": 75,
+    "legacy_sup_t1_inline_supplements": 2,
+    "paragraphs": 177,
+    "search_records": 177,
+    "speaker_segments": 141,
+    "sup_t1_items": 13,
+    "sup_t2_items": 43,
+    "sup_t2_speaker_segments": 63,
+    "sup_t3_items": 1,
+    "sup_t4_items": 15,
+    "sup_t4_speaker_segments": 22,
+    "sup_t5_items": 3,
+    "sup_t5_speaker_segments": 3
+  },
+  "files": {
+    "supplement_search.json": {
+      "bytes": 288677,
+      "sha256": "bd3216465f10f8a9bc0b6f5ce96822412d7d4025e4abd973fbd773e7b4a3f10b"
+    },
+    "supplement_speakers.json": {
+      "bytes": 126287,
+      "sha256": "9846f708baebe27466b82df1ff6400e9f9d8714ae4aa935801be00ab143dd284"
+    },
+    "supplements.json": {
+      "bytes": 1115190,
+      "sha256": "bb2ec2a001aec35a83ef055c1fcdbd41307cc1b1f8a9970ecfd43aaf53777f0b"
+    }
+  },
+  "m3_decision_lock_sha256": "bb4a5c772b3eafdfe6eb857bc303a724a4bdb0cb0cef97c0ee5f088dfd65ab83",
+  "m6_authority": "M5_G17_REOPEN_SPECIFIC_CANDIDATES__EXACT_V54_BRANCH",
+  "m7rc_existing_complement_replacements": 9,
+  "m9_authority": "M8_MUTATION_AUTHORIZATION_R3_SUPT4_2026-08-28",
+  "programme": "LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4-SUP-T5",
+  "provenance_contract": "SUP-T1..SUP-T4_PRESERVED__SUP-T5_SOURCE_CRITICAL_AUTHORIZED__NO_MAJORITY_VOTE",
+  "r6_authority": "AUTHORIZED_RUNTIME_LEDGER_SHA256_5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906__OFFICIAL_R6_PREDECESSOR",
+  "release_status": "V72_PROVENANCE_PRESENTATION_SUCCESSOR__EXTERNAL_FINAL_CERTIFICATION_AUTHORITY__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED_BY_PACKAGE",
+  "schema": "ldc-supplement-manifest-v2",
+  "status": "LDC_V72_PROVENANCE_PRESENTATION_SUCCESSOR__STATIC_PACKAGE_CERTIFICATION_EXTERNAL_TO_ZIP__NOT_PUBLICLY_DEPLOYED",
+  "sup_t1_snapshot_sha256": "ee568d8857b3e38b4a2b536de146c3b54f876ab93478e66f327bdaaf0768a1e0",
+  "sup_t2_segmentation_ledger_sha256": "f3345d58d2c12625c46cb92466012755c070fa84aef04da8cbcf2f9caa705f77",
+  "user_state_schema": 4,
+  "v67_four_pass_metadata_reconciliation": {
+    "predecessor_zip_sha256": "4317d041ec9475b52850c7ec7cd374eb0b2b980e115f841eebaafe10df7ddcd6",
+    "status_and_authority_wrapper_only": true,
+    "supplement_content_changes": 0
+  },
+  "v68_principal_ui_presentation_successor": {
+    "predecessor_zip_sha256": "f58a28f6546000c6b17905fa37c0ba74db44de766a11bf2ef5b936ed384919e9",
+    "status_wrapper_only": true,
+    "supplement_content_changes": 0
+  },
+  "v69_deep_four_pass_metadata_repair": {
+    "counts_reconciled_to_actual_segments": true,
+    "predecessor_zip_sha256": "58e7eebd7c3a04db53e7a21ea144842aebd36c8e3dd8815f37c8e2f6edc3618d",
+    "speaker_segment_content_changes": 0,
+    "sup_t2_speaker_segments": 63,
+    "supplement_content_changes": 0,
+    "total_speaker_segments": 141
+  },
+  "v72_provenance_presentation_successor": {
+    "canonical_or_devotional_text_mutations": 0,
+    "direct_predecessor_app_version": "v2.19.71-R1B",
+    "direct_predecessor_zip_sha256": "ed925239f570293b54a4565a2666dc50ac71e43aa149b3567d8a55364e550d8c",
+    "display_flow_semantic_mutations": 0,
+    "family_distribution": {
+      "SUP_T1": 13,
+      "SUP_T2_GELDC": 1,
+      "SUP_T2_ITPM": 42,
+      "SUP_T3": 1,
+      "SUP_T4": 15,
+      "SUP_T5_REUSE": 1,
+      "SUP_T5_SOURCE_CRITICAL": 2
+    },
+    "migration_algorithm_mutations": 0,
+    "reader_fields_per_supplement": [
+      "reader_provenance_text",
+      "reader_french_wording_label"
+    ],
+    "schema": "ldc-v72-provenance-presentation-successor-v1",
+    "search_semantic_mutations": 0,
+    "semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
+    "source_reference_distribution": {
+      "FW_SOURCE_REF": 43,
+      "ITPM_SOURCE_FILE": 13,
+      "NONE": 19
+    },
+    "speaker_semantic_mutations": 0,
+    "user_state_schema_mutations": 0
+  },
+  "within_paragraph_contract": {
+    "dependent_after_aligne_correction": 1,
+    "placements": 22,
+    "runtime_requirement": "CANONICAL_HOST_ID_AND_OFFSETS_PRESERVED__DISPLAY_SLICES_ONLY__CANONICAL_USER_OFFSETS"
+  }
+}
