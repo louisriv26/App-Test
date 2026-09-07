@@ -1,0 +1,124 @@
+{
+  "version": "v101.133",
+  "stage": "VISUAL_BOUNDARY_LEADING_WHITESPACE_ALIGNMENT_REPAIR_R1",
+  "summary": {
+    "pass": 21,
+    "fail": 0,
+    "total": 21
+  },
+  "rows": [
+    {
+      "check": "baseline_sha",
+      "status": "PASS",
+      "detail": "5a529f8bfee3022fe03da02f42f843d40482a287fbfd61bcb3e0a1bcb8e5bf75"
+    },
+    {
+      "check": "baseline_members_701",
+      "status": "PASS",
+      "detail": 701
+    },
+    {
+      "check": "baseline_zip_clean",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_index.html",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_luisa_24_heures.html",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_version.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_manifest.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_sw.js",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_metadata/full_build_overlay_manifest.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_metadata/hash_manifest.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_metadata/package_manifest.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_metadata/current_tooling_inventory.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_metadata/current_gate_map.json",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_README.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_REAL_DEVICE_QA_CHECKLIST.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "exists_scripts/EXECUTION_SPEC.md",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "hash_manifest_all_rows_match",
+      "status": "PASS",
+      "detail": 750
+    },
+    {
+      "check": "package_manifest_all_rows_match",
+      "status": "PASS",
+      "detail": 750
+    },
+    {
+      "check": "all_gate_map_dependencies_resolve",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "overlay_changed_set_exact",
+      "status": "PASS",
+      "detail": {
+        "actual_only": [],
+        "declared_only": [],
+        "actual": 69,
+        "declared": 69
+      }
+    },
+    {
+      "check": "overlay_removed_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "declared": []
+      }
+    }
+  ]
+}

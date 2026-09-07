@@ -1,0 +1,19 @@
+gate,check,status,evidence
+G01,v101.121 baseline finality,PASS,gate0/V101121_FINAL_DECISION_LOCK_EXTERNAL.json
+G02,Runtime build reproduction,PASS,evidence/v101122/BUILD_RUNTIME_PARITY.json
+G03,Protected declarations,PASS,14/14; evidence/v101122/PROTECTED_DECLARATION_PARITY.json
+G04,Help function parity,PASS,evidence/v101122/HELP_PARITY.json
+G05,JavaScript syntax,PASS,evidence/v101122/JAVASCRIPT_SYNTAX_CHECK.json
+G06,Service-worker syntax,PASS,evidence/v101122/SERVICE_WORKER_SYNTAX_CHECK.json
+G07,Hour-24 state transition matrix,PASS,16/16
+G08,Five-profile Hour-24 UX matrix,PASS,70/70
+G09,Help browser matrix,PASS,70/70
+G10,Broad Chromium runtime,PASS,52/52
+G11,Quoted-span fixed point,PASS,A=0 B=0 spans=398
+G12,Exhaustive presentation matrix,PASS,1990/1990
+G13,Service-worker logic,PASS,15/15
+G14,Mutation tests,PASS,12/12
+G15,Independent Hour-24 browser probe,PASS,55/55
+G16,Physical iPhone/iPad/Samsung,NOT_TESTED,external real-device gate
+G17,Installed PWA / true offline cold reopen,NOT_TESTED,external live-origin/device gate
+G18,VoiceOver/TalkBack,NOT_TESTED,external device/AT gate

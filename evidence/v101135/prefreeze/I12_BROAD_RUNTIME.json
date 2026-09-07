@@ -1,0 +1,476 @@
+{
+  "schema": "L24H_BROAD_RUNTIME_MATRIX_V1",
+  "version": "v101.135",
+  "browser": "system Chromium via Playwright content injection",
+  "origin_limitation": "real URL/service-worker origin not claimed",
+  "summary": {
+    "pass": 52,
+    "fail": 0,
+    "total": 52
+  },
+  "results": [
+    {
+      "profile": "phone",
+      "check": "init_version",
+      "status": "PASS",
+      "detail": {
+        "ver": "v101.135",
+        "stage": "MASTER_SCRIPT_VALIDATION_COMPLETION_R1",
+        "view": "home",
+        "content": 1173,
+        "bodyWidth": 390,
+        "innerWidth": 390
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "init_home_content",
+      "status": "PASS",
+      "detail": 1173
+    },
+    {
+      "profile": "phone",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 390,
+        "inner": 390
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "runtime_target_map_integrity",
+      "status": "PASS",
+      "detail": {
+        "speechTargets": 2176,
+        "speechSegments": 3252,
+        "projectionTargets": 2289,
+        "projectionRuns": 2189,
+        "hiddenRanges": 570,
+        "displayTargets": 74,
+        "topoTargets": 102
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "render_all_24_hours",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "phone",
+      "check": "search_ame_results",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "count": 60
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "mon_espace_renders",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "text": 839
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "theme_font_controls",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "dark": true,
+        "font": 3
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "v101112_user_fixes_preserved",
+      "status": "PASS",
+      "detail": {
+        "h3count": 1,
+        "h22rows": 9
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "exact_text_highlight_model",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "start": 0,
+        "end": 12,
+        "whole": false,
+        "android": false
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "visible_buttons_named",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "phone",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "phone",
+      "check": "no_console_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad",
+      "check": "init_version",
+      "status": "PASS",
+      "detail": {
+        "ver": "v101.135",
+        "stage": "MASTER_SCRIPT_VALIDATION_COMPLETION_R1",
+        "view": "home",
+        "content": 1173,
+        "bodyWidth": 820,
+        "innerWidth": 820
+      }
+    },
+    {
+      "profile": "ipad",
+      "check": "init_home_content",
+      "status": "PASS",
+      "detail": 1173
+    },
+    {
+      "profile": "ipad",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 820,
+        "inner": 820
+      }
+    },
+    {
+      "profile": "ipad",
+      "check": "runtime_target_map_integrity",
+      "status": "PASS",
+      "detail": {
+        "speechTargets": 2176,
+        "speechSegments": 3252,
+        "projectionTargets": 2289,
+        "projectionRuns": 2189,
+        "hiddenRanges": 570,
+        "displayTargets": 74,
+        "topoTargets": 102
+      }
+    },
+    {
+      "profile": "ipad",
+      "check": "render_all_24_hours",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad",
+      "check": "search_ame_results",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "count": 60
+      }
+    },
+    {
+      "profile": "ipad",
+      "check": "mon_espace_renders",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "text": 839
+      }
+    },
+    {
+      "profile": "ipad",
+      "check": "theme_font_controls",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "dark": true,
+        "font": 3
+      }
+    },
+    {
+      "profile": "ipad",
+      "check": "v101112_user_fixes_preserved",
+      "status": "PASS",
+      "detail": {
+        "h3count": 1,
+        "h22rows": 9
+      }
+    },
+    {
+      "profile": "ipad",
+      "check": "exact_text_highlight_model",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "start": 0,
+        "end": 12,
+        "whole": false,
+        "android": false
+      }
+    },
+    {
+      "profile": "ipad",
+      "check": "visible_buttons_named",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad",
+      "check": "no_console_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "samsung",
+      "check": "init_version",
+      "status": "PASS",
+      "detail": {
+        "ver": "v101.135",
+        "stage": "MASTER_SCRIPT_VALIDATION_COMPLETION_R1",
+        "view": "home",
+        "content": 1173,
+        "bodyWidth": 412,
+        "innerWidth": 412
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "init_home_content",
+      "status": "PASS",
+      "detail": 1173
+    },
+    {
+      "profile": "samsung",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 412,
+        "inner": 412
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "runtime_target_map_integrity",
+      "status": "PASS",
+      "detail": {
+        "speechTargets": 2176,
+        "speechSegments": 3252,
+        "projectionTargets": 2289,
+        "projectionRuns": 2189,
+        "hiddenRanges": 570,
+        "displayTargets": 74,
+        "topoTargets": 102
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "render_all_24_hours",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "samsung",
+      "check": "search_ame_results",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "count": 60
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "mon_espace_renders",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "text": 839
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "theme_font_controls",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "dark": true,
+        "font": 3
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "v101112_user_fixes_preserved",
+      "status": "PASS",
+      "detail": {
+        "h3count": 1,
+        "h22rows": 9
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "samsung_paragraph_pending",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "p": {
+          "start": 0,
+          "end": 151,
+          "whole": true,
+          "android": true
+        },
+        "len": 151
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "visible_buttons_named",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "samsung",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "samsung",
+      "check": "no_console_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "desktop",
+      "check": "init_version",
+      "status": "PASS",
+      "detail": {
+        "ver": "v101.135",
+        "stage": "MASTER_SCRIPT_VALIDATION_COMPLETION_R1",
+        "view": "home",
+        "content": 1173,
+        "bodyWidth": 1200,
+        "innerWidth": 1200
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "init_home_content",
+      "status": "PASS",
+      "detail": 1173
+    },
+    {
+      "profile": "desktop",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": {
+        "body": 1200,
+        "inner": 1200
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "runtime_target_map_integrity",
+      "status": "PASS",
+      "detail": {
+        "speechTargets": 2176,
+        "speechSegments": 3252,
+        "projectionTargets": 2289,
+        "projectionRuns": 2189,
+        "hiddenRanges": 570,
+        "displayTargets": 74,
+        "topoTargets": 102
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "render_all_24_hours",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "desktop",
+      "check": "search_ame_results",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "count": 60
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "mon_espace_renders",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "text": 839
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "theme_font_controls",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "dark": true,
+        "font": 3
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "v101112_user_fixes_preserved",
+      "status": "PASS",
+      "detail": {
+        "h3count": 1,
+        "h22rows": 9
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "exact_text_highlight_model",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "start": 0,
+        "end": 12,
+        "whole": false,
+        "android": false
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "visible_buttons_named",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "desktop",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "desktop",
+      "check": "no_console_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

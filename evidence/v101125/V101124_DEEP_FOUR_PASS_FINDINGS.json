@@ -1,0 +1,29 @@
+{
+  "schema": "L24H_V101125_V101124_DEEP_FOUR_PASS_FINDINGS_V1",
+  "version": "v101.125",
+  "audited_predecessor": "v101.124",
+  "audited_predecessor_zip_sha256": "15b9fdb66fb07617ac8078fddb3e4076347390252a510c6eeb4b613f4a06d3ac",
+  "pass1_files_vs_build": "PASS",
+  "pass2_runtime_package": "PASS",
+  "pass3_report_integrity": "FAIL_REPORT_BINDING_INTEGRITY",
+  "pass4_stale_obsolete_evidence": "FAIL_STALE_CURRENT_EVIDENCE_SCHEMA_SCOPE",
+  "findings": [
+    {
+      "id": "R125-01",
+      "class": "REPORT_BINDING",
+      "detail": "Active v101.124 report lines for current APP_VERSION/stage/cache/storage and release lifecycle were bound generically to declaration-parity evidence that did not directly prove those specific claims."
+    },
+    {
+      "id": "R125-02",
+      "class": "STALE_GENERATED_EVIDENCE",
+      "detail": "Current v101.124 evidence included HOUR24 state/UX schema identifiers from V101123 while current v101.124 scripts emitted V101124 schemas; other current wrappers retained V101121 schema ids."
+    },
+    {
+      "id": "R125-03",
+      "class": "STALE_SCAN_SCOPE",
+      "detail": "v101.124 current stale-reference scan excluded evidence/v101124, so its zero-unexplained-current-reference claim did not govern current generated evidence artifacts."
+    }
+  ],
+  "application_runtime_defect_found": false,
+  "successor_scope": "release identity + evidence schemas + stale scan scope + claim-specific line evidence only"
+}

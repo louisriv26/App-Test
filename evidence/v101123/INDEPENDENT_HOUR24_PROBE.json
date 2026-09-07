@@ -1,0 +1,388 @@
+{
+  "schema": "L24H_V101123_INDEPENDENT_HOUR24_PROBE_V1",
+  "version": "v101.123",
+  "implementation": "separate browser probe; does not call primary Hour-24 matrix",
+  "summary": {
+    "pass": 55,
+    "fail": 0,
+    "total": 55,
+    "profiles": 5
+  },
+  "rows": [
+    {
+      "profile": "phone",
+      "check": "identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "phone",
+      "check": "hour23_contract",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "check": "hour24_hour_actions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "check": "incomplete_truth",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "check": "complete_truth",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "check": "terminal_nav_no_next",
+      "status": "PASS",
+      "detail": [
+        "Précédente\nJésus transpercé par la lanc",
+        "Méditée\nAppuyez après avoir médité"
+      ]
+    },
+    {
+      "profile": "phone",
+      "check": "no_local_home",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "check": "live_transition",
+      "status": "PASS",
+      "detail": {
+        "a": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "b": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "incomplete_restart_rejected",
+      "status": "PASS",
+      "detail": {
+        "r": false,
+        "same": true
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "hour23_contract",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "hour24_hour_actions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "incomplete_truth",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "complete_truth",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "terminal_nav_no_next",
+      "status": "PASS",
+      "detail": [
+        "Précédente\nJésus transpercé par la lanc",
+        "Méditée\nAppuyez après avoir médité"
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "no_local_home",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "live_transition",
+      "status": "PASS",
+      "detail": {
+        "a": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "b": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "incomplete_restart_rejected",
+      "status": "PASS",
+      "detail": {
+        "r": false,
+        "same": true
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "hour23_contract",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "hour24_hour_actions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "incomplete_truth",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "complete_truth",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "terminal_nav_no_next",
+      "status": "PASS",
+      "detail": [
+        "Précédente\nJésus transpercé par la lanc",
+        "Méditée\nAppuyez après avoir médité"
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "no_local_home",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "live_transition",
+      "status": "PASS",
+      "detail": {
+        "a": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "b": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "incomplete_restart_rejected",
+      "status": "PASS",
+      "detail": {
+        "r": false,
+        "same": true
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "desktop",
+      "check": "identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "desktop",
+      "check": "hour23_contract",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "check": "hour24_hour_actions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "check": "incomplete_truth",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "check": "complete_truth",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "check": "terminal_nav_no_next",
+      "status": "PASS",
+      "detail": [
+        "Précédente\nJésus transpercé par la lanc",
+        "Méditée\nAppuyez après avoir médité"
+      ]
+    },
+    {
+      "profile": "desktop",
+      "check": "no_local_home",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "check": "live_transition",
+      "status": "PASS",
+      "detail": {
+        "a": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "b": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "incomplete_restart_rejected",
+      "status": "PASS",
+      "detail": {
+        "r": false,
+        "same": true
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "samsung",
+      "check": "identity",
+      "status": "PASS",
+      "detail": "v101.123"
+    },
+    {
+      "profile": "samsung",
+      "check": "hour23_contract",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "check": "hour24_hour_actions",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "check": "incomplete_truth",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "check": "complete_truth",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "check": "terminal_nav_no_next",
+      "status": "PASS",
+      "detail": [
+        "Précédente\nJésus transpercé par la lanc",
+        "Méditée\nAppuyez après avoir médité"
+      ]
+    },
+    {
+      "profile": "samsung",
+      "check": "no_local_home",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "check": "live_transition",
+      "status": "PASS",
+      "detail": {
+        "a": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "b": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "incomplete_restart_rejected",
+      "status": "PASS",
+      "detail": {
+        "r": false,
+        "same": true
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

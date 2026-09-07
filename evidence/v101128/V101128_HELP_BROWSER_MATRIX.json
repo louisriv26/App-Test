@@ -1,0 +1,1069 @@
+{
+  "schema": "L24H_V101128_HELP_BROWSER_MATRIX_V1",
+  "version": "v101.128",
+  "browser": "system Chromium via Playwright content injection",
+  "real_device_limitation": "Not physical Safari/Samsung/TalkBack/VoiceOver evidence",
+  "summary": {
+    "profiles": 5,
+    "pass": 70,
+    "fail": 0,
+    "total": 70
+  },
+  "results": [
+    {
+      "profile": "phone",
+      "check": "version_stage",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.128",
+        "stage": "MEDITEE_RECOVERY_ACCESS_AND_SINGLE_STATE_SYNC_R1"
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "help_opens_semantic_dialog",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "role": "dialog",
+        "modal": "true",
+        "sections": 12,
+        "rows": 36,
+        "quick": 9,
+        "sectionIds": [
+          "help-practice",
+          "help-navigation",
+          "help-reading",
+          "help-actions",
+          "help-espace",
+          "help-reperes",
+          "help-search",
+          "help-samsung",
+          "help-share",
+          "help-backup",
+          "help-update",
+          "help-support"
+        ],
+        "quickText": [
+          "Comment pratiquer les 24 Heures",
+          "Commencer / reprendre une Heure",
+          "Surligner / prendre une note",
+          "Retrouver mes éléments dans Mon Espace",
+          "Rechercher un texte",
+          "Utiliser Samsung / Android",
+          "Partager un passage",
+          "Sauvegarder / restaurer mes données",
+          "Signaler un problème"
+        ],
+        "text": "GUIDE D’UTILISATION\nAide et À propos\n× Fermer\nQue voulez-vous faire ?\nComment pratiquer les 24 Heures\nCommencer / reprendre une Heure\nSurligner / prendre une note\nRetrouver mes éléments dans Mon Espace\nRechercher un texte\nUtiliser Samsung / Android\nPartager un passage\nSauvegarder / restaurer mes données\nSignaler un problème\nCOMMENCER ET PRATIQUER LES 24 HEURES\n✝\nParcours simple proposé — Prier une Heure par jour, dans l’ordre, puis poursuivre avec l’Heure suivante. Vous pouvez aussi choisir une Heure selon le moment de la journée ou parcourir librement les Heures.\n📖\nComment pratiquer — Ouvre le texte détaillé intégré à l’application. Le parcours « une Heure par jour » est proposé par défaut, mais ce n’est pas la seule manière de pratiquer.\n✓\nMéditée — Appuyez après avoir médité une Heure pour l’ajouter à votre progression. Arriver à la fin du texte ne la marque pas automatiquement. Appuyez de nouveau pour retirer ce statut.\nSE DÉPLACER DANS L’APPLICATION\n🏠\nAccueil · Heures · Recherche · Mon Espace — Utilisez la navigation principale pour reprendre votre lecture, parcourir les 24 Heures, rechercher un texte ou retrouver vos éléments personnels.\n📖\nApprofondir · Prières & compléments — Dans Réglages → Parcours, ouvrez les textes du Livre du Ciel, les textes liés et les prières du parcours.\n←\nRetour — Revient à l’écran précédent en conservant votre place lorsque cette reprise est disponible.\nLIRE ET PRIER UNE HEURE\n✝\nMéditation — Texte principal. Réflexions et pratiques ouvre les réflexions associées ; Textes liés ouvre les textes d’approfondissement liés à l’Heure.\n≡\nProgression et Plan — La ligne de progression indique approximativement la part de l’Heure parcourue. Lorsqu’un Plan est disponible, il permet d’aller directement à une scène interne.\n🕯\nPrières de début et de fin — Elles s’ouvrent sans perdre votre position de lecture.\nA\nTaille et thème — Réglages permet de choisir Petit 16 px, Normal 19 px, Grand 22 px ou Très grand 26 px, ainsi que Automatique, Clair ou Sombre.\nSURLIGNER, NOTER ET MARQUER\nSelon votre appareil : sur iPhone/iPad et les appareils compatibles, sélectionnez précisément les mots. Sur Samsung/Android, lorsque Paragraphe est proposé, touchez le paragraphe entier. Marquer cette lecture est différent : il enregistre toute une lecture Approfondir.\n◐\nSurligner — Choisissez Jaune · Bleu · Vert · Violet · Rose. Sur les appareils compatibles, vous pouvez aussi sélectionner du texte dans le titre d’une lecture Approfondir ou dans un titre d’extrait « Tome … — date — … ».\n✎\nNote et Copier — Une note peut être rattachée au passage ou au titre concerné, jusqu’à 2 000 caractères. Copier reprend le texte sélectionné, ou le paragraphe ciblé, avec sa référence lisible.\n🎨\nModifier ou supprimer — Touchez/cliquez un surlignage existant pour changer sa couleur ou le supprimer. Annuler reste disponible temporairement après une suppression réussie.\n★\nMarquer cette lecture — Dans Approfondir, ce bouton ne surligne pas le texte : il place la lecture complète dans Mon Espace → Lectures marquées.\nMON ESPACE\n▶\nReprise et progression — Reprendre rouvre l’Heure à la position enregistrée ; Ouvrir au début repart du début. La progression regroupe les Heures marquées comme méditées.\n🖍\nSurlignages · Notes · Lectures marquées — Ouvrez un élément pour revenir au passage ou à la lecture concernée.\n⚠\nPassages à vérifier — Ce sont d’anciens surlignages que l’application ne peut plus replacer avec certitude après une modification du paragraphe ou de son texte. Cela ne signifie pas que le texte de Luisa est signalé comme douteux : seul l’emplacement de votre annotation personnelle doit être vérifié.\nREPÈRES ET PAROLES DIRECTES\n#\nRepères — Affiche ou masque numéros de paragraphe, références de source et badges Jésus / Père / Marie. Cela ne modifie jamais le texte ; Note, Surligner et Copier restent disponibles.\n✝\nBadges Jésus / Père / Marie — Ils signalent les paroles directement attribuées à cette personne. Le filtre Paroles directes de la Recherche utilise ces attributions.\n❝\nCouleur et continuité du dialogue — La couleur et la typographie suivent aussi le tour de parole principal. Lorsque Jésus, le Père ou Marie cite quelqu’un d’autre, la citation peut conserver cette présentation visuelle sans être attribuée à Jésus, au Père ou à Marie.\nRECHERCHE\n🔍\nTapez un mot ou une expression puis filtrez par Tout · Heures · Réflexions · Prières · Compléments · Paroles directes. Les résultats ouvrent le contenu et, lorsque l’ancre existe, le passage concerné.\n✝\nParoles directes peut aussi afficher les segments directement attribués sans texte saisi et filtrer Tous · Jésus · Père · Marie.\nSAMSUNG / ANDROID\n◐\nParagraphe — Sur les appareils Android/Samsung où ce mode est proposé, activez-le puis touchez le paragraphe à traiter. Le surlignage porte sur le paragraphe entier afin d’éviter les menus Recherche/Traduction de la sélection native.\n⌁\niPhone/iPad — La méthode prévue reste la sélection précise des mots. Cette différence est volontaire.\nPARTAGER UN PASSAGE\n↗\nPartager — Dans une Heure : Réglages → Référence du passage → Partager. Le partage de l’appareil s’ouvre avec la référence stable du passage visible. S’il n’est pas disponible, le lien est copié lorsque cela est possible.\n⎘\nCopier le lien — Copie uniquement l’adresse stable du passage visible.\nSAUVEGARDER ET RESTAURER\n⬇\nSauvegarde JSON — Sert à restaurer progression, positions de lecture, réglages, surlignages, notes et Lectures marquées lorsqu’ils sont présents.\n⬆\nImporter — Remplace vos données actuelles après confirmation. Il est prudent d’exporter votre sauvegarde actuelle avant une importation.\n↗\nJournal lisible — Fichier Markdown destiné à la lecture ; il ne peut pas être importé comme sauvegarde.\nImportant : les données personnelles sont conservées localement lorsque le stockage de l’appareil/navigateur est disponible. Exportez une sauvegarde JSON avant de supprimer ou réinstaller l’app, d’effacer les données du site ou de changer d’appareil.\nMISE À JOUR DE L’APPLICATION\n↻\nActualiser — Lorsqu’une nouvelle version est détectée, une bannière peut proposer Actualiser. Une note non enregistrée bloque l’opération afin d’éviter de perdre le brouillon.\n⌕\nRechercher une mise à jour lance une vérification manuelle. Hors ligne ou si le serveur ne répond pas, elle peut être momentanément impossible.\n↺\nSi la bannière reste affichée après Actualiser, fermez complètement l’application puis rouvrez-la avant de signaler le problème.\nASSISTANCE, CONFIDENTIALITÉ ET À PROPOS\n!\nSignaler un problème de texte — Copie version, empreinte du corpus, route, ID stable et référence source disponibles. Ajoutez ensuite votre description.\n⌘\nCopier les diagnostics — Copie les informations techniques utiles au dépannage.\n🔒\nVie privée — Partager, Copier le lien, Signaler un problème de texte et Diagnostics n’ajoutent pas automatiquement le contenu de vos notes ni celui de vos surlignages personnels.\n! Signaler un problème de texte⌘ Copier les diagnostics\n✦\nVersion : v101.128 · Source : GE / Lumen Luminis / septembre 2021 · Empreinte corpus : ab55fe5dbd4859ff\nL’application rassemble les 24 Heures, les prières et les textes d’approfondissement associés. Vos annotations, progression et positions de lecture restent locales lorsque le stockage de l’appareil/navigateur est disponible.",
+        "hOverflow": 0
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "help_structure_12_36_9",
+      "status": "PASS",
+      "detail": {
+        "sections": 12,
+        "rows": 36,
+        "quick": 9
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "help_section_order",
+      "status": "PASS",
+      "detail": [
+        "help-practice",
+        "help-navigation",
+        "help-reading",
+        "help-actions",
+        "help-espace",
+        "help-reperes",
+        "help-search",
+        "help-samsung",
+        "help-share",
+        "help-backup",
+        "help-update",
+        "help-support"
+      ]
+    },
+    {
+      "profile": "phone",
+      "check": "practice_first_quick",
+      "status": "PASS",
+      "detail": [
+        "Comment pratiquer les 24 Heures",
+        "Commencer / reprendre une Heure",
+        "Surligner / prendre une note",
+        "Retrouver mes éléments dans Mon Espace",
+        "Rechercher un texte",
+        "Utiliser Samsung / Android",
+        "Partager un passage",
+        "Sauvegarder / restaurer mes données",
+        "Signaler un problème"
+      ]
+    },
+    {
+      "profile": "phone",
+      "check": "attribution_clarity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "check": "stale_highlight_clarity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "check": "sharing_guidance",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "check": "misleading_old_wording_absent",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "check": "no_help_horizontal_overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "profile": "phone",
+      "check": "all_quick_links_resolve_and_focus",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "help-practice",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-reading",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-actions",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-espace",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-search",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-samsung",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-share",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-backup",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-support",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        }
+      ]
+    },
+    {
+      "profile": "phone",
+      "check": "help_reaches_final_section",
+      "status": "PASS",
+      "detail": {
+        "atBottom": true,
+        "supportVisible": true,
+        "scrollTop": 5530,
+        "max": 5530
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "help_close_restores_focus",
+      "status": "PASS",
+      "detail": {
+        "closed": true,
+        "active": "__helpTestInvoker"
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "version_stage",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.128",
+        "stage": "MEDITEE_RECOVERY_ACCESS_AND_SINGLE_STATE_SYNC_R1"
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "help_opens_semantic_dialog",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "role": "dialog",
+        "modal": "true",
+        "sections": 12,
+        "rows": 36,
+        "quick": 9,
+        "sectionIds": [
+          "help-practice",
+          "help-navigation",
+          "help-reading",
+          "help-actions",
+          "help-espace",
+          "help-reperes",
+          "help-search",
+          "help-samsung",
+          "help-share",
+          "help-backup",
+          "help-update",
+          "help-support"
+        ],
+        "quickText": [
+          "Comment pratiquer les 24 Heures",
+          "Commencer / reprendre une Heure",
+          "Surligner / prendre une note",
+          "Retrouver mes éléments dans Mon Espace",
+          "Rechercher un texte",
+          "Utiliser Samsung / Android",
+          "Partager un passage",
+          "Sauvegarder / restaurer mes données",
+          "Signaler un problème"
+        ],
+        "text": "GUIDE D’UTILISATION\nAide et À propos\n× Fermer\nQue voulez-vous faire ?\nComment pratiquer les 24 Heures\nCommencer / reprendre une Heure\nSurligner / prendre une note\nRetrouver mes éléments dans Mon Espace\nRechercher un texte\nUtiliser Samsung / Android\nPartager un passage\nSauvegarder / restaurer mes données\nSignaler un problème\nCOMMENCER ET PRATIQUER LES 24 HEURES\n✝\nParcours simple proposé — Prier une Heure par jour, dans l’ordre, puis poursuivre avec l’Heure suivante. Vous pouvez aussi choisir une Heure selon le moment de la journée ou parcourir librement les Heures.\n📖\nComment pratiquer — Ouvre le texte détaillé intégré à l’application. Le parcours « une Heure par jour » est proposé par défaut, mais ce n’est pas la seule manière de pratiquer.\n✓\nMéditée — Appuyez après avoir médité une Heure pour l’ajouter à votre progression. Arriver à la fin du texte ne la marque pas automatiquement. Appuyez de nouveau pour retirer ce statut.\nSE DÉPLACER DANS L’APPLICATION\n🏠\nAccueil · Heures · Recherche · Mon Espace — Utilisez la navigation principale pour reprendre votre lecture, parcourir les 24 Heures, rechercher un texte ou retrouver vos éléments personnels.\n📖\nApprofondir · Prières & compléments — Dans Réglages → Parcours, ouvrez les textes du Livre du Ciel, les textes liés et les prières du parcours.\n←\nRetour — Revient à l’écran précédent en conservant votre place lorsque cette reprise est disponible.\nLIRE ET PRIER UNE HEURE\n✝\nMéditation — Texte principal. Réflexions et pratiques ouvre les réflexions associées ; Textes liés ouvre les textes d’approfondissement liés à l’Heure.\n≡\nProgression et Plan — La ligne de progression indique approximativement la part de l’Heure parcourue. Lorsqu’un Plan est disponible, il permet d’aller directement à une scène interne.\n🕯\nPrières de début et de fin — Elles s’ouvrent sans perdre votre position de lecture.\nA\nTaille et thème — Réglages permet de choisir Petit 16 px, Normal 19 px, Grand 22 px ou Très grand 26 px, ainsi que Automatique, Clair ou Sombre.\nSURLIGNER, NOTER ET MARQUER\nSelon votre appareil : sur iPhone/iPad et les appareils compatibles, sélectionnez précisément les mots. Sur Samsung/Android, lorsque Paragraphe est proposé, touchez le paragraphe entier. Marquer cette lecture est différent : il enregistre toute une lecture Approfondir.\n◐\nSurligner — Choisissez Jaune · Bleu · Vert · Violet · Rose. Sur les appareils compatibles, vous pouvez aussi sélectionner du texte dans le titre d’une lecture Approfondir ou dans un titre d’extrait « Tome … — date — … ».\n✎\nNote et Copier — Une note peut être rattachée au passage ou au titre concerné, jusqu’à 2 000 caractères. Copier reprend le texte sélectionné, ou le paragraphe ciblé, avec sa référence lisible.\n🎨\nModifier ou supprimer — Touchez/cliquez un surlignage existant pour changer sa couleur ou le supprimer. Annuler reste disponible temporairement après une suppression réussie.\n★\nMarquer cette lecture — Dans Approfondir, ce bouton ne surligne pas le texte : il place la lecture complète dans Mon Espace → Lectures marquées.\nMON ESPACE\n▶\nReprise et progression — Reprendre rouvre l’Heure à la position enregistrée ; Ouvrir au début repart du début. La progression regroupe les Heures marquées comme méditées.\n🖍\nSurlignages · Notes · Lectures marquées — Ouvrez un élément pour revenir au passage ou à la lecture concernée.\n⚠\nPassages à vérifier — Ce sont d’anciens surlignages que l’application ne peut plus replacer avec certitude après une modification du paragraphe ou de son texte. Cela ne signifie pas que le texte de Luisa est signalé comme douteux : seul l’emplacement de votre annotation personnelle doit être vérifié.\nREPÈRES ET PAROLES DIRECTES\n#\nRepères — Affiche ou masque numéros de paragraphe, références de source et badges Jésus / Père / Marie. Cela ne modifie jamais le texte ; Note, Surligner et Copier restent disponibles.\n✝\nBadges Jésus / Père / Marie — Ils signalent les paroles directement attribuées à cette personne. Le filtre Paroles directes de la Recherche utilise ces attributions.\n❝\nCouleur et continuité du dialogue — La couleur et la typographie suivent aussi le tour de parole principal. Lorsque Jésus, le Père ou Marie cite quelqu’un d’autre, la citation peut conserver cette présentation visuelle sans être attribuée à Jésus, au Père ou à Marie.\nRECHERCHE\n🔍\nTapez un mot ou une expression puis filtrez par Tout · Heures · Réflexions · Prières · Compléments · Paroles directes. Les résultats ouvrent le contenu et, lorsque l’ancre existe, le passage concerné.\n✝\nParoles directes peut aussi afficher les segments directement attribués sans texte saisi et filtrer Tous · Jésus · Père · Marie.\nSAMSUNG / ANDROID\n◐\nParagraphe — Sur les appareils Android/Samsung où ce mode est proposé, activez-le puis touchez le paragraphe à traiter. Le surlignage porte sur le paragraphe entier afin d’éviter les menus Recherche/Traduction de la sélection native.\n⌁\niPhone/iPad — La méthode prévue reste la sélection précise des mots. Cette différence est volontaire.\nPARTAGER UN PASSAGE\n↗\nPartager — Dans une Heure : Réglages → Référence du passage → Partager. Le partage de l’appareil s’ouvre avec la référence stable du passage visible. S’il n’est pas disponible, le lien est copié lorsque cela est possible.\n⎘\nCopier le lien — Copie uniquement l’adresse stable du passage visible.\nSAUVEGARDER ET RESTAURER\n⬇\nSauvegarde JSON — Sert à restaurer progression, positions de lecture, réglages, surlignages, notes et Lectures marquées lorsqu’ils sont présents.\n⬆\nImporter — Remplace vos données actuelles après confirmation. Il est prudent d’exporter votre sauvegarde actuelle avant une importation.\n↗\nJournal lisible — Fichier Markdown destiné à la lecture ; il ne peut pas être importé comme sauvegarde.\nImportant : les données personnelles sont conservées localement lorsque le stockage de l’appareil/navigateur est disponible. Exportez une sauvegarde JSON avant de supprimer ou réinstaller l’app, d’effacer les données du site ou de changer d’appareil.\nMISE À JOUR DE L’APPLICATION\n↻\nActualiser — Lorsqu’une nouvelle version est détectée, une bannière peut proposer Actualiser. Une note non enregistrée bloque l’opération afin d’éviter de perdre le brouillon.\n⌕\nRechercher une mise à jour lance une vérification manuelle. Hors ligne ou si le serveur ne répond pas, elle peut être momentanément impossible.\n↺\nSi la bannière reste affichée après Actualiser, fermez complètement l’application puis rouvrez-la avant de signaler le problème.\nASSISTANCE, CONFIDENTIALITÉ ET À PROPOS\n!\nSignaler un problème de texte — Copie version, empreinte du corpus, route, ID stable et référence source disponibles. Ajoutez ensuite votre description.\n⌘\nCopier les diagnostics — Copie les informations techniques utiles au dépannage.\n🔒\nVie privée — Partager, Copier le lien, Signaler un problème de texte et Diagnostics n’ajoutent pas automatiquement le contenu de vos notes ni celui de vos surlignages personnels.\n! Signaler un problème de texte⌘ Copier les diagnostics\n✦\nVersion : v101.128 · Source : GE / Lumen Luminis / septembre 2021 · Empreinte corpus : ab55fe5dbd4859ff\nL’application rassemble les 24 Heures, les prières et les textes d’approfondissement associés. Vos annotations, progression et positions de lecture restent locales lorsque le stockage de l’appareil/navigateur est disponible.",
+        "hOverflow": 0
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "help_structure_12_36_9",
+      "status": "PASS",
+      "detail": {
+        "sections": 12,
+        "rows": 36,
+        "quick": 9
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "help_section_order",
+      "status": "PASS",
+      "detail": [
+        "help-practice",
+        "help-navigation",
+        "help-reading",
+        "help-actions",
+        "help-espace",
+        "help-reperes",
+        "help-search",
+        "help-samsung",
+        "help-share",
+        "help-backup",
+        "help-update",
+        "help-support"
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "practice_first_quick",
+      "status": "PASS",
+      "detail": [
+        "Comment pratiquer les 24 Heures",
+        "Commencer / reprendre une Heure",
+        "Surligner / prendre une note",
+        "Retrouver mes éléments dans Mon Espace",
+        "Rechercher un texte",
+        "Utiliser Samsung / Android",
+        "Partager un passage",
+        "Sauvegarder / restaurer mes données",
+        "Signaler un problème"
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "attribution_clarity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "stale_highlight_clarity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "sharing_guidance",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "misleading_old_wording_absent",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "no_help_horizontal_overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "all_quick_links_resolve_and_focus",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "help-practice",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-reading",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-actions",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-espace",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-search",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-samsung",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-share",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-backup",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-support",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        }
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "help_reaches_final_section",
+      "status": "PASS",
+      "detail": {
+        "atBottom": true,
+        "supportVisible": true,
+        "scrollTop": 3093,
+        "max": 3093
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "help_close_restores_focus",
+      "status": "PASS",
+      "detail": {
+        "closed": true,
+        "active": "__helpTestInvoker"
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "version_stage",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.128",
+        "stage": "MEDITEE_RECOVERY_ACCESS_AND_SINGLE_STATE_SYNC_R1"
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "help_opens_semantic_dialog",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "role": "dialog",
+        "modal": "true",
+        "sections": 12,
+        "rows": 36,
+        "quick": 9,
+        "sectionIds": [
+          "help-practice",
+          "help-navigation",
+          "help-reading",
+          "help-actions",
+          "help-espace",
+          "help-reperes",
+          "help-search",
+          "help-samsung",
+          "help-share",
+          "help-backup",
+          "help-update",
+          "help-support"
+        ],
+        "quickText": [
+          "Comment pratiquer les 24 Heures",
+          "Commencer / reprendre une Heure",
+          "Surligner / prendre une note",
+          "Retrouver mes éléments dans Mon Espace",
+          "Rechercher un texte",
+          "Utiliser Samsung / Android",
+          "Partager un passage",
+          "Sauvegarder / restaurer mes données",
+          "Signaler un problème"
+        ],
+        "text": "GUIDE D’UTILISATION\nAide et À propos\n× Fermer\nQue voulez-vous faire ?\nComment pratiquer les 24 Heures\nCommencer / reprendre une Heure\nSurligner / prendre une note\nRetrouver mes éléments dans Mon Espace\nRechercher un texte\nUtiliser Samsung / Android\nPartager un passage\nSauvegarder / restaurer mes données\nSignaler un problème\nCOMMENCER ET PRATIQUER LES 24 HEURES\n✝\nParcours simple proposé — Prier une Heure par jour, dans l’ordre, puis poursuivre avec l’Heure suivante. Vous pouvez aussi choisir une Heure selon le moment de la journée ou parcourir librement les Heures.\n📖\nComment pratiquer — Ouvre le texte détaillé intégré à l’application. Le parcours « une Heure par jour » est proposé par défaut, mais ce n’est pas la seule manière de pratiquer.\n✓\nMéditée — Appuyez après avoir médité une Heure pour l’ajouter à votre progression. Arriver à la fin du texte ne la marque pas automatiquement. Appuyez de nouveau pour retirer ce statut.\nSE DÉPLACER DANS L’APPLICATION\n🏠\nAccueil · Heures · Recherche · Mon Espace — Utilisez la navigation principale pour reprendre votre lecture, parcourir les 24 Heures, rechercher un texte ou retrouver vos éléments personnels.\n📖\nApprofondir · Prières & compléments — Dans Réglages → Parcours, ouvrez les textes du Livre du Ciel, les textes liés et les prières du parcours.\n←\nRetour — Revient à l’écran précédent en conservant votre place lorsque cette reprise est disponible.\nLIRE ET PRIER UNE HEURE\n✝\nMéditation — Texte principal. Réflexions et pratiques ouvre les réflexions associées ; Textes liés ouvre les textes d’approfondissement liés à l’Heure.\n≡\nProgression et Plan — La ligne de progression indique approximativement la part de l’Heure parcourue. Lorsqu’un Plan est disponible, il permet d’aller directement à une scène interne.\n🕯\nPrières de début et de fin — Elles s’ouvrent sans perdre votre position de lecture.\nA\nTaille et thème — Réglages permet de choisir Petit 16 px, Normal 19 px, Grand 22 px ou Très grand 26 px, ainsi que Automatique, Clair ou Sombre.\nSURLIGNER, NOTER ET MARQUER\nSelon votre appareil : sur iPhone/iPad et les appareils compatibles, sélectionnez précisément les mots. Sur Samsung/Android, lorsque Paragraphe est proposé, touchez le paragraphe entier. Marquer cette lecture est différent : il enregistre toute une lecture Approfondir.\n◐\nSurligner — Choisissez Jaune · Bleu · Vert · Violet · Rose. Sur les appareils compatibles, vous pouvez aussi sélectionner du texte dans le titre d’une lecture Approfondir ou dans un titre d’extrait « Tome … — date — … ».\n✎\nNote et Copier — Une note peut être rattachée au passage ou au titre concerné, jusqu’à 2 000 caractères. Copier reprend le texte sélectionné, ou le paragraphe ciblé, avec sa référence lisible.\n🎨\nModifier ou supprimer — Touchez/cliquez un surlignage existant pour changer sa couleur ou le supprimer. Annuler reste disponible temporairement après une suppression réussie.\n★\nMarquer cette lecture — Dans Approfondir, ce bouton ne surligne pas le texte : il place la lecture complète dans Mon Espace → Lectures marquées.\nMON ESPACE\n▶\nReprise et progression — Reprendre rouvre l’Heure à la position enregistrée ; Ouvrir au début repart du début. La progression regroupe les Heures marquées comme méditées.\n🖍\nSurlignages · Notes · Lectures marquées — Ouvrez un élément pour revenir au passage ou à la lecture concernée.\n⚠\nPassages à vérifier — Ce sont d’anciens surlignages que l’application ne peut plus replacer avec certitude après une modification du paragraphe ou de son texte. Cela ne signifie pas que le texte de Luisa est signalé comme douteux : seul l’emplacement de votre annotation personnelle doit être vérifié.\nREPÈRES ET PAROLES DIRECTES\n#\nRepères — Affiche ou masque numéros de paragraphe, références de source et badges Jésus / Père / Marie. Cela ne modifie jamais le texte ; Note, Surligner et Copier restent disponibles.\n✝\nBadges Jésus / Père / Marie — Ils signalent les paroles directement attribuées à cette personne. Le filtre Paroles directes de la Recherche utilise ces attributions.\n❝\nCouleur et continuité du dialogue — La couleur et la typographie suivent aussi le tour de parole principal. Lorsque Jésus, le Père ou Marie cite quelqu’un d’autre, la citation peut conserver cette présentation visuelle sans être attribuée à Jésus, au Père ou à Marie.\nRECHERCHE\n🔍\nTapez un mot ou une expression puis filtrez par Tout · Heures · Réflexions · Prières · Compléments · Paroles directes. Les résultats ouvrent le contenu et, lorsque l’ancre existe, le passage concerné.\n✝\nParoles directes peut aussi afficher les segments directement attribués sans texte saisi et filtrer Tous · Jésus · Père · Marie.\nSAMSUNG / ANDROID\n◐\nParagraphe — Sur les appareils Android/Samsung où ce mode est proposé, activez-le puis touchez le paragraphe à traiter. Le surlignage porte sur le paragraphe entier afin d’éviter les menus Recherche/Traduction de la sélection native.\n⌁\niPhone/iPad — La méthode prévue reste la sélection précise des mots. Cette différence est volontaire.\nPARTAGER UN PASSAGE\n↗\nPartager — Dans une Heure : Réglages → Référence du passage → Partager. Le partage de l’appareil s’ouvre avec la référence stable du passage visible. S’il n’est pas disponible, le lien est copié lorsque cela est possible.\n⎘\nCopier le lien — Copie uniquement l’adresse stable du passage visible.\nSAUVEGARDER ET RESTAURER\n⬇\nSauvegarde JSON — Sert à restaurer progression, positions de lecture, réglages, surlignages, notes et Lectures marquées lorsqu’ils sont présents.\n⬆\nImporter — Remplace vos données actuelles après confirmation. Il est prudent d’exporter votre sauvegarde actuelle avant une importation.\n↗\nJournal lisible — Fichier Markdown destiné à la lecture ; il ne peut pas être importé comme sauvegarde.\nImportant : les données personnelles sont conservées localement lorsque le stockage de l’appareil/navigateur est disponible. Exportez une sauvegarde JSON avant de supprimer ou réinstaller l’app, d’effacer les données du site ou de changer d’appareil.\nMISE À JOUR DE L’APPLICATION\n↻\nActualiser — Lorsqu’une nouvelle version est détectée, une bannière peut proposer Actualiser. Une note non enregistrée bloque l’opération afin d’éviter de perdre le brouillon.\n⌕\nRechercher une mise à jour lance une vérification manuelle. Hors ligne ou si le serveur ne répond pas, elle peut être momentanément impossible.\n↺\nSi la bannière reste affichée après Actualiser, fermez complètement l’application puis rouvrez-la avant de signaler le problème.\nASSISTANCE, CONFIDENTIALITÉ ET À PROPOS\n!\nSignaler un problème de texte — Copie version, empreinte du corpus, route, ID stable et référence source disponibles. Ajoutez ensuite votre description.\n⌘\nCopier les diagnostics — Copie les informations techniques utiles au dépannage.\n🔒\nVie privée — Partager, Copier le lien, Signaler un problème de texte et Diagnostics n’ajoutent pas automatiquement le contenu de vos notes ni celui de vos surlignages personnels.\n! Signaler un problème de texte⌘ Copier les diagnostics\n✦\nVersion : v101.128 · Source : GE / Lumen Luminis / septembre 2021 · Empreinte corpus : ab55fe5dbd4859ff\nL’application rassemble les 24 Heures, les prières et les textes d’approfondissement associés. Vos annotations, progression et positions de lecture restent locales lorsque le stockage de l’appareil/navigateur est disponible.",
+        "hOverflow": 0
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "help_structure_12_36_9",
+      "status": "PASS",
+      "detail": {
+        "sections": 12,
+        "rows": 36,
+        "quick": 9
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "help_section_order",
+      "status": "PASS",
+      "detail": [
+        "help-practice",
+        "help-navigation",
+        "help-reading",
+        "help-actions",
+        "help-espace",
+        "help-reperes",
+        "help-search",
+        "help-samsung",
+        "help-share",
+        "help-backup",
+        "help-update",
+        "help-support"
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "practice_first_quick",
+      "status": "PASS",
+      "detail": [
+        "Comment pratiquer les 24 Heures",
+        "Commencer / reprendre une Heure",
+        "Surligner / prendre une note",
+        "Retrouver mes éléments dans Mon Espace",
+        "Rechercher un texte",
+        "Utiliser Samsung / Android",
+        "Partager un passage",
+        "Sauvegarder / restaurer mes données",
+        "Signaler un problème"
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "attribution_clarity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "stale_highlight_clarity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "sharing_guidance",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "misleading_old_wording_absent",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "no_help_horizontal_overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "all_quick_links_resolve_and_focus",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "help-practice",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-reading",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-actions",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-espace",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-search",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-samsung",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-share",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-backup",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-support",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        }
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "help_reaches_final_section",
+      "status": "PASS",
+      "detail": {
+        "atBottom": true,
+        "supportVisible": true,
+        "scrollTop": 3148,
+        "max": 3148
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "help_close_restores_focus",
+      "status": "PASS",
+      "detail": {
+        "closed": true,
+        "active": "__helpTestInvoker"
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "desktop",
+      "check": "version_stage",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.128",
+        "stage": "MEDITEE_RECOVERY_ACCESS_AND_SINGLE_STATE_SYNC_R1"
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "help_opens_semantic_dialog",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "role": "dialog",
+        "modal": "true",
+        "sections": 12,
+        "rows": 36,
+        "quick": 9,
+        "sectionIds": [
+          "help-practice",
+          "help-navigation",
+          "help-reading",
+          "help-actions",
+          "help-espace",
+          "help-reperes",
+          "help-search",
+          "help-samsung",
+          "help-share",
+          "help-backup",
+          "help-update",
+          "help-support"
+        ],
+        "quickText": [
+          "Comment pratiquer les 24 Heures",
+          "Commencer / reprendre une Heure",
+          "Surligner / prendre une note",
+          "Retrouver mes éléments dans Mon Espace",
+          "Rechercher un texte",
+          "Utiliser Samsung / Android",
+          "Partager un passage",
+          "Sauvegarder / restaurer mes données",
+          "Signaler un problème"
+        ],
+        "text": "GUIDE D’UTILISATION\nAide et À propos\n× Fermer\nQue voulez-vous faire ?\nComment pratiquer les 24 Heures\nCommencer / reprendre une Heure\nSurligner / prendre une note\nRetrouver mes éléments dans Mon Espace\nRechercher un texte\nUtiliser Samsung / Android\nPartager un passage\nSauvegarder / restaurer mes données\nSignaler un problème\nCOMMENCER ET PRATIQUER LES 24 HEURES\n✝\nParcours simple proposé — Prier une Heure par jour, dans l’ordre, puis poursuivre avec l’Heure suivante. Vous pouvez aussi choisir une Heure selon le moment de la journée ou parcourir librement les Heures.\n📖\nComment pratiquer — Ouvre le texte détaillé intégré à l’application. Le parcours « une Heure par jour » est proposé par défaut, mais ce n’est pas la seule manière de pratiquer.\n✓\nMéditée — Appuyez après avoir médité une Heure pour l’ajouter à votre progression. Arriver à la fin du texte ne la marque pas automatiquement. Appuyez de nouveau pour retirer ce statut.\nSE DÉPLACER DANS L’APPLICATION\n🏠\nAccueil · Heures · Recherche · Mon Espace — Utilisez la navigation principale pour reprendre votre lecture, parcourir les 24 Heures, rechercher un texte ou retrouver vos éléments personnels.\n📖\nApprofondir · Prières & compléments — Dans Réglages → Parcours, ouvrez les textes du Livre du Ciel, les textes liés et les prières du parcours.\n←\nRetour — Revient à l’écran précédent en conservant votre place lorsque cette reprise est disponible.\nLIRE ET PRIER UNE HEURE\n✝\nMéditation — Texte principal. Réflexions et pratiques ouvre les réflexions associées ; Textes liés ouvre les textes d’approfondissement liés à l’Heure.\n≡\nProgression et Plan — La ligne de progression indique approximativement la part de l’Heure parcourue. Lorsqu’un Plan est disponible, il permet d’aller directement à une scène interne.\n🕯\nPrières de début et de fin — Elles s’ouvrent sans perdre votre position de lecture.\nA\nTaille et thème — Réglages permet de choisir Petit 16 px, Normal 19 px, Grand 22 px ou Très grand 26 px, ainsi que Automatique, Clair ou Sombre.\nSURLIGNER, NOTER ET MARQUER\nSelon votre appareil : sur iPhone/iPad et les appareils compatibles, sélectionnez précisément les mots. Sur Samsung/Android, lorsque Paragraphe est proposé, touchez le paragraphe entier. Marquer cette lecture est différent : il enregistre toute une lecture Approfondir.\n◐\nSurligner — Choisissez Jaune · Bleu · Vert · Violet · Rose. Sur les appareils compatibles, vous pouvez aussi sélectionner du texte dans le titre d’une lecture Approfondir ou dans un titre d’extrait « Tome … — date — … ».\n✎\nNote et Copier — Une note peut être rattachée au passage ou au titre concerné, jusqu’à 2 000 caractères. Copier reprend le texte sélectionné, ou le paragraphe ciblé, avec sa référence lisible.\n🎨\nModifier ou supprimer — Touchez/cliquez un surlignage existant pour changer sa couleur ou le supprimer. Annuler reste disponible temporairement après une suppression réussie.\n★\nMarquer cette lecture — Dans Approfondir, ce bouton ne surligne pas le texte : il place la lecture complète dans Mon Espace → Lectures marquées.\nMON ESPACE\n▶\nReprise et progression — Reprendre rouvre l’Heure à la position enregistrée ; Ouvrir au début repart du début. La progression regroupe les Heures marquées comme méditées.\n🖍\nSurlignages · Notes · Lectures marquées — Ouvrez un élément pour revenir au passage ou à la lecture concernée.\n⚠\nPassages à vérifier — Ce sont d’anciens surlignages que l’application ne peut plus replacer avec certitude après une modification du paragraphe ou de son texte. Cela ne signifie pas que le texte de Luisa est signalé comme douteux : seul l’emplacement de votre annotation personnelle doit être vérifié.\nREPÈRES ET PAROLES DIRECTES\n#\nRepères — Affiche ou masque numéros de paragraphe, références de source et badges Jésus / Père / Marie. Cela ne modifie jamais le texte ; Note, Surligner et Copier restent disponibles.\n✝\nBadges Jésus / Père / Marie — Ils signalent les paroles directement attribuées à cette personne. Le filtre Paroles directes de la Recherche utilise ces attributions.\n❝\nCouleur et continuité du dialogue — La couleur et la typographie suivent aussi le tour de parole principal. Lorsque Jésus, le Père ou Marie cite quelqu’un d’autre, la citation peut conserver cette présentation visuelle sans être attribuée à Jésus, au Père ou à Marie.\nRECHERCHE\n🔍\nTapez un mot ou une expression puis filtrez par Tout · Heures · Réflexions · Prières · Compléments · Paroles directes. Les résultats ouvrent le contenu et, lorsque l’ancre existe, le passage concerné.\n✝\nParoles directes peut aussi afficher les segments directement attribués sans texte saisi et filtrer Tous · Jésus · Père · Marie.\nSAMSUNG / ANDROID\n◐\nParagraphe — Sur les appareils Android/Samsung où ce mode est proposé, activez-le puis touchez le paragraphe à traiter. Le surlignage porte sur le paragraphe entier afin d’éviter les menus Recherche/Traduction de la sélection native.\n⌁\niPhone/iPad — La méthode prévue reste la sélection précise des mots. Cette différence est volontaire.\nPARTAGER UN PASSAGE\n↗\nPartager — Dans une Heure : Réglages → Référence du passage → Partager. Le partage de l’appareil s’ouvre avec la référence stable du passage visible. S’il n’est pas disponible, le lien est copié lorsque cela est possible.\n⎘\nCopier le lien — Copie uniquement l’adresse stable du passage visible.\nSAUVEGARDER ET RESTAURER\n⬇\nSauvegarde JSON — Sert à restaurer progression, positions de lecture, réglages, surlignages, notes et Lectures marquées lorsqu’ils sont présents.\n⬆\nImporter — Remplace vos données actuelles après confirmation. Il est prudent d’exporter votre sauvegarde actuelle avant une importation.\n↗\nJournal lisible — Fichier Markdown destiné à la lecture ; il ne peut pas être importé comme sauvegarde.\nImportant : les données personnelles sont conservées localement lorsque le stockage de l’appareil/navigateur est disponible. Exportez une sauvegarde JSON avant de supprimer ou réinstaller l’app, d’effacer les données du site ou de changer d’appareil.\nMISE À JOUR DE L’APPLICATION\n↻\nActualiser — Lorsqu’une nouvelle version est détectée, une bannière peut proposer Actualiser. Une note non enregistrée bloque l’opération afin d’éviter de perdre le brouillon.\n⌕\nRechercher une mise à jour lance une vérification manuelle. Hors ligne ou si le serveur ne répond pas, elle peut être momentanément impossible.\n↺\nSi la bannière reste affichée après Actualiser, fermez complètement l’application puis rouvrez-la avant de signaler le problème.\nASSISTANCE, CONFIDENTIALITÉ ET À PROPOS\n!\nSignaler un problème de texte — Copie version, empreinte du corpus, route, ID stable et référence source disponibles. Ajoutez ensuite votre description.\n⌘\nCopier les diagnostics — Copie les informations techniques utiles au dépannage.\n🔒\nVie privée — Partager, Copier le lien, Signaler un problème de texte et Diagnostics n’ajoutent pas automatiquement le contenu de vos notes ni celui de vos surlignages personnels.\n! Signaler un problème de texte⌘ Copier les diagnostics\n✦\nVersion : v101.128 · Source : GE / Lumen Luminis / septembre 2021 · Empreinte corpus : ab55fe5dbd4859ff\nL’application rassemble les 24 Heures, les prières et les textes d’approfondissement associés. Vos annotations, progression et positions de lecture restent locales lorsque le stockage de l’appareil/navigateur est disponible.",
+        "hOverflow": 0
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "help_structure_12_36_9",
+      "status": "PASS",
+      "detail": {
+        "sections": 12,
+        "rows": 36,
+        "quick": 9
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "help_section_order",
+      "status": "PASS",
+      "detail": [
+        "help-practice",
+        "help-navigation",
+        "help-reading",
+        "help-actions",
+        "help-espace",
+        "help-reperes",
+        "help-search",
+        "help-samsung",
+        "help-share",
+        "help-backup",
+        "help-update",
+        "help-support"
+      ]
+    },
+    {
+      "profile": "desktop",
+      "check": "practice_first_quick",
+      "status": "PASS",
+      "detail": [
+        "Comment pratiquer les 24 Heures",
+        "Commencer / reprendre une Heure",
+        "Surligner / prendre une note",
+        "Retrouver mes éléments dans Mon Espace",
+        "Rechercher un texte",
+        "Utiliser Samsung / Android",
+        "Partager un passage",
+        "Sauvegarder / restaurer mes données",
+        "Signaler un problème"
+      ]
+    },
+    {
+      "profile": "desktop",
+      "check": "attribution_clarity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "check": "stale_highlight_clarity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "check": "sharing_guidance",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "check": "misleading_old_wording_absent",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "check": "no_help_horizontal_overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "profile": "desktop",
+      "check": "all_quick_links_resolve_and_focus",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "help-practice",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-reading",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-actions",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-espace",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-search",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-samsung",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-share",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-backup",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-support",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        }
+      ]
+    },
+    {
+      "profile": "desktop",
+      "check": "help_reaches_final_section",
+      "status": "PASS",
+      "detail": {
+        "atBottom": true,
+        "supportVisible": true,
+        "scrollTop": 3093,
+        "max": 3093
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "help_close_restores_focus",
+      "status": "PASS",
+      "detail": {
+        "closed": true,
+        "active": "__helpTestInvoker"
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "samsung",
+      "check": "version_stage",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.128",
+        "stage": "MEDITEE_RECOVERY_ACCESS_AND_SINGLE_STATE_SYNC_R1"
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "help_opens_semantic_dialog",
+      "status": "PASS",
+      "detail": {
+        "ok": true,
+        "role": "dialog",
+        "modal": "true",
+        "sections": 12,
+        "rows": 36,
+        "quick": 9,
+        "sectionIds": [
+          "help-practice",
+          "help-navigation",
+          "help-reading",
+          "help-actions",
+          "help-espace",
+          "help-reperes",
+          "help-search",
+          "help-samsung",
+          "help-share",
+          "help-backup",
+          "help-update",
+          "help-support"
+        ],
+        "quickText": [
+          "Comment pratiquer les 24 Heures",
+          "Commencer / reprendre une Heure",
+          "Surligner / prendre une note",
+          "Retrouver mes éléments dans Mon Espace",
+          "Rechercher un texte",
+          "Utiliser Samsung / Android",
+          "Partager un passage",
+          "Sauvegarder / restaurer mes données",
+          "Signaler un problème"
+        ],
+        "text": "GUIDE D’UTILISATION\nAide et À propos\n× Fermer\nQue voulez-vous faire ?\nComment pratiquer les 24 Heures\nCommencer / reprendre une Heure\nSurligner / prendre une note\nRetrouver mes éléments dans Mon Espace\nRechercher un texte\nUtiliser Samsung / Android\nPartager un passage\nSauvegarder / restaurer mes données\nSignaler un problème\nCOMMENCER ET PRATIQUER LES 24 HEURES\n✝\nParcours simple proposé — Prier une Heure par jour, dans l’ordre, puis poursuivre avec l’Heure suivante. Vous pouvez aussi choisir une Heure selon le moment de la journée ou parcourir librement les Heures.\n📖\nComment pratiquer — Ouvre le texte détaillé intégré à l’application. Le parcours « une Heure par jour » est proposé par défaut, mais ce n’est pas la seule manière de pratiquer.\n✓\nMéditée — Appuyez après avoir médité une Heure pour l’ajouter à votre progression. Arriver à la fin du texte ne la marque pas automatiquement. Appuyez de nouveau pour retirer ce statut.\nSE DÉPLACER DANS L’APPLICATION\n🏠\nAccueil · Heures · Recherche · Mon Espace — Utilisez la navigation principale pour reprendre votre lecture, parcourir les 24 Heures, rechercher un texte ou retrouver vos éléments personnels.\n📖\nApprofondir · Prières & compléments — Dans Réglages → Parcours, ouvrez les textes du Livre du Ciel, les textes liés et les prières du parcours.\n←\nRetour — Revient à l’écran précédent en conservant votre place lorsque cette reprise est disponible.\nLIRE ET PRIER UNE HEURE\n✝\nMéditation — Texte principal. Réflexions et pratiques ouvre les réflexions associées ; Textes liés ouvre les textes d’approfondissement liés à l’Heure.\n≡\nProgression et Plan — La ligne de progression indique approximativement la part de l’Heure parcourue. Lorsqu’un Plan est disponible, il permet d’aller directement à une scène interne.\n🕯\nPrières de début et de fin — Elles s’ouvrent sans perdre votre position de lecture.\nA\nTaille et thème — Réglages permet de choisir Petit 16 px, Normal 19 px, Grand 22 px ou Très grand 26 px, ainsi que Automatique, Clair ou Sombre.\nSURLIGNER, NOTER ET MARQUER\nSelon votre appareil : sur iPhone/iPad et les appareils compatibles, sélectionnez précisément les mots. Sur Samsung/Android, lorsque Paragraphe est proposé, touchez le paragraphe entier. Marquer cette lecture est différent : il enregistre toute une lecture Approfondir.\n◐\nSurligner — Choisissez Jaune · Bleu · Vert · Violet · Rose. Sur les appareils compatibles, vous pouvez aussi sélectionner du texte dans le titre d’une lecture Approfondir ou dans un titre d’extrait « Tome … — date — … ».\n✎\nNote et Copier — Une note peut être rattachée au passage ou au titre concerné, jusqu’à 2 000 caractères. Copier reprend le texte sélectionné, ou le paragraphe ciblé, avec sa référence lisible.\n🎨\nModifier ou supprimer — Touchez/cliquez un surlignage existant pour changer sa couleur ou le supprimer. Annuler reste disponible temporairement après une suppression réussie.\n★\nMarquer cette lecture — Dans Approfondir, ce bouton ne surligne pas le texte : il place la lecture complète dans Mon Espace → Lectures marquées.\nMON ESPACE\n▶\nReprise et progression — Reprendre rouvre l’Heure à la position enregistrée ; Ouvrir au début repart du début. La progression regroupe les Heures marquées comme méditées.\n🖍\nSurlignages · Notes · Lectures marquées — Ouvrez un élément pour revenir au passage ou à la lecture concernée.\n⚠\nPassages à vérifier — Ce sont d’anciens surlignages que l’application ne peut plus replacer avec certitude après une modification du paragraphe ou de son texte. Cela ne signifie pas que le texte de Luisa est signalé comme douteux : seul l’emplacement de votre annotation personnelle doit être vérifié.\nREPÈRES ET PAROLES DIRECTES\n#\nRepères — Affiche ou masque numéros de paragraphe, références de source et badges Jésus / Père / Marie. Cela ne modifie jamais le texte ; Note, Surligner et Copier restent disponibles.\n✝\nBadges Jésus / Père / Marie — Ils signalent les paroles directement attribuées à cette personne. Le filtre Paroles directes de la Recherche utilise ces attributions.\n❝\nCouleur et continuité du dialogue — La couleur et la typographie suivent aussi le tour de parole principal. Lorsque Jésus, le Père ou Marie cite quelqu’un d’autre, la citation peut conserver cette présentation visuelle sans être attribuée à Jésus, au Père ou à Marie.\nRECHERCHE\n🔍\nTapez un mot ou une expression puis filtrez par Tout · Heures · Réflexions · Prières · Compléments · Paroles directes. Les résultats ouvrent le contenu et, lorsque l’ancre existe, le passage concerné.\n✝\nParoles directes peut aussi afficher les segments directement attribués sans texte saisi et filtrer Tous · Jésus · Père · Marie.\nSAMSUNG / ANDROID\n◐\nParagraphe — Sur les appareils Android/Samsung où ce mode est proposé, activez-le puis touchez le paragraphe à traiter. Le surlignage porte sur le paragraphe entier afin d’éviter les menus Recherche/Traduction de la sélection native.\n⌁\niPhone/iPad — La méthode prévue reste la sélection précise des mots. Cette différence est volontaire.\nPARTAGER UN PASSAGE\n↗\nPartager — Dans une Heure : Réglages → Référence du passage → Partager. Le partage de l’appareil s’ouvre avec la référence stable du passage visible. S’il n’est pas disponible, le lien est copié lorsque cela est possible.\n⎘\nCopier le lien — Copie uniquement l’adresse stable du passage visible.\nSAUVEGARDER ET RESTAURER\n⬇\nSauvegarde JSON — Sert à restaurer progression, positions de lecture, réglages, surlignages, notes et Lectures marquées lorsqu’ils sont présents.\n⬆\nImporter — Remplace vos données actuelles après confirmation. Il est prudent d’exporter votre sauvegarde actuelle avant une importation.\n↗\nJournal lisible — Fichier Markdown destiné à la lecture ; il ne peut pas être importé comme sauvegarde.\nImportant : les données personnelles sont conservées localement lorsque le stockage de l’appareil/navigateur est disponible. Exportez une sauvegarde JSON avant de supprimer ou réinstaller l’app, d’effacer les données du site ou de changer d’appareil.\nMISE À JOUR DE L’APPLICATION\n↻\nActualiser — Lorsqu’une nouvelle version est détectée, une bannière peut proposer Actualiser. Une note non enregistrée bloque l’opération afin d’éviter de perdre le brouillon.\n⌕\nRechercher une mise à jour lance une vérification manuelle. Hors ligne ou si le serveur ne répond pas, elle peut être momentanément impossible.\n↺\nSi la bannière reste affichée après Actualiser, fermez complètement l’application puis rouvrez-la avant de signaler le problème.\nASSISTANCE, CONFIDENTIALITÉ ET À PROPOS\n!\nSignaler un problème de texte — Copie version, empreinte du corpus, route, ID stable et référence source disponibles. Ajoutez ensuite votre description.\n⌘\nCopier les diagnostics — Copie les informations techniques utiles au dépannage.\n🔒\nVie privée — Partager, Copier le lien, Signaler un problème de texte et Diagnostics n’ajoutent pas automatiquement le contenu de vos notes ni celui de vos surlignages personnels.\n! Signaler un problème de texte⌘ Copier les diagnostics\n✦\nVersion : v101.128 · Source : GE / Lumen Luminis / septembre 2021 · Empreinte corpus : ab55fe5dbd4859ff\nL’application rassemble les 24 Heures, les prières et les textes d’approfondissement associés. Vos annotations, progression et positions de lecture restent locales lorsque le stockage de l’appareil/navigateur est disponible.",
+        "hOverflow": 0
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "help_structure_12_36_9",
+      "status": "PASS",
+      "detail": {
+        "sections": 12,
+        "rows": 36,
+        "quick": 9
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "help_section_order",
+      "status": "PASS",
+      "detail": [
+        "help-practice",
+        "help-navigation",
+        "help-reading",
+        "help-actions",
+        "help-espace",
+        "help-reperes",
+        "help-search",
+        "help-samsung",
+        "help-share",
+        "help-backup",
+        "help-update",
+        "help-support"
+      ]
+    },
+    {
+      "profile": "samsung",
+      "check": "practice_first_quick",
+      "status": "PASS",
+      "detail": [
+        "Comment pratiquer les 24 Heures",
+        "Commencer / reprendre une Heure",
+        "Surligner / prendre une note",
+        "Retrouver mes éléments dans Mon Espace",
+        "Rechercher un texte",
+        "Utiliser Samsung / Android",
+        "Partager un passage",
+        "Sauvegarder / restaurer mes données",
+        "Signaler un problème"
+      ]
+    },
+    {
+      "profile": "samsung",
+      "check": "attribution_clarity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "check": "stale_highlight_clarity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "check": "sharing_guidance",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "check": "misleading_old_wording_absent",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "check": "no_help_horizontal_overflow",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "profile": "samsung",
+      "check": "all_quick_links_resolve_and_focus",
+      "status": "PASS",
+      "detail": [
+        {
+          "id": "help-practice",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-reading",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-actions",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-espace",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-search",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-samsung",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-share",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-backup",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        },
+        {
+          "id": "help-support",
+          "ok": true,
+          "exists": true,
+          "focused": true
+        }
+      ]
+    },
+    {
+      "profile": "samsung",
+      "check": "help_reaches_final_section",
+      "status": "PASS",
+      "detail": {
+        "atBottom": true,
+        "supportVisible": true,
+        "scrollTop": 5191,
+        "max": 5191
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "help_close_restores_focus",
+      "status": "PASS",
+      "detail": {
+        "closed": true,
+        "active": "__helpTestInvoker"
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "schema": "L24H_V101129_USER_STATE_TOPOLOGY_V1",
+  "version": "v101.129",
+  "note": "Character offsets are unchanged; this matrix verifies corrected Samsung/visual-paragraph range topology. Physical Samsung remains external.",
+  "summary": {
+    "pass": 8,
+    "fail": 0,
+    "total": 8
+  },
+  "rows": [
+    {
+      "case": "PASSION24.HOUR.08.P009_visual_paragraph_target_ranges",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          [
+            0,
+            93
+          ],
+          [
+            94,
+            210
+          ],
+          [
+            211,
+            238
+          ]
+        ],
+        "got": [
+          [
+            0,
+            93
+          ],
+          [
+            94,
+            210
+          ],
+          [
+            211,
+            238
+          ]
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P010_visual_paragraph_target_ranges",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          [
+            0,
+            92
+          ]
+        ],
+        "got": [
+          [
+            0,
+            92
+          ]
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P015_visual_paragraph_target_ranges",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          [
+            0,
+            145
+          ],
+          [
+            146,
+            755
+          ]
+        ],
+        "got": [
+          [
+            0,
+            145
+          ],
+          [
+            146,
+            755
+          ]
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P020_visual_paragraph_target_ranges",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          [
+            0,
+            101
+          ]
+        ],
+        "got": [
+          [
+            0,
+            101
+          ]
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P025_visual_paragraph_target_ranges",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          [
+            0,
+            157
+          ]
+        ],
+        "got": [
+          [
+            0,
+            157
+          ]
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P043_visual_paragraph_target_ranges",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          [
+            0,
+            51
+          ]
+        ],
+        "got": [
+          [
+            0,
+            51
+          ]
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P058_visual_paragraph_target_ranges",
+      "status": "PASS",
+      "detail": {
+        "expected": [
+          [
+            0,
+            51
+          ]
+        ],
+        "got": [
+          [
+            0,
+            51
+          ]
+        ]
+      }
+    },
+    {
+      "case": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

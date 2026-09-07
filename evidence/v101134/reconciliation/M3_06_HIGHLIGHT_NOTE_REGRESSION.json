@@ -1,0 +1,89 @@
+{
+  "schema": "L24H_V101133_HIGHLIGHT_NOTE_REGRESSION_RECONSTRUCTION_V1",
+  "provenance": "Reconstructed in v101.134 release-engineering reconciliation from frozen v101.133 M3_05 evidence; no app mutation.",
+  "summary": {
+    "pass": 6,
+    "fail": 0,
+    "total": 6
+  },
+  "rows": [
+    {
+      "check": "highlight_note_roundtrip_0",
+      "status": "PASS",
+      "detail": {
+        "start": 108,
+        "end": 113,
+        "text": " » Ce",
+        "expected": " » Ce",
+        "note": "qa",
+        "st": 108,
+        "en": 113
+      }
+    },
+    {
+      "check": "highlight_note_roundtrip_1",
+      "status": "PASS",
+      "detail": {
+        "start": 140,
+        "end": 145,
+        "text": " » Po",
+        "expected": " » Po",
+        "note": "qa",
+        "st": 140,
+        "en": 145
+      }
+    },
+    {
+      "check": "highlight_note_roundtrip_2",
+      "status": "PASS",
+      "detail": {
+        "start": 193,
+        "end": 198,
+        "text": "!» Il",
+        "expected": "!» Il",
+        "note": "qa",
+        "st": 193,
+        "en": 198
+      }
+    },
+    {
+      "check": "highlight_note_roundtrip_3",
+      "status": "PASS",
+      "detail": {
+        "start": 193,
+        "end": 198,
+        "text": "!» Il",
+        "expected": "!» Il",
+        "note": "qa",
+        "st": 193,
+        "en": 198
+      }
+    },
+    {
+      "check": "highlight_note_roundtrip_4",
+      "status": "PASS",
+      "detail": {
+        "start": 109,
+        "end": 114,
+        "text": ".» En",
+        "expected": ".» En",
+        "note": "qa",
+        "st": 109,
+        "en": 114
+      }
+    },
+    {
+      "check": "highlight_note_roundtrip_5",
+      "status": "PASS",
+      "detail": {
+        "start": 68,
+        "end": 73,
+        "text": "i, bi",
+        "expected": "i, bi",
+        "note": "qa",
+        "st": 68,
+        "en": 73
+      }
+    }
+  ]
+}

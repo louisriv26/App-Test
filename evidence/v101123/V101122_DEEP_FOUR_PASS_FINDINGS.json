@@ -1,0 +1,40 @@
+{
+  "schema": "L24H_V101122_DEEP_REAUDIT_FINDINGS_V1",
+  "audited_zip_sha256": "039f7ad95bced983b5deb1613bacb92ababf75e2a162462b4389a3a028bf8565",
+  "pass1": "FAIL_FULL_PACKAGE_BUILD_REPRODUCIBILITY_AND_CURRENT_TOOL_SELF_CONTAINMENT",
+  "pass2": "PASS_APPLICATION_RUNTIME",
+  "pass3": "FAIL_REPORT_INTEGRITY_ACTIVE_REPORT_UNIVERSE_INCOMPLETE",
+  "pass4": "FAIL_STALE_SEMANTIC_TOOLING_TRANSIENT_PATH_ASSUMPTIONS",
+  "runtime_evidence": {
+    "state": "16/16",
+    "ux": "70/70",
+    "help": "70/70",
+    "broad": "52/52",
+    "quoted_defects": "0/0",
+    "presentation": "1990/1990",
+    "sw": "15/15",
+    "mutation": "12/12",
+    "ind_hour24": "55/55",
+    "ind_runtime": "50/50"
+  },
+  "reproduced_defects": [
+    {
+      "id": "D1",
+      "detail": "v101.122 packaged builder reconstructs 185 files versus frozen package 257; 72 package files omitted and 29 common metadata/report/evidence files differ."
+    },
+    {
+      "id": "D2",
+      "detail": "v101.122 current independent prefreeze checker hardcodes /mnt/data/v101122_run/final_prefreeze/INDEPENDENT_HOUR24_PROBE.json and fails 22/23 from a fresh extraction when that transient path is absent."
+    },
+    {
+      "id": "D3",
+      "detail": "v101.122 active_report_inventory excludes current audit/independent_four_pass_audit.md/.json; the 154-line audit therefore does not cover the current PASS audit that fails fresh."
+    },
+    {
+      "id": "D4",
+      "detail": "v101.122 current build provenance references transient /mnt/data/v101122_run/gate0 path rather than package-contained evidence; semantic stale scan does not challenge it."
+    }
+  ],
+  "retrospective_status": "FAIL_REPORT_TOOLING_REPRODUCIBILITY_SUPERSEDED",
+  "app_runtime_mutation_required": false
+}

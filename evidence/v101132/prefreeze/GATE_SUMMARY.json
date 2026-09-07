@@ -1,0 +1,129 @@
+{
+  "schema": "L24H_V101132_PREFREEZE_GATE_SUMMARY_V1",
+  "version": "v101.132",
+  "stage": "DEEP_FOUR_PASS_RELEASE_ENGINEERING_RECONCILIATION_R1",
+  "all_current_gates_pass": true,
+  "gate_files": [
+    {
+      "file": "01_RELEASE_INTEGRITY.json",
+      "sha256": "85f9f5836de24a96146ff00640fc6e4da229d597e69dab46eef4dce2950b907f",
+      "pass": 21,
+      "fail": 0,
+      "total": 21,
+      "status": "PASS"
+    },
+    {
+      "file": "02_GLOBAL_RAW_TEXT_COMPLETENESS_GATE.json",
+      "sha256": "7b94625bfee0d96ee1bc747dfd448a3ba706f1f861148f941e0da2a5d2ab265d",
+      "pass": 14,
+      "fail": 0,
+      "total": 14,
+      "status": "PASS"
+    },
+    {
+      "file": "03_APPROVED_CASES_RUNTIME_PRESENTATION.json",
+      "sha256": "91fa9c2b370f161b762b3a60f75b30a645e27b4e53a11d2ed0f0e1d4cec3417d",
+      "pass": 29,
+      "fail": 0,
+      "total": 29,
+      "status": "PASS"
+    },
+    {
+      "file": "04_MUTATION_TEST_MATRIX.json",
+      "sha256": "9537c56910f46c8bf718e058a717d67170e976fa05702f3b738f2d339aac60f1",
+      "pass": 10,
+      "fail": 0,
+      "total": 10,
+      "status": "PASS"
+    },
+    {
+      "file": "05_STRICT_CROSS_RECORD_GLYPH_FLOW_MATRIX.json",
+      "sha256": "2ab29c62fcdd71b8a7a2ba571ff87f3937fc5c1de1ea4c900328025b04ab8024",
+      "pass": 185,
+      "fail": 0,
+      "total": 185,
+      "status": "PASS"
+    },
+    {
+      "file": "06_LEGACY_CONTINUITY_MATRIX.json",
+      "sha256": "d3f671a608adace69dad5b28eac3fa7a4ae2aab89aa392ade34433abcca460de",
+      "pass": 215,
+      "fail": 0,
+      "total": 215,
+      "status": "PASS"
+    },
+    {
+      "file": "07_MEDITEE_REGRESSION_MATRIX.json",
+      "sha256": "2ac3ca631002b1f39998871371ce32122f432f58070ebaab6c5c4d4604d234a2",
+      "pass": 164,
+      "fail": 0,
+      "total": 164,
+      "status": "PASS"
+    },
+    {
+      "file": "08_MEDITEE_RESPONSIVE_REGRESSION_MATRIX.json",
+      "sha256": "cad3fe5652e63594ccb63d1d52c002b3d8108e9f2f427347210a9e9786fd2098",
+      "pass": 245,
+      "fail": 0,
+      "total": 245,
+      "status": "PASS"
+    },
+    {
+      "file": "09_HOUR24_REGRESSION_MATRIX.json",
+      "sha256": "029975760863dfd364960dc236d822e1013fff499f809f949ef817721baca655",
+      "pass": 17,
+      "fail": 0,
+      "total": 17,
+      "status": "PASS"
+    },
+    {
+      "file": "10_HELP_REGRESSION_MATRIX.json",
+      "sha256": "2a56d3c1c1325847263a49e7fbfd57381541806e17631d27e1b954a80534bbc5",
+      "pass": 70,
+      "fail": 0,
+      "total": 70,
+      "status": "PASS"
+    },
+    {
+      "file": "11_PRESENTATION_SUCCESSOR_MATRIX.json",
+      "sha256": "697cf54d5a315a9a2c5de872e8d81f4032f73406df1e2700dd5394c85182dcec",
+      "pass": 2000,
+      "fail": 0,
+      "total": 2000,
+      "status": "PASS"
+    },
+    {
+      "file": "12_INDEPENDENT_PRESENTATION_SUCCESSOR_MATRIX.json",
+      "sha256": "4656db6fe914429af8a6113bc4f5b9397741f2e32e03f573036f41373e79a8c8",
+      "pass": 2000,
+      "fail": 0,
+      "total": 2000,
+      "status": "PASS"
+    },
+    {
+      "file": "13_BROAD_RUNTIME_MATRIX.json",
+      "sha256": "859d43314e0dd403e0c64ec18d3ec87d538f87e6ebdf48fd2c6da2c09c14f4c0",
+      "pass": 52,
+      "fail": 0,
+      "total": 52,
+      "status": "PASS"
+    },
+    {
+      "file": "14_SERVICE_WORKER_MATRIX.json",
+      "sha256": "08d64724b2582ed39cba055b4a25facbd75edac06a5f13cc1f154e1b35ec78f3",
+      "pass": 15,
+      "fail": 0,
+      "total": 15,
+      "status": "PASS"
+    }
+  ],
+  "aggregate_assertions": 5037,
+  "aggregate_failures": 0,
+  "external_open_gates": [
+    "physical iPad/iPhone/Samsung",
+    "live-origin exact-byte binding",
+    "installed PWA update from v101.131",
+    "true offline cold reopen",
+    "VoiceOver/TalkBack representative testing"
+  ]
+}

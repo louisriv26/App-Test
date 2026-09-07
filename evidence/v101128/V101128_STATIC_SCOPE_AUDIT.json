@@ -1,0 +1,220 @@
+{
+  "schema": "L24H_V101128_STATIC_SCOPE_AUDIT_V1",
+  "version": "v101.128",
+  "stage": "MEDITEE_RECOVERY_ACCESS_AND_SINGLE_STATE_SYNC_R1",
+  "summary": {
+    "pass": 41,
+    "fail": 0,
+    "total": 41
+  },
+  "rows": [
+    {
+      "check": "baseline_sha",
+      "status": "PASS",
+      "detail": "d2614307d3335d4e76a3b9559cb4d8267549b9a5a4adf4ec616344f2b98664d6"
+    },
+    {
+      "check": "baseline_zip_integrity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "baseline_member_count",
+      "status": "PASS",
+      "detail": 440
+    },
+    {
+      "check": "deploy_html_mirror",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "version_identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "stage_identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_CORPUS",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_TEXT_LIBRARY",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_HOUR_LINKED_TEXTS",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_INTERNAL_SUBHEADINGS",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_SPEECH_DATA",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_SPEECH_PRESENTATION_ADJUDICATIONS",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_SPEECH_PRESENTATION_PROJECTION",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_DISPLAY_SEGMENTS",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_CONTINUITY_GROUPS",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_LDC_LIBRARY_FLOW_LAYOUT",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_LDC_CURRENT_SYNC_AUTHORITY",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "protected_VISIBLE_PARAGRAPH_TOPOLOGY",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "storage_key_universe_unchanged",
+      "status": "PASS",
+      "detail": {
+        "added": [],
+        "removed": []
+      }
+    },
+    {
+      "check": "function_unchanged_getCompletedHourNumbers",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "function_unchanged_getProgressSnapshot",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "function_unchanged_buildHour24CyclePanel",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "function_unchanged_refreshHourEndCycleUI",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "function_unchanged_restoreSavedParaForHour",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "function_unchanged_openHour",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "function_unchanged_commitDurableChange",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "function_unchanged_persistPersonalSnapshot",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "markMeditee_single_sync_call",
+      "status": "PASS",
+      "detail": "ionLog.filter(e => !(e.date === today && e.hour === n));\n    state.meditationLog.push({ date: today, hour: n });\n    if (state.meditationLog.length > 100) state.meditationLog = state.meditationLog.slice(-100);\n  }\n  const committed = commitDurableChange(before, wasRead ? 'Retrait de la progression' : 'Enregistrement de la progression');\n  refreshMediteeControls(n);\n  refreshHourEndCycleUI();\n  if (committed.ok) showToast(wasRead ? 'Progression retirée' : ('✓ ' + ordinalHeure(n) + ' méditée'));\n}"
+    },
+    {
+      "check": "markMeditee_no_renderReader",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "markMeditee_still_single_state",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "buildMarkBar_active",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "refresh_helper_projection_only",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "top_and_bottom_data_roles",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "aria_pressed_present",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "mark_controls_not_fixed_or_sticky",
+      "status": "PASS",
+      "detail": ".mark-btn-hint { color: rgba(255,255,255,0.8); }\n.mark-btn-hint { font-size: 0.72rem; color: var(--ink4); font-style: italic; }\n.mark-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 0.7rem;\n  padding: 0.6rem 0.9rem; margin-bottom: 0.75rem;\n  background: var(--bg2); border: 1px solid var(--bg3);\n  border-radius: var(--radius); }\n.mark-bar.done { border-color: var(--accent-light); background: var(--accent-pale); }\n.mark-btn { flex: 0 0 auto; min-height: 44px; max-width: 100%; padding: 0.45rem 0.85rem;\n  background: var(--accent); color: #fff; border: 1px solid var(--accent);\n  border-radius: calc(var(--radius) - 2px); font-family: var(--font-ui);\n  font-size: 0.8rem; cursor: pointer; white-space: normal; text-align: center;\n  transition: opacity 0.15s, background 0.15s, color 0.15s; }\n.mark-btn.done { background: transparent; color: var(--accent); border-color: var(--accent-light); }\n.mark-btn:active { opacity: 0.8; }\n.mark-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }\n.mark-bar { align-items: stretch; }\n.mark-btn { width: 100%; }\n.mark-btn, .cc-btn, .espace-show-all,\n.integrity-btn, .nav-btn, .mark-read-btn, .update-refresh-btn, .cp-remove {\n  min-height:44px;\n}"
+    },
+    {
+      "check": "storage_schema_8",
+      "status": "PASS",
+      "detail": 8
+    },
+    {
+      "check": "personal_snapshot_5",
+      "status": "PASS",
+      "detail": 5
+    },
+    {
+      "check": "version_json_v101128",
+      "status": "PASS",
+      "detail": "v101.128"
+    },
+    {
+      "check": "cache_v101128",
+      "status": "PASS",
+      "detail": "luisa-24h-v101-128"
+    },
+    {
+      "check": "v101127_glyph_flow_css_retained",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "delices_visuelles_retained",
+      "status": "PASS",
+      "detail": null
+    }
+  ]
+}

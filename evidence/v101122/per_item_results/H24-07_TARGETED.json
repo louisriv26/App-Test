@@ -1,0 +1,32 @@
+{
+  "mode": "H24-07",
+  "rows": [
+    {
+      "check": "redundant_home_removed",
+      "status": "PASS",
+      "detail": [
+        {
+          "v": "progress",
+          "nav": "flex",
+          "home": true,
+          "local": 0
+        },
+        {
+          "v": "completed",
+          "nav": "flex",
+          "home": true,
+          "local": 0
+        },
+        {
+          "v": "hour24",
+          "local": 0
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "pass": 1,
+    "fail": 0,
+    "total": 1
+  }
+}

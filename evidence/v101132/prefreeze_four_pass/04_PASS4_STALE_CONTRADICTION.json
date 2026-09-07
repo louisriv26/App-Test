@@ -1,0 +1,67 @@
+{
+  "version": "v101.132",
+  "stage": "DEEP_FOUR_PASS_RELEASE_ENGINEERING_RECONCILIATION_R1",
+  "summary": {
+    "pass": 9,
+    "fail": 0,
+    "total": 9
+  },
+  "rows": [
+    {
+      "case": "no_stale_v101122_active_bindings",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "runtime_identity_current",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "sw_cache_current",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "root_current_report_universe_exact",
+      "status": "PASS",
+      "detail": [
+        "DEEP_FOUR_PASS_RELEASE_ENGINEERING_RECONCILIATION.md"
+      ]
+    },
+    {
+      "case": "gate_count_number_current",
+      "status": "PASS",
+      "detail": 14
+    },
+    {
+      "case": "assertion_number_current",
+      "status": "PASS",
+      "detail": {
+        "assertions": 5037,
+        "failures": 0
+      }
+    },
+    {
+      "case": "tooling_inventory_no_missing_actual_harnesses",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "frozen_dependency_no_missing",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "external_open_gates_exact",
+      "status": "PASS",
+      "detail": [
+        "physical iPad/iPhone/Samsung",
+        "live-origin exact-byte binding",
+        "installed PWA update from v101.131",
+        "true offline cold reopen",
+        "VoiceOver/TalkBack representative testing"
+      ]
+    }
+  ]
+}

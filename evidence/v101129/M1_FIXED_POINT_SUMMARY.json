@@ -1,0 +1,43 @@
+{
+  "schema": "L24H_V101129_M1_FIXED_POINT_V1",
+  "date": "2026-09-03",
+  "baseline": "v101.128",
+  "structural_counts": {
+    "raw_speech_end_positions": 139,
+    "raw_speech_end_ids": 125,
+    "active_projection_positions": 99,
+    "active_projection_ids": 98,
+    "topology_local_break_positions": 109,
+    "topology_local_break_ids": 108,
+    "run_exit_rows": 100,
+    "orphan_active_break_rows": 7,
+    "combined_review_rows": 107,
+    "semantic_alias_groups": 101,
+    "missing_projection_text_ids": 0
+  },
+  "count_reconciliation": {
+    "preliminary_r2_checkpoint": "approximately 101 run exits / 103 review rows / 97 semantic loci",
+    "reproduced": "100 governed SPP run-exit rows + 7 active non-exit break rows = 107 review rows / 101 alias groups",
+    "reason": "R2 preliminary counting did not consistently separate five cross-record wrapper/handoff breaks and two nested-quote-opening breaks from intra-record exit rows; strict reconstruction retains them as explicit non-mutating controls rather than silently dropping them.",
+    "counts_forced_to_preliminary": false
+  },
+  "lane_a_rows": 107,
+  "lane_b_rows": 107,
+  "lane_disagreements": 0,
+  "inactive_raw_rows": 40,
+  "unexplained_inactive_rows": 0,
+  "alias_groups": 101,
+  "alias_divergence": 0,
+  "false_negative_rows_without_current_break": 8,
+  "speech_data_nonexact_same_speaker_contained": 1649,
+  "speech_data_uncovered": 0,
+  "closure_cycle_2_new_ids": 0,
+  "definite_current_false_break_rows": 8,
+  "prevalidated_false_break_rows": 6,
+  "additional_unvalidated_defect_rows": 0,
+  "additional_unvalidated_ids": [],
+  "m1_semantic_fixed_point": "PASS",
+  "mutation_freeze_authority": "AUTHORISED_8_OPERATIONS",
+  "next_gate": "M2",
+  "user_validated_defect_rows": 8
+}

@@ -1,0 +1,137 @@
+{
+  "schema": "L24H_V101133_M1_PRE_EDIT_FIXED_POINT_MANIFEST_V1",
+  "created": "2026-09-03",
+  "baseline_version": "v101.132",
+  "target_successor": "v101.133",
+  "mutation_authority": "NONE",
+  "status": "PASS_PRE_EDIT_FIXED_POINT__USER_MUTATION_APPROVAL_REQUIRED",
+  "governing_sources": [
+    {
+      "path": "/mnt/data/L24H_V101133_VISUAL_BOUNDARY_LEADING_WHITESPACE_ALIGNMENT_REPAIR_MASTER_EXECUTION_SCRIPT_R1_2026-09-03.md",
+      "sha256": "f8601991e140c3f6be61bd141cec3e6d9b6074beb26a04d1f45dcc3e727059f6",
+      "bytes": 36004
+    },
+    {
+      "path": "/mnt/data/L24H_v101132_GITHUB_DEPLOY_DEEP_FOUR_PASS_RELEASE_ENGINEERING_RECONCILIATION_R1_LOCKED.zip",
+      "sha256": "5a529f8bfee3022fe03da02f42f843d40482a287fbfd61bcb3e0a1bcb8e5bf75",
+      "bytes": 5620498
+    },
+    {
+      "path": "/mnt/data/luisa-24h-state_v101.132_UPDATED_2026-09-03_FULL_R1.md",
+      "sha256": "8b021fed8b02422572ad6b19af2aa93d846e51c8f3fe3770358a8ef2ac9be01b",
+      "bytes": 293245
+    },
+    {
+      "path": "/mnt/data/l24h_v101132_work/final_evidence/FINAL_V101132_DECISION_LOCK.json",
+      "sha256": "ffdb76471f3bd1c0c41029e87950efe8df855835296ce87d14de94739d74acf2",
+      "bytes": 3197
+    },
+    {
+      "path": "/mnt/data/l24h_v101132_work/final_evidence/FINAL_POSTFREEZE_REPORT_V101132.md",
+      "sha256": "27e96916e0b424ec42f504194983928853764290cf18e7958320840825651fa0",
+      "bytes": 2346
+    },
+    {
+      "path": "/mnt/data/l24h_v101132_work/final_evidence/FINAL_META_AUDIT_V101132.json",
+      "sha256": "32a3e57ab9fed7049cc191448b92c0fbd4746f0ebf147b6a53edd4d95e4da5bc",
+      "bytes": 4923
+    },
+    {
+      "path": "/mnt/data/v101132_fullscan/ALIGNMENT_BOUNDARY_UNIVERSE.csv",
+      "sha256": "126128210b832e176d8ba2db3bcea11e199fc12a12d782afd166b8280346cbea",
+      "bytes": 67863
+    },
+    {
+      "path": "/mnt/data/v101132_fullscan/RUNTIME_ALIGNMENT_SCAN2.json",
+      "sha256": "bb7936cf79ac23f041546d33016062fb7e43b033593d28fe4bc258d6b3858837",
+      "bytes": 907008
+    }
+  ],
+  "m1_artifacts": [
+    {
+      "file": "M1_01_BASELINE_IDENTITY.json",
+      "sha256": "492bb664d1060ce5df70621e40ec7aee50d26e393b077b64fd9295210b2a7c0d",
+      "bytes": 549
+    },
+    {
+      "file": "M1_02_RAW_TEXT_UNIVERSE.csv",
+      "sha256": "c8f2f2eaddc23b9584fd885e57a8d700173f3f25d89bc6cb786c1cc6a5502fa9",
+      "bytes": 1438448
+    },
+    {
+      "file": "M1_03B_RAW_FROZEN_AUTHORITY_RECONCILIATION.json",
+      "sha256": "9ad350ac0fe47deb7d604dbeec89b8fc28fa3ac64879c0417817916456fac19a",
+      "bytes": 349
+    },
+    {
+      "file": "M1_03_RAW_LEADING_WHITESPACE_AUDIT.json",
+      "sha256": "a8521ca2dcc5e9338b1354b1b3d79bb28450143bb85b835d2587f80bd8c8fb8e",
+      "bytes": 173
+    },
+    {
+      "file": "M1_04_RUNTIME_BOUNDARY_UNIVERSE.csv",
+      "sha256": "e087d1f63125b78cd49a375b2c2d40f80a7e078e49ae09f642cdcc600a7792bd",
+      "bytes": 770315
+    },
+    {
+      "file": "M1_05_ALIGNMENT_POSITIVE_82_LEDGER.csv",
+      "sha256": "3ccbfc17cb6ac81dc9404a6dc8ee54aa51d07a92877e64afcda88f0c06c8c355",
+      "bytes": 35421
+    },
+    {
+      "file": "M1_06_ALIGNMENT_UNIQUE_76_LEDGER.csv",
+      "sha256": "94ca09585032d3384c9f2bea5896d514f3d6d8208e6070c560b8f52f6e1e3b3e",
+      "bytes": 33474
+    },
+    {
+      "file": "M1_07B_NEGATIVE_CONTROL_SUMMARY.json",
+      "sha256": "fdcd1fd6a1362317b8f4d2102e460739679d2a6be6f6be5f86b2dbee19399105",
+      "bytes": 2364
+    },
+    {
+      "file": "M1_07_ALIGNMENT_NEGATIVE_CONTROLS.csv",
+      "sha256": "86f366d8094e33495464fcba6afe6c70f91fd0796faf2f72e08960ea914e2fdb",
+      "bytes": 735273
+    },
+    {
+      "file": "M1_08_V101132_NEGATIVE_CONTROL_RESULT.json",
+      "sha256": "16211f4d194c1e192f3eb11b7d0f911f8b691e9790d7ffdbd47fb1cacccc5ef0",
+      "bytes": 1018
+    },
+    {
+      "file": "M1_10_PRE_EDIT_FIXED_POINT_REPORT.md",
+      "sha256": "4f58e9be1d72110118f6314609dbd2864f98a920cecc8f16eba4025a9a60de68",
+      "bytes": 4265
+    },
+    {
+      "file": "M1_RUNTIME_SCAN_RAW.json",
+      "sha256": "bb7936cf79ac23f041546d33016062fb7e43b033593d28fe4bc258d6b3858837",
+      "bytes": 907008
+    },
+    {
+      "file": "m1_build_ledgers.py",
+      "sha256": "f7ee8ab52d4a4ec920150ff88c360afdc0ed56bd7fb57d78d9dfc65d8ee83273",
+      "bytes": 8531
+    },
+    {
+      "file": "m1_runtime_alignment_scan.py",
+      "sha256": "83696c90a7eec769e6fe186da12324ae217905dc03ff463164e5a96a738e59a5",
+      "bytes": 6039
+    }
+  ],
+  "fixed_point": {
+    "raw_text_records": 4613,
+    "native_leading_whitespace_records": 0,
+    "runtime_synthetic_boundaries": 1748,
+    "alignment_failures": 82,
+    "unique_text_offset_loci": 76,
+    "speech_path_failures": 78,
+    "ldc_path_failures": 4,
+    "display_segment_runtime_block_starts": 122,
+    "display_segment_failures": 0,
+    "cross_record_controls": 1468,
+    "cross_record_failures": 0
+  },
+  "hard_stop_fired": "USER_MUTATION_APPROVAL_REQUIRED_BEFORE_M2",
+  "m1_artifact_aggregate_sha256": "db619b0bc8283f62224a73870a1b401805225a171ce55fc7a87ad0a2d3da486f"
+}

@@ -1,0 +1,203 @@
+{
+  "schema": "L24H_V101130_PASS2_RUNTIME_PACKAGE_BEHAVIOUR_SUMMARY_V1",
+  "version": "v101.130",
+  "stage": "FOUR_PASS_FINAL_PACKAGE_METADATA_EVIDENCE_RECONCILIATION_R1",
+  "tested_html_sha256": "6400a743255ef56b5ad556d5a23e6dc26749adf8abbeea24334ead40c9ce7f07",
+  "summary": {
+    "pass_gates": 21,
+    "fail_gates": 0,
+    "total_gates": 21
+  },
+  "rows": [
+    {
+      "file": "current_runtime/20_INTRA_RECORD_QUOTE_HOST_SYNTAX_MATRIX.json",
+      "schema": "L24H_V101130_QUOTE_HOST_SYNTAX_MATRIX_V1",
+      "version": "v101.130",
+      "pass": 37,
+      "fail": 0,
+      "total": 37,
+      "sha256": "d51fd328932b91dbc5674ba369606f34b8c2869ac218b32d4eae7170db74373c"
+    },
+    {
+      "file": "current_runtime/21_INTRA_RECORD_QUOTE_HOST_CONTINUITY_GEOMETRY_MATRIX.json",
+      "schema": "L24H_V101130_QUOTE_HOST_GEOMETRY_V1",
+      "version": "v101.130",
+      "pass": 15,
+      "fail": 0,
+      "total": 15,
+      "sha256": "8594a4cf01529801f11b5b0d265b1edcb050519814e78654e32e3d1279c9d0ad"
+    },
+    {
+      "file": "current_runtime/22_VALID_BREAK_CONTROL_MATRIX.json",
+      "schema": "L24H_V101130_VALID_BREAK_CONTROL_MATRIX_V1",
+      "version": "v101.130",
+      "pass": 6,
+      "fail": 0,
+      "total": 6,
+      "sha256": "3d4575412e4cd755be025638cce4633fa00868360c08a695948cdb6e5d6417df"
+    },
+    {
+      "file": "current_runtime/23_PROJECTION_TOPOLOGY_PARITY_MATRIX.json",
+      "schema": "L24H_V101130_PROJECTION_TOPOLOGY_PARITY_V1",
+      "version": "v101.130",
+      "pass": 8,
+      "fail": 0,
+      "total": 8,
+      "sha256": "796647fcf2bf99a61af2dada2628478ab62ac922d660bad897266438a6a65e8e"
+    },
+    {
+      "file": "current_runtime/24_SPEAKER_CONSERVATION_MATRIX.json",
+      "schema": "L24H_V101130_SPEAKER_CONSERVATION_V1",
+      "version": "v101.130",
+      "pass": 8,
+      "fail": 0,
+      "total": 8,
+      "sha256": "fc90b64a1654759c74d0b65c2065c4aee6e0b287182f5c4642029f44162f399a"
+    },
+    {
+      "file": "current_runtime/25_RENDERED_TEXT_CONSERVATION_MATRIX.json",
+      "schema": "L24H_V101130_RENDERED_TEXT_CONSERVATION_V1",
+      "version": "v101.130",
+      "pass": 8,
+      "fail": 0,
+      "total": 8,
+      "sha256": "33fc6e4b8035f5fb961c2bbff2edcb9dfdcff019acaa0007fcd6fb7fdb1622d3"
+    },
+    {
+      "file": "current_runtime/26B_USER_STATE_ANCHOR_APPLE_SELECTION_MATRIX.json",
+      "schema": "L24H_V101130_USER_STATE_ANCHOR_APPLE_SELECTION_V1",
+      "version": "v101.130",
+      "pass": 20,
+      "fail": 0,
+      "total": 20,
+      "sha256": "093031ed1b0f1fb75256fab7ed3ae0a5876fc8194be7e8d353ffca7e1960a5b8"
+    },
+    {
+      "file": "current_runtime/26_USER_STATE_TOPOLOGY_MATRIX.json",
+      "schema": "L24H_V101130_USER_STATE_TOPOLOGY_V1",
+      "version": "v101.130",
+      "pass": 8,
+      "fail": 0,
+      "total": 8,
+      "sha256": "98c83fba003d163ce7be6f623a552a442c18d039accc922fdff1c5f3871b0251"
+    },
+    {
+      "file": "current_runtime/27_REPERES_PRESENTATION_MATRIX.json",
+      "schema": "L24H_V101130_SPEAKER_RETURN_PRESENTATION_V1",
+      "version": "v101.130",
+      "pass": 9,
+      "fail": 0,
+      "total": 9,
+      "sha256": "d7992d4dc170edb88f4cb4e07f8912424a1cac949a7c9a97dc21be089778a44b"
+    },
+    {
+      "file": "current_runtime/28B_INDEPENDENT_QUOTE_HOST_PROBE.json",
+      "schema": "L24H_V101130_INDEPENDENT_QUOTE_HOST_PROBE_V1",
+      "version": "v101.130",
+      "pass": 49,
+      "fail": 0,
+      "total": 49,
+      "sha256": "34a9113852080902b425c1e025da96ea05746ed0454d54bce677ddf0a3490365"
+    },
+    {
+      "file": "current_runtime/28_MUTATION_DETECTION_MATRIX.json",
+      "schema": "L24H_V101130_MUTATION_DETECTION_V1",
+      "version": "v101.130",
+      "pass": 8,
+      "fail": 0,
+      "total": 8,
+      "sha256": "ba0d0ab91d1724863774db813539da712863f1228c8e281a1fecbadf0e999255"
+    },
+    {
+      "file": "current_runtime/29_STRICT_CROSS_RECORD_GLYPH_FLOW_MATRIX.json",
+      "schema": "L24H_STRICT_CONTINUITY_GLYPH_FLOW_MATRIX_V1",
+      "version": "v101.130",
+      "pass": 185,
+      "fail": 0,
+      "total": 185,
+      "sha256": "ec185b7adb00b78a10230f1c8ca796113fbce7afb1ca64702c4e5f5baee906d2"
+    },
+    {
+      "file": "current_runtime/30_LEGACY_CONTINUITY_MATRIX.json",
+      "schema": "L24H_V101128_LEGACY_CONTINUITY_MATRIX_V1",
+      "version": "v101.130",
+      "pass": 215,
+      "fail": 0,
+      "total": 215,
+      "sha256": "9d7cd3bcae97da02c9ccabe8d2b191341707ed42710c2e0d32e2f3b0d3bb4381"
+    },
+    {
+      "file": "current_runtime/31B_MEDITEE_RESPONSIVE_REGRESSION_MATRIX.json",
+      "schema": "L24H_V101128_MEDITEE_RESPONSIVE_MATRIX_V1",
+      "version": "v101.130",
+      "pass": 245,
+      "fail": 0,
+      "total": 245,
+      "sha256": "9fc8e040ea81ab1f0e4ff078c073d5d4cafa069dab788ce293d750799e202888"
+    },
+    {
+      "file": "current_runtime/31_MEDITEE_REGRESSION_MATRIX.json",
+      "schema": "L24H_V101128_MEDITEE_CORE_MATRIX_V1",
+      "version": "v101.130",
+      "pass": 164,
+      "fail": 0,
+      "total": 164,
+      "sha256": "464dde6637678cb28613cbb8dbe7cf17bcf921b0b848e75c8381b3602b8dabe3"
+    },
+    {
+      "file": "current_runtime/32_HOUR24_REGRESSION_MATRIX.json",
+      "schema": "L24H_V101128_HOUR24_REGRESSION_MATRIX_V1",
+      "version": "v101.130",
+      "pass": 17,
+      "fail": 0,
+      "total": 17,
+      "sha256": "5b78b2e90ff6e69269e0b0e13dc5c8a8e3fc3156891ebda90c14424f25270e76"
+    },
+    {
+      "file": "current_runtime/33_HELP_REGRESSION_MATRIX.json",
+      "schema": "L24H_V101128_HELP_BROWSER_MATRIX_V1",
+      "version": "v101.130",
+      "pass": 70,
+      "fail": 0,
+      "total": 70,
+      "sha256": "1aa6ef834aa75af39a4eaacd96679bc312653670cf0739f0f0e0d5e24aa74343"
+    },
+    {
+      "file": "current_runtime/34A_PRESENTATION_EXHAUSTIVE_MATRIX.json",
+      "schema": "L24H_V101119_EXHAUSTIVE_PRESENTATION_MATRIX_V1",
+      "version": "v101.130",
+      "pass": 1990,
+      "fail": 0,
+      "total": 1990,
+      "sha256": "7f30324e31e49dcb86122466fccb9f9aa962d8ed094d6ba0692b6a74d967b158"
+    },
+    {
+      "file": "current_runtime/34B_PRESENTATION_INDEPENDENT_MATRIX.json",
+      "schema": "L24H_V101121_INDEPENDENT_PRESENTATION_MATRIX_V1",
+      "version": "v101.130",
+      "pass": 1990,
+      "fail": 0,
+      "total": 1990,
+      "sha256": "7e45f4233effbab48885a27a4f8e7b017743b5f12aa6580597b2e2777c1ebcf6"
+    },
+    {
+      "file": "current_runtime/35_BROAD_RUNTIME_MATRIX.json",
+      "schema": "L24H_V101128_INDEPENDENT_RUNTIME_SMOKE_V1",
+      "version": "v101.130",
+      "pass": 50,
+      "fail": 0,
+      "total": 50,
+      "sha256": "954f443c1da515209b839906f3d4a951c3bbb6cb4acb6c9bd06dc9cc4d1c2563"
+    },
+    {
+      "file": "current_runtime/36_SERVICE_WORKER_MATRIX.json",
+      "schema": "L24H_SW_LOGIC_MATRIX_V1",
+      "version": null,
+      "pass": 15,
+      "fail": 0,
+      "total": 15,
+      "sha256": "c9d195a1f76674068ddf9b47cf957028eb1944de2e567768bb384c2b0ee89aa4"
+    }
+  ],
+  "external_limit": "Browser/static evidence only; physical-device/PWA/offline/screen-reader/live-origin gates remain external."
+}

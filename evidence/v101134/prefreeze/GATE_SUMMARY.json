@@ -1,0 +1,151 @@
+{
+  "schema": "L24H_V101134_GATE_SUMMARY_V1",
+  "version": "v101.134",
+  "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1",
+  "gate_families": [
+    {
+      "gate": "R-1",
+      "evidence": "R01_RELEASE_INTEGRITY.json",
+      "assertions": 26,
+      "pass": 26,
+      "fail": 0
+    },
+    {
+      "gate": "R-2",
+      "evidence": "R02_BOUNDARY_REPRODUCIBILITY.json",
+      "assertions": 15,
+      "pass": 15,
+      "fail": 0
+    },
+    {
+      "gate": "R-3",
+      "evidence": "R03_ACCESSIBILITY_STRUCTURE.json",
+      "assertions": 31,
+      "pass": 31,
+      "fail": 0
+    },
+    {
+      "gate": "A-1",
+      "evidence": "A01_ALIGNMENT_GEOMETRY.json",
+      "assertions": 2050,
+      "pass": 2050,
+      "fail": 0
+    },
+    {
+      "gate": "A-2",
+      "evidence": "A02_STATIC_CONTROLS.json",
+      "assertions": 10,
+      "pass": 10,
+      "fail": 0
+    },
+    {
+      "gate": "A-3",
+      "evidence": "A03_MUTANTS.json",
+      "assertions": 5,
+      "pass": 5,
+      "fail": 0
+    },
+    {
+      "gate": "A-4",
+      "evidence": "A04_SOURCE_SELECTION_STATE.json",
+      "assertions": 24,
+      "pass": 24,
+      "fail": 0
+    },
+    {
+      "gate": "I-1",
+      "evidence": "I01_GLOBAL_RAW_QUOTE.json",
+      "assertions": 14,
+      "pass": 14,
+      "fail": 0
+    },
+    {
+      "gate": "I-2",
+      "evidence": "I02_RUNTIME_PRESENTATION.json",
+      "assertions": 29,
+      "pass": 29,
+      "fail": 0
+    },
+    {
+      "gate": "I-3",
+      "evidence": "I03_MUTATION_TESTS.json",
+      "assertions": 10,
+      "pass": 10,
+      "fail": 0
+    },
+    {
+      "gate": "I-4",
+      "evidence": "I04_STRICT_GLYPH_FLOW.json",
+      "assertions": 185,
+      "pass": 185,
+      "fail": 0
+    },
+    {
+      "gate": "I-5",
+      "evidence": "I05_LEGACY_CONTINUITY.json",
+      "assertions": 215,
+      "pass": 215,
+      "fail": 0
+    },
+    {
+      "gate": "I-6",
+      "evidence": "I06_MEDITEE.json",
+      "assertions": 164,
+      "pass": 164,
+      "fail": 0
+    },
+    {
+      "gate": "I-7",
+      "evidence": "I07_RESPONSIVE.json",
+      "assertions": 245,
+      "pass": 245,
+      "fail": 0
+    },
+    {
+      "gate": "I-8",
+      "evidence": "I08_HOUR24.json",
+      "assertions": 17,
+      "pass": 17,
+      "fail": 0
+    },
+    {
+      "gate": "I-9",
+      "evidence": "I09_HELP.json",
+      "assertions": 70,
+      "pass": 70,
+      "fail": 0
+    },
+    {
+      "gate": "I-10",
+      "evidence": "I10_PRESENTATION_PRIMARY.json",
+      "assertions": 2000,
+      "pass": 2000,
+      "fail": 0
+    },
+    {
+      "gate": "I-11",
+      "evidence": "I11_PRESENTATION_INDEPENDENT.json",
+      "assertions": 2000,
+      "pass": 2000,
+      "fail": 0
+    },
+    {
+      "gate": "I-12",
+      "evidence": "I12_BROAD_RUNTIME.json",
+      "assertions": 52,
+      "pass": 52,
+      "fail": 0
+    },
+    {
+      "gate": "I-13",
+      "evidence": "I13_SW_LOGIC.json",
+      "assertions": 15,
+      "pass": 15,
+      "fail": 0
+    }
+  ],
+  "aggregate_assertions": 7177,
+  "aggregate_pass": 7177,
+  "aggregate_failures": 0,
+  "status": "PASS"
+}

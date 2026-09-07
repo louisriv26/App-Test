@@ -1,0 +1,3999 @@
+{
+  "schema": "L24H_STRICT_CONTINUITY_GLYPH_FLOW_MATRIX_V1",
+  "version": "v101.130",
+  "profiles": [
+    "phone",
+    "ipad_portrait",
+    "ipad_landscape",
+    "desktop",
+    "samsung"
+  ],
+  "strict_invariant": "approved continuity boundaries must share a true inline glyph-flow; desktop wide profile requires same baseline when space is available",
+  "summary": {
+    "pass": 185,
+    "fail": 0,
+    "total": 185
+  },
+  "rows": [
+    {
+      "profile": "phone",
+      "pair": "UNIVERSE→UNIVERSE",
+      "check": "exact_five_pair_universe",
+      "status": "PASS",
+      "detail": [
+        [
+          "PASSION24.HOUR.03.P012",
+          "PASSION24.HOUR.03.P013"
+        ],
+        [
+          "PASSION24.HOUR.13.P011",
+          "PASSION24.HOUR.13.P013"
+        ],
+        [
+          "PASSION24.HOUR.15.P014",
+          "PASSION24.HOUR.15.P015"
+        ],
+        [
+          "PASSION24.HOUR.19.P183",
+          "PASSION24.HOUR.19.P184"
+        ],
+        [
+          "PASSION24.HOUR.19.P185",
+          "PASSION24.HOUR.19.P186"
+        ]
+      ]
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 310.90625,
+          "y": 3406.21875,
+          "right": 315.296875,
+          "bottom": 3431.21875,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 318.5,
+          "y": 3406.21875,
+          "right": 326.09375,
+          "bottom": 3431.21875,
+          "width": 7.59375,
+          "height": 25,
+          "ch": "a"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "0px"
+          },
+          {
+            "display": "block",
+            "mt": "17.1px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "bText": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen.",
+        "ea": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "eb": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen."
+      }
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 310.90625,
+          "y": 3406.21875,
+          "right": 315.296875,
+          "bottom": 3431.21875,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 318.5,
+          "y": 3406.21875,
+          "right": 326.09375,
+          "bottom": 3431.21875,
+          "width": 7.59375,
+          "height": 25,
+          "ch": "a"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "0px"
+          },
+          {
+            "display": "block",
+            "mt": "17.1px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "bText": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen.",
+        "ea": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "eb": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen."
+      }
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_final_display_segment_inline",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_prior_segments_remain_block",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_internal_rhythm_preserved",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 299.5625,
+          "y": 2655.390625,
+          "right": 303.953125,
+          "bottom": 2680.390625,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 307.15625,
+          "y": 2655.390625,
+          "right": 321.953125,
+          "bottom": 2680.390625,
+          "width": 14.796875,
+          "height": 25,
+          "ch": "m"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "bText": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi.",
+        "ea": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "eb": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi."
+      }
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 299.5625,
+          "y": 2655.390625,
+          "right": 303.953125,
+          "bottom": 2680.390625,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 307.15625,
+          "y": 2655.390625,
+          "right": 321.953125,
+          "bottom": 2680.390625,
+          "width": 14.796875,
+          "height": 25,
+          "ch": "m"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "bText": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi.",
+        "ea": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "eb": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi."
+      }
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_final_display_segment_inline",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_prior_segments_remain_block",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_internal_rhythm_preserved",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 368.265625,
+          "y": 2456.9375,
+          "right": 372.65625,
+          "bottom": 2481.9375,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 19.203125,
+          "y": 2490.1875,
+          "right": 23.859375,
+          "bottom": 2515.1875,
+          "width": 4.65625,
+          "height": 25,
+          "ch": "i"
+        },
+        "dy": 33.25,
+        "dx": -353.453125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "bText": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible.",
+        "ea": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "eb": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible."
+      }
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 368.265625,
+          "y": 2456.9375,
+          "right": 372.65625,
+          "bottom": 2481.9375,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 19.203125,
+          "y": 2490.1875,
+          "right": 23.859375,
+          "bottom": 2515.1875,
+          "width": 4.65625,
+          "height": 25,
+          "ch": "i"
+        },
+        "dy": 33.25,
+        "dx": -353.453125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "bText": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible.",
+        "ea": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "eb": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible."
+      }
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 367,
+          "y": 30279.359375,
+          "right": 371.46875,
+          "bottom": 30304.359375,
+          "width": 4.46875,
+          "height": 25,
+          "ch": ":"
+        },
+        "br": {
+          "x": 19.203125,
+          "y": 30312.609375,
+          "right": 30.140625,
+          "bottom": 30337.609375,
+          "width": 10.9375,
+          "height": 25,
+          "ch": "E"
+        },
+        "dy": 33.25,
+        "dx": -352.265625,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "bText": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !",
+        "ea": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "eb": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !"
+      }
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 367,
+          "y": 30279.359375,
+          "right": 371.46875,
+          "bottom": 30304.359375,
+          "width": 4.46875,
+          "height": 25,
+          "ch": ":"
+        },
+        "br": {
+          "x": 19.203125,
+          "y": 30312.609375,
+          "right": 30.140625,
+          "bottom": 30337.609375,
+          "width": 10.9375,
+          "height": 25,
+          "ch": "E"
+        },
+        "dy": 33.25,
+        "dx": -352.265625,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "bText": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !",
+        "ea": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "eb": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !"
+      }
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 345.140625,
+          "y": 30597,
+          "right": 350.703125,
+          "bottom": 30622,
+          "width": 5.5625,
+          "height": 25,
+          "ch": "!"
+        },
+        "br": {
+          "x": 19.203125,
+          "y": 30630.25,
+          "right": 33.359375,
+          "bottom": 30655.25,
+          "width": 14.15625,
+          "height": 25,
+          "ch": "D"
+        },
+        "dy": 33.25,
+        "dx": -331.5,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "bText": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances ».",
+        "ea": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "eb": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances »."
+      }
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 345.140625,
+          "y": 30597,
+          "right": 350.703125,
+          "bottom": 30622,
+          "width": 5.5625,
+          "height": 25,
+          "ch": "!"
+        },
+        "br": {
+          "x": 19.203125,
+          "y": 30630.25,
+          "right": 33.359375,
+          "bottom": 30655.25,
+          "width": 14.15625,
+          "height": 25,
+          "ch": "D"
+        },
+        "dy": 33.25,
+        "dx": -331.5,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "bText": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances ».",
+        "ea": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "eb": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances »."
+      }
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "phone",
+      "pair": "PAGE→PAGE",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "UNIVERSE→UNIVERSE",
+      "check": "exact_five_pair_universe",
+      "status": "PASS",
+      "detail": [
+        [
+          "PASSION24.HOUR.03.P012",
+          "PASSION24.HOUR.03.P013"
+        ],
+        [
+          "PASSION24.HOUR.13.P011",
+          "PASSION24.HOUR.13.P013"
+        ],
+        [
+          "PASSION24.HOUR.15.P014",
+          "PASSION24.HOUR.15.P015"
+        ],
+        [
+          "PASSION24.HOUR.19.P183",
+          "PASSION24.HOUR.19.P184"
+        ],
+        [
+          "PASSION24.HOUR.19.P185",
+          "PASSION24.HOUR.19.P186"
+        ]
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 569.109375,
+          "y": 2001.328125,
+          "right": 573.484375,
+          "bottom": 2026.328125,
+          "width": 4.375,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 576.6875,
+          "y": 2001.328125,
+          "right": 584.28125,
+          "bottom": 2026.328125,
+          "width": 7.59375,
+          "height": 25,
+          "ch": "a"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "0px"
+          },
+          {
+            "display": "block",
+            "mt": "17.1px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "bText": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen.",
+        "ea": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "eb": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen."
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 569.109375,
+          "y": 2001.328125,
+          "right": 573.484375,
+          "bottom": 2026.328125,
+          "width": 4.375,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 576.6875,
+          "y": 2001.328125,
+          "right": 584.28125,
+          "bottom": 2026.328125,
+          "width": 7.59375,
+          "height": 25,
+          "ch": "a"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "0px"
+          },
+          {
+            "display": "block",
+            "mt": "17.1px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "bText": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen.",
+        "ea": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "eb": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen."
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_final_display_segment_inline",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_prior_segments_remain_block",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_internal_rhythm_preserved",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 237.0625,
+          "y": 1549.125,
+          "right": 241.4375,
+          "bottom": 1574.125,
+          "width": 4.375,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 244.640625,
+          "y": 1549.125,
+          "right": 259.4375,
+          "bottom": 1574.125,
+          "width": 14.796875,
+          "height": 25,
+          "ch": "m"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "bText": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi.",
+        "ea": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "eb": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi."
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 237.0625,
+          "y": 1549.125,
+          "right": 241.4375,
+          "bottom": 1574.125,
+          "width": 4.375,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 244.640625,
+          "y": 1549.125,
+          "right": 259.4375,
+          "bottom": 1574.125,
+          "width": 14.796875,
+          "height": 25,
+          "ch": "m"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "bText": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi.",
+        "ea": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "eb": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi."
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_final_display_segment_inline",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_prior_segments_remain_block",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_internal_rhythm_preserved",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 706.015625,
+          "y": 1588.28125,
+          "right": 710.40625,
+          "bottom": 1613.28125,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 713.609375,
+          "y": 1588.28125,
+          "right": 718.265625,
+          "bottom": 1613.28125,
+          "width": 4.65625,
+          "height": 25,
+          "ch": "i"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "bText": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible.",
+        "ea": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "eb": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible."
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 706.015625,
+          "y": 1588.28125,
+          "right": 710.40625,
+          "bottom": 1613.28125,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 713.609375,
+          "y": 1588.28125,
+          "right": 718.265625,
+          "bottom": 1613.28125,
+          "width": 4.65625,
+          "height": 25,
+          "ch": "i"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "bText": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible.",
+        "ea": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "eb": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible."
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 728.765625,
+          "y": 17530.484375,
+          "right": 733.25,
+          "bottom": 17555.484375,
+          "width": 4.484375,
+          "height": 25,
+          "ch": ":"
+        },
+        "br": {
+          "x": 736.453125,
+          "y": 17530.484375,
+          "right": 747.390625,
+          "bottom": 17555.484375,
+          "width": 10.9375,
+          "height": 25,
+          "ch": "E"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "bText": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !",
+        "ea": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "eb": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !"
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 728.765625,
+          "y": 17530.484375,
+          "right": 733.25,
+          "bottom": 17555.484375,
+          "width": 4.484375,
+          "height": 25,
+          "ch": ":"
+        },
+        "br": {
+          "x": 736.453125,
+          "y": 17530.484375,
+          "right": 747.390625,
+          "bottom": 17555.484375,
+          "width": 10.9375,
+          "height": 25,
+          "ch": "E"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "bText": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !",
+        "ea": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "eb": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !"
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 97.15625,
+          "y": 17715.125,
+          "right": 102.71875,
+          "bottom": 17740.125,
+          "width": 5.5625,
+          "height": 25,
+          "ch": "!"
+        },
+        "br": {
+          "x": 105.921875,
+          "y": 17715.125,
+          "right": 120.078125,
+          "bottom": 17740.125,
+          "width": 14.15625,
+          "height": 25,
+          "ch": "D"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "bText": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances ».",
+        "ea": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "eb": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances »."
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 97.15625,
+          "y": 17715.125,
+          "right": 102.71875,
+          "bottom": 17740.125,
+          "width": 5.5625,
+          "height": 25,
+          "ch": "!"
+        },
+        "br": {
+          "x": 105.921875,
+          "y": 17715.125,
+          "right": 120.078125,
+          "bottom": 17740.125,
+          "width": 14.15625,
+          "height": 25,
+          "ch": "D"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "bText": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances ».",
+        "ea": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "eb": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances »."
+      }
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_portrait",
+      "pair": "PAGE→PAGE",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "UNIVERSE→UNIVERSE",
+      "check": "exact_five_pair_universe",
+      "status": "PASS",
+      "detail": [
+        [
+          "PASSION24.HOUR.03.P012",
+          "PASSION24.HOUR.03.P013"
+        ],
+        [
+          "PASSION24.HOUR.13.P011",
+          "PASSION24.HOUR.13.P013"
+        ],
+        [
+          "PASSION24.HOUR.15.P014",
+          "PASSION24.HOUR.15.P015"
+        ],
+        [
+          "PASSION24.HOUR.19.P183",
+          "PASSION24.HOUR.19.P184"
+        ],
+        [
+          "PASSION24.HOUR.19.P185",
+          "PASSION24.HOUR.19.P186"
+        ]
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 584.359375,
+          "y": 1909.1875,
+          "right": 588.734375,
+          "bottom": 1934.1875,
+          "width": 4.375,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 591.9375,
+          "y": 1909.1875,
+          "right": 599.53125,
+          "bottom": 1934.1875,
+          "width": 7.59375,
+          "height": 25,
+          "ch": "a"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "0px"
+          },
+          {
+            "display": "block",
+            "mt": "17.1px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "bText": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen.",
+        "ea": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "eb": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen."
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 584.359375,
+          "y": 1909.1875,
+          "right": 588.734375,
+          "bottom": 1934.1875,
+          "width": 4.375,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 591.9375,
+          "y": 1909.1875,
+          "right": 599.53125,
+          "bottom": 1934.1875,
+          "width": 7.59375,
+          "height": 25,
+          "ch": "a"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "0px"
+          },
+          {
+            "display": "block",
+            "mt": "17.1px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "bText": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen.",
+        "ea": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "eb": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen."
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_final_display_segment_inline",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_prior_segments_remain_block",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_internal_rhythm_preserved",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 285.53125,
+          "y": 1556.90625,
+          "right": 289.921875,
+          "bottom": 1581.90625,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 293.125,
+          "y": 1556.90625,
+          "right": 307.921875,
+          "bottom": 1581.90625,
+          "width": 14.796875,
+          "height": 25,
+          "ch": "m"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "bText": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi.",
+        "ea": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "eb": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi."
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 285.53125,
+          "y": 1556.90625,
+          "right": 289.921875,
+          "bottom": 1581.90625,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 293.125,
+          "y": 1556.90625,
+          "right": 307.921875,
+          "bottom": 1581.90625,
+          "width": 14.796875,
+          "height": 25,
+          "ch": "m"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "bText": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi.",
+        "ea": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "eb": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi."
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_final_display_segment_inline",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_prior_segments_remain_block",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_internal_rhythm_preserved",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 832.015625,
+          "y": 1464.296875,
+          "right": 836.40625,
+          "bottom": 1489.296875,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 839.609375,
+          "y": 1464.296875,
+          "right": 844.265625,
+          "bottom": 1489.296875,
+          "width": 4.65625,
+          "height": 25,
+          "ch": "i"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "bText": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible.",
+        "ea": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "eb": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible."
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 832.015625,
+          "y": 1464.296875,
+          "right": 836.40625,
+          "bottom": 1489.296875,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 839.609375,
+          "y": 1464.296875,
+          "right": 844.265625,
+          "bottom": 1489.296875,
+          "width": 4.65625,
+          "height": 25,
+          "ch": "i"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "bText": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible.",
+        "ea": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "eb": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible."
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 854.765625,
+          "y": 16120.234375,
+          "right": 859.25,
+          "bottom": 16145.234375,
+          "width": 4.484375,
+          "height": 25,
+          "ch": ":"
+        },
+        "br": {
+          "x": 862.453125,
+          "y": 16120.234375,
+          "right": 873.390625,
+          "bottom": 16145.234375,
+          "width": 10.9375,
+          "height": 25,
+          "ch": "E"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "bText": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !",
+        "ea": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "eb": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !"
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 854.765625,
+          "y": 16120.234375,
+          "right": 859.25,
+          "bottom": 16145.234375,
+          "width": 4.484375,
+          "height": 25,
+          "ch": ":"
+        },
+        "br": {
+          "x": 862.453125,
+          "y": 16120.234375,
+          "right": 873.390625,
+          "bottom": 16145.234375,
+          "width": 10.9375,
+          "height": 25,
+          "ch": "E"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "bText": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !",
+        "ea": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "eb": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !"
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 874.84375,
+          "y": 16271.625,
+          "right": 880.40625,
+          "bottom": 16296.625,
+          "width": 5.5625,
+          "height": 25,
+          "ch": "!"
+        },
+        "br": {
+          "x": 883.609375,
+          "y": 16271.625,
+          "right": 897.765625,
+          "bottom": 16296.625,
+          "width": 14.15625,
+          "height": 25,
+          "ch": "D"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "bText": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances ».",
+        "ea": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "eb": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances »."
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 874.84375,
+          "y": 16271.625,
+          "right": 880.40625,
+          "bottom": 16296.625,
+          "width": 5.5625,
+          "height": 25,
+          "ch": "!"
+        },
+        "br": {
+          "x": 883.609375,
+          "y": 16271.625,
+          "right": 897.765625,
+          "bottom": 16296.625,
+          "width": 14.15625,
+          "height": 25,
+          "ch": "D"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "bText": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances ».",
+        "ea": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "eb": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances »."
+      }
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "ipad_landscape",
+      "pair": "PAGE→PAGE",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "desktop",
+      "pair": "UNIVERSE→UNIVERSE",
+      "check": "exact_five_pair_universe",
+      "status": "PASS",
+      "detail": [
+        [
+          "PASSION24.HOUR.03.P012",
+          "PASSION24.HOUR.03.P013"
+        ],
+        [
+          "PASSION24.HOUR.13.P011",
+          "PASSION24.HOUR.13.P013"
+        ],
+        [
+          "PASSION24.HOUR.15.P014",
+          "PASSION24.HOUR.15.P015"
+        ],
+        [
+          "PASSION24.HOUR.19.P183",
+          "PASSION24.HOUR.19.P184"
+        ],
+        [
+          "PASSION24.HOUR.19.P185",
+          "PASSION24.HOUR.19.P186"
+        ]
+      ]
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 794.359375,
+          "y": 1909.40625,
+          "right": 798.734375,
+          "bottom": 1934.40625,
+          "width": 4.375,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 801.9375,
+          "y": 1909.40625,
+          "right": 809.53125,
+          "bottom": 1934.40625,
+          "width": 7.59375,
+          "height": 25,
+          "ch": "a"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "0px"
+          },
+          {
+            "display": "block",
+            "mt": "17.1px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "bText": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen.",
+        "ea": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "eb": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen."
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 794.359375,
+          "y": 1909.40625,
+          "right": 798.734375,
+          "bottom": 1934.40625,
+          "width": 4.375,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 801.9375,
+          "y": 1909.40625,
+          "right": 809.53125,
+          "bottom": 1934.40625,
+          "width": 7.59375,
+          "height": 25,
+          "ch": "a"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "0px"
+          },
+          {
+            "display": "block",
+            "mt": "17.1px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "bText": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen.",
+        "ea": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "eb": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen."
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_final_display_segment_inline",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_prior_segments_remain_block",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_internal_rhythm_preserved",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "true_same_line_boundary_when_space_available",
+      "status": "PASS",
+      "detail": {
+        "dy": 0,
+        "dx": 3.203125,
+        "ar": {
+          "x": 794.359375,
+          "y": 1909.40625,
+          "right": 798.734375,
+          "bottom": 1934.40625,
+          "width": 4.375,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 801.9375,
+          "y": 1909.40625,
+          "right": 809.53125,
+          "bottom": 1934.40625,
+          "width": 7.59375,
+          "height": 25,
+          "ch": "a"
+        }
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 495.53125,
+          "y": 1557.03125,
+          "right": 499.921875,
+          "bottom": 1582.03125,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 503.125,
+          "y": 1557.03125,
+          "right": 517.921875,
+          "bottom": 1582.03125,
+          "width": 14.796875,
+          "height": 25,
+          "ch": "m"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "bText": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi.",
+        "ea": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "eb": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi."
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 495.53125,
+          "y": 1557.03125,
+          "right": 499.921875,
+          "bottom": 1582.03125,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 503.125,
+          "y": 1557.03125,
+          "right": 517.921875,
+          "bottom": 1582.03125,
+          "width": 14.796875,
+          "height": 25,
+          "ch": "m"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "bText": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi.",
+        "ea": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "eb": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi."
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_final_display_segment_inline",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_prior_segments_remain_block",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_internal_rhythm_preserved",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "true_same_line_boundary_when_space_available",
+      "status": "PASS",
+      "detail": {
+        "dy": 0,
+        "dx": 3.203125,
+        "ar": {
+          "x": 495.53125,
+          "y": 1557.03125,
+          "right": 499.921875,
+          "bottom": 1582.03125,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 503.125,
+          "y": 1557.03125,
+          "right": 517.921875,
+          "bottom": 1582.03125,
+          "width": 14.796875,
+          "height": 25,
+          "ch": "m"
+        }
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 1042.015625,
+          "y": 1464.46875,
+          "right": 1046.40625,
+          "bottom": 1489.46875,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 1049.609375,
+          "y": 1464.46875,
+          "right": 1054.265625,
+          "bottom": 1489.46875,
+          "width": 4.65625,
+          "height": 25,
+          "ch": "i"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "bText": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible.",
+        "ea": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "eb": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible."
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 1042.015625,
+          "y": 1464.46875,
+          "right": 1046.40625,
+          "bottom": 1489.46875,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 1049.609375,
+          "y": 1464.46875,
+          "right": 1054.265625,
+          "bottom": 1489.46875,
+          "width": 4.65625,
+          "height": 25,
+          "ch": "i"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "bText": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible.",
+        "ea": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "eb": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible."
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "true_same_line_boundary_when_space_available",
+      "status": "PASS",
+      "detail": {
+        "dy": 0,
+        "dx": 3.203125,
+        "ar": {
+          "x": 1042.015625,
+          "y": 1464.46875,
+          "right": 1046.40625,
+          "bottom": 1489.46875,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 1049.609375,
+          "y": 1464.46875,
+          "right": 1054.265625,
+          "bottom": 1489.46875,
+          "width": 4.65625,
+          "height": 25,
+          "ch": "i"
+        }
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 1064.765625,
+          "y": 16120.265625,
+          "right": 1069.25,
+          "bottom": 16145.265625,
+          "width": 4.484375,
+          "height": 25,
+          "ch": ":"
+        },
+        "br": {
+          "x": 1072.453125,
+          "y": 16120.265625,
+          "right": 1083.390625,
+          "bottom": 16145.265625,
+          "width": 10.9375,
+          "height": 25,
+          "ch": "E"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "bText": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !",
+        "ea": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "eb": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !"
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 1064.765625,
+          "y": 16120.265625,
+          "right": 1069.25,
+          "bottom": 16145.265625,
+          "width": 4.484375,
+          "height": 25,
+          "ch": ":"
+        },
+        "br": {
+          "x": 1072.453125,
+          "y": 16120.265625,
+          "right": 1083.390625,
+          "bottom": 16145.265625,
+          "width": 10.9375,
+          "height": 25,
+          "ch": "E"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "bText": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !",
+        "ea": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "eb": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !"
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "true_same_line_boundary_when_space_available",
+      "status": "PASS",
+      "detail": {
+        "dy": 0,
+        "dx": 3.203125,
+        "ar": {
+          "x": 1064.765625,
+          "y": 16120.265625,
+          "right": 1069.25,
+          "bottom": 16145.265625,
+          "width": 4.484375,
+          "height": 25,
+          "ch": ":"
+        },
+        "br": {
+          "x": 1072.453125,
+          "y": 16120.265625,
+          "right": 1083.390625,
+          "bottom": 16145.265625,
+          "width": 10.9375,
+          "height": 25,
+          "ch": "E"
+        }
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 1084.84375,
+          "y": 16271.65625,
+          "right": 1090.40625,
+          "bottom": 16296.65625,
+          "width": 5.5625,
+          "height": 25,
+          "ch": "!"
+        },
+        "br": {
+          "x": 1093.609375,
+          "y": 16271.65625,
+          "right": 1107.765625,
+          "bottom": 16296.65625,
+          "width": 14.15625,
+          "height": 25,
+          "ch": "D"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "bText": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances ».",
+        "ea": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "eb": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances »."
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 1084.84375,
+          "y": 16271.65625,
+          "right": 1090.40625,
+          "bottom": 16296.65625,
+          "width": 5.5625,
+          "height": 25,
+          "ch": "!"
+        },
+        "br": {
+          "x": 1093.609375,
+          "y": 16271.65625,
+          "right": 1107.765625,
+          "bottom": 16296.65625,
+          "width": 14.15625,
+          "height": 25,
+          "ch": "D"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "bText": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances ».",
+        "ea": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "eb": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances »."
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "desktop",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "true_same_line_boundary_when_space_available",
+      "status": "PASS",
+      "detail": {
+        "dy": 0,
+        "dx": 3.203125,
+        "ar": {
+          "x": 1084.84375,
+          "y": 16271.65625,
+          "right": 1090.40625,
+          "bottom": 16296.65625,
+          "width": 5.5625,
+          "height": 25,
+          "ch": "!"
+        },
+        "br": {
+          "x": 1093.609375,
+          "y": 16271.65625,
+          "right": 1107.765625,
+          "bottom": 16296.65625,
+          "width": 14.15625,
+          "height": 25,
+          "ch": "D"
+        }
+      }
+    },
+    {
+      "profile": "desktop",
+      "pair": "PAGE→PAGE",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "samsung",
+      "pair": "UNIVERSE→UNIVERSE",
+      "check": "exact_five_pair_universe",
+      "status": "PASS",
+      "detail": [
+        [
+          "PASSION24.HOUR.03.P012",
+          "PASSION24.HOUR.03.P013"
+        ],
+        [
+          "PASSION24.HOUR.13.P011",
+          "PASSION24.HOUR.13.P013"
+        ],
+        [
+          "PASSION24.HOUR.15.P014",
+          "PASSION24.HOUR.15.P015"
+        ],
+        [
+          "PASSION24.HOUR.19.P183",
+          "PASSION24.HOUR.19.P184"
+        ],
+        [
+          "PASSION24.HOUR.19.P185",
+          "PASSION24.HOUR.19.P186"
+        ]
+      ]
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 229.796875,
+          "y": 3239.984375,
+          "right": 234.1875,
+          "bottom": 3264.984375,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 237.390625,
+          "y": 3239.984375,
+          "right": 244.984375,
+          "bottom": 3264.984375,
+          "width": 7.59375,
+          "height": 25,
+          "ch": "a"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "0px"
+          },
+          {
+            "display": "block",
+            "mt": "17.1px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "bText": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen.",
+        "ea": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "eb": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen."
+      }
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 229.796875,
+          "y": 3239.984375,
+          "right": 234.1875,
+          "bottom": 3264.984375,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 237.390625,
+          "y": 3239.984375,
+          "right": 244.984375,
+          "bottom": 3264.984375,
+          "width": 7.59375,
+          "height": 25,
+          "ch": "a"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "0px"
+          },
+          {
+            "display": "block",
+            "mt": "17.1px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "bText": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen.",
+        "ea": "En cet agneau il ne reste plus d’humeur vitale à cause de la force du feu. Ainsi Toi, l’Agneau mystique, Tu vas, par la force de l’Amour, Te consumer tout entier pour les créatures. Tu ne garderas même pas une goutte de Sang pour Toi-même. Tu le verseras tout entier par Amour pour nous. Ô Jésus, il n’y a rien de ce que Tu fais qui ne rappelle ta Passion douloureuse. Celle-ci est toujours présente à ton Esprit et à ton Cœur. Par cela Tu m’enseignes que si, moi aussi, j’avais toujours présente à l’esprit et au cœur ta sainte Passion, Tu ne me refuserais jamais la nourriture de ton Amour. Ô mon Jésus, à chacun de tes Actes Tu me portes dans ta Pensée. Que ta Passion soit toujours présente à mon esprit et à mon cœur. Qu’elle habite mes regards, mes pas et mes peines,",
+        "eb": "afin que, où que je sois, je perçoive toujours ta sainte Présence en moi. Amen."
+      }
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_final_display_segment_inline",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_prior_segments_remain_block",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "leader_internal_rhythm_preserved",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "0px"
+        },
+        {
+          "display": "block",
+          "mt": "17.1px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.03.P012→PASSION24.HOUR.03.P013",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 299.5625,
+          "y": 2422.65625,
+          "right": 303.953125,
+          "bottom": 2447.65625,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 307.15625,
+          "y": 2422.65625,
+          "right": 321.953125,
+          "bottom": 2447.65625,
+          "width": 14.796875,
+          "height": 25,
+          "ch": "m"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "bText": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi.",
+        "ea": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "eb": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi."
+      }
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 299.5625,
+          "y": 2422.65625,
+          "right": 303.953125,
+          "bottom": 2447.65625,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 307.15625,
+          "y": 2422.65625,
+          "right": 321.953125,
+          "bottom": 2447.65625,
+          "width": 14.796875,
+          "height": 25,
+          "ch": "m"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [
+          {
+            "display": "block",
+            "mt": "0px",
+            "mb": "17.1px"
+          },
+          {
+            "display": "inline",
+            "mt": "0px",
+            "mb": "0px"
+          }
+        ],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "bText": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi.",
+        "ea": "Je Te prie de faire poindre dans tous les cœurs l’aube de ta Grâce. Mais je vois, mon doux Jésus, que Tu répares pour les premières pensées, affections et paroles, qui au petit jour, ne Te sont pas offertes. Tu les appelles, puisqu’elles Te sont dues. Tu répares pour donner au Père la Gloire qui Lui est due. Mon Jésus, Maître divin, dans cette prison nous avons une heure de libre et nous sommes seuls. Je veux non seulement faire ce que Tu fais,",
+        "eb": "mais aussi Te nettoyer, T’arranger les Cheveux et me fondre en Toi."
+      }
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_final_display_segment_inline",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_prior_segments_remain_block",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "leader_internal_rhythm_preserved",
+      "status": "PASS",
+      "detail": [
+        {
+          "display": "block",
+          "mt": "0px",
+          "mb": "17.1px"
+        },
+        {
+          "display": "inline",
+          "mt": "0px",
+          "mb": "0px"
+        }
+      ]
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.13.P011→PASSION24.HOUR.13.P013",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 368.265625,
+          "y": 2390.453125,
+          "right": 372.65625,
+          "bottom": 2415.453125,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 375.859375,
+          "y": 2390.453125,
+          "right": 380.515625,
+          "bottom": 2415.453125,
+          "width": 4.65625,
+          "height": 25,
+          "ch": "i"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "bText": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible.",
+        "ea": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "eb": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible."
+      }
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 368.265625,
+          "y": 2390.453125,
+          "right": 372.65625,
+          "bottom": 2415.453125,
+          "width": 4.390625,
+          "height": 25,
+          "ch": ","
+        },
+        "br": {
+          "x": 375.859375,
+          "y": 2390.453125,
+          "right": 380.515625,
+          "bottom": 2415.453125,
+          "width": 4.65625,
+          "height": 25,
+          "ch": "i"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "bText": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible.",
+        "ea": "Il est irrité parce que ses curiosités ne sont pas satisfaites, et en se sentant humilié par ton silence,",
+        "eb": "il proclame devant tous que Tu es un fou. Il ordonne que Tu sois traité comme un fou. Ainsi il Te fait revêtir d’un vêtement blanc et il Te met entre les mains des soldats, afin qu’ils Te bafouent le plus possible."
+      }
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.15.P014→PASSION24.HOUR.15.P015",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 367,
+          "y": 28729.359375,
+          "right": 371.46875,
+          "bottom": 28754.359375,
+          "width": 4.46875,
+          "height": 25,
+          "ch": ":"
+        },
+        "br": {
+          "x": 19.203125,
+          "y": 28762.609375,
+          "right": 30.140625,
+          "bottom": 28787.609375,
+          "width": 10.9375,
+          "height": 25,
+          "ch": "E"
+        },
+        "dy": 33.25,
+        "dx": -352.265625,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "bText": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !",
+        "ea": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "eb": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !"
+      }
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 367,
+          "y": 28729.359375,
+          "right": 371.46875,
+          "bottom": 28754.359375,
+          "width": 4.46875,
+          "height": 25,
+          "ch": ":"
+        },
+        "br": {
+          "x": 19.203125,
+          "y": 28762.609375,
+          "right": 30.140625,
+          "bottom": 28787.609375,
+          "width": 10.9375,
+          "height": 25,
+          "ch": "E"
+        },
+        "dy": 33.25,
+        "dx": -352.265625,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "bText": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !",
+        "ea": "Mon Père, écoute mon Cœur qui, sur le point de défaillir, accélère ses Battements brûlants et crie :",
+        "eb": "En échange de toutes mes Souffrances, Je Te demande le repentir et la conversion de toutes ces âmes malheureuses. Qu’aucune d’elles ne Nous échappe !"
+      }
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P183→PASSION24.HOUR.19.P184",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "stable_ids_surface",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 214.75,
+          "y": 29047,
+          "right": 220.3125,
+          "bottom": 29072,
+          "width": 5.5625,
+          "height": 25,
+          "ch": "!"
+        },
+        "br": {
+          "x": 223.515625,
+          "y": 29047,
+          "right": 237.671875,
+          "bottom": 29072,
+          "width": 14.15625,
+          "height": 25,
+          "ch": "D"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "bText": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances ».",
+        "ea": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "eb": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances »."
+      }
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "fragment_and_text_wrappers_inline",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.130",
+        "A": true,
+        "B": true,
+        "S": true,
+        "ar": {
+          "x": 214.75,
+          "y": 29047,
+          "right": 220.3125,
+          "bottom": 29072,
+          "width": 5.5625,
+          "height": 25,
+          "ch": "!"
+        },
+        "br": {
+          "x": 223.515625,
+          "y": 29047,
+          "right": 237.671875,
+          "bottom": 29072,
+          "width": 14.15625,
+          "height": 25,
+          "ch": "D"
+        },
+        "dy": 0,
+        "dx": 3.203125,
+        "aDisplay": "inline",
+        "bDisplay": "inline",
+        "taDisplay": "inline",
+        "tbDisplay": "inline",
+        "aSegs": [],
+        "bSegs": [],
+        "join": " ",
+        "aText": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "bText": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances ».",
+        "ea": "Mon Père, J’ai soif. J’ai soif de toutes les âmes, surtout de celles-ci. J’ai soif de souffrir davantage pour chacune de ces âmes. J’ai toujours fait ta Volonté, mon Père. Or, cette Volonté qui est la Mienne est aussi la Tienne !",
+        "eb": "De grâce, fais qu’elle soit parfaitement accomplie par Amour pour Moi, ton Fils bien-aimé, « en qui Tu as trouvé toutes tes complaisances »."
+      }
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "canonical_text_exact",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "single_space_joiner",
+      "status": "PASS",
+      "detail": " "
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "leader_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PASSION24.HOUR.19.P185→PASSION24.HOUR.19.P186",
+      "check": "follower_no_segment_override_needed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "profile": "samsung",
+      "pair": "PAGE→PAGE",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

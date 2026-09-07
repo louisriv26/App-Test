@@ -1,0 +1,13 @@
+{
+  "schema": "L24H_V101125_FULL_PACKAGE_BUILD_REPRODUCTION_V1",
+  "version": "v101.125",
+  "stage": "FOUR_PASS_EVIDENCE_SCHEMA_AND_DIRECT_REPORT_BINDING_RECONCILIATION_R1",
+  "status": "PASS_FULL_PACKAGE_REPRODUCTION",
+  "baseline_version": "v101.124",
+  "baseline_zip_sha256": "15b9fdb66fb07617ac8078fddb3e4076347390252a510c6eeb4b613f4a06d3ac",
+  "builder": "scripts/build_v101125_full_package_reconciliation.py",
+  "source_file_count_at_verification": 428,
+  "exact_source_tree_reproduction": "PASS",
+  "hash_manifest_reconciliation": "PASS",
+  "verification_note": "Fresh builder execution reproduced the complete then-current source tree exactly from immutable v101.124. This evidence is revalidated again by independent prefreeze and final reopened-ZIP audits before any final decision."
+}

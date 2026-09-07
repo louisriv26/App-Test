@@ -1,0 +1,546 @@
+{
+  "schema": "L24H_V101128_INDEPENDENT_RUNTIME_SMOKE_V1",
+  "version": "v101.129",
+  "summary": {
+    "pass": 50,
+    "fail": 0,
+    "total": 50
+  },
+  "results": [
+    {
+      "profile": "phone",
+      "check": "identity",
+      "status": "PASS",
+      "detail": {
+        "v": "v101.129",
+        "s": "INTRA_RECORD_QUOTE_HOST_SENTENCE_CONTINUITY_R1",
+        "home": 1173,
+        "bw": 390,
+        "iw": 390,
+        "hours": 24,
+        "speech": 2169,
+        "proj": 2281,
+        "adj": 11
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "home_nonempty",
+      "status": "PASS",
+      "detail": 1173
+    },
+    {
+      "profile": "phone",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": [
+        390,
+        390
+      ]
+    },
+    {
+      "profile": "phone",
+      "check": "24_hours",
+      "status": "PASS",
+      "detail": 24
+    },
+    {
+      "profile": "phone",
+      "check": "render_24_hours",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "phone",
+      "check": "v101112_user_fixes",
+      "status": "PASS",
+      "detail": {
+        "h3": 1,
+        "ok": true,
+        "p70": "Je Te promets que chaque fois où me viendra la pensée de m’éloigner de Toi, je crierai immédiatement : « Jésus et Marie, je Vous recommande mon âme ! ».",
+        "p71": "Jésus, je donne un baiser à ton Cœur infiniment sacré. Je veux m’enfermer en Lui et y enfermer toutes les âmes rachetées par Toi, pour que toutes soient sauvées, sans aucune exception. Jésus, enferme-moi dans ton Cœur et fermes-en les portes, de sorte que je ne puisse voir que Toi."
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "search",
+      "status": "PASS",
+      "detail": 60
+    },
+    {
+      "profile": "phone",
+      "check": "mon_espace",
+      "status": "PASS",
+      "detail": 836
+    },
+    {
+      "profile": "phone",
+      "check": "presentation_controls",
+      "status": "PASS",
+      "detail": {
+        "p053": {
+          "ch": "«",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p068": {
+          "ch": "«",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p090o": {
+          "ch": " ",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p090c": {
+          "ch": "’",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        }
+      }
+    },
+    {
+      "profile": "phone",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_p",
+      "check": "identity",
+      "status": "PASS",
+      "detail": {
+        "v": "v101.129",
+        "s": "INTRA_RECORD_QUOTE_HOST_SENTENCE_CONTINUITY_R1",
+        "home": 1173,
+        "bw": 820,
+        "iw": 820,
+        "hours": 24,
+        "speech": 2169,
+        "proj": 2281,
+        "adj": 11
+      }
+    },
+    {
+      "profile": "ipad_p",
+      "check": "home_nonempty",
+      "status": "PASS",
+      "detail": 1173
+    },
+    {
+      "profile": "ipad_p",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": [
+        820,
+        820
+      ]
+    },
+    {
+      "profile": "ipad_p",
+      "check": "24_hours",
+      "status": "PASS",
+      "detail": 24
+    },
+    {
+      "profile": "ipad_p",
+      "check": "render_24_hours",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_p",
+      "check": "v101112_user_fixes",
+      "status": "PASS",
+      "detail": {
+        "h3": 1,
+        "ok": true,
+        "p70": "Je Te promets que chaque fois où me viendra la pensée de m’éloigner de Toi, je crierai immédiatement : « Jésus et Marie, je Vous recommande mon âme ! ».",
+        "p71": "Jésus, je donne un baiser à ton Cœur infiniment sacré. Je veux m’enfermer en Lui et y enfermer toutes les âmes rachetées par Toi, pour que toutes soient sauvées, sans aucune exception. Jésus, enferme-moi dans ton Cœur et fermes-en les portes, de sorte que je ne puisse voir que Toi."
+      }
+    },
+    {
+      "profile": "ipad_p",
+      "check": "search",
+      "status": "PASS",
+      "detail": 60
+    },
+    {
+      "profile": "ipad_p",
+      "check": "mon_espace",
+      "status": "PASS",
+      "detail": 836
+    },
+    {
+      "profile": "ipad_p",
+      "check": "presentation_controls",
+      "status": "PASS",
+      "detail": {
+        "p053": {
+          "ch": "«",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p068": {
+          "ch": "«",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p090o": {
+          "ch": " ",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p090c": {
+          "ch": "’",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        }
+      }
+    },
+    {
+      "profile": "ipad_p",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_l",
+      "check": "identity",
+      "status": "PASS",
+      "detail": {
+        "v": "v101.129",
+        "s": "INTRA_RECORD_QUOTE_HOST_SENTENCE_CONTINUITY_R1",
+        "home": 1173,
+        "bw": 1180,
+        "iw": 1180,
+        "hours": 24,
+        "speech": 2169,
+        "proj": 2281,
+        "adj": 11
+      }
+    },
+    {
+      "profile": "ipad_l",
+      "check": "home_nonempty",
+      "status": "PASS",
+      "detail": 1173
+    },
+    {
+      "profile": "ipad_l",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": [
+        1180,
+        1180
+      ]
+    },
+    {
+      "profile": "ipad_l",
+      "check": "24_hours",
+      "status": "PASS",
+      "detail": 24
+    },
+    {
+      "profile": "ipad_l",
+      "check": "render_24_hours",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "ipad_l",
+      "check": "v101112_user_fixes",
+      "status": "PASS",
+      "detail": {
+        "h3": 1,
+        "ok": true,
+        "p70": "Je Te promets que chaque fois où me viendra la pensée de m’éloigner de Toi, je crierai immédiatement : « Jésus et Marie, je Vous recommande mon âme ! ».",
+        "p71": "Jésus, je donne un baiser à ton Cœur infiniment sacré. Je veux m’enfermer en Lui et y enfermer toutes les âmes rachetées par Toi, pour que toutes soient sauvées, sans aucune exception. Jésus, enferme-moi dans ton Cœur et fermes-en les portes, de sorte que je ne puisse voir que Toi."
+      }
+    },
+    {
+      "profile": "ipad_l",
+      "check": "search",
+      "status": "PASS",
+      "detail": 60
+    },
+    {
+      "profile": "ipad_l",
+      "check": "mon_espace",
+      "status": "PASS",
+      "detail": 836
+    },
+    {
+      "profile": "ipad_l",
+      "check": "presentation_controls",
+      "status": "PASS",
+      "detail": {
+        "p053": {
+          "ch": "«",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p068": {
+          "ch": "«",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p090o": {
+          "ch": " ",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p090c": {
+          "ch": "’",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        }
+      }
+    },
+    {
+      "profile": "ipad_l",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "desktop",
+      "check": "identity",
+      "status": "PASS",
+      "detail": {
+        "v": "v101.129",
+        "s": "INTRA_RECORD_QUOTE_HOST_SENTENCE_CONTINUITY_R1",
+        "home": 1173,
+        "bw": 1200,
+        "iw": 1200,
+        "hours": 24,
+        "speech": 2169,
+        "proj": 2281,
+        "adj": 11
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "home_nonempty",
+      "status": "PASS",
+      "detail": 1173
+    },
+    {
+      "profile": "desktop",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": [
+        1200,
+        1200
+      ]
+    },
+    {
+      "profile": "desktop",
+      "check": "24_hours",
+      "status": "PASS",
+      "detail": 24
+    },
+    {
+      "profile": "desktop",
+      "check": "render_24_hours",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "desktop",
+      "check": "v101112_user_fixes",
+      "status": "PASS",
+      "detail": {
+        "h3": 1,
+        "ok": true,
+        "p70": "Je Te promets que chaque fois où me viendra la pensée de m’éloigner de Toi, je crierai immédiatement : « Jésus et Marie, je Vous recommande mon âme ! ».",
+        "p71": "Jésus, je donne un baiser à ton Cœur infiniment sacré. Je veux m’enfermer en Lui et y enfermer toutes les âmes rachetées par Toi, pour que toutes soient sauvées, sans aucune exception. Jésus, enferme-moi dans ton Cœur et fermes-en les portes, de sorte que je ne puisse voir que Toi."
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "search",
+      "status": "PASS",
+      "detail": 60
+    },
+    {
+      "profile": "desktop",
+      "check": "mon_espace",
+      "status": "PASS",
+      "detail": 836
+    },
+    {
+      "profile": "desktop",
+      "check": "presentation_controls",
+      "status": "PASS",
+      "detail": {
+        "p053": {
+          "ch": "«",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p068": {
+          "ch": "«",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p090o": {
+          "ch": " ",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p090c": {
+          "ch": "’",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        }
+      }
+    },
+    {
+      "profile": "desktop",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "samsung",
+      "check": "identity",
+      "status": "PASS",
+      "detail": {
+        "v": "v101.129",
+        "s": "INTRA_RECORD_QUOTE_HOST_SENTENCE_CONTINUITY_R1",
+        "home": 1173,
+        "bw": 412,
+        "iw": 412,
+        "hours": 24,
+        "speech": 2169,
+        "proj": 2281,
+        "adj": 11
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "home_nonempty",
+      "status": "PASS",
+      "detail": 1173
+    },
+    {
+      "profile": "samsung",
+      "check": "no_horizontal_overflow",
+      "status": "PASS",
+      "detail": [
+        412,
+        412
+      ]
+    },
+    {
+      "profile": "samsung",
+      "check": "24_hours",
+      "status": "PASS",
+      "detail": 24
+    },
+    {
+      "profile": "samsung",
+      "check": "render_24_hours",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "profile": "samsung",
+      "check": "v101112_user_fixes",
+      "status": "PASS",
+      "detail": {
+        "h3": 1,
+        "ok": true,
+        "p70": "Je Te promets que chaque fois où me viendra la pensée de m’éloigner de Toi, je crierai immédiatement : « Jésus et Marie, je Vous recommande mon âme ! ».",
+        "p71": "Jésus, je donne un baiser à ton Cœur infiniment sacré. Je veux m’enfermer en Lui et y enfermer toutes les âmes rachetées par Toi, pour que toutes soient sauvées, sans aucune exception. Jésus, enferme-moi dans ton Cœur et fermes-en les portes, de sorte que je ne puisse voir que Toi."
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "search",
+      "status": "PASS",
+      "detail": 60
+    },
+    {
+      "profile": "samsung",
+      "check": "mon_espace",
+      "status": "PASS",
+      "detail": 836
+    },
+    {
+      "profile": "samsung",
+      "check": "presentation_controls",
+      "status": "PASS",
+      "detail": {
+        "p053": {
+          "ch": "«",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p068": {
+          "ch": "«",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p090o": {
+          "ch": " ",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        },
+        "p090c": {
+          "ch": "’",
+          "j": true,
+          "m": false,
+          "f": false,
+          "h": false
+        }
+      }
+    },
+    {
+      "profile": "samsung",
+      "check": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

@@ -1,0 +1,990 @@
+{
+  "schema": "L24H_V101125_REPORT_CLAIM_ASSERTIONS_V1",
+  "version": "v101.125",
+  "status": "PASS",
+  "assertions_total": 98,
+  "assertions_pass": 98,
+  "assertions_fail": 0,
+  "assertions": [
+    {
+      "assertion_id": "A0001",
+      "path": "reports/CONTINUITY_PRODUCT_CONTRACT.md",
+      "line": 1,
+      "line_text": "# Cross-record continuity product contract — v101.125",
+      "type": "STRUCTURE",
+      "status": "PASS",
+      "evidence_path": "reports/CONTINUITY_PRODUCT_CONTRACT.md",
+      "evidence_detail": "heading/structure only"
+    },
+    {
+      "assertion_id": "A0002",
+      "path": "reports/CONTINUITY_PRODUCT_CONTRACT.md",
+      "line": 3,
+      "line_text": "- Scope: inherited unchanged from v101.124; presentation continuity only; canonical text and stable paragraph IDs remain unchanged.",
+      "type": "CONTINUITY_CONTRACT",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/FUNCTIONAL_HTML_PARITY.json",
+      "evidence_detail": "functional/canonical/stable identity inherited"
+    },
+    {
+      "assertion_id": "A0003",
+      "path": "reports/CONTINUITY_PRODUCT_CONTRACT.md",
+      "line": 4,
+      "line_text": "- Approved continuity universe: exactly five leader→follower pairs recorded in `CONTINUITY_GROUPS`.",
+      "type": "CONTINUITY_CONTRACT",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CONTINUITY_CANDIDATE_AUDIT.json",
+      "evidence_detail": "exact five approved pairs"
+    },
+    {
+      "assertion_id": "A0004",
+      "path": "reports/CONTINUITY_PRODUCT_CONTRACT.md",
+      "line": 5,
+      "line_text": "- Visual contract: each approved pair renders as one inline grammatical flow with exactly one ordinary space between record texts.",
+      "type": "CONTINUITY_CONTRACT",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CONTINUITY_RUNTIME_MATRIX.json",
+      "evidence_detail": "25/25 inline + single-space across five profiles"
+    },
+    {
+      "assertion_id": "A0005",
+      "path": "reports/CONTINUITY_PRODUCT_CONTRACT.md",
+      "line": 6,
+      "line_text": "- Stable-ID contract: leader and follower remain separately addressable `.para-block` fragments with their original `id` and `data-para-id`.",
+      "type": "CONTINUITY_CONTRACT",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CONTINUITY_RUNTIME_MATRIX.json",
+      "evidence_detail": "stable id/data-id checks across all pairs/profiles"
+    },
+    {
+      "assertion_id": "A0006",
+      "path": "reports/CONTINUITY_PRODUCT_CONTRACT.md",
+      "line": 7,
+      "line_text": "- Annotation contract: notes/highlights/deep-link targets retain record-level identity because both stable IDs/data IDs and storage/anchor authorities remain unchanged.",
+      "type": "CONTINUITY_CONTRACT",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CONTINUITY_RUNTIME_MATRIX.json",
+      "evidence_detail": "record-level ids/notes plus unchanged anchor/storage authorities"
+    },
+    {
+      "assertion_id": "A0007",
+      "path": "reports/CONTINUITY_PRODUCT_CONTRACT.md",
+      "line": 8,
+      "line_text": "- Repères contract: one paragraph-number/speaker header is shown for each visual continuity unit; the approved pairs do not conceal a distinct follower speaker attribution.",
+      "type": "CONTINUITY_CONTRACT",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CONTINUITY_SPEAKER_HEADER_AUDIT.json",
+      "evidence_detail": "one repères surface and no distinct follower divine speaker suppressed"
+    },
+    {
+      "assertion_id": "A0008",
+      "path": "reports/CONTINUITY_PRODUCT_CONTRACT.md",
+      "line": 9,
+      "line_text": "- Fail-closed contract: grouping occurs only when the approved follower is immediately adjacent in the rendered paragraph sequence.",
+      "type": "CONTINUITY_CONTRACT",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CONTINUITY_MUTATION_TESTS.json",
+      "evidence_detail": "adjacency guard exists and its removal is detected"
+    },
+    {
+      "assertion_id": "A0009",
+      "path": "reports/CONTINUITY_PRODUCT_CONTRACT.md",
+      "line": 10,
+      "line_text": "- No automatic broad punctuation heuristic is used at runtime.",
+      "type": "CONTINUITY_CONTRACT",
+      "status": "PASS",
+      "evidence_path": "index.html",
+      "evidence_detail": "runtime grouping is fixed-group lookup; no punctuation heuristic in renderer"
+    },
+    {
+      "assertion_id": "A0010",
+      "path": "reports/CONTINUITY_PRODUCT_CONTRACT.md",
+      "line": 11,
+      "line_text": "Evidence: `evidence/v101125/CONTINUITY_RUNTIME_MATRIX.json`, `evidence/v101125/INDEPENDENT_CONTINUITY_PROBE.json`, `evidence/v101125/PROTECTED_DECLARATION_PARITY.json`, `evidence/v101125/CONTINUITY_SPEAKER_HEADER_AUDIT.json`.",
+      "type": "EVIDENCE_POINTERS",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CONTINUITY_RUNTIME_MATRIX.json;evidence/v101125/INDEPENDENT_CONTINUITY_PROBE.json;evidence/v101125/PROTECTED_DECLARATION_PARITY.json;evidence/v101125/CONTINUITY_SPEAKER_HEADER_AUDIT.json",
+      "evidence_detail": "all declared evidence paths exist"
+    },
+    {
+      "assertion_id": "A0011",
+      "path": "reports/EVIDENCE_SCHEMA_AND_BINDING_RECONCILIATION.md",
+      "line": 1,
+      "line_text": "# Evidence-schema and direct-report-binding reconciliation — v101.125",
+      "type": "STRUCTURE",
+      "status": "PASS",
+      "evidence_path": "reports/EVIDENCE_SCHEMA_AND_BINDING_RECONCILIATION.md",
+      "evidence_detail": "heading/structure only"
+    },
+    {
+      "assertion_id": "A0012",
+      "path": "reports/EVIDENCE_SCHEMA_AND_BINDING_RECONCILIATION.md",
+      "line": 3,
+      "line_text": "- v101.124 application/runtime evidence reruns remain PASS, but its report/evidence layer is superseded for current continuation.",
+      "type": "RECONCILIATION",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/V101124_DEEP_FOUR_PASS_FINDINGS.json",
+      "evidence_detail": "runtime PASS; report layer superseded"
+    },
+    {
+      "assertion_id": "A0013",
+      "path": "reports/EVIDENCE_SCHEMA_AND_BINDING_RECONCILIATION.md",
+      "line": 4,
+      "line_text": "- Reproduced v101.124 defect A: some active report lines were bound to evidence that did not directly prove that specific claim.",
+      "type": "RECONCILIATION",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/V101124_DEEP_FOUR_PASS_FINDINGS.json",
+      "evidence_detail": "reproduced direct-binding defect"
+    },
+    {
+      "assertion_id": "A0014",
+      "path": "reports/EVIDENCE_SCHEMA_AND_BINDING_RECONCILIATION.md",
+      "line": 5,
+      "line_text": "- Reproduced v101.124 defect B: current generated evidence contained older schema identifiers (`V101123` / `V101121`) while current v101.124 tools had already moved some schemas forward.",
+      "type": "RECONCILIATION",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/V101124_DEEP_FOUR_PASS_FINDINGS.json",
+      "evidence_detail": "reproduced stale generated schema defect"
+    },
+    {
+      "assertion_id": "A0015",
+      "path": "reports/EVIDENCE_SCHEMA_AND_BINDING_RECONCILIATION.md",
+      "line": 6,
+      "line_text": "- Reproduced v101.124 defect C: the v101.124 stale scanner did not include the current `evidence/v101124` tree, so its zero-stale-reference claim did not cover current evidence artifacts.",
+      "type": "RECONCILIATION",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/V101124_DEEP_FOUR_PASS_FINDINGS.json",
+      "evidence_detail": "reproduced stale-scan scope defect"
+    },
+    {
+      "assertion_id": "A0016",
+      "path": "reports/EVIDENCE_SCHEMA_AND_BINDING_RECONCILIATION.md",
+      "line": 7,
+      "line_text": "- v101.125 corrects only release identity, current evidence schemas, stale-scan scope and claim-specific report bindings.",
+      "type": "RECONCILIATION",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CURRENT_EVIDENCE_SCHEMA_AUDIT.json",
+      "evidence_detail": "current evidence schemas/stale scope corrected"
+    },
+    {
+      "assertion_id": "A0017",
+      "path": "reports/EVIDENCE_SCHEMA_AND_BINDING_RECONCILIATION.md",
+      "line": 8,
+      "line_text": "- Functional application behaviour is unchanged after normalising release identity.",
+      "type": "RECONCILIATION",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/FUNCTIONAL_HTML_PARITY.json",
+      "evidence_detail": "identity-normalized byte parity"
+    },
+    {
+      "assertion_id": "A0018",
+      "path": "reports/EVIDENCE_SCHEMA_AND_BINDING_RECONCILIATION.md",
+      "line": 9,
+      "line_text": "Evidence: `evidence/v101125/V101124_DEEP_FOUR_PASS_FINDINGS.json`, `evidence/v101125/FUNCTIONAL_HTML_PARITY.json`, `evidence/v101125/CURRENT_EVIDENCE_SCHEMA_AUDIT.json`.",
+      "type": "EVIDENCE_POINTERS",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/V101124_DEEP_FOUR_PASS_FINDINGS.json;evidence/v101125/FUNCTIONAL_HTML_PARITY.json;evidence/v101125/CURRENT_EVIDENCE_SCHEMA_AUDIT.json",
+      "evidence_detail": "all declared evidence paths exist"
+    },
+    {
+      "assertion_id": "A0019",
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 1,
+      "line_text": "# Build script vs files — v101.125",
+      "type": "STRUCTURE",
+      "status": "PASS",
+      "evidence_path": "reports/build_script_vs_files_audit.md",
+      "evidence_detail": "heading/structure only"
+    },
+    {
+      "assertion_id": "A0020",
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 3,
+      "line_text": "- Status: **PASS** only if `evidence/v101125/FULL_PACKAGE_BUILD_REPRODUCTION.json` is current and PASS.",
+      "type": "BUILD_REPRODUCTION",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/FULL_PACKAGE_BUILD_REPRODUCTION.json",
+      "evidence_detail": "current full build reproduction PASS"
+    },
+    {
+      "assertion_id": "A0021",
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 4,
+      "line_text": "- Baseline: immutable v101.124 ZIP SHA-256 `15b9fdb66fb07617ac8078fddb3e4076347390252a510c6eeb4b613f4a06d3ac`.",
+      "type": "BUILD_REPRODUCTION",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/FULL_PACKAGE_BUILD_REPRODUCTION.json",
+      "evidence_detail": "exact immutable baseline hash"
+    },
+    {
+      "assertion_id": "A0022",
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 5,
+      "line_text": "- Builder: `scripts/build_v101125_full_package_reconciliation.py`.",
+      "type": "BUILD_REPRODUCTION",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/FULL_PACKAGE_BUILD_REPRODUCTION.json",
+      "evidence_detail": "exact builder recorded"
+    },
+    {
+      "assertion_id": "A0023",
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 6,
+      "line_text": "- Contract: baseline extraction + exact `metadata/full_build_overlay_manifest.json` must reproduce the complete current package-source tree and reconcile the current hash manifest.",
+      "type": "BUILD_REPRODUCTION",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/FULL_PACKAGE_BUILD_REPRODUCTION.json",
+      "evidence_detail": "full tree + hash manifest reconciliation"
+    },
+    {
+      "assertion_id": "A0024",
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 7,
+      "line_text": "- Deterministic ZIP freeze is permitted only after current reports, tooling, evidence and manifests are final.",
+      "type": "BUILD_REPRODUCTION",
+      "status": "PASS",
+      "evidence_path": "metadata/release_evidence_lifecycle.json",
+      "evidence_detail": "freeze lifecycle contract"
+    },
+    {
+      "assertion_id": "A0025",
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 8,
+      "line_text": "Evidence: `evidence/v101125/FULL_PACKAGE_BUILD_REPRODUCTION.json`, `metadata/release_evidence_lifecycle.json`.",
+      "type": "EVIDENCE_POINTERS",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/FULL_PACKAGE_BUILD_REPRODUCTION.json;metadata/release_evidence_lifecycle.json",
+      "evidence_detail": "all declared evidence paths exist"
+    },
+    {
+      "assertion_id": "A0026",
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 1,
+      "line_text": "# Current metadata and semantic consistency — v101.125",
+      "type": "STRUCTURE",
+      "status": "PASS",
+      "evidence_path": "reports/current_metadata_semantic_consistency.md",
+      "evidence_detail": "heading/structure only"
+    },
+    {
+      "assertion_id": "A0027",
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 3,
+      "line_text": "- APP_VERSION: `v101.125`.",
+      "type": "CURRENT_METADATA",
+      "status": "PASS",
+      "evidence_path": "version.json",
+      "evidence_detail": "version.json + HTML current identity"
+    },
+    {
+      "assertion_id": "A0028",
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 4,
+      "line_text": "- Stage: `FOUR_PASS_EVIDENCE_SCHEMA_AND_DIRECT_REPORT_BINDING_RECONCILIATION_R1`.",
+      "type": "CURRENT_METADATA",
+      "status": "PASS",
+      "evidence_path": "index.html",
+      "evidence_detail": "exact current stage constant"
+    },
+    {
+      "assertion_id": "A0029",
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 5,
+      "line_text": "- Service-worker cache: `luisa-24h-v101-125`.",
+      "type": "CURRENT_METADATA",
+      "status": "PASS",
+      "evidence_path": "sw.js",
+      "evidence_detail": "version metadata and SW cache identity agree"
+    },
+    {
+      "assertion_id": "A0030",
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 6,
+      "line_text": "- Storage schema: 8; personal snapshot: 5.",
+      "type": "CURRENT_METADATA",
+      "status": "PASS",
+      "evidence_path": "version.json",
+      "evidence_detail": "exact storage/personal snapshot versions"
+    },
+    {
+      "assertion_id": "A0031",
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 7,
+      "line_text": "- Canonical devotional text: unchanged versus v101.124.",
+      "type": "CURRENT_METADATA",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "canonical/protected declarations unchanged"
+    },
+    {
+      "assertion_id": "A0032",
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 8,
+      "line_text": "- All 14 governed declarations, including `CONTINUITY_GROUPS`, are byte-identical to v101.124.",
+      "type": "CURRENT_METADATA",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "14/14 exact declaration parity"
+    },
+    {
+      "assertion_id": "A0033",
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 9,
+      "line_text": "- Cross-record continuity behaviour is inherited unchanged from v101.124.",
+      "type": "CURRENT_METADATA",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/FUNCTIONAL_HTML_PARITY.json",
+      "evidence_detail": "complete functional HTML parity after release identity normalization"
+    },
+    {
+      "assertion_id": "A0034",
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 10,
+      "line_text": "- Final package status remains prefreeze/conditional inside the immutable package; final reopened-ZIP decisions are external and written after freeze.",
+      "type": "CURRENT_METADATA",
+      "status": "PASS",
+      "evidence_path": "metadata/release_evidence_lifecycle.json",
+      "evidence_detail": "package remains prefreeze/conditional; postfreeze decision external"
+    },
+    {
+      "assertion_id": "A0035",
+      "path": "reports/current_metadata_semantic_consistency.md",
+      "line": 11,
+      "line_text": "Evidence: `version.json`, `index.html`, `sw.js`, `evidence/v101125/PROTECTED_DECLARATION_PARITY.json`, `evidence/v101125/FUNCTIONAL_HTML_PARITY.json`, `metadata/release_evidence_lifecycle.json`.",
+      "type": "EVIDENCE_POINTERS",
+      "status": "PASS",
+      "evidence_path": "version.json;index.html;sw.js;evidence/v101125/PROTECTED_DECLARATION_PARITY.json;evidence/v101125/FUNCTIONAL_HTML_PARITY.json;metadata/release_evidence_lifecycle.json",
+      "evidence_detail": "all declared evidence paths exist"
+    },
+    {
+      "assertion_id": "A0036",
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 1,
+      "line_text": "# v101.125 four-pass deep audit — prefreeze",
+      "type": "STRUCTURE",
+      "status": "PASS",
+      "evidence_path": "reports/four_pass_deep_audit.md",
+      "evidence_detail": "heading/structure only"
+    },
+    {
+      "assertion_id": "A0037",
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 3,
+      "line_text": "- Pass 1 — files vs build script/current tooling: **PASS** only after fresh self-contained reproduction.",
+      "type": "FOUR_PASS",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/FULL_PACKAGE_BUILD_REPRODUCTION.json",
+      "evidence_detail": "fresh full build evidence"
+    },
+    {
+      "assertion_id": "A0038",
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 4,
+      "line_text": "- Pass 2 — runtime/package behaviour: **PASS** only after the full current regression matrix reruns.",
+      "type": "FOUR_PASS",
+      "status": "PASS",
+      "evidence_path": "reports/full_regression_matrix.csv",
+      "evidence_detail": "all current runtime/package regression rows pass"
+    },
+    {
+      "assertion_id": "A0039",
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 6,
+      "line_text": "- Pass 4 — stale references, stale evidence schemas, semantic assumptions and contradictions: **PASS** only when both current stale scans and the current-evidence schema audit pass.",
+      "type": "FOUR_PASS",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CURRENT_EVIDENCE_SCHEMA_AUDIT.json",
+      "evidence_detail": "version/semantic/schema stale gates all pass"
+    },
+    {
+      "assertion_id": "A0040",
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 7,
+      "line_text": "- v101.124 report/evidence integrity defects are explicitly superseded; its application/runtime evidence remains historical predecessor evidence.",
+      "type": "FOUR_PASS",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/V101124_DEEP_FOUR_PASS_FINDINGS.json",
+      "evidence_detail": "predecessor report defect superseded; runtime retained"
+    },
+    {
+      "assertion_id": "A0041",
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 8,
+      "line_text": "- Physical-device/live-origin/PWA/offline/accessibility: **NOT TESTED** for v101.125.",
+      "type": "FOUR_PASS",
+      "status": "PASS",
+      "evidence_path": "version.json",
+      "evidence_detail": "external device/live gates explicitly not tested"
+    },
+    {
+      "assertion_id": "A0042",
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 9,
+      "line_text": "- Final reopened-ZIP audits are external/post-freeze and are not claimed PASS by this prefreeze report.",
+      "type": "FOUR_PASS",
+      "status": "PASS",
+      "evidence_path": "metadata/release_evidence_lifecycle.json",
+      "evidence_detail": "reopen decisions external/postfreeze"
+    },
+    {
+      "assertion_id": "A0043",
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 10,
+      "line_text": "Evidence: `reports/full_regression_matrix.csv`, `evidence/v101125/ACTIVE_REPORT_LINE_AUDIT_SUMMARY.json`, `evidence/v101125/REPORT_CLAIM_ASSERTIONS.json`, `evidence/v101125/VERSION_STALE_SCAN.json`, `evidence/v101125/SEMANTIC_STALE_SCAN.json`, `evidence/v101125/CURRENT_EVIDENCE_SCHEMA_AUDIT.json`, `evidence/v101125/FULL_PACKAGE_BUILD_REPRODUCTION.json`.",
+      "type": "EVIDENCE_POINTERS",
+      "status": "PASS",
+      "evidence_path": "reports/full_regression_matrix.csv;evidence/v101125/ACTIVE_REPORT_LINE_AUDIT_SUMMARY.json;evidence/v101125/REPORT_CLAIM_ASSERTIONS.json;evidence/v101125/VERSION_STALE_SCAN.json;evidence/v101125/SEMANTIC_STALE_SCAN.json;evidence/v101125/CURRENT_EVIDENCE_SCHEMA_AUDIT.json;evidence/v101125/FULL_PACKAGE_BUILD_REPRODUCTION.json",
+      "evidence_detail": "all declared evidence paths exist"
+    },
+    {
+      "assertion_id": "A0044",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 1,
+      "line_text": "gate,result,status,evidence",
+      "type": "STRUCTURE",
+      "status": "PASS",
+      "evidence_path": "reports/full_regression_matrix.csv",
+      "evidence_detail": "exact CSV schema"
+    },
+    {
+      "assertion_id": "A0045",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 2,
+      "line_text": "continuity_runtime,215/215,PASS,evidence/v101125/CONTINUITY_RUNTIME_MATRIX.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CONTINUITY_RUNTIME_MATRIX.json",
+      "evidence_detail": "claim-specific gate assertion continuity_runtime"
+    },
+    {
+      "assertion_id": "A0046",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 3,
+      "line_text": "continuity_candidate_universe,5 approved; no extra strong ungrouped,PASS,evidence/v101125/CONTINUITY_CANDIDATE_AUDIT.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CONTINUITY_CANDIDATE_AUDIT.json",
+      "evidence_detail": "claim-specific gate assertion continuity_candidate_universe"
+    },
+    {
+      "assertion_id": "A0047",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 4,
+      "line_text": "continuity_speaker_header,5/5; no distinct follower divine speaker suppressed,PASS,evidence/v101125/CONTINUITY_SPEAKER_HEADER_AUDIT.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CONTINUITY_SPEAKER_HEADER_AUDIT.json",
+      "evidence_detail": "claim-specific gate assertion continuity_speaker_header"
+    },
+    {
+      "assertion_id": "A0048",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 5,
+      "line_text": "continuity_mutation_detection,9/9,PASS,evidence/v101125/CONTINUITY_MUTATION_TESTS.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CONTINUITY_MUTATION_TESTS.json",
+      "evidence_detail": "claim-specific gate assertion continuity_mutation_detection"
+    },
+    {
+      "assertion_id": "A0049",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 6,
+      "line_text": "hour24_state,16/16,PASS,evidence/v101125/HOUR24_STATE_TRANSITION_MATRIX.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/HOUR24_STATE_TRANSITION_MATRIX.json",
+      "evidence_detail": "claim-specific gate assertion hour24_state"
+    },
+    {
+      "assertion_id": "A0050",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 7,
+      "line_text": "hour24_five_profile_ux,70/70,PASS,evidence/v101125/HOUR24_FIVE_PROFILE_UX_MATRIX.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/HOUR24_FIVE_PROFILE_UX_MATRIX.json",
+      "evidence_detail": "claim-specific gate assertion hour24_five_profile_ux"
+    },
+    {
+      "assertion_id": "A0051",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 8,
+      "line_text": "help,70/70,PASS,evidence/v101125/HELP_BROWSER_MATRIX.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/HELP_BROWSER_MATRIX.json",
+      "evidence_detail": "claim-specific gate assertion help"
+    },
+    {
+      "assertion_id": "A0052",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 9,
+      "line_text": "broad_runtime,52/52,PASS,evidence/v101125/BROAD_CHROMIUM_RUNTIME_MATRIX.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/BROAD_CHROMIUM_RUNTIME_MATRIX.json",
+      "evidence_detail": "claim-specific gate assertion broad_runtime"
+    },
+    {
+      "assertion_id": "A0053",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 10,
+      "line_text": "quoted_span_fixed_point,0/0 defects; 398 presentation spans,PASS,evidence/v101125/fixed/M1_FIXED_POINT_SUMMARY.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/fixed/M1_FIXED_POINT_SUMMARY.json",
+      "evidence_detail": "claim-specific gate assertion quoted_span_fixed_point"
+    },
+    {
+      "assertion_id": "A0054",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 11,
+      "line_text": "presentation,1990/1990,PASS,evidence/v101125/EXHAUSTIVE_PRESENTATION_RUNTIME_MATRIX.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/EXHAUSTIVE_PRESENTATION_RUNTIME_MATRIX.json",
+      "evidence_detail": "claim-specific gate assertion presentation"
+    },
+    {
+      "assertion_id": "A0055",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 12,
+      "line_text": "service_worker,15/15,PASS,evidence/v101125/SERVICE_WORKER_LOGIC_MATRIX.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/SERVICE_WORKER_LOGIC_MATRIX.json",
+      "evidence_detail": "claim-specific gate assertion service_worker"
+    },
+    {
+      "assertion_id": "A0056",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 13,
+      "line_text": "independent_hour24,55/55,PASS,evidence/v101125/INDEPENDENT_HOUR24_PROBE.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/INDEPENDENT_HOUR24_PROBE.json",
+      "evidence_detail": "claim-specific gate assertion independent_hour24"
+    },
+    {
+      "assertion_id": "A0057",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 14,
+      "line_text": "independent_runtime,50/50,PASS,evidence/v101125/INDEPENDENT_RUNTIME_SMOKE.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/INDEPENDENT_RUNTIME_SMOKE.json",
+      "evidence_detail": "claim-specific gate assertion independent_runtime"
+    },
+    {
+      "assertion_id": "A0058",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 15,
+      "line_text": "independent_presentation,1990/1990,PASS,evidence/v101125/INDEPENDENT_PRESENTATION_MATRIX.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/INDEPENDENT_PRESENTATION_MATRIX.json",
+      "evidence_detail": "claim-specific gate assertion independent_presentation"
+    },
+    {
+      "assertion_id": "A0059",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 16,
+      "line_text": "independent_continuity,205/205,PASS,evidence/v101125/INDEPENDENT_CONTINUITY_PROBE.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/INDEPENDENT_CONTINUITY_PROBE.json",
+      "evidence_detail": "claim-specific gate assertion independent_continuity"
+    },
+    {
+      "assertion_id": "A0060",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 17,
+      "line_text": "hour24_mutation_detection,12/12,PASS,evidence/v101125/HOUR24_MUTATION_TEST_MATRIX.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/HOUR24_MUTATION_TEST_MATRIX.json",
+      "evidence_detail": "claim-specific gate assertion hour24_mutation_detection"
+    },
+    {
+      "assertion_id": "A0061",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 18,
+      "line_text": "protected_declarations,14/14 unchanged,PASS,evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "claim-specific gate assertion protected_declarations"
+    },
+    {
+      "assertion_id": "A0062",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 19,
+      "line_text": "functional_html_parity,identity-normalized byte parity,PASS,evidence/v101125/FUNCTIONAL_HTML_PARITY.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/FUNCTIONAL_HTML_PARITY.json",
+      "evidence_detail": "claim-specific gate assertion functional_html_parity"
+    },
+    {
+      "assertion_id": "A0063",
+      "path": "reports/full_regression_matrix.csv",
+      "line": 20,
+      "line_text": "current_evidence_schema,all current evidence consistent or explicitly lineage-classified,PASS,evidence/v101125/CURRENT_EVIDENCE_SCHEMA_AUDIT.json",
+      "type": "EXECUTED_GATE",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/CURRENT_EVIDENCE_SCHEMA_AUDIT.json",
+      "evidence_detail": "claim-specific gate assertion current_evidence_schema"
+    },
+    {
+      "assertion_id": "A0064",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 1,
+      "line_text": "declaration,baseline_sha256,current_sha256,status,detail",
+      "type": "STRUCTURE",
+      "status": "PASS",
+      "evidence_path": "reports/protected_declaration_parity.csv",
+      "evidence_detail": "exact CSV schema"
+    },
+    {
+      "assertion_id": "A0065",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 2,
+      "line_text": "CORPUS,630ce4d98e80d3649a4c96340e05d556f17249a5ac55dea8789966f8d24d67b3,630ce4d98e80d3649a4c96340e05d556f17249a5ac55dea8789966f8d24d67b3,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for CORPUS"
+    },
+    {
+      "assertion_id": "A0066",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 3,
+      "line_text": "TEXT_LIBRARY,27721abc524d1d4ff652f6c0c9919d7c24b5fda21a75bcd11c01f651b8c913e8,27721abc524d1d4ff652f6c0c9919d7c24b5fda21a75bcd11c01f651b8c913e8,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for TEXT_LIBRARY"
+    },
+    {
+      "assertion_id": "A0067",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 4,
+      "line_text": "HOUR_LINKED_TEXTS,1a75b674a677d0a91ac643abbeea3c22d9773599a33ff3c9c6a30bd9f51aa0d2,1a75b674a677d0a91ac643abbeea3c22d9773599a33ff3c9c6a30bd9f51aa0d2,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for HOUR_LINKED_TEXTS"
+    },
+    {
+      "assertion_id": "A0068",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 5,
+      "line_text": "INTERNAL_SUBHEADINGS,cabf1d5d2b13c60f91198e1cee0629bec0d2e00b915afc8db7e2d3be02586782,cabf1d5d2b13c60f91198e1cee0629bec0d2e00b915afc8db7e2d3be02586782,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for INTERNAL_SUBHEADINGS"
+    },
+    {
+      "assertion_id": "A0069",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 6,
+      "line_text": "DISPLAY_SEGMENTS,4b548f9729cb39d9bb200660270e280c4a72ac24ef5c13904e4dd4cfa8366d24,4b548f9729cb39d9bb200660270e280c4a72ac24ef5c13904e4dd4cfa8366d24,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for DISPLAY_SEGMENTS"
+    },
+    {
+      "assertion_id": "A0070",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 7,
+      "line_text": "CONTINUITY_GROUPS,de95740b95c88c8a995d47356dbf60a7db035657503b14efb58f622971a93e09,de95740b95c88c8a995d47356dbf60a7db035657503b14efb58f622971a93e09,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for CONTINUITY_GROUPS"
+    },
+    {
+      "assertion_id": "A0071",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 8,
+      "line_text": "LDC_LIBRARY_FLOW_LAYOUT,84c6f7da244a8fee258733763a401c129aacd5c2960418597e1007317adab2b4,84c6f7da244a8fee258733763a401c129aacd5c2960418597e1007317adab2b4,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for LDC_LIBRARY_FLOW_LAYOUT"
+    },
+    {
+      "assertion_id": "A0072",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 9,
+      "line_text": "SPEECH_END_VISUAL_BREAKS,d20b979b1a8529e9dcddf8973688e8db90a5228e874edce17e2a432b68a92809,d20b979b1a8529e9dcddf8973688e8db90a5228e874edce17e2a432b68a92809,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for SPEECH_END_VISUAL_BREAKS"
+    },
+    {
+      "assertion_id": "A0073",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 10,
+      "line_text": "SPEECH_CROSS_RECORD_VISUAL_BREAKS,6017d1170165935c86fc12a2728b5c08869009d7d9d86fba5b4b48cd92e22a00,6017d1170165935c86fc12a2728b5c08869009d7d9d86fba5b4b48cd92e22a00,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for SPEECH_CROSS_RECORD_VISUAL_BREAKS"
+    },
+    {
+      "assertion_id": "A0074",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 11,
+      "line_text": "SPEECH_DATA,dbac002c67051d11fbbbee589fdabf947ba98fac7f9e262f9b0269b6b29b0a12,dbac002c67051d11fbbbee589fdabf947ba98fac7f9e262f9b0269b6b29b0a12,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for SPEECH_DATA"
+    },
+    {
+      "assertion_id": "A0075",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 12,
+      "line_text": "VISIBLE_PARAGRAPH_TOPOLOGY,e4eb1434ffe0e3891a15d4ceb5127d1f916721a53557b47dedcf674876c43603,e4eb1434ffe0e3891a15d4ceb5127d1f916721a53557b47dedcf674876c43603,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for VISIBLE_PARAGRAPH_TOPOLOGY"
+    },
+    {
+      "assertion_id": "A0076",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 13,
+      "line_text": "SPEECH_CROSS_RECORD_OPENING_WRAPPER_SUPPRESSIONS,a4b68b83dfb91beed798ceb12a82110c20488d7fda9a4d037b4345dcc2bac96b,a4b68b83dfb91beed798ceb12a82110c20488d7fda9a4d037b4345dcc2bac96b,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for SPEECH_CROSS_RECORD_OPENING_WRAPPER_SUPPRESSIONS"
+    },
+    {
+      "assertion_id": "A0077",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 14,
+      "line_text": "SPEECH_PRESENTATION_PROJECTION,1c117ed369c8af35f25491d295c5b9b0f7f8e77e3483687ec0a3d86542e25112,1c117ed369c8af35f25491d295c5b9b0f7f8e77e3483687ec0a3d86542e25112,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for SPEECH_PRESENTATION_PROJECTION"
+    },
+    {
+      "assertion_id": "A0078",
+      "path": "reports/protected_declaration_parity.csv",
+      "line": 15,
+      "line_text": "SPEECH_PRESENTATION_ADJUDICATIONS,407ae8c46f1fa4f2017ad2d6c643875359a20241a0212e97c54b3e4140e11ad2,407ae8c46f1fa4f2017ad2d6c643875359a20241a0212e97c54b3e4140e11ad2,PASS,byte-identical expression",
+      "type": "DECLARATION_PARITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/PROTECTED_DECLARATION_PARITY.json",
+      "evidence_detail": "exact row match for SPEECH_PRESENTATION_ADJUDICATIONS"
+    },
+    {
+      "assertion_id": "A0079",
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "line": 1,
+      "line_text": "# Report claims vs evidence — v101.125",
+      "type": "STRUCTURE",
+      "status": "PASS",
+      "evidence_path": "reports/report_claims_vs_evidence_audit.md",
+      "evidence_detail": "heading/structure only"
+    },
+    {
+      "assertion_id": "A0080",
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "line": 4,
+      "line_text": "- Current source-report universe is declared in `metadata/active_report_inventory.json`.",
+      "type": "REPORT_AUDIT",
+      "status": "PASS",
+      "evidence_path": "metadata/active_report_inventory.json",
+      "evidence_detail": "declared source-report universe equals actual current root report universe"
+    },
+    {
+      "assertion_id": "A0081",
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "line": 5,
+      "line_text": "- Historical reports under `reports/historical/` are excluded from current claims.",
+      "type": "REPORT_AUDIT",
+      "status": "PASS",
+      "evidence_path": "reports/historical/v101124",
+      "evidence_detail": "historical predecessor reports segregated"
+    },
+    {
+      "assertion_id": "A0082",
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "line": 6,
+      "line_text": "- `reports/active_report_line_audit.csv` is self-excluded from its own source universe.",
+      "type": "REPORT_AUDIT",
+      "status": "PASS",
+      "evidence_path": "metadata/active_report_inventory.json",
+      "evidence_detail": "self-excluded derived line-audit output declared"
+    },
+    {
+      "assertion_id": "A0083",
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "line": 10,
+      "line_text": "Evidence: `evidence/v101125/ACTIVE_REPORT_LINE_AUDIT_SUMMARY.json`, `evidence/v101125/REPORT_CLAIM_ASSERTIONS.json`.",
+      "type": "EVIDENCE_POINTERS",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/ACTIVE_REPORT_LINE_AUDIT_SUMMARY.json;evidence/v101125/REPORT_CLAIM_ASSERTIONS.json",
+      "evidence_detail": "all declared evidence paths exist"
+    },
+    {
+      "assertion_id": "A0084",
+      "path": "reports/semantic_stale_scan.txt",
+      "line": 1,
+      "line_text": "v101.125 semantic/current-tooling/current-evidence stale scan",
+      "type": "SEMANTIC_STALE_SCAN",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/SEMANTIC_STALE_SCAN.json",
+      "evidence_detail": "semantic/transient/schema scan PASS"
+    },
+    {
+      "assertion_id": "A0085",
+      "path": "reports/semantic_stale_scan.txt",
+      "line": 2,
+      "line_text": "status=PASS",
+      "type": "SEMANTIC_STALE_SCAN",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/SEMANTIC_STALE_SCAN.json",
+      "evidence_detail": "semantic/transient/schema scan PASS"
+    },
+    {
+      "assertion_id": "A0086",
+      "path": "reports/semantic_stale_scan.txt",
+      "line": 3,
+      "line_text": "transient_hits=0",
+      "type": "SEMANTIC_STALE_SCAN",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/SEMANTIC_STALE_SCAN.json",
+      "evidence_detail": "semantic/transient/schema scan PASS"
+    },
+    {
+      "assertion_id": "A0087",
+      "path": "reports/semantic_stale_scan.txt",
+      "line": 4,
+      "line_text": "schema_hits=0",
+      "type": "SEMANTIC_STALE_SCAN",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/SEMANTIC_STALE_SCAN.json",
+      "evidence_detail": "semantic/transient/schema scan PASS"
+    },
+    {
+      "assertion_id": "A0088",
+      "path": "reports/semantic_stale_scan.txt",
+      "line": 5,
+      "line_text": "evidence=evidence/v101125/SEMANTIC_STALE_SCAN.json",
+      "type": "SEMANTIC_STALE_SCAN",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/SEMANTIC_STALE_SCAN.json",
+      "evidence_detail": "semantic/transient/schema scan PASS"
+    },
+    {
+      "assertion_id": "A0089",
+      "path": "reports/stale_reference_scan.txt",
+      "line": 1,
+      "line_text": "v101.125 version/reference/current-evidence stale scan",
+      "type": "VERSION_STALE_SCAN",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/VERSION_STALE_SCAN.json",
+      "evidence_detail": "current version/evidence stale scan PASS with zero unexplained/schema hits"
+    },
+    {
+      "assertion_id": "A0090",
+      "path": "reports/stale_reference_scan.txt",
+      "line": 2,
+      "line_text": "status=PASS",
+      "type": "VERSION_STALE_SCAN",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/VERSION_STALE_SCAN.json",
+      "evidence_detail": "current version/evidence stale scan PASS with zero unexplained/schema hits"
+    },
+    {
+      "assertion_id": "A0091",
+      "path": "reports/stale_reference_scan.txt",
+      "line": 3,
+      "line_text": "unexplained_hits=0",
+      "type": "VERSION_STALE_SCAN",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/VERSION_STALE_SCAN.json",
+      "evidence_detail": "current version/evidence stale scan PASS with zero unexplained/schema hits"
+    },
+    {
+      "assertion_id": "A0092",
+      "path": "reports/stale_reference_scan.txt",
+      "line": 4,
+      "line_text": "schema_hits=0",
+      "type": "VERSION_STALE_SCAN",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/VERSION_STALE_SCAN.json",
+      "evidence_detail": "current version/evidence stale scan PASS with zero unexplained/schema hits"
+    },
+    {
+      "assertion_id": "A0093",
+      "path": "reports/stale_reference_scan.txt",
+      "line": 5,
+      "line_text": "evidence=evidence/v101125/VERSION_STALE_SCAN.json",
+      "type": "VERSION_STALE_SCAN",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/VERSION_STALE_SCAN.json",
+      "evidence_detail": "current version/evidence stale scan PASS with zero unexplained/schema hits"
+    },
+    {
+      "assertion_id": "A0094",
+      "path": "reports/four_pass_deep_audit.md",
+      "line": 5,
+      "line_text": "- Pass 3 — every active current report line vs claim-specific direct evidence: **PASS** only when exact line coverage and claim assertions both pass.",
+      "type": "FOUR_PASS_REPORT_INTEGRITY",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/REPORT_CLAIM_ASSERTIONS.json",
+      "evidence_detail": "all non-self active report claims have claim-specific PASS assertions"
+    },
+    {
+      "assertion_id": "A0095",
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "line": 3,
+      "line_text": "- Status: **PASS** only when both exact line coverage and claim-specific assertion checks pass.",
+      "type": "REPORT_AUDIT_SELF",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/REPORT_CLAIM_ASSERTIONS.json",
+      "evidence_detail": "overall report-line audit PASS iff exact coverage and claim assertions pass"
+    },
+    {
+      "assertion_id": "A0096",
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "line": 7,
+      "line_text": "- Every nonblank source-report line is represented exactly once.",
+      "type": "REPORT_AUDIT_SELF",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/REPORT_CLAIM_ASSERTIONS.json",
+      "evidence_detail": "exact coverage reconstructed below from source universe"
+    },
+    {
+      "assertion_id": "A0097",
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "line": 8,
+      "line_text": "- Every claim line has a claim-specific evidence path and assertion ID; unrelated/generic evidence pointers are prohibited.",
+      "type": "REPORT_AUDIT_SELF",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/REPORT_CLAIM_ASSERTIONS.json",
+      "evidence_detail": "all non-self claim rows have claim-specific evidence and assertion id"
+    },
+    {
+      "assertion_id": "A0098",
+      "path": "reports/report_claims_vs_evidence_audit.md",
+      "line": 9,
+      "line_text": "- Structural headings/schema rows are explicitly classified as structure rather than falsely treated as execution claims.",
+      "type": "REPORT_AUDIT_SELF",
+      "status": "PASS",
+      "evidence_path": "evidence/v101125/REPORT_CLAIM_ASSERTIONS.json",
+      "evidence_detail": "headings/CSV schemas explicitly classified STRUCTURE"
+    }
+  ]
+}

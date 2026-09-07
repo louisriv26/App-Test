@@ -1,0 +1,171 @@
+{
+  "schema": "L24H_V101128_HOUR24_EXTRACT_V1",
+  "version": "v101.128",
+  "source_matrix": "V101128_MEDITEE_UX_MATRIX.json",
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "total": 4
+  },
+  "rows": [
+    {
+      "group": "hour24",
+      "case": "23_to_24_via_top",
+      "status": "PASS",
+      "detail": {
+        "before": {
+          "completed": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "count": 23,
+          "pct": 96,
+          "hasCycleState": true,
+          "complete": false
+        },
+        "after": {
+          "completed": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24
+          ],
+          "count": 24,
+          "pct": 100,
+          "hasCycleState": true,
+          "complete": true
+        },
+        "panel": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "top": "true",
+        "bot": "true"
+      }
+    },
+    {
+      "group": "hour24",
+      "case": "24_to_23_via_top",
+      "status": "PASS",
+      "detail": {
+        "x": {
+          "completed": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "count": 23,
+          "pct": 96,
+          "hasCycleState": true,
+          "complete": false
+        },
+        "panel": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "top": "false",
+        "bot": "false"
+      }
+    },
+    {
+      "group": "hour24",
+      "case": "h24_marked_other_hour_missing_still_incomplete",
+      "status": "PASS",
+      "detail": {
+        "x": {
+          "completed": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            24
+          ],
+          "count": 23,
+          "pct": 96,
+          "hasCycleState": true,
+          "complete": false
+        },
+        "panel": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+      }
+    },
+    {
+      "group": "hour24",
+      "case": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}
