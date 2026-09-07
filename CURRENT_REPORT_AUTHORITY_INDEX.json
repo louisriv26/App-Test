@@ -1,22 +1,22 @@
 {
-  "schema": "ldc-v67-current-report-authority-index-v1",
-  "app_version": "v2.19.67-R1B",
-  "public_version": "67",
+  "schema": "ldc-v69-current-report-authority-index-v1",
+  "app_version": "v2.19.69-R1B",
+  "public_version": 69,
   "semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
   "predecessor_v66_zip_sha256": "4317d041ec9475b52850c7ec7cd374eb0b2b980e115f841eebaafe10df7ddcd6",
   "current_active_reports": {
-    "README.md": "ONLY lines 1-17: the first v67 section through its explicit historical supersession marker is current; all inherited sections below are historical.",
+    "README.md": "ONLY the first v69 section through its explicit historical supersession marker is current; inherited v68 and older sections below are historical.",
     "CURRENT_REPORT_AUTHORITY_INDEX.json": "CURRENT machine-readable authority boundary.",
-    "V67_FOUR_PASS_APP_AUDIT_SUMMARY.md": "CURRENT package-scope report; external certification results remain outside the ZIP.",
-    "V67_FOUR_PASS_METADATA_RECONCILIATION_LEDGER.json": "CURRENT exact metadata/report correction scope.",
-    "version.json": "Only the keys enumerated in version_current_field_keys plus interim_successor_rev6_authorized and v67_four_pass_report_metadata_reconciliation are current release authority. Other named phase objects are historical/provenance unless explicitly promoted.",
-    "corpus/manifest.json": "Only the keys enumerated in corpus_manifest_current_field_keys are current report authority. Named historical/RA/M/V/R6 objects remain provenance.",
-    "corpus/supplement_manifest.json": "CURRENT supplement identity/count/authority wrapper; all top-level fields are current unless explicitly named historical.",
-    "corpus/supplements.json": "CURRENT supplement registry. Top-level identity/status/counts and supplement payload are current.",
-    "corpus/volume_01.json..volume_36.json": "CURRENT volume data and release wrappers. r3_status/r3ait_status are named historical provenance fields only.",
+    "version.json": "Only keys enumerated in version_current_field_keys plus interim_successor_rev6_authorized and v69_deep_four_pass_metadata_repair are current release authority. v68 and older named phase objects are historical/provenance unless explicitly promoted.",
+    "corpus/manifest.json": "CURRENT v69 authority is limited to keys enumerated in corpus_manifest_current_field_keys; v68 and older named objects remain historical provenance.",
+    "corpus/supplement_manifest.json": "CURRENT supplement identity/count/authority wrapper; v69 count reconciliation is current, v68/v67 named objects are historical.",
+    "corpus/supplements.json": "CURRENT supplement registry; top-level identity/status/counts and supplement payload are current.",
+    "corpus/volume_01.json..volume_36.json": "CURRENT volume data and release wrappers; historical status fields remain historical.",
     "offline_manifest.json": "CURRENT offline integrity binding.",
     "INTERIM_SUCCESSOR_USER_AUTHORIZATION_RECEIPT.json": "CURRENT semantic authorization evidence; public deployment remains unauthorized.",
-    "INTERIM_SUCCESSOR_OBSERVED_MUTATION_LEDGER.json": "CURRENT observed v66 semantic mutation evidence inherited byte-for-byte; v67 adds no semantic mutation."
+    "INTERIM_SUCCESSOR_OBSERVED_MUTATION_LEDGER.json": "CURRENT observed semantic mutation evidence inherited byte-for-byte; v69 adds no semantic mutation.",
+    "V69_DEEP_FOUR_PASS_APP_AUDIT_SUMMARY.md": "CURRENT v69 package-scope deep-audit repair summary; external certification remains outside the immutable ZIP.",
+    "V69_DEEP_FOUR_PASS_MUTATION_LEDGER.json": "CURRENT exact v68→v69 bounded audit-repair/release-binding mutation boundary."
   },
   "version_current_field_keys": [
     "app_version",
@@ -117,7 +117,7 @@
   ],
   "version_current_authority_objects": [
     "interim_successor_rev6_authorized",
-    "v67_four_pass_report_metadata_reconciliation"
+    "v69_deep_four_pass_metadata_repair"
   ],
   "version_historical_provenance_objects": [
     "r6_official_authorized_build",
@@ -153,7 +153,7 @@
     "t17_23nov1924_status",
     "total_entries",
     "total_paragraphs",
-    "v67_four_pass_metadata_reconciliation",
+    "v69_deep_four_pass_metadata_repair",
     "version",
     "volumes_available",
     "volumes_total"
@@ -162,10 +162,14 @@
     "INTERIM_SUCCESSOR_AUTHORIZED_BUILD_README.md",
     "POST_R6_DATE_ID_A2_PREAUTH_GATE.txt",
     "R6_AUTHORIZED_BUILD_README.md",
-    "R6_AUTHORIZED_DERIVATION_CONTRACT.json"
+    "R6_AUTHORIZED_DERIVATION_CONTRACT.json",
+    "V67_FOUR_PASS_APP_AUDIT_SUMMARY.md",
+    "V67_FOUR_PASS_METADATA_RECONCILIATION_LEDGER.json",
+    "V68_PRINCIPAL_UI_APP_AUDIT_SUMMARY.md",
+    "V68_PRINCIPAL_UI_MUTATION_LEDGER.json"
   ],
-  "historical_policy": "Historical predecessor files and historical/named phase objects may contain old CURRENT/PASS/FAIL/count/version wording valid at their own freeze point; they do not override the current v67 section or external current-state receipt.",
-  "external_gate_authority": "External receipts/state only; the immutable ZIP intentionally makes no physical-device/live-browser/public-release PASS assertion.",
+  "historical_policy": "Historical predecessor files and named historical objects may retain older current/PASS/FAIL/count/version/ALIGNÉ/AFLP wording valid at their own freeze point. They do not override the v69 current section, current index or external current-state receipt.",
+  "external_gate_authority": "External receipts/state only; immutable v69 makes no physical-device/live-browser/public-release PASS assertion.",
   "version_historical_field_keys": [
     "f1_poisoned_http_cache_regression_gate",
     "f7_release_metadata_generation",
@@ -271,6 +275,8 @@
     "v46_release_disposition",
     "v63_four_pass_active_metadata_reconciliation",
     "v64_four_pass_metadata_namespace_reconciliation",
+    "v67_four_pass_report_metadata_reconciliation",
+    "v68_principal_ui_presentation_successor",
     "vector_search_subsystem"
   ],
   "version_field_partition_complete": true,
@@ -322,8 +328,12 @@
     "ra9_source_verified_display_flow_repairs",
     "total_corrections",
     "v63_four_pass_active_metadata_reconciliation",
-    "v64_four_pass_metadata_namespace_reconciliation"
+    "v64_four_pass_metadata_namespace_reconciliation",
+    "v67_four_pass_metadata_reconciliation",
+    "v68_principal_ui_presentation_successor"
   ],
   "corpus_manifest_field_partition_complete": true,
-  "classification_policy": "EXHAUSTIVE_TOP_LEVEL_PARTITION__UNLISTED_TOP_LEVEL_FIELDS_FORBIDDEN__NESTED_CURRENT_OBJECTS_VALIDATED_BY_PASS3"
+  "classification_policy": "EXHAUSTIVE_TOP_LEVEL_PARTITION__UNLISTED_TOP_LEVEL_FIELDS_FORBIDDEN__V68_AND_OLDER_NAMED_OBJECTS_HISTORICAL__V69_DEEP_AUDIT_REPAIR_CURRENT",
+  "predecessor_v67_zip_sha256": "f58a28f6546000c6b17905fa37c0ba74db44de766a11bf2ef5b936ed384919e9",
+  "predecessor_v68_zip_sha256": "58e7eebd7c3a04db53e7a21ea144842aebd36c8e3dd8815f37c8e2f6edc3618d"
 }

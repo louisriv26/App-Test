@@ -45,11 +45,11 @@
     36
   ],
   "volumes_total": 36,
-  "status": "LDC_V67_FOUR_PASS_REPORT_METADATA_RECONCILIATION__FINAL_CERTIFICATION_AUTHORITY_EXTERNAL_TO_ZIP__NOT_PUBLICLY_DEPLOYED",
+  "status": "LDC_V69_DEEP_FOUR_PASS_METADATA_REPAIR__FINAL_CERTIFICATION_AUTHORITY_EXTERNAL_TO_ZIP__NOT_PUBLICLY_DEPLOYED",
   "speech_resynced": true,
-  "notes": "Current v67 is a metadata/report-only successor of certified v66. Canonical R7 wording and paragraph/search/speaker/display/flow semantics are unchanged from v66. v67 corrects stale current status/predecessor/report metadata and regenerates only release/cache/offline bindings required by those metadata corrections.",
+  "notes": "Current v69 is a bounded report/runtime-metadata repair successor of certified v68. It corrects a stale visible paragraph count and stale supplement-speaker count metadata only. Canonical text and paragraph/search/speaker-segment/display/flow semantics remain unchanged from v68.",
   "speech_layer_note": "Final R7 backbone speaker layer contains 65,099 segments. REV6 includes exactly six governed A1-A6 reattributions, exactly two governed entry speaker-array updates, 127 unrelated array mismatches deferred, and 34 first_jesus_para_id changes. v67 changes no speaker identity, offsets, previews, presentation parents or runtime speech logic.",
-  "app_version": "v2.19.67-R1B",
+  "app_version": "v2.19.69-R1B",
   "speaker_layer": {
     "total_segments": 65099,
     "speaker_counts": {
@@ -118,7 +118,7 @@
     "note": "Display-only token projection. Suppressed and replaced tokens keep their canonical [start,end) so highlights, notes and bookmarks stay anchored."
   },
   "reader_architecture": {
-    "version": "R7_REV6_CERTIFIED__V67_REPORT_METADATA_SUCCESSOR",
+    "version": "R7_REV6_CERTIFIED__V69_DEEP_FOUR_PASS_METADATA_REPAIR",
     "flow_aware_dom": true,
     "post_render_structural_mutation": false,
     "paragraph_local_styled_runs": 57966,
@@ -1023,6 +1023,50 @@
     "supplement_provenance_contract_corrected": true,
     "reader_architecture_current_wrapper_corrected": true,
     "report_field_classification_exhaustive": true,
+    "public_deployment_authorized": false,
+    "external_certification_authority": "OUTSIDE_IMMUTABLE_ZIP"
+  },
+  "v68_principal_ui_presentation_successor": {
+    "predecessor_zip_sha256": "f58a28f6546000c6b17905fa37c0ba74db44de766a11bf2ef5b936ed384919e9",
+    "semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
+    "visible_modes": [
+      "PRINCIPAL",
+      "COMPLÉMENT",
+      "ENRICHI"
+    ],
+    "canonical_text_changes": 0,
+    "paragraph_id_order_changes": 0,
+    "search_semantic_changes": 0,
+    "speaker_semantic_changes": 0,
+    "display_flow_semantic_changes": 0,
+    "supplement_content_changes": 0,
+    "user_state_schema_changes": 0,
+    "migration_algorithm_changes": 0,
+    "stored_source_mode_value_changes": 0,
+    "public_deployment_authorized": false,
+    "external_certification_authority": "OUTSIDE_IMMUTABLE_ZIP"
+  },
+  "v69_deep_four_pass_metadata_repair": {
+    "predecessor_zip_sha256": "58e7eebd7c3a04db53e7a21ea144842aebd36c8e3dd8815f37c8e2f6edc3618d",
+    "semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
+    "visible_onboarding_paragraph_count": 74346,
+    "supplement_speaker_segments_total": 141,
+    "supplement_speaker_stage_counts": {
+      "SUP-T1": 50,
+      "SUP-T2": 63,
+      "SUP-T3": 3,
+      "SUP-T4": 22,
+      "SUP-T5": 3
+    },
+    "canonical_text_changes": 0,
+    "paragraph_id_order_changes": 0,
+    "search_semantic_changes": 0,
+    "speaker_segment_semantic_changes": 0,
+    "display_flow_semantic_changes": 0,
+    "supplement_content_changes": 0,
+    "user_state_schema_changes": 0,
+    "migration_algorithm_changes": 0,
+    "stored_source_mode_value_changes": 0,
     "public_deployment_authorized": false,
     "external_certification_authority": "OUTSIDE_IMMUTABLE_ZIP"
   }

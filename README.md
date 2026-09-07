@@ -1,3 +1,45 @@
+# Livre du Ciel — v2.19.69-R1B / Public 69 — deep four-pass audit repair successor
+
+**Exact predecessor:** certified v2.19.68-R1B ZIP `58e7eebd7c3a04db53e7a21ea144842aebd36c8e3dd8815f37c8e2f6edc3618d`.
+
+**Semantic authority:** `d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4` — unchanged.
+
+**Proven repairs:** visible onboarding count corrected to **74,346** backbone paragraphs; supplement-speaker metadata reconciled to **141** actual segments (**SUP-T1 50 · SUP-T2 63 · SUP-T3 3 · SUP-T4 22 · SUP-T5 3**).
+
+**Mutation boundary:** report/runtime metadata and required release/cache/offline bindings only. Canonical/devotional text, paragraph IDs/order, search semantics, speaker-segment content/offsets, display/flow semantics, supplement content, user-state schemas and migration algorithms are unchanged from v68.
+
+**Source modes:** **PRINCIPAL · COMPLÉMENT · ENRICHI**; stored mode `aflp` and technical `G036-AFLP-*` lineage remain unchanged.
+
+**Public deployment:** **NOT AUTHORIZED BY THIS PACKAGE**. External live/PWA/device/offline/accessibility gates remain separate.
+
+See `CURRENT_REPORT_AUTHORITY_INDEX.json` for the current-vs-historical report boundary.
+
+---
+
+> Everything below this line is predecessor/historical documentation. Any older current/PASS/FAIL/count/version wording below is historical only and is superseded for current interpretation by the v69 section above and external current-state receipts.
+
+# Livre du Ciel — v2.19.68-R1B / Public 68 — PRINCIPAL UI terminology successor
+
+**Exact predecessor:** certified v2.19.67-R1B ZIP `f58a28f6546000c6b17905fa37c0ba74db44de766a11bf2ef5b936ed384919e9`.
+
+**Semantic authority:** `d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4` — unchanged.
+
+**User-facing modes:** **PRINCIPAL · COMPLÉMENT · ENRICHI**. `PRINCIPAL` means the governed main French corpus; the internal stored mode remains `aflp` and technical `G036-AFLP-*` generation IDs remain unchanged.
+
+**Provenance:** the main French corpus is GE/Lumen Luminis-derived, was later reconciled with AFLP witnesses, and was later corrected punctually where controlled Italian/other-source evidence justified it. No claim is made that every paragraph was individually source-critically verified or that the current corpus reproduces any one French edition word-for-word.
+
+**Counts:** 2,312 PRINCIPAL entries · 74,346 PRINCIPAL paragraphs · 65,099 backbone speaker segments · 75 COMPLÉMENTS / 177 paragraphs / 141 supplement speaker segments.
+
+**Mutation boundary:** presentation/report terminology plus required release/cache/offline bindings only. Canonical/devotional text, paragraph identity/order, search semantics, speaker semantics, display/flow semantics, supplement content, user-data schemas and migration algorithms are unchanged from v67.
+
+**Certification model:** this immutable ZIP does not self-promote external live/device gates. Public deployment is **NOT AUTHORIZED BY THIS PACKAGE** and requires a separate user decision.
+
+See `CURRENT_REPORT_AUTHORITY_INDEX.json` for the machine-readable current-vs-historical report boundary.
+
+---
+
+> Everything below this line is predecessor/historical documentation. Any older current/PASS/FAIL/count/version/source-mode wording below is historical only and is superseded for current interpretation by the v68 section above and external current-state receipts.
+
 # Livre du Ciel — v2.19.67-R1B / Public 67 — four-pass report/metadata reconciliation successor
 
 **Exact predecessor:** certified v2.19.66-R1B ZIP `4317d041ec9475b52850c7ec7cd374eb0b2b980e115f841eebaafe10df7ddcd6`.

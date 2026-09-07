@@ -1,13 +1,13 @@
 {
-  "app_version": "v2.19.67-R1B",
-  "public_version": "67",
+  "app_version": "v2.19.69-R1B",
+  "public_version": 69,
   "build_date": "2026-09-07",
   "corpus_version": "G036-AFLP-R7-SUP-T5",
-  "stage": "LDC_V67_FOUR_PASS_REPORT_METADATA_RECONCILIATION__FINAL_CERTIFICATION_AUTHORITY_EXTERNAL_TO_ZIP__NOT_PUBLICLY_DEPLOYED",
-  "baseline_candidate_version": "v2.19.66-R1B",
-  "baseline_candidate_sha256": "4317d041ec9475b52850c7ec7cd374eb0b2b980e115f841eebaafe10df7ddcd6",
-  "owner_stage_start_authorisation": "USER_WORLD_LEADING_APP_CHECK_FOUR_PASS__VERIFY_FILES_RUNTIME_REPORTS_CONTRADICTIONS__CORRECT_FAILURES_AND_UPDATE_PACKAGE__2026_09_07",
-  "owner_override_note": "v67 is a metadata/report-only successor of certified v66. It corrects stale active status/predecessor/report wrappers found by the user-directed four-pass audit. No canonical/devotional text, search row, speaker semantic, display/flow semantic, supplement content, or user-data migration/runtime logic is changed.",
+  "stage": "LDC_V69_DEEP_FOUR_PASS_METADATA_REPAIR__FINAL_CERTIFICATION_AUTHORITY_EXTERNAL_TO_ZIP__NOT_PUBLICLY_DEPLOYED",
+  "baseline_candidate_version": "v2.19.68-R1B",
+  "baseline_candidate_sha256": "58e7eebd7c3a04db53e7a21ea144842aebd36c8e3dd8815f37c8e2f6edc3618d",
+  "owner_stage_start_authorisation": "V69__USER_REQUESTED_WORLD_CLASS_FOUR_PASS_DEEP_AUDIT__CORRECT_ALL_PROVEN_FAILURES__2026_09_07",
+  "owner_override_note": "v69 is a bounded audit-repair successor of exact certified v68. It corrects the stale visible onboarding paragraph count to 74 346 and reconciles supplement-speaker stage metadata to the 141 actual segments (SUP-T1 50, SUP-T2 63, SUP-T3 3, SUP-T4 22, SUP-T5 3). No canonical/devotional text, paragraph/search/speaker-segment semantics, display/flow semantics, supplement content, user-data schema, stored source mode, or migration algorithm changes.",
   "reader_contract": "ONE_CALM_READER_PLUS_OPTIONAL_REPERES",
   "context_action_contract": "SELECTION_OR_PARAGRAPH_SINGLE_CONTEXT_SURFACE",
   "vector_binding": "RETIRED_FROM_DEPLOY__LEXICAL_BM25_METADATA_SEARCH_AUTHORITATIVE__FUTURE_VECTOR_SEARCH_REQUIRES_FULL_COMPOSITE_REBUILD_AND_BUNDLED_OR_SELF_HOSTED_RUNTIME",
@@ -30,11 +30,11 @@
   "owner_user_acceptance": "AUTHORIZED_EXACT_INTERIM_SUCCESSOR_AUTHORITY_SHA256_d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED",
   "offline_state_schema": "ldc-offline-state-v2",
   "offline_manifest_schema": "ldc-offline-manifest-v2",
-  "offline_cache_version": "ldc-le-livre-du-ciel-offline-v2.19.67-R1B-four-pass-r1",
-  "offline_scope": "36 tomes ALIGNÉ R7 + active SUP-T1/SUP-T2/SUP-T3/SUP-T4/SUP-T5 + lexical/BM25 search + schema-v4/R3/R4/R5/R6/R7-DateID/REV6 user-state migration; v67 report/metadata reconciliation only",
+  "offline_cache_version": "ldc-le-livre-du-ciel-offline-v2.19.69-R1B-deep-audit-r1",
+  "offline_scope": "36 tomes PRINCIPAL R7 + active SUP-T1/SUP-T2/SUP-T3/SUP-T4/SUP-T5 + lexical/BM25 search + unchanged migrations; v69 bounded audit repair of visible count and supplement-speaker metadata only",
   "volume_lru_max": 4,
-  "offline_content_binding_sha256": "f3e41c19cec1e99c6ac485c1eb3f49eb8edfa829502cb2e6e49337c07a568f8c",
-  "offline_corpus_manifest_sha256": "96f8c54253e08f8cf50b5a583761ca17b1d27403c5329b88f5db26f64221aca6",
+  "offline_content_binding_sha256": "92af0e31ada6ccc55148cf6dbe38c0fed66916def9f0a77b5f4d0e139fa61b3b",
+  "offline_corpus_manifest_sha256": "a28f0b0f6beed9ae2f6cddabd3642b9dca8bcd6defc4499c8036fec627036940",
   "offline_integrity_contract": "EVERY_OFFLINE_ASSET_BYTE_LENGTH_AND_SHA256_VERIFIED_BEFORE_CACHE_ACCEPTANCE__READY_REQUIRES_VERIFIED_CACHE_MARKERS_AND_EXACT_CONTENT_BINDING",
   "owner_acceptance_findings_2026_08_12": [
     "existing-highlight palette inconsistent with original highlight palette",
@@ -95,7 +95,7 @@
     "paragraphs": 177,
     "search_records": 177,
     "speaker_segments": 141,
-    "sup_t2_speaker_segments": 65,
+    "sup_t2_speaker_segments": 63,
     "sup_t3_items": 1,
     "sup_t4_items": 15,
     "sup_t4_speaker_segments": 22,
@@ -103,10 +103,10 @@
     "sup_t5_speaker_segments": 3
   },
   "supplement_provenance_contract": "AFLP_SCOPE_FIXED__HISTORICAL_R1B_IMMUTABLE__R6_SOURCE_CRITICAL_AUTHORIZED__R7_REV6_FIXED_POINT__SUP_T1_SUP_T2_SUP_T3_SUP_T4_SUP_T5_PRESERVED__NO_MAJORITY_VOTE__CASE_SPECIFIC_FRENCH_WORDING_PROVENANCE",
-  "reading_source_mode_contract": "JOURNEY_MAIN_PERSISTS_SOURCE_MODE__SEQUENTIAL_MODE_CHANGES_MAY_UPDATE_JOURNEY__CONSULTATION_MODE_CHANGES_CANNOT_UPDATE_MAIN__THREE_USER_MODES_ALIGNE_COMPLEMENT_ENRICHI",
+  "reading_source_mode_contract": "JOURNEY_MAIN_PERSISTS_SOURCE_MODE__SEQUENTIAL_MODE_CHANGES_MAY_UPDATE_JOURNEY__CONSULTATION_MODE_CHANGES_CANNOT_UPDATE_MAIN__THREE_USER_MODES_PRINCIPAL_COMPLEMENT_ENRICHI",
   "vector_search_authorised": false,
   "offline_asset_count": 232,
-  "offline_total_bytes": 196237808,
+  "offline_total_bytes": 196239681,
   "supplement_provenance_fields_embedded": true,
   "supplement_runtime_schema": "ldc-supplement-registry-v2",
   "static_audit_scope": "PACKAGE_BYTES_AND_BUILD_BINDINGS_ONLY__POST_FREEZE_REOPEN_RESULTS_EXTERNAL__PHYSICAL_DEVICE_LIVE_ORIGIN_PWA_OFFLINE_SCREEN_READER_NOT_CLAIMED",
@@ -146,7 +146,7 @@
     "enriched"
   ],
   "source_mode_user_labels": {
-    "aflp": "ALIGNÉ",
+    "aflp": "PRINCIPAL",
     "additions": "COMPLÉMENT",
     "enriched": "ENRICHI"
   },
@@ -243,7 +243,7 @@
     ]
   },
   "historical_ra1_ra2_runtime_browser": "NOT_TESTED_ADMIN_POLICY",
-  "current_runtime_browser_validation": "STATIC_NODE_HTTP_AND_RUNTIME_HARNESS_PASS__LIVE_BROWSER_ATTEMPT_ENVIRONMENT_BLOCKED_BY_MANAGED_CHROMIUM_URLBLOCKLIST_BEFORE_APPLICATION_ASSERTIONS__NEITHER_APP_PASS_NOR_APP_FAIL",
+  "current_runtime_browser_validation": "STATIC_RUNTIME_PACKAGE_VALIDATION_IS_EXTERNAL_TO_IMMUTABLE_ZIP__MANAGED_CHROMIUM_LIVE_NAVIGATION_LIMITATION_REMAINS_EXTERNAL_ENVIRONMENT_CONSTRAINT__NEITHER_LIVE_APP_PASS_NOR_LIVE_APP_FAIL",
   "ra4b_four_pass_corrective_recheck": {
     "baseline_version": "v2.19.10-R1B",
     "baseline_sha256": "6eb568094178a3c745873792a97ddbf61fe296ef4e26a72fa5d33d16c0617367",
@@ -591,10 +591,10 @@
     "highlight_storage_changed": false,
     "user_data_schema_changed": false
   },
-  "physical_samsung_android_gate": "EXTERNAL_GATE__NO_PASS_ASSERTED_BY_PACKAGE__CURRENT_V67_CANDIDATE",
-  "physical_iphone_gate": "EXTERNAL_GATE__NO_PASS_ASSERTED_BY_PACKAGE__CURRENT_V67_CANDIDATE",
-  "physical_ipad_gate": "EXTERNAL_GATE__NO_PASS_ASSERTED_BY_PACKAGE__CURRENT_V67_CANDIDATE",
-  "wide_public_release": "NOT_AUTHORIZED_BY_THIS_PACKAGE__CURRENT_V67_REQUIRES_SEPARATE_USER_RELEASE_DECISION_AFTER_EXTERNAL_GATES",
+  "physical_samsung_android_gate": "EXTERNAL_GATE__NO_PASS_ASSERTED_BY_PACKAGE__CURRENT_V69_CANDIDATE",
+  "physical_iphone_gate": "EXTERNAL_GATE__NO_PASS_ASSERTED_BY_PACKAGE__CURRENT_V69_CANDIDATE",
+  "physical_ipad_gate": "EXTERNAL_GATE__NO_PASS_ASSERTED_BY_PACKAGE__CURRENT_V69_CANDIDATE",
+  "wide_public_release": "NOT_AUTHORIZED_BY_THIS_PACKAGE__CURRENT_V69_REQUIRES_SEPARATE_USER_RELEASE_DECISION_AFTER_EXTERNAL_GATES",
   "ra19d_mobile_shell_integrity": {
     "date": "2026-08-22",
     "baseline_app_version": "v2.19.30-R1B",
@@ -755,7 +755,7 @@
     "PRIEST": 19,
     "SAINT": 24
   },
-  "corpus_cache_epoch": "cm-96f8c54253e08f8c",
+  "corpus_cache_epoch": "cm-a28f0b0f6beed9ae",
   "corpus_cache_integrity_contract": "CORPUS_CACHE_EPOCH_DERIVED_FROM_CORPUS_MANIFEST_SHA256__RUNTIME_MISS_FETCH_CACHE_RELOAD__BYTES_AND_SHA256_VERIFIED_AGAINST_FROZEN_OFFLINE_MANIFEST_BEFORE_RUNTIME_CACHE_ADOPTION",
   "f1_poisoned_http_cache_regression_gate": "REQUIRED_AND_EXTERNAL_EVIDENCE",
   "f7_release_metadata_generation": "CURRENT_RELEASE_COUNTS_AND_BINDINGS_GENERATED_AFTER_CORPUS_PAYLOAD_FREEZE__V32_VALUES_RETAINED_ONLY_UNDER_HISTORICAL_KEYS",
@@ -795,9 +795,9 @@
     "speaker_offsets_changed": false,
     "normal_reader_reperes_off_changed": false
   },
-  "package_state_at_freeze": "V67_FOUR_PASS_REPORT_METADATA_RECONCILIATION_CANDIDATE__FINAL_CERTIFICATION_AUTHORITY_EXTERNAL_TO_ZIP__NOT_PUBLICLY_DEPLOYED",
+  "package_state_at_freeze": "V69_DEEP_FOUR_PASS_METADATA_REPAIR_CANDIDATE__FINAL_CERTIFICATION_AUTHORITY_EXTERNAL_TO_ZIP__NOT_PUBLICLY_DEPLOYED",
   "external_decision_authority": "FINAL_DECISION_LOCK_EXTERNAL_TO_DEPLOY_ZIP__WRITTEN_LAST_AFTER_PRIMARY_AND_INDEPENDENT_REOPEN_AUDITS",
-  "external_validation_status": "NOT_ASSERTED_BY_PACKAGE__SEE_EXTERNAL_CURRENT_STATE_AND_GATE_RECEIPTS__LIVE_BROWSER_DEVICE_PWA_OFFLINE_ACCESSIBILITY_GATES_ARE_EXTERNAL",
+  "external_validation_status": "V69__NOT_ASSERTED_BY_PACKAGE__SEE_EXTERNAL_CURRENT_STATE_AND_GATE_RECEIPTS__LIVE_BROWSER_DEVICE_PWA_OFFLINE_ACCESSIBILITY_GATES_ARE_EXTERNAL",
   "rejected_predecessor_version": "v2.19.37-R1B",
   "rejected_predecessor_sha256": "0e26740387911fe15a9a275c3ff04d08ba9cbb28f46c2ec74670eb795fbe22d6",
   "rejected_predecessor_status": "FAIL_HIGHLIGHT_ANCHOR_COMPATIBILITY",
@@ -974,7 +974,7 @@
     "corpus_generation_to": "G036-AFLP-R2-SUP-T2"
   },
   "m4_status": "R2_SUP_T2_FIXED_POINT_PRESERVED__V54_PROTECTED_LECTURE_SUIVIE__EXTERNAL_FINAL_REOPEN_AUTHORITY_REQUIRED",
-  "current_release_authority": "V67_METADATA_REPORT_SUCCESSOR_OF_CERTIFIED_V66_SHA256_4317d041ec9475b52850c7ec7cd374eb0b2b980e115f841eebaafe10df7ddcd6__SEMANTIC_AUTHORITY_UNCHANGED_d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED_BY_PACKAGE",
+  "current_release_authority": "V69_DEEP_AUDIT_SUCCESSOR_OF_CERTIFIED_V68_SHA256_58e7eebd7c3a04db53e7a21ea144842aebd36c8e3dd8815f37c8e2f6edc3618d__SEMANTIC_AUTHORITY_UNCHANGED_d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED_BY_PACKAGE",
   "historical_backbone_generation": "G036-AFLP-R1B-UWR2",
   "historical_sup_t1_items": 14,
   "current_counts": {
@@ -994,8 +994,8 @@
     "semantic_predecessor_aligne": "G036-AFLP-R6-UWR2",
     "active_aligne": "G036-AFLP-R7-UWR2",
     "active_enrichi": "G036-AFLP-R7-SUP-T5",
-    "package_predecessor_app_version": "v2.19.66-R1B",
-    "package_predecessor_zip_sha256": "4317d041ec9475b52850c7ec7cd374eb0b2b980e115f841eebaafe10df7ddcd6"
+    "package_predecessor_app_version": "v2.19.68-R1B",
+    "package_predecessor_zip_sha256": "58e7eebd7c3a04db53e7a21ea144842aebd36c8e3dd8815f37c8e2f6edc3618d"
   },
   "v2_19_49_deep_four_pass_reaudit_repairs": [
     "flow_19 derived metadata synchronized for LDC.T19.E0049.P044/P045 after authorised ALIGNÉ text correction; boundary policy/group membership unchanged",
@@ -1265,5 +1265,74 @@
     ],
     "external_final_certification_required": true,
     "public_deployment_authorized_by_package": false
+  },
+  "v68_principal_ui_presentation_successor": {
+    "date": "2026-09-07",
+    "predecessor_app_version": "v2.19.67-R1B",
+    "predecessor_zip_sha256": "f58a28f6546000c6b17905fa37c0ba74db44de766a11bf2ef5b936ed384919e9",
+    "builder_sha256": "f54075d9f2e383533936ed26778ed200e34efd8727654f85e11f8c42aab25dfb",
+    "semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
+    "visible_modes": [
+      "PRINCIPAL",
+      "COMPLÉMENT",
+      "ENRICHI"
+    ],
+    "internal_mode_value_preserved": "aflp",
+    "backbone_generation_preserved": "G036-AFLP-R7-UWR2",
+    "composite_generation_preserved": "G036-AFLP-R7-SUP-T5",
+    "canonical_text_changes": 0,
+    "paragraph_id_order_changes": 0,
+    "search_semantic_changes": 0,
+    "speaker_semantic_changes": 0,
+    "display_flow_semantic_changes": 0,
+    "supplement_content_changes": 0,
+    "user_state_schema_changes": 0,
+    "migration_algorithm_changes": 0,
+    "stored_source_mode_value_changes": 0,
+    "public_deployment_authorized_by_package": false,
+    "external_final_certification_required": true
+  },
+  "v69_deep_four_pass_metadata_repair": {
+    "date": "2026-09-07",
+    "predecessor_app_version": "v2.19.68-R1B",
+    "predecessor_zip_sha256": "58e7eebd7c3a04db53e7a21ea144842aebd36c8e3dd8815f37c8e2f6edc3618d",
+    "builder_sha256": "e4f8ab30356b555b3ca9b886168bf56fdde322596138ba82aaf5eafdb8d3ca87",
+    "semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
+    "repairs": {
+      "visible_onboarding_paragraph_count": {
+        "before": 74348,
+        "after": 74346,
+        "evidence": "actual backbone paragraph/search population = 74,346"
+      },
+      "supplement_speaker_stage_metadata": {
+        "before": {
+          "sup_t1": 52,
+          "sup_t2": 65,
+          "sup_t3": 3,
+          "sup_t4": 22,
+          "total": 142
+        },
+        "after": {
+          "sup_t1": 50,
+          "sup_t2": 63,
+          "sup_t3": 3,
+          "sup_t4": 22,
+          "sup_t5": 3,
+          "total": 141
+        },
+        "evidence": "141 actual supplement speaker segments classified through current supplement registry"
+      }
+    },
+    "canonical_text_changes": 0,
+    "paragraph_id_order_changes": 0,
+    "search_semantic_changes": 0,
+    "speaker_segment_semantic_changes": 0,
+    "display_flow_semantic_changes": 0,
+    "supplement_content_changes": 0,
+    "user_state_schema_changes": 0,
+    "migration_algorithm_changes": 0,
+    "stored_source_mode_value_changes": 0,
+    "public_deployment_authorized_by_package": false,
+    "external_final_certification_required": true
   }
 }

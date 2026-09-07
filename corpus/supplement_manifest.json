@@ -1,7 +1,7 @@
 {
   "schema": "ldc-supplement-manifest-v2",
   "programme": "LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4-SUP-T5",
-  "status": "LDC_V67_FOUR_PASS_REPORT_METADATA_RECONCILIATION__FINAL_CERTIFICATION_AUTHORITY_EXTERNAL_TO_ZIP__NOT_PUBLICLY_DEPLOYED",
+  "status": "LDC_V69_DEEP_FOUR_PASS_METADATA_REPAIR__FINAL_CERTIFICATION_AUTHORITY_EXTERNAL_TO_ZIP__NOT_PUBLICLY_DEPLOYED",
   "backbone_generation": "G036-AFLP-R7-UWR2",
   "composite_generation": "G036-AFLP-R7-SUP-T5",
   "counts": {
@@ -14,7 +14,7 @@
     "paragraphs": 177,
     "search_records": 177,
     "speaker_segments": 141,
-    "sup_t2_speaker_segments": 65,
+    "sup_t2_speaker_segments": 63,
     "sup_t3_items": 1,
     "sup_t4_items": 15,
     "sup_t4_speaker_segments": 22,
@@ -23,16 +23,16 @@
   },
   "files": {
     "supplements.json": {
-      "sha256": "c7082bdc3b33af7e0580c45f408410176f1fb1dc1442181b966f23991b1b4116",
-      "bytes": 1086592
+      "sha256": "287f0550e87f8ac4fc0ca5ec44c7313b408d543c12b4e872bbfbd4539851dbbb",
+      "bytes": 1086601
     },
     "supplement_search.json": {
       "sha256": "bd3216465f10f8a9bc0b6f5ce96822412d7d4025e4abd973fbd773e7b4a3f10b",
       "bytes": 288677
     },
     "supplement_speakers.json": {
-      "sha256": "39e98636eb427c15e7803c5a5c2ccafe8fa852080e925560f3f8e841c6adac3a",
-      "bytes": 126270
+      "sha256": "9846f708baebe27466b82df1ff6400e9f9d8714ae4aa935801be00ab143dd284",
+      "bytes": 126287
     }
   },
   "sup_t1_snapshot_sha256": "ee568d8857b3e38b4a2b536de146c3b54f876ab93478e66f327bdaaf0768a1e0",
@@ -44,7 +44,7 @@
     "dependent_after_aligne_correction": 1,
     "runtime_requirement": "CANONICAL_HOST_ID_AND_OFFSETS_PRESERVED__DISPLAY_SLICES_ONLY__CANONICAL_USER_OFFSETS"
   },
-  "release_status": "V67_METADATA_REPORT_SUCCESSOR__EXTERNAL_FINAL_CERTIFICATION_AUTHORITY__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED_BY_PACKAGE",
+  "release_status": "V69_DEEP_FOUR_PASS_METADATA_REPAIR__EXTERNAL_FINAL_CERTIFICATION_AUTHORITY__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED_BY_PACKAGE",
   "user_state_schema": 4,
   "m6_authority": "M5_G17_REOPEN_SPECIFIC_CANDIDATES__EXACT_V54_BRANCH",
   "m9_authority": "M8_MUTATION_AUTHORIZATION_R3_SUPT4_2026-08-28",
@@ -55,5 +55,18 @@
     "predecessor_zip_sha256": "4317d041ec9475b52850c7ec7cd374eb0b2b980e115f841eebaafe10df7ddcd6",
     "supplement_content_changes": 0,
     "status_and_authority_wrapper_only": true
+  },
+  "v68_principal_ui_presentation_successor": {
+    "predecessor_zip_sha256": "f58a28f6546000c6b17905fa37c0ba74db44de766a11bf2ef5b936ed384919e9",
+    "supplement_content_changes": 0,
+    "status_wrapper_only": true
+  },
+  "v69_deep_four_pass_metadata_repair": {
+    "predecessor_zip_sha256": "58e7eebd7c3a04db53e7a21ea144842aebd36c8e3dd8815f37c8e2f6edc3618d",
+    "supplement_content_changes": 0,
+    "speaker_segment_content_changes": 0,
+    "counts_reconciled_to_actual_segments": true,
+    "sup_t2_speaker_segments": 63,
+    "total_speaker_segments": 141
   }
 }
