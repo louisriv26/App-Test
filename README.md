@@ -1,3 +1,18 @@
+# CURRENT — LDC v2.19.70-R1B SEARCH-V2 CORE
+
+- predecessor: certified v2.19.69-R1B `5e3896468c6d822760fcd555c59e0042d3ed217ee7f389e8b2ab7a60d2b7d6dd`
+- semantic authority: `d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4` unchanged
+- corpus: 74,346 PRINCIPAL + 177 COMPLÉMENT = 74,523 searchable paragraphs; canonical text unchanged
+- SEARCH-V2: compact global lexical/BM25 index; body/metadata separated; structured Tome/date/reference parsing; compact Jésus filter; fail-closed asset verification; stale-run generation guard
+- legacy search shards: preserved as validation witnesses, no longer the active main/Autour retrieval path
+- morphology/synonyms/vectors/fuzzy search/pagination: deferred or retired as governed
+- static/package/algorithmic certification: external report/receipt governs exact final ZIP bytes
+- managed Chromium local navigation: ENVIRONMENT_BLOCKED (`ERR_BLOCKED_BY_ADMINISTRATOR`)
+- live GitHub / installed PWA / true offline / physical iPhone-iPad-Samsung / VoiceOver-TalkBack: OPEN / NOT YET CERTIFIED
+- public deployment: NOT AUTHORIZED
+
+---
+
 # Livre du Ciel — v2.19.69-R1B / Public 69 — deep four-pass audit repair successor
 
 **Exact predecessor:** certified v2.19.68-R1B ZIP `58e7eebd7c3a04db53e7a21ea144842aebd36c8e3dd8815f37c8e2f6edc3618d`.

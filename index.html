@@ -1958,12 +1958,12 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.69-R1B'; // technical update/audit identifier
-const PUBLIC_VERSION = '69';        // single user-facing release number
+const APP_VERSION = 'v2.19.70-R1B'; // technical update/audit identifier
+const PUBLIC_VERSION = '70';        // single user-facing release number
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD   = '2026-09-07';
-const SW_CACHE_VERSION = 'ldc-v2.19.69-R1B-deep-audit-r1';
-const CORPUS_MANIFEST_SHA256 = 'a28f0b0f6beed9ae2f6cddabd3642b9dca8bcd6defc4499c8036fec627036940';
+const SW_CACHE_VERSION = 'ldc-v2.19.70-R1B-search-v2-core-r1';
+const CORPUS_MANIFEST_SHA256 = 'ab29bdc028898fe59b7adbb6a99ebe12b73971927acaf09cce1f62bbfae9832c';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
 
@@ -2260,7 +2260,7 @@ function isStaleRecord(r) {
 /* ═══════════════════════════════════════════════════════
    CORPUS LOADING
 ═══════════════════════════════════════════════════════ */
-const CORPUS_CV = 'cv=cm-a28f0b0f6beed9ae'; // derived from corpus/manifest.json SHA-256
+const CORPUS_CV = 'cv=cm-ab29bdc028898fe5'; // derived from corpus/manifest.json SHA-256
 
 function sourceModeShowsBackbone() { return supplementMode !== 'additions'; }
 function sourceModeShowsSupplements() { return supplementMode !== 'aflp'; }
@@ -5573,6 +5573,9 @@ let semanticIndexLoading = false;
 let searchMetadataIndex = null, searchMetadataLoading = null;
 let searchMetadataByEntry = new Map();
 let searchRunSeq = 0, activeSearchAbort = null;
+let searchV2Worker = null;
+let searchV2Pending = new Map();
+let searchV2AuxSeq = 0;
 const SEARCH_RESULT_CAP = 30;
 const SEARCH_POOL_CAP = 500;
 const BACKBONE_GENERATION = 'G036-AFLP-R7-UWR2';
@@ -5631,15 +5634,15 @@ function renderVolFilterRow() {
 }
 
 function onSearchInput() {
+  cancelActiveSearch('input-mutated');
   const val = document.getElementById('search-input').value;
   document.getElementById('search-clear').style.display = val ? '' : 'none';
   document.querySelector('.date-nav-entry').style.display = val ? 'none' : '';
-  if (!val) {
-    clearSearch();
-  }
+  if (!val) clearSearch();
 }
 
 async function clearSearch() {
+  cancelActiveSearch('cleared');
   document.getElementById('search-input').value = '';
   document.getElementById('search-clear').style.display = 'none';
   document.querySelector('.date-nav-entry').style.display = '';
@@ -6199,44 +6202,140 @@ function renderSearchResults(results, raw, totalMatches, metadataMode=false, mat
   }
 }
 
+function ensureSearchV2Worker() {
+  if (searchV2Worker) return searchV2Worker;
+  const w = new Worker(`search_worker_v2.js?${CORPUS_CV}`);
+  w.onmessage = ev => {
+    const msg = ev.data || {};
+    if (msg.type !== 'search-result') return;
+    const pending = searchV2Pending.get(msg.generation);
+    if (!pending) return;
+    searchV2Pending.delete(msg.generation);
+    if (msg.ok) pending.resolve(msg.result);
+    else pending.reject(new Error(msg.error || 'SEARCH-V2 indisponible'));
+  };
+  w.onerror = ev => {
+    const err = new Error(ev && ev.message ? ev.message : 'SEARCH-V2 worker failure');
+    for (const [,pending] of searchV2Pending) pending.reject(err);
+    searchV2Pending.clear();
+    try { w.terminate(); } catch(e) {}
+    if (searchV2Worker === w) searchV2Worker = null;
+  };
+  searchV2Worker = w;
+  return w;
+}
+
+function searchV2Request(query, generation, optionOverrides={}) {
+  const w = ensureSearchV2Worker();
+  const options = {
+    mode: supplementMode,
+    volMin: searchVolFilter === 0 ? 0 : searchVolFilter,
+    volMax: searchVolFilter === 0 ? 0 : searchVolFilterMax,
+    jesus: !!searchSpeakerFilter,
+    cap: SEARCH_RESULT_CAP,
+    ...optionOverrides
+  };
+  return new Promise((resolve,reject) => {
+    searchV2Pending.set(generation,{resolve,reject});
+    w.postMessage({type:'search',generation,query,options});
+  });
+}
+
+function searchV2NormalisedMap(source) {
+  const src=String(source==null?'':source), chars=[], map=[];
+  function fold(c){
+    const low=c.toLowerCase();
+    const m={'é':'e','è':'e','ê':'e','ë':'e','à':'a','â':'a','î':'i','ï':'i','ô':'o','ö':'o','ù':'u','û':'u','ü':'u','ç':'c','œ':'oe','æ':'ae'};
+    if(m[low]!==undefined)return m[low];
+    if(/[\u00A0\u202F\s‘’‚‛\-–—]/.test(c))return ' ';
+    return /[A-Za-z0-9]/.test(c)?low:' ';
+  }
+  for(let i=0;i<src.length;i++){
+    const f=fold(src[i]);
+    for(const ch of f){
+      if(/\s/.test(ch)){
+        if(!chars.length||chars[chars.length-1]===' ')continue;
+        chars.push(' ');map.push(i);
+      } else {chars.push(ch);map.push(i);}
+    }
+  }
+  while(chars.length&&chars[chars.length-1]===' '){chars.pop();map.pop();}
+  return {norm:chars.join(''),map};
+}
+
+function searchV2SourceRanges(source, lexical) {
+  const nm=searchV2NormalisedMap(source), query=normalise(lexical||'');
+  if(!query||!nm.norm)return [];
+  const ranges=[];
+  function addNeedle(needle){
+    if(!needle)return;
+    let from=0,at;
+    while((at=nm.norm.indexOf(needle,from))!==-1){
+      const end=at+needle.length;
+      const left=at===0||nm.norm.charCodeAt(at-1)===32, right=end===nm.norm.length||nm.norm.charCodeAt(end)===32;
+      if(left&&right){const a=nm.map[at],z=nm.map[end-1]+1;if(Number.isInteger(a)&&Number.isInteger(z)&&z>a)ranges.push([a,z]);}
+      from=at+1;
+    }
+  }
+  addNeedle(query);
+  if(!ranges.length) for(const t of [...new Set(query.split(' ').filter(x=>x.length>=3))]) addNeedle(t);
+  ranges.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+  const merged=[];for(const r of ranges){const last=merged[merged.length-1];if(last&&r[0]<=last[1])last[1]=Math.max(last[1],r[1]);else merged.push(r.slice());}
+  return merged;
+}
+
+function searchV2Excerpt(text, lexical, windowSize=220) {
+  const src=String(text||''), ranges=searchV2SourceRanges(src,lexical);
+  if(!ranges.length)return src.slice(0,windowSize)+(src.length>windowSize?'…':'');
+  const idx=ranges[0][0],half=Math.floor(windowSize/2);let start=Math.max(0,idx-half),end=Math.min(src.length,start+windowSize);start=Math.max(0,end-windowSize);
+  return (start>0?'…':'')+src.slice(start,end)+(end<src.length?'…':'');
+}
+
+function searchV2Highlight(text, lexical) {
+  const src=String(text||''), ranges=searchV2SourceRanges(src,lexical);
+  if(!ranges.length)return escapeHtml(src);
+  let html='',last=0;for(const [a,z] of ranges){html+=escapeHtml(src.slice(last,a));html+='<mark class="search-hl">'+escapeHtml(src.slice(a,z))+'</mark>';last=z;}html+=escapeHtml(src.slice(last));return html;
+}
+
+function renderSearchV2Card(container,r,lexical,metadataMode=false) {
+  const card=document.createElement('button');card.className='result-card';card.type='button';card.dataset.resultKey=String(r.id||r.entry_id||r.stable_ref||'');
+  const editorialNo=tome1EditorialNoteNumber(r.entry_id||r.id||r.stable_ref);
+  const tagClass=metadataMode||r.matchType==='exact'||r.matchType==='words'?'exact':'approximate';
+  const tagLabel=editorialNo?'Éditorial':metadataMode?(r._metaKind||'Titre / date'):({exact:'Phrase exacte',words:'Tous les mots',partial:'Correspondance partielle'}[r.matchType]||'Résultat');
+  const lexicalQuery=lexical||'';const excerpt=metadataMode?(r.text||r.title||''):searchV2Excerpt(r.text||'',lexicalQuery);const displayTitle=editorialNo?`Explication éditoriale — note ${editorialNo}`:(r.title||'');
+  const speechTag=searchSpeakerFilter?`<span class="rc-tag" style="background:rgba(92,58,16,.12);color:#5C3A10;border-color:rgba(92,58,16,.2);"><i class="ti ti-message-circle" style="font-size:10px;"></i> Passages contenant des paroles de Jésus</span>`:'';
+  const supplementTag=r.is_supplement?`<span class="rc-tag exact">COMPLÉMENT</span>`:'';
+  card.innerHTML=`<div class="rc-stable">${escapeHtml(r.stable_ref||r.entry_id||r.id)} · Tome ${r.volume}</div>${displayTitle?`<div class="rc-title">${escapeHtml(displayTitle)}</div>`:''}<div class="rc-body-text">${metadataMode?escapeHtml(excerpt):searchV2Highlight(excerpt,lexicalQuery)}</div><div class="rc-tags"><span class="rc-tag ${tagClass}">${escapeHtml(tagLabel)}</span>${supplementTag}${speechTag}${r.date_display?`<span class="rc-tag">${escapeHtml(r.date_display)}</span>`:''}</div>`;
+  card.onclick=()=>openFromSearch(r);container.appendChild(card);
+}
+
+function renderSearchV2Results(payload, raw) {
+  const results=payload.results||[],metadata=payload.metadata||[],total=Number(payload.totalMatches||0),counts=payload.matchCounts||{exact:0,words:0,partial:0};
+  const meta=document.getElementById('search-meta');meta.style.display='block';
+  if(!results.length&&!metadata.length){meta.textContent='0 résultat';document.getElementById('trust-notice').style.display='none';document.getElementById('search-results').innerHTML='<div class="empty-state"><i class="ti ti-search-off"></i>Aucun résultat. Essayez d\'autres mots.</div>';return;}
+  const shown=results.length,parts=[];if(total)parts.push(`${shown} passage${shown!==1?'s':''} affiché${shown!==1?'s':''} sur ${total}`);if(metadata.length)parts.push(`${metadata.length} entrée${metadata.length!==1?'s':''} correspondante${metadata.length!==1?'s':''}`);
+  meta.innerHTML=`${escapeHtml(parts.join(' · '))} <span class="search-mode-badge">Recherche lexicale</span>`;
+  document.getElementById('trust-notice').style.display=counts.partial>0?'block':'none';
+  const sug=document.getElementById('search-suggestions');if(sug)sug.style.display='none';const container=document.getElementById('search-results');container.innerHTML='';const lexical=(payload.parsed&&payload.parsed.lexical)||raw;
+  if(results.length){const h=document.createElement('div');h.className='sugg-label';h.textContent='Passages';container.appendChild(h);for(const r of results)renderSearchV2Card(container,r,lexical,false);}
+  if(metadata.length){const h=document.createElement('div');h.className='sugg-label';h.textContent='Entrées correspondantes';container.appendChild(h);for(const r of metadata)renderSearchV2Card(container,r,lexical,true);}
+}
+
 async function runSearch() {
   const raw=document.getElementById('search-input').value.trim();
-  if (!raw) { cancelActiveSearch('empty'); return; }
+  if(!raw){cancelActiveSearch('empty');return;}
   const normCheck=normalise(raw).replace(/\s+/g,'');
-  if (normCheck.length<3) {
-    cancelActiveSearch('too-short');
-    const meta=document.getElementById('search-meta'); meta.style.display='block'; meta.textContent='Saisissez au moins 3 caractères.';
-    document.getElementById('search-results').innerHTML=''; return;
-  }
-  const words=LDCSearch.terms(raw,3);
-  if (!words.length && normCheck.length<8) {
-    cancelActiveSearch('stopword-only');
-    const meta=document.getElementById('search-meta'); meta.style.display='block'; meta.textContent='Recherche trop courte. Ajoutez un mot plus spécifique.';
-    document.getElementById('search-results').innerHTML=''; return;
-  }
+  if(normCheck.length<3){cancelActiveSearch('too-short');const meta=document.getElementById('search-meta');meta.style.display='block';meta.textContent='Saisissez au moins 3 caractères.';document.getElementById('search-results').innerHTML='';return;}
   saveRecentSearch(raw).catch(()=>{});
-  const {token,signal}=beginSearchRun();
-  const vols=selectedSearchVolumes();
-  const metaEl=document.getElementById('search-meta'); metaEl.style.display='block'; metaEl.textContent='Recherche dans les titres et les dates…';
-  try {
-    const metadataHits=await findMetadataHits(raw,vols,searchSpeakerFilter);
-    if (!isSearchActive(token)) return;
-    const intent=metadataIntent(raw,metadataHits);
-    if (intent && metadataHits.length) {
-      renderSearchResults(metadataHits.slice(0,SEARCH_RESULT_CAP),raw,metadataHits.length,true);
-      activeSearchAbort=null; return;
-    }
-    const body=await scanBodyKeyword(raw,vols,token,signal,searchSpeakerFilter);
-    if (!isSearchActive(token)) return;
-    renderSearchResults(body.results,raw,body.totalMatches,false,body.matchCounts);
-    activeSearchAbort=null;
-  } catch(e) {
-    if (e && e.name==='AbortError') return;
-    console.error('LDC search failed',e);
-    if (isSearchActive(token)) {
-      metaEl.textContent='Recherche indisponible pour le moment.';
-      document.getElementById('search-results').innerHTML='';
-    }
+  cancelActiveSearch('new-search');const generation=searchRunSeq;
+  const metaEl=document.getElementById('search-meta');metaEl.style.display='block';metaEl.textContent='Recherche…';
+  try{
+    const payload=await searchV2Request(raw,generation);
+    if(!isSearchActive(generation)||document.getElementById('search-input').value.trim()!==raw)return;
+    renderSearchV2Results(payload,raw);
+  }catch(e){
+    if(!isSearchActive(generation))return;
+    console.error('LDC SEARCH-V2 failed',e);metaEl.textContent='Recherche indisponible pour le moment.';document.getElementById('trust-notice').style.display='none';document.getElementById('search-results').innerHTML='<div class="empty-state"><i class="ti ti-alert-triangle"></i>Le moteur de recherche n’a pas pu être vérifié. Aucun résultat partiel n’est affiché.</div>';
   }
 }
 
@@ -6603,8 +6702,13 @@ async function buildAutourContent(container) {
 
   // ── Section 3: Thème lié — source-aware query ──
   const queryWords = buildAutourQuery(activeSupp?{title:supplementRegistryTitle(activeSupp),date_display:activeSupp.display_date||activeSupp.date_iso||''}:entry);
-  const thematicResults = await searchForAutour(queryWords, entry.id, 6);
-  renderAutourSection(container, 'Passages thématiquement proches',
+  let thematicResults=[];
+  try { thematicResults = await searchForAutour(queryWords, entry.id, 6); }
+  catch(e) {
+    console.error('LDC SEARCH-V2 Autour failed',e);
+    const msg=document.createElement('div');msg.className='autour-empty';msg.textContent='Recherche de passages liés indisponible pour le moment.';container.appendChild(msg);
+  }
+  renderAutourSection(container, 'Passages avec des termes proches',
     'ti-sparkles', 'thematic', thematicResults.map(r => ({
       ref:      r.stable_ref,
       vol:      r.volume,
@@ -6612,7 +6716,7 @@ async function buildAutourContent(container) {
       para_id:  r.id,
       supplement_id: r.supplement_id || null,
       text:     r.text,
-      tag:      'Thème proche',
+      tag:      'Termes proches',
       tagCls:   'thematic',
     }))
   );
@@ -6620,7 +6724,12 @@ async function buildAutourContent(container) {
   // ── Section 4: Même image spirituelle ──
   const imageFamily = detectImageFamily(entry);
   if (imageFamily) {
-    const imageResults = await searchImageFamily(imageFamily.terms, entry.id, 5);
+    let imageResults=[];
+    try { imageResults = await searchImageFamily(imageFamily.terms, entry.id, 5); }
+    catch(e) {
+      console.error('LDC SEARCH-V2 image-family search failed',e);
+      const msg=document.createElement('div');msg.className='autour-empty';msg.textContent='Recherche par image spirituelle indisponible pour le moment.';container.appendChild(msg);
+    }
     renderAutourSection(container,
       'Même image — ' + imageFamily.label,
       'ti-eye', 'thematic', imageResults.map(r => ({
@@ -6680,63 +6789,37 @@ function renderAutourSection(container, label, icon, type, items) {
 }
 
 function buildAutourQuery(entry) {
-  // Extract key words from title and entry text for autour search
-  const src = (entry.title || '') + ' ' + (entry.date_display || '');
-  return normalise(src).split(/\s+/).filter(w => w.length > 3).slice(0, 6);
+  // SEARCH-V2 CORE: use explicit title terms only. Do not inject the date into
+  // lexical related-search terms and do not infer an unreviewed semantic expansion.
+  return normalise(entry.title || '').split(/\s+/).filter(w => w.length >= 3).slice(0, 8);
 }
 
 async function searchForAutour(words, excludeEntryId, limit) {
   if (!words.length) return [];
-  // LDC-B: scan shards on demand without retaining the full 74k-record index in JS memory.
-  const scored = [];
-  for (let v=1; v<=36; v++) {
-    let shard = [];
-    try { shard = await fetchSearchShard(v, undefined, false); } catch(e) { continue; }
-    for (const item of shard) {
-      if (item.entry_id === excludeEntryId) continue;
-      const matched = words.filter(w => (item.norm || '').includes(w));
-      if (matched.length >= 2) scored.push({ ...item, score: matched.length });
-    }
-    if (scored.length > 800) { scored.sort((a,b)=>b.score-a.score); scored.length=500; }
-    await new Promise(r=>setTimeout(r,0));
-  }
-  scored.sort((a,b) => b.score - a.score);
-  const seen = new Set(), results = [];
-  for (const r of scored) {
-    if (!seen.has(r.entry_id)) { seen.add(r.entry_id); results.push(r); if (results.length >= limit) break; }
+  const requestId=`autour-${++searchV2AuxSeq}`;
+  const payload=await searchV2Request(words.join(' '),requestId,{mode:supplementMode,volMin:0,volMax:0,jesus:false,cap:Math.max(30,Number(limit||6)*10)});
+  const seen=new Set(),results=[];
+  for(const r of payload.results||[]){
+    if(r.entry_id===excludeEntryId||seen.has(r.entry_id))continue;
+    seen.add(r.entry_id);results.push(r);if(results.length>=limit)break;
   }
   return results;
 }
 
 function detectImageFamily(entry) {
-  // Find which spiritual image family this entry belongs to
-  const src = normalise((entry.title || '') + ' ');
-  return THEME_FAMILIES.find(f =>
-    f.terms.some(t => src.includes(t))
-  ) || null;
+  const src=normalise(entry.title||'');
+  return THEME_FAMILIES.find(f=>f.terms.some(t=>containsNormalisedTokenOrPhrase(src,t)))||null;
 }
 
 async function searchImageFamily(terms, excludeEntryId, limit) {
-  const scored = [];
-  for (let v=1; v<=36; v++) {
-    let shard = [];
-    try { shard = await fetchSearchShard(v, undefined, false); } catch(e) { continue; }
-    for (const item of shard) {
-      if (item.entry_id === excludeEntryId) continue;
-      const matched = terms.filter(t => (item.norm || '').includes(t));
-      if (matched.length > 0) scored.push({ ...item, score: matched.length });
-    }
-    if (scored.length > 800) { scored.sort((a,b)=>b.score-a.score); scored.length=500; }
-    await new Promise(r=>setTimeout(r,0));
-  }
-  scored.sort((a,b) => b.score - a.score);
-  const seen = new Set(), results = [];
-  for (const r of scored) {
-    if (!seen.has(r.entry_id)) { seen.add(r.entry_id); results.push(r); if (results.length >= limit) break; }
-  }
+  const lexical=[...new Set((terms||[]).map(t=>normalise(t)).filter(Boolean))];
+  if(!lexical.length)return [];
+  const requestId=`autour-image-${++searchV2AuxSeq}`;
+  const payload=await searchV2Request(lexical.join(' '),requestId,{mode:supplementMode,volMin:0,volMax:0,jesus:false,cap:Math.max(50,Number(limit||5)*15)});
+  const seen=new Set(),results=[];
+  for(const r of payload.results||[]){if(r.entry_id===excludeEntryId||seen.has(r.entry_id))continue;seen.add(r.entry_id);results.push(r);if(results.length>=limit)break;}
   return results;
 }
-
 
 
 
@@ -7448,10 +7531,10 @@ function renderDnResultCard() {
    CacheStorage contains public app/corpus bytes only. IndexedDB settings holds
    the user-visible completion record; it is not itself the offline payload.
 ═══════════════════════════════════════════════════════ */
-const OFFLINE_CACHE_VERSION = 'ldc-le-livre-du-ciel-offline-v2.19.69-R1B-deep-audit-r1';
+const OFFLINE_CACHE_VERSION = 'ldc-le-livre-du-ciel-offline-v2.19.70-R1B-search-v2-core-r1';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v2';
-const OFFLINE_CONTENT_BINDING = '92af0e31ada6ccc55148cf6dbe38c0fed66916def9f0a77b5f4d0e139fa61b3b';
-const OFFLINE_CORPUS_MANIFEST_SHA256 = 'a28f0b0f6beed9ae2f6cddabd3642b9dca8bcd6defc4499c8036fec627036940';
+const OFFLINE_CONTENT_BINDING = 'df5c444d2487e10e7e1fac20334fe3fd0581b4182475c0652e48f7f57eab9eee';
+const OFFLINE_CORPUS_MANIFEST_SHA256 = 'ab29bdc028898fe59b7adbb6a99ebe12b73971927acaf09cce1f62bbfae9832c';
 const OFFLINE_STATES = Object.freeze(['NOT_PREPARED','CHECKING','DOWNLOADING','READY','PARTIAL','ERROR','CANCELLED']);
 let offlineUiState = {state:'NOT_PREPARED',completed:0,total:0,failed:[],total_bytes:0,job_id:null,message:'',content_binding_sha256:OFFLINE_CONTENT_BINDING,corpus_manifest_sha256:OFFLINE_CORPUS_MANIFEST_SHA256};
 let runtimeCacheUiState = {entries:0,bytes:0,max_entries:48,max_bytes:50331648};
