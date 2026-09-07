@@ -1,3 +1,0 @@
-# v101.136 R5 Scope Authority
-
-Canonical content authority remains exactly **97 records relative to immutable v101.135** under ledger `f9c89f2fdcb0f6588cb4250e8ea4bc00d9ccf1f51900a83d77e6e3b415ae9394`. R5 authorizes **zero** additional canonical text mutations and is release-engineering/documentation only. No H23 source-critical finding is authorized. The existing R4 exception at `PASSION24.TEXT.RELATED_HOUR_13.BODY.P124` remains limited to the exact previously authorized insertion `de `; no other upstream finding or action is authorized. Any further canonical text change requires new authority.

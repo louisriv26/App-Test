@@ -1,0 +1,54 @@
+{
+  "schema": "ldc-supplement-manifest-v2",
+  "programme": "LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4-SUP-T5",
+  "status": "LDC_INTERIM_SUCCESSOR_REV6_AUTHORIZED_BUILD__POSTAUTH_CERTIFICATION_REQUIRED__NOT_PUBLICLY_DEPLOYED",
+  "backbone_generation": "G036-AFLP-R7-UWR2",
+  "composite_generation": "G036-AFLP-R7-SUP-T5",
+  "counts": {
+    "items": 75,
+    "sup_t1_items": 13,
+    "sup_t2_items": 43,
+    "complete_entries": 13,
+    "internal_supplements": 62,
+    "legacy_sup_t1_inline_supplements": 2,
+    "paragraphs": 177,
+    "search_records": 177,
+    "speaker_segments": 141,
+    "sup_t2_speaker_segments": 65,
+    "sup_t3_items": 1,
+    "sup_t4_items": 15,
+    "sup_t4_speaker_segments": 22,
+    "sup_t5_items": 3,
+    "sup_t5_speaker_segments": 3
+  },
+  "files": {
+    "supplements.json": {
+      "sha256": "c7082bdc3b33af7e0580c45f408410176f1fb1dc1442181b966f23991b1b4116",
+      "bytes": 1086592
+    },
+    "supplement_search.json": {
+      "sha256": "bd3216465f10f8a9bc0b6f5ce96822412d7d4025e4abd973fbd773e7b4a3f10b",
+      "bytes": 288677
+    },
+    "supplement_speakers.json": {
+      "sha256": "39e98636eb427c15e7803c5a5c2ccafe8fa852080e925560f3f8e841c6adac3a",
+      "bytes": 126270
+    }
+  },
+  "sup_t1_snapshot_sha256": "ee568d8857b3e38b4a2b536de146c3b54f876ab93478e66f327bdaaf0768a1e0",
+  "m3_decision_lock_sha256": "bb4a5c772b3eafdfe6eb857bc303a724a4bdb0cb0cef97c0ee5f088dfd65ab83",
+  "sup_t2_segmentation_ledger_sha256": "f3345d58d2c12625c46cb92466012755c070fa84aef04da8cbcf2f9caa705f77",
+  "provenance_contract": "SUP-T1..SUP-T4_PRESERVED__SUP-T5_SOURCE_CRITICAL_AUTHORIZED__NO_MAJORITY_VOTE",
+  "within_paragraph_contract": {
+    "placements": 22,
+    "dependent_after_aligne_correction": 1,
+    "runtime_requirement": "CANONICAL_HOST_ID_AND_OFFSETS_PRESERVED__DISPLAY_SLICES_ONLY__CANONICAL_USER_OFFSETS"
+  },
+  "release_status": "INTERIM_SUCCESSOR_AUTHORIZED_BUILD__NOT_PUBLIC_DEPLOYMENT_AUTHORITY",
+  "user_state_schema": 4,
+  "m6_authority": "M5_G17_REOPEN_SPECIFIC_CANDIDATES__EXACT_V54_BRANCH",
+  "m9_authority": "M8_MUTATION_AUTHORIZATION_R3_SUPT4_2026-08-28",
+  "r6_authority": "AWAITING_EXPLICIT_M7_RUNTIME_COMPLETE_HASH_AUTHORIZATION",
+  "m7rc_existing_complement_replacements": 9,
+  "authorized_runtime_ledger_sha256": "5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906"
+}
