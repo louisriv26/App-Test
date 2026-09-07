@@ -1,11 +1,12 @@
 {
   "schema": "L24H_PACKAGE_MANIFEST_V1",
   "version": "v101.136",
+  "build_revision": "R5",
   "self_exclusion": [
     "metadata/hash_manifest.json",
     "metadata/package_manifest.json"
   ],
-  "file_count": 863,
+  "file_count": 877,
   "files": [
     {
       "path": ".gitattributes",
@@ -17,15 +18,15 @@
     },
     {
       "path": "README.md",
-      "size": 241
+      "size": 971
     },
     {
       "path": "REAL_DEVICE_QA_CHECKLIST.md",
-      "size": 903
+      "size": 3621
     },
     {
       "path": "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
-      "size": 51
+      "size": 4175
     },
     {
       "path": "apple-touch-icon.png",
@@ -2292,6 +2293,38 @@
       "size": 64956
     },
     {
+      "path": "evidence/v101136_r3/R2_FOUR_PASS_TRIGGER.json",
+      "size": 445
+    },
+    {
+      "path": "evidence/v101136_r3/RELEASE_ENGINEERING_FIX_LEDGER.csv",
+      "size": 1513
+    },
+    {
+      "path": "evidence/v101136_r4/AUTHORIZATION_RECEIPT_R4.json",
+      "size": 1272
+    },
+    {
+      "path": "evidence/v101136_r4/AUTHORIZED_MUTATION_DELTA_1.csv",
+      "size": 1843
+    },
+    {
+      "path": "evidence/v101136_r4/AUTHORIZED_MUTATION_UNIVERSE_97.csv",
+      "size": 112304
+    },
+    {
+      "path": "evidence/v101136_r4/SOURCE_VERIFICATION_R4.json",
+      "size": 1257
+    },
+    {
+      "path": "evidence/v101136_r4/UPSTREAM_HOLD_EXCEPTION_R4.json",
+      "size": 830
+    },
+    {
+      "path": "evidence/v101136_r5/R4_FOUR_PASS_TRIGGER.json",
+      "size": 1151
+    },
+    {
       "path": "favicon-16.png",
       "size": 629
     },
@@ -2325,43 +2358,43 @@
     },
     {
       "path": "index.html",
-      "size": 2572565
+      "size": 2573045
     },
     {
       "path": "luisa_24_heures.html",
-      "size": 2572565
+      "size": 2573045
     },
     {
       "path": "manifest.json",
-      "size": 886
+      "size": 912
     },
     {
       "path": "metadata/active_report_inventory.json",
-      "size": 371
+      "size": 650
     },
     {
       "path": "metadata/build_provenance.json",
-      "size": 812
+      "size": 981
     },
     {
       "path": "metadata/builder_input_manifest.json",
-      "size": 436
+      "size": 839
     },
     {
       "path": "metadata/current_evidence_lineage.json",
-      "size": 606
+      "size": 1146
     },
     {
       "path": "metadata/current_gate_map.json",
-      "size": 312
+      "size": 679
     },
     {
       "path": "metadata/current_tooling_inventory.json",
-      "size": 249
+      "size": 550
     },
     {
       "path": "metadata/full_build_overlay_manifest.json",
-      "size": 1151
+      "size": 1236
     },
     {
       "path": "metadata/historical/v101127/scope_escalation_authority.md",
@@ -2381,19 +2414,15 @@
     },
     {
       "path": "metadata/release_evidence_lifecycle.json",
-      "size": 234
+      "size": 478
     },
     {
       "path": "metadata/scope_escalation_authority.md",
-      "size": 298
+      "size": 603
     },
     {
-      "path": "reports/V101135_MASTER_SCRIPT_VALIDATION_COMPLETION.md",
-      "size": 776
-    },
-    {
-      "path": "reports/V101136_INTERIM_CLOSED_SUCCESSOR.md",
-      "size": 568
+      "path": "reports/V101136_R5_FOUR_PASS_RELEASE_RECONCILIATION.md",
+      "size": 1572
     },
     {
       "path": "reports/historical/v101122/HOUR24_PRODUCT_CONTRACT.md",
@@ -2632,6 +2661,22 @@
       "size": 1045
     },
     {
+      "path": "reports/historical/v101135/V101135_MASTER_SCRIPT_VALIDATION_COMPLETION.md",
+      "size": 776
+    },
+    {
+      "path": "reports/historical/v101136_r2/V101136_INTERIM_CLOSED_SUCCESSOR_R2.md",
+      "size": 568
+    },
+    {
+      "path": "reports/historical/v101136_r3/V101136_R3_FOUR_PASS_RELEASE_RECONCILIATION.md",
+      "size": 1372
+    },
+    {
+      "path": "reports/historical/v101136_r4/V101136_R4_SINGLE_GRAMMAR_FIX.md",
+      "size": 1375
+    },
+    {
       "path": "scripts/EXECUTION_SPEC.md",
       "size": 556
     },
@@ -2746,6 +2791,18 @@
     {
       "path": "scripts/build_v101136_interim_closed_96_r2.py",
       "size": 18925
+    },
+    {
+      "path": "scripts/build_v101136_r3_four_pass_reconciliation.py",
+      "size": 20339
+    },
+    {
+      "path": "scripts/build_v101136_r4_single_grammar_fix.py",
+      "size": 22488
+    },
+    {
+      "path": "scripts/build_v101136_r5_release_reconciliation.py",
+      "size": 18169
     },
     {
       "path": "scripts/create_m1_addendum_docx.py",
@@ -3453,11 +3510,11 @@
     },
     {
       "path": "sw.js",
-      "size": 3906
+      "size": 3909
     },
     {
       "path": "version.json",
-      "size": 1626
+      "size": 1949
     }
   ]
 }

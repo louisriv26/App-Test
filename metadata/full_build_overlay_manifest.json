@@ -1,14 +1,14 @@
 {
-  "schema": "L24H_V101136_FULL_BUILD_OVERLAY_V1",
+  "schema": "L24H_V101136_R5_FULL_BUILD_OVERLAY_V1",
   "version": "v101.136",
-  "baseline_version": "v101.135",
-  "baseline_zip_sha256": "cf8b688e649b2ef3f7c36768691c6a647d9d1e9eec85c90ba697dc2a05ef26fc",
+  "build_revision": "R5",
+  "baseline": "v101.136 R4",
+  "baseline_zip_sha256": "7af0df0f37552f603d58aa407e94d9bd8f2719bd12b8b7313538d7b5d575668b",
   "changed_or_added": [
     "README.md",
-    "evidence/v101136/APPLY_LEDGER_96.csv",
-    "evidence/v101136/AUTHORIZATION_RECEIPT.json",
-    "evidence/v101136/AUTHORIZED_MUTATION_UNIVERSE_96.csv",
-    "evidence/v101136/DERIVED_LAYER_REBUILD.json",
+    "REAL_DEVICE_QA_CHECKLIST.md",
+    "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
+    "evidence/v101136_r5/R4_FOUR_PASS_TRIGGER.json",
     "index.html",
     "luisa_24_heures.html",
     "manifest.json",
@@ -23,10 +23,13 @@
     "metadata/package_manifest.json",
     "metadata/release_evidence_lifecycle.json",
     "metadata/scope_escalation_authority.md",
-    "reports/V101136_INTERIM_CLOSED_SUCCESSOR.md",
-    "scripts/build_v101136_interim_closed_96_r2.py",
+    "reports/V101136_R5_FOUR_PASS_RELEASE_RECONCILIATION.md",
+    "reports/historical/v101136_r4/V101136_R4_SINGLE_GRAMMAR_FIX.md",
+    "scripts/build_v101136_r5_release_reconciliation.py",
     "sw.js",
     "version.json"
   ],
-  "removed": []
+  "removed": [
+    "reports/V101136_R4_SINGLE_GRAMMAR_FIX.md"
+  ]
 }

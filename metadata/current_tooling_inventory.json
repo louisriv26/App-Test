@@ -1,8 +1,9 @@
 {
   "version": "v101.136",
-  "stage": "INTERIM_CLOSED_96_SUCCESSOR_R2",
-  "current_tools": [
-    "scripts/build_v101136_interim_closed_96_r2.py"
-  ],
-  "reused_runtime_validation_lineage": "v101.135 runtime harnesses used externally after freeze"
+  "build_revision": "R5",
+  "stage": "INTERIM_CLOSED_97_SUCCESSOR_R5_FOUR_PASS_RELEASE_RECONCILED",
+  "current_builder": "scripts/build_v101136_r5_release_reconciliation.py",
+  "builder_cli": "python scripts/build_v101136_r5_release_reconciliation.py <sha-bound-v101136-R4-predecessor.zip> <out_dir> <out_zip>",
+  "predecessor_builder": "scripts/build_v101136_r4_single_grammar_fix.py retained as historical tooling",
+  "runtime_validation": "external exact-ZIP v101.136 R5 harnesses and final reopened recheck required"
 }
