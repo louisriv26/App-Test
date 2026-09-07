@@ -1,0 +1,90 @@
+{
+  "schema": "L24H_V101128_SCROLL_FOCUS_EXTRACT_V1",
+  "version": "v101.128",
+  "source_matrix": "V101128_MEDITEE_UX_MATRIX.json",
+  "summary": {
+    "pass": 7,
+    "fail": 0,
+    "total": 7
+  },
+  "rows": [
+    {
+      "group": "scroll_focus",
+      "case": "top_no_rerender",
+      "status": "PASS",
+      "detail": {
+        "before": 0,
+        "after": 0,
+        "render": 0,
+        "focused": true,
+        "has": true
+      }
+    },
+    {
+      "group": "scroll_focus",
+      "case": "top_focus_preserved",
+      "status": "PASS",
+      "detail": {
+        "before": 0,
+        "after": 0,
+        "render": 0,
+        "focused": true,
+        "has": true
+      }
+    },
+    {
+      "group": "scroll_focus",
+      "case": "top_scroll_preserved",
+      "status": "PASS",
+      "detail": {
+        "before": 0,
+        "after": 0,
+        "render": 0,
+        "focused": true,
+        "has": true
+      }
+    },
+    {
+      "group": "scroll_focus",
+      "case": "bottom_no_rerender",
+      "status": "PASS",
+      "detail": {
+        "before": 904,
+        "after": 904,
+        "render": 0,
+        "focused": true,
+        "has": true
+      }
+    },
+    {
+      "group": "scroll_focus",
+      "case": "bottom_focus_preserved",
+      "status": "PASS",
+      "detail": {
+        "before": 904,
+        "after": 904,
+        "render": 0,
+        "focused": true,
+        "has": true
+      }
+    },
+    {
+      "group": "scroll_focus",
+      "case": "bottom_scroll_preserved",
+      "status": "PASS",
+      "detail": {
+        "before": 904,
+        "after": 904,
+        "render": 0,
+        "focused": true,
+        "has": true
+      }
+    },
+    {
+      "group": "scroll_focus",
+      "case": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

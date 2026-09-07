@@ -1,0 +1,78 @@
+{
+  "schema": "L24H_V101128_PRESENTATION_LEDGER_REBIND_AUDIT_V1",
+  "status": "PASS",
+  "prior_span_count": 398,
+  "current_span_count": 398,
+  "span_id_conservation": true,
+  "changed_rows": 3,
+  "changes": [
+    {
+      "span_id": "A-Q00012",
+      "fields": [
+        "close_offset",
+        "last_lexical_offset",
+        "source_basis"
+      ],
+      "before": {
+        "close_offset": "102",
+        "last_lexical_offset": "98",
+        "source_basis": "NO_DIVINE_PARENT; ACTIVE_ADJUDICATION_OR_SPEECH_DATA"
+      },
+      "after": {
+        "close_offset": "101",
+        "last_lexical_offset": "99",
+        "source_basis": "V101126_TEXT_REBIND_OP-H03-003-01; NO_DIVINE_PARENT; ACTIVE_ADJUDICATION_OR_SPEECH_DATA"
+      }
+    },
+    {
+      "span_id": "A-Q00274",
+      "fields": [
+        "quote_family",
+        "close_offset",
+        "last_lexical_offset",
+        "source_basis"
+      ],
+      "before": {
+        "quote_family": "straight_double",
+        "close_offset": "187",
+        "last_lexical_offset": "185",
+        "source_basis": "NO_DIVINE_PARENT; ACTIVE_ADJUDICATION_OR_SPEECH_DATA"
+      },
+      "after": {
+        "quote_family": "mixed_straight_guillemet",
+        "close_offset": "193",
+        "last_lexical_offset": "191",
+        "source_basis": "V101126_TEXT_REBIND_OP-LMARY-180-01; mixed delimiter accepted by governed source correction; NO_DIVINE_PARENT; ACTIVE_ADJUDICATION_OR_SPEECH_DATA"
+      }
+    },
+    {
+      "span_id": "A-Q00563",
+      "fields": [
+        "open_offset",
+        "close_offset",
+        "first_lexical_offset",
+        "last_lexical_offset",
+        "source_basis"
+      ],
+      "before": {
+        "open_offset": "200",
+        "close_offset": "218",
+        "first_lexical_offset": "201",
+        "last_lexical_offset": "215",
+        "source_basis": "NO_DIVINE_PARENT; ACTIVE_ADJUDICATION_OR_SPEECH_DATA"
+      },
+      "after": {
+        "open_offset": "199",
+        "close_offset": "217",
+        "first_lexical_offset": "200",
+        "last_lexical_offset": "216",
+        "source_basis": "V101126_MIRROR_REBIND_OP-BEN-121-01; NO_DIVINE_PARENT; ACTIVE_ADJUDICATION_OR_SPEECH_DATA"
+      }
+    }
+  ],
+  "scanner_false_positive_adjudication": {
+    "target": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P198",
+    "reason": "Luisa narration/thought begins after the Jesus quotation closes in P197; immediate-left divine presentation must not cross this discourse boundary",
+    "action": "NO_PRESENTATION_MUTATION"
+  }
+}

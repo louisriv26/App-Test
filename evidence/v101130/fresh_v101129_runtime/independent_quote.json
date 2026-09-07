@@ -1,0 +1,502 @@
+{
+  "schema": "L24H_V101129_INDEPENDENT_QUOTE_HOST_PROBE_V1",
+  "version": "v101.129",
+  "implementation": "Independent probe; reads candidate bytes only and does not read primary v101.129 matrix outputs or the mutation ledger.",
+  "summary": {
+    "pass": 49,
+    "fail": 0,
+    "total": 49
+  },
+  "rows": [
+    {
+      "case": "release_identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "PASSION24.HOUR.08.P009_projection_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [
+          93,
+          210
+        ],
+        "expected": [
+          93,
+          210
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P009_topology_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [
+          93,
+          210
+        ],
+        "expected": [
+          93,
+          210
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P009_speech_end_forbidden_offsets_absent",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "forbidden": [
+          42,
+          140,
+          93,
+          210
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P009_speaker_runs_finite",
+      "status": "PASS",
+      "detail": [
+        {
+          "start": 14,
+          "end": 40,
+          "speaker": "JESUS"
+        },
+        {
+          "start": 112,
+          "end": 138,
+          "speaker": "JESUS"
+        }
+      ]
+    },
+    {
+      "case": "PASSION24.HOUR.08.P010_projection_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "expected": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P010_topology_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "expected": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P010_speech_end_forbidden_offsets_absent",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "forbidden": [
+          49
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P010_speaker_runs_finite",
+      "status": "PASS",
+      "detail": [
+        {
+          "start": 22,
+          "end": 47,
+          "speaker": "JESUS"
+        }
+      ]
+    },
+    {
+      "case": "PASSION24.HOUR.08.P015_projection_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [
+          145
+        ],
+        "expected": [
+          145
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P015_topology_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [
+          145
+        ],
+        "expected": [
+          145
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P015_speech_end_forbidden_offsets_absent",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "forbidden": [
+          50,
+          145
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P015_speaker_runs_finite",
+      "status": "PASS",
+      "detail": [
+        {
+          "start": 38,
+          "end": 48,
+          "speaker": "JESUS"
+        }
+      ]
+    },
+    {
+      "case": "PASSION24.HOUR.21.P020_projection_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "expected": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P020_topology_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "expected": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P020_speech_end_forbidden_offsets_absent",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "forbidden": [
+          69
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P020_speaker_runs_finite",
+      "status": "PASS",
+      "detail": [
+        {
+          "start": 44,
+          "end": 67,
+          "speaker": "JESUS"
+        },
+        {
+          "start": 84,
+          "end": 99,
+          "speaker": "JESUS"
+        }
+      ]
+    },
+    {
+      "case": "PASSION24.HOUR.21.P025_projection_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "expected": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P025_topology_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "expected": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P025_speech_end_forbidden_offsets_absent",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "forbidden": [
+          118
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P025_speaker_runs_finite",
+      "status": "PASS",
+      "detail": [
+        {
+          "start": 93,
+          "end": 116,
+          "speaker": "JESUS"
+        },
+        {
+          "start": 140,
+          "end": 155,
+          "speaker": "JESUS"
+        }
+      ]
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P043_projection_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "expected": []
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P043_topology_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "expected": []
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P043_speech_end_forbidden_offsets_absent",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "forbidden": [
+          49
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P043_speaker_runs_finite",
+      "status": "PASS",
+      "detail": [
+        {
+          "start": 0,
+          "end": 49,
+          "speaker": "JESUS"
+        }
+      ]
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P058_projection_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "expected": []
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P058_topology_exact",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "expected": []
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P058_speech_end_forbidden_offsets_absent",
+      "status": "PASS",
+      "detail": {
+        "actual": [],
+        "forbidden": [
+          49
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P058_speaker_runs_finite",
+      "status": "PASS",
+      "detail": [
+        {
+          "start": 0,
+          "end": 49,
+          "speaker": "JESUS"
+        }
+      ]
+    },
+    {
+      "case": "PASSION24.HOUR.08.P007_valid_projection_retained",
+      "status": "PASS",
+      "detail": [
+        111
+      ]
+    },
+    {
+      "case": "PASSION24.HOUR.08.P007_valid_topology_retained",
+      "status": "PASS",
+      "detail": [
+        111
+      ]
+    },
+    {
+      "case": "PASSION24.HOUR.08.P008_valid_projection_retained",
+      "status": "PASS",
+      "detail": [
+        42
+      ]
+    },
+    {
+      "case": "PASSION24.HOUR.08.P008_valid_topology_retained",
+      "status": "PASS",
+      "detail": [
+        42
+      ]
+    },
+    {
+      "case": "PASSION24.HOUR.08.P014_valid_projection_retained",
+      "status": "PASS",
+      "detail": [
+        34
+      ]
+    },
+    {
+      "case": "PASSION24.HOUR.08.P014_valid_topology_retained",
+      "status": "PASS",
+      "detail": [
+        34
+      ]
+    },
+    {
+      "case": "PASSION24.HOUR.08.P009_dom_text_conserved",
+      "status": "PASS",
+      "detail": {
+        "same": true,
+        "len": 238
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P010_dom_text_conserved",
+      "status": "PASS",
+      "detail": {
+        "same": true,
+        "len": 92
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P015_dom_text_conserved",
+      "status": "PASS",
+      "detail": {
+        "same": true,
+        "len": 755
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P020_dom_text_conserved",
+      "status": "PASS",
+      "detail": {
+        "same": true,
+        "len": 101
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P025_dom_text_conserved",
+      "status": "PASS",
+      "detail": {
+        "same": true,
+        "len": 157
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P043_dom_text_conserved",
+      "status": "PASS",
+      "detail": {
+        "same": true,
+        "len": 51
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P058_dom_text_conserved",
+      "status": "PASS",
+      "detail": {
+        "same": true,
+        "len": 51
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P009_boundary_93_visible_separation",
+      "status": "PASS",
+      "detail": {
+        "a": 92,
+        "b": 94,
+        "A": {
+          "x": 699.609375,
+          "y": 3004,
+          "h": 22,
+          "ch": "."
+        },
+        "B": {
+          "x": 0,
+          "y": 3053.390625,
+          "h": 22,
+          "ch": "T"
+        },
+        "dy": 49.390625
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P009_boundary_210_visible_separation",
+      "status": "PASS",
+      "detail": {
+        "a": 209,
+        "b": 211,
+        "A": {
+          "x": 884.515625,
+          "y": 3053.390625,
+          "h": 22,
+          "ch": "."
+        },
+        "B": {
+          "x": 0,
+          "y": 3102.78125,
+          "h": 22,
+          "ch": "Q"
+        },
+        "dy": 49.390625
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P015_boundary_145_visible_separation",
+      "status": "PASS",
+      "detail": {
+        "a": 144,
+        "b": 146,
+        "A": {
+          "x": 1106.9375,
+          "y": 3004,
+          "h": 22,
+          "ch": "."
+        },
+        "B": {
+          "x": 0,
+          "y": 3053,
+          "h": 22,
+          "ch": "E"
+        },
+        "dy": 49
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P007_valid_dom_break_present",
+      "status": "PASS",
+      "detail": {
+        "actual": 1
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P008_valid_dom_break_present",
+      "status": "PASS",
+      "detail": {
+        "actual": 1
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P014_valid_dom_break_present",
+      "status": "PASS",
+      "detail": {
+        "actual": 1
+      }
+    },
+    {
+      "case": "browser_page_errors_zero",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schema": "L24H_V101129_DEEP_FOUR_PASS_FINDINGS_V1",
+  "date": "2026-09-03",
+  "audited_package": "L24H_v101129_GITHUB_DEPLOY_INTRA_RECORD_QUOTE_HOST_SENTENCE_CONTINUITY_R1_LOCKED.zip",
+  "audited_zip_sha256": "8160f3133eb6d486c2109ea34911dfb13382c08d9f03883e2117cab90f01f6f0",
+  "pass1": {
+    "status": "PASS_FUNCTIONAL_BUILD_REPRODUCIBLE",
+    "result": "Fresh rebuild from immutable v101.128 + frozen eight-operation ledger reproduced 551/551 paths with zero byte differences."
+  },
+  "pass2": {
+    "status": "PASS_RUNTIME",
+    "fresh_results": {
+      "quote_host_syntax": "37/37",
+      "quote_host_geometry": "15/15",
+      "valid_break_controls": "6/6",
+      "projection_topology": "8/8",
+      "speaker_conservation": "8/8",
+      "rendered_text": "8/8",
+      "user_state_topology": "8/8",
+      "anchor_selection": "20/20",
+      "reperes": "9/9",
+      "mutation_detection": "8/8",
+      "independent_quote_probe": "49/49",
+      "strict_cross_record": "185/185",
+      "legacy_continuity": "215/215",
+      "meditee": "164/164",
+      "meditee_responsive": "245/245",
+      "hour24": "17/17",
+      "help": "70/70",
+      "broad_runtime": "50/50",
+      "service_worker": "15/15",
+      "presentation_exhaustive": "1990/1990",
+      "presentation_independent": "1990/1990"
+    }
+  },
+  "pass3": {
+    "status": "PASS_ACTIVE_REPORT",
+    "result": "The sole active v101.129 source report was claim-by-claim supportable."
+  },
+  "pass4": {
+    "status": "FAIL_RELEASE_ENGINEERING_METADATA",
+    "findings": [
+      {
+        "id": "F01",
+        "severity": "MEDIUM",
+        "finding": "version.json overall_release_status remained LIMITED_PASS_STATIC_PENDING_FINAL_REOPEN_AUDIT after final reopen evidence had already been executed externally.",
+        "required_repair": "Use non-staling package-local static status semantics and bind postfreeze decisions externally by exact ZIP SHA."
+      },
+      {
+        "id": "F02",
+        "severity": "MEDIUM",
+        "finding": "metadata/scope_escalation_authority.md remained a v101.127 current-root authority.",
+        "required_repair": "Archive it under explicit historical metadata and create a current successor scope authority."
+      },
+      {
+        "id": "F03",
+        "severity": "MEDIUM",
+        "finding": "metadata/full_build_overlay_manifest.json remained a v101.128 current-root build authority.",
+        "required_repair": "Archive it explicitly and regenerate a current successor overlay manifest."
+      },
+      {
+        "id": "F04",
+        "severity": "MEDIUM",
+        "finding": "Fifteen predecessor reports from v101.125-v101.129 remained in the current reports root even though only QUOTE_HOST_SENTENCE_CONTINUITY.md was declared active; several generic filenames looked current while containing v101.125 claims.",
+        "required_repair": "Move every predecessor report to explicit versioned historical namespaces and leave exactly one current report in the root."
+      }
+    ]
+  },
+  "conclusion": "v101.129 runtime/topology is sound, but package/report/metadata governance requires a release-engineering-only successor."
+}

@@ -1,0 +1,55 @@
+--- before
++++ after
+@@ -6730,11 +6730,18 @@
+   document.getElementById('progressWrap').style.display = 'none';
+   setBottomNav('espace'); buildSidebar(); updateRightContextPanel();
+ }
+-function restartTwentyFourHours() {
++function restartTwentyFourHours(options = {}) {
+   const p = getProgressSnapshot();
++  const requireComplete = !!(options && options.requireComplete === true);
++  const destination = options && options.destination === 'hour1' ? 'hour1' : 'home';
++  if (requireComplete && !p.complete) {
++    showToast('Le cycle n’est pas encore complet.');
++    refreshHourEndCycleUI();
++    return false;
++  }
+   if (!p.hasCycleState) { showToast('Votre progression est déjà à zéro'); return false; }
+-  const label = p.complete ? 'Recommencer les 24 Heures ?' : 'Réinitialiser ma progression ?';
+-  const message = `${label}\n\nSeront effacés : les statuts « Méditée », la reprise de lecture, les onglets de lecture et l’historique quotidien de méditation.\n\nVos surlignages, notes et préférences seront conservés.`;
++  const label = requireComplete || p.complete ? 'Recommencer depuis la 1re Heure ?' : 'Réinitialiser ma progression ?';
++  const message = `${label}\n\nVotre progression des 24 Heures sera remise à zéro :\n• statuts « Méditée »\n• positions de reprise\n• onglets de lecture enregistrés\n• historique quotidien de méditation\n\nVos surlignages, notes et préférences seront conservés.`;
+   if (!window.confirm(message)) return false;
+   const beforeSnapshot = buildPersonalSnapshotFromState();
+   state.readHours = new Set();
+@@ -6742,21 +6749,22 @@
+   state.hourTabs = Object.create(null);
+   state.meditationLog = [];
+   state.currentHour = null;
+-  /* v101.32 P1-04: clear the canonical resume Hour BEFORE committing. Previously saveState()
+-     ran while state.currentHour was already null, so the snapshot builder fell back to the
+-     still-present legacy key and wrote the OLD Hour into the canonical snapshot; the legacy
+-     key was then removed, so the next load mirrored the stale Hour straight back and the
+-     resume card reappeared after a reset. writeLegacySnapshotMirrors() removes the legacy
+-     key on its own when lastHour is null, so no manual removal is needed here. */
++  /* Preserve the canonical reset contract: clear the resume Hour before committing. */
+   state.lastHour = null;
+   const committed = commitDurableChange(beforeSnapshot, 'Réinitialisation de la progression');
+   if (!committed.ok) {
+     updateRightContextPanel(); buildSidebar();
++    refreshHourEndCycleUI();
+     return false;
+   }
+   try { sessionStorage.removeItem(STAGE6A_ANCHOR_STORAGE_KEY); } catch(e) {}
+-  showHome();
+-  showToast('Progression réinitialisée. Vous pouvez recommencer à la 1re Heure.');
++  if (destination === 'hour1') {
++    openHour(1, false);
++    showToast('Progression réinitialisée. Vous recommencez à la 1re Heure.');
++  } else {
++    showHome();
++    showToast('Progression réinitialisée. Vous pouvez recommencer à la 1re Heure.');
++  }
+   return true;
+ }
+ // ── End Stage 7D/R38 ─────────────────────────────────────────────────────

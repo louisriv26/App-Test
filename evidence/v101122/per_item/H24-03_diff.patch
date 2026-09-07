@@ -1,0 +1,10 @@
+--- before
++++ after
+@@ -9010,6 +9010,7 @@
+   const committed = commitDurableChange(before, wasRead ? 'Retrait de la progression' : 'Enregistrement de la progression');
+   const btn = document.getElementById('markReadBtn');
+   if (btn) { const rd = state.readHours.has(n); btn.classList.toggle('done', rd); btn.innerHTML = rd ? '<span>✓ Méditée</span>' : '<span>Méditée</span><span class="mark-btn-hint">Appuyez après avoir médité</span>'; }
++  refreshHourEndCycleUI();
+   if (committed.ok) showToast(wasRead ? 'Progression retirée' : ('✓ ' + ordinalHeure(n) + ' méditée'));
+ }
+ function toggleRead(n) { markMeditee(n); }

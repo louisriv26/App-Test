@@ -1,0 +1,76 @@
+{
+  "schema": "L24H_V101128_MUTATION_DETECTION_MATRIX_V1",
+  "summary": {
+    "pass": 8,
+    "fail": 0,
+    "total": 8
+  },
+  "rows": [
+    {
+      "mutation": "A_BREAK_TOP_TO_BOTTOM",
+      "expected_gate": "dual-control",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "ta": "true",
+        "ba": "false",
+        "bt": "Méditée\nAppuyez après avoir médité"
+      }
+    },
+    {
+      "mutation": "B_BREAK_BOTTOM_TO_TOP",
+      "expected_gate": "dual-control",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "ta": "false",
+        "ba": "true",
+        "tt": "Marquer comme méditée"
+      }
+    },
+    {
+      "mutation": "C_SECOND_STATE_AUTHORITY",
+      "expected_gate": "single-state static audit",
+      "status": "PASS",
+      "detail": {
+        "marker_present": true
+      }
+    },
+    {
+      "mutation": "D_RENDER_READER_ON_TOGGLE",
+      "expected_gate": "no-rerender static audit",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "mutation": "E_STALE_ARIA",
+      "expected_gate": "accessibility matrix",
+      "status": "PASS",
+      "detail": "false"
+    },
+    {
+      "mutation": "F_BREAK_HOUR24_REFRESH",
+      "expected_gate": "Hour24 matrix",
+      "status": "PASS",
+      "detail": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+    },
+    {
+      "mutation": "G_MOBILE_OVERFLOW",
+      "expected_gate": "responsive matrix",
+      "status": "PASS",
+      "detail": {
+        "bw": 390,
+        "iw": 390,
+        "tw": 620
+      }
+    },
+    {
+      "mutation": "H_REINTRODUCE_GLYPH_BREAK",
+      "expected_gate": "strict glyph-flow",
+      "status": "PASS",
+      "detail": {
+        "dy": 33.25
+      }
+    }
+  ]
+}

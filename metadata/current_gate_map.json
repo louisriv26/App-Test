@@ -1,0 +1,27 @@
+{
+  "version": "v101.137",
+  "build_revision": "R2",
+  "stage": "TEXTUAL_PROVENANCE_ABOUT_RECONCILIATION_R2",
+  "internal_gates": [
+    "exact R1 SHA binding",
+    "protected declarations byte-identical",
+    "CORPUS fingerprint identical",
+    "TEXT_LIBRARY identical",
+    "R1 preservation evidence identical",
+    "R2 about text present",
+    "support payload revision identity",
+    "HTML mirror identity",
+    "JS syntax",
+    "deterministic A/B freeze",
+    "exact ZIP reopen integrity"
+  ],
+  "external_open_gates": [
+    "physical iPad/iPhone/Samsung",
+    "live-origin exact-byte binding",
+    "installed PWA update v101.136 R5→v101.137 R2",
+    "installed PWA close/reopen persistence",
+    "true offline cold reopen",
+    "VoiceOver/TalkBack representative testing"
+  ],
+  "public_release": "UNAUTHORIZED"
+}

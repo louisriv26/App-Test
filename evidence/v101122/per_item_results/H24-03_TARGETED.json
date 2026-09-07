@@ -1,0 +1,34 @@
+{
+  "mode": "H24-03",
+  "rows": [
+    {
+      "check": "live_23_to_24",
+      "status": "PASS",
+      "detail": {
+        "before": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "after": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "undo": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "y1": 123,
+        "y2": 123,
+        "has24": false
+      }
+    },
+    {
+      "check": "live_24_to_23",
+      "status": "PASS",
+      "detail": {
+        "before": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "after": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "undo": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "y1": 123,
+        "y2": 123,
+        "has24": false
+      }
+    }
+  ],
+  "summary": {
+    "pass": 2,
+    "fail": 0,
+    "total": 2
+  }
+}

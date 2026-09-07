@@ -1,0 +1,37 @@
+--- before
++++ after
+@@ -6228,6 +6228,26 @@
+     : 'Après cette méditation, vous pouvez réfléchir, approfondir ou poursuivre vers l’Heure suivante.';
+   return `<div class="hour-end-actions" id="hourEndActions"><div class="hour-end-title">${title}</div><div class="hour-end-note">${note}</div><div class="hour-end-buttons"><button type="button" class="hour-end-btn" onclick="goToHourTab('reflections', 'reflectionsContent')">Réflexion et pratique</button><button type="button" class="hour-end-btn" onclick="goToHourTab('linked', 'linkedTextsContent')">Approfondir</button><button type="button" class="hour-end-btn" onclick="scrollReaderToTop()">↟ Revenir au début</button>${nextBtn}</div></div>`;
+ }
++function buildHour24CyclePanel(hour) {
++  if (Number(hour && hour.hour_number) !== 24) return '';
++  const p = getProgressSnapshot();
++  if (!p.complete) {
++    return `<div class="hour-end-actions cycle" id="hour24CyclePanel"><div class="hour-end-title">Votre parcours</div><div class="hour-end-note"><strong>${p.count}/24</strong> Heures marquées comme méditées.</div><div class="hour-end-buttons"><button type="button" class="hour-end-btn primary" onclick="showProgressView()">Voir ma progression</button><button type="button" class="hour-end-btn" onclick="showCompletedHoursView()">Revoir les Heures méditées</button></div></div>`;
++  }
++  return `<div class="hour-end-actions cycle" id="hour24CyclePanel"><div class="hour-end-title">Le cycle des 24 Heures est accompli</div><div class="hour-end-note"><strong>24/24</strong> Heures marquées comme méditées.</div><div class="hour-end-buttons"><button type="button" class="hour-end-btn primary" onclick="restartTwentyFourHours({requireComplete:true,destination:'hour1'})">↻ Recommencer depuis la 1re Heure</button><button type="button" class="hour-end-btn" onclick="showProgressView()">Voir ma progression</button><button type="button" class="hour-end-btn" onclick="showCompletedHoursView()">Revoir les Heures méditées</button></div></div>`;
++}
++function refreshHourEndCycleUI() {
++  if (state.view !== 'reader' || Number(state.currentHour) !== 24) return false;
++  const host = document.getElementById('hour24CyclePanelHost');
++  if (!host) return false;
++  const content = document.getElementById('content');
++  const y = content ? content.scrollTop : null;
++  const hour = CORPUS.hours.find(h => Number(h.hour_number) === 24);
++  host.innerHTML = buildHour24CyclePanel(hour);
++  if (content && y !== null) content.scrollTop = y;
++  return true;
++}
++
+ 
+ // ── History ──
+ let suppressScrollSaveUntil = 0;
+@@ -7084,6 +7104,7 @@
+         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+       </button>
+     </div>
++    ${Number(hour.hour_number) === 24 ? `<div id="hour24CyclePanelHost">${buildHour24CyclePanel(hour)}</div>` : ''}
+   </div>`;
+ 
+   if (scroll) resetContentScrollAfterRender();

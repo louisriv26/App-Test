@@ -1,0 +1,195 @@
+{
+  "schema": "L24H_V101128_HOUR24_REGRESSION_MATRIX_V1",
+  "version": "v101.133",
+  "summary": {
+    "pass": 17,
+    "fail": 0,
+    "total": 17
+  },
+  "rows": [
+    {
+      "case": "S01_Hour23_unchanged",
+      "status": "PASS",
+      "detail": {
+        "actions": true,
+        "progress": false,
+        "review": false
+      }
+    },
+    {
+      "case": "S02_0of24",
+      "status": "PASS",
+      "detail": {
+        "x": "VOTRE PARCOURS\n0/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+      }
+    },
+    {
+      "case": "S03_22of24",
+      "status": "PASS",
+      "detail": {
+        "x": "VOTRE PARCOURS\n22/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées"
+      }
+    },
+    {
+      "case": "S04_23_to_complete",
+      "status": "PASS",
+      "detail": {
+        "before": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "after": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "count": 24,
+        "has24": true
+      }
+    },
+    {
+      "case": "S05_complete_to_23",
+      "status": "PASS",
+      "detail": {
+        "before": "LE CYCLE DES 24 HEURES EST ACCOMPLI\n24/24 Heures marquées comme méditées.\n↻ Recommencer depuis la 1re Heure\nVoir ma progression\nRevoir les Heures méditées",
+        "after": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "count": 23,
+        "has24": false
+      }
+    },
+    {
+      "case": "S06_H24_marked_other_missing",
+      "status": "PASS",
+      "detail": {
+        "x": "VOTRE PARCOURS\n23/24 Heures marquées comme méditées.\nVoir ma progression\nRevoir les Heures méditées",
+        "p": {
+          "completed": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24
+          ],
+          "count": 23,
+          "pct": 96,
+          "hasCycleState": true,
+          "complete": false
+        },
+        "has24": true
+      }
+    },
+    {
+      "case": "S07_restart_cancel",
+      "status": "PASS",
+      "detail": {
+        "ret": false,
+        "same": true,
+        "count": 24,
+        "lastHour": 24
+      }
+    },
+    {
+      "case": "S08_restart_confirm",
+      "status": "PASS",
+      "detail": {
+        "ret": true,
+        "count": 0,
+        "lastParas": 0,
+        "hourTabs": 0,
+        "log": 0,
+        "currentHour": 1,
+        "lastHour": 1,
+        "view": "reader",
+        "same": true
+      }
+    },
+    {
+      "case": "S09_forced_reset_incomplete_rejected",
+      "status": "PASS",
+      "detail": {
+        "ret": false,
+        "same": true,
+        "count": 23
+      }
+    },
+    {
+      "case": "S10_reflection_action",
+      "status": "PASS",
+      "detail": {
+        "tab": "reflections",
+        "display": "block"
+      }
+    },
+    {
+      "case": "S11_linked_action",
+      "status": "PASS",
+      "detail": {
+        "tab": "linked",
+        "display": "block"
+      }
+    },
+    {
+      "case": "S12_return_to_top",
+      "status": "PASS",
+      "detail": {
+        "hour": 24,
+        "view": "reader",
+        "scroll": 0
+      }
+    },
+    {
+      "case": "S13_progress_home",
+      "status": "PASS",
+      "detail": {
+        "home": true,
+        "view": "home"
+      }
+    },
+    {
+      "case": "S14_completed_home",
+      "status": "PASS",
+      "detail": {
+        "home": true,
+        "view": "home"
+      }
+    },
+    {
+      "case": "S15_meditee_persists",
+      "status": "PASS",
+      "detail": {
+        "raw": true,
+        "has6": true,
+        "count": 1,
+        "log": true
+      }
+    },
+    {
+      "case": "S16_reset_persists",
+      "status": "PASS",
+      "detail": {
+        "ret": true,
+        "raw": true,
+        "snapRead": [],
+        "snapLast": "1",
+        "loadedCount": 0,
+        "loadedLast": 1
+      }
+    },
+    {
+      "case": "NO_PAGE_ERRORS",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

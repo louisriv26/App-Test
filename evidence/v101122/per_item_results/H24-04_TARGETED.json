@@ -1,0 +1,61 @@
+{
+  "mode": "H24-04",
+  "rows": [
+    {
+      "check": "incomplete_restart_rejected",
+      "status": "PASS",
+      "detail": {
+        "rejected": false,
+        "unchanged": true,
+        "cancelled": false,
+        "countAfterCancel": 24,
+        "ok": true,
+        "count": 0,
+        "currentHour": 1,
+        "lastHour": 1,
+        "notesSame": true,
+        "hlSame": true,
+        "view": "reader"
+      }
+    },
+    {
+      "check": "cancel_no_mutation",
+      "status": "PASS",
+      "detail": {
+        "rejected": false,
+        "unchanged": true,
+        "cancelled": false,
+        "countAfterCancel": 24,
+        "ok": true,
+        "count": 0,
+        "currentHour": 1,
+        "lastHour": 1,
+        "notesSame": true,
+        "hlSame": true,
+        "view": "reader"
+      }
+    },
+    {
+      "check": "complete_restart_hour1",
+      "status": "PASS",
+      "detail": {
+        "rejected": false,
+        "unchanged": true,
+        "cancelled": false,
+        "countAfterCancel": 24,
+        "ok": true,
+        "count": 0,
+        "currentHour": 1,
+        "lastHour": 1,
+        "notesSame": true,
+        "hlSame": true,
+        "view": "reader"
+      }
+    }
+  ],
+  "summary": {
+    "pass": 3,
+    "fail": 0,
+    "total": 3
+  }
+}

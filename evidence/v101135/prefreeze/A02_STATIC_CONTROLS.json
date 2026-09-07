@@ -1,0 +1,121 @@
+{
+  "schema": "L24H_V101135_NEGATIVE_CONTROLS_V1",
+  "summary": {
+    "pass": 10,
+    "fail": 0,
+    "total": 10
+  },
+  "rows": [
+    {
+      "check": "display_segments_declared_124",
+      "status": "PASS",
+      "detail": {
+        "speechMeta": 93,
+        "displayDeclared": 124,
+        "ldcBefore": 1473,
+        "ldcBlock": 48,
+        "ldcInline": 97,
+        "crossSpeech": 1,
+        "localTopo": 103,
+        "wrapperWidth": 0
+      }
+    },
+    {
+      "check": "cross_speech_exact_1",
+      "status": "PASS",
+      "detail": {
+        "speechMeta": 93,
+        "displayDeclared": 124,
+        "ldcBefore": 1473,
+        "ldcBlock": 48,
+        "ldcInline": 97,
+        "crossSpeech": 1,
+        "localTopo": 103,
+        "wrapperWidth": 0
+      }
+    },
+    {
+      "check": "ldc_intra_block_48",
+      "status": "PASS",
+      "detail": {
+        "speechMeta": 93,
+        "displayDeclared": 124,
+        "ldcBefore": 1473,
+        "ldcBlock": 48,
+        "ldcInline": 97,
+        "crossSpeech": 1,
+        "localTopo": 103,
+        "wrapperWidth": 0
+      }
+    },
+    {
+      "check": "ldc_intra_preserve_inline_97",
+      "status": "PASS",
+      "detail": {
+        "speechMeta": 93,
+        "displayDeclared": 124,
+        "ldcBefore": 1473,
+        "ldcBlock": 48,
+        "ldcInline": 97,
+        "crossSpeech": 1,
+        "localTopo": 103,
+        "wrapperWidth": 0
+      }
+    },
+    {
+      "check": "separator_css_zero_width",
+      "status": "PASS",
+      "detail": 0
+    },
+    {
+      "check": "static_false_positive_PASSION24.HOUR.05.P028",
+      "status": "PASS",
+      "detail": {
+        "pid": "PASSION24.HOUR.05.P028",
+        "off": 483,
+        "n": 0,
+        "seg": 4
+      }
+    },
+    {
+      "check": "static_false_positive_PASSION24.HOUR.07.P117",
+      "status": "PASS",
+      "detail": {
+        "pid": "PASSION24.HOUR.07.P117",
+        "off": 228,
+        "n": 0,
+        "seg": 2
+      }
+    },
+    {
+      "check": "static_false_positive_PASSION24.HOUR.08.P015",
+      "status": "PASS",
+      "detail": {
+        "pid": "PASSION24.HOUR.08.P015",
+        "off": null,
+        "n": 0,
+        "seg": 4
+      }
+    },
+    {
+      "check": "static_false_positive_PASSION24.HOUR.13.P005",
+      "status": "PASS",
+      "detail": {
+        "pid": "PASSION24.HOUR.13.P005",
+        "off": 147,
+        "n": 0,
+        "seg": 2
+      }
+    },
+    {
+      "check": "static_false_positive_PASSION24.HOUR.22.REF.P001",
+      "status": "PASS",
+      "detail": {
+        "pid": "PASSION24.HOUR.22.REF.P001",
+        "off": 237,
+        "n": 0,
+        "seg": 5
+      }
+    }
+  ]
+}

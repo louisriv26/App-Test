@@ -1,0 +1,96 @@
+{
+  "schema": "L24H_V101128_INHERITED_REGRESSION_MATRIX_V1",
+  "version": "v101.128",
+  "summary": {
+    "pass": 8,
+    "fail": 0,
+    "total": 8
+  },
+  "gates": [
+    {
+      "gate": "strict_glyph_flow",
+      "file": "V101128_STRICT_GLYPH_FLOW_MATRIX.json",
+      "summary": {
+        "pass": 185,
+        "fail": 0,
+        "total": 185
+      },
+      "status": "PASS"
+    },
+    {
+      "gate": "legacy_continuity",
+      "file": "V101128_LEGACY_CONTINUITY_MATRIX.json",
+      "summary": {
+        "pass": 215,
+        "fail": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "gate": "broad_runtime",
+      "file": "V101128_BROAD_RUNTIME_MATRIX.json",
+      "summary": {
+        "pass": 52,
+        "fail": 0,
+        "total": 52
+      },
+      "status": "PASS"
+    },
+    {
+      "gate": "service_worker",
+      "file": "V101128_SERVICE_WORKER_MATRIX.json",
+      "summary": {
+        "pass": 15,
+        "fail": 0,
+        "total": 15
+      },
+      "status": "PASS"
+    },
+    {
+      "gate": "independent_runtime",
+      "file": "V101128_INDEPENDENT_RUNTIME_SMOKE.json",
+      "summary": {
+        "pass": 50,
+        "fail": 0,
+        "total": 50
+      },
+      "status": "PASS"
+    },
+    {
+      "gate": "help",
+      "file": "V101128_HELP_BROWSER_MATRIX.json",
+      "summary": {
+        "profiles": 5,
+        "pass": 70,
+        "fail": 0,
+        "total": 70
+      },
+      "status": "PASS"
+    },
+    {
+      "gate": "exhaustive_presentation",
+      "file": "V101128_EXHAUSTIVE_PRESENTATION_MATRIX.json",
+      "summary": {
+        "profiles": 5,
+        "spans": 398,
+        "checks": 1990,
+        "pass": 1990,
+        "fail": 0
+      },
+      "status": "PASS"
+    },
+    {
+      "gate": "independent_presentation",
+      "file": "V101128_INDEPENDENT_PRESENTATION_MATRIX.json",
+      "summary": {
+        "profiles": 5,
+        "spans": 398,
+        "checks": 1990,
+        "pass": 1990,
+        "fail": 0,
+        "cross_record_spans": 257
+      },
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "version": "v101.134",
+  "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1",
+  "summary": {
+    "pass": 13,
+    "fail": 0,
+    "total": 13
+  },
+  "rows": [
+    {
+      "check": "current_version_present",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "current_stage_present",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no_unqualified_v101122_current",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no_pending_current_claim",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no_full_pass_overclaim",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "external_boundary_not_overclaimed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no_mnt_data_current_dependency",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "no_current_tool_inventory_omission",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "obsolete_1856_reconstruction_logic_absent",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "correct_1748_reconstruction_logic_present",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "historical_missing_artifact_not_fabricated",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "m1_historical_manifest_preserved",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "all_current_gate_harnesses_mapped",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "schema": "L24H_V101128_UNAUTHORISED_DELTA_AUDIT_V1",
+  "version": "v101.128",
+  "changed_or_added": 27,
+  "removed": [],
+  "unexplained": [],
+  "status": "PASS",
+  "rows": [
+    {
+      "path": "version.json",
+      "change": "CHANGED",
+      "classification": "AUTHORISED_RUNTIME_OR_RELEASE"
+    },
+    {
+      "path": "index.html",
+      "change": "CHANGED",
+      "classification": "AUTHORISED_RUNTIME_OR_RELEASE"
+    },
+    {
+      "path": "luisa_24_heures.html",
+      "change": "CHANGED",
+      "classification": "AUTHORISED_RUNTIME_OR_RELEASE"
+    },
+    {
+      "path": "sw.js",
+      "change": "CHANGED",
+      "classification": "AUTHORISED_RUNTIME_OR_RELEASE"
+    },
+    {
+      "path": "manifest.json",
+      "change": "CHANGED",
+      "classification": "AUTHORISED_RUNTIME_OR_RELEASE"
+    },
+    {
+      "path": "README.md",
+      "change": "CHANGED",
+      "classification": "AUTHORISED_RUNTIME_OR_RELEASE"
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "change": "CHANGED",
+      "classification": "AUTHORISED_RELEASE_METADATA"
+    },
+    {
+      "path": "metadata/active_report_inventory.json",
+      "change": "CHANGED",
+      "classification": "AUTHORISED_RELEASE_METADATA"
+    },
+    {
+      "path": "metadata/release_evidence_lifecycle.json",
+      "change": "CHANGED",
+      "classification": "AUTHORISED_RELEASE_METADATA"
+    },
+    {
+      "path": "metadata/build_provenance.json",
+      "change": "CHANGED",
+      "classification": "AUTHORISED_RELEASE_METADATA"
+    },
+    {
+      "path": "metadata/current_evidence_lineage.json",
+      "change": "CHANGED",
+      "classification": "AUTHORISED_RELEASE_METADATA"
+    },
+    {
+      "path": "reports/MEDITEE_RECOVERY_ACCESS.md",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_REPORT"
+    },
+    {
+      "path": "scripts/run_v101128_independent_runtime_smoke.py",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_TOOLING"
+    },
+    {
+      "path": "scripts/run_v101128_help_browser_matrix.py",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_TOOLING"
+    },
+    {
+      "path": "scripts/run_v101128_legacy_continuity_matrix.py",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_TOOLING"
+    },
+    {
+      "path": "scripts/run_v101128_hour24_regression_matrix.py",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_TOOLING"
+    },
+    {
+      "path": "scripts/run_v101128_meditee_core_matrix.py",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_TOOLING"
+    },
+    {
+      "path": "scripts/run_v101128_meditee_ux_matrix.py",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_TOOLING"
+    },
+    {
+      "path": "scripts/run_v101128_mutation_tests.py",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_TOOLING"
+    },
+    {
+      "path": "scripts/run_v101128_static_scope_audit.py",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_TOOLING"
+    },
+    {
+      "path": "scripts/build_v101128_meditee_recovery_access.py",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_TOOLING"
+    },
+    {
+      "path": "scripts/run_v101128_meditee_responsive_matrix.py",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_TOOLING"
+    },
+    {
+      "path": "evidence/v101128/V101128_MUTATION_AUTHORITY.json",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_EVIDENCE"
+    },
+    {
+      "path": "evidence/v101128/V101128_PROTECTED_DECLARATION_HASHES.json",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_EVIDENCE"
+    },
+    {
+      "path": "evidence/v101128/V101128_BASELINE_BINDING.json",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_EVIDENCE"
+    },
+    {
+      "path": "evidence/v101128/V101128_IMPLEMENTATION_DELTA.json",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_EVIDENCE"
+    },
+    {
+      "path": "evidence/v101128/V101128_EXISTING_MEDITEE_ARCHITECTURE_REPORT.md",
+      "change": "ADDED",
+      "classification": "AUTHORISED_CURRENT_EVIDENCE"
+    }
+  ]
+}

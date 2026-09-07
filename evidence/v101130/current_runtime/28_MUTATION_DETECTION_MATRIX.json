@@ -1,0 +1,63 @@
+{
+  "schema": "L24H_V101130_MUTATION_DETECTION_V1",
+  "version": "v101.130",
+  "summary": {
+    "pass": 8,
+    "fail": 0,
+    "total": 8
+  },
+  "rows": [
+    {
+      "case": "MUT-F_speaker_data_change_detected",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "MUT-G_canonical_text_change_detected",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "case": "MUT-A_reintroduce_bad_quote_close",
+      "status": "PASS",
+      "detail": [
+        "projection_universe"
+      ]
+    },
+    {
+      "case": "MUT-B_remove_valid_break",
+      "status": "PASS",
+      "detail": [
+        "projection_universe"
+      ]
+    },
+    {
+      "case": "MUT-C_missing_relocated_break",
+      "status": "PASS",
+      "detail": [
+        "projection_universe"
+      ]
+    },
+    {
+      "case": "MUT-D_wrong_relocated_offset",
+      "status": "PASS",
+      "detail": [
+        "projection_universe"
+      ]
+    },
+    {
+      "case": "MUT-E_topology_stale",
+      "status": "PASS",
+      "detail": [
+        "topology_universe"
+      ]
+    },
+    {
+      "case": "MUT-H_user_state_topology_change_detected",
+      "status": "PASS",
+      "detail": [
+        "topology_universe"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "schema": "L24H_V101119_MUTATION_TESTS_V1",
+  "summary": {
+    "tests": 5,
+    "detected": 5,
+    "missed": 0,
+    "status": "PASS"
+  },
+  "tests": [
+    {
+      "test": "TRUNCATE_DIVINE_RUN_BEFORE_CLOSER",
+      "span_id": "A-Q00374",
+      "target": "PASSION24.TEXT.RELATED_HOUR_15.BODY.P042",
+      "detected": true,
+      "detector_output": [
+        "closer_speaker_OUTSIDE_expected_JESUS"
+      ]
+    },
+    {
+      "test": "OMIT_P090_NESTED_GENERIC_SOUL_FROM_PARENT_PRESENTATION",
+      "span_id": "A-Q00550",
+      "target": "PASSION24.TEXT.RELATED_HOUR_22.BODY.P090",
+      "detected": true,
+      "detector_output": [
+        "opener_speaker_OUTSIDE_expected_JESUS",
+        "first_speaker_OUTSIDE_expected_JESUS",
+        "last_speaker_OUTSIDE_expected_JESUS",
+        "closer_speaker_OUTSIDE_expected_JESUS"
+      ]
+    },
+    {
+      "test": "FALSE_DIVINE_STYLE_NARRATOR_WRAPPER_DELIMITERS",
+      "span_id": "A-Q00055",
+      "target": "PASSION24.HOUR.08.P010",
+      "detected": true,
+      "detector_output": [
+        "top_level_delimiter_overcoloured"
+      ]
+    },
+    {
+      "test": "HIDE_MEANINGFUL_P053_OPENING_DELIMITER",
+      "span_id": "A-Q00326",
+      "target": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P053",
+      "detected": true,
+      "detector_output": [
+        "opener_hidden"
+      ]
+    },
+    {
+      "test": "LOSE_CROSS_RECORD_PARENT_CONTINUITY",
+      "span_id": "A-Q00363",
+      "target": "PASSION24.TEXT.RELATED_HOUR_13.BODY.P033",
+      "detected": true,
+      "detector_output": [
+        "closer_speaker_OUTSIDE_expected_JESUS"
+      ]
+    }
+  ]
+}

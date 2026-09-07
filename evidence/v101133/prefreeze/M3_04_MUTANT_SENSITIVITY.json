@@ -1,0 +1,45 @@
+{
+  "schema": "L24H_V101133_MUTANT_SENSITIVITY_V1",
+  "summary": {
+    "pass": 5,
+    "fail": 0,
+    "total": 5
+  },
+  "rows": [
+    {
+      "check": "mutant_A_speech_path_detected",
+      "status": "PASS",
+      "detail": {
+        "failures": 78
+      }
+    },
+    {
+      "check": "mutant_B_ldc_path_detected",
+      "status": "PASS",
+      "detail": {
+        "failures": 4
+      }
+    },
+    {
+      "check": "mutant_C_css_detected",
+      "status": "PASS",
+      "detail": {
+        "failures": 82
+      }
+    },
+    {
+      "check": "mutant_D_source_deletion_detected",
+      "status": "PASS",
+      "detail": {
+        "text_mismatches": 10
+      }
+    },
+    {
+      "check": "mutant_E_aria_hidden_detected",
+      "status": "PASS",
+      "detail": {
+        "aria_hidden": 10
+      }
+    }
+  ]
+}
