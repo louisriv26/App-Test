@@ -1,7 +1,5 @@
-const VERSION = 'ldc-v2.19.80-R1B-offline-retention-r1';
+const VERSION = 'ldc-v2.19.84-R1B-stage8-r3';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
-const SHELL_CACHE = `${CACHE_PREFIX}shell-v2.19.83-R1B-stage7-r1`;
-const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-v2.19.83-R1B-stage7-r1`;
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
 const LEGACY_OFFLINE_CACHE_PREFIX = `${CACHE_PREFIX}offline-v`;
@@ -11,6 +9,9 @@ function scopeFingerprint(scope) {
   return (h>>>0).toString(16).padStart(8,'0');
 }
 const OFFLINE_SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
+const SCOPE_CACHE_PREFIX = `${CACHE_PREFIX}${OFFLINE_SCOPE_FINGERPRINT}-`;
+const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.84-R1B-stage8-r3`;
+const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.84-R1B-stage8-r3`;
 const OFFLINE_CACHE = `${CACHE_PREFIX}offline-persistent-v3-${OFFLINE_SCOPE_FINGERPRINT}`;
 const OFFLINE_MANIFEST_URL = './offline_manifest.json';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v3';
@@ -32,8 +33,8 @@ let offlineJob = null;
 const FILE_TIMEOUT_MS = 30000;
 const DOWNLOAD_CONCURRENCY = 3;
 
-function isOwnedCacheName(name) {
-  return name.startsWith(CACHE_PREFIX) || /^ldc-v\d/.test(name);
+function isCurrentScopeShellRuntimeCacheName(name) {
+  return name.startsWith(SCOPE_CACHE_PREFIX);
 }
 function isOfflineFamilyCacheName(name) { return name.startsWith(`${CACHE_PREFIX}offline-`); }
 function isLegacyOfflineCacheName(name) { return name.startsWith(LEGACY_OFFLINE_CACHE_PREFIX); }
@@ -71,7 +72,7 @@ async function loadOfflineManifest() {
   if(!r){r=await fetch(OFFLINE_MANIFEST_URL,{cache:'reload'});if(r&&r.ok)await shell.put(OFFLINE_MANIFEST_URL,r.clone());}
   if(!r||!r.ok)throw new Error('offline manifest indisponible');
   const m=await r.json();
-  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.83-R1B'||m.storage_schema!==OFFLINE_STORAGE_SCHEMA)throw new Error('offline manifest incompatible');
+  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.84-R1B'||m.storage_schema!==OFFLINE_STORAGE_SCHEMA)throw new Error('offline manifest incompatible');
   if(m.content_binding_schema!==OFFLINE_CONTENT_BINDING_SCHEMA||m.content_binding_sha256!==OFFLINE_CONTENT_BINDING)throw new Error('offline manifest binding incompatible');
   if(m.corpus_manifest_sha256!==OFFLINE_CORPUS_MANIFEST_SHA256)throw new Error('offline corpus manifest binding incompatible');
   const unique=[...new Set((m.assets||[]).map(a=>a.path))];
@@ -308,7 +309,7 @@ self.addEventListener('activate',e=>{e.waitUntil((async()=>{
   const keys=await caches.keys();
   // Offline corpus caches are persistent data. Preserve the offline family across
   // shell updates and across sibling service-worker scopes on the same origin.
-  await Promise.all(keys.filter(k=>isOwnedCacheName(k)&&!keep.has(k)&&!isOfflineFamilyCacheName(k)).map(k=>caches.delete(k)));
+  await Promise.all(keys.filter(k=>isCurrentScopeShellRuntimeCacheName(k)&&!keep.has(k)).map(k=>caches.delete(k)));
   await self.clients.claim();
 })());});
 
