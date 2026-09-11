@@ -1,4 +1,4 @@
-# Real-device QA checklist — v101.143 R1 / CONC-24H-01
+# Real-device QA checklist — v101.144 R1 / Stage 7
 
 Use only the exact SHA-bound frozen candidate after external reopened-package certification.
 
@@ -32,3 +32,13 @@ Use only the exact SHA-bound frozen candidate after external reopened-package ce
 - Installed-PWA update from deployed v101.142 R1 and three close/reopen cycles.
 - True offline cold reopen.
 - Representative VoiceOver/TalkBack.
+
+## Stage 7 additions
+- Both Search surfaces expose an explicit accessible name.
+- Every primary route listed in the Stage-7 ledger exposes exactly one route-level H1.
+- Search counts/ranking are unchanged; 61/120/121-result scenarios disclose 60/+60 correctly; Back restores visible limit, scroll and focus.
+- Manual update with an unsaved note does not navigate and returns focus to the note.
+- Manual update does not navigate before controller transition; timeout/no transition remains in-app with retry/close-reopen guidance.
+- Light/dark targeted contrast pairs are >= 4.5:1.
+- In a browser with `color-mix()` disabled/unsupported, governed Help/hour-end/progress-focus affordances remain visible.
+- Forced-colors/high-contrast is test-only; record actual behavior, do not mutate CSS without supplemental authority.

@@ -1,9 +1,9 @@
-# v101.143 R1 — CONC-24H-01 frozen successor candidate
+# v101.144 R1 — Stage 7 accessibility / reliability engineering candidate
 
-Current stage: `PERSONAL_STATE_CONCURRENCY_SUCCESSOR_R1`. Immediate immutable predecessor: `v101.142 R1` SHA-256 `5e94f3cbdff075b43dfb3c6278d30a81c94df2ccdebcabe942c5fa75b537b2c0`. This successor is limited to the confirmed 24H multi-context personal-state committed-change-loss repair. Full support floor approved by the owner: iOS/iPadOS 15.4+ and equivalent modern Android/Samsung; older engines are best-effort.
+Immutable predecessor: **v101.143 R1** SHA-256 `3eb86f5d9f1686a8851664020be4060c85dbf20228351d1d1c442e583c8ece5c`. Governing owner-authorized Stage-7 proposal SHA-256 `42126e52c63d114d1b3a42bdf2bcac8f19e88dc70417fd95accfe33f809312a6`.
 
-Repair invariant: serialize app-specific personal writes, read fresh durable state inside serialization, merge only the initiating operation, preserve newer same-record durable state on conflict, retain verified persistence/rollback and legacy mirrors, reconcile peer UI, and serialize import/startup/position write paths.
+Authorized functional delta only: accessible names for both Search renderings; route-level primary `h1` structure at the 11 enumerated views; Search progressive disclosure by 60 with exact matching/ranking/count preserved and history/scroll/focus restoration; guarded update navigation only after proven Service Worker controller transition; targeted contrast repairs; and governed `color-mix()` fallbacks. `luisa_24_heures.html` is byte-identical to `index.html`.
 
-Protected: corpus text, speakers, stable IDs/order, Search semantics/cap, typography/contrast/Repères semantics, PWA identity-critical fields, backup schema, Hub architecture and unrelated Service Worker behavior.
+Protected and unchanged: devotional/canonical corpus, Hour-23 source-critical material, stable IDs/order, speakers/display/flow authority, Search index/matching/ranking, personal-state meaning and Stage-1 concurrency architecture, backup schema, Hub architecture, and unrelated Service Worker strategy.
 
-This ZIP does not self-certify final bytes. Device candidacy requires an external SHA-bound reopened-package receipt. Physical/live-origin/PWA/offline/screen-reader gates remain `NOT TESTED`.
+Package-local QA does not close physical iPhone/iPad/Samsung, real VoiceOver/TalkBack, live-origin exact-SHA, installed-PWA update, true cold-offline or mixed-version gates.
