@@ -1,30 +1,28 @@
 {
-  "version": "v101.144",
+  "version": "v101.143",
   "build_revision": "R1",
-  "stage": "STAGE7_ACCESSIBILITY_RELIABILITY_WAVE_R1",
+  "stage": "PERSONAL_STATE_CONCURRENCY_SUCCESSOR_R1",
   "active_documents": [
     "README.md",
     "REAL_DEVICE_QA_CHECKLIST.md",
     "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
-    "reports/V101144_R1_STAGE7_ACCESSIBILITY_RELIABILITY_REPORT.md",
+    "reports/V101143_R1_CONC_24H_01_PERSONAL_STATE_CONCURRENCY_SUCCESSOR.md",
     "version.json",
     "metadata/build_provenance.json",
     "metadata/current_evidence_lineage.json",
     "metadata/current_gate_map.json",
     "metadata/release_evidence_lifecycle.json",
+    "metadata/scope_escalation_authority.md",
     "metadata/current_tooling_inventory.json"
   ],
   "active_test_artifacts_external": [
-    "Collection Luisa Stage-7 focused/inherited QA pack",
-    "Stage-7 deliberate-mutant summary",
-    "Stage-7 forced-colors TEST-ONLY receipt",
-    "per-app four-pass audit",
-    "deterministic A/B + clean-replay receipt",
-    "fresh exact-ZIP hostile-reopen receipt",
-    "cumulative Master handback"
+    "CONC-24H-01 per-release QA Evidence Pack bound to final successor SHA",
+    "§54A handback package to Master Governance"
   ],
-  "inherited_evidence_boundary": "v101.143 R1 CONC-24H-01 and all earlier fixed points remain inherited; predecessor/historical reports cannot override the Stage-7 current documents.",
+  "inactive_predecessor_evidence_retained": [
+    "reports/V101142_R1_NATIVE_VISIBLE_FLOW_TOPOLOGY_SUCCESSOR.md",
+    "evidence/v101142_r1/"
+  ],
   "historical_reports_root": "reports/historical/",
-  "stage7_authorization_proposal_sha256": "42126e52c63d114d1b3a42bdf2bcac8f19e88dc70417fd95accfe33f809312a6",
-  "stage7_predecessor_zip_sha256": "3eb86f5d9f1686a8851664020be4060c85dbf20228351d1d1c442e583c8ece5c"
+  "rule": "Only listed active documents are current. Existing v101.142 evidence remains immutable predecessor evidence, not current successor evidence."
 }

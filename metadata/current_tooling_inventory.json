@@ -1,10 +1,8 @@
 {
-  "version": "v101.144",
+  "version": "v101.143",
   "build_revision": "R1",
-  "stage": "STAGE7_ACCESSIBILITY_RELIABILITY_WAVE_R1",
-  "current_builder": "EXTERNAL_STAGE7_WAVE_QA_PACK/build_24h_stage7.py",
-  "builder_contract": "Exact immutable v101.143 R1 predecessor + frozen Stage-7 proposal SHA; deterministic output; protected-domain parity; fail closed on any unlisted mutation.",
-  "qa_evidence": "EXTERNAL_STAGE7_WAVE_QA_PACK: focused/inherited QA, deliberate mutants, forced-colors slice, four-pass audit, deterministic replay and hostile-reopen receipt.",
-  "stage7_authorization_proposal_sha256": "42126e52c63d114d1b3a42bdf2bcac8f19e88dc70417fd95accfe33f809312a6",
-  "stage7_predecessor_zip_sha256": "3eb86f5d9f1686a8851664020be4060c85dbf20228351d1d1c442e583c8ece5c"
+  "stage": "PERSONAL_STATE_CONCURRENCY_SUCCESSOR_R1",
+  "current_builder": "scripts/build_v101143_r1_conc24h01.py",
+  "builder_contract": "Exact SHA-bound v101.142 R1 predecessor + exact CONC-24H-01 runtime patch SHA; protected-domain parity; deterministic manifests/freeze; no unrelated runtime mutation.",
+  "qa_evidence": "External SHA-bound CONC-24H-01 per-release Evidence Pack and §54A handback."
 }

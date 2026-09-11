@@ -1,32 +1,30 @@
 {
-  "version": "v101.144",
+  "version": "v101.143",
   "build_revision": "R1",
-  "stage": "STAGE7_ACCESSIBILITY_RELIABILITY_WAVE_R1",
+  "stage": "PERSONAL_STATE_CONCURRENCY_SUCCESSOR_R1",
   "internal_gates": [
-    "exact v101.143 R1 predecessor SHA binding",
-    "exact frozen Stage-7 proposal SHA binding",
-    "authorized mutation-universe verifier",
-    "11 route-level h1 states + Search accessible names",
-    "Search 60/+60 disclosure and history/focus/scroll state model",
-    "controller-transition-before-navigation update state model",
-    "full targeted light/dark contrast remeasurement",
-    "governed color-mix fallback negative control",
-    "inherited CONC-24H-01/corpus/Search/speaker/topology fixed points",
-    "forced-colors TEST-ONLY wave slice",
-    "deliberate mutants",
-    "deterministic A/B and clean replay",
+    "exact v101.142 R1 SHA binding",
+    "v101.141->v101.142 personal-write equivalence before rebase",
+    "complete personal-write-path inventory",
+    "operation-level concurrency merge/conflict semantics",
+    "defect-sensitive stale-whole-snapshot mutant",
+    "exact persistence failure/rollback semantics",
+    "import confirmation-race protection",
+    "future-schema guard inside lock",
+    "legacy mirror parity",
+    "rapid/conflicting reading-position persistence",
+    "protected corpus/Search/speaker/topology/schema/PWA-identity parity",
+    "deterministic package rebuild",
     "four-pass adversarial audit",
-    "fresh exact-ZIP hostile reopen"
+    "fresh exact-ZIP reopened-package audit"
   ],
   "external_open_gates": [
-    "physical iPad/iPhone/Samsung",
+    "physical iPad/iPhone/Samsung multi-context concurrency",
     "live-origin exact-byte binding",
-    "installed-PWA update",
+    "installed PWA update from deployed v101.142 R1 to v101.143 R1",
+    "installed PWA close/reopen persistence",
     "true offline cold reopen",
     "VoiceOver/TalkBack representative testing"
   ],
-  "forced_colors": "TEST_ONLY__PASS_EMULATED_CHROMIUM__ZERO_MUTATION",
-  "public_release": "UNAUTHORIZED",
-  "stage7_authorization_proposal_sha256": "42126e52c63d114d1b3a42bdf2bcac8f19e88dc70417fd95accfe33f809312a6",
-  "stage7_predecessor_zip_sha256": "3eb86f5d9f1686a8851664020be4060c85dbf20228351d1d1c442e583c8ece5c"
+  "public_release": "UNAUTHORIZED"
 }

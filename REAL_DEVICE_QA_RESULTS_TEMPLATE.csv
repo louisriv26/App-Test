@@ -8,6 +8,6 @@ CONC-POSITION-RAPID,iPhone;iPad;Samsung,YES,Rapid position writes do not starve 
 CONC-POSITION-CONFLICT,iPhone;iPad;Samsung,YES,Same-Hour stale pointer does not overwrite newer durable pointer,,,
 CONC-IMPORT-RACE,iPhone;iPad;Samsung,YES,Import aborts if durable personal state changed after confirmation baseline,,,
 STATE-UPDATE,iPhone;iPad;Samsung,YES,All existing personal-state domains survive installed-PWA update and reopen,,,
-PWA-UPDATE,iPhone;iPad;Samsung,YES,Update reaches exact SHA-bound v101.144 R1 and survives three close/reopen cycles,,,
+PWA-UPDATE,iPhone;iPad;Samsung,YES,Update reaches exact SHA-bound v101.143 R1 and survives three close/reopen cycles,,,
 OFFLINE-01,iPhone;iPad;Samsung,YES,True offline cold reopen succeeds after update,,,
 A11Y-01,iPhone;iPad;Samsung,YES,Representative VoiceOver or TalkBack navigation remains usable,,,
