@@ -1,0 +1,148 @@
+{
+  "schema": "L24H_V101134_GLOBAL_RAW_TEXT_COMPLETENESS_GATE_V1",
+  "version": "v101.134",
+  "method": "Reconstruct every raw CORPUS/TEXT_LIBRARY record independently of speech metadata, compare all 4,613 record texts to the M1 frozen raw universe, then assert approved divine-speech coverage. Any raw text insertion/change invalidates the gate before metadata consistency is considered.",
+  "summary": {
+    "pass": 14,
+    "fail": 0,
+    "total": 14
+  },
+  "postmutation_unmapped_quote_records": 202,
+  "raw_aggregate_sha256": "d697fa66b639e5dc2b534a63afa90c9625f32dbc3757099cfa3dd747f32d1e0f",
+  "rows": [
+    {
+      "check": "all_text_record_count_4613",
+      "status": "PASS",
+      "detail": 4613
+    },
+    {
+      "check": "raw_record_identity_set_exact",
+      "status": "PASS",
+      "detail": {
+        "current": 4613,
+        "frozen": 4613,
+        "added": [],
+        "missing": []
+      }
+    },
+    {
+      "check": "raw_text_all_4613_records_byte_character_identical",
+      "status": "PASS",
+      "detail": {
+        "diff_count": 0,
+        "sample": []
+      }
+    },
+    {
+      "check": "quote_bearing_record_count_807",
+      "status": "PASS",
+      "detail": 807
+    },
+    {
+      "check": "postmutation_quote_bearing_unmapped_count_202",
+      "status": "PASS",
+      "detail": 202
+    },
+    {
+      "check": "M1C002_nested_JESUS_semantic_covered",
+      "status": "PASS",
+      "detail": [
+        {
+          "speaker": "JESUS",
+          "start": 0,
+          "end": 38
+        },
+        {
+          "speaker": "JESUS",
+          "start": 40,
+          "end": 98
+        }
+      ]
+    },
+    {
+      "check": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P068_FATHER_semantic_covered",
+      "status": "PASS",
+      "detail": [
+        {
+          "speaker": "FATHER",
+          "start": 0,
+          "end": 36
+        }
+      ]
+    },
+    {
+      "check": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P069_FATHER_semantic_covered",
+      "status": "PASS",
+      "detail": [
+        {
+          "speaker": "FATHER",
+          "start": 0,
+          "end": 418
+        }
+      ]
+    },
+    {
+      "check": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P070_FATHER_semantic_covered",
+      "status": "PASS",
+      "detail": [
+        {
+          "speaker": "FATHER",
+          "start": 0,
+          "end": 259
+        }
+      ]
+    },
+    {
+      "check": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P071_FATHER_semantic_covered",
+      "status": "PASS",
+      "detail": [
+        {
+          "speaker": "FATHER",
+          "start": 0,
+          "end": 117
+        }
+      ]
+    },
+    {
+      "check": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P072_FATHER_semantic_covered",
+      "status": "PASS",
+      "detail": [
+        {
+          "speaker": "FATHER",
+          "start": 0,
+          "end": 130
+        }
+      ]
+    },
+    {
+      "check": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P073_FATHER_semantic_covered",
+      "status": "PASS",
+      "detail": [
+        {
+          "speaker": "FATHER",
+          "start": 0,
+          "end": 259
+        }
+      ]
+    },
+    {
+      "check": "M1C004_nested_JESUS_semantic_covered",
+      "status": "PASS",
+      "detail": [
+        {
+          "speaker": "JESUS",
+          "start": 27,
+          "end": 55
+        }
+      ]
+    },
+    {
+      "check": "raw_text_aggregate_hash_equals_frozen_M1_universe",
+      "status": "PASS",
+      "detail": {
+        "current": "d697fa66b639e5dc2b534a63afa90c9625f32dbc3757099cfa3dd747f32d1e0f",
+        "frozen": "d697fa66b639e5dc2b534a63afa90c9625f32dbc3757099cfa3dd747f32d1e0f"
+      }
+    }
+  ]
+}

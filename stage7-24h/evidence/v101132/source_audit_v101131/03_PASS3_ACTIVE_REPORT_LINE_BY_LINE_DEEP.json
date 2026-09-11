@@ -1,0 +1,70 @@
+{
+  "schema": "L24H_V101131_DEEP_PASS3_V1",
+  "summary": {
+    "pass": 9,
+    "fail": 1,
+    "total": 10
+  },
+  "rows": [
+    {
+      "line": 1,
+      "claim": "# v101.131 Global Raw-Quote / Host-Sentence Successor",
+      "status": "PASS",
+      "evidence": "report identity"
+    },
+    {
+      "line": 3,
+      "claim": "- Immutable predecessor: `v101.130` / `53d542f3514b5b2b233fe513219886020a6d178e89f8d79d254bd6979c784327` / 613 members.",
+      "status": "PASS",
+      "evidence": "baseline zip verified"
+    },
+    {
+      "line": 4,
+      "claim": "- Approved mutation ledger SHA-256: `d40aea7f9fbf7f237802efbf2d7cf0219ec0dd7c3fb1d6397fb3dbf3b214bca8`.",
+      "status": "PASS",
+      "evidence": "approved ledger hash"
+    },
+    {
+      "line": 5,
+      "claim": "- User-approved operations: **4** (`M1C001`–`M1C004`).",
+      "status": "PASS",
+      "evidence": "approved authority"
+    },
+    {
+      "line": 6,
+      "claim": "- Canonical text mutations: **0**. Character-offset migrations: **0**.",
+      "status": "PASS",
+      "evidence": "mutation integrity/raw authorities"
+    },
+    {
+      "line": 7,
+      "claim": "- Implicated mutable authorities only: `SPEECH_DATA`, `SPEECH_PRESENTATION_ADJUDICATIONS`, `SPEECH_END_VISUAL_BREAKS`, `SPEECH_PRESENTATION_PROJECTION`, `VISIBLE_PARAGRAPH_TOPOLOGY`.",
+      "status": "PASS",
+      "evidence": "baseline diff/mutation integrity"
+    },
+    {
+      "line": 8,
+      "claim": "- Raw corpus/library text, paragraph IDs/order, search strings, continuity groups, notes/highlights, storage schema, snapshot schema, Méditée semantics and the eight v101.129 controls are protected.",
+      "status": "PASS",
+      "evidence": "protected-authority reruns all pass"
+    },
+    {
+      "line": 9,
+      "claim": "- Permanent v101.131 raw-text completeness and mutation-detection gates are included in current tooling/evidence.",
+      "status": "FAIL",
+      "evidence": "scripts are embedded, but required frozen 02_ALL_TEXT_RECORD_UNIVERSE.csv is absent; gates are not self-contained/re-runnable from package evidence"
+    },
+    {
+      "line": 10,
+      "claim": "- Current prefreeze evidence closes **14 gate families / 5,033 assertions / 0 FAIL**, including two independent **2,000-check** presentation matrices on the reconciled 400-span successor ledger.",
+      "status": "PASS",
+      "evidence": "PREFREEZE_GATE_SUMMARY: 14 families / 5033 / 0 fail; 400 ledger; 2000+2000"
+    },
+    {
+      "line": 11,
+      "claim": "- Physical-device/PWA/offline/screen-reader/live-origin validation remains external.",
+      "status": "PASS",
+      "evidence": "version.json and final decision lock explicitly leave external gates open"
+    }
+  ]
+}

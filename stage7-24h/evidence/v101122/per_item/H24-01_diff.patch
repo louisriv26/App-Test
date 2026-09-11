@@ -1,0 +1,22 @@
+--- before
++++ after
+@@ -6219,13 +6219,14 @@
+ 
+ function buildHourEndActions(hour, next) {
+   const isTerminal = Number(hour && hour.hour_number) === 24;
+-  if (isTerminal) {
+-    return `<div class="hour-end-actions cycle" id="hourEndActions"><div class="hour-end-title">Le cycle des 24 Heures</div><div class="hour-end-note">Vous avez atteint la 24e Heure. Vous pouvez revoir votre parcours ou recommencer un nouveau cycle de prière.</div><div class="hour-end-buttons"><button type="button" class="hour-end-btn primary" onclick="restartTwentyFourHours()">↻ Recommencer les 24 Heures</button><button type="button" class="hour-end-btn" onclick="showHome()">⌂ Revenir à l’Accueil</button><button type="button" class="hour-end-btn" onclick="showProgressView()">Voir ma progression</button><button type="button" class="hour-end-btn" onclick="showCompletedHoursView()">Revoir les Heures terminées</button></div></div>`;
+-  }
+-  const nextHour = next;
++  const nextHour = isTerminal ? null : next;
+   const nextLabel = nextHour ? ('Prier la ' + ordinalHeure(nextHour.hour_number)) : '';
+   const nextBtn = nextHour ? `<button type="button" class="hour-end-btn primary" onclick="openHour(${nextHour.hour_number})">${escHtml(nextLabel)}</button>` : '';
+-  return `<div class="hour-end-actions" id="hourEndActions"><div class="hour-end-title">Continuer le chemin des Heures</div><div class="hour-end-note">Après cette méditation, vous pouvez réfléchir, approfondir ou poursuivre vers l’Heure suivante.</div><div class="hour-end-buttons"><button type="button" class="hour-end-btn" onclick="goToHourTab('reflections', 'reflectionsContent')">Réflexion et pratique</button><button type="button" class="hour-end-btn" onclick="goToHourTab('linked', 'linkedTextsContent')">Approfondir</button><button type="button" class="hour-end-btn" onclick="scrollReaderToTop()">↟ Revenir au début</button>${nextBtn}</div></div>`;
++  const title = isTerminal ? 'Après cette Heure' : 'Continuer le chemin des Heures';
++  const note = isTerminal
++    ? 'Vous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.'
++    : 'Après cette méditation, vous pouvez réfléchir, approfondir ou poursuivre vers l’Heure suivante.';
++  return `<div class="hour-end-actions" id="hourEndActions"><div class="hour-end-title">${title}</div><div class="hour-end-note">${note}</div><div class="hour-end-buttons"><button type="button" class="hour-end-btn" onclick="goToHourTab('reflections', 'reflectionsContent')">Réflexion et pratique</button><button type="button" class="hour-end-btn" onclick="goToHourTab('linked', 'linkedTextsContent')">Approfondir</button><button type="button" class="hour-end-btn" onclick="scrollReaderToTop()">↟ Revenir au début</button>${nextBtn}</div></div>`;
+ }
+ 
+ // ── History ──

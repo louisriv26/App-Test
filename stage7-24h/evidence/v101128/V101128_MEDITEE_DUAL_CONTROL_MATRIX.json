@@ -1,0 +1,3234 @@
+{
+  "schema": "L24H_V101128_DUAL_CONTROL_EXTRACT_V1",
+  "version": "v101.128",
+  "source_matrix": "V101128_MEDITEE_UX_MATRIX.json",
+  "summary": {
+    "pass": 145,
+    "fail": 0,
+    "total": 145
+  },
+  "rows": [
+    {
+      "group": "dual_control",
+      "case": "H01_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H01_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H01_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H01_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H01_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H01_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H02_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H02_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H02_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H02_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H02_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H02_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H03_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H03_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H03_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H03_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H03_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H03_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H04_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H04_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H04_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H04_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H04_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H04_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H05_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H05_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H05_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H05_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H05_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H05_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H06_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H06_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H06_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H06_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H06_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H06_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H07_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H07_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H07_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H07_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H07_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H07_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H08_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H08_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H08_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H08_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H08_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H08_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H09_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H09_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H09_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H09_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H09_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H09_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H10_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H10_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H10_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H10_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H10_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H10_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H11_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H11_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H11_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H11_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H11_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H11_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H12_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H12_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H12_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H12_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H12_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H12_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H13_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H13_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H13_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H13_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H13_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H13_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H14_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H14_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H14_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H14_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H14_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H14_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H15_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H15_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H15_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H15_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H15_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H15_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H16_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H16_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H16_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H16_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H16_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H16_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H17_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H17_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H17_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H17_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H17_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H17_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H18_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H18_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H18_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H18_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H18_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H18_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H19_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H19_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H19_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H19_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H19_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H19_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H20_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H20_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H20_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H20_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H20_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H20_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H21_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H21_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H21_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H21_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H21_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H21_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H22_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H22_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H22_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H22_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H22_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H22_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H23_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H23_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H23_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H23_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H23_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H23_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H24_controls_exist",
+      "status": "PASS",
+      "detail": {
+        "a": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "b": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "c": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "d": {
+          "has": true,
+          "topText": "Retirer",
+          "botText": "✓ Méditée",
+          "topAria": "true",
+          "botAria": "true",
+          "topDone": true,
+          "botDone": true,
+          "barDone": true
+        },
+        "e": {
+          "has": false,
+          "topText": "Marquer comme méditée",
+          "botText": "Méditée\nAppuyez après avoir médité",
+          "topAria": "false",
+          "botAria": "false",
+          "topDone": false,
+          "botDone": false,
+          "barDone": false
+        },
+        "topExists": true,
+        "botExists": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H24_initial_unread",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H24_top_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H24_bottom_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H24_bottom_marks_both",
+      "status": "PASS",
+      "detail": {
+        "has": true,
+        "topText": "Retirer",
+        "botText": "✓ Méditée",
+        "topAria": "true",
+        "botAria": "true",
+        "topDone": true,
+        "botDone": true,
+        "barDone": true
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "H24_top_unmarks_both",
+      "status": "PASS",
+      "detail": {
+        "has": false,
+        "topText": "Marquer comme méditée",
+        "botText": "Méditée\nAppuyez après avoir médité",
+        "topAria": "false",
+        "botAria": "false",
+        "topDone": false,
+        "botDone": false,
+        "barDone": false
+      }
+    },
+    {
+      "group": "dual_control",
+      "case": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

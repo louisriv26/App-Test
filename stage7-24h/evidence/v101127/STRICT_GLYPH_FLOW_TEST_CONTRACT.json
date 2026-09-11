@@ -1,0 +1,16 @@
+{
+  "schema": "L24H_V101127_STRICT_GLYPH_FLOW_TEST_CONTRACT_V1",
+  "version": "v101.127",
+  "stage": "CROSS_RECORD_CONTINUITY_GLYPH_FLOW_REGRESSION_REPAIR_R1",
+  "profiles": [
+    "phone",
+    "ipad_portrait",
+    "ipad_landscape",
+    "desktop",
+    "samsung"
+  ],
+  "required_pairs": 5,
+  "desktop_invariant": "last lexical glyph of leader and first lexical glyph of follower must have equal baseline (|dy| <= 1px) when the 880px reader width has space",
+  "segmented_boundary_invariant": "leader final DISPLAY_SEGMENT inline; earlier internal segments remain block with rhythm preserved",
+  "negative_control": "unrepaired v101.126 must fail this gate for H03 and H13"
+}

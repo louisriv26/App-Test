@@ -1,0 +1,176 @@
+{
+  "schema": "L24H_V101129_SPEAKER_RETURN_PRESENTATION_V1",
+  "version": "v101.129",
+  "summary": {
+    "pass": 9,
+    "fail": 0,
+    "total": 9
+  },
+  "rows": [
+    {
+      "case": "OP01_speaker_returns_after_quote",
+      "status": "PASS",
+      "detail": {
+        "inside": {
+          "ch": "?",
+          "jesus": true,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        },
+        "outside": {
+          "ch": "q",
+          "jesus": false,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "case": "OP02_speaker_returns_after_quote",
+      "status": "PASS",
+      "detail": {
+        "inside": {
+          "ch": "?",
+          "jesus": true,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        },
+        "outside": {
+          "ch": "à",
+          "jesus": false,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "case": "OP03_speaker_returns_after_quote",
+      "status": "PASS",
+      "detail": {
+        "inside": {
+          "ch": "?",
+          "jesus": true,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        },
+        "outside": {
+          "ch": "r",
+          "jesus": false,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "case": "OP04_speaker_returns_after_quote",
+      "status": "PASS",
+      "detail": {
+        "inside": {
+          "ch": "!",
+          "jesus": true,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        },
+        "outside": {
+          "ch": "q",
+          "jesus": false,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "case": "OP05_speaker_returns_after_quote",
+      "status": "PASS",
+      "detail": {
+        "inside": {
+          "ch": "!",
+          "jesus": true,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        },
+        "outside": {
+          "ch": "e",
+          "jesus": false,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "case": "OP06_speaker_returns_after_quote",
+      "status": "PASS",
+      "detail": {
+        "inside": {
+          "ch": "!",
+          "jesus": true,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        },
+        "outside": {
+          "ch": "e",
+          "jesus": false,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "case": "OP07_speaker_returns_after_quote",
+      "status": "PASS",
+      "detail": {
+        "inside": {
+          "ch": "\"",
+          "jesus": true,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        },
+        "outside": {
+          "ch": "?",
+          "jesus": false,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "case": "OP08_speaker_returns_after_quote",
+      "status": "PASS",
+      "detail": {
+        "inside": {
+          "ch": "\"",
+          "jesus": true,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        },
+        "outside": {
+          "ch": "?",
+          "jesus": false,
+          "mary": false,
+          "father": false,
+          "hidden": false
+        }
+      }
+    },
+    {
+      "case": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

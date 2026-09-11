@@ -1,0 +1,13 @@
+test_id,platform,required,expected,actual,status,notes
+CONC-NOTE-PROGRESS,iPhone;iPad;Samsung,YES,Independent note and progress commits from stale peer contexts both survive,,,
+CONC-NOTE-SAME-PARA,iPhone;iPad;Samsung,YES,Independent notes on same paragraph both survive,,,
+CONC-HL-SAME-PARA,iPhone;iPad;Samsung,YES,Independent highlights on same paragraph both survive,,,
+CONC-SAME-RECORD,iPhone;iPad;Samsung,YES,Same-record stale conflict preserves newer durable value and requires retry,,,
+CONC-DELETE-UNDO,iPhone;iPad;Samsung,YES,Delete and Undo never erase independent peer records,,,
+CONC-POSITION-RAPID,iPhone;iPad;Samsung,YES,Rapid position writes do not starve or erase note/highlight commits,,,
+CONC-POSITION-CONFLICT,iPhone;iPad;Samsung,YES,Same-Hour stale pointer does not overwrite newer durable pointer,,,
+CONC-IMPORT-RACE,iPhone;iPad;Samsung,YES,Import aborts if durable personal state changed after confirmation baseline,,,
+STATE-UPDATE,iPhone;iPad;Samsung,YES,All existing personal-state domains survive installed-PWA update and reopen,,,
+PWA-UPDATE,iPhone;iPad;Samsung,YES,Update reaches exact SHA-bound v101.143 R1 and survives three close/reopen cycles,,,
+OFFLINE-01,iPhone;iPad;Samsung,YES,True offline cold reopen succeeds after update,,,
+A11Y-01,iPhone;iPad;Samsung,YES,Representative VoiceOver or TalkBack navigation remains usable,,,

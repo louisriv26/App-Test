@@ -1,0 +1,181 @@
+{
+  "schema": "L24H_V101130_SPEAKER_CONSERVATION_V1",
+  "version": "v101.130",
+  "summary": {
+    "pass": 8,
+    "fail": 0,
+    "total": 8
+  },
+  "rows": [
+    {
+      "case": "SPEECH_DATA_byte_equivalent_json",
+      "status": "PASS",
+      "detail": {
+        "entries": 2169
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P009_speaker_runs_unchanged",
+      "status": "PASS",
+      "detail": {
+        "runs": [
+          {
+            "start": 14,
+            "end": 40,
+            "speaker": "JESUS"
+          },
+          {
+            "start": 112,
+            "end": 138,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 12,
+            "end": 14,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_ATTRIBUTION"
+          },
+          {
+            "start": 40,
+            "end": 42,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_ATTRIBUTION"
+          },
+          {
+            "start": 110,
+            "end": 112,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_ATTRIBUTION"
+          },
+          {
+            "start": 138,
+            "end": 140,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_ATTRIBUTION"
+          }
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P010_speaker_runs_unchanged",
+      "status": "PASS",
+      "detail": {
+        "runs": [
+          {
+            "start": 22,
+            "end": 47,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P015_speaker_runs_unchanged",
+      "status": "PASS",
+      "detail": {
+        "runs": [
+          {
+            "start": 38,
+            "end": 48,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P020_speaker_runs_unchanged",
+      "status": "PASS",
+      "detail": {
+        "runs": [
+          {
+            "start": 44,
+            "end": 67,
+            "speaker": "JESUS"
+          },
+          {
+            "start": 84,
+            "end": 99,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P025_speaker_runs_unchanged",
+      "status": "PASS",
+      "detail": {
+        "runs": [
+          {
+            "start": 93,
+            "end": 116,
+            "speaker": "JESUS"
+          },
+          {
+            "start": 140,
+            "end": 155,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": [
+          {
+            "start": 91,
+            "end": 93,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_TURN_ADJUDICATED"
+          },
+          {
+            "start": 116,
+            "end": 118,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_TURN_ADJUDICATED"
+          },
+          {
+            "start": 138,
+            "end": 140,
+            "role": "OUTER_DIVINE_OPEN_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_TURN_ADJUDICATED"
+          },
+          {
+            "start": 155,
+            "end": 157,
+            "role": "OUTER_DIVINE_CLOSE_WRAPPER_HIDE",
+            "reason": "OUTER_DIVINE_DIRECT_TURN_ADJUDICATED"
+          }
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P043_speaker_runs_unchanged",
+      "status": "PASS",
+      "detail": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 49,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": []
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P058_speaker_runs_unchanged",
+      "status": "PASS",
+      "detail": {
+        "runs": [
+          {
+            "start": 0,
+            "end": 49,
+            "speaker": "JESUS"
+          }
+        ],
+        "hidden": []
+      }
+    }
+  ]
+}

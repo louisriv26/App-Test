@@ -1,0 +1,433 @@
+{
+  "status": "PASS",
+  "classified_hits": 71,
+  "unexplained_count": 0,
+  "hits": [
+    {
+      "path": "README.md",
+      "line": 5,
+      "classification": "IMMUTABLE_BASELINE_REFERENCE_ALLOWED",
+      "text": "Immutable baseline: v101.120 / `66b5fbff29865faa9a2cf55aad28c090de86fefe1ea8911feaf124f3eff97d5d`."
+    },
+    {
+      "path": "README.md",
+      "line": 7,
+      "classification": "IMMUTABLE_BASELINE_REFERENCE_ALLOWED",
+      "text": "This successor changes **release identity, audit/report tooling and current evidence reports only**. The v101.120 Help content and all reader/corpus behaviour are preserved."
+    },
+    {
+      "path": "README.md",
+      "line": 9,
+      "classification": "IMMUTABLE_BASELINE_REFERENCE_ALLOWED",
+      "text": "Protected and byte-identical to v101.120 inside the app HTML: the fourteen governed declarations, the complete `showHelp()` function, paragraph IDs/order, corpus text, speech semantics, presentation projections/adjudications, display segmentation, Samsung paragraph topology, storage schema, navigation, highlighting and reader logic."
+    },
+    {
+      "path": "index.html",
+      "line": 4793,
+      "classification": "PROTECTED_PRESENTATION_PROVENANCE_ALLOWED",
+      "text": "const SPEECH_PRESENTATION_ADJUDICATIONS = {\"PASSION24.TEXT.RELATED_HOUR_17.BODY.P067\":[{\"start\":43,\"end\":56,\"semantic_speaker\":\"OTHER\",\"presentation_speaker\":\"JESUS\",\"quotation_depth\":2,\"reason\":\"RA19E LDC.T19.E0029.P006; meaningful nested reported quotation keeps guillemets and inherits active outer Jesus display.\"},{\"start\":80,\"end\":127,\"semantic_speaker\":\"OTHER\",\"presentation_speaker\":\"JESUS\",\"quotation_depth\":2,\"reason\":\"RA19E LDC.T19.E0029.P006; meaningful nested reported quotation keeps gu"
+    },
+    {
+      "path": "luisa_24_heures.html",
+      "line": 4793,
+      "classification": "PROTECTED_PRESENTATION_PROVENANCE_ALLOWED",
+      "text": "const SPEECH_PRESENTATION_ADJUDICATIONS = {\"PASSION24.TEXT.RELATED_HOUR_17.BODY.P067\":[{\"start\":43,\"end\":56,\"semantic_speaker\":\"OTHER\",\"presentation_speaker\":\"JESUS\",\"quotation_depth\":2,\"reason\":\"RA19E LDC.T19.E0029.P006; meaningful nested reported quotation keeps guillemets and inherits active outer Jesus display.\"},{\"start\":80,\"end\":127,\"semantic_speaker\":\"OTHER\",\"presentation_speaker\":\"JESUS\",\"quotation_depth\":2,\"reason\":\"RA19E LDC.T19.E0029.P006; meaningful nested reported quotation keeps gu"
+    },
+    {
+      "path": "metadata/build_provenance.json",
+      "line": 5,
+      "classification": "IMMUTABLE_BASELINE_REFERENCE_ALLOWED",
+      "text": "  \"baseline_version\": \"v101.120\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 14,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/run_v101119_exhaustive_presentation_matrix.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 15,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/run_v101119_quoted_span_fixed_point.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 20,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/build_v101112_user_confirmed_text_structure_repair.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 21,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/build_v101113_audit_report_qa_integrity_repair.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 22,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/build_v101114_four_pass_audit_evidence_integrity_repair.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 23,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/build_v101115_active_report_line_closure.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 24,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/build_v101116_self_contained_build_integrity_repair.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 25,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/build_v101117_semantic_metadata_integrity_repair.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 26,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/build_v101118_generic_execution_spec_integrity_repair.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 27,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/build_v101119_quoted_span_presentation_closure.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 28,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/build_v101120_help_information_architecture.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 30,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/historical/run_independent_prefreeze_audit_v101120_OBSOLETE.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 33,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/run_v101114_broad_runtime_matrix.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 34,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/run_v101114_independent_prefreeze_audit.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 35,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/run_v101114_sw_logic_matrix.js\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 36,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/run_v101119_mutation_tests.py\","
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 37,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "    \"scripts/run_v101120_help_browser_matrix.py\""
+    },
+    {
+      "path": "metadata/current_tooling_inventory.json",
+      "line": 39,
+      "classification": "TOOLING_INVENTORY_LINEAGE_ALLOWED",
+      "text": "  \"obsolete_tool_reclassified\": \"scripts/historical/run_independent_prefreeze_audit_v101120_OBSOLETE.py\""
+    },
+    {
+      "path": "metadata/scope_escalation_authority.md",
+      "line": 5,
+      "classification": "IMMUTABLE_BASELINE_REFERENCE_ALLOWED",
+      "text": "The immutable v101.120 ZIP `66b5fbff29865faa9a2cf55aad28c090de86fefe1ea8911feaf124f3eff97d5d` is the executable baseline. Authorized app mutation is restricted to release identity (`APP_VERSION`, `APP_EVIDENCE_STAGE`, build comment, service-worker cache identity, manifest/version metadata) plus audit/report/tooling files. `showHelp()`, corpus, speech data, presentation projection/adjudication, display segmentation, paragraph topology, storage schema, navigation, highlighting and reader logic are"
+    },
+    {
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 7,
+      "classification": "IMMUTABLE_BASELINE_AUDIT_REFERENCE_ALLOWED",
+      "text": "- Authorized reverse-diff to v101.120 HTML: PASS."
+    },
+    {
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 9,
+      "classification": "IMMUTABLE_BASELINE_AUDIT_REFERENCE_ALLOWED",
+      "text": "- `showHelp()` function: byte-identical to v101.120."
+    },
+    {
+      "path": "reports/build_script_vs_files_audit.md",
+      "line": 10,
+      "classification": "IMMUTABLE_BASELINE_AUDIT_REFERENCE_ALLOWED",
+      "text": "- Obsolete v101.120 independent-prefreeze checker: removed from current tooling and retained only under `scripts/historical/`."
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 4,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "BASE_ZIP=Path('/mnt/data/L24H_v101120_GITHUB_DEPLOY_HELP_INFORMATION_ARCHITECTURE_AND_ATTRIBUTION_CLARITY_R1_LOCKED.zip')"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 44,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "html=html.replace(\"const APP_VERSION = 'v101.120';\",\"const APP_VERSION = 'v101.121';\",1)"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 46,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "html=html.replace(\"const BUILD_DATE = '2026-08-25'; // v101.120 / help information architecture and attribution clarity R1\",\"const BUILD_DATE = '2026-08-25'; // v101.121 / four-pass report tooling reconciliation R1\",1)"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 49,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "sw=(ROOT/'sw.js').read_text(encoding='utf-8').replace('/* v101.120 */','/* v101.121 */',1).replace(\"const CACHE_NAME = 'luisa-24h-v101-120';\",f\"const CACHE_NAME = '{CACHE}';\",1);write(ROOT/'sw.js',sw)"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 51,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "vj=json.loads((ROOT/'version.json').read_text());vj.update({'app_version':VER,'cache_name':CACHE,'release_scope':'Report/tooling-only successor: repairs obsolete independent-prefreeze assumptions, replaces generic active-report line presence checks with direct line evidence bindings, adds semantic stale-assumption scanning, and packages the actual current build/audit tooling. Help content, corpus, speech/presentation data, topology, storage schema and reader/highlighting logic are unchanged from"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 52,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "write(ROOT/'README.md',f'''# Les 24 Heures de la Passion — {VER}\\n\\nStage: `{STAGE}`\\n\\nImmutable baseline: v101.120 / `{BASE_SHA}`.\\n\\nThis successor changes **release identity, audit/report tooling and current evidence reports only**. The v101.120 Help content and all reader/corpus behaviour are preserved.\\n\\nProtected and byte-identical to v101.120 inside the app HTML: the fourteen governed declarations, the complete `showHelp()` function, paragraph IDs/order, corpus text, speech semantics, p"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 55,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "write(ROOT/'metadata/scope_escalation_authority.md',f'''# Scope authority — {VER}\\n\\nCurrent stage: `{STAGE}`.\\n\\nThe immutable v101.120 ZIP `{BASE_SHA}` is the executable baseline. Authorized app mutation is restricted to release identity (`APP_VERSION`, `APP_EVIDENCE_STAGE`, build comment, service-worker cache identity, manifest/version metadata) plus audit/report/tooling files. `showHelp()`, corpus, speech data, presentation projection/adjudication, display segmentation, paragraph topology, s"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 61,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": " hist=ROOT/'scripts/historical/run_independent_prefreeze_audit_v101120_OBSOLETE.py';hist.parent.mkdir(parents=True,exist_ok=True);shutil.move(str(old),str(hist))"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 66,
+      "classification": "REUSED_TOOL_REFERENCE_ALLOWED",
+      "text": "current_tools=['scripts/'+x for x in current_tool_files]+['scripts/run_broad_runtime_matrix.py','scripts/run_v101119_exhaustive_presentation_matrix.py','scripts/run_v101119_quoted_span_fixed_point.py','scripts/run_sw_logic_matrix.js']"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 68,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "write(ROOT/'metadata/current_tooling_inventory.json',json.dumps({'version':VER,'stage':STAGE,'current_tools':current_tools,'historical_or_superseded_tools':sorted(historical),'obsolete_tool_reclassified':'scripts/historical/run_independent_prefreeze_audit_v101120_OBSOLETE.py'},ensure_ascii=False,indent=2)+'\\n')"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 77,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "rev=html.replace(\"const APP_VERSION = 'v101.121';\",\"const APP_VERSION = 'v101.120';\",1).replace(f\"const APP_EVIDENCE_STAGE = '{STAGE}';\",\"const APP_EVIDENCE_STAGE = 'HELP_INFORMATION_ARCHITECTURE_AND_ATTRIBUTION_CLARITY_R1';\",1).replace(\"const BUILD_DATE = '2026-08-25'; // v101.121 / four-pass report tooling reconciliation R1\",\"const BUILD_DATE = '2026-08-25'; // v101.120 / help information architecture and attribution clarity R1\",1)"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 82,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "write(ROOT/'reports/build_script_vs_files_audit.md',f'''# Build script vs files audit — {VER}\\n\\n**PASS**\\n\\n- Baseline ZIP SHA-256: `{BASE_SHA}` — verified.\\n- Baseline HTML SHA-256: `{BASE_HTML_SHA}` — verified.\\n- Authorized reverse-diff to v101.120 HTML: PASS.\\n- Protected declarations: 14/14 byte-identical.\\n- `showHelp()` function: byte-identical to v101.120.\\n- Obsolete v101.120 independent-prefreeze checker: removed from current tooling and retained only under `scripts/historical/`.\\n- C"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 87,
+      "classification": "REUSED_TOOL_REFERENCE_ALLOWED",
+      "text": "fp=E/'post_tooling_fixed_point';run(['python',str(ROOT/'scripts/run_v101119_quoted_span_fixed_point.py'),str(ROOT/'index.html'),str(fp)])"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 88,
+      "classification": "REUSED_TOOL_REFERENCE_ALLOWED",
+      "text": "run(['python',str(ROOT/'scripts/run_v101119_exhaustive_presentation_matrix.py'),str(ROOT/'index.html'),str(fp/'M1_QUOTED_SPAN_PRESENTATION_LEDGER.csv'),str(E/'EXHAUSTIVE_PRESENTATION_RUNTIME_MATRIX.json'),VER])"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 96,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "fixes=[['RPT-121-001','Obsolete packaged independent prefreeze checker','current path contained v101.117-era QA/release-scope assumptions','moved to scripts/historical; replaced by v101.121 independently implemented checker','PASS'],['RPT-121-002','Independent prefreeze report provenance','same finalizer generated both first-party and “independent” prefreeze report','separate packaged auditor implementation produces independent report','PASS'],['RPT-121-003','Active report line audit','generic p"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 109,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "write(ROOT/'metadata/build_provenance.json',json.dumps({'version':VER,'stage':STAGE,'build_date':'2026-08-25','baseline_version':'v101.120','baseline_role':'IMMUTABLE_BASELINE','baseline_zip_sha256':BASE_SHA,'baseline_html_sha256':BASE_HTML_SHA,'candidate_html_sha256':sha_b(html.encode()),'authorized_app_mutations':['APP_VERSION','APP_EVIDENCE_STAGE','BUILD_DATE comment','service-worker cache identity','release metadata'],'help_function_unchanged':True,'protected_declarations_unchanged':14,'tool"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 122,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "  elif rel=='reports/build_script_vs_files_audit.md' and ('v101.120' in line or 'v101-120' in line or 'v101120' in line):"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 125,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "   if 'v101.120' in line or 'v101-120' in line or 'v101120' in line: cls='BUILD_BASELINE_REFERENCE_ALLOWED'"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 126,
+      "classification": "REUSED_TOOL_REFERENCE_ALLOWED",
+      "text": "   elif 'v101.119' in line or 'v101-119' in line or 'v101119' in line: cls='REUSED_TOOL_REFERENCE_ALLOWED'"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 127,
+      "classification": "STALE_SCANNER_POLICY_CODE_ALLOWED",
+      "text": "   elif ('v101.112' in line or 'v101112' in line) and ('elif rel==' in line or 'v101112_user_fixes_preserved' in line): cls='STALE_SCANNER_POLICY_CODE_ALLOWED'"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 129,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "  elif ('v101.120' in line or 'v101-120' in line or 'v101120' in line) and rel in {'README.md','metadata/scope_escalation_authority.md','metadata/build_provenance.json','version.json'}:"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 131,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "  elif rel.startswith('scripts/run_v101121_') and ('v101.120' in line or 'v101-120' in line or 'v101120' in line) and any(k in line.lower() for k in ['baseline','unchanged','base_zip','v101.120']):"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 133,
+      "classification": "REUSED_TOOL_REFERENCE_ALLOWED",
+      "text": "  elif rel.startswith('scripts/run_v101121_') and ('v101.119' in line or 'v101-119' in line or 'v101119' in line) and ('run_v101119_' in line):"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 135,
+      "classification": "REUSED_TOOL_REFERENCE_ALLOWED",
+      "text": "  elif rel=='scripts/run_independent_prefreeze_audit_v101121.py' and ('v101.119' in line or 'v101119' in line) and 'current_tooling_inventory_complete' in line:"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 137,
+      "classification": "STALE_SCANNER_POLICY_CODE_ALLOWED",
+      "text": "  elif rel=='scripts/run_v101121_independent_runtime_smoke.py' and ('v101.112' in line or 'v101112' in line) and ('HOUR.22' in line or 'réprouvés' in line):"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 139,
+      "classification": "STALE_SCANNER_POLICY_CODE_ALLOWED",
+      "text": "  elif rel=='scripts/build_v101121_four_pass_report_tooling_reconciliation.py' and ('v101.112' in line or 'v101112' in line) and 'v101112_user_fixes_preserved' in line:"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 141,
+      "classification": "REUSED_TOOL_REFERENCE_ALLOWED",
+      "text": "  elif rel in {'scripts/run_v101119_exhaustive_presentation_matrix.py','scripts/run_v101119_quoted_span_fixed_point.py'}:"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 143,
+      "classification": "REUSED_TOOL_REFERENCE_ALLOWED",
+      "text": "  elif rel in {'index.html','luisa_24_heures.html'} and 'v101.119 quoted-span closure' in line:"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 145,
+      "classification": "STALE_SCANNER_POLICY_CODE_ALLOWED",
+      "text": "  elif rel=='scripts/run_broad_runtime_matrix.py' and 'v101112_user_fixes_preserved' in line:"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 165,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "write(ROOT/'metadata/build_provenance.json',json.dumps({'version':VER,'stage':STAGE,'build_date':'2026-08-25','baseline_version':'v101.120','baseline_role':'IMMUTABLE_BASELINE','baseline_zip_sha256':BASE_SHA,'baseline_html_sha256':BASE_HTML_SHA,'candidate_html_sha256':sha_b(html.encode()),'authorized_app_mutations':['APP_VERSION','APP_EVIDENCE_STAGE','BUILD_DATE comment','service-worker cache identity','release metadata'],'help_function_unchanged':True,'protected_declarations_unchanged':14,'tool"
+    },
+    {
+      "path": "scripts/build_v101121_four_pass_report_tooling_reconciliation.py",
+      "line": 167,
+      "classification": "BUILD_BASELINE_REFERENCE_ALLOWED",
+      "text": "write(ROOT/'reports/four_pass_deep_audit.md',f'''# {VER} four-pass deep audit\\n\\n**PASS_PREFREEZE**\\n\\n## Pass 1 — files vs build script\\n- Baseline ZIP hash: PASS — `{BASE_SHA}`.\\n- Authorized HTML reverse-diff: PASS.\\n- Protected declarations: 14/14 byte-identical.\\n- `showHelp()` function: byte-identical to v101.120.\\n- Current packaged build/audit tooling inventory: PASS.\\n\\n## Pass 2 — runtime/package behaviour\\n- Help browser: {help_browser['pass']}/{help_browser['total']} PASS.\\n- Broad C"
+    },
+    {
+      "path": "scripts/run_broad_runtime_matrix.py",
+      "line": 49,
+      "classification": "HISTORICAL_REGRESSION_CONTROL_ALLOWED",
+      "text": "   add(label,'v101112_user_fixes_preserved',ok,{'h3count':fix['h3count'],'h22rows':len(fix['rows'])})"
+    },
+    {
+      "path": "scripts/run_independent_prefreeze_audit_v101121.py",
+      "line": 48,
+      "classification": "CURRENT_TOOLING_INVENTORY_REUSED_TOOL_ALLOWED",
+      "text": "cur=set(ti['current_tools']); ck('current_tooling_inventory_complete',{'scripts/build_v101121_four_pass_report_tooling_reconciliation.py','scripts/run_independent_prefreeze_audit_v101121.py','scripts/run_v101121_help_browser_matrix.py','scripts/run_broad_runtime_matrix.py','scripts/run_v101119_exhaustive_presentation_matrix.py','scripts/run_v101119_quoted_span_fixed_point.py','scripts/run_sw_logic_matrix.js','scripts/run_v101121_primary_reopen_audit.py','scripts/run_v101121_independent_reopen_au"
+    },
+    {
+      "path": "scripts/run_v101119_exhaustive_presentation_matrix.py",
+      "line": 60,
+      "classification": "REUSED_VALIDATED_TOOL_SCHEMA_LINEAGE_ALLOWED",
+      "text": " OUT.write_text(json.dumps({'schema':'L24H_V101119_EXHAUSTIVE_PRESENTATION_MATRIX_V1','version':VERSION,'browser':'system Chromium via Playwright / actual renderParaText DOM','summary':summary,'results':out},ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')"
+    },
+    {
+      "path": "scripts/run_v101119_quoted_span_fixed_point.py",
+      "line": 318,
+      "classification": "REUSED_VALIDATED_TOOL_SCHEMA_LINEAGE_ALLOWED",
+      "text": " 'PASSION24.TEXT.RELATED_HOUR_22.BODY.P090':[{'start':217,'end':238,'semantic_speaker':'GENERIC_SOUL','presentation_speaker':'JESUS','quotation_depth':1,'reason':'v101.119 quoted-span closure: governing handover identifies source-supported GENERIC_SOUL nested speech inside active JESUS turn; canonical text and raw SPEECH_DATA remain unchanged.'}],"
+    },
+    {
+      "path": "scripts/run_v101119_quoted_span_fixed_point.py",
+      "line": 319,
+      "classification": "REUSED_VALIDATED_TOOL_SCHEMA_LINEAGE_ALLOWED",
+      "text": " 'PASSION24.HOUR.24.DESOL.P033':[{'start':1,'end':163,'semantic_speaker':'PERSONIFIED_VOICE','presentation_speaker':'MARY','quotation_depth':2,'reason':'v101.119 quoted-span closure: P032 says the remembered arrows \"me disent\" and P033 is their quoted voice inside the continuing MARY turn; semantic voice remains distinct while MARY governs display.'}]"
+    },
+    {
+      "path": "scripts/run_v101119_quoted_span_fixed_point.py",
+      "line": 358,
+      "classification": "REUSED_VALIDATED_TOOL_SCHEMA_LINEAGE_ALLOWED",
+      "text": " 'schema':'L24H_V101119_QUOTED_SPAN_FIXED_POINT_R1','baseline_html_sha256':hashlib.sha256(html.encode()).hexdigest(),'active_render_targets':len(TM),'containers':len(CONTAINERS),'quote_token_inventory':dict(tokens),'paired_spans':len(SPANS),'unmatched_non_apostrophe_tokens':len(UNMATCHED),'presentation_relevant_spans':len(ledger),'presentation_relevant_by_family':dict(Counter(r['quote_family'] for r in ledger)),'scanner_a_valid_defects':len(ADEF),'scanner_b_valid_defects':len(BDEF),'scanner_conv"
+    },
+    {
+      "path": "scripts/run_v101119_quoted_span_fixed_point.py",
+      "line": 364,
+      "classification": "REUSED_VALIDATED_TOOL_SCHEMA_LINEAGE_ALLOWED",
+      "text": "lines=['# v101.119 M1 — QUOTED_SPAN_PRESENTATION_CLOSURE_R1 evidence fixed point','',f\"Baseline HTML SHA-256: `{summary['baseline_html_sha256']}`\",f\"Presentation-relevant quoted spans derived dynamically: **{len(ledger)}**\",f\"Scanner A defects: **{len(ADEF)}**\",f\"Scanner B defects: **{len(BDEF)}**\",f\"Independent convergence: **{'PASS' if a_set==b_set else 'FAIL'}**\",f\"Hidden ranges checked: **{hidden_ranges}**; lexical-text hiding violations: **{len(hidden_bad)}**\",'',f\"## Fixed-point decision: "
+    },
+    {
+      "path": "scripts/run_v101121_independent_reopen_audit.py",
+      "line": 36,
+      "classification": "CURRENT_AUDITOR_BASELINE_REFERENCE_ALLOWED",
+      "text": "# Help block unchanged to v101.120 baseline"
+    },
+    {
+      "path": "scripts/run_v101121_independent_runtime_smoke.py",
+      "line": 17,
+      "classification": "HISTORICAL_REGRESSION_CONTROL_ALLOWED",
+      "text": "   u=await pg.evaluate('''()=>{openHour(3,false);const h3=(document.getElementById('content').innerText.match(/Le monde des réprouvés est représenté par Judas/g)||[]).length;openHour(22,false);const ids=['PASSION24.HOUR.22.P048','PASSION24.HOUR.22.P050','PASSION24.HOUR.22.P052','PASSION24.HOUR.22.P054','PASSION24.HOUR.22.P056','PASSION24.HOUR.22.P059','PASSION24.HOUR.22.P061','PASSION24.HOUR.22.P063','PASSION24.HOUR.22.P065'];let ok=true;for(const id of ids){const e=document.getElementById(id),s"
+    },
+    {
+      "path": "scripts/run_v101121_primary_reopen_audit.py",
+      "line": 24,
+      "classification": "CURRENT_AUDITOR_REUSED_TOOL_REFERENCE_ALLOWED",
+      "text": "fp=OUT/'FIXED_POINT_RERUN'; r=run(['python',str(EXT/'scripts/run_v101119_quoted_span_fixed_point.py'),str(EXT/'index.html'),str(fp)]); ck('fixed_point_rerun',r.returncode==0,r.stdout[-500:]+r.stderr[-500:])"
+    },
+    {
+      "path": "scripts/run_v101121_primary_reopen_audit.py",
+      "line": 25,
+      "classification": "CURRENT_AUDITOR_REUSED_TOOL_REFERENCE_ALLOWED",
+      "text": "r=run(['python',str(EXT/'scripts/run_v101119_exhaustive_presentation_matrix.py'),str(EXT/'index.html'),str(fp/'M1_QUOTED_SPAN_PRESENTATION_LEDGER.csv'),str(OUT/'PRESENTATION_RERUN.json'),VER]); ck('presentation_rerun',r.returncode==0,r.stdout[-500:]+r.stderr[-500:])"
+    },
+    {
+      "path": "version.json",
+      "line": 11,
+      "classification": "IMMUTABLE_BASELINE_REFERENCE_ALLOWED",
+      "text": "  \"release_scope\": \"Report/tooling-only successor: repairs obsolete independent-prefreeze assumptions, replaces generic active-report line presence checks with direct line evidence bindings, adds semantic stale-assumption scanning, and packages the actual current build/audit tooling. Help content, corpus, speech/presentation data, topology, storage schema and reader/highlighting logic are unchanged from v101.120.\","
+    }
+  ]
+}

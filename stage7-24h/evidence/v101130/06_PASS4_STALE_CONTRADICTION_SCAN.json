@@ -1,0 +1,86 @@
+{
+  "version": "v101.130",
+  "stage": "FOUR_PASS_FINAL_PACKAGE_METADATA_EVIDENCE_RECONCILIATION_R1",
+  "summary": {
+    "pass": 15,
+    "fail": 0,
+    "total": 15
+  },
+  "rows": [
+    {
+      "check": "no_pending_release_status",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "only_current_root_report",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "old_root_report_v101125_absent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "historical_v101125_present",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "historical_v101126_present",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "historical_v101127_present",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "historical_v101128_present",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "historical_v101129_present",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "current_scope_not_v101127",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "current_overlay_not_v101128",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "historical_old_metadata_present",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "active_inventory_no_old_report",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "current_evidence_root_v101130",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no_fail_in_current_report",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "external_gate_not_overclaimed",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

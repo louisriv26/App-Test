@@ -1,0 +1,5 @@
+action_id,target,finding,before,after,status
+AUD-001,REAL_DEVICE_QA_CHECKLIST.md,ACTIVE_QA_VERSION_STALE,v101.111,v101.113 + 21 explicit external scenarios,PASS
+AUD-002,REAL_DEVICE_QA_RESULTS_TEMPLATE.csv,ACTIVE_QA_VERSION_STALE_AND_INCOMPLETE,2 rows at v101.111,21 rows at v101.113,PASS
+AUD-003,reports/stale_reference_scan.*,FALSE_ZERO_FAILURE_CLASSIFICATION,root QA v101.111 treated historical,root QA files treated CURRENT_FACING; no stale current version allowed,PASS
+AUD-004,audit/independent_four_pass_audit.md,UNSUPPORTED_CURRENT_FACING_CLAIM,claimed all current-facing refs were v101.112,regenerated after direct active-report line audit,PASS

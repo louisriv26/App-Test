@@ -1,0 +1,3 @@
+action_id,target,finding,correction,status
+AUD-116-001,scripts/build_v101116_self_contained_build_integrity_repair.py,EXTERNAL_RUNNER_DEPENDENCY,resolve runtime/SW/independent runners from packaged sibling scripts,PASS
+AUD-116-002,stale scanner,CURRENT_SCRIPTS_MISCLASSIFIED_HISTORICAL,classify current scripts explicitly and block obsolete external runner dependencies,PASS

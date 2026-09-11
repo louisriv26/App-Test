@@ -1,0 +1,30 @@
+{
+  "version": "v101.143",
+  "build_revision": "R1",
+  "stage": "PERSONAL_STATE_CONCURRENCY_SUCCESSOR_R1",
+  "internal_gates": [
+    "exact v101.142 R1 SHA binding",
+    "v101.141->v101.142 personal-write equivalence before rebase",
+    "complete personal-write-path inventory",
+    "operation-level concurrency merge/conflict semantics",
+    "defect-sensitive stale-whole-snapshot mutant",
+    "exact persistence failure/rollback semantics",
+    "import confirmation-race protection",
+    "future-schema guard inside lock",
+    "legacy mirror parity",
+    "rapid/conflicting reading-position persistence",
+    "protected corpus/Search/speaker/topology/schema/PWA-identity parity",
+    "deterministic package rebuild",
+    "four-pass adversarial audit",
+    "fresh exact-ZIP reopened-package audit"
+  ],
+  "external_open_gates": [
+    "physical iPad/iPhone/Samsung multi-context concurrency",
+    "live-origin exact-byte binding",
+    "installed PWA update from deployed v101.142 R1 to v101.143 R1",
+    "installed PWA close/reopen persistence",
+    "true offline cold reopen",
+    "VoiceOver/TalkBack representative testing"
+  ],
+  "public_release": "UNAUTHORIZED"
+}

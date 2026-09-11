@@ -1,0 +1,35 @@
+{
+  "app_version": "v101.143",
+  "build_date": "2026-09-10",
+  "cache_name": "luisa-24h-v101-143-r1",
+  "storage_schema": 8,
+  "personal_snapshot": 5,
+  "ldc_source_public_version": "65",
+  "ldc_source_app_version": "v2.19.65-R1B",
+  "ldc_source_package_sha256": "35ee5c69fe0468d2e3ee2d963a7fa6667169c24d6c8023da2726b4cd8b50ed20",
+  "release_scope": "CONC-24H-01 bounded successor of exact immutable v101.142 R1. Eliminates confirmed multi-context committed-change loss for 24H personal state using app-specific serialization on the owner-approved iOS/iPadOS 15.4+ full-support floor, fresh canonical durable read inside the lock, operation-level delta/merge, same-record conflict preservation/retry, inherited verified persistence/rollback, coherent legacy mirrors, peer reconciliation, concurrency-safe import/restore, startup migration/recovery serialization, and conflict-aware coalesced reading-position persistence. Corpus, speaker authority, stable IDs/order, Search semantics/cap, typography/contrast/Repères semantics, PWA identity-critical fields, backup schema, Hub architecture and unrelated Service Worker logic are unchanged.",
+  "real_device_status": "Physical iPhone/iPad/Samsung multi-context concurrency, live-origin exact-byte binding, installed-PWA update/persistence, true offline cold reopen and representative VoiceOver/TalkBack remain NOT_TESTED for v101.143 R1.",
+  "overall_release_status": "V101143_R1_CONC24H01_FROZEN_CANDIDATE__EXTERNAL_SHA_BOUND_REOPEN_REQUIRED_BY_DESIGN",
+  "known_blockers": [
+    "external SHA-bound reopened-package receipt before device candidacy",
+    "physical iPad/iPhone/Samsung multi-context concurrency",
+    "live-origin exact-byte binding",
+    "installed PWA update from deployed v101.142 R1 to v101.143 R1",
+    "installed PWA close/reopen persistence",
+    "true offline cold reopen",
+    "VoiceOver/TalkBack representative testing"
+  ],
+  "external_open_gates": [
+    "physical iPad/iPhone/Samsung multi-context concurrency",
+    "live-origin exact-byte binding",
+    "installed PWA update from deployed v101.142 R1 to v101.143 R1",
+    "installed PWA close/reopen persistence",
+    "true offline cold reopen",
+    "VoiceOver/TalkBack representative testing"
+  ],
+  "ldc_source_alignment_generation": "G036-AFLP-R6-UWR2",
+  "ldc_source_enriched_generation": "G036-AFLP-R6-SUP-T5",
+  "ldc_source_corpus_manifest_sha256": "0d04190b166932086ed45141368bd4ae88b5a22806ca1e525a3e6a60a267f3ad",
+  "postfreeze_reopen_evidence": "The package intentionally does not self-certify its own final ZIP. Use the external SHA-bound CONC-24H-01 reopened-package receipt.",
+  "build_revision": "R1"
+}

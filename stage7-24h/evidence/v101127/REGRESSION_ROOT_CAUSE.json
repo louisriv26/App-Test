@@ -1,0 +1,22 @@
+{
+  "schema": "L24H_V101127_CONTINUITY_GLYPH_FLOW_ROOT_CAUSE_V1",
+  "version": "v101.127",
+  "stage": "CROSS_RECORD_CONTINUITY_GLYPH_FLOW_REGRESSION_REPAIR_R1",
+  "reported_case": {
+    "leader": "PASSION24.HOUR.03.P012",
+    "follower": "PASSION24.HOUR.03.P013",
+    "visible_boundary": "peines, → afin que"
+  },
+  "root_cause": "continuity fragments and para-text were inline, but the leader final DISPLAY_SEGMENTS span remained display:block, forcing the follower onto a new line",
+  "also_affected_by_same_mechanism": [
+    "PASSION24.HOUR.13.P011 → PASSION24.HOUR.13.P013"
+  ],
+  "unaffected_pairs": [
+    "PASSION24.HOUR.15.P014 → PASSION24.HOUR.15.P015",
+    "PASSION24.HOUR.19.P183 → PASSION24.HOUR.19.P184",
+    "PASSION24.HOUR.19.P185 → PASSION24.HOUR.19.P186"
+  ],
+  "prior_gate_blind_spot": "v101.124/v101.125 continuity test accepted dy <= one line-height, so a forced one-line displacement incorrectly passed",
+  "repair": "last DISPLAY_SEGMENT of continuity leader becomes inline; previous segment receives equivalent margin-bottom rhythm; first segment of any segmented follower becomes inline",
+  "canonical_text_changed": false
+}

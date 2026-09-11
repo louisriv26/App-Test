@@ -1,0 +1,48 @@
+{
+  "cycle": "CYCLE_2_INDEPENDENT_RESCAN",
+  "implementation": "Direct index.html projection + raw-record regex rescan; does not consume BLIND_SPAN_ADJUDICATED classifications.",
+  "scanner_hits": [
+    {
+      "record_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P057",
+      "rule": "NESTED_PARENT_ABRUPT_STOP",
+      "start": 77,
+      "end": 113
+    },
+    {
+      "record_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P100",
+      "rule": "NESTED_PARENT_ABRUPT_STOP",
+      "start": 39,
+      "end": 98
+    },
+    {
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P067",
+      "rule": "EXPLICIT_THRONE_UNMAPPED",
+      "start": 47,
+      "end": null
+    },
+    {
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P100",
+      "rule": "NESTED_TU_DIS_UNSTYLED",
+      "start": 26,
+      "end": 55
+    }
+  ],
+  "reproduced_candidate_ids": [
+    "M1C001",
+    "M1C002",
+    "M1C003",
+    "M1C004"
+  ],
+  "cycle_1_candidate_ids": [
+    "M1C001",
+    "M1C002",
+    "M1C003",
+    "M1C004"
+  ],
+  "missing_cycle_1_candidate_ids": [],
+  "new_candidate_ids": [],
+  "new_candidate_count": 0,
+  "unquoted_reporter_scan_new_candidates": 0,
+  "unbalanced_quote_hold_rows": 2,
+  "status": "PASS"
+}

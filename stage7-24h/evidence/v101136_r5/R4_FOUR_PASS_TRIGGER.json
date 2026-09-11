@@ -1,0 +1,40 @@
+{
+  "schema": "L24H_V101136_R5_R4_FOUR_PASS_TRIGGER_V1",
+  "predecessor_sha256": "7af0df0f37552f603d58aa407e94d9bd8f2719bd12b8b7313538d7b5d575668b",
+  "canonical_defects_found": 0,
+  "runtime_defects_found": 0,
+  "release_package_defects_found": 4,
+  "defects": [
+    {
+      "id": "R4-DOC-01",
+      "file": "REAL_DEVICE_QA_CHECKLIST.md",
+      "line": 14,
+      "old": "external R3 release receipt",
+      "new": "external R5 release receipt"
+    },
+    {
+      "id": "R4-DOC-02",
+      "file": "REAL_DEVICE_QA_CHECKLIST.md",
+      "line": 24,
+      "old": "v101.136 / R3",
+      "new": "v101.136 / R5"
+    },
+    {
+      "id": "R4-META-01",
+      "file": "version.json",
+      "field": "overall_release_status",
+      "old": "R4_INTERNAL_VALIDATION_REQUIRED...",
+      "new": "R5_CONTROLLED_DEVICE_TEST_CANDIDATE..."
+    },
+    {
+      "id": "R4-META-02",
+      "file": "version.json",
+      "field": "known_blockers",
+      "old": [],
+      "new": "explicit external open release gates"
+    }
+  ],
+  "r4_pass1_rebuild": "876/876 files identical; exact ZIP SHA reproduced",
+  "r4_pass2_runtime": "625/625 PASS",
+  "r4_pass2_static": "47/47 PASS"
+}
