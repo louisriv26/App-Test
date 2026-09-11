@@ -1,0 +1,28 @@
+{
+  "version": "v101.143",
+  "build_revision": "R1",
+  "stage": "PERSONAL_STATE_CONCURRENCY_SUCCESSOR_R1",
+  "active_documents": [
+    "README.md",
+    "REAL_DEVICE_QA_CHECKLIST.md",
+    "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
+    "reports/V101143_R1_CONC_24H_01_PERSONAL_STATE_CONCURRENCY_SUCCESSOR.md",
+    "version.json",
+    "metadata/build_provenance.json",
+    "metadata/current_evidence_lineage.json",
+    "metadata/current_gate_map.json",
+    "metadata/release_evidence_lifecycle.json",
+    "metadata/scope_escalation_authority.md",
+    "metadata/current_tooling_inventory.json"
+  ],
+  "active_test_artifacts_external": [
+    "CONC-24H-01 per-release QA Evidence Pack bound to final successor SHA",
+    "§54A handback package to Master Governance"
+  ],
+  "inactive_predecessor_evidence_retained": [
+    "reports/V101142_R1_NATIVE_VISIBLE_FLOW_TOPOLOGY_SUCCESSOR.md",
+    "evidence/v101142_r1/"
+  ],
+  "historical_reports_root": "reports/historical/",
+  "rule": "Only listed active documents are current. Existing v101.142 evidence remains immutable predecessor evidence, not current successor evidence."
+}

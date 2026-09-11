@@ -1,0 +1,57 @@
+{
+  "schema": "L24H_V101128_RESUME_EXTRACT_V1",
+  "version": "v101.128",
+  "source_matrix": "V101128_MEDITEE_UX_MATRIX.json",
+  "summary": {
+    "pass": 4,
+    "fail": 0,
+    "total": 4
+  },
+  "rows": [
+    {
+      "group": "resume",
+      "case": "saved_para_restored",
+      "status": "PASS",
+      "detail": {
+        "saved": "PASSION24.HOUR.11.P025",
+        "before": "PASSION24.HOUR.11.P025",
+        "after": "PASSION24.HOUR.11.P025",
+        "near": true,
+        "scroll": 2577,
+        "has": true
+      }
+    },
+    {
+      "group": "resume",
+      "case": "toggle_does_not_change_lastParas",
+      "status": "PASS",
+      "detail": {
+        "saved": "PASSION24.HOUR.11.P025",
+        "before": "PASSION24.HOUR.11.P025",
+        "after": "PASSION24.HOUR.11.P025",
+        "near": true,
+        "scroll": 2577,
+        "has": true
+      }
+    },
+    {
+      "group": "resume",
+      "case": "toggle_state_changed",
+      "status": "PASS",
+      "detail": {
+        "saved": "PASSION24.HOUR.11.P025",
+        "before": "PASSION24.HOUR.11.P025",
+        "after": "PASSION24.HOUR.11.P025",
+        "near": true,
+        "scroll": 2577,
+        "has": true
+      }
+    },
+    {
+      "group": "resume",
+      "case": "no_page_errors",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

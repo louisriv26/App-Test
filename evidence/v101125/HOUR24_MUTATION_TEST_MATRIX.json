@@ -1,0 +1,119 @@
+{
+  "schema": "L24H_V101125_MUTATION_TEST_MATRIX_V1",
+  "baseline_validator_errors": [],
+  "summary": {
+    "pass": 12,
+    "fail": 0,
+    "total": 12
+  },
+  "mutations": [
+    {
+      "mutation": "MUT-01",
+      "description": "Treat Hour 24 as complete regardless of progress",
+      "status": "PASS",
+      "expected_detection": "canonical_complete_gate_missing",
+      "detected_errors": [
+        "canonical_complete_gate_missing"
+      ]
+    },
+    {
+      "mutation": "MUT-02",
+      "description": "Show restart in incomplete state",
+      "status": "PASS",
+      "expected_detection": "restart_visible_in_incomplete_branch",
+      "detected_errors": [
+        "restart_visible_in_incomplete_branch"
+      ]
+    },
+    {
+      "mutation": "MUT-03",
+      "description": "Omit Hour-24 Réflexion et pratique",
+      "status": "PASS",
+      "expected_detection": "hour_action_missing:Réflexion et pratique",
+      "detected_errors": [
+        "hour_action_missing:Réflexion et pratique"
+      ]
+    },
+    {
+      "mutation": "MUT-04",
+      "description": "Omit Hour-24 Approfondir",
+      "status": "PASS",
+      "expected_detection": "hour_action_missing:Approfondir",
+      "detected_errors": [
+        "hour_action_missing:Approfondir"
+      ]
+    },
+    {
+      "mutation": "MUT-05",
+      "description": "Omit Hour-24 Revenir au début",
+      "status": "PASS",
+      "expected_detection": "hour_action_missing:Revenir au début",
+      "detected_errors": [
+        "hour_action_missing:Revenir au début"
+      ]
+    },
+    {
+      "mutation": "MUT-06",
+      "description": "Leave Suivante rendered on Hour 24",
+      "status": "PASS",
+      "expected_detection": "hour24_next_control_not_removed",
+      "detected_errors": [
+        "hour24_next_control_not_removed"
+      ]
+    },
+    {
+      "mutation": "MUT-07",
+      "description": "Fail to refresh after Méditée toggle",
+      "status": "PASS",
+      "expected_detection": "meditee_does_not_refresh",
+      "detected_errors": [
+        "meditee_does_not_refresh"
+      ]
+    },
+    {
+      "mutation": "MUT-08",
+      "description": "Allow incomplete completed-cycle reset",
+      "status": "PASS",
+      "expected_detection": "restart_complete_guard_missing",
+      "detected_errors": [
+        "restart_complete_guard_missing"
+      ]
+    },
+    {
+      "mutation": "MUT-09",
+      "description": "Route completed restart to Home",
+      "status": "PASS",
+      "expected_detection": "restart_hour1_destination_missing",
+      "detected_errors": [
+        "restart_hour1_destination_missing"
+      ]
+    },
+    {
+      "mutation": "MUT-10",
+      "description": "Clear notes/highlights during restart",
+      "status": "PASS",
+      "expected_detection": "restart_clears_protected_personal_data",
+      "detected_errors": [
+        "restart_clears_protected_personal_data"
+      ]
+    },
+    {
+      "mutation": "MUT-11",
+      "description": "Add progress action to Hours 1–23",
+      "status": "PASS",
+      "expected_detection": "cycle_action_leaked_to_hour_actions",
+      "detected_errors": [
+        "cycle_action_leaked_to_hour_actions"
+      ]
+    },
+    {
+      "mutation": "MUT-12",
+      "description": "Restore redundant Hour-24 Accueil action",
+      "status": "PASS",
+      "expected_detection": "redundant_home_restored",
+      "detected_errors": [
+        "redundant_home_restored"
+      ]
+    }
+  ]
+}

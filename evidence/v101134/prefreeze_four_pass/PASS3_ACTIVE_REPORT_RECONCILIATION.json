@@ -1,0 +1,523 @@
+{
+  "version": "v101.134",
+  "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1",
+  "summary": {
+    "pass": 65,
+    "fail": 0,
+    "total": 65
+  },
+  "rows": [
+    {
+      "check": "README.md:L1",
+      "status": "PASS",
+      "detail": {
+        "line": "# Les 24 Heures de la Passion — v101.134",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "README.md:L3",
+      "status": "PASS",
+      "detail": {
+        "line": "Release-engineering-only successor of immutable v101.133.",
+        "support": "explicit predecessor/historical context"
+      }
+    },
+    {
+      "check": "README.md:L5",
+      "status": "PASS",
+      "detail": {
+        "line": "- Functional renderer behavior is unchanged from v101.133.",
+        "support": "explicit predecessor/historical context"
+      }
+    },
+    {
+      "check": "README.md:L6",
+      "status": "PASS",
+      "detail": {
+        "line": "- The v101.133 repair remains 82/82 aligned with canonical text/source offsets preserved.",
+        "support": "82-locus per-locus reconciliation"
+      }
+    },
+    {
+      "check": "README.md:L7",
+      "status": "PASS",
+      "detail": {
+        "line": "- v101.134 repairs package-local evidence reproducibility: corrected 1,748-boundary reconstruction, missing named M1/M3 reconciliation artifacts, tooling inventory and gate mapping.",
+        "support": "current-version identity"
+      }
+    },
+    {
+      "check": "README.md:L8",
+      "status": "PASS",
+      "detail": {
+        "line": "- Canonical text operations: 0. Speaker/topology/offset/schema changes: 0.",
+        "support": "release integrity gate"
+      }
+    },
+    {
+      "check": "README.md:L9",
+      "status": "PASS",
+      "detail": {
+        "line": "- Physical-device/PWA/offline/screen-reader/live-origin validation remains external and open.",
+        "support": "version.json external-open authority"
+      }
+    },
+    {
+      "check": "REAL_DEVICE_QA_CHECKLIST.md:L1",
+      "status": "PASS",
+      "detail": {
+        "line": "# Real-device QA checklist — v101.134",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "REAL_DEVICE_QA_CHECKLIST.md:L3",
+      "status": "PASS",
+      "detail": {
+        "line": "Use only the exact SHA-bound locked v101.134 package and confirm `v101.134` in Aide.",
+        "support": "current-version identity"
+      }
+    },
+    {
+      "check": "REAL_DEVICE_QA_CHECKLIST.md:L5",
+      "status": "PASS",
+      "detail": {
+        "line": "## Alignment controls",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "REAL_DEVICE_QA_CHECKLIST.md:L6",
+      "status": "PASS",
+      "detail": {
+        "line": "Verify native left-edge alignment at Hour 8 P007/P008/P009; Hour 5 reflection P005; one Promesses main case and its Library mirror; one linked-LDC case; `RELATED_HOUR_21.P073`; and `PART_III_MARY_SORROWS.BODY.P212`.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "REAL_DEVICE_QA_CHECKLIST.md:L8",
+      "status": "PASS",
+      "detail": {
+        "line": "## External gates",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "REAL_DEVICE_QA_CHECKLIST.md:L9",
+      "status": "PASS",
+      "detail": {
+        "line": "- iPhone; iPad portrait; iPad landscape; Samsung/Android.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "REAL_DEVICE_QA_CHECKLIST.md:L10",
+      "status": "PASS",
+      "detail": {
+        "line": "- Installed-PWA update from v101.133 and close/reopen persistence.",
+        "support": "version.json external-open authority"
+      }
+    },
+    {
+      "check": "REAL_DEVICE_QA_CHECKLIST.md:L11",
+      "status": "PASS",
+      "detail": {
+        "line": "- True offline cold reopen.",
+        "support": "version.json external-open authority"
+      }
+    },
+    {
+      "check": "REAL_DEVICE_QA_CHECKLIST.md:L12",
+      "status": "PASS",
+      "detail": {
+        "line": "- Representative VoiceOver/TalkBack.",
+        "support": "version.json external-open authority"
+      }
+    },
+    {
+      "check": "REAL_DEVICE_QA_CHECKLIST.md:L13",
+      "status": "PASS",
+      "detail": {
+        "line": "- Live GitHub Pages exact-byte binding.",
+        "support": "version.json external-open authority"
+      }
+    },
+    {
+      "check": "REAL_DEVICE_QA_CHECKLIST.md:L15",
+      "status": "PASS",
+      "detail": {
+        "line": "Browser emulation is supporting evidence only. Natural wrapping is valid; a synthetic one-space left indent is not.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L1",
+      "status": "PASS",
+      "detail": {
+        "line": "# Les 24 Heures de la Passion — v101.134",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L2",
+      "status": "PASS",
+      "detail": {
+        "line": "## Boundary-Universe Evidence Reproducibility Reconciliation",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L3",
+      "status": "PASS",
+      "detail": {
+        "line": "### Corrective M4 execution specification",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L5",
+      "status": "PASS",
+      "detail": {
+        "line": "## Authority",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L7",
+      "status": "PASS",
+      "detail": {
+        "line": "- Immutable functional predecessor: `v101.133`.",
+        "support": "explicit predecessor/historical context"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L8",
+      "status": "PASS",
+      "detail": {
+        "line": "- Predecessor ZIP SHA-256: `1479ac5f1de0a425f3c7f2e5cd9ce7340ba1465dccac817cd27cb93f49f09b9a`.",
+        "support": "predecessor SHA direct hash"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L9",
+      "status": "PASS",
+      "detail": {
+        "line": "- Governing user authority: the approved v101.133 master script authorised M2–M4 and requires release-engineering defects found during M4 to be corrected and M4 restarted without broadening functional scope.",
+        "support": "explicit predecessor/historical context"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L10",
+      "status": "PASS",
+      "detail": {
+        "line": "- v101.133 remains immutable.",
+        "support": "explicit predecessor/historical context"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L12",
+      "status": "PASS",
+      "detail": {
+        "line": "## Why v101.134 exists",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L14",
+      "status": "PASS",
+      "detail": {
+        "line": "The v101.133 functional alignment repair passed its runtime gates, but final deliverable reconciliation found package-local evidence/tooling defects: the required M1 boundary-universe artifact was missing; the added reconstruction helper was omitted from current tooling inventory and did not reproduce 1,748; and several required named M3 deliverables were not separately embedded.",
+        "support": "explicit predecessor/historical context"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L16",
+      "status": "PASS",
+      "detail": {
+        "line": "## Permitted scope",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L18",
+      "status": "PASS",
+      "detail": {
+        "line": "Release-engineering only. Preserve v101.133 renderer behavior exactly after normalising release identity. Canonical text, speaker adjudications, topology/offsets, continuity authority, storage schema and user-state semantics must not change.",
+        "support": "release integrity gate"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L20",
+      "status": "PASS",
+      "detail": {
+        "line": "## Required reconciliation",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L22",
+      "status": "PASS",
+      "detail": {
+        "line": "1. Embed the corrected runtime-boundary reconstruction tool.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L23",
+      "status": "PASS",
+      "detail": {
+        "line": "2. Reproduce `1,858 raw markers -> 1,748 effective boundaries` using explicit exclusions: 105 non-block markers and 5 wrapper-only local speech markers without visible semantic content after the boundary.",
+        "support": "boundary reconstruction summary"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L24",
+      "status": "PASS",
+      "detail": {
+        "line": "3. Preserve the 82-case repair universe: 78 speech/presentation + 4 LDC intra-record.",
+        "support": "frozen v101.133 mutant/positive-ledger authority"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L25",
+      "status": "PASS",
+      "detail": {
+        "line": "4. Embed the missing M1/M3 named reconciliation artifacts without pretending they are byte-identical historical artifacts.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L26",
+      "status": "PASS",
+      "detail": {
+        "line": "5. List every current/added validation tool in current tooling inventory and map every current gate dependency.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L27",
+      "status": "PASS",
+      "detail": {
+        "line": "6. Rerun the complete v101.133 functional suite on v101.134.",
+        "support": "current-version identity"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L28",
+      "status": "PASS",
+      "detail": {
+        "line": "7. Run strengthened four-pass, deterministic Build A/B, exact reopen, independent audit and meta-audit.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L29",
+      "status": "PASS",
+      "detail": {
+        "line": "8. Write the final decision lock last.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L31",
+      "status": "PASS",
+      "detail": {
+        "line": "## Hard stop",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L33",
+      "status": "PASS",
+      "detail": {
+        "line": "Stop for user approval if any correction requires a functional renderer change, canonical text change, speaker/topology/offset change, schema change or content-specific exception.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L35",
+      "status": "PASS",
+      "detail": {
+        "line": "## External boundary",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "scripts/EXECUTION_SPEC.md:L37",
+      "status": "PASS",
+      "detail": {
+        "line": "Physical iPhone/iPad/Samsung, installed-PWA upgrade, true cold-offline, live-origin binding and representative VoiceOver/TalkBack remain OPEN unless directly tested.",
+        "support": "version.json external-open authority"
+      }
+    },
+    {
+      "check": "reports/V101134_BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION.md:L1",
+      "status": "PASS",
+      "detail": {
+        "line": "# v101.134 Boundary-Universe Evidence Reproducibility Reconciliation",
+        "support": "structural"
+      }
+    },
+    {
+      "check": "reports/V101134_BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION.md:L3",
+      "status": "PASS",
+      "detail": {
+        "line": "- Immutable functional predecessor: `v101.133` / `1479ac5f1de0a425f3c7f2e5cd9ce7340ba1465dccac817cd27cb93f49f09b9a` / 751 members.",
+        "support": "predecessor SHA direct hash"
+      }
+    },
+    {
+      "check": "reports/V101134_BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION.md:L4",
+      "status": "PASS",
+      "detail": {
+        "line": "- Functional renderer change relative to v101.133: **0**.",
+        "support": "explicit predecessor/historical context"
+      }
+    },
+    {
+      "check": "reports/V101134_BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION.md:L5",
+      "status": "PASS",
+      "detail": {
+        "line": "- Canonical text / speaker / topology-offset / schema changes: **0**.",
+        "support": "release integrity gate"
+      }
+    },
+    {
+      "check": "reports/V101134_BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION.md:L6",
+      "status": "PASS",
+      "detail": {
+        "line": "- Corrected package-local reconstruction: **1,858 raw markers -> 1,748 effective runtime boundaries**.",
+        "support": "boundary reconstruction summary"
+      }
+    },
+    {
+      "check": "reports/V101134_BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION.md:L7",
+      "status": "PASS",
+      "detail": {
+        "line": "- Explicit exclusions: **105 non-block markers + 5 wrapper-only local markers without visible semantic content**.",
+        "support": "boundary exclusion summary"
+      }
+    },
+    {
+      "check": "reports/V101134_BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION.md:L8",
+      "status": "PASS",
+      "detail": {
+        "line": "- v101.133 alignment repair remains **82/82 repaired**: 78 speech/presentation + 4 LDC intra-record loci.",
+        "support": "82-locus per-locus reconciliation"
+      }
+    },
+    {
+      "check": "reports/V101134_BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION.md:L9",
+      "status": "PASS",
+      "detail": {
+        "line": "- Missing named M1/M3 artifacts are embedded as **later reconciliation evidence**, not fabricated historical byte-streams.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "reports/V101134_BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION.md:L10",
+      "status": "PASS",
+      "detail": {
+        "line": "- Corrected reconstruction helper is current, package-local and explicitly listed in tooling/gate authorities.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "reports/V101134_BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION.md:L11",
+      "status": "PASS",
+      "detail": {
+        "line": "- Current prefreeze evidence: **7177 assertions / 0 FAIL**.",
+        "support": "instruction/context"
+      }
+    },
+    {
+      "check": "reports/V101134_BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION.md:L12",
+      "status": "PASS",
+      "detail": {
+        "line": "- Physical-device/PWA/true-offline/screen-reader/live-origin validation remains external and open.",
+        "support": "version.json external-open authority"
+      }
+    },
+    {
+      "check": "version.json_current_version",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.134"
+      }
+    },
+    {
+      "check": "metadata/current_tooling_inventory.json_current_version",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.134"
+      }
+    },
+    {
+      "check": "metadata/current_tooling_inventory.json_current_stage",
+      "status": "PASS",
+      "detail": {
+        "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1"
+      }
+    },
+    {
+      "check": "metadata/current_gate_map.json_current_version",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.134"
+      }
+    },
+    {
+      "check": "metadata/current_gate_map.json_current_stage",
+      "status": "PASS",
+      "detail": {
+        "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1"
+      }
+    },
+    {
+      "check": "metadata/build_provenance.json_current_version",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.134"
+      }
+    },
+    {
+      "check": "metadata/build_provenance.json_current_stage",
+      "status": "PASS",
+      "detail": {
+        "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1"
+      }
+    },
+    {
+      "check": "metadata/current_evidence_lineage.json_current_version",
+      "status": "PASS",
+      "detail": {
+        "version": "v101.134"
+      }
+    },
+    {
+      "check": "metadata/current_evidence_lineage.json_current_stage",
+      "status": "PASS",
+      "detail": {
+        "stage": "BOUNDARY_UNIVERSE_EVIDENCE_REPRODUCIBILITY_RECONCILIATION_R1"
+      }
+    },
+    {
+      "check": "version_external_gates_open",
+      "status": "PASS",
+      "detail": [
+        "physical iPad/iPhone/Samsung",
+        "live-origin exact-byte binding",
+        "installed PWA update from v101.133",
+        "installed PWA close/reopen persistence",
+        "true offline cold reopen",
+        "VoiceOver/TalkBack representative testing"
+      ]
+    },
+    {
+      "check": "version_no_known_internal_blocker",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

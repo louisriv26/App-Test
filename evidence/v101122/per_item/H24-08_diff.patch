@@ -1,0 +1,13 @@
+--- before
++++ after
+@@ -4813,8 +4813,8 @@
+ window.addEventListener('unhandledrejection', function(e) {
+   console.error('Unhandled promise rejection:', e.reason);
+ });
+-const APP_VERSION = 'v101.121';
+-const APP_EVIDENCE_STAGE = 'FOUR_PASS_REPORT_TOOLING_RECONCILIATION_R1';
++const APP_VERSION = 'v101.122';
++const APP_EVIDENCE_STAGE = 'HOUR24_END_OF_CYCLE_STATE_AND_ACTION_HIERARCHY_R1';
+ const STORAGE_SCHEMA_VERSION=8; const R41_TEXT_ANCHOR_RESET_VERSION='1';
+ const MAX_PERSONAL_DATA_IMPORT_BYTES = 32 * 1024 * 1024; // finite parser guard; must exceed any realistic localStorage-backed self-export
+ const PERSONAL_BACKUP_FORMAT = 'luisa-24h-user-data';

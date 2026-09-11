@@ -1,0 +1,25 @@
+{
+  "schema": "L24H_V101141_R1_SEARCH_COMPLETENESS_AUTHORITY_V1",
+  "authorized_by_user": "proceed",
+  "date": "2026-09-09",
+  "immutable_predecessor_version": "v101.140 R1",
+  "immutable_predecessor_zip_sha256": "c84f2266e82de38b2adb70873f15f4da9046d504ff02a7cb93e389aec7bd7835",
+  "scope": [
+    "Extend Paroles directes to visible TEXT_LIBRARY body records carrying existing SPEECH_DATA, preserving speaker attribution and stable anchors.",
+    "Explicitly index Hour, Prayer and Section titles and route each title result to its owning item.",
+    "Remove the unnecessary plus suffix from exact search-result totals above the 60-result display cap."
+  ],
+  "forbidden": [
+    "Any CORPUS text mutation",
+    "Any TEXT_LIBRARY text or metadata mutation",
+    "Any SPEECH_DATA or semantic speaker mutation",
+    "Any stable ID mutation",
+    "Any search normalization change",
+    "Any personal storage schema change",
+    "Any unrelated UI or corpus change"
+  ],
+  "source_evidence": {
+    "report": "V101140_R1_SEARCH_FUNCTION_VERIFICATION_REPORT_2026-09-09.md",
+    "predecessor_search_verdict": "ordinary search PASS; two material completeness gaps and one minor count-label issue"
+  }
+}

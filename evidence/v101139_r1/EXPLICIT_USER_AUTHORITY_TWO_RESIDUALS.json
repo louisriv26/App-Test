@@ -1,0 +1,39 @@
+{
+  "schema": "l24h-v101139-r1-two-residual-explicit-user-authority-v1",
+  "date": "2026-09-08",
+  "instruction_source": "User explicitly instructed that the next-conversation prompt should fix the two residual French source-fidelity defects.",
+  "base_app": "v101.138 R2",
+  "base_app_zip_sha256": "14538b7e7294b77282ad40a4efae76df070ee32325752d79965a2be41aaca1ef",
+  "target_successor": "v101.139 R1",
+  "decision_gate_sha256": "309ff5de13c669a9a1df5390a225abb716957203eacfcfe6c98cb3bb9499fc41",
+  "parent_79_ledger_sha256": "f9a9c4c74df33b3f96909e3611acb74c448deed5fa367fa86072d2e27cbfef49",
+  "authorized_scope": "EXACTLY_TWO_CANONICAL_TEXT_RECORDS",
+  "authorized_records": [
+    {
+      "record_id": "PASSION24.HOUR.01.P027",
+      "current_sha256": "c94005064df666aeb762839e5d9a69fbb1390fc0a232b2677fdd1441569379e7",
+      "authorized_proposed_sha256": "258887a4526d0f873ca08772ae891c6cd8374ae9b8bc564f06d8d8376d9f0fea",
+      "authorized_proposed_text": "Je donne un baiser à ta Main droite pour que Tu bénisses tous mes battements de cœur, mes pensées et mes affections, afin que, valorisés par cette bénédiction, tous deviennent saints. Et avec moi, bénis aussi toutes les créatures et scelle le salut de leur âme par ta bénédiction."
+    },
+    {
+      "record_id": "PASSION24.HOUR.24.DESOL.P081",
+      "current_sha256": "5b2be922ae0443e7991740bb90e239059979779dd327cd0036d4ed9ed72cf0af",
+      "authorized_proposed_sha256": "3e602dd9e83c78cc53b898b8dbf5bacb1f97a4fcbd3144994bf18bb5f79004cb",
+      "authorized_proposed_text": "Maman désolée, regarde, moi aussi je suis ton enfant et seule je ne peux, ni ne veux vivre. Prends-moi sur tes genoux et presse-moi dans tes bras maternels. Sers-moi de Maman, j’ai besoin d’un guide, d’aide, de soutien. Regarde ma pauvreté. Sur mes plaies, verse une de tes larmes, et quand tu me verras distraite, serre-moi sur ton Cœur maternel et rafraîchis en moi la Vie de Jésus. Mais tandis que je te prie, je suis forcée de m’arrêter pour prêter attention à tes douleurs si amères. Je me sens transpercée en voyant que, lorsque tu bouges la tête, tu sens pénétrer les épines que tu as prises de Jésus, ainsi que les piqûres de tous nos péchés de pensée qui, pénétrant jusque dans tes yeux, te font pleurer des larmes mêlées de sang. Tandis que tu pleures, ayant dans tes yeux la Vue de Jésus, toutes les offenses des créatures passent devant ton regard. Oh ! comme elles t’emplissent d’amertume ! Comme tu comprends ce que Jésus a souffert, puisque tu as en toi ses mêmes Peines ! Mais une douleur n’attend pas l’autre. Lorsque tu tends l’oreille, tu te sens assourdie par l’écho des voix des créatures ; chaque variété de voix pénètre de tes oreilles jusqu’à ton Cœur et le transperce, et tu répètes ton refrain : « Fils, comme Tu as souffert ! » Mère désolée, comme je compatis avec toi ! Permets-moi d’essuyer ton Visage baigné de larmes et de sang. Mais je recule en le voyant tout couvert de meurtrissures, méconnaissable et pâle d’une pâleur mortelle. Je comprends : ce sont les mauvais traitements de Jésus que tu as pris sur toi qui te font tant souffrir. Lorsque tu remues les lèvres pour prier ou pousser des soupirs de ta Poitrine embrasée, tu sens ton souffle amer et tes lèvres brûlées par la Soif de Jésus. Pauvre Maman, comme je compatis avec toi ! Tes douleurs grandissent toujours davantage et semblent se donner la main. Prenant tes mains dans les miennes, je les vois transpercées par les clous. C’est dans ces mêmes mains que tu ressens la douleur et vois les homicides, les trahisons, les sacrilèges et toutes les œuvres mauvaises qui renouvellent les coups, élargissent les Plaies et les rendent plus cruelles. Comme je compatis avec toi ! Tu es la véritable Mère crucifiée : même tes Pieds ne restent pas sans clous ; non seulement tu les sens cloués, mais comme arrachés par tant de pas iniques et par les âmes qui vont en enfer, et tu cours après elles afin qu’elles ne tombent pas dans les flammes infernales. Mais ce n’est pas encore tout, Mère transpercée. Toutes tes Peines, réunies ensemble, font écho dans ton Cœur et le transpercent, non de sept épées, mais de mille et mille épées. D’autant plus qu’ayant en toi le Cœur divin de Jésus, qui contient tous les cœurs et enveloppe dans son Battement les battements de tous, à chaque Battement Il dit : « Âmes ! Amour ! » Et toi, au Battement « Âmes ! », tu sens passer dans ton propre battement tous les péchés et tu te sens donner la mort ; au Battement « Amour ! », tu te sens donner la Vie. Ainsi tu es dans un continuel acte de mort et de Vie. Mère crucifiée, en te regardant, je compatis à tes Douleurs : elles sont indicibles ! Je voudrais changer mon être en langue et en voix pour te dire ma compassion."
+    }
+  ],
+  "explicitly_not_authorized": [
+    "any third canonical text mutation",
+    "reopening or modifying the 79-row source-critical ledger",
+    "H23 Form-A/Form-B synthesis or wording changes",
+    "H24 burial/deposition relocation",
+    "H8 strapazzi decision",
+    "TEXT_LIBRARY mutations",
+    "stable-ID changes",
+    "storage schema changes unless strictly mechanically necessary and separately justified",
+    "wholesale normalization to AFLP-27",
+    "unrelated UI/feature changes",
+    "AFLP alternative-edition feature work"
+  ],
+  "governance_note": "Necessary build/release metadata and mechanically dependent evidence files may change, but canonical text authority is limited to the two exact stable IDs and exact proposed texts."
+}

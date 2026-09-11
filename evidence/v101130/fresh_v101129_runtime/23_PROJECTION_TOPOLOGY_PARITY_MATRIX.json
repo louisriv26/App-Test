@@ -1,0 +1,86 @@
+{
+  "schema": "L24H_V101129_PROJECTION_TOPOLOGY_PARITY_V1",
+  "version": "v101.129",
+  "summary": {
+    "pass": 8,
+    "fail": 0,
+    "total": 8
+  },
+  "rows": [
+    {
+      "case": "all_projection_breaks_exist_in_visible_topology",
+      "status": "PASS",
+      "detail": {
+        "projection": 94,
+        "topology": 104,
+        "missing": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P009_affected_projection_equals_topology",
+      "status": "PASS",
+      "detail": {
+        "projection": [
+          93,
+          210
+        ],
+        "topology": [
+          93,
+          210
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P010_affected_projection_equals_topology",
+      "status": "PASS",
+      "detail": {
+        "projection": [],
+        "topology": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.08.P015_affected_projection_equals_topology",
+      "status": "PASS",
+      "detail": {
+        "projection": [
+          145
+        ],
+        "topology": [
+          145
+        ]
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P020_affected_projection_equals_topology",
+      "status": "PASS",
+      "detail": {
+        "projection": [],
+        "topology": []
+      }
+    },
+    {
+      "case": "PASSION24.HOUR.21.P025_affected_projection_equals_topology",
+      "status": "PASS",
+      "detail": {
+        "projection": [],
+        "topology": []
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P043_affected_projection_equals_topology",
+      "status": "PASS",
+      "detail": {
+        "projection": [],
+        "topology": []
+      }
+    },
+    {
+      "case": "PASSION24.TEXT.RELATED_HOUR_06.BODY.P058_affected_projection_equals_topology",
+      "status": "PASS",
+      "detail": {
+        "projection": [],
+        "topology": []
+      }
+    }
+  ]
+}

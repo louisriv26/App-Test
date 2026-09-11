@@ -1,0 +1,1613 @@
+{
+  "schema": "L24H_V101140_R1_LDC_FAST_MODE_DERIVATIVE_AUTHORITY_V1",
+  "predecessor_zip_sha256": "07c58c551046ec186428b7075b9a6225b6b36d97359439d3a92c69ad58271726",
+  "certified_ledger_sha256": "dddb49ce5260512eb5c66dcf4db6b56d95bf0313e8c48af05461d87e1f4c7b76",
+  "mapping_ledger_sha256": "a5ff8bd4adeb4c7d0dcc709384b31d74f87e0cfb6c0130c7167417f3d6bd2a80",
+  "premutation_authority_sha256": "a6f1582bd249b1f5fa58e000774a9544db237f401ba7453981671f683a04a716",
+  "source_terminal_counts": {
+    "NOT_PRESENT_IN_24H": 2668,
+    "PRESENT_ALL_ALREADY_CORRECT": 2,
+    "PRESENT_WITH_APPLICABLE_DERIVATIVES": 37,
+    "BLOCKED_MAPPING_OR_CONFLICT": 0
+  },
+  "authorized_source_corrections": 37,
+  "already_correct_noops": 2,
+  "changed_record_count": 36,
+  "topology_edits": [
+    {
+      "source_ordinal": 11,
+      "item_id": "PASSION24.TEXT.RELATED_HOUR_05",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_05.BODY.P037",
+      "physical_index": 36,
+      "operation": "REMOVE_LDC_FLOW_BREAK_BEFORE",
+      "before_action": "paragraph_break",
+      "after_action": "joiner_space"
+    },
+    {
+      "source_ordinal": 555,
+      "item_id": "PASSION24.TEXT.RELATED_HOUR_17",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P194",
+      "physical_index": 193,
+      "operation": "REMOVE_LDC_FLOW_BREAK_BEFORE",
+      "before_action": "paragraph_break",
+      "after_action": "joiner_space"
+    },
+    {
+      "source_ordinal": 2469,
+      "item_id": "PASSION24.TEXT.RELATED_HOUR_21",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P172",
+      "physical_index": 171,
+      "operation": "REMOVE_LDC_FLOW_BREAK_BEFORE",
+      "before_action": "paragraph_break",
+      "after_action": "joiner_space"
+    }
+  ],
+  "mutations": [
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P078",
+      "record_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P078",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.PART_III_MARY_SORROWS].body[physical_index=77]",
+      "before_text": "Car Je dois de mettre en évidence les modèles les plus parfaits où Ma Volonté a sa pérennité, ne trouvant jamais aucun obstacle à son champ d'action divine où effectuer des choses dignes d'Elle-même.",
+      "before_sha256": "0a4562613e592f63371499bbe8977b099ba21612df2cb80c2dd45996550bc848",
+      "after_text": "Car Je dois mettre en évidence les modèles les plus parfaits où Ma Volonté a sa pérennité, ne trouvant jamais aucun obstacle à son champ d'action divine où effectuer des choses dignes d'Elle-même.",
+      "after_sha256": "59432968ea964d719421bdb8cd10940a7b75a49028e188c09cb38d3abdd944fd",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 72,
+          "kind": "text",
+          "old": "Je dois de mettre",
+          "new": "Je dois mettre",
+          "current_position_at_application": 4
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 72,
+          "stable_ref": "LDC.T19.E0016.P047",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0356_2026-09-08.zip",
+          "checkpoint_zip_sha256": "76a875461fdaf07396603445ce80fcf41a56e21bc42b7dfa61b258daa1c56085"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P117",
+      "record_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P117",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.PART_III_MARY_SORROWS].body[physical_index=116]",
+      "before_text": "J’étais captivée par un chant beau et harmonieux, suivi d'une sonorité inconnue, qui enchantait tout et tous. Ils s'harmonisant avec toute la Création et la céleste patrie.",
+      "before_sha256": "ea5affba5775a838f4ddc3383ab6fca82ef9ad7c138f78c11f36be459a05653f",
+      "after_text": "J’étais captivée par un chant beau et harmonieux, suivi d'une sonorité inconnue, qui enchantait tout et tous. Ils s'harmonisaient avec toute la Création et la céleste patrie.",
+      "after_sha256": "dc26fa70df207c080e77c3a7eadd527b8c956518e8319378dea2f9cb846576a6",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 73,
+          "kind": "text",
+          "old": "Ils s'harmonisant",
+          "new": "Ils s'harmonisaient",
+          "current_position_at_application": 110
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 73,
+          "stable_ref": "LDC.T19.E0016.P101",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0356_2026-09-08.zip",
+          "checkpoint_zip_sha256": "76a875461fdaf07396603445ce80fcf41a56e21bc42b7dfa61b258daa1c56085"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P129",
+      "record_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P129",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.PART_III_MARY_SORROWS].body[physical_index=128]",
+      "before_text": "Fais Moi parler du Règne de Ma Suprême Volonté.\"",
+      "before_sha256": "7764c982256afb15a80c004bc23dff30020d72e42f8bc5aafb6788462e7f48cf",
+      "after_text": "Fais-Moi parler du Règne de Ma Suprême Volonté.\"",
+      "after_sha256": "e984d5e14e6bd76faacb8419ca9c64ee61b20068a677b8886fe2025e4f5215af",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 92,
+          "kind": "text",
+          "old": "Fais Moi",
+          "new": "Fais-Moi",
+          "current_position_at_application": 0
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 92,
+          "stable_ref": "LDC.T19.E0037.P004",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0356_2026-09-08.zip",
+          "checkpoint_zip_sha256": "76a875461fdaf07396603445ce80fcf41a56e21bc42b7dfa61b258daa1c56085"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P176",
+      "record_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P176",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.PART_III_MARY_SORROWS].body[physical_index=175]",
+      "before_text": "ses peines intimes, Mes propres privations qui martyrisèrent son petit cœur, la donnant continuellement une mort.",
+      "before_sha256": "06abdf392427887bdc5def67d448304bb13048152f8d76f93f2dd0f36e367ee1",
+      "after_text": "ses peines intimes, Mes propres privations qui martyrisèrent son petit cœur, lui donnant continuellement une mort.",
+      "after_sha256": "a8acb5db5f407f29008be66daa87f5c5bdedfb767d696a008397a9a4dfa10a1c",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 93,
+          "kind": "text",
+          "old": "la donnant continuellement",
+          "new": "lui donnant continuellement",
+          "current_position_at_application": 77
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 93,
+          "stable_ref": "LDC.T19.E0037.P073",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0356_2026-09-08.zip",
+          "checkpoint_zip_sha256": "76a875461fdaf07396603445ce80fcf41a56e21bc42b7dfa61b258daa1c56085"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P218",
+      "record_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P218",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.PART_III_MARY_SORROWS].body[physical_index=217]",
+      "before_text": "Car, être privée de Moi est la peine la plus grande, confère à l'âme le mérite de devenir dépositaire des Dons les plus inestimables de son Créateur, de ses Connaissances les plus élevés et de ses Secrets.",
+      "before_sha256": "ab88c8b51862088762bb65c41ea5a114b8856930f7bdfdb9184b46791f125207",
+      "after_text": "Car, être privée de Moi est la peine la plus grande, confère à l'âme le mérite de devenir dépositaire des Dons les plus inestimables de son Créateur, de ses Connaissances les plus élevées et de ses Secrets.",
+      "after_sha256": "cdbfdd0c79ade961dd7b29d0db5317b2743045f8204b03d1ae07382ff5949330",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 102,
+          "kind": "text",
+          "old": "Connaissances les plus élevés",
+          "new": "Connaissances les plus élevées",
+          "current_position_at_application": 157
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 102,
+          "stable_ref": "LDC.T19.E0050.P053",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0356_2026-09-08.zip",
+          "checkpoint_zip_sha256": "76a875461fdaf07396603445ce80fcf41a56e21bc42b7dfa61b258daa1c56085"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P220",
+      "record_id": "PASSION24.TEXT.PART_III_MARY_SORROWS.BODY.P220",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.PART_III_MARY_SORROWS].body[physical_index=219]",
+      "before_text": "Après t'avoir privée de Moi, Je t'ai manifesté les Connaissances les plus élevés concernant Ma Volonté, te rendant dépositaire, non seulement de ses Connaissances, mais aussi de Ma propre Volonté.",
+      "before_sha256": "701379fd258694aac590884906562bb073d306c4b58866d8175e63291684ef5e",
+      "after_text": "Après t'avoir privée de Moi, Je t'ai manifesté les Connaissances les plus élevées concernant Ma Volonté, te rendant dépositaire, non seulement de ses Connaissances, mais aussi de Ma propre Volonté.",
+      "after_sha256": "ba7783fe7746fcab162ca4fd05f0257bf3e5a8167a1fa0950808b765b09fbd1f",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 103,
+          "kind": "text",
+          "old": "Connaissances les plus élevés",
+          "new": "Connaissances les plus élevées",
+          "current_position_at_application": 51
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 103,
+          "stable_ref": "LDC.T19.E0050.P055",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0356_2026-09-08.zip",
+          "checkpoint_zip_sha256": "76a875461fdaf07396603445ce80fcf41a56e21bc42b7dfa61b258daa1c56085"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_05.BODY.P036",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_05.BODY.P036",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_05].body[physical_index=35]",
+      "before_text": "Il n'y a rien en toi et en dehors de toi qui ne soit entouré de Mes Actes répétés d'Amour. Voilà pourquoi, dans le Jardin de Gethsémani, Mon Humanité gémissait, suffoquait et se sentait écrasée sous le poids de tant d'Amour.",
+      "before_sha256": "e5f063e830e12e689acaee0b171f2dab59095afb3e4f3d13478351546a19b6eb",
+      "after_text": "Il n'y a rien en toi et en dehors de toi qui ne soit entouré de Mes Actes répétés d'Amour. Voilà pourquoi, dans le Jardin de Gethsémani, Mon Humanité gémissait, suffoquait et se sentait écrasée sous le poids de tant d'Amour,",
+      "after_sha256": "f401f76d0bf5e9dbc94ed37e89b7d6832c897af9f484ce3b5986eeabd87c63ee",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 11,
+          "kind": "boundary_governing_punctuation",
+          "old": "tant d'Amour.",
+          "new": "tant d'Amour,",
+          "current_position_at_application": 211
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 11,
+          "stable_ref": "LDC.T17.E0021.P073",
+          "correction_type": "BOUNDARY_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0292_2026-09-08.zip",
+          "checkpoint_zip_sha256": "d12778ea9ab04c668b1aa8d404a4e3cd4a50335b298cd1934900e43e9f0d4d6b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "source_ordinal": 11,
+          "item_id": "PASSION24.TEXT.RELATED_HOUR_05",
+          "record_id": "PASSION24.TEXT.RELATED_HOUR_05.BODY.P037",
+          "physical_index": 36,
+          "operation": "REMOVE_LDC_FLOW_BREAK_BEFORE",
+          "before_action": "paragraph_break",
+          "after_action": "joiner_space"
+        },
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_05.BODY.P037",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_05.BODY.P037",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_05].body[physical_index=36]",
+      "before_text": "Parce que J'aimais et Je n'étais pas aimé. Ces peines d'Amour sont les plus amères, les plus cruelles.",
+      "before_sha256": "a406619fd9ef3f41faaa425c3176e0cdd8c7e8755e3aaf522cd201b1907147cd",
+      "after_text": "parce que J'aimais et Je n'étais pas aimé. Ces peines d'Amour sont les plus amères, les plus cruelles.",
+      "after_sha256": "6edc6d23ec60e8d49b5b14a34d3f3ff6740c266716d3832c608ab74458967118",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 11,
+          "kind": "boundary_subordinate_case",
+          "old": "Parce que",
+          "new": "parce que",
+          "current_position_at_application": 0
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 11,
+          "stable_ref": "LDC.T17.E0021.P073",
+          "correction_type": "BOUNDARY_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0292_2026-09-08.zip",
+          "checkpoint_zip_sha256": "d12778ea9ab04c668b1aa8d404a4e3cd4a50335b298cd1934900e43e9f0d4d6b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "source_ordinal": 11,
+          "item_id": "PASSION24.TEXT.RELATED_HOUR_05",
+          "record_id": "PASSION24.TEXT.RELATED_HOUR_05.BODY.P037",
+          "physical_index": 36,
+          "operation": "REMOVE_LDC_FLOW_BREAK_BEFORE",
+          "before_action": "paragraph_break",
+          "after_action": "joiner_space"
+        },
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_05.BODY.P039",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_05.BODY.P039",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_05].body[physical_index=38]",
+      "before_text": "Et Il a le sentiment d'être payé de retour par un acte de mort. Vois donc toute l'amertume et la douleur que M'a données la Passion de Mon Amour. Parce que dans Ma Passion physique, ils ne M'ont donné qu'une seule mort. Alors que dans Ma Passion d'Amour, J'ai eu à souffrir autant de morts que le nombre d'actes d'amour qui sont sortis de Moi et pour lesquels il n'y a pas eu de réciprocité.",
+      "before_sha256": "eb5828f56fe49299bc80c8610ffbb011f6c00e864c990390884d4d751b09dea7",
+      "after_text": "Et Il a le sentiment d'être payé de retour par un acte de mort. Vois donc toute l'amertume et la douleur que M'a données la Passion de Mon Amour, parce que dans Ma Passion physique, ils ne M'ont donné qu'une seule mort, alors que dans Ma Passion d'Amour, J'ai eu à souffrir autant de morts que le nombre d'actes d'amour qui sont sortis de Moi et pour lesquels il n'y a pas eu de réciprocité.",
+      "after_sha256": "d83946302c67c2160dda3aac50b63f6137d313209e07ec26834d39c4776887aa",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 12,
+          "kind": "boundary_internal_join",
+          "old": ". Parce que",
+          "new": ", parce que",
+          "current_position_at_application": 144
+        },
+        {
+          "source_ordinal": 13,
+          "kind": "boundary_internal_join",
+          "old": ". Alors que",
+          "new": ", alors que",
+          "current_position_at_application": 218
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 12,
+          "stable_ref": "LDC.T17.E0021.P077",
+          "correction_type": "BOUNDARY_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0292_2026-09-08.zip",
+          "checkpoint_zip_sha256": "d12778ea9ab04c668b1aa8d404a4e3cd4a50335b298cd1934900e43e9f0d4d6b"
+        },
+        {
+          "cumulative_ordinal": 13,
+          "stable_ref": "LDC.T17.E0021.P077",
+          "correction_type": "BOUNDARY_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0292_2026-09-08.zip",
+          "checkpoint_zip_sha256": "d12778ea9ab04c668b1aa8d404a4e3cd4a50335b298cd1934900e43e9f0d4d6b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_17.BODY.P082",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P082",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_17].body[physical_index=81]",
+      "before_text": "Partout où Elle règne, toutes nos Œuvres sont pleine de Vie.",
+      "before_sha256": "8f7e8e8aad36da4ef0a81936e1bc727656da43989acd4c1b97ab081f31a3f8fc",
+      "after_text": "Partout où Elle règne, toutes nos Œuvres sont pleines de Vie.",
+      "after_sha256": "9f548852e3b33a1298727b237aebaab39f032cccf7f8c96341919cce9dd44c5d",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 82,
+          "kind": "text",
+          "old": "toutes nos Œuvres sont pleine",
+          "new": "toutes nos Œuvres sont pleines",
+          "current_position_at_application": 23
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 82,
+          "stable_ref": "LDC.T19.E0029.P034",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0356_2026-09-08.zip",
+          "checkpoint_zip_sha256": "76a875461fdaf07396603445ce80fcf41a56e21bc42b7dfa61b258daa1c56085"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_17.BODY.P174",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P174",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_17].body[physical_index=173]",
+      "before_text": "Jésus me surpris en train d'écrire.",
+      "before_sha256": "75b7f46eb6a6eb5b3551c79060f89350bc4ca91672826333d829d43e10da7262",
+      "after_text": "Jésus me surprit en train d'écrire.",
+      "after_sha256": "f5dbf5bdc0d0e17f17c38fe505932620de9a6f139392a238cfe85ea3fdc21579",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 83,
+          "kind": "text",
+          "old": "Jésus me surpris",
+          "new": "Jésus me surprit",
+          "current_position_at_application": 0
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 83,
+          "stable_ref": "LDC.T19.E0029.P154",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0356_2026-09-08.zip",
+          "checkpoint_zip_sha256": "76a875461fdaf07396603445ce80fcf41a56e21bc42b7dfa61b258daa1c56085"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_17.BODY.P175",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P175",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_17].body[physical_index=174]",
+      "before_text": "Il sortis de moi, mit ses bras autour de mon cou et me serra très fort ce qui faisait que je ne pus continuer à écrire, mon pauvre esprit étant ailleurs.",
+      "before_sha256": "d581b4164b8d74d327cadafdc24f52bcdbda30d7c9197a4746e594355f5ff232",
+      "after_text": "Il sortit de moi, mit ses bras autour de mon cou et me serra très fort ce qui faisait que je ne pus continuer à écrire, mon pauvre esprit étant ailleurs.",
+      "after_sha256": "2a2807853435636110d1a55d5b75fb4a04508b56c82412a84da5138d5b8b8ff0",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 84,
+          "kind": "text",
+          "old": "Il sortis",
+          "new": "Il sortit",
+          "current_position_at_application": 0
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 84,
+          "stable_ref": "LDC.T19.E0029.P155",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0356_2026-09-08.zip",
+          "checkpoint_zip_sha256": "76a875461fdaf07396603445ce80fcf41a56e21bc42b7dfa61b258daa1c56085"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_17.BODY.P193",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P193",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_17].body[physical_index=192]",
+      "before_text": "Ma fille, si Rome a la primauté de Mon Église, elle le doit à Jérusalem.",
+      "before_sha256": "a74ab33e5dbf8552590b73b1feb9b05a05497d6f007b88a2bc141fa768ad04c5",
+      "after_text": "Ma fille, si Rome a la primauté de Mon Église, elle le doit à Jérusalem,",
+      "after_sha256": "e82853f3f82442db196ec65800d404e9ee6fec0988004687a46746d9df8ebbb5",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 555,
+          "kind": "boundary_governing_punctuation",
+          "old": "Jérusalem.",
+          "new": "Jérusalem,",
+          "current_position_at_application": 62
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 555,
+          "stable_ref": "LDC.T24.E0048.P007",
+          "correction_type": "BOUNDARY_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0548_2026-09-08.zip",
+          "checkpoint_zip_sha256": "b420e833921ef7e87385f07b88272a276d45b870f019f58ee38e586d1e8b9c03"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "source_ordinal": 555,
+          "item_id": "PASSION24.TEXT.RELATED_HOUR_17",
+          "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P194",
+          "physical_index": 193,
+          "operation": "REMOVE_LDC_FLOW_BREAK_BEFORE",
+          "before_action": "paragraph_break",
+          "after_action": "joiner_space"
+        },
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_17.BODY.P194",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P194",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_17].body[physical_index=193]",
+      "before_text": "Parce que le commencement de la Rédemption était précisément à Jérusalem.",
+      "before_sha256": "c269fbe450df751ed04a42e9f7d92ea1864535328535162823b2835ac6024c9b",
+      "after_text": "parce que le commencement de la Rédemption était précisément à Jérusalem.",
+      "after_sha256": "ccd57f4fdda892779d5d576ea4a885595790dc3e308f7a576c7a449ad431f35d",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 555,
+          "kind": "boundary_subordinate_case",
+          "old": "Parce que",
+          "new": "parce que",
+          "current_position_at_application": 0
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 555,
+          "stable_ref": "LDC.T24.E0048.P007",
+          "correction_type": "BOUNDARY_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0548_2026-09-08.zip",
+          "checkpoint_zip_sha256": "b420e833921ef7e87385f07b88272a276d45b870f019f58ee38e586d1e8b9c03"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "source_ordinal": 555,
+          "item_id": "PASSION24.TEXT.RELATED_HOUR_17",
+          "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P194",
+          "physical_index": 193,
+          "operation": "REMOVE_LDC_FLOW_BREAK_BEFORE",
+          "before_action": "paragraph_break",
+          "after_action": "joiner_space"
+        },
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_17.BODY.P199",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P199",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_17].body[physical_index=198]",
+      "before_text": "Les premiers annonceurs de l’Évangile, ceux qui établirent le catholicisme à Rome, étaient Mes Apôtres, tous de Jérusalem c'est-à-dire de cette patrie.",
+      "before_sha256": "2e07250e5c8d72893611990c91f92718b9b045beed3627db67f174ed5ae2c2ba",
+      "after_text": "Les premiers annonceurs de l’Évangile, ceux qui établirent le catholicisme à Rome, étaient Mes Apôtres, tous de Jérusalem, c'est-à-dire de cette patrie.",
+      "after_sha256": "2d223a406e431cc8fe0ac31de96c84c3218ec6f2e88709fcdc568b7bac524f09",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 556,
+          "kind": "text",
+          "old": "Jérusalem c'est-à-dire",
+          "new": "Jérusalem, c'est-à-dire",
+          "current_position_at_application": 112
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 556,
+          "stable_ref": "LDC.T24.E0048.P017",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0548_2026-09-08.zip",
+          "checkpoint_zip_sha256": "b420e833921ef7e87385f07b88272a276d45b870f019f58ee38e586d1e8b9c03"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_17.BODY.P213",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P213",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_17].body[physical_index=212]",
+      "before_text": "De fait, en créant l’homme, Nous avons placé dans son être toutes les semences de bonheurs que possédait chaque chose créée, Nous avons disposé l’intérieur de l’homme comme un champ contenant toutes les semences de bonheurs.",
+      "before_sha256": "b12fa02d7eb93c5d1b117addbabd78b2b283a30841262a2f539ab9fd39d4693d",
+      "after_text": "De fait, en créant l’homme, Nous avons placé dans son être toutes les semences de bonheurs que possédait chaque chose créée. Nous avons disposé l’intérieur de l’homme comme un champ contenant toutes les semences de bonheurs.",
+      "after_sha256": "04029030ea44d0b5d1c3862e45437287f521d6a14732d6834a90b0731c9630de",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 557,
+          "kind": "text",
+          "old": "chaque chose créée, Nous avons disposé",
+          "new": "chaque chose créée. Nous avons disposé",
+          "current_position_at_application": 105
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 557,
+          "stable_ref": "LDC.T24.E0048.P039",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0548_2026-09-08.zip",
+          "checkpoint_zip_sha256": "b420e833921ef7e87385f07b88272a276d45b870f019f58ee38e586d1e8b9c03"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_17.BODY.P216",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P216",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_17].body[physical_index=215]",
+      "before_text": "Or, en péchant, l’homme a fait que ces semences de bonheurs que Dieu lui avait infusées en le créant sont devenues malades. Par conséquent, Il a perdu le goût de jouir de tous les bonheurs contenus dans la Création.",
+      "before_sha256": "7350fcb52f8945805b65ab0f37a899a33c181b331eace91ec70a6f73eed4bff8",
+      "after_text": "Or, en péchant, l’homme a fait que ces semences de bonheurs que Dieu lui avait infusées en le créant sont devenues malades. Par conséquent, il a perdu le goût de jouir de tous les bonheurs contenus dans la Création.",
+      "after_sha256": "94b8ed30918069d30ac8dfb92c2794fcf162005c0d940393d61822c6ff647d98",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 558,
+          "kind": "text",
+          "old": "Par conséquent, Il a perdu le goût",
+          "new": "Par conséquent, il a perdu le goût",
+          "current_position_at_application": 124
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 558,
+          "stable_ref": "LDC.T24.E0048.P043",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0548_2026-09-08.zip",
+          "checkpoint_zip_sha256": "b420e833921ef7e87385f07b88272a276d45b870f019f58ee38e586d1e8b9c03"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_17.BODY.P219",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_17.BODY.P219",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_17].body[physical_index=218]",
+      "before_text": "Par contre, celui qui est sain, peut goûter les saveurs, la force et la chaleur.",
+      "before_sha256": "9fbb7fb94ebb2395a239450030b6c02d88a98ade829af52afa31e6a52a0b8f73",
+      "after_text": "Par contre, celui qui est sain peut goûter les saveurs, la force et la chaleur.",
+      "after_sha256": "b875b4a707a30c7dd037c9d61bfeb6ed374a92a09c70fd4c1fa6d687e9367d7d",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 559,
+          "kind": "text",
+          "old": "celui qui est sain, peut goûter",
+          "new": "celui qui est sain peut goûter",
+          "current_position_at_application": 12
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 559,
+          "stable_ref": "LDC.T24.E0048.P046",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0548_2026-09-08.zip",
+          "checkpoint_zip_sha256": "b420e833921ef7e87385f07b88272a276d45b870f019f58ee38e586d1e8b9c03"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P076",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P076",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=75]",
+      "before_text": "Ah ! Cette Volonté possède tous les biens, reflète parfaitement Jésus en les âmes, embrasse tout et donne un parfait retour à Dieu pour ses Œuvres de la Création, de la Rédemption et de la Sanctification.",
+      "before_sha256": "6176ba2d2f201f84013293567d7109ced7fffd3da2059ab2073118567e717e1b",
+      "after_text": "Ah ! Cette Volonté possède tous les biens, reflète parfaitement Jésus dans les âmes, embrasse tout et donne un parfait retour à Dieu pour ses Œuvres de la Création, de la Rédemption et de la Sanctification.",
+      "after_sha256": "27437c6067738d4b517d75bff1d0eef48dc862c0c72a7b36e0f8cd9a6db2dce6",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 61,
+          "kind": "text",
+          "old": "en les âmes",
+          "new": "dans les âmes",
+          "current_position_at_application": 70
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 61,
+          "stable_ref": "LDC.T18.E0005A.P028",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0356_2026-09-08.zip",
+          "checkpoint_zip_sha256": "76a875461fdaf07396603445ce80fcf41a56e21bc42b7dfa61b258daa1c56085"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P129",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P129",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=128]",
+      "before_text": "Notre Règne divin l’investit. Nous la faisons dominatrice de toute chose, dominatrice de notre force, de notre bonté et de notre sainteté dominatrice de la lumière.",
+      "before_sha256": "75df2dd73f6723440b55820cdcf7b3e15feca686337947ae00d6f9baa29f8af1",
+      "after_text": "Notre Règne divin l’investit. Nous la faisons dominatrice de toute chose, dominatrice de notre force, de notre bonté et de notre sainteté, dominatrice de la lumière.",
+      "after_sha256": "031248d79d0f2ec26aa1655c972d6c5c27949f1f032af8248f51b8073c99261e",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2458,
+          "kind": "text",
+          "old": "de notre sainteté dominatrice de la lumière",
+          "new": "de notre sainteté, dominatrice de la lumière",
+          "current_position_at_application": 120
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2458,
+          "stable_ref": "LDC.T35.E0040.P005",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P145",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P145",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=144]",
+      "before_text": "Par conséquent, Nous avons donné naissance à la Création, ainsi elle doit nous revenir dans notre adorable Fiat. Si nous ne le faisions pas, ce serait comme si nous n’avions pas la Puissance nécessaire pour tout faire, l’Amour pour tout conquérir ou la Sagesse pour pouvoir tout disposer.",
+      "before_sha256": "1846c38639729b2f7b5f04aad1b35290acaf2f96263611d270ee2b78d89413ae",
+      "after_text": "Par conséquent, Nous avons donné naissance à la Création. Ainsi elle doit nous revenir dans notre adorable Fiat. Si nous ne le faisions pas, ce serait comme si nous n’avions pas la Puissance nécessaire pour tout faire, l’Amour pour tout conquérir ou la Sagesse pour pouvoir tout disposer.",
+      "after_sha256": "9fd5c80811f4c5962f7b6034b45510c5fa37b788b9ece765cf2e1d69a98b72a6",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2459,
+          "kind": "text",
+          "old": "Nous avons donné naissance à la Création, ainsi elle doit",
+          "new": "Nous avons donné naissance à la Création. Ainsi elle doit",
+          "current_position_at_application": 16
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2459,
+          "stable_ref": "LDC.T35.E0040.P021",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P150",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P150",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=149]",
+      "before_text": "Notre Amour trouvera, son repos, sa délivrance et sa paix en toi, ainsi que, le commencement de notre bonheur sur terre dans le cœur de la créature.",
+      "before_sha256": "1ddae54f38428227b0bc1697da75d8189b58e997455a4e3025a5f8b2fc96fff7",
+      "after_text": "Notre Amour trouvera son repos, sa délivrance et sa paix en toi, ainsi que le commencement de notre bonheur sur terre dans le cœur de la créature.",
+      "after_sha256": "46116b62f177c982c6cc081a000322e013f5239a84c41ae612f3da00916b83aa",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2460,
+          "kind": "text",
+          "old": "Notre Amour trouvera, son repos",
+          "new": "Notre Amour trouvera son repos",
+          "current_position_at_application": 0
+        },
+        {
+          "source_ordinal": 2461,
+          "kind": "text",
+          "old": "ainsi que, le commencement",
+          "new": "ainsi que le commencement",
+          "current_position_at_application": 65
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2460,
+          "stable_ref": "LDC.T35.E0040.P026",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        },
+        {
+          "cumulative_ordinal": 2461,
+          "stable_ref": "LDC.T35.E0040.P026",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P154",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P154",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=153]",
+      "before_text": "Tu dois savoir que Ma Volonté est comme une vraie Mère pour la créature : elle la crée de ses mains, elle la conçoit dans son sein maternel, et elle ne la laisse jamais seule pas même un seul instant dans ce sein maternel, comme à l’intérieur d’un lieu sacré. Ma Volonté forme la créature,",
+      "before_sha256": "1e14e2941bfb891d748ea0428be202a269687a125e895280507f0e5336b55455",
+      "after_text": "Tu dois savoir que Ma Volonté est comme une vraie Mère pour la créature : elle la crée de ses mains, elle la conçoit dans son sein maternel, et elle ne la laisse jamais seule, pas même un seul instant dans ce sein maternel, comme à l’intérieur d’un lieu sacré. Ma Volonté forme la créature,",
+      "after_sha256": "a278a16e2eec84f8656778f94fdc4df9accf2eb2a30c1f26239caa9103ab1601",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2462,
+          "kind": "text",
+          "old": "elle ne la laisse jamais seule pas même un seul instant",
+          "new": "elle ne la laisse jamais seule, pas même un seul instant",
+          "current_position_at_application": 144
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2462,
+          "stable_ref": "LDC.T35.E0040.P030",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P155",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P155",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=154]",
+      "before_text": "lui donne l’usage de ses membres, elle l’élève avec ses souffles, lui donne sa chaleur. Après l’avoir bien formée, elle lui donne le jour.",
+      "before_sha256": "9460bf7b9472651418b0bc310e203be70bc34dd0462716bec32620aefd2d3250",
+      "after_text": "lui donne l’usage de ses membres. Elle l’élève avec ses souffles, lui donne sa chaleur. Après l’avoir bien formée, elle lui donne le jour.",
+      "after_sha256": "ff91028b1e3a1b310d2b29909d66bcbe622eb733758d257a623964c39bc8f023",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2463,
+          "kind": "text",
+          "old": "l’usage de ses membres, elle l’élève",
+          "new": "l’usage de ses membres. Elle l’élève",
+          "current_position_at_application": 10
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2463,
+          "stable_ref": "LDC.T35.E0040.P031",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P160",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P160",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=159]",
+      "before_text": "Bien qu’elle sent sa Vie divine étouffée, et peut-être même inconnue de la créature et non aimée, l’Amour de Ma Volonté est si grand qu’il continue sa Vie avec la créature, même si celle-ci l’offense, afin de le sauver.",
+      "before_sha256": "af758cd6874cee5af4bd6bd3161f625b95f2437796c28f3433d86836720d2b23",
+      "after_text": "Bien qu’elle sente sa Vie divine étouffée, et peut-être même inconnue de la créature et non aimée, l’Amour de Ma Volonté est si grand qu’il continue sa Vie avec la créature, même si celle-ci l’offense, afin de la sauver.",
+      "after_sha256": "4f48ded84351258394263e4c60bb2300839c216bf20a59ff68abd409e69651d1",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2464,
+          "kind": "text",
+          "old": "Bien qu’elle sent sa Vie divine",
+          "new": "Bien qu’elle sente sa Vie divine",
+          "current_position_at_application": 0
+        },
+        {
+          "source_ordinal": 2640,
+          "kind": "text",
+          "old": "afin de le sauver",
+          "new": "afin de la sauver",
+          "current_position_at_application": 202
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2464,
+          "stable_ref": "LDC.T35.E0040.P036",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        },
+        {
+          "cumulative_ordinal": 2640,
+          "stable_ref": "LDC.T35.E0040.P036",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P162",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P162",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=161]",
+      "before_text": "Tu dois savoir qu’à ce moment, Nous donnons le dernier signe d’amour à la créature en lui accordant nos grâces, amour et bonté, en témoignant tellement de tendresses d’amour capables à adoucir et à gagner les cœurs les plus durs.",
+      "before_sha256": "c1801eb3b3be1f7b3571eafba5209d00f4dbed84e06fc123f7e651ce4b7b96c8",
+      "after_text": "Tu dois savoir qu’à ce moment, Nous donnons le dernier signe d’amour à la créature en lui accordant nos grâces, amour et bonté, en témoignant tellement de tendresses d’amour capables d’adoucir et à gagner les cœurs les plus durs.",
+      "after_sha256": "3aedc1cbb5049b92707af972461fab712c04e0a6b52f620622e5fd645e84a96f",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2465,
+          "kind": "text",
+          "old": "tendresses d’amour capables à adoucir",
+          "new": "tendresses d’amour capables d’adoucir",
+          "current_position_at_application": 155
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2465,
+          "stable_ref": "LDC.T35.E0040.P038",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P163",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P163",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=162]",
+      "before_text": "Lorsque la créature se trouve, entre la vie et la mort, entre le temps qui est sur le point de finir et l’éternité qui est sur le point de commencer presque dans l’acte de quitter son corps, Moi, ton Jésus, Je Me laisse voir avec une amabilité qui ravit, avec une douceur qui enchaîne et adoucit les amertumes de la vie, spécialement en ce moment extrême.",
+      "before_sha256": "3b5268b9a9bce608ff6c59c51498da7bec3c81392343229299cb05ccceafa9d3",
+      "after_text": "Lorsque la créature se trouve entre la vie et la mort, entre le temps qui est sur le point de finir et l’éternité qui est sur le point de commencer presque dans l’acte de quitter son corps, Moi, ton Jésus, Je Me laisse voir avec une amabilité qui ravit, avec une douceur qui enchaîne et adoucit les amertumes de la vie, spécialement en ce moment extrême.",
+      "after_sha256": "0b84785ab2f2342b9219faf52351b1150ba509cc035c756ea5b2908b5699d4e3",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2466,
+          "kind": "text",
+          "old": "Lorsque la créature se trouve, entre la vie et la mort",
+          "new": "Lorsque la créature se trouve entre la vie et la mort",
+          "current_position_at_application": 0
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2466,
+          "stable_ref": "LDC.T35.E0040.P039",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P164",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P164",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=163]",
+      "before_text": "Puis, il y a Mon regard… Je la regarde avec tant d’amour pour faire sortir de la créature, un acte de contrition, un acte d’amour, un acte d’adhésion à Ma Volonté.",
+      "before_sha256": "72083069c2e46b8120ced244c984e59d7ebb98e6fa0d4cbe08809eb93a3af461",
+      "after_text": "Puis, il y a Mon regard… Je la regarde avec tant d’amour pour faire sortir de la créature un acte de contrition, un acte d’amour, un acte d’adhésion à Ma Volonté.",
+      "after_sha256": "82ae583c240277004633c2318882500aa5fd5c612a4074e6480a5cdbb5abcd13",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2467,
+          "kind": "text",
+          "old": "faire sortir de la créature, un acte de contrition",
+          "new": "faire sortir de la créature un acte de contrition",
+          "current_position_at_application": 62
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2467,
+          "stable_ref": "LDC.T35.E0040.P040",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P165",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P165",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=164]",
+      "before_text": "En ce moment de perte des illusions, en voyant en touchant de ses mains combien nous l’aimions et l’aimons encore, la créature ressent une si grande souffrance qu’elle se repent de ne pas nous avoir aimés. Elle reconnaît notre Volonté comme principe et accomplissement de sa vie. En satisfaction, elle accepte sa mort pour accomplir un acte de notre Volonté.",
+      "before_sha256": "db5b5312f9f1411d487a29ecbf53b2c33350795631859ee2d76061675f3339b2",
+      "after_text": "En ce moment de perte des illusions, en voyant et en touchant de ses mains combien nous l’aimions et l’aimons encore, la créature ressent une si grande souffrance qu’elle se repent de ne pas nous avoir aimés. Elle reconnaît notre Volonté comme principe et accomplissement de sa vie. En satisfaction, elle accepte sa mort pour accomplir un acte de notre Volonté.",
+      "after_sha256": "9d058bb36e76a28c83179f65ae90456cc37effda77f31503ba13186e6276ffcd",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2468,
+          "kind": "text",
+          "old": "en voyant en touchant de ses mains",
+          "new": "en voyant et en touchant de ses mains",
+          "current_position_at_application": 37
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2468,
+          "stable_ref": "LDC.T35.E0040.P041",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P171",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P171",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=170]",
+      "before_text": "Mais la créature ne peut voir aucune de ces choses. Elle les entend affirmer par d’autres. Et ceux qui les lui disent ne peuvent pas les voir non plus.",
+      "before_sha256": "5ebd2616d1694793882a94fe97bf0b5d0f17a1c60c9e03e335e7cc71622f8647",
+      "after_text": "Mais la créature ne peut voir aucune de ces choses. Elle les entend affirmer par d’autres. Et ceux qui les lui disent ne peuvent pas les voir non plus,",
+      "after_sha256": "bdf3eccb2855349e3626253144e01bf97cb778522f3fcd7a3c20156d4c0c27d5",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2469,
+          "kind": "boundary_governing_punctuation",
+          "old": "non plus.",
+          "new": "non plus,",
+          "current_position_at_application": 142
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2469,
+          "stable_ref": "LDC.T35.E0040.P048",
+          "correction_type": "BOUNDARY_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "source_ordinal": 2469,
+          "item_id": "PASSION24.TEXT.RELATED_HOUR_21",
+          "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P172",
+          "physical_index": 171,
+          "operation": "REMOVE_LDC_FLOW_BREAK_BEFORE",
+          "before_action": "paragraph_break",
+          "after_action": "joiner_space"
+        },
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_21.BODY.P172",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P172",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_21].body[physical_index=171]",
+      "before_text": "De sorte qu’ils parlent presque sans même trop y croire. Alors ils ne savent pas accorder beaucoup d’importance à leurs paroles. Ils ne leur donnent pas un ton de réalité, comme quelque chose qui est certain.",
+      "before_sha256": "e86879bd8df2d93d030968a099d392fe0fb953153c7a99dcf498dbf26226cc20",
+      "after_text": "de sorte qu’ils parlent presque sans même trop y croire. Alors ils ne savent pas accorder beaucoup d’importance à leurs paroles. Ils ne leur donnent pas un ton de réalité, comme quelque chose qui est certain.",
+      "after_sha256": "2c2ea7182a95615e1c8cd091376cdb47fb161322f4758619fee2a587ca7a90a6",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2469,
+          "kind": "boundary_subordinate_case",
+          "old": "De sorte qu’",
+          "new": "de sorte qu’",
+          "current_position_at_application": 0
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2469,
+          "stable_ref": "LDC.T35.E0040.P048",
+          "correction_type": "BOUNDARY_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "source_ordinal": 2469,
+          "item_id": "PASSION24.TEXT.RELATED_HOUR_21",
+          "record_id": "PASSION24.TEXT.RELATED_HOUR_21.BODY.P172",
+          "physical_index": 171,
+          "operation": "REMOVE_LDC_FLOW_BREAK_BEFORE",
+          "before_action": "paragraph_break",
+          "after_action": "joiner_space"
+        },
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_22.BODY.P066",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_22.BODY.P066",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_22].body[physical_index=65]",
+      "before_text": "Lorsque la créature marche, Je crie à ses pas, la bouche brûlante : «",
+      "before_sha256": "5285761b107072dc1ecfc0e41a0deeb465eece6b97905d87d88be332cb90e4bd",
+      "after_text": "lorsque la créature marche, Je crie à ses pas, la bouche brûlante : «",
+      "after_sha256": "4bcdf21378bb3b1e748748718c9306ba7e79f698bdde1f2a93039615c3bda26b",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2507,
+          "kind": "text",
+          "old": "Lorsque la créature marche",
+          "new": "lorsque la créature marche",
+          "current_position_at_application": 0
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2507,
+          "stable_ref": "LDC.T36.E0003.P008",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_END_VISUAL_BREAKS",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_CROSS_RECORD_OPENING_WRAPPER_SUPPRESSIONS",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "VISIBLE_PARAGRAPH_TOPOLOGY",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_22.BODY.P083",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_22.BODY.P083",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_22].body[physical_index=82]",
+      "before_text": "Ma Volonté n’est pas seulement Vie pour nous, mais forme notre Résidence autour de Nous avec son immensité dans laquelle demeure toujours en acte : tous nos Actes, toutes nos Paroles et tout ce que Nous sommes.",
+      "before_sha256": "5cc064cc91a9fc5476a87b7b7a809a4a6e9621d759b1d3a0d6bbb03b73339666",
+      "after_text": "Ma Volonté n’est pas seulement Vie pour nous, mais forme notre Résidence autour de Nous avec son immensité dans laquelle demeurent toujours en acte tous nos Actes, toutes nos Paroles et tout ce que Nous sommes.",
+      "after_sha256": "d888ccd6f4f51802b346d579b4e00ff4519a8a9198f4216070d2e4de4675e5de",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 2508,
+          "kind": "text",
+          "old": "dans laquelle demeure toujours en acte",
+          "new": "dans laquelle demeurent toujours en acte",
+          "current_position_at_application": 107
+        },
+        {
+          "source_ordinal": 2509,
+          "kind": "text",
+          "old": "en acte : tous nos Actes",
+          "new": "en acte tous nos Actes",
+          "current_position_at_application": 140
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 2508,
+          "stable_ref": "LDC.T36.E0003.P023",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        },
+        {
+          "cumulative_ordinal": 2509,
+          "stable_ref": "LDC.T36.E0003.P023",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0804_2026-09-08.zip",
+          "checkpoint_zip_sha256": "283b07c731e20a5b7363ac10f2257426b792835f3d4eaa79d76335d469a2fc2b"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_23.BODY.P052",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_23.BODY.P052",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_23].body[physical_index=51]",
+      "before_text": "ici, dans le nouveau Paradis, le Ciel lui est ouvert à nouveau, il retrouve la Paix et le Bonheur perdus, le démon est enchaîné alors que l’homme est délivré de son esclavage.",
+      "before_sha256": "7df368972711586eef26ac141de37ba03cd9d0d732129d2e27ccfab7c2deffa3",
+      "after_text": "Ici, dans le nouveau Paradis, le Ciel lui est ouvert à nouveau, il retrouve la Paix et le Bonheur perdus, le démon est enchaîné alors que l’homme est délivré de son esclavage.",
+      "after_sha256": "bc71d19d4637bdaaede847b832c6612e01ca95844b1297efb4a22ad524ed1bf6",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 341,
+          "kind": "text",
+          "old": "ici, dans le nouveau Paradis",
+          "new": "Ici, dans le nouveau Paradis",
+          "current_position_at_application": 0
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 341,
+          "stable_ref": "LDC.T24.E0006.P012",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0548_2026-09-08.zip",
+          "checkpoint_zip_sha256": "b420e833921ef7e87385f07b88272a276d45b870f019f58ee38e586d1e8b9c03"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_23.BODY.P081",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_23.BODY.P081",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_23].body[physical_index=80]",
+      "before_text": "Ma Mort, Ma Résurrection était nécessaire à Mon Amour.",
+      "before_sha256": "3739fdd71d79b7368d52349a51cb279af7343d6a44ae7a2e34a1cc7cf7972ea4",
+      "after_text": "Ma Mort, Ma Résurrection étaient nécessaires à Mon Amour.",
+      "after_sha256": "33957052d52c4190df7243d8558dd72ae2ebc23cfea48da993f3119e27fb0d8b",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 343,
+          "kind": "text",
+          "old": "Ma Mort, Ma Résurrection était nécessaire",
+          "new": "Ma Mort, Ma Résurrection étaient nécessaires",
+          "current_position_at_application": 0
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 343,
+          "stable_ref": "LDC.T24.E0006.P065",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0548_2026-09-08.zip",
+          "checkpoint_zip_sha256": "b420e833921ef7e87385f07b88272a276d45b870f019f58ee38e586d1e8b9c03"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    },
+    {
+      "operation_id": "V101140.LDCFAST.PASSION24.TEXT.RELATED_HOUR_23.BODY.P083",
+      "record_id": "PASSION24.TEXT.RELATED_HOUR_23.BODY.P083",
+      "file_object_path": "TEXT_LIBRARY[PASSION24.TEXT.RELATED_HOUR_23].body[physical_index=82]",
+      "before_text": "Et je voulais ressusciter afin de former non seulement la résurrection du corps, mais en elle la résurrection de la Vie de Ma Volonté.",
+      "before_sha256": "df18eeebcc8b6d0f80b6520ae6d105aa6b942af49cf86e9211f6b411d6f27dd0",
+      "after_text": "Et Je voulais ressusciter afin de former non seulement la résurrection du corps, mais en elle la résurrection de la Vie de Ma Volonté.",
+      "after_sha256": "a0158eab9a6491b73122042d86f57c93363c24ad3c3c229c7326596c50ce70a7",
+      "minimal_hunks": [
+        {
+          "source_ordinal": 344,
+          "kind": "text",
+          "old": "Et je voulais ressusciter",
+          "new": "Et Je voulais ressusciter",
+          "current_position_at_application": 0
+        }
+      ],
+      "certified_ldc_entries": [
+        {
+          "cumulative_ordinal": 344,
+          "stable_ref": "LDC.T24.E0006.P067",
+          "correction_type": "EXACT_SURFACE_REPAIR",
+          "checkpoint_filename": "LDC_FAST_MODE_CHECKPOINT_POST_BODY0548_2026-09-08.zip",
+          "checkpoint_zip_sha256": "b420e833921ef7e87385f07b88272a276d45b870f019f58ee38e586d1e8b9c03"
+        }
+      ],
+      "mapping_evidence": "Frozen v101.139 current source/flow mapping + unique local old-span/context; exact full before text SHA-bound.",
+      "mechanically_entailed_offset_or_topology_updates": [
+        {
+          "layer": "SPEECH_DATA",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        },
+        {
+          "layer": "SPEECH_PRESENTATION_PROJECTION",
+          "operation": "MECHANICAL_OFFSET_REMAP_IF_POSITION_AFFECTED",
+          "semantic_speaker_decision": "PRESERVE"
+        }
+      ],
+      "status": "AUTHORIZED_TO_APPLY"
+    }
+  ],
+  "negative_locks": [
+    "NO_NON_LDC_TEXT",
+    "NO_CANONICAL_HOUR_TEXT",
+    "NO_MEDITATION_REFLECTION_PRACTICE_TEXT",
+    "NO_AFLP_FULL_TEXT_ALTERNATIVE",
+    "NO_UI_OR_NAVIGATION_CHANGE_EXCEPT_VERSION_CACHE_EVIDENCE",
+    "NO_SEMANTIC_SPEAKER_REINTERPRETATION",
+    "NO_REJECTED_OR_OOS_FAST_MODE_CASES"
+  ]
+}

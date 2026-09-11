@@ -1,0 +1,28 @@
+{
+  "mode": "H24-05",
+  "rows": [
+    {
+      "check": "hour23_next_present",
+      "status": "PASS",
+      "detail": {
+        "next": true
+      }
+    },
+    {
+      "check": "hour24_next_absent",
+      "status": "PASS",
+      "detail": {
+        "next": false,
+        "buttons": [
+          "Précédente\nJésus transpercé par la lanc",
+          "Méditée\nAppuyez après avoir médité"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "pass": 2,
+    "fail": 0,
+    "total": 2
+  }
+}

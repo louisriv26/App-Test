@@ -1,0 +1,101 @@
+{
+  "schema": "L24H_V101131_PASS2_V1",
+  "version": "v101.131",
+  "summary": {
+    "pass": 18,
+    "fail": 0,
+    "total": 18
+  },
+  "checks": [
+    {
+      "case": "01_MUTATION_INTEGRITY.json",
+      "status": "PASS",
+      "detail": "pass=17 fail=0 total=17"
+    },
+    {
+      "case": "02_GLOBAL_RAW_TEXT_COMPLETENESS_GATE.json",
+      "status": "PASS",
+      "detail": "pass=14 fail=0 total=14"
+    },
+    {
+      "case": "03_APPROVED_CASES_RUNTIME_PRESENTATION.json",
+      "status": "PASS",
+      "detail": "pass=29 fail=0 total=29"
+    },
+    {
+      "case": "04_MUTATION_TEST_MATRIX.json",
+      "status": "PASS",
+      "detail": "pass=10 fail=0 total=10"
+    },
+    {
+      "case": "05_STRICT_CROSS_RECORD_GLYPH_FLOW_MATRIX.json",
+      "status": "PASS",
+      "detail": "pass=185 fail=0 total=185"
+    },
+    {
+      "case": "06_LEGACY_CONTINUITY_MATRIX.json",
+      "status": "PASS",
+      "detail": "pass=215 fail=0 total=215"
+    },
+    {
+      "case": "07_MEDITEE_REGRESSION_MATRIX.json",
+      "status": "PASS",
+      "detail": "pass=164 fail=0 total=164"
+    },
+    {
+      "case": "08_MEDITEE_RESPONSIVE_REGRESSION_MATRIX.json",
+      "status": "PASS",
+      "detail": "pass=245 fail=0 total=245"
+    },
+    {
+      "case": "09_HOUR24_REGRESSION_MATRIX.json",
+      "status": "PASS",
+      "detail": "pass=17 fail=0 total=17"
+    },
+    {
+      "case": "10_HELP_REGRESSION_MATRIX.json",
+      "status": "PASS",
+      "detail": "pass=70 fail=0 total=70"
+    },
+    {
+      "case": "11_PRESENTATION_SUCCESSOR_MATRIX.json",
+      "status": "PASS",
+      "detail": "pass=2000 fail=0 total=2000"
+    },
+    {
+      "case": "12_INDEPENDENT_PRESENTATION_SUCCESSOR_MATRIX.json",
+      "status": "PASS",
+      "detail": "pass=2000 fail=0 total=2000"
+    },
+    {
+      "case": "13_BROAD_RUNTIME_MATRIX.json",
+      "status": "PASS",
+      "detail": "pass=52 fail=0 total=52"
+    },
+    {
+      "case": "14_SERVICE_WORKER_MATRIX.json",
+      "status": "PASS",
+      "detail": "pass=15 fail=0 total=15"
+    },
+    {
+      "case": "prefreeze_summary_14_families_5033_zero_fail",
+      "status": "PASS",
+      "detail": "5033"
+    },
+    {
+      "case": "successor_presentation_ledger_400",
+      "status": "PASS",
+      "detail": "400"
+    },
+    {
+      "case": "presentation_ledger_reconciliation_evidence_only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "invalid_responsive_harness_excluded",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

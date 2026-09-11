@@ -1,0 +1,393 @@
+{
+  "schema": "L24H_V101133_RUNTIME_PRESENTATION_MATRIX_V1",
+  "version": "v101.133",
+  "summary": {
+    "pass": 29,
+    "fail": 0,
+    "total": 29
+  },
+  "rows": [
+    {
+      "check": "identity",
+      "status": "PASS",
+      "detail": {
+        "v": "v101.133",
+        "s": "VISUAL_BOUNDARY_LEADING_WHITESPACE_ALIGNMENT_REPAIR_R1"
+      }
+    },
+    {
+      "check": "M1C001_nested_text_JESUS",
+      "status": "PASS",
+      "detail": {
+        "res": {
+          "ch": "I",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "className": "sp-jesus"
+        },
+        "textConserved": true,
+        "breaks": 0,
+        "raw": "Oh ! Combien la Création exalte de façon admirable ce dicton Me concernant : \"Il est à la fois ancien et nouveau.\""
+      }
+    },
+    {
+      "check": "M1C001_open_quote_visible_JESUS",
+      "status": "PASS",
+      "detail": {
+        "res": {
+          "ch": "\"",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "className": "sp-jesus"
+        },
+        "textConserved": true,
+        "breaks": 0,
+        "raw": "Oh ! Combien la Création exalte de façon admirable ce dicton Me concernant : \"Il est à la fois ancien et nouveau.\""
+      }
+    },
+    {
+      "check": "M1C001_close_quote_visible_JESUS",
+      "status": "PASS",
+      "detail": {
+        "res": {
+          "ch": "\"",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "className": "sp-jesus"
+        },
+        "textConserved": true,
+        "breaks": 0,
+        "raw": "Oh ! Combien la Création exalte de façon admirable ce dicton Me concernant : \"Il est à la fois ancien et nouveau.\""
+      }
+    },
+    {
+      "check": "M1C001_no_break",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "M1C001_text_conserved",
+      "status": "PASS",
+      "detail": 114
+    },
+    {
+      "check": "M1C002_nested_direct_JESUS",
+      "status": "PASS",
+      "detail": {
+        "res": {
+          "ch": "M",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "className": "sp-jesus"
+        },
+        "textConserved": true,
+        "breaks": 0,
+        "raw": "Et Je Lui demandais alors sans cesse : \"Maman, veux-Tu faire ceci ? Veux-Tu souffrir cette peine ?\""
+      }
+    },
+    {
+      "check": "M1C002_quotes_visible_and_JESUS",
+      "status": "PASS",
+      "detail": {
+        "open": {
+          "res": {
+            "ch": "\"",
+            "jesus": true,
+            "father": false,
+            "mary": false,
+            "hidden": false,
+            "className": "sp-jesus"
+          },
+          "textConserved": true,
+          "breaks": 0,
+          "raw": "Et Je Lui demandais alors sans cesse : \"Maman, veux-Tu faire ceci ? Veux-Tu souffrir cette peine ?\""
+        },
+        "close": {
+          "res": {
+            "ch": "\"",
+            "jesus": true,
+            "father": false,
+            "mary": false,
+            "hidden": false,
+            "className": "sp-jesus"
+          },
+          "textConserved": true,
+          "breaks": 0,
+          "raw": "Et Je Lui demandais alors sans cesse : \"Maman, veux-Tu faire ceci ? Veux-Tu souffrir cette peine ?\""
+        }
+      }
+    },
+    {
+      "check": "M1C002_no_break",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "M1C002_text_conserved",
+      "status": "PASS",
+      "detail": 99
+    },
+    {
+      "check": "M1C003_open_wrapper_hidden",
+      "status": "PASS",
+      "detail": {
+        "res": {
+          "ch": "«",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": true,
+          "className": "speech-quote-hidden"
+        },
+        "textConserved": true,
+        "breaks": 0,
+        "raw": "Alors, une Voix provenant du Trône divin dit : «"
+      }
+    },
+    {
+      "check": "M1C003_FATHER_starts_P068",
+      "status": "PASS",
+      "detail": {
+        "res": {
+          "ch": "E",
+          "jesus": false,
+          "father": true,
+          "mary": false,
+          "hidden": false,
+          "className": "sp-father"
+        },
+        "textConserved": true,
+        "breaks": 0,
+        "raw": "Elle est l'élue parmi tous les élus."
+      }
+    },
+    {
+      "check": "M1C003_FATHER_through_P073_258",
+      "status": "PASS",
+      "detail": {
+        "res": {
+          "ch": ".",
+          "jesus": false,
+          "father": true,
+          "mary": false,
+          "hidden": false,
+          "className": "sp-father"
+        },
+        "textConserved": true,
+        "breaks": 1,
+        "raw": "Et à travers toi, c'est-à-dire à travers notre Volonté en toi, notre Fiat revivra sur la terre. Nous regarderons vos deux volontés, celle de la divine Mère et la tienne, comme un gage précieux, apte à servir de rançon pour toutes les autres volontés humaines.» Ensuite, la Voix cessa de se faire entendre. Je me suis retrouvée sur l'autre Genou du Père dans l'acte de rendre mon dernier soupir."
+      }
+    },
+    {
+      "check": "M1C003_close_wrapper_hidden",
+      "status": "PASS",
+      "detail": {
+        "res": {
+          "ch": "»",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": true,
+          "className": "speech-quote-hidden"
+        },
+        "textConserved": true,
+        "breaks": 1,
+        "raw": "Et à travers toi, c'est-à-dire à travers notre Volonté en toi, notre Fiat revivra sur la terre. Nous regarderons vos deux volontés, celle de la divine Mère et la tienne, comme un gage précieux, apte à servir de rançon pour toutes les autres volontés humaines.» Ensuite, la Voix cessa de se faire entendre. Je me suis retrouvée sur l'autre Genou du Père dans l'acte de rendre mon dernier soupir."
+      }
+    },
+    {
+      "check": "M1C003_narration_resumes_not_FATHER",
+      "status": "PASS",
+      "detail": {
+        "res": {
+          "ch": "E",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "className": ""
+        },
+        "textConserved": true,
+        "breaks": 1,
+        "raw": "Et à travers toi, c'est-à-dire à travers notre Volonté en toi, notre Fiat revivra sur la terre. Nous regarderons vos deux volontés, celle de la divine Mère et la tienne, comme un gage précieux, apte à servir de rançon pour toutes les autres volontés humaines.» Ensuite, la Voix cessa de se faire entendre. Je me suis retrouvée sur l'autre Genou du Père dans l'acte de rendre mon dernier soupir."
+      }
+    },
+    {
+      "check": "M1C003_break_260_exact",
+      "status": "PASS",
+      "detail": [
+        260
+      ]
+    },
+    {
+      "check": "M1C003_P067_P068_join_preserved",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "check": "M1C003_text_conserved",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "M1C003_break_260_visible_geometry",
+      "status": "PASS",
+      "detail": {
+        "A": {
+          "x": 118.640625,
+          "y": 57
+        },
+        "B": {
+          "x": 0,
+          "y": 89.71875
+        },
+        "dy": 32.71875
+      }
+    },
+    {
+      "check": "M1C004_nested_JESUS_27_55",
+      "status": "PASS",
+      "detail": {
+        "res": {
+          "ch": "É",
+          "jesus": true,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "className": "sp-jesus"
+        },
+        "textConserved": true,
+        "breaks": 0,
+        "raw": "Au lieu de cela, Tu dis : \"Élève-toi toujours plus haut\"."
+      }
+    },
+    {
+      "check": "M1C004_quote_delimiters_visible_default",
+      "status": "PASS",
+      "detail": {
+        "open": {
+          "res": {
+            "ch": "\"",
+            "jesus": false,
+            "father": false,
+            "mary": false,
+            "hidden": false,
+            "className": ""
+          },
+          "textConserved": true,
+          "breaks": 0,
+          "raw": "Au lieu de cela, Tu dis : \"Élève-toi toujours plus haut\"."
+        },
+        "close": {
+          "res": {
+            "ch": "\"",
+            "jesus": false,
+            "father": false,
+            "mary": false,
+            "hidden": false,
+            "className": ""
+          },
+          "textConserved": true,
+          "breaks": 0,
+          "raw": "Au lieu de cela, Tu dis : \"Élève-toi toujours plus haut\"."
+        }
+      }
+    },
+    {
+      "check": "M1C004_outer_Luisa_default",
+      "status": "PASS",
+      "detail": {
+        "res": {
+          "ch": "d",
+          "jesus": false,
+          "father": false,
+          "mary": false,
+          "hidden": false,
+          "className": ""
+        },
+        "textConserved": true,
+        "breaks": 0,
+        "raw": "Au lieu de cela, Tu dis : \"Élève-toi toujours plus haut\"."
+      }
+    },
+    {
+      "check": "M1C004_no_break",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "M1C004_text_conserved",
+      "status": "PASS",
+      "detail": 57
+    },
+    {
+      "check": "user_state_anchor_1",
+      "status": "PASS",
+      "detail": {
+        "fresh": true,
+        "start": 70,
+        "end": 90,
+        "text": "nant : \"Il est à la ",
+        "expected": "nant : \"Il est à la ",
+        "note": "qa",
+        "hash": "11fadb1c9becbd9fd8f76160ceeffaa2929af280bbbf6f0b916618ff8166a354",
+        "currentHash": "11fadb1c9becbd9fd8f76160ceeffaa2929af280bbbf6f0b916618ff8166a354"
+      }
+    },
+    {
+      "check": "user_state_anchor_2",
+      "status": "PASS",
+      "detail": {
+        "fresh": true,
+        "start": 30,
+        "end": 60,
+        "text": " cesse : \"Maman, veux-Tu faire",
+        "expected": " cesse : \"Maman, veux-Tu faire",
+        "note": "qa",
+        "hash": "855d46aaedc6eb18b2697774946e7879c4a2991e7e1568a6895a17b329d2c88a",
+        "currentHash": "855d46aaedc6eb18b2697774946e7879c4a2991e7e1568a6895a17b329d2c88a"
+      }
+    },
+    {
+      "check": "user_state_anchor_3",
+      "status": "PASS",
+      "detail": {
+        "fresh": true,
+        "start": 250,
+        "end": 280,
+        "text": "humaines.» Ensuite, la Voix ce",
+        "expected": "humaines.» Ensuite, la Voix ce",
+        "note": "qa",
+        "hash": "fbda6dba8e3441b7eaf3fde83d0b52408f775aba50fe540b72f334ae6767adb4",
+        "currentHash": "fbda6dba8e3441b7eaf3fde83d0b52408f775aba50fe540b72f334ae6767adb4"
+      }
+    },
+    {
+      "check": "user_state_anchor_4",
+      "status": "PASS",
+      "detail": {
+        "fresh": true,
+        "start": 20,
+        "end": 56,
+        "text": "dis : \"Élève-toi toujours plus haut\"",
+        "expected": "dis : \"Élève-toi toujours plus haut\"",
+        "note": "qa",
+        "hash": "0d537b5385402805597bd499ed1791459bae96d2234f3d3ff033678b0b626fee",
+        "currentHash": "0d537b5385402805597bd499ed1791459bae96d2234f3d3ff033678b0b626fee"
+      }
+    },
+    {
+      "check": "browser_page_errors_zero",
+      "status": "PASS",
+      "detail": []
+    }
+  ]
+}

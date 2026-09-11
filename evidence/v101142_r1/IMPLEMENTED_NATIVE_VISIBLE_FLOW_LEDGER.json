@@ -1,0 +1,99 @@
+{
+  "schema": "L24H_V101142_R1_NATIVE_VISIBLE_FLOW_IMPLEMENTATION_LEDGER_V1",
+  "version": "v101.142",
+  "build_revision": "R1",
+  "proposal_sha256": "d50bd78e917e77d226eca30d8df625538496ef1625630b9c3d16fb753e0ade05",
+  "group_count": 4,
+  "join_inline_edge_count": 6,
+  "groups": [
+    {
+      "group_id": "NATIVE_FLOW.H14.MOTHER_ENCOUNTER.R3",
+      "members": [
+        {
+          "paragraph_id": "PASSION24.HOUR.14.P008",
+          "start": 716,
+          "end": 954,
+          "scope": "DISPLAY_SEGMENT_3_ONLY"
+        },
+        {
+          "paragraph_id": "PASSION24.HOUR.14.P009",
+          "start": 0,
+          "end": 184,
+          "scope": "FULL_RECORD"
+        },
+        {
+          "paragraph_id": "PASSION24.HOUR.14.P010",
+          "start": 0,
+          "end": 152,
+          "scope": "FULL_RECORD"
+        },
+        {
+          "paragraph_id": "PASSION24.HOUR.14.P011",
+          "start": 0,
+          "end": 161,
+          "scope": "FULL_RECORD"
+        }
+      ],
+      "joiner": "space"
+    },
+    {
+      "group_id": "NATIVE_FLOW.H18.MOTHER_ENCOUNTER.R3",
+      "members": [
+        {
+          "paragraph_id": "PASSION24.HOUR.18.P055",
+          "start": 0,
+          "end": 259,
+          "scope": "FULL_RECORD"
+        },
+        {
+          "paragraph_id": "PASSION24.HOUR.18.P056",
+          "start": 0,
+          "end": 283,
+          "scope": "FULL_RECORD"
+        }
+      ],
+      "joiner": "space"
+    },
+    {
+      "group_id": "NATIVE_FLOW.H18.MARY_SOUL_ACTION.R3",
+      "members": [
+        {
+          "paragraph_id": "PASSION24.HOUR.18.P062",
+          "start": 0,
+          "end": 119,
+          "scope": "FULL_RECORD"
+        },
+        {
+          "paragraph_id": "PASSION24.HOUR.18.P063",
+          "start": 0,
+          "end": 245,
+          "scope": "FULL_RECORD"
+        }
+      ],
+      "joiner": "space"
+    },
+    {
+      "group_id": "NATIVE_FLOW.H22.SIXTH_WORD_SYMPTOMS.R3",
+      "members": [
+        {
+          "paragraph_id": "PASSION24.HOUR.22.P019",
+          "start": 0,
+          "end": 211,
+          "scope": "FULL_RECORD"
+        },
+        {
+          "paragraph_id": "PASSION24.HOUR.22.P020",
+          "start": 0,
+          "end": 272,
+          "scope": "FULL_RECORD"
+        }
+      ],
+      "joiner": "space"
+    }
+  ],
+  "blocked": [
+    "new list styling at H18/H22",
+    "canonical record merge/delete",
+    "CSS per-ID spacing hacks"
+  ]
+}

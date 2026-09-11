@@ -1,0 +1,38 @@
+{
+  "schema": "L24H_CONC24H01_IMPLEMENTED_LEDGER_V1",
+  "version": "v101.143",
+  "build_revision": "R1",
+  "repair_id": "CONC-24H-01",
+  "runtime_patch_sha256": "8c3b77a7bde7c46a19f347f4bb95245a6d43e145419788c87391a4a9a353bc43",
+  "lock_name": "collection-luisa:24h:personal-state:v1",
+  "changed_functional_domains": [
+    "personal-state commit serialization",
+    "operation-level merge/conflict semantics",
+    "low-level canonical/mirror lock guards",
+    "peer reconciliation",
+    "import confirmation race guard",
+    "startup migration/recovery serialization",
+    "passive reading-position coalescing/conflict",
+    "auxiliary personal-key serialization"
+  ],
+  "mechanical_release_bindings": [
+    "APP_VERSION/stage/build date",
+    "Service Worker cache identity only",
+    "manifest non-identity version field",
+    "version.json/current package metadata"
+  ],
+  "protected_domains": [
+    "corpus text",
+    "speaker semantics",
+    "stable IDs/order",
+    "Search semantics/cap",
+    "typography/contrast",
+    "Repères semantics",
+    "manifest id/start_url/scope",
+    "backup schema",
+    "Hub architecture",
+    "unrelated Service Worker logic"
+  ],
+  "storage_schema": 8,
+  "personal_snapshot_schema": 5
+}

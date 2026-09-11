@@ -1,0 +1,50 @@
+{
+  "cycle": "CYCLE_1_DISCOVERY_CLOSURE",
+  "baseline_version": "v101.130",
+  "mutation_authority": "NONE",
+  "source_inputs": {
+    "raw_span_universe_sha256": "2733cb8db45438dd5ac725da81c92adbdcfd028a55d32c4830695412b6518378",
+    "priority_pool_sha256": "b95092e8088f49b3dbba47d0278521287a05484129de256e852dc12811f41c3a",
+    "first_blind_freeze_sha256": "bf2502231e5399d5e4190a0593bf4e35c6863d26d51a37af95fba9cd678211cb",
+    "nested_parent_scan_sha256": "38e137612a4a044953a8f870057a341b13f7cdfd3ce13de70a76b2b32318ff34",
+    "strong_reporter_scan_sha256": "9ac69c301daeca095a5fbc9749d9fd3325f29fcbf1407dec466cd336fb92409b",
+    "unquoted_reporter_scan_sha256": "b9bd16591f5f110748ec3db97ce2ca6f7b8bb93c32f6f0e2eeb6e23a8b8fac87"
+  },
+  "universe_counts": {
+    "text_records": 4613,
+    "body_practice": 4579,
+    "quote_bearing_records": 807,
+    "priority_pool": 205,
+    "raw_quote_spans": 600
+  },
+  "discoveries": {
+    "nested_presentation_parent_holes": [
+      "Q0264",
+      "Q0268"
+    ],
+    "explicit_divine_reporter_uncovered_cross_record": [
+      "Q0497"
+    ],
+    "nested_unstyled_explicit_tu_dis_quote": [
+      "Q0509"
+    ],
+    "unquoted_reporter_new_mutations": 0,
+    "unbalanced_quote_rows": 2,
+    "unbalanced_quote_resolution": "2 exact BENEFITS/PROMISES_BENEFITS mirror unmatched closers; explicit HOLD, no canonical mutation asserted."
+  },
+  "candidate_ids": [
+    "M1C001",
+    "M1C002",
+    "M1C003",
+    "M1C004"
+  ],
+  "candidate_span_ids": [
+    "Q0264",
+    "Q0268",
+    "Q0497",
+    "Q0509"
+  ],
+  "candidate_count": 4,
+  "semantic_blind_layer_quality_note": "The original first blind freeze is preserved unchanged. Closure QA found numerous raw-reporting-clause misclassifications in its semantic labels. Therefore no mutation candidate is accepted solely from that classifier; the four candidates are independently supported by raw reporter/context or the inherited presentation-parent invariant and current-display comparison.",
+  "status": "CYCLE_1_CLOSED_WITH_4_CANDIDATES"
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "L24H_V101141_R1_SEARCH_CODE_CHANGE_LEDGER_V1",
+  "status": "BUILT_PENDING_EXTERNAL_VALIDATION",
+  "predecessor_zip_sha256": "c84f2266e82de38b2adb70873f15f4da9046d504ff02a7cb93e389aec7bd7835",
+  "authority_sha256": "4bd256323432c4c86bf665a0de4912d6c82d610001e0af3178d453bcc977ac42",
+  "changes": [
+    {
+      "id": "SEARCH.DIRECT_SPEECH.LIBRARY",
+      "description": "Under Paroles directes, enumerate visible TEXT_LIBRARY body paragraphs with existing SPEECH_DATA and route to exact library stable anchors."
+    },
+    {
+      "id": "SEARCH.TITLES.HOUR_PRAYER_SECTION",
+      "description": "Add explicit title results for Hour, Prayer and Section titles, routed to owning item."
+    },
+    {
+      "id": "SEARCH.RESULT_COUNT.EXACT",
+      "description": "Remove plus suffix because allFiltered.length is exact; retain 60-item display-limit note."
+    }
+  ],
+  "forbidden_mutations_observed": 0
+}

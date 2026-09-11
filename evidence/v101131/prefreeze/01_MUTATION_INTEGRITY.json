@@ -1,0 +1,114 @@
+{
+  "schema": "L24H_V101131_MUTATION_INTEGRITY_V1",
+  "version": "v101.131",
+  "summary": {
+    "pass": 17,
+    "fail": 0,
+    "total": 17
+  },
+  "rows": [
+    {
+      "check": "candidate_identity",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "CORPUS_raw_literal_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "TEXT_LIBRARY_raw_literal_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HOUR_LINKED_TEXTS_raw_literal_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "INTERNAL_SUBHEADINGS_raw_literal_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "DISPLAY_SEGMENTS_raw_literal_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "CONTINUITY_GROUPS_raw_literal_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "LDC_LIBRARY_FLOW_LAYOUT_raw_literal_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "LDC_CURRENT_SYNC_AUTHORITY_raw_literal_unchanged",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "SPEECH_DATA_equals_independent_expected_mutation",
+      "status": "PASS",
+      "detail": {
+        "candidate_count": 2176,
+        "expected_count": 2176
+      }
+    },
+    {
+      "check": "SPEECH_PRESENTATION_ADJUDICATIONS_equals_independent_expected_mutation",
+      "status": "PASS",
+      "detail": {
+        "candidate_count": 12,
+        "expected_count": 12
+      }
+    },
+    {
+      "check": "SPEECH_END_VISUAL_BREAKS_equals_independent_expected_mutation",
+      "status": "PASS",
+      "detail": {
+        "candidate_count": 117,
+        "expected_count": 117
+      }
+    },
+    {
+      "check": "SPEECH_PRESENTATION_PROJECTION_equals_independent_expected_mutation",
+      "status": "PASS",
+      "detail": {
+        "candidate_count": 2289,
+        "expected_count": 2289
+      }
+    },
+    {
+      "check": "VISIBLE_PARAGRAPH_TOPOLOGY_equals_independent_expected_mutation",
+      "status": "PASS",
+      "detail": {
+        "candidate_count": 3,
+        "expected_count": 3
+      }
+    },
+    {
+      "check": "candidate_html_reverts_exactly_to_v101130",
+      "status": "PASS",
+      "detail": {
+        "base_sha256": "6400a743255ef56b5ad556d5a23e6dc26749adf8abbeea24334ead40c9ce7f07",
+        "reverted_sha256": "6400a743255ef56b5ad556d5a23e6dc26749adf8abbeea24334ead40c9ce7f07"
+      }
+    },
+    {
+      "check": "p067_p068_cross_record_join_preserved",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "v101129_closed_break_controls_preserved",
+      "status": "PASS",
+      "detail": null
+    }
+  ]
+}

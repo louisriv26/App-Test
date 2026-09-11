@@ -1,0 +1,20 @@
+{
+  "mode": "H24-01",
+  "rows": [
+    {
+      "check": "hour23_actions_unchanged",
+      "status": "PASS",
+      "detail": "<div class=\"hour-end-actions\" id=\"hourEndActions\"><div class=\"hour-end-title\">Continuer le chemin des Heures</div><div class=\"hour-end-note\">Après cette méditation, vous pouvez réfléchir, approfondir ou poursuivre vers l’Heure suivante.</div><div class=\"hour-end-buttons\"><button type=\"button\" class=\"hour-end-btn\" onclick=\"goToHourTab('reflections', 'reflectionsContent')\">Réflexion et pratique</button><button type=\"button\" class=\"hour-end-btn\" onclick=\"goToHourTab('linked', 'linkedTextsContent')\">Approfondir</button><button type=\"button\" class=\"hour-end-btn\" onclick=\"scrollReaderToTop()\">↟ Revenir au début</button><button type=\"button\" class=\"hour-end-btn primary\" onclick=\"openHour(24)\">Prier la 24e Heure</button></div></div>"
+    },
+    {
+      "check": "hour24_hour_actions_present",
+      "status": "PASS",
+      "detail": "<div class=\"hour-end-actions\" id=\"hourEndActions\"><div class=\"hour-end-title\">Après cette Heure</div><div class=\"hour-end-note\">Vous pouvez réfléchir à cette Heure, l’approfondir ou la reprendre depuis le début.</div><div class=\"hour-end-buttons\"><button type=\"button\" class=\"hour-end-btn\" onclick=\"goToHourTab('reflections', 'reflectionsContent')\">Réflexion et pratique</button><button type=\"button\" class=\"hour-end-btn\" onclick=\"goToHourTab('linked', 'linkedTextsContent')\">Approfondir</button><button type=\"button\" class=\"hour-end-btn\" onclick=\"scrollReaderToTop()\">↟ Revenir au début</button></div></div>"
+    }
+  ],
+  "summary": {
+    "pass": 2,
+    "fail": 0,
+    "total": 2
+  }
+}

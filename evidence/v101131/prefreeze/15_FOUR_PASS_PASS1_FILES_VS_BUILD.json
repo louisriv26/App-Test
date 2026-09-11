@@ -1,0 +1,171 @@
+{
+  "schema": "L24H_V101131_PASS1_V1",
+  "version": "v101.131",
+  "summary": {
+    "pass": 32,
+    "fail": 0,
+    "total": 32
+  },
+  "checks": [
+    {
+      "case": "baseline_zip_sha_exact",
+      "status": "PASS",
+      "detail": "53d542f3514b5b2b233fe513219886020a6d178e89f8d79d254bd6979c784327"
+    },
+    {
+      "case": "baseline_members_exact",
+      "status": "PASS",
+      "detail": "613"
+    },
+    {
+      "case": "baseline_html_sha_exact",
+      "status": "PASS",
+      "detail": "6400a743255ef56b5ad556d5a23e6dc26749adf8abbeea24334ead40c9ce7f07"
+    },
+    {
+      "case": "mirrored_html_byte_identical",
+      "status": "PASS",
+      "detail": "b04c4c7a569c6ebeb254bd84fc36ea44c3e2b54c68a7227e586bf06866684474"
+    },
+    {
+      "case": "version_stage_index_exact",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "version_json_stable_static_status",
+      "status": "PASS",
+      "detail": "LIMITED_PASS_STATIC__EXTERNAL_VALIDATION_OPEN"
+    },
+    {
+      "case": "manifest_version_exact",
+      "status": "PASS",
+      "detail": "v101.131"
+    },
+    {
+      "case": "service_worker_version_cache_exact",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "approved_ledger_sha_exact",
+      "status": "PASS",
+      "detail": "d40aea7f9fbf7f237802efbf2d7cf0219ec0dd7c3fb1d6397fb3dbf3b214bca8"
+    },
+    {
+      "case": "approved_ledger_exact_four",
+      "status": "PASS",
+      "detail": "4"
+    },
+    {
+      "case": "explicit_user_authority_bound",
+      "status": "PASS",
+      "detail": "Je valide les quatre changements M1C001 à M1C004 et autorise la préparation du successeur v101.131 dans ce périmètre uniquement."
+    },
+    {
+      "case": "prevalidation_word_embedded",
+      "status": "PASS",
+      "detail": "d658d97ad9f7fe6ed8158bffc5513b736027fae39b953b59beea9631322d7055"
+    },
+    {
+      "case": "raw_protected_CORPUS",
+      "status": "PASS",
+      "detail": "ce5e641cae457604e74f5f894e258f596b8190fc92ff4804ebd9c5fae8b9b5d6"
+    },
+    {
+      "case": "raw_protected_TEXT_LIBRARY",
+      "status": "PASS",
+      "detail": "f01ce45bb15528278cca7aeae4c7432f3090faf372d492746fc2b79f785ac8c0"
+    },
+    {
+      "case": "raw_protected_HOUR_LINKED_TEXTS",
+      "status": "PASS",
+      "detail": "abffddceeaf11cd74f043bea1d97568f2bd1ba28fb1fbc541610d282039c0095"
+    },
+    {
+      "case": "raw_protected_INTERNAL_SUBHEADINGS",
+      "status": "PASS",
+      "detail": "2cdc80893e8afad04d8990d3f7cbd240367fbbac51a360a1d12dcf46636708ae"
+    },
+    {
+      "case": "raw_protected_DISPLAY_SEGMENTS",
+      "status": "PASS",
+      "detail": "141be59c6a94231ffea999c3706e70580e894ba9eb3ec60912e8b1fe5614b222"
+    },
+    {
+      "case": "raw_protected_CONTINUITY_GROUPS",
+      "status": "PASS",
+      "detail": "1ab140d3c155fa2dde654af4c1095678b6c8d02acb0351e8e9441fe7652aa702"
+    },
+    {
+      "case": "raw_protected_LDC_LIBRARY_FLOW_LAYOUT",
+      "status": "PASS",
+      "detail": "32fbb90e1611ee810cb7beec1f3da1d5b492d877837d877da7d3b45bab6fc273"
+    },
+    {
+      "case": "raw_protected_LDC_CURRENT_SYNC_AUTHORITY",
+      "status": "PASS",
+      "detail": "078968ce5748f0b8976742375b7946692c7e329ba40e51abe22e0cff086c5bb7"
+    },
+    {
+      "case": "approved_authority_changed_SPEECH_DATA",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "approved_authority_changed_SPEECH_PRESENTATION_ADJUDICATIONS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "approved_authority_changed_SPEECH_END_VISUAL_BREAKS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "approved_authority_changed_SPEECH_PRESENTATION_PROJECTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "approved_authority_changed_VISIBLE_PARAGRAPH_TOPOLOGY",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "independent_mutation_integrity_17_17",
+      "status": "PASS",
+      "detail": "{'pass': 17, 'fail': 0, 'total': 17}"
+    },
+    {
+      "case": "hash_manifest_path_universe_exact",
+      "status": "PASS",
+      "detail": "listed=649 actual=649"
+    },
+    {
+      "case": "hash_manifest_bytes_exact",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "package_manifest_count_exact",
+      "status": "PASS",
+      "detail": "649 vs 649"
+    },
+    {
+      "case": "current_tools_all_resolve",
+      "status": "PASS",
+      "detail": "count=9 missing=[]"
+    },
+    {
+      "case": "single_current_report_exact",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "case": "v101130_report_archived",
+      "status": "PASS",
+      "detail": ""
+    }
+  ]
+}

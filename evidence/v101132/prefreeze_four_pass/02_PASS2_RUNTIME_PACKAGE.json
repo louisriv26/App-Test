@@ -1,0 +1,171 @@
+{
+  "version": "v101.132",
+  "stage": "DEEP_FOUR_PASS_RELEASE_ENGINEERING_RECONCILIATION_R1",
+  "summary": {
+    "pass": 16,
+    "fail": 0,
+    "total": 16
+  },
+  "rows": [
+    {
+      "case": "gate_01_RELEASE_INTEGRITY",
+      "status": "PASS",
+      "detail": {
+        "pass": 21,
+        "fail": 0,
+        "total": 21
+      }
+    },
+    {
+      "case": "gate_02_GLOBAL_RAW_TEXT_COMPLETENESS_GATE",
+      "status": "PASS",
+      "detail": {
+        "pass": 14,
+        "fail": 0,
+        "total": 14
+      }
+    },
+    {
+      "case": "gate_03_APPROVED_CASES_RUNTIME_PRESENTATION",
+      "status": "PASS",
+      "detail": {
+        "pass": 29,
+        "fail": 0,
+        "total": 29
+      }
+    },
+    {
+      "case": "gate_04_MUTATION_TEST_MATRIX",
+      "status": "PASS",
+      "detail": {
+        "pass": 10,
+        "fail": 0,
+        "total": 10
+      }
+    },
+    {
+      "case": "gate_05_STRICT_CROSS_RECORD_GLYPH_FLOW_MATRIX",
+      "status": "PASS",
+      "detail": {
+        "pass": 185,
+        "fail": 0,
+        "total": 185
+      }
+    },
+    {
+      "case": "gate_06_LEGACY_CONTINUITY_MATRIX",
+      "status": "PASS",
+      "detail": {
+        "pass": 215,
+        "fail": 0,
+        "total": 215
+      }
+    },
+    {
+      "case": "gate_07_MEDITEE_REGRESSION_MATRIX",
+      "status": "PASS",
+      "detail": {
+        "pass": 164,
+        "fail": 0,
+        "total": 164
+      }
+    },
+    {
+      "case": "gate_08_MEDITEE_RESPONSIVE_REGRESSION_MATRIX",
+      "status": "PASS",
+      "detail": {
+        "pass": 245,
+        "fail": 0,
+        "total": 245
+      }
+    },
+    {
+      "case": "gate_09_HOUR24_REGRESSION_MATRIX",
+      "status": "PASS",
+      "detail": {
+        "pass": 17,
+        "fail": 0,
+        "total": 17
+      }
+    },
+    {
+      "case": "gate_10_HELP_REGRESSION_MATRIX",
+      "status": "PASS",
+      "detail": {
+        "profiles": 5,
+        "pass": 70,
+        "fail": 0,
+        "total": 70
+      }
+    },
+    {
+      "case": "gate_11_PRESENTATION_SUCCESSOR_MATRIX",
+      "status": "PASS",
+      "detail": {
+        "profiles": 5,
+        "spans": 400,
+        "checks": 2000,
+        "pass": 2000,
+        "fail": 0
+      }
+    },
+    {
+      "case": "gate_12_INDEPENDENT_PRESENTATION_SUCCESSOR_MATRIX",
+      "status": "PASS",
+      "detail": {
+        "profiles": 5,
+        "spans": 400,
+        "checks": 2000,
+        "pass": 2000,
+        "fail": 0,
+        "cross_record_spans": 256
+      }
+    },
+    {
+      "case": "gate_13_BROAD_RUNTIME_MATRIX",
+      "status": "PASS",
+      "detail": {
+        "pass": 52,
+        "fail": 0,
+        "total": 52
+      }
+    },
+    {
+      "case": "gate_14_SERVICE_WORKER_MATRIX",
+      "status": "PASS",
+      "detail": {
+        "pass": 15,
+        "fail": 0,
+        "total": 15
+      }
+    },
+    {
+      "case": "14_gate_files_exact",
+      "status": "PASS",
+      "detail": [
+        "01_RELEASE_INTEGRITY.json",
+        "02_GLOBAL_RAW_TEXT_COMPLETENESS_GATE.json",
+        "03_APPROVED_CASES_RUNTIME_PRESENTATION.json",
+        "04_MUTATION_TEST_MATRIX.json",
+        "05_STRICT_CROSS_RECORD_GLYPH_FLOW_MATRIX.json",
+        "06_LEGACY_CONTINUITY_MATRIX.json",
+        "07_MEDITEE_REGRESSION_MATRIX.json",
+        "08_MEDITEE_RESPONSIVE_REGRESSION_MATRIX.json",
+        "09_HOUR24_REGRESSION_MATRIX.json",
+        "10_HELP_REGRESSION_MATRIX.json",
+        "11_PRESENTATION_SUCCESSOR_MATRIX.json",
+        "12_INDEPENDENT_PRESENTATION_SUCCESSOR_MATRIX.json",
+        "13_BROAD_RUNTIME_MATRIX.json",
+        "14_SERVICE_WORKER_MATRIX.json"
+      ]
+    },
+    {
+      "case": "aggregate_zero_fail",
+      "status": "PASS",
+      "detail": {
+        "assertions": 5037,
+        "failures": 0
+      }
+    }
+  ]
+}

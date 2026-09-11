@@ -1,0 +1,11 @@
+﻿line,claim,evidence,status
+1,# v101.131 Global Raw-Quote / Host-Sentence Successor,report identity,PASS
+3,- Immutable predecessor: `v101.130` / `53d542f3514b5b2b233fe513219886020a6d178e89f8d79d254bd6979c784327` / 613 members.,baseline zip verified,PASS
+4,- Approved mutation ledger SHA-256: `d40aea7f9fbf7f237802efbf2d7cf0219ec0dd7c3fb1d6397fb3dbf3b214bca8`.,approved ledger hash,PASS
+5,- User-approved operations: **4** (`M1C001`–`M1C004`).,approved authority,PASS
+6,- Canonical text mutations: **0**. Character-offset migrations: **0**.,mutation integrity/raw authorities,PASS
+7,"- Implicated mutable authorities only: `SPEECH_DATA`, `SPEECH_PRESENTATION_ADJUDICATIONS`, `SPEECH_END_VISUAL_BREAKS`, `SPEECH_PRESENTATION_PROJECTION`, `VISIBLE_PARAGRAPH_TOPOLOGY`.",baseline diff/mutation integrity,PASS
+8,"- Raw corpus/library text, paragraph IDs/order, search strings, continuity groups, notes/highlights, storage schema, snapshot schema, Méditée semantics and the eight v101.129 controls are protected.",protected-authority reruns all pass,PASS
+9,- Permanent v101.131 raw-text completeness and mutation-detection gates are included in current tooling/evidence.,"scripts are embedded, but required frozen 02_ALL_TEXT_RECORD_UNIVERSE.csv is absent; gates are not self-contained/re-runnable from package evidence",FAIL
+10,"- Current prefreeze evidence closes **14 gate families / 5,033 assertions / 0 FAIL**, including two independent **2,000-check** presentation matrices on the reconciled 400-span successor ledger.",PREFREEZE_GATE_SUMMARY: 14 families / 5033 / 0 fail; 400 ledger; 2000+2000,PASS
+11,- Physical-device/PWA/offline/screen-reader/live-origin validation remains external.,version.json and final decision lock explicitly leave external gates open,PASS

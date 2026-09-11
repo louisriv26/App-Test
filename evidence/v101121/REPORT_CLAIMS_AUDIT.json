@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "claims_pass": 9,
+  "claims_fail": 0,
+  "claims": [
+    {
+      "claim": "BUILD_SCOPE",
+      "status": "PASS",
+      "evidence": "evidence/v101121/BUILD_SCOPE_AUDIT.json"
+    },
+    {
+      "claim": "CURRENT_METADATA",
+      "status": "PASS",
+      "evidence": "evidence/v101121/CURRENT_METADATA_AUDIT.json"
+    },
+    {
+      "claim": "HELP_CONTENT",
+      "status": "PASS",
+      "evidence": "evidence/v101121/HELP_CONTENT_AUDIT.json"
+    },
+    {
+      "claim": "HELP_BROWSER",
+      "status": "PASS",
+      "evidence": "evidence/v101121/HELP_BROWSER_MATRIX.json"
+    },
+    {
+      "claim": "BROAD_RUNTIME",
+      "status": "PASS",
+      "evidence": "evidence/v101121/BROAD_CHROMIUM_RUNTIME_MATRIX.json"
+    },
+    {
+      "claim": "FIXED_POINT",
+      "status": "PASS",
+      "evidence": "evidence/v101121/post_tooling_fixed_point/M1_FIXED_POINT_SUMMARY.json"
+    },
+    {
+      "claim": "PRESENTATION",
+      "status": "PASS",
+      "evidence": "evidence/v101121/EXHAUSTIVE_PRESENTATION_RUNTIME_MATRIX.json"
+    },
+    {
+      "claim": "SW_LOGIC",
+      "status": "PASS",
+      "evidence": "evidence/v101121/SERVICE_WORKER_LOGIC_MATRIX.json"
+    },
+    {
+      "claim": "PROTECTED",
+      "status": "PASS",
+      "evidence": "reports/protected_declaration_parity.csv"
+    }
+  ]
+}

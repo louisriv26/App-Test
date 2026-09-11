@@ -1,0 +1,58 @@
+{
+  "version": "v101.133",
+  "stage": "VISUAL_BOUNDARY_LEADING_WHITESPACE_ALIGNMENT_REPAIR_R1",
+  "summary": {
+    "pass": 9,
+    "fail": 0,
+    "total": 9
+  },
+  "rows": [
+    {
+      "check": "current_version_present",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "current_stage_present",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no_stale_current_v101122",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "external_boundary_not_overclaimed",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "no_full_pass_overclaim",
+      "status": "PASS",
+      "detail": [
+        "Do **not** use `FULL_PASS` while external validation remains open."
+      ]
+    },
+    {
+      "check": "no_temp_mnt_dependency",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "tool_inventory_contains_alignment_harness",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "gate_map_contains_both_presentation_harnesses",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "real_device_checklist_targets_v101133",
+      "status": "PASS",
+      "detail": null
+    }
+  ]
+}
