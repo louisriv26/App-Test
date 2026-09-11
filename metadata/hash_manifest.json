@@ -1,12 +1,12 @@
 {
   "schema": "L24H_HASH_MANIFEST_V1",
-  "version": "v101.143",
+  "version": "v101.144",
   "build_revision": "R1",
   "self_exclusion": [
     "metadata/hash_manifest.json",
     "metadata/package_manifest.json"
   ],
-  "file_count": 945,
+  "file_count": 947,
   "files": [
     {
       "path": ".gitattributes",
@@ -20,18 +20,18 @@
     },
     {
       "path": "README.md",
-      "size": 1207,
-      "sha256": "ea63e7fb436bb2836ed8cf60bb6d795087c8e48f8dbb4bd9fedf2e8d88f36390"
+      "size": 1257,
+      "sha256": "92aba7b192f1c9245846e0e2767390685bead0a13dcec4e87f30f2334e99c962"
     },
     {
       "path": "REAL_DEVICE_QA_CHECKLIST.md",
-      "size": 1999,
-      "sha256": "b02a943704d76d9a6896125d1989b0d7bc3b0478fa01bd5b70e002b89109abe0"
+      "size": 2816,
+      "sha256": "dc48e1fd2aa60035305017ad224e051c851c76e5b1a494304e114a4f573d18c1"
     },
     {
       "path": "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
       "size": 1358,
-      "sha256": "d22aa863d232f4b5a623ba9df06bc2168dc10074b8cee227d505dbb7083ee87e"
+      "sha256": "5fc5a11f3e3f1308fdb8cd6532c12c83650083c51fc3b05a2f617e49f75724cc"
     },
     {
       "path": "apple-touch-icon.png",
@@ -3154,6 +3154,16 @@
       "sha256": "e2c5da69852a547be8a247f91c20c1f7100cc7f07a752875f7de82f38620b24a"
     },
     {
+      "path": "evidence/v101144_r1/AUTHORIZED_RUNTIME_INDEX_DIFF.patch",
+      "size": 600321,
+      "sha256": "6fc66d7973fa6eac502a9370f02e5f1ff8cfe5bcc32d8e8b73511f15ca5979fa"
+    },
+    {
+      "path": "evidence/v101144_r1/STAGE7_AUTHORITY_BINDING.json",
+      "size": 355,
+      "sha256": "6752b04f10c6a80267de724e04ca098e0d2a0f1c8bb5fc41f7dfe49df7e186e8"
+    },
+    {
       "path": "favicon-16.png",
       "size": 629,
       "sha256": "18ea7f82b0a52d3ab2e5f89eb294fb06f0057b72f890aa66ada9e0f3ff4beaa8"
@@ -3195,28 +3205,28 @@
     },
     {
       "path": "index.html",
-      "size": 2603495,
-      "sha256": "3d3d1779891c3912ea3b11d4ec6de085e10ec65efba0a190f04b4829755d4690"
+      "size": 2607492,
+      "sha256": "e09f5dc8cad3783b7adb721d2bc94e8c3d4ba23b385c86081ed7b1d88552568d"
     },
     {
       "path": "luisa_24_heures.html",
-      "size": 2603495,
-      "sha256": "3d3d1779891c3912ea3b11d4ec6de085e10ec65efba0a190f04b4829755d4690"
+      "size": 2607492,
+      "sha256": "e09f5dc8cad3783b7adb721d2bc94e8c3d4ba23b385c86081ed7b1d88552568d"
     },
     {
       "path": "manifest.json",
       "size": 912,
-      "sha256": "baa78124f29e32a5fd5dbf6e80a681dd9326bda3dd617884a3fae24b7e352ad8"
+      "sha256": "3790cb5ce2c65b5ef9586db994c740306f690699c2dd917fd0442cad2db4d4c0"
     },
     {
       "path": "metadata/active_report_inventory.json",
-      "size": 1114,
-      "sha256": "39d4cc9bb113ad940c2a21733e3d36cdd9abea8ecdcbd525dfaea9772f9c117b"
+      "size": 1335,
+      "sha256": "b769d367ce72eb021c2b712345f6078c83f8997c317fb88d02a7a56aaff9f5dd"
     },
     {
       "path": "metadata/build_provenance.json",
-      "size": 1601,
-      "sha256": "e0366a3dc75f4b80f3efa0929ffe25a8dfb5b7610af7b44c4410e685372917a4"
+      "size": 1140,
+      "sha256": "982807359560510ee894963f198a375a19296cbdba556bef26330d96040f1ed6"
     },
     {
       "path": "metadata/builder_input_manifest.json",
@@ -3225,23 +3235,18 @@
     },
     {
       "path": "metadata/current_evidence_lineage.json",
-      "size": 746,
-      "sha256": "32d3bdcda710db2fb44dd511b8af9fea6e316c7ab4c30d16c42c6587113fdcfe"
+      "size": 946,
+      "sha256": "07edf3cc2e152cd137b6a5c3798260172fc2a4c89dea4191e1306fc8ede8fbca"
     },
     {
       "path": "metadata/current_gate_map.json",
-      "size": 1168,
-      "sha256": "ee2848d3f824f00c8a4a9ae2acca0f7a7913be55c0c114b5e5b9615f89bcde5f"
+      "size": 1368,
+      "sha256": "52c5faabd66a4caf3484d17fb0361c8e976d68140b566488b2ab5a1af47061ef"
     },
     {
       "path": "metadata/current_tooling_inventory.json",
-      "size": 459,
-      "sha256": "5641286bb3a3656e03518f4a98d704c1f4413340920ecb1e2da0ebd59369782f"
-    },
-    {
-      "path": "metadata/full_build_overlay_manifest.json",
-      "size": 1759,
-      "sha256": "7cb2f49917e84aad778e3d6f72e5126607525ac1d25ea187054dfda1e895018c"
+      "size": 755,
+      "sha256": "ffc2f560878a9cd9b9ccfdca613dd69682ca739dca9ff61811189f955dbd27c5"
     },
     {
       "path": "metadata/historical/v101127/scope_escalation_authority.md",
@@ -3265,13 +3270,13 @@
     },
     {
       "path": "metadata/release_evidence_lifecycle.json",
-      "size": 860,
-      "sha256": "88d4dd8f7e39f151d96545ca6369e67a1c4ae3e3a45689f9b4f54a070e1eba01"
+      "size": 1680,
+      "sha256": "dfe5a25711a081f2d223817eb03f75de98c8c60f4088686f6fe8ea569c52c102"
     },
     {
       "path": "metadata/scope_escalation_authority.md",
-      "size": 1047,
-      "sha256": "51ae53b3ccc5648fe0a5f920756d8e52082cd2555bf2f6cedd5166428a10a35c"
+      "size": 427,
+      "sha256": "9eaa021566a92add6205d74dec102749b436e0ce7b87e945a1e58f6444366b18"
     },
     {
       "path": "reports/V101140_R1_LDC_FAST_MODE_DERIVATIVE_CORRECTION.md",
@@ -3292,6 +3297,11 @@
       "path": "reports/V101143_R1_CONC_24H_01_PERSONAL_STATE_CONCURRENCY_SUCCESSOR.md",
       "size": 1271,
       "sha256": "e3406c38661c8d93cb4753a14dd0cb74c5e09970430037264813699728a32075"
+    },
+    {
+      "path": "reports/V101144_R1_STAGE7_ACCESSIBILITY_RELIABILITY_REPORT.md",
+      "size": 741,
+      "sha256": "9fe62740b1dda5fc56ef740c6cbffb3d7b1f688f799d824719e0c93e12319141"
     },
     {
       "path": "reports/historical/v101122/HOUR24_PRODUCT_CONTRACT.md",
@@ -4726,12 +4736,12 @@
     {
       "path": "sw.js",
       "size": 3909,
-      "sha256": "612bbaaea0ac32a681669f988878e1a65b099f6e4cc14a1037a07fc4e7f051a8"
+      "sha256": "a65e691c7582a642900c409f3cb81dfa5031f434b59aace29d769d29c973a5c3"
     },
     {
       "path": "version.json",
-      "size": 2647,
-      "sha256": "f885943826d7cbcbee24a39fe08e8b26e4d3a120523f6472f27ecd4bfdb58c19"
+      "size": 2589,
+      "sha256": "9d48bf6bf136db84a24e71b3bbf48cab985d1910fca51df6075a28d7d1b9f1ef"
     }
   ]
 }
