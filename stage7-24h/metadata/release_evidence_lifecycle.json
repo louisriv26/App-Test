@@ -1,19 +1,38 @@
 {
-  "version": "v101.143",
+  "version": "v101.144",
   "build_revision": "R1",
-  "stage": "PERSONAL_STATE_CONCURRENCY_SUCCESSOR_R1",
-  "package_rule": "Package does not self-certify final ZIP bytes; exact frozen v101.143 R1 ZIP requires external SHA-bound reopened-package audit and handback evidence.",
-  "immediate_build_predecessor": "v101.142 R1",
-  "immediate_build_predecessor_sha256": "5e94f3cbdff075b43dfb3c6278d30a81c94df2ccdebcabe942c5fa75b537b2c0",
-  "repair_id": "CONC-24H-01",
-  "corpus_text_changed": false,
-  "search_code_changed": false,
-  "speaker_authority_changed": false,
-  "native_visible_flow_topology_changed": false,
-  "storage_schema_changed": false,
-  "personal_snapshot_schema_changed": false,
-  "pwa_identity_fields_changed": false,
-  "service_worker_logic_changed": false,
+  "stage": "STAGE7_ACCESSIBILITY_RELIABILITY_WAVE_R1",
+  "package_rule": "Standalone v101.144 R1 bytes are deterministic from immutable v101.143 R1 plus the frozen Stage-7 authorization. QA/replay/hostile-reopen receipts are external and SHA-bound in the cumulative handback.",
+  "immediate_build_predecessor": "v101.143 R1",
+  "immediate_build_predecessor_sha256": "3eb86f5d9f1686a8851664020be4060c85dbf20228351d1d1c442e583c8ece5c",
+  "authorized_runtime_changes": {
+    "search_accessible_names": true,
+    "route_heading_structure": true,
+    "search_progressive_disclosure_state": true,
+    "update_controller_transition_logic": true,
+    "targeted_contrast": true,
+    "color_mix_fallbacks": true
+  },
+  "protected_semantic_changes": {
+    "corpus_text": false,
+    "search_matching_ranking_index": false,
+    "speaker_authority": false,
+    "native_visible_flow_topology": false,
+    "storage_schema": false,
+    "personal_snapshot_schema": false,
+    "concurrency_architecture": false,
+    "backup_schema": false,
+    "unrelated_service_worker_strategy": false
+  },
+  "release_binding_changes": {
+    "app_version": true,
+    "service_worker_cache_identity": true,
+    "manifest_release_identity": true,
+    "current_report_metadata": true
+  },
+  "forced_colors_stage7": "TEST_ONLY__PASS_EMULATED_CHROMIUM__ZERO_MUTATION",
   "physical_device_claims": "NOT_TESTED",
-  "public_deployment_authorized": false
+  "public_deployment_authorized": false,
+  "stage7_authorization_proposal_sha256": "42126e52c63d114d1b3a42bdf2bcac8f19e88dc70417fd95accfe33f809312a6",
+  "stage7_predecessor_zip_sha256": "3eb86f5d9f1686a8851664020be4060c85dbf20228351d1d1c442e583c8ece5c"
 }

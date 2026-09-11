@@ -1,12 +1,12 @@
 {
   "schema": "L24H_PACKAGE_MANIFEST_V1",
-  "version": "v101.143",
+  "version": "v101.144",
   "build_revision": "R1",
   "self_exclusion": [
     "metadata/hash_manifest.json",
     "metadata/package_manifest.json"
   ],
-  "file_count": 945,
+  "file_count": 947,
   "files": [
     {
       "path": ".gitattributes",
@@ -18,11 +18,11 @@
     },
     {
       "path": "README.md",
-      "size": 1207
+      "size": 1257
     },
     {
       "path": "REAL_DEVICE_QA_CHECKLIST.md",
-      "size": 1999
+      "size": 2816
     },
     {
       "path": "REAL_DEVICE_QA_RESULTS_TEMPLATE.csv",
@@ -2525,6 +2525,14 @@
       "size": 1228
     },
     {
+      "path": "evidence/v101144_r1/AUTHORIZED_RUNTIME_INDEX_DIFF.patch",
+      "size": 600321
+    },
+    {
+      "path": "evidence/v101144_r1/STAGE7_AUTHORITY_BINDING.json",
+      "size": 355
+    },
+    {
       "path": "favicon-16.png",
       "size": 629
     },
@@ -2558,11 +2566,11 @@
     },
     {
       "path": "index.html",
-      "size": 2603495
+      "size": 2607492
     },
     {
       "path": "luisa_24_heures.html",
-      "size": 2603495
+      "size": 2607492
     },
     {
       "path": "manifest.json",
@@ -2570,11 +2578,11 @@
     },
     {
       "path": "metadata/active_report_inventory.json",
-      "size": 1114
+      "size": 1335
     },
     {
       "path": "metadata/build_provenance.json",
-      "size": 1601
+      "size": 1140
     },
     {
       "path": "metadata/builder_input_manifest.json",
@@ -2582,19 +2590,15 @@
     },
     {
       "path": "metadata/current_evidence_lineage.json",
-      "size": 746
+      "size": 946
     },
     {
       "path": "metadata/current_gate_map.json",
-      "size": 1168
+      "size": 1368
     },
     {
       "path": "metadata/current_tooling_inventory.json",
-      "size": 459
-    },
-    {
-      "path": "metadata/full_build_overlay_manifest.json",
-      "size": 1759
+      "size": 755
     },
     {
       "path": "metadata/historical/v101127/scope_escalation_authority.md",
@@ -2614,11 +2618,11 @@
     },
     {
       "path": "metadata/release_evidence_lifecycle.json",
-      "size": 860
+      "size": 1680
     },
     {
       "path": "metadata/scope_escalation_authority.md",
-      "size": 1047
+      "size": 427
     },
     {
       "path": "reports/V101140_R1_LDC_FAST_MODE_DERIVATIVE_CORRECTION.md",
@@ -2635,6 +2639,10 @@
     {
       "path": "reports/V101143_R1_CONC_24H_01_PERSONAL_STATE_CONCURRENCY_SUCCESSOR.md",
       "size": 1271
+    },
+    {
+      "path": "reports/V101144_R1_STAGE7_ACCESSIBILITY_RELIABILITY_REPORT.md",
+      "size": 741
     },
     {
       "path": "reports/historical/v101122/HOUR24_PRODUCT_CONTRACT.md",
@@ -3786,7 +3794,7 @@
     },
     {
       "path": "version.json",
-      "size": 2647
+      "size": 2589
     }
   ]
 }
