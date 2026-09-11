@@ -1,26 +1,5 @@
-<!-- V83_CURRENT_START -->
-# CURRENT — v2.19.83-R1B STAGE 7 ACCESSIBILITY / RELIABILITY SUCCESSOR
-
-- Direct predecessor: immutable `v2.19.82-R1B` SHA-256 `ed925383399f733323495fa21be42d6eafd7ba1d578ffe99f63af986b0ff2224`.
-- Owner authorization: exact frozen Collection Luisa Stage-7 proposal SHA-256 `42126e52c63d114d1b3a42bdf2bcac8f19e88dc70417fd95accfe33f809312a6`.
-- Four bounded LDC sub-ledgers: `A11Y-LDC-SEARCH-NAME`, `A11Y-LDC-CONTRAST`, `WORDING-LDC-OFFLINE-ZERO`, `WORDING-LDC-BACKUP-HELP`.
-- Search now has the explicit accessible name “Rechercher dans le Livre du Ciel”; matching, ranking, filters and SEARCH-V2 payload remain unchanged.
-- The base “Lecture suivie” journey indicator now uses existing theme-aware `var(--gold-text)`; the consultation variant is unchanged. Frozen design ratios are approximately 6.12:1 light and 7.22:1 dark.
-- Exact numeric zero in offline-size display now reads `0 Mo`; all other predecessor formatting/unavailable wording is preserved.
-- Help now describes the normal `.ldcbackup` backup route rather than calling it “Sauvegarde JSON”; the legacy JSON compatibility importer and its valid error path are unchanged.
-- v82 Stage-6 recovery/privacy/update, v81 scalable backup, v80 prepared-offline retention, v79 transaction integrity, corpus/devotional wording and IDs/order, `speech_model.js`, Search semantics, supplements, DB schema/migrations and all other protected domains remain inherited unchanged.
-- The separate `forced-colors` **TEST-ONLY** Stage-7 slice passed under emulated Chromium high-contrast mode; no concrete failure was reproduced and zero CSS mutation was made under that slice. Evidence is carried in the external Stage-7 wave QA pack.
-- Physical iPhone/iPad/Samsung, installed-PWA/live-origin/true-offline and VoiceOver/TalkBack gates remain external/open unless separately executed.
-- Public deployment: **NOT AUTHORIZED BY THIS PACKAGE**.
-
-<!-- V83_CURRENT_END -->
-
----
-
-> **Historical/inherited boundary:** Everything below is predecessor or inherited-authority documentation. v82 Stage-6, v81 backup, v80 offline and v79 integrity remain active inherited authorities, but older CURRENT/version/deployment wording cannot override v83.
-
 <!-- V82_CURRENT_START -->
-# INHERITED ACTIVE AUTHORITY — v2.19.82-R1B STAGE 6 RECOVERY / PRIVACY / UPDATE SUCCESSOR
+# CURRENT — v2.19.82-R1B STAGE 6 RECOVERY / PRIVACY / UPDATE SUCCESSOR
 
 - Direct predecessor: immutable `v2.19.81-R1B` SHA-256 `45d91f21230c17e71ced37f9fef915656ed6622764465b13c930b3e6138d5089`.
 - Owner authorization: exact frozen Stage-6 proposal SHA-256 `c9b7430e34fe827e77f4562890635ab57966df25a16971248804ce8584f0ae25`.
