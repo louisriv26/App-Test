@@ -1,6 +1,6 @@
 {
-  "app_version": "v2.19.82-R1B",
-  "classification_policy": "EXHAUSTIVE_CURRENT_TOP_LEVEL_PARTITION__V82_STAGE6_RECOVERY_PRIVACY_UPDATE_CURRENT__V81_SCALABLE_BACKUP_V80_OFFLINE_RETENTION_V79_TRANSACTIONAL_INTEGRITY_V77_RENDERER_V74_FAST1_AND_V72_PROVENANCE_REMAIN_ACTIVE_INHERITED_AUTHORITIES__OLDER_NAMED_PHASE_OBJECTS_HISTORICAL__FINAL_ZIP_SHA_EXTERNAL_RECEIPT",
+  "app_version": "v2.19.83-R1B",
+  "classification_policy": "EXHAUSTIVE_CURRENT_TOP_LEVEL_PARTITION__V83_STAGE7_ACCESSIBILITY_RELIABILITY_CURRENT__V82_STAGE6_V81_SCALABLE_BACKUP_V80_OFFLINE_RETENTION_V79_TRANSACTIONAL_INTEGRITY_V77_RENDERER_V74_FAST1_AND_V72_PROVENANCE_REMAIN_ACTIVE_INHERITED_AUTHORITIES__OLDER_NAMED_PHASE_OBJECTS_HISTORICAL__FINAL_ZIP_SHA_IN_STAGE7_REOPEN_RECEIPT",
   "corpus_manifest_current_field_keys": [
     "app_version",
     "corpus",
@@ -35,7 +35,8 @@
     "v79_conc_ldc_01_stage4a",
     "v80_ldc_offline_discard_01_stage4b",
     "v81_bkp_ldc_01_stage5b",
-    "v82_stage6_recovery_privacy_update"
+    "v82_stage6_recovery_privacy_update",
+    "v83_stage7_accessibility_reliability"
   ],
   "corpus_manifest_field_partition_complete": true,
   "corpus_manifest_historical_field_keys": [
@@ -97,25 +98,26 @@
     "v78_deep_four_pass_stale_gate_metadata_repair"
   ],
   "current_active_reports": {
-    "CURRENT_REPORT_AUTHORITY_INDEX.json": "Current v82 package-local authority boundary; final ZIP hash remains external.",
-    "README.md": "Current v82 Stage 6 recovery/privacy/update scope/status with explicit inherited and residual boundaries.",
+    "CURRENT_REPORT_AUTHORITY_INDEX.json": "Current v83 package-local authority boundary; final deterministic ZIP/reopen evidence is Stage-7 governed.",
+    "README.md": "Current v83 Stage-7 accessibility/reliability scope/status with explicit inherited and external-gate boundaries.",
     "V77_RENDERER_SUCCESSOR_CERTIFICATION_SUMMARY.md": "Inherited current renderer semantic authority: exact v77 renderer repair remains byte-identical.",
     "V74_FAST_MODE_TERMINAL_MUTATION_LEDGER_2707.json": "Inherited current semantic authority for unchanged v74 FAST1 corpus mutation: exact 2,707-entry terminal ledger.",
     "V74_SEMANTIC_PAYLOAD_VALIDATION_REPORT.json": "Inherited semantic validation evidence for protected canonical/search-index-payload/speaker/display/flow payload.",
-    "corpus/M2_INDEPENDENT_INDEX_VERIFICATION.json": "Current v82 SEARCH-V2 independent evidence binding; payload semantics unchanged.",
-    "corpus/manifest.json": "Current v82 corpus/package wrapper; canonical and semantic generation unchanged.",
-    "corpus/search_v2_manifest.json": "Current v82 SEARCH-V2 source/binding manifest; index payload assets unchanged.",
-    "corpus/supplement_manifest.json": "Current v82 supplement registry/hash binding; supplement semantics unchanged.",
-    "corpus/supplements.json": "Current supplement registry wrapper; supplement objects/counts unchanged.",
-    "offline_manifest.json": "Current v82 app-independent offline content/storage identity; Stage-4B retention algorithms inherited.",
-    "version.json": "Current v82 release/runtime/Stage-6/offline/device-gate binding and authority partition.",
+    "corpus/M2_INDEPENDENT_INDEX_VERIFICATION.json": "Current v83 SEARCH-V2 independent evidence binding; payload semantics unchanged.",
+    "corpus/manifest.json": "Current v83 corpus/package wrapper; canonical and semantic generation unchanged.",
+    "corpus/search_v2_manifest.json": "Current v83 SEARCH-V2 source/binding manifest; index payload assets unchanged.",
+    "corpus/supplement_manifest.json": "Current v83 supplement registry/hash binding; supplement semantics unchanged.",
+    "corpus/supplements.json": "Current v83 supplement registry wrapper; supplement objects/counts unchanged.",
+    "offline_manifest.json": "Current v83 app-independent offline content/storage identity; Stage-4B retention algorithms inherited unchanged.",
+    "version.json": "Current v83 release/runtime/Stage-7/offline/device-gate binding and authority partition.",
     "V79_CONC_LDC_01_STAGE4A_CERTIFICATION_SUMMARY.md": "Inherited active Stage 4A transactional-integrity authority; v81 does not mutate those functions.",
     "V80_LDC_OFFLINE_DISCARD_01_STAGE4B_CERTIFICATION_SUMMARY.md": "Inherited active Stage 4B prepared-offline retention authority; v81 does not mutate its algorithms.",
     "V81_BKP_LDC_01_STAGE5B_CERTIFICATION_SUMMARY.md": "Current v81 scalable backup/restore engineering candidate scope/status; exact final ZIP SHA remains external.",
-    "V82_LDC_STAGE6_CERTIFICATION_SUMMARY.md": "Current v82 Stage-6 package-local engineering scope/status; exact final ZIP SHA remains external."
+    "V82_LDC_STAGE6_CERTIFICATION_SUMMARY.md": "Current v82 Stage-6 package-local engineering scope/status; exact final ZIP SHA remains external.",
+    "V83_LDC_STAGE7_ACCESSIBILITY_RELIABILITY_CERTIFICATION_SUMMARY.md": "Current v83 Stage-7 package-local engineering scope/status and QA boundary."
   },
   "external_gate_authority": "External receipts/state only; package-local certification does not claim live GitHub, installed-PWA, real persisted user-data migration, true-offline cold reopen, physical-device, accessibility, or public-release PASS.",
-  "historical_policy": "Historical predecessor files and explicitly versioned named objects retain freeze-point wording. They do not override current v82 package identity/status, active inherited v81 scalable backup, v80 offline retention, v79 transactional integrity, v77 renderer, v74 FAST1 semantic authority or v72 reader provenance.",
+  "historical_policy": "Historical predecessor files and explicitly versioned named objects retain freeze-point wording. They do not override current v83 package identity/status, v82 Stage-6 recovery/privacy/update, v81 scalable backup, v80 offline retention, v79 transactional integrity, v77 renderer, v74 FAST1 semantic authority or v72 reader provenance.",
   "historical_predecessor_reports_byte_preserved": [
     "INTERIM_SUCCESSOR_AUTHORIZED_BUILD_README.md",
     "POST_R6_DATE_ID_A2_PREAUTH_GATE.txt",
@@ -138,7 +140,7 @@
   "predecessor_v70_zip_sha256": "c4a4e35208ed8a40368137bea7303bf773cd5cc0d6192f54c3a5cc94dc8cb399",
   "predecessor_v71_zip_sha256": "ed925239f570293b54a4565a2666dc50ac71e43aa149b3567d8a55364e550d8c",
   "predecessor_v72_zip_sha256": "825e08ea96a8cf6a245cd56c47e30f3eb4a04bb838fc2e4d3940f8bd2f3f974c",
-  "public_version": 82,
+  "public_version": 83,
   "schema": "ldc-current-report-authority-index-v2",
   "semantic_authority_sha256": "afc351c02ee954583f663ca42615e48c5450893560f052d7da3c8a3caebfc879",
   "version_current_authority_objects": [
@@ -148,7 +150,8 @@
     "v79_conc_ldc_01_stage4a",
     "v80_ldc_offline_discard_01_stage4b",
     "v81_bkp_ldc_01_stage5b",
-    "v82_stage6_recovery_privacy_update"
+    "v82_stage6_recovery_privacy_update",
+    "v83_stage7_accessibility_reliability"
   ],
   "version_current_field_keys": [
     "app_version",
@@ -272,7 +275,13 @@
     "controllerchange_reload_contract",
     "degraded_boot_stage6",
     "migration_concurrency_residual",
-    "stage5b_help_label_residual"
+    "stage5b_help_label_residual",
+    "v83_stage7_accessibility_reliability",
+    "search_accessible_name_contract",
+    "journey_intent_contrast_contract",
+    "offline_zero_wording_contract",
+    "backup_help_current_format_contract",
+    "forced_colors_stage7"
   ],
   "version_field_partition_complete": true,
   "version_historical_field_keys": [
@@ -410,5 +419,6 @@
   "predecessor_v78_zip_sha256": "a1c78fff7d2893b3b38344c0da8a2cc483eb3186bc580f84b3d9b57dc3ecddcb",
   "predecessor_v79_zip_sha256": "88f7e06831bc9cae4f69155abe8dabfe1f12a9b6b348e41648fe2b5fe4aa9930",
   "predecessor_v80_zip_sha256": "d94da78f2f29378bb0e672d26dcc430c9303de82e35aa588d7b8001bbbb89e3b",
-  "predecessor_v81_zip_sha256": "45d91f21230c17e71ced37f9fef915656ed6622764465b13c930b3e6138d5089"
+  "predecessor_v81_zip_sha256": "45d91f21230c17e71ced37f9fef915656ed6622764465b13c930b3e6138d5089",
+  "predecessor_v82_zip_sha256": "ed925383399f733323495fa21be42d6eafd7ba1d578ffe99f63af986b0ff2224"
 }

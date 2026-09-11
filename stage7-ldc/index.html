@@ -443,7 +443,7 @@ h2.dn-section-title{margin-bottom:0;}
 .mode-pill.reperes-active{background:var(--accent-fill);color:var(--accent-fill-ink);border-color:var(--accent-fill);}
 
 .reader-header{padding:20px 22px 10px;}
-.journey-intent-indicator{display:inline-flex;align-items:center;gap:5px;margin:0 0 8px;padding:3px 8px;border-radius:999px;font:600 10px var(--body);letter-spacing:.04em;background:var(--gold-pale);color:#7A5A20;}
+.journey-intent-indicator{display:inline-flex;align-items:center;gap:5px;margin:0 0 8px;padding:3px 8px;border-radius:999px;font:600 10px var(--body);letter-spacing:.04em;background:var(--gold-pale);color:var(--gold-text);}
 .journey-intent-indicator.consultation{background:var(--accent-fill);color:var(--accent-fill-ink);}
 .rh-vol{font-size:10px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--gold-text);font-family:var(--body);margin-bottom:6px;}
@@ -1669,7 +1669,7 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
   <div class="search-bar-wrap">
     <div class="search-bar">
       <i class="ti ti-search"></i>
-      <input type="search" id="search-input" placeholder="Idée, thème, citation…"
+      <input type="search" id="search-input" placeholder="Idée, thème, citation…" aria-label="Rechercher dans le Livre du Ciel"
         oninput="onSearchInput()" onkeydown="if(event.key==='Enter')runSearch()">
       <button class="btn-icon" onclick="clearSearch()" id="search-clear" style="display:none;" aria-label="Effacer la recherche">
         <i class="ti ti-x" style="font-size:14px;"></i>
@@ -1849,7 +1849,7 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
       <div class="help-section-head"><div class="help-section-icon hsi-teal"><i class="ti ti-lock"></i></div><h2 class="help-section-title">Sauvegarde et données</h2></div>
       <div class="help-card">
         <div class="help-row"><span class="help-chip light">Journal</span><span class="help-text">Exporte un texte lisible de vos notes et collections. Ce fichier n’est pas une sauvegarde restaurable.</span></div>
-        <div class="help-row"><span class="help-chip light">↓ Sauvegarde JSON</span><span class="help-text">Crée une sauvegarde restaurable des données personnelles prises en charge par l’application, notamment notes, surlignages, favoris, collections, lecture, position et préférences.</span></div>
+        <div class="help-row"><span class="help-chip light">↓ Sauvegarde</span><span class="help-text">Crée une sauvegarde restaurable au format .ldcbackup des données personnelles prises en charge par l’application, notamment notes, surlignages, favoris, collections, lecture, position et préférences.</span></div>
         <div class="help-row"><span class="help-chip light">⇧ Restaurer</span><span class="help-text">Le fichier est vérifié avant écriture et un aperçu précède la restauration. Une erreur de restauration ne doit pas remplacer silencieusement les données existantes.</span></div>
       </div>
       <div class="help-tip">Vos données personnelles restent locales à l’application sur cet appareil et ne sont pas synchronisées automatiquement entre vos appareils. Utilisez la <b>Sauvegarde</b> pour conserver une copie ou transférer vos données. Le cache hors ligne n’est pas une sauvegarde de Mon Espace.</div>
@@ -1958,12 +1958,12 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.82-R1B'; // technical update/audit identifier
-const PUBLIC_VERSION = '82';        // single user-facing release number
+const APP_VERSION = 'v2.19.83-R1B'; // technical update/audit identifier
+const PUBLIC_VERSION = '83';        // single user-facing release number
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD   = '2026-09-10';
-const SW_CACHE_VERSION = 'ldc-v2.19.82-R1B-stage6-r1';
-const CORPUS_MANIFEST_SHA256 = '3956433d0302e8ecc6a3bba722be707f91f617dc9d1224067e2e849f29b43868';
+const SW_CACHE_VERSION = 'ldc-v2.19.83-R1B-stage7-r1';
+const CORPUS_MANIFEST_SHA256 = '4e7f7bf22552299a1e4e08525c41534a607fb956a7ad819d1b5358dec092b941';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
 
@@ -2434,7 +2434,7 @@ function isStaleRecord(r) {
 /* ═══════════════════════════════════════════════════════
    CORPUS LOADING
 ═══════════════════════════════════════════════════════ */
-const CORPUS_CV = 'cv=cm-3956433d0302e8ec'; // derived from corpus/manifest.json SHA-256
+const CORPUS_CV = 'cv=cm-4e7f7bf22552299a'; // derived from corpus/manifest.json SHA-256
 
 function sourceModeShowsBackbone() { return supplementMode !== 'additions'; }
 function sourceModeShowsSupplements() { return supplementMode !== 'aflp'; }
@@ -7755,8 +7755,8 @@ function renderDnResultCard() {
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
-const OFFLINE_CONTENT_BINDING = '38e8923c74da2759eed128dd0c372c654fe75bb8fc2ccfc89b1a9f414826aebc';
-const OFFLINE_CORPUS_MANIFEST_SHA256 = '3956433d0302e8ecc6a3bba722be707f91f617dc9d1224067e2e849f29b43868';
+const OFFLINE_CONTENT_BINDING = '69bafb3c9fc99bbcad3e9453b60cb4fc4204cca540c2deab6317708e3648c419';
+const OFFLINE_CORPUS_MANIFEST_SHA256 = '4e7f7bf22552299a1e4e08525c41534a607fb956a7ad819d1b5358dec092b941';
 const OFFLINE_STATES = Object.freeze(['NOT_PREPARED','CHECKING','DOWNLOADING','READY','PARTIAL','ERROR','CANCELLED']);
 let offlineUiState = {state:'NOT_PREPARED',completed:0,total:0,failed:[],total_bytes:0,job_id:null,message:'',content_binding_sha256:OFFLINE_CONTENT_BINDING,corpus_manifest_sha256:OFFLINE_CORPUS_MANIFEST_SHA256};
 let runtimeCacheUiState = {entries:0,bytes:0,max_entries:48,max_bytes:50331648};
@@ -7772,7 +7772,7 @@ function offlineStateLabel(s) {
   const map={NOT_PREPARED:'Non préparé',CHECKING:'Vérification…',DOWNLOADING:'Téléchargement…',READY:'Prêt hors ligne',PARTIAL:'Préparation partielle',ERROR:'Erreur',CANCELLED:'Préparation annulée'};
   return map[s] || s;
 }
-function offlineMb(n){return n ? `${(n/1e6).toFixed(1).replace('.',',')} Mo` : 'taille en cours de calcul';}
+function offlineMb(n){return n===0 ? '0 Mo' : (n ? `${(n/1e6).toFixed(1).replace('.',',')} Mo` : 'taille en cours de calcul');}
 function announceOfflineMilestone(st,pct,total,completed,failedCount){
   const live=document.getElementById('offline-at-status'); if(!live)return;
   const now=Date.now(), state=String(st.state||'');

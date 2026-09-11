@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.82-R1B",
+  "app_version": "v2.19.83-R1B",
   "asset_count": 238,
   "assets": [
     {
@@ -373,9 +373,9 @@
       "sha256": "8ea99b2cfec18d07cb7dfcc7432e4fae81b33190df4534a28073ad1faaa561d8"
     },
     {
-      "bytes": 63983,
+      "bytes": 65939,
       "path": "corpus/manifest.json",
-      "sha256": "3956433d0302e8ecc6a3bba722be707f91f617dc9d1224067e2e849f29b43868"
+      "sha256": "4e7f7bf22552299a1e4e08525c41534a607fb956a7ad819d1b5358dec092b941"
     },
     {
       "bytes": 908100,
@@ -763,9 +763,9 @@
       "sha256": "092514bba4699dd68c326ed1753432f94c238ff50073bd095583d12765080667"
     },
     {
-      "bytes": 12853,
+      "bytes": 12873,
       "path": "corpus/search_v2_manifest.json",
-      "sha256": "1be0e8d1549c5a5e068fc65b3c4779c4e81ccf9d5e9185be6226723f49425d25"
+      "sha256": "295c5361c70a8d150985cee888e96a7bee8bd46c4d5197b4f3c1c6996d8dafbd"
     },
     {
       "bytes": 568387,
@@ -953,9 +953,9 @@
       "sha256": "32c8e0d2a3b0f83e61dd3f63067334893eb9f09d588f1823edac61eb7cdf50c7"
     },
     {
-      "bytes": 9817,
+      "bytes": 10454,
       "path": "corpus/supplement_manifest.json",
-      "sha256": "2847965f8338ee9c116039a1db0e6cf5fa9d414e06b090c58c5e5a941e40a75f"
+      "sha256": "8506937170759522f477f1205cc69d081ba498a4cb2ec2867cf1226b404ce55a"
     },
     {
       "bytes": 288689,
@@ -968,9 +968,9 @@
       "sha256": "5b0688292b83406ebbf67cd8c3d1c6c7900a334cb969d2535025c02c62852374"
     },
     {
-      "bytes": 1115274,
+      "bytes": 1115287,
       "path": "corpus/supplements.json",
-      "sha256": "f7067ea5e0a35c00bcdebdb410d36b38eb53e4ced0eb53c1dc012f3b8f9b3511"
+      "sha256": "da16a9d3a04105dcecd51519e3b18dc9a5a986bc9e5ab64fb7e9073c0d131348"
     },
     {
       "bytes": 1642311,
@@ -1195,9 +1195,9 @@
   ],
   "authorized_runtime_ledger_sha256": "5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906",
   "content_binding_schema": "ldc-offline-content-binding-v2",
-  "content_binding_sha256": "38e8923c74da2759eed128dd0c372c654fe75bb8fc2ccfc89b1a9f414826aebc",
+  "content_binding_sha256": "69bafb3c9fc99bbcad3e9453b60cb4fc4204cca540c2deab6317708e3648c419",
   "corpus_generation": "G036-AFLP-R7-SUP-T5-FAST1",
-  "corpus_manifest_sha256": "3956433d0302e8ecc6a3bba722be707f91f617dc9d1224067e2e849f29b43868",
+  "corpus_manifest_sha256": "4e7f7bf22552299a1e4e08525c41534a607fb956a7ad819d1b5358dec092b941",
   "families": {
     "date_id_reconciliation": 1,
     "display": 37,
@@ -1229,12 +1229,12 @@
   "predecessor_of_v71_zip_sha256": "c4a4e35208ed8a40368137bea7303bf773cd5cc0d6192f54c3a5cc94dc8cb399",
   "predecessor_of_v72_zip_sha256": "ed925239f570293b54a4565a2666dc50ac71e43aa149b3567d8a55364e550d8c",
   "predecessor_of_v73_zip_sha256": "825e08ea96a8cf6a245cd56c47e30f3eb4a04bb838fc2e4d3940f8bd2f3f974c",
-  "rebuild_status": "V82_STAGE6_RECOVERY_PRIVACY_UPDATE__CONTENT_IDENTITY_REBIND_FROM_EXACT_V81_PREDECESSOR_BYTES",
+  "rebuild_status": "V83_STAGE7_ACCESSIBILITY_RELIABILITY__CONTENT_IDENTITY_REBIND_FROM_EXACT_V82_PREDECESSOR_BYTES",
   "schema": "ldc-offline-manifest-v3",
-  "scope": "36 tomes PRINCIPAL R7/FAST1 + SUP-T1..SUP-T5; v82 preserves v80 Stage-4B prepared-offline retention algorithms and v81 scalable backup semantics while changing only Stage-6 shell recovery/privacy/update behavior; public deployment not authorized.",
+  "scope": "36 tomes PRINCIPAL R7/FAST1 + SUP-T1..SUP-T5; v83 preserves v80 Stage-4B prepared-offline retention algorithms, v81 scalable backup and v82 Stage-6 recovery/privacy/update logic while changing only bounded Stage-7 accessibility/reliability wording plus release wrappers; public deployment not authorized.",
   "semantic_vector_search_included": false,
   "semantic_vector_search_note": "Vector/embedding search remains retired; semantic_index.json is lexical BM25 metadata.",
-  "total_bytes": 215898824,
+  "total_bytes": 215901450,
   "fast_mode_authority_sha256": "09590abe803b99dadf696fbecd64fb88b4fee9a05b38280549b4abcb920e0c78",
   "terminal_mutation_ledger_sha256": "afc351c02ee954583f663ca42615e48c5450893560f052d7da3c8a3caebfc879",
   "predecessor_semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",

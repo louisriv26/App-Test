@@ -29,8 +29,8 @@
       "sha256": "5b0688292b83406ebbf67cd8c3d1c6c7900a334cb969d2535025c02c62852374"
     },
     "supplements.json": {
-      "bytes": 1115274,
-      "sha256": "f7067ea5e0a35c00bcdebdb410d36b38eb53e4ced0eb53c1dc012f3b8f9b3511"
+      "bytes": 1115287,
+      "sha256": "da16a9d3a04105dcecd51519e3b18dc9a5a986bc9e5ab64fb7e9073c0d131348"
     }
   },
   "m3_decision_lock_sha256": "bb4a5c772b3eafdfe6eb857bc303a724a4bdb0cb0cef97c0ee5f088dfd65ab83",
@@ -40,9 +40,9 @@
   "programme": "LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4-SUP-T5",
   "provenance_contract": "SUP-T1..SUP-T4_PRESERVED__SUP-T5_SOURCE_CRITICAL_AUTHORIZED__NO_MAJORITY_VOTE",
   "r6_authority": "AUTHORIZED_RUNTIME_LEDGER_SHA256_5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906__OFFICIAL_R6_PREDECESSOR",
-  "release_status": "V82_STAGE6_RECOVERY_PRIVACY_UPDATE__ENGINEERING_CANDIDATE__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED_BY_PACKAGE",
+  "release_status": "V83_STAGE7_ACCESSIBILITY_RELIABILITY__ENGINEERING_CANDIDATE__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED_BY_PACKAGE",
   "schema": "ldc-supplement-manifest-v2",
-  "status": "LDC_V82_STAGE6_SUCCESSOR__SUPPLEMENT_CONTENT_AND_SPEAKER_SEMANTICS_UNCHANGED__NOT_PUBLICLY_DEPLOYED",
+  "status": "LDC_V83_STAGE7_SUCCESSOR__SUPPLEMENT_CONTENT_AND_SPEAKER_SEMANTICS_UNCHANGED__NOT_PUBLICLY_DEPLOYED",
   "sup_t1_snapshot_sha256": "ee568d8857b3e38b4a2b536de146c3b54f876ab93478e66f327bdaaf0768a1e0",
   "sup_t2_segmentation_ledger_sha256": "f3345d58d2c12625c46cb92466012755c070fa84aef04da8cbcf2f9caa705f77",
   "user_state_schema": 4,
@@ -205,6 +205,18 @@
     "speaker_segment_content_changes": 0,
     "user_state_schema_mutations": 0,
     "runtime_scope": "RECOVERY_PRIVACY_UPDATE_ONLY",
+    "status_wrapper_only": true,
+    "public_deployment_authorized": false
+  },
+  "v83_stage7_accessibility_reliability": {
+    "schema": "ldc-v83-stage7-accessibility-reliability-v1",
+    "direct_predecessor_app_version": "v2.19.82-R1B",
+    "direct_predecessor_zip_sha256": "ed925383399f733323495fa21be42d6eafd7ba1d578ffe99f63af986b0ff2224",
+    "owner_authorization_proposal_sha256": "42126e52c63d114d1b3a42bdf2bcac8f19e88dc70417fd95accfe33f809312a6",
+    "supplement_content_changes": 0,
+    "speaker_segment_content_changes": 0,
+    "user_state_schema_mutations": 0,
+    "runtime_scope": "ACCESSIBILITY_RELIABILITY_WORDING_ONLY",
     "status_wrapper_only": true,
     "public_deployment_authorized": false
   }
