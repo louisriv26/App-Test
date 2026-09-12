@@ -1958,11 +1958,11 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.83-R1B'; // technical update/audit identifier
-const PUBLIC_VERSION = '83';        // single user-facing release number
+const APP_VERSION = 'v2.19.84-R1B'; // technical update/audit identifier
+const PUBLIC_VERSION = '84';        // single user-facing release number
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD   = '2026-09-10';
-const SW_CACHE_VERSION = 'ldc-v2.19.83-R1B-stage7-r1';
+const APP_BUILD   = '2026-09-11';
+const SW_CACHE_VERSION = 'ldc-v2.19.84-R1B-stage8-r4';
 const CORPUS_MANIFEST_SHA256 = '4e7f7bf22552299a1e4e08525c41534a607fb956a7ad819d1b5358dec092b941';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
@@ -1971,7 +1971,7 @@ const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
    STATE
 ═══════════════════════════════════════════════════════ */
 const DB_NAME = 'ldc_user_v1';
-const DB_VER  = 3;
+const DB_VER  = 4;
 let db = null;
 
 // RA5 two-tier volume cache. corpusCache is lightweight Tome metadata and may
@@ -7258,6 +7258,61 @@ function setShellState(state){
   });
 }
 
+/* STAGE8_MIGRATION_STARTUP_BEGIN */
+const STAGE8_MIGRATION_LOCK='ldc-userdata-migration-db4-v1';
+const STAGE8_MIGRATION_MARKER='stage8_migration_startup_complete_v1';
+const STAGE8_MIGRATION_GATE_REV='gate2';
+const STAGE8_MIGRATION_FIXED_POINT=`${APP_VERSION}|${CORPUS_GENERATION}|db${DB_VER}|${STAGE8_MIGRATION_GATE_REV}`;
+async function stage8MigrationAlreadyComplete(){const m=await dbGet('settings',STAGE8_MIGRATION_MARKER).catch(()=>null);return !!(m&&m.value===STAGE8_MIGRATION_FIXED_POINT);}
+async function stage8HistoricalMigrationNeeded(){
+  if(await stage8MigrationAlreadyComplete())return false;
+  const rp=await dbGetAll('reading_pos').catch(()=>[]);
+  if((rp||[]).some(r=>r&&String(r.schema||'')!==READING_POSITION_SCHEMA))return true;
+  const schema=await dbGet('settings','user_data_schema_version').catch(()=>null);if(!schema||Number(schema.value)<4)return true;
+  for(const key of ['user_data_aligne_r3_migration_v1','user_data_aligne_r4_migration_v1','user_data_aligne_r5_migration_v1','user_data_aligne_r6_supt5_migration_v1']){const m=await dbGet('settings',key).catch(()=>null);if(!m||m.to_generation!==CORPUS_GENERATION)return true;}
+  const r7map=await loadUserStateR7DateIdMap(),r7=await dbGet('settings','user_data_r7_date_id_identity_migration_v1').catch(()=>null);if(!r7||r7.fixed_point_sha256!==r7map.fixed_point_sha256)return true;
+  const interimMap=await loadUserStateInterimMap(),interim=await dbGet('settings',interimMap.idempotence_marker).catch(()=>null);if(!interim||interim.value!==interimMap.fixed_point_sha256)return true;
+  const fastMap=await loadUserStateFast1Map(),fast=await dbGet('settings',fastMap.idempotence_marker).catch(()=>null);if(!fast||fast.value!==fastMap.fixed_point_sha256)return true;
+  return false;
+}
+async function stage8ProfileHasMigrationSensitiveData(){for(const store of ['reading_pos','highlights','notes','favorites','collections','col_items','read_entries']){const rows=await dbGetAll(store).catch(()=>[]);if(rows&&rows.length)return true;}return false;}
+async function runStage8MigrationChain(){
+  readingPositionV3MigrationDone=false;
+  await migrateReadingPositionsV3();
+  await migrateUserDataV4();
+  await migrateUserDataR3Once();
+  await migrateUserDataR4Once();
+  await migrateUserDataR5Once();
+  await migrateUserDataR6Once();
+  await migrateUserDataR7DateIdOnce();
+  await migrateUserDataInterimOnce();
+  await migrateUserDataFast1Once();
+}
+async function runStage8StartupMigrationGate(){
+  if(await stage8MigrationAlreadyComplete())return {skipped:true,reason:'aggregate marker'};
+  const sensitive=await stage8ProfileHasMigrationSensitiveData();
+  if(!(navigator.locks&&typeof navigator.locks.request==='function')){
+    const needed=sensitive ? await stage8HistoricalMigrationNeeded() : false;
+    if(needed){const e=new Error('Votre navigateur ne peut pas sécuriser la migration des données. Mettez-le à jour puis réessayez.');e.name='LDCMigrationLockUnavailableError';throw e;}
+    await dbPut('settings',{key:STAGE8_MIGRATION_MARKER,value:STAGE8_MIGRATION_FIXED_POINT,ts:Date.now(),verified_without_mutation:true});
+    return {skipped:true,reason:'no historical migration required'};
+  }
+  return navigator.locks.request(STAGE8_MIGRATION_LOCK,{mode:'exclusive'},async()=>{
+    if(await stage8MigrationAlreadyComplete())return {skipped:true,reason:'aggregate marker after lock'};
+    const before=await snapshotUserDataState();
+    try{
+      await runStage8MigrationChain();
+      await dbPut('settings',{key:STAGE8_MIGRATION_MARKER,value:STAGE8_MIGRATION_FIXED_POINT,ts:Date.now()});
+      return {skipped:false,completed:true};
+    }catch(err){
+      try{await dbReplaceUserDataAtomic(before);readingPositionV3MigrationDone=false;}
+      catch(rollback){const critical=new Error('Échec de migration et échec de restauration de l’état antérieur. Conservez votre sauvegarde et ne poursuivez pas.');critical.name='LDCMigrationRollbackError';critical.cause=rollback;throw critical;}
+      const wrapped=new Error(`Migration des données annulée; l’état antérieur a été restauré. ${String(err&&err.message||err)}`);wrapped.name='LDCMigrationStartupError';wrapped.cause=err;throw wrapped;
+    }
+  });
+}
+/* STAGE8_MIGRATION_STARTUP_END */
+
 /* M12_ATOMIC_BOOTSTRAP_BEGIN */
 const BOOT_SW_REGISTER_TIMEOUT_MS = 20000;
 const BOOT_SW_INSTALL_TIMEOUT_MS = 60000;
@@ -7285,6 +7340,20 @@ function queryWorkerVersion(worker,timeoutMs=1000) {
 }
 function queryControllerVersion(timeoutMs=1000) {
   return queryWorkerVersion(navigator.serviceWorker&&navigator.serviceWorker.controller,timeoutMs);
+}
+function swVersionMismatchError(actual){const e=new Error(`version de contrôle Service Worker inattendue (${actual||'inconnue'})`);e.name='ServiceWorkerVersionMismatchError';return e;}
+function remainingControllerBudget(deadlineAt){return Math.max(0,Number(deadlineAt||0)-Date.now());}
+async function queryExpectedWorkerVersionUntil(worker,deadlineAt){
+  if(!worker)throw new Error('nouveau Service Worker sans contrôleur vérifiable');
+  while(remainingControllerBudget(deadlineAt)>0){
+    const attempt=Math.min(750,remainingControllerBudget(deadlineAt));
+    const version=await queryWorkerVersion(worker,attempt);
+    if(version===SW_CACHE_VERSION)return version;
+    if(version!==null)throw swVersionMismatchError(version);
+    const pause=Math.min(120,remainingControllerBudget(deadlineAt));
+    if(pause>0)await new Promise(r=>setTimeout(r,pause));
+  }
+  const e=new Error('nouveau Service Worker activé mais version de contrôle non confirmée avant le délai maximal');e.name='ServiceWorkerSyncTimeoutError';throw e;
 }
 function waitForWorkerInstalled(worker, timeoutMs=BOOT_SW_INSTALL_TIMEOUT_MS) {
   if(!worker)return Promise.resolve(null);
@@ -7316,31 +7385,36 @@ async function ensureCurrentServiceWorkerBeforeCorpus() {
   try{await bootWithTimeout(reg.update(),BOOT_SW_REGISTER_TIMEOUT_MS,'vérification du Service Worker trop longue');}
   catch(e){if(hadController)throw e;}
   if(!hadController)return {status:'FIRST_LOAD',registration:reg};
-  let current=await queryControllerVersion(500);
+  const controllerDeadline=Date.now()+BOOT_SW_CONTROLLER_TIMEOUT_MS;
+  let current=await queryControllerVersion(Math.min(500,remainingControllerBudget(controllerDeadline)));
   if(current===SW_CACHE_VERSION)return {status:'CURRENT_AFTER_UPDATE',registration:reg};
   let candidate=reg.waiting||reg.installing;
   if(candidate&&candidate.state!=='installed'&&candidate.state!=='activated')await waitForWorkerInstalled(candidate);
   candidate=reg.waiting||candidate;
   if(reg.waiting||(candidate&&candidate.state==='installed')){
-    const changing=waitForControllerChange();
+    const waitMs=remainingControllerBudget(controllerDeadline);if(waitMs<=0)throw new Error('délai maximal de synchronisation du contrôleur dépassé');
+    const changing=waitForControllerChange(waitMs);
     (reg.waiting||candidate).postMessage({type:'SKIP_WAITING'});
-    await changing;
-    const after=await queryControllerVersion(1000);
-    if(after!==SW_CACHE_VERSION)throw new Error('nouveau Service Worker activé mais version de contrôle inattendue');
+    const newController=await changing;
+    await queryExpectedWorkerVersionUntil(newController,controllerDeadline);
     return {status:'RELOAD_REQUIRED',registration:reg};
   }
-  // Rare lifecycle race: the replacement may already be active while this page still has the predecessor controller.
+  // Rare lifecycle race: replacement active while this page still has predecessor controller.
   if(reg.active){
-    const activeVersion=await queryWorkerVersion(reg.active,750);
+    const activeVersion=await queryWorkerVersion(reg.active,Math.min(750,remainingControllerBudget(controllerDeadline)));
+    if(activeVersion!==null&&activeVersion!==SW_CACHE_VERSION)throw swVersionMismatchError(activeVersion);
     if(activeVersion===SW_CACHE_VERSION){
-      try{await waitForControllerChange(5000);}catch(e){}
-      const after=await queryControllerVersion(1000);
-      if(after===SW_CACHE_VERSION)return {status:'RELOAD_REQUIRED',registration:reg};
+      try{
+        const waitMs=remainingControllerBudget(controllerDeadline);if(waitMs<=0)throw new Error('délai maximal de synchronisation du contrôleur dépassé');
+        const newController=await waitForControllerChange(waitMs);
+        await queryExpectedWorkerVersionUntil(newController,controllerDeadline);
+        return {status:'RELOAD_REQUIRED',registration:reg};
+      }catch(e){if(e&&e.name==='ServiceWorkerVersionMismatchError')throw e;}
     }
   }
-  current=await queryControllerVersion(1000);
-  if(current===SW_CACHE_VERSION)return {status:'CURRENT_AFTER_ACTIVATION',registration:reg};
-  throw new Error('ancienne version du cache encore active; synchronisation impossible avant le corpus');
+  const controller=navigator.serviceWorker.controller;
+  await queryExpectedWorkerVersionUntil(controller,controllerDeadline);
+  return {status:'CURRENT_AFTER_ACTIVATION',registration:reg};
 }
 function reloadBoot(){
   const u=new URL(window.location.href);u.searchParams.set('ldc_retry',Date.now().toString(36));window.location.replace(u.href);
@@ -7364,7 +7438,7 @@ async function repairBootCacheAndReload(){
       const expectedScope=new URL('./',window.location.href).href;
       if(reg&&reg.scope===expectedScope)await reg.unregister().catch(()=>{});
     }
-    if('caches' in window){const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith('ldc-le-livre-du-ciel-')||/^ldc-v\d/.test(k)).map(k=>caches.delete(k)));}
+    if('caches' in window){const scope=new URL('./',window.location.href).href;let h=2166136261;for(let i=0;i<scope.length;i++){h^=scope.charCodeAt(i);h=Math.imul(h,16777619);}const fp=(h>>>0).toString(16).padStart(8,'0'),prefix=`ldc-le-livre-du-ciel-${fp}-`;const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith(prefix)).map(k=>caches.delete(k)));}
   }catch(e){console.warn('LDC boot cache repair partial',e);}
   const u=new URL('./',window.location.href);u.searchParams.set('ldc_recovery',Date.now().toString(36));window.location.replace(u.href);
 }
@@ -7378,6 +7452,7 @@ function showBootFailure(err){
   if(repairable)detail.textContent=navigator.onLine===false?'La mise à jour ne peut pas être vérifiée hors connexion. Reconnectez-vous puis réessayez. Aucun cache ne sera supprimé hors connexion.':'La mise à jour locale et les fichiers publiés ne sont pas synchronisés. Vos notes, surlignages et favoris ne seront pas effacés.';
   else if(dbFailure)detail.textContent='Le stockage local n’a pas pu être ouvert. Aucun cache ni donnée personnelle ne sera supprimé automatiquement.';
   else if(bootStage==='CORPUS_INIT')detail.textContent='Le registre du corpus n’a pas pu être chargé. Réessayez d’abord; une réparation du cache n’est proposée que pour un conflit de version ou d’intégrité identifié.';
+  else if(bootStage==='MIGRATION_STARTUP')detail.textContent='La migration sécurisée de vos données n’a pas pu être terminée. L’application reste fermée pour éviter toute écriture concurrente ou état partiel. Mettez le navigateur à jour si nécessaire, fermez les autres fenêtres du Livre du Ciel puis réessayez.';
   else detail.textContent='L’initialisation a été interrompue. Vos données personnelles ne seront pas supprimées automatiquement.';
   let btn=document.getElementById('boot-repair-btn');if(!btn){btn=document.createElement('button');btn.id='boot-repair-btn';btn.type='button';btn.className='btn-primary';btn.style.marginTop='4px';box.appendChild(btn);}
   btn.disabled=false;
@@ -7398,21 +7473,10 @@ async function boot() {
   await bootWithTimeout(openDB(),BOOT_DB_TIMEOUT_MS,'ouverture du stockage local trop longue');
   bootStage='CORPUS_INIT';
   await bootWithTimeout(initialiseSupplementMode(),BOOT_CORPUS_TIMEOUT_MS,'chargement du registre des compléments trop long');
+  bootStage='MIGRATION_STARTUP';
+  if(loadingSub)loadingSub.textContent='Vérification et migration sécurisée des données…';
+  await runStage8StartupMigrationGate();
   bootStage='POST_INIT';
-  await migrateReadingPositionsV3().catch(e=>console.warn('LDC: reading-position v3 migration deferred',e));
-
-  // M4 schema-v4 migration is idempotent and non-destructive. It preserves
-  // unresolved records and never silently relocates an ambiguous exact-text anchor.
-  migrateUserDataV4()
-    .then(r => { if (r && !r.skipped) console.info('LDC: user data migrated to schema 4', r); return migrateUserDataR3Once(); })
-    .then(r => { if (r && !r.skipped) console.info('LDC: user data migrated across ALIGNÉ R3', r); return migrateUserDataR4Once(); })
-    .then(r => { if (r && !r.skipped) console.info('LDC: user data migrated across ALIGNÉ R4', r); return migrateUserDataR5Once(); })
-    .then(r => { if (r && !r.skipped) console.info('LDC: user data migrated across ALIGNÉ R5', r); return migrateUserDataR6Once(); })
-    .then(r => { if (r && !r.skipped) console.info('LDC: user data migrated across ALIGNÉ R6/SUP-T5', r); return migrateUserDataR7DateIdOnce(); })
-    .then(r => { if (r && !r.skipped) console.info('LDC: user data migrated across Date/ID identity reconciliation', r); return migrateUserDataInterimOnce(); })
-    .then(r => { if (r && !r.skipped) console.info('LDC: user data migrated across interim successor', r); return migrateUserDataFast1Once(); })
-    .then(r => { if (r && !r.skipped) console.info('LDC: user data migrated across FAST1 certified corpus mutation', r); })
-    .catch(e => console.warn('LDC: user-data migration deferred', e));
 
   // LDC-A: migrate the legacy 14–22 slider once, then restore one of the
   // four semantic levels. A fresh profile defaults to Normal (19px).
