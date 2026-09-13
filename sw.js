@@ -1,4 +1,4 @@
-const VERSION = 'ldc-v2.19.86-R1B-stage8-r12';
+const VERSION = 'ldc-v2.19.86-R1B-stage8-r13';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
@@ -10,8 +10,11 @@ function scopeFingerprint(scope) {
 }
 const OFFLINE_SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
 const SCOPE_CACHE_PREFIX = `${CACHE_PREFIX}${OFFLINE_SCOPE_FINGERPRINT}-`;
-const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.86-R1B-stage8-r12`;
-const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.86-R1B-stage8-r12`;
+const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.86-R1B-stage8-r13`;
+const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.86-R1B-stage8-r13`;
+const LEGACY_V76_WORKER_VERSION = 'ldc-v2.19.76-R1B-report-r2';
+const UPDATE_COMPAT_META_PATH = '__ldc_update_compat__.json';
+const INSTALL_FETCH_NONCE = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 const OFFLINE_CACHE = `${CACHE_PREFIX}offline-persistent-v3-${OFFLINE_SCOPE_FINGERPRINT}`;
 const OFFLINE_MANIFEST_URL = './offline_manifest.json';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v3';
@@ -275,19 +278,74 @@ async function handleOfflineMessage(event) {
   }
 }
 
+async function readUpdateCompatMeta() {
+  try{const c=await caches.open(SHELL_CACHE),r=await c.match(new URL(UPDATE_COMPAT_META_PATH,self.registration.scope).href,{ignoreSearch:true});return r?await r.json():null;}catch(e){return null;}
+}
+async function writeUpdateCompatMeta(meta) {
+  const c=await caches.open(SHELL_CACHE),u=new URL(UPDATE_COMPAT_META_PATH,self.registration.scope).href;
+  await c.put(u,new Response(JSON.stringify(meta),{status:200,headers:{'content-type':'application/json'}}));
+}
+async function clearLegacyV76VersionAlias() {
+  const meta=await readUpdateCompatMeta();if(!meta||!meta.legacy_v76_alias_active)return;
+  meta.legacy_v76_alias_active=false;meta.alias_cleared_at=new Date().toISOString();await writeUpdateCompatMeta(meta);
+}
+async function reportedWorkerVersion() {
+  const meta=await readUpdateCompatMeta();return meta&&meta.direct_v76_upgrade&&meta.legacy_v76_alias_active?LEGACY_V76_WORKER_VERSION:VERSION;
+}
+async function respondWorkerVersion(e){
+  const version=await reportedWorkerVersion(),p=e.ports&&e.ports[0];
+  if(p)p.postMessage({type:'LDC_SW_VERSION',version});else if(e.source)e.source.postMessage({type:'LDC_SW_VERSION',version});
+}
 self.addEventListener('message',e=>{
-  if(e.data&&e.data.type==='LDC_GET_VERSION'){const p=e.ports&&e.ports[0];if(p)p.postMessage({type:'LDC_SW_VERSION',version:VERSION});else if(e.source)e.source.postMessage({type:'LDC_SW_VERSION',version:VERSION});return;}
+  if(e.data&&e.data.type==='LDC_GET_VERSION'){e.waitUntil(respondWorkerVersion(e));return;}
   if(e.data&&e.data.type==='SKIP_WAITING'){self.skipWaiting();return;}
   if(e.data&&String(e.data.type||'').startsWith('OFFLINE_'))e.waitUntil(handleOfflineMessage(e));
 });
 
 const BOOT_CRITICAL_CORPUS = ['corpus/supplements.json','corpus/supplement_manifest.json'];
+function queryPredecessorWorkerVersion(timeoutMs=1200){
+  return new Promise(resolve=>{
+    const worker=self.registration&&self.registration.active;
+    if(!worker||typeof MessageChannel==='undefined'){resolve(null);return;}
+    const ch=new MessageChannel();let done=false;
+    const finish=v=>{if(done)return;done=true;clearTimeout(timer);try{ch.port1.close();ch.port2.close();}catch(e){}resolve(v||null);};
+    const timer=setTimeout(()=>finish(null),timeoutMs);
+    ch.port1.onmessage=e=>{const d=e&&e.data||{};finish(d.type==='LDC_SW_VERSION'?String(d.version||''):null);};
+    try{worker.postMessage({type:'LDC_GET_VERSION'},[ch.port2]);}catch(e){finish(null);}
+  });
+}
+function revisionBoundUrl(input){const u=new URL(input,self.registration.scope);u.searchParams.set('ldc_sw_revision',`${VERSION}-${INSTALL_FETCH_NONCE}`);return u.href;}
+async function verifyPublishedRevisionMarker(){
+  const r=await fetch(new Request(revisionBoundUrl('./version.json'),{cache:'no-store'}));
+  if(!r||!r.ok)throw new Error(`version marker HTTP ${r&&r.status}`);
+  const meta=await r.json();
+  if(String(meta&&meta.page_worker_revision||'')!==VERSION)throw new Error(`published revision mismatch: ${String(meta&&meta.page_worker_revision||'missing')}`);
+  return meta;
+}
+async function verifyShellRevisionResponse(rel,response){
+  if(rel==='./'||rel==='./index.html'){
+    const text=await response.clone().text();if(!text.includes(`const SW_CACHE_VERSION = '${VERSION}';`))throw new Error(`index revision mismatch: ${rel}`);
+  }else if(rel==='./sw.js'){
+    const text=await response.clone().text();if(!text.includes(`const VERSION = '${VERSION}';`))throw new Error('worker self revision mismatch');
+  }else if(rel==='./offline_manifest.json'){
+    const meta=await response.clone().json();if(String(meta&&meta.page_worker_revision||'')!==VERSION)throw new Error(`offline manifest revision mismatch: ${String(meta&&meta.page_worker_revision||'missing')}`);
+  }
+}
 async function installFreshShell() {
+  const predecessorVersion=await queryPredecessorWorkerVersion();
+  const directV76=predecessorVersion===LEGACY_V76_WORKER_VERSION;
   await caches.delete(SHELL_CACHE);
   const c=await caches.open(SHELL_CACHE);
-  const requests=SHELL.map(u=>new Request(new URL(u,self.registration.scope).href,{cache:'reload'}));
-  try{await c.addAll(requests);}
-  catch(e){await caches.delete(SHELL_CACHE);throw e;}
+  try{
+    await Promise.all(SHELL.map(async rel=>{
+      const canonical=new URL(rel,self.registration.scope).href;
+      const response=await fetch(new Request(revisionBoundUrl(rel),{cache:'no-store'}));
+      if(!response||!response.ok)throw new Error(`shell asset HTTP ${response&&response.status}: ${rel}`);
+      await verifyShellRevisionResponse(rel,response);
+      await c.put(canonical,response.clone());
+    }));
+    await writeUpdateCompatMeta({schema:'ldc-update-compat-v1',direct_v76_upgrade:directV76,legacy_v76_alias_active:directV76,installed_revision:VERSION,predecessor_worker_version:predecessorVersion,created_at:new Date().toISOString()});
+  }catch(e){await caches.delete(SHELL_CACHE);throw e;}
 }
 async function installVerifiedBootCorpus() {
   const m=await loadOfflineManifest();
@@ -296,14 +354,18 @@ async function installVerifiedBootCorpus() {
   try{
     for(const path of BOOT_CRITICAL_CORPUS){
       const asset=m.assetMap.get(path);if(!asset)throw new Error(`boot-critical asset absent du manifeste: ${path}`);
-      const raw=await fetch(cacheUrl(path),{cache:'reload'});
+      const raw=await fetch(revisionBoundUrl(path),{cache:'no-store'});
       const verified=await verifiedNetworkResponse(raw,asset,m);
       await cache.put(cacheUrl(path),verified.clone());entries.push({path,bytes:Number(asset.bytes)});
     }
     await writeRuntimeMeta(cache,m,entries);
   }catch(e){await caches.delete(RUNTIME_CACHE);throw e;}
 }
-self.addEventListener('install',e=>{e.waitUntil((async()=>{await installFreshShell();await installVerifiedBootCorpus();})());});
+async function installCurrentRevisionAtomically(){
+  try{await verifyPublishedRevisionMarker();await installFreshShell();await installVerifiedBootCorpus();await verifyPublishedRevisionMarker();}
+  catch(e){await Promise.all([caches.delete(SHELL_CACHE),caches.delete(RUNTIME_CACHE)]);throw e;}
+}
+self.addEventListener('install',e=>{e.waitUntil(installCurrentRevisionAtomically());});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{
   const keep=new Set([SHELL_CACHE,RUNTIME_CACHE,OFFLINE_CACHE]);
   const keys=await caches.keys();
@@ -362,7 +424,7 @@ self.addEventListener('fetch',e=>{
   }
   if(e.request.mode==='navigate'){
     const freshNav=new Request(e.request,{cache:'reload'});
-    e.respondWith(fetch(freshNav).catch(async()=>{const c=await caches.open(SHELL_CACHE);return (await c.match('./index.html'))||(await c.match('./'));}));return;
+    e.respondWith((async()=>{await clearLegacyV76VersionAlias();return fetch(freshNav).catch(async()=>{const c=await caches.open(SHELL_CACHE);return (await c.match('./index.html'))||(await c.match('./'));});})());return;
   }
   if(path.includes('/corpus/')){
     e.respondWith(cachedCorpusResponse(e.request,false));return;

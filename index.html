@@ -1867,7 +1867,7 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
         <div id="offline-failed-list" class="help-text" style="display:none;font-size:12px;color:var(--muted);margin:-2px 0 10px;white-space:pre-wrap;"></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn-secondary" style="flex:1;min-width:160px;" onclick="startOfflinePreparation()" id="offline-prepare-btn"><i class="ti ti-download"></i> Préparer hors ligne</button><button class="btn-secondary" style="display:none;" onclick="cancelOfflinePreparation()" id="offline-cancel-btn"><i class="ti ti-x"></i> Annuler</button><button class="btn-secondary" style="display:none;" onclick="clearOfflinePreparation()" id="offline-clear-btn"><i class="ti ti-trash"></i> Effacer les caches</button></div>
         <div class="help-divider"></div>
-        <div class="help-text" style="padding:2px 0 10px;" id="update-check-status">L’application vérifie automatiquement les mises à jour à l’ouverture. Une nouvelle version peut s’activer en arrière-plan, mais la page n’est jamais rechargée automatiquement. Lorsque la bannière apparaît, terminez ou annulez toute saisie en cours puis appuyez sur <b>Actualiser</b> pour charger la nouvelle page.</div>
+        <div class="help-text" style="padding:2px 0 10px;" id="update-check-status">L’application vérifie les mises à jour à l’ouverture, au retour dans l’app, au retour en ligne et périodiquement tant qu’elle reste visible. La vérification de la version publiée et celle du Service Worker sont indépendantes : l’échec temporaire de l’une ne bloque pas l’autre. La page n’est jamais rechargée automatiquement pendant une saisie. Lorsque la bannière apparaît, terminez ou annulez toute saisie en cours puis appuyez sur <b>Actualiser</b>.</div>
         <button class="btn-secondary" style="width:100%;" onclick="manualCheckForUpdate()" id="update-check-btn"><i class="ti ti-refresh"></i> Vérifier les mises à jour</button>
       </div>
       <div class="help-tip">Après une mise à jour incompatible avec le cache précédent, l’application peut demander une nouvelle préparation hors ligne. <b>Effacer les caches</b> supprime la préparation hors ligne et le cache temporaire de lecture/recherche, mais ne supprime pas Mon Espace, vos favoris, notes ou surlignages.</div>
@@ -1962,7 +1962,7 @@ const APP_VERSION = 'v2.19.86-R1B'; // technical update/audit identifier
 const PUBLIC_VERSION = '86';        // single user-facing release number
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD   = '2026-09-13';
-const SW_CACHE_VERSION = 'ldc-v2.19.86-R1B-stage8-r12';
+const SW_CACHE_VERSION = 'ldc-v2.19.86-R1B-stage8-r13';
 const CORPUS_MANIFEST_SHA256 = '4e7f7bf22552299a1e4e08525c41534a607fb956a7ad819d1b5358dec092b941';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
@@ -7906,10 +7906,13 @@ async function boot() {
           if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
             document.getElementById('update-banner').classList.add('show');
             setUpdateStatus('Une nouvelle version est prête à être installée.');
+          } else if (newWorker.state === 'redundant' && navigator.serviceWorker.controller) {
+            showUpdateAvailable('nouvelle version','Une mise à jour a été détectée mais son installation n’a pas abouti. La vérification sera réessayée automatiquement.');
           }
         });
       });
       backgroundUpdateCheck(reg).catch(()=>{});
+      startPeriodicUpdateChecks(reg);
       document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') backgroundUpdateCheck(reg).catch(()=>{}); });
       window.addEventListener('focus', () => backgroundUpdateCheck(reg).catch(()=>{}));
       window.addEventListener('online', () => { backgroundUpdateCheck(reg).catch(()=>{}); requestOfflineStatus().catch(()=>{}); });
@@ -8325,6 +8328,9 @@ async function initOfflineState(){
 }
 
 const UPDATE_CHECK_TIMEOUT_MS = 15000;
+const UPDATE_POLL_INTERVAL_MS = 180000;
+let updateCheckInFlight = null;
+let updatePollTimer = null;
 function ldcUnsafeReloadState(){
   const reasons=[];
   const visible=id=>{const el=document.getElementById(id);return !!(el&&el.classList.contains('show'));};
@@ -8380,14 +8386,33 @@ function waitForRegistrationUpdate(reg, timeoutMs=UPDATE_CHECK_TIMEOUT_MS) {
   });
 }
 async function backgroundUpdateCheck(reg) {
-  try {
-    const published=await fetchPublishedVersion();
-    const publishedLabel=`Version ${published.publicVersion}`;
-    if(published.version!==APP_VERSION)showUpdateAvailable(publishedLabel,`${publishedLabel} est publiée. Cette page exécute encore ${APP_VERSION_LABEL}.`);
-    await reg.update();
-    if(reg.waiting&&navigator.serviceWorker.controller)showUpdateAvailable(publishedLabel,'Une nouvelle version est prête à être installée.');
+  if(updateCheckInFlight)return updateCheckInFlight;
+  updateCheckInFlight=(async()=>{
+    let published=null,publishedError=null,workerError=null;
+    try{
+      published=await fetchPublishedVersion();
+      const publishedLabel=`Version ${published.publicVersion}`;
+      if(published.version!==APP_VERSION)showUpdateAvailable(publishedLabel,`${publishedLabel} est publiée. Cette page exécute encore ${APP_VERSION_LABEL}.`);
+    }catch(e){publishedError=e;}
+    // Independent channel: a transient version.json failure must never suppress
+    // the browser's Service Worker update algorithm.
+    try{await reg.update();}catch(e){workerError=e;}
+    if(reg.waiting&&navigator.serviceWorker.controller){
+      const label=published?`Version ${published.publicVersion}`:'nouvelle version';
+      showUpdateAvailable(label,'Une nouvelle version est prête à être installée.');
+    }
+    if(!published&&workerError){
+      setUpdateStatus(navigator.onLine===false?'Vérification différée hors ligne.':'La vérification automatique sera réessayée.');
+    }
     return published;
-  } catch(e) { return null; }
+  })();
+  try{return await updateCheckInFlight;}finally{updateCheckInFlight=null;}
+}
+function startPeriodicUpdateChecks(reg){
+  if(updatePollTimer)clearInterval(updatePollTimer);
+  updatePollTimer=setInterval(()=>{
+    if(document.visibilityState==='visible'&&navigator.onLine!==false)backgroundUpdateCheck(reg).catch(()=>{});
+  },UPDATE_POLL_INTERVAL_MS);
 }
 async function reloadForUpdate() {
   const unsafe=ldcUnsafeReloadState();
@@ -8414,32 +8439,20 @@ async function manualCheckForUpdate() {
   const btn=document.getElementById('update-check-btn');
   if(!statusEl||!btn)return;
   if(!('serviceWorker' in navigator)){statusEl.textContent='Les mises à jour automatiques ne sont pas prises en charge sur ce navigateur.';return;}
-  const originalBtnHtml=btn.innerHTML;btn.disabled=true;btn.innerHTML='<i class="ti ti-refresh"></i> Vérification…';statusEl.textContent='Vérification de la version publiée…';
+  const originalBtnHtml=btn.innerHTML;btn.disabled=true;btn.innerHTML='<i class="ti ti-refresh"></i> Vérification…';statusEl.textContent='Vérification de la version publiée et du Service Worker…';
   try {
-    const published=await fetchPublishedVersion();
     const reg=(await navigator.serviceWorker.getRegistration()) || (await navigator.serviceWorker.ready);
-    const publishedLabel=`Version ${published.publicVersion}`;
-    if(published.version===APP_VERSION){
-      await reg.update();
-      statusEl.textContent=`Vous avez la dernière version publiée (${APP_VERSION_LABEL}).`;
-      showToast('Version publiée confirmée');
-      return;
-    }
-    showUpdateAvailable(publishedLabel,`${publishedLabel} est publiée. Installation en cours de vérification…`);
-    await reg.update();
+    let published=null,publishedError=null,workerError=null;
+    try{published=await fetchPublishedVersion();}catch(e){publishedError=e;}
+    try{await reg.update();}catch(e){workerError=e;}
+    const publishedLabel=published?`Version ${published.publicVersion}`:'nouvelle version';
+    if(reg.waiting&&navigator.serviceWorker.controller){showUpdateAvailable(publishedLabel,`${publishedLabel} est prête à être installée.`);showToast('Nouvelle version prête');return;}
     const result=await waitForRegistrationUpdate(reg);
-    if(reg.waiting||result.worker){
-      statusEl.textContent=`${publishedLabel} est prête à être installée.`;
-      document.getElementById('update-banner').classList.add('show');
-      showToast('Nouvelle version prête');
-    } else {
-      statusEl.textContent=`${publishedLabel} est publiée, mais cette page exécute encore ${APP_VERSION_LABEL}. Installation non terminée — réessayez.`;
-      document.getElementById('update-banner').classList.add('show');
-      showToast('Mise à jour publiée mais non installée');
-    }
-  } catch(e) {
-    statusEl.textContent=navigator.onLine===false?'Vérification impossible hors ligne.':'Impossible de confirmer la version publiée pour le moment.';
-    showToast('Version publiée non vérifiable');
+    if(reg.waiting||result.worker){showUpdateAvailable(publishedLabel,`${publishedLabel} est prête à être installée.`);showToast('Nouvelle version prête');return;}
+    if(published&&published.version!==APP_VERSION){showUpdateAvailable(publishedLabel,`${publishedLabel} est publiée, mais son installation n’est pas encore terminée. La vérification sera réessayée.`);return;}
+    if(published&&published.version===APP_VERSION&&!workerError){statusEl.textContent=`Vous avez la dernière version publiée (${APP_VERSION_LABEL}).`;showToast('Version publiée confirmée');return;}
+    statusEl.textContent=navigator.onLine===false?'Vérification impossible hors ligne.':'La vérification n’a pas pu être entièrement confirmée. Elle sera réessayée automatiquement.';
+    if(publishedError&&workerError)showToast('Vérification à réessayer');
   } finally {btn.disabled=false;btn.innerHTML=originalBtnHtml;}
 }
 
