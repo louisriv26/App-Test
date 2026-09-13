@@ -1,4 +1,4 @@
-const VERSION = 'ldc-v2.19.86-R1B-stage8-r9';
+const VERSION = 'ldc-v2.19.86-R1B-stage8-r12';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
@@ -10,8 +10,8 @@ function scopeFingerprint(scope) {
 }
 const OFFLINE_SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
 const SCOPE_CACHE_PREFIX = `${CACHE_PREFIX}${OFFLINE_SCOPE_FINGERPRINT}-`;
-const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.86-R1B-stage8-r9`;
-const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.86-R1B-stage8-r9`;
+const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.86-R1B-stage8-r12`;
+const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.86-R1B-stage8-r12`;
 const OFFLINE_CACHE = `${CACHE_PREFIX}offline-persistent-v3-${OFFLINE_SCOPE_FINGERPRINT}`;
 const OFFLINE_MANIFEST_URL = './offline_manifest.json';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v3';

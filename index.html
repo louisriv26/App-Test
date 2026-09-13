@@ -1961,8 +1961,8 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
 const APP_VERSION = 'v2.19.86-R1B'; // technical update/audit identifier
 const PUBLIC_VERSION = '86';        // single user-facing release number
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD   = '2026-09-12';
-const SW_CACHE_VERSION = 'ldc-v2.19.86-R1B-stage8-r9';
+const APP_BUILD   = '2026-09-13';
+const SW_CACHE_VERSION = 'ldc-v2.19.86-R1B-stage8-r12';
 const CORPUS_MANIFEST_SHA256 = '4e7f7bf22552299a1e4e08525c41534a607fb956a7ad819d1b5358dec092b941';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
@@ -2027,8 +2027,8 @@ function readerIntentForAction(action,currentIntent=READER_INTENT.CONSULTATION){
   return READER_INTENT.CONSULTATION;
 }
 function readerIntentMayWriteMain(intent){return normalizeReaderIntent(intent)===READER_INTENT.SEQUENTIAL;}
-function createReaderSession(intent,vol,entryId,supplementId=null){
-  return {session_id:`reader-${Date.now()}-${++readerSessionSerial}`,intent:normalizeReaderIntent(intent),vol:Number(vol)||null,entry_id:entryId||null,supplement_id:supplementId||null,source_mode:supplementMode,save_sequence:0,opened_at:Date.now()};
+function createReaderSession(intent,vol,entryId,supplementId=null,authorityEpoch=0){
+  return {session_id:`reader-${Date.now()}-${++readerSessionSerial}`,intent:normalizeReaderIntent(intent),vol:Number(vol)||null,entry_id:entryId||null,supplement_id:supplementId||null,source_mode:supplementMode,save_sequence:0,authority_epoch:Math.max(0,Number(authorityEpoch)||0),opened_at:Date.now()};
 }
 function currentReaderIntent(){return activeReaderSession?normalizeReaderIntent(activeReaderSession.intent):READER_INTENT.CONSULTATION;}
 function readerScreenIsVisible(){return !!document.getElementById('screen-reader')?.classList.contains('active');}
@@ -2060,6 +2060,7 @@ function makeReaderPositionSnapshot(pos,advanceSequence=true){
     reader_intent:normalizeReaderIntent(session.intent),
     source_mode:String(session.source_mode||supplementMode||'enriched'),
     save_sequence:seq,
+    authority_epoch:Math.max(0,Number(session.authority_epoch)||0),
     captured_at:Date.now()
   }));
 }
@@ -2693,6 +2694,7 @@ async function openSupplementItem(s,backDest='tomes',opts={}){
   const inheritedIntent=(!opts.intent&&opts.inheritIntent===true&&activeReaderSession&&readerSessionOwnsVisibleReader(activeReaderSession))
     ? normalizeReaderIntent(activeReaderSession.intent)
     : null;
+  const inheritedAuthorityEpoch=inheritedIntent===READER_INTENT.SEQUENTIAL&&activeReaderSession?Math.max(0,Number(activeReaderSession.authority_epoch)||0):0;
   if(activeReaderSession&&opts.preserveSession!==true)await flushReaderForTransition('supplement-navigation');
   // Reader data is loaded exactly once by openEntry(); do not pre-load it here.
   currentSupplementFocusId=s.supplement_id;
@@ -2700,7 +2702,7 @@ async function openSupplementItem(s,backDest='tomes',opts={}){
   else pendingParaId=null;
   const entryId=s.supplement_type==='COMPLETE_ENTRY'&&s.entry?s.entry.id:s.target_entry_id;
   const openOpts={...opts,supplementId:s.supplement_id};
-  if(inheritedIntent){openOpts.intent=inheritedIntent;openOpts.inheritIntent=false;}
+  if(inheritedIntent){openOpts.intent=inheritedIntent;openOpts.inheritIntent=false;openOpts.authorityEpoch=inheritedAuthorityEpoch;}
   return openEntry(s.volume,entryId,backDest,openOpts);
 }
 
@@ -3253,10 +3255,16 @@ async function persistReaderSnapshot(snapshot,opts={}){
     if(requireActive&&!allowSuspendedCommit&&activeReaderSession&&String(activeReaderSession.session_id)===sessionId&&activeReaderSession.persistence_suspended)return {written:false,reason:'session_persistence_suspended'};
     const committed=Number(readingPositionCommittedSequence.get(sessionId)||0);
     if(seq<=committed)return {written:false,reason:'stale_sequence',committed_sequence:committed};
-    const updateMain=requestedMain&&readerSnapshotMayWriteMain(snapshot);
+    let updateMain=requestedMain&&readerSnapshotMayWriteMain(snapshot),authorityReason='';
+    if(updateMain){
+      const authoritative=await dbGet('reading_pos','main').catch(()=>null);
+      const currentEpoch=Math.max(0,Number(authoritative&&authoritative.authority_epoch)||0);
+      const snapshotEpoch=Math.max(0,Number(snapshot.authority_epoch)||0);
+      if(currentEpoch>snapshotEpoch){updateMain=false;authorityReason='stale_authority_epoch';}
+    }
     await persistSemanticReadingPosition(snapshot,updateMain);
     readingPositionCommittedSequence.set(sessionId,seq);
-    return {written:true,reason:updateMain?'committed':'committed_main_denied',save_sequence:seq,update_main:updateMain,main_requested:requestedMain};
+    return {written:true,reason:updateMain?'committed':(authorityReason||'committed_main_denied'),save_sequence:seq,update_main:updateMain,main_requested:requestedMain};
   };
   const run=readingPositionWriteChain.catch(()=>{}).then(task);
   readingPositionWriteChain=run.then(()=>undefined,()=>undefined);
@@ -3332,7 +3340,7 @@ function captureNavigationContext(kind){
   return {screen:screen||'tomes'};
 }
 
-function captureReaderOriginContext(){return {screen:'reader',vol:currentVolume,entryId:currentEntry?currentEntry.id:null,position:captureSemanticReadingPosition(),intent:currentReaderIntent(),source_mode:supplementMode,parent:readerOriginContext};}
+function captureReaderOriginContext(){return {screen:'reader',vol:currentVolume,entryId:currentEntry?currentEntry.id:null,position:captureSemanticReadingPosition(),intent:currentReaderIntent(),source_mode:supplementMode,authority_epoch:activeReaderSession&&currentReaderIntent()===READER_INTENT.SEQUENTIAL?Math.max(0,Number(activeReaderSession.authority_epoch)||0):0,parent:readerOriginContext};}
 
 async function restoreNavigationContext(ctx){
   if(!ctx){goTomes();return;}
@@ -3341,7 +3349,7 @@ async function restoreNavigationContext(ctx){
     if(validJourneySourceMode(ctx.source_mode)&&supplementMode!==ctx.source_mode)applyAutomaticReaderSourceMode(ctx.source_mode);
     readerOriginContext=ctx.parent||null;
     pendingSemanticPosition=ctx.position||null;
-    await openEntry(ctx.vol,ctx.entryId,ctx.parent&&ctx.parent.screen?ctx.parent.screen:'tomes',{preserveOrigin:true,originContext:ctx.parent||null,restorePosition:ctx.position||null,supplementId:ctx.position&&ctx.position.supplement_id||null,intent:readerIntentForAction('RESTORE_PARENT',ctx.intent||READER_INTENT.CONSULTATION)});
+    await openEntry(ctx.vol,ctx.entryId,ctx.parent&&ctx.parent.screen?ctx.parent.screen:'tomes',{preserveOrigin:true,originContext:ctx.parent||null,restorePosition:ctx.position||null,supplementId:ctx.position&&ctx.position.supplement_id||null,intent:readerIntentForAction('RESTORE_PARENT',ctx.intent||READER_INTENT.CONSULTATION),authorityEpoch:Math.max(0,Number(ctx.authority_epoch)||0)});
     return;
   }
   if(ctx.screen==='entries'){
@@ -3393,6 +3401,180 @@ async function migrateReadingPositionsV3(){
 }
 async function confirmLegacyMainReadingPosition(){return resumeReading({confirmLegacy:true});}
 function chooseDifferentMainReadingPosition(){goTomes();showToast('Ouvrez le texte souhaité puis choisissez « Continuer ma lecture suivie à partir d’ici ».');}
+
+const LEGACY_READING_RECOVERY_CLASS=Object.freeze({
+  COHERENT:'COHERENT_CURRENT_TARGET',ALIAS:'RECOVERABLE_EXACT_ALIAS',PARAGRAPH:'RECOVERABLE_EXACT_PARAGRAPH',
+  SUPPLEMENT:'RECOVERABLE_EXACT_SUPPLEMENT_OR_ENTRY',EXCERPT:'RECOVERABLE_UNIQUE_EXACT_EXCERPT',
+  AMBIGUOUS:'AMBIGUOUS_PRESERVE',INVALID:'INVALID_PRESERVE',CONTRADICTORY:'CONTRADICTORY_PRESERVE'
+});
+let legacyRecoverySearchV2Promise=null;
+function normalizeLegacyRecoveryText(value){
+  return String(value||'').normalize('NFKC').replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim();
+}
+function normalizedSavedExcerpt(value){return normalizeLegacyRecoveryText(value).replace(/(?:…|\.\.\.)$/,'').trim();}
+function savedExcerptMatchesParagraph(excerpt,text){const e=normalizedSavedExcerpt(excerpt);return !e||normalizeLegacyRecoveryText(text).startsWith(e);}
+function inferVolumeFromReadingIdentity(value){
+  const s=String(value||'');let m=/(?:^|[._-])(?:LDC|LDCSUP)?[._-]?T0*(\d{1,2})(?:[._-]|$)/i.exec(s);
+  if(!m)m=/^ldc(?:sup)?_t0*(\d{1,2})_/i.exec(s);
+  const v=m?Number(m[1]):0;return Number.isInteger(v)&&v>=1&&v<=36?v:null;
+}
+function legacyRecoveryLabel(candidate){
+  const e=candidate&&candidate.entry,sp=candidate&&candidate.supplement;
+  if(!e)return candidate&&candidate.label||'—';
+  return `Tome ${candidate.vol} · ${sp&&isInternalSupplementItem(sp)?'Complément interne':(e.date_display||e.title||e.stable_ref||'')}${sp?' · COMPLÉMENT':''}`;
+}
+async function loadLegacyRecoverySearchV2(){
+  if(legacyRecoverySearchV2Promise)return legacyRecoverySearchV2Promise;
+  legacyRecoverySearchV2Promise=Promise.all([
+    fetch(`corpus/search_v2_documents.json?${CORPUS_CV}`).then(r=>{if(!r.ok)throw new Error('legacy recovery documents unavailable');return r.json();}),
+    fetch(`corpus/search_v2_entries.json?${CORPUS_CV}`).then(r=>{if(!r.ok)throw new Error('legacy recovery entries unavailable');return r.json();})
+  ]).then(([d,e])=>{if(!d||d.schema!=='ldc-search-v2-documents-v1'||!Array.isArray(d.documents)||!e||d.predecessor_sha256!==e.predecessor_sha256||!Array.isArray(e.entries))throw new Error('legacy recovery search authority mismatch');return {documents:d.documents,entries:e.entries};});
+  try{return await legacyRecoverySearchV2Promise;}catch(e){legacyRecoverySearchV2Promise=null;throw e;}
+}
+async function readingRecoveryAliasForParagraph(paraId){
+  if(!paraId)return null;
+  try{const m=await loadUserStateR7DateIdMap();const a=(m.paragraph_aliases||[]).find(x=>x.old_para_id===paraId);return a||null;}catch(e){return null;}
+}
+async function paragraphCandidateExact(paraId,preferredVolumes=[]){
+  if(!paraId)return {matches:[]};
+  const alias=await readingRecoveryAliasForParagraph(paraId),targetId=alias&&alias.new_para_id||paraId;
+  const preferred=Array.isArray(preferredVolumes)?preferredVolumes:[preferredVolumes];
+  const identityVolumes=[alias&&Number(alias.volume),inferVolumeFromReadingIdentity(targetId),inferVolumeFromReadingIdentity(paraId)].filter(v=>Number.isInteger(v)&&v>=1&&v<=36);
+  const staleNumeric=preferred.map(Number).filter(v=>Number.isInteger(v)&&v>=1&&v<=36);
+  const volumes=identityVolumes.length?[...new Set(identityVolumes)]:[...new Set([...staleNumeric,...Array.from({length:36},(_,i)=>i+1)])],matches=[];
+  for(const vol of volumes){
+    try{await ensureVolumeReaderData(vol);}catch(e){continue;}
+    for(const p of (parasCache[vol]||[]).filter(x=>x.id===targetId)){
+      const entry=await currentEntryById(vol,p.entry_id);if(!entry)continue;
+      const supplement=p.supplement_id?supplementById(p.supplement_id):supplementForTarget(vol,p.entry_id,p.id);
+      matches.push({vol,entry_id:p.entry_id,supplement_id:supplement&&supplement.supplement_id||null,para_id:p.id,stable_ref:p.stable_ref||null,text:p.text||'',entry,supplement,alias});
+    }
+  }
+  return {matches,alias};
+}
+async function paragraphCandidateByStableRefExact(stableRef,preferredVolumes=[]){
+  const ref=String(stableRef||'').trim();if(!ref)return {matches:[]};
+  const preferred=Array.isArray(preferredVolumes)?preferredVolumes:[preferredVolumes];
+  const inferred=inferVolumeFromReadingIdentity(ref),numeric=preferred.map(Number).filter(v=>Number.isInteger(v)&&v>=1&&v<=36);
+  const volumes=inferred?[inferred]:[...new Set([...numeric,...Array.from({length:36},(_,i)=>i+1)])],matches=[];
+  for(const vol of volumes){
+    try{await ensureVolumeReaderData(vol);}catch(e){continue;}
+    for(const p of (parasCache[vol]||[]).filter(x=>String(x.stable_ref||'')===ref)){
+      const entry=await currentEntryById(vol,p.entry_id);if(!entry)continue;
+      const supplement=p.supplement_id?supplementById(p.supplement_id):supplementForTarget(vol,p.entry_id,p.id);
+      matches.push({vol,entry_id:p.entry_id,supplement_id:supplement&&supplement.supplement_id||null,para_id:p.id,stable_ref:p.stable_ref||null,text:p.text||'',entry,supplement,alias:null});
+    }
+  }
+  return {matches};
+}
+function readingRecoverySourceModeCompatible(mode,hasSupplement){
+  if(mode==null||String(mode)==='')return true;
+  if(!validJourneySourceMode(mode))return false;
+  return hasSupplement?String(mode)!=='aflp':String(mode)!=='additions';
+}
+function recoveredSourceModeForCandidate(old,candidate){
+  const mode=validJourneySourceMode(old&&old.source_mode)?String(old.source_mode):null;
+  if(candidate&&candidate.supplement)return mode==='additions'||mode==='enriched'?mode:'enriched';
+  return mode==='aflp'||mode==='enriched'?mode:'enriched';
+}
+async function validateCurrentReadingPositionCoherence(pos){
+  const vol=Number(pos&&pos.vol);if(!pos||!Number.isInteger(vol)||vol<1||vol>36||!pos.entry_id)return {ok:false,reason:'invalid_target'};
+  try{
+    await loadSupplementRegistryData();await ensureVolumeIndex(vol);
+    const entry=(corpusCache[vol].allById&&corpusCache[vol].allById[pos.entry_id])||corpusCache[vol].byId[pos.entry_id];if(!entry)return {ok:false,reason:'entry_missing'};
+    const supplement=pos.supplement_id?supplementById(pos.supplement_id):null;if(pos.supplement_id&&!supplement)return {ok:false,reason:'supplement_missing'};
+    if(supplement){
+      if(Number(supplement.volume)!==vol)return {ok:false,reason:'supplement_volume_membership'};
+      const entryIds=new Set([supplement.target_entry_id,supplement.entry&&supplement.entry.id,...(supplement.paragraphs||[]).map(p=>p.entry_id)].filter(Boolean).map(String));
+      if(entryIds.size&&!entryIds.has(String(pos.entry_id)))return {ok:false,reason:'supplement_entry_membership'};
+    }
+    if(!readingRecoverySourceModeCompatible(pos.source_mode,!!supplement))return {ok:false,reason:'source_mode_membership',entry,supplement};
+    let paragraph=null;
+    if(pos.para_id){
+      await ensureVolumeReaderData(vol);paragraph=paragraphRecordById(vol,pos.para_id);if(!paragraph||String(paragraph.entry_id)!==String(pos.entry_id))return {ok:false,reason:'paragraph_membership'};
+      const paragraphSupplement=paragraph.supplement_id||null,canonicalSupplement=supplement&&supplement.supplement_id||null;
+      if(String(paragraphSupplement||'')!==String(canonicalSupplement||''))return {ok:false,reason:'supplement_membership'};
+      if(pos.stable_ref&&String(paragraph.stable_ref||'')!==String(pos.stable_ref))return {ok:false,reason:'stable_ref_membership'};
+      if(!savedExcerptMatchesParagraph(pos.excerpt,paragraph.text))return {ok:false,reason:'paragraph_excerpt_contradiction',paragraph,entry,supplement};
+    }else if(pos.stable_ref||normalizedSavedExcerpt(pos.excerpt)){
+      // A stable reference or excerpt identifies a passage, but restoreSemanticReadingPosition()
+      // cannot target either without a concrete para_id. Force exact governed resolution first;
+      // never call such a row coherent merely because the evidence exists somewhere in the entry.
+      return {ok:false,reason:'exact_passage_resolution_required',entry,supplement};
+    }
+    return {ok:true,entry,supplement,paragraph};
+  }catch(e){return {ok:false,reason:'load_failure',error:e};}
+}
+function correctedPositionFromCandidate(old,candidate,classification){
+  const text=String(candidate.text||''),sourceMode=recoveredSourceModeForCandidate(old,candidate);
+  return Object.assign({},old,{schema:READING_POSITION_SCHEMA,vol:Number(candidate.vol),entry_id:candidate.entry_id,supplement_id:candidate.supplement_id||null,para_id:candidate.para_id||null,
+    stable_ref:candidate.stable_ref||old.stable_ref||undefined,label:legacyRecoveryLabel(candidate),excerpt:text?text.slice(0,80)+(text.length>80?'…':''):(old.excerpt||''),source_mode:sourceMode,
+    recovery_classification:classification,recovered_from_legacy:true,recovered_at:Date.now()});
+}
+async function exactExcerptCandidates(excerpt){
+  const needle=normalizedSavedExcerpt(excerpt);if(!needle)return [];
+  const data=await loadLegacyRecoverySearchV2(),hits=[];
+  for(const d of data.documents){if(!Array.isArray(d)||d.length<6)continue;const text=String(d[5]||'');if(!normalizeLegacyRecoveryText(text).startsWith(needle))continue;
+    const entry=data.entries[Number(d[1])];if(!entry)continue;const vol=Number(d[2]),entryId=String(entry[0]||''),paraId=String(d[0]||'');
+    await loadSupplementRegistryData();const supplement=Number(d[3])?supplementForTarget(vol,entryId,paraId):null;const currentEntry=await currentEntryById(vol,entryId);if(!currentEntry)continue;
+    hits.push({vol,entry_id:entryId,supplement_id:supplement&&supplement.supplement_id||null,para_id:paraId,stable_ref:String(d[4]||'')||null,text,entry:currentEntry,supplement,alias:null});
+  }
+  return hits;
+}
+async function resolveLegacyReadingPosition(pos){
+  if(!pos)return {classification:LEGACY_READING_RECOVERY_CLASS.INVALID,old_position:pos,reason:'no_main'};
+  const coherent=await validateCurrentReadingPositionCoherence(pos);if(coherent.ok)return {classification:LEGACY_READING_RECOVERY_CLASS.COHERENT,position:pos,old_position:pos,changed:false};
+  if(coherent.reason==='paragraph_excerpt_contradiction')return {classification:LEGACY_READING_RECOVERY_CLASS.CONTRADICTORY,old_position:pos,reason:coherent.reason};
+  if(pos.para_id){
+    const exact=await paragraphCandidateExact(pos.para_id,[pos.supplement_id,pos.entry_id,pos.vol]);
+    if(exact.matches.length===1){const c=exact.matches[0];if(pos.excerpt&&!savedExcerptMatchesParagraph(pos.excerpt,c.text))return {classification:LEGACY_READING_RECOVERY_CLASS.CONTRADICTORY,old_position:pos,reason:'paragraph_excerpt_contradiction'};
+      // If two independently exact governed identities disagree, do not choose one silently.
+      if(pos.stable_ref&&String(c.stable_ref||'')!==String(pos.stable_ref)){
+        const refCheck=await paragraphCandidateByStableRefExact(pos.stable_ref,[pos.vol,c.vol]);
+        if(refCheck.matches.length===1){const r=refCheck.matches[0];if(Number(r.vol)!==Number(c.vol)||String(r.entry_id||'')!==String(c.entry_id||'')||String(r.supplement_id||'')!==String(c.supplement_id||'')||String(r.para_id||'')!==String(c.para_id||''))return {classification:LEGACY_READING_RECOVERY_CLASS.CONTRADICTORY,old_position:pos,reason:'paragraph_stable_ref_contradiction'};}
+      }
+      if(pos.supplement_id&&String(pos.supplement_id)!==String(c.supplement_id||'')){
+        await loadSupplementRegistryData();const assertedSupplement=supplementById(pos.supplement_id);
+        if(assertedSupplement&&String(assertedSupplement.supplement_id||'')!==String(c.supplement_id||''))return {classification:LEGACY_READING_RECOVERY_CLASS.CONTRADICTORY,old_position:pos,reason:'paragraph_supplement_contradiction'};
+      }
+      const cls=exact.alias?LEGACY_READING_RECOVERY_CLASS.ALIAS:(c.supplement?LEGACY_READING_RECOVERY_CLASS.SUPPLEMENT:LEGACY_READING_RECOVERY_CLASS.PARAGRAPH);
+      return {classification:cls,old_position:pos,position:correctedPositionFromCandidate(pos,c,cls),candidate:c,changed:true};}
+    if(exact.matches.length>1)return {classification:LEGACY_READING_RECOVERY_CLASS.AMBIGUOUS,old_position:pos,reason:'paragraph_ambiguous'};
+  }
+  if(pos.stable_ref){
+    const exactRef=await paragraphCandidateByStableRefExact(pos.stable_ref,[pos.vol]);
+    if(exactRef.matches.length===1){const c=exactRef.matches[0];if(pos.excerpt&&!savedExcerptMatchesParagraph(pos.excerpt,c.text))return {classification:LEGACY_READING_RECOVERY_CLASS.CONTRADICTORY,old_position:pos,reason:'stable_ref_excerpt_contradiction'};
+      const cls=c.supplement?LEGACY_READING_RECOVERY_CLASS.SUPPLEMENT:LEGACY_READING_RECOVERY_CLASS.PARAGRAPH;return {classification:cls,old_position:pos,position:correctedPositionFromCandidate(pos,c,cls),candidate:c,changed:true};}
+    if(exactRef.matches.length>1)return {classification:LEGACY_READING_RECOVERY_CLASS.AMBIGUOUS,old_position:pos,reason:'stable_ref_ambiguous'};
+  }
+  if(pos.supplement_id&&pos.para_id){
+    await loadSupplementRegistryData();const sp=supplementById(pos.supplement_id),p=sp&&(sp.paragraphs||[]).find(x=>x.id===pos.para_id);
+    if(sp&&p){const entry=await currentEntryById(Number(sp.volume),p.entry_id||sp.target_entry_id);if(entry&&savedExcerptMatchesParagraph(pos.excerpt,p.text)){const c={vol:Number(sp.volume),entry_id:p.entry_id||sp.target_entry_id,supplement_id:sp.supplement_id,para_id:p.id,stable_ref:p.stable_ref||null,text:p.text||'',entry,supplement:sp};return {classification:LEGACY_READING_RECOVERY_CLASS.SUPPLEMENT,old_position:pos,position:correctedPositionFromCandidate(pos,c,LEGACY_READING_RECOVERY_CLASS.SUPPLEMENT),candidate:c,changed:true};}}
+  }
+  if(pos.excerpt){
+    try{const hits=await exactExcerptCandidates(pos.excerpt);if(hits.length===1){const c=hits[0];return {classification:LEGACY_READING_RECOVERY_CLASS.EXCERPT,old_position:pos,position:correctedPositionFromCandidate(pos,c,LEGACY_READING_RECOVERY_CLASS.EXCERPT),candidate:c,changed:true};}
+      if(hits.length>1)return {classification:LEGACY_READING_RECOVERY_CLASS.AMBIGUOUS,old_position:pos,reason:'excerpt_ambiguous',match_count:hits.length};}catch(e){return {classification:LEGACY_READING_RECOVERY_CLASS.INVALID,old_position:pos,reason:'recovery_index_unavailable',error:e};}
+  }
+  return {classification:LEGACY_READING_RECOVERY_CLASS.INVALID,old_position:pos,reason:coherent.reason||'unresolved'};
+}
+async function commitRecoveredReadingMain(oldMain,targetPos,committedSnapshot,classification){
+  if(!oldMain||!targetPos||!committedSnapshot)return {written:false,reason:'invalid_recovery_commit'};
+  const identityMatches=Number(targetPos.vol)===Number(committedSnapshot.vol)&&String(targetPos.entry_id||'')===String(committedSnapshot.entry_id||'')&&String(targetPos.supplement_id||'')===String(committedSnapshot.supplement_id||'')&&String(targetPos.para_id||'')===String(committedSnapshot.para_id||'')&&(!validJourneySourceMode(targetPos.source_mode)||String(targetPos.source_mode)===String(committedSnapshot.source_mode||''));
+  if(!identityMatches)return {written:false,reason:'recovery_commit_target_mismatch'};
+  await readingPositionWriteChain.catch(()=>{});
+  const current=await dbGet('reading_pos','main');if(!current||JSON.stringify(current)!==JSON.stringify(oldMain))return {written:false,reason:'main_changed_during_recovery'};
+  const newEpoch=Math.max(0,Number(oldMain.authority_epoch)||0)+1,now=Date.now();
+  const canonical=Object.assign({},targetPos,committedSnapshot,{schema:READING_POSITION_SCHEMA,vol:Number(targetPos.vol),entry_id:targetPos.entry_id,supplement_id:targetPos.supplement_id||null,para_id:targetPos.para_id||null,source_mode:validJourneySourceMode(targetPos.source_mode)?targetPos.source_mode:committedSnapshot.source_mode,authority_epoch:newEpoch,confirmation_status:'confirmed',journey_provenance:'legacy_exact_recovery',recovery_classification:classification,recovered_at:now});
+  const per=Object.assign({},canonical,{key:readingPosKey(canonical.vol,canonical.entry_id,canonical.supplement_id||null)});
+  const previous=Object.assign({},oldMain,{key:'main_previous',saved_for_legacy_recovery_at:now,replaced_by_authority_epoch:newEpoch});
+  const main=Object.assign({},canonical,{key:'main'});
+  await dbPutManyAtomic('reading_pos',[per,previous,main]);
+  if(activeReaderSession&&String(activeReaderSession.session_id)===String(committedSnapshot.session_id)){activeReaderSession.authority_epoch=newEpoch;activeReaderSession.intent=READER_INTENT.SEQUENTIAL;activeReaderSession.source_mode=canonical.source_mode;}
+  readingPositionCommittedSequence.set(String(committedSnapshot.session_id),Number(committedSnapshot.save_sequence)||0);
+  await renderHome().catch(()=>{});
+  return {written:true,reason:'legacy_recovery_committed',authority_epoch:newEpoch};
+}
+window.__ldcLegacyReadingRecovery={normalizeLegacyRecoveryText,normalizedSavedExcerpt,savedExcerptMatchesParagraph,inferVolumeFromReadingIdentity,resolveLegacyReadingPosition,classes:LEGACY_READING_RECOVERY_CLASS};
 
 /* ═══════════════════════════════════════════════════════
    HOME
@@ -3473,26 +3655,22 @@ function setResumeReadingBusy(busy){
 }
 async function preflightResumePosition(pos,opts={}){
   if(!pos)return {status:'NO_MAIN',message:'Aucune position de lecture suivie n’est enregistrée.'};
-  const vol=Number(pos.vol);
-  if(!Number.isInteger(vol)||vol<1||vol>36||!pos.entry_id)return {status:'INVALID_TARGET',message:'Votre position de lecture enregistrée est incomplète.'};
   if(pos.confirmation_status==='needs_confirmation'&&!opts.ignoreConfirmation)return {status:'NEEDS_CONFIRMATION',position:pos};
   try{
-    await loadSupplementRegistryData();
-    await ensureVolumeIndex(vol);
-    const supplement=pos.supplement_id?supplementById(pos.supplement_id):null;
-    if(pos.supplement_id&&!supplement)return {status:'INVALID_TARGET',message:'Le complément enregistré n’existe plus dans cette version.'};
-    const entry=(corpusCache[vol].allById&&corpusCache[vol].allById[pos.entry_id])||corpusCache[vol].byId[pos.entry_id];
-    if(!entry)return {status:'INVALID_TARGET',message:'Votre ancienne position de lecture ne peut pas être ouverte telle quelle.'};
-    let paraExists=true;
-    if(pos.para_id){
-      await ensureVolumeReaderData(vol);
-      paraExists=!!paragraphRecordById(vol,pos.para_id);
+    const resolution=await resolveLegacyReadingPosition(pos);
+    if(resolution.classification===LEGACY_READING_RECOVERY_CLASS.COHERENT){return {status:'READY',position:pos,original_position:pos,recovery:resolution,required_source_mode:validJourneySourceMode(pos.source_mode)?pos.source_mode:null};}
+    if([LEGACY_READING_RECOVERY_CLASS.ALIAS,LEGACY_READING_RECOVERY_CLASS.PARAGRAPH,LEGACY_READING_RECOVERY_CLASS.SUPPLEMENT,LEGACY_READING_RECOVERY_CLASS.EXCERPT].includes(resolution.classification)){
+      return {status:'RECOVERED_EXACT',position:resolution.position,original_position:pos,recovery:resolution,required_source_mode:validJourneySourceMode(resolution.position.source_mode)?resolution.position.source_mode:null};
     }
-    return {status:paraExists?'READY':'NEEDS_REANCHOR',position:pos,entry,supplement,required_source_mode:validJourneySourceMode(pos.source_mode)?pos.source_mode:null};
+    if(resolution.classification===LEGACY_READING_RECOVERY_CLASS.AMBIGUOUS)return {status:'AMBIGUOUS_PRESERVE',position:pos,recovery:resolution,message:'Votre ancienne position correspond à plusieurs passages. Elle est conservée sans déplacement automatique.'};
+    if(resolution.classification===LEGACY_READING_RECOVERY_CLASS.CONTRADICTORY)return {status:'CONTRADICTORY_PRESERVE',position:pos,recovery:resolution,message:'Les repères enregistrés se contredisent. Votre ancienne position est conservée sans choix automatique.'};
+    return {status:'INVALID_PRESERVE',position:pos,recovery:resolution,message:'Votre ancienne position ne peut pas être retrouvée de façon certaine. Elle est conservée sans déplacement automatique.'};
   }catch(e){return {status:'LOAD_FAILURE',position:pos,error:e,message:'Impossible de vérifier votre position de lecture pour le moment.'};}
 }
 function resumeFailureMessage(status){
-  if(status==='INVALID_TARGET'||status==='NEEDS_REANCHOR')return 'Votre ancienne position de lecture ne peut pas être ouverte telle quelle. Nous devons la retrouver dans le texte actuel.';
+  if(status==='AMBIGUOUS_PRESERVE')return 'Votre ancienne position correspond à plusieurs passages. Elle est conservée sans déplacement automatique.';
+  if(status==='CONTRADICTORY_PRESERVE')return 'Les repères de votre ancienne position se contredisent. Elle est conservée sans déplacement automatique.';
+  if(status==='INVALID_PRESERVE'||status==='INVALID_TARGET'||status==='NEEDS_REANCHOR')return 'Votre ancienne position ne peut pas être retrouvée de façon certaine. Elle est conservée sans déplacement automatique.';
   if(status==='LOAD_FAILURE')return 'Impossible d’ouvrir votre position de lecture pour le moment. Votre progression enregistrée n’a pas été modifiée.';
   return 'Impossible d’ouvrir votre position de lecture. Votre progression enregistrée n’a pas été modifiée.';
 }
@@ -3503,27 +3681,32 @@ function resumePostconditionsMatch(pos,preflight=null){
   if(normalizeReaderIntent(activeReaderSession.intent)!==READER_INTENT.SEQUENTIAL)return false;
   if(!readerSessionOwnsVisibleReader(activeReaderSession))return false;
   if(String(pos.supplement_id||'')!==String(activeReaderSession.supplement_id||''))return false;
-  if(preflight&&preflight.status==='READY'&&pos.para_id){const restored=captureSemanticReadingPosition();if(!restored||String(restored.para_id||'')!==String(pos.para_id))return false;}
+  if(validJourneySourceMode(pos.source_mode)&&(String(activeReaderSession.source_mode||'')!==String(pos.source_mode)||String(supplementMode)!==String(pos.source_mode)))return false;
+  if(pos.para_id){const restored=captureSemanticReadingPosition();if(!restored||String(restored.para_id||'')!==String(pos.para_id))return false;}
   return true;
 }
 async function resumeReading(opts={}) {
   if(resumeReadingBusy)return false;
   const txId=`resume-${Date.now()}-${++resumeTransactionSerial}`;
   setResumeReadingBusy(true);
-  let pos=null,preflight=null,openedSessionId=null;
+  let pos=null,preflight=null,openedSessionId=null,commitCompleted=false;
   try{
     pos=await dbGet('reading_pos','main');
     if(!pos){showToast('Aucune position de lecture suivie n’est enregistrée.');return false;}
     preflight=await preflightResumePosition(pos,{ignoreConfirmation:!!opts.confirmLegacy});
     if(preflight.status==='NEEDS_CONFIRMATION'){await renderHome();return false;}
-    if(!['READY','NEEDS_REANCHOR'].includes(preflight.status)){showToast(resumeFailureMessage(preflight.status));return false;}
-    if(opts.confirmLegacy&&pos.confirmation_status==='needs_confirmation'){
+    if(!['READY','RECOVERED_EXACT'].includes(preflight.status)){showToast(resumeFailureMessage(preflight.status));return false;}
+    const originalMain=pos;
+    pos=preflight.position||pos;
+    const confirmingLegacy=!!(opts.confirmLegacy&&originalMain.confirmation_status==='needs_confirmation'&&preflight.status==='READY');
+    if(confirmingLegacy){
+      // Confirmation metadata remains in-memory until the exact visible target has opened and
+      // passed all postconditions. Failure before commit must leave the old main byte-for-byte untouched.
       pos=Object.assign({},pos,{schema:READING_POSITION_SCHEMA,confirmation_status:'confirmed',journey_provenance:pos.journey_provenance||'legacy_v2_confirmed',confirmed_at:Date.now()});
-      await dbPut('reading_pos',pos);
     }
     applyJourneySourceModeForReader(pos);
     // Explicit restorePosition is the sole Resume semantic target; no global pending state.
-    await openEntry(pos.vol,pos.entry_id,'home',{restorePosition:pos,supplementId:pos.supplement_id||null,intent:readerIntentForAction('RESUME'),deferSessionPersistence:true});
+    await openEntry(pos.vol,pos.entry_id,'home',{restorePosition:pos,supplementId:pos.supplement_id||null,intent:readerIntentForAction('RESUME'),authorityEpoch:Math.max(0,Number(originalMain.authority_epoch)||0),deferSessionPersistence:true});
     openedSessionId=activeReaderSession&&activeReaderSession.session_id||null;
     await waitReaderFrames(3);
     if(!resumePostconditionsMatch(pos,preflight)){
@@ -3531,25 +3714,32 @@ async function resumeReading(opts={}) {
     }
     if(!activeReaderSession||activeReaderSession.session_id!==openedSessionId){const e=new Error('Resume session lost before commit');e.name='LDCResumeCommitError';throw e;}
     const committedPos=captureSemanticReadingPosition();
-    const committedSnapshot=makeReaderPositionSnapshot(committedPos,true);
-    if(!committedSnapshot){const e=new Error('Resume commit position unavailable');e.name='LDCResumeCommitError';throw e;}
+    const rawSnapshot=makeReaderPositionSnapshot(committedPos,true);
+    if(!rawSnapshot){const e=new Error('Resume commit position unavailable');e.name='LDCResumeCommitError';throw e;}
+    const committedSnapshot=confirmingLegacy?Object.freeze(Object.assign({},rawSnapshot,{journey_provenance:pos.journey_provenance||'legacy_v2_confirmed',confirmed_at:pos.confirmed_at||Date.now()})):rawSnapshot;
     // Keep ordinary Reader persistence suspended through the explicit transaction commit.
     // Only this commit may bypass the barrier; scroll/lifecycle writes remain denied.
-    const commitResult=await persistReaderSnapshot(committedSnapshot,{requireActive:true,allowSuspendedCommit:true});
-    if(!commitResult||commitResult.written!==true||commitResult.update_main!==true){const e=new Error('Resume commit rejected: '+String(commitResult&&commitResult.reason||'unknown'));e.name='LDCResumeCommitError';throw e;}
-    if(!activeReaderSession||activeReaderSession.session_id!==openedSessionId){const e=new Error('Resume session lost after commit');e.name='LDCResumeCommitError';throw e;}
-    activeReaderSession.persistence_suspended=false;
-    window.__ldcLastResumeDiagnostic={tx_id:txId,status:'SUCCESS',target:{vol:pos.vol,entry_id:pos.entry_id,para_id:pos.para_id||null,supplement_id:pos.supplement_id||null},session_id:openedSessionId,source_mode:supplementMode,semantic_restore:preflight.status==='NEEDS_REANCHOR'?'GOVERNED_FALLBACK':'EXACT_PARAGRAPH',main_write_authorized:readerSessionMayWriteMain(activeReaderSession),commit_result:commitResult,at:new Date().toISOString()};
+    const commitResult=preflight.status==='RECOVERED_EXACT'
+      ? await commitRecoveredReadingMain(originalMain,pos,committedSnapshot,preflight.recovery&&preflight.recovery.classification)
+      : await persistReaderSnapshot(committedSnapshot,{requireActive:true,allowSuspendedCommit:true});
+    if(!commitResult||commitResult.written!==true||(preflight.status!=='RECOVERED_EXACT'&&commitResult.update_main!==true)){const e=new Error('Resume commit rejected: '+String(commitResult&&commitResult.reason||'unknown'));e.name='LDCResumeCommitError';throw e;}
+    commitCompleted=true;
+    // Once the authoritative main commit succeeded, never report a rollback-style failure merely
+    // because the ephemeral ReaderSession disappeared afterward. Navigation is inert during Resume,
+    // but this makes the transaction truthful even under an unexpected post-commit lifecycle race.
+    const sessionStillActive=!!(activeReaderSession&&activeReaderSession.session_id===openedSessionId);
+    if(sessionStillActive)activeReaderSession.persistence_suspended=false;
+    window.__ldcLastResumeDiagnostic={tx_id:txId,status:'SUCCESS',target:{vol:pos.vol,entry_id:pos.entry_id,para_id:pos.para_id||null,supplement_id:pos.supplement_id||null},session_id:openedSessionId,session_still_active:sessionStillActive,source_mode:supplementMode,semantic_restore:pos.para_id?'EXACT_PARAGRAPH':'ENTRY_FRACTION',recovery_classification:preflight.recovery&&preflight.recovery.classification||LEGACY_READING_RECOVERY_CLASS.COHERENT,main_write_authorized:sessionStillActive?readerSessionMayWriteMain(activeReaderSession):false,commit_result:commitResult,at:new Date().toISOString()};
     return true;
   }catch(e){
     console.warn('LDC: Resume transaction failed',txId,e);
-    window.__ldcLastResumeDiagnostic={tx_id:txId,status:'FAILURE',classification:e&&e.name||'OPEN_REJECTED',message:String(e&&e.message||e),target:pos?{vol:pos.vol,entry_id:pos.entry_id,para_id:pos.para_id||null,supplement_id:pos.supplement_id||null}:null,at:new Date().toISOString()};
+    window.__ldcLastResumeDiagnostic={tx_id:txId,status:'FAILURE',classification:e&&e.name||'OPEN_REJECTED',message:String(e&&e.message||e),target:pos?{vol:pos.vol,entry_id:pos.entry_id,para_id:pos.para_id||null,supplement_id:pos.supplement_id||null}:null,commit_completed:commitCompleted,at:new Date().toISOString()};
     if(activeReaderSession&&(!openedSessionId||activeReaderSession.session_id===openedSessionId))activeReaderSession=null;
     pendingSemanticPosition=null;
     readerOriginContext=null;
     await restoreAutomaticReaderSourceMode().catch(()=>{});
     showScreen('home');await renderHome().catch(()=>{});
-    showToast('Impossible d’ouvrir votre position de lecture pour le moment. Votre progression enregistrée n’a pas été modifiée.');
+    showToast(commitCompleted?'La position a été enregistrée, mais le lecteur s’est fermé de façon inattendue.':'Impossible d’ouvrir votre position de lecture pour le moment. Votre progression enregistrée n’a pas été modifiée.');
     return false;
   }finally{setResumeReadingBusy(false);}
 }
@@ -3899,6 +4089,7 @@ async function openEntry(vol, entryId, backDest, opts={}) {
   if(editorialNoteNo)return openTome1EditorialAppendix(backDest||'entries',editorialNoteNo);
   const priorReaderSession=activeReaderSession;
   const requestedIntent=normalizeReaderIntent(opts.intent||(opts.inheritIntent&&priorReaderSession?priorReaderSession.intent:READER_INTENT.CONSULTATION));
+  const inheritedAuthorityEpoch=Math.max(0,Number(opts.authorityEpoch!=null?opts.authorityEpoch:(requestedIntent===READER_INTENT.SEQUENTIAL&&priorReaderSession?priorReaderSession.authority_epoch:0))||0);
   const sameReaderRerender = !!(currentEntry && currentEntry.id===entryId && currentVolume===vol && document.getElementById('screen-reader')?.classList.contains('active'));
   if(priorReaderSession&&!sameReaderRerender&&opts.skipSessionFlush!==true)await flushReaderForTransition('reader-navigation');
   if (opts.originContext !== undefined) readerOriginContext = opts.originContext;
@@ -3930,7 +4121,7 @@ async function openEntry(vol, entryId, backDest, opts={}) {
     activeReaderSession.supplement_id=focusedSupplement&&focusedSupplement.supplement_id||null;
     activeReaderSession.source_mode=supplementMode;
   }else{
-    activeReaderSession=createReaderSession(requestedIntent,vol,currentEntry.id,focusedSupplement&&focusedSupplement.supplement_id||null);
+    activeReaderSession=createReaderSession(requestedIntent,vol,currentEntry.id,focusedSupplement&&focusedSupplement.supplement_id||null,inheritedAuthorityEpoch);
   }
   if(activeReaderSession&&opts.deferSessionPersistence===true)activeReaderSession.persistence_suspended=true;
   updateReaderIntentIndicator();
@@ -5349,23 +5540,31 @@ async function requestRelocateReadingJourney(){
   const pos=captureSemanticReadingPosition();
   const snapshot=makeReaderPositionSnapshot(pos,true);
   if(!snapshot)return false;
-  const oldMain=await dbGet('reading_pos','main');
-  const oldLabel=oldMain&&oldMain.label?oldMain.label:'aucune position';
+  const previewOldMain=await dbGet('reading_pos','main');
+  const oldLabel=previewOldMain&&previewOldMain.label?previewOldMain.label:'aucune position';
   const newLabel=snapshot.label||`Tome ${snapshot.vol}`;
-  if(oldMain&&oldMain.entry_id===snapshot.entry_id&&oldMain.vol===snapshot.vol&&oldMain.para_id===snapshot.para_id&&Math.abs(Number(oldMain.fraction_within_paragraph||0)-Number(snapshot.fraction_within_paragraph||0))<0.01){showToast('Cette position est déjà votre lecture suivie.');return false;}
+  if(previewOldMain&&previewOldMain.entry_id===snapshot.entry_id&&previewOldMain.vol===snapshot.vol&&previewOldMain.para_id===snapshot.para_id&&Math.abs(Number(previewOldMain.fraction_within_paragraph||0)-Number(snapshot.fraction_within_paragraph||0))<0.01){showToast('Cette position est déjà votre lecture suivie.');return false;}
   const ok=window.confirm(`Déplacer votre lecture suivie ?\n\nActuellement : ${oldLabel}\nNouvelle position : ${newLabel}`);
   if(!ok)return false;
-  const per=Object.assign({},snapshot,{key:readingPosKey(snapshot.vol,snapshot.entry_id,snapshot.supplement_id||null),schema:READING_POSITION_SCHEMA});
-  const previous=oldMain?Object.assign({},oldMain,{key:'main_previous',saved_for_relocation_at:Date.now()}):{key:'main_previous',schema:READING_POSITION_SCHEMA,no_previous:true,saved_for_relocation_at:Date.now()};
-  const main=Object.assign({},snapshot,{key:'main',schema:READING_POSITION_SCHEMA,confirmation_status:'confirmed',journey_provenance:'explicit_relocation',relocated_at:Date.now()});
+  await readingPositionWriteChain.catch(()=>{});
+  // Re-read after draining queued writes so Undo preserves the true immediately preceding authority.
+  const oldMain=await dbGet('reading_pos','main');
+  const newEpoch=Math.max(0,Number(oldMain&&oldMain.authority_epoch)||0)+1,relocatedAt=Date.now();
+  const authoritativeSnapshot=Object.freeze(Object.assign({},snapshot,{authority_epoch:newEpoch}));
+  const per=Object.assign({},authoritativeSnapshot,{key:readingPosKey(authoritativeSnapshot.vol,authoritativeSnapshot.entry_id,authoritativeSnapshot.supplement_id||null),schema:READING_POSITION_SCHEMA});
+  const previous=oldMain?Object.assign({},oldMain,{key:'main_previous',saved_for_relocation_at:relocatedAt,replaced_by_authority_epoch:newEpoch}):{key:'main_previous',schema:READING_POSITION_SCHEMA,no_previous:true,saved_for_relocation_at:relocatedAt,replaced_by_authority_epoch:newEpoch};
+  const main=Object.assign({},authoritativeSnapshot,{key:'main',schema:READING_POSITION_SCHEMA,confirmation_status:'confirmed',journey_provenance:'explicit_relocation',relocated_at:relocatedAt});
   await dbPutManyAtomic('reading_pos',[per,previous,main]);
-  if(activeReaderSession&&activeReaderSession.session_id===snapshot.session_id){activeReaderSession.intent=READER_INTENT.SEQUENTIAL;activeReaderSession.source_mode=snapshot.source_mode;}
+  readingPositionCommittedSequence.set(String(authoritativeSnapshot.session_id),Number(authoritativeSnapshot.save_sequence)||0);
+  if(activeReaderSession&&activeReaderSession.session_id===authoritativeSnapshot.session_id){activeReaderSession.intent=READER_INTENT.SEQUENTIAL;activeReaderSession.source_mode=authoritativeSnapshot.source_mode;activeReaderSession.authority_epoch=newEpoch;}
   updateReaderIntentIndicator();
   await renderHome().catch(()=>{});
   showToastWithAction('Lecture suivie déplacée','Annuler',undoLastReadingJourneyRelocation,15000);
   return true;
 }
 async function undoLastReadingJourneyRelocation(){
+  if(activeReaderSession)activeReaderSession.intent=READER_INTENT.CONSULTATION;
+  await readingPositionWriteChain.catch(()=>{});
   const prev=await dbGet('reading_pos','main_previous');
   if(!prev)return false;
   if(prev.no_previous)await dbDelete('reading_pos','main');

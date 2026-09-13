@@ -1216,7 +1216,10 @@
     "user_state_migration": 8,
     "volume": 36
   },
+  "fast_mode_authority_sha256": "09590abe803b99dadf696fbecd64fb88b4fee9a05b38280549b4abcb920e0c78",
+  "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
+  "page_worker_revision": "ldc-v2.19.86-R1B-stage8-r12",
   "post_r6_date_id_a2_fixed_point": {
     "a2_sha256": "dd034a4d4bb329254818c3e62fd629c9b64c90f9d4bd533de9f6ed99247cb1d8",
     "date_id_sha256": "ed5bf462c47b8fb5a41f7c81591257d6e99f94bae08628aa27e5f7d667020c2a",
@@ -1229,27 +1232,24 @@
   "predecessor_of_v71_zip_sha256": "c4a4e35208ed8a40368137bea7303bf773cd5cc0d6192f54c3a5cc94dc8cb399",
   "predecessor_of_v72_zip_sha256": "ed925239f570293b54a4565a2666dc50ac71e43aa149b3567d8a55364e550d8c",
   "predecessor_of_v73_zip_sha256": "825e08ea96a8cf6a245cd56c47e30f3eb4a04bb838fc2e4d3940f8bd2f3f974c",
-  "rebuild_status": "V86_REPRENDRE_P1_REPAIR_R4__BLIND_ADVERSARIAL_CORRECTIONS__SUPPLEMENT_INTENT_AND_TRANSACTION_SESSION_INVARIANTS__OFFLINE_CONTENT_IDENTITY_UNCHANGED",
+  "predecessor_semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
+  "rebuild_status": "V86_REPRENDRE_P1_REPAIR_R5__R12_HOSTILE_REAUDIT__EXACT_PASSAGE_RECOVERY__RELOCATION_AUTHORITY_EPOCH_PROPAGATION__CURRENT_OFFLINE_IDENTITY_UNCHANGED",
+  "retention_contract": {
+    "clear_policy": "CURRENT_SCOPE_ONLY_FOR_SHARED_LEGACY_CACHES",
+    "copy_migration_required": false,
+    "download_policy": "ONLY_MISSING_CHANGED_OR_INVALID_CURRENT_ASSETS_TO_STABLE_CACHE",
+    "legacy_asset_reuse": "EXACT_CURRENT_SCOPE_URL_SHA256_BYTES_MARKERS__GLOBAL_OLD_BINDING_NOT_REQUIRED",
+    "legacy_offline_cache_activation": "PRESERVE",
+    "persistent_offline_cache": "APP_VERSION_INDEPENDENT_SCOPE_FINGERPRINTED_STORAGE_V3",
+    "shell_runtime_caches": "APP_VERSIONED"
+  },
   "schema": "ldc-offline-manifest-v3",
-  "scope": "36 tomes PRINCIPAL R7/FAST1 + SUP-T1..SUP-T5; v86 Repair R4 contains the bounded Ma lecture suivie / Reprendre P1 repair, supplement intent-propagation repair, blind-adversarial transaction/session corrections, and no corpus/Search/DB-schema mutation; deferred offline-control defect intentionally excluded; public deployment not authorized.",
+  "scope": "36 tomes PRINCIPAL R7/FAST1 + SUP-T1..SUP-T5; v86 Repair R5 R12 hardens exact legacy passage recovery, Resume transaction truthfulness, and sequential authority-epoch propagation through related-reader restoration while preserving R4 protections; corpus/Search ranking/DB schema and offline content identity unchanged; public deployment remains blocked pending the two owner device gates.",
+  "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
   "semantic_vector_search_included": false,
   "semantic_vector_search_note": "Vector/embedding search remains retired; semantic_index.json is lexical BM25 metadata.",
-  "total_bytes": 215901450,
-  "fast_mode_authority_sha256": "09590abe803b99dadf696fbecd64fb88b4fee9a05b38280549b4abcb920e0c78",
-  "terminal_mutation_ledger_sha256": "afc351c02ee954583f663ca42615e48c5450893560f052d7da3c8a3caebfc879",
-  "predecessor_semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
-  "storage_schema": "ldc-offline-storage-v3",
   "storage_cache_name_contract": "ldc-le-livre-du-ciel-offline-persistent-v3-<fnv1a32(service-worker-scope)>",
-  "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
-  "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
-  "retention_contract": {
-    "shell_runtime_caches": "APP_VERSIONED",
-    "persistent_offline_cache": "APP_VERSION_INDEPENDENT_SCOPE_FINGERPRINTED_STORAGE_V3",
-    "legacy_offline_cache_activation": "PRESERVE",
-    "legacy_asset_reuse": "EXACT_CURRENT_SCOPE_URL_SHA256_BYTES_MARKERS__GLOBAL_OLD_BINDING_NOT_REQUIRED",
-    "download_policy": "ONLY_MISSING_CHANGED_OR_INVALID_CURRENT_ASSETS_TO_STABLE_CACHE",
-    "copy_migration_required": false,
-    "clear_policy": "CURRENT_SCOPE_ONLY_FOR_SHARED_LEGACY_CACHES"
-  },
-  "page_worker_revision": "ldc-v2.19.86-R1B-stage8-r9"
+  "storage_schema": "ldc-offline-storage-v3",
+  "terminal_mutation_ledger_sha256": "afc351c02ee954583f663ca42615e48c5450893560f052d7da3c8a3caebfc879",
+  "total_bytes": 215901450
 }
