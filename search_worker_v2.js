@@ -1,7 +1,7 @@
 'use strict';
 importScripts('./search_engine_v2.js');
 const EXPECTED_PREDECESSOR='5e3896468c6d822760fcd555c59e0042d3ed217ee7f389e8b2ab7a60d2b7d6dd';
-const EXPECTED_MANIFEST_SHA256='21948b20a8028bf5da3c51bcf58643196c902ecd8e359cbb296136784f910db7';
+const EXPECTED_MANIFEST_SHA256='295c5361c70a8d150985cee888e96a7bee8bd46c4d5197b4f3c1c6996d8dafbd';
 const CV='LDC-V74-FAST1-CERTIFIED-MUTATION';
 let enginePromise=null;
 function hex(buf){return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');}

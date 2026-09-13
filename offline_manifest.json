@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.76-R1B",
+  "app_version": "v2.19.86-R1B",
   "asset_count": 238,
   "assets": [
     {
@@ -373,9 +373,9 @@
       "sha256": "8ea99b2cfec18d07cb7dfcc7432e4fae81b33190df4534a28073ad1faaa561d8"
     },
     {
-      "bytes": 55316,
+      "bytes": 65939,
       "path": "corpus/manifest.json",
-      "sha256": "178bc2d6c7533676a7716bb67c1a9961078aa23bebd9d576a7ee682bb1deb105"
+      "sha256": "4e7f7bf22552299a1e4e08525c41534a607fb956a7ad819d1b5358dec092b941"
     },
     {
       "bytes": 908100,
@@ -763,9 +763,9 @@
       "sha256": "092514bba4699dd68c326ed1753432f94c238ff50073bd095583d12765080667"
     },
     {
-      "bytes": 12812,
+      "bytes": 12873,
       "path": "corpus/search_v2_manifest.json",
-      "sha256": "21948b20a8028bf5da3c51bcf58643196c902ecd8e359cbb296136784f910db7"
+      "sha256": "295c5361c70a8d150985cee888e96a7bee8bd46c4d5197b4f3c1c6996d8dafbd"
     },
     {
       "bytes": 568387,
@@ -953,9 +953,9 @@
       "sha256": "32c8e0d2a3b0f83e61dd3f63067334893eb9f09d588f1823edac61eb7cdf50c7"
     },
     {
-      "bytes": 6431,
+      "bytes": 10454,
       "path": "corpus/supplement_manifest.json",
-      "sha256": "0ea528160ed629f257cd015ebaf100819d454f70285ea0ffa2efee757937dae0"
+      "sha256": "8506937170759522f477f1205cc69d081ba498a4cb2ec2867cf1226b404ce55a"
     },
     {
       "bytes": 288689,
@@ -968,9 +968,9 @@
       "sha256": "5b0688292b83406ebbf67cd8c3d1c6c7900a334cb969d2535025c02c62852374"
     },
     {
-      "bytes": 1115215,
+      "bytes": 1115287,
       "path": "corpus/supplements.json",
-      "sha256": "68ff5a177d4a81da06f524dfaca0218925fb1919ef2d3f22a1b7d075f713f013"
+      "sha256": "da16a9d3a04105dcecd51519e3b18dc9a5a986bc9e5ab64fb7e9073c0d131348"
     },
     {
       "bytes": 1642311,
@@ -1194,11 +1194,10 @@
     }
   ],
   "authorized_runtime_ledger_sha256": "5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906",
-  "cache_version": "ldc-le-livre-du-ciel-offline-v2.19.76-R1B-report-r2",
-  "content_binding_schema": "ldc-offline-content-binding-v1",
-  "content_binding_sha256": "f1faa7a3bb65613f8ec5dc28606ad707df1f2fd1abba65ede4ebad780c287b62",
+  "content_binding_schema": "ldc-offline-content-binding-v2",
+  "content_binding_sha256": "69bafb3c9fc99bbcad3e9453b60cb4fc4204cca540c2deab6317708e3648c419",
   "corpus_generation": "G036-AFLP-R7-SUP-T5-FAST1",
-  "corpus_manifest_sha256": "178bc2d6c7533676a7716bb67c1a9961078aa23bebd9d576a7ee682bb1deb105",
+  "corpus_manifest_sha256": "4e7f7bf22552299a1e4e08525c41534a607fb956a7ad819d1b5358dec092b941",
   "families": {
     "date_id_reconciliation": 1,
     "display": 37,
@@ -1230,13 +1229,27 @@
   "predecessor_of_v71_zip_sha256": "c4a4e35208ed8a40368137bea7303bf773cd5cc0d6192f54c3a5cc94dc8cb399",
   "predecessor_of_v72_zip_sha256": "ed925239f570293b54a4565a2666dc50ac71e43aa149b3567d8a55364e550d8c",
   "predecessor_of_v73_zip_sha256": "825e08ea96a8cf6a245cd56c47e30f3eb4a04bb838fc2e4d3940f8bd2f3f974c",
-  "rebuild_status": "V76_REPORT_AND_SEARCH_BINDING_REPAIR__STATIC_PACKAGE_ALGORITHMIC_CERTIFIED_FROM_EXACT_PREDECESSOR_BYTES",
-  "schema": "ldc-offline-manifest-v2",
-  "scope": "36 tomes PRINCIPAL R7/FAST1 + SUP-T1..SUP-T5, unchanged v74 SEARCH-V2 index payload/corpus semantic payload, bounded FAST1 user-state migration, and v76 report/search-binding release metadata; public deployment not authorized.",
+  "rebuild_status": "V86_REPRENDRE_P1_REPAIR_R4__BLIND_ADVERSARIAL_CORRECTIONS__SUPPLEMENT_INTENT_AND_TRANSACTION_SESSION_INVARIANTS__OFFLINE_CONTENT_IDENTITY_UNCHANGED",
+  "schema": "ldc-offline-manifest-v3",
+  "scope": "36 tomes PRINCIPAL R7/FAST1 + SUP-T1..SUP-T5; v86 Repair R4 contains the bounded Ma lecture suivie / Reprendre P1 repair, supplement intent-propagation repair, blind-adversarial transaction/session corrections, and no corpus/Search/DB-schema mutation; deferred offline-control defect intentionally excluded; public deployment not authorized.",
   "semantic_vector_search_included": false,
   "semantic_vector_search_note": "Vector/embedding search remains retired; semantic_index.json is lexical BM25 metadata.",
-  "total_bytes": 215886671,
+  "total_bytes": 215901450,
   "fast_mode_authority_sha256": "09590abe803b99dadf696fbecd64fb88b4fee9a05b38280549b4abcb920e0c78",
   "terminal_mutation_ledger_sha256": "afc351c02ee954583f663ca42615e48c5450893560f052d7da3c8a3caebfc879",
-  "predecessor_semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4"
+  "predecessor_semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
+  "storage_schema": "ldc-offline-storage-v3",
+  "storage_cache_name_contract": "ldc-le-livre-du-ciel-offline-persistent-v3-<fnv1a32(service-worker-scope)>",
+  "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
+  "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
+  "retention_contract": {
+    "shell_runtime_caches": "APP_VERSIONED",
+    "persistent_offline_cache": "APP_VERSION_INDEPENDENT_SCOPE_FINGERPRINTED_STORAGE_V3",
+    "legacy_offline_cache_activation": "PRESERVE",
+    "legacy_asset_reuse": "EXACT_CURRENT_SCOPE_URL_SHA256_BYTES_MARKERS__GLOBAL_OLD_BINDING_NOT_REQUIRED",
+    "download_policy": "ONLY_MISSING_CHANGED_OR_INVALID_CURRENT_ASSETS_TO_STABLE_CACHE",
+    "copy_migration_required": false,
+    "clear_policy": "CURRENT_SCOPE_ONLY_FOR_SHARED_LEGACY_CACHES"
+  },
+  "page_worker_revision": "ldc-v2.19.86-R1B-stage8-r9"
 }

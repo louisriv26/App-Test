@@ -1,7 +1,7 @@
 {
   "schema": "ldc-search-v2-independent-verification-v1",
-  "generated": "2026-09-09",
-  "app_version": "v2.19.76-R1B",
+  "generated": "2026-09-11",
+  "app_version": "v2.19.84-R1B",
   "checks": {
     "documents": 74522,
     "entries": 2325,
@@ -16,5 +16,5 @@
   "errors": [],
   "status": "PASS",
   "method": "Independent recomputation from search_v2_documents.json of tokenisation, document lengths, dfs, postings and encoded posting lists; independent Jésus bit/count checks and stable-reference structural controls.",
-  "current_binding_note": "v76 current evidence binding; SEARCH-V2 payloads are byte-identical to v74 and counts/postings were independently rechecked against the current package."
+  "current_binding_note": "v84 current evidence binding after Stage 8 platform hardening; SEARCH-V2 payload bytes/counts/postings/tokenisation/ranking semantics remain unchanged from certified v83."
 }

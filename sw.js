@@ -1,12 +1,22 @@
-const VERSION = 'ldc-v2.19.76-R1B-report-r2';
+const VERSION = 'ldc-v2.19.86-R1B-stage8-r9';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
-const SHELL_CACHE = `${CACHE_PREFIX}shell-v2.19.76-R1B-report-r2`;
-const RUNTIME_CACHE = `${CACHE_PREFIX}runtime-v2.19.76-R1B-report-r2`;
-const OFFLINE_CACHE = 'ldc-le-livre-du-ciel-offline-v2.19.76-R1B-report-r2';
+const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
+const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
+const LEGACY_OFFLINE_CACHE_PREFIX = `${CACHE_PREFIX}offline-v`;
+function scopeFingerprint(scope) {
+  let h=2166136261;
+  for(let i=0;i<scope.length;i++){h^=scope.charCodeAt(i);h=Math.imul(h,16777619);}
+  return (h>>>0).toString(16).padStart(8,'0');
+}
+const OFFLINE_SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
+const SCOPE_CACHE_PREFIX = `${CACHE_PREFIX}${OFFLINE_SCOPE_FINGERPRINT}-`;
+const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.86-R1B-stage8-r9`;
+const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.86-R1B-stage8-r9`;
+const OFFLINE_CACHE = `${CACHE_PREFIX}offline-persistent-v3-${OFFLINE_SCOPE_FINGERPRINT}`;
 const OFFLINE_MANIFEST_URL = './offline_manifest.json';
-const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v2';
-const OFFLINE_CONTENT_BINDING = 'f1faa7a3bb65613f8ec5dc28606ad707df1f2fd1abba65ede4ebad780c287b62';
-const OFFLINE_CORPUS_MANIFEST_SHA256 = '178bc2d6c7533676a7716bb67c1a9961078aa23bebd9d576a7ee682bb1deb105';
+const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v3';
+const OFFLINE_CONTENT_BINDING = '69bafb3c9fc99bbcad3e9453b60cb4fc4204cca540c2deab6317708e3648c419';
+const OFFLINE_CORPUS_MANIFEST_SHA256 = '4e7f7bf22552299a1e4e08525c41534a607fb956a7ad819d1b5358dec092b941';
 const OFFLINE_META_PATH = '__ldc_offline_meta__.json';
 const RUNTIME_META_PATH = '__ldc_runtime_meta__.json';
 const RUNTIME_MAX_ENTRIES = 48;
@@ -23,26 +33,30 @@ let offlineJob = null;
 const FILE_TIMEOUT_MS = 30000;
 const DOWNLOAD_CONCURRENCY = 3;
 
-function isOwnedCacheName(name) {
-  return name.startsWith(CACHE_PREFIX) || /^ldc-v\d/.test(name);
+function isCurrentScopeShellRuntimeCacheName(name) {
+  return name.startsWith(SCOPE_CACHE_PREFIX);
+}
+function isOfflineFamilyCacheName(name) { return name.startsWith(`${CACHE_PREFIX}offline-`); }
+function isLegacyOfflineCacheName(name) { return name.startsWith(LEGACY_OFFLINE_CACHE_PREFIX); }
+function requestBelongsToCurrentScope(input) {
+  const u=new URL(typeof input==='string'?input:input.url), scope=new URL(self.registration.scope);
+  return u.origin===scope.origin && u.pathname.startsWith(scope.pathname);
 }
 function hex(buf) { return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join(''); }
 async function sha256Bytes(bytes) { return hex(await crypto.subtle.digest('SHA-256', bytes)); }
 async function sha256Text(text) { return sha256Bytes(new TextEncoder().encode(text)); }
 function bindingCanonicalString(m) {
   const obj={
-    app_version:m.app_version,
     assets:(m.assets||[]).map(a=>({bytes:Number(a.bytes),path:String(a.path),sha256:String(a.sha256)})),
-    cache_version:m.cache_version,
     corpus_generation:m.corpus_generation,
     corpus_manifest_sha256:m.corpus_manifest_sha256,
-    schema:'ldc-offline-content-binding-v1'
+    schema:OFFLINE_CONTENT_BINDING_SCHEMA
   };
-  // Python build uses sort_keys=True; construct the same lexical top-level key order and
-  // each asset in bytes,path,sha256 order. JSON.stringify preserves insertion order.
+  // Build tooling uses the same lexical key order. The digest binds content identity,
+  // not app version or physical cache name.
   return JSON.stringify(obj);
 }
-function statusBase(m) { return {content_binding_sha256:m&&m.content_binding_sha256||OFFLINE_CONTENT_BINDING,corpus_manifest_sha256:m&&m.corpus_manifest_sha256||OFFLINE_CORPUS_MANIFEST_SHA256}; }
+function statusBase(m) { return {storage_schema:m&&m.storage_schema||OFFLINE_STORAGE_SCHEMA,content_binding_schema:m&&m.content_binding_schema||OFFLINE_CONTENT_BINDING_SCHEMA,content_binding_sha256:m&&m.content_binding_sha256||OFFLINE_CONTENT_BINDING,corpus_manifest_sha256:m&&m.corpus_manifest_sha256||OFFLINE_CORPUS_MANIFEST_SHA256,scope_fingerprint:OFFLINE_SCOPE_FINGERPRINT}; }
 function terminalPayload(job,state,message,extra={}) {
   return {type:'LDC_OFFLINE_STATUS',state,job_id:job&&job.job_id||null,completed:job&&job.completed||0,total:job&&job.total||0,failed:job&&job.failed||[],total_bytes:job&&job.total_bytes||0,...statusBase(job&&job.manifest),message:message||'',...extra};
 }
@@ -58,8 +72,8 @@ async function loadOfflineManifest() {
   if(!r){r=await fetch(OFFLINE_MANIFEST_URL,{cache:'reload'});if(r&&r.ok)await shell.put(OFFLINE_MANIFEST_URL,r.clone());}
   if(!r||!r.ok)throw new Error('offline manifest indisponible');
   const m=await r.json();
-  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.76-R1B'||m.cache_version!==OFFLINE_CACHE)throw new Error('offline manifest incompatible');
-  if(m.content_binding_schema!=='ldc-offline-content-binding-v1'||m.content_binding_sha256!==OFFLINE_CONTENT_BINDING)throw new Error('offline manifest binding incompatible');
+  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.86-R1B'||m.storage_schema!==OFFLINE_STORAGE_SCHEMA)throw new Error('offline manifest incompatible');
+  if(m.content_binding_schema!==OFFLINE_CONTENT_BINDING_SCHEMA||m.content_binding_sha256!==OFFLINE_CONTENT_BINDING)throw new Error('offline manifest binding incompatible');
   if(m.corpus_manifest_sha256!==OFFLINE_CORPUS_MANIFEST_SHA256)throw new Error('offline corpus manifest binding incompatible');
   const unique=[...new Set((m.assets||[]).map(a=>a.path))];
   if(unique.length!==m.asset_count||unique.length!==(m.assets||[]).length)throw new Error('offline manifest dupliqué/incomplet');
@@ -71,18 +85,47 @@ async function loadOfflineManifest() {
 function cacheUrl(path) { return new URL(path,self.registration.scope).href; }
 async function readOfflineMeta(cache,m) {
   const r=await cache.match(cacheUrl(OFFLINE_META_PATH),{ignoreSearch:true});if(!r)return {failed:[]};
-  try{const x=await r.json();if(x.content_binding_sha256!==m.content_binding_sha256||x.cache_version!==m.cache_version)return {failed:[]};return x;}catch(e){return {failed:[]};}
+  try{
+    const x=await r.json();
+    if(x.schema!=='ldc-offline-meta-v2'||x.storage_schema!==OFFLINE_STORAGE_SCHEMA||x.scope_fingerprint!==OFFLINE_SCOPE_FINGERPRINT||x.content_binding_schema!==OFFLINE_CONTENT_BINDING_SCHEMA||x.content_binding_sha256!==m.content_binding_sha256)return {failed:[]};
+    return x;
+  }catch(e){return {failed:[]};}
 }
 async function writeOfflineMeta(cache,m,failed=[]) {
-  const body=JSON.stringify({schema:'ldc-offline-meta-v1',cache_version:m.cache_version,content_binding_sha256:m.content_binding_sha256,corpus_manifest_sha256:m.corpus_manifest_sha256,failed:Array.isArray(failed)?failed:[],updated_at:new Date().toISOString()});
-  await cache.put(cacheUrl(OFFLINE_META_PATH),new Response(body,{status:200,headers:{'content-type':'application/json','x-ldc-content-binding':m.content_binding_sha256}}));
+  const body=JSON.stringify({schema:'ldc-offline-meta-v2',storage_schema:OFFLINE_STORAGE_SCHEMA,scope_fingerprint:OFFLINE_SCOPE_FINGERPRINT,content_binding_schema:OFFLINE_CONTENT_BINDING_SCHEMA,content_binding_sha256:m.content_binding_sha256,corpus_manifest_sha256:m.corpus_manifest_sha256,failed:Array.isArray(failed)?failed:[],updated_at:new Date().toISOString()});
+  await cache.put(cacheUrl(OFFLINE_META_PATH),new Response(body,{status:200,headers:{'content-type':'application/json','x-ldc-content-binding':m.content_binding_sha256,'x-ldc-offline-storage-schema':OFFLINE_STORAGE_SCHEMA}}));
 }
-async function cacheEntryVerified(cache,asset,m,deleteInvalid=true) {
-  const url=cacheUrl(asset.path), r=await cache.match(url,{ignoreSearch:true});if(!r)return {ok:false,reason:'missing'};
+async function offlineCacheSources() {
+  const keys=await caches.keys(), names=[OFFLINE_CACHE];
+  for(const name of keys.filter(isLegacyOfflineCacheName).sort().reverse())if(!names.includes(name))names.push(name);
+  const out=[];
+  for(const name of names)out.push({name,cache:await caches.open(name),stable:name===OFFLINE_CACHE});
+  return out;
+}
+async function offlineCacheEntryVerified(cache,asset,deleteInvalid=true) {
+  const url=cacheUrl(asset.path);
+  if(!requestBelongsToCurrentScope(url))return {ok:false,reason:'wrong scope'};
+  const r=await cache.match(url,{ignoreSearch:true});if(!r)return {ok:false,reason:'missing'};
+  const h=r.headers;
+  const ok=h.get('x-ldc-verified-sha256')===asset.sha256 && h.get('x-ldc-verified-bytes')===String(asset.bytes);
+  if(!ok&&deleteInvalid)await cache.delete(url,{ignoreSearch:true});
+  return ok?{ok:true,response:r}:{ok:false,reason:'cache integrity marker mismatch'};
+}
+async function findVerifiedOfflineAsset(asset,sources,deleteInvalid=true) {
+  let invalid=false;
+  for(const source of sources){
+    const v=await offlineCacheEntryVerified(source.cache,asset,deleteInvalid);
+    if(v.ok)return {ok:true,response:v.response,cache_name:source.name,stable:source.stable};
+    if(v.reason!=='missing')invalid=true;
+  }
+  return {ok:false,reason:invalid?'cache integrity marker mismatch':'missing'};
+}
+async function runtimeCacheEntryVerified(cache,asset,m,deleteInvalid=true) {
+  const url=cacheUrl(asset.path),r=await cache.match(url,{ignoreSearch:true});if(!r)return {ok:false,reason:'missing'};
   const h=r.headers;
   const ok=h.get('x-ldc-verified-sha256')===asset.sha256 && h.get('x-ldc-verified-bytes')===String(asset.bytes) && h.get('x-ldc-content-binding')===m.content_binding_sha256;
-  if(!ok&&deleteInvalid)await cache.delete(url);
-  return ok?{ok:true}:{ok:false,reason:'cache integrity marker mismatch'};
+  if(!ok&&deleteInvalid)await cache.delete(url,{ignoreSearch:true});
+  return ok?{ok:true,response:r}:{ok:false,reason:'runtime cache integrity marker mismatch'};
 }
 function emptyRuntimeStats() { return {entries:0,bytes:0,max_entries:RUNTIME_MAX_ENTRIES,max_bytes:RUNTIME_MAX_BYTES}; }
 function queueRuntimeMutation(task) {
@@ -138,16 +181,19 @@ async function clearRuntimeCache() {
   return queueRuntimeMutation(async()=>{await caches.delete(RUNTIME_CACHE);return emptyRuntimeStats();});
 }
 async function scanOfflineCache() {
-  const m=await loadOfflineManifest(), cache=await caches.open(OFFLINE_CACHE); let completed=0,cached_bytes=0;const invalid=[];const missing=[];
-  for(const asset of m.assets){const v=await cacheEntryVerified(cache,asset,m,true);if(v.ok){completed++;cached_bytes+=Number(asset.bytes||0);}else if(v.reason==='missing')missing.push(asset.path);else invalid.push({path:asset.path,error:v.reason});}
-  const meta=await readOfflineMeta(cache,m);const unresolved=new Map();
+  const m=await loadOfflineManifest(), sources=await offlineCacheSources(), stable=sources[0].cache;
+  let completed=0,cached_bytes=0;const invalid=[];const missing=[];
+  for(const asset of m.assets){
+    const v=await findVerifiedOfflineAsset(asset,sources,true);
+    if(v.ok){completed++;cached_bytes+=Number(asset.bytes||0);}else if(v.reason==='missing')missing.push(asset.path);else invalid.push({path:asset.path,error:v.reason});
+  }
+  const meta=await readOfflineMeta(stable,m),unresolved=new Map();
   for(const f of (meta.failed||[])){if(f&&f.path&&!unresolved.has(f.path))unresolved.set(f.path,f);}
   for(const f of invalid){if(f&&f.path)unresolved.set(f.path,f);}
-  const missingSet=new Set(missing);
-  const failed=[...unresolved.values()].filter(f=>missingSet.has(f.path)||invalid.some(x=>x.path===f.path));
+  const missingSet=new Set(missing),failed=[...unresolved.values()].filter(f=>missingSet.has(f.path)||invalid.some(x=>x.path===f.path));
   const state=completed===m.assets.length?'READY':(completed?'PARTIAL':'NOT_PREPARED');
   if(state==='READY'&&failed.length)failed.length=0;
-  await writeOfflineMeta(cache,m,failed);
+  await writeOfflineMeta(stable,m,failed);
   const runtime=await runtimeCacheStats(m);
   return {state,completed,total:m.assets.length,failed,total_bytes:m.total_bytes||0,cached_bytes,job_id:null,...statusBase(m),runtime,message:state==='READY'?'Préparation complète.':''};
 }
@@ -161,40 +207,51 @@ async function verifiedNetworkResponse(res,asset,m) {
   return new Response(bytes,{status:res.status,statusText:res.statusText,headers});
 }
 async function fetchIntoOfflineCache(cache,asset,job) {
-  const url=cacheUrl(asset.path);
-  const ctl=new AbortController(); job.controllers.add(ctl);
+  const url=cacheUrl(asset.path),ctl=new AbortController();job.controllers.add(ctl);
   const timer=setTimeout(()=>ctl.abort('timeout'),FILE_TIMEOUT_MS);
   try{
     const res=await fetch(url,{cache:'reload',signal:ctl.signal});
     const verified=await verifiedNetworkResponse(res,asset,job.manifest);
-    await cache.put(url,verified); return true;
+    await cache.put(url,verified);return true;
   }finally{clearTimeout(timer);job.controllers.delete(ctl);}
 }
 async function runOfflineJob(job,requestClientId) {
   try{
-    job.state='CHECKING'; await broadcast(terminalPayload(job,'CHECKING','Analyse du cache existant…'),requestClientId);
-    const m=await loadOfflineManifest(); job.manifest=m;job.total=m.assets.length;job.total_bytes=m.total_bytes||0;
-    const cache=await caches.open(OFFLINE_CACHE), missing=[];job.completed=0;job.failed=[];
-    for(const asset of m.assets){if(job.cancelled)break;const v=await cacheEntryVerified(cache,asset,m,true);if(v.ok)job.completed++;else missing.push(asset);}
-    if(job.cancelled){job.state='CANCELLED';await writeOfflineMeta(cache,m,job.failed);await broadcast(terminalPayload(job,'CANCELLED','Préparation annulée.'),requestClientId);return;}
-    if(!missing.length){job.state='READY';await writeOfflineMeta(cache,m,[]);const runtime=await clearRuntimeCache();await broadcast(terminalPayload(job,'READY','Préparation complète.',{runtime}),requestClientId);return;}
+    job.state='CHECKING';await broadcast(terminalPayload(job,'CHECKING','Analyse des fichiers déjà présents…'),requestClientId);
+    const m=await loadOfflineManifest();job.manifest=m;job.total=m.assets.length;job.total_bytes=m.total_bytes||0;
+    const sources=await offlineCacheSources(),stable=sources[0].cache,missing=[];job.completed=0;job.failed=[];
+    for(const asset of m.assets){if(job.cancelled)break;const v=await findVerifiedOfflineAsset(asset,sources,true);if(v.ok)job.completed++;else missing.push(asset);}
+    if(job.cancelled){job.state='CANCELLED';await writeOfflineMeta(stable,m,job.failed);await broadcast(terminalPayload(job,'CANCELLED','Préparation annulée; les fichiers déjà vérifiés sont conservés.'),requestClientId);return;}
+    if(!missing.length){job.state='READY';await writeOfflineMeta(stable,m,[]);const runtime=await clearRuntimeCache();await broadcast(terminalPayload(job,'READY','Préparation complète.',{runtime}),requestClientId);return;}
     job.state='DOWNLOADING';await broadcast(terminalPayload(job,'DOWNLOADING','Téléchargement et vérification des fichiers manquants…'),requestClientId);
     let cursor=0;
     async function worker(){
       while(true){
-        if(job.cancelled)return; const i=cursor++; if(i>=missing.length)return; const asset=missing[i];
-        try{await fetchIntoOfflineCache(cache,asset,job);job.completed++;}
+        if(job.cancelled)return;const i=cursor++;if(i>=missing.length)return;const asset=missing[i];
+        try{await fetchIntoOfflineCache(stable,asset,job);job.completed++;}
         catch(e){if(job.cancelled)return;job.failed.push({path:asset.path,error:(e&&e.name==='AbortError')?'timeout/annulation':String(e&&e.message||e)});}
-        await writeOfflineMeta(cache,m,job.failed);
+        await writeOfflineMeta(stable,m,job.failed);
         await broadcast(terminalPayload(job,'DOWNLOADING',job.failed.length?'Téléchargement avec certains échecs…':'Téléchargement et vérification…'),requestClientId);
       }
     }
     await Promise.all(Array.from({length:Math.min(DOWNLOAD_CONCURRENCY,missing.length)},()=>worker()));
-    if(job.cancelled){job.state='CANCELLED';await writeOfflineMeta(cache,m,job.failed);await broadcast(terminalPayload(job,'CANCELLED','Préparation annulée; les fichiers déjà vérifiés sont conservés.'),requestClientId);return;}
-    if(job.failed.length){job.state=job.completed?'PARTIAL':'ERROR';await writeOfflineMeta(cache,m,job.failed);await broadcast(terminalPayload(job,job.state,'Certains fichiers n’ont pas pu être vérifiés. Utilisez Reprendre.'),requestClientId);return;}
-    job.state='READY';await writeOfflineMeta(cache,m,[]);const runtime=await clearRuntimeCache();await broadcast(terminalPayload(job,'READY','Préparation complète et vérifiée.',{runtime}),requestClientId);
-  }catch(e){job.state='ERROR';job.failed=job.failed||[];if(job.manifest){try{const cache=await caches.open(OFFLINE_CACHE);await writeOfflineMeta(cache,job.manifest,job.failed);}catch(_){}}await broadcast(terminalPayload(job,'ERROR',String(e&&e.message||e)),requestClientId);}
-  finally{offlineJob=null;}
+    if(job.cancelled){job.state='CANCELLED';await writeOfflineMeta(stable,m,job.failed);await broadcast(terminalPayload(job,'CANCELLED','Préparation annulée; les fichiers déjà vérifiés sont conservés.'),requestClientId);return;}
+    if(job.failed.length){job.state=job.completed?'PARTIAL':'ERROR';await writeOfflineMeta(stable,m,job.failed);await broadcast(terminalPayload(job,job.state,'Certains fichiers n’ont pas pu être vérifiés. Utilisez Reprendre.'),requestClientId);return;}
+    job.state='READY';await writeOfflineMeta(stable,m,[]);const runtime=await clearRuntimeCache();await broadcast(terminalPayload(job,'READY','Préparation complète et vérifiée.',{runtime}),requestClientId);
+  }catch(e){
+    job.state='ERROR';job.failed=job.failed||[];
+    if(job.manifest){try{const stable=(await offlineCacheSources())[0].cache;await writeOfflineMeta(stable,job.manifest,job.failed);}catch(_){}}
+    await broadcast(terminalPayload(job,'ERROR',String(e&&e.message||e)),requestClientId);
+  }finally{offlineJob=null;}
+}
+async function clearCurrentScopeOfflineData() {
+  await caches.delete(OFFLINE_CACHE);
+  const keys=await caches.keys();
+  for(const name of keys.filter(isLegacyOfflineCacheName)){
+    const cache=await caches.open(name),requests=await cache.keys();
+    for(const request of requests)if(requestBelongsToCurrentScope(request))await cache.delete(request,{ignoreSearch:true});
+    if((await cache.keys()).length===0)await caches.delete(name);
+  }
 }
 async function handleOfflineMessage(event) {
   const d=event.data||{}, clientId=event.source&&event.source.id;
@@ -214,7 +271,7 @@ async function handleOfflineMessage(event) {
   }
   if(d.type==='OFFLINE_CLEAR'){
     if(offlineJob){await broadcast(terminalPayload(offlineJob,offlineJob.state,'Impossible d’effacer pendant un téléchargement.'),clientId);return;}
-    await caches.delete(OFFLINE_CACHE);const runtime=await clearRuntimeCache();const m=await loadOfflineManifest();await broadcast({type:'LDC_OFFLINE_STATUS',state:'NOT_PREPARED',completed:0,total:m.assets.length,failed:[],total_bytes:m.total_bytes||0,cached_bytes:0,job_id:null,...statusBase(m),runtime,message:'Données hors ligne et cache temporaire de lecture/recherche effacés.'},clientId);return;
+    await clearCurrentScopeOfflineData();const runtime=await clearRuntimeCache();const m=await loadOfflineManifest();await broadcast({type:'LDC_OFFLINE_STATUS',state:'NOT_PREPARED',completed:0,total:m.assets.length,failed:[],total_bytes:m.total_bytes||0,cached_bytes:0,job_id:null,...statusBase(m),runtime,message:'Données hors ligne de cette installation et cache temporaire de lecture/recherche effacés.'},clientId);return;
   }
 }
 
@@ -250,7 +307,9 @@ self.addEventListener('install',e=>{e.waitUntil((async()=>{await installFreshShe
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{
   const keep=new Set([SHELL_CACHE,RUNTIME_CACHE,OFFLINE_CACHE]);
   const keys=await caches.keys();
-  await Promise.all(keys.filter(k=>isOwnedCacheName(k)&&!keep.has(k)).map(k=>caches.delete(k)));
+  // Offline corpus caches are persistent data. Preserve the offline family across
+  // shell updates and across sibling service-worker scopes on the same origin.
+  await Promise.all(keys.filter(k=>isCurrentScopeShellRuntimeCacheName(k)&&!keep.has(k)).map(k=>caches.delete(k)));
   await self.clients.claim();
 })());});
 
@@ -259,28 +318,38 @@ function corpusAssetPath(request) {
   let p=u.pathname.startsWith(scopePath)?u.pathname.slice(scopePath.length):u.pathname.replace(/^\/+/, '');
   return p.replace(/^\/+/, '');
 }
-async function verifiedCachedCorpusHit(cache,request,asset,m) {
-  const hit=await cache.match(request,{ignoreSearch:true}); if(!hit)return null;
-  const h=hit.headers;
-  const ok=h.get('x-ldc-verified-sha256')===asset.sha256 && h.get('x-ldc-verified-bytes')===String(asset.bytes) && h.get('x-ldc-content-binding')===m.content_binding_sha256;
+async function verifiedOfflineCachedCorpusHit(cache,request,asset) {
+  if(!requestBelongsToCurrentScope(request))return null;
+  const hit=await cache.match(request,{ignoreSearch:true});if(!hit)return null;
+  const h=hit.headers,ok=h.get('x-ldc-verified-sha256')===asset.sha256&&h.get('x-ldc-verified-bytes')===String(asset.bytes);
   if(!ok){await cache.delete(request,{ignoreSearch:true});return null;}
   return hit;
 }
+async function verifiedRuntimeCachedCorpusHit(cache,request,asset,m) {
+  const hit=await cache.match(request,{ignoreSearch:true});if(!hit)return null;
+  const h=hit.headers,ok=h.get('x-ldc-verified-sha256')===asset.sha256&&h.get('x-ldc-verified-bytes')===String(asset.bytes)&&h.get('x-ldc-content-binding')===m.content_binding_sha256;
+  if(!ok){await cache.delete(request,{ignoreSearch:true});return null;}
+  return hit;
+}
+async function persistentOfflineCorpusHit(request,asset) {
+  const sources=await offlineCacheSources();
+  for(const source of sources){const hit=await verifiedOfflineCachedCorpusHit(source.cache,request,asset);if(hit)return hit;}
+  return null;
+}
 async function cachedCorpusResponse(request,networkFirst=false) {
-  const m=await loadOfflineManifest(), asset=m.assetMap.get(corpusAssetPath(request));
+  const m=await loadOfflineManifest(),asset=m.assetMap.get(corpusAssetPath(request));
   if(!asset)return fetch(new Request(request,{cache:'reload'}));
-  const offline=await caches.open(OFFLINE_CACHE), runtime=await caches.open(RUNTIME_CACHE);
+  const runtime=await caches.open(RUNTIME_CACHE);
   if(!networkFirst){
-    const oc=await verifiedCachedCorpusHit(offline,request,asset,m); if(oc)return oc;
-    const rc=await verifiedCachedCorpusHit(runtime,request,asset,m); if(rc)return rc;
+    const oc=await persistentOfflineCorpusHit(request,asset);if(oc)return oc;
+    const rc=await verifiedRuntimeCachedCorpusHit(runtime,request,asset,m);if(rc)return rc;
   }
   try{
-    const raw=await fetch(new Request(request,{cache:'reload'}));
-    const verified=await verifiedNetworkResponse(raw,asset,m);
-    await runtime.put(request,verified.clone()); await recordRuntimeEntry(asset,m); return verified;
+    const raw=await fetch(new Request(request,{cache:'reload'})),verified=await verifiedNetworkResponse(raw,asset,m);
+    await runtime.put(request,verified.clone());await recordRuntimeEntry(asset,m);return verified;
   }catch(e){
-    const oc=await verifiedCachedCorpusHit(offline,request,asset,m); if(oc)return oc;
-    const rc=await verifiedCachedCorpusHit(runtime,request,asset,m); if(rc)return rc;
+    const oc=await persistentOfflineCorpusHit(request,asset);if(oc)return oc;
+    const rc=await verifiedRuntimeCachedCorpusHit(runtime,request,asset,m);if(rc)return rc;
     return Response.error();
   }
 }

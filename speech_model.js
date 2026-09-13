@@ -211,23 +211,30 @@
   }
   function flowBoundaryVisualPolicy(members, index, meta) {
     meta = meta || {};
-    // RA19B — source-backed boundary metadata is authoritative. The RA18
-    // heuristic remains only as a compatibility fallback for legacy/non-active
-    // boundaries that do not carry an RA19B adjudication record.
+    // R3 SHADOW PROPOSAL — explicit governed boundary metadata is authoritative.
+    // This deliberately recognizes only the two currently certified generations:
+    // RA19B source-backed adjudications and FAST correction-certain boundary repairs.
+    // All legacy/non-governed boundaries continue through the inherited heuristic path.
     var explicitBoundary = members && members[index] && members[index].boundaryAfter || null;
-    if (explicitBoundary && explicitBoundary.adjudication_generation === 'RA19B_MULTI_SOURCE') {
+    var explicitGeneration = explicitBoundary ? String(explicitBoundary.adjudication_generation || '') : '';
+    var explicitStatusRequired = explicitGeneration === 'RA19B_MULTI_SOURCE' ? 'SOURCE_BACKED_CERTAIN'
+      : (explicitGeneration === 'FAST_MODE_BODY0277_0854' ? 'CERTIFIED_CORRECTION_CERTAIN' : '');
+    if (explicitBoundary && explicitStatusRequired) {
       var explicitPolicy = String(explicitBoundary.visual_policy || '');
       var explicitAction = String(explicitBoundary.visual_action || '');
       var expectedAction = explicitPolicy === 'continuous_prose' ? 'join_inline'
         : (explicitPolicy === 'preserve_break_enumeration' ? 'preserve_list_break'
         : (explicitPolicy === 'preserve_break_ambiguous' ? 'preserve_break' : ''));
-      if (explicitBoundary.adjudication_status !== 'SOURCE_BACKED_CERTAIN' ||
+      if (String(explicitBoundary.adjudication_status || '') !== explicitStatusRequired ||
           !expectedAction || explicitAction !== expectedAction ||
           !explicitBoundary.evidence_ref || !/^[0-9a-f]{64}$/i.test(String(explicitBoundary.evidence_sha256 || ''))) {
-        throw new Error('LDC_INVALID_RA19B_EXPLICIT_FLOW_BOUNDARY:' +
+        throw new Error('LDC_INVALID_EXPLICIT_FLOW_BOUNDARY:' +
           String(members[index] && members[index].paraId || index));
       }
-      return { policy: explicitPolicy, reason: 'ra19b_source_backed_explicit_boundary',
+      return { policy: explicitPolicy,
+               reason: explicitGeneration === 'RA19B_MULTI_SOURCE'
+                 ? 'ra19b_source_backed_explicit_boundary'
+                 : 'fast_correction_certain_explicit_boundary',
                action: explicitAction, explicit: true,
                evidence_ref: String(explicitBoundary.evidence_ref),
                evidence_sha256: String(explicitBoundary.evidence_sha256) };
@@ -275,9 +282,40 @@
     return { action:'baseline_joiner', className:'flow-joiner', text:String(joinerText == null ? '' : joinerText) };
   }
 
+  // R3 SHADOW PROPOSAL — visual topology authority is independent from
+  // semantic speaker-run linking. Only explicitly governed RA19B/FAST boundaries
+  // are pre-assigned here; legacy boundaries retain the inherited linking-time path.
+  function assignGovernedFlowBoundaryVisualActions(members, opts) {
+    opts = opts || {};
+    var assigned = [];
+    for (var k = 0; k < (members || []).length - 1; k++) {
+      var cur = members[k], nxt = members[k + 1];
+      var b = cur && cur.boundaryAfter;
+      if (!b || !b.display_joiner) continue;
+      var generation = String(b.adjudication_generation || '');
+      if (generation !== 'RA19B_MULTI_SOURCE' && generation !== 'FAST_MODE_BODY0277_0854') continue;
+      var visual = flowBoundaryVisualPolicy(members, k, opts);
+      var visualAction = visual.action || (visual.policy === 'continuous_prose' ? 'join_inline'
+        : (visual.policy === 'preserve_break_enumeration' ? 'preserve_list_break' : 'preserve_break'));
+      cur.visualPolicyAfter = visual.policy;
+      cur.visualPolicyReason = visual.reason;
+      cur.visualBoundaryActionAfter = visualAction;
+      nxt.visualBoundaryActionFromPrevious = visualAction;
+      assigned.push({ from_paragraph: cur.paraId, to_paragraph: nxt.paraId,
+                      visual_policy: visual.policy, visual_reason: visual.reason,
+                      visual_action: visualAction, generation: generation,
+                      explicit_source_backed: !!visual.explicit,
+                      evidence_ref: visual.evidence_ref || '', evidence_sha256: visual.evidence_sha256 || '' });
+    }
+    return assigned;
+  }
+
   function linkFlowRuns(members, opts) {
     opts = opts || {};
     var links = [];
+    // Assign certified visual actions before any semantic speaker-link predicate.
+    // This is the only behavioral addition in the shadow candidate.
+    assignGovernedFlowBoundaryVisualActions(members, opts);
     // display-visible length of a canonical range, so an approved suppressed
     // extraction dash does not stop a run from counting as fragment-initial
     function visibleLen(atoms, from, to) {
@@ -318,7 +356,13 @@
       // (7) the continuation inherits the logical run id. Visual continuity is
       // deliberately classified separately so genuine/potential list structure
       // is not flattened merely because the speaker remains the same.
-      var visual = flowBoundaryVisualPolicy(members, k, opts);
+      var visual = (cur.visualBoundaryActionAfter &&
+                    (String(b.adjudication_generation || '') === 'RA19B_MULTI_SOURCE' ||
+                     String(b.adjudication_generation || '') === 'FAST_MODE_BODY0277_0854'))
+        ? { policy: cur.visualPolicyAfter, reason: cur.visualPolicyReason,
+            action: cur.visualBoundaryActionAfter, explicit: true,
+            evidence_ref: String(b.evidence_ref || ''), evidence_sha256: String(b.evidence_sha256 || '') }
+        : flowBoundaryVisualPolicy(members, k, opts);
       cur.visualPolicyAfter = visual.policy;
       cur.visualPolicyReason = visual.reason;
       var runId = cr.runId || (cur.paraId + '#R' + (cur.model.runs.length - 1));
@@ -520,6 +564,7 @@
     normSpeaker: normSpeaker,
     isStyled: isStyled,
     linkFlowRuns: linkFlowRuns,
+    assignGovernedFlowBoundaryVisualActions: assignGovernedFlowBoundaryVisualActions,
     flowBoundaryVisualPolicy: flowBoundaryVisualPolicy,
     isStrongColonDashEnumeration: isStrongColonDashEnumeration,
     flowJoinerPresentation: flowJoinerPresentation,
