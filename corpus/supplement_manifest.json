@@ -1,0 +1,223 @@
+{
+  "authorized_runtime_ledger_sha256": "5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906",
+  "backbone_generation": "G036-AFLP-R7-UWR2-FAST1",
+  "composite_generation": "G036-AFLP-R7-SUP-T5-FAST1",
+  "counts": {
+    "complete_entries": 13,
+    "internal_supplements": 62,
+    "items": 75,
+    "legacy_sup_t1_inline_supplements": 2,
+    "paragraphs": 177,
+    "search_records": 177,
+    "speaker_segments": 141,
+    "sup_t1_items": 13,
+    "sup_t2_items": 43,
+    "sup_t2_speaker_segments": 63,
+    "sup_t3_items": 1,
+    "sup_t4_items": 15,
+    "sup_t4_speaker_segments": 22,
+    "sup_t5_items": 3,
+    "sup_t5_speaker_segments": 3
+  },
+  "files": {
+    "supplement_search.json": {
+      "bytes": 288689,
+      "sha256": "2898a4557059df7b6057a4213c06e264ee20249654c92d229bf5eae4404f176e"
+    },
+    "supplement_speakers.json": {
+      "bytes": 126299,
+      "sha256": "5b0688292b83406ebbf67cd8c3d1c6c7900a334cb969d2535025c02c62852374"
+    },
+    "supplements.json": {
+      "bytes": 1115287,
+      "sha256": "da16a9d3a04105dcecd51519e3b18dc9a5a986bc9e5ab64fb7e9073c0d131348"
+    }
+  },
+  "m3_decision_lock_sha256": "bb4a5c772b3eafdfe6eb857bc303a724a4bdb0cb0cef97c0ee5f088dfd65ab83",
+  "m6_authority": "M5_G17_REOPEN_SPECIFIC_CANDIDATES__EXACT_V54_BRANCH",
+  "m7rc_existing_complement_replacements": 9,
+  "m9_authority": "M8_MUTATION_AUTHORIZATION_R3_SUPT4_2026-08-28",
+  "programme": "LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4-SUP-T5",
+  "provenance_contract": "SUP-T1..SUP-T4_PRESERVED__SUP-T5_SOURCE_CRITICAL_AUTHORIZED__NO_MAJORITY_VOTE",
+  "r6_authority": "AUTHORIZED_RUNTIME_LEDGER_SHA256_5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906__OFFICIAL_R6_PREDECESSOR",
+  "release_status": "V83_STAGE7_ACCESSIBILITY_RELIABILITY__ENGINEERING_CANDIDATE__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED_BY_PACKAGE",
+  "schema": "ldc-supplement-manifest-v2",
+  "status": "LDC_V83_STAGE7_SUCCESSOR__SUPPLEMENT_CONTENT_AND_SPEAKER_SEMANTICS_UNCHANGED__NOT_PUBLICLY_DEPLOYED",
+  "sup_t1_snapshot_sha256": "ee568d8857b3e38b4a2b536de146c3b54f876ab93478e66f327bdaaf0768a1e0",
+  "sup_t2_segmentation_ledger_sha256": "f3345d58d2c12625c46cb92466012755c070fa84aef04da8cbcf2f9caa705f77",
+  "user_state_schema": 4,
+  "v67_four_pass_metadata_reconciliation": {
+    "predecessor_zip_sha256": "4317d041ec9475b52850c7ec7cd374eb0b2b980e115f841eebaafe10df7ddcd6",
+    "status_and_authority_wrapper_only": true,
+    "supplement_content_changes": 0
+  },
+  "v68_principal_ui_presentation_successor": {
+    "predecessor_zip_sha256": "f58a28f6546000c6b17905fa37c0ba74db44de766a11bf2ef5b936ed384919e9",
+    "status_wrapper_only": true,
+    "supplement_content_changes": 0
+  },
+  "v69_deep_four_pass_metadata_repair": {
+    "counts_reconciled_to_actual_segments": true,
+    "predecessor_zip_sha256": "58e7eebd7c3a04db53e7a21ea144842aebd36c8e3dd8815f37c8e2f6edc3618d",
+    "speaker_segment_content_changes": 0,
+    "sup_t2_speaker_segments": 63,
+    "supplement_content_changes": 0,
+    "total_speaker_segments": 141
+  },
+  "v72_provenance_presentation_successor": {
+    "canonical_or_devotional_text_mutations": 0,
+    "direct_predecessor_app_version": "v2.19.71-R1B",
+    "direct_predecessor_zip_sha256": "ed925239f570293b54a4565a2666dc50ac71e43aa149b3567d8a55364e550d8c",
+    "display_flow_semantic_mutations": 0,
+    "family_distribution": {
+      "SUP_T1": 13,
+      "SUP_T2_GELDC": 1,
+      "SUP_T2_ITPM": 42,
+      "SUP_T3": 1,
+      "SUP_T4": 15,
+      "SUP_T5_REUSE": 1,
+      "SUP_T5_SOURCE_CRITICAL": 2
+    },
+    "migration_algorithm_mutations": 0,
+    "reader_fields_per_supplement": [
+      "reader_provenance_text",
+      "reader_french_wording_label"
+    ],
+    "schema": "ldc-v72-provenance-presentation-successor-v1",
+    "search_semantic_mutations": 0,
+    "semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
+    "source_reference_distribution": {
+      "FW_SOURCE_REF": 43,
+      "ITPM_SOURCE_FILE": 13,
+      "NONE": 19
+    },
+    "speaker_semantic_mutations": 0,
+    "user_state_schema_mutations": 0
+  },
+  "v73_deep_four_pass_report_repair": {
+    "canonical_or_devotional_text_mutations": 0,
+    "direct_predecessor_app_version": "v2.19.72-R1B",
+    "direct_predecessor_zip_sha256": "825e08ea96a8cf6a245cd56c47e30f3eb4a04bb838fc2e4d3940f8bd2f3f974c",
+    "reader_provenance_fields_changed": false,
+    "schema": "ldc-v73-deep-four-pass-report-repair-v1",
+    "search_semantic_mutations": 0,
+    "semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
+    "speaker_semantic_mutations": 0,
+    "supplement_object_semantics_changed": false,
+    "user_state_schema_mutations": 0
+  },
+  "within_paragraph_contract": {
+    "dependent_after_aligne_correction": 1,
+    "placements": 22,
+    "runtime_requirement": "CANONICAL_HOST_ID_AND_OFFSETS_PRESERVED__DISPLAY_SLICES_ONLY__CANONICAL_USER_OFFSETS"
+  },
+  "v74_fast_mode_corpus_mutation": {
+    "schema": "ldc-v74-fast-mode-corpus-mutation-v1",
+    "direct_predecessor_app_version": "v2.19.73-R1B",
+    "direct_predecessor_zip_sha256": "38222de19ff4bc2cde26d2edce26bd6ddabf223bd97c6652975f82ad48a6beac",
+    "authorized_entries": 2707,
+    "applied_entries": 2700,
+    "already_present_noop": 6,
+    "blocked_conflict": 1,
+    "canonical_text_mutated_records": 2768,
+    "canonical_deleted_records": 1,
+    "supplement_object_semantics_changed": false,
+    "reader_provenance_fields_changed": false,
+    "terminal_mutation_ledger_sha256": "afc351c02ee954583f663ca42615e48c5450893560f052d7da3c8a3caebfc879"
+  },
+  "v75_deep_four_pass_report_repair": {
+    "schema": "ldc-v75-deep-four-pass-report-repair-v1",
+    "direct_predecessor_app_version": "v2.19.74-R1B",
+    "direct_predecessor_zip_sha256": "c7dd3cd477aca7734bb205c5e8400654c40a615bb408b5693cc488e0bcb33f64",
+    "supplement_content_changes": 0,
+    "speaker_segment_content_changes": 0,
+    "status_wrapper_only": true
+  },
+  "v76_deep_four_pass_report_repair": {
+    "schema": "ldc-v76-deep-four-pass-report-repair-v2",
+    "direct_predecessor_app_version": "v2.19.75-R1B",
+    "direct_predecessor_zip_sha256": "3a2163a69431795a3670fbfc9c242035c7664b626301f6b82aae9db50b7e4956",
+    "underlying_semantic_predecessor_v74_zip_sha256": "c7dd3cd477aca7734bb205c5e8400654c40a615bb408b5693cc488e0bcb33f64",
+    "supplement_content_changes": 0,
+    "speaker_segment_content_changes": 0,
+    "status_wrapper_only": true
+  },
+  "v77_renderer_successor": {
+    "schema": "ldc-v77-renderer-successor-v1",
+    "direct_predecessor_app_version": "v2.19.76-R1B",
+    "direct_predecessor_zip_sha256": "df5ebdb4fed3690def49f1b0169104bec8ad5991e19f5b4d425a45ace7939536",
+    "authorized_proposal_sha256": "427f90ecc20d0149ca2561043c080c1dcab438f6985615a6cda2a0a7f9459961",
+    "supplement_content_changes": 0,
+    "speaker_segment_content_changes": 0,
+    "status_wrapper_only": true
+  },
+  "v78_deep_four_pass_stale_gate_metadata_repair": {
+    "schema": "ldc-v78-stale-gate-metadata-repair-v1",
+    "direct_predecessor_app_version": "v2.19.77-R1B",
+    "direct_predecessor_zip_sha256": "69c1d171adae77aa2c7dc9a38df7f33fba95565da7834059fd7cd22dcee1cfda",
+    "physical_gate_fields_corrected": 3,
+    "supplement_content_changes": 0,
+    "speaker_segment_content_changes": 0,
+    "status_wrapper_only": true
+  },
+  "v79_conc_ldc_01_stage4a": {
+    "schema": "ldc-v79-conc-ldc-01-stage4a-v1",
+    "direct_predecessor_app_version": "v2.19.78-R1B",
+    "direct_predecessor_zip_sha256": "a1c78fff7d2893b3b38344c0da8a2cc483eb3186bc580f84b3d9b57dc3ecddcb",
+    "owner_authorization_proposal_sha256": "ae14ae9bce3b5c1ab9075e0a3879c963ec16126fcde551333de70ad8943bbb3f",
+    "supplement_content_changes": 0,
+    "speaker_segment_content_changes": 0,
+    "user_state_schema_mutations": 0,
+    "runtime_scope": "INDEXEDDB_TRANSACTIONAL_PERSONAL_COLLECTION_INTEGRITY_ONLY",
+    "status_wrapper_only": true,
+    "public_deployment_authorized": false
+  },
+  "v80_ldc_offline_discard_01_stage4b": {
+    "schema": "ldc-v80-offline-retention-stage4b-v1",
+    "direct_predecessor_app_version": "v2.19.79-R1B",
+    "direct_predecessor_zip_sha256": "88f7e06831bc9cae4f69155abe8dabfe1f12a9b6b348e41648fe2b5fe4aa9930",
+    "owner_authorization_proposal_sha256": "c2c20cb7051692ab0801171407448416052089573ee95b832483b805568b9c5b",
+    "supplement_content_changes": 0,
+    "speaker_segment_content_changes": 0,
+    "user_state_schema_mutations": 0,
+    "runtime_scope": "PERSISTENT_OFFLINE_ASSET_RETENTION_AND_EXACT_LEGACY_REUSE_ONLY",
+    "status_wrapper_only": true,
+    "public_deployment_authorized": false
+  },
+  "v81_bkp_ldc_01_stage5b": {
+    "schema": "ldc-v81-bkp-ldc-01-stage5b-v1",
+    "direct_predecessor_app_version": "v2.19.80-R1B",
+    "direct_predecessor_zip_sha256": "d94da78f2f29378bb0e672d26dcc430c9303de82e35aa588d7b8001bbbb89e3b",
+    "owner_authorization_proposal_sha256": "cee0dc13ce06dc41a32a448bcadb2b0d22f60d57e1517bba17f1acfeec1227f1",
+    "supplement_content_changes": 0,
+    "speaker_segment_content_changes": 0,
+    "user_state_schema_mutations": 0,
+    "runtime_scope": "SCALABLE_INDEXEDDB_BACKUP_STAGING_AND_ATOMIC_RESTORE_ONLY",
+    "status_wrapper_only": true,
+    "public_deployment_authorized": false
+  },
+  "v82_stage6_recovery_privacy_update": {
+    "schema": "ldc-v82-stage6-recovery-privacy-update-v1",
+    "direct_predecessor_app_version": "v2.19.81-R1B",
+    "direct_predecessor_zip_sha256": "45d91f21230c17e71ced37f9fef915656ed6622764465b13c930b3e6138d5089",
+    "owner_authorization_proposal_sha256": "c9b7430e34fe827e77f4562890635ab57966df25a16971248804ce8584f0ae25",
+    "supplement_content_changes": 0,
+    "speaker_segment_content_changes": 0,
+    "user_state_schema_mutations": 0,
+    "runtime_scope": "RECOVERY_PRIVACY_UPDATE_ONLY",
+    "status_wrapper_only": true,
+    "public_deployment_authorized": false
+  },
+  "v83_stage7_accessibility_reliability": {
+    "schema": "ldc-v83-stage7-accessibility-reliability-v1",
+    "direct_predecessor_app_version": "v2.19.82-R1B",
+    "direct_predecessor_zip_sha256": "ed925383399f733323495fa21be42d6eafd7ba1d578ffe99f63af986b0ff2224",
+    "owner_authorization_proposal_sha256": "42126e52c63d114d1b3a42bdf2bcac8f19e88dc70417fd95accfe33f809312a6",
+    "supplement_content_changes": 0,
+    "speaker_segment_content_changes": 0,
+    "user_state_schema_mutations": 0,
+    "runtime_scope": "ACCESSIBILITY_RELIABILITY_WORDING_ONLY",
+    "status_wrapper_only": true,
+    "public_deployment_authorized": false
+  }
+}
