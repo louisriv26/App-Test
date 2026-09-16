@@ -1,13 +1,10 @@
-/* Luisa Piccarreta PWA — Service Worker v2.3 R5
-   Stage 8 CACHE-SCOPE-COLL-01:
-   - index.html / navigation shell → network-first with HTTP-cache bypass, cache fallback
-   - corpus.json → network-first with HTTP-cache bypass, cache fallback
-   - local static assets → cache-first
-   - all UI fonts and Tabler icons are local, exact-version assets precached in the scoped shell
-   - Cache Storage ownership is bound to the exact Service Worker registration scope
-   - ambiguous legacy unscoped caches are intentionally not globally deleted on first transition
-   - a failed install fails closed, leaving the previously active worker/app intact
-*/
+// ── Version — must match APP_VERSION in index.html ───────────────────
+const VERSION = '41';
+
+// Stage 8 CACHE-SCOPE-COLL-01: Cache Storage ownership is deployment-scope
+// specific. This prevents a sibling deployment on the same origin from deleting
+// this installation's shell/content caches. Legacy unscoped mjv-* caches are
+// intentionally left untouched during the first transition.
 function scopeFingerprint(scope) {
   let h = 2166136261;
   const text = String(scope || '');
@@ -15,25 +12,21 @@ function scopeFingerprint(scope) {
   return (h >>> 0).toString(16).padStart(8, '0');
 }
 const SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
-const APP_CACHE_PREFIX = `luisa-letters-${SCOPE_FINGERPRINT}-`;
-const SHELL_CACHE = `${APP_CACHE_PREFIX}shell-v2.3-r5`;
-const CORPUS_CACHE = `${APP_CACHE_PREFIX}corpus-v2.3-r5`;
-const CANONICAL_SHELL_URL = './index.html';
-const CORPUS_URL = './corpus.json';
+const CACHE_PREFIX = `mjv-${SCOPE_FINGERPRINT}-`;
 
-const APP_SHELL = [
+// H5 uses two deployment-scoped buckets. Local OFL fonts ship with the release shell.
+//   SHELL   — bumped per app version (index.html, manifest, icons, local fonts)
+//   CONTENT — bumped when governed corpus or migration assets change
+const SHELL_CACHE   = CACHE_PREFIX + 'shell-v' + VERSION;
+const CONTENT_CACHE = CACHE_PREFIX + 'content-v3';   // corpus 1.0.1 + hardened migration generation
+const ALL_CACHES = [SHELL_CACHE, CONTENT_CACHE];
+
+// Icons are precached too: without them a first-run-offline install showed
+// broken icons until one online visit populated the cache opportunistically.
+const REQUIRED_SHELL_ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './icons/icon-60.png',
-  './icons/icon-120.png',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-maskable-512.png',
-  './icons/apple-touch-icon.png',
-  './icons/favicon-16.png',
-  './icons/favicon-32.png',
-  './icons/favicon.ico',
   './fonts/crimson-text-400.woff2',
   './fonts/crimson-text-600.woff2',
   './fonts/crimson-text-400-italic.woff2',
@@ -41,128 +34,185 @@ const APP_SHELL = [
   './fonts/im-fell-english-400-italic.woff2',
   './fonts/OFL-Crimson-Text.txt',
   './fonts/OFL-IM-Fell-English.txt',
-  './vendor/tabler/tabler-sprite.svg',
-  './vendor/tabler/LICENSE.txt',
 ];
 
-function isOwnedCacheName(name) {
-  return name.startsWith(APP_CACHE_PREFIX);
+const OPTIONAL_SHELL_ASSETS = [
+  './icons/favicon-16.png',
+  './icons/favicon-32.png',
+  './icons/favicon.ico',
+  './icons/icon-60.png',
+  './icons/icon-120.png',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './icons/icon-maskable-512.png',
+  './icons/apple-touch-icon.png',
+];
+
+const CONTENT_ASSETS = [
+  './corpus/manifest.json?cv=1.0.1',
+  './corpus/days.json?cv=1.0.1',
+  './corpus/migrations-v1.0.0-to-v1.0.1.json?mv=2.17.18'
+];
+
+
+// How long to wait for the network before falling back to a cached copy.
+// Without this, a "lie-fi" connection left the app on the loading screen for
+// the full request timeout even though a perfectly good cached copy existed.
+const NET_TIMEOUT_MS = 3500;
+
+// Install-time requests bypass the browser HTTP cache. This prevents a new
+// service-worker version from seeding its versioned shell cache with stale
+// bytes that happen to be fresh in the normal HTTP cache. Required reader
+// assets are atomic: if one cannot be obtained, this worker does not activate
+// and the previous working service worker remains in control.
+function scopedRequest(url, cacheMode = 'reload') {
+  return new Request(new URL(url, self.registration.scope).href, { cache: cacheMode });
 }
 
-async function freshFetch(urlOrRequest) {
-  const request = typeof urlOrRequest === 'string'
-    ? new Request(urlOrRequest, {cache:'reload'})
-    : new Request(urlOrRequest, {cache:'reload'});
-  const response = await fetch(request);
-  if (!response || !response.ok) throw new Error('fresh_fetch_failed:' + request.url + ':' + (response && response.status));
-  return response;
+async function fetchRequired(url) {
+  const req = scopedRequest(url, 'reload');
+  const res = await fetch(req);
+  if (!res || !res.ok) throw new Error('required precache failed: ' + req.url);
+  return { req, res };
 }
 
-self.addEventListener('install', event => {
-  event.waitUntil((async () => {
-    const shellCache = await caches.open(SHELL_CACHE);
-    const corpusCache = await caches.open(CORPUS_CACHE);
-    // cache:'reload' prevents stale browser HTTP-cache bytes from seeding a new release cache.
-    for (const url of APP_SHELL) {
-      const response = await freshFetch(url);
-      await shellCache.put(url, response.clone());
-    }
-    // Precache the protected corpus in its own cache before install can succeed. This closes
-    // the activation/offline gap where the old corpus cache could be removed before the new
-    // page had a chance to fetch corpus.json under the new worker.
-    const corpusResponse = await freshFetch(CORPUS_URL);
-    await corpusCache.put(CORPUS_URL, corpusResponse.clone());
-    // Deliberately do not skipWaiting here. The running app remains in control until explicit activation.
+async function putRequired(cache, url) {
+  const { req, res } = await fetchRequired(url);
+  await cache.put(req, res.clone());
+}
+
+async function putOptionalReload(cache, url) {
+  try {
+    const { req, res } = await fetchRequired(url);
+    await cache.put(req, res.clone());
+  } catch (_) { /* cosmetic asset: fallback UI remains usable */ }
+}
+
+async function ensureContent(cache, url) {
+  const req = scopedRequest(url, 'reload');
+  if (await cache.match(req)) return;
+  const res = await fetch(req);
+  if (!res || !res.ok) throw new Error('required content precache failed: ' + req.url);
+  await cache.put(req, res.clone());
+}
+
+
+
+self.addEventListener('install', e => {
+  e.waitUntil((async () => {
+    const shell = await caches.open(SHELL_CACHE);
+    for (const u of REQUIRED_SHELL_ASSETS) await putRequired(shell, u);
+    await Promise.all(OPTIONAL_SHELL_ASSETS.map(u => putOptionalReload(shell, u)));
+
+    const content = await caches.open(CONTENT_CACHE);
+    for (const u of CONTENT_ASSETS) await ensureContent(content, u);
+
+    await self.skipWaiting();
   })());
 });
 
-self.addEventListener('activate', event => {
-  event.waitUntil((async () => {
+self.addEventListener('activate', e => {
+  e.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys
-      .filter(name => isOwnedCacheName(name) && name !== SHELL_CACHE && name !== CORPUS_CACHE)
-      .map(name => caches.delete(name)));
+    // Only touch older caches from this exact deployment scope. Ambiguous
+    // legacy unscoped mjv-* caches and sibling deployment caches are preserved.
+    await Promise.all(
+      keys.filter(k => k.startsWith(CACHE_PREFIX) && !ALL_CACHES.includes(k))
+          .map(k => caches.delete(k))
+    );
     await self.clients.claim();
+    const clients = await self.clients.matchAll({ type: 'window' });
+    clients.forEach(c => c.postMessage({ type: 'SW_UPDATED' }));
   })());
 });
 
-self.addEventListener('fetch', event => {
-  const url = new URL(event.request.url);
-  if (event.request.method !== 'GET') return;
-
-  if (url.origin === self.location.origin && url.pathname.endsWith('corpus.json')) {
-    event.respondWith(networkFirstCorpus(event.request));
-    return;
-  }
-
-
-  if (url.origin === self.location.origin && (url.pathname === '/' || url.pathname.endsWith('/index.html') || url.pathname.endsWith('/'))) {
-    event.respondWith(networkFirstShell(event.request));
-    return;
-  }
-
-  if (url.origin === self.location.origin) {
-    event.respondWith(cacheFirst(event.request));
-  }
-});
-
-async function networkFirstCorpus(request) {
-  let networkResponse = null;
-  try {
-    const response = await fetch(request, {cache:'no-store'});
-    if (response.ok) {
-      const cache = await caches.open(CORPUS_CACHE);
-      await cache.put(request, response.clone());
-      return response;
-    }
-    networkResponse = response;
-  } catch (e) {
-    // Fall through to the last known-good cached corpus.
-  }
-  const cache = await caches.open(CORPUS_CACHE);
-  const cached = await cache.match(request) || await cache.match(CORPUS_URL);
-  if (cached) return cached;
-  if (networkResponse) return networkResponse;
-  return new Response(JSON.stringify({error:'corpus_unavailable',letters:[]}), {status:503,headers:{'Content-Type':'application/json'}});
+// Serve from cache immediately, then refresh the cache in the background so the
+// next launch is up to date. Used for the corpus, which is static text that
+// only changes on a deliberate content release.
+async function staleWhileRevalidate(request, cacheName) {
+  const cache = await caches.open(cacheName);
+  const cached = await cache.match(request);
+  const network = fetch(request).then(res => {
+    if (res && res.status === 200) cache.put(request, res.clone());
+    return res;
+  }).catch(() => null);
+  if (cached) return cached;              // instant, no network wait
+  const fresh = await network;
+  if (fresh) return fresh;
+  throw new Error('offline and not cached: ' + request.url);
 }
 
-async function networkFirstShell(request) {
-  let networkResponse = null;
-  try {
-    const response = await fetch(request, {cache:'no-store'});
-    if (response.ok) {
-      const cache = await caches.open(SHELL_CACHE);
-      // Store every successful navigation response under one canonical shell key instead of
-      // proliferating one cache entry per deep-link query string.
-      await cache.put(CANONICAL_SHELL_URL, response.clone());
-      return response;
-    }
-    networkResponse = response;
-  } catch (e) {
-    // Fall through to the last known-good cached shell.
+// Prefer the network so a new deployment is picked up, but never let a slow
+// connection block startup: whichever resolves first within the timeout wins,
+// and the cached copy is the fallback.
+function shellCacheKey(request) {
+  // Deep links are query-string routes served by the same app shell. The
+  // install cache contains only './' and './index.html'; matching the full
+  // navigation URL would therefore fail offline for ?open=unit/search routes.
+  // Canonicalise only shell navigations, while preserving the browser's real
+  // URL so startup routing still sees window.location.search.
+  const url = new URL(request.url);
+  if (url.origin === self.location.origin &&
+      (url.pathname.endsWith('/') || url.pathname.endsWith('/index.html'))) {
+    url.search = '';
+    url.hash = '';
+    return new Request(url.href, { method: 'GET' });
   }
-  // A deep link such as ?letter=... or a manifest shortcut must still open from the cached
-  // canonical shell when the network is unreachable or returns a non-OK HTTP response.
-  const cache = await caches.open(SHELL_CACHE);
-  const cached = await cache.match(request) || await cache.match(CANONICAL_SHELL_URL) || await cache.match('./');
-  if (cached) return cached;
-  if (networkResponse) return networkResponse;
-  return new Response('Offline', {status:503,headers:{'Content-Type':'text/plain; charset=utf-8'}});
+  return request;
 }
 
-async function cacheFirst(request) {
-  const cache = await caches.open(SHELL_CACHE);
+async function networkFirstWithTimeout(request, cacheName) {
+  const cache = await caches.open(cacheName);
+  const cacheKey = shellCacheKey(request);
+  const cached = await cache.match(cacheKey);
+
+  const network = fetch(request, { cache: 'no-store' }).then(res => {
+    if (res && res.status === 200) cache.put(cacheKey, res.clone());
+    return res;
+  });
+
+  if (!cached) return network;            // nothing to fall back to
+
+  let timer;
+  const timeout = new Promise(resolve => { timer = setTimeout(() => resolve(null), NET_TIMEOUT_MS); });
+  try {
+    const winner = await Promise.race([network.catch(() => null), timeout]);
+    return winner || cached;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function cacheFirst(request, cacheName) {
+  const cache = await caches.open(cacheName);
   const cached = await cache.match(request);
   if (cached) return cached;
-  try {
-    const response = await fetch(request);
-    if (response.ok) await cache.put(request, response.clone());
-    return response;
-  } catch (e) {
-    return new Response('Offline — ressource non disponible', {status:503,headers:{'Content-Type':'text/plain; charset=utf-8'}});
-  }
+  const res = await fetch(request);
+  if (res && res.status === 200 && request.method === 'GET') cache.put(request, res.clone());
+  return res;
 }
 
-self.addEventListener('message', event => {
-  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
+self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
+
+  const url = new URL(e.request.url);
+  const isCrossOrigin = url.origin !== self.location.origin;
+  const isCorpus = url.pathname.includes('/corpus/');
+  const isShell = url.pathname.endsWith('/') || url.pathname.endsWith('index.html');
+
+  if (isCrossOrigin) return;
+
+  if (isCorpus) {
+    // Static book content — serve instantly from cache, refresh in background
+    e.respondWith(staleWhileRevalidate(e.request, CONTENT_CACHE));
+    return;
+  }
+
+  if (isShell) {
+    // Fresh shell after a deploy, but bounded so lie-fi can't stall startup
+    e.respondWith(networkFirstWithTimeout(e.request, SHELL_CACHE));
+    return;
+  }
+
+  e.respondWith(cacheFirst(e.request, SHELL_CACHE));
 });
