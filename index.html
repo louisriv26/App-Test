@@ -447,6 +447,7 @@ h2.dn-section-title{margin-bottom:0;}
 .supp-context-card.after{margin-top:10px;margin-bottom:0;}
 .supp-context-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-text);margin-bottom:4px;font-weight:600;}
 @media(max-width:420px){.source-mode-btn{min-height:44px;padding:10px 10px;font-size:var(--source-mode-size)}.source-mode-bar{padding-left:8px;padding-right:8px;overflow-x:auto}.source-mode-segment{flex-shrink:0}}
+@media(max-width:420px){.source-mode-bar.reader-context-bar{overflow:visible}.reader-context-bar .source-mode-segment{flex:1 1 auto}.reader-context-bar .source-mode-btn{padding-left:7px;padding-right:7px}}
 
 /* ═══ READER ═══ */
 .reader-top{display:flex;align-items:center;justify-content:space-between;
@@ -480,13 +481,33 @@ h2.dn-section-title{margin-bottom:0;}
    reflow as reading progress. The class is removed on the first genuine user
    scroll gesture. */
 #reader-scroll.entry-start-locked{overflow-anchor:none;}
-/* v107 physical-failure repair: when a Tome list has been scrolled, iOS/WebKit
-   must not carry focus/momentum/compositor state from #entries-list into the
-   newly shown Reader. The source list is frozen only for the bounded handoff;
-   the Reader receives a fresh scroll surface and starts with async touch
-   scrolling temporarily disabled until its absolute-top state has settled. */
+/* v110 Reader/List isolation. The Tome-list position is captured as logical
+   return context, then the physical source scroller is neutralised only at the
+   last handoff boundary. While Reader is active the hidden list stays at zero;
+   its old position is reconstructed only after returning to Entries. */
 #entries-list.reader-handoff-source-frozen{overflow-y:hidden!important;-webkit-overflow-scrolling:auto!important;touch-action:none!important;overscroll-behavior:none!important;}
+#entries-list.reader-handoff-source-isolated{visibility:hidden!important;scroll-behavior:auto!important;overflow-anchor:none!important;}
 #reader-scroll.entry-list-handoff-reset{-webkit-overflow-scrolling:auto!important;scroll-behavior:auto!important;overflow-anchor:none!important;}
+#screen-entries.entries-return-restoring #entries-list{visibility:hidden!important;}
+#entries-list.entries-return-lock{scroll-behavior:auto!important;overflow-anchor:none!important;}
+
+/* v110 contextual Reader bar: Back is a primary fixed navigation action on the
+   same line as PRINCIPAL / COMPLÉMENT / ENRICHI, outside #reader-scroll. */
+.source-mode-bar.reader-context-bar{justify-content:flex-start;gap:8px;overflow:visible;}
+.reader-context-back{min-height:48px;display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;border:1px solid var(--gold-light);background:var(--gold-pale);color:var(--gold-text);border-radius:999px;padding:8px 13px;font-family:var(--body);font-size:var(--source-mode-size);font-weight:700;line-height:1;cursor:pointer;white-space:nowrap;}
+.reader-context-back i{font-size:calc(var(--source-mode-size) + 5px);}
+.reader-context-back:hover{background:var(--white);color:var(--night);}
+.reader-context-back:focus-visible{outline:2px solid var(--gold-text);outline-offset:2px;}
+.reader-context-bar .source-mode-segment{flex:1 1 auto;min-width:0;justify-content:center;}
+.reader-context-bar .source-mode-btn{flex:1 1 0;min-width:0;padding-left:9px;padding-right:9px;}
+.reader-source-short{display:none;}
+@media(max-width:360px){
+  .source-mode-bar.reader-context-bar{gap:5px;padding-left:6px;padding-right:6px;}
+  .reader-context-back{padding-left:9px;padding-right:9px;}
+  .reader-context-bar .source-mode-btn{padding-left:5px;padding-right:5px;letter-spacing:.02em;}
+  .reader-context-bar .reader-source-long{display:none;}
+  .reader-context-bar .reader-source-short{display:inline;}
+}
 .journey-state-block{margin:0 0 12px;}
 .journey-intent-indicator{display:inline-flex;align-items:center;gap:5px;margin:0 0 6px;padding:3px 8px;border-radius:999px;font:600 var(--reading-badge-size) var(--body);letter-spacing:.04em;background:var(--gold-pale);color:var(--gold-text);}
 .journey-intent-indicator.consultation{background:var(--accent-fill);color:var(--accent-fill-ink);}
@@ -1930,10 +1951,6 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
 <!-- READER -->
 <div class="screen" id="screen-reader">
   <div class="reader-top">
-    <button class="btn-back" id="reader-back-btn" onclick="backFromReader()">
-      <i class="ti ti-arrow-left"></i>
-      <span id="reader-back-label">Entrées</span>
-    </button>
     <div class="reader-top-title" id="reader-top-title">Livre du Ciel</div>
     <div class="reader-tools">
       <button class="mode-pill" id="reperes-toggle" type="button" aria-pressed="false" onclick="toggleReperes()">Repères</button>
@@ -1942,11 +1959,16 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
       <button class="btn-icon" type="button" onclick="openReaderMore()" aria-label="Plus d’outils"><i class="ti ti-dots"></i></button>
     </div>
   </div>
-  <div class="source-mode-bar" id="reader-source-mode"><div class="source-mode-segment" role="group" aria-label="Source affichée">
-    <button class="source-mode-btn" type="button" data-source-mode="aflp" onclick="setSupplementMode('aflp')">PRINCIPAL</button>
-    <button class="source-mode-btn" type="button" data-source-mode="additions" onclick="setSupplementMode('additions')">COMPLÉMENT</button>
-    <button class="source-mode-btn" type="button" data-source-mode="enriched" onclick="setSupplementMode('enriched')">ENRICHI</button>
-  </div></div>
+  <div class="source-mode-bar reader-context-bar" id="reader-source-mode">
+    <button class="reader-context-back" id="reader-back-btn" type="button" onclick="backFromReader()" aria-label="Retour">
+      <i class="ti ti-arrow-left" aria-hidden="true"></i><span id="reader-back-label">Retour</span>
+    </button>
+    <div class="source-mode-segment" role="group" aria-label="Source affichée">
+      <button class="source-mode-btn" type="button" data-source-mode="aflp" aria-label="PRINCIPAL" onclick="setSupplementMode('aflp')"><span class="reader-source-long">PRINCIPAL</span><span class="reader-source-short" aria-hidden="true">PRINC.</span></button>
+      <button class="source-mode-btn" type="button" data-source-mode="additions" aria-label="COMPLÉMENT" onclick="setSupplementMode('additions')"><span class="reader-source-long">COMPLÉMENT</span><span class="reader-source-short" aria-hidden="true">COMPL.</span></button>
+      <button class="source-mode-btn" type="button" data-source-mode="enriched" aria-label="ENRICHI" onclick="setSupplementMode('enriched')"><span class="reader-source-long">ENRICHI</span><span class="reader-source-short" aria-hidden="true">ENRICHI</span></button>
+    </div>
+  </div>
   <div class="source-mode-caption" data-source-mode-caption></div>
   <div class="scroll" id="reader-scroll" onscroll="onReaderScroll()">
     <div class="reader-header">
@@ -2117,6 +2139,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
         <div class="help-row"><span class="help-chip light">♥</span><span class="help-text">Ajoute ou retire l’entrée des Favoris. Le cœur est rempli lorsqu’elle est enregistrée ; elle apparaît aussi dans <b>Mon Espace → Favoris</b> et dans la liste du Tome.</span></div>
         <div class="help-row"><span class="help-chip light">Lu / ✓ Lu</span><span class="help-text">Marque explicitement l’entrée comme lue. Appuyez de nouveau sur <b>✓ Lu</b> pour retirer ce marquage. L’ouverture seule d’une entrée ne la marque pas comme lue.</span></div>
         <div class="help-row"><span class="help-chip light">◂ ▸</span><span class="help-text">Passe à l’entrée précédente ou suivante sans revenir à la liste.</span></div>
+        <div class="help-row"><span class="help-chip light">← Tome</span><span class="help-text">Dans le lecteur, le bouton de retour reste visible sur la même ligne que <b>PRINCIPAL · COMPLÉMENT · ENRICHI</b>. Il revient à la liste du Tome et restaure autant que possible le passage sélectionné au même endroit dans la liste, afin de poursuivre votre exploration sans repartir du début.</span></div>
         <div class="help-row"><span class="help-chip light">⋯</span><span class="help-text">Ouvre les outils du lecteur : Favori, Autour de ce passage, Partager la référence, Copier le lien, Signaler un problème de texte, Copier le diagnostic, Infos et source, Version du texte, l’action de lecture suivie lorsqu’elle est pertinente, Taille du texte et Thème.</span></div>
         <div class="help-row"><span class="help-chip light">Taille</span><span class="help-text">Choisissez <b>Petit · Normal · Grand · Très grand</b>. La taille adapte le texte de lecture ainsi que les textes utiles de l’interface. Certains éléments très compacts, notamment de navigation, augmentent de façon plus limitée afin de rester utilisables sur les petits écrans. Depuis l’Accueil, utilisez le bouton <b>Taille du texte</b> ; dans le lecteur, ouvrez <b>⋯ → Taille du texte</b>. La préférence est mémorisée.</span></div>
         <div class="help-row"><span class="help-chip light">Thème</span><span class="help-text">Choisissez <b>Automatique · Clair · Sombre</b>. <b>Automatique</b> suit le réglage clair ou sombre de votre appareil. La préférence est mémorisée.</span></div>
@@ -2303,11 +2326,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.108-R1B-DIAG'; // Diagnostic-only Reader A/B trace successor to exact v107
-const PUBLIC_VERSION = '108';       // single user-facing release number
+const APP_VERSION = 'v2.19.110-R1B'; // Reader list-isolation + contextual-return successor to exact v108 diagnostic line
+const PUBLIC_VERSION = '110';       // single user-facing release number
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD   = '2026-09-17';
-const SW_CACHE_VERSION = 'ldc-v2.19.108-R1B-reader-ab-diagnostic-r1';
+const SW_CACHE_VERSION = 'ldc-v2.19.110-R1B-reader-list-isolation-return-r1';
 const CORPUS_MANIFEST_SHA256 = '8d831c437fa6c2caa56ac637c3d539279ec24b57711d209b264804cca19c0ab7';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
@@ -2539,7 +2562,7 @@ let entriesReaderHandoffSeq = 0;
 const entriesReaderHandoffTrace = [];
 window.__ldcEntriesReaderHandoffTrace = entriesReaderHandoffTrace;
 
-// v108 DIAGNOSTIC ONLY. This instrumentation is deliberately observation-only:
+// v108 diagnostic instrumentation retained unchanged in v110 repair successor. It remains observation-only:
 // it does not prevent events, move focus, write scroll state, or alter layout.
 let readerOpenTraceSeq=0;
 let readerOpenTraceActive=null;
@@ -3236,8 +3259,9 @@ async function setSupplementMode(mode, opts={}) {
   readerTemporarySourceModeRestore=null;
   const next=['aflp','additions','enriched'].includes(mode)?mode:'enriched';
   if(next===supplementMode){syncSupplementModeUI();return;}
-  const oldMode=supplementMode, semantic=document.getElementById('screen-reader')?.classList.contains('active')?captureSemanticReadingPosition():null;
+  const oldMode=supplementMode, readerActive=document.getElementById('screen-reader')?.classList.contains('active'), semantic=readerActive?captureSemanticReadingPosition():null;
   const oldEntry=currentEntry, oldFocus=currentSupplementFocusId, focusItem=oldFocus?supplementById(oldFocus):null;
+  if(readerActive&&readerOriginContext&&readerOriginContext.screen==='entries')readerOriginContext.return_source_mode=next;
   supplementMode=next;
   if(activeReaderSession)activeReaderSession.source_mode=next;
   await dbPut('settings',{key:SUPPLEMENT_MODE_KEY,val:next,ts:Date.now()}).catch(()=>{});
@@ -3373,6 +3397,7 @@ async function getParagraphs(vol, entryId) {
    SCREENS
 ═══════════════════════════════════════════════════════ */
 function showScreen(id) {
+  if (id !== 'entries' && typeof releaseEntriesReturnLock==='function') releaseEntriesReturnLock('screen:'+id);
   if (id !== 'reader') {clearEntryStartTargetLock('screen:'+id);resetReaderInteractionContext('screen:'+id);}
   if (id !== 'search') cancelActiveSearch('navigation');
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -3984,9 +4009,67 @@ function restoreScrollContext(el,ctx,selector,keyAttr){
   });
 }
 
+const ENTRIES_RETURN_SELECTOR='[data-return-key]';
+let entriesReturnLock=null,entriesReturnLockSeq=0;
+function entryReturnNode(list,key){if(!list||key==null)return null;return [...list.querySelectorAll(ENTRIES_RETURN_SELECTOR)].find(n=>String(n.dataset.returnKey||'')===String(key))||null;}
+function captureEntriesNavigationContext(selectedButton=null){
+  const list=document.getElementById('entries-list'),lr=list&&list.getBoundingClientRect();
+  const selected=(selectedButton&&list&&list.contains(selectedButton))?selectedButton:null;
+  const active=document.activeElement,focus=(active&&list&&list.contains(active)&&active.dataset)?active:null;
+  return {screen:'entries',vol:currentVolume,source_mode:supplementMode,
+    scroll:captureScrollContext(list,ENTRIES_RETURN_SELECTOR,'data-return-key'),
+    selectedKey:selected&&selected.dataset?selected.dataset.returnKey||null:null,
+    selectedOffset:selected&&lr?selected.getBoundingClientRect().top-lr.top:null,
+    focusKey:focus&&focus.dataset?focus.dataset.returnKey||null:null};
+}
+function releaseEntriesReturnLock(reason='release'){
+  if(!entriesReturnLock)return false;const list=document.getElementById('entries-list');
+  if(list)list.classList.remove('entries-return-lock');entriesReturnLock=null;return true;
+}
+function entriesReturnTarget(ctx,list){
+  if(!ctx||!list)return null;
+  const selected=entryReturnNode(list,ctx.selectedKey);
+  if(selected&&Number.isFinite(Number(ctx.selectedOffset)))return {node:selected,offset:Number(ctx.selectedOffset),kind:'selected'};
+  const anchor=entryReturnNode(list,ctx.scroll&&ctx.scroll.anchorKey);
+  if(anchor&&Number.isFinite(Number(ctx.scroll&&ctx.scroll.anchorOffset)))return {node:anchor,offset:Number(ctx.scroll.anchorOffset),kind:'anchor'};
+  return null;
+}
+function enforceEntriesReturnPosition(reason='enforce'){
+  const lock=entriesReturnLock,list=document.getElementById('entries-list');if(!lock||!list||currentScreenName()!=='entries')return false;
+  const target=entriesReturnTarget(lock.ctx,list);
+  if(target){const lr=list.getBoundingClientRect(),delta=(target.node.getBoundingClientRect().top-lr.top)-target.offset;if(Math.abs(delta)>.5)list.scrollTop+=delta;}
+  else if(!lock.rawApplied){list.scrollTop=Number(lock.ctx&&lock.ctx.scroll&&lock.ctx.scroll.scrollTop)||0;lock.rawApplied=true;}
+  lock.last_reason=reason;lock.last_scroll_top=Number(list.scrollTop)||0;return true;
+}
+function installEntriesReturnLock(ctx){
+  releaseEntriesReturnLock('replace');const list=document.getElementById('entries-list');if(!list)return null;
+  entriesReturnLock={id:++entriesReturnLockSeq,ctx,rawApplied:false,created_at:Date.now()};list.classList.add('entries-return-lock');
+  list.scrollTop=Number(ctx&&ctx.scroll&&ctx.scroll.scrollTop)||0;
+  enforceEntriesReturnPosition('immediate');
+  requestAnimationFrame(()=>{if(entriesReturnLock)enforceEntriesReturnPosition('raf1');requestAnimationFrame(()=>{if(entriesReturnLock)enforceEntriesReturnPosition('raf2');});});
+  setTimeout(()=>{if(entriesReturnLock)enforceEntriesReturnPosition('t120');},120);
+  setTimeout(()=>{if(entriesReturnLock)enforceEntriesReturnPosition('t300');},300);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(entriesReturnLock)enforceEntriesReturnPosition('fonts-ready');}).catch(()=>{});
+  return entriesReturnLock;
+}
+function bindEntriesReturnIntentHandlers(){const list=document.getElementById('entries-list');if(!list||list.dataset.returnIntentBound==='1')return;list.dataset.returnIntentBound='1';for(const ev of ['pointerdown','touchstart','wheel'])list.addEventListener(ev,()=>releaseEntriesReturnLock('user:'+ev),{passive:true});list.addEventListener('keydown',e=>{if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(e.key))releaseEntriesReturnLock('user:key');});}
+async function restoreEntriesNavigationContext(ctx){
+  if(!ctx)return false;const screen=document.getElementById('screen-entries');if(screen)screen.classList.add('entries-return-restoring');
+  try{
+    const desired=validJourneySourceMode(ctx.return_source_mode)?ctx.return_source_mode:(validJourneySourceMode(ctx.source_mode)?ctx.source_mode:supplementMode);
+    if(desired!==supplementMode)await setSupplementMode(desired,{rerender:false,silent:true});
+    currentVolume=ctx.vol||currentVolume;await openTome(currentVolume);bindEntriesReturnIntentHandlers();
+    const list=document.getElementById('entries-list');installEntriesReturnLock(ctx);
+    await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+    enforceEntriesReturnPosition('before-reveal');
+    const focus=entryReturnNode(list,ctx.focusKey||ctx.selectedKey);if(focus){try{focus.focus({preventScroll:true});}catch(_){focus.focus();enforceEntriesReturnPosition('focus-fallback');}}
+    return true;
+  }finally{if(screen)screen.classList.remove('entries-return-restoring');}
+}
+
 function captureNavigationContext(kind){
   const screen=kind||currentScreenName();
-  if(screen==='entries')return {screen:'entries',vol:currentVolume,scroll:captureScrollContext(document.getElementById('entries-list'),'.entry-item','data-entry-id'),focusEntry:document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.entryId:null};
+  if(screen==='entries')return captureEntriesNavigationContext();
   if(screen==='search')return {screen:'search',query:document.getElementById('search-input').value,volMin:searchVolFilter,volMax:searchVolFilterMax,speaker:searchSpeakerFilter,source_mode:supplementMode,order:effectiveSearchOrder(),orderExplicit:!!searchOrderMode,lane:searchLastPayload&&searchLastPayload.foundation&&searchLastPayload.foundation.lane||searchResultLane,page:searchPage,metadataPage:searchMetadataPage,scroll:captureScrollContext(document.getElementById('search-results'),'.result-card','data-result-key'),focusKey:document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.resultKey:null};
   if(screen==='espace'){const panel=document.getElementById('ep-'+activeEspaceTab);return {screen:'espace',tab:activeEspaceTab,filter:document.getElementById('espace-filter-input').value,scroll:captureScrollContext(panel,'[data-filter-text]',null)};}
   if(screen==='date-nav')return {screen:'date-nav',year:dnYear,month:dnMonth,day:dnDay,scroll:captureScrollContext(document.querySelector('#screen-date-nav .scroll'),':scope > *',null)};
@@ -4007,10 +4090,7 @@ async function restoreNavigationContext(ctx){
     await openEntry(ctx.vol,ctx.entryId,ctx.parent&&ctx.parent.screen?ctx.parent.screen:'tomes',{preserveOrigin:true,originContext:ctx.parent||null,restorePosition:ctx.position||null,supplementId:ctx.position&&ctx.position.supplement_id||null,intent:readerIntentForAction('RESTORE_PARENT',ctx.intent||READER_INTENT.CONSULTATION),authorityEpoch:Math.max(0,Number(ctx.authority_epoch)||0)});
     return;
   }
-  if(ctx.screen==='entries'){
-    currentVolume=ctx.vol||currentVolume;showScreen('entries');const list=document.getElementById('entries-list');restoreScrollContext(list,ctx.scroll,'.entry-item','data-entry-id');
-    requestAnimationFrame(()=>{if(ctx.focusEntry){const el=[...list.querySelectorAll('.entry-item')].find(x=>x.dataset.entryId===ctx.focusEntry);if(el){try{el.focus({preventScroll:true});}catch(_){el.focus();}}}});return;
-  }
+  if(ctx.screen==='entries'){await restoreEntriesNavigationContext(ctx);return;}
   if(ctx.screen==='search'){
     const sourceChanged=ctx.source_mode&&ctx.source_mode!==supplementMode;
     searchVolFilter=Number(ctx.volMin)||0;searchVolFilterMax=Number(ctx.volMax)||0;searchSpeakerFilter=!!ctx.speaker;searchOrderMode=ctx.orderExplicit&&['book','relevance'].includes(ctx.order)?ctx.order:null;searchResultLane=['exact','words','partial'].includes(ctx.lane)?ctx.lane:null;searchPage=Math.max(1,Number(ctx.page)||1);searchMetadataPage=Math.max(1,Number(ctx.metadataPage)||1);
@@ -4569,14 +4649,14 @@ async function renderSupplementRegistryList(container,items,opts={}){
   items.forEach(s=>{
     const btn=document.createElement('button');btn.type='button';btn.className='supp-registry-item';btn.dataset.supplementId=s.supplement_id;
     const userId=s.supplement_type==='COMPLETE_ENTRY'&&s.entry?s.entry.id:s.supplement_id;
-    btn.dataset.entryId=userId;btn.id='entry-row-'+userId;
+    btn.dataset.entryId=userId;btn.dataset.returnKey='supp:'+String(s.supplement_id||userId);btn.id='entry-row-'+userId;
     const kind=isInternalSupplementItem(s)?'Complément interne':'Entrée complète';
     const favMark=favoriteIds.has(userId)?`<span class="ei-fav-mark" data-favorite-indicator="true" title="Favori" aria-label="Favori"><i class="ti ti-heart-filled" aria-hidden="true"></i></span>`:'';
     const readMark=readIds.has(userId)?`<span class="ei-read-mark" data-read-indicator="true" title="Lu" aria-label="Lu"><i class="ti ti-circle-check" aria-hidden="true"></i></span>`:'';
     const statuses=(favMark||readMark)?`<span class="ei-statuses">${favMark}${readMark}</span>`:'';
     btn.classList.toggle('read',readIds.has(userId));
     btn.innerHTML=`<div class="sri-top"><span>Tome ${s.volume}</span><span>·</span><span>${escapeHtml(s.display_date||s.date_iso||'')}</span><span class="sri-type">${kind}</span><span class="ei-supp-badge">COMPLÉMENT</span>${statuses}</div><div class="sri-title">${escapeHtml(supplementRegistryTitle(s))}</div><div class="sri-excerpt">${escapeHtml(supplementRegistryExcerpt(s))}</div>`;
-    btn.onclick=()=>openSupplementItem(s,opts.global?'tomes':'entries',{intent:READER_INTENT.CONSULTATION});container.appendChild(btn);
+    btn.onclick=()=>opts.global?openSupplementItem(s,'tomes',{intent:READER_INTENT.CONSULTATION}):openSupplementFromEntries(s,btn);container.appendChild(btn);
   });
 }
 
@@ -4608,41 +4688,54 @@ function renewReaderScrollSurfaceForEntriesHandoff(){
 }
 function beginEntriesToReaderHandoff(button,originContext){
   if(entriesReaderHandoff)completeEntriesToReaderHandoff(entriesReaderHandoff,'superseded');
+  releaseEntriesReturnLock('open-reader');
   const list=document.getElementById('entries-list');
-  const token={id:++entriesReaderHandoffSeq,created_at:Date.now(),source_scroll_top:list?Number(list.scrollTop)||0:0,source_entry_id:button&&button.dataset?button.dataset.entryId||null:null,origin_context:originContext||null};
+  const token={id:++entriesReaderHandoffSeq,created_at:Date.now(),source_scroll_top:list?Number(list.scrollTop)||0:0,source_entry_id:button&&button.dataset?button.dataset.entryId||button.dataset.returnKey||null:null,origin_context:originContext||null,source_isolated:false};
   entriesReaderHandoff=token;
   if(readerOpenTraceActive)readerOpenTraceActive.handoff_id=token.id;
   entriesReaderHandoffTraceEvent('BEGIN',{handoff_id:token.id,entry_id:token.source_entry_id});
-  readerDiagStage('before v107 blur',{handoff_id:token.id});
-  // Crucial: release focus synchronously, before openEntryCore reaches its first
-  // await. A focused button inside a scrolled, momentum-enabled list must never
-  // remain the browser's scroll anchor while that screen is hidden.
+  readerDiagStage('before v110 blur',{handoff_id:token.id});
   const active=document.activeElement;
   if(active&&list&&list.contains(active)){try{active.blur();}catch(_){}}
   if(button&&document.activeElement===button){try{button.blur();}catch(_){}}
-  readerDiagStage('after v107 blur',{handoff_id:token.id});
-  if(list){
-    list.classList.add('reader-handoff-source-frozen');
-    // Keep logical Back geometry intact while terminating physical momentum.
-    list.scrollTop=token.source_scroll_top;
-    void list.offsetHeight;
-    list.scrollTop=token.source_scroll_top;
-  }
-  readerDiagStage('after source freeze',{handoff_id:token.id});
+  readerDiagStage('after v110 blur',{handoff_id:token.id});
+  if(list){list.classList.add('reader-handoff-source-frozen');void list.offsetHeight;}
   token.reader_surface=renewReaderScrollSurfaceForEntriesHandoff();
   entriesReaderHandoffTraceEvent('SOURCE_FROZEN',{handoff_id:token.id,blurred:!(document.activeElement&&list&&list.contains(document.activeElement))});
   return token;
+}
+function resetRootScrollForReaderHandoff(){
+  try{window.scrollTo(0,0);}catch(_){}const se=document.scrollingElement;if(se)se.scrollTop=0;if(document.documentElement)document.documentElement.scrollTop=0;if(document.body)document.body.scrollTop=0;
+}
+async function isolateEntriesSourceBeforeReaderExposure(token){
+  if(!token||token.source_isolated)return;const list=document.getElementById('entries-list');if(!list)return;
+  readerDiagStage('before v110 source isolation',{handoff_id:token.id,source_scroll_top:token.source_scroll_top});
+  list.classList.add('reader-handoff-source-isolated','reader-handoff-source-frozen');
+  list.scrollTop=0;resetRootScrollForReaderHandoff();void list.offsetHeight;
+  await new Promise(resolve=>requestAnimationFrame(resolve));
+  list.scrollTop=0;resetRootScrollForReaderHandoff();void list.offsetHeight;
+  token.source_isolated=true;
+  entriesReaderHandoffTraceEvent('SOURCE_ISOLATED_AT_ZERO',{handoff_id:token.id,logical_source_scroll_top:token.source_scroll_top});
+  readerDiagStage('after v110 source isolation',{handoff_id:token.id});
 }
 function completeEntriesToReaderHandoff(token,reason='complete'){
   if(!token)return;
   const list=document.getElementById('entries-list');
   if(list){
-    list.classList.remove('reader-handoff-source-frozen');
-    // Restore the source list's logical position without allowing it to drive the
-    // Reader; the list is normally hidden at this point and Back later restores
-    // its captured anchor/focus context explicitly.
-    list.scrollTop=Number(token.source_scroll_top)||0;
+    list.classList.remove('reader-handoff-source-frozen','reader-handoff-source-isolated');
+    if(token.source_isolated||currentScreenName()==='reader'){
+      // v110 invariant: once Reader exposure has begun, the hidden Tome-list remains
+      // physically neutral. Its prior position exists only in origin_context and is
+      // reconstructed by restoreEntriesNavigationContext() after returning to Entries.
+      list.scrollTop=0;
+    }else{
+      // Transaction rollback: if target loading failed before physical isolation,
+      // Reader was never exposed, so restore the still-visible list instead of
+      // turning a failed open into an unrelated jump to the top.
+      list.scrollTop=Number(token.source_scroll_top)||0;
+    }
   }
+  if(token.source_isolated||currentScreenName()==='reader')resetRootScrollForReaderHandoff();
   const sc=document.getElementById('reader-scroll');
   if(sc){
     sc.scrollTop=0;
@@ -4670,7 +4763,7 @@ async function openEntryFromEntries(vol,entryId,button){
   readerDiagStage('openEntryFromEntries BEGIN');
   // Capture Back state BEFORE blur/freeze so returning to the Tome preserves the
   // exact list position and can restore focus to the selected entry.
-  const originContext=captureNavigationContext('entries');
+  const originContext=captureEntriesNavigationContext(button);
   readerDiagStage('after origin context capture');
   const token=beginEntriesToReaderHandoff(button,originContext);
   try{
@@ -4681,9 +4774,19 @@ async function openEntryFromEntries(vol,entryId,button){
     completeEntriesToReaderHandoff(token,'open-entry-finally');
   }
 }
+async function openSupplementFromEntries(s,button){
+  if(!s)return null;const entryId=s.supplement_type==='COMPLETE_ENTRY'&&s.entry?s.entry.id:s.target_entry_id;
+  readerDiagEnsure('DIRECT_ENTRIES',s.volume,entryId,null,'openSupplementFromEntries');
+  readerDiagStage('openSupplementFromEntries BEGIN');
+  const originContext=captureEntriesNavigationContext(button);readerDiagStage('after supplement origin context capture');
+  const token=beginEntriesToReaderHandoff(button,originContext);
+  try{return await openSupplementItem(s,'entries',{intent:READER_INTENT.CONSULTATION,originContext});}
+  finally{readerDiagStage('supplement handoff finally BEGIN',{handoff_id:token&&token.id||null});completeEntriesToReaderHandoff(token,'open-supplement-finally');}
+}
 window.__ldcEntriesReaderHandoffDebug=()=>({active:entriesReaderHandoff&&Object.assign({},entriesReaderHandoff,{reader_surface:undefined}),trace:entriesReaderHandoffTrace.slice(-30),entries_scroll_top:Number(document.getElementById('entries-list')?.scrollTop)||0,reader_scroll_top:Number(document.getElementById('reader-scroll')?.scrollTop)||0});
 
 async function openTome(vol) {
+  releaseEntriesReturnLock('open-tome');
   if(activeReaderSession)await finishReaderForPermanentNavigation('entries');
   currentVolume = vol;
   await ensureVolumeIndex(vol);
@@ -4694,7 +4797,7 @@ async function openTome(vol) {
   if(supplementsOnly()){
     document.getElementById('entries-title').textContent=`Tome ${vol} · Compléments`;
     await renderSupplementRegistryList(list,sortedSupplementItems(supplementItemsForVolume(vol)),{global:false});
-    showScreen('entries'); scheduleVolumeReaderPreload(vol); return;
+    showScreen('entries'); bindEntriesReturnIntentHandlers(); scheduleVolumeReaderPreload(vol); return;
   }
   const entries = corpusCache[vol].entries;
   // Load user-status sets once per Tome render. This avoids one IndexedDB query per row.
@@ -4704,6 +4807,7 @@ async function openTome(vol) {
     const btn = document.createElement('button');
     btn.className = 'entry-item' + (readIds.has(e.id) ? ' read' : '');
     btn.dataset.entryId = e.id;
+    btn.dataset.returnKey = 'entry:' + String(e.id);
     btn.id = 'entry-row-' + e.id;
     const favMark = favoriteIds.has(e.id)
       ? `<span class="ei-fav-mark" data-favorite-indicator="true" title="Favori" aria-label="Favori"><i class="ti ti-heart-filled" aria-hidden="true"></i></span>` : '';
@@ -4729,6 +4833,7 @@ async function openTome(vol) {
     appendix.onclick=()=>openTome1EditorialAppendix('entries');list.appendChild(appendix);
   }
   showScreen('entries');
+  bindEntriesReturnIntentHandlers();
   scheduleVolumeReaderPreload(vol);
 }
 
@@ -4990,8 +5095,10 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
   if (rtt) rtt.textContent = `Tome ${vol}${currentEntry.date_display ? ' · ' + currentEntry.date_display : ''}`;
 
   // Back label
-  const labels = { entries:`Tome ${vol}`, tomes:'Tomes', search:'Recherche', espace:'Mon Espace', autour:'Passage d’origine', 'date-nav':'Dates', home:'Accueil', parcours:'Parcours' };
-  document.getElementById('reader-back-label').textContent = labels[backDest] || 'Retour';
+  const labels = { entries:`Tome ${vol}`, tomes:'Tomes', search:'Recherche', espace:'Mon Espace', autour:'Origine', 'date-nav':'Dates', home:'Accueil', parcours:'Parcours' };
+  const backLabel=labels[backDest]||'Retour',backBtn=document.getElementById('reader-back-btn');
+  document.getElementById('reader-back-label').textContent=backLabel;
+  if(backBtn){const ariaBack=backDest==='entries'?`Retour à la liste des textes du Tome ${vol}`:(backDest==='autour'?'Retour au passage d’origine':`Retour vers ${backLabel}`);backBtn.setAttribute('aria-label',ariaBack);}
 
   // Provenance — source identity follows the active supplement when the reader is focused on a COMPLÉMENT.
   {const pm=buildReaderProvenanceModel(currentEntry,headerSupplement);document.getElementById('prov-id').textContent=pm.stableRef;document.getElementById('prov-ed-key').textContent=pm.primaryKey;document.getElementById('prov-ed').textContent=pm.primaryValue;document.getElementById('prov-pages-key').textContent=pm.locatorKey;document.getElementById('prov-pages').textContent=pm.locatorValue||'—';document.getElementById('prov-status-key').textContent='Statut';document.getElementById('prov-status').textContent=pm.publicStatus;}
@@ -5248,8 +5355,10 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
   updateReadActionState(isConfirmedReadRecord(readRec));
 
   applyReperesState();
+  if(entriesReaderHandoff)await isolateEntriesSourceBeforeReaderExposure(entriesReaderHandoff);
   readerDiagStage('before showScreen(reader)');
   showScreen('reader');
+  resetRootScrollForReaderHandoff();
   readerDiagStage('after showScreen(reader)');
   readerDiagScheduleDelayed();
 

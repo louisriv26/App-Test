@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.108-R1B-DIAG",
+  "app_version": "v2.19.110-R1B",
   "asset_count": 202,
   "assets": [
     {
@@ -1040,7 +1040,7 @@
   "fast_mode_authority_sha256": "09590abe803b99dadf696fbecd64fb88b4fee9a05b38280549b4abcb920e0c78",
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.108-R1B-reader-ab-diagnostic-r1",
+  "page_worker_revision": "ldc-v2.19.110-R1B-reader-list-isolation-return-r1",
   "post_r6_date_id_a2_fixed_point": {
     "a2_sha256": "dd034a4d4bb329254818c3e62fd629c9b64c90f9d4bd533de9f6ed99247cb1d8",
     "date_id_sha256": "ed5bf462c47b8fb5a41f7c81591257d6e99f94bae08628aa27e5f7d667020c2a",
@@ -1054,7 +1054,7 @@
   "predecessor_of_v72_zip_sha256": "ed925239f570293b54a4565a2666dc50ac71e43aa149b3567d8a55364e550d8c",
   "predecessor_of_v73_zip_sha256": "825e08ea96a8cf6a245cd56c47e30f3eb4a04bb838fc2e4d3940f8bd2f3f974c",
   "predecessor_semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
-  "rebuild_status": "V107_ENTRY_LIST_READER_HANDOFF_R1__OWNER_PHYSICAL_V106_A_B_TEST_CONFIRMED_SAME_ENTRY_OPENS_MID_TEXT_FROM_SCROLLED_TOME_LIST_BUT_AT_ABSOLUTE_START_VIA_PREVIOUS_NEXT__SOURCE_LIST_FOCUS_MOMENTUM_COMPOSITOR_AUTHORITY_TERMINATED_BEFORE_ASYNC_OPEN__FRESH_READER_SCROLL_SURFACE_CREATED_FOR_DIRECT_TOME_ENTRY__V106_ENTRY_START_LOCK_PRESERVED__SEARCH_CORPUS_USER_DATA_SCHEMA_UNCHANGED__PUBLIC_RELEASE_REQUIRES_EXACT_V107_PHYSICAL_CONFIRMATION",
+  "rebuild_status": "V110_READER_LIST_ISOLATION_CONTEXT_RETURN_R1__EXACT_V108_DIAGNOSTIC_PREDECESSOR__PHYSICAL_TOME_LIST_SCROLL_POSITION_CAPTURED_AS_LOGICAL_CONTEXT_ONLY__SOURCE_SCROLL_SURFACE_NEUTRALISED_AT_ZERO_IMMEDIATELY_BEFORE_READER_EXPOSURE__NO_HIDDEN_LIST_SCROLL_RESTORE_WHILE_READER_ACTIVE__PRINCIPAL_COMPLEMENT_ENRICHI_LOCAL_OPENS_SHARE_HANDOFF__RETURN_REBUILDS_TOME_LIST_AND_RESTORES_SELECTED_ROW_OR_VIEWPORT_ANCHOR__V108_DIAGNOSTICS_RETAINED__SEARCH_CORPUS_USER_DATA_SCHEMA_UNCHANGED__PUBLIC_RELEASE_REQUIRES_PHYSICAL_CONFIRMATION",
   "retention_contract": {
     "clear_policy": "CURRENT_SCOPE_ONLY_FOR_SHARED_LEGACY_CACHES",
     "copy_migration_required": false,
@@ -1065,7 +1065,7 @@
     "shell_runtime_caches": "APP_VERSIONED"
   },
   "schema": "ldc-offline-manifest-v3",
-  "scope": "36 tomes PRINCIPAL R7/FAST1 + SUP-T1..SUP-T5 + SEARCH-V2 active assets only + compact volume summary + projected speaker/flow runtime payloads + V2.1A exact truth + V2.1B foundation + V2.2 A9 Formulation proche runtime; v107 changes only direct Tome-list -> Reader physical scroll-surface handoff plus release identity; v106 ENTRY_START semantic lock remains; semantic remembered-meaning Search remains a separate open P0; offline corpus content binding unchanged; public deployment not authorized.",
+  "scope": "36 tomes PRINCIPAL R7/FAST1 + SUP-T1..SUP-T5 + SEARCH-V2 active assets only + compact volume summary + projected speaker/flow runtime payloads + V2.1A exact truth + V2.1B foundation + V2.2 A9 Formulation proche runtime; v110 changes only Tome-list <-> Reader navigation isolation/context-return UI plus release identity; v108 Reader diagnostic instrumentation and v106 ENTRY_START semantic lock remain; semantic remembered-meaning Search remains a separate open P0; offline corpus content binding unchanged; public release not authorized pending exact v110 physical confirmation.",
   "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
   "semantic_vector_search_included": false,
   "semantic_vector_search_note": "Vector/embedding search remains retired. Legacy semantic_index.json is also retired from deploy; SEARCH-V2 is the sole active search runtime.",
