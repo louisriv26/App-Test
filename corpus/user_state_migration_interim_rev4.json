@@ -1,0 +1,81 @@
+{
+  "schema": "ldc-user-state-interim-successor-migration-v1",
+  "stage_order": [
+    "R6",
+    "R7_DATE_ID",
+    "INTERIM_REV4"
+  ],
+  "assumes_date_id_fixed_point_sha256": "ed5bf462c47b8fb5a41f7c81591257d6e99f94bae08628aa27e5f7d667020c2a",
+  "stores": [
+    "reading_pos",
+    "highlights",
+    "notes",
+    "favorites",
+    "collections",
+    "col_items",
+    "settings",
+    "read_entries"
+  ],
+  "D1": {
+    "deleted_ref": "LDC.T20.E0058.P032",
+    "deleted_para_id": "LDC.T20.E0058.P032",
+    "entry_id": "LDC.T20.E0058",
+    "old_text": "Le tort que Notre gloire reçoit de la part de la Création est grand et incalculable, à tel point que même tous les Bienfaits de la Rédemption ne pouvaient le réparer, car même avec la Rédemption, l'homme n'est pas revenu dans l'Unité de notre Volonté, ni Elle ne règne pleinement dans les créatures.",
+    "old_text_sha256": "e89ec16f638f36d3787b48a9774ecb930444bd7ed407e554f3df1668dc3dbef3",
+    "retained": [
+      {
+        "stable_ref": "LDC.T20.E0058.P033",
+        "para_id": "LDC.T20.E0058.P033",
+        "text": "Le tort que Notre gloire reçoit de la part de la Création est grand et incalculable, à tel point que même tous les Bienfaits de la Rédemption ne pouvaient le réparer.",
+        "text_sha256": "24952d6aa5a528a7621028136b4936f78ff4b3cdc45b02c59c79161b29306da7"
+      },
+      {
+        "stable_ref": "LDC.T20.E0058.P034",
+        "para_id": "LDC.T20.E0058.P034",
+        "text": "Car même avec la Rédemption,",
+        "text_sha256": "5da0ba6e99b7fc6ada6fdc88be0150498f33cfffff4608a0801cf11daf0dc083"
+      },
+      {
+        "stable_ref": "LDC.T20.E0058.P035",
+        "para_id": "LDC.T20.E0058.P035",
+        "text": "- l’homme n’est pas revenu dans l’Unité de notre Volonté",
+        "text_sha256": "55104fdf7fd1ea5d45ed949d052aaa37e8c5ec7c970d8385b14ffd48efc9591f"
+      },
+      {
+        "stable_ref": "LDC.T20.E0058.P036",
+        "para_id": "LDC.T20.E0058.P036",
+        "text": "- ni Elle ne règne pleinement dans les créatures.",
+        "text_sha256": "2f1499962573a7b09592c741ffd6e3c6dcff5147bda156a17ea8a0ab64f47b70"
+      }
+    ]
+  },
+  "D2": {
+    "deleted_ref": "LDC.T04.1900-10-12.E001.P001",
+    "deleted_para_id": "ldc_t04_1900_10_12_e001_p001",
+    "trimmed_ref": "LDC.T04.1900-10-12.E001.P002",
+    "trimmed_para_id": "ldc_t04_1900_10_12_e001_p002",
+    "entry_id": "ldc_t04_1900_10_12_e001",
+    "deleted_text": "Les ennemis les plus puissants de l'homme sont : l'amour des plaisirs,",
+    "old_trimmed_text": "- l'amour des richesses et - l'amour des honneurs. Mon adorable Jésus continue de venir. Ce matin, Il portait une couronne d'épines touffue. Je la lui enlevai tout doucement et la mis sur ma tête. Je lui dis : «Seigneur, aide-moi à l'enfoncer.»",
+    "prefix": "- l'amour des richesses et - l'amour des honneurs. ",
+    "prefix_length": 51,
+    "new_trimmed_text": "Mon adorable Jésus continue de venir. Ce matin, Il portait une couronne d'épines touffue. Je la lui enlevai tout doucement et la mis sur ma tête. Je lui dis : «Seigneur, aide-moi à l'enfoncer.»"
+  },
+  "speaker_segment_aliases": {
+    "LDC.T12.1918-06-12.E001.P002.R3A31.0001.0242.JESUS": "LDC.T12.1918-06-12.E001.P002.R3A31.0001.0242.LUISA",
+    "LDC.T12.1918-06-12.E001.P003.R3A31.0000.0114.JESUS": "LDC.T12.1918-06-12.E001.P003.R3A31.0000.0114.LUISA"
+  },
+  "store_policy": {
+    "highlights": "D1 exact/split to retained paragraphs; ambiguous preserved stale. D2 deleted/removed-only preserved retired; survivor exact shifted; cross-boundary preserves survivor plus legacy retired context.",
+    "notes": "D1 single-target exact quote migrates; split/ambiguous or paragraph-only deleted target preserved needs_reanchor. D2 deleted/removed-only retired; survivor exact migrates; cross-boundary preserved needs_reanchor.",
+    "col_items": "single-target exact only; split/cross/ambiguous preserved needs_reanchor; deleted/removed-only retired.",
+    "reading_pos": "D1 deleted paragraph preserved needs_reanchor (no guessed paragraph). D2 deleted/prefix positions preserved needs_reanchor; positions in surviving P002 shift by prefix length and fraction recalculates.",
+    "favorites": "entry identity unchanged by D1/D2; no structural mutation after R7 DateID.",
+    "read_entries": "entry identity unchanged by D1/D2; no structural mutation after R7 DateID.",
+    "collections": "no corpus target fields; unchanged.",
+    "settings": "unchanged except migration marker/log."
+  },
+  "negative_rule": "never silently attach an ambiguous or deleted-content record to live text",
+  "idempotence_marker": "user_data_interim_successor_rev4_migration_v1",
+  "fixed_point_sha256": "02a7b97c8f54ade7634fe04c747b54b3653add3093599f97c29073bf8c0297cd"
+}
