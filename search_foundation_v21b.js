@@ -91,7 +91,7 @@ function createFoundation(payload){
     const lanes={exact:[],words:[],partial:[]};for(const r of all)(lanes[r.matchType]||lanes.partial).push(r);
     const counts={exact:lanes.exact.length,words:lanes.words.length,partial:lanes.partial.length};
     const exactTokens=applied.exactTruth&&Number(applied.exactTruth.queryTokens)||0;
-    let lane=VALID_LANES.has(opt.resultLane)?opt.resultLane:(counts.exact?'exact':(counts.words?'words':'partial'));
+    let lane=VALID_LANES.has(opt.resultLane)?opt.resultLane:(counts.exact?'exact':(counts.words?'words':(opt.allowPartialDefault===false?'words':'partial')));
     const indexedTokens=(applied.parsed&&applied.parsed.tokens&&applied.parsed.tokens.length)||0;
     let order=VALID_ORDERS.has(opt.order)?opt.order:((exactTokens===1||indexedTokens===0)?'book':'relevance');
     const selected=lanes[lane].slice();
