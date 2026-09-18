@@ -32,7 +32,7 @@
   --reader-measure:613px; --home-offline-title-size:13px; --home-offline-detail-size:12px;
   --reader-title-size:20px; --browse-title-size:15px; --journey-copy-size:13px; --journey-action-size:14px;
   --content-meta-size:12px; --content-seq-size:11px; --reading-badge-size:11px; --source-mode-size:12px; --supp-badge-size:12px;
-  --reader-control-size:14px; --search-excerpt-size:15px; --espace-excerpt-size:14px; --collection-excerpt-size:14px;
+  --reader-control-size:14px; --reader-journey-copy-size:13px; --reader-journey-action-size:14px; --reader-context-back-size:14px; --reader-chrome-title-size:14px; --reader-orientation-size:12px; --reader-date-size:13px; --search-excerpt-size:15px; --espace-excerpt-size:14px; --collection-excerpt-size:14px;
   --help-body-size:14px; --help-tip-size:13px; --annotation-body-size:14px; --collection-title-size:16px;
   --home-title-size:28px; --home-quote-size:15px; --home-resume-title-size:16px; --home-action-size:13px;
   --accent:#7a5c10;
@@ -225,7 +225,7 @@ body.app-state-boot,body.app-state-onboarding{overflow:hidden;}
    It must inherit the body flex-height contract so screen-level .scroll panes have
    a bounded height on desktop while preserving the existing touch scroll model. */
 #main-content{position:relative;display:flex;flex:1 1 auto;min-height:0;min-width:0;flex-direction:column;overflow:hidden;width:100%;}
-.screen{display:none;flex:1;min-height:0;flex-direction:column;}
+.screen{display:none;flex:1;min-height:0;min-width:0;width:100%;max-width:100%;flex-direction:column;}
 .screen.active{display:flex;}
 /* Stage A semantic structure/accessibility: one main landmark and visually stable semantic headings. */
 .sr-only,.speech-attribution-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
@@ -458,7 +458,7 @@ h2.dn-section-title{margin-bottom:0;}
   padding:4px;border-radius:6px;transition:color .15s;}
 .btn-back:hover{color:var(--night);}
 .reader-tools{display:flex;align-items:center;gap:2px;}
-.reader-top-title{flex:1;min-width:0;text-align:center;padding:0 8px;font-family:var(--serif);font-size:13px;
+.reader-top-title{flex:1;min-width:0;text-align:center;padding:0 8px;font-family:var(--serif);font-size:var(--reader-chrome-title-size);
   color:var(--night);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .reader-menu-list{display:grid;grid-template-columns:1fr;gap:8px;padding:6px 0 2px;}
 .reader-menu-btn{min-height:48px;width:100%;display:flex;align-items:center;gap:10px;text-align:left;padding:10px 12px;
@@ -494,37 +494,37 @@ h2.dn-section-title{margin-bottom:0;}
 /* v110 contextual Reader bar: Back is a primary fixed navigation action on the
    same line as PRINCIPAL / COMPLÉMENT / ENRICHI, outside #reader-scroll. */
 .source-mode-bar.reader-context-bar{justify-content:flex-start;gap:8px;overflow:visible;}
-.reader-context-back{min-height:48px;display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;border:1px solid var(--gold-light);background:var(--gold-pale);color:var(--gold-text);border-radius:999px;padding:8px 13px;font-family:var(--body);font-size:var(--source-mode-size);font-weight:700;line-height:1;cursor:pointer;white-space:nowrap;}
-.reader-context-back i{font-size:calc(var(--source-mode-size) + 5px);}
+.reader-context-back{min-height:48px;display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;border:1px solid var(--gold-light);background:var(--gold-pale);color:var(--gold-text);border-radius:999px;padding:8px 16px;font-family:var(--body);font-size:var(--reader-context-back-size);font-weight:700;line-height:1;cursor:pointer;white-space:nowrap;}
+.reader-context-back i{font-size:calc(var(--reader-context-back-size) + 5px);}
 .reader-context-back:hover{background:var(--white);color:var(--night);}
 .reader-context-back:focus-visible{outline:2px solid var(--gold-text);outline-offset:2px;}
 .reader-context-bar .source-mode-segment{flex:1 1 auto;min-width:0;justify-content:center;}
 .reader-context-bar .source-mode-btn{flex:1 1 0;min-width:0;padding-left:9px;padding-right:9px;}
 .reader-source-short{display:none;}
 @media(max-width:360px){
-  .source-mode-bar.reader-context-bar{gap:5px;padding-left:6px;padding-right:6px;}
-  .reader-context-back{padding-left:9px;padding-right:9px;}
-  .reader-context-bar .source-mode-btn{padding-left:5px;padding-right:5px;letter-spacing:.02em;}
+  .source-mode-bar.reader-context-bar{gap:3px;padding-left:4px;padding-right:4px;}
+  .reader-context-back{padding-left:8px;padding-right:8px;}
+  .reader-context-bar .source-mode-btn{padding-left:4px;padding-right:4px;letter-spacing:.01em;}
   .reader-context-bar .reader-source-long{display:none;}
   .reader-context-bar .reader-source-short{display:inline;}
 }
 .journey-state-block{margin:0 0 12px;}
-.journey-intent-indicator{display:inline-flex;align-items:center;gap:5px;margin:0 0 6px;padding:3px 8px;border-radius:999px;font:600 var(--reading-badge-size) var(--body);letter-spacing:.04em;background:var(--gold-pale);color:var(--gold-text);}
+.journey-intent-indicator{display:inline-flex;align-items:center;gap:5px;margin:0 0 6px;padding:4px 9px;border-radius:999px;font:600 var(--reader-orientation-size) var(--body);letter-spacing:.04em;background:var(--gold-pale);color:var(--gold-text);}
 .journey-intent-indicator.consultation{background:var(--accent-fill);color:var(--accent-fill-ink);}
-.journey-state-explainer{font-size:var(--journey-copy-size);line-height:1.45;color:var(--muted);margin:0 0 6px;max-width:42rem;}
+.journey-state-explainer{font-size:var(--reader-journey-copy-size);line-height:1.45;color:var(--muted);margin:0 0 6px;max-width:42rem;}
 .journey-state-explainer:empty{display:none;}
 .journey-state-action{display:inline-flex;align-items:center;gap:5px;border:0;background:none;padding:8px 0;color:var(--gold-text);
-  font:600 var(--journey-action-size) var(--body);cursor:pointer;text-align:left;min-height:44px;white-space:normal;overflow-wrap:anywhere;}
+  font:600 var(--reader-journey-action-size) var(--body);cursor:pointer;text-align:left;min-height:44px;white-space:normal;overflow-wrap:anywhere;}
 .journey-state-action:hover{text-decoration:underline;}
 .journey-state-action[hidden]{display:none!important;}
 .journey-state-action:focus-visible,.rc-secondary:focus-visible{outline:2px solid var(--gold-text);outline-offset:2px;}
 .journey-intent-indicator:focus{outline:2px solid var(--gold-text);outline-offset:3px;}
-@media(max-width:420px){.journey-state-explainer{font-size:var(--journey-copy-size)}.journey-state-action{font-size:var(--journey-action-size);line-height:1.35}}
-.rh-vol{font-size:var(--reading-badge-size);letter-spacing:.1em;text-transform:uppercase;
+@media(max-width:420px){.journey-state-explainer{font-size:var(--reader-journey-copy-size)}.journey-state-action{font-size:var(--reader-journey-action-size);line-height:1.35}}
+.rh-vol{font-size:var(--reader-orientation-size);letter-spacing:.1em;text-transform:uppercase;
   color:var(--gold-text);font-family:var(--body);margin-bottom:6px;}
 .rh-title{font-family:var(--serif);font-size:var(--reader-title-size);color:var(--night);
   line-height:1.35;margin-bottom:8px;}
-.rh-date{font-size:var(--content-meta-size);color:var(--muted);margin-bottom:10px;}
+.rh-date{font-size:var(--reader-date-size);color:var(--muted);margin-bottom:10px;}
 .rh-divider{height:1px;background:linear-gradient(90deg,var(--gold-light),transparent);opacity:.5;}
 
 .reader-body{padding:0 22px 20px;}
@@ -648,13 +648,20 @@ mark.hl-pink{background:#fce7f3;color:inherit;}
 .hl-del-btn:hover{background:rgba(255,255,255,.1);}
 
 /* ═══ SEARCH SCREEN ═══ */
-.search-bar-wrap{padding:10px 12px 8px;flex-shrink:0;}
-.search-bar{display:flex;align-items:center;gap:8px;background:var(--white);
+.search-bar-wrap{padding:10px 12px 8px;flex-shrink:0;min-width:0;width:100%;max-width:100%;}
+.search-bar{display:flex;align-items:center;gap:8px;background:var(--white);min-width:0;width:100%;max-width:100%;
   border:0.5px solid var(--border);border-radius:10px;padding:9px 13px;}
-.search-bar input{flex:1;border:none;background:transparent;font-size:16px;
+.search-bar input{flex:1 1 0;min-width:0;width:0;max-width:100%;border:none;background:transparent;font-size:16px;
   font-family:var(--body);color:var(--ink);outline:none;}
 .search-bar input::placeholder{color:var(--muted);}
 .search-bar i{color:var(--muted);font-size:17px;flex-shrink:0;}
+
+/* v112 iPhone Search viewport containment. Flex inputs must be allowed to shrink;
+   iOS touch browsers also require a >=16px form-control floor to avoid focus zoom. */
+#screen-search,#search-results,.search-suggestions,.search-meta,.trust-notice,.result-card{min-width:0;max-width:100%;}
+#screen-search{width:100%;overflow-x:hidden;}
+.search-suggestions,.search-meta,.trust-notice,.result-card{overflow-wrap:anywhere;word-break:normal;}
+@media (hover:none) and (pointer:coarse){.search-bar input{font-size:max(16px,var(--sem-strong-16));}}
 
 .search-meta{padding:4px 16px 8px;font-size:12px;color:var(--muted);flex-shrink:0;}
 .search-mode-badge{display:inline-flex;align-items:center;gap:4px;
@@ -695,7 +702,7 @@ mark.hl-pink{background:#fce7f3;color:inherit;}
 mark.search-hl{background:rgba(201,168,76,.35);color:inherit;border-radius:2px;padding:0 1px;}
 
 /* Vol filter chips */
-.filter-row{display:flex;gap:6px;padding:6px 12px 8px;overflow-x:auto;
+.filter-row{display:flex;gap:6px;padding:6px 12px 8px;overflow-x:auto;min-width:0;width:100%;max-width:100%;
   scrollbar-width:none;flex-shrink:0;}
 .filter-row::-webkit-scrollbar{display:none;}
 .chip{flex-shrink:0;padding:5px 12px;border-radius:20px;font-size:12px;
@@ -1384,7 +1391,6 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
 .support-check{font-size:var(--sem-strong-12);}
 .ob-skip,
 .btn-back,
-.reader-top-title,
 .reader-info-row,
 .textsize-label,
 .search-suggestion-box,
@@ -2326,11 +2332,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.110-R1B'; // Reader list-isolation + contextual-return successor to exact v108 diagnostic line
-const PUBLIC_VERSION = '110';       // single user-facing release number
+const APP_VERSION = 'v2.19.112-R1B'; // iPhone Search viewport containment + robust Tome-context return successor to exact v111
+const PUBLIC_VERSION = '112';       // single user-facing release number
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD   = '2026-09-17';
-const SW_CACHE_VERSION = 'ldc-v2.19.110-R1B-reader-list-isolation-return-r1';
+const APP_BUILD   = '2026-09-18';
+const SW_CACHE_VERSION = 'ldc-v2.19.112-R1B-iphone-search-tome-return-r1';
 const CORPUS_MANIFEST_SHA256 = '8d831c437fa6c2caa56ac637c3d539279ec24b57711d209b264804cca19c0ab7';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
@@ -3397,6 +3403,8 @@ async function getParagraphs(vol, entryId) {
    SCREENS
 ═══════════════════════════════════════════════════════ */
 function showScreen(id) {
+  const leavingSearch=id!=='search'&&document.getElementById('screen-search')?.classList.contains('active');
+  if(leavingSearch)resetRootHorizontalViewport('leave-search');
   if (id !== 'entries' && typeof releaseEntriesReturnLock==='function') releaseEntriesReturnLock('screen:'+id);
   if (id !== 'reader') {clearEntryStartTargetLock('screen:'+id);resetReaderInteractionContext('screen:'+id);}
   if (id !== 'search') cancelActiveSearch('navigation');
@@ -3435,15 +3443,26 @@ async function finishReaderForPermanentNavigation(destination){
 }
 
 async function goHome(){await finishReaderForPermanentNavigation('home');showScreen('home');await renderHome();}
+function resetRootHorizontalViewport(reason='reset'){
+  const input=document.getElementById('search-input');
+  if(input&&document.activeElement===input){try{input.blur();}catch(_){}}
+  const apply=()=>{try{const y=Number(window.scrollY)||0;window.scrollTo(0,y);}catch(_){}const se=document.scrollingElement;if(se)se.scrollLeft=0;if(document.documentElement)document.documentElement.scrollLeft=0;if(document.body)document.body.scrollLeft=0;};
+  apply();requestAnimationFrame(()=>{apply();requestAnimationFrame(apply);});
+}
+function shouldAutofocusSearchInput(){
+  try{return !!(window.matchMedia&&window.matchMedia('(hover:hover) and (pointer:fine)').matches&&window.innerWidth>=768);}catch(_){return false;}
+}
 async function goSearch() {
   await finishReaderForPermanentNavigation('search');
+  resetRootHorizontalViewport('enter-search');
   showScreen('search');
   renderSearchSourceModeRow();
   renderSearchOrderRow();
   renderSpeakerFilterRow();
   renderVolFilterRow();
-  document.getElementById('search-input').focus();
-  if (!document.getElementById('search-input').value) refreshSearchSuggestions().catch(()=>{});
+  const input=document.getElementById('search-input');
+  if(input&&shouldAutofocusSearchInput())input.focus({preventScroll:true});
+  if (!input.value) refreshSearchSuggestions().catch(()=>{});
   // Stage 10: SEARCH-V2 is the sole active retrieval engine and loads lazily in its worker.
 }
 
@@ -4023,7 +4042,8 @@ function captureEntriesNavigationContext(selectedButton=null){
     focusKey:focus&&focus.dataset?focus.dataset.returnKey||null:null};
 }
 function releaseEntriesReturnLock(reason='release'){
-  if(!entriesReturnLock)return false;const list=document.getElementById('entries-list');
+  if(!entriesReturnLock)return false;const lock=entriesReturnLock,list=document.getElementById('entries-list');
+  if(lock.resizeObserver){try{lock.resizeObserver.disconnect();}catch(_){}}
   if(list)list.classList.remove('entries-return-lock');entriesReturnLock=null;return true;
 }
 function entriesReturnTarget(ctx,list){
@@ -4043,25 +4063,40 @@ function enforceEntriesReturnPosition(reason='enforce'){
 }
 function installEntriesReturnLock(ctx){
   releaseEntriesReturnLock('replace');const list=document.getElementById('entries-list');if(!list)return null;
-  entriesReturnLock={id:++entriesReturnLockSeq,ctx,rawApplied:false,created_at:Date.now()};list.classList.add('entries-return-lock');
+  const lock=entriesReturnLock={id:++entriesReturnLockSeq,ctx,rawApplied:false,created_at:Date.now(),resizeObserver:null};list.classList.add('entries-return-lock');
   list.scrollTop=Number(ctx&&ctx.scroll&&ctx.scroll.scrollTop)||0;
   enforceEntriesReturnPosition('immediate');
-  requestAnimationFrame(()=>{if(entriesReturnLock)enforceEntriesReturnPosition('raf1');requestAnimationFrame(()=>{if(entriesReturnLock)enforceEntriesReturnPosition('raf2');});});
-  setTimeout(()=>{if(entriesReturnLock)enforceEntriesReturnPosition('t120');},120);
-  setTimeout(()=>{if(entriesReturnLock)enforceEntriesReturnPosition('t300');},300);
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(entriesReturnLock)enforceEntriesReturnPosition('fonts-ready');}).catch(()=>{});
-  return entriesReturnLock;
+  requestAnimationFrame(()=>{if(entriesReturnLock===lock)enforceEntriesReturnPosition('raf1');requestAnimationFrame(()=>{if(entriesReturnLock===lock)enforceEntriesReturnPosition('raf2');});});
+  for(const [delay,label] of [[120,'t120'],[300,'t300'],[700,'t700'],[1200,'t1200']])setTimeout(()=>{if(entriesReturnLock===lock)enforceEntriesReturnPosition(label);},delay);
+  if(typeof ResizeObserver==='function'){try{lock.resizeObserver=new ResizeObserver(()=>{if(entriesReturnLock===lock)enforceEntriesReturnPosition('resize-observer');});lock.resizeObserver.observe(list);}catch(_){lock.resizeObserver=null;}}
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(entriesReturnLock===lock)enforceEntriesReturnPosition('fonts-ready');}).catch(()=>{});
+  return lock;
 }
 function bindEntriesReturnIntentHandlers(){const list=document.getElementById('entries-list');if(!list||list.dataset.returnIntentBound==='1')return;list.dataset.returnIntentBound='1';for(const ev of ['pointerdown','touchstart','wheel'])list.addEventListener(ev,()=>releaseEntriesReturnLock('user:'+ev),{passive:true});list.addEventListener('keydown',e=>{if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' '].includes(e.key))releaseEntriesReturnLock('user:key');});}
+function entriesListMatchesReturnContext(list,ctx,desired){
+  if(!list||!ctx)return false;
+  if(String(list.dataset.renderedVolume||'')!==String(ctx.vol||''))return false;
+  if(String(list.dataset.renderedSourceMode||'')!==String(desired||''))return false;
+  const key=ctx.selectedKey||(ctx.scroll&&ctx.scroll.anchorKey)||ctx.focusKey;
+  return key!=null&&!!entryReturnNode(list,key);
+}
 async function restoreEntriesNavigationContext(ctx){
   if(!ctx)return false;const screen=document.getElementById('screen-entries');if(screen)screen.classList.add('entries-return-restoring');
   try{
     const desired=validJourneySourceMode(ctx.return_source_mode)?ctx.return_source_mode:(validJourneySourceMode(ctx.source_mode)?ctx.source_mode:supplementMode);
     if(desired!==supplementMode)await setSupplementMode(desired,{rerender:false,silent:true});
-    currentVolume=ctx.vol||currentVolume;await openTome(currentVolume);bindEntriesReturnIntentHandlers();
-    const list=document.getElementById('entries-list');installEntriesReturnLock(ctx);
+    currentVolume=ctx.vol||currentVolume;
+    let list=document.getElementById('entries-list');
+    // v112: the v110 handoff deliberately neutralises the hidden list while Reader is active.
+    // On Back, prefer restoring that already-rendered logical list instead of rebuilding it.
+    // This removes an iOS timing window in which a rebuild could visibly settle at scrollTop=0.
+    const warm=entriesListMatchesReturnContext(list,ctx,desired);
+    if(warm){showScreen('entries');bindEntriesReturnIntentHandlers();}
+    else{await openTome(currentVolume);list=document.getElementById('entries-list');bindEntriesReturnIntentHandlers();}
+    installEntriesReturnLock(ctx);
     await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-    enforceEntriesReturnPosition('before-reveal');
+    enforceEntriesReturnPosition(warm?'warm-before-reveal':'rebuilt-before-reveal');
+    const selected=entryReturnNode(list,ctx.selectedKey);if(selected){const lr=list.getBoundingClientRect(),rr=selected.getBoundingClientRect();if(rr.bottom<=lr.top||rr.top>=lr.bottom){selected.scrollIntoView({block:'center',inline:'nearest'});enforceEntriesReturnPosition('selected-visible-fallback');}}
     const focus=entryReturnNode(list,ctx.focusKey||ctx.selectedKey);if(focus){try{focus.focus({preventScroll:true});}catch(_){focus.focus();enforceEntriesReturnPosition('focus-fallback');}}
     return true;
   }finally{if(screen)screen.classList.remove('entries-return-restoring');}
@@ -4793,6 +4828,8 @@ async function openTome(vol) {
   document.getElementById('entries-title').textContent = `Tome ${vol}`;
   const list = document.getElementById('entries-list');
   list.innerHTML = '';
+  list.dataset.renderedVolume=String(vol);
+  list.dataset.renderedSourceMode=String(supplementMode);
   syncSupplementModeUI();
   if(supplementsOnly()){
     document.getElementById('entries-title').textContent=`Tome ${vol} · Compléments`;
@@ -8608,10 +8645,10 @@ function closeHelp() {
 ═══════════════════════════════════════════════════════ */
 const TEXT_LEVELS = Object.freeze({ small:16, normal:19, large:22, xlarge:26 });
 const TEXT_TYPOGRAPHY = Object.freeze({
-  small:  {readerTitle:20,browseTitle:14,journeyCopy:12,journeyAction:13,meta:11,seq:10,badge:10,sourceMode:12,suppBadge:12,readerControl:13,searchExcerpt:14,espaceExcerpt:13,collectionExcerpt:13,helpBody:13,helpTip:12,annotationBody:12,collectionTitle:16,homeTitle:24,homeQuote:14,homeResumeTitle:15,homeAction:13},
-  normal: {readerTitle:20,browseTitle:15,journeyCopy:13,journeyAction:14,meta:12,seq:11,badge:11,sourceMode:12,suppBadge:12,readerControl:14,searchExcerpt:15,espaceExcerpt:14,collectionExcerpt:14,helpBody:14,helpTip:13,annotationBody:14,collectionTitle:16,homeTitle:28,homeQuote:15,homeResumeTitle:16,homeAction:13},
-  large:  {readerTitle:23,browseTitle:17,journeyCopy:15,journeyAction:16,meta:13,seq:12,badge:13,sourceMode:14,suppBadge:14,readerControl:15,searchExcerpt:17,espaceExcerpt:16,collectionExcerpt:16,helpBody:16,helpTip:15,annotationBody:16,collectionTitle:18,homeTitle:31,homeQuote:17,homeResumeTitle:18,homeAction:15},
-  xlarge: {readerTitle:27,browseTitle:20,journeyCopy:18,journeyAction:19,meta:14,seq:13,badge:15,sourceMode:15,suppBadge:15,readerControl:17,searchExcerpt:20,espaceExcerpt:19,collectionExcerpt:19,helpBody:18,helpTip:17,annotationBody:18,collectionTitle:20,homeTitle:35,homeQuote:20,homeResumeTitle:21,homeAction:17}
+  small:  {readerTitle:20,browseTitle:14,journeyCopy:12,journeyAction:13,meta:11,seq:10,badge:10,sourceMode:12,suppBadge:12,readerControl:13,readerJourneyCopy:12,readerJourneyAction:13,readerBack:13,readerChromeTitle:13,readerOrientation:11,readerDate:12,searchExcerpt:14,espaceExcerpt:13,collectionExcerpt:13,helpBody:13,helpTip:12,annotationBody:12,collectionTitle:16,homeTitle:24,homeQuote:14,homeResumeTitle:15,homeAction:13},
+  normal: {readerTitle:20,browseTitle:15,journeyCopy:13,journeyAction:14,meta:12,seq:11,badge:11,sourceMode:12,suppBadge:12,readerControl:14,readerJourneyCopy:13,readerJourneyAction:14,readerBack:14,readerChromeTitle:14,readerOrientation:12,readerDate:13,searchExcerpt:15,espaceExcerpt:14,collectionExcerpt:14,helpBody:14,helpTip:13,annotationBody:14,collectionTitle:16,homeTitle:28,homeQuote:15,homeResumeTitle:16,homeAction:13},
+  large:  {readerTitle:23,browseTitle:17,journeyCopy:15,journeyAction:16,meta:13,seq:12,badge:13,sourceMode:14,suppBadge:14,readerControl:18,readerJourneyCopy:17,readerJourneyAction:18,readerBack:17,readerChromeTitle:17,readerOrientation:15,readerDate:16,searchExcerpt:17,espaceExcerpt:16,collectionExcerpt:16,helpBody:16,helpTip:15,annotationBody:16,collectionTitle:18,homeTitle:31,homeQuote:17,homeResumeTitle:18,homeAction:15},
+  xlarge: {readerTitle:27,browseTitle:20,journeyCopy:18,journeyAction:19,meta:14,seq:13,badge:15,sourceMode:15,suppBadge:15,readerControl:20,readerJourneyCopy:20,readerJourneyAction:21,readerBack:19,readerChromeTitle:20,readerOrientation:17,readerDate:18,searchExcerpt:20,espaceExcerpt:19,collectionExcerpt:19,helpBody:18,helpTip:17,annotationBody:18,collectionTitle:20,homeTitle:35,homeQuote:20,homeResumeTitle:21,homeAction:17}
 });
 const TEXT_LEVEL_MIGRATION_KEY = 'text_size_level_migration_v1';
 
@@ -8637,6 +8674,12 @@ function applyTextLevel(level) {
   root.style.setProperty('--source-mode-size', type.sourceMode + 'px');
   root.style.setProperty('--supp-badge-size', type.suppBadge + 'px');
   root.style.setProperty('--reader-control-size', type.readerControl + 'px');
+  root.style.setProperty('--reader-journey-copy-size', type.readerJourneyCopy + 'px');
+  root.style.setProperty('--reader-journey-action-size', type.readerJourneyAction + 'px');
+  root.style.setProperty('--reader-context-back-size', type.readerBack + 'px');
+  root.style.setProperty('--reader-chrome-title-size', type.readerChromeTitle + 'px');
+  root.style.setProperty('--reader-orientation-size', type.readerOrientation + 'px');
+  root.style.setProperty('--reader-date-size', type.readerDate + 'px');
   root.style.setProperty('--search-excerpt-size', type.searchExcerpt + 'px');
   root.style.setProperty('--espace-excerpt-size', type.espaceExcerpt + 'px');
   root.style.setProperty('--collection-excerpt-size', type.collectionExcerpt + 'px');
