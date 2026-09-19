@@ -2372,11 +2372,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.118-R1B-NAV-BACK-ROOT-RESTORE-R1'; // bounded Reader→Tome scroll-owner-aware root restoration candidate; Search/R18D preserved
-const PUBLIC_VERSION = '118';       // internal controlled-device repair candidate; public release not yet authorized
+const APP_VERSION = 'v2.19.119-R1B-NAV-BACK-ROOT-RESTORE-R2'; // bounded Reader→Tome scroll-owner-aware root restoration candidate; Search/R18D preserved
+const PUBLIC_VERSION = '119';       // internal controlled-device repair candidate; public release not yet authorized
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD   = '2026-09-19';
-const SW_CACHE_VERSION = 'ldc-v2.19.118-R1B-nav-back-root-restore-r1';
+const SW_CACHE_VERSION = 'ldc-v2.19.119-R1B-nav-back-root-restore-r2';
 const CORPUS_MANIFEST_SHA256 = '8d831c437fa6c2caa56ac637c3d539279ec24b57711d209b264804cca19c0ab7';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
@@ -4180,6 +4180,19 @@ function enforceTomesReturnPosition(reason='enforce'){const lock=tomesReturnLock
 function installTomesReturnLock(ctx,token){releaseTomesReturnLock('replace');const list=document.getElementById('tomes-list');if(!list)return null;const lock=tomesReturnLock={id:++tomesReturnLockSeq,ctx,token,rawApplied:false,created_at:Date.now(),resizeObserver:null,autoRelease:null};list.classList.add('tomes-return-lock');enforceTomesReturnPosition('DESTINATION_POSITIONED');requestAnimationFrame(()=>{if(tomesReturnLock===lock)enforceTomesReturnPosition('RAF1');requestAnimationFrame(()=>{if(tomesReturnLock===lock)enforceTomesReturnPosition('RAF2');});});for(const [delay,label] of [[120,'T+120'],[300,'T+300'],[700,'T+700'],[1200,'T+1200']])setTimeout(()=>{if(tomesReturnLock===lock)enforceTomesReturnPosition(label);},delay);if(typeof ResizeObserver==='function'){try{lock.resizeObserver=new ResizeObserver(()=>{if(tomesReturnLock===lock)enforceTomesReturnPosition('resize-observer');});lock.resizeObserver.observe(list);}catch(_){}}if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(tomesReturnLock===lock)enforceTomesReturnPosition('fonts-ready');}).catch(()=>{});lock.autoRelease=setTimeout(()=>{if(tomesReturnLock===lock)releaseTomesReturnLock('settled-timeout');},1800);return lock;}
 function bindTomesReturnIntentHandlers(){const list=document.getElementById('tomes-list');if(!list||list.dataset.returnIntentBound==='1')return;list.dataset.returnIntentBound='1';for(const ev of ['pointerdown','touchstart','wheel'])list.addEventListener(ev,()=>releaseTomesReturnLock('user:'+ev),{passive:true});list.addEventListener('keydown',e=>{if(['ArrowDown','ArrowUp','PageDown','PageUp','Home','End',' ','Tab'].includes(e.key))releaseTomesReturnLock('user:key:'+e.key);});}
 async function restoreEntriesNavigationContext(ctx){if(!ctx)return false;const desired=validJourneySourceMode(ctx.return_source_mode)?ctx.return_source_mode:(validJourneySourceMode(ctx.source_mode)?ctx.source_mode:supplementMode);if(desired!==supplementMode)await setSupplementMode(desired,{rerender:false,silent:true});let list=document.getElementById('entries-list');const warm=entriesListMatchesReturnContext(list,ctx,desired);const token=beginNavigationTransaction(NAV_INTENT.BACK_RESTORE,{volume:ctx.vol,source_mode:supplementMode});navigationTraceSnapshot('AFTER_CAPTURE',token,{capture_kind:'entries-return',warm,selected_key:ctx.selectedKey,selected_entry_id:ctx.selectedEntryId,selected_offset:ctx.selectedOffset,selected_viewport_top:ctx.selectedViewportTop,selected_viewport_fraction:ctx.selectedVisibleViewportFraction,raw_entries_scroll_top:ctx.raw_entries_scroll_top,raw_root_scroll_top:ctx.raw_root_scroll_top,capture_scroll_owner:ctx.capture_scroll_owner});navigationTraceSnapshot('LOAD_COMPLETE',token,{warm});if(warm){const source=document.getElementById('reader-scroll');freezeNavigationSource(source,token);const screen=stageNavigationScreen('entries',token);bindEntriesReturnIntentHandlers();resetRootVerticalNavigation();installEntriesReturnLock(ctx,token);await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));if(!navigationCommitAllowed(token,'warm-back')){releaseNavigationSource(source);if(screen)screen.classList.remove('navigation-commit-hidden');return false;}enforceEntriesReturnPosition('rebuilt-before-reveal');const focus=entryReturnNode(list,ctx.focusKey||ctx.selectedKey);if(focus){try{focus.focus({preventScroll:true});}catch(_){focus.focus();enforceEntriesReturnPosition('focus-fallback');}}revealNavigationScreen(screen,token);releaseNavigationSource(source);return true;}return !!(await openTome(ctx.vol,{intent:NAV_INTENT.BACK_RESTORE,navigationToken:token,returnContext:ctx}));}
+
+async function restoreTomesNavigationContext(ctx){const token=beginNavigationTransaction(NAV_INTENT.TOMES_BACK_RESTORE,{source_mode:supplementMode,selected_volume:ctx&&ctx.selected_volume||currentVolume});navigationTraceSnapshot('LOAD_BEGIN',token);await renderTomes();if(!navigationCommitAllowed(token,'tomes-rendered'))return false;navigationTraceSnapshot('LOAD_COMPLETE',token);const source=document.getElementById('entries-list');freezeNavigationSource(source,token);const screen=stageNavigationScreen('tomes',token);bindTomesReturnIntentHandlers();installTomesReturnLock(ctx||{raw_tomes_scroll_top:0},token);resetRootVerticalNavigation();await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));if(!navigationCommitAllowed(token,'tomes-back')){releaseNavigationSource(source);if(screen)screen.classList.remove('navigation-commit-hidden');return false;}enforceTomesReturnPosition('rebuilt-before-reveal');revealNavigationScreen(screen,token);releaseNavigationSource(source);return true;}
+async function openFreshTomeFromTomes(vol,button){const token=beginNavigationTransaction(NAV_INTENT.FRESH_TOME,{selected_volume:Number(vol),source_mode:supplementMode});const ctx=captureTomesNavigationContext(button,vol,token.id,supplementMode);tomesOriginContext=ctx;token.tomes_context=ctx;navigationTraceSnapshot('AFTER_CAPTURE',token,{capture_kind:'tomes',selected_tome_key:ctx.selected_tome_key,raw_tomes_scroll_top:ctx.raw_tomes_scroll_top});return openTome(vol,{intent:NAV_INTENT.FRESH_TOME,navigationToken:token,tomesContext:ctx});}
+function captureNavigationContext(kind){
+  const screen=kind||currentScreenName();
+  if(screen==='entries')return captureEntriesNavigationContext();
+  if(screen==='search')return {screen:'search',query:document.getElementById('search-input').value,intentMode:searchIntentMode,volMin:searchVolFilter,volMax:searchVolFilterMax,speaker:searchSpeakerFilter,source_mode:supplementMode,order:effectiveSearchOrder(),orderExplicit:!!searchOrderMode,lane:searchLastPayload&&searchLastPayload.foundation&&searchLastPayload.foundation.lane||searchResultLane,partialExpanded:searchPartialExpanded,page:searchPage,metadataPage:searchMetadataPage,scroll:captureScrollContext(document.getElementById('search-results'),'.result-card','data-result-key'),focusKey:document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.resultKey:null};
+  if(screen==='espace'){const panel=document.getElementById('ep-'+activeEspaceTab);return {screen:'espace',tab:activeEspaceTab,filter:document.getElementById('espace-filter-input').value,scroll:captureScrollContext(panel,'[data-filter-text]',null)};}
+  if(screen==='date-nav')return {screen:'date-nav',year:dnYear,month:dnMonth,day:dnDay,scroll:captureScrollContext(document.querySelector('#screen-date-nav .scroll'),':scope > *',null)};
+  if(screen==='tomes')return captureTomesNavigationContext();
+  if(screen==='home'||screen==='parcours')return {screen};
+  return {screen:screen||'tomes'};
+}
 
 function captureReaderOriginContext(){return {screen:'reader',vol:currentVolume,entryId:currentEntry?currentEntry.id:null,position:captureSemanticReadingPosition(),intent:currentReaderIntent(),source_mode:supplementMode,authority_epoch:activeReaderSession&&currentReaderIntent()===READER_INTENT.SEQUENTIAL?Math.max(0,Number(activeReaderSession.authority_epoch)||0):0,parent:readerOriginContext};}
 
@@ -9792,10 +9805,12 @@ async function fetchPublishedVersion() {
   if(!res||!res.ok)throw new Error(`version HTTP ${res&&res.status}`);
   const meta=await res.json();
   const version=String(meta&&meta.app_version||'').trim();
-  if(!/^v\d+\.\d+\.\d+-R1B$/.test(version))throw new Error('version publiée invalide');
+  if(!/^v\d+\.\d+\.\d+-R1B(?:-[A-Za-z0-9]+)*$/.test(version))throw new Error('version publiée invalide');
   const explicitPublic=String(meta&&meta.public_version||'').trim();
-  const patchMatch=version.match(/^v\d+\.\d+\.(\d+)-R1B$/);
-  const publicVersion=/^\d+$/.test(explicitPublic)?explicitPublic:(patchMatch?patchMatch[1]:version);
+  const patchMatch=version.match(/^v\d+\.\d+\.(\d+)-R1B(?:-|$)/);
+  const derivedPublic=patchMatch?patchMatch[1]:version;
+  if(/^\d+$/.test(explicitPublic)&&patchMatch&&explicitPublic!==derivedPublic)console.warn('LDC: public_version incohérent; version dérivée utilisée',explicitPublic,derivedPublic);
+  const publicVersion=derivedPublic;
   return {version,publicVersion,meta};
 }
 function waitForRegistrationUpdate(reg, timeoutMs=UPDATE_CHECK_TIMEOUT_MS) {
