@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.113-R1B-SEARCH-MERGE",
+  "app_version": "v2.19.115-R1B-SEARCH-NAV-CLOSURE-R1",
   "asset_count": 202,
   "assets": [
     {
@@ -1040,7 +1040,7 @@
   "fast_mode_authority_sha256": "09590abe803b99dadf696fbecd64fb88b4fee9a05b38280549b4abcb920e0c78",
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.113-R1B-search-merge-r1",
+  "page_worker_revision": "ldc-v2.19.115-R1B-search-nav-closure-r1",
   "post_r6_date_id_a2_fixed_point": {
     "a2_sha256": "dd034a4d4bb329254818c3e62fd629c9b64c90f9d4bd533de9f6ed99247cb1d8",
     "date_id_sha256": "ed5bf462c47b8fb5a41f7c81591257d6e99f94bae08628aa27e5f7d667020c2a",
@@ -1054,7 +1054,7 @@
   "predecessor_of_v72_zip_sha256": "ed925239f570293b54a4565a2666dc50ac71e43aa149b3567d8a55364e550d8c",
   "predecessor_of_v73_zip_sha256": "825e08ea96a8cf6a245cd56c47e30f3eb4a04bb838fc2e4d3940f8bd2f3f974c",
   "predecessor_semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
-  "rebuild_status": "V113_INTERNAL_SEARCH_REBASE_R1__EXACT_V112_PREDECESSOR__V112_IPHONE_SEARCH_VIEWPORT_AND_TOME_RETURN_PRESERVED__V109_SEARCH_WORDS_MERGED__SEARCH_V3_R5_RUNTIME_SHELL_ADDED__PAR_LE_SENS_FAIL_CLOSED_WITHOUT_QUALIFIED_PACK__CORPUS_BINDING_UNCHANGED__PUBLIC_RELEASE_NOT_AUTHORIZED",
+  "rebuild_status": "V115_SEARCH_NAV_CLOSURE_R1__EXACT_V113_SEARCH_MERGE_PREDECESSOR__R18D_SEARCH_V3_EVIDENCE_PRESERVED__NAVIGATION_RUNTIME_SHELL_ONLY__CORPUS_BINDING_UNCHANGED__PAR_LE_SENS_FAIL_CLOSED__PUBLIC_RELEASE_NOT_AUTHORIZED",
   "retention_contract": {
     "clear_policy": "CURRENT_SCOPE_ONLY_FOR_SHARED_LEGACY_CACHES",
     "copy_migration_required": false,
@@ -1065,10 +1065,10 @@
     "shell_runtime_caches": "APP_VERSIONED"
   },
   "schema": "ldc-offline-manifest-v3",
-  "scope": "v113 internal Search rebase: 36 tomes governed corpus + existing SEARCH-V2/V2.1/V2.2 assets + v109 Search-Words explicit expansion behavior + Search-V3 R5 internal lab shell/runtime; v112 iPhone Search viewport containment and Tome-list context return preserved; no model/vector semantic pack bundled; Par le sens fails closed unless a separately verified QUALIFIED pack is installed; public release not authorized.",
+  "scope": "v115 controlled navigation successor of exact v113 Search-Merge: all Search-Words/Search-V3 modules and governed corpus bytes preserved; intent-aware Tomes→Entries→Reader navigation closure added; iPhone/iPad physical acceptance remains open; no model/vector semantic pack bundled; Par le sens remains fail-closed and unreleased.",
   "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
   "semantic_vector_search_included": false,
-  "semantic_vector_search_note": "Search-V3 semantic runtime/lifecycle modules are present for internal development, but no model, vectors or qualified semantic pack are bundled. Par le sens fails closed. Search-Words remains the active qualified retrieval path.",
+  "semantic_vector_search_note": "R18D Search-V3 engineering evidence is preserved externally and v113 Search-V3 runtime modules remain byte-identical. No neural model, vectors or qualified semantic pack are bundled. Par le sens remains fail-closed.",
   "storage_cache_name_contract": "ldc-le-livre-du-ciel-offline-persistent-v3-<fnv1a32(service-worker-scope)>",
   "storage_schema": "ldc-offline-storage-v3",
   "terminal_mutation_ledger_sha256": "afc351c02ee954583f663ca42615e48c5450893560f052d7da3c8a3caebfc879",
