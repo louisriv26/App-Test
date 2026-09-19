@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.117-R1B-NAV-BACK-RESTORE-R1",
+  "app_version": "v2.19.118-R1B-NAV-BACK-ROOT-RESTORE-R1",
   "asset_count": 202,
   "assets": [
     {
@@ -1040,7 +1040,7 @@
   "fast_mode_authority_sha256": "09590abe803b99dadf696fbecd64fb88b4fee9a05b38280549b4abcb920e0c78",
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.117-R1B-nav-back-restore-r1",
+  "page_worker_revision": "ldc-v2.19.118-R1B-nav-back-root-restore-r1",
   "post_r6_date_id_a2_fixed_point": {
     "a2_sha256": "dd034a4d4bb329254818c3e62fd629c9b64c90f9d4bd533de9f6ed99247cb1d8",
     "date_id_sha256": "ed5bf462c47b8fb5a41f7c81591257d6e99f94bae08628aa27e5f7d667020c2a",
@@ -1054,7 +1054,7 @@
   "predecessor_of_v72_zip_sha256": "ed925239f570293b54a4565a2666dc50ac71e43aa149b3567d8a55364e550d8c",
   "predecessor_of_v73_zip_sha256": "825e08ea96a8cf6a245cd56c47e30f3eb4a04bb838fc2e4d3940f8bd2f3f974c",
   "predecessor_semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
-  "rebuild_status": "V116_NAV_PHYSICAL_DIAGNOSTIC_R1__EXACT_V115_PHYSICAL_FAIL_PREDECESSOR__SEARCH_R18D_PRESERVED__OBSERVATION_ONLY__NO_NAVIGATION_FIX_CLAIM__PAR_LE_SENS_FAIL_CLOSED__PUBLIC_RELEASE_NOT_AUTHORIZED",
+  "rebuild_status": "V118_READER_BACK_ROOT_OWNER_REPAIR_R1__V117_PHYSICAL_FAIL_IPHONE_IPAD__V117_TRACE_PROVES_ENTRIES_LIST_ZERO_SCROLL_RANGE_AND_DOCUMENT_ROOT_SCROLL_OWNER__SEARCH_R18D_PRESERVED__PAR_LE_SENS_FAIL_CLOSED__PUBLIC_RELEASE_NOT_AUTHORIZED",
   "retention_contract": {
     "clear_policy": "CURRENT_SCOPE_ONLY_FOR_SHARED_LEGACY_CACHES",
     "copy_migration_required": false,
@@ -1065,7 +1065,7 @@
     "shell_runtime_caches": "APP_VERSIONED"
   },
   "schema": "ldc-offline-manifest-v3",
-  "scope": "v116 internal physical-navigation diagnostic successor of exact v115: preserves Search-Words/Search-V3 modules, governed corpus bytes, navigation behavior and user-data schemas; adds bounded event-driven physical scroll/focus/VisualViewport tracing and user-copy export only; v115 physical FAIL remains governing; no navigation-fix or public-release claim; Par le sens remains fail-closed.",
+  "scope": "v118 internal Reader→Tome root-owner restoration successor of exact v117: preserves Search-Words/Search-V3 modules, governed corpus bytes and user-data schemas; uses v117 physical trace evidence to restore the actual document/root scroll owner by semantic entry identity and captured viewport position; retains nested-list restoration where the list is truly scrollable; removes failed v117 shell-renewal from active return path; public release not authorized; Par le sens remains fail-closed.",
   "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
   "semantic_vector_search_included": false,
   "semantic_vector_search_note": "R18D Search-V3 engineering evidence is preserved externally and v113 Search-V3 runtime modules remain byte-identical. No neural model, vectors or qualified semantic pack are bundled. Par le sens remains fail-closed.",
