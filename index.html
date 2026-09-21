@@ -470,6 +470,20 @@ h2.dn-section-title{margin-bottom:0;}
 .reader-info-key{color:var(--muted);}
 .reader-info-val{color:var(--ink);overflow-wrap:anywhere;}
 .reader-info-val.mono{font-family:monospace;font-size:11px;color:var(--gold-text);}
+.reader-info-method-link{display:flex;justify-content:flex-start;padding:4px 0 12px;}
+.reader-info-method-link .btn-secondary{min-height:42px;text-align:left;}
+.reader-info-technical{margin:2px 0 12px;border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);}
+.reader-info-technical summary,.help-validation-details summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;color:var(--night);font-weight:600;}
+.reader-info-technical summary{padding:12px 2px;font-size:var(--sem-strong-13);}
+.reader-info-technical summary::-webkit-details-marker,.help-validation-details summary::-webkit-details-marker{display:none;}
+.reader-info-technical summary::before,.help-validation-details summary::before{content:'›';display:inline-block;color:var(--gold-text);transition:transform .15s ease;font-size:18px;line-height:1;}
+.reader-info-technical[open] summary::before,.help-validation-details[open] summary::before{transform:rotate(90deg);}
+.reader-info-technical .reader-info-grid{padding:0 0 12px;}
+.help-jump-action{display:flex;justify-content:flex-start;padding-top:8px;}
+.help-jump-action .btn-secondary{min-height:42px;text-align:left;}
+.help-validation-details{margin-top:10px;border-top:0.5px solid var(--border);padding-top:2px;}
+.help-validation-details summary{padding:10px 0;font-size:var(--help-body-size);}
+.help-validation-details .help-row:first-of-type{border-top:0;}
 @media(max-width:420px){.reader-top-title{display:none}.reader-tools{margin-left:auto}.reader-info-row{grid-template-columns:1fr}.reader-info-key{font-size:11px}}
 .mode-pill{font-size:12px;padding:3px 10px;border-radius:12px;border:0.5px solid var(--border);
   background:none;color:var(--muted);cursor:pointer;font-family:var(--body);transition:all .15s;}
@@ -1709,15 +1723,19 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="reader-info-title">
     <div class="sheet-handle"></div>
     <div class="sheet-title" id="reader-info-title">Infos et source</div>
-    <div class="reader-info-grid">
-      <div class="reader-info-row"><div class="reader-info-key">Référence stable</div><div class="reader-info-val mono" id="info-stable-ref"></div></div>
+    <div class="reader-info-grid" id="info-public-grid">
+      <div class="reader-info-row"><div class="reader-info-key" id="info-status-key">Version du texte</div><div class="reader-info-val" id="info-status"></div></div>
       <div class="reader-info-row"><div class="reader-info-key" id="info-source-edition-key">Édition source</div><div class="reader-info-val" id="info-source-edition"></div></div>
       <div class="reader-info-row"><div class="reader-info-key" id="info-source-pages-key">Pages source</div><div class="reader-info-val" id="info-source-pages"></div></div>
-      <div class="reader-info-row"><div class="reader-info-key" id="info-status-key">Statut</div><div class="reader-info-val" id="info-status"></div></div>
-      <div class="reader-info-row"><div class="reader-info-key" id="info-corpus-generation-key">Identifiant technique du corpus</div><div class="reader-info-val mono" id="info-corpus-generation"></div></div>
+      <div class="reader-info-row"><div class="reader-info-key">Référence stable</div><div class="reader-info-val mono" id="info-stable-ref"></div></div>
       <div class="reader-info-row"><div class="reader-info-key">Précision de date</div><div class="reader-info-val" id="info-date-precision"></div></div>
-      <div id="info-extra"></div>
+      <div id="info-public-extra"></div>
     </div>
+    <div class="reader-info-method-link"><button class="btn-secondary" type="button" onclick="openProvenanceHelpFromReaderInfo()"><i class="ti ti-file-description" aria-hidden="true"></i> Comment le texte a-t-il été vérifié ?</button></div>
+    <details class="reader-info-technical" id="info-technical-details">
+      <summary>Détails techniques</summary>
+      <div class="reader-info-grid" id="info-technical"></div>
+    </details>
     <div class="sheet-actions"><button class="btn-primary" type="button" onclick="closeReaderInfo()">Fermer</button></div>
   </div>
 </div>
@@ -1796,7 +1814,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
         <div class="ob-icon" style="font-size:48px;margin-bottom:24px;">✦</div>
         <div class="ob-title">Livre du Ciel</div>
         <div class="ob-body">Les 36 Tomes du Livre du Ciel rassemblent des écrits de Luisa Piccarreta datés de 1899 à 1938. Dans ces écrits, elle rapporte ses expériences spirituelles et des paroles qu’elle présente comme venant de Jésus.</div>
-        <div class="ob-sub">Corpus PRINCIPAL · 74 346 paragraphes</div>
+        <div class="ob-sub">Corpus PRINCIPAL · 74 345 paragraphes</div>
       </div>
       <!-- Slide 1: Speech layer -->
       <div class="ob-slide" id="ob-slide-1">
@@ -2193,13 +2211,34 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
     <div class="help-section">
       <div class="help-section-head"><div class="help-section-icon hsi-amber"><i class="ti ti-adjustments-horizontal"></i></div><h2 class="help-section-title">Version du texte</h2></div>
       <div class="help-card">
-        <div class="help-row"><span class="help-chip light">PRINCIPAL</span><span class="help-text">Affiche le corpus français principal du Livre du Ciel. Il est issu du corpus GE/Lumen Luminis, puis a été réconcilié avec les témoins AFLP et corrigé ponctuellement lorsque des preuves suffisantes provenant des sources italiennes ou d’autres témoins contrôlés le justifiaient. Il ne reproduit donc mot pour mot aucune édition française unique.</span></div>
-        <div class="help-row"><span class="help-chip">COMPLÉMENT</span><span class="help-text">Affiche uniquement les 75 compléments approuvés : 13 entrées complètes et 62 compléments internes. Ils sont conservés séparément du corpus PRINCIPAL afin que leur statut et leur provenance restent visibles. Leur intégration ne signifie pas que toute différence possible entre tous les témoins a été résolue.</span></div>
-        <div class="help-row"><span class="help-chip light">ENRICHI</span><span class="help-text">Réunit PRINCIPAL et les COMPLÉMENTS à leur position de lecture. Le choix est mémorisé et ne supprime ni favoris, ni notes, ni surlignages.</span></div>
+        <div class="help-row"><span class="help-chip light">PRINCIPAL</span><span class="help-text">Affiche le texte français principal utilisé pour la lecture courante. Il part de la base française décrite ci-dessous et intègre les corrections et choix de texte issus des différents contrôles. Il ne reproduit donc pas intégralement une édition française unique.</span></div>
+        <div class="help-row"><span class="help-chip">COMPLÉMENT</span><span class="help-text">Affiche les <b>75 COMPLÉMENTS</b>, identifiés comme distincts du PRINCIPAL afin que leur origine et leur statut restent visibles : <b>13 entrées complètes et 62 compléments internes</b>. Le mot <b>RETENU</b> indique seulement que le passage fait partie des COMPLÉMENTS de l’application après examen des éléments disponibles. Ce choix dans l’application ne constitue pas une approbation de l’Église.</span></div>
+        <div class="help-row"><span class="help-chip light">ENRICHI</span><span class="help-text">Affiche le PRINCIPAL et insère les COMPLÉMENTS à leur place de lecture, tout en les gardant clairement identifiés.</span></div>
         <div class="help-row"><span class="help-chip outline">Portée du choix</span><span class="help-text">La version choisie s’applique à l’ensemble de l’application : Bibliothèque, lecture, Recherche, navigation par date et statistiques liées aux textes visibles. Changer de version ne supprime pas vos données personnelles.</span></div>
+        <div class="help-jump-action"><button class="btn-secondary" type="button" onclick="scrollHelpToProvenance()"><i class="ti ti-file-description" aria-hidden="true"></i> Comprendre l’origine et la vérification du texte</button></div>
       </div>
     </div>
 
+    <div class="help-section" id="help-provenance-origin">
+      <div class="help-section-head"><div class="help-section-icon hsi-teal"><i class="ti ti-file-description"></i></div><h2 class="help-section-title">Origine et vérification du texte</h2></div>
+      <div class="help-card">
+        <div class="help-tip"><b>En bref :</b> le texte français de cette application vient principalement d’une base française existante. Certains passages qui soulevaient une difficulté ont été comparés à d’autres versions françaises et, lorsque cela était utile, à des textes italiens disponibles. Un contrôle distinct a aussi recherché, dans l’ensemble du texte français, certains types d’erreurs évidentes pouvant être corrigées avec une très grande certitude. Pour les passages ainsi examinés, les décisions sont documentées et peuvent être revues si de meilleurs éléments apparaissent. Ce texte n’est pas l’édition critique officielle.</div>
+        <div class="help-row"><span class="help-chip light">Base française</span><span class="help-text"><b>D’où vient le texte français ?</b> Le corpus <b>GE / Lumen Luminis</b> a servi de principale base de départ. D’autres éditions et documents français, notamment <b>AFLP</b>, ont aussi été consultés selon les besoins pour comparer certaines formulations et vérifier la présence de passages, des dates, des titres ou la continuité du texte. Le texte actuel ne correspond donc pas exactement à une édition française unique. Son histoire peut varier selon les tomes et les passages.</span></div>
+        <div class="help-row"><span class="help-chip light">Choix du texte</span><span class="help-text"><b>Que se passait-il lorsque les sources différaient ?</b> Une différence entre deux sources n’entraînait pas automatiquement une correction. Selon les éléments disponibles, le passage pouvait être corrigé, laissé inchangé, présenté séparément comme <b>COMPLÉMENT</b> ou laissé en attente d’éléments supplémentaires.</span></div>
+        <div class="help-row"><span class="help-chip outline">Passages difficiles</span><span class="help-text"><b>Comment les passages difficiles ont-ils été vérifiés ?</b> Lorsqu’un passage paraissait manquer ou soulevait une difficulté, il pouvait être réexaminé et comparé aux sources disponibles les plus pertinentes. Selon les cas, la vérification pouvait porter sur le sens, la date, le locuteur, la structure ou la place du passage dans le texte. Cette vérification était ciblée : elle ne portait pas sur chaque paragraphe des 36 Tomes.</span></div>
+        <div class="help-row"><span class="help-chip outline">Français</span><span class="help-text"><b>Le français a-t-il été contrôlé dans l’ensemble du texte ?</b> Oui, mais dans un périmètre précis. Un contrôle distinct a recherché, dans l’ensemble du texte français, des défauts évidents pour lesquels une correction pouvait être faite avec une très grande certitude : accords manifestes, mots manquants ou répétés, erreurs de transcription, phrases clairement rompues et défauts comparables. Il ne cherchait pas à résoudre toutes les difficultés grammaticales possibles, à moderniser le style ni à retraduire le <i>Livre du Ciel</i> depuis l’italien.</span></div>
+        <div class="help-row"><span class="help-chip light">Textes italiens</span><span class="help-text"><b>Quel rôle avaient les textes italiens ?</b> Pour certains passages difficiles, des textes italiens disponibles ont servi de comparaison. Parmi les ensembles consultés figurent notamment <b>IT-PM / Don Pablo Martín</b> et <b>IT-DV</b>, noms utilisés dans la documentation technique du projet. Ce sont ici des textes de comparaison. Ils ne sont pas présentés comme les manuscrits originaux de Luisa et ne sont pas automatiquement décisifs lorsqu’une source diffère d’une autre.</span></div>
+        <div class="help-row"><span class="help-chip light">Autres langues</span><span class="help-text"><b>D’autres traductions ont-elles été consultées ?</b> Oui, ponctuellement. Des traductions anglaises et espagnoles ont parfois servi à vérifier la présence, l’ordre ou le sens général d’un passage. Plusieurs fichiers appartenant à une même famille de traduction n’étaient pas comptés comme autant de confirmations indépendantes.</span></div>
+        <div class="help-divider"></div>
+        <div class="help-row"><span class="help-chip outline">Portée</span><span class="help-text"><b>Ce que cette vérification ne garantit pas.</b> La documentation est la plus détaillée pour les passages qui ont réellement été signalés, réexaminés et comparés, puis ont fait l’objet d’une décision. Ce travail n’est ni une nouvelle traduction complète depuis l’italien ni une comparaison, paragraphe par paragraphe, des 36 Tomes avec toutes les éditions existantes. Le contrôle du français ne garantit pas non plus qu’aucune erreur subtile ne subsiste. Le texte reste révisable si de nouvelles sources suffisamment solides justifient de revoir une décision.</span></div>
+        <details class="help-validation-details">
+          <summary>Détails de la validation</summary>
+          <div class="help-row"><span class="help-chip light">Sources</span><span class="help-text"><b>Vérification ciblée des sources.</b> Les passages signalés comme difficiles ont pu être comparés aux témoins français, italiens ou traduits jugés pertinents. Il ne s’agit pas d’une collation universelle de chaque paragraphe.</span></div>
+          <div class="help-row"><span class="help-chip light">Français</span><span class="help-text"><b>Contrôle systématique dans un périmètre défini.</b> L’ensemble du texte a été examiné selon un protocole visant certains défauts français évidents et corrigeables avec une très grande certitude, sans transformer ce contrôle en réécriture stylistique ou en nouvelle traduction.</span></div>
+          <div class="help-row"><span class="help-chip light">Cohérence</span><span class="help-text"><b>Contrôles structurels et techniques.</b> D’autres vérifications portent notamment sur les dates, l’identité des entrées, les locuteurs, les paragraphes, les COMPLÉMENTS, les références et la cohérence des données de l’application. Elles renforcent la traçabilité du corpus sans équivaloir à une édition critique mot à mot.</span></div>
+        </details>
+      </div>
+    </div>
     <div class="help-section">
       <div class="help-section-head"><div class="help-section-icon hsi-gold"><i class="ti ti-highlight"></i></div><h2 class="help-section-title">Surligner, noter et conserver</h2></div>
       <div class="help-card">
@@ -2228,7 +2267,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
         <div class="help-row"><span class="help-chip outline">Par le sens / Par les mots</span><span class="help-text"><b>Par les mots</b> conserve la recherche textuelle qualifiée. <b>Par le sens</b> est le laboratoire de recherche d’un souvenir exprimé avec vos propres mots. Il ne remplace jamais le sens par une union de mots partiels et reste fermé tant que le modèle, le pack sémantique, l’abstention et les tests appareil/hors ligne ne sont pas qualifiés.</span></div>
         <div class="help-divider"></div>
         <div class="help-row"><span class="help-chip">Autour de ce passage</span><span class="help-text">Dans le lecteur, ouvrez <b>⋯ → Autour de ce passage</b> pour explorer des entrées du même Tome, des thèmes proches ou des familles d’images spirituelles.</span></div>
-        <div class="help-row"><span class="help-chip outline">Badges de contexte</span><span class="help-text"><b>Éditorial</b> signale une explication éditoriale du Tome 1 ; <b>COMPLÉMENT</b> signale un contenu substantiel absent du corpus PRINCIPAL et intégré comme complément approuvé ; sa provenance détaillée est disponible dans les informations du passage ; le badge du filtre Jésus apparaît lorsque ce filtre est actif.</span></div>
+        <div class="help-row"><span class="help-chip outline">Badges de contexte</span><span class="help-text"><b>Éditorial</b> signale une explication éditoriale du Tome 1 ; <b>COMPLÉMENT</b> signale un passage identifié comme distinct du PRINCIPAL afin que son statut et son origine restent visibles ; ouvrez <b>Infos et source</b> pour les détails propres au passage ; le badge du filtre Jésus apparaît lorsque ce filtre est actif.</span></div>
       </div>
       <div class="help-tip">Les rapprochements approximatifs, thématiques et « Autour de ce passage » sont proposés automatiquement pour faciliter l’exploration. Ils ne constituent pas des renvois éditoriaux, historiques ou doctrinaux établis.</div>
     </div>
@@ -2289,13 +2328,14 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
     <div class="help-section">
       <div class="help-section-head"><div class="help-section-icon hsi-amber"><i class="ti ti-info-circle"></i></div><h2 class="help-section-title">À propos, sources et support</h2></div>
       <div class="help-card">
-        <div class="help-text">Cette application propose les 36 Tomes du <b>Livre du Ciel</b> de Luisa Piccarreta dans un corpus français de lecture et d’étude. Le corpus PRINCIPAL est issu du corpus GE/Lumen Luminis, puis a été réconcilié avec les témoins AFLP et corrigé ponctuellement lorsque des preuves suffisantes provenant des sources italiennes ou d’autres témoins contrôlés le justifiaient. Il ne reproduit donc mot pour mot aucune édition française unique. Les COMPLÉMENTS sont conservés séparément afin que leur statut et leur provenance restent visibles.</div>
+        <div class="help-text">Cette application présente les 36 Tomes du <b>Livre du Ciel</b> de Luisa Piccarreta dans un corpus français de lecture et d’étude. Une seule section de référence explique l’origine du texte, les contrôles effectués et leurs limites.</div>
+        <div class="help-jump-action"><button class="btn-secondary" type="button" onclick="scrollHelpToProvenance()"><i class="ti ti-file-description" aria-hidden="true"></i> Voir l’origine et la vérification du texte</button></div>
         <div class="help-divider"></div>
-        <div class="help-row"><span class="help-chip">COMPLÉMENT</span><span class="help-text">Signale un contenu substantiel absent du corpus PRINCIPAL et intégré comme complément approuvé. La fiche du passage indique séparément la provenance du contenu et celle du libellé français.</span></div>
-        <div class="help-row"><span class="help-chip light">Infos et source</span><span class="help-text">Affiche la référence stable et les informations de provenance disponibles pour l’entrée courante : édition ou libellé français, référence source lorsqu’elle est disponible, statut, précision de date et, dans les détails, les identifiants techniques utiles.</span></div>
+        <div class="help-row"><span class="help-chip">COMPLÉMENT</span><span class="help-text">Passage identifié comme distinct du PRINCIPAL afin que son statut et son origine restent visibles. Les détails propres au passage figurent dans <b>« Infos et source »</b>.</span></div>
+        <div class="help-row"><span class="help-chip light">Infos et source</span><span class="help-text">Affiche d’abord les informations utiles pour comprendre l’entrée courante : version du texte, source ou libellé français, référence source lorsqu’elle est disponible, référence stable et précision de date. Les identifiants et statuts techniques restent accessibles séparément sous <b>Détails techniques</b>.</span></div>
         <div class="help-row"><span class="help-chip light">Signaler un problème de texte</span><span class="help-text">Prépare un signalement que vous pouvez relire, copier et transmettre. <b>Rien n’est envoyé automatiquement.</b> Le passage sélectionné n’est inclus que si vous choisissez de l’ajouter.</span></div>
         <div class="help-row"><span class="help-chip light">Copier le diagnostic</span><span class="help-text">Copie uniquement des informations techniques publiques et des identifiants de passage utiles au dépannage. Les termes de recherche, messages d’erreur détaillés, notes, surlignages, commentaires et textes sélectionnés n’y sont pas inclus.</span></div>
-        <div class="help-row"><span class="help-chip outline">Navigation v117 · test contrôlé</span><span class="help-text">Version de test interne. Le retour Reader → Tome renouvelle maintenant la surface physique de défilement de la liste avant de restaurer la position sémantique enregistrée. Après un échec, utilisez « Copier trace courte » : l’export est volontairement compact pour rester compatible avec le presse-papiers iPhone/iPad.</span></div>
+        <div class="help-row"><span class="help-chip outline">Dépannage navigation</span><span class="help-text">Si le retour Reader → Tome ne restaure pas la bonne position dans la liste, utilisez « Copier trace courte » puis joignez le résultat à votre signalement. Cette trace contient uniquement des informations techniques de navigation et reste volontairement compacte pour être copiable sur iPhone/iPad.</span></div>
         <div class="help-row"><span></span><div style="display:flex;gap:8px;flex-wrap:wrap;width:100%;"><button class="btn-secondary sem-strong-13" type="button" onclick="copyNavigationPhysicalTrace()" style="padding:8px 16px;"><i class="ti ti-copy" aria-hidden="true"></i> Copier trace courte</button><button class="btn-secondary sem-strong-13" type="button" onclick="resetNavigationPhysicalTrace()" style="padding:8px 16px;"><i class="ti ti-trash" aria-hidden="true"></i> Effacer trace</button></div></div>
         <div class="help-divider"></div>
         <div class="help-row"><span class="help-chip outline">Version</span><span class="help-text" id="about-app-version">—</span></div>
@@ -2372,11 +2412,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.119-R1B-NAV-BACK-ROOT-RESTORE-R2'; // bounded Reader→Tome scroll-owner-aware root restoration candidate; Search/R18D preserved
+const APP_VERSION = 'v2.19.119-R1B-NAV-BACK-ROOT-RESTORE-R2-PROV-R6-R8-FULLQA-META'; // full-application QA repaired successor of exact R6 R6 IA; corpus/Search/navigation/user-data semantics preserved
 const PUBLIC_VERSION = '119';       // internal controlled-device repair candidate; public release not yet authorized
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD   = '2026-09-19';
-const SW_CACHE_VERSION = 'ldc-v2.19.119-R1B-nav-back-root-restore-r2';
+const APP_BUILD   = '2026-09-21';
+const SW_CACHE_VERSION = 'ldc-v2.19.119-R1B-nav-back-root-restore-r2-prov-r6-r8-fullqa-meta';
 const CORPUS_MANIFEST_SHA256 = '8d831c437fa6c2caa56ac637c3d539279ec24b57711d209b264804cca19c0ab7';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
@@ -3079,8 +3119,8 @@ function enrichedMode() { return supplementMode === 'enriched'; }
 function sourceModeLabel(mode=supplementMode) { return mode==='aflp'?'PRINCIPAL':(mode==='additions'?'COMPLÉMENT':'ENRICHI'); }
 function sourceModeCaption(mode=supplementMode) {
   if(mode==='aflp') return 'Corpus français principal';
-  if(mode==='additions') { const c=(supplementRegistry&&supplementRegistry.counts)||{}; return `${c.items||75} compléments approuvés · ${c.complete_entries||13} entrées + ${c.internal_supplements||62} compléments internes`; }
-  return 'PRINCIPAL + compléments approuvés';
+  if(mode==='additions') { const c=(supplementRegistry&&supplementRegistry.counts)||{}; return `${c.items||75} compléments · ${c.complete_entries||13} entrées + ${c.internal_supplements||62} compléments internes`; }
+  return 'PRINCIPAL + COMPLÉMENTS';
 }
 
 async function loadSupplementRegistryData() {
@@ -3146,8 +3186,8 @@ function internalSupplementItemsForVolume(vol) { return supplementItemsForVolume
 function requireReaderFrenchLabel(s){const v=s&&s.reader_french_wording_label;if(typeof v!=='string'||!v.trim())throw new Error('reader French provenance label missing: '+String(s&&s.supplement_id||'UNKNOWN'));return v.trim();}
 function requireReaderProvenanceText(s){const v=s&&s.reader_provenance_text;if(typeof v!=='string'||!v.trim())throw new Error('reader provenance text missing: '+String(s&&s.supplement_id||'UNKNOWN'));return v.trim();}
 function supplementReaderSourceReference(s){if(!s)return null;const fw=s.french_wording_provenance||{},it=s.itpm_anchor||{};if(typeof fw.source_page_refs==='string'&&fw.source_page_refs.trim())return fw.source_page_refs.trim();if(typeof it.source_file==='string'&&it.source_file.trim())return it.source_file.trim();return null;}
-function buildReaderProvenanceModel(entry,s){if(s)return {kind:'supplement',stableRef:s.supplement_id||'—',primaryKey:'Libellé français',primaryValue:requireReaderFrenchLabel(s),locatorKey:'Référence source',locatorValue:supplementReaderSourceReference(s),publicStatus:'COMPLÉMENT APPROUVÉ',longProvenance:requireReaderProvenanceText(s),technicalStatus:s.translation_status||'—',technicalSource:s.source_origin||'—',technicalCorpus:CORPUS_GENERATION,technicalProgramme:SUPPLEMENT_PROGRAMME};return {kind:'principal',stableRef:entry&&entry.stable_ref||'—',primaryKey:'Édition source',primaryValue:entry&&entry.source_edition||'—',locatorKey:'Pages source',locatorValue:entry&&entry.source_page_start?`${entry.source_page_start}–${entry.source_page_end||entry.source_page_start}`:null,publicStatus:entry&&entry.verification_status||'—',technicalCorpus:BACKBONE_GENERATION};}
-function supplementReaderBadgeLabel(s){return `COMPLÉMENT approuvé — ${requireReaderFrenchLabel(s)}`;}
+function buildReaderProvenanceModel(entry,s){if(s)return {kind:'supplement',stableRef:s.supplement_id||'—',primaryKey:'Libellé français',primaryValue:requireReaderFrenchLabel(s),locatorKey:'Référence source',locatorValue:supplementReaderSourceReference(s),publicStatus:'COMPLÉMENT RETENU',longProvenance:requireReaderProvenanceText(s),technicalStatus:s.translation_status||'—',technicalSource:s.source_origin||'—',technicalCorpus:CORPUS_GENERATION,technicalProgramme:SUPPLEMENT_PROGRAMME};return {kind:'principal',stableRef:entry&&entry.stable_ref||'—',primaryKey:'Édition source',primaryValue:entry&&entry.source_edition||'—',locatorKey:'Pages source',locatorValue:entry&&entry.source_page_start?`${entry.source_page_start}–${entry.source_page_end||entry.source_page_start}`:null,publicStatus:entry&&entry.verification_status||'—',technicalCorpus:BACKBONE_GENERATION};}
+function supplementReaderBadgeLabel(s){return `COMPLÉMENT — ${requireReaderFrenchLabel(s)} ; origine et détails dans Infos et source.`;}
 function supplementFrenchProvenanceLabel(s){return requireReaderFrenchLabel(s);}
 function supplementBadgeText(s) { return 'COMPLÉMENT'; }
 function supplementPrimaryContextParaId(s, side='before') {
@@ -4758,9 +4798,9 @@ function supplementRegistryExcerpt(s){const p=s.paragraphs&&s.paragraphs[0];retu
 async function renderSupplementRegistryList(container,items,opts={}){
   container.innerHTML='';
   const intro=document.createElement('div');intro.className='supp-registry-intro';
-  { const c=(supplementRegistry&&supplementRegistry.counts)||{}; intro.innerHTML=opts.global?`<b>${c.items||75} compléments approuvés</b> · ${c.complete_entries||13} entrées datées complètes + ${c.internal_supplements||62} compléments internes. Chaque complément reste distinct du corpus principal et peut être masqué.`:'<b>COMPLÉMENTS de ce tome</b> · seuls les compléments approuvés par la réconciliation critique sont affichés.'; }
+  { const c=(supplementRegistry&&supplementRegistry.counts)||{}; intro.innerHTML=opts.global?`<b>${c.items||75} compléments</b> · ${c.complete_entries||13} entrées complètes + ${c.internal_supplements||62} compléments internes. Chaque complément reste distinct du texte PRINCIPAL et peut être masqué.`:'<b>COMPLÉMENTS de ce tome</b> · seuls les COMPLÉMENTS retenus pour ce tome sont affichés.'; }
   container.appendChild(intro);
-  if(!items.length){const empty=document.createElement('div');empty.className='empty-state';empty.innerHTML='<i class="ti ti-layers-off"></i>Aucun complément approuvé dans ce tome.';container.appendChild(empty);return;}
+  if(!items.length){const empty=document.createElement('div');empty.className='empty-state';empty.innerHTML='<i class="ti ti-layers-off"></i>Aucun complément dans ce tome.';container.appendChild(empty);return;}
   const [favoriteRows,readRows]=await Promise.all([dbGetAll('favorites'),dbGetAll('read_entries')]);
   const favoriteIds=new Set(favoriteRows.map(r=>r&&r.entry_id).filter(Boolean));
   const readIds=new Set(readRows.filter(isConfirmedReadRecord).map(r=>r&&r.entry_id).filter(Boolean));
@@ -4931,7 +4971,7 @@ async function openTome(vol,opts={}) {
       const readMark=readIds.has(e.id)?`<span class="ei-read-mark" title="Lu" aria-label="Lu"><i class="ti ti-circle-check" aria-hidden="true"></i></span>`:'';
       const statusMarks=(favMark||readMark)?`<span class="ei-statuses">${favMark}${readMark}</span>`:'';
       const inlineHostAdd=renderMode==='enriched'&&!e.is_supplement&&inlineSupplementsForEntry(vol,e.id).length>0;
-      btn.innerHTML=`<span class="ei-seq">${idx+1}</span><div class="ei-body"><div class="ei-title">${e.title||'Entrée '+(idx+1)}</div><div class="ei-date">${e.date_display||''}</div>${e.is_supplement?`<span class="ei-supp-badge" title="Complément approuvé, absent du corpus PRINCIPAL ; provenance détaillée dans Infos et source" aria-label="Complément approuvé, absent du corpus PRINCIPAL ; provenance détaillée dans Infos et source">COMPLÉMENT</span>`:''}${inlineHostAdd?`<span class="ei-supp-badge" title="Cette entrée principale contient un complément approuvé ; sa provenance est indiquée dans Infos et source." aria-label="Cette entrée principale contient un complément approuvé ; sa provenance est indiquée dans Infos et source.">+ COMPL.</span>`:''}</div>${statusMarks}`;
+      btn.innerHTML=`<span class="ei-seq">${idx+1}</span><div class="ei-body"><div class="ei-title">${e.title||'Entrée '+(idx+1)}</div><div class="ei-date">${e.date_display||''}</div>${e.is_supplement?`<span class="ei-supp-badge" title="COMPLÉMENT — origine et détails dans Infos et source." aria-label="COMPLÉMENT — origine et détails dans Infos et source.">COMPLÉMENT</span>`:''}${inlineHostAdd?`<span class="ei-supp-badge" title="Cette entrée contient un COMPLÉMENT — origine et détails dans Infos et source." aria-label="Cette entrée contient un COMPLÉMENT — origine et détails dans Infos et source.">+ COMPL.</span>`:''}</div>${statusMarks}`;
       btn.onclick=()=>openEntryFromEntries(vol,e.id,btn);stage.appendChild(btn);
     });
     if(Number(vol)===1&&renderMode!=='additions'){
@@ -7055,26 +7095,58 @@ function openSizeFromReaderMore() { closeReaderMore(); showSizeSheet(); }
 function openThemeFromReaderMore() { closeReaderMore(); showThemeSheet(); }
 function openReaderInfoFromMore() { closeReaderMore(); openReaderInfo(); }
 
-function addInfoExtraRow(label, value) {
+function addInfoExtraRow(label, value, mono=false) {
   if (value == null || String(value).trim() === '') return '';
-  return `<div class="reader-info-row"><div class="reader-info-key">${escapeHtml(label)}</div><div class="reader-info-val">${escapeHtml(String(value))}</div></div>`;
+  return `<div class="reader-info-row"><div class="reader-info-key">${escapeHtml(label)}</div><div class="reader-info-val${mono?' mono':''}">${escapeHtml(String(value))}</div></div>`;
 }
 function openReaderInfo() {
   if (!currentEntry) return;
   const volData = corpusCache[currentVolume] || {};
   const sp=activeReaderSupplement(), pm=buildReaderProvenanceModel(currentEntry,sp);
-  document.getElementById('info-stable-ref').textContent=pm.stableRef;
+  document.getElementById('info-status-key').textContent='Version du texte';
+  document.getElementById('info-status').textContent=sp?'COMPLÉMENT RETENU':'PRINCIPAL';
   document.getElementById('info-source-edition-key').textContent=pm.primaryKey;
   document.getElementById('info-source-edition').textContent=pm.primaryValue;
   document.getElementById('info-source-pages-key').textContent=pm.locatorKey;
   document.getElementById('info-source-pages').textContent=pm.locatorValue||'—';
-  document.getElementById('info-status-key').textContent='Statut';
-  document.getElementById('info-status').textContent=pm.publicStatus;
-  document.getElementById('info-corpus-generation-key').textContent='Identifiant technique du corpus';
-  document.getElementById('info-corpus-generation').textContent=pm.technicalCorpus;
+  document.getElementById('info-stable-ref').textContent=pm.stableRef;
   document.getElementById('info-date-precision').textContent=currentEntry.date_precision||'—';
-  if(sp){const it=sp.itpm_anchor||{},qa=sp.queen_anchor||{},ha=sp.hugh_anchor||{};const extra=[['Type',isInternalSupplementItem(sp)?'COMPLÉMENT INTERNE':'ENTRÉE COMPLÉMENTAIRE'],['Provenance du contenu',pm.longProvenance],['Statut technique',pm.technicalStatus],['Identifiant technique du programme',pm.technicalProgramme],['Version de traduction',sp.translation_version],['Famille source technique',pm.technicalSource],['Ancrage IT-PM',it.source_file||null],['Queen',qa.role==='comparative_translation'?'traduction comparative':null],['Hugh Owen',ha.role==='comparative_translation'?'traduction comparative':null],['Entrée PRINCIPALE hôte',isInternalSupplementItem(sp)?(currentEntry.stable_ref||sp.target_entry_id):null],['Contrat technique de source',sp.source_evidence_contract]].map(x=>addInfoExtraRow(x[0],x[1])).join('');document.getElementById('info-extra').innerHTML=extra;}
-  else{const extra=[['Note de provenance',currentEntry.provenance_note],['Autorité du texte',currentEntry.body_authority],['Détail d’autorité',currentEntry.body_text_authority],['Corroboration',currentEntry.en_corroboration],['Localisation source',currentEntry.source_locator_type],['Statut du tome',volData.status]].map(x=>addInfoExtraRow(x[0],x[1])).join('');document.getElementById('info-extra').innerHTML=extra;}
+  const details=document.getElementById('info-technical-details');if(details)details.open=false;
+  if(sp){
+    const it=sp.itpm_anchor||{},qa=sp.queen_anchor||{},ha=sp.hugh_anchor||{};
+    const publicRows=[
+      ['Type',isInternalSupplementItem(sp)?'COMPLÉMENT INTERNE':'ENTRÉE COMPLÉMENTAIRE'],
+      ['Ce que signifie « RETENU »','Ce passage fait partie des COMPLÉMENTS de l’application après examen des éléments disponibles. Ce choix dans l’application ne constitue pas une approbation de l’Église.'],
+      ['Origine de ce complément',pm.longProvenance]
+    ].map(x=>addInfoExtraRow(x[0],x[1])).join('');
+    document.getElementById('info-public-extra').innerHTML=publicRows;
+    const technicalRows=[
+      ['Statut technique',pm.technicalStatus],
+      ['Identifiant technique du corpus',pm.technicalCorpus],
+      ['Identifiant technique du programme',pm.technicalProgramme],
+      ['Version de traduction',sp.translation_version],
+      ['Famille source technique',pm.technicalSource],
+      ['Ancrage IT-PM',it.source_file||null],
+      ['Queen',qa.role==='comparative_translation'?'traduction comparative':null],
+      ['Hugh Owen',ha.role==='comparative_translation'?'traduction comparative':null],
+      ['Entrée PRINCIPALE hôte',isInternalSupplementItem(sp)?(currentEntry.stable_ref||sp.target_entry_id):null],
+      ['Contrat technique de source',sp.source_evidence_contract]
+    ].map(x=>addInfoExtraRow(x[0],x[1],/Identifiant|Ancrage|Contrat/.test(x[0]))).join('');
+    document.getElementById('info-technical').innerHTML=technicalRows;
+  } else {
+    document.getElementById('info-public-extra').innerHTML='';
+    const technicalRows=[
+      ['Statut technique',pm.publicStatus],
+      ['Identifiant technique du corpus',pm.technicalCorpus],
+      ['Note de provenance',currentEntry.provenance_note],
+      ['Autorité du texte',currentEntry.body_authority],
+      ['Détail d’autorité',currentEntry.body_text_authority],
+      ['Corroboration',currentEntry.en_corroboration],
+      ['Localisation source',currentEntry.source_locator_type],
+      ['Statut du tome',volData.status]
+    ].map(x=>addInfoExtraRow(x[0],x[1],/Identifiant/.test(x[0]))).join('');
+    document.getElementById('info-technical').innerHTML=technicalRows;
+  }
   openModalOverlay('reader-info-overlay','closeReaderInfo');
 }
 function closeReaderInfo() {
@@ -7336,7 +7408,7 @@ async function shareCitation() {
   const human = formatHumanReference(currentEntry, paraId);
   const url = buildDeepLink(paraId ? {view:'paragraph',vol:currentVolume,entry:currentEntry.id,para:paraId} : {view:'entry',vol:currentVolume,entry:currentEntry.id});
   const sp=activeReaderSupplement();
-  const provenance=sp?`\nProvenance : COMPLÉMENT approuvé · ${requireReaderFrenchLabel(sp)}`:'';
+  const provenance=sp?`\nStatut : COMPLÉMENT · ${requireReaderFrenchLabel(sp)}`:'';
   const text = `${passage}${human}\n${url}\n\nSource : Livre du Ciel, Luisa Piccarreta${provenance}`;
   try {
     if (navigator.share) await navigator.share({ title: sp?supplementRegistryTitle(sp):currentEntry.title, text, url });
@@ -7587,7 +7659,7 @@ const CORPUS_GENERATION = 'G036-AFLP-R7-SUP-T5-FAST1';
 const SUPPLEMENT_PROGRAMME = 'LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4-SUP-T5';
 const SUPPLEMENT_MODE_KEY = 'supplement_mode';
 const SUPPLEMENT_BADGE = 'COMPLÉMENT';
-const SUPPLEMENT_PROVENANCE_TEXT = 'COMPLÉMENT approuvé — contenu conservé séparément du corpus PRINCIPAL. Provenance détaillée dans Infos et source.';
+const SUPPLEMENT_PROVENANCE_TEXT = 'COMPLÉMENT — origine et détails dans Infos et source.';
 let supplementMode = 'enriched';
 let currentSupplementFocusId = null;
 let supplementRegistry = null, supplementSpeakerData = null, supplementManifest = null;
@@ -8555,7 +8627,7 @@ async function diagnosticsText(){
   const off=await dbGet('settings','offline_completion').catch(()=>null);
   const deploymentBase=(()=>{try{return new URL('./',window.location.href).pathname;}catch(e){return window.location.pathname.replace(/[^/]*$/,'');}})();
   const publicRef=currentEntry?`${currentEntry.stable_ref||currentEntry.id||''}`:'aucun';
-  return ['Livre du Ciel — diagnostic public',`App : ${APP_VERSION} · ${APP_BUILD}`,`SW attendu : ${SW_CACHE_VERSION}`,`SW contrôleur : ${sw}`,`Caches LDC : ${cachesOwned.join(', ')||'aucun détecté'}`,`Corpus composite : ${CORPUS_GENERATION}`,`Corpus principal : ${BACKBONE_GENERATION}`,`Lecture : ${sourceModeLabel()}`,`Backbone manifest SHA-256 : ${CORPUS_MANIFEST_SHA256}`,`Résumé des tomes : ${volumeSummary?'chargé · 36 tomes':'non chargé'}`,`Recherche : Search-Words v109 + SEARCH-V3 R18D evidence preserved · navigation v118 Reader→Tome root-owner controlled repair candidate · Par le sens fail-closed tant que pack/modèle non qualifiés`,`Stockage IndexedDB : ${db?'ouvert':'indisponible'}`,`Hors ligne : navigator.onLine=${navigator.onLine!==false} · completion=${off?JSON.stringify(off.val??off.value??off):'non préparé'}`,`Thème : ${theme}`,`Texte : ${tl}`,`Repères : ${showReperes?'ON':'OFF'}`,`Diagnostics locaux récents : ${localDiagnosticBuffer.length}`,...localDiagnosticBuffer.slice(-5).map(x=>`Erreur locale ${x.ts} · ${x.kind||'runtime'} · ${x.name||'Erreur'}`),`Base de déploiement : ${deploymentBase}`,`Passage public courant : ${publicRef}`,`Reader A/B diagnostic : ${window.__ldcReaderOpenTraceExport?window.__ldcReaderOpenTraceExport():'indisponible'}`].join('\n');
+  return ['Livre du Ciel — diagnostic public',`App : ${APP_VERSION} · ${APP_BUILD}`,`SW attendu : ${SW_CACHE_VERSION}`,`SW contrôleur : ${sw}`,`Caches LDC : ${cachesOwned.join(', ')||'aucun détecté'}`,`Corpus composite : ${CORPUS_GENERATION}`,`Corpus principal : ${BACKBONE_GENERATION}`,`Lecture : ${sourceModeLabel()}`,`Backbone manifest SHA-256 : ${CORPUS_MANIFEST_SHA256}`,`Résumé des tomes : ${volumeSummary?'chargé · 36 tomes':'non chargé'}`,`Recherche : Search-Words v109 + SEARCH-V3 R18D evidence preserved · navigation v118 Reader→Tome root-owner repair preserved · Par le sens fail-closed tant que pack/modèle non qualifiés`,`Stockage IndexedDB : ${db?'ouvert':'indisponible'}`,`Hors ligne : navigator.onLine=${navigator.onLine!==false} · completion=${off?JSON.stringify(off.val??off.value??off):'non préparé'}`,`Thème : ${theme}`,`Texte : ${tl}`,`Repères : ${showReperes?'ON':'OFF'}`,`Diagnostics locaux récents : ${localDiagnosticBuffer.length}`,...localDiagnosticBuffer.slice(-5).map(x=>`Erreur locale ${x.ts} · ${x.kind||'runtime'} · ${x.name||'Erreur'}`),`Base de déploiement : ${deploymentBase}`,`Passage public courant : ${publicRef}`,`Reader A/B diagnostic : ${window.__ldcReaderOpenTraceExport?window.__ldcReaderOpenTraceExport():'indisponible'}`].join('\n');
 }
 async function copyDiagnostics(){const text=await diagnosticsText();const ok=await copyPlainText(text);showToast(ok?'Diagnostic copié':'Copie indisponible');return text;}
 async function routeFail(message,fallback){console.warn('LDC deep link:',message);showToast('Lien invalide ou cible introuvable');if(fallback==='search')goSearch();else if(fallback==='espace')goEspace();else goHome();return false;}
@@ -8801,6 +8873,17 @@ function updateThemeBtn(theme) {
 /* ═══════════════════════════════════════════════════════
    HELP SCREEN
 ═══════════════════════════════════════════════════════ */
+function scrollHelpToProvenance() {
+  const el=document.getElementById('help-provenance-origin');if(!el)return;
+  el.scrollIntoView({block:'start',behavior:reduceMotionPreferred()?'auto':'smooth'});
+  const title=el.querySelector('.help-section-title');if(title){title.setAttribute('tabindex','-1');requestAnimationFrame(()=>{try{title.focus({preventScroll:true});}catch(_){title.focus();}});}
+}
+async function openProvenanceHelpFromReaderInfo() {
+  closeReaderInfo();
+  await openHelp();
+  requestAnimationFrame(()=>requestAnimationFrame(scrollHelpToProvenance));
+}
+
 async function openHelp() {
   // Remember current screen to restore on close. If this temporarily hides the Reader, save while it is still visible but retain the logical session.
   const current = document.querySelector('.screen.active');

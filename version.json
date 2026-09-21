@@ -1,10 +1,10 @@
 {
-  "app_version": "v2.19.119-R1B-NAV-BACK-ROOT-RESTORE-R2",
+  "app_version": "v2.19.119-R1B-NAV-BACK-ROOT-RESTORE-R2-PROV-R6-R8-FULLQA-META",
   "backbone_corpus_version": "G036-AFLP-R7-UWR2-FAST1",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
-  "baseline_candidate_sha256": "4a45966c24b9d6444c77b4229ba3df16634ec949cfb703dce91c5da1ec2d8fad",
-  "baseline_candidate_version": "v2.19.91-R1B Stage14 Search V2.2 A9 Near R1 controlled-test freeze",
-  "build_date": "2026-09-19",
+  "baseline_candidate_sha256": "6b8bfe0765d51b9169e9d90f412713341bb6a5dcf191a1faacd860ec015daa79",
+  "baseline_candidate_version": "v2.19.119-R1B-NAV-BACK-ROOT-RESTORE-R2-PROV-R6-R7-FULLQA",
+  "build_date": "2026-09-21",
   "collection_link_contract": "LOCAL_COLLECTION_ID_LINK_DOES_NOT_TRANSFER_USER_DATA",
   "collections_visibility": "VISIBLE_MON_ESPACE_WORKSPACE_AND_EXPLICIT_ENTRYPOINT",
   "context_action_contract": "SELECTION_OR_PARAGRAPH_SINGLE_CONTEXT_SURFACE",
@@ -27,18 +27,18 @@
     "active_aligne": "G036-AFLP-R7-UWR2-FAST1",
     "active_enrichi": "G036-AFLP-R7-SUP-T5-FAST1",
     "historical_r1b": "G036-AFLP-R1B-UWR2",
-    "package_predecessor_app_version": "v2.19.113-R1B-SEARCH-MERGE",
-    "package_predecessor_zip_sha256": "7a340d7de0cad2e6b83dcf66f214bfa07e16239c5c35318914f381b9cdc0317d",
+    "package_predecessor_app_version": "v2.19.119-R1B-NAV-BACK-ROOT-RESTORE-R2-PROV-R6-R7-FULLQA",
+    "package_predecessor_zip_sha256": "6b8bfe0765d51b9169e9d90f412713341bb6a5dcf191a1faacd860ec015daa79",
     "semantic_predecessor_aligne": "G036-AFLP-R7-UWR2"
   },
-  "current_release_authority": "LDC_V119_INTERNAL_RUNTIME_SHELL_REPAIR_R2__V118_WITHDRAWN_FOR_MISSING_LIVE_NAVIGATION_FUNCTIONS__RESTORE_TOMES_CONTEXT_FRESH_TOME_AND_GENERIC_NAVIGATION_CONTEXT_FROM_V117__V118_ROOT_OWNER_READER_BACK_REPAIR_PRESERVED__UPDATE_METADATA_AND_PARSER_REPAIRED__SEARCH_R18D_PRESERVED__PAR_LE_SENS_UNRELEASED__PUBLIC_RELEASE_NOT_AUTHORIZED",
-  "current_runtime_browser_validation": "V118_USER_RUNTIME_FAIL__TOME_SELECTION_BROKEN_BROWSER_IPHONE_IPAD__ROOT_CAUSE_MISSING_OPENFRESHTOMEFROMTOMES_PLUS_TWO_OTHER_LIVE_NAVIGATION_FUNCTIONS__V119_RUNTIME_AND_DEVICE_RETEST_REQUIRED",
+  "current_release_authority": "LDC_V119_PROVENANCE_R6_R8_FULLQA_METADATA_COHERENCE__EXACT_R7_PREDECESSOR__R7_RUNTIME_REPAIRS_PRESERVED__ACTIVE_STAGE_AND_CURRENT_GENERATION_PREDECESSOR_METADATA_CORRECTED__CORPUS_SEARCH_NAVIGATION_USER_DATA_SEMANTICS_UNCHANGED__PUBLIC_RELEASE_NOT_AUTHORIZED",
+  "current_runtime_browser_validation": "R8_FULLQA_METADATA_COHERENCE_SUCCESSOR__R7_STATIC_PACKAGE_RENDERER_SEARCH_MIGRATION_UI_AND_SW_HARNESS_EVIDENCE_REQUALIFIED_ON_EXACT_R8_BYTES__INSTALLED_PWA_SECURE_ORIGIN_INDEXEDDB_AND_PHYSICAL_DEVICE_GATES_PENDING__PUBLIC_RELEASE_NOT_AUTHORIZED",
   "deep_link_schema": "ldc-deep-link-v1",
   "degraded_boot_stage6": "DEFER__NOT_JUSTIFIED_FOR_RUNTIME_MUTATION_NOW",
   "diagnostic_default_copy_contract": "ALLOWLIST_PUBLIC_TECHNICAL_METADATA__NO_RAW_QUERY__NO_RAW_ERROR_MESSAGE__NO_USER_AUTHORED_TEXT",
   "entry_start_contract": "V107__V106_ENTRY_START_SEMANTIC_FIXED_POINT_AND_USER_INTENT_LOCK_PRESERVED__DIRECT_TOME_LIST_OPEN_ADDS_SOURCE_SCROLL_HANDOFF_TRANSACTION__CAPTURE_BACK_CONTEXT_BEFORE_BLUR__BLUR_FOCUSED_LIST_BUTTON_BEFORE_FIRST_AWAIT__FREEZE_SOURCE_MOMENTUM__RENEW_READER_SCROLL_DOM_SURFACE__PIN_TOP_BEFORE_EXPOSURE_AND_FOR_TWO_SETTLING_FRAMES__PREVIOUS_NEXT_SEARCH_RESUME_NOTE_HIGHLIGHT_DEEP_LINK_TARGET_SEMANTICS_UNCHANGED",
   "external_decision_authority": "FINAL_DECISION_LOCK_EXTERNAL_TO_DEPLOY_ZIP__WRITTEN_LAST_AFTER_PRIMARY_AND_INDEPENDENT_REOPEN_AUDITS",
-  "external_validation_status": "OPEN_FOR_EXACT_V119_BROWSER_SMOKE_TEST_THEN_IPHONE_IPAD_CONTROLLED_DEVICE_TEST__PUBLIC_RELEASE_NOT_AUTHORIZED",
+  "external_validation_status": "R8_FULL_APPLICATION_QA_INTERNAL_BLIND_CHALLENGE_PASS__INSTALLED_PWA_REAL_INDEXEDDB_LIVE_ORIGIN_PHYSICAL_DEVICE_AND_ACCESSIBILITY_GATES_PENDING__PUBLIC_RELEASE_NOT_AUTHORIZED",
   "f1_poisoned_http_cache_regression_gate": "REQUIRED_AND_EXTERNAL_EVIDENCE",
   "f7_release_metadata_generation": "CURRENT_RELEASE_COUNTS_AND_BINDINGS_GENERATED_AFTER_CORPUS_PAYLOAD_FREEZE__V32_VALUES_RETAINED_ONLY_UNDER_HISTORICAL_KEYS",
   "f8_android_nonfragment_highlight_targeting": {
@@ -408,13 +408,13 @@
   "owner_override_note": "A continuation of the full blind adversarial audit of frozen R18 R7 found a genuine active-metadata contradiction: offline_manifest.json had the correct R18 R7 page_worker_revision and rebuild_status but its active scope field still described v87 R18 R6 as the current bounded successor. R18 R8 is a metadata-coherence successor. It corrects that active scope description and advances page/worker/cache identity to R18 R8 so the corrected bytes have a unique update namespace. The R18 R7 user-select:none native-selection repair and all R18 R6/R18 R5 runtime repairs are preserved. No corpus, search, speaker, flow, display, interaction-anchor, DB-schema or offline-content-binding mutation is authorised.",
   "owner_stage_start_authorisation": "USER_EXPLICITLY_AUTHORIZED_FULL_BLIND_ADVERSARIAL_VERIFICATION_AND_ALL_NECESSARY_CORRECTIONS__2026_09_12",
   "owner_user_acceptance": "USER_EXPLICITLY_REQUESTED_CONTINUED_DEVELOPMENT_WITHOUT_IMMEDIATE_DEVICE_CHECKING__NO_PUBLIC_DEPLOYMENT_AUTHORITY__2026_09_14",
-  "package_predecessor_app_version": "v2.19.110-R1B",
-  "package_predecessor_zip_sha256": "8e5228cac3a795ea510098cc67e16c8de7f1050a90f13a56bb83a4caaf08de61",
-  "package_state_at_freeze": "V107_CONTROLLED_TEST_CANDIDATE__EXACT_V106_PREDECESSOR__V106_PHYSICAL_FAIL_LOCALIZED_BY_OWNER_A_B_TEST_TO_SCROLLED_ENTRIES_LIST_TO_READER_TRANSITION__BOUNDED_HANDOFF_REPAIR_ONLY__CORPUS_SEARCH_USER_DATA_SCHEMA_PERSISTENT_OFFLINE_CONTENT_UNCHANGED__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED",
-  "page_worker_revision": "ldc-v2.19.119-R1B-nav-back-root-restore-r2",
-  "physical_ipad_gate": "V117_CONTROLLED_RETEST_REQUIRED__READER_BACK_PRIMARY__FRESH_TOME_REGRESSION__V116_READER_BACK_FAIL_AUTHORITATIVE",
-  "physical_iphone_gate": "V117_CONTROLLED_RETEST_REQUIRED__READER_BACK_PRIMARY__FRESH_TOME_REGRESSION__V116_READER_BACK_FAIL_AUTHORITATIVE",
-  "physical_samsung_android_gate": "V106_RETEST_REQUIRED_AFTER_READER_MUTATION__DIRECT_TOME_ENTRY_START__PREV_NEXT__FOUR_TEXT_PRESETS__MAX_SYSTEM_FONT__OFFLINE_COLD_REOPEN__TALKBACK_REPRESENTATIVE_CHECK",
+  "package_predecessor_app_version": "v2.19.119-R1B-NAV-BACK-ROOT-RESTORE-R2-PROV-R6-R7-FULLQA",
+  "package_predecessor_zip_sha256": "6b8bfe0765d51b9169e9d90f412713341bb6a5dcf191a1faacd860ec015daa79",
+  "package_state_at_freeze": "R8_FULLQA_METADATA_COHERENCE_CONTROLLED_DEVICE_TEST_CANDIDATE__EXACT_R7_PREDECESSOR__ACTIVE_STAGE_AND_CURRENT_GENERATION_PREDECESSOR_METADATA_REPAIRED__R7_SW_AND_HELP_REPAIRS_PRESERVED__CORPUS_SEARCH_NAVIGATION_USER_DATA_SEMANTICS_UNCHANGED__EXTERNAL_DEVICE_AND_LIVE_ORIGIN_GATES_OPEN__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED",
+  "page_worker_revision": "ldc-v2.19.119-R1B-nav-back-root-restore-r2-prov-r6-r8-fullqa-meta",
+  "physical_ipad_gate": "R8_EXACT_CANDIDATE_PHYSICAL_IPAD_PORTRAIT_LANDSCAPE_RETEST_REQUIRED__INSTALL_UPDATE_OFFLINE_REOPEN_NAVIGATION_SEARCH_READER_PROVENANCE_AND_USER_STATE_SMOKE",
+  "physical_iphone_gate": "R8_EXACT_CANDIDATE_PHYSICAL_IPHONE_RETEST_REQUIRED__INSTALL_UPDATE_OFFLINE_REOPEN_NAVIGATION_SEARCH_READER_PROVENANCE_AND_USER_STATE_SMOKE",
+  "physical_samsung_android_gate": "R8_EXACT_CANDIDATE_REPRESENTATIVE_ANDROID_RETEST_REQUIRED__INSTALL_UPDATE_OFFLINE_REOPEN_SEARCH_READER_AND_TALKBACK_SMOKE",
   "post_four_pass_metadata_reconciliation": {
     "active_envelopes_rebound_to_r3": 109,
     "corpus_text_mutated": false,
@@ -447,7 +447,7 @@
   ],
   "protected_lecture_suivie_contract": "ONE_PROTECTED_MAIN_JOURNEY__ONLY_EXPLICIT_SEQUENTIAL_START_RESUME_INHERITED_PREV_NEXT_OR_CONFIRMED_RELOCATION_MAY_WRITE_MAIN__CONSULTATIONS_NEVER_WRITE_MAIN__LU_INDEPENDENT",
   "protected_v45_runtime": "CORPUS_SPEAKERS_PRESENTATION_SEARCH_FLOW_DISPLAY_SUPPLEMENTS_USER_STATE_HIGHLIGHTING_OFFLINE_CACHE_ALGORITHM_NAVIGATION_LOGIC_UNCHANGED",
-  "public_release": "NOT_AUTHORIZED",
+  "public_release": "NOT_AUTHORIZED__R8_INSTALLED_PWA_REAL_INDEXEDDB_LIVE_ORIGIN_AND_PHYSICAL_DEVICE_GATES_PENDING",
   "public_version": "119",
   "quote_display_contract": "CANONICAL_GUILLEMETS_PRESERVED_IN_CORPUS__ADJACENT_OUTER_DELIMITERS_HIDDEN__TWO_SOURCE_SPAN_GAP_OPENERS_WITH_EXPLICIT_JESUS_ATTRIBUTION_HIDDEN__SIX_PUNCTUATION_GAP_CLOSERS_HIDDEN__NESTED_AND_REPORTED_QUOTES_PRESERVED",
   "r16_authority_fencing_reaudit": {
@@ -1503,6 +1503,7 @@
     "superseded v2.19.0 key-claim-only report audit with exhaustive active-report line/row audit and exact shipped-function tests"
   ],
   "reaudit_static_validator": "HISTORICAL_RA1_PRE_FINAL_TARGETED_TESTS__CURRENT_RA5C_FINAL_AUTHORITY_IN_EXTERNAL_DECISION_LOCK",
+  "rebuild_status": "R8_METADATA_COHERENCE_SUCCESSOR__FOUR_FILE_RELEASE_METADATA_DELTA_ONLY__DETERMINISTIC_BUILD_AND_EXACT_BYTE_REQUALIFICATION_REQUIRED__PUBLIC_RELEASE_NOT_AUTHORIZED",
   "rejected_predecessor_sha256": "0e26740387911fe15a9a275c3ff04d08ba9cbb28f46c2ec74670eb795fbe22d6",
   "rejected_predecessor_status": "FAIL_HIGHLIGHT_ANCHOR_COMPATIBILITY",
   "rejected_predecessor_version": "v2.19.37-R1B",
@@ -1930,7 +1931,7 @@
   "speaker_presentation_contract": "SEMANTIC_SPEAKER_DISTINCT_FROM_PRESENTATION_PARENT__BV7_11_EXPLICIT_MAIN_PARENT_PER_SEGMENT_OVERLAY__PARENTLESS_SUPPLEMENT_LEGACY_FALLBACK_ONLY__FALLBACK_NEVER_OVERRIDES_VALID_EXPLICIT_PARENT",
   "speech_boundary_display_contract": "RA19B_MULTI_SOURCE_SOURCE_BACKED_EXPLICIT_BOUNDARY_METADATA__20811_ACTIVE_LINKED_BOUNDARIES__HEURISTIC_FALLBACK_ZERO_ON_ACTIVE_LINKS__CANONICAL_TEXT_AND_SPEAKER_OFFSETS_UNCHANGED",
   "speech_paragraphing_contract": "UNCOLOURED_DIRECT_TURN_STAYS_WITH_ATTRIBUTION_OPEN_GUILLEMET__CLOSING_GUILLEMET_STAYS_WITH_TURN__RESUMED_NARRATION_STARTS_NEW_VISUAL_PARAGRAPH__JESUS_MARY_STYLING_UNCHANGED",
-  "stage": "LDC_V113_SEARCH_REBASE_R1_INTERNAL",
+  "stage": "LDC_V119_PROVENANCE_R6_R8_FULLQA_METADATA_COHERENCE",
   "stage10_runtime_slim_r1": {
     "accessibility_cases": 28,
     "added_files": [
@@ -3405,6 +3406,88 @@
   "vector_search_subsystem": "RETIRED_IN_RA3_V2_19_8__PRESERVED_IN_V2_19_9",
   "volume_lru_max": 4,
   "whole_collection_undo_contract": "TEN_SECOND_ATOMIC_PARENT_PLUS_ALL_CAPTURED_CHILDREN__FAIL_CLOSED_ON_PARENT_CHILD_OR_UNEXPECTED_ORPHAN_CONFLICT",
-  "wide_public_release": "NOT_AUTHORIZED__V112_PHYSICAL_REGRESSION_GATE_INHERITED_OPEN__SEARCH_MEANING_NEURAL_HUMAN_CALIBRATION_AND_DEVICE_GATES_OPEN",
-  "wide_public_release_gate": "NOT_AUTHORIZED__PHYSICAL_DEVICE_INSTALLED_PWA_TRUE_OFFLINE_VOICEOVER_TALKBACK_TEXTUAL_FIDELITY_RIGHTS_AND_DEPLOY_BINDING_GATES_OPEN"
+  "wide_public_release": "NOT_AUTHORIZED__R8_INSTALLED_PWA_TRUE_BROWSER_OFFLINE_REAL_INDEXEDDB_PHYSICAL_DEVICE_ACCESSIBILITY_DEPLOY_BINDING_AND_RIGHTS_GATES_OPEN",
+  "wide_public_release_gate": "NOT_AUTHORIZED__R8_INSTALLED_PWA_TRUE_BROWSER_OFFLINE_REAL_INDEXEDDB_IPHONE_IPAD_ANDROID_VOICEOVER_TALKBACK_DEPLOY_BINDING_TEXTUAL_FIDELITY_AND_RIGHTS_GATES_OPEN",
+  "search_v2_current_semantic_rebind_r7_fullqa": {
+    "status": "PASS_CURRENT_SEMANTIC_PARITY_REVERIFIED_2026-09-21",
+    "jesus_filter_rule": "speaker == JESUS && confidence == high",
+    "principal_eligible_paragraphs": 57562,
+    "complement_eligible_paragraphs": 114,
+    "enrichi_eligible_paragraphs": 57676,
+    "current_filter_missing": 0,
+    "current_filter_extra": 0,
+    "manifest_source_hash_scope_note": "corpus/search_v2_manifest.json source_hashes are retained as historical generation-input bindings from the unchanged SEARCH-V2 payload lineage; current speaker/supplement semantic parity was independently recomputed against the R7 package. No Search payload mutation is made by R7."
+  },
+  "full_application_qa_r7": {
+    "date": "2026-09-21",
+    "predecessor_zip": "LDC_v119_PROVENANCE_R6_R6_IA_CONTROLLED_TEST_GITHUB_DEPLOY.zip",
+    "predecessor_sha256": "c7a150f50f1f807d34f0f59e8c61f195e2046498ee1f2d5f367926e1968adf58",
+    "repair_scope": [
+      "index.html",
+      "sw.js",
+      "version.json",
+      "offline_manifest.json"
+    ],
+    "repairs": [
+      "service-worker published revision marker coherence",
+      "service-worker offline-manifest app-version gate coherence",
+      "active release metadata refresh",
+      "remove stale v117 internal-test wording from public Help"
+    ],
+    "protected": [
+      "canonical corpus",
+      "supplement content and placement",
+      "Search/Search-V3 payload and semantics",
+      "speaker/display/flow semantics",
+      "navigation logic",
+      "user-data schemas and migration algorithms",
+      "offline content payload binding"
+    ],
+    "environment_limitations": [
+      "browser navigation to local/file/http origins blocked by administrator policy",
+      "installed-PWA Service Worker/CacheStorage/IndexedDB origin runtime not executable end-to-end in current container",
+      "physical iPhone/iPad/Android and VoiceOver/TalkBack not executable in current container"
+    ],
+    "release": "NOT_AUTHORIZED"
+  },
+  "full_application_qa_r8": {
+    "date": "2026-09-21",
+    "direct_predecessor_app_version": "v2.19.119-R1B-NAV-BACK-ROOT-RESTORE-R2-PROV-R6-R7-FULLQA",
+    "direct_predecessor_zip_sha256": "6b8bfe0765d51b9169e9d90f412713341bb6a5dcf191a1faacd860ec015daa79",
+    "trigger": "FINAL_METADATA_HOSTILITY_SWEEP_FOUND_ACTIVE_STAGE_V113_AND_CURRENT_GENERATION_CONTRACT_PACKAGE_PREDECESSOR_V113",
+    "repair_scope": [
+      "index.html",
+      "sw.js",
+      "version.json",
+      "offline_manifest.json"
+    ],
+    "substantive_metadata_repairs": [
+      "stage rebound to R8 current authority",
+      "current_generation_contract.package_predecessor_app_version rebound to exact R7",
+      "current_generation_contract.package_predecessor_zip_sha256 rebound to exact R7"
+    ],
+    "mechanical_release_repairs": [
+      "unique R8 app/page-worker/cache identity",
+      "R8 offline-manifest app/revision/status/scope binding"
+    ],
+    "protected": [
+      "canonical corpus and supplements",
+      "Search/Search-V3 payload and semantics",
+      "speaker/display/flow semantics",
+      "navigation logic",
+      "user-data schemas and migration algorithms",
+      "offline content asset list and content binding",
+      "R7 Help/provenance wording and runtime repair logic"
+    ],
+    "public_release_authorized": false,
+    "external_gates": [
+      "installed-PWA update from existing installation",
+      "secure-origin IndexedDB with real persisted data",
+      "true browser-process cold offline reopen",
+      "live deployment exact-byte binding",
+      "physical iPhone/iPad/Android",
+      "VoiceOver/TalkBack",
+      "rights/final release governance"
+    ]
+  }
 }
