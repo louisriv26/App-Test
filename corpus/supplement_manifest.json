@@ -1,7 +1,7 @@
 {
   "authorized_runtime_ledger_sha256": "5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906",
-  "backbone_generation": "G036-AFLP-R7-UWR2-FAST1",
-  "composite_generation": "G036-AFLP-R7-SUP-T5-FAST1",
+  "backbone_generation": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
+  "composite_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
   "counts": {
     "complete_entries": 13,
     "internal_supplements": 62,
@@ -21,12 +21,12 @@
   },
   "files": {
     "supplement_speakers.json": {
-      "bytes": 126299,
-      "sha256": "5b0688292b83406ebbf67cd8c3d1c6c7900a334cb969d2535025c02c62852374"
+      "bytes": 126321,
+      "sha256": "29be363a2b5a20e0c020bfee2863ba7d291a018b226b80ec6daf03404704ab30"
     },
     "supplements.json": {
-      "bytes": 1115287,
-      "sha256": "da16a9d3a04105dcecd51519e3b18dc9a5a986bc9e5ab64fb7e9073c0d131348"
+      "bytes": 1115190,
+      "sha256": "9261a61a9dc58e72a1e3b529a92b24aee88d14be0e9546f7695692f9c64aa1ba"
     }
   },
   "m3_decision_lock_sha256": "bb4a5c772b3eafdfe6eb857bc303a724a4bdb0cb0cef97c0ee5f088dfd65ab83",
@@ -36,9 +36,9 @@
   "programme": "LDC-AFLP-SUP-T1-SUP-T2-SUP-T3-SUP-T4-SUP-T5",
   "provenance_contract": "SUP-T1..SUP-T4_PRESERVED__SUP-T5_SOURCE_CRITICAL_AUTHORIZED__NO_MAJORITY_VOTE",
   "r6_authority": "AUTHORIZED_RUNTIME_LEDGER_SHA256_5ec25e997fc68e24eb18cd27180bb2b87aa153f9e3c976dab7b36ddef11b7906__OFFICIAL_R6_PREDECESSOR",
-  "release_status": "V87_STAGE10_RUNTIME_SLIM_R1__LEGACY_SUPPLEMENT_SEARCH_WITNESS_RETIRED_FROM_DEPLOY__SEARCH_V2_COMPLEMENT_DOCUMENTS_UNCHANGED__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED",
+  "release_status": "V124_PROVENANCE_R12_INTEGRITY_R1__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED",
   "schema": "ldc-supplement-manifest-v2",
-  "status": "STAGE10_RUNTIME_SLIM_R1__SUPPLEMENT_CONTENT_AND_SPEAKER_SEMANTICS_UNCHANGED__SUPPLEMENT_SEARCH_RUNTIME_WITNESS_RETIRED",
+  "status": "V124_PROVENANCE_R12_INTEGRITY_R1__CURRENT_FILE_BINDINGS_REPAIRED__SUPPLEMENT_BODY_AND_SPEAKER_SEMANTICS_UNCHANGED",
   "sup_t1_snapshot_sha256": "ee568d8857b3e38b4a2b536de146c3b54f876ab93478e66f327bdaaf0768a1e0",
   "sup_t2_segmentation_ledger_sha256": "f3345d58d2c12625c46cb92466012755c070fa84aef04da8cbcf2f9caa705f77",
   "user_state_schema": 4,
@@ -225,5 +225,32 @@
     "active_search_source": "SEARCH-V2 complement documents already frozen in corpus/search_v2_documents.json",
     "supplement_speakers_preserved": true,
     "supplements_registry_preserved": true
+  },
+  "v123_provenance_r12_presentation_successor": {
+    "schema": "ldc-v123-provenance-r12-presentation-successor-v1",
+    "date": "2026-09-26",
+    "direct_predecessor_app_version": "v2.19.122-R1B-TOME1-FINAL-R2",
+    "direct_predecessor_zip_sha256": "684188fa7fd4ae4c7188fcf5eb3e775a9f4ae4b58406d53ebf303b4025ea92dd",
+    "reader_provenance_fields_changed": true,
+    "reader_provenance_strings_changed": 76,
+    "supplement_devotional_body_mutations": 0,
+    "supplement_object_semantics_changed": false,
+    "speaker_semantic_mutations": 0,
+    "search_payload_mutations": 0,
+    "user_state_schema_mutations": 0,
+    "public_term": "COMPLÉMENT retenu"
+  },
+  "v124_provenance_r12_integrity_repair": {
+    "schema": "ldc-v124-provenance-r12-integrity-repair-v1",
+    "date": "2026-09-26",
+    "direct_predecessor_app_version": "v2.19.123-R1B-PROVENANCE-R12",
+    "direct_predecessor_zip_sha256": "091bbec3c5d917c171626fb12d0d3c1d2824c55d877d3e92a90c94c61cc98bab",
+    "repairs": [
+      "SUPPLEMENT_SPEAKERS_CURRENT_BYTES_SHA_BINDING"
+    ],
+    "supplement_devotional_body_mutations": 0,
+    "speaker_semantic_mutations": 0,
+    "search_payload_mutations": 0,
+    "user_state_schema_mutations": 0
   }
 }

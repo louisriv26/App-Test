@@ -1,1 +1,50 @@
-{"corpus_version":"G036-AFLP-R7-UWR2-FAST1","group_count":2,"groups":[{"classification":"ra11_broader_boundary_high_confidence_continuation","confidence":"high","flow_id":"FLOW.RA11.T07.ldc_t07_1906_02_23_e001.P006-P007","members":[{"boundary_after":{"adjudication_generation":"RA19B_MULTI_SOURCE","adjudication_status":"SOURCE_BACKED_CERTAIN","display_joiner":"space","evidence_ref":"RA19B:B07.00064.ldc_t07_1906_02_23_e001_p006__ldc_t07_1906_02_23_e001_p007","evidence_sha256":"b9de0a98d4b86c0daa54d54ff7ac577c0ebd70f3526bc0f27eb5c10003997497","speech_run_policy":"continue_same_speaker_only","visual_action":"join_inline","visual_policy":"continuous_prose"},"paragraph_id":"ldc_t07_1906_02_23_e001_p006"},{"paragraph_id":"ldc_t07_1906_02_23_e001_p007"}],"review_status":"source_or_grammar_discourse_adjudicated"},{"classification":"ra11_broader_boundary_high_confidence_continuation","confidence":"high","flow_id":"FLOW.RA11.T07.ldc_t07_1906_10_14_e001.P012-P013","members":[{"boundary_after":{"display_joiner":"space","speech_run_policy":"continue_same_speaker_only"},"paragraph_id":"ldc_t07_1906_10_14_e001_p012"},{"paragraph_id":"ldc_t07_1906_10_14_e001_p013"}],"review_status":"source_or_grammar_discourse_adjudicated"}],"schema_version":"ldc-display-flow-v2","volume":7}
+{
+  "corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
+  "group_count": 2,
+  "groups": [
+    {
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "flow_id": "FLOW.RA11.T07.ldc_t07_1906_02_23_e001.P006-P007",
+      "members": [
+        {
+          "boundary_after": {
+            "adjudication_generation": "RA19B_MULTI_SOURCE",
+            "adjudication_status": "SOURCE_BACKED_CERTAIN",
+            "display_joiner": "space",
+            "evidence_ref": "RA19B:B07.00064.ldc_t07_1906_02_23_e001_p006__ldc_t07_1906_02_23_e001_p007",
+            "evidence_sha256": "b9de0a98d4b86c0daa54d54ff7ac577c0ebd70f3526bc0f27eb5c10003997497",
+            "speech_run_policy": "continue_same_speaker_only",
+            "visual_action": "join_inline",
+            "visual_policy": "continuous_prose"
+          },
+          "paragraph_id": "ldc_t07_1906_02_23_e001_p006"
+        },
+        {
+          "paragraph_id": "ldc_t07_1906_02_23_e001_p007"
+        }
+      ],
+      "review_status": "source_or_grammar_discourse_adjudicated"
+    },
+    {
+      "classification": "ra11_broader_boundary_high_confidence_continuation",
+      "confidence": "high",
+      "flow_id": "FLOW.RA11.T07.ldc_t07_1906_10_14_e001.P012-P013",
+      "members": [
+        {
+          "boundary_after": {
+            "display_joiner": "space",
+            "speech_run_policy": "continue_same_speaker_only"
+          },
+          "paragraph_id": "ldc_t07_1906_10_14_e001_p012"
+        },
+        {
+          "paragraph_id": "ldc_t07_1906_10_14_e001_p013"
+        }
+      ],
+      "review_status": "source_or_grammar_discourse_adjudicated"
+    }
+  ],
+  "schema_version": "ldc-display-flow-v2",
+  "volume": 7
+}

@@ -1,4 +1,4 @@
-const VERSION = 'ldc-v2.19.119-R1B-nav-back-root-restore-r2-prov-r6-r8-fullqa-meta';
+const VERSION = 'ldc-v2.19.124-R1B-provenance-r12-integrity-r1';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
@@ -10,16 +10,16 @@ function scopeFingerprint(scope) {
 }
 const OFFLINE_SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
 const SCOPE_CACHE_PREFIX = `${CACHE_PREFIX}${OFFLINE_SCOPE_FINGERPRINT}-`;
-const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.119-R1B-nav-back-root-restore-r2-prov-r6-r8-fullqa-meta`;
-const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.119-R1B-nav-back-root-restore-r2-prov-r6-r8-fullqa-meta`;
+const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.124-R1B-provenance-r12-integrity-r1`;
+const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.124-R1B-provenance-r12-integrity-r1`;
 const LEGACY_V76_WORKER_VERSION = 'ldc-v2.19.76-R1B-report-r2';
 const UPDATE_COMPAT_META_PATH = '__ldc_update_compat__.json';
 const INSTALL_FETCH_NONCE = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 const OFFLINE_CACHE = `${CACHE_PREFIX}offline-persistent-v3-${OFFLINE_SCOPE_FINGERPRINT}`;
 const OFFLINE_MANIFEST_URL = './offline_manifest.json';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v3';
-const OFFLINE_CONTENT_BINDING = '36e9d99ef1474bf4dfd15651bc5894f072afe0aab80c38567937552d057d5b55';
-const OFFLINE_CORPUS_MANIFEST_SHA256 = '8d831c437fa6c2caa56ac637c3d539279ec24b57711d209b264804cca19c0ab7';
+const OFFLINE_CONTENT_BINDING = '50f9e009bc4b4abe73f0cc114d04e3e7443c1d176db81fa4e33b8b24dffd0ee7';
+const OFFLINE_CORPUS_MANIFEST_SHA256 = 'd1e761c7e6cb046afe092abde992fffa18369f6192b7cae47b0194fbd583c3fb';
 const OFFLINE_META_PATH = '__ldc_offline_meta__.json';
 const RUNTIME_META_PATH = '__ldc_runtime_meta__.json';
 const RUNTIME_MAX_ENTRIES = 48;
@@ -75,7 +75,7 @@ async function loadOfflineManifest() {
   if(!r){r=await fetch(OFFLINE_MANIFEST_URL,{cache:'reload'});if(r&&r.ok)await shell.put(OFFLINE_MANIFEST_URL,r.clone());}
   if(!r||!r.ok)throw new Error('offline manifest indisponible');
   const m=await r.json();
-  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.119-R1B-NAV-BACK-ROOT-RESTORE-R2-PROV-R6-R8-FULLQA-META'||m.storage_schema!==OFFLINE_STORAGE_SCHEMA)throw new Error('offline manifest incompatible');
+  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.124-R1B-PROVENANCE-R12-INTEGRITY-R1'||m.storage_schema!==OFFLINE_STORAGE_SCHEMA)throw new Error('offline manifest incompatible');
   if(m.content_binding_schema!==OFFLINE_CONTENT_BINDING_SCHEMA||m.content_binding_sha256!==OFFLINE_CONTENT_BINDING)throw new Error('offline manifest binding incompatible');
   if(m.corpus_manifest_sha256!==OFFLINE_CORPUS_MANIFEST_SHA256)throw new Error('offline corpus manifest binding incompatible');
   const unique=[...new Set((m.assets||[]).map(a=>a.path))];
