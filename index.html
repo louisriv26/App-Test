@@ -33,7 +33,7 @@
   --reader-title-size:20px; --browse-title-size:15px; --journey-copy-size:13px; --journey-action-size:14px;
   --content-meta-size:12px; --content-seq-size:11px; --reading-badge-size:11px; --source-mode-size:12px; --supp-badge-size:12px;
   --reader-control-size:14px; --reader-journey-copy-size:13px; --reader-journey-action-size:14px; --reader-context-back-size:14px; --reader-chrome-title-size:14px; --reader-orientation-size:12px; --reader-date-size:13px; --search-excerpt-size:15px; --espace-excerpt-size:14px; --collection-excerpt-size:14px;
-  --help-body-size:14px; --help-tip-size:13px; --annotation-body-size:14px; --collection-title-size:16px;
+  --help-body-size:14px; --help-tip-size:13px; --help-title-size:16px; --annotation-body-size:14px; --collection-title-size:16px;
   --home-title-size:28px; --home-quote-size:15px; --home-resume-title-size:16px; --home-action-size:13px;
   --accent:#7a5c10;
   --onboarding-bg:#1A2A4A; --onboarding-ink:#F9F6F0; --onboarding-muted:#D8D3C8; --onboarding-accent:#D4A060;
@@ -1047,7 +1047,7 @@ html[data-theme="dark"] #update-banner { background: #0F1A2E; }
 .hsi-purple{background:#EEEDFE;color:#3C3489;}
 .hsi-coral{background:#FAECE7;color:#993C1D;}
 .hsi-gold {background:var(--gold-pale);color:#7A5A20;}
-.help-section-title{font-family:var(--serif);font-size:15px;color:var(--night);margin:0;font-weight:600;line-height:1.3;}
+.help-section-title{font-family:var(--serif);font-size:var(--help-title-size);color:var(--night);margin:0;font-weight:600;line-height:1.3;}
 .help-card{background:var(--white);border:0.5px solid var(--border);
   border-radius:10px;padding:12px 14px;margin-bottom:8px;}
 .help-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;}
@@ -1435,7 +1435,6 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
 .cp-remove,
 .dn-result-date{font-size:var(--sem-strong-14);}
 .ob-body,
-.help-section-title,
 .cp-close,
 .date-nav-entry{font-size:var(--sem-strong-15);}
 .pc-title,
@@ -2618,11 +2617,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.124-R1B-PROVENANCE-R12-INTEGRITY-R1'; // R12 provenance/presentation successor; devotional corpus and Search-V2 payloads preserved
-const PUBLIC_VERSION = '124';       // R12 provenance/presentation successor; public release not yet authorized
+const APP_VERSION = 'v2.19.125-R1B-HELP-TYPOGRAPHY-R1'; // bounded Help/documentation typography successor of exact v124; corpus and Search-V2 payloads preserved
+const PUBLIC_VERSION = '125';       // bounded Help/documentation typography successor; final external/device qualification still required
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-09-26';
-const SW_CACHE_VERSION = 'ldc-v2.19.124-R1B-provenance-r12-integrity-r1';
+const SW_CACHE_VERSION = 'ldc-v2.19.125-R1B-help-typography-r1';
 const CORPUS_MANIFEST_SHA256 = 'd1e761c7e6cb046afe092abde992fffa18369f6192b7cae47b0194fbd583c3fb';
 const DEEP_LINK_SCHEMA = 'ldc-deep-link-v1';
 const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
@@ -9110,10 +9109,10 @@ function closeProvenanceDetails(){
 ═══════════════════════════════════════════════════════ */
 const TEXT_LEVELS = Object.freeze({ small:16, normal:19, large:22, xlarge:26 });
 const TEXT_TYPOGRAPHY = Object.freeze({
-  small:  {readerTitle:20,browseTitle:14,journeyCopy:12,journeyAction:13,meta:11,seq:10,badge:10,sourceMode:12,suppBadge:12,readerControl:13,readerJourneyCopy:12,readerJourneyAction:13,readerBack:13,readerChromeTitle:13,readerOrientation:11,readerDate:12,searchExcerpt:14,espaceExcerpt:13,collectionExcerpt:13,helpBody:13,helpTip:12,annotationBody:12,collectionTitle:16,homeTitle:24,homeQuote:14,homeResumeTitle:15,homeAction:13},
-  normal: {readerTitle:20,browseTitle:15,journeyCopy:13,journeyAction:14,meta:12,seq:11,badge:11,sourceMode:12,suppBadge:12,readerControl:14,readerJourneyCopy:13,readerJourneyAction:14,readerBack:14,readerChromeTitle:14,readerOrientation:12,readerDate:13,searchExcerpt:15,espaceExcerpt:14,collectionExcerpt:14,helpBody:14,helpTip:13,annotationBody:14,collectionTitle:16,homeTitle:28,homeQuote:15,homeResumeTitle:16,homeAction:13},
-  large:  {readerTitle:23,browseTitle:17,journeyCopy:15,journeyAction:16,meta:13,seq:12,badge:13,sourceMode:14,suppBadge:14,readerControl:18,readerJourneyCopy:17,readerJourneyAction:18,readerBack:17,readerChromeTitle:17,readerOrientation:15,readerDate:16,searchExcerpt:17,espaceExcerpt:16,collectionExcerpt:16,helpBody:16,helpTip:15,annotationBody:16,collectionTitle:18,homeTitle:31,homeQuote:17,homeResumeTitle:18,homeAction:15},
-  xlarge: {readerTitle:27,browseTitle:20,journeyCopy:18,journeyAction:19,meta:14,seq:13,badge:15,sourceMode:15,suppBadge:15,readerControl:20,readerJourneyCopy:20,readerJourneyAction:21,readerBack:19,readerChromeTitle:20,readerOrientation:17,readerDate:18,searchExcerpt:20,espaceExcerpt:19,collectionExcerpt:19,helpBody:18,helpTip:17,annotationBody:18,collectionTitle:20,homeTitle:35,homeQuote:20,homeResumeTitle:21,homeAction:17}
+  small:  {readerTitle:20,browseTitle:14,journeyCopy:12,journeyAction:13,meta:11,seq:10,badge:10,sourceMode:12,suppBadge:12,readerControl:13,readerJourneyCopy:12,readerJourneyAction:13,readerBack:13,readerChromeTitle:13,readerOrientation:11,readerDate:12,searchExcerpt:14,espaceExcerpt:13,collectionExcerpt:13,helpBody:13,helpTip:12,helpTitle:15,annotationBody:12,collectionTitle:16,homeTitle:24,homeQuote:14,homeResumeTitle:15,homeAction:13},
+  normal: {readerTitle:20,browseTitle:15,journeyCopy:13,journeyAction:14,meta:12,seq:11,badge:11,sourceMode:12,suppBadge:12,readerControl:14,readerJourneyCopy:13,readerJourneyAction:14,readerBack:14,readerChromeTitle:14,readerOrientation:12,readerDate:13,searchExcerpt:15,espaceExcerpt:14,collectionExcerpt:14,helpBody:14,helpTip:13,helpTitle:16,annotationBody:14,collectionTitle:16,homeTitle:28,homeQuote:15,homeResumeTitle:16,homeAction:13},
+  large:  {readerTitle:23,browseTitle:17,journeyCopy:15,journeyAction:16,meta:13,seq:12,badge:13,sourceMode:14,suppBadge:14,readerControl:18,readerJourneyCopy:17,readerJourneyAction:18,readerBack:17,readerChromeTitle:17,readerOrientation:15,readerDate:16,searchExcerpt:17,espaceExcerpt:16,collectionExcerpt:16,helpBody:17,helpTip:16,helpTitle:20,annotationBody:16,collectionTitle:18,homeTitle:31,homeQuote:17,homeResumeTitle:18,homeAction:15},
+  xlarge: {readerTitle:27,browseTitle:20,journeyCopy:18,journeyAction:19,meta:14,seq:13,badge:15,sourceMode:15,suppBadge:15,readerControl:20,readerJourneyCopy:20,readerJourneyAction:21,readerBack:19,readerChromeTitle:20,readerOrientation:17,readerDate:18,searchExcerpt:20,espaceExcerpt:19,collectionExcerpt:19,helpBody:20,helpTip:19,helpTitle:23,annotationBody:18,collectionTitle:20,homeTitle:35,homeQuote:20,homeResumeTitle:21,homeAction:17}
 });
 const TEXT_LEVEL_MIGRATION_KEY = 'text_size_level_migration_v1';
 
@@ -9150,6 +9149,7 @@ function applyTextLevel(level) {
   root.style.setProperty('--collection-excerpt-size', type.collectionExcerpt + 'px');
   root.style.setProperty('--help-body-size', type.helpBody + 'px');
   root.style.setProperty('--help-tip-size', type.helpTip + 'px');
+  root.style.setProperty('--help-title-size', type.helpTitle + 'px');
   root.style.setProperty('--annotation-body-size', type.annotationBody + 'px');
   root.style.setProperty('--collection-title-size', type.collectionTitle + 'px');
   root.style.setProperty('--home-title-size', type.homeTitle + 'px');

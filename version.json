@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.124-R1B-PROVENANCE-R12-INTEGRITY-R1",
+  "app_version": "v2.19.125-R1B-HELP-TYPOGRAPHY-R1",
   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
   "baseline_candidate_sha256": "4a45966c24b9d6444c77b4229ba3df16634ec949cfb703dce91c5da1ec2d8fad",
@@ -32,14 +32,14 @@
     "semantic_predecessor_aligne": "G036-AFLP-R7-UWR2",
     "stage2_221_predecessor_generation": "G036-AFLP-R7-SUP-T5-FAST1"
   },
-  "current_release_authority": "V124_PROVENANCE_R12_INTEGRITY_R1__R12_PRESENTATION_PRESERVED__CURRENT_DERIVED_METADATA_REPAIRED__ZERO_SEMANTIC_MUTATION__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED",
-  "current_runtime_browser_validation": "INTERNAL_STATIC_PACKAGE_AND_SERVED_ASSET_INTEGRITY_PASS__MANAGED_CHROMIUM_BLOCKED_BY_ADMINISTRATOR__EXTERNAL_BROWSER_PWA_IPHONE_IPAD_GATES_OPEN",
+  "current_release_authority": "V125_HELP_TYPOGRAPHY_R1__BOUNDED_SUCCESSOR_OF_EXACT_V124__HELP_DOCUMENTATION_SCALING_ONLY__CORPUS_SEARCH_READER_UNCHANGED__FINAL_EXTERNAL_DEVICE_QUALIFICATION_REQUIRED",
+  "current_runtime_browser_validation": "V125_INTERNAL_STATIC_INTEGRITY_PASS__ISOLATED_REAL_CHROMIUM_LAYOUT_MATRIX_PASS_48_CASES_HELP_AND_PROVENANCE__FULL_NAVIGATION_BLOCKED_BY_ADMINISTRATOR__EXTERNAL_HOSTED_BROWSER_PWA_IPHONE_IPAD_GATES_REQUIRED",
   "deep_link_schema": "ldc-deep-link-v1",
   "degraded_boot_stage6": "DEFER__NOT_JUSTIFIED_FOR_RUNTIME_MUTATION_NOW",
   "diagnostic_default_copy_contract": "ALLOWLIST_PUBLIC_TECHNICAL_METADATA__NO_RAW_QUERY__NO_RAW_ERROR_MESSAGE__NO_USER_AUTHORED_TEXT",
   "entry_start_contract": "V107__V106_ENTRY_START_SEMANTIC_FIXED_POINT_AND_USER_INTENT_LOCK_PRESERVED__DIRECT_TOME_LIST_OPEN_ADDS_SOURCE_SCROLL_HANDOFF_TRANSACTION__CAPTURE_BACK_CONTEXT_BEFORE_BLUR__BLUR_FOCUSED_LIST_BUTTON_BEFORE_FIRST_AWAIT__FREEZE_SOURCE_MOMENTUM__RENEW_READER_SCROLL_DOM_SURFACE__PIN_TOP_BEFORE_EXPOSURE_AND_FOR_TWO_SETTLING_FRAMES__PREVIOUS_NEXT_SEARCH_RESUME_NOTE_HIGHLIGHT_DEEP_LINK_TARGET_SEMANTICS_UNCHANGED",
   "external_decision_authority": "FINAL_DECISION_LOCK_EXTERNAL_TO_DEPLOY_ZIP__WRITTEN_LAST_AFTER_PRIMARY_AND_INDEPENDENT_REOPEN_AUDITS",
-  "external_validation_status": "V124_PROVENANCE_R12_INTEGRITY_R1__INTERNAL_STATIC_AND_SERVED_ASSET_REAUDIT_PASS__MANAGED_CHROMIUM_ENVIRONMENT_BLOCKED__FRESH_EXTERNAL_BROWSER_PWA_IPHONE_IPAD_CONTROLLED_TEST_REQUIRED__PUBLIC_RELEASE_NOT_AUTHORIZED",
+  "external_validation_status": "V125_HELP_TYPOGRAPHY_R1__INTERNAL_BOUNDED_QA_PASS__FULL_BROWSER_NAVIGATION_ENVIRONMENT_BLOCKED__FRESH_HOSTED_BROWSER_PWA_IPHONE_IPAD_CONTROLLED_TEST_REQUIRED__PUBLIC_RELEASE_NOT_YET_AUTHORIZED",
   "f1_poisoned_http_cache_regression_gate": "REQUIRED_AND_EXTERNAL_EVIDENCE",
   "f7_release_metadata_generation": "CURRENT_RELEASE_COUNTS_AND_BINDINGS_GENERATED_AFTER_CORPUS_PAYLOAD_FREEZE__V32_VALUES_RETAINED_ONLY_UNDER_HISTORICAL_KEYS",
   "f8_android_nonfragment_highlight_targeting": {
@@ -391,7 +391,7 @@
   "offline_corpus_manifest_sha256": "d1e761c7e6cb046afe092abde992fffa18369f6192b7cae47b0194fbd583c3fb",
   "offline_integrity_contract": "PERSISTENT_OFFLINE_REUSE_REQUIRES_CURRENT_SCOPE_URL_PLUS_EXACT_ASSET_SHA256_AND_BYTE_LENGTH_MARKERS__GLOBAL_PREDECESSOR_BINDING_NOT_REQUIRED__CHANGED_OR_INVALID_ASSETS_FAIL_CLOSED",
   "offline_manifest_schema": "ldc-offline-manifest-v3",
-  "offline_scope": "36 tomes PRINCIPAL Final R2 textual state + SUP-T1..SUP-T5; R12 provenance presentation preserved; v124 repairs current derived metadata only; SEARCH-V2 payloads unchanged; Semantic Search V3 fail-closed; public deployment not authorized.",
+  "offline_scope": "36 tomes PRINCIPAL Final R2 textual state + SUP-T1..SUP-T5; R12 provenance presentation preserved; v125 bounded Help/documentation typography scaling only; corpus and SEARCH-V2 payloads unchanged; Semantic Search V3 fail-closed; public deployment not yet authorized.",
   "offline_state_schema": "ldc-offline-state-v3",
   "offline_status_typography_v98_contract": "IMPORTANT_STATUS_TITLE_DETAIL_SCALE_12_13_16_19_AND_11_12_15_18_SMALL_NORMAL_LARGE_XLARGE",
   "offline_storage_cache_name_contract": "ldc-le-livre-du-ciel-offline-persistent-v3-<fnv1a32(service-worker-scope)>",
@@ -409,12 +409,12 @@
   "owner_override_note": "A continuation of the full blind adversarial audit of frozen R18 R7 found a genuine active-metadata contradiction: offline_manifest.json had the correct R18 R7 page_worker_revision and rebuild_status but its active scope field still described v87 R18 R6 as the current bounded successor. R18 R8 is a metadata-coherence successor. It corrects that active scope description and advances page/worker/cache identity to R18 R8 so the corrected bytes have a unique update namespace. The R18 R7 user-select:none native-selection repair and all R18 R6/R18 R5 runtime repairs are preserved. No corpus, search, speaker, flow, display, interaction-anchor, DB-schema or offline-content-binding mutation is authorised.",
   "owner_stage_start_authorisation": "USER_EXPLICITLY_AUTHORIZED_FULL_BLIND_ADVERSARIAL_VERIFICATION_AND_ALL_NECESSARY_CORRECTIONS__2026_09_12",
   "owner_user_acceptance": "USER_EXPLICITLY_REQUESTED_CONTINUED_DEVELOPMENT_WITHOUT_IMMEDIATE_DEVICE_CHECKING__NO_PUBLIC_DEPLOYMENT_AUTHORITY__2026_09_14",
-  "package_predecessor_app_version": "v2.19.123-R1B-PROVENANCE-R12",
-  "package_predecessor_zip_sha256": "091bbec3c5d917c171626fb12d0d3c1d2824c55d877d3e92a90c94c61cc98bab",
+  "package_predecessor_app_version": "v2.19.124-R1B-PROVENANCE-R12-INTEGRITY-R1",
+  "package_predecessor_zip_sha256": "ee7fb4eee1a0345f028d0c798b7b62ef231abdb4c704cac283f4b27f181ad893",
   "package_state_at_freeze": "V107_CONTROLLED_TEST_CANDIDATE__EXACT_V106_PREDECESSOR__V106_PHYSICAL_FAIL_LOCALIZED_BY_OWNER_A_B_TEST_TO_SCROLLED_ENTRIES_LIST_TO_READER_TRANSITION__BOUNDED_HANDOFF_REPAIR_ONLY__CORPUS_SEARCH_USER_DATA_SCHEMA_PERSISTENT_OFFLINE_CONTENT_UNCHANGED__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED",
-  "page_worker_revision": "ldc-v2.19.124-R1B-provenance-r12-integrity-r1",
-  "physical_ipad_gate": "OPEN__V124_PROVENANCE_R12_INTEGRITY_R1_REQUIRES_CONTROLLED_RETEST",
-  "physical_iphone_gate": "OPEN__V124_PROVENANCE_R12_INTEGRITY_R1_REQUIRES_CONTROLLED_RETEST",
+  "page_worker_revision": "ldc-v2.19.125-R1B-help-typography-r1",
+  "physical_ipad_gate": "OPEN__V125_HELP_TYPOGRAPHY_R1_REQUIRES_CONTROLLED_RETEST",
+  "physical_iphone_gate": "OPEN__V125_HELP_TYPOGRAPHY_R1_REQUIRES_CONTROLLED_RETEST",
   "physical_samsung_android_gate": "V106_RETEST_REQUIRED_AFTER_READER_MUTATION__DIRECT_TOME_ENTRY_START__PREV_NEXT__FOUR_TEXT_PRESETS__MAX_SYSTEM_FONT__OFFLINE_COLD_REOPEN__TALKBACK_REPRESENTATIVE_CHECK",
   "post_four_pass_metadata_reconciliation": {
     "active_envelopes_rebound_to_r3": 109,
@@ -449,7 +449,7 @@
   "protected_lecture_suivie_contract": "ONE_PROTECTED_MAIN_JOURNEY__ONLY_EXPLICIT_SEQUENTIAL_START_RESUME_INHERITED_PREV_NEXT_OR_CONFIRMED_RELOCATION_MAY_WRITE_MAIN__CONSULTATIONS_NEVER_WRITE_MAIN__LU_INDEPENDENT",
   "protected_v45_runtime": "CORPUS_SPEAKERS_PRESENTATION_SEARCH_FLOW_DISPLAY_SUPPLEMENTS_USER_STATE_HIGHLIGHTING_OFFLINE_CACHE_ALGORITHM_NAVIGATION_LOGIC_UNCHANGED",
   "public_release": "NOT_AUTHORIZED",
-  "public_version": "124",
+  "public_version": 125,
   "quote_display_contract": "CANONICAL_GUILLEMETS_PRESERVED_IN_CORPUS__ADJACENT_OUTER_DELIMITERS_HIDDEN__TWO_SOURCE_SPAN_GAP_OPENERS_WITH_EXPLICIT_JESUS_ATTRIBUTION_HIDDEN__SIX_PUNCTUATION_GAP_CLOSERS_HIDDEN__NESTED_AND_REPORTED_QUOTES_PRESERVED",
   "r16_authority_fencing_reaudit": {
     "corpus_changed": false,
@@ -3482,7 +3482,7 @@
     "offline_content_binding_sha256": "329634e8189bc88a936bbaf92898fc1905c4c2084e611e6692d727a2f78ecc61",
     "offline_manifest_sha256": "909b0f9b0b36fa4dc26e045b07219c2067d7c69e94cedd238315b7e940c0de2d"
   },
-  "offline_manifest_sha256": "aa0bc06d4e754a11ea284e8fcd3c6931358de02428c6929e8bf102092fd5a8e6",
+  "offline_manifest_sha256": "0e3503e2ffe5965a957cd8432e6dd4b67c3bef91a8ad7bd4002d7773e7aeb9c7",
   "tome1_finalization_release_integrity_r2": {
     "date": "2026-09-26",
     "predecessor_candidate_sha256": "d5341cd079a6c50bee148c497108a40f924a70f50f840702884a457fb88abe4b",
@@ -3552,5 +3552,58 @@
     "public_deployment_authorized": false,
     "internal_reaudit_status": "PASS__DERIVED_METADATA_BINDINGS__JS_SYNTAX__STATIC_DOM__204_OFFLINE_ASSETS__5_SHELL_SERVED_BYTES",
     "managed_chromium_status": "ENVIRONMENT_BLOCKED__ERR_BLOCKED_BY_ADMINISTRATOR__NOT_APPLICATION_PASS_OR_FAIL"
+  },
+  "help_typography_v125": {
+    "classification": "BOUNDED_HELP_DOCUMENTATION_TYPOGRAPHY_SCALING",
+    "predecessor_app_version": "v2.19.124-R1B-PROVENANCE-R12-INTEGRITY-R1",
+    "predecessor_zip_sha256": "ee7fb4eee1a0345f028d0c798b7b62ef231abdb4c704cac283f4b27f181ad893",
+    "mutation_universe": [
+      "index.html",
+      "offline_manifest.json",
+      "sw.js",
+      "version.json"
+    ],
+    "help_body_px": {
+      "small": 13,
+      "normal": 14,
+      "large": 17,
+      "xlarge": 20
+    },
+    "help_tip_px": {
+      "small": 12,
+      "normal": 13,
+      "large": 16,
+      "xlarge": 19
+    },
+    "help_title_px": {
+      "small": 15,
+      "normal": 16,
+      "large": 20,
+      "xlarge": 23
+    },
+    "help_chip_curve_changed": false,
+    "reader_typography_changed": false,
+    "corpus_changed": false,
+    "search_v2_changed": false,
+    "search_v3_changed": false,
+    "user_data_schema_changed": false,
+    "service_worker_algorithm_changed": false,
+    "service_worker_revision_changed_for_update_delivery": true,
+    "physical_device_retest_required": true,
+    "public_deployment_authorized": false,
+    "internal_qa": {
+      "diff_scope": "PASS__248_FILES_PRESERVED__ONLY_INDEX_HTML_OFFLINE_MANIFEST_SW_JS_VERSION_JSON_CHANGED",
+      "corpus_byte_identity": "PASS__205_OF_205_CORPUS_FILES_IDENTICAL_TO_V124",
+      "offline_manifest_assets": "PASS__204_UNIQUE_ASSETS__114480819_BYTES__ALL_SIZE_SHA256_MATCH",
+      "offline_content_binding": "PASS__50f9e009bc4b4abe73f0cc114d04e3e7443c1d176db81fa4e33b8b24dffd0ee7",
+      "js_syntax": "PASS__SW_AND_INLINE_SCRIPT",
+      "help_layout_matrix": "PASS__24_CASES__6_WIDTHS_X_4_TEXT_LEVELS__ZERO_OVERFLOW__74_ROWS__11_SECTIONS",
+      "provenance_layout_matrix": "PASS__24_CASES__6_WIDTHS_X_4_TEXT_LEVELS__ZERO_OVERFLOW__14_DISCLOSURES",
+      "service_worker_fresh_offline": "PASS__READY_204_OF_204__114480819_BYTES",
+      "service_worker_corruption_recovery": "PASS__DETECT_PARTIAL_203_OF_204__REPAIR_READY_204_OF_204",
+      "service_worker_v124_to_v125_update": "PASS__OLD_SHELL_RUNTIME_RETAINED_WHILE_WAITING__REMOVED_AFTER_ACTIVATION",
+      "full_browser_navigation": "NOT_TESTABLE_IN_CURRENT_ENVIRONMENT__ERR_BLOCKED_BY_ADMINISTRATOR",
+      "physical_device": "OPEN"
+    }
   }
 }

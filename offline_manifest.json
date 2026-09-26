@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.124-R1B-PROVENANCE-R12-INTEGRITY-R1",
+  "app_version": "v2.19.125-R1B-HELP-TYPOGRAPHY-R1",
   "asset_count": 204,
   "assets": [
     {
@@ -1050,7 +1050,7 @@
   "fast_mode_authority_sha256": "09590abe803b99dadf696fbecd64fb88b4fee9a05b38280549b4abcb920e0c78",
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.124-R1B-provenance-r12-integrity-r1",
+  "page_worker_revision": "ldc-v2.19.125-R1B-help-typography-r1",
   "post_r6_date_id_a2_fixed_point": {
     "a2_sha256": "dd034a4d4bb329254818c3e62fd629c9b64c90f9d4bd533de9f6ed99247cb1d8",
     "date_id_sha256": "ed5bf462c47b8fb5a41f7c81591257d6e99f94bae08628aa27e5f7d667020c2a",
@@ -1121,5 +1121,32 @@
     "corpus_manifest_sha256": "d1e761c7e6cb046afe092abde992fffa18369f6192b7cae47b0194fbd583c3fb",
     "search_v2_manifest_sha256": "e87da88a709a1b81f6e76e1afe119a8ad946df602977a88c45c8b0d6e35dc250",
     "semantic_mutations": 0
+  },
+  "help_typography_v125": {
+    "classification": "BOUNDED_HELP_DOCUMENTATION_TYPOGRAPHY_SCALING",
+    "predecessor_app_version": "v2.19.124-R1B-PROVENANCE-R12-INTEGRITY-R1",
+    "corpus_assets_changed": false,
+    "search_v2_payloads_changed": false,
+    "reader_typography_changed": false,
+    "help_body_px": {
+      "small": 13,
+      "normal": 14,
+      "large": 17,
+      "xlarge": 20
+    },
+    "help_tip_px": {
+      "small": 12,
+      "normal": 13,
+      "large": 16,
+      "xlarge": 19
+    },
+    "help_title_px": {
+      "small": 15,
+      "normal": 16,
+      "large": 20,
+      "xlarge": 23
+    },
+    "help_chip_curve_changed": false,
+    "physical_device_retest_required": true
   }
 }
