@@ -16,8 +16,8 @@ function scopeFingerprint(scope) {
 }
 const SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
 const APP_CACHE_PREFIX = `luisa-letters-${SCOPE_FINGERPRINT}-`;
-const SHELL_CACHE = `${APP_CACHE_PREFIX}shell-v2.3-r8`;
-const CORPUS_CACHE = `${APP_CACHE_PREFIX}corpus-v2.3-r8`;
+const SHELL_CACHE = `${APP_CACHE_PREFIX}shell-v2.3-r8-r4`;
+const CORPUS_CACHE = `${APP_CACHE_PREFIX}corpus-v2.3-r8-r4`;
 const CANONICAL_SHELL_URL = './index.html';
 const CORPUS_URL = './corpus.json';
 
