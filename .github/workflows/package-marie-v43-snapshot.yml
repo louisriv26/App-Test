@@ -1,0 +1,63 @@
+name: Package Marie V43 production snapshot
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/package-marie-v43-snapshot.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Clone exact Marie V43 production
+        run: |
+          rm -rf /tmp/marie-v43
+          git clone --depth 1 --branch main https://github.com/louisriv26/La-Vierge-Marie-dans-le-Royaume-de-la-Divine-Volont-.git /tmp/marie-v43
+          cd /tmp/marie-v43
+          test "$(git rev-parse HEAD)" = "cd4bc5cf4a23c8ced277ab55439a3b743ea8765f"
+          test "$(git rev-parse HEAD^{tree})" = "48a286a6b7acbacdd2ef0f3d8d8fd05fd684f552"
+
+      - name: Build snapshot and manifests
+        run: |
+          mkdir -p out
+          cd /tmp/marie-v43
+          git archive --format=zip --output="$GITHUB_WORKSPACE/out/MJV_V43_CURRENT_PRODUCTION_SOURCE_SNAPSHOT_2026-09-27.zip" HEAD
+          sha256sum "$GITHUB_WORKSPACE/out/MJV_V43_CURRENT_PRODUCTION_SOURCE_SNAPSHOT_2026-09-27.zip" | sed 's#  .*/#  #' > "$GITHUB_WORKSPACE/out/MJV_V43_CURRENT_PRODUCTION_SOURCE_SNAPSHOT_2026-09-27_SHA256.txt"
+          python - <<'PY'
+          import csv, hashlib, pathlib, subprocess, os
+          root=pathlib.Path('/tmp/marie-v43')
+          out=pathlib.Path(os.environ['GITHUB_WORKSPACE'])/'out'
+          paths=subprocess.check_output(['git','-C',str(root),'ls-tree','-r','--name-only','HEAD'],text=True).splitlines()
+          with (out/'MJV_V43_CURRENT_PRODUCTION_FILE_MANIFEST_SHA256.csv').open('w',newline='',encoding='utf-8') as f:
+              w=csv.writer(f); w.writerow(['path','bytes','sha256'])
+              for p in sorted(paths):
+                  b=(root/p).read_bytes()
+                  w.writerow([p,len(b),hashlib.sha256(b).hexdigest()])
+          with (out/'MJV_V43_CURRENT_PRODUCTION_GIT_BLOB_MANIFEST.csv').open('w',newline='',encoding='utf-8') as f:
+              w=csv.writer(f); w.writerow(['path','git_blob_sha','bytes'])
+              lines=subprocess.check_output(['git','-C',str(root),'ls-tree','-r','-l','HEAD'],text=True).splitlines()
+              for line in lines:
+                  meta,p=line.split('\t',1)
+                  mode,typ,sha,size=meta.split()
+                  w.writerow([p,sha,size])
+          PY
+
+      - name: Verify snapshot
+        run: |
+          unzip -t out/MJV_V43_CURRENT_PRODUCTION_SOURCE_SNAPSHOT_2026-09-27.zip
+          FILE_COUNT=$(unzip -Z1 out/MJV_V43_CURRENT_PRODUCTION_SOURCE_SNAPSHOT_2026-09-27.zip | awk '!/\/$/' | wc -l)
+          test "$FILE_COUNT" -eq 24
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MJV_V43_CURRENT_PRODUCTION_SOURCE_SNAPSHOT
+          path: out/*
+          if-no-files-found: error
+          retention-days: 30
