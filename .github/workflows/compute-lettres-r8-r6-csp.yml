@@ -1,4 +1,4 @@
-name: Compute Lettres R8 R6 CSP
+name: Verify Lettres R8 R6 CSP
 
 on:
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
           rm -rf /tmp/lettres-r8-r6
           git clone --depth 1 --branch ux-lettres-v2.3-r8-r6 https://github.com/louisriv26/Les-lettres-de-Luisa.git /tmp/lettres-r8-r6
 
-      - name: Compute exact main-script CSP digest
+      - name: Verify exact main-script CSP digest
         run: |
           python - <<'PY'
           import re, hashlib, base64, json
@@ -34,17 +34,22 @@ jobs:
           script_elem=re.search(r"script-src-elem '([^']+)'",csp).group(1)
           out={
             'actual_main_script_hash':actual,
-            'current_script_src_hash':script_src,
-            'current_script_src_elem_hash':script_elem
+            'script_src_hash':script_src,
+            'script_src_elem_hash':script_elem,
+            'script_src_matches':actual==script_src,
+            'script_src_elem_matches':actual==script_elem,
+            'script_src_equals_elem':script_src==script_elem
           }
-          open('lettres-r8-r6-csp-computed.json','w').write(json.dumps(out,indent=2))
+          open('lettres-r8-r6-csp-verification.json','w').write(json.dumps(out,indent=2))
           print(json.dumps(out,indent=2))
+          if not (out['script_src_matches'] and out['script_src_elem_matches'] and out['script_src_equals_elem']):
+              raise SystemExit(1)
           PY
 
       - name: Commit report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add lettres-r8-r6-csp-computed.json
-          git commit -m "Compute Lettres R8 R6 CSP digest" || exit 0
+          git add lettres-r8-r6-csp-verification.json
+          git commit -m "Verify Lettres R8 R6 CSP hashes" || exit 0
           git push
