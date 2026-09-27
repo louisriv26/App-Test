@@ -53,16 +53,8 @@ jobs:
       - name: Verify ZIP
         run: |
           unzip -t out/LETTRES_v2.3_R8_R5_GITHUB_DEPLOY.zip
-          test "$(unzip -Z1 out/LETTRES_v2.3_R8_R5_GITHUB_DEPLOY.zip | grep -v '/
-
-      - name: Upload package artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: LETTRES_v2.3_R8_R5_GITHUB_DEPLOY_PACKAGE
-          path: out/*
-          if-no-files-found: error
-          retention-days: 30
- | wc -l)" -eq 22
+          FILE_COUNT=$(unzip -Z1 out/LETTRES_v2.3_R8_R5_GITHUB_DEPLOY.zip | awk '!/\/$/' | wc -l)
+          test "$FILE_COUNT" -eq 22
 
       - name: Upload package artifact
         uses: actions/upload-artifact@v4
