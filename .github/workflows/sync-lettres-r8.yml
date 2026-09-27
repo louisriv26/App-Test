@@ -1,4 +1,4 @@
-name: Sync Lettres R8 test deploy
+name: Sync Lettres R8 R2 same-scope test deploy
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
       - name: Fetch exact Lettres R8 candidate
         run: |
           rm -rf /tmp/lettres-r8
-          git clone --depth 1 --branch ux-lettres-v2.3-r8-r1 https://github.com/louisriv26/Les-lettres-de-Luisa.git /tmp/lettres-r8
+          git clone --depth 1 --branch ux-lettres-v2.3-r8-r2 https://github.com/louisriv26/Les-lettres-de-Luisa.git /tmp/lettres-r8
           rm -rf lettres-r8
           mkdir -p lettres-r8
           cp -a /tmp/lettres-r8/. lettres-r8/
@@ -28,10 +28,10 @@ jobs:
 
       - name: Verify candidate markers
         run: |
-          grep -q "shell-v2.3-r8" lettres-r8/index.html
-          grep -q "corpus-v2.3-r8" lettres-r8/index.html
-          grep -q "shell-v2.3-r8" lettres-r8/sw.js
-          grep -q "corpus-v2.3-r8" lettres-r8/sw.js
+          grep -q "shell-v2.3-r8-r2" lettres-r8/index.html
+          grep -q "corpus-v2.3-r8-r2" lettres-r8/index.html
+          grep -q "shell-v2.3-r8-r2" lettres-r8/sw.js
+          grep -q "corpus-v2.3-r8-r2" lettres-r8/sw.js
 
       - name: Commit isolated test deployment
         run: |
@@ -42,5 +42,5 @@ jobs:
             echo "No changes to commit"
             exit 0
           fi
-          git commit -m "Sync exact Lettres v2.3 R8 test deployment"
+          git commit -m "Sync exact Lettres v2.3 R8 R2 same-scope test deployment"
           git push
