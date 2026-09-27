@@ -16,8 +16,8 @@ function scopeFingerprint(scope) {
 }
 const SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
 const APP_CACHE_PREFIX = `luisa-letters-${SCOPE_FINGERPRINT}-`;
-const SHELL_CACHE = `${APP_CACHE_PREFIX}shell-v2.3-r8`;
-const CORPUS_CACHE = `${APP_CACHE_PREFIX}corpus-v2.3-r8`;
+const SHELL_CACHE = `${APP_CACHE_PREFIX}shell-v2.3-r8-r2`;
+const CORPUS_CACHE = `${APP_CACHE_PREFIX}corpus-v2.3-r8-r2`;
 const CANONICAL_SHELL_URL = './index.html';
 const CORPUS_URL = './corpus.json';
 
@@ -107,23 +107,18 @@ self.addEventListener('fetch', event => {
 });
 
 async function networkFirstCorpus(request) {
-  let networkResponse = null;
-  try {
-    const response = await fetch(request, {cache:'no-store'});
-    if (response.ok) {
-      const cache = await caches.open(CORPUS_CACHE);
-      await cache.put(request, response.clone());
-      return response;
-    }
-    networkResponse = response;
-  } catch (e) {
-    // Fall through to the last known-good cached corpus.
-  }
+  // The current release corpus is precached before this worker can install.
+  // Serve that exact versioned corpus immediately so an update/reopen cannot stall on a network request.
   const cache = await caches.open(CORPUS_CACHE);
   const cached = await cache.match(request) || await cache.match(CORPUS_URL);
   if (cached) return cached;
-  if (networkResponse) return networkResponse;
-  return new Response(JSON.stringify({error:'corpus_unavailable',letters:[]}), {status:503,headers:{'Content-Type':'application/json'}});
+  try {
+    const response = await fetch(request, {cache:'no-store'});
+    if (response.ok) await cache.put(request, response.clone());
+    return response;
+  } catch (e) {
+    return new Response(JSON.stringify({error:'corpus_unavailable',letters:[]}), {status:503,headers:{'Content-Type':'application/json'}});
+  }
 }
 
 async function networkFirstShell(request) {
