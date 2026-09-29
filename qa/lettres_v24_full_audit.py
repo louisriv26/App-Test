@@ -11,6 +11,7 @@ EXPECTED={
 R=[]
 def rec(n,ok=True,d=None):
     R.append({'name':n,'ok':bool(ok),'detail':d})
+    print('CHECK',n,'PASS' if ok else 'FAIL',repr(d),flush=True)
     if not ok: raise AssertionError(f'{n}: {d}')
 def ready(pg):
     pg.locator('#loading').wait_for(state='detached',timeout=20000)
@@ -73,7 +74,14 @@ with sync_playwright() as p:
     expect(pg.locator('#note-sheet')).to_be_hidden()
 
     # Highlight create from actual Reader selection
-    dp=pg.locator('#phone-reader-scroll [data-dp-id]').first
+    dps=pg.locator('#phone-reader-scroll [data-dp-id]')
+    dp=None
+    for i in range(dps.count()):
+        cand=dps.nth(i)
+        if len(cand.inner_text().strip())>=8:
+            dp=cand
+            break
+    rec('highlight:text_paragraph_found',dp is not None,dps.count())
     ok=dp.evaluate("""el=>{const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){let t=n.nodeValue||'';let a=t.search(/\\S/);if(a>=0&&t.slice(a).trim().length>=8){let z=Math.min(t.length,a+8);let r=document.createRange();r.setStart(n,a);r.setEnd(n,z);let s=window.getSelection();s.removeAllRanges();s.addRange(r);return s.toString();}}return '';}""")
     rec('highlight:selection_created',len(ok.strip())>=2,ok)
     pg.locator('#phone-reader-scroll').dispatch_event('mouseup'); expect(pg.locator('#hl-popup')).to_have_class(re.compile('show'))
