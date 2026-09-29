@@ -61,7 +61,7 @@ with sync_playwright() as p:
     rec('phone:nav5',pg.locator('.pnav-item').count()==5,pg.locator('.pnav-item').count())
     pg.locator('#pnav-list').click(); rec('phone:list136',pg.locator('#letter-list .letter-item').count()==136,pg.locator('#letter-list .letter-item').count())
     pg.locator('#letter-list .letter-item[data-n="1"]').click(); rec('phone:open1',num(pg)==1,num(pg))
-    pg.locator('#pr-btn-prev').click(); pg.wait_for_timeout(100); rec('phone:prev_boundary',num(pg)==1,num(pg))
+    expect(pg.locator('#pr-btn-prev')).to_be_disabled(); rec('phone:prev_boundary_disabled',num(pg)==1,num(pg))
     pg.locator('#pr-btn-next').click(); pg.wait_for_timeout(100); rec('phone:next2',num(pg)==2,num(pg))
     pg.locator('#pr-fav-btn').click(); expect(pg.locator('#pr-fav-btn')).to_have_attribute('aria-pressed','true')
     pg.locator('#pr-read-btn').click(); expect(pg.locator('#pr-read-btn')).to_have_attribute('aria-label','Marquer comme non lu')
