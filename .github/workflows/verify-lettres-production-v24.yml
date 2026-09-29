@@ -1,0 +1,83 @@
+name: Lettres v2.4 production live qualification
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/verify-lettres-production-v24.yml'
+
+jobs:
+  production-live:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify production GitHub Pages exact served bytes
+        run: |
+          python3 - <<'PY'
+          import urllib.request,hashlib,time
+          base='https://louisriv26.github.io/Les-lettres-de-Luisa/'
+          expected={
+            'index.html':'1034efd29bd5c93021cb0a68cb3bc9c7e0fc48f3bb4e3a3a3b7e17181369de95',
+            'sw.js':'42203358031e1d710db5610fd1b21af8ab40f7f88a0dcdec72a346235edc3797',
+            'corpus.json':'362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec',
+            'manifest.json':'6ac8e12e1f037b5920a1c274866fa393b5c49c5e52fb18cf922f92c17881ad48',
+          }
+          got={}
+          for attempt in range(18):
+              try:
+                  got={}
+                  for name,want in expected.items():
+                      req=urllib.request.Request(base+name,headers={'Cache-Control':'no-cache','Pragma':'no-cache','User-Agent':'Lettres-v2.4-production-QA'})
+                      with urllib.request.urlopen(req,timeout=20) as r:
+                          data=r.read()
+                      got[name]=hashlib.sha256(data).hexdigest()
+                  if got==expected:
+                      print({'production_served_byte_binding':'PASS','base':base,'hashes':got})
+                      break
+                  print({'attempt':attempt+1,'served_hashes':got})
+              except Exception as e:
+                  print({'attempt':attempt+1,'error':repr(e)})
+              time.sleep(5)
+          else:
+              raise AssertionError(('Production Pages did not serve exact v2.4 B1 bytes',got))
+          PY
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install browser harness
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Chromium production served-origin startup smoke
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          url='https://louisriv26.github.io/Les-lettres-de-Luisa/index.html'
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              for viewport in ({'width':390,'height':844},{'width':1280,'height':900}):
+                  page=browser.new_page(viewport=viewport)
+                  console_errors=[]; page_errors=[]
+                  page.on('console',lambda m: console_errors.append(m.text) if m.type=='error' else None)
+                  page.on('pageerror',lambda e: page_errors.append(str(e)))
+                  response=page.goto(url,wait_until='domcontentloaded')
+                  assert response and response.ok,response.status if response else None
+                  page.locator('#loading').wait_for(state='detached',timeout=20000)
+                  title=page.locator('#list-title').inner_text()
+                  version=page.locator('.build-meta').first.inner_text()
+                  assert title=='136 Lettres',title
+                  assert version=='v2.4 · 2026-09-29',version
+                  assert not page.locator('.error-state').count(),'error-state rendered'
+                  assert not page_errors,page_errors
+                  csp=[e for e in console_errors if 'Content Security Policy' in e or 'Refused to' in e]
+                  assert not csp,csp
+                  if viewport['width']>=1000:
+                      assert page.locator('#sidebar').is_visible()
+                      assert page.locator('#right-panel').is_visible()
+                  print({'production_origin':url,'viewport':viewport,'visible_version':version,'list_title':title,'console_errors':console_errors})
+                  page.close()
+              browser.close()
+          PY
