@@ -36,7 +36,7 @@ def clean(c,e,w):
     bad=[x for x in c if 'Content Security Policy' in x or 'Refused to' in x]
     rec(w+':csp',not bad,bad)
 def num(pg,wide=False):
-    s=pg.locator('#wr-num' if wide else '#pr-num').inner_text()
+    s=pg.locator('#wr-num' if wide else '#pr-pos').inner_text()
     m=re.search(r'(\d+)',s); return int(m.group(1)) if m else None
 def store(ctx):
     for o in ctx.storage_state().get('origins',[]):
