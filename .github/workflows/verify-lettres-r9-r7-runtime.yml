@@ -56,16 +56,16 @@ jobs:
                   page.on('pageerror',lambda e: page_errors.append(str(e)))
                   response=page.goto('http://127.0.0.1:8765/lettres-r9/index.html',wait_until='domcontentloaded')
                   assert response and response.ok,response.status if response else None
-                  page.wait_for_function("document.getElementById('loading') === null",timeout=15000)
-                  corpus_len=page.evaluate('CORPUS.length')
-                  build=page.evaluate('APP_BUILD')
-                  assert build=='R9 R7',build
-                  assert corpus_len==136,corpus_len
+                  page.locator('#loading').wait_for(state='detached',timeout=15000)
+                  title=page.locator('#list-title').inner_text()
+                  build_text=page.locator('.build-meta').first.inner_text()
+                  assert '136 Lettres' in title,title
+                  assert 'R9 R7' in build_text,build_text
                   assert not page.locator('.error-state').count(),'error-state rendered'
                   assert not page_errors,page_errors
                   csp_errors=[e for e in console_errors if 'Content Security Policy' in e or 'Refused to' in e]
                   assert not csp_errors,csp_errors
-                  print({'build':build,'corpus_len':corpus_len,'console_errors':console_errors})
+                  print({'build_text':build_text,'list_title':title,'console_errors':console_errors})
                   browser.close()
           finally:
               server.terminate(); server.wait(timeout=5)
@@ -83,11 +83,12 @@ jobs:
                   browser=p.chromium.launch(headless=True)
                   page=browser.new_page(viewport={'width':1280,'height':900})
                   page.goto('http://127.0.0.1:8766/lettres-r9/index.html',wait_until='domcontentloaded')
-                  page.wait_for_function("document.getElementById('loading') === null",timeout=15000)
-                  assert page.evaluate('CORPUS.length')==136
+                  page.locator('#loading').wait_for(state='detached',timeout=15000)
+                  assert '136 Lettres' in page.locator('#list-title').inner_text()
                   assert page.locator('#sidebar').is_visible()
                   assert page.locator('#right-panel').is_visible()
-                  print({'layout':page.locator('html').get_attribute('data-layout'),'build':page.evaluate('APP_BUILD')})
+                  assert 'R9 R7' in page.locator('.build-meta').first.inner_text()
+                  print({'layout':page.locator('html').get_attribute('data-layout'),'list_title':page.locator('#list-title').inner_text()})
                   browser.close()
           finally:
               server.terminate(); server.wait(timeout=5)
