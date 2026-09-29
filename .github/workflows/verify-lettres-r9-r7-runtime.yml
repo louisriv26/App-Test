@@ -1,0 +1,94 @@
+name: Lettres R9 R7 runtime qualification
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - 'lettres-r9/**'
+      - '.github/workflows/verify-lettres-r9-r7-runtime.yml'
+
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify exact R9 R7 source bytes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          expected={
+            'lettres-r9/index.html':'f6581ba9c8cc1b382065584241dd8df4b479be0a6898861e19088f7eea69c544',
+            'lettres-r9/sw.js':'239ea367a7dfe4eed3a269e7b1a333348f7e850a23eb31a8ee922305ada70609',
+            'lettres-r9/corpus.json':'362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec',
+          }
+          for path,want in expected.items():
+              got=hashlib.sha256(Path(path).read_bytes()).hexdigest()
+              print(path,got)
+              assert got==want,(path,got,want)
+          PY
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install browser harness
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Chromium CSP and corpus-load smoke
+        run: |
+          python3 - <<'PY'
+          import subprocess,time
+          from playwright.sync_api import sync_playwright
+          server=subprocess.Popen(['python3','-m','http.server','8765','--bind','127.0.0.1'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+          try:
+              time.sleep(1)
+              with sync_playwright() as p:
+                  browser=p.chromium.launch(headless=True)
+                  page=browser.new_page(viewport={'width':390,'height':844})
+                  console_errors=[]
+                  page_errors=[]
+                  page.on('console',lambda m: console_errors.append(m.text) if m.type=='error' else None)
+                  page.on('pageerror',lambda e: page_errors.append(str(e)))
+                  response=page.goto('http://127.0.0.1:8765/lettres-r9/index.html',wait_until='domcontentloaded')
+                  assert response and response.ok,response.status if response else None
+                  page.wait_for_function("document.getElementById('loading') === null",timeout=15000)
+                  corpus_len=page.evaluate('CORPUS.length')
+                  build=page.evaluate('APP_BUILD')
+                  assert build=='R9 R7',build
+                  assert corpus_len==136,corpus_len
+                  assert not page.locator('.error-state').count(),'error-state rendered'
+                  assert not page_errors,page_errors
+                  csp_errors=[e for e in console_errors if 'Content Security Policy' in e or 'Refused to' in e]
+                  assert not csp_errors,csp_errors
+                  print({'build':build,'corpus_len':corpus_len,'console_errors':console_errors})
+                  browser.close()
+          finally:
+              server.terminate(); server.wait(timeout=5)
+          PY
+
+      - name: Wide-layout startup smoke
+        run: |
+          python3 - <<'PY'
+          import subprocess,time
+          from playwright.sync_api import sync_playwright
+          server=subprocess.Popen(['python3','-m','http.server','8766','--bind','127.0.0.1'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+          try:
+              time.sleep(1)
+              with sync_playwright() as p:
+                  browser=p.chromium.launch(headless=True)
+                  page=browser.new_page(viewport={'width':1280,'height':900})
+                  page.goto('http://127.0.0.1:8766/lettres-r9/index.html',wait_until='domcontentloaded')
+                  page.wait_for_function("document.getElementById('loading') === null",timeout=15000)
+                  assert page.evaluate('CORPUS.length')==136
+                  assert page.locator('#sidebar').is_visible()
+                  assert page.locator('#right-panel').is_visible()
+                  print({'layout':page.locator('html').get_attribute('data-layout'),'build':page.evaluate('APP_BUILD')})
+                  browser.close()
+          finally:
+              server.terminate(); server.wait(timeout=5)
+          PY
