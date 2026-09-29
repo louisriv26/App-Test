@@ -17,6 +17,15 @@ def ready(pg):
     expect(pg.locator('#list-title')).to_have_text('136 Lettres')
     expect(pg.locator('.build-meta').first).to_have_text('v2.4 · 2026-09-29')
     expect(pg.locator('.error-state')).to_have_count(0)
+    # Fresh storage intentionally opens onboarding after a short delay.
+    pg.wait_for_timeout(1000)
+    overlay=pg.locator('#help-overlay')
+    onboard=overlay.is_visible()
+    if onboard:
+        expect(pg.locator('#help-slide-label')).to_have_text('1 / 12')
+        pg.locator('#help-close-btn').click()
+        expect(overlay).to_be_hidden()
+    return onboard
 def errs(pg):
     c=[]; e=[]
     pg.on('console',lambda m:c.append(m.text) if m.type=='error' else None)
@@ -47,7 +56,8 @@ with sync_playwright() as p:
     # PHONE normal/alternative/edge paths
     ctx=b.new_context(viewport={'width':390,'height':844},locale='fr-FR')
     pg=ctx.new_page(); c,e=errs(pg); resp=pg.goto(URL+'?qa=full-phone',wait_until='domcontentloaded')
-    rec('phone:http',resp and resp.ok,resp.status if resp else None); ready(pg)
+    rec('phone:http',resp and resp.ok,resp.status if resp else None); onboard=ready(pg)
+    rec('onboarding:auto_help_and_close',onboard,onboard)
     rec('phone:nav5',pg.locator('.pnav-item').count()==5,pg.locator('.pnav-item').count())
     pg.locator('#pnav-list').click(); rec('phone:list136',pg.locator('#letter-list .letter-item').count()==136,pg.locator('#letter-list .letter-item').count())
     pg.locator('#letter-list .letter-item[data-n="1"]').click(); rec('phone:open1',num(pg)==1,num(pg))
