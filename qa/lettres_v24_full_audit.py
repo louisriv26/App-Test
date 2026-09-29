@@ -108,7 +108,8 @@ with sync_playwright() as p:
     expect(pg.locator('#t-notes')).to_contain_text('QA note modifiée'); rec('D1_D2:note_edit_delete_undo',True)
     pg.locator('#tab-highlights').click(); rec('highlight:workspace_present',pg.locator('#t-highlights .hl-item').count()==1,pg.locator('#t-highlights').inner_text()[:250])
     pg.get_by_role('button',name='Supprimer le surlignage').click(); expect(pg.locator('#toast .undo-toast-btn')).to_be_visible(); pg.locator('#toast .undo-toast-btn').click()
-    rec('D1:highlight_undo',pg.locator('#t-highlights .hl-item').count()==1,pg.locator('#t-highlights').inner_text()[:250])
+    expect(pg.locator('#t-highlights .hl-item')).to_have_count(1)
+    rec('D1:highlight_undo',True,pg.locator('#t-highlights').inner_text()[:250])
 
     # Search paths
     pg.locator('#pnav-search').click(); q=pg.locator('#search-input')
