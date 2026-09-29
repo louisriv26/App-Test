@@ -49,4 +49,5 @@ jobs:
             exit 0
           fi
           git commit -m "Sync exact 24H v112 B1 Wave-1 test deployment [skip ci]"
+          git pull --rebase origin main
           git push
