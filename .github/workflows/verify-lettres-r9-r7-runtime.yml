@@ -1,4 +1,4 @@
-name: Lettres R9 R7 runtime qualification
+name: Lettres v2.4 B1 runtime qualification
 
 on:
   workflow_dispatch:
@@ -14,21 +14,38 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Verify exact R9 R7 source bytes
+      - name: Verify exact v2.4 B1 bytes, CSP and syntax
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import hashlib
+          import hashlib,re,base64
           expected={
-            'lettres-r9/index.html':'f6581ba9c8cc1b382065584241dd8df4b479be0a6898861e19088f7eea69c544',
-            'lettres-r9/sw.js':'239ea367a7dfe4eed3a269e7b1a333348f7e850a23eb31a8ee922305ada70609',
+            'lettres-r9/index.html':'1034efd29bd5c93021cb0a68cb3bc9c7e0fc48f3bb4e3a3a3b7e17181369de95',
+            'lettres-r9/sw.js':'42203358031e1d710db5610fd1b21af8ab40f7f88a0dcdec72a346235edc3797',
             'lettres-r9/corpus.json':'362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec',
+            'lettres-r9/manifest.json':'6ac8e12e1f037b5920a1c274866fa393b5c49c5e52fb18cf922f92c17881ad48',
           }
           for path,want in expected.items():
               got=hashlib.sha256(Path(path).read_bytes()).hexdigest()
               print(path,got)
               assert got==want,(path,got,want)
+          html=Path('lettres-r9/index.html').read_text()
+          assert "const APP_VERSION = '2.4';" in html
+          assert "const APP_BUILD = 'B1';" in html
+          styles=re.findall(r'<style(?:\s[^>]*)?>(.*?)</style>',html,flags=re.S|re.I)
+          scripts=re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',html,flags=re.S|re.I)
+          assert len(styles)==2 and len(scripts)==1,(len(styles),len(scripts))
+          b64=lambda s: base64.b64encode(hashlib.sha256(s.encode()).digest()).decode()
+          sh=b64(scripts[0]); sth=[b64(x) for x in styles]
+          assert sh=='uzQLHoS6VLlJi4lh/qc4kRzys95Cwcpz05M/LcYt03A=',sh
+          assert sth==['m8PqFEBgnpUJCW0bEHjvbxDZIV/eOvQmHfBSbNzo6Y4=','SR1dAYhet9nuA9lGNHsrAy+Ao1s+iyRu2/Vb85or+1M='],sth
+          csp=re.search(r'<meta http-equiv="Content-Security-Policy" content="([^"]*)">',html,re.I).group(1)
+          assert csp.count("'sha256-"+sh+"'")==2
+          for h in sth: assert csp.count("'sha256-"+h+"'")==1
+          Path('/tmp/app.js').write_text(scripts[0])
           PY
+          node --check /tmp/app.js
+          node --check lettres-r9/sw.js
 
       - uses: actions/setup-python@v5
         with:
@@ -39,7 +56,7 @@ jobs:
           python -m pip install --disable-pip-version-check playwright
           python -m playwright install --with-deps chromium
 
-      - name: Chromium CSP and corpus-load smoke
+      - name: Chromium phone CSP and corpus-load smoke
         run: |
           python3 - <<'PY'
           import subprocess,time
@@ -50,28 +67,29 @@ jobs:
               with sync_playwright() as p:
                   browser=p.chromium.launch(headless=True)
                   page=browser.new_page(viewport={'width':390,'height':844})
-                  console_errors=[]
-                  page_errors=[]
+                  console_errors=[]; page_errors=[]
                   page.on('console',lambda m: console_errors.append(m.text) if m.type=='error' else None)
                   page.on('pageerror',lambda e: page_errors.append(str(e)))
                   response=page.goto('http://127.0.0.1:8765/lettres-r9/index.html',wait_until='domcontentloaded')
                   assert response and response.ok,response.status if response else None
                   page.locator('#loading').wait_for(state='detached',timeout=15000)
                   title=page.locator('#list-title').inner_text()
-                  build_text=page.locator('.build-meta').first.inner_text()
-                  assert '136 Lettres' in title,title
-                  assert 'R9 R7' in build_text,build_text
+                  visible_version=page.locator('.build-meta').first.inner_text()
+                  about=page.locator('.help-slide[data-help-key="about"] .help-body').inner_text()
+                  assert title=='136 Lettres',title
+                  assert visible_version=='v2.4 · 2026-09-29',visible_version
+                  assert 'v2.4' in about and 'B1' not in about,about
                   assert not page.locator('.error-state').count(),'error-state rendered'
                   assert not page_errors,page_errors
                   csp_errors=[e for e in console_errors if 'Content Security Policy' in e or 'Refused to' in e]
                   assert not csp_errors,csp_errors
-                  print({'build_text':build_text,'list_title':title,'console_errors':console_errors})
+                  print({'visible_version':visible_version,'list_title':title,'console_errors':console_errors})
                   browser.close()
           finally:
               server.terminate(); server.wait(timeout=5)
           PY
 
-      - name: Wide-layout startup smoke
+      - name: Chromium wide-layout startup smoke
         run: |
           python3 - <<'PY'
           import subprocess,time
@@ -82,13 +100,19 @@ jobs:
               with sync_playwright() as p:
                   browser=p.chromium.launch(headless=True)
                   page=browser.new_page(viewport={'width':1280,'height':900})
+                  console_errors=[]; page_errors=[]
+                  page.on('console',lambda m: console_errors.append(m.text) if m.type=='error' else None)
+                  page.on('pageerror',lambda e: page_errors.append(str(e)))
                   page.goto('http://127.0.0.1:8766/lettres-r9/index.html',wait_until='domcontentloaded')
                   page.locator('#loading').wait_for(state='detached',timeout=15000)
-                  assert '136 Lettres' in page.locator('#list-title').inner_text()
+                  assert page.locator('#list-title').inner_text()=='136 Lettres'
                   assert page.locator('#sidebar').is_visible()
                   assert page.locator('#right-panel').is_visible()
-                  assert 'R9 R7' in page.locator('.build-meta').first.inner_text()
-                  print({'layout':page.locator('html').get_attribute('data-layout'),'list_title':page.locator('#list-title').inner_text()})
+                  assert page.locator('.build-meta').first.inner_text()=='v2.4 · 2026-09-29'
+                  assert not page_errors,page_errors
+                  csp_errors=[e for e in console_errors if 'Content Security Policy' in e or 'Refused to' in e]
+                  assert not csp_errors,csp_errors
+                  print({'layout':page.locator('html').get_attribute('data-layout'),'list_title':page.locator('#list-title').inner_text(),'console_errors':console_errors})
                   browser.close()
           finally:
               server.terminate(); server.wait(timeout=5)
