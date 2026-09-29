@@ -37,8 +37,12 @@ def clean(c,e,w):
     bad=[x for x in c if 'Content Security Policy' in x or 'Refused to' in x]
     rec(w+':csp',not bad,bad)
 def num(pg,wide=False):
-    s=pg.locator('#wr-num' if wide else '#pr-pos').inner_text()
+    s=pg.locator('#wr-pos' if wide else '#pr-pos').inner_text()
     m=re.search(r'(\d+)',s); return int(m.group(1)) if m else None
+def waitnum(pg,n,wide=False):
+    loc=pg.locator('#wr-pos' if wide else '#pr-pos')
+    expect(loc).to_have_text(f'{n} / 136',timeout=10000)
+    return num(pg,wide)
 def store(ctx):
     for o in ctx.storage_state().get('origins',[]):
         if o['origin']=='https://louisriv26.github.io':
@@ -142,12 +146,12 @@ with sync_playwright() as p:
     # WIDE: D3 cross-letter interaction + keyboard guard + responsive boundary
     ctx=b.new_context(viewport={'width':1280,'height':900},locale='fr-FR'); pg=ctx.new_page(); c,e=errs(pg); pg.goto(URL+'?qa=full-wide',wait_until='domcontentloaded'); ready(pg)
     pg.locator('#snav-list').click(); rec('wide:list136',pg.locator('#letter-list .letter-item').count()==136,pg.locator('#letter-list .letter-item').count())
-    pg.locator('#letter-list .letter-item[data-n="5"]').click(); rec('wide:open5',num(pg,True)==5,num(pg,True))
+    pg.locator('#letter-list .letter-item[data-n="5"]').click(); waitnum(pg,5,True); rec('wide:open5',num(pg,True)==5,num(pg,True))
     pg.get_by_role('button',name='Ajouter une note').click(); pg.locator('#note-input').fill('D3 letter 5'); pg.locator('#note-save-btn').click()
-    pg.locator('#letter-list .letter-item[data-n="10"]').click(); rec('wide:open10',num(pg,True)==10,num(pg,True))
+    pg.locator('#letter-list .letter-item[data-n="10"]').click(); waitnum(pg,10,True); rec('wide:open10',num(pg,True)==10,num(pg,True))
     pg.locator('#snav-notes').click(); pg.locator('#tab-notes').click(); pg.get_by_role('button',name='Modifier la note').click(); pg.locator('#note-input').fill('D3 edited while 10 visible'); pg.locator('#note-save-btn').click()
-    pg.locator('#wr-btn-next').click(); pg.wait_for_timeout(100); rec('D3:next_is_11',num(pg,True)==11,num(pg,True))
-    pg.locator('#snav-list').click(); pg.locator('#letter-list .letter-item[data-n="20"]').click(); pg.locator('#wide-reader-scroll').click(position={'x':20,'y':80}); pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(100)
+    pg.locator('#wr-btn-next').click(); waitnum(pg,11,True); rec('D3:next_is_11',num(pg,True)==11,num(pg,True))
+    pg.locator('#snav-list').click(); pg.locator('#letter-list .letter-item[data-n="20"]').click(); waitnum(pg,20,True); pg.locator('#wide-reader-scroll').click(position={'x':20,'y':80}); pg.keyboard.press('ArrowRight'); waitnum(pg,21,True)
     rec('wide:key_next',num(pg,True)==21,num(pg,True)); pg.locator('#wr-fav-btn').focus(); pg.keyboard.press('ArrowRight'); pg.wait_for_timeout(100); rec('wide:key_guard',num(pg,True)==21,num(pg,True))
     pg.set_viewport_size({'width':768,'height':900}); pg.wait_for_timeout(250); rec('layout:768','wide'==pg.locator('html').get_attribute('data-layout'),pg.locator('html').get_attribute('data-layout'))
     pg.set_viewport_size({'width':767,'height':900}); pg.wait_for_timeout(250); rec('layout:767','phone'==pg.locator('html').get_attribute('data-layout'),pg.locator('html').get_attribute('data-layout'))
@@ -159,6 +163,8 @@ with sync_playwright() as p:
     fail=[]
     for n in range(1,137):
         pg.locator(f'#letter-list .letter-item[data-n="{n}"]').click()
+        try: waitnum(pg,n,False)
+        except Exception as ex: fail.append((n,'number_wait',repr(ex)))
         if num(pg)!=n: fail.append((n,'number',num(pg)))
         m=pg.locator('#phone-reader-scroll').evaluate('(el)=>({sw:el.scrollWidth,cw:el.clientWidth})')
         if m['sw']>m['cw']+2: fail.append((n,'overflow',m))
@@ -171,17 +177,17 @@ with sync_playwright() as p:
     ctx.set_offline(True); pg=ctx.new_page(); c2,e2=errs(pg)
     try:
         pg.goto(URL+'?letter=LP.LETTER.010',wait_until='domcontentloaded',timeout=15000); ready(pg); pg.wait_for_timeout(300)
-        rec('offline:cold_reopen',True); rec('offline:deep10',num(pg)==10,num(pg))
+        rec('offline:cold_reopen',True); waitnum(pg,10); rec('offline:deep10',num(pg)==10,num(pg))
     except Exception as ex: rec('offline:cold_reopen',False,repr(ex))
     clean(c2,e2,'offline'); ctx.set_offline(False); ctx.close(); b.close()
 
     # Independent WebKit challenge
     wb=p.webkit.launch(headless=True); ctx=wb.new_context(viewport={'width':390,'height':844},locale='fr-FR'); pg=ctx.new_page(); c,e=errs(pg)
     resp=pg.goto(URL+'?qa=webkit',wait_until='domcontentloaded'); rec('webkit:http',resp and resp.ok,resp.status if resp else None); ready(pg)
-    pg.locator('#pnav-list').click(); pg.locator('#letter-list .letter-item[data-n="33"]').click(); rec('webkit:open33',num(pg)==33,num(pg))
+    pg.locator('#pnav-list').click(); pg.locator('#letter-list .letter-item[data-n="33"]').click(); waitnum(pg,33); rec('webkit:open33',num(pg)==33,num(pg))
     pg.locator('#pr-source-btn').click(); expect(pg.locator('#reader-info-sheet')).to_be_visible(); pg.locator('#reader-info-methodology').click(); expect(pg.locator('#provenance-screen')).to_be_visible()
     pg.locator('#provenance-back').click(); expect(pg.locator('#reader-info-sheet')).to_be_visible(); pg.locator('#reader-info-close').click(); rec('webkit:provenance_return',True)
-    pg.get_by_role('button',name='Retour à la liste').click(); pg.locator('#pnav-search').click(); pg.locator('#search-input').fill('10'); pg.wait_for_timeout(600); pg.locator('#search-results [data-action="search-result"]').first.click()
+    pg.get_by_role('button',name='Retour à la liste').click(); pg.locator('#pnav-search').click(); pg.locator('#search-input').fill('10'); pg.wait_for_timeout(600); pg.locator('#search-results [data-action="search-result"]').first.click(); waitnum(pg,10)
     rec('webkit:search_open10',num(pg)==10,num(pg)); pg.get_by_role('button',name='Retour à la liste').click(); rec('webkit:search_return',pg.locator('#search-input').input_value()=='10',pg.locator('#search-input').input_value())
     clean(c,e,'webkit'); ctx.close(); wb.close()
 
