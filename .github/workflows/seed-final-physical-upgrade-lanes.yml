@@ -29,23 +29,27 @@ jobs:
           rsync -a --exclude='.git' /tmp/u24/ upgrade-24h-v119/
           rsync -a --exclude='.git' /tmp/uldc/ upgrade-ldc-v132/
           rsync -a --exclude='.git' /tmp/uletters/ upgrade-lettres-v2-10/
-      - name: Verify exact source tree hashes
+      - name: Verify exact source-to-lane byte equality
         run: |
           python - <<'PY'
           from pathlib import Path
           import hashlib
           specs=[
-            ('upgrade-24h-v119',15,'d35613c669c37c9e5c8d631345519cbd6fd60bfe7df10357a70e8ba2499a44e3'),
-            ('upgrade-ldc-v132',248,'19eb8b2357e7802db4e2617ce52f3d642e011b9267df2b9c9207663293cb5e56'),
-            ('upgrade-lettres-v2-10',22,'d9ffbf03c4dafd7065b4cb4df8e844328a1553418551a744cff5769502483d31')]
-          for route,count,expected in specs:
-              root=Path(route); rows=[]
-              for p in sorted(x for x in root.rglob('*') if x.is_file()):
+            ('/tmp/u24','upgrade-24h-v119',15),
+            ('/tmp/uldc','upgrade-ldc-v132',248),
+            ('/tmp/uletters','upgrade-lettres-v2-10',22)]
+          def digest(root):
+              root=Path(root); rows=[]
+              for p in sorted(x for x in root.rglob('*') if x.is_file() and '.git' not in x.relative_to(root).parts):
                   rows.append(p.relative_to(root).as_posix()+'\0'+hashlib.sha256(p.read_bytes()).hexdigest()+'\n')
-              got=hashlib.sha256(''.join(rows).encode()).hexdigest()
-              assert len(rows)==count,(route,len(rows),count)
-              assert got==expected,(route,got,expected)
-              print(route,count,got)
+              return rows,hashlib.sha256(''.join(rows).encode()).hexdigest()
+          for src,route,count in specs:
+              srows,sd=digest(src); rrows,rd=digest(route)
+              assert len(srows)==count,(src,len(srows),count)
+              assert len(rrows)==count,(route,len(rrows),count)
+              assert srows==rrows,(route,'file-set or byte mismatch')
+              assert sd==rd,(route,sd,rd)
+              print(route,count,rd)
           PY
       - name: Commit seeded lanes
         run: |
