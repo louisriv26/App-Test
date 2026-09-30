@@ -1,0 +1,57 @@
+name: Seed final physical upgrade lanes
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  seed:
+    if: ${{ contains(github.event.head_commit.message, 'Seed final physical upgrade lanes') && !contains(github.event.head_commit.message, '[upgrade-lanes-seeded]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Fetch exact production predecessors
+        run: |
+          rm -rf /tmp/u24 /tmp/uldc /tmp/uletters
+          git clone https://github.com/louisriv26/Les-24-Heures-de-la-Passion.git /tmp/u24
+          git -C /tmp/u24 checkout 9d55c3a3238b6dac2fbbd1b9d4a9347d284e0c69
+          git clone https://github.com/louisriv26/Le-livre-du-Ciel---Github.git /tmp/uldc
+          git -C /tmp/uldc checkout 365d04490411879bdcfa748b3f632dcce88a220c
+          git clone https://github.com/louisriv26/Les-lettres-de-Luisa.git /tmp/uletters
+          git -C /tmp/uletters checkout 20d29f09330818f655ddc1370cbb4f56bad957bf
+      - name: Seed same-origin predecessor lanes
+        run: |
+          rm -rf upgrade-24h-v119 upgrade-ldc-v132 upgrade-lettres-v2-10
+          mkdir -p upgrade-24h-v119 upgrade-ldc-v132 upgrade-lettres-v2-10
+          rsync -a --exclude='.git' /tmp/u24/ upgrade-24h-v119/
+          rsync -a --exclude='.git' /tmp/uldc/ upgrade-ldc-v132/
+          rsync -a --exclude='.git' /tmp/uletters/ upgrade-lettres-v2-10/
+      - name: Verify exact source tree hashes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          specs=[
+            ('upgrade-24h-v119',15,'d35613c669c37c9e5c8d631345519cbd6fd60bfe7df10357a70e8ba2499a44e3'),
+            ('upgrade-ldc-v132',248,'19eb8b2357e7802db4e2617ce52f3d642e011b9267df2b9c9207663293cb5e56'),
+            ('upgrade-lettres-v2-10',22,'d9ffbf03c4dafd7065b4cb4df8e844328a1553418551a744cff5769502483d31')]
+          for route,count,expected in specs:
+              root=Path(route); rows=[]
+              for p in sorted(x for x in root.rglob('*') if x.is_file()):
+                  rows.append(p.relative_to(root).as_posix()+'\0'+hashlib.sha256(p.read_bytes()).hexdigest()+'\n')
+              got=hashlib.sha256(''.join(rows).encode()).hexdigest()
+              assert len(rows)==count,(route,len(rows),count)
+              assert got==expected,(route,got,expected)
+              print(route,count,got)
+          PY
+      - name: Commit seeded lanes
+        run: |
+          rm -f .github/workflows/seed-final-physical-upgrade-lanes.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Seed final physical upgrade lanes [upgrade-lanes-seeded]"
+          git push origin HEAD:main
