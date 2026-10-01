@@ -63,17 +63,22 @@ async function upgrade(p){
     const r=await p.goto(url,{waitUntil:'domcontentloaded',timeout:60000});await sleep(900);await waitReady(p);if(!navigator){}
     if(!(await p.evaluate(()=>!!navigator.serviceWorker.controller))){await p.reload({waitUntil:'domcontentloaded',timeout:60000});await sleep(600);}
     const before=await identity(p,k);await seed(p);
-    copyTree(path.join(ROOT,s.final),path.join(RUN,s.route));await sleep(300);
-    const activation=await upgrade(p);await p.reload({waitUntil:'domcontentloaded',timeout:60000});await sleep(900);await waitReady(p);
-    const after=await identity(p,k), state=await verifyState(p);
-    const beforeOk=k==='ldc'?before.app===s.oldV:before.app===s.oldV;
+    copyTree(path.join(ROOT,s.final),path.join(RUN,s.route));await sleep(500);
+    const activation=await upgrade(p);
+    await p.close();
+    const p2=await ctx.newPage();const errors2=[];p2.on('pageerror',e=>errors2.push(String(e)));
+    let r2=null,navError=null;
+    try{r2=await p2.goto(url+'?upgrade='+Date.now(),{waitUntil:'domcontentloaded',timeout:45000});}catch(e){navError=String(e);}
+    await sleep(1200);try{await waitReady(p2)}catch(e){errors2.push(String(e))}
+    const after=await identity(p2,k), state=await verifyState(p2);
+    const beforeOk=before.app===s.oldV;
     const afterOk=k==='ldc'?(after.app===s.newV||after.pub===s.newV):after.app===s.newV;
-    const pass=r&&r.status()===200&&beforeOk&&afterOk&&state.localStorage==='keep-me'&&state.indexedDB==='keep-me'&&!errors.length;
-    report.apps[k]={url,status:r&&r.status(),before,activation,after,state,errors,pass};
+    const pass=r&&r.status()===200&&r2&&r2.status()===200&&beforeOk&&afterOk&&state.localStorage==='keep-me'&&state.indexedDB==='keep-me'&&!errors.length&&!errors2.length;
+    report.apps[k]={url,status:r&&r.status(),before,activation,after_status:r2&&r2.status(),navError,after,state,errors:[...errors,...errors2],pass};
     await ctx.close();
   }
  } finally {await browser.close();server.kill('SIGTERM');}
  report.overall=Object.values(report.apps).every(x=>x.pass)?'PASS':'FAIL';
  fs.writeFileSync('synthetic-upgrade-final-prephysical-results.json',JSON.stringify(report,null,2)+'\n');
  console.log(JSON.stringify(report,null,2));if(report.overall!=='PASS')process.exitCode=1;
-})().catch(e=>{console.error(e);process.exitCode=2});
+})().catch(e=>{const x={generated_at:new Date().toISOString(),overall:'HARNESS_ERROR',error:String(e&&e.stack||e)};fs.writeFileSync('synthetic-upgrade-final-prephysical-results.json',JSON.stringify(x,null,2)+'\\n');console.error(e);process.exitCode=2});
