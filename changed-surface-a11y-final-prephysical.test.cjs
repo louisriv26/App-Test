@@ -26,7 +26,7 @@ async function open(page,url){await page.goto(url,{waitUntil:'domcontentloaded',
     const noteName=await p.locator('#noteTextarea').getAttribute('aria-label');
     const dark=await p.evaluate(()=>{document.documentElement.setAttribute('data-theme','dark');const e=document.querySelector('.mark-btn:not(.done)')||document.querySelector('.mark-btn');const s=getComputedStyle(e);return {fg:s.color,bg:s.backgroundColor}});
     R.apps.h24={tabs,start,after,keyboard:{focusRes,reached,outline,active},noteName,dark,darkRatio:ratio(dark.fg,dark.bg)};
-    R.apps.h24.pass=tabs===3&&start==='meditation'&&after.focus==='reflection'&&after.selected==='reflection'&&after.hiddenMed==='true'&&reached&&outline&&outline.style!=='none'&&parseFloat(outline.width)>=2&&noteName==='Note personnelle'&&R.apps.h24.darkRatio>=4.5;
+    R.apps.h24.pass=tabs===3&&start==='meditation'&&after.focus==='reflections'&&after.selected==='reflections'&&after.hiddenMed==='true'&&reached&&outline&&outline.style!=='none'&&parseFloat(outline.width)>=2&&noteName==='Note personnelle'&&R.apps.h24.darkRatio>=4.5;
     await c.close();
    }
    // 24H forced-colors context
