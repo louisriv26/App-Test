@@ -1,0 +1,30 @@
+name: Final changed-surface accessibility qualification
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  qualify:
+    if: ${{ contains(github.event.head_commit.message, 'Run final changed-surface accessibility qualification') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Playwright Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run exact final changed-surface checks
+        run: node changed-surface-a11y-final-prephysical.test.cjs
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: changed-surface-a11y-final-prephysical-evidence
+          path: changed-surface-a11y-final-prephysical-results.json
+          if-no-files-found: error
