@@ -1,0 +1,119 @@
+diff --git a/ldc-v133-r6-governed-r5/index.html b/ldc-v133-r6-governed-r5/index.html
+index 93089fd..5f11075 100644
+--- a/ldc-v133-r6-governed-r5/index.html
++++ b/ldc-v133-r6-governed-r5/index.html
+@@ -148,6 +148,7 @@ html[data-theme="dark"]{
+ /* Repeat key rules for explicit data-theme=dark (manual toggle) */
+ html[data-theme="dark"] .resume-card { background:#242018 !important; }
+ html[data-theme="dark"] .btn-primary  { background:#C9A84C !important; color:#1A1612 !important; }
++html[data-theme="dark"] .rc-btn       { background:#C9A84C !important; color:#1A1612 !important; } /* v133 D-04 manual-dark contrast repair */
+ html[data-theme="dark"] .btn-secondary{ background:#2A2418 !important; color:#8A7E72 !important; border-color:#3A3020 !important; }
+ html[data-theme="dark"] .sheet       { background:#201C18 !important; }
+ html[data-theme="dark"] #autour-sheet{ background:#201C18 !important; }
+@@ -2548,11 +2549,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
+    VERSION — single source of truth
+    Update this string on every release.
+ ═══════════════════════════════════════════════════════ */
+-const APP_VERSION = 'v2.19.131-R1B-UX-ACCESS-R5'; // v131 adversarial release-binding correction; v130 D-10 safeguard inherited; protected corpus/Search/provenance/user-state semantics preserved
+-const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+)/)||[])[1] || '131'; // single authoritative public identity derived from APP_VERSION
++const APP_VERSION = 'v2.19.133-R1B-UX-ACCESS-R6'; // v133 bounded D-04 manual-dark contrast repair; v131 release binding and v130 D-10 safeguard inherited; protected corpus/Search/provenance/user-state semantics preserved
++const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+)/)||[])[1] || '133'; // single authoritative public identity derived from APP_VERSION
+ const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
+ const APP_BUILD = '2026-09-27';
+-const SW_CACHE_VERSION = 'ldc-v2.19.131-R1B-ux-access-r5';
++const SW_CACHE_VERSION = 'ldc-v2.19.133-R1B-ux-access-r6';
+ const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
+   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
+   neutralSource:'Source détaillée dans la notice documentaire',
+diff --git a/ldc-v133-r6-governed-r5/offline_manifest.json b/ldc-v133-r6-governed-r5/offline_manifest.json
+index b5c3555..e2f382c 100644
+--- a/ldc-v133-r6-governed-r5/offline_manifest.json
++++ b/ldc-v133-r6-governed-r5/offline_manifest.json
+@@ -1,5 +1,5 @@
+ {
+-  "app_version": "v2.19.131-R1B-UX-ACCESS-R5",
++  "app_version": "v2.19.133-R1B-UX-ACCESS-R6",
+   "asset_count": 204,
+   "assets": [
+     {
+@@ -1077,7 +1077,7 @@
+   },
+   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
+   "m7rc_fixed_point": true,
+-  "page_worker_revision": "ldc-v2.19.131-R1B-ux-access-r5",
++  "page_worker_revision": "ldc-v2.19.133-R1B-ux-access-r6",
+   "post_r6_date_id_a2_fixed_point": {
+     "a2_sha256": "dd034a4d4bb329254818c3e62fd629c9b64c90f9d4bd533de9f6ed99247cb1d8",
+     "date_id_sha256": "ed5bf462c47b8fb5a41f7c81591257d6e99f94bae08628aa27e5f7d667020c2a",
+@@ -1138,7 +1138,7 @@
+     "user_state_schema_changed": false,
+     "ux_logic_changed": false
+   },
+-  "rebuild_status": "V131_R5_ADVERSARIAL_RELEASE_BINDING_CORRECTION__SHELL_AND_RUNTIME_CACHE_NAMES_REBOUND_TO_CURRENT_REVISION__D07_D08_D13_D10_SOFTWARE_REPAIRS_INHERITED__CORPUS_SEARCH_PROVENANCE_USER_STATE_OFFLINE_CONTENT_BINDING_UNCHANGED__PUBLIC_RELEASE_NOT_AUTHORIZED",
++  "rebuild_status": "V133_R6_D04_MANUAL_DARK_CONTRAST_REPAIR__V131_RELEASE_BINDING_AND_V130_D10_SAFEGUARD_INHERITED__CORPUS_SEARCH_PROVENANCE_USER_STATE_OFFLINE_CONTENT_BINDING_UNCHANGED__PUBLIC_RELEASE_NOT_AUTHORIZED",
+   "retention_contract": {
+     "clear_policy": "CURRENT_SCOPE_ONLY_FOR_SHARED_LEGACY_CACHES",
+     "copy_migration_required": false,
+@@ -1149,7 +1149,7 @@
+     "shell_runtime_caches": "APP_VERSIONED"
+   },
+   "schema": "ldc-offline-manifest-v3",
+-  "scope": "v131 adversarial release-binding correction successor of exact v130; D-10 software safeguard and all persistent offline content bytes are unchanged; shell/runtime cache namespaces now match the current worker revision.",
++  "scope": "v133 bounded D-04 manual-dark Reprendre contrast repair successor of exact v131; protected corpus, Search, provenance, user-state semantics and persistent offline content bytes are unchanged; shell/runtime cache namespaces advanced to the new successor identity.",
+   "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
+   "semantic_vector_search_included": false,
+   "semantic_vector_search_note": "R18D Search-V3 engineering evidence is preserved externally and v113 Search-V3 runtime modules remain byte-identical. No neural model, vectors or qualified semantic pack are bundled. Par le sens remains fail-closed.",
+diff --git a/ldc-v133-r6-governed-r5/sw.js b/ldc-v133-r6-governed-r5/sw.js
+index 5c595c0..02c8f4e 100644
+--- a/ldc-v133-r6-governed-r5/sw.js
++++ b/ldc-v133-r6-governed-r5/sw.js
+@@ -1,4 +1,4 @@
+-const VERSION = 'ldc-v2.19.131-R1B-ux-access-r5';
++const VERSION = 'ldc-v2.19.133-R1B-ux-access-r6';
+ const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
+ const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
+ const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
+@@ -8,8 +8,8 @@ function scopeFingerprint(scope) {
+ }
+ const OFFLINE_SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
+ const SCOPE_CACHE_PREFIX = `${CACHE_PREFIX}${OFFLINE_SCOPE_FINGERPRINT}-`;
+-const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.131-R1B-ux-access-r5`;
+-const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.131-R1B-ux-access-r5`;
++const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.133-R1B-ux-access-r6`;
++const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.133-R1B-ux-access-r6`;
+ const LEGACY_V76_WORKER_VERSION = 'ldc-v2.19.76-R1B-report-r2';
+ const UPDATE_COMPAT_META_PATH = '__ldc_update_compat__.json';
+ const INSTALL_FETCH_NONCE = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+@@ -72,7 +72,7 @@ async function loadOfflineManifest() {
+   if(!r){r=await fetch(OFFLINE_MANIFEST_URL,{cache:'reload'});if(r&&r.ok)await shell.put(OFFLINE_MANIFEST_URL,r.clone());}
+   if(!r||!r.ok)throw new Error('offline manifest indisponible');
+   const m=await r.json();
+-  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.131-R1B-UX-ACCESS-R5'||m.storage_schema!==OFFLINE_STORAGE_SCHEMA)throw new Error('offline manifest incompatible');
++  if(m.schema!==OFFLINE_MANIFEST_SCHEMA||m.app_version!=='v2.19.133-R1B-UX-ACCESS-R6'||m.storage_schema!==OFFLINE_STORAGE_SCHEMA)throw new Error('offline manifest incompatible');
+   if(m.content_binding_schema!==OFFLINE_CONTENT_BINDING_SCHEMA||m.content_binding_sha256!==OFFLINE_CONTENT_BINDING)throw new Error('offline manifest binding incompatible');
+   if(m.corpus_manifest_sha256!==OFFLINE_CORPUS_MANIFEST_SHA256)throw new Error('offline corpus manifest binding incompatible');
+   const unique=[...new Set((m.assets||[]).map(a=>a.path))];
+diff --git a/ldc-v133-r6-governed-r5/version.json b/ldc-v133-r6-governed-r5/version.json
+index 4e4abf3..88f4ffd 100644
+--- a/ldc-v133-r6-governed-r5/version.json
++++ b/ldc-v133-r6-governed-r5/version.json
+@@ -1,5 +1,5 @@
+ {
+-  "app_version": "v2.19.131-R1B-UX-ACCESS-R5",
++  "app_version": "v2.19.133-R1B-UX-ACCESS-R6",
+   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
+   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
+   "baseline_candidate_sha256": "4a45966c24b9d6444c77b4229ba3df16634ec949cfb703dce91c5da1ec2d8fad",
+@@ -28,7 +28,7 @@
+     "stage2_221_predecessor_generation": "G036-AFLP-R7-SUP-T5-FAST1"
+   },
+-  "current_release_authority": "V131_ADVERSARIAL_RELEASE_BINDING_CORRECTION__V130_D10_SOFTWARE_SAFEGUARD_INHERITED__D04_D11_RUNTIME_IDENTITY_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED",
++  "current_release_authority": "V133_BOUNDED_D04_MANUAL_DARK_CONTRAST_REPAIR__V131_RELEASE_BINDING_AND_V130_D10_SOFTWARE_SAFEGUARD_INHERITED__D11_SAME_NAVIGATION_PASS__PHYSICAL_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED",
+   "current_runtime_browser_validation": "V127_R1_INTERNAL_PASS__INLINE_JS_SW_SYNTAX__240_OF_240_LAYOUT_CASES__HELP_AND_PROVENANCE_REFLOW_POSITION_PASS__ESPACE_TAB_SELECTED_STATE_PASS__SIZE_THEME_NOTE_MODAL_FOCUS_RETURN_PASS__204_OFFLINE_ASSETS_AND_BINDING_PASS__IN_MEMORY_OPAQUE_ORIGIN_INDEXEDDB_UNAVAILABLE__FRESH_HOSTED_PWA_IPHONE_IPAD_RETEST_REQUIRED",
+@@ -46,7 +46,7 @@
+   "entry_start_contract": "V107__V106_ENTRY_START_SEMANTIC_FIXED_POINT_AND_USER_INTENT_LOCK_PRESERVED__DIRECT_TOME_LIST_OPEN_ADDS_SOURCE_SCROLL_HANDOFF_TRANSACTION__CAPTURE_BACK_CONTEXT_BEFORE_BLUR__BLUR_FOCUSED_LIST_BUTTON_BEFORE_FIRST_AWAIT__FREEZE_SOURCE_MOMENTUM__RENEW_READER_SCROLL_DOM_SURFACE__PIN_TOP_BEFORE_EXPOSURE_AND_FOR_TWO_SETTLING_FRAMES__PREVIOUS_NEXT_SEARCH_RESUME_NOTE_HIGHLIGHT_DEEP_LINK_TARGET_SEMANTICS_UNCHANGED",
+   "external_decision_authority": "FINAL_DECISION_LOCK_EXTERNAL_TO_DEPLOY_ZIP__WRITTEN_LAST_AFTER_PRIMARY_AND_INDEPENDENT_REOPEN_AUDITS",
+-  "external_validation_status": "V131_R5__STATIC_PACKAGE_AND_ADVERSARIAL_BINDING_CORRECTION__FRESH_HOSTED_PWA_IPHONE_IPAD_CONTROLLED_TEST_REQUIRED__D04_D11_SAME_NAVIGATION_RUNTIME_BINDING_REQUIRED__PUBLIC_RELEASE_NOT_AUTHORIZED",
++  "external_validation_status": "V133_INTERNAL_SUCCESSOR__D04_ROOT_CAUSE_REPAIRED_PENDING_EXACT_SERVED_REQUALIFICATION__D11_EXACT_V131_SAME_NAVIGATION_PASS_INHERITED_AS NON_MUTATED_SURFACE_EVIDENCE_ONLY__FRESH_HOSTED_PWA_IPHONE_IPAD_CONTROLLED_TEST_REQUIRED__PUBLIC_RELEASE_NOT_AUTHORIZED",
+   "f1_poisoned_http_cache_regression_gate": "REQUIRED_AND_EXTERNAL_EVIDENCE",
+   "f7_release_metadata_generation": "CURRENT_RELEASE_COUNTS_AND_BINDINGS_GENERATED_AFTER_CORPUS_PAYLOAD_FREEZE__V32_VALUES_RETAINED_ONLY_UNDER_HISTORICAL_KEYS",
