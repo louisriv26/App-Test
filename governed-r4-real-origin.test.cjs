@@ -128,7 +128,7 @@ async function testLDC(browser,spec){
 }
 async function testLetters(browser,spec){
   const x=await commonStart(browser,spec), p=x.page;
-  const out={http_status:x.http_status,sw:x.sw,idb:x.idb,errors:x.errors};
+  const out={http_status:x.http_status,nav_sha256:x.nav_sha256,sw:x.sw,idb:x.idb,errors:x.errors};
   try{await p.waitForFunction(()=>typeof CORPUS!=='undefined'&&CORPUS.length>0,{timeout:30000});}catch(e){out.corpus_wait_error=String(e);}
   out.identity=await p.evaluate(()=>({version:typeof APP_VERSION!=='undefined'?APP_VERSION:null,corpus:typeof CORPUS!=='undefined'?CORPUS.length:null,letters:document.querySelectorAll('.letter-item').length,role:document.getElementById('p-list')?.getAttribute('role'),label:document.getElementById('p-list')?.getAttribute('aria-label')}));
   try{
