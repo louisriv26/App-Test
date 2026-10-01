@@ -1,0 +1,116 @@
+name: Freeze final prephysical packages
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  freeze:
+    if: ${{ contains(github.event.head_commit.message, 'Freeze final prephysical packages') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Build deterministic packages and adversarial receipt
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, json, re, zipfile, base64
+          roots={
+            "24H":("24h-v119-b1-prephysical","24H_v119_B1_FINAL_PREPHYSICAL_EXACT_DEPLOY.zip"),
+            "LDC":("ldc-v132-b1-prephysical","LDC_v132_B1_FINAL_PREPHYSICAL_EXACT_DEPLOY.zip"),
+            "Lettres":("lettres-v2.10-b1-prephysical","LETTRES_v2.10_B1_FINAL_PREPHYSICAL_EXACT_DEPLOY.zip"),
+          }
+          fixed=(2026,10,1,0,0,0)
+          out={"git_sha":"${GITHUB_SHA}","packages":{},"checks":{}}
+          def sha(b): return hashlib.sha256(b).hexdigest()
+          for key,(rootname,zipname) in roots.items():
+            root=Path(rootname)
+            files=sorted(p for p in root.rglob('*') if p.is_file() and p.name!='.nojekyll')
+            with zipfile.ZipFile(zipname,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for p in files:
+                rel=p.relative_to(root).as_posix()
+                zi=zipfile.ZipInfo(rel,fixed)
+                zi.compress_type=zipfile.ZIP_DEFLATED
+                zi.external_attr=(0o100644 & 0xFFFF)<<16
+                zi.create_system=3
+                z.writestr(zi,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+            zb=Path(zipname).read_bytes()
+            out["packages"][key]={
+              "filename":zipname,"sha256":sha(zb),"members":len(files),
+              "tree_manifest_sha256":sha((''.join(f"{sha(p.read_bytes())}  {p.relative_to(root).as_posix()}\n" for p in files)).encode()),
+              "files":{p.relative_to(root).as_posix():sha(p.read_bytes()) for p in files}
+            }
+          # 24H exact-current checks
+          h=Path("24h-v119-b1-prephysical/index.html").read_text(encoding='utf-8')
+          hs=Path("24h-v119-b1-prephysical/luisa_24_heures.html").read_text(encoding='utf-8')
+          hv=json.loads(Path("24h-v119-b1-prephysical/version.json").read_text())
+          hc={
+            "index_equals_canonical_shell":h.encode()==hs.encode(),
+            "version_v119":hv.get("app_version")=="v119",
+            "evidence_stage_v119":"24H_V119_FINAL_PREPHYSICAL_B1" in h,
+            "focus_visible":bool(re.search(r'mark-btn:focus-visible',h)),
+            "accessible_tabs":('role="tablist"' in h and 'aria-selected' in h and 'handleReaderTabKey' in h),
+            "note_accessible_name":('noteTextarea' in h and 'Note personnelle' in h),
+            "forced_colors":('forced-colors: active' in h),
+            "desktop_non_overlay":bool(re.search(r'min-width\s*:\s*1150px',h) and re.search(r'\.bottom-nav\s*\{[^}]*position\s*:\s*static',h,re.S)),
+            "search_destination_binding":('applySearchDestinationRanges' in h),
+            "home_race_guards":all(x in h for x in ['_selectionFinalizeTimer','_selectionCaptureTimer','_selectionGeneration']),
+          }
+          # verify CSP hashes in page against exact inline elements
+          cspm=re.search(r'<meta[^>]+http-equiv=["\']Content-Security-Policy["\'][^>]+content=["\']([^"\']+)["\']',h,re.I)
+          hc["csp_meta_present"]=bool(cspm)
+          # LDC
+          l=Path("ldc-v132-b1-prephysical/index.html").read_text(encoding='utf-8')
+          lv=json.loads(Path("ldc-v132-b1-prephysical/version.json").read_text())
+          lo=json.loads(Path("ldc-v132-b1-prephysical/offline_manifest.json").read_text())
+          lsw=Path("ldc-v132-b1-prephysical/sw.js").read_text(encoding='utf-8')
+          lc={
+            "app_132":bool(re.search(r"const APP_VERSION\s*=\s*['\"]132['\"]",l)),
+            "public_132":str(lv.get("public_version"))=="132",
+            "sw_132":"ldc-v132-b1-final-prephysical" in lsw,
+            "d07_nonsticky":('semanticPackV3Status' in l and 'SEARCH_INTENT_MODE_KEY' in l and "setItem(SEARCH_INTENT_MODE_KEY,'words')" in l),
+            "d13_no_lab_interne":len(re.findall(r'LAB interne',l,re.I))==0,
+            "d13_no_laboratoire":len(re.findall(r'laboratoire',l,re.I))==0,
+            "storage_api_present":('navigator.storage' in l),
+            "offline_manifest_132":str(lo.get("app_version"))=="132",
+            "offline_manifest_hash_bound":sha(Path("ldc-v132-b1-prephysical/offline_manifest.json").read_bytes())==lv.get("offline_manifest_sha256"),
+          }
+          # protected LDC search modules internally frozen as exact app-test candidate members
+          searchmods=sorted(Path("ldc-v132-b1-prephysical").glob("search*.js"))
+          lc["search_module_count"]=len(searchmods)
+          lc["corpus_file_count"]=len([p for p in Path("ldc-v132-b1-prephysical/corpus").rglob('*') if p.is_file()])
+          # Lettres
+          t=Path("lettres-v2.10-b1-prephysical/index.html").read_text(encoding='utf-8')
+          tsw=Path("lettres-v2.10-b1-prephysical/sw.js").read_text(encoding='utf-8')
+          tc={
+            "app_2_10":bool(re.search(r"const APP_VERSION\s*=\s*['\"]2\.10['\"]",t)),
+            "l07_main_landmark":bool(re.search(r'id=["\']p-list["\'][^>]*role=["\']main["\']|role=["\']main["\'][^>]*id=["\']p-list["\']',t)),
+            "l16_focus_restore":('deactivateDialog' in t and '.focus(' in t and 'closeHelp' in t),
+            "l24_forced_colors":('forced-colors: active' in t),
+            "corpus_untouched_member_present":Path("lettres-v2.10-b1-prephysical/corpus.json").exists(),
+            "sw_2_10":('shell-v2.10-b1' in tsw and 'corpus-v2.10-b1' in tsw),
+          }
+          out["checks"]={"24H":hc,"LDC":lc,"Lettres":tc}
+          def allbool(d): return all(v for v in d.values() if isinstance(v,bool))
+          out["overall_static"]="PASS" if all(allbool(x) for x in out["checks"].values()) else "FAIL"
+          Path("FINAL_PREPHYSICAL_PACKAGE_FREEZE_RECEIPT.json").write_text(json.dumps(out,indent=2,ensure_ascii=False)+"\n",encoding='utf-8')
+          Path("SHA256SUMS_FINAL_PREPHYSICAL.txt").write_text(''.join(f"{out['packages'][k]['sha256']}  {out['packages'][k]['filename']}\n" for k in roots),encoding='utf-8')
+          print(json.dumps({"overall_static":out["overall_static"],"packages":{k:{x:y for x,y in v.items() if x in ("filename","sha256","members","tree_manifest_sha256")} for k,v in out["packages"].items()},"checks":out["checks"]},indent=2))
+          if out["overall_static"]!="PASS": raise SystemExit(1)
+          PY
+      - name: Upload exact frozen packages and receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-prephysical-packages
+          path: |
+            24H_v119_B1_FINAL_PREPHYSICAL_EXACT_DEPLOY.zip
+            LDC_v132_B1_FINAL_PREPHYSICAL_EXACT_DEPLOY.zip
+            LETTRES_v2.10_B1_FINAL_PREPHYSICAL_EXACT_DEPLOY.zip
+            FINAL_PREPHYSICAL_PACKAGE_FREEZE_RECEIPT.json
+            SHA256SUMS_FINAL_PREPHYSICAL.txt
+          if-no-files-found: error
