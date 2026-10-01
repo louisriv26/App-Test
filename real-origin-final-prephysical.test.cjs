@@ -5,9 +5,9 @@ const crypto = require('crypto');
 
 const ROOT = process.cwd();
 const specs = [
-  {key:'24H', dir:'24h-v119-b1-prephysical', url:'https://louisriv26.github.io/App-Test/24h-v119-b1-prephysical/'},
-  {key:'LDC', dir:'ldc-v132-b1-prephysical', url:'https://louisriv26.github.io/App-Test/ldc-v132-b1-prephysical/'},
-  {key:'Lettres', dir:'lettres-v2.10-b1-prephysical', url:'https://louisriv26.github.io/App-Test/lettres-v2.10-b1-prephysical/'}
+  {key:'24H', dir:'24h-v119-b1-governed-r4', url:'https://louisriv26.github.io/App-Test/24h-v119-b1-governed-r4/'},
+  {key:'LDC', dir:'ldc-v131-r5-governed-r4', url:'https://louisriv26.github.io/App-Test/ldc-v131-r5-governed-r4/'},
+  {key:'Lettres', dir:'lettres-v2.9-b1-governed-r4', url:'https://louisriv26.github.io/App-Test/lettres-v2.9-b1-governed-r4/'}
 ];
 const report={generated_at:new Date().toISOString(), served_byte_parity:{}, apps:{}, overall:'UNKNOWN'};
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -69,12 +69,14 @@ async function commonStart(browser,spec){
   page.on('pageerror',e=>errors.push('pageerror:'+String(e)));
   page.on('console',m=>{if(m.type()==='error') errors.push('console:'+m.text());});
   const resp=await page.goto(spec.url,{waitUntil:'domcontentloaded',timeout:45000});
+  const navBody=resp?Buffer.from(await resp.body()):Buffer.alloc(0);
+  const navSha=sha(navBody);
   await page.waitForTimeout(1200);
   let sw=await swInfo(page);
   if(sw.supported && !sw.error && !sw.controller){
     await page.reload({waitUntil:'domcontentloaded',timeout:45000}); await page.waitForTimeout(800); sw=await swInfo(page);
   }
-  return {context,page,errors,http_status:resp&&resp.status(),sw,idb:await idbProbe(page)};
+  return {context,page,errors,http_status:resp&&resp.status(),nav_sha256:navSha,sw,idb:await idbProbe(page)};
 }
 async function offlineCold(context,url,checkFn){
   await context.setOffline(true);
@@ -105,14 +107,15 @@ async function test24(browser,spec){
   out.forced_colors=await p.evaluate(()=>Object.fromEntries(['.bn-item','.mark-btn','.mark-read-btn'].map(sel=>{const e=document.querySelector(sel);if(!e)return[sel,null];const c=getComputedStyle(e);return[sel,{width:c.borderWidth,style:c.borderStyle}];})));
   out.offline=await offlineCold(x.context,spec.url,async q=>q.evaluate(()=>({version:typeof APP_VERSION!=='undefined'?APP_VERSION:null,view:typeof state!=='undefined'?state.view:null,body:document.body.innerText.length})));
   await p.close();await x.context.close();
-  out.pass=out.http_status===200&&out.idb.pass&&out.sw.active&&out.identity.version==='v119'&&out.race_after_home&&out.race_after_home.view==='home'&&!out.race_after_home.pending&&!out.race_after_home.toolbarVisible&&out.search&&out.search.count>0&&out.search.flash>0&&out.offline.nav_ok&&out.offline.state&&out.offline.state.version==='v119';
+  out.pass=out.http_status===200&&out.nav_sha256==='56628a5329bd708715308dc2bb41a21d4a1dcbeee03ec2cf9c657a0fa7d9309d'&&out.idb.pass&&out.sw.active&&out.identity.version==='v119'&&out.race_after_home&&out.race_after_home.view==='home'&&!out.race_after_home.pending&&!out.race_after_home.toolbarVisible&&out.search&&out.search.count>0&&out.search.flash>0&&out.offline.nav_ok&&out.offline.state&&out.offline.state.version==='v119';
   return out;
 }
 async function testLDC(browser,spec){
   const x=await commonStart(browser,spec), p=x.page;
-  const out={http_status:x.http_status,sw:x.sw,idb:x.idb,errors:x.errors};
+  const out={http_status:x.http_status,nav_sha256:x.nav_sha256,sw:x.sw,idb:x.idb,errors:x.errors};
   await p.waitForTimeout(1000);
   out.identity=await p.evaluate(()=>({app:typeof APP_VERSION!=='undefined'?APP_VERSION:null,pub:typeof PUBLIC_VERSION!=='undefined'?PUBLIC_VERSION:null,swExpected:typeof SW_CACHE_VERSION!=='undefined'?SW_CACHE_VERSION:null}));
+  out.d04=await p.evaluate(()=>{document.documentElement.setAttribute('data-theme','dark');const e=document.getElementById('resume-reading-btn');if(!e)return{exists:false};const c=getComputedStyle(e);const parse=s=>{const m=String(s).match(/rgba?\\((\\d+),\\s*(\\d+),\\s*(\\d+)/);return m?[+m[1],+m[2],+m[3]]:null};const lum=a=>a.map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce((z,v,i)=>z+v*[.2126,.7152,.0722][i],0);const fg=parse(c.color),bg=parse(c.backgroundColor);const l1=lum(fg),l2=lum(bg),ratio=(Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05);return{exists:true,color:c.color,background:c.backgroundColor,ratio,pass:ratio>=4.5,label:e.innerText.trim()};});
   try{
     out.d07=await p.evaluate(async()=>{try{localStorage.setItem(SEARCH_INTENT_MODE_KEY,'meaning')}catch(e){};setSearchIntentMode('meaning',{rerun:false,persist:false});await goSearch();return{mode:searchIntentMode,words:document.getElementById('search-intent-words')?.getAttribute('aria-pressed'),meaning:document.getElementById('search-intent-meaning')?.getAttribute('aria-pressed'),stored:localStorage.getItem(SEARCH_INTENT_MODE_KEY)};});
   }catch(e){out.d07={error:String(e)};}
@@ -120,7 +123,7 @@ async function testLDC(browser,spec){
   out.public_copy=await p.evaluate(()=>({lab:(document.body.innerText.match(/LAB interne/gi)||[]).length,laboratoire:(document.body.innerText.match(/laboratoire/gi)||[]).length}));
   out.offline=await offlineCold(x.context,spec.url,async q=>q.evaluate(()=>({version:typeof APP_VERSION!=='undefined'?APP_VERSION:null,swExpected:typeof SW_CACHE_VERSION!=='undefined'?SW_CACHE_VERSION:null,body:document.body.innerText.length})));
   await p.close();await x.context.close();
-  out.pass=out.http_status===200&&out.idb.pass&&out.sw.active&&out.identity.app==='132'&&out.identity.pub==='132'&&out.identity.swExpected==='ldc-v132-b1-final-prephysical'&&out.d07&&out.d07.mode==='words'&&out.public_copy.lab===0&&out.public_copy.laboratoire===0&&out.offline.nav_ok&&out.offline.state&&out.offline.state.version==='132';
+  out.pass=out.http_status===200&&out.nav_sha256==='56a1e81251def926197dbdb4a422422f3e54f9b9ede5b8fcb61f38d4ac2c28ea'&&out.idb.pass&&out.sw.active&&out.d04&&out.d04.pass&&out.identity.app==='v2.19.131-R1B-UX-ACCESS-R5'&&out.identity.pub==='131'&&out.identity.swExpected==='ldc-v2.19.131-R1B-ux-access-r5'&&out.d07&&out.d07.mode==='words'&&out.public_copy.lab===0&&out.public_copy.laboratoire===0&&out.offline.nav_ok&&out.offline.state&&out.offline.state.version==='v2.19.131-R1B-UX-ACCESS-R5';
   return out;
 }
 async function testLetters(browser,spec){
@@ -147,7 +150,7 @@ async function testLetters(browser,spec){
   out.forced=await p.evaluate(()=>{const e=document.querySelector('.ldj-card')||document.querySelector('.help-nav-btn.primary');if(!e)return null;const c=getComputedStyle(e);return{width:c.borderWidth,style:c.borderStyle};});
   out.offline=await offlineCold(x.context,spec.url,async q=>{try{await q.waitForFunction(()=>typeof CORPUS!=='undefined'&&CORPUS.length>0,{timeout:12000});}catch(e){}return q.evaluate(()=>({version:typeof APP_VERSION!=='undefined'?APP_VERSION:null,corpus:typeof CORPUS!=='undefined'?CORPUS.length:null,letters:document.querySelectorAll('.letter-item').length}));});
   await p.close();await x.context.close();
-  out.pass=out.http_status===200&&out.idb.pass&&out.sw.active&&out.identity.version==='2.10'&&out.identity.corpus>0&&out.identity.role==='main'&&out.help_focus&&out.help_focus.returned&&out.offline.nav_ok&&out.offline.state&&out.offline.state.version==='2.10'&&out.offline.state.corpus>0;
+  out.pass=out.http_status===200&&out.nav_sha256==='f7f0270b3b303ee26ac94f3c8c0168a8aea12313fb4345571a891267c3091fe7'&&out.idb.pass&&out.sw.active&&out.identity.version==='2.9'&&out.identity.corpus>0&&out.identity.role==='main'&&out.help_focus&&out.help_focus.returned&&out.offline.nav_ok&&out.offline.state&&out.offline.state.version==='2.9'&&out.offline.state.corpus>0;
   return out;
 }
 (async()=>{
