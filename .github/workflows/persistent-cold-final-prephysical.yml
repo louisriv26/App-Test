@@ -1,0 +1,30 @@
+name: Persistent cold final prephysical qualification
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  qualify:
+    if: ${{ contains(github.event.head_commit.message, 'Run persistent cold final prephysical qualification') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: main}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Chromium
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Execute two full browser-process offline reopen cycles
+        run: node persistent-cold-final-prephysical.test.cjs
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: persistent-cold-final-prephysical-evidence
+          path: persistent-cold-final-prephysical-results.json
+          if-no-files-found: error
