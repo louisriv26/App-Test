@@ -4,7 +4,7 @@ const ROOT=process.cwd(), RUN=path.join(ROOT,'.upgrade-runtime');
 const specs={
  h24:{old:'upgrade-24h-v119',final:'24h-v119-b1-prephysical',route:'h24',oldV:'v111.0',newV:'v119'},
  ldc:{old:'upgrade-ldc-v132',final:'ldc-v132-b1-prephysical',route:'ldc',oldV:'v2.19.128-R1B-UX-ACCESS-R2',newV:'132'},
- lettres:{old:'upgrade-lettres-v2-10',final:'lettres-v2.10-b1-prephysical',route:'lettres',oldV:'2.8',newV:'2.10'}
+ lettres:{old:'upgrade-lettres-v2-10',final:'lettres-v2.10-b1-prephysical',route:'lettres',oldV:'2.4',newV:'2.10'}
 };
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function copyTree(src,dst){fs.rmSync(dst,{recursive:true,force:true});fs.cpSync(src,dst,{recursive:true});}
