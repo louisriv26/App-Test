@@ -1,0 +1,60 @@
+name: Stage exact LDC v133 governed R5 successor
+on:
+  push:
+    paths:
+      - '.github/staging-r5/TRIGGER'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Reconstruct exact successor
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf ldc-v133-r6-governed-r5
+          cp -a ldc-v131-r5-governed-r4 ldc-v133-r6-governed-r5
+          git apply .github/staging-r5/ldc-v133.patch
+          test "$(find ldc-v133-r6-governed-r5 -type f | wc -l)" -eq 248
+          printf '%s\n'             '9e5b735e8b7c0882b428203badb1d76af68e5ce172a2d0cae1c30fd2935cf359  ldc-v133-r6-governed-r5/index.html'             '40876d0576b421031ae4b3b645d7d207c6a004642001fc14e661ddcf5f7e6505  ldc-v133-r6-governed-r5/offline_manifest.json'             '9426b0c1123291049735086aa1b17122528a156e2e26243a0317f047616432bc  ldc-v133-r6-governed-r5/sw.js'             'abe4b8ac6f85a7945a9ab07bc25279e4b9cec0edf418af436fa383c4fa61d148  ldc-v133-r6-governed-r5/version.json' | sha256sum -c -
+          diff -qr ldc-v131-r5-governed-r4/corpus ldc-v133-r6-governed-r5/corpus
+      - name: Commit isolated route if needed
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "collection-luisa-governance"
+          git config user.email "collection-luisa-governance@users.noreply.github.com"
+          git add ldc-v133-r6-governed-r5
+          if git diff --cached --quiet; then
+            echo "Exact v133 route already staged."
+          else
+            git commit -m "Stage exact LDC v133 D-04 repair candidate"
+            for n in 1 2 3 4 5; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then exit 0; fi
+              sleep 2
+            done
+            exit 1
+          fi
+      - name: Wait for GitHub Pages and verify served key bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://louisriv26.github.io/App-Test/ldc-v133-r6-governed-r5'
+          for n in $(seq 1 30); do
+            ok=1
+            for spec in               'index.html 9e5b735e8b7c0882b428203badb1d76af68e5ce172a2d0cae1c30fd2935cf359'               'offline_manifest.json 40876d0576b421031ae4b3b645d7d207c6a004642001fc14e661ddcf5f7e6505'               'sw.js 9426b0c1123291049735086aa1b17122528a156e2e26243a0317f047616432bc'               'version.json abe4b8ac6f85a7945a9ab07bc25279e4b9cec0edf418af436fa383c4fa61d148'
+            do
+              set -- $spec
+              got=$(curl -fsSL "$base/$1?bind=$n" | sha256sum | cut -d' ' -f1) || ok=0
+              [ "$got" = "$2" ] || ok=0
+            done
+            [ "$ok" -eq 1 ] && exit 0
+            sleep 5
+          done
+          exit 1
