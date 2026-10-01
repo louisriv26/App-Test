@@ -18,7 +18,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          import hashlib, json, re, zipfile, base64
+          import hashlib, json, re, zipfile, base64, os
           roots={
             "24H":("24h-v119-b1-prephysical","24H_v119_B1_FINAL_PREPHYSICAL_EXACT_DEPLOY.zip"),
             "LDC":("ldc-v132-b1-prephysical","LDC_v132_B1_FINAL_PREPHYSICAL_EXACT_DEPLOY.zip"),
@@ -58,7 +58,7 @@ jobs:
             "forced_colors":('forced-colors: active' in h),
             "desktop_non_overlay":bool(re.search(r'min-width\s*:\s*1150px',h) and re.search(r'\.bottom-nav\s*\{[^}]*position\s*:\s*static',h,re.S)),
             "search_destination_binding":('applySearchDestinationRanges' in h),
-            "home_race_guards":all(x in h for x in ['_selectionFinalizeTimer','_selectionCaptureTimer','_selectionGeneration']),
+            "home_race_guards":all(x in h for x in ['_selectionFinalizeTimer','_selectionCaptureTimer','_selectionCaptureGeneration']),
           }
           # verify CSP hashes in page against exact inline elements
           cspm=re.search(r'<meta[^>]+http-equiv=["\']Content-Security-Policy["\'][^>]+content=["\']([^"\']+)["\']',h,re.I)
