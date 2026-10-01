@@ -56,7 +56,7 @@ jobs:
             "accessible_tabs":('role="tablist"' in h and 'aria-selected' in h and 'handleReaderTabKey' in h),
             "note_accessible_name":('noteTextarea' in h and 'Note personnelle' in h),
             "forced_colors":('forced-colors: active' in h),
-            "desktop_non_overlay":bool(re.search(r'min-width\s*:\s*1150px',h) and re.search(r'\.bottom-nav\s*\{[^}]*position\s*:\s*static',h,re.S)),
+            "desktop_non_overlay":bool(re.search(r'@media\s*\(min-width:\s*769px\)[\s\S]{0,800}\.bottom-nav\s*\{[\s\S]{0,500}position\s*:\s*relative\s*!important',h)),
             "search_destination_binding":('applySearchDestinationRanges' in h),
             "home_race_guards":all(x in h for x in ['_selectionFinalizeTimer','_selectionCaptureTimer','_selectionCaptureGeneration']),
           }
@@ -72,7 +72,7 @@ jobs:
             "app_132":bool(re.search(r"const APP_VERSION\s*=\s*['\"]132['\"]",l)),
             "public_132":str(lv.get("public_version"))=="132",
             "sw_132":"ldc-v132-b1-final-prephysical" in lsw,
-            "d07_nonsticky":('semanticPackV3Status' in l and 'SEARCH_INTENT_MODE_KEY' in l and "setItem(SEARCH_INTENT_MODE_KEY,'words')" in l),
+            "d07_nonsticky":('SEARCH_INTENT_MODE_KEY' in l and "searchIntentMode='words'" in l and 'removeItem(SEARCH_INTENT_MODE_KEY)' in l),
             "d13_no_lab_interne":len(re.findall(r'LAB interne',l,re.I))==0,
             "d13_no_laboratoire":len(re.findall(r'laboratoire',l,re.I))==0,
             "storage_api_present":('navigator.storage' in l),
