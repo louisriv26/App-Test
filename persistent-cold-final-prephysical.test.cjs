@@ -1,13 +1,13 @@
 const { chromium } = require('playwright');
 const fs=require('fs'), path=require('path');
 const specs={
-  h24:{url:'https://louisriv26.github.io/App-Test/24h-v119-b1-prephysical/',expect:{app:'v119'}},
-  ldc:{url:'https://louisriv26.github.io/App-Test/ldc-v132-b1-prephysical/',expect:{app:'132',pub:'132'}},
-  lettres:{url:'https://louisriv26.github.io/App-Test/lettres-v2.10-b1-prephysical/',expect:{app:'2.10',letters:136}},
+  h24:{url:'https://louisriv26.github.io/App-Test/24h-v119-b1-governed-r4/',expect:{app:'v119'}},
+  ldc:{url:'https://louisriv26.github.io/App-Test/ldc-v131-r5-governed-r4/',expect:{app:'v2.19.131-R1B-UX-ACCESS-R5',pub:'131'}},
+  lettres:{url:'https://louisriv26.github.io/App-Test/lettres-v2.9-b1-governed-r4/',expect:{app:'2.9',letters:136}},
   mjv:{url:'https://louisriv26.github.io/App-Test/marie-v46/',expect:{app:'46'}},
   hub:{url:'https://louisriv26.github.io/Hub---Github/',expect:{hubVersion:'1.0.6',cards:4}}
 };
-const report={generated_at:new Date().toISOString(),candidate_set:'24H_v119__LDC_v132__LETTRES_v2.10__MJV_v46__HUB_v1.0.6',apps:{},overall:'UNKNOWN'};
+const report={generated_at:new Date().toISOString(),candidate_set:'24H_v119__LDC_v131_R5__LETTRES_v2.9__MJV_v46__HUB_v1.0.6',apps:{},overall:'UNKNOWN'};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 async function probe(page,key){
   return page.evaluate(async key=>{
