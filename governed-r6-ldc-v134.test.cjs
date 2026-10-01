@@ -1,7 +1,7 @@
 const {chromium}=require('playwright');
 const fs=require('fs'),path=require('path'),crypto=require('crypto');
 const URL='https://louisriv26.github.io/App-Test/ldc-v134-r7-governed-r6/';
-const INDEX_SHA=sha(fs.readFileSync(path.join(process.cwd(),'ldc-v134-r7-governed-r6','index.html')));
+const INDEX_SHA=crypto.createHash('sha256').update(fs.readFileSync(path.join(process.cwd(),'ldc-v134-r7-governed-r6','index.html'))).digest('hex');
 const PROFILE=path.join(process.cwd(),'.ldc-r6-v134-profile');
 const out={generated_at:new Date().toISOString(),candidate:'LDC v134/R7',overall:'UNKNOWN'};
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
