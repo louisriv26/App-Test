@@ -1,0 +1,16 @@
+name: LDC v133 exact D04 no-SW
+on:
+  push:
+    paths:
+      - '.github/qualification-r5/D04_TRIGGER'
+  workflow_dispatch:
+jobs:
+  d04:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: node governed-r5-ldc-v133-d04-nosw.cjs
