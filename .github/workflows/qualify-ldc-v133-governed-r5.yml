@@ -1,0 +1,41 @@
+name: Qualify exact LDC v133 governed R5 successor
+on:
+  push:
+    paths:
+      - '.github/qualification-r5/TRIGGER'
+  workflow_dispatch:
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - name: Full served-byte parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://louisriv26.github.io/App-Test/ldc-v133-r6-governed-r5'
+          bad=0
+          while IFS= read -r -d '' f; do
+            rel="${f#ldc-v133-r6-governed-r5/}"
+            [ "$rel" = ".nojekyll" ] && continue
+            exp=$(sha256sum "$f"|cut -d' ' -f1)
+            got=$(curl -fsSL "$base/$rel?fullbind=1"|sha256sum|cut -d' ' -f1) || { echo "FETCH_FAIL $rel"; bad=1; continue; }
+            [ "$exp" = "$got" ] || { echo "HASH_FAIL $rel $exp $got"; bad=1; }
+          done < <(find ldc-v133-r6-governed-r5 -type f -print0)
+          test "$bad" -eq 0
+      - name: D04 D11 real-origin cold backup gates
+        run: node governed-r5-ldc-v133.test.cjs
+      - name: Predecessor to v133 state-preservation update gate
+        run: node governed-r5-ldc-v133-upgrade.test.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v133-governed-r5-evidence
+          path: |
+            governed-r5-ldc-v133-results.json
+            governed-r5-ldc-v133-upgrade-results.json
