@@ -31,7 +31,7 @@ async function open(page,url){await page.goto(url,{waitUntil:'domcontentloaded',
    }
    // 24H forced-colors context
    {
-    const c=await browser.newContext({viewport:{width:390,height:844},forcedColors:'active'}),p=await c.newPage();await open(p,U.h24);
+    const c=await browser.newContext({viewport:{width:390,height:844},forcedColors:'active'}),p=await c.newPage();await open(p,U.h24);await p.evaluate(()=>openHour(1,false));await sleep(200);
     R.apps.h24.forced=await p.evaluate(()=>{const out={};for(const sel of ['.bn-item','.mark-btn','.mark-read-btn']){const e=document.querySelector(sel);if(e){const s=getComputedStyle(e);out[sel]={borderWidth:s.borderTopWidth,borderStyle:s.borderTopStyle}}}return out});
     R.apps.h24.pass=R.apps.h24.pass&&Object.values(R.apps.h24.forced).length>=2&&Object.values(R.apps.h24.forced).every(x=>parseFloat(x.borderWidth)>=1&&x.borderStyle!=='none');
     await c.close();
