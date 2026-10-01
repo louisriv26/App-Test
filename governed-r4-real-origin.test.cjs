@@ -91,7 +91,7 @@ async function offlineCold(context,url,checkFn){
 }
 async function test24(browser,spec){
   const x=await commonStart(browser,spec), p=x.page;
-  const out={http_status:x.http_status,sw:x.sw,idb:x.idb,errors:x.errors};
+  const out={http_status:x.http_status,nav_sha256:x.nav_sha256,sw:x.sw,idb:x.idb,errors:x.errors};
   out.identity=await p.evaluate(()=>({version:typeof APP_VERSION!=='undefined'?APP_VERSION:null,seq:typeof APP_RELEASE_SEQUENCE!=='undefined'?APP_RELEASE_SEQUENCE:null,id:typeof APP_RELEASE_ID!=='undefined'?APP_RELEASE_ID:null,evidence:typeof APP_EVIDENCE_STAGE!=='undefined'?APP_EVIDENCE_STAGE:null}));
   out.desktop_geometry=await p.evaluate(()=>{const n=document.querySelector('.bottom-nav'),c=document.getElementById('content');if(!n||!c)return null;const a=n.getBoundingClientRect(),b=c.getBoundingClientRect();return{position:getComputedStyle(n).position,vertical_overlap:Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top))};});
   try{
@@ -123,7 +123,7 @@ async function testLDC(browser,spec){
   out.public_copy=await p.evaluate(()=>({lab:(document.body.innerText.match(/LAB interne/gi)||[]).length,laboratoire:(document.body.innerText.match(/laboratoire/gi)||[]).length}));
   out.offline=await offlineCold(x.context,spec.url,async q=>q.evaluate(()=>({version:typeof APP_VERSION!=='undefined'?APP_VERSION:null,swExpected:typeof SW_CACHE_VERSION!=='undefined'?SW_CACHE_VERSION:null,body:document.body.innerText.length})));
   await p.close();await x.context.close();
-  out.pass=out.http_status===200&&out.nav_sha256==='56a1e81251def926197dbdb4a422422f3e54f9b9ede5b8fcb61f38d4ac2c28ea'&&out.idb.pass&&out.sw.active&&out.d04&&out.d04.pass&&out.identity.app==='v2.19.131-R1B-UX-ACCESS-R5'&&out.identity.pub==='131'&&out.identity.swExpected==='ldc-v2.19.131-R1B-ux-access-r5'&&out.d07&&out.d07.mode==='words'&&out.public_copy.lab===0&&out.public_copy.laboratoire===0&&out.offline.nav_ok&&out.offline.state&&out.offline.state.version==='v2.19.131-R1B-UX-ACCESS-R5';
+  out.pass=out.http_status===200&&out.nav_sha256==='56a1e81251def926197dbdb4a422422f3e54f9b9ede5b8fcb61f38d4ac2c28ea'&&out.idb.pass&&out.sw.active&&out.d04&&out.d04.pass&&out.identity.app==='v2.19.131-R1B-UX-ACCESS-R5'&&out.identity.pub==='131'&&out.identity.swExpected==='ldc-v2.19.131-R1B-ux-access-r5'&&out.d07&&out.d07.mode==='meaning'&&out.public_copy.lab===0&&out.public_copy.laboratoire===0&&out.offline.nav_ok&&out.offline.state&&out.offline.state.version==='v2.19.131-R1B-UX-ACCESS-R5';
   return out;
 }
 async function testLetters(browser,spec){
