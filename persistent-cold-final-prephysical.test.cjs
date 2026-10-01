@@ -4,7 +4,7 @@ const specs={
   h24:{url:'https://louisriv26.github.io/App-Test/24h-v119-b1-prephysical/',expect:{app:'v119'}},
   ldc:{url:'https://louisriv26.github.io/App-Test/ldc-v132-b1-prephysical/',expect:{app:'132',pub:'132'}},
   lettres:{url:'https://louisriv26.github.io/App-Test/lettres-v2.10-b1-prephysical/',expect:{app:'2.10',letters:136}},
-  mjv:{url:'https://louisriv26.github.io/La-Vierge-Marie-dans-le-Royaume-de-la-Divine-Volonte-/',expect:{app:'46'}},
+  mjv:{url:'https://louisriv26.github.io/App-Test/marie-v46/',expect:{app:'46'}},
   hub:{url:'https://louisriv26.github.io/Hub---Github/',expect:{hubVersion:'1.0.6',cards:4}}
 };
 const report={generated_at:new Date().toISOString(),candidate_set:'24H_v119__LDC_v132__LETTRES_v2.10__MJV_v46__HUB_v1.0.6',apps:{},overall:'UNKNOWN'};
