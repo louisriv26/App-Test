@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/stage-governed-r4.yml'
+      - '.github/staging-r4/TRIGGER'
 
 permissions:
   contents: write
