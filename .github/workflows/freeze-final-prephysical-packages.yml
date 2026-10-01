@@ -18,14 +18,14 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          import hashlib, json, re, zipfile, base64, os
+          import hashlib, json, re, zipfile, base64, os, os
           roots={
             "24H":("24h-v119-b1-prephysical","24H_v119_B1_FINAL_PREPHYSICAL_EXACT_DEPLOY.zip"),
             "LDC":("ldc-v132-b1-prephysical","LDC_v132_B1_FINAL_PREPHYSICAL_EXACT_DEPLOY.zip"),
             "Lettres":("lettres-v2.10-b1-prephysical","LETTRES_v2.10_B1_FINAL_PREPHYSICAL_EXACT_DEPLOY.zip"),
           }
           fixed=(2026,10,1,0,0,0)
-          out={"git_sha":"${GITHUB_SHA}","packages":{},"checks":{}}
+          out={"git_sha":os.environ.get("GITHUB_SHA"),"packages":{},"checks":{}}
           def sha(b): return hashlib.sha256(b).hexdigest()
           for key,(rootname,zipname) in roots.items():
             root=Path(rootname)
