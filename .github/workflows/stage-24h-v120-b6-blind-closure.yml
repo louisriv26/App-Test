@@ -1,0 +1,38 @@
+name: Stage 24H v120 B6 blind-adversarial closure
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-v120-b6-stage/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind failed B5
+        run: test "$(git rev-parse HEAD:24h-v120-b5-blind-repair)" = "b1000f0e0187ec8f77359c2df2e491746f0a24d2"
+      - run: python3 .github/scripts/stage_24h_v120_b6_blind_closure.py
+      - name: Syntax and CSP sanity
+        run: |
+          python3 - <<'PY'
+          import re,hashlib,base64
+          from pathlib import Path
+          s=Path('24h-v120-b6-blind-closure/index.html').read_text()
+          js=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.S|re.I); assert len(js)==1
+          Path('/tmp/b6.js').write_text(js[0])
+          h=base64.b64encode(hashlib.sha256(js[0].encode()).digest()).decode()
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',s).group(1)
+          assert ("'sha256-"+h+"'") in csp.split('script-src-elem',1)[1].split(';',1)[0]
+          PY
+          node --check /tmp/b6.js
+          node --check 24h-v120-b6-blind-closure/sw.js
+      - name: Commit immutable B6
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b6-blind-closure
+          git commit -m "Stage 24H v120 B6 full blind-adversarial closure"
+          git push
