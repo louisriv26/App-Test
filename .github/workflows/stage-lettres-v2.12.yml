@@ -1,0 +1,23 @@
+name: Stage Lettres v2.12 dark-mode successor
+on:
+  push:
+    paths: ['.github/lettres-v2.12-stage/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind v2.11 predecessor
+        run: test "$(git rev-parse HEAD:lettres-v2.11-b1-darkmode)" = "35583b2234baaec5c43e7c2e08dc19b8e473d9d8"
+      - run: python3 .github/scripts/stage_lettres_v2_12.py
+      - name: Commit v2.12
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lettres-v2.12-b1-darkmode
+          git commit -m "Stage Lettres v2.12 dark-mode contrast successor"
+          git push
