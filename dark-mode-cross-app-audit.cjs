@@ -2,9 +2,9 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const apps=[
- {name:'24H',url:'https://louisriv26.github.io/App-Test/24h-v119-b1-governed-r4/',scenes:[['home'],['help',"typeof showHelp==='function'&&showHelp()"],['settings',"typeof showSettingsSheet==='function'&&showSettingsSheet()"]]},
+ {name:'24H',url:'https://louisriv26.github.io/App-Test/24h-v119-b1-prephysical/',scenes:[['home'],['help',"typeof showHelp==='function'&&showHelp()"],['settings',"typeof showSettingsSheet==='function'&&showSettingsSheet()"]]},
  {name:'LDC',url:'https://louisriv26.github.io/App-Test/ldc-v135-r8-governed-r7/',scenes:[['home'],['help',"typeof openHelp==='function'&&openHelp()"],['theme',"typeof showThemeSheet==='function'&&showThemeSheet()"],['size',"typeof showSizeSheet==='function'&&showSizeSheet()"]]},
- {name:'Lettres',url:'https://louisriv26.github.io/App-Test/lettres-v2.9-b1-governed-r4/',scenes:[['home'],['help',"typeof openHelp==='function'&&openHelp()"]]},
+ {name:'Lettres',url:'https://louisriv26.github.io/App-Test/lettres-v2.10-b1-prephysical/',scenes:[['home'],['help',"typeof openHelp==='function'&&openHelp()"]]},
  {name:'Marie',url:'https://louisriv26.github.io/App-Test/marie-v46/',scenes:[['home']]},
  {name:'Hub',url:'https://louisriv26.github.io/Hub---Github/',scenes:[['home']]}
 ];
