@@ -21,8 +21,8 @@ const apps=[
 
    const core=await p.evaluate(()=>{
      function parse(s){
-       const m=String(s||'').match(/rgba?\(([d.]+)[,s]+([d.]+)[,s]+([d.]+)(?:[,s/]+([d.]+))?)/i);
-       return m?{r:+m[1],g:+m[2],b:+m[3],a:m[4]===undefined?1:+m[4]}:null;
+       const nums=String(s||'').match(/[0-9.]+/g); if(!nums||nums.length<3)return null;
+       return {r:+nums[0],g:+nums[1],b:+nums[2],a:nums[3]===undefined?1:+nums[3]};
      }
      function over(f,b){const a=f.a+b.a*(1-f.a);if(!a)return {r:0,g:0,b:0,a:0};return {r:(f.r*f.a+b.r*b.a*(1-f.a))/a,g:(f.g*f.a+b.g*b.a*(1-f.a))/a,b:(f.b*f.a+b.b*b.a*(1-f.a))/a,a};}
      function bg(el){
@@ -57,7 +57,7 @@ const apps=[
    async function measure(id,label,state='base'){
      const val=await p.evaluate(id=>{
        const el=document.getElementById(id);
-       function parse(s){const m=String(s||'').match(/rgba?\(([d.]+)[,s]+([d.]+)[,s]+([d.]+)(?:[,s/]+([d.]+))?)/i);return m?{r:+m[1],g:+m[2],b:+m[3],a:m[4]===undefined?1:+m[4]}:null;}
+       function parse(s){const nums=String(s||'').match(/[0-9.]+/g);if(!nums||nums.length<3)return null;return {r:+nums[0],g:+nums[1],b:+nums[2],a:nums[3]===undefined?1:+nums[3]};}
        function over(f,b){const a=f.a+b.a*(1-f.a);return {r:(f.r*f.a+b.r*b.a*(1-f.a))/a,g:(f.g*f.a+b.g*b.b*(1-f.a))/a,b:(f.b*f.a+b.b*b.a*(1-f.a))/a,a};}
        // corrected over function locally below (avoid typo effects by inline recompute)
        function comp(f,b){const a=f.a+b.a*(1-f.a);return {r:(f.r*f.a+b.r*b.a*(1-f.a))/a,g:(f.g*f.a+b.g*b.a*(1-f.a))/a,b:(f.b*f.a+b.b*b.a*(1-f.a))/a,a};}
