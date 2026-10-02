@@ -1,0 +1,31 @@
+name: Stage dark-mode closure successors
+on:
+  push:
+    paths:
+      - '.github/dark-mode-stage/TRIGGER'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact predecessors
+        run: |
+          test "$(git rev-parse HEAD:ldc-v135-r8-governed-r7)" = "ba58aff745cbb016ff465566e86d7a36eac9351d"
+          test "$(git rev-parse HEAD:lettres-v2.10-b1-prephysical)" = "1197deef9b1c6bc81f45bd4d9395fe04f894056b"
+          test "$(git rev-parse HEAD:marie-v46)" = "48c094e18494e65a45659ef16ead69f40d2c0b42"
+          git clone -q https://github.com/louisriv26/Les-24-Heures-de-la-Passion.git /tmp/prod24
+          git -C /tmp/prod24 checkout -q 50a11cb67a79882e6e80088d6740b6db4827c06c
+          test "$(git -C /tmp/prod24 rev-parse HEAD^{tree})" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+      - run: python3 .github/scripts/stage_dark_mode_successors.py
+      - name: Commit exact successors
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b1-darkmode ldc-v136-r9-darkmode lettres-v2.11-b1-darkmode marie-v47-b1-darkmode
+          git diff --cached --quiet && { echo "No successor changes"; exit 1; }
+          git commit -m "Stage exact dark-mode closure successors: 24H v120, LDC v136, Lettres v2.11, Marie v47"
+          git push
