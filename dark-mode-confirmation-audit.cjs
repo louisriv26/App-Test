@@ -92,7 +92,7 @@ const apps=[
        ['p17','span','sr-badge speech','Parole',{}]
      ];
      for(const d of defs){await inject(...d);await measure(d[0],d[2]);}
-     for(const [id,label] of [['p11','integrity-btn'],['p12','help-round'],['p13','panel-close-btn']]){await p.locator('#'+id).hover();await measure(id,label,'hover');}
+     for(const [id,label] of [['p11','integrity-btn'],['p12','help-round'],['p13','panel-close-btn']]){await p.locator('#'+id).hover({force:true});await measure(id,label,'hover');}
    } else if(app.name==='LDC'){
      const defs=[
        ['p1','span','search-mode-badge','Mode',{}],
