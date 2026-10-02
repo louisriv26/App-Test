@@ -1,0 +1,25 @@
+name: Stage 24H v120 B2 CSP-bound successor
+on:
+  push:
+    paths: ['.github/24h-v120-b2-stage/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind failed B1 and live predecessor
+        run: |
+          test "$(git rev-parse HEAD:24h-v120-b1-darkmode)" = "536793b1a6c12768d81c260db45736e4938c8edf"
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+      - run: python3 .github/scripts/stage_24h_v120_b2_csp.py
+      - name: Commit B2 successor
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b2-darkmode
+          git commit -m "Stage 24H v120 B2 CSP-bound dark-mode successor"
+          git push
