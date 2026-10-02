@@ -1,0 +1,54 @@
+name: 24H blind adversarial B5 verification
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-blind-b5/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact B5 and production predecessor
+        run: |
+          test "$(git rev-parse HEAD:24h-v120-b5-blind-repair)" = "b1000f0e0187ec8f77359c2df2e491746f0a24d2"
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+      - name: Independent static/package audit
+        run: python3 24h-blind-adversarial-b5-static.py
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install browser
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start exact-byte origin
+        run: |
+          python3 -m http.server 8084 --bind 127.0.0.1 >/tmp/24hblindb5.log 2>&1 &
+          sleep 2
+      - name: Independent rendered/runtime audit
+        run: node 24h-blind-adversarial-b5.cjs
+      - name: Adjudicate machine findings
+        run: |
+          python3 - <<'PY'
+          import json,sys
+          s=json.load(open('24h-blind-adversarial-b5-static.json'))
+          r=json.load(open('24h-blind-adversarial-b5-results.json'))
+          errs=[x for x in s['findings']+r['findings'] if x.get('severity')=='error']
+          print('ERROR_FINDINGS',len(errs))
+          for x in errs: print(x)
+          sys.exit(1 if errs else 0)
+          PY
+      - name: Upload full evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 24h-blind-adversarial-b5-evidence
+          path: |
+            24h-blind-adversarial-b5-static.json
+            24h-blind-adversarial-b5-results.json
+            24h-blind-adversarial-b5-fatal.txt
+          if-no-files-found: warn
