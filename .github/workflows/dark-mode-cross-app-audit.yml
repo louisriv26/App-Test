@@ -13,7 +13,7 @@ jobs:
         with: {node-version: '22'}
       - run: npm install --no-save playwright@1.55.0
       - run: npx playwright install --with-deps chromium
-      - run: node dark-mode-cross-app-audit.cjs > dark-mode-cross-app-audit.json
+      - run: node dark-mode-cross-app-audit.cjs | tee dark-mode-cross-app-audit.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
