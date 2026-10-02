@@ -1,0 +1,16 @@
+name: Corrected dark-mode confirmation audit
+on:
+  push:
+    paths:
+      - '.github/dark-mode-confirm/TRIGGER'
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: node dark-mode-confirmation-audit.cjs
