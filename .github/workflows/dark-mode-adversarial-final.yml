@@ -1,0 +1,35 @@
+name: Final successor blind dark-mode audit
+on:
+  push:
+    branches: [main]
+    paths: ['.github/dark-mode-adversarial-final/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bind final trees
+        run: |
+          test "$(git rev-parse HEAD:24h-v120-b4-darkmode)" = "fa26ec9bf92f9d5ff8551113ad43d26fda45168e"
+          test "$(git rev-parse HEAD:ldc-v136-r9-darkmode)" = "c8a300b6167f015c4895572c900d989ff63bd386"
+          test "$(git rev-parse HEAD:lettres-v2.12-b1-darkmode)" = "03617ce508bb9cce7e114c1cec4aa40c3a0b6dc9"
+          test "$(git rev-parse HEAD:marie-v47-b1-darkmode)" = "81acbb9f409c7c0e1695b0ab35f33dfdc4978631"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8082 --bind 127.0.0.1 >/tmp/http.log 2>&1 &
+          sleep 2
+      - run: node dark-mode-adversarial-final.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dark-mode-adversarial-final-evidence
+          path: dark-mode-adversarial-final-results.json
+          if-no-files-found: error
