@@ -1,9 +1,9 @@
 const { chromium } = require('playwright');
 
 const apps=[
- {name:'24H',url:'https://louisriv26.github.io/App-Test/24h-v119-b1-governed-r4/'},
+ {name:'24H',url:'https://louisriv26.github.io/App-Test/24h-v119-b1-prephysical/'},
  {name:'LDC',url:'https://louisriv26.github.io/App-Test/ldc-v135-r8-governed-r7/'},
- {name:'Lettres',url:'https://louisriv26.github.io/App-Test/lettres-v2.9-b1-governed-r4/'},
+ {name:'Lettres',url:'https://louisriv26.github.io/App-Test/lettres-v2.10-b1-prephysical/'},
  {name:'Marie',url:'https://louisriv26.github.io/App-Test/marie-v46/'},
  {name:'Hub',url:'https://louisriv26.github.io/Hub---Github/'}
 ];
