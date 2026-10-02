@@ -1,0 +1,41 @@
+name: Successor PWA offline state qualification
+on:
+  push:
+    branches: [main]
+    paths: ['.github/successor-pwa-state/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind current exact candidates
+        run: |
+          test "$(git rev-parse HEAD:24h-v120-b3-darkmode)" = "0a0b1601b9a260be783f94e9e64aefdd77c783b5"
+          test "$(git rev-parse HEAD:ldc-v136-r9-darkmode)" = "c8a300b6167f015c4895572c900d989ff63bd386"
+          test "$(git rev-parse HEAD:lettres-v2.12-b1-darkmode)" = "03617ce508bb9cce7e114c1cec4aa40c3a0b6dc9"
+          test "$(git rev-parse HEAD:marie-v47-b1-darkmode)" = "81acbb9f409c7c0e1695b0ab35f33dfdc4978631"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Prepare same-scope upgrade root
+        run: mkdir -p qa-upgrade
+      - name: Start local exact-byte origin
+        run: |
+          python3 -m http.server 8081 --bind 127.0.0.1 --directory qa-upgrade >/tmp/qa-http.log 2>&1 &
+          sleep 2
+      - name: Run predecessor to successor, offline and state checks
+        run: node successor-pwa-offline-state.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: successor-pwa-offline-state-evidence
+          path: successor-pwa-offline-state-results.json
+          if-no-files-found: warn
