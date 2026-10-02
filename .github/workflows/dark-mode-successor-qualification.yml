@@ -1,0 +1,98 @@
+name: Exact dark-mode successor qualification
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/dark-mode-successor-qualification/TRIGGER'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact predecessor and successor trees
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+          test "$(git rev-parse HEAD:24h-v120-b1-darkmode)" = "536793b1a6c12768d81c260db45736e4938c8edf"
+          test "$(git rev-parse HEAD:ldc-v135-r8-governed-r7)" = "ba58aff745cbb016ff465566e86d7a36eac9351d"
+          test "$(git rev-parse HEAD:ldc-v136-r9-darkmode)" = "c8a300b6167f015c4895572c900d989ff63bd386"
+          test "$(git rev-parse HEAD:lettres-v2.10-b1-prephysical)" = "1197deef9b1c6bc81f45bd4d9395fe04f894056b"
+          test "$(git rev-parse HEAD:lettres-v2.11-b1-darkmode)" = "35583b2234baaec5c43e7c2e08dc19b8e473d9d8"
+          test "$(git rev-parse HEAD:marie-v46)" = "48c094e18494e65a45659ef16ead69f40d2c0b42"
+          test "$(git rev-parse HEAD:marie-v47-b1-darkmode)" = "81acbb9f409c7c0e1695b0ab35f33dfdc4978631"
+      - name: Exact changed-file boundary and protected-surface parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib, json
+          pairs=[
+            ('24h-v119-b1-governed-r4','24h-v120-b1-darkmode',{'index.html','luisa_24_heures.html','manifest.json','sw.js','version.json'}),
+            ('ldc-v135-r8-governed-r7','ldc-v136-r9-darkmode',{'index.html','offline_manifest.json','sw.js','version.json'}),
+            ('lettres-v2.10-b1-prephysical','lettres-v2.11-b1-darkmode',{'index.html','manifest.json','sw.js'}),
+            ('marie-v46','marie-v47-b1-darkmode',{'index.html','sw.js'}),
+          ]
+          def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+          for a,b,allowed in pairs:
+            A=Path(a);B=Path(b)
+            fa={str(p.relative_to(A)):sha(p) for p in A.rglob('*') if p.is_file()}
+            fb={str(p.relative_to(B)):sha(p) for p in B.rglob('*') if p.is_file()}
+            changed={k for k in set(fa)|set(fb) if fa.get(k)!=fb.get(k)}
+            assert changed==allowed,(a,b,changed,allowed)
+          for sub,a,b in [
+            ('corpus','ldc-v135-r8-governed-r7','ldc-v136-r9-darkmode'),
+            ('corpus','marie-v46','marie-v47-b1-darkmode')]:
+            A=Path(a)/sub; B=Path(b)/sub
+            for p in A.rglob('*'):
+              if p.is_file():
+                q=B/p.relative_to(A); assert q.exists() and sha(p)==sha(q),(p,q)
+          assert sha(Path('lettres-v2.10-b1-prephysical/corpus.json'))==sha(Path('lettres-v2.11-b1-darkmode/corpus.json'))
+          print('BOUNDARY_AND_PROTECTED_PARITY_PASS')
+          PY
+      - name: Static JS JSON CSP and version checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check 24h-v120-b1-darkmode/sw.js
+          node --check ldc-v136-r9-darkmode/sw.js
+          node --check lettres-v2.11-b1-darkmode/sw.js
+          node --check marie-v47-b1-darkmode/sw.js
+          python3 - <<'PY'
+          import json
+          for p in [
+            '24h-v120-b1-darkmode/manifest.json','24h-v120-b1-darkmode/version.json',
+            'ldc-v136-r9-darkmode/offline_manifest.json','ldc-v136-r9-darkmode/version.json',
+            'lettres-v2.11-b1-darkmode/manifest.json','marie-v47-b1-darkmode/manifest.json']:
+            json.load(open(p,encoding='utf-8'))
+          s=open('lettres-v2.11-b1-darkmode/index.html',encoding='utf-8').read()
+          assert "appearance:none" in s and "color-scheme:dark" in s
+          assert "v2.11" in s
+          print('STATIC_PASS')
+          PY
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start exact-byte local origin
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/http.log 2>&1 &
+          echo $! > /tmp/http.pid
+          sleep 2
+      - name: Run rendered successor qualification
+        run: node dark-mode-successor-qualification.cjs
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dark-mode-successor-qualification-evidence
+          path: dark-mode-successor-qualification-results.json
+          if-no-files-found: warn
