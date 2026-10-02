@@ -1,0 +1,22 @@
+name: Stage 24H v120 B4 navigation contrast successor
+on:
+  push:
+    paths: ['.github/24h-v120-b4-stage/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind B3
+        run: test "$(git rev-parse HEAD:24h-v120-b3-darkmode)" = "0a0b1601b9a260be783f94e9e64aefdd77c783b5"
+      - run: python3 .github/scripts/stage_24h_v120_b4.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b4-darkmode
+          git commit -m "Stage 24H v120 B4 navigation dark-mode successor"
+          git push
