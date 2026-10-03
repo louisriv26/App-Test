@@ -1,0 +1,27 @@
+name: Correct Marie v48 evidence report
+on:
+  push:
+    branches: [main]
+    paths: ['.github/marie-v48-evidence/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  correct:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind immutable candidate before evidence-only correction
+        run: test "$(git rev-parse HEAD:marie-v48-b1-darkmode)" = "3ff02c47315f57d373e2475fe1191157ffabfdb0"
+      - run: python3 repair-marie-v48-evidence.py
+      - name: Confirm candidate unchanged
+        run: test "$(git rev-parse HEAD:marie-v48-b1-darkmode)" = "3ff02c47315f57d373e2475fe1191157ffabfdb0"
+      - name: Commit evidence only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add marie-v48-build-evidence.json
+          git commit -m "Correct Marie v48 evidence hash reporting"
+          git pull --rebase origin main
+          test "$(git rev-parse HEAD:marie-v48-b1-darkmode)" = "3ff02c47315f57d373e2475fe1191157ffabfdb0"
+          git push origin HEAD:main
