@@ -1,0 +1,33 @@
+{
+  "candidate": "v120/B10",
+  "release_id": "24h-v120-b10-20261003-predecessor-compatible-activation-closure",
+  "release_sequence": 120000010,
+  "source_b7_tree": "ffa6ae0129a39d9802fce6ec5b5b1967da1efc5f",
+  "source_b8_tree": "3e5f03b4ff1c6d6ff36e8396d67193558ad7319c",
+  "canonical_shell_sha256": "85d11653074dda89eaa1e45c1da6c88fc2dc9b4c738317bad0263c4b9f3c563b",
+  "script_sha256_base64": [
+    "zto5iX+HQklZR5dKrCmXnS590bh2OpOLnz9vPG/iSEI="
+  ],
+  "style_sha256_base64": [
+    "UQ2LZMV8vpixa50rjbFhb0lgGCv04EY1sB1SyGNLL0k=",
+    "22kgUYtoJwaxTowAL2oHFM3bqDE4+xNTntiRF7nBtME=",
+    "4AfsRj8AWkdWUFWpaxT/0+3244PorRYCufbvVPHqiRU=",
+    "WLj0DFZ2D1b1hR/2JC2FK3aNLqjx9Hipj0auK8YOfq8="
+  ],
+  "changed_files_expected": [
+    "index.html",
+    "luisa_24_heures.html",
+    "manifest.json",
+    "sw.js",
+    "version.json"
+  ],
+  "activation_repair": "DEFER_ACCEPT_ACK_TO_SUCCESSOR_ACTIVATE_AFTER_CLIENTS_CLAIM",
+  "production_deployment_authority": "NONE",
+  "physical_gate": "OPEN",
+  "deterministic_zip_sha256": "42937d636f0c44a78e9969bb8410fd374784e6ef6b3d937270ccd4ed81e6adc9",
+  "deterministic_zip_size": 1992023,
+  "rendered_evidence": "24h-v120-b10-rendered-evidence.json",
+  "upgrade_evidence": "24h-b10-production-upgrade-offline-results.json",
+  "multiclient_evidence": "24h-v120-b10-multiclient-evidence.json",
+  "qualification": "PASS_NONPHYSICAL"
+}

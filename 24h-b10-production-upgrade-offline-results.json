@@ -1,0 +1,122 @@
+{
+  "generated_at": "2026-10-03T19:58:59.465Z",
+  "pred": "24h-v119-b1-governed-r4",
+  "succ": "24h-v120-b10-predecessor-compatible-closure",
+  "steps": {
+    "pre": {
+      "identity": {
+        "APP_VERSION": "v119",
+        "BUILD_REVISION": "B1",
+        "APP_RELEASE_ID": "24h-v119-b1-20261001-adversarial-ux-correction",
+        "APP_RELEASE_SEQUENCE": 119000001
+      },
+      "worker": {
+        "sequence": 119000001,
+        "version": "v119",
+        "releaseId": "24h-v119-b1-20261001-adversarial-ux-correction",
+        "shell": "./luisa_24_heures.html",
+        "shellHash": "56628a5329bd708715308dc2bb41a21d4a1dcbeee03ec2cf9c657a0fa7d9309d",
+        "workerState": "activated"
+      },
+      "controlled": true,
+      "controllerScript": "http://127.0.0.1:8080/qa-24h-b10-upgrade/app/sw.js",
+      "snapshot": {
+        "themePreference": "dark",
+        "fontLevel": "xlarge",
+        "lastHour": "3"
+      },
+      "sentinel": "24H-B10-UPGRADE",
+      "caches": [
+        "luisa-24h-af5e72d6-v119-b1",
+        "luisa-24h-af5e72d6-update-meta-v2"
+      ]
+    },
+    "prepared": {
+      "checkResult": true,
+      "prepared": true,
+      "mode": "waiting",
+      "remote": {
+        "sequence": 120000010,
+        "version": "v120",
+        "releaseId": "24h-v120-b10-20261003-predecessor-compatible-activation-closure",
+        "shellHash": "85d11653074dda89eaa1e45c1da6c88fc2dc9b4c738317bad0263c4b9f3c563b"
+      },
+      "worker": {
+        "sequence": 120000010,
+        "version": "v120",
+        "releaseId": "24h-v120-b10-20261003-predecessor-compatible-activation-closure",
+        "shell": "./luisa_24_heures.html",
+        "shellHash": "85d11653074dda89eaa1e45c1da6c88fc2dc9b4c738317bad0263c4b9f3c563b",
+        "workerState": "installed"
+      },
+      "reg": {
+        "waiting": "installed",
+        "active": "activated"
+      },
+      "status": ""
+    },
+    "post": {
+      "identity": {
+        "APP_VERSION": "v120",
+        "BUILD_REVISION": "B10",
+        "APP_RELEASE_ID": "24h-v120-b10-20261003-predecessor-compatible-activation-closure",
+        "APP_RELEASE_SEQUENCE": 120000010
+      },
+      "worker": {
+        "sequence": 120000010,
+        "version": "v120",
+        "releaseId": "24h-v120-b10-20261003-predecessor-compatible-activation-closure",
+        "shell": "./luisa_24_heures.html",
+        "shellHash": "85d11653074dda89eaa1e45c1da6c88fc2dc9b4c738317bad0263c4b9f3c563b",
+        "workerState": "activated"
+      },
+      "snapshot": {
+        "themePreference": "dark",
+        "fontLevel": "xlarge",
+        "lastHour": "3"
+      },
+      "sentinel": "24H-B10-UPGRADE",
+      "controller": true,
+      "caches": [
+        "luisa-24h-af5e72d6-v119-b1",
+        "luisa-24h-af5e72d6-update-meta-v2",
+        "luisa-24h-af5e72d6-v120-b10"
+      ],
+      "body": "Aller directement au texte\nLES 24 HEURES DE LA PASSION\nLUISA PICCARRETA\n⚙\n✦ ✝ ✦\nLes 24 Heures de la Passion\nde Notre-Seigneur Jésus-Christ\n\nLuisa Piccarreta — Petite fille de la Divine Volonté\n\n120  ·"
+    },
+    "offline1": {
+      "id": "24h-v120-b10-20261003-predecessor-compatible-activation-closure",
+      "build": "B10",
+      "sentinel": "24H-B10-UPGRADE",
+      "snap": {
+        "themePreference": "dark",
+        "fontLevel": "xlarge",
+        "lastHour": "3"
+      },
+      "body": "Aller directement au texte\nLES 24 HEURES DE LA PASSION\nLUISA PICCARRETA\n⚙\n✦ ✝ ✦\nLes 24 Heures de la Passion\nde Notre-Sei"
+    },
+    "offline2": {
+      "id": "24h-v120-b10-20261003-predecessor-compatible-activation-closure",
+      "build": "B10",
+      "sentinel": "24H-B10-UPGRADE",
+      "snap": {
+        "themePreference": "dark",
+        "fontLevel": "xlarge",
+        "lastHour": "3"
+      },
+      "body": "Aller directement au texte\nLES 24 HEURES DE LA PASSION\nLUISA PICCARRETA\n⚙\n✦ ✝ ✦\nLes 24 Heures de la Passion\nde Notre-Sei"
+    },
+    "onlineRecovery": {
+      "id": "24h-v120-b10-20261003-predecessor-compatible-activation-closure",
+      "build": "B10",
+      "caches": [
+        "luisa-24h-af5e72d6-v119-b1",
+        "luisa-24h-af5e72d6-update-meta-v2",
+        "luisa-24h-af5e72d6-v120-b10"
+      ],
+      "controller": true
+    }
+  },
+  "consoleErrors": [],
+  "pageErrors": []
+}
