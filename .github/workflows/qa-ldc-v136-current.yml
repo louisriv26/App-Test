@@ -1,0 +1,31 @@
+name: Fresh LDC v136 current-candidate QA
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-ldc-v136-current/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact LDC v136 tree
+        run: test "$(git rev-parse HEAD:ldc-v136-r9-darkmode)" = "c8a300b6167f015c4895572c900d989ff63bd386"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8110 --bind 127.0.0.1 >/tmp/ldc136.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v136-current.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-ldc-v136-current
+          path: qa-ldc-v136-current-results.json
+          if-no-files-found: warn
