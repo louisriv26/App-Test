@@ -1,0 +1,24 @@
+name: Stage 24H v120 B5 adversarial runtime closure
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-v120-b5-stage/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind failed frozen B4
+        run: test "$(git rev-parse HEAD:24h-v120-b4-darkmode)" = "fa26ec9bf92f9d5ff8551113ad43d26fda45168e"
+      - run: python3 .github/scripts/stage_24h_v120_b5.py
+      - name: Commit immutable B5 successor
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b5-adversarial
+          git commit -m "Stage 24H v120 B5 adversarial runtime closure"
+          git push
