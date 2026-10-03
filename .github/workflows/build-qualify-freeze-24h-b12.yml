@@ -51,7 +51,18 @@ jobs:
               return s
           n10=norm_html(h10,'B10',120000010,'24h-v120-b10-20261003-predecessor-compatible-activation-closure','24H_V120_PREDECESSOR_COMPATIBLE_ACTIVATION_CLOSURE_B10')
           n11=norm_html(h11,'B12',120000012,'24h-v120-b12-20261003-release-reconciliation-update-banner-closure','24H_V120_RELEASE_RECONCILIATION_UPDATE_BANNER_CLOSURE_B12')
-          assert n10==n11,'B12 shell changed beyond release identity/CSP'
+          # Normalize the two explicitly authorized B12 update-banner CSS changes back to B10.
+          n11=n11.replace(""".update-refresh-btn { flex-shrink: 0; min-height: 44px; padding: 0.4rem 0.8rem;
+  background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.4);
+  color: var(--on-accent); border-radius: 8px; font-family: var(--font-ui); font-size: 0.82rem;
+  cursor: pointer; white-space: nowrap; }""",""".update-refresh-btn { flex-shrink: 0; padding: 0.4rem 0.8rem;
+  background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.4);
+  color: #fff; border-radius: 8px; font-family: var(--font-ui); font-size: 0.82rem;
+  cursor: pointer; white-space: nowrap; }""")
+          n11=n11.replace(""".update-dismiss-btn { flex-shrink: 0; min-width: 44px; min-height: 44px; background: none; border: none; color: var(--on-accent);
+  font-size: 1.1rem; cursor: pointer; padding: 2px 4px; line-height: 1; }""",""".update-dismiss-btn { flex-shrink: 0; background: none; border: none; color: rgba(255,255,255,0.7);
+  font-size: 1.1rem; cursor: pointer; padding: 2px 4px; line-height: 1; }""")
+          assert n10==n11,'B12 shell changed beyond release identity/CSP and authorized update-banner closure'
           # Normalize SW identity/cache/shell hash/comment. Any semantic SW change is a failure.
           s10=(b10/'sw.js').read_text(encoding='utf-8'); s11=(b12/'sw.js').read_text(encoding='utf-8')
           def norm_sw(s,rev,seq,rid,cache,sha):
