@@ -59,11 +59,14 @@ repls={
 "const BUILD_REVISION = 'B1';":"const BUILD_REVISION = 'B5';",
 "const RELEASE_SEQUENCE = 120000001;":"const RELEASE_SEQUENCE = 120000005;",
 "const RELEASE_ID = '24h-v120-b4-20261002-dark-mode-closure';":"const RELEASE_ID = '24h-v120-b5-20261003-dark-mode-csp-runtime-repair';",
-"const CACHE_NAME = \`\${CACHE_PREFIX}v120-b4\`;":"const CACHE_NAME = \`\${CACHE_PREFIX}v120-b5\`;",
 }
 for old,new in repls.items():
     assert sw.count(old)==1,(old,sw.count(old))
     sw=sw.replace(old,new,1)
+cache_old="const CACHE_NAME = `${CACHE_PREFIX}v120-b4`;"
+cache_new="const CACHE_NAME = `${CACHE_PREFIX}v120-b5`;"
+assert sw.count(cache_old)==1,(cache_old,sw.count(cache_old))
+sw=sw.replace(cache_old,cache_new,1)
 sw,n=re.subn(r"const CANONICAL_SHELL_SHA256 = '[0-9a-f]{64}';",f"const CANONICAL_SHELL_SHA256 = '{shell_sha}';",sw,count=1)
 assert n==1
 (DST/"sw.js").write_text(sw,encoding="utf-8",newline="")
