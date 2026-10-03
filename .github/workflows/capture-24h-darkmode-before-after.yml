@@ -28,6 +28,6 @@ jobs:
       - run: node capture-24h-darkmode-before-after.cjs
       - uses: actions/upload-artifact@v4
         with:
-          name: 24h-darkmode-before-after-screenshots
-          path: 24h-darkmode-screenshots/
+          name: 24h-darkmode-before-after-screenshots-v2
+          path: 24h-darkmode-screenshots-v2/
           if-no-files-found: error
