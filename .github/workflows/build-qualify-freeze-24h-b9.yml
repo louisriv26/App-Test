@@ -1,0 +1,122 @@
+name: Build qualify and freeze 24H v120 B9 converged closure
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b9-build/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact fork authorities
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:24h-v120-b7-darkmode)" = "ffa6ae0129a39d9802fce6ec5b5b1967da1efc5f"
+          test "$(git rev-parse HEAD:24h-v120-b8-update-activation-closure)" = "3e5f03b4ff1c6d6ff36e8396d67193558ad7319c"
+      - name: Build bounded B9 convergence
+        run: python3 build-24h-v120b9.py
+      - name: Static integrity and protected-surface audit
+        run: |
+          set -euo pipefail
+          node --check 24h-v120-b9-converged-closure/sw.js
+          python3 - <<'PY'
+          import hashlib,json,pathlib,re,base64
+          b8=pathlib.Path('24h-v120-b8-update-activation-closure'); b9=pathlib.Path('24h-v120-b9-converged-closure')
+          def hs(root): return {str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
+          a,c=hs(b8),hs(b9); changed=sorted(k for k in set(a)|set(c) if a.get(k)!=c.get(k))
+          assert changed==['index.html','luisa_24_heures.html','manifest.json','sw.js','version.json'],changed
+          html=(b9/'index.html').read_text(encoding='utf-8')
+          assert (b9/'index.html').read_bytes()==(b9/'luisa_24_heures.html').read_bytes()
+          assert 'transition:none !important' in html
+          assert "const activated=await waitForWorkerState(prepared.worker,['activated'],15000);" in html
+          assert 'target_worker_identity_mismatch_after_activation' in html
+          v=json.loads((b9/'version.json').read_text()); m=json.loads((b9/'manifest.json').read_text())
+          shell=hashlib.sha256((b9/'index.html').read_bytes()).hexdigest()
+          assert v['canonical_shell_sha256']==shell and shell in (b9/'sw.js').read_text()
+          assert v['build_revision']=='B9' and v['release_sequence']==120000009
+          assert m['build_revision']=='B9' and m['release_sequence']==120000009
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',html).group(1)
+          tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
+          scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>',html,re.I)
+          styles=re.findall(r'<style[^>]*>([\s\S]*?)</style>',html,re.I)
+          assert all(tok(x) in csp for x in scripts+styles)
+          pathlib.Path('/tmp/b9-main.js').write_text(max(scripts,key=len))
+          print('B9_STATIC_PASS',changed,shell,len(scripts),len(styles))
+          PY
+          node --check /tmp/b9-main.js
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install browser tooling
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve exact checkout
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/b9-http.log 2>&1 &
+          sleep 2
+      - name: Fresh B9 rendered runtime and transient contrast
+        run: |
+          cat > /tmp/qa-b9-render.cjs <<'JS'
+          const {chromium}=require('playwright');
+          function parse(s){const m=String(s).match(/rgba?\(([^)]+)\)/);if(!m)return null;const a=m[1].split(/[,\s/]+/).filter(Boolean).map(Number);return{r:a[0],g:a[1],b:a[2]}}
+          function lin(v){v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)} function L(c){return .2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b)} function cr(a,b){return(Math.max(L(a),L(b))+.05)/(Math.min(L(a),L(b))+.05)}
+          (async()=>{const b=await chromium.launch({headless:true});const out=[];
+          for(const vp of [{n:'iphone',w:390,h:844},{n:'ipad',w:820,h:1180}]){
+            for(const mode of ['dark','system']){
+              const c=await b.newContext({viewport:{width:vp.w,height:vp.h},colorScheme:'dark'});const p=await c.newPage();const errs=[],ce=[];
+              p.on('pageerror',e=>errs.push(String(e)));p.on('console',m=>{if(m.type()==='error')ce.push(m.text())});
+              const r=await p.goto('http://127.0.0.1:8080/24h-v120-b9-converged-closure/luisa_24_heures.html',{waitUntil:'domcontentloaded',timeout:120000});
+              await p.waitForFunction(()=>window.__lp24Init==='done'&&APP_VERSION==='v120'&&BUILD_REVISION==='B9'&&APP_RELEASE_SEQUENCE===120000009,null,{timeout:30000});
+              await p.evaluate(mode=>{state.themePreference=mode;applyTheme();showHome();const q=document.createElement('button');q.id='qa-int';q.className='integrity-btn';q.textContent='Vérifier';q.style.position='fixed';q.style.left='20px';q.style.top='100px';q.style.zIndex='99999';document.body.appendChild(q)},mode);
+              const base=await p.$eval('#qa-int',e=>{const s=getComputedStyle(e);return{transition:s.transition,transitionDuration:s.transitionDuration,color:s.color,bg:s.backgroundColor}});
+              if(!String(base.transitionDuration).split(',').every(x=>x.trim()==='0s'))throw new Error(vp.n+' '+mode+' non-atomic transition '+base.transitionDuration);
+              const samples=[];await p.hover('#qa-int');
+              let prev=0;for(const ms of [0,10,20,30,50,75,100,150,200]){if(ms>prev)await p.waitForTimeout(ms-prev);prev=ms;const x=await p.$eval('#qa-int',e=>{const s=getComputedStyle(e);return{color:s.color,bg:s.backgroundColor}});samples.push({ms,...x,ratio:+cr(parse(x.color),parse(x.bg)).toFixed(3)})}
+              const min=Math.min(...samples.map(x=>x.ratio));if(min<4.5)throw new Error(vp.n+' '+mode+' transient contrast '+min);
+              await p.evaluate(()=>showHoursView());await p.waitForTimeout(80);await p.evaluate(()=>openHour(1));await p.waitForTimeout(120);
+              const reader=await p.locator('#content').innerText();if(reader.length<800)throw new Error('reader_short');
+              await p.evaluate(()=>showSearchView());await p.waitForTimeout(80);await p.evaluate(()=>showEspaceView());await p.waitForTimeout(80);
+              const body=(await p.locator('body').innerText()).trim();if(!body||/Chargement…|Chargement\.\.\./.test(body.slice(0,80)))throw new Error('runtime_not_ready');
+              if(errs.length||ce.some(x=>/content security policy|uncaught|referenceerror|typeerror/i.test(x)))throw new Error('runtime errors '+JSON.stringify({errs,ce}));
+              out.push({vp:vp.n,mode,http:r.status(),base,min,samples,body:body.slice(0,120)});await c.close();
+            }
+          }
+          await b.close();require('fs').writeFileSync('24h-v120-b9-rendered-evidence.json',JSON.stringify(out,null,2));console.log('B9_RENDERED_TRANSIENT_PASS');
+          })().catch(e=>{console.error(e);process.exit(2)});
+          JS
+          node /tmp/qa-b9-render.cjs
+      - name: Exact v119 to B9 update state and offline qualification
+        run: |
+          sed -e 's/24h-v120-b8-update-activation-closure/24h-v120-b9-converged-closure/g'               -e 's/24h-v120-b8-20261003-update-activation-closure/24h-v120-b9-20261003-converged-activation-contrast-closure/g'               -e 's/120000008/120000009/g' -e 's/v120-b8/v120-b9/g' -e 's/B8/B9/g' -e 's/b8/b9/g'               -e 's/127.0.0.1:8086/127.0.0.1:8080/g'               24h-b8-production-upgrade-offline.cjs > /tmp/qa-b9-upgrade.cjs
+          node /tmp/qa-b9-upgrade.cjs
+      - name: Deterministic freeze package and evidence
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,zipfile
+          src=pathlib.Path('24h-v120-b9-converged-closure'); z=pathlib.Path('24H_v120_B9_CONVERGED_RELEASE.zip')
+          with zipfile.ZipFile(z,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as f:
+            for p in sorted(x for x in src.rglob('*') if x.is_file()):
+              zi=zipfile.ZipInfo(str(p.relative_to(src)).replace(os.sep,'/'),(1980,1,1,0,0,0));zi.compress_type=zipfile.ZIP_DEFLATED;zi.external_attr=0o100644<<16
+              f.writestr(zi,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          zh=hashlib.sha256(z.read_bytes()).hexdigest()
+          pathlib.Path('24H_v120_B9_CONVERGED_RELEASE_SHA256.txt').write_text(zh+'  '+z.name+'\n')
+          e=json.loads(pathlib.Path('24h-v120-b9-build-evidence.json').read_text())
+          e.update({'deterministic_zip_sha256':zh,'deterministic_zip_size':z.stat().st_size,'rendered_evidence':'24h-v120-b9-rendered-evidence.json','upgrade_evidence':'24h-b9-production-upgrade-offline-results.json','qualification':'PASS_NONPHYSICAL','production_deployment_authority':'NONE','physical_gate':'OPEN'})
+          pathlib.Path('24H_v120_B9_BUILD_QA_EVIDENCE.json').write_text(json.dumps(e,indent=2)+'\n')
+          print('B9_ZIP',zh,z.stat().st_size)
+          PY
+          unzip -t 24H_v120_B9_CONVERGED_RELEASE.zip
+      - name: Freeze exact qualified candidate
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b9-converged-closure 24H_v120_B9_CONVERGED_RELEASE.zip 24H_v120_B9_CONVERGED_RELEASE_SHA256.txt 24H_v120_B9_BUILD_QA_EVIDENCE.json 24h-v120-b9-rendered-evidence.json 24h-b9-production-upgrade-offline-results.json
+          git commit -m "Freeze 24H v120 B9 converged candidate after fresh qualification"
+          git pull --rebase origin main
+          test "$(git rev-parse HEAD:24h-v120-b7-darkmode)" = "ffa6ae0129a39d9802fce6ec5b5b1967da1efc5f"
+          test "$(git rev-parse HEAD:24h-v120-b8-update-activation-closure)" = "3e5f03b4ff1c6d6ff36e8396d67193558ad7319c"
+          git push origin HEAD:main
