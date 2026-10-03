@@ -1,7 +1,7 @@
 const { chromium } = require('playwright');
+const { AxeBuilder } = require('@axe-core/playwright');
 const fs = require('fs');
 const crypto = require('crypto');
-const axeSource = fs.readFileSync(require.resolve('axe-core/axe.min.js'),'utf8');
 
 const CANDIDATE='24h-v120-b4-darkmode';
 const PREDECESSOR='24h-v119-b1-governed-r4';
@@ -68,8 +68,7 @@ async function setThemeAndView(page, themeMode, view){
 }
 
 async function scanPage(page,label){
-  const result=await page.evaluate(async ({axeSource,label})=>{
-    try{ if(!window.axe) eval(axeSource); }catch(e){}
+  const result=await page.evaluate(async ({label})=>{
     const visible=el=>{
       const r=el.getBoundingClientRect(),s=getComputedStyle(el);
       return r.width>0&&r.height>0&&s.display!=='none'&&s.visibility!=='hidden'&&Number(s.opacity)>0;
@@ -115,13 +114,14 @@ async function scanPage(page,label){
       }
     }
     const overflow={scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth,bodyScrollWidth:document.body.scrollWidth};
-    let axe=[];
-    if(window.axe){
-      const ar=await axe.run(document,{runOnly:{type:'rule',values:['color-contrast']},resultTypes:['violations']});
-      axe=ar.violations.flatMap(v=>v.nodes.map(n=>({rule:v.id,impact:v.impact,target:n.target,html:n.html.slice(0,180),summary:n.failureSummary})));
-    }
-    return {label,fails,overflow,axe,theme:document.documentElement.getAttribute('data-theme'),view:(typeof state!=='undefined'?state.view:null)};
-  },{axeSource,label});
+    return {label,fails,overflow,theme:document.documentElement.getAttribute('data-theme'),view:(typeof state!=='undefined'?state.view:null)};
+  },{label});
+  try{
+    const ar=await new AxeBuilder({page}).withRules(['color-contrast']).analyze();
+    result.axe=ar.violations.flatMap(v=>v.nodes.map(n=>({rule:v.id,impact:v.impact,target:n.target,html:n.html.slice(0,180),summary:n.failureSummary})));
+  }catch(e){
+    result.axe=[{rule:'HARNESS_AXE_ERROR',impact:'harness',target:[],html:'',summary:String(e)}];
+  }
   return result;
 }
 
