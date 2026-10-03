@@ -115,8 +115,8 @@ for old,new in {
 "const RELEASE_ID = '24h-v120-b5-20261003-dark-mode-csp-runtime-repair';":"const RELEASE_ID = '24h-v120-b6-20261003-dark-mode-adversarial-closure';",
 }.items():
     assert sw.count(old)==1,(old,sw.count(old)); sw=sw.replace(old,new,1)
-cache_old="const CACHE_NAME = \`\${CACHE_PREFIX}v120-b5\`;"
-cache_new="const CACHE_NAME = \`\${CACHE_PREFIX}v120-b6\`;"
+cache_old="const CACHE_NAME = `${CACHE_PREFIX}v120-b5`;"
+cache_new="const CACHE_NAME = `${CACHE_PREFIX}v120-b6`;"
 assert sw.count(cache_old)==1,(cache_old,sw.count(cache_old))
 sw=sw.replace(cache_old,cache_new,1)
 sw,n=re.subn(r"const CANONICAL_SHELL_SHA256 = '[0-9a-f]{64}';",f"const CANONICAL_SHELL_SHA256 = '{shell_sha}';",sw,count=1)
