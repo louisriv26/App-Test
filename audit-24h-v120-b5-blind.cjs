@@ -208,7 +208,20 @@ async function cleanPwa(browser){
   const before=await page.evaluate(async()=>({sentinel:localStorage.getItem('clean_pwa_sentinel'),read1:state.readHours.has(1),snapshot:(await readLatestDurablePersonalSnapshotStrong()).readHours||[]}));
   await page.reload({waitUntil:'networkidle'});await page.waitForFunction(()=>typeof showHome==='function'&&window.__lp24Init==='done');
   const after=await page.evaluate(()=>({sentinel:localStorage.getItem('clean_pwa_sentinel'),read1:state.readHours.has(1),v:APP_VERSION,b:BUILD_REVISION,rid:APP_RELEASE_ID,seq:APP_RELEASE_SEQUENCE}));
-  await ctx.setOffline(true);let offline={ok:false};try{await page.reload({waitUntil:'domcontentloaded',timeout:15000});await page.waitForFunction(()=>typeof showHome==='function'&&window.__lp24Init==='done',{timeout:10000});offline=await page.evaluate(()=>({ok:true,sentinel:localStorage.getItem('clean_pwa_sentinel'),read1:state.readHours.has(1),text:document.body.innerText.slice(0,100)})}catch(e){offline={ok:false,error:String(e))}
+  await ctx.setOffline(true);
+  let offline={ok:false};
+  try{
+    await page.reload({waitUntil:'domcontentloaded',timeout:15000});
+    await page.waitForFunction(()=>typeof showHome==='function'&&window.__lp24Init==='done',{timeout:10000});
+    offline=await page.evaluate(()=>({
+      ok:true,
+      sentinel:localStorage.getItem('clean_pwa_sentinel'),
+      read1:state.readHours.has(1),
+      text:document.body.innerText.slice(0,100)
+    }));
+  }catch(e){
+    offline={ok:false,error:String(e)};
+  }
   report.cleanPwa={reg,rel,before,after,offline,consoleErrors:[...new Set(errs)]};
   if(reg.active!=='activated'||rel.release_id!==EXPECT.releaseId||rel.build_revision!==EXPECT.revision||rel.release_sequence!==EXPECT.sequence)report.hardFailures.push('clean PWA identity '+JSON.stringify(report.cleanPwa));
   if(!after.read1||after.sentinel!=='keep'||!offline.ok||!offline.read1||offline.sentinel!=='keep')report.hardFailures.push('clean PWA persistence/offline '+JSON.stringify(report.cleanPwa));
@@ -230,7 +243,23 @@ async function updatePwa(browser){
   const activated=await page.evaluate(async expected=>{const deadline=Date.now()+12000;while(Date.now()<deadline){const r=await navigator.serviceWorker.getRegistration();if(r.active&&!r.waiting){const data=await new Promise(resolve=>{const ch=new MessageChannel(),t=setTimeout(()=>resolve(null),1200);ch.port1.onmessage=e=>{clearTimeout(t);resolve(e.data)};r.active.postMessage({type:'GET_RELEASE_INFO_V2'},[ch.port2])});if(data&&data.release_id===expected)return {ok:true,data,controller:!!navigator.serviceWorker.controller}}await new Promise(x=>setTimeout(x,100))}return {ok:false}},EXPECT.releaseId);
   await page.reload({waitUntil:'networkidle',timeout:30000});await page.waitForFunction(()=>typeof showHome==='function'&&window.__lp24Init==='done');
   const after=await page.evaluate(()=>({v:APP_VERSION,b:BUILD_REVISION,rid:APP_RELEASE_ID,seq:APP_RELEASE_SEQUENCE,sentinel:localStorage.getItem('update_pwa_sentinel'),read2:state.readHours.has(2)}));
-  await ctx.setOffline(true);let offline={ok:false};try{await page.reload({waitUntil:'domcontentloaded',timeout:15000});await page.waitForFunction(()=>typeof showHome==='function'&&window.__lp24Init==='done',{timeout:10000});offline=await page.evaluate(()=>({ok:true,v:APP_VERSION,b:BUILD_REVISION,rid:APP_RELEASE_ID,seq:APP_RELEASE_SEQUENCE,sentinel:localStorage.getItem('update_pwa_sentinel'),read2:state.readHours.has(2)})}catch(e){offline={ok:false,error:String(e))}
+  await ctx.setOffline(true);
+  let offline={ok:false};
+  try{
+    await page.reload({waitUntil:'domcontentloaded',timeout:15000});
+    await page.waitForFunction(()=>typeof showHome==='function'&&window.__lp24Init==='done',{timeout:10000});
+    offline=await page.evaluate(()=>({
+      ok:true,
+      v:APP_VERSION,
+      b:BUILD_REVISION,
+      rid:APP_RELEASE_ID,
+      seq:APP_RELEASE_SEQUENCE,
+      sentinel:localStorage.getItem('update_pwa_sentinel'),
+      read2:state.readHours.has(2)
+    }));
+  }catch(e){
+    offline={ok:false,error:String(e)};
+  }
   report.updatePwa={reg0,rel0,updateState,waitingRel,accepted,activated,after,offline,consoleErrors:[...new Set(errs)]};
   if(rel0.release_id!=='24h-v119-b1-20261001-adversarial-ux-correction')report.hardFailures.push('update predecessor identity '+JSON.stringify(rel0));
   if(!updateState.waiting||waitingRel.release_id!==EXPECT.releaseId||accepted.type!=='ACTIVATE_UPDATE_ACCEPTED_V2'||!activated.ok)report.hardFailures.push('explicit update activation '+JSON.stringify(report.updatePwa));
