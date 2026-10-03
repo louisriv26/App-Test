@@ -1,0 +1,232 @@
+name: Independent blind challenge 24H v120 B13 frozen package
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b13-blind/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  blind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+
+      - name: Bind frozen B13 tree and deterministic package
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:24h-v120-b13-cross-theme-update-banner-closure)" = "4e57e407510591db3705d876f602d8c23cc87e29"
+          echo "bc884f780576f29c8d28d2028f2e595e44aeab4c55f7eece0a0f6a0baa0093ac  24H_v120_B13_CROSS_THEME_UPDATE_BANNER_RELEASE.zip" | sha256sum -c -
+          rm -rf blind-extracted
+          mkdir blind-extracted
+          unzip -q 24H_v120_B13_CROSS_THEME_UPDATE_BANNER_RELEASE.zip -d blind-extracted
+          diff -qr 24h-v120-b13-cross-theme-update-banner-closure blind-extracted
+
+      - name: Independent static contradiction and integrity audit
+        run: |
+          python3 - <<'PY'
+          import base64,hashlib,json,pathlib,re
+          root=pathlib.Path('blind-extracted')
+          h=(root/'index.html').read_text(encoding='utf-8')
+          h2=(root/'luisa_24_heures.html').read_text(encoding='utf-8')
+          sw=(root/'sw.js').read_text(encoding='utf-8')
+          v=json.loads((root/'version.json').read_text())
+          m=json.loads((root/'manifest.json').read_text())
+          assert h==h2
+          sha=hashlib.sha256((root/'index.html').read_bytes()).hexdigest()
+          assert sha=='765784949a85e64c8715f478a71117e10accaaff8dcf8614936a4d76bb7492dd'
+          assert v['canonical_shell_sha256']==sha and sha in sw
+          assert v['app_version']=='v120' and v['build_revision']=='B13' and v['release_sequence']==120000013
+          assert v['release_id']=='24h-v120-b13-20261003-cross-theme-update-banner-closure'
+          assert m['version']=='v120' and m['build_revision']=='B13' and m['release_sequence']==120000013 and m['release_id']==v['release_id']
+          assert all('v120/B8' not in x for x in v['known_blockers'])
+          assert all('v120/B8' not in x for x in v['external_open_gates'])
+          assert 'V120_B8' not in v['functional_freeze_status']
+          assert v['overall_release_status'].endswith('PRODUCTION_NOT_AUTHORIZED')
+          assert v['real_device_status']=='V120_B13_CANDIDATE__REAL_DEVICE_GATES_OPEN'
+          # Exact CSP authorization.
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',h).group(1)
+          tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
+          scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>',h,re.I)
+          styles=re.findall(r'<style[^>]*>([\s\S]*?)</style>',h,re.I)
+          assert scripts and styles and all(tok(x) in csp for x in scripts+styles)
+          # B7/B10/B13 critical closures are present.
+          assert 'html[data-theme="dark"] .integrity-btn { transition:none !important; }' in h
+          assert '.update-refresh-btn { flex-shrink: 0; min-height: 44px;' in h
+          assert 'background: transparent; border: 1px solid currentColor;' in h
+          assert '.update-refresh-btn:active { background: transparent; }' in h
+          assert '.update-dismiss-btn { flex-shrink: 0; min-width: 44px; min-height: 44px;' in h
+          assert 'pendingExplicitActivationReply' in sw
+          # Falsify authority if any materialized 24H v120 candidate now has a higher sequence.
+          higher=[]
+          for p in pathlib.Path('.').glob('24h-v120-b*/version.json'):
+              try:
+                  x=json.loads(p.read_text())
+                  if int(x.get('release_sequence',0))>120000013:
+                      higher.append((str(p),x.get('release_sequence'),x.get('release_id')))
+              except Exception: pass
+          assert not higher, higher
+          pathlib.Path('/tmp/blind-main.js').write_text(max(scripts,key=len))
+          print(json.dumps({'tree':'4e57e407510591db3705d876f602d8c23cc87e29','zip_sha256':'bc884f780576f29c8d28d2028f2e595e44aeab4c55f7eece0a0f6a0baa0093ac','shell_sha256':sha,'scripts':len(scripts),'styles':len(styles),'higher_candidates':higher}))
+          PY
+          node --check /tmp/blind-main.js
+          node --check blind-extracted/sw.js
+
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install independent browser tooling
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve frozen extracted package
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/blind-http.log 2>&1 &
+          sleep 2
+
+      - name: Blind broad runtime challenge from ZIP bytes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('audit-24h-v120b7-blind-adversarial.cjs').read_text()
+          s=s.replace("const CANDIDATE='24h-v120-b7-darkmode';","const CANDIDATE='blind-extracted';")
+          s=s.replace("const OUT='blind-24h-v120b7-audit';","const OUT='blind-24h-v120b13-frozen';")
+          s=s.replace("if(!report.static.closure_style_authorized_by_csp)hard.push('closure CSP not authorized');",
+                      "if(!report.static.closure_style_authorized_by_csp)hard.push('closure CSP not authorized'); if(!fs.readFileSync(CANDIDATE+'/index.html','utf8').includes('html[data-theme=\\\"dark\\\"] .integrity-btn { transition:none !important; }'))hard.push('atomic dark transition missing');")
+          Path('blind-b13-broad.cjs').write_text(s)
+          PY
+          node blind-b13-broad.cjs
+          test -f blind-24h-v120b13-frozen/REPORT.json
+
+      - name: Blind cross-theme update-banner and active-state challenge
+        run: |
+          cat > blind-b13-banner.cjs <<'JS'
+          const {chromium}=require('playwright'),fs=require('fs');
+          function parse(s){const m=String(s).match(/rgba?\(([^)]+)\)/);if(!m)return null;const a=m[1].split(/[,\s/]+/).filter(Boolean).map(Number);return{r:a[0],g:a[1],b:a[2],a:a[3]===undefined?1:a[3]}}
+          function comp(fg,bg){const ba=bg.a===undefined?1:bg.a,a=fg.a+ba*(1-fg.a);return{r:(fg.r*fg.a+bg.r*ba*(1-fg.a))/a,g:(fg.g*fg.a+bg.g*ba*(1-fg.a))/a,b:(fg.b*fg.a+bg.b*ba*(1-fg.a))/a,a}}
+          function lin(v){v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)} function L(c){return .2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b)} function ratio(a,b){return(Math.max(L(a),L(b))+.05)/(Math.min(L(a),L(b))+.05)}
+          (async()=>{const b=await chromium.launch({headless:true}),out=[];
+            for(const vp of [{n:'narrow',w:320,h:700},{n:'iphone',w:390,h:844},{n:'ipad',w:820,h:1180}]){
+              for(const mode of ['light','dark','system']){
+                const c=await b.newContext({viewport:{width:vp.w,height:vp.h},colorScheme:mode==='light'?'light':'dark'});
+                const p=await c.newPage(),ce=[],pe=[]; p.on('console',m=>{if(m.type()==='error')ce.push(m.text())});p.on('pageerror',e=>pe.push(String(e)));
+                await p.goto('http://127.0.0.1:8080/blind-extracted/luisa_24_heures.html',{waitUntil:'domcontentloaded',timeout:120000});
+                await p.waitForFunction(()=>window.__lp24Init==='done'&&BUILD_REVISION==='B13'&&APP_RELEASE_SEQUENCE===120000013,null,{timeout:30000});
+                await p.evaluate(mode=>{state.themePreference=mode;applyTheme();showHome();showUpdateBanner('v999','',true,'Nouvelle version vérifiée et prête.');},mode);
+                const x=await p.evaluate(()=>{
+                  function parse(s){const m=String(s).match(/rgba?\(([^)]+)\)/);if(!m)return null;const a=m[1].split(/[,\s/]+/).filter(Boolean).map(Number);return{r:a[0],g:a[1],b:a[2],a:a[3]===undefined?1:a[3]}}
+                  function comp(fg,bg){const ba=bg.a===undefined?1:bg.a,a=fg.a+ba*(1-fg.a);return{r:(fg.r*fg.a+bg.r*ba*(1-fg.a))/a,g:(fg.g*fg.a+bg.g*ba*(1-fg.a))/a,b:(fg.b*fg.a+bg.b*ba*(1-fg.a))/a,a}}
+                  function bg(el){const chain=[];for(let q=el;q;q=q.parentElement)chain.unshift(q);let acc={r:255,g:255,b:255,a:1};for(const q of chain){const z=parse(getComputedStyle(q).backgroundColor);if(z&&z.a>0)acc=comp(z,acc)}return acc}
+                  function lin(v){v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)} function L(c){return .2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b)} function ratio(a,b){return(Math.max(L(a),L(b))+.05)/(Math.min(L(a),L(b))+.05)}
+                  function m(sel){const e=document.querySelector(sel),s=getComputedStyle(e),b=bg(e),f=parse(s.color),op=Number(s.opacity||1);f.a*=op;const rendered=comp(f,b),r=e.getBoundingClientRect();return{sel,ratio:+ratio(rendered,b).toFixed(3),w:r.width,h:r.height,color:s.color,bg:s.backgroundColor}}
+                  return {items:[m('.update-banner-text'),m('.update-banner-text strong'),m('.update-refresh-btn'),m('.update-dismiss-btn')],scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth};
+                });
+                for(const i of x.items)if(i.ratio<4.5)throw new Error(vp.n+' '+mode+' low contrast '+JSON.stringify(i));
+                const rr=x.items.find(i=>i.sel==='.update-refresh-btn'),dd=x.items.find(i=>i.sel==='.update-dismiss-btn');
+                if(rr.h<43.9||dd.h<43.9||dd.w<43.9)throw new Error(vp.n+' '+mode+' touch floor '+JSON.stringify({rr,dd}));
+                if(x.scrollWidth>x.clientWidth+1)throw new Error(vp.n+' '+mode+' overflow '+JSON.stringify(x));
+                // Hold :active and verify the repair does not introduce a new background.
+                const box=await p.locator('.update-refresh-btn').boundingBox(); await p.mouse.move(box.x+box.width/2,box.y+box.height/2); await p.mouse.down(); await p.waitForTimeout(60);
+                const active=await p.locator('.update-refresh-btn').evaluate(e=>({bg:getComputedStyle(e).backgroundColor,color:getComputedStyle(e).color}));
+                await p.mouse.up();
+                if(active.bg!=='rgba(0, 0, 0, 0)')throw new Error(vp.n+' '+mode+' active overlay '+JSON.stringify(active));
+                if(pe.length||ce.some(z=>/content security policy|uncaught|referenceerror|typeerror/i.test(z)))throw new Error('runtime error '+JSON.stringify({pe,ce}));
+                out.push({vp:vp.n,mode,...x,active});await c.close();
+              }
+            }
+            fs.writeFileSync('24H_v120_B13_BLIND_BANNER_EVIDENCE.json',JSON.stringify(out,null,2));await b.close();console.log('BLIND_B13_BANNER_PASS');
+          })().catch(e=>{console.error(e);process.exit(2)});
+          JS
+          node blind-b13-banner.cjs
+
+      - name: Blind exact v119 to frozen-ZIP update offline replay
+        run: |
+          rm -rf blind-upgrade
+          mkdir -p blind-upgrade
+          python3 -m http.server 8086 --bind 127.0.0.1 --directory blind-upgrade >/tmp/blind-upgrade-http.log 2>&1 &
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('24h-b8-production-upgrade-offline.cjs').read_text()
+          s=s.replace("const pred='24h-v119-b1-governed-r4', succ='24h-v120-b8-update-activation-closure', dst=path.join('qa-24h-b8-upgrade','app');",
+                      "const pred='24h-v119-b1-governed-r4', succ='blind-extracted', dst=path.join('blind-upgrade','app');")
+          reps=[
+            ('24h-v120-b8-20261003-update-activation-closure','24h-v120-b13-20261003-cross-theme-update-banner-closure'),
+            ('120000008','120000013'),('v120-b8','v120-b13'),('B8','B13'),('b8','b13'),
+            ("'24H-B13-UPGRADE'","'24H-B13-BLIND-UPGRADE'"),
+            ('24h-b13-production-upgrade-offline-results.json','24H_v120_B13_BLIND_UPGRADE_EVIDENCE.json')
+          ]
+          for a,b in reps:s=s.replace(a,b)
+          Path('blind-b13-upgrade.cjs').write_text(s)
+          PY
+          node blind-b13-upgrade.cjs
+          test -f 24H_v120_B13_BLIND_UPGRADE_EVIDENCE.json
+
+      - name: Hostile CSP negative control proves harness sensitivity
+        run: |
+          rm -rf blind-tamper
+          cp -a blind-extracted blind-tamper
+          python3 - <<'PY'
+          from pathlib import Path
+          for n in ('index.html','luisa_24_heures.html'):
+              p=Path('blind-tamper')/n
+              s=p.read_text()
+              old="const APP_VERSION = 'v120';"
+              assert s.count(old)==1
+              p.write_text(s.replace(old,"const APP_VERSION = 'v120-TAMPER';",1))
+          PY
+          cat > blind-b13-negative.cjs <<'JS'
+          const {chromium}=require('playwright');
+          (async()=>{const b=await chromium.launch({headless:true});const c=await b.newContext();const p=await c.newPage();const ce=[],pe=[];
+            p.on('console',m=>{if(m.type()==='error')ce.push(m.text())});p.on('pageerror',e=>pe.push(String(e)));
+            await p.goto('http://127.0.0.1:8080/blind-tamper/luisa_24_heures.html',{waitUntil:'domcontentloaded',timeout:30000});await p.waitForTimeout(1200);
+            const state=await p.evaluate(()=>({init:window.__lp24Init||null,showHome:typeof window.showHome,appVersion:typeof window.APP_VERSION==='undefined'?null:window.APP_VERSION}));
+            const cspSignal=ce.some(x=>/content security policy|refused to execute|violates/i.test(x));
+            if(state.showHome==='function'||state.init==='done'||state.appVersion!==null||!cspSignal)throw new Error('NEGATIVE_CONTROL_DID_NOT_FAIL_CLOSED '+JSON.stringify({state,ce,pe}));
+            require('fs').writeFileSync('24H_v120_B13_BLIND_NEGATIVE_CONTROL.json',JSON.stringify({state,consoleErrors:ce,pageErrors:pe,cspSignal},null,2));
+            await c.close();await b.close();console.log('BLIND_B13_NEGATIVE_CONTROL_PASS');
+          })().catch(e=>{console.error(e);process.exit(2)});
+          JS
+          node blind-b13-negative.cjs
+
+      - name: Reconcile blind result and persist evidence
+        run: |
+          python3 - <<'PY'
+          import json,pathlib
+          r=json.loads(pathlib.Path('blind-24h-v120b13-frozen/REPORT.json').read_text())
+          assert r['delta']['afterCustomFailureCount']==0
+          assert not r['delta']['overflowAfter'] and not r['delta']['consoleErrorsAfter'] and not r['delta']['pageErrorsAfter']
+          assert r['pwa']['offlineOk'] and r['pwa']['sentinel']=='keep'
+          banner=json.loads(pathlib.Path('24H_v120_B13_BLIND_BANNER_EVIDENCE.json').read_text())
+          up=json.loads(pathlib.Path('24H_v120_B13_BLIND_UPGRADE_EVIDENCE.json').read_text())
+          neg=json.loads(pathlib.Path('24H_v120_B13_BLIND_NEGATIVE_CONTROL.json').read_text())
+          summary={
+            'candidate':'v120/B13',
+            'release_id':'24h-v120-b13-20261003-cross-theme-update-banner-closure',
+            'release_sequence':120000013,
+            'tree':'4e57e407510591db3705d876f602d8c23cc87e29',
+            'package_sha256':'bc884f780576f29c8d28d2028f2e595e44aeab4c55f7eece0a0f6a0baa0093ac',
+            'shell_sha256':'765784949a85e64c8715f478a71117e10accaaff8dcf8614936a4d76bb7492dd',
+            'package_tree_byte_binding':'PASS',
+            'static_csp_identity_contradiction':'PASS',
+            'broad_runtime_from_frozen_zip':'PASS',
+            'cross_theme_update_banner':{'status':'PASS','cases':len(banner)},
+            'v119_update_state_offline_from_frozen_zip':{'status':'PASS','post':up['steps']['post']['identity'],'offline_reopens':2},
+            'hostile_csp_negative_control':{'status':'PASS','csp_signal':neg['cspSignal']},
+            'physical_iphone_ipad':'OPEN_NOT_INFERRED',
+            'production_deployment_authority':'NONE',
+            'independent_blind_challenge':'PASS'
+          }
+          pathlib.Path('24H_v120_B13_INDEPENDENT_BLIND_CHALLENGE.json').write_text(json.dumps(summary,indent=2)+'\n')
+          print(json.dumps(summary,indent=2))
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24H_v120_B13_INDEPENDENT_BLIND_CHALLENGE.json \
+                  24H_v120_B13_BLIND_BANNER_EVIDENCE.json \
+                  24H_v120_B13_BLIND_UPGRADE_EVIDENCE.json \
+                  24H_v120_B13_BLIND_NEGATIVE_CONTROL.json
+          git commit -m "Record independent blind challenge PASS for frozen 24H v120 B13"
+          git pull --rebase origin main
+          test "$(git rev-parse HEAD:24h-v120-b13-cross-theme-update-banner-closure)" = "4e57e407510591db3705d876f602d8c23cc87e29"
+          echo "bc884f780576f29c8d28d2028f2e595e44aeab4c55f7eece0a0f6a0baa0093ac  24H_v120_B13_CROSS_THEME_UPDATE_BANNER_RELEASE.zip" | sha256sum -c -
+          git push origin HEAD:main
