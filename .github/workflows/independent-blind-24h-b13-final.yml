@@ -1,0 +1,187 @@
+name: Independent blind falsification 24H v120 B13 final
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b13-final-blind/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  blind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+
+      - name: Bind frozen candidate and prove package byte identity
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:24h-v120-b13-cross-theme-update-banner-closure)" = "4e57e407510591db3705d876f602d8c23cc87e29"
+          echo "bc884f780576f29c8d28d2028f2e595e44aeab4c55f7eece0a0f6a0baa0093ac  24H_v120_B13_CROSS_THEME_UPDATE_BANNER_RELEASE.zip" | sha256sum -c -
+          rm -rf blind-b13-package
+          mkdir blind-b13-package
+          unzip -q 24H_v120_B13_CROSS_THEME_UPDATE_BANNER_RELEASE.zip -d blind-b13-package
+          python3 - <<'PY'
+          import base64,hashlib,json,pathlib,re
+          cand=pathlib.Path('24h-v120-b13-cross-theme-update-banner-closure')
+          pkg=pathlib.Path('blind-b13-package')
+          def tree(root):
+              return {str(p.relative_to(root)).replace('\\','/'):hashlib.sha256(p.read_bytes()).hexdigest()
+                      for p in root.rglob('*') if p.is_file()}
+          a,b=tree(cand),tree(pkg)
+          assert a==b, {'missing':sorted(set(a)-set(b)),'extra':sorted(set(b)-set(a)),
+                        'different':sorted(k for k in set(a)&set(b) if a[k]!=b[k])}
+          assert len(a)==15,len(a)
+          h=(pkg/'index.html').read_text(encoding='utf-8')
+          assert (pkg/'index.html').read_bytes()==(pkg/'luisa_24_heures.html').read_bytes()
+          shell=hashlib.sha256((pkg/'index.html').read_bytes()).hexdigest()
+          assert shell=='765784949a85e64c8715f478a71117e10accaaff8dcf8614936a4d76bb7492dd'
+          v=json.loads((pkg/'version.json').read_text(encoding='utf-8'))
+          m=json.loads((pkg/'manifest.json').read_text(encoding='utf-8'))
+          sw=(pkg/'sw.js').read_text(encoding='utf-8')
+          assert v['app_version']=='v120' and v['build_revision']=='B13' and v['release_sequence']==120000013
+          assert v['release_id']=='24h-v120-b13-20261003-cross-theme-update-banner-closure'
+          assert v['canonical_shell_sha256']==shell
+          assert m['version']=='v120' and m['build_revision']=='B13' and m['release_sequence']==120000013 and m['release_id']==v['release_id']
+          assert "const BUILD_REVISION = 'B13';" in sw and "const RELEASE_SEQUENCE = 120000013;" in sw
+          assert v['release_id'] in sw and shell in sw
+          assert all('v120/B8' not in str(x) for x in v.get('known_blockers',[]))
+          assert all('v120/B8' not in str(x) for x in v.get('external_open_gates',[]))
+          assert 'V120_B8' not in str(v.get('functional_freeze_status',''))
+          assert v.get('full_qa_20261003_b11_failed_attempt',{}).get('status')=='FAILED_UNFROZEN__NEVER_PROMOTED'
+          assert v.get('full_qa_20261003_b12_failed_attempt',{}).get('status')=='FAILED_UNFROZEN__NEVER_PROMOTED'
+          assert v.get('full_qa_20261003_b13',{}).get('production_deployment_authority')=='NONE'
+          assert v.get('full_qa_20261003_b13',{}).get('physical_gate')=='OPEN'
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',h).group(1)
+          tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
+          scripts=re.findall(r'<script(?![^>]*\\bsrc=)[^>]*>([\\s\\S]*?)</script>',h,re.I)
+          styles=re.findall(r'<style[^>]*>([\\s\\S]*?)</style>',h,re.I)
+          assert scripts and styles and all(tok(x) in csp for x in scripts+styles)
+          pathlib.Path('/tmp/b13-final-inline.js').write_text(max(scripts,key=len))
+          print('BLIND_STATIC_PACKAGE_PASS',len(a),shell)
+          PY
+          node --check blind-b13-package/sw.js
+          node --check /tmp/b13-final-inline.js
+
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install independent browser tooling
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Serve exact frozen package
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/b13-final-http.log 2>&1 &
+          sleep 2
+
+      - name: Fresh independent runtime falsification matrix
+        run: |
+          cat > /tmp/b13-final-blind.cjs <<'JS'
+          const {chromium}=require('playwright');
+          const fs=require('fs');
+          const out={matrix:[],pwa:null,errors:[]};
+          const URL='http://127.0.0.1:8080/blind-b13-package/luisa_24_heures.html';
+          function parse(s){const m=String(s).match(/rgba?\(([^)]+)\)/);if(!m)return null;const a=m[1].split(/[,\s/]+/).filter(Boolean).map(Number);return{r:a[0],g:a[1],b:a[2],a:a[3]===undefined?1:a[3]}}
+          function lin(v){v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)}
+          function L(c){return .2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b)}
+          function ratio(a,b){return(Math.max(L(a),L(b))+.05)/(Math.min(L(a),L(b))+.05)}
+          async function view(page,name){
+            await page.evaluate(name=>{
+              try{if(typeof closeHelpModal==='function')closeHelpModal()}catch(_){}
+              try{if(typeof closeSettingsSheet==='function')closeSettingsSheet()}catch(_){}
+              if(name==='home')showHome();
+              else if(name==='hours')showHoursView(false);
+              else if(name==='search')showSearchView(false);
+              else if(name==='espace')showEspaceView(false);
+              else if(name==='reader')openHour(1,false,{resume:false});
+              else if(name==='help'){showHome();showHelp();}
+              else if(name==='settings'){showHome();showSettingsSheet();}
+            },name);
+            await page.waitForTimeout(120);
+          }
+          async function bannerMetrics(page){
+            return await page.evaluate(()=>{
+              function p(s){const m=String(s).match(/rgba?\(([^)]+)\)/);if(!m)return null;const a=m[1].split(/[,\s/]+/).filter(Boolean).map(Number);return{r:a[0],g:a[1],b:a[2],a:a[3]===undefined?1:a[3]}}
+              function cp(f,b){const ba=b.a===undefined?1:b.a,a=f.a+ba*(1-f.a);return{r:(f.r*f.a+b.r*ba*(1-f.a))/a,g:(f.g*f.a+b.g*ba*(1-f.a))/a,b:(f.b*f.a+b.b*ba*(1-f.a))/a,a}}
+              function bg(e){let chain=[];for(let q=e;q;q=q.parentElement)chain.unshift(q);let a={r:255,g:255,b:255,a:1};for(const q of chain){const c=p(getComputedStyle(q).backgroundColor);if(c&&c.a>0)a=cp(c,a)}return a}
+              function lin(v){v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)} function L(c){return .2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b)} function cr(a,b){return(Math.max(L(a),L(b))+.05)/(Math.min(L(a),L(b))+.05)}
+              function m(sel){const e=document.querySelector(sel),s=getComputedStyle(e),b=bg(e),f=p(s.color),op=Number(s.opacity||1);f.a*=op;const rf=cp(f,b),r=e.getBoundingClientRect();return{sel,ratio:+cr(rf,b).toFixed(3),w:r.width,h:r.height,color:s.color,bg:s.backgroundColor,transition:s.transitionDuration}}
+              return [m('.update-banner-text'),m('.update-banner-text strong'),m('.update-refresh-btn'),m('.update-dismiss-btn')];
+            });
+          }
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            for(const vp of [{n:'narrow',w:320,h:700},{n:'iphone',w:390,h:844},{n:'ipad',w:820,h:1180}]){
+              for(const mode of ['light','dark','system']){
+                const ctx=await browser.newContext({viewport:{width:vp.w,height:vp.h},colorScheme:mode==='light'?'light':'dark'});
+                const page=await ctx.newPage(); const pe=[],ce=[];
+                page.on('pageerror',e=>pe.push(String(e))); page.on('console',m=>{if(m.type()==='error')ce.push(m.text())});
+                const resp=await page.goto(URL,{waitUntil:'domcontentloaded',timeout:120000});
+                await page.waitForFunction(()=>window.__lp24Init==='done'&&APP_VERSION==='v120'&&BUILD_REVISION==='B13'&&APP_RELEASE_SEQUENCE===120000013,null,{timeout:30000});
+                await page.evaluate(mode=>{state.themePreference=mode;applyTheme()},mode);
+                for(const name of ['home','hours','search','espace','reader','help','settings']){
+                  await view(page,name);
+                  const snap=await page.evaluate(()=>({body:(document.body.innerText||'').slice(0,220),sw:document.documentElement.scrollWidth,cw:document.documentElement.clientWidth}));
+                  if(!snap.body||/Chargement…|Chargement\.\.\.|v—/.test(snap.body))throw new Error(vp.n+' '+mode+' '+name+' not ready');
+                  if(snap.sw>snap.cw+1)throw new Error(vp.n+' '+mode+' '+name+' overflow '+snap.sw+'/'+snap.cw);
+                }
+                await page.evaluate(()=>{showHome();showUpdateBanner('v999','',true,'Blind update state');});
+                let bm=await bannerMetrics(page);
+                for(const x of bm)if(x.ratio<4.5)throw new Error(vp.n+' '+mode+' banner contrast '+JSON.stringify(x));
+                const rr=bm.find(x=>x.sel==='.update-refresh-btn'),dd=bm.find(x=>x.sel==='.update-dismiss-btn');
+                if(rr.h<43.9||dd.h<43.9||dd.w<43.9)throw new Error(vp.n+' '+mode+' banner target '+JSON.stringify({rr,dd}));
+                const btn=page.locator('.update-refresh-btn'); await btn.hover(); const box=await btn.boundingBox();
+                if(box){await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();bm=await bannerMetrics(page);const ar=bm.find(x=>x.sel==='.update-refresh-btn');if(ar.ratio<4.5)throw new Error(vp.n+' '+mode+' active banner contrast '+JSON.stringify(ar));await page.mouse.up();}
+                if(mode!=='light'){
+                  await page.evaluate(()=>{document.getElementById('blind-int')?.remove();const b=document.createElement('button');b.id='blind-int';b.className='integrity-btn';b.textContent='Vérifier';b.style.cssText='position:fixed;left:20px;top:100px;z-index:99999';document.body.appendChild(b)});
+                  const d=await page.$eval('#blind-int',e=>getComputedStyle(e).transitionDuration);
+                  if(!String(d).split(',').every(x=>x.trim()==='0s'))throw new Error(vp.n+' '+mode+' integrity transition '+d);
+                  await page.hover('#blind-int');
+                  for(const ms of [0,15,30,60,120,180]){if(ms)await page.waitForTimeout(ms===15?15:ms-(ms===30?15:ms===60?30:ms===120?60:120));const x=await page.$eval('#blind-int',e=>({c:getComputedStyle(e).color,b:getComputedStyle(e).backgroundColor}));const a=parse(x.c),b=parse(x.b);if(!a||!b||ratio(a,b)<4.5)throw new Error(vp.n+' '+mode+' transient contrast '+ms+' '+JSON.stringify(x));}
+                }
+                if(pe.length||ce.some(x=>/content security policy|uncaught|referenceerror|typeerror/i.test(x)))throw new Error(vp.n+' '+mode+' runtime errors '+JSON.stringify({pe,ce}));
+                out.matrix.push({vp:vp.n,mode,http:resp.status(),banner:bm,pageErrors:pe,consoleErrors:ce});
+                await ctx.close();
+              }
+            }
+
+            const ctx=await browser.newContext({viewport:{width:390,height:844},colorScheme:'dark'});
+            const page=await ctx.newPage(); const pe=[],ce=[];
+            page.on('pageerror',e=>pe.push(String(e))); page.on('console',m=>{if(m.type()==='error')ce.push(m.text())});
+            await page.goto(URL,{waitUntil:'domcontentloaded',timeout:120000});
+            await page.waitForFunction(()=>window.__lp24Init==='done'&&BUILD_REVISION==='B13');
+            await page.evaluate(()=>navigator.serviceWorker.ready);
+            await page.reload({waitUntil:'domcontentloaded'}); await page.waitForFunction(()=>navigator.serviceWorker.controller&&window.__lp24Init==='done');
+            const committed=await page.evaluate(async()=>{
+              const before=buildPersonalSnapshotFromState();
+              const pid=CORPUS.hours[0].paragraphs[0].id;
+              state.themePreference='dark'; state.fontLevel='xlarge'; state.fontSize=3; state.lastHour='3'; state.readHours.add(1);
+              state.notes[pid]=[{id:'blind-final-note',text:'B13 final blind sentinel',ts:1893456000}];
+              const r=await commitDurableChange(before,'Blind final',{quiet:true});
+              localStorage.setItem('b13_final_blind_sentinel','KEEP');
+              return {ok:r.ok,pid};
+            });
+            if(!committed.ok)throw new Error('durable personal-state commit failed');
+            await page.reload({waitUntil:'domcontentloaded'}); await page.waitForFunction(()=>window.__lp24Init==='done'&&BUILD_REVISION==='B13');
+            const persisted=await page.evaluate(pid=>({snap:buildPersonalSnapshotFromState(),sentinel:localStorage.getItem('b13_final_blind_sentinel'),note:(state.notes[pid]||[]).some(n=>n.id==='blind-final-note')}),committed.pid);
+            if(persisted.snap.themePreference!=='dark'||persisted.snap.fontLevel!=='xlarge'||String(persisted.snap.lastHour)!=='3'||!persisted.snap.readHours.includes(1)||!persisted.note||persisted.sentinel!=='KEEP')throw new Error('durable state mismatch '+JSON.stringify(persisted));
+            await ctx.setOffline(true);
+            for(let i=0;i<2;i++){await page.reload({waitUntil:'domcontentloaded',timeout:30000});await page.waitForFunction(()=>window.__lp24Init==='done'&&BUILD_REVISION==='B13');const q=await page.evaluate(pid=>({id:APP_RELEASE_ID,s:localStorage.getItem('b13_final_blind_sentinel'),snap:buildPersonalSnapshotFromState(),note:(state.notes[pid]||[]).some(n=>n.id==='blind-final-note')}),committed.pid);if(q.id!=='24h-v120-b13-20261003-cross-theme-update-banner-closure'||q.s!=='KEEP'||q.snap.themePreference!=='dark'||q.snap.fontLevel!=='xlarge'||!q.note)throw new Error('offline persistence mismatch '+JSON.stringify(q));}
+            await ctx.setOffline(false); await page.reload({waitUntil:'domcontentloaded'}); await page.waitForFunction(()=>window.__lp24Init==='done'&&BUILD_REVISION==='B13');
+            if(pe.length||ce.some(x=>/content security policy|uncaught|referenceerror|typeerror/i.test(x)))throw new Error('pwa errors '+JSON.stringify({pe,ce}));
+            out.pwa={committed,persisted,offlineReopens:2,onlineRecovery:true,pageErrors:pe,consoleErrors:ce};
+            await ctx.close(); await browser.close();
+            fs.writeFileSync('24H_v120_B13_FINAL_INDEPENDENT_BLIND_EVIDENCE.json',JSON.stringify(out,null,2));
+            console.log('FINAL_INDEPENDENT_BLIND_B13_PASS',out.matrix.length,out.pwa.offlineReopens);
+          })().catch(e=>{out.errors.push(String(e&&e.stack||e));try{fs.writeFileSync('24H_v120_B13_FINAL_INDEPENDENT_BLIND_EVIDENCE.json',JSON.stringify(out,null,2))}catch(_){}console.error(e);process.exit(2)});
+          JS
+          node /tmp/b13-final-blind.cjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 24H-v120-B13-final-independent-blind-evidence
+          path: 24H_v120_B13_FINAL_INDEPENDENT_BLIND_EVIDENCE.json
+          if-no-files-found: warn
