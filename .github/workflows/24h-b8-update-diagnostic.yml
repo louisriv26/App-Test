@@ -1,0 +1,34 @@
+name: 24H B8 page update diagnostic
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b8-diagnostic/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact predecessor and B8
+        run: |
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+          test "$(git rev-parse HEAD:24h-v120-b8-update-activation-closure)" = "3e5f03b4ff1c6d6ff36e8396d67193558ad7319c"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: |
+          mkdir -p qa-b8-diag
+          python3 -m http.server 8099 --bind 127.0.0.1 --directory qa-b8-diag >/tmp/b8diag.log 2>&1 &
+          sleep 2
+      - run: node qa-24h-b8-update-diagnostic.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 24h-b8-page-update-diagnostic
+          path: qa-24h-b8-update-diagnostic-results.json
+          if-no-files-found: warn
