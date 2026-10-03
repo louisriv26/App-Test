@@ -1,0 +1,26 @@
+name: Build 24H v120 B5 CSP repair
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-v120b5-build/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact B4 predecessor
+        run: test "$(git rev-parse HEAD:24h-v120-b4-darkmode)" = "fa26ec9bf92f9d5ff8551113ad43d26fda45168e"
+      - name: Build bounded B5 successor
+        run: python3 build-24h-v120b5.py
+      - name: Commit immutable B5 candidate
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b5-darkmode 24h-v120-b5-build-evidence.json
+          git commit -m "Create 24H v120 B5 CSP runtime repair candidate"
+          git pull --rebase origin main
+          git push origin HEAD:main
