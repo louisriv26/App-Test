@@ -1,0 +1,42 @@
+name: Stage 24H v120 B7 blind accessibility closure
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-v120-b7-stage/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact B6 predecessor
+        run: test "$(git rev-parse HEAD:24h-v120-b6-adversarial)" = "cdb60100c7576f99eb678a79f798946bc14f349e"
+      - run: python3 .github/scripts/stage_24h_v120_b7.py
+      - name: Syntax and exact CSP sanity
+        run: |
+          node --check 24h-v120-b7-adversarial/sw.js
+          python3 - <<'PY'
+          import re,pathlib,hashlib,base64
+          s=pathlib.Path('24h-v120-b7-adversarial/index.html').read_text()
+          scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.S|re.I)
+          styles=re.findall(r'<style[^>]*>(.*?)</style>',s,re.S|re.I)
+          assert len(scripts)==1
+          tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',s).group(1)
+          assert tok(scripts[0]) in csp.split('script-src-elem',1)[1].split(';',1)[0]
+          seg=csp.split('style-src-elem',1)[1].split(';',1)[0]
+          for x in styles: assert tok(x) in seg
+          pathlib.Path('/tmp/24h-b7-inline.js').write_text(scripts[0])
+          print('CSP_SANITY_PASS',len(styles))
+          PY
+          node --check /tmp/24h-b7-inline.js
+      - name: Commit immutable B7
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b7-adversarial
+          git commit -m "Stage 24H v120 B7 blind accessibility closure"
+          git push
