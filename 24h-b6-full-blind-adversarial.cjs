@@ -145,6 +145,11 @@ async function pageAudit(page,label){
   await page.goto('http://127.0.0.1:8091/24h/luisa_24_heures.html',{waitUntil:'domcontentloaded'}); await page.waitForTimeout(1000);
   const preInfo=await page.evaluate(async()=>{const r=await navigator.serviceWorker.ready;return await new Promise((resolve,reject)=>{const ch=new MessageChannel();const t=setTimeout(()=>reject(new Error('pre info timeout')),5000);ch.port1.onmessage=e=>{clearTimeout(t);resolve(e.data)};r.active.postMessage({type:'GET_RELEASE_INFO_V2'},[ch.port2])})});
   evidence.upgrade.pre=preInfo;
+  // Reload once after predecessor activation so this page is genuinely controlled by v119.
+  await page.reload({waitUntil:'domcontentloaded'}); await page.waitForTimeout(500);
+  const controlled=await page.evaluate(()=>!!navigator.serviceWorker.controller);
+  evidence.upgrade.predecessorControlled=controlled;
+  if(!controlled) fail('predecessor page is not service-worker controlled after reload');
   await page.evaluate(()=>setThemePreference('dark')); await page.waitForTimeout(200);
   copyTree(ROUTE,slot);
   const upd=await page.evaluate(async()=>{const r=await navigator.serviceWorker.getRegistration();await r.update(); const start=Date.now();while(!r.waiting&&Date.now()-start<15000)await new Promise(x=>setTimeout(x,200));return{waiting:!!r.waiting,installing:!!r.installing}});
