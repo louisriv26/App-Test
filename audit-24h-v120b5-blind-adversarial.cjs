@@ -2,11 +2,12 @@ const { chromium } = require('playwright');
 const fs = require('fs');
 const crypto = require('crypto');
 
-const CANDIDATE='24h-v120-b5-darkmode';
+const CANDIDATE='24h-v120-b5-darkmode-integrity';
+const IMMEDIATE_PREDECESSOR='24h-v120-b4-darkmode';
 const PREDECESSOR='24h-v119-b1-governed-r4';
 const OUT='blind-24h-v120b5-audit';
 fs.mkdirSync(OUT,{recursive:true});
-const report={candidate:CANDIDATE,predecessor:PREDECESSOR,generated:new Date().toISOString(),static:{},runs:[],targeted:[],pwa:{},errors:[]};
+const report={candidate:CANDIDATE,immediatePredecessor:IMMEDIATE_PREDECESSOR,runtimeBaseline:PREDECESSOR,generated:new Date().toISOString(),static:{},runs:[],targeted:[],pwa:{},errors:[]};
 
 function sha256(s){return crypto.createHash('sha256').update(s).digest('base64');}
 function fileSha256(p){return crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');}
@@ -22,7 +23,7 @@ function staticAudit(){
   report.static.app_version=version.app_version;
   report.static.cache_name=version.cache_name;
   report.static.manifest_start_url=manifest.start_url;
-  report.static.sw_has_v120b5=/v120-b5/i.test(sw);
+  report.static.sw_has_v120b4=/v120-b4/i.test(sw);
   report.static.predecessor_bytes=a.length;
   report.static.changed_index_bytes=a.length-pm.length;
   const styleMatch=a.match(/<style id="dark-mode-contrast-closure-v120">([\s\S]*?)<\/style>/);
@@ -41,6 +42,39 @@ function staticAudit(){
     'html[data-theme="dark"] .bn-item'
   ];
   report.static.required_closure_selectors=Object.fromEntries(required.map(x=>[x,a.includes(x)]));
+  const csp=(a.match(/Content-Security-Policy" content="([^"]+)"/)||[])[1]||'';
+  const scripts=[...a.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)].map(m=>m[1]);
+  report.static.inline_script_count=scripts.length;
+  report.static.inline_script_sha256_csp=scripts.length===1?'sha256-'+sha256(scripts[0]):null;
+  report.static.inline_script_authorized_by_csp=!!report.static.inline_script_sha256_csp && csp.includes("'"+report.static.inline_script_sha256_csp+"'");
+  const rx=(src,re)=>{const m=src.match(re);return m?m[1]:null};
+  const htmlIdentity={
+    version:rx(a,/const APP_VERSION\s*=\s*'([^']+)'/),
+    build:rx(a,/const BUILD_REVISION\s*=\s*'([^']+)'/),
+    sequence:Number(rx(a,/const APP_RELEASE_SEQUENCE\s*=\s*(\d+)/)),
+    release_id:rx(a,/const APP_RELEASE_ID\s*=\s*'([^']+)'/)
+  };
+  const swIdentity={
+    version:rx(sw,/const APP_VERSION\s*=\s*'([^']+)'/),
+    build:rx(sw,/const BUILD_REVISION\s*=\s*'([^']+)'/),
+    sequence:Number(rx(sw,/const RELEASE_SEQUENCE\s*=\s*(\d+)/)),
+    release_id:rx(sw,/const RELEASE_ID\s*=\s*'([^']+)'/),
+    canonical_shell_sha256:rx(sw,/const CANONICAL_SHELL_SHA256\s*=\s*'([0-9a-f]{64})'/),
+    cache_name:rx(sw,/const CACHE_NAME\s*=\s*`\$\{CACHE_PREFIX\}([^\`]+)\`/)
+  };
+  const manifestIdentity={version:manifest.version,build:manifest.build_revision,sequence:Number(manifest.release_sequence),release_id:manifest.release_id};
+  const versionIdentity={version:version.app_version,build:version.build_revision,sequence:Number(version.release_sequence),release_id:version.release_id};
+  report.static.release_identity={html:htmlIdentity,sw:swIdentity,manifest:manifestIdentity,version:versionIdentity};
+  report.static.release_identity_coherent=[htmlIdentity,swIdentity,manifestIdentity,versionIdentity].every(x=>x.version==='v120'&&x.build==='B5'&&x.sequence===120000002&&x.release_id==='24h-v120-b5-20261003-csp-release-integrity-closure');
+  report.static.shell_sha256=fileSha256(CANDIDATE+'/index.html');
+  report.static.sw_canonical_shell_matches=swIdentity.canonical_shell_sha256===report.static.shell_sha256;
+  report.static.version_canonical_shell_matches=version.canonical_shell_sha256===report.static.shell_sha256;
+  report.static.version_script_hash_matches=version.security_inline_script_sha256_base64===report.static.inline_script_sha256_csp && version.canonical_shell_inline_script_sha256_csp===report.static.inline_script_sha256_csp;
+  report.static.release_sequence_incremented=Number(manifest.release_sequence)>Number(JSON.parse(fs.readFileSync(IMMEDIATE_PREDECESSOR+'/manifest.json','utf8')).release_sequence);
+  const files=fs.readdirSync(CANDIDATE).filter(x=>fs.statSync(CANDIDATE+'/'+x).isFile()).sort();
+  const immediateFiles=fs.readdirSync(IMMEDIATE_PREDECESSOR).filter(x=>fs.statSync(IMMEDIATE_PREDECESSOR+'/'+x).isFile()).sort();
+  report.static.immediate_changed_files=files.filter(name=>!immediateFiles.includes(name)||fileSha256(CANDIDATE+'/'+name)!==fileSha256(IMMEDIATE_PREDECESSOR+'/'+name));
+  report.static.immediate_added_removed={added:files.filter(x=>!immediateFiles.includes(x)),removed:immediateFiles.filter(x=>!files.includes(x))};
 }
 
 async function setThemeAndView(page, themeMode, view){
@@ -115,7 +149,7 @@ async function scanPage(page,label){
     const overflow={scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth,bodyScrollWidth:document.body.scrollWidth};
     return {label,fails,overflow,theme:document.documentElement.getAttribute('data-theme'),view:(typeof state!=='undefined'?state.view:null)};
   },{label});
-  result.axe=[];
+  result.axe = [];
   return result;
 }
 
@@ -178,14 +212,30 @@ async function runPath(browser,path,label){
   for(const viewport of [{name:'iphone',w:390,h:844},{name:'ipad',w:820,h:1180}]){
     for(const mode of ['dark','system']){
       const ctx=await browser.newContext({viewport:{width:viewport.w,height:viewport.h},colorScheme:'dark'});
-      await ctx.addInitScript(()=>{localStorage.setItem('lp24_onboarded','1');localStorage.setItem('blind_sentinel','preserve-me');});
       const page=await ctx.newPage();
       const consoleErrors=[]; const pageErrors=[];
       page.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text())});
       page.on('pageerror',e=>pageErrors.push(String(e)));
       const res=await page.goto('http://127.0.0.1:8080/'+path+'/luisa_24_heures.html',{waitUntil:'domcontentloaded',timeout:120000});
-      await page.waitForFunction(()=>typeof showHome==='function',{timeout:30000});
-      await page.waitForTimeout(600);
+      await page.waitForSelector('#app',{state:'attached',timeout:30000});
+      await page.waitForTimeout(1800);
+      await page.evaluate(()=>{try{localStorage.setItem('lp24_onboarded','1');localStorage.setItem('blind_sentinel','preserve-me');}catch(e){}});
+      const readiness=await page.evaluate(()=>({
+        showHome:typeof showHome,
+        showHoursView:typeof showHoursView,
+        showSearchView:typeof showSearchView,
+        showEspaceView:typeof showEspaceView,
+        corpus:typeof CORPUS,
+        state:typeof state,
+        contentText:(document.getElementById('content')?.innerText||'').slice(0,120),
+        readyState:document.readyState
+      }));
+      if(readiness.showHome!=='function'){
+        report.errors.push(label+' '+viewport.name+' '+mode+' JS readiness '+JSON.stringify(readiness));
+        fs.writeFileSync(OUT+'/EARLY_READINESS_'+label+'_'+viewport.name+'_'+mode+'.json',JSON.stringify({readiness,consoleErrors,pageErrors},null,2));
+        await page.screenshot({path:OUT+'/EARLY_READINESS_'+label+'_'+viewport.name+'_'+mode+'.png',fullPage:false});
+        throw new Error('JS readiness failure '+label+' '+viewport.name+' '+mode+' '+JSON.stringify(readiness));
+      }
       for(const view of ['home','hours','search','espace','reader','help','settings','prayer','section']){
         await setThemeAndView(page,mode,view);
         const scan=await scanPage(page,label+'-'+viewport.name+'-'+mode+'-'+view);
@@ -258,7 +308,14 @@ async function pwaAudit(browser){
   const hard=[];
   if(!report.static.index_equals_luisa)hard.push('index/luisa mismatch');
   if(report.static.app_version!=='v120')hard.push('wrong version');
-  if(!report.static.closure_style_authorized_by_csp)hard.push('closure CSP not authorized');
+  if(!report.static.closure_style_authorized_by_csp)hard.push('closure style CSP not authorized');
+  if(!report.static.inline_script_authorized_by_csp)hard.push('inline script CSP not authorized');
+  if(!report.static.release_identity_coherent)hard.push('release identity incoherent');
+  if(!report.static.sw_canonical_shell_matches||!report.static.version_canonical_shell_matches)hard.push('canonical shell hash mismatch');
+  if(!report.static.version_script_hash_matches)hard.push('version script hash metadata mismatch');
+  if(!report.static.release_sequence_incremented)hard.push('release sequence not incremented');
+  const expectedChanged=['index.html','luisa_24_heures.html','manifest.json','sw.js','version.json'];
+  if(JSON.stringify(report.static.immediate_changed_files)!==JSON.stringify(expectedChanged) || report.static.immediate_added_removed.added.length || report.static.immediate_added_removed.removed.length) hard.push('unexpected B4 to B5 mutation boundary');
   if(report.delta.newCustomFailures.length)hard.push('new custom contrast failures '+report.delta.newCustomFailures.length);
   if(report.delta.overflowAfter.length)hard.push('horizontal overflow');
   if(report.delta.pageErrorsAfter.length)hard.push('page errors');
