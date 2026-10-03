@@ -1,0 +1,27 @@
+name: 24H B7-B8 transient dark contrast probe
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b8-transient/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact candidates
+        run: |
+          test "$(git rev-parse HEAD:24h-v120-b7-darkmode)" = "ffa6ae0129a39d9802fce6ec5b5b1967da1efc5f"
+          test "$(git rev-parse HEAD:24h-v120-b8-update-activation-closure)" = "3e5f03b4ff1c6d6ff36e8396d67193558ad7319c"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/b8-transient.log 2>&1 &
+          sleep 2
+      - run: node qa-24h-b8-transient-probe.cjs
