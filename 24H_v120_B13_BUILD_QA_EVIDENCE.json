@@ -1,0 +1,34 @@
+{
+  "candidate": "v120/B13",
+  "release_id": "24h-v120-b13-20261003-cross-theme-update-banner-closure",
+  "release_sequence": 120000013,
+  "source_b10_tree": "2a12ff7881832645adfa41ebddd5772f3a5c406a",
+  "source_b10_zip_sha256": "42937d636f0c44a78e9969bb8410fd374784e6ef6b3d937270ccd4ed81e6adc9",
+  "canonical_shell_sha256": "765784949a85e64c8715f478a71117e10accaaff8dcf8614936a4d76bb7492dd",
+  "script_sha256_base64": [
+    "N8XoqZI3Z+3fDNBAcRKDU2t4dfdJApgPE68H+WJ2xHI="
+  ],
+  "style_sha256_base64": [
+    "UQ2LZMV8vpixa50rjbFhb0lgGCv04EY1sB1SyGNLL0k=",
+    "M2PqUQmZeL2+DuWG5timTn9bq9xhgUKlH+hhm+uY1s8=",
+    "4AfsRj8AWkdWUFWpaxT/0+3244PorRYCufbvVPHqiRU=",
+    "WLj0DFZ2D1b1hR/2JC2FK3aNLqjx9Hipj0auK8YOfq8="
+  ],
+  "changed_files_expected": [
+    "index.html",
+    "luisa_24_heures.html",
+    "manifest.json",
+    "sw.js",
+    "version.json"
+  ],
+  "functional_change": "CROSS_THEME_UPDATE_BANNER_CONTRAST_TOUCH_TARGET_PLUS_RELEASE_METADATA_RECONCILIATION",
+  "production_deployment_authority": "NONE",
+  "physical_gate": "OPEN",
+  "deterministic_zip_sha256": "bc884f780576f29c8d28d2028f2e595e44aeab4c55f7eece0a0f6a0baa0093ac",
+  "deterministic_zip_size": 1992917,
+  "broad_runtime_evidence": "qualification-24h-v120b13/REPORT.json",
+  "upgrade_evidence": "24h-b13-production-upgrade-offline-results.json",
+  "multiclient_evidence": "24h-v120-b13-multiclient-evidence.json",
+  "update_banner_evidence": "24h-v120-b13-update-banner-evidence.json",
+  "qualification": "PASS_NONPHYSICAL"
+}
