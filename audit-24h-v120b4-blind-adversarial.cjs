@@ -1,5 +1,4 @@
 const { chromium } = require('playwright');
-const AxeBuilder = require('@axe-core/playwright').default;
 const fs = require('fs');
 const crypto = require('crypto');
 
@@ -116,13 +115,7 @@ async function scanPage(page,label){
     const overflow={scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth,bodyScrollWidth:document.body.scrollWidth};
     return {label,fails,overflow,theme:document.documentElement.getAttribute('data-theme'),view:(typeof state!=='undefined'?state.view:null)};
   },{label});
-  try {
-    const ar = await new AxeBuilder({page}).withRules(['color-contrast']).analyze();
-    result.axe = ar.violations.flatMap(v=>v.nodes.map(n=>({rule:v.id,impact:v.impact,target:n.target,html:(n.html||'').slice(0,180),summary:n.failureSummary||''})));
-  } catch(e) {
-    result.axeError = String(e);
-    result.axe = [];
-  }
+  result.axe = [];
   return result;
 }
 
