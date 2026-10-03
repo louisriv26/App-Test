@@ -55,8 +55,8 @@ jobs:
           assert v.get('full_qa_20261003_b13',{}).get('physical_gate')=='OPEN'
           csp=re.search(r'Content-Security-Policy" content="([^"]+)"',h).group(1)
           tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
-          scripts=re.findall(r'<script(?![^>]*\\bsrc=)[^>]*>([\\s\\S]*?)</script>',h,re.I)
-          styles=re.findall(r'<style[^>]*>([\\s\\S]*?)</style>',h,re.I)
+          scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>',h,re.I)
+          styles=re.findall(r'<style[^>]*>([\s\S]*?)</style>',h,re.I)
           assert scripts and styles and all(tok(x) in csp for x in scripts+styles)
           pathlib.Path('/tmp/b13-final-inline.js').write_text(max(scripts,key=len))
           print('BLIND_STATIC_PACKAGE_PASS',len(a),shell)
