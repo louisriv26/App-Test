@@ -34,7 +34,7 @@ const ROUTE='24h-v120-b6-adversarial';
   await p.keyboard.press('Escape').catch(()=>{});
   if(typeof (await p.evaluate(()=>typeof showProvenance))==='string'){}
   out.scenes.push({scheme,name:'runtime-errors',errors:errs});
-  c.close();
+  await c.close();
  }
  await b.close();fs.writeFileSync('24h-b6-independent-rendered-sweep.json',JSON.stringify(out,null,2));
  console.log('SCENES',out.scenes.length,'AXE_VIOLATIONS',totalViol);
