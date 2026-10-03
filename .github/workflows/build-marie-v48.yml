@@ -1,0 +1,98 @@
+name: Build and qualify Marie v48 CSP repair
+on:
+  push:
+    branches: [main]
+    paths: ['.github/marie-v48-build/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  build-qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind failed immutable v47
+        run: test "$(git rev-parse HEAD:marie-v47-b1-darkmode)" = "81acbb9f409c7c0e1695b0ab35f33dfdc4978631"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Build v48 bounded successor
+        run: python3 build-marie-v48.py
+      - name: Static integrity
+        run: |
+          set -euo pipefail
+          node --check marie-v48-b1-darkmode/sw.js
+          python3 - <<'PY'
+          import re,hashlib,base64,json,pathlib
+          s=pathlib.Path('marie-v48-b1-darkmode/index.html').read_text(encoding='utf-8')
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',s).group(1)
+          styles=re.findall(r'<style[^>]*>([\s\S]*?)</style>',s,re.I)
+          scripts=[m.group(1) for m in re.finditer(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>',s,re.I)]
+          def tok(x):return "'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
+          assert all(tok(x) in csp for x in styles)
+          assert all(tok(x) in csp for x in scripts)
+          assert "const APP_VERSION = '48';" in s
+          assert ".search-input::placeholder, .note-textarea::placeholder" in s
+          assert "const VERSION = '48';" in pathlib.Path('marie-v48-b1-darkmode/sw.js').read_text()
+          print('MARIE_V48_STATIC_INTEGRITY_PASS')
+          PY
+      - name: Install browser
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve checkout
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/marie-v48-http.log 2>&1 &
+          sleep 2
+      - name: Rendered dark mode and runtime audit
+        run: |
+          cat > /tmp/marie-v48-test.cjs <<'JS'
+          const {chromium}=require('playwright');
+          function parse(s){const m=String(s).match(/rgba?\(([^)]+)\)/);if(!m)return null;const a=m[1].split(/[,\s/]+/).filter(Boolean).map(Number);return{r:a[0],g:a[1],b:a[2],a:a[3]===undefined?1:a[3]}}
+          const lin=v=>{v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)},L=c=>.2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b);
+          const ratio=(a,b)=>(Math.max(L(a),L(b))+.05)/(Math.min(L(a),L(b))+.05);
+          (async()=>{
+            const b=await chromium.launch({headless:true});const out=[];
+            for(const vp of [{n:'iphone',w:390,h:844},{n:'ipad',w:820,h:1180}]){
+              const c=await b.newContext({viewport:{width:vp.w,height:vp.h},colorScheme:'dark'});const p=await c.newPage();
+              const errs=[];p.on('pageerror',e=>errs.push(String(e)));const ce=[];p.on('console',m=>{if(m.type()==='error')ce.push(m.text())});
+              const res=await p.goto('http://127.0.0.1:8080/marie-v48-b1-darkmode/',{waitUntil:'domcontentloaded',timeout:120000});
+              await p.waitForTimeout(2200);await p.evaluate(()=>document.documentElement.setAttribute('data-theme','dark'));
+              const x=await p.evaluate(()=>{
+                const q=s=>{const e=document.querySelector(s),cs=getComputedStyle(e),ps=getComputedStyle(e,'::placeholder');return{styleSheets:document.styleSheets.length,placeholder:ps.color,bg:cs.backgroundColor,color:cs.color,display:cs.display}};
+                const root=getComputedStyle(document.documentElement);
+                return{version:typeof APP_VERSION==='undefined'?null:APP_VERSION,root:{ivory:root.getPropertyValue('--ivory').trim(),muted:root.getPropertyValue('--muted').trim()},search:q('#search-input'),wide:q('#wide-search-input'),note:q('#note-textarea'),backup:(()=>{const e=document.querySelector('.backup-btn.primary');if(!e)return null;const cs=getComputedStyle(e);return{color:cs.color,bg:cs.backgroundColor}})()};
+              });
+              for(const k of ['search','wide','note']){const z=x[k];z.ratio=+ratio(parse(z.placeholder),parse(z.bg)).toFixed(3);if(z.ratio<4.5)throw new Error(vp.n+' '+k+' placeholder '+z.ratio)}
+              if(x.version!=='48'||x.search.styleSheets<1||errs.length||ce.length)throw new Error(vp.n+' runtime '+JSON.stringify({x,errs,ce}));
+              out.push({viewport:vp.n,...x,errs,consoleErrors:ce,http:res.status()});await c.close();
+            }
+            await b.close();console.log(JSON.stringify(out,null,2));console.log('MARIE_V48_RENDERED_PASS');
+          })().catch(e=>{console.error(e);process.exit(2)});
+          JS
+          node /tmp/marie-v48-test.cjs
+      - name: PWA update and offline state v47 to v48
+        run: |
+          cat > /tmp/marie-v48-pwa.cjs <<'JS'
+          const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+          const dst='qa-marie-upgrade';const cp=s=>{fs.rmSync(dst,{recursive:true,force:true});fs.cpSync(s,dst,{recursive:true})};
+          (async()=>{cp('marie-v47-b1-darkmode');const b=await chromium.launch({headless:true});const c=await b.newContext({colorScheme:'dark',viewport:{width:390,height:844}});let p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e)));
+          const u='http://127.0.0.1:8080/'+dst+'/';let r=await p.goto(u,{waitUntil:'domcontentloaded',timeout:120000});await p.waitForTimeout(1800);
+          await p.evaluate(()=>localStorage.setItem('APP_GOV_SENTINEL','marie-v48'));const pre=await p.evaluate(()=>({v:typeof APP_VERSION==='undefined'?null:APP_VERSION}));
+          cp('marie-v48-b1-darkmode');const reg=await p.evaluate(()=>navigator.serviceWorker.getRegistration());if(reg)await p.evaluate(async()=>{const r=await navigator.serviceWorker.getRegistration();await r.update();await new Promise(x=>setTimeout(x,1800))});
+          await p.close();await new Promise(x=>setTimeout(x,1000));p=await c.newPage();p.on('pageerror',e=>errs.push(String(e)));r=await p.goto(u,{waitUntil:'domcontentloaded',timeout:120000});await p.waitForTimeout(1200);
+          const post=await p.evaluate(()=>({v:typeof APP_VERSION==='undefined'?null:APP_VERSION,s:localStorage.getItem('APP_GOV_SENTINEL'),title:document.title}));
+          if(post.v!=='48'||post.s!=='marie-v48'||!post.title)throw new Error('online update mismatch '+JSON.stringify(post));
+          await c.setOffline(true);await p.reload({waitUntil:'domcontentloaded',timeout:30000});await p.waitForTimeout(600);const off=await p.evaluate(()=>({v:typeof APP_VERSION==='undefined'?null:APP_VERSION,s:localStorage.getItem('APP_GOV_SENTINEL'),title:document.title}));
+          if(off.v!=='48'||off.s!=='marie-v48'||!off.title||errs.length)throw new Error('offline/state mismatch '+JSON.stringify({off,errs}));
+          console.log(JSON.stringify({pre,post,off,errs},null,2));await c.close();await b.close();console.log('MARIE_V47_V48_PWA_PASS')})().catch(e=>{console.error(e);process.exit(2)});
+          JS
+          node /tmp/marie-v48-pwa.cjs
+      - name: Commit frozen v48 candidate and evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add marie-v48-b1-darkmode marie-v48-build-evidence.json
+          git commit -m "Create Marie v48 CSP and placeholder repair candidate"
+          git pull --rebase origin main
+          git push origin HEAD:main
