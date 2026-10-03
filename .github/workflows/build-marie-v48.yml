@@ -46,7 +46,7 @@ jobs:
           sleep 2
       - name: Rendered dark mode and runtime audit
         run: |
-          cat > /tmp/marie-v48-test.cjs <<'JS'
+          cat > marie-v48-test.cjs <<'JS'
           const {chromium}=require('playwright');
           function parse(s){const m=String(s).match(/rgba?\(([^)]+)\)/);if(!m)return null;const a=m[1].split(/[,\s/]+/).filter(Boolean).map(Number);return{r:a[0],g:a[1],b:a[2],a:a[3]===undefined?1:a[3]}}
           const lin=v=>{v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)},L=c=>.2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b);
@@ -70,10 +70,10 @@ jobs:
             await b.close();console.log(JSON.stringify(out,null,2));console.log('MARIE_V48_RENDERED_PASS');
           })().catch(e=>{console.error(e);process.exit(2)});
           JS
-          node /tmp/marie-v48-test.cjs
+          node marie-v48-test.cjs
       - name: PWA update and offline state v47 to v48
         run: |
-          cat > /tmp/marie-v48-pwa.cjs <<'JS'
+          cat > marie-v48-pwa.cjs <<'JS'
           const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
           const dst='qa-marie-upgrade';const cp=s=>{fs.rmSync(dst,{recursive:true,force:true});fs.cpSync(s,dst,{recursive:true})};
           (async()=>{cp('marie-v47-b1-darkmode');const b=await chromium.launch({headless:true});const c=await b.newContext({colorScheme:'dark',viewport:{width:390,height:844}});let p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e)));
@@ -87,7 +87,7 @@ jobs:
           if(off.v!=='48'||off.s!=='marie-v48'||!off.title||errs.length)throw new Error('offline/state mismatch '+JSON.stringify({off,errs}));
           console.log(JSON.stringify({pre,post,off,errs},null,2));await c.close();await b.close();console.log('MARIE_V47_V48_PWA_PASS')})().catch(e=>{console.error(e);process.exit(2)});
           JS
-          node /tmp/marie-v48-pwa.cjs
+          node marie-v48-pwa.cjs
       - name: Commit frozen v48 candidate and evidence
         run: |
           git config user.name "github-actions[bot]"
