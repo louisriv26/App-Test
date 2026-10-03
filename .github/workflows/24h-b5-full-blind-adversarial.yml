@@ -1,0 +1,76 @@
+name: 24H B5 full blind adversarial qualification
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b5-full-blind/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  blind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind B4 and B5 exact trees
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:24h-v120-b4-darkmode)" = "fa26ec9bf92f9d5ff8551113ad43d26fda45168e"
+          test "$(git rev-parse HEAD:24h-v120-b5-adversarial)" = "e5bba58721351f15664eac060af11c2180a06b38"
+      - name: Exact mutation boundary and static integrity
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,re,base64
+          A=Path('24h-v120-b4-darkmode');B=Path('24h-v120-b5-adversarial')
+          def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+          fa={str(p.relative_to(A)):sha(p) for p in A.rglob('*') if p.is_file()}
+          fb={str(p.relative_to(B)):sha(p) for p in B.rglob('*') if p.is_file()}
+          changed={k for k in set(fa)|set(fb) if fa.get(k)!=fb.get(k)}
+          allowed={'index.html','luisa_24_heures.html','manifest.json','sw.js','version.json'}
+          assert changed==allowed,(changed,allowed)
+          assert (B/'index.html').read_bytes()==(B/'luisa_24_heures.html').read_bytes()
+          shell=sha(B/'index.html')
+          s=(B/'index.html').read_text(encoding='utf-8')
+          m=re.search(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.S|re.I);assert m
+          token="'sha256-"+base64.b64encode(hashlib.sha256(m.group(1).encode()).digest()).decode()+"'"
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',s).group(1)
+          assert token in csp.split('script-src-elem',1)[1].split(';',1)[0]
+          man=json.loads((B/'manifest.json').read_text());ver=json.loads((B/'version.json').read_text());sw=(B/'sw.js').read_text()
+          assert man['build_revision']=='B5' and man['release_sequence']==120000005 and man['release_id']=='24h-v120-b5-20261003-adversarial-runtime-closure'
+          assert ver['build_revision']=='B5' and ver['release_sequence']==120000005 and ver['release_id']==man['release_id'] and ver['canonical_shell_sha256']==shell
+          assert "const BUILD_REVISION = 'B5';" in sw and "const RELEASE_SEQUENCE = 120000005;" in sw and man['release_id'] in sw and shell in sw
+          # All non-authorized assets remain byte-identical.
+          for k in set(fa)|set(fb):
+            if k not in allowed: assert fa.get(k)==fb.get(k),k
+          print('STATIC_IDENTITY_BOUNDARY_PASS',shell,token)
+          PY
+          node --check 24h-v120-b5-adversarial/sw.js
+          python3 - <<'PY'
+          import re,pathlib
+          s=pathlib.Path('24h-v120-b5-adversarial/index.html').read_text()
+          b=re.search(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.S|re.I).group(1)
+          pathlib.Path('/tmp/24h-b5-inline.js').write_text(b)
+          PY
+          node --check /tmp/24h-b5-inline.js
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install browser audit dependencies
+        run: |
+          npm install --no-save playwright@1.55.0 axe-core@4.10.3
+          npx playwright install --with-deps chromium
+      - name: Start exact-byte origins
+        run: |
+          mkdir -p qa-upgrade
+          python3 -m http.server 8090 --bind 127.0.0.1 >/tmp/http8090.log 2>&1 &
+          python3 -m http.server 8091 --bind 127.0.0.1 --directory qa-upgrade >/tmp/http8091.log 2>&1 &
+          sleep 2
+      - name: Full fresh blind browser/PWA/update audit
+        run: node 24h-b5-full-blind-adversarial.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 24h-b5-full-blind-adversarial-evidence
+          path: 24h-b5-full-blind-adversarial.json
+          if-no-files-found: warn
