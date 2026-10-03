@@ -21,7 +21,7 @@ jobs:
         with: {node-version: '22'}
       - name: Install independent browser audit dependencies
         run: |
-          npm install --no-save playwright@1.55.0 @axe-core/playwright@4.10.3
+          npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
       - name: Serve exact checkout
         run: |
