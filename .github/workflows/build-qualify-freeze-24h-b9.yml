@@ -60,7 +60,7 @@ jobs:
           sleep 2
       - name: Fresh B9 rendered runtime and transient contrast
         run: |
-          cat > /tmp/qa-b9-render.cjs <<'JS'
+          cat > qa-b9-render.cjs <<'JS'
           const {chromium}=require('playwright');
           function parse(s){const m=String(s).match(/rgba?\(([^)]+)\)/);if(!m)return null;const a=m[1].split(/[,\s/]+/).filter(Boolean).map(Number);return{r:a[0],g:a[1],b:a[2]}}
           function lin(v){v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)} function L(c){return .2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b)} function cr(a,b){return(Math.max(L(a),L(b))+.05)/(Math.min(L(a),L(b))+.05)}
@@ -88,11 +88,11 @@ jobs:
           await b.close();require('fs').writeFileSync('24h-v120-b9-rendered-evidence.json',JSON.stringify(out,null,2));console.log('B9_RENDERED_TRANSIENT_PASS');
           })().catch(e=>{console.error(e);process.exit(2)});
           JS
-          node /tmp/qa-b9-render.cjs
+          node qa-b9-render.cjs
       - name: Exact v119 to B9 update state and offline qualification
         run: |
-          sed -e 's/24h-v120-b8-update-activation-closure/24h-v120-b9-converged-closure/g'               -e 's/24h-v120-b8-20261003-update-activation-closure/24h-v120-b9-20261003-converged-activation-contrast-closure/g'               -e 's/120000008/120000009/g' -e 's/v120-b8/v120-b9/g' -e 's/B8/B9/g' -e 's/b8/b9/g'               -e 's/127.0.0.1:8086/127.0.0.1:8080/g'               24h-b8-production-upgrade-offline.cjs > /tmp/qa-b9-upgrade.cjs
-          node /tmp/qa-b9-upgrade.cjs
+          sed -e 's/24h-v120-b8-update-activation-closure/24h-v120-b9-converged-closure/g'               -e 's/24h-v120-b8-20261003-update-activation-closure/24h-v120-b9-20261003-converged-activation-contrast-closure/g'               -e 's/120000008/120000009/g' -e 's/v120-b8/v120-b9/g' -e 's/B8/B9/g' -e 's/b8/b9/g'               -e 's/127.0.0.1:8086/127.0.0.1:8080/g'               24h-b8-production-upgrade-offline.cjs > qa-b9-upgrade.cjs
+          node qa-b9-upgrade.cjs
       - name: Deterministic freeze package and evidence
         run: |
           python3 - <<'PY'
