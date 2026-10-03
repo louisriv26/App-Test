@@ -1,0 +1,29 @@
+name: Build 24H v120 B5 blind adversarial closure
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-v120-b5-build/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind frozen B4 source
+        run: test "$(git rev-parse HEAD:24h-v120-b4-darkmode)" = "fa26ec9bf92f9d5ff8551113ad43d26fda45168e"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Build immutable B5 successor
+        run: node build-24h-v120-b5.cjs
+      - name: Commit only the new B5 candidate
+        run: |
+          git config user.name "OpenAI App-Test QA"
+          git config user.email "actions@users.noreply.github.com"
+          git add 24h-v120-b5-blind-adversarial-closure 24h-v120-b5-build-report.json
+          git diff --cached --check
+          git commit -m "Add 24H v120 B5 blind adversarial integrity closure"
+          git push origin HEAD:main
