@@ -52,7 +52,7 @@ repls=[
  ("const BUILD_REVISION = 'B8';","const BUILD_REVISION = 'B9';"),
  ("const RELEASE_SEQUENCE = 120000008;","const RELEASE_SEQUENCE = 120000009;"),
  ("const RELEASE_ID = '24h-v120-b8-20261003-update-activation-closure';",f"const RELEASE_ID = '{RID}';"),
- ("\`${CACHE_PREFIX}v120-b8\`","\`${CACHE_PREFIX}v120-b9\`")
+ ("`${CACHE_PREFIX}v120-b8`","`${CACHE_PREFIX}v120-b9`")
 ]
 for a,b in repls:
     assert a in sw,a
