@@ -1,0 +1,23 @@
+{
+  "candidate": "MJV v48/B1",
+  "predecessor": "MJV v47/B1",
+  "date": "2026-10-03",
+  "root_cause": "v47 inline stylesheet changed but CSP style-src retained the exact v46 stylesheet hash, so the browser rejected the v47 application stylesheet.",
+  "repair": [
+    "advance APP_VERSION/SW VERSION 47→48",
+    "explicitly bind search/note placeholders to var(--muted) with opacity 1",
+    "recompute exact inline script and style CSP hashes"
+  ],
+  "changed_files": [
+    "index.html",
+    "sw.js"
+  ],
+  "index_sha256": "33febb0c66e27da75d26da234b89f6996571919f56d5cc1994f090f38345a80c",
+  "sw_sha256": "968c4bde3aecf07f5fc27a0ad91e28ea845180aae0ccf80f7282f17434d2d2be",
+  "style_sha256_base64": [],
+  "script_sha256_base64": [],
+  "corpus_mutation": false,
+  "personal_state_schema_mutation": false,
+  "production_deployment_authority": "NONE",
+  "physical_gate": "OPEN"
+}
