@@ -91,7 +91,7 @@ jobs:
           node qa-b9-render.cjs
       - name: Exact v119 to B9 update state and offline qualification
         run: |
-          sed -e 's/24h-v120-b8-update-activation-closure/24h-v120-b9-converged-closure/g'               -e 's/24h-v120-b8-20261003-update-activation-closure/24h-v120-b9-20261003-converged-activation-contrast-closure/g'               -e 's/120000008/120000009/g' -e 's/v120-b8/v120-b9/g' -e 's/B8/B9/g' -e 's/b8/b9/g'               -e 's/127.0.0.1:8086/127.0.0.1:8080/g'               24h-b8-production-upgrade-offline.cjs > qa-b9-upgrade.cjs
+          sed -e 's/24h-v120-b8-update-activation-closure/24h-v120-b9-converged-closure/g'               -e 's/24h-v120-b8-20261003-update-activation-closure/24h-v120-b9-20261003-converged-activation-contrast-closure/g'               -e 's/120000008/120000009/g' -e 's/v120-b8/v120-b9/g' -e 's/B8/B9/g' -e 's/b8/b9/g'               -e 's#http://127.0.0.1:8086/app/#http://127.0.0.1:8080/qa-24h-b9-upgrade/app/#g'               24h-b8-production-upgrade-offline.cjs > qa-b9-upgrade.cjs
           node qa-b9-upgrade.cjs
       - name: Deterministic freeze package and evidence
         run: |
