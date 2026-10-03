@@ -1,0 +1,29 @@
+name: Marie v47 placeholder runtime probe
+on:
+  push:
+    branches: [main]
+    paths: ['.github/marie-v47-placeholder-probe/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact Marie v47 tree
+        run: test "$(git rev-parse HEAD:marie-v47-b1-darkmode)" = "81acbb9f409c7c0e1695b0ab35f33dfdc4978631"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve exact checkout
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/marie-placeholder-http.log 2>&1 &
+          sleep 2
+      - name: Probe placeholder contrast
+        run: node qa-marie-v47-placeholder-probe.cjs
