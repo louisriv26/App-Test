@@ -36,15 +36,15 @@ html=html.replace("const APP_EVIDENCE_STAGE = '24H_V120_UPDATE_ACTIVATION_CLOSUR
 html=html.replace("const APP_RELEASE_SEQUENCE = 120000008;","const APP_RELEASE_SEQUENCE = 120000010;",1)
 html=html.replace("const APP_RELEASE_ID = '24h-v120-b8-20261003-update-activation-closure';",f"const APP_RELEASE_ID = '{RID}';",1)
 
-scripts=re.findall(r'<script(?![^>]*\\bsrc=)[^>]*>([\\s\\S]*?)</script>',html,re.I)
-styles=re.findall(r'<style[^>]*>([\\s\\S]*?)</style>',html,re.I)
+scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>',html,re.I)
+styles=re.findall(r'<style[^>]*>([\s\S]*?)</style>',html,re.I)
 assert scripts and styles
 script_tokens=[f"'sha256-{sha_b64(x)}'" for x in scripts]
 style_tokens=[f"'sha256-{sha_b64(x)}'" for x in styles]
 m=re.search(r'(<meta http-equiv="Content-Security-Policy" content=")([^"]+)(")',html,re.I); assert m
 csp=m.group(2)
-csp,n1=re.subn(r"script-src-elem\\s+[^;]*;", "script-src-elem "+" ".join(script_tokens)+";", csp, count=1)
-csp,n2=re.subn(r"style-src-elem\\s+[^;]*;", "style-src-elem "+" ".join(style_tokens)+";", csp, count=1)
+csp,n1=re.subn(r"script-src-elem\s+[^;]*;", "script-src-elem "+" ".join(script_tokens)+";", csp, count=1)
+csp,n2=re.subn(r"style-src-elem\s+[^;]*;", "style-src-elem "+" ".join(style_tokens)+";", csp, count=1)
 assert n1==1 and n2==1
 html=html[:m.start(2)]+csp+html[m.end(2):]
 for t in script_tokens+style_tokens: assert t in csp
