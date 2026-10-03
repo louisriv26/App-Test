@@ -78,7 +78,7 @@ jobs:
 
       - name: Fresh independent runtime falsification matrix
         run: |
-          cat > /tmp/b13-final-blind.cjs <<'JS'
+          cat > b13-final-blind.cjs <<'JS'
           const {chromium}=require('playwright');
           const fs=require('fs');
           const out={matrix:[],pwa:null,errors:[]};
@@ -177,7 +177,7 @@ jobs:
             console.log('FINAL_INDEPENDENT_BLIND_B13_PASS',out.matrix.length,out.pwa.offlineReopens);
           })().catch(e=>{out.errors.push(String(e&&e.stack||e));try{fs.writeFileSync('24H_v120_B13_FINAL_INDEPENDENT_BLIND_EVIDENCE.json',JSON.stringify(out,null,2))}catch(_){}console.error(e);process.exit(2)});
           JS
-          node /tmp/b13-final-blind.cjs
+          node b13-final-blind.cjs
 
       - uses: actions/upload-artifact@v4
         if: always()
