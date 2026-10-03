@@ -41,7 +41,7 @@ def waitnum(pg,n,wide=False):
     return num(pg,wide)
 def store(ctx):
     for o in ctx.storage_state().get('origins',[]):
-        if o['origin']=='https://louisriv26.github.io':
+        if o['origin']=='http://127.0.0.1:8120':
             return {x['name']:x['value'] for x in o.get('localStorage',[])}
     return {}
 
