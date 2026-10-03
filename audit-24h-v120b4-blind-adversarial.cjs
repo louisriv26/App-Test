@@ -178,14 +178,30 @@ async function runPath(browser,path,label){
   for(const viewport of [{name:'iphone',w:390,h:844},{name:'ipad',w:820,h:1180}]){
     for(const mode of ['dark','system']){
       const ctx=await browser.newContext({viewport:{width:viewport.w,height:viewport.h},colorScheme:'dark'});
-      await ctx.addInitScript(()=>{localStorage.setItem('lp24_onboarded','1');localStorage.setItem('blind_sentinel','preserve-me');});
       const page=await ctx.newPage();
       const consoleErrors=[]; const pageErrors=[];
       page.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text())});
       page.on('pageerror',e=>pageErrors.push(String(e)));
       const res=await page.goto('http://127.0.0.1:8080/'+path+'/luisa_24_heures.html',{waitUntil:'domcontentloaded',timeout:120000});
-      await page.waitForFunction(()=>typeof showHome==='function',{timeout:30000});
-      await page.waitForTimeout(600);
+      await page.waitForSelector('#app',{state:'attached',timeout:30000});
+      await page.waitForTimeout(1800);
+      await page.evaluate(()=>{try{localStorage.setItem('lp24_onboarded','1');localStorage.setItem('blind_sentinel','preserve-me');}catch(e){}});
+      const readiness=await page.evaluate(()=>({
+        showHome:typeof showHome,
+        showHoursView:typeof showHoursView,
+        showSearchView:typeof showSearchView,
+        showEspaceView:typeof showEspaceView,
+        corpus:typeof CORPUS,
+        state:typeof state,
+        contentText:(document.getElementById('content')?.innerText||'').slice(0,120),
+        readyState:document.readyState
+      }));
+      if(readiness.showHome!=='function'){
+        report.errors.push(label+' '+viewport.name+' '+mode+' JS readiness '+JSON.stringify(readiness));
+        fs.writeFileSync(OUT+'/EARLY_READINESS_'+label+'_'+viewport.name+'_'+mode+'.json',JSON.stringify({readiness,consoleErrors,pageErrors},null,2));
+        await page.screenshot({path:OUT+'/EARLY_READINESS_'+label+'_'+viewport.name+'_'+mode+'.png',fullPage:false});
+        throw new Error('JS readiness failure '+label+' '+viewport.name+' '+mode+' '+JSON.stringify(readiness));
+      }
       for(const view of ['home','hours','search','espace','reader','help','settings','prayer','section']){
         await setThemeAndView(page,mode,view);
         const scan=await scanPage(page,label+'-'+viewport.name+'-'+mode+'-'+view);
