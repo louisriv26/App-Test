@@ -1,0 +1,25 @@
+name: Fresh Lettres v2.12 full current-candidate QA
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-lettres-v212-current/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact Lettres v2.12 tree
+        run: test "$(git rev-parse HEAD:lettres-v2.12-b1-darkmode)" = "03617ce508bb9cce7e114c1cec4aa40c3a0b6dc9"
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
+      - run: |
+          python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres212.log 2>&1 &
+          sleep 2
+      - run: python qa/lettres_v212_full_current.py
