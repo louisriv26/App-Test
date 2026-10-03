@@ -37,7 +37,7 @@ async function pageAudit(page,label){
     duplicateIds:(()=>{const a=[...document.querySelectorAll('[id]')].map(e=>e.id);return [...new Set(a.filter((x,i)=>a.indexOf(x)!==i))]})(),
     visibleUnlabelledControls:[...document.querySelectorAll('button,input,select,textarea,a[href],[role="button"]')].filter(el=>{
       const r=el.getBoundingClientRect(),s=getComputedStyle(el); if(r.width<=0||r.height<=0||s.visibility==='hidden'||s.display==='none')return false;
-      const txt=(el.innerText||el.value||'').trim(); return !txt&&!el.getAttribute('aria-label')&&!el.getAttribute('title')&&!el.getAttribute('aria-labelledby');
+      const txt=(el.innerText||el.textContent||el.value||'').trim(); return !txt&&!el.getAttribute('aria-label')&&!el.getAttribute('title')&&!el.getAttribute('aria-labelledby');
     }).map(el=>el.outerHTML.slice(0,220))
   }),{RID,SEQ});
   if(out.runtime.appVersion!=='v120'||out.runtime.buildRevision!=='B6'||out.runtime.releaseId!==RID||out.runtime.releaseSequence!==SEQ) fail(label+' identity mismatch '+JSON.stringify(out.runtime));
