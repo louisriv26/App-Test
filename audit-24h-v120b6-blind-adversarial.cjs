@@ -221,7 +221,7 @@ async function contractAudit(browser){
       document.getElementById('qa-contract')?.remove();
       const q=document.createElement('div'); q.id='qa-contract';
       q.style.cssText='position:fixed;left:10px;top:70px;width:640px;z-index:99999;background:var(--bg);padding:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px';
-      q.innerHTML=\`
+      q.innerHTML=`
         <button id="qa-on" class="onboarding-primary">Commencer</button>
         <button id="qa-sf" class="sf-btn active" aria-pressed="true">Tout</button>
         <button id="qa-mark" class="mark-btn">Marquer comme méditée</button>
@@ -242,7 +242,7 @@ async function contractAudit(browser){
           <button id="qa-refresh" class="update-refresh-btn">Mettre à jour</button>
           <button id="qa-dismiss" class="update-dismiss-btn">×</button>
         </div>
-        <div id="qa-inkcard" style="background:var(--bg3);padding:8px"><span id="qa-ink4" style="color:var(--ink4)">Texte tertiaire</span></div>\`;
+        <div id="qa-inkcard" style="background:var(--bg3);padding:8px"><span id="qa-ink4" style="color:var(--ink4)">Texte tertiaire</span></div>`;
       document.body.appendChild(q);
     });
     const measure=async(id)=>await page.evaluate(id=>{
