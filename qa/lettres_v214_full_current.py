@@ -126,7 +126,7 @@ with sync_playwright() as p:
     with pg.expect_download(timeout=10000) as di: pg.locator('#settings-export-btn').click()
     path=di.value.path(); data=json.load(open(path,encoding='utf-8'))
     rec('backup:format',data.get('format')=='luisa-letters-user-data',data.get('format'))
-    rec('backup:version',data.get('app_version')=='2.13',data.get('app_version'))
+    rec('backup:version',data.get('app_version')=='2.14',data.get('app_version'))
     rec('backup:state',2 in data.get('data',{}).get('favourites',[]) and 2 in data.get('data',{}).get('read_state',[]),data.get('data',{}))
     pg.locator('#import-input').set_input_files(path); expect(pg.locator('#import-sheet')).to_be_visible(); rec('backup:preview',True,pg.locator('#import-preview-summary').inner_text())
     pg.locator('#import-merge-btn').click(); expect(pg.locator('#import-sheet')).to_be_hidden(); rec('backup:self_merge',True)
