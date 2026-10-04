@@ -1,0 +1,33 @@
+name: Lettres R9 rendered contrast sweep
+on:
+  push:
+    branches: [main]
+    paths: ['.github/lettres-r9-contrast/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  contrast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve repository
+        run: |
+          python3 -m http.server 8093 --bind 127.0.0.1 >/tmp/lettres-contrast.log 2>&1 &
+          sleep 2
+      - name: Sweep rendered controls
+        run: node qa-lettres-r9-contrast-sweep-20261004.cjs
+      - name: Record evidence
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add LETTRES_R9_CONTRAST_SWEEP_2026-10-04.json
+          git commit -m "Record Lettres R9 rendered contrast sweep"
+          git pull --rebase origin main
+          git push origin HEAD:main
