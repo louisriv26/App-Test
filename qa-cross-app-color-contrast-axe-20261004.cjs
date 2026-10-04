@@ -14,7 +14,6 @@ function summarizeAxe(r){
   }));
 }
 async function axeContrast(p,label){
-  await p.addScriptTag({content:axeSource});
   const r=await p.evaluate(async()=>await axe.run(document,{runOnly:{type:'rule',values:['color-contrast']}}));
   return {label,violations:summarizeAxe(r)};
 }
@@ -24,6 +23,7 @@ async function waitMarie(p){await p.waitForFunction(()=>typeof APP_VERSION!=='un
 
 async function lettresScenes(browser,viewport,theme){
   const c=await browser.newContext({viewport,colorScheme:theme});
+  await c.addInitScript({content:axeSource});
   const p=await c.newPage(),errs=[];await errorsOn(p,errs);
   await p.goto(APPS.lettres.url,{waitUntil:'domcontentloaded',timeout:60000});await waitLettres(p);
   await p.evaluate(t=>setThemeFromSettings(t),theme);await p.waitForTimeout(150);
@@ -45,6 +45,7 @@ async function lettresScenes(browser,viewport,theme){
 
 async function marieScenes(browser,viewport,theme){
   const c=await browser.newContext({viewport,colorScheme:theme});
+  await c.addInitScript({content:axeSource});
   const p=await c.newPage(),errs=[];await errorsOn(p,errs);
   // Preserve first-run onboarding for one scan, but preselect theme.
   await p.addInitScript(t=>{localStorage.removeItem('mjv_onboarded');localStorage.setItem('mjv_theme',t)},theme);
