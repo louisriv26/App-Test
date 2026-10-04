@@ -8,7 +8,7 @@ function copy(src,dst){fs.rmSync(dst,{recursive:true,force:true});fs.cpSync(src,
 async function ready(p,t=90000){await p.waitForFunction(()=>{const l=document.getElementById('loading'),vp=document.getElementById('version-pill-home');return l&&getComputedStyle(l).display==='none'&&vp&&vp.textContent&&!/v—|v-$/.test(vp.textContent);},{timeout:t});}
 async function snap(p){return p.evaluate(async()=>({app:APP_VERSION,pub:PUBLIC_VERSION,swExpected:SW_CACHE_VERSION,controller:!!navigator.serviceWorker.controller,caches:(await caches.keys()).filter(x=>x.startsWith('ldc-le-livre-du-ciel-')).sort(),pill:document.getElementById('version-pill-home')?.textContent||'',loadingVisible:getComputedStyle(document.getElementById('loading')).display!=='none',local:localStorage.getItem('qa_v138_local'),idb:(await dbGet('settings','qa_v138_sentinel').catch(()=>null))?.val||null,version:await fetch('./version.json',{cache:'no-store'}).then(r=>r.json())}));}
 async function run(){
- fs.rmSync(PROFILE,{recursive:true,force:true});fs.mkdirSync(SERVE,{recursive:true});copy(path.join(process.cwd(),'ldc-v138-fullqa-corrective'),APP);
+ fs.rmSync(PROFILE,{recursive:true,force:true});fs.mkdirSync(SERVE,{recursive:true});copy(path.join(process.cwd(),'ldc-v137-r10-release-integrity'),APP);
  const c=await chromium.launchPersistentContext(PROFILE,{headless:true,serviceWorkers:'allow',viewport:{width:390,height:844}});
  const p=await c.newPage(),errors=[],consoleErrors=[];p.on('pageerror',e=>errors.push(String(e)));p.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text());});
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:90000});await ready(p);
