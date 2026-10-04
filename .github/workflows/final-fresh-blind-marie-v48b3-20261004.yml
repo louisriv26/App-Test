@@ -1,0 +1,45 @@
+name: Final fresh blind Marie v48 B3 exact package
+on:
+  push:
+    branches: [main]
+    paths: ['.github/marie-v48b3-finalblind/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  finalblind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind immutable package and candidate
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:marie-v48-b3-csp-note-placeholder-closure)" = "197600dc9ad6c2b722e0b1f3f0120b3757b2af36"
+          echo "974fa966ed9f215812c7eb03248edbe32a80d7459069a2d326556fa572d58e0b  MJV_v48_B3_CSP_NOTE_PLACEHOLDER_RELEASE.zip" | sha256sum -c -
+          rm -rf qa-marie-v48b3-finalblind-package && mkdir qa-marie-v48b3-finalblind-package
+          unzip -q MJV_v48_B3_CSP_NOTE_PLACEHOLDER_RELEASE.zip -d qa-marie-v48b3-finalblind-package
+          diff -qr marie-v48-b3-csp-note-placeholder-closure qa-marie-v48b3-finalblind-package
+          node --check qa-marie-v48b3-final-fresh-blind-20261004.cjs
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve exact packaged bytes
+        run: |
+          python3 -m http.server 8092 --bind 127.0.0.1 >/tmp/mjv-finalblind.log 2>&1 &
+          sleep 2
+      - name: Independent falsification campaign
+        run: node qa-marie-v48b3-final-fresh-blind-20261004.cjs
+      - name: Record blind evidence only
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add MJV_v48_B3_FINAL_FRESH_BLIND_2026-10-04.json
+          git commit -m "Record final fresh blind challenge for frozen Marie v48 B3"
+          git pull --rebase origin main
+          test "$(git rev-parse HEAD:marie-v48-b3-csp-note-placeholder-closure)" = "197600dc9ad6c2b722e0b1f3f0120b3757b2af36"
+          git push origin HEAD:main
