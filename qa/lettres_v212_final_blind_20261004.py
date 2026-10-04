@@ -95,12 +95,15 @@ with sync_playwright() as p:
                     pg.locator('#path-modal-back').click()
                     expect(pg.locator('#path-modal')).not_to_have_class(re.compile('show'))
             pg.evaluate('openHelp(0)'); expect(pg.locator('#help-overlay')).to_be_visible()
-            for bid in ['help-prev','help-next']:
+            def check_help_button(bid):
                 data=pg.locator('#'+bid).evaluate("el=>{let s=getComputedStyle(el);return {fg:s.color,bg:s.backgroundColor,disp:s.display,vis:s.visibility,op:s.opacity}}")
                 fg,bg=rgb(data['fg']),rgb(data['bg']); ratio=contrast(fg,bg) if fg and bg else 0
                 rec('help_dark:'+bid+':visible',data['disp']!='none' and data['vis']!='hidden' and float(data['op'] or 1)>0,data)
                 rec('help_dark:'+bid+':contrast',ratio>=4.5,round(ratio,2))
-            for i in range(11): pg.locator('#help-next').click()
+            check_help_button('help-next')
+            pg.locator('#help-next').click(); expect(pg.locator('#help-slide-label')).to_have_text('2 / 12')
+            check_help_button('help-prev')
+            for i in range(10): pg.locator('#help-next').click()
             expect(pg.locator('#help-slide-label')).to_have_text('12 / 12')
             for i in range(11): pg.locator('#help-prev').click()
             expect(pg.locator('#help-slide-label')).to_have_text('1 / 12')
