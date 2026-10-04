@@ -1,0 +1,828 @@
+{
+  "candidate": "LDC v139/R12 offline persistence diagnostic",
+  "generated_at": "2026-10-04T07:24:40.256Z",
+  "scenarios": {
+    "no_backup": {
+      "withBackup": false,
+      "pre": {
+        "saved": {
+          "state": "NOT_PREPARED",
+          "completed": 0,
+          "total": 204,
+          "failed": [],
+          "total_bytes": 114483048,
+          "job_id": null,
+          "message": "",
+          "storage_schema": "ldc-offline-storage-v3",
+          "content_binding_schema": "ldc-offline-content-binding-v2",
+          "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+          "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
+          "corpus_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
+          "manifest_schema": "ldc-offline-manifest-v3",
+          "updated_at": "2026-10-04T07:24:41.393Z"
+        },
+        "ui": {
+          "state": "NOT_PREPARED",
+          "completed": 0,
+          "total": 204,
+          "failed": [],
+          "total_bytes": 114483048,
+          "job_id": null,
+          "message": "",
+          "storage_schema": "ldc-offline-storage-v3",
+          "content_binding_schema": "ldc-offline-content-binding-v2",
+          "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+          "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b"
+        }
+      },
+      "readySeen": true,
+      "post": {
+        "saved": {
+          "state": "READY",
+          "completed": 204,
+          "total": 204,
+          "failed": [],
+          "total_bytes": 114483048,
+          "job_id": "ldc-offline-1791098682656-71a763",
+          "message": "Préparation complète et vérifiée.",
+          "storage_schema": "ldc-offline-storage-v3",
+          "content_binding_schema": "ldc-offline-content-binding-v2",
+          "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+          "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
+          "corpus_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
+          "manifest_schema": "ldc-offline-manifest-v3",
+          "updated_at": "2026-10-04T07:24:45.386Z"
+        },
+        "ui": {
+          "state": "READY",
+          "completed": 204,
+          "total": 204,
+          "failed": [],
+          "total_bytes": 114483048,
+          "job_id": "ldc-offline-1791098682656-71a763",
+          "message": "Préparation complète et vérifiée.",
+          "storage_schema": "ldc-offline-storage-v3",
+          "content_binding_schema": "ldc-offline-content-binding-v2",
+          "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+          "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b"
+        },
+        "diag": {
+          "writes": [
+            {
+              "at": 1791098683160,
+              "state": "DOWNLOADING",
+              "completed": 50,
+              "stack": "Error: offline_completion write\n    at dbPut (eval at evaluate (:291:30), <anonymous>:5:187)\n    at http://127.0.0.1:8140/ldc-v139-r12-search-v21a-recert/:10133:5"
+            },
+            {
+              "at": 1791098683454,
+              "state": "DOWNLOADING",
+              "completed": 51,
+              "stack": "Error: offline_completion write\n    at dbPut (eval at evaluate (:291:30), <anonymous>:5:187)\n    at http://127.0.0.1:8140/ldc-v139-r12-search-v21a-recert/:10133:5"
+            },
+            {
+              "at": 1791098685386,
+              "state": "READY",
+              "completed": 204,
+              "stack": "Error: offline_completion write\n    at dbPut (eval at evaluate (:291:30), <anonymous>:5:187)\n    at http://127.0.0.1:8140/ldc-v139-r12-search-v21a-recert/:10133:5"
+            }
+          ],
+          "poll": [
+            {
+              "at": 1791098682750,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 5
+            },
+            {
+              "at": 1791098682850,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 28
+            },
+            {
+              "at": 1791098682951,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 49
+            },
+            {
+              "at": 1791098683097,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 50
+            },
+            {
+              "at": 1791098683150,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 50
+            },
+            {
+              "at": 1791098683250,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 50
+            },
+            {
+              "at": 1791098683443,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 51
+            },
+            {
+              "at": 1791098683602,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 52
+            },
+            {
+              "at": 1791098683603,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 52
+            },
+            {
+              "at": 1791098683651,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 52
+            },
+            {
+              "at": 1791098683752,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 61
+            },
+            {
+              "at": 1791098683850,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 68
+            },
+            {
+              "at": 1791098683950,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 68
+            },
+            {
+              "at": 1791098684050,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 85
+            },
+            {
+              "at": 1791098684150,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 91
+            },
+            {
+              "at": 1791098684251,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 97
+            },
+            {
+              "at": 1791098684350,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 103
+            },
+            {
+              "at": 1791098684451,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 112
+            },
+            {
+              "at": 1791098684550,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 114
+            },
+            {
+              "at": 1791098684650,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 128
+            },
+            {
+              "at": 1791098684750,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 139
+            },
+            {
+              "at": 1791098684851,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 149
+            },
+            {
+              "at": 1791098684950,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 165
+            },
+            {
+              "at": 1791098685051,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 188
+            },
+            {
+              "at": 1791098685150,
+              "saved": "DOWNLOADING",
+              "ui": "DOWNLOADING",
+              "completed": 204
+            },
+            {
+              "at": 1791098685250,
+              "saved": "DOWNLOADING",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098685350,
+              "saved": "DOWNLOADING",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098685450,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098685550,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098685650,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098685750,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098685850,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098685950,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098686050,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098686150,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098686250,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098686350,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098686450,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098686550,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098686650,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098686750,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098686850,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098686950,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098687050,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098687150,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098687250,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098687350,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098687450,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098687550,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098687650,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            }
+          ],
+          "replaceCalls": []
+        }
+      },
+      "errors": {
+        "page": [],
+        "console": []
+      },
+      "pass": true
+    },
+    "with_backup": {
+      "withBackup": true,
+      "pre": {
+        "saved": {
+          "state": "NOT_PREPARED",
+          "completed": 0,
+          "total": 204,
+          "failed": [],
+          "total_bytes": 114483048,
+          "job_id": null,
+          "message": "",
+          "storage_schema": "ldc-offline-storage-v3",
+          "content_binding_schema": "ldc-offline-content-binding-v2",
+          "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+          "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
+          "corpus_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
+          "manifest_schema": "ldc-offline-manifest-v3",
+          "updated_at": "2026-10-04T07:24:48.686Z"
+        },
+        "ui": {
+          "state": "NOT_PREPARED",
+          "completed": 0,
+          "total": 204,
+          "failed": [],
+          "total_bytes": 114483048,
+          "job_id": null,
+          "message": "",
+          "storage_schema": "ldc-offline-storage-v3",
+          "content_binding_schema": "ldc-offline-content-binding-v2",
+          "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+          "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b"
+        }
+      },
+      "readySeen": true,
+      "post": {
+        "saved": {
+          "state": "READY",
+          "completed": 204,
+          "total": 204,
+          "failed": [],
+          "total_bytes": 114483048,
+          "job_id": "ldc-offline-1791098691016-92deee",
+          "message": "Préparation complète et vérifiée.",
+          "storage_schema": "ldc-offline-storage-v3",
+          "content_binding_schema": "ldc-offline-content-binding-v2",
+          "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+          "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
+          "corpus_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
+          "manifest_schema": "ldc-offline-manifest-v3",
+          "updated_at": "2026-10-04T07:24:52.935Z"
+        },
+        "ui": {
+          "state": "READY",
+          "completed": 204,
+          "total": 204,
+          "failed": [],
+          "total_bytes": 114483048,
+          "job_id": "ldc-offline-1791098691016-92deee",
+          "message": "Préparation complète et vérifiée.",
+          "storage_schema": "ldc-offline-storage-v3",
+          "content_binding_schema": "ldc-offline-content-binding-v2",
+          "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+          "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b"
+        },
+        "diag": {
+          "writes": [
+            {
+              "at": 1791098692935,
+              "state": "READY",
+              "completed": 204,
+              "stack": "Error: offline_completion write\n    at dbPut (eval at evaluate (:291:30), <anonymous>:5:187)\n    at http://127.0.0.1:8140/ldc-v139-r12-search-v21a-recert/:10133:5"
+            }
+          ],
+          "poll": [
+            {
+              "at": 1791098690058,
+              "saved": "NOT_PREPARED",
+              "ui": "NOT_PREPARED",
+              "completed": 0
+            },
+            {
+              "at": 1791098690158,
+              "saved": "NOT_PREPARED",
+              "ui": "NOT_PREPARED",
+              "completed": 0
+            },
+            {
+              "at": 1791098690258,
+              "saved": "NOT_PREPARED",
+              "ui": "NOT_PREPARED",
+              "completed": 0
+            },
+            {
+              "at": 1791098690358,
+              "saved": "NOT_PREPARED",
+              "ui": "NOT_PREPARED",
+              "completed": 0
+            },
+            {
+              "at": 1791098690458,
+              "saved": "NOT_PREPARED",
+              "ui": "NOT_PREPARED",
+              "completed": 0
+            },
+            {
+              "at": 1791098690558,
+              "saved": "NOT_PREPARED",
+              "ui": "NOT_PREPARED",
+              "completed": 0
+            },
+            {
+              "at": 1791098690658,
+              "saved": "NOT_PREPARED",
+              "ui": "NOT_PREPARED",
+              "completed": 0
+            },
+            {
+              "at": 1791098690758,
+              "saved": "NOT_PREPARED",
+              "ui": "NOT_PREPARED",
+              "completed": 0
+            },
+            {
+              "at": 1791098690858,
+              "saved": "NOT_PREPARED",
+              "ui": "NOT_PREPARED",
+              "completed": 0
+            },
+            {
+              "at": 1791098690958,
+              "saved": "NOT_PREPARED",
+              "ui": "NOT_PREPARED",
+              "completed": 0
+            },
+            {
+              "at": 1791098691058,
+              "saved": "NOT_PREPARED",
+              "ui": "CHECKING",
+              "completed": 0
+            },
+            {
+              "at": 1791098691158,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 23
+            },
+            {
+              "at": 1791098691258,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 51
+            },
+            {
+              "at": 1791098691358,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 59
+            },
+            {
+              "at": 1791098691458,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 65
+            },
+            {
+              "at": 1791098691558,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 78
+            },
+            {
+              "at": 1791098691658,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 90
+            },
+            {
+              "at": 1791098691758,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 96
+            },
+            {
+              "at": 1791098691859,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 101
+            },
+            {
+              "at": 1791098691958,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 110
+            },
+            {
+              "at": 1791098692058,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 113
+            },
+            {
+              "at": 1791098692158,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 123
+            },
+            {
+              "at": 1791098692258,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 136
+            },
+            {
+              "at": 1791098692358,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 145
+            },
+            {
+              "at": 1791098692458,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 157
+            },
+            {
+              "at": 1791098692558,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 180
+            },
+            {
+              "at": 1791098692658,
+              "saved": "NOT_PREPARED",
+              "ui": "DOWNLOADING",
+              "completed": 204
+            },
+            {
+              "at": 1791098692758,
+              "saved": "NOT_PREPARED",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098692858,
+              "saved": "NOT_PREPARED",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098692958,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098693058,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098693158,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098693258,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098693358,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098693458,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098693558,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098693658,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098693758,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098693858,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098693958,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098694058,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098694158,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098694258,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098694358,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098694458,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098694558,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098694658,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098694758,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098694858,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098694958,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098695058,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            },
+            {
+              "at": 1791098695158,
+              "saved": "READY",
+              "ui": "READY",
+              "completed": 204
+            }
+          ],
+          "replaceCalls": [
+            {
+              "at": 1791098689983,
+              "phase": "start",
+              "offline": {
+                "key": "offline_completion",
+                "val": {
+                  "state": "NOT_PREPARED",
+                  "completed": 0,
+                  "total": 204,
+                  "failed": [],
+                  "total_bytes": 114483048,
+                  "job_id": null,
+                  "message": "",
+                  "storage_schema": "ldc-offline-storage-v3",
+                  "content_binding_schema": "ldc-offline-content-binding-v2",
+                  "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+                  "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
+                  "corpus_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
+                  "manifest_schema": "ldc-offline-manifest-v3",
+                  "updated_at": "2026-10-04T07:24:48.686Z"
+                },
+                "ts": 1791098688686
+              }
+            },
+            {
+              "at": 1791098689986,
+              "phase": "end"
+            }
+          ]
+        }
+      },
+      "errors": {
+        "page": [],
+        "console": []
+      },
+      "pass": true
+    }
+  },
+  "overall": "PASS"
+}
