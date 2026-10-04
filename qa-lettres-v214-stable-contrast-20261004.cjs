@@ -21,7 +21,7 @@ async function ready(p){
 async function runScene(browser,viewport,theme){
   const c=await browser.newContext({viewport:{width:viewport.width,height:viewport.height},colorScheme:theme});
   await c.addInitScript({content:axeSource});
-  await c.addInitScript(t=>{localStorage.setItem('lp_theme',t);localStorage.setItem('lp_size','normal');},theme);
+  await c.addInitScript(t=>{localStorage.setItem('lp_theme',t);localStorage.setItem('lp_size','normal');localStorage.setItem('lp_onboarded','1');},theme);
   const p=await c.newPage(); const errs=[];
   p.on('pageerror',e=>errs.push('PAGE '+String(e)));p.on('console',m=>{if(m.type()==='error')errs.push('CONSOLE '+m.text())});
   await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:60000}); await ready(p); await p.waitForTimeout(500);
@@ -35,8 +35,9 @@ async function runScene(browser,viewport,theme){
   await p.evaluate(()=>switchPanel('p-list'));await p.waitForTimeout(420);
   out.scenes.push(await scan(p,'list-stable'));
   // Reader stable.
-  const first=p.locator('.letter-item').first();
-  if(await first.count()){await first.click();out.scenes.push(await scan(p,'reader'));}
+  await p.evaluate(async()=>{if(typeof closeHelp==='function')closeHelp(true); if(typeof openLetter==='function') await openLetter(1);});
+  await p.waitForTimeout(420);
+  out.scenes.push(await scan(p,'reader'));
   // Settings.
   await p.evaluate(()=>openTextBar());out.scenes.push(await scan(p,'settings'));
   // Transfer.
