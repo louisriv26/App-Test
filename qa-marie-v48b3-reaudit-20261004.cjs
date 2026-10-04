@@ -228,15 +228,36 @@ async function assertCore(p,label){
     await p.click('#btn-complete'); await p.waitForFunction(()=>State.read.size>0);
     await p.evaluate(()=>navigator.serviceWorker.ready);
     fs.rmSync(UPDATE_ROOT,{recursive:true,force:true}); fs.cpSync(ROOT,UPDATE_ROOT,{recursive:true});
-    await p.evaluate(async()=>{const r=await navigator.serviceWorker.getRegistration(); if(!r) throw new Error('no registration'); await r.update(); await new Promise(res=>setTimeout(res,2500));});
+    const updateSignal=await p.evaluate(async()=>{
+      const r=await navigator.serviceWorker.getRegistration(); if(!r) throw new Error('no registration');
+      let controllerChanged=false;
+      const changed=new Promise(resolve=>{
+        const done=()=>{controllerChanged=true;resolve(true)};
+        navigator.serviceWorker.addEventListener('controllerchange',done,{once:true});
+        setTimeout(()=>resolve(false),12000);
+      });
+      await r.update();
+      await changed;
+      const rr=await navigator.serviceWorker.getRegistration();
+      return {controllerChanged,installing:!!rr?.installing,waiting:!!rr?.waiting,active:!!rr?.active};
+    });
     await p.close(); await new Promise(r=>setTimeout(r,500));
     p=await c.newPage(); await attachErrors(p,errors);
     await p.goto(UPDATE_BASE,{waitUntil:'domcontentloaded',timeout:60000}); await ready(p,'48');
-    const post=await p.evaluate(()=>({v:APP_VERSION,read:State.read.size,sentinel:localStorage.getItem('FRESH_REAUDIT_UPDATE_SENTINEL'),loading:document.getElementById('screen-loading').classList.contains('active'),version:document.getElementById('mobile-version').textContent,controller:!!navigator.serviceWorker.controller,caches:null}));
-    post.caches=await p.evaluate(()=>caches.keys());
+    const stabilizeStart=Date.now();
+    let post=null;
+    for(let i=0;i<30;i++){
+      post=await p.evaluate(()=>({v:APP_VERSION,read:State.read.size,sentinel:localStorage.getItem('FRESH_REAUDIT_UPDATE_SENTINEL'),loading:document.getElementById('screen-loading').classList.contains('active'),version:document.getElementById('mobile-version').textContent,controller:!!navigator.serviceWorker.controller,caches:null}));
+      post.caches=await p.evaluate(()=>caches.keys());
+      const own=post.caches.filter(x=>x.startsWith('mjv-'));
+      if(own.some(x=>/-shell-v48$/.test(x)) && !own.some(x=>/-shell-v46$/.test(x))) break;
+      await p.waitForTimeout(500);
+    }
+    post.stabilizationMs=Date.now()-stabilizeStart;
+    post.updateSignal=updateSignal;
     if(post.v!=='48'||post.read<1||post.sentinel!=='keep'||post.loading||post.version!=='v48'||!post.controller) throw new Error('update state '+JSON.stringify(post));
     const own=post.caches.filter(x=>x.startsWith('mjv-'));
-    if(!own.some(x=>/-shell-v48$/.test(x))||!own.some(x=>/-content-v3$/.test(x))||own.some(x=>/-shell-v46$/.test(x))) throw new Error('stale/new cache contradiction '+JSON.stringify(own));
+    if(!own.some(x=>/-shell-v48$/.test(x))||!own.some(x=>/-content-v3$/.test(x))||own.some(x=>/-shell-v46$/.test(x))) throw new Error('stale/new cache contradiction after bounded stabilization '+JSON.stringify(post));
     await c.setOffline(true); await p.close(); p=await c.newPage(); await attachErrors(p,errors);
     await p.goto(UPDATE_BASE+'?open=search&q=Fiat',{waitUntil:'domcontentloaded',timeout:30000}); await ready(p,'48');
     const off=await p.evaluate(()=>({v:APP_VERSION,loading:document.getElementById('screen-loading').classList.contains('active'),version:document.getElementById('mobile-version').textContent,sentinel:localStorage.getItem('FRESH_REAUDIT_UPDATE_SENTINEL'),read:State.read.size,q:document.getElementById('search-input').value,results:document.querySelectorAll('#list-scroll .snippet-card').length}));
