@@ -8,7 +8,7 @@ function copy(src,dst){fs.rmSync(dst,{recursive:true,force:true});fs.cpSync(src,
 async function ready(p,t=90000){await p.waitForFunction(()=>{const l=document.getElementById('loading'),vp=document.getElementById('version-pill-home');return l&&getComputedStyle(l).display==='none'&&vp&&vp.textContent&&!/v—|v-$/.test(vp.textContent);},{timeout:t});}
 async function snap(p){return p.evaluate(async()=>({app:APP_VERSION,pub:PUBLIC_VERSION,swExpected:SW_CACHE_VERSION,controller:!!navigator.serviceWorker.controller,caches:(await caches.keys()).filter(x=>x.startsWith('ldc-le-livre-du-ciel-')).sort(),pill:document.getElementById('version-pill-home')?.textContent||'',loadingVisible:getComputedStyle(document.getElementById('loading')).display!=='none',local:localStorage.getItem('qa_v139_local'),idb:(await dbGet('settings','qa_v139_sentinel').catch(()=>null))?.val||null,version:await fetch('./version.json',{cache:'no-store'}).then(r=>r.json())}));}
 async function run(){
- fs.rmSync(PROFILE,{recursive:true,force:true});fs.mkdirSync(SERVE,{recursive:true});copy(path.join(process.cwd(),'ldc-v139-r12-search-v21a-recert'),APP);
+ fs.rmSync(PROFILE,{recursive:true,force:true});fs.mkdirSync(SERVE,{recursive:true});copy(path.join(process.cwd(),'ldc-v138-fullqa-corrective'),APP);
  const c=await chromium.launchPersistentContext(PROFILE,{headless:true,serviceWorkers:'allow',viewport:{width:390,height:844}});
  const p=await c.newPage(),errors=[],consoleErrors=[];p.on('pageerror',e=>errors.push(String(e)));p.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text());});
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:90000});await ready(p);
@@ -40,4 +40,4 @@ async function run(){
  out.overall=Object.entries(out.assertions).filter(([k])=>k!=='stale').every(([,v])=>v===true)?'PASS':'FAIL';
  await c.close();
 }
-run().catch(e=>{out.overall='HARNESS_ERROR';out.error=String(e&&e.stack||e);}).finally(()=>{fs.writeFileSync('qa-ldc-v138-update-results.json',JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify({overall:out.overall,pre:out.pre&&{app:out.pre.app,caches:out.pre.caches},post:out.post&&{app:out.post.app,caches:out.post.caches},assertions:out.assertions},null,2));});
+run().catch(e=>{out.overall='HARNESS_ERROR';out.error=String(e&&e.stack||e);}).finally(()=>{fs.writeFileSync('qa-ldc-v139-update-results.json',JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify({overall:out.overall,pre:out.pre&&{app:out.pre.app,caches:out.pre.caches},post:out.post&&{app:out.post.app,caches:out.post.caches},assertions:out.assertions},null,2));});
