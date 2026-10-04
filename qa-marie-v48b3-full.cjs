@@ -229,5 +229,5 @@ async function elementContrast(p, sel, pseudo=null) {
   await browser.close();
   const report={candidate:'MJV v48/B3',scenes,persistence:{before,after,envelope},status:'PASS'};
   fs.writeFileSync('MJV_v48_B3_RUNTIME_QA_EVIDENCE.json',JSON.stringify(report,null,2));
-  console.log('MARIE_V48_B2_FULL_RUNTIME_PASS',scenes.length);
+  console.log('MARIE_V48_B3_FULL_RUNTIME_PASS',scenes.length);
 })().catch(e=>{console.error(e);process.exit(2)});
