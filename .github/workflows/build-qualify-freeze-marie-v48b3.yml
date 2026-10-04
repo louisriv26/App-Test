@@ -106,7 +106,7 @@ jobs:
       - name: Pass 2 full exact-candidate runtime and material journeys
         run: node qa-marie-v48b3-full.cjs
 
-      - name: Pass 2 exact production v46 to B2 update persistence and offline
+      - name: Pass 2 exact production v46 to B3 update persistence and offline
         run: node qa-marie-v48b3-pwa.cjs
 
       - name: Deterministic release package and QA evidence
