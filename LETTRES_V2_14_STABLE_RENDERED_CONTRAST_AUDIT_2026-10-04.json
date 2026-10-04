@@ -1,0 +1,1959 @@
+{
+  "candidateTree": "92530b7219fae7940be525b73b92d0a3782451ac",
+  "appVersion": "2.14",
+  "runs": [
+    {
+      "viewport": "phone",
+      "theme": "light",
+      "scenes": [
+        {
+          "label": "p-home",
+          "nodes": []
+        },
+        {
+          "label": "p-list",
+          "nodes": []
+        },
+        {
+          "label": "p-search",
+          "nodes": []
+        },
+        {
+          "label": "p-notes",
+          "nodes": []
+        },
+        {
+          "label": "p-explore",
+          "nodes": []
+        },
+        {
+          "label": "list-stable",
+          "nodes": []
+        },
+        {
+          "label": "reader",
+          "nodes": []
+        },
+        {
+          "label": "settings",
+          "nodes": []
+        },
+        {
+          "label": "transfer",
+          "nodes": []
+        },
+        {
+          "label": "help",
+          "nodes": []
+        }
+      ],
+      "errors": [],
+      "suspects": {
+        "settings-export-btn": {
+          "display": "flex",
+          "color": "rgb(26, 42, 74)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "16px"
+        },
+        "snav-home": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-list": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-search": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-notes": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-explore": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-settings": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-help": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        ".sidebar-bottom .build-meta": {
+          "display": "block",
+          "color": "rgba(255, 255, 255, 0.2)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "11px"
+        },
+        "#home-scroll .build-meta": {
+          "display": "block",
+          "color": "rgb(103, 91, 80)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "0.55",
+          "fontSize": "11px"
+        },
+        ".chip": {
+          "display": "block",
+          "color": "rgb(201, 168, 76)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".chip.active": {
+          "display": "block",
+          "color": "rgb(201, 168, 76)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".li-dest": {
+          "display": "block",
+          "color": "rgb(103, 91, 80)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".topic-pill": {
+          "display": "block",
+          "color": "rgb(122, 90, 32)",
+          "background": "rgb(245, 237, 216)",
+          "opacity": "1",
+          "fontSize": "13px"
+        },
+        ".lrp-label": {
+          "display": "block",
+          "color": "rgb(103, 91, 80)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "13px"
+        }
+      }
+    },
+    {
+      "viewport": "ipad",
+      "theme": "light",
+      "scenes": [
+        {
+          "label": "p-home",
+          "nodes": [
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#home-scroll > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"text-align:center;padding:4px 0 16px;font-family:var(--body);font-size:10px;color:var(--muted);opacity:.55;letter-spacing:.06em;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.36 (foreground color: #a9a198, background color: #f9f6f0, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-list",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-search",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-notes",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-explore",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "list-stable",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "reader",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "settings",
+          "nodes": []
+        },
+        {
+          "label": "transfer",
+          "nodes": []
+        },
+        {
+          "label": "help",
+          "nodes": []
+        }
+      ],
+      "errors": [],
+      "suspects": {
+        "settings-export-btn": {
+          "display": "flex",
+          "color": "rgb(26, 42, 74)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "16px"
+        },
+        "snav-home": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-list": {
+          "display": "flex",
+          "color": "rgb(201, 168, 76)",
+          "background": "rgba(201, 168, 76, 0.18)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-search": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-notes": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-explore": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-settings": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-help": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        ".sidebar-bottom .build-meta": {
+          "display": "block",
+          "color": "rgba(255, 255, 255, 0.2)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "11px"
+        },
+        "#home-scroll .build-meta": {
+          "display": "block",
+          "color": "rgb(103, 91, 80)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "0.55",
+          "fontSize": "11px"
+        },
+        ".chip": {
+          "display": "block",
+          "color": "rgb(201, 168, 76)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".chip.active": {
+          "display": "block",
+          "color": "rgb(201, 168, 76)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".li-dest": {
+          "display": "block",
+          "color": "rgb(103, 91, 80)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".topic-pill": {
+          "display": "block",
+          "color": "rgb(122, 90, 32)",
+          "background": "rgb(245, 237, 216)",
+          "opacity": "1",
+          "fontSize": "13px"
+        },
+        ".lrp-label": {
+          "display": "block",
+          "color": "rgb(103, 91, 80)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "13px"
+        }
+      }
+    },
+    {
+      "viewport": "desktop",
+      "theme": "light",
+      "scenes": [
+        {
+          "label": "p-home",
+          "nodes": [
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#home-scroll > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"text-align:center;padding:4px 0 16px;font-family:var(--body);font-size:10px;color:var(--muted);opacity:.55;letter-spacing:.06em;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.36 (foreground color: #a9a198, background color: #f9f6f0, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-list",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-search",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-notes",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-explore",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "list-stable",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "reader",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "settings",
+          "nodes": []
+        },
+        {
+          "label": "transfer",
+          "nodes": []
+        },
+        {
+          "label": "help",
+          "nodes": []
+        }
+      ],
+      "errors": [],
+      "suspects": {
+        "settings-export-btn": {
+          "display": "flex",
+          "color": "rgb(26, 42, 74)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "16px"
+        },
+        "snav-home": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-list": {
+          "display": "flex",
+          "color": "rgb(201, 168, 76)",
+          "background": "rgba(201, 168, 76, 0.18)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-search": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-notes": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-explore": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-settings": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-help": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        ".sidebar-bottom .build-meta": {
+          "display": "block",
+          "color": "rgba(255, 255, 255, 0.2)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "11px"
+        },
+        "#home-scroll .build-meta": {
+          "display": "block",
+          "color": "rgb(103, 91, 80)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "0.55",
+          "fontSize": "11px"
+        },
+        ".chip": {
+          "display": "block",
+          "color": "rgb(201, 168, 76)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".chip.active": {
+          "display": "block",
+          "color": "rgb(201, 168, 76)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".li-dest": {
+          "display": "block",
+          "color": "rgb(103, 91, 80)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".topic-pill": {
+          "display": "block",
+          "color": "rgb(122, 90, 32)",
+          "background": "rgb(245, 237, 216)",
+          "opacity": "1",
+          "fontSize": "13px"
+        },
+        ".lrp-label": {
+          "display": "block",
+          "color": "rgb(103, 91, 80)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "13px"
+        }
+      }
+    },
+    {
+      "viewport": "phone",
+      "theme": "dark",
+      "scenes": [
+        {
+          "label": "p-home",
+          "nodes": []
+        },
+        {
+          "label": "p-list",
+          "nodes": []
+        },
+        {
+          "label": "p-search",
+          "nodes": []
+        },
+        {
+          "label": "p-notes",
+          "nodes": []
+        },
+        {
+          "label": "p-explore",
+          "nodes": []
+        },
+        {
+          "label": "list-stable",
+          "nodes": []
+        },
+        {
+          "label": "reader",
+          "nodes": []
+        },
+        {
+          "label": "settings",
+          "nodes": []
+        },
+        {
+          "label": "transfer",
+          "nodes": []
+        },
+        {
+          "label": "help",
+          "nodes": []
+        }
+      ],
+      "errors": [],
+      "suspects": {
+        "settings-export-btn": {
+          "display": "flex",
+          "color": "rgb(232, 217, 196)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "16px"
+        },
+        "snav-home": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-list": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-search": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-notes": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-explore": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-settings": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        "snav-help": {
+          "display": "inline-block",
+          "color": "rgb(0, 0, 0)",
+          "background": "rgb(239, 239, 239)",
+          "opacity": "1",
+          "fontSize": "13.3333px"
+        },
+        ".sidebar-bottom .build-meta": {
+          "display": "block",
+          "color": "rgba(255, 255, 255, 0.2)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "11px"
+        },
+        "#home-scroll .build-meta": {
+          "display": "block",
+          "color": "rgb(163, 151, 138)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "0.55",
+          "fontSize": "11px"
+        },
+        ".chip": {
+          "display": "block",
+          "color": "rgb(212, 168, 67)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".chip.active": {
+          "display": "block",
+          "color": "rgb(212, 168, 67)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".li-dest": {
+          "display": "block",
+          "color": "rgb(163, 151, 138)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".topic-pill": {
+          "display": "block",
+          "color": "rgb(212, 160, 80)",
+          "background": "rgb(42, 32, 16)",
+          "opacity": "1",
+          "fontSize": "13px"
+        },
+        ".lrp-label": {
+          "display": "block",
+          "color": "rgb(163, 151, 138)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "13px"
+        }
+      }
+    },
+    {
+      "viewport": "ipad",
+      "theme": "dark",
+      "scenes": [
+        {
+          "label": "p-home",
+          "nodes": [
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#home-scroll > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"text-align:center;padding:4px 0 16px;font-family:var(--body);font-size:10px;color:var(--muted);opacity:.55;letter-spacing:.06em;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.78 (foreground color: #655d54, background color: #1a1612, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-list",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-search",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-notes",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-explore",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "list-stable",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "reader",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "settings",
+          "nodes": []
+        },
+        {
+          "label": "transfer",
+          "nodes": []
+        },
+        {
+          "label": "help",
+          "nodes": []
+        }
+      ],
+      "errors": [],
+      "suspects": {
+        "settings-export-btn": {
+          "display": "flex",
+          "color": "rgb(232, 217, 196)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "16px"
+        },
+        "snav-home": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-list": {
+          "display": "flex",
+          "color": "rgb(212, 168, 67)",
+          "background": "rgba(201, 168, 76, 0.18)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-search": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-notes": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-explore": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-settings": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-help": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        ".sidebar-bottom .build-meta": {
+          "display": "block",
+          "color": "rgba(255, 255, 255, 0.2)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "11px"
+        },
+        "#home-scroll .build-meta": {
+          "display": "block",
+          "color": "rgb(163, 151, 138)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "0.55",
+          "fontSize": "11px"
+        },
+        ".chip": {
+          "display": "block",
+          "color": "rgb(212, 168, 67)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".chip.active": {
+          "display": "block",
+          "color": "rgb(212, 168, 67)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".li-dest": {
+          "display": "block",
+          "color": "rgb(163, 151, 138)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".topic-pill": {
+          "display": "block",
+          "color": "rgb(212, 160, 80)",
+          "background": "rgb(42, 32, 16)",
+          "opacity": "1",
+          "fontSize": "13px"
+        },
+        ".lrp-label": {
+          "display": "block",
+          "color": "rgb(163, 151, 138)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "13px"
+        }
+      }
+    },
+    {
+      "viewport": "desktop",
+      "theme": "dark",
+      "scenes": [
+        {
+          "label": "p-home",
+          "nodes": [
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#home-scroll > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"text-align:center;padding:4px 0 16px;font-family:var(--body);font-size:10px;color:var(--muted);opacity:.55;letter-spacing:.06em;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.78 (foreground color: #655d54, background color: #1a1612, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-list",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-search",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-notes",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "p-explore",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-list",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-list')\" id=\"snav-list\" aria-label=\"Lettres\"><svg class=\"ti ti-books\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-books\"></use></svg>Lettres</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "list-stable",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "reader",
+          "nodes": [
+            {
+              "target": "#snav-home",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-search",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-search')\" id=\"snav-search\" aria-label=\"Recherche\"><svg class=\"ti ti-search\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-search\"></use></svg>Recherche</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-notes",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-notes')\" id=\"snav-notes\" aria-label=\"Mon Espace\"><svg class=\"ti ti-user-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-user-circle\"></use></svg>Mon Espace</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-explore",
+              "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-explore')\" id=\"snav-explore\" aria-label=\"Explorer\"><svg class=\"ti ti-layout-grid\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-layout-grid\"></use></svg>Explorer</butt",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-settings",
+              "html": "<button class=\"snav-item\" id=\"snav-settings\" onclick=\"openTextBar()\" aria-label=\"Réglages\"><svg class=\"ti ti-settings\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-settings\"></use></svg>Réglages</button>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": "#snav-help",
+              "html": "<button class=\"snav-item\" id=\"snav-help\" onclick=\"openContextHelp(this)\" aria-label=\"Aide sur l’écran actuel\"><svg class=\"ti ti-help-circle\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-help-circle\"></use></svg>Aide<",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.09 (foreground color: #818a9b, background color: #1a2a4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": ".sidebar-bottom > .build-meta",
+              "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.14 · 2026-10-04</div>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        },
+        {
+          "label": "settings",
+          "nodes": []
+        },
+        {
+          "label": "transfer",
+          "nodes": []
+        },
+        {
+          "label": "help",
+          "nodes": []
+        }
+      ],
+      "errors": [],
+      "suspects": {
+        "settings-export-btn": {
+          "display": "flex",
+          "color": "rgb(232, 217, 196)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "16px"
+        },
+        "snav-home": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-list": {
+          "display": "flex",
+          "color": "rgb(212, 168, 67)",
+          "background": "rgba(201, 168, 76, 0.18)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-search": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-notes": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-explore": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-settings": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        "snav-help": {
+          "display": "flex",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "12px"
+        },
+        ".sidebar-bottom .build-meta": {
+          "display": "block",
+          "color": "rgba(255, 255, 255, 0.2)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "11px"
+        },
+        "#home-scroll .build-meta": {
+          "display": "block",
+          "color": "rgb(163, 151, 138)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "0.55",
+          "fontSize": "11px"
+        },
+        ".chip": {
+          "display": "block",
+          "color": "rgb(212, 168, 67)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".chip.active": {
+          "display": "block",
+          "color": "rgb(212, 168, 67)",
+          "background": "rgb(26, 42, 74)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".li-dest": {
+          "display": "block",
+          "color": "rgb(163, 151, 138)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "14px"
+        },
+        ".topic-pill": {
+          "display": "block",
+          "color": "rgb(212, 160, 80)",
+          "background": "rgb(42, 32, 16)",
+          "opacity": "1",
+          "fontSize": "13px"
+        },
+        ".lrp-label": {
+          "display": "block",
+          "color": "rgb(163, 151, 138)",
+          "background": "rgba(0, 0, 0, 0)",
+          "opacity": "1",
+          "fontSize": "13px"
+        }
+      }
+    }
+  ],
+  "status": "PASS_EXECUTION"
+}
