@@ -26,8 +26,14 @@ async function ready(p,version){
   await p.click('#btn-complete');await p.click('#btn-activate');
   await p.click('#btn-textsize');await p.click('#textsize-panel .textsize-option[data-text-level="xlarge"]');
   const pid=await p.locator('#reader-body p[data-pid]').first().getAttribute('data-pid');
-  await p.locator('#reader-body .para-note-btn').first().click();
+  const notePara=p.locator('#reader-body p[data-pid]').first();
+  await notePara.hover();
+  const noteBtn=p.locator('#reader-body .para-note-btn').first();
+  const notePointer=await noteBtn.evaluate(el=>getComputedStyle(el).pointerEvents);
+  if(notePointer!=='auto')throw new Error('predecessor fine-pointer note control did not activate on hover: '+notePointer);
+  await noteBtn.click();
   await p.fill('#note-textarea','QA_MARIE_UPGRADE_SENTINEL');await p.click('#note-modal .modal-btn-save');
+  await p.waitForFunction(()=>Object.values(State.notes).some(n=>n.text==='QA_MARIE_UPGRADE_SENTINEL'),null,{timeout:10000});
   await p.evaluate(()=>localStorage.setItem('APP_GOV_MARIE_UPGRADE_SENTINEL','PRESERVE_ME'));
   const pre=await p.evaluate(unit=>({
     v:APP_VERSION,read:State.read.has(unit),activeDay:State.activeDay,textSize:State.textSize,
@@ -88,5 +94,5 @@ async function ready(p,version){
   const out={candidate:'MJV v48/B3',pre,post,offline,recovery,errors,status:'PASS'};
   fs.writeFileSync('MJV_v48_B3_PWA_UPDATE_OFFLINE_EVIDENCE.json',JSON.stringify(out,null,2));
   await c.close();await b.close();
-  console.log('MARIE_V46_TO_V48_B2_PWA_PASS');
+  console.log('MARIE_V46_TO_V48_B3_PWA_PASS');
 })().catch(e=>{console.error(e);process.exit(2)});
