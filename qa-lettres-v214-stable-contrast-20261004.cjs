@@ -25,6 +25,8 @@ async function runScene(browser,viewport,theme){
   const p=await c.newPage(); const errs=[];
   p.on('pageerror',e=>errs.push('PAGE '+String(e)));p.on('console',m=>{if(m.type()==='error')errs.push('CONSOLE '+m.text())});
   await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:60000}); await ready(p); await p.waitForTimeout(500);
+  await p.evaluate(()=>{if(document.getElementById('help-overlay')?.classList.contains('show') && typeof closeHelp==='function') closeHelp();});
+  await p.waitForTimeout(420);
   const out={viewport:viewport.name,theme,scenes:[],errors:errs};
   for(const panel of ['p-home','p-list','p-search','p-notes','p-explore']){
     await p.evaluate(id=>switchPanel(id),panel);out.scenes.push(await scan(p,panel));
