@@ -3,7 +3,7 @@ const fs=require('fs'),path=require('path'),crypto=require('crypto');
 const ROOT=path.join(process.cwd(),'ldc-v139-r12-search-v21a-recert');
 const URL='http://127.0.0.1:8130/ldc-v139-r12-search-v21a-recert/';
 const PROFILE=path.join(process.cwd(),'.qa-ldc-v139-profile');
-const EXPECT={app:'v2.19.139-R1B-UX-ACCESS-R12',pub:'139',sw:'ldc-v2.19.139-R1B-ux-access-r12',tree:'b5ceb62669483661ddf095807608b6fa354de6db'};
+const EXPECT={app:'v2.19.139-R1B-UX-ACCESS-R12',pub:'139',sw:'ldc-v2.19.139-R1B-ux-access-r12',tree:'b9aaaa762034d9a21398bc8c242c802f59062492'};
 const out={candidate:'LDC v139/R12',generated_at:new Date().toISOString(),overall:'UNKNOWN'};
 const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
