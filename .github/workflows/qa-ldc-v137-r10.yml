@@ -1,0 +1,190 @@
+name: LDC v137 R10 full QA and blind challenge
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-ldc-v137-r10/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  bind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Exact tree, syntax, manifest and staleness gate
+        shell: bash
+        run: |
+          set +e
+          bad=0
+          tree=$(git rev-parse HEAD:ldc-v137-r10-release-integrity 2>/dev/null)
+          [ "$tree" = "44f92a8aaedb8ab0ef3f689751a31715e8813868" ] || bad=1
+          count=$(find ldc-v137-r10-release-integrity -type f | wc -l | tr -d ' ')
+          [ "$count" = "248" ] || bad=1
+          python3 - <<'PY' || bad=1
+          import json, pathlib, hashlib
+          r=pathlib.Path('ldc-v137-r10-release-integrity')
+          js=list(r.rglob('*.json'))
+          for p in js: json.loads(p.read_text(encoding='utf-8'))
+          m=json.loads((r/'offline_manifest.json').read_text(encoding='utf-8'))
+          v=json.loads((r/'version.json').read_text(encoding='utf-8'))
+          assert len(m['assets'])==204
+          assert m['app_version']=='v2.19.137-R1B-UX-ACCESS-R10'
+          assert m['page_worker_revision']=='ldc-v2.19.137-R1B-ux-access-r10'
+          assert v['app_version']=='v2.19.137-R1B-UX-ACCESS-R10'
+          assert v['public_version']=='137'
+          assert v['page_worker_revision']=='ldc-v2.19.137-R1B-ux-access-r10'
+          assert v['offline_manifest_sha256']==hashlib.sha256((r/'offline_manifest.json').read_bytes()).hexdigest()
+          for a in m['assets']:
+              p=r/a['path']; assert p.is_file(), a['path']
+              b=p.read_bytes(); assert len(b)==a['bytes'], a['path']; assert hashlib.sha256(b).hexdigest()==a['sha256'], a['path']
+          assert sum(a['bytes'] for a in m['assets'])==m['total_bytes']==114480819
+          print('JSON_OK',len(js),'OFFLINE_OK',len(m['assets']))
+          PY
+          for f in $(find ldc-v137-r10-release-integrity -type f -name '*.js'); do node --check "$f" >/dev/null 2>&1 || bad=1; done
+          node --check qa-ldc-v137-current.cjs >/dev/null 2>&1 || bad=1
+          node --check qa-ldc-v137-update.cjs >/dev/null 2>&1 || bad=1
+          node --check qa-ldc-v137-blind.cjs >/dev/null 2>&1 || bad=1
+          grep -q "const APP_VERSION = 'v2.19.137-R1B-UX-ACCESS-R10'" ldc-v137-r10-release-integrity/index.html || bad=1
+          grep -q "const SW_CACHE_VERSION = 'ldc-v2.19.137-R1B-ux-access-r10'" ldc-v137-r10-release-integrity/index.html || bad=1
+          grep -q "const VERSION = 'ldc-v2.19.137-R1B-ux-access-r10'" ldc-v137-r10-release-integrity/sw.js || bad=1
+          grep -q "shell-v2.19.137-R1B-ux-access-r10" ldc-v137-r10-release-integrity/sw.js || bad=1
+          grep -q "runtime-v2.19.137-R1B-ux-access-r10" ldc-v137-r10-release-integrity/sw.js || bad=1
+          ! grep -E "shell-v2\.19\.(135|136)|runtime-v2\.19\.(135|136)" ldc-v137-r10-release-integrity/sw.js >/dev/null || bad=1
+          echo "$bad" > /tmp/static_bad
+          echo "$tree" > /tmp/tree
+      - name: Wait for exact GitHub Pages index bytes
+        shell: bash
+        run: |
+          set +e
+          exp=$(sha256sum ldc-v137-r10-release-integrity/index.html|cut -d' ' -f1)
+          ok=0
+          for i in $(seq 1 72); do
+            got=$(curl -fsSL "https://louisriv26.github.io/App-Test/ldc-v137-r10-release-integrity/index.html?bind=$i" | sha256sum | cut -d' ' -f1)
+            if [ "$got" = "$exp" ]; then ok=1; break; fi
+            sleep 10
+          done
+          echo "$ok" > /tmp/pages_index_ok
+      - name: Full staged Pages byte parity
+        shell: bash
+        run: |
+          set +e
+          bad=0
+          checked=0
+          if [ "$(cat /tmp/pages_index_ok)" != "1" ]; then bad=1
+          else
+            base='https://louisriv26.github.io/App-Test/ldc-v137-r10-release-integrity'
+            while IFS= read -r -d '' f; do
+              rel="\${f#ldc-v137-r10-release-integrity/}"
+              exp=$(sha256sum "$f"|cut -d' ' -f1)
+              got=$(curl -fsSL "$base/$rel?fullbind=137" | sha256sum | cut -d' ' -f1)
+              [ "$exp" = "$got" ] || bad=$((bad+1))
+              checked=$((checked+1))
+            done < <(find ldc-v137-r10-release-integrity -type f -print0)
+          fi
+          STATIC=$(cat /tmp/static_bad)
+          INDEX=$(cat /tmp/pages_index_ok)
+          TREE=$(cat /tmp/tree)
+          python3 - "$STATIC" "$INDEX" "$bad" "$checked" "$TREE" <<'PY'
+          import json,sys,datetime
+          static,index,bad,checked,tree=sys.argv[1:]
+          o={'candidate':'LDC v137/R10','generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'tree':tree,'static_pass':static=='0','pages_index_exact':index=='1','pages_files_checked':int(checked),'pages_mismatches':int(bad)}
+          o['overall']='PASS' if o['static_pass'] and o['pages_index_exact'] and o['pages_files_checked']==248 and o['pages_mismatches']==0 else 'FAIL'
+          open('qa-ldc-v137-bind-results.json','w').write(json.dumps(o,indent=2)+'\n')
+          print(json.dumps(o,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v137-bind, path: qa-ldc-v137-bind-results.json}
+  current:
+    needs: bind
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/ldc137-current.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v137-current.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v137-current, path: qa-ldc-v137-current-results.json}
+  update:
+    needs: bind
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          mkdir -p qa-ldc-v137-upgrade
+          python3 -m http.server 8121 --bind 127.0.0.1 --directory qa-ldc-v137-upgrade >/tmp/ldc137-update.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v137-update.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v137-update, path: qa-ldc-v137-update-results.json}
+  blind:
+    needs: bind
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8122 --bind 127.0.0.1 >/tmp/ldc137-blind.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v137-blind.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v137-blind, path: qa-ldc-v137-blind-results.json}
+  publish:
+    needs: [bind,current,update,blind]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with: {pattern: 'ldc-v137-*', path: qa-results, merge-multiple: true}
+      - name: Commit exact QA evidence back to App-Test
+        shell: bash
+        run: |
+          set -e
+          mkdir -p .github/qa-ldc-v137-r10/results
+          cp qa-results/*.json .github/qa-ldc-v137-r10/results/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa-ldc-v137-r10/results
+          git commit -m 'Record LDC v137 R10 full QA evidence' || true
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Fail closed unless all four machine evidence files PASS
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,glob,sys,os
+          fs=glob.glob('qa-results/*.json')
+          rows=[]
+          for f in sorted(fs):
+              try: rows.append((os.path.basename(f),json.load(open(f))['overall']))
+              except Exception: rows.append((os.path.basename(f),'MISSING_OR_INVALID'))
+          print(rows)
+          required={'qa-ldc-v137-bind-results.json','qa-ldc-v137-current-results.json','qa-ldc-v137-update-results.json','qa-ldc-v137-blind-results.json'}
+          d=dict(rows)
+          ok=all(d.get(n)=='PASS' for n in required)
+          sys.exit(0 if ok else 1)
+          PY
