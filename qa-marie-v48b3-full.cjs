@@ -194,7 +194,12 @@ async function elementContrast(p, sel, pseudo=null) {
   await p.click('#btn-activate');
   await p.click('#btn-textsize'); await p.click('#textsize-panel .textsize-option[data-text-level="xlarge"]');
   const pid=await p.locator('#reader-body p[data-pid]').first().getAttribute('data-pid');
-  await p.locator('#reader-body .para-note-btn').first().click();
+  const notePara=p.locator('#reader-body p[data-pid]').first();
+  await notePara.hover();
+  const noteBtn=p.locator('#reader-body .para-note-btn').first();
+  const notePointer=await noteBtn.evaluate(el=>getComputedStyle(el).pointerEvents);
+  if(notePointer!=='auto')throw new Error('fine-pointer note control did not activate on paragraph hover: '+notePointer);
+  await noteBtn.click();
   await p.fill('#note-textarea','QA_MARIE_V48_B3_NOTE_SENTINEL');
   await p.click('#note-modal .modal-btn-save');
   const envelope=await p.evaluate(()=>{
