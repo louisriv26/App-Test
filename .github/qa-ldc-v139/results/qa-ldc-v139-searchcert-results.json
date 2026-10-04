@@ -1,0 +1,102 @@
+{
+  "candidate": "LDC v139/R12 Search recertification",
+  "generated_at": "2026-10-04T07:18:02.374Z",
+  "overall": "PASS",
+  "checks": {
+    "logical_unit_coverage": {
+      "pass": true,
+      "units_checked": 4712,
+      "exact_in_unit_probes": 129
+    },
+    "search_chain": {
+      "pass": true
+    }
+  },
+  "samples": {
+    "bateau": {
+      "results": 17,
+      "totalMatches": 17,
+      "matchCounts": {
+        "exact": 17,
+        "words": 0,
+        "partial": 0
+      },
+      "first": {
+        "stable_ref": "LDC.T02.1899-06-02.E001.P009",
+        "matchType": "exact"
+      }
+    },
+    "divine volonté": {
+      "results": 30,
+      "totalMatches": 731,
+      "matchCounts": {
+        "exact": 731,
+        "words": 3144,
+        "partial": 11122
+      },
+      "first": {
+        "stable_ref": "LDC.T14.E0004.P016",
+        "matchType": "exact"
+      }
+    },
+    "de": {
+      "results": 30,
+      "totalMatches": 35951,
+      "matchCounts": {
+        "exact": 35951,
+        "words": 0,
+        "partial": 0
+      },
+      "first": {
+        "stable_ref": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE001.P001",
+        "matchType": "exact"
+      }
+    },
+    "je": {
+      "results": 30,
+      "totalMatches": 15940,
+      "matchCounts": {
+        "exact": 15940,
+        "words": 0,
+        "partial": 0
+      },
+      "first": {
+        "stable_ref": "LDC.T01.SEC001.P001",
+        "matchType": "exact"
+      }
+    },
+    "volonté": {
+      "results": 30,
+      "totalMatches": 14023,
+      "matchCounts": {
+        "exact": 14023,
+        "words": 0,
+        "partial": 0
+      },
+      "first": {
+        "stable_ref": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE001.P001",
+        "matchType": "exact"
+      }
+    },
+    "volonté": {
+      "results": 30,
+      "totalMatches": 14023,
+      "matchCounts": {
+        "exact": 14023,
+        "words": 0,
+        "partial": 0
+      },
+      "first": {
+        "stable_ref": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE001.P001",
+        "matchType": "exact"
+      }
+    },
+    "near": {
+      "query": "luisa a ecritx le present",
+      "accepted": 1,
+      "results": 1,
+      "ambiguous": false
+    }
+  },
+  "errors": []
+}

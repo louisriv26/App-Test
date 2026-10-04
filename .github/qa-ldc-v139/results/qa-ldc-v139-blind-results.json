@@ -1,0 +1,91 @@
+{
+  "candidate": "LDC v139/R12 independent blind challenge",
+  "generated_at": "2026-10-04T07:18:27.537Z",
+  "overall": "PASS",
+  "probes": {
+    "app": "v2.19.139-R1B-UX-ACCESS-R12",
+    "pub": "139",
+    "swExpected": "ldc-v2.19.139-R1B-ux-access-r12",
+    "build": "2026-10-04",
+    "versionApp": "v2.19.139-R1B-UX-ACCESS-R12",
+    "versionPub": "139",
+    "versionWorker": "ldc-v2.19.139-R1B-ux-access-r12",
+    "offlineApp": "v2.19.139-R1B-UX-ACCESS-R12",
+    "offlineWorker": "ldc-v2.19.139-R1B-ux-access-r12",
+    "searchMeta": "Phrase exacte : 17 · 2 entrées correspondantes Recherche lexicale · ENRICHI",
+    "searchSamples": {
+      "bateau": {
+        "meta": "Phrase exacte : 17 · 2 entrées correspondantes Recherche lexicale · ENRICHI",
+        "cards": 19,
+        "failed": false
+      },
+      "de": {
+        "meta": "Phrase exacte : 36089 Recherche lexicale · ENRICHI",
+        "cards": 30,
+        "failed": false
+      },
+      "je": {
+        "meta": "Phrase exacte : 15940 Recherche lexicale · ENRICHI",
+        "cards": 30,
+        "failed": false
+      },
+      "volonté": {
+        "meta": "Phrase exacte : 14023 · 973 entrées correspondantes Recherche lexicale · ENRICHI",
+        "cards": 40,
+        "failed": false
+      }
+    },
+    "searchFailed": false,
+    "secondaryContrast": {
+      "fg": "rgb(168, 155, 142)",
+      "bg": "rgb(42, 36, 24)",
+      "ratio": 5.677543866685297
+    },
+    "swHasVersion": true,
+    "swHasShell": true,
+    "swHasRuntime": true,
+    "swHasStale": false,
+    "caches": [
+      "ldc-le-livre-du-ciel-8f29c3c1-runtime-v2.19.139-R1B-ux-access-r12",
+      "ldc-le-livre-du-ciel-8f29c3c1-shell-v2.19.139-R1B-ux-access-r12",
+      "ldc-le-livre-du-ciel-offline-persistent-v3-8f29c3c1"
+    ],
+    "tomes": 36,
+    "entries": 46,
+    "loadingVisible": false,
+    "versionPill": "v139",
+    "css": [
+      {
+        "tag": "DIV",
+        "fg": "rgb(212, 168, 67)",
+        "bg": "rgb(42, 32, 16)"
+      },
+      {
+        "tag": "SUMMARY",
+        "fg": "rgb(212, 200, 188)",
+        "bg": "rgba(0, 0, 0, 0)"
+      }
+    ]
+  },
+  "index": {
+    "served": "450535b37ebb74193812111bf601cc4a00df78027538d65fce6e61cf92db3807",
+    "local": "450535b37ebb74193812111bf601cc4a00df78027538d65fce6e61cf92db3807"
+  },
+  "errors": {
+    "page": [],
+    "console": []
+  },
+  "falsification": {
+    "servedExact": true,
+    "identity": true,
+    "workerText": true,
+    "caches": true,
+    "ready": true,
+    "navigation": true,
+    "search": true,
+    "contrast": true,
+    "build": true,
+    "noErrors": true,
+    "staleCaches": []
+  }
+}
