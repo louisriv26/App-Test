@@ -56,7 +56,7 @@ for rel in files:
     rec('edge22:'+rel+':sha256',got==want,{'got':got,'want':want})
 
 manifest=json.loads((ROOT/'manifest.json').read_text(encoding='utf-8'))
-rec('manifest:identity',(manifest.get('version'),manifest.get('build_revision'),manifest.get('release_id'))==('2.12','B1','lettres-v2.14-b1-csp-repair'),{k:manifest.get(k) for k in ('version','build_revision','release_id')})
+rec('manifest:identity',(manifest.get('version'),manifest.get('build_revision'),manifest.get('release_id'))==('2.14','B1','lettres-v2.14-b1-csp-repair'),{k:manifest.get(k) for k in ('version','build_revision','release_id')})
 sw=(ROOT/'sw.js').read_text(encoding='utf-8')
 rec('sw:no_predecessor_runtime_token','v2.13' not in sw and 'v2.12' not in sw,{'v213':sw.count('v2.13'),'v212':sw.count('v2.12')})
 rec('sw:successor_cache_ids',sw.count('shell-v2.14-b1')>=1 and sw.count('corpus-v2.14-b1')>=1,None)
