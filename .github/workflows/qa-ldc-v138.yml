@@ -1,0 +1,193 @@
+name: LDC v138 full QA and blind challenge
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-ldc-v138/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  bind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Exact tree, syntax, Search authority, manifest and staleness gate
+        shell: bash
+        run: |
+          set +e
+          bad=0
+          tree=$(git rev-parse HEAD:ldc-v138-fullqa-corrective 2>/dev/null)
+          [ "$tree" = "b5ceb62669483661ddf095807608b6fa354de6db" ] || bad=1
+          count=$(find ldc-v138-fullqa-corrective -type f | wc -l | tr -d ' ')
+          [ "$count" = "248" ] || bad=1
+          python3 - <<'PY' || bad=1
+          import json,pathlib,hashlib
+          r=pathlib.Path('ldc-v138-fullqa-corrective')
+          js=list(r.rglob('*.json'))
+          for p in js: json.loads(p.read_text(encoding='utf-8'))
+          m=json.loads((r/'offline_manifest.json').read_text(encoding='utf-8'))
+          v=json.loads((r/'version.json').read_text(encoding='utf-8'))
+          assert len(m['assets'])==204
+          assert m['app_version']=='v2.19.138-R1B-UX-ACCESS-R11'
+          assert m['page_worker_revision']=='ldc-v2.19.138-R1B-ux-access-r11'
+          assert v['app_version']=='v2.19.138-R1B-UX-ACCESS-R11'
+          assert v['public_version']=='138'
+          assert v['page_worker_revision']=='ldc-v2.19.138-R1B-ux-access-r11'
+          assert v['offline_manifest_sha256']==hashlib.sha256((r/'offline_manifest.json').read_bytes()).hexdigest()
+          for a in m['assets']:
+              p=r/a['path']; assert p.is_file(),a['path']; b=p.read_bytes()
+              assert len(b)==a['bytes'],a['path']; assert hashlib.sha256(b).hexdigest()==a['sha256'],a['path']
+          assert sum(a['bytes'] for a in m['assets'])==m['total_bytes']==114480819
+          obj={'assets':[{'bytes':int(a['bytes']),'path':str(a['path']),'sha256':str(a['sha256'])} for a in m['assets']],'corpus_generation':m['corpus_generation'],'corpus_manifest_sha256':m['corpus_manifest_sha256'],'schema':'ldc-offline-content-binding-v2'}
+          binding=hashlib.sha256(json.dumps(obj,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+          assert binding==m['content_binding_sha256']=='50f9e009bc4b4abe73f0cc114d04e3e7443c1d176db81fa4e33b8b24dffd0ee7'
+          print('JSON_OK',len(js),'OFFLINE_OK',len(m['assets']))
+          PY
+          for f in $(find ldc-v138-fullqa-corrective -type f -name '*.js'); do node --check "$f" >/dev/null 2>&1 || bad=1; done
+          node --check qa-ldc-v138-current.cjs >/dev/null 2>&1 || bad=1
+          node --check qa-ldc-v138-update.cjs >/dev/null 2>&1 || bad=1
+          node --check qa-ldc-v138-blind.cjs >/dev/null 2>&1 || bad=1
+          grep -q "const APP_VERSION = 'v2.19.138-R1B-UX-ACCESS-R11'" ldc-v138-fullqa-corrective/index.html || bad=1
+          grep -q "const APP_BUILD = '2026-10-04'" ldc-v138-fullqa-corrective/index.html || bad=1
+          grep -q "const SW_CACHE_VERSION = 'ldc-v2.19.138-R1B-ux-access-r11'" ldc-v138-fullqa-corrective/index.html || bad=1
+          grep -q "const VERSION = 'ldc-v2.19.138-R1B-ux-access-r11'" ldc-v138-fullqa-corrective/sw.js || bad=1
+          grep -q "shell-v2.19.138-R1B-ux-access-r11" ldc-v138-fullqa-corrective/sw.js || bad=1
+          grep -q "runtime-v2.19.138-R1B-ux-access-r11" ldc-v138-fullqa-corrective/sw.js || bad=1
+          ! grep -E "shell-v2\.19\.(135|136|137)|runtime-v2\.19\.(135|136|137)" ldc-v138-fullqa-corrective/sw.js >/dev/null || bad=1
+          grep -q "EXPECTED_MANIFEST_SHA256='e87da88a709a1b81f6e76e1afe119a8ad946df602977a88c45c8b0d6e35dc250'" ldc-v138-fullqa-corrective/search_worker_v2.js || bad=1
+          grep -q "EXPECTED_PREDECESSOR='295c5361c70a8d150985cee888e96a7bee8bd46c4d5197b4f3c1c6996d8dafbd'" ldc-v138-fullqa-corrective/search_worker_v2.js || bad=1
+          grep -q "EXPECTED_V21_MANIFEST_SHA256='09e0dd47cab26c0409d598b27b95857c9e1eedaf72467e558403dcb7f30a61a8'" ldc-v138-fullqa-corrective/search_worker_v2.js || bad=1
+          echo "$bad" >/tmp/static_bad
+          echo "$tree" >/tmp/tree
+      - name: Wait for exact GitHub Pages index bytes
+        shell: bash
+        run: |
+          set +e
+          exp=$(sha256sum ldc-v138-fullqa-corrective/index.html|cut -d' ' -f1)
+          ok=0
+          for i in $(seq 1 72); do
+            got=$(curl -fsSL "https://louisriv26.github.io/App-Test/ldc-v138-fullqa-corrective/index.html?bind=$i" | sha256sum | cut -d' ' -f1)
+            if [ "$got" = "$exp" ]; then ok=1; break; fi
+            sleep 10
+          done
+          echo "$ok" >/tmp/pages_index_ok
+      - name: Full staged Pages byte parity
+        shell: bash
+        run: |
+          set +e
+          bad=0
+          checked=0
+          if [ "$(cat /tmp/pages_index_ok)" != "1" ]; then
+            bad=1
+          else
+            base='https://louisriv26.github.io/App-Test/ldc-v138-fullqa-corrective'
+            while IFS= read -r -d '' f; do
+              rel=$(printf '%s' "$f" | sed 's#^ldc-v138-fullqa-corrective/##')
+              exp=$(sha256sum "$f"|cut -d' ' -f1)
+              got=$(curl -fsSL "$base/$rel?fullbind=138" | sha256sum | cut -d' ' -f1)
+              [ "$exp" = "$got" ] || bad=$((bad+1))
+              checked=$((checked+1))
+            done < <(find ldc-v138-fullqa-corrective -type f -print0)
+          fi
+          STATIC=$(cat /tmp/static_bad); INDEX=$(cat /tmp/pages_index_ok); TREE=$(cat /tmp/tree)
+          python3 - "$STATIC" "$INDEX" "$bad" "$checked" "$TREE" <<'PY'
+          import json,sys,datetime
+          static,index,bad,checked,tree=sys.argv[1:]
+          o={'candidate':'LDC v138','generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'tree':tree,'static_pass':static=='0','pages_index_exact':index=='1','pages_files_checked':int(checked),'pages_mismatches':int(bad)}
+          o['overall']='PASS' if o['static_pass'] and o['pages_index_exact'] and o['pages_files_checked']==248 and o['pages_mismatches']==0 else 'FAIL'
+          open('qa-ldc-v138-bind-results.json','w').write(json.dumps(o,indent=2)+'\n')
+          print(json.dumps(o,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v138-bind, path: qa-ldc-v138-bind-results.json}
+  current:
+    needs: bind
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/ldc138-current.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v138-current.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v138-current, path: qa-ldc-v138-current-results.json}
+  update:
+    needs: bind
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          mkdir -p qa-ldc-v138-upgrade
+          python3 -m http.server 8121 --bind 127.0.0.1 --directory qa-ldc-v138-upgrade >/tmp/ldc138-update.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v138-update.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v138-update, path: qa-ldc-v138-update-results.json}
+  blind:
+    needs: bind
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8122 --bind 127.0.0.1 >/tmp/ldc138-blind.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v138-blind.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v138-blind, path: qa-ldc-v138-blind-results.json}
+  publish:
+    needs: [bind,current,update,blind]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with: {pattern: 'ldc-v138-*', path: qa-results, merge-multiple: true}
+      - name: Commit exact QA evidence
+        shell: bash
+        run: |
+          set -e
+          mkdir -p .github/qa-ldc-v138/results
+          cp qa-results/*.json .github/qa-ldc-v138/results/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa-ldc-v138/results
+          git commit -m 'Record LDC v138 full QA evidence' || true
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Fail closed unless all evidence PASS
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,glob,sys,os
+          required={'qa-ldc-v138-bind-results.json','qa-ldc-v138-current-results.json','qa-ldc-v138-update-results.json','qa-ldc-v138-blind-results.json'}
+          d={}
+          for f in glob.glob('qa-results/*.json'):
+              try:d[os.path.basename(f)]=json.load(open(f))['overall']
+              except Exception:d[os.path.basename(f)]='MISSING_OR_INVALID'
+          print(d)
+          sys.exit(0 if all(d.get(n)=='PASS' for n in required) else 1)
+          PY
