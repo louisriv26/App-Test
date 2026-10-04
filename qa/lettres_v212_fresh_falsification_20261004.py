@@ -205,8 +205,17 @@ with sync_playwright() as p:
         if child.is_dir(): shutil.copytree(child,dst)
         else: shutil.copy2(child,dst)
     shutil.rmtree(tmp)
+    # Test-lab transport hygiene: http.server uses Last-Modified conditional responses.
+    # Git checkouts can give predecessor/successor files identical mtimes even when bytes differ.
+    # Advance mtimes only (never bytes) so the synthetic server cannot answer 304 for changed successor files.
+    stamp=time.time()+10
+    for fp in SCOPE.rglob('*'):
+        if fp.is_file(): os.utime(fp,(stamp,stamp))
 
     pg.evaluate("""async()=>{const r=await navigator.serviceWorker.getRegistration(); await r.update();}""")
+    pg.wait_for_function("""async()=>{const r=await navigator.serviceWorker.getRegistration();return !!(r&&(r.waiting||r.installing));}""",timeout=20000)
+    worker_state=pg.evaluate("""async()=>{const r=await navigator.serviceWorker.getRegistration();return {waiting:r&&r.waiting&&r.waiting.state,installing:r&&r.installing&&r.installing.state,active:r&&r.active&&r.active.state};}""")
+    rec('update:successor_worker_detected',bool(worker_state.get('waiting') or worker_state.get('installing')),worker_state)
     expect(pg.locator('#update-banner')).to_be_visible(timeout=20000)
     rec('update:banner_visible',True,pg.locator('#update-banner-message').inner_text())
     pg.locator('#update-apply-btn').click()
