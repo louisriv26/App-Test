@@ -202,6 +202,7 @@ async function elementContrast(p, sel, pseudo=null) {
   await noteBtn.click();
   await p.fill('#note-textarea','QA_MARIE_V48_B3_NOTE_SENTINEL');
   await p.click('#note-modal .modal-btn-save');
+  await p.waitForFunction(()=>Object.values(State.notes).some(n=>n.text==='QA_MARIE_V48_B3_NOTE_SENTINEL'),null,{timeout:10000});
   const envelope=await p.evaluate(()=>{
     const e=App.buildBackupEnvelope(new Date().toISOString());
     const v=Pure.validateBackupEnvelope(e,App.backupValidationContext());
