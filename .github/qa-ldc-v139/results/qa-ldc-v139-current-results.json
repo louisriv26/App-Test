@@ -1,7 +1,7 @@
 {
   "candidate": "LDC v139/R12",
-  "generated_at": "2026-10-04T07:18:29.808Z",
-  "overall": "FAIL",
+  "generated_at": "2026-10-04T07:27:36.852Z",
+  "overall": "PASS",
   "navigation": {
     "status": 200,
     "sha256": "450535b37ebb74193812111bf601cc4a00df78027538d65fce6e61cf92db3807",
@@ -4030,20 +4030,20 @@
     "total_bytes": 114483048,
     "label": "Prêt hors ligne — Préparation complète et vérifiée.",
     "saved": {
-      "state": "NOT_PREPARED",
-      "completed": 0,
+      "state": "READY",
+      "completed": 204,
       "total": 204,
       "failed": [],
       "total_bytes": 114483048,
-      "job_id": null,
-      "message": "",
+      "job_id": "ldc-offline-1791098863637-9464c9",
+      "message": "Préparation complète et vérifiée.",
       "storage_schema": "ldc-offline-storage-v3",
       "content_binding_schema": "ldc-offline-content-binding-v2",
       "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
       "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
       "corpus_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
       "manifest_schema": "ldc-offline-manifest-v3",
-      "updated_at": "2026-10-04T07:18:31.005Z"
+      "updated_at": "2026-10-04T07:27:45.756Z"
     },
     "events": [
       {
@@ -4072,7 +4072,7 @@
         "state": "READY"
       }
     ],
-    "pass": false
+    "pass": true
   },
   "errors": {
     "page": [],
@@ -4084,20 +4084,20 @@
     "pill": "v139",
     "loadingVisible": false,
     "saved": {
-      "state": "NOT_PREPARED",
-      "completed": 0,
+      "state": "READY",
+      "completed": 204,
       "total": 204,
       "failed": [],
       "total_bytes": 114483048,
-      "job_id": null,
-      "message": "",
+      "job_id": "ldc-offline-1791098863637-9464c9",
+      "message": "Préparation complète et vérifiée.",
       "storage_schema": "ldc-offline-storage-v3",
       "content_binding_schema": "ldc-offline-content-binding-v2",
       "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
       "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
       "corpus_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
       "manifest_schema": "ldc-offline-manifest-v3",
-      "updated_at": "2026-10-04T07:18:31.005Z"
+      "updated_at": "2026-10-04T07:27:45.756Z"
     },
     "volume36": {
       "ok": true,
@@ -4112,6 +4112,6 @@
     "nav": true,
     "navError": null,
     "errors": [],
-    "pass": false
+    "pass": true
   }
 }
