@@ -1,0 +1,57 @@
+name: Blind challenge Marie v48 B3 frozen package
+on:
+  push:
+    branches: [main]
+    paths: ['.github/marie-v48b3-blind/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  blind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind frozen candidate and package independently
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:marie-v48-b3-csp-note-placeholder-closure)" = "197600dc9ad6c2b722e0b1f3f0120b3757b2af36"
+          echo "974fa966ed9f215812c7eb03248edbe32a80d7459069a2d326556fa572d58e0b  MJV_v48_B3_CSP_NOTE_PLACEHOLDER_RELEASE.zip" | sha256sum -c -
+          rm -rf qa-marie-v48b3-blind-package && mkdir qa-marie-v48b3-blind-package
+          unzip -q MJV_v48_B3_CSP_NOTE_PLACEHOLDER_RELEASE.zip -d qa-marie-v48b3-blind-package
+          diff -qr marie-v48-b3-csp-note-placeholder-closure qa-marie-v48b3-blind-package
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,hashlib,re
+          p=Path('qa-marie-v48b3-blind-package/index.html');s=p.read_text()
+          assert hashlib.sha256(p.read_bytes()).hexdigest()=='db36f50e6bb527a1f890f5359d7d60e5c16fc019f81c1b5119ecd77f4b3bedf2'
+          assert hashlib.sha256(Path('qa-marie-v48b3-blind-package/sw.js').read_bytes()).hexdigest()=='968c4bde3aecf07f5fc27a0ad91e28ea845180aae0ccf80f7282f17434d2d2be'
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',s).group(1)
+          assert "'unsafe-inline'" not in csp and "script-src-attr 'none'" in csp and "style-src-attr 'none'" in csp
+          scripts=[m.group(1) for m in re.finditer(r'<script(?![^>]*\\bsrc=)[^>]*>([\\s\\S]*?)</script>',s,re.I)]
+          styles=re.findall(r'<style[^>]*>([\\s\\S]*?)</style>',s,re.I)
+          tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
+          assert len(scripts)==3 and len(styles)==1 and all(tok(x) in csp for x in scripts+styles)
+          assert "const APP_VERSION = '48';" in s and "const VERSION = '48';" in Path('qa-marie-v48b3-blind-package/sw.js').read_text()
+          assert hashlib.sha256(Path('qa-marie-v48b3-blind-package/corpus/days.json').read_bytes()).hexdigest()=='884b83aaf28e51d2eb6318f4f044e6d58568211f41d6df25c0ef43d4bb8560b8'
+          print('BLIND_STATIC_PACKAGE_PASS')
+          PY
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0 && npx playwright install --with-deps chromium
+      - name: Serve exact packaged bytes
+        run: |
+          python3 -m http.server 8088 --bind 127.0.0.1 >/tmp/marie-blind-http.log 2>&1 &
+          sleep 2
+      - name: Independent runtime falsification challenge
+        run: node qa-marie-v48b3-blind.cjs
+      - name: Record blind evidence without mutating candidate
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add MJV_v48_B3_BLIND_CHALLENGE_EVIDENCE.json
+          git commit -m "Record independent blind challenge for frozen Marie v48 B3"
+          git pull --rebase origin main
+          test "$(git rev-parse HEAD:marie-v48-b3-csp-note-placeholder-closure)" = "197600dc9ad6c2b722e0b1f3f0120b3757b2af36"
+          git push origin HEAD:main
