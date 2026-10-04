@@ -1,0 +1,105 @@
+name: Fresh re-audit Marie v48 B3 exact package
+on:
+  push:
+    branches: [main]
+    paths: ['.github/marie-v48b3-reaudit/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  reaudit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+
+      - name: Bind exact frozen candidate and uploaded release identity
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:marie-v48-b3-csp-note-placeholder-closure)" = "197600dc9ad6c2b722e0b1f3f0120b3757b2af36"
+          echo "974fa966ed9f215812c7eb03248edbe32a80d7459069a2d326556fa572d58e0b  MJV_v48_B3_CSP_NOTE_PLACEHOLDER_RELEASE.zip" | sha256sum -c -
+          rm -rf qa-marie-v48b3-reaudit-package
+          mkdir qa-marie-v48b3-reaudit-package
+          unzip -q MJV_v48_B3_CSP_NOTE_PLACEHOLDER_RELEASE.zip -d qa-marie-v48b3-reaudit-package
+          diff -qr marie-v48-b3-csp-note-placeholder-closure qa-marie-v48b3-reaudit-package
+          test "$(find qa-marie-v48b3-reaudit-package -type f | wc -l)" -eq 24
+
+      - name: Fresh independent static/package audit
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,hashlib,json,re
+          root=Path('qa-marie-v48b3-reaudit-package')
+          idx=(root/'index.html').read_text(encoding='utf-8')
+          sw=(root/'sw.js').read_text(encoding='utf-8')
+          manifest=json.loads((root/'manifest.json').read_text(encoding='utf-8'))
+          corpus=json.loads((root/'corpus/days.json').read_text(encoding='utf-8'))
+          assert hashlib.sha256((root/'index.html').read_bytes()).hexdigest()=='db36f50e6bb527a1f890f5359d7d60e5c16fc019f81c1b5119ecd77f4b3bedf2'
+          assert hashlib.sha256((root/'sw.js').read_bytes()).hexdigest()=='968c4bde3aecf07f5fc27a0ad91e28ea845180aae0ccf80f7282f17434d2d2be'
+          assert hashlib.sha256((root/'corpus/days.json').read_bytes()).hexdigest()=='884b83aaf28e51d2eb6318f4f044e6d58568211f41d6df25c0ef43d4bb8560b8'
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',idx).group(1)
+          scripts=[m.group(1) for m in re.finditer(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>',idx,re.I)]
+          styles=re.findall(r'<style[^>]*>([\s\S]*?)</style>',idx,re.I)
+          tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
+          assert len(scripts)==3 and len(styles)==1 and all(tok(x) in csp for x in scripts+styles)
+          assert "'unsafe-inline'" not in csp and "script-src-attr 'none'" in csp and "style-src-attr 'none'" in csp
+          assert re.search(r"const APP_VERSION = '48';",idx)
+          assert re.search(r"const VERSION = '48';",sw)
+          assert "shell-v' + VERSION" in sw and "content-v3" in sw
+          icons=[x['src'].removeprefix('./') for x in manifest.get('icons',[])]
+          assert icons and all((root/x).is_file() for x in icons)
+          for arr in ['REQUIRED_SHELL_ASSETS','OPTIONAL_SHELL_ASSETS','CONTENT_ASSETS']:
+              m=re.search(r'const '+arr+r' = \[(.*?)\];',sw,re.S); assert m
+              for v in re.findall(r"'([^']+)'",m.group(1)):
+                  p=v.split('?',1)[0]
+                  if p=='./': continue
+                  assert (root/p.removeprefix('./')).is_file(),(arr,v)
+          units=corpus if isinstance(corpus,list) else (corpus.get('units') or corpus.get('days') or [])
+          assert len(units)==37
+          paras=[]
+          for u in units:
+              for s in u.get('sections',[]): paras+=s.get('paragraphs',[])
+          assert len(paras)==753 and len({p.get('paragraph_id') for p in paras})==753
+          assert idx.count('.note-textarea::placeholder { color: var(--muted); }')==1
+          assert idx.count('.search-input::placeholder { color: var(--muted); }')==1
+          out={
+            'candidate':'MJV v48/B3',
+            'package_sha256':'974fa966ed9f215812c7eb03248edbe32a80d7459069a2d326556fa572d58e0b',
+            'tree':'197600dc9ad6c2b722e0b1f3f0120b3757b2af36',
+            'file_count':24,'script_blocks':3,'style_blocks':1,'units':37,'paragraphs':753,
+            'index_sha256':'db36f50e6bb527a1f890f5359d7d60e5c16fc019f81c1b5119ecd77f4b3bedf2',
+            'sw_sha256':'968c4bde3aecf07f5fc27a0ad91e28ea845180aae0ccf80f7282f17434d2d2be',
+            'status':'PASS'
+          }
+          Path('MJV_v48_B3_FRESH_REAUDIT_STATIC_2026-10-04.json').write_text(json.dumps(out,indent=2)+'\n')
+          print('FRESH_STATIC_PACKAGE_PASS',json.dumps(out))
+          PY
+          node --check qa-marie-v48b3-reaudit-20261004.cjs
+          node --check qa-marie-v48b3-reaudit-package/sw.js
+
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Serve exact package and update scope
+        run: |
+          python3 -m http.server 8090 --bind 127.0.0.1 >/tmp/mjv-reaudit.log 2>&1 &
+          python3 -m http.server 8091 --bind 127.0.0.1 >/tmp/mjv-reaudit-update.log 2>&1 &
+          sleep 2
+
+      - name: Fresh runtime and adversarial journey campaign
+        run: node qa-marie-v48b3-reaudit-20261004.cjs
+
+      - name: Record fresh evidence without changing candidate bytes
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add MJV_v48_B3_FRESH_REAUDIT_STATIC_2026-10-04.json MJV_v48_B3_FRESH_REAUDIT_RUNTIME_2026-10-04.json
+          git commit -m "Record fresh full re-audit evidence for frozen Marie v48 B3"
+          git pull --rebase origin main
+          test "$(git rev-parse HEAD:marie-v48-b3-csp-note-placeholder-closure)" = "197600dc9ad6c2b722e0b1f3f0120b3757b2af36"
+          git push origin HEAD:main
