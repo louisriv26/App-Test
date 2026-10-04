@@ -141,7 +141,7 @@ with sync_playwright() as p:
     # Future-schema fail-closed preservation: v2.12 must not silently downgrade newer personal state.
     browser=p.chromium.launch(headless=True)
     ctx=browser.new_context(viewport={'width':390,'height':844},locale='fr-FR')
-    ctx.add_init_script("""()=>{
+    ctx.add_init_script("""(()=>{
       localStorage.setItem('lp_state_schema','999');
       localStorage.setItem('lp_favs','[2]');
       localStorage.setItem('lp_theme','dark');
@@ -149,7 +149,7 @@ with sync_playwright() as p:
       localStorage.setItem('lp_highlights','[]');
       localStorage.setItem('lp_read','[]');
       localStorage.setItem('lp_positions','{}');
-    }""")
+    })()""")
     pg=ctx.new_page(); c,e=errors(pg)
     pg.goto(PUBLIC+'index.html?future-schema=1',wait_until='domcontentloaded',timeout=30000); ready(pg)
     fs=pg.evaluate("""()=>({
