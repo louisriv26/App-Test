@@ -1,0 +1,71 @@
+{
+  "candidate": "LDC v138/R11 independent blind challenge",
+  "generated_at": "2026-10-04T04:42:44.519Z",
+  "overall": "FAIL",
+  "probes": {
+    "app": "v2.19.138-R1B-UX-ACCESS-R11",
+    "pub": "138",
+    "swExpected": "ldc-v2.19.138-R1B-ux-access-r11",
+    "build": "2026-10-04",
+    "versionApp": "v2.19.138-R1B-UX-ACCESS-R11",
+    "versionPub": "138",
+    "versionWorker": "ldc-v2.19.138-R1B-ux-access-r11",
+    "offlineApp": "v2.19.138-R1B-UX-ACCESS-R11",
+    "offlineWorker": "ldc-v2.19.138-R1B-ux-access-r11",
+    "searchMeta": "Recherche indisponible pour le moment.",
+    "searchFailed": true,
+    "secondaryContrast": {
+      "fg": "rgb(168, 155, 142)",
+      "bg": "rgb(42, 36, 24)",
+      "ratio": 5.677543866685297
+    },
+    "swHasVersion": true,
+    "swHasShell": true,
+    "swHasRuntime": true,
+    "swHasStale": false,
+    "caches": [
+      "ldc-le-livre-du-ciel-66537510-runtime-v2.19.138-R1B-ux-access-r11",
+      "ldc-le-livre-du-ciel-66537510-shell-v2.19.138-R1B-ux-access-r11",
+      "ldc-le-livre-du-ciel-offline-persistent-v3-66537510"
+    ],
+    "tomes": 36,
+    "entries": 46,
+    "loadingVisible": false,
+    "versionPill": "v138",
+    "css": [
+      {
+        "tag": "DIV",
+        "fg": "rgb(212, 168, 67)",
+        "bg": "rgb(42, 32, 16)"
+      },
+      {
+        "tag": "SUMMARY",
+        "fg": "rgb(212, 200, 188)",
+        "bg": "rgba(0, 0, 0, 0)"
+      }
+    ]
+  },
+  "index": {
+    "served": "9679ad2f4c4a35492d644ae5ee3d4ab3e7e96f923aec1f922b596b61ac8ad81c",
+    "local": "9679ad2f4c4a35492d644ae5ee3d4ab3e7e96f923aec1f922b596b61ac8ad81c"
+  },
+  "errors": {
+    "page": [],
+    "console": [
+      "LDC SEARCH-V2 failed Error: SEARCH-V2.1A aflp token-count mismatch\n    at w.onmessage (http://127.0.0.1:8122/ldc-v138-fullqa-corrective/:8262:25)"
+    ]
+  },
+  "falsification": {
+    "servedExact": true,
+    "identity": true,
+    "workerText": true,
+    "caches": false,
+    "ready": true,
+    "navigation": true,
+    "search": false,
+    "contrast": true,
+    "build": true,
+    "noErrors": false,
+    "staleCaches": []
+  }
+}
