@@ -1,0 +1,234 @@
+name: LDC v139 full QA and blind challenge
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-ldc-v139/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  bind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Exact tree, mutation boundary, syntax, manifests and staleness gate
+        shell: bash
+        run: |
+          set +e
+          bad=0
+          tree=$(git rev-parse HEAD:ldc-v139-r12-search-v21a-recert 2>/dev/null)
+          [ "$tree" = "b9aaaa762034d9a21398bc8c242c802f59062492" ] || bad=1
+          count=$(find ldc-v139-r12-search-v21a-recert -type f | wc -l | tr -d ' ')
+          [ "$count" = "248" ] || bad=1
+          python3 - <<'PY' || bad=1
+          import json,pathlib,hashlib
+          a=pathlib.Path('ldc-v138-fullqa-corrective'); r=pathlib.Path('ldc-v139-r12-search-v21a-recert')
+          expected={'corpus/manifest.json','corpus/search_v21_manifest.json','corpus/search_v21_topology.json','index.html','offline_manifest.json','search_worker_v2.js','sw.js','version.json'}
+          def files(root): return {str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
+          fa,fr=files(a),files(r); changed={p for p in set(fa)|set(fr) if fa.get(p)!=fr.get(p)}
+          assert changed==expected,(changed,expected)
+          js=list(r.rglob('*.json'))
+          for p in js: json.loads(p.read_text(encoding='utf-8'))
+          m=json.loads((r/'offline_manifest.json').read_text(encoding='utf-8')); v=json.loads((r/'version.json').read_text(encoding='utf-8'))
+          assert len(m['assets'])==204
+          assert m['app_version']=='v2.19.139-R1B-UX-ACCESS-R12'
+          assert m['page_worker_revision']=='ldc-v2.19.139-R1B-ux-access-r12'
+          assert v['app_version']=='v2.19.139-R1B-UX-ACCESS-R12' and v['public_version']=='139'
+          assert v['page_worker_revision']=='ldc-v2.19.139-R1B-ux-access-r12'
+          assert v['offline_manifest_sha256']==hashlib.sha256((r/'offline_manifest.json').read_bytes()).hexdigest()
+          for x in m['assets']:
+              p=r/x['path']; b=p.read_bytes(); assert len(b)==x['bytes'],x['path']; assert hashlib.sha256(b).hexdigest()==x['sha256'],x['path']
+          assert sum(x['bytes'] for x in m['assets'])==m['total_bytes']==114483048
+          obj={'assets':[{'bytes':int(x['bytes']),'path':str(x['path']),'sha256':str(x['sha256'])} for x in m['assets']],'corpus_generation':m['corpus_generation'],'corpus_manifest_sha256':m['corpus_manifest_sha256'],'schema':'ldc-offline-content-binding-v2'}
+          binding=hashlib.sha256(json.dumps(obj,separators=(',',':'),ensure_ascii=False).encode()).hexdigest()
+          assert binding==m['content_binding_sha256']=='1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384'
+          top=(r/'corpus/search_v21_topology.json').read_bytes(); man=(r/'corpus/search_v21_manifest.json').read_bytes()
+          assert hashlib.sha256(top).hexdigest()=='9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f'
+          assert hashlib.sha256(man).hexdigest()=='86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996'
+          print('JSON_OK',len(js),'DIFF_OK',sorted(changed),'OFFLINE_OK',len(m['assets']))
+          PY
+          for f in $(find ldc-v139-r12-search-v21a-recert -type f -name '*.js'); do node --check "$f" >/dev/null 2>&1 || bad=1; done
+          node --check qa-ldc-v139-current.cjs >/dev/null 2>&1 || bad=1
+          node --check qa-ldc-v139-update.cjs >/dev/null 2>&1 || bad=1
+          node --check qa-ldc-v139-blind.cjs >/dev/null 2>&1 || bad=1
+          grep -q "const APP_VERSION = 'v2.19.139-R1B-UX-ACCESS-R12'" ldc-v139-r12-search-v21a-recert/index.html || bad=1
+          grep -q "const APP_BUILD = '2026-10-04'" ldc-v139-r12-search-v21a-recert/index.html || bad=1
+          grep -q "const SW_CACHE_VERSION = 'ldc-v2.19.139-R1B-ux-access-r12'" ldc-v139-r12-search-v21a-recert/index.html || bad=1
+          grep -q "const VERSION = 'ldc-v2.19.139-R1B-ux-access-r12'" ldc-v139-r12-search-v21a-recert/sw.js || bad=1
+          grep -q "shell-v2.19.139-R1B-ux-access-r12" ldc-v139-r12-search-v21a-recert/sw.js || bad=1
+          grep -q "runtime-v2.19.139-R1B-ux-access-r12" ldc-v139-r12-search-v21a-recert/sw.js || bad=1
+          ! grep -E "shell-v2\.19\.(135|136|137|138)|runtime-v2\.19\.(135|136|137|138)" ldc-v139-r12-search-v21a-recert/sw.js >/dev/null || bad=1
+          grep -q "EXPECTED_MANIFEST_SHA256='e87da88a709a1b81f6e76e1afe119a8ad946df602977a88c45c8b0d6e35dc250'" ldc-v139-r12-search-v21a-recert/search_worker_v2.js || bad=1
+          grep -q "EXPECTED_PREDECESSOR='295c5361c70a8d150985cee888e96a7bee8bd46c4d5197b4f3c1c6996d8dafbd'" ldc-v139-r12-search-v21a-recert/search_worker_v2.js || bad=1
+          grep -q "EXPECTED_V21_MANIFEST_SHA256='86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996'" ldc-v139-r12-search-v21a-recert/search_worker_v2.js || bad=1
+          echo "$bad" >/tmp/static_bad; echo "$tree" >/tmp/tree
+      - name: Wait for exact GitHub Pages index bytes
+        shell: bash
+        run: |
+          set +e
+          exp=$(sha256sum ldc-v139-r12-search-v21a-recert/index.html|cut -d' ' -f1); ok=0
+          for i in $(seq 1 72); do
+            got=$(curl -fsSL "https://louisriv26.github.io/App-Test/ldc-v139-r12-search-v21a-recert/index.html?bind=$i" | sha256sum | cut -d' ' -f1)
+            if [ "$got" = "$exp" ]; then ok=1; break; fi
+            sleep 10
+          done
+          echo "$ok" >/tmp/pages_index_ok
+      - name: Full staged Pages byte parity
+        shell: bash
+        run: |
+          set +e
+          bad=0; checked=0
+          if [ "$(cat /tmp/pages_index_ok)" != "1" ]; then bad=1; else
+            base='https://louisriv26.github.io/App-Test/ldc-v139-r12-search-v21a-recert'
+            while IFS= read -r -d '' f; do
+              rel=$(printf '%s' "$f" | sed 's#^ldc-v139-r12-search-v21a-recert/##')
+              exp=$(sha256sum "$f"|cut -d' ' -f1)
+              got=$(curl -fsSL "$base/$rel?fullbind=139" | sha256sum | cut -d' ' -f1)
+              [ "$exp" = "$got" ] || bad=$((bad+1)); checked=$((checked+1))
+            done < <(find ldc-v139-r12-search-v21a-recert -type f -print0)
+          fi
+          STATIC=$(cat /tmp/static_bad); INDEX=$(cat /tmp/pages_index_ok); TREE=$(cat /tmp/tree)
+          python3 - "$STATIC" "$INDEX" "$bad" "$checked" "$TREE" <<'PY'
+          import json,sys,datetime
+          static,index,bad,checked,tree=sys.argv[1:]
+          o={'candidate':'LDC v139/R12','generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'tree':tree,'static_pass':static=='0','pages_index_exact':index=='1','pages_files_checked':int(checked),'pages_mismatches':int(bad)}
+          o['overall']='PASS' if o['static_pass'] and o['pages_index_exact'] and o['pages_files_checked']==248 and o['pages_mismatches']==0 else 'FAIL'
+          open('qa-ldc-v139-bind-results.json','w').write(json.dumps(o,indent=2)+'\n'); print(json.dumps(o,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-bind, path: qa-ldc-v139-bind-results.json}
+  searchcert:
+    needs: bind
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Exhaustive current Search-V2.1A recertification
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs=require('fs'),path=require('path'),crypto=require('crypto');
+          const ROOT=path.join(process.cwd(),'ldc-v139-r12-search-v21a-recert'); process.chdir(ROOT);
+          const Core=require('./search_engine_v2.js'), Exact=require('./search_exact_v21.js'), Foundation=require('./search_foundation_v21b.js'), Near=require('./search_near_v22.js');
+          const read=p=>JSON.parse(fs.readFileSync(p,'utf8')), sha=s=>crypto.createHash('sha256').update(s).digest('hex');
+          const payload={index:read('corpus/search_v2_index.json'),documents:read('corpus/search_v2_documents.json'),entries:read('corpus/search_v2_entries.json'),jesusFilter:read('corpus/search_v2_jesus_filter.json'),topology:read('corpus/search_v21_topology.json')};
+          const m2=read('corpus/search_v2_manifest.json'),m21=read('corpus/search_v21_manifest.json');
+          const exact=Exact.createExactLayer(payload), lexical=Core.createEngine({index:payload.index,documents:payload.documents,entries:payload.entries,jesusFilter:payload.jesusFilter});
+          const foundation=Foundation.createFoundation({lexical,exact,documents:payload.documents.documents,entries:payload.entries.entries,jesusFilter:payload.jesusFilter,topology:payload.topology,index:payload.index});
+          const near=Near.createNearLayer({index:payload.index,documents:payload.documents,entries:payload.entries,jesusFilter:payload.jesusFilter,topology:payload.topology,exact});
+          const out={candidate:'LDC v139/R12 Search recertification',generated_at:new Date().toISOString(),overall:'UNKNOWN',checks:{},samples:{},errors:[]};
+          function assert(c,m){if(!c){out.errors.push(m);throw new Error(m)}}
+          const exp={aflp:{tokens:1466870,units:2312,digest:'6bc37d012a23154af2d669cddb3f84078de606fadb43da3ab1dba516639a6c0f'},additions:{tokens:14333,units:75,digest:'029c8f53c9a20cae460ff2ef8e76c82cbc50bba4aa518b357eabe1019f4c2c16'},enriched:{tokens:1480956,units:2325,digest:'49bc61ea97e2218da594a713748da0f21beefabef4762516cdb14b4af42b1544'}};
+          try{
+            let coverage=0,probes=0;
+            for(const mode of ['aflp','additions','enriched']){
+              const units=exact.nearAuthority.units(mode), tokens=units.reduce((n,u)=>n+(u.stream?u.stream.split(' ').length:0),0), digest=sha(JSON.stringify(units.map(u=>[u.id,u.stream])));
+              assert(units.length===exp[mode].units,mode+' units'); assert(tokens===exp[mode].tokens,mode+' tokens'); assert(digest===exp[mode].digest,mode+' digest');
+              assert(m21.reference[mode].tokens===tokens&&m21.reference[mode].digest===digest,mode+' manifest ref'); assert(payload.topology.reference[mode].tokens===tokens&&payload.topology.reference[mode].digest===digest,mode+' topology ref');
+              for(let i=0;i<units.length;i++){const u=units[i],ts=(u.stream||'').split(' ').filter(Boolean);if(!ts.length)continue;const start=Math.min(ts.length-1,(i*17)%ts.length),len=Math.min(3,ts.length-start),q=ts.slice(start,start+len).join(' ');assert(exact.verifyUnitQuery(mode,u.id,q),mode+'/'+u.id+' verify');coverage++;if(i%37===0){assert(exact.exactInUnit(mode,u.id,q).length>0,mode+'/'+u.id+' exact');probes++;}}
+            }
+            out.checks.logical_unit_coverage={pass:true,units_checked:coverage,exact_in_unit_probes:probes};
+            for(const [q,opt] of [['bateau',{mode:'enriched'}],['divine volonté',{mode:'enriched'}],['de',{mode:'aflp'}],['je',{mode:'enriched'}],['volonté',{mode:'enriched'}],['volonte\u0301',{mode:'enriched'}]]){const r=foundation.search(q,opt);assert(!r.structuralError&&Array.isArray(r.results)&&r.results.length>0,'query '+q);out.samples[q]={results:r.results.length,totalMatches:r.totalMatches,matchCounts:r.matchCounts,first:r.results[0]&&{stable_ref:r.results[0].stable_ref,matchType:r.results[0].matchType}};}
+            const eu=exact.nearAuthority.units('enriched').find(u=>(u.stream||'').split(' ').length>=6),et=eu.stream.split(' ').slice(0,5),alt=et.slice();alt[2]+='x';const nr=near.search(alt.join(' '),{mode:'enriched',limit:5,diagnostics:true});assert(nr&&nr.eligible===true&&nr.results.length>0,'near search');out.samples.near={query:alt.join(' '),accepted:nr.totalAccepted,results:nr.results.length,ambiguous:nr.ambiguous};
+            const fileSha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'); assert(fileSha('corpus/search_v21_topology.json')===m21.topology_sha256,'topology binding');
+            for(const [p,k] of [['corpus/search_v2_documents.json','search_v2_documents_sha256'],['corpus/search_v2_entries.json','search_v2_entries_sha256'],['corpus/search_v2_index.json','search_v2_index_sha256'],['corpus/search_v2_jesus_filter.json','search_v2_jesus_filter_sha256']]){assert(m21.bindings[k]===m2.assets[p].sha256,'binding '+k);assert(fileSha(p)===m2.assets[p].sha256,'bytes '+p)}
+            out.checks.search_chain={pass:true}; out.overall='PASS';
+          }catch(e){out.overall='FAIL';out.error=String(e&&e.stack||e)}
+          process.chdir('..'); fs.writeFileSync('qa-ldc-v139-searchcert-results.json',JSON.stringify(out,null,2)+'\n'); console.log(JSON.stringify(out,null,2)); if(out.overall!=='PASS')process.exitCode=1;
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-searchcert, path: qa-ldc-v139-searchcert-results.json}
+  current:
+    needs: bind
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8130 --bind 127.0.0.1 >/tmp/ldc139-current.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v139-current.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-current, path: qa-ldc-v139-current-results.json}
+  update:
+    needs: bind
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          mkdir -p qa-ldc-v139-upgrade
+          python3 -m http.server 8131 --bind 127.0.0.1 --directory qa-ldc-v139-upgrade >/tmp/ldc139-update.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v139-update.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-update, path: qa-ldc-v139-update-results.json}
+  blind:
+    needs: bind
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8132 --bind 127.0.0.1 >/tmp/ldc139-blind.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v139-blind.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-blind, path: qa-ldc-v139-blind-results.json}
+  publish:
+    needs: [bind,searchcert,current,update,blind]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with: {pattern: 'ldc-v139-*', path: qa-results, merge-multiple: true}
+      - name: Commit exact QA evidence
+        shell: bash
+        run: |
+          set -e
+          mkdir -p .github/qa-ldc-v139/results
+          cp qa-results/*.json .github/qa-ldc-v139/results/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa-ldc-v139/results
+          git commit -m 'Record LDC v139 full QA evidence' || true
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Fail closed unless all evidence PASS
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,glob,sys,os
+          required={'qa-ldc-v139-bind-results.json','qa-ldc-v139-searchcert-results.json','qa-ldc-v139-current-results.json','qa-ldc-v139-update-results.json','qa-ldc-v139-blind-results.json'}
+          d={}
+          for f in glob.glob('qa-results/*.json'):
+              try:d[os.path.basename(f)]=json.load(open(f))['overall']
+              except Exception:d[os.path.basename(f)]='MISSING_OR_INVALID'
+          print(d); sys.exit(0 if all(d.get(n)=='PASS' for n in required) else 1)
+          PY
