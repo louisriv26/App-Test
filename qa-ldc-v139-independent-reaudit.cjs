@@ -71,7 +71,7 @@ async function run(){
  out.checks.help=await p.evaluate(async()=>{await openHelp();const hs=document.getElementById('help-scroll');hs.scrollTop=Math.min(620,Math.max(0,hs.scrollHeight-hs.clientHeight));const before=hs.scrollTop;await openProvenanceDetails('help');await new Promise(r=>setTimeout(r,200));const ptop=document.getElementById('provenance-scroll')?.scrollTop||0;await closeProvenanceDetails();await new Promise(r=>setTimeout(r,350));return{before,after:hs.scrollTop,provenanceTop:ptop,restored:Math.abs(hs.scrollTop-before)<=3&&ptop<=1};});
 
  // PWA asset probes
- out.checks.assets=await p.evaluate(async()=>{const urls=['./manifest.json','./sw.js','./assets/fonts/fonts.css','./assets/icons/tabler-icons.min.css','./icons/icon-192.png','./corpus/volume_36.json','./corpus/search_v2_index.json'];const o={};for(const u of urls){try{const r=await fetch(u,{cache:'no-store'});o[u]={ok:r.ok,status:r.status,bytes:(await r.arrayBuffer()).byteLength};}catch(e){o[u]={ok:false,error:String(e)}}return o;});
+ out.checks.assets=await p.evaluate(async()=>{const urls=['./manifest.json','./sw.js','./assets/fonts/fonts.css','./assets/icons/tabler-icons.min.css','./icons/icon-192.png','./corpus/volume_36.json','./corpus/search_v2_index.json'];const o={};for(const u of urls){try{const r=await fetch(u,{cache:'no-store'});o[u]={ok:r.ok,status:r.status,bytes:(await r.arrayBuffer()).byteLength};}catch(e){o[u]={ok:false,error:String(e)}}}return o;});
 
  // Responsive smoke in same exact app, new pages/contexts
  const widths=[[390,844],[820,1180],[1440,900]],layouts=[];
