@@ -28,8 +28,8 @@ jobs:
           assert hashlib.sha256(Path('qa-marie-v48b3-blind-package/sw.js').read_bytes()).hexdigest()=='968c4bde3aecf07f5fc27a0ad91e28ea845180aae0ccf80f7282f17434d2d2be'
           csp=re.search(r'Content-Security-Policy" content="([^"]+)"',s).group(1)
           assert "'unsafe-inline'" not in csp and "script-src-attr 'none'" in csp and "style-src-attr 'none'" in csp
-          scripts=[m.group(1) for m in re.finditer(r'<script(?![^>]*\\bsrc=)[^>]*>([\\s\\S]*?)</script>',s,re.I)]
-          styles=re.findall(r'<style[^>]*>([\\s\\S]*?)</style>',s,re.I)
+          scripts=[m.group(1) for m in re.finditer(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>',s,re.I)]
+          styles=re.findall(r'<style[^>]*>([\s\S]*?)</style>',s,re.I)
           tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
           assert len(scripts)==3 and len(styles)==1 and all(tok(x) in csp for x in scripts+styles)
           assert "const APP_VERSION = '48';" in s and "const VERSION = '48';" in Path('qa-marie-v48b3-blind-package/sw.js').read_text()
