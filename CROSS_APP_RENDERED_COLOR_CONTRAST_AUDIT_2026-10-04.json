@@ -22,171 +22,52 @@
               "nodes": [
                 {
                   "target": [
-                    "button[data-filter=\"all\"]"
-                  ],
-                  "html": "<button class=\"chip active\" data-action=\"filter\" data-filter=\"all\" aria-pressed=\"true\">Toutes</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.19 (foreground color: #d7bf7c, background color: #5c667b, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-filter=\"fav\"]"
-                  ],
-                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"fav\" aria-pressed=\"false\">♥ Favoris</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #92897f, background color: #fdfcfb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-filter=\"unread\"]"
-                  ],
-                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"unread\" aria-pressed=\"false\">Non lues</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #92897f, background color: #fdfcfb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-filter=\"Divine Volonté\"]"
-                  ],
-                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Divine Volonté\" aria-pressed=\"false\">Divine Volonté</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #92897f, background color: #fdfcfb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-filter=\"Croix\"]"
-                  ],
-                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Croix\" aria-pressed=\"false\">Croix</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #92897f, background color: #fdfcfb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-filter=\"Paix\"]"
-                  ],
-                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Paix\" aria-pressed=\"false\">Paix</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #92897f, background color: #fdfcfb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-filter=\"Prêtres\"]"
-                  ],
-                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Prêtres\" aria-pressed=\"false\">Prêtres</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #92897f, background color: #fdfcfb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-filter=\"Deuil\"]"
-                  ],
-                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Deuil\" aria-pressed=\"false\">Deuil</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #92897f, background color: #fdfcfb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-filter=\"Confiance\"]"
-                  ],
-                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Confiance\" aria-pressed=\"false\">Confiance</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #92897f, background color: #fdfcfb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-filter=\"Propagation des écrits\"]"
-                  ],
-                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Propagation des écrits\" aria-pressed=\"false\">Propagation</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.35 (foreground color: #92897f, background color: #fdfcfb, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    ".lrp-label"
-                  ],
-                  "html": "<div class=\"lrp-label\" style=\"font-size:10px;color:var(--muted);font-family:var(--body)\">0 / 136 lues (0%)</div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.18 (foreground color: #92897f, background color: #f9f6f0, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-n=\"1\"] > .li-body > .li-dest"
-                  ],
-                  "html": "<div class=\"li-dest\">Supérieurs généraux des Pères Rogationnistes et des Filles du Divin Zèle · 24 février 1932</div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.18 (foreground color: #92897f, background color: #f9f6f0, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
                     "button[data-n=\"1\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill"
                   ],
                   "html": "<span class=\"topic-pill\">Deuil</span>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.99 (foreground color: #9f885d, background color: #f6f0df, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-n=\"2\"] > .li-body > .li-dest"
-                  ],
-                  "html": "<div class=\"li-dest\">Sœur Giovannina · 14 mai 1932</div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.18 (foreground color: #92897f, background color: #f9f6f0, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.15 (foreground color: #8a6e3a, background color: #f6eedb, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
                 },
                 {
                   "target": [
                     "button[data-n=\"2\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill"
                   ],
                   "html": "<span class=\"topic-pill\">Sainteté</span>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.99 (foreground color: #9f885d, background color: #f6f0df, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-n=\"3\"] > .li-body > .li-dest"
-                  ],
-                  "html": "<div class=\"li-dest\">la Mère Générale des Filles du Divin Zèle · 22 juillet 1932</div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.18 (foreground color: #92897f, background color: #f9f6f0, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.15 (foreground color: #8a6e3a, background color: #f6eedb, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
                 },
                 {
                   "target": [
                     "button[data-n=\"3\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill:nth-child(1)"
                   ],
                   "html": "<span class=\"topic-pill\">Jésus fait tout en nous</span>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.99 (foreground color: #9f885d, background color: #f6f0df, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.15 (foreground color: #8a6e3a, background color: #f6eedb, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
                 },
                 {
                   "target": [
                     "button[data-n=\"3\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill:nth-child(2)"
                   ],
                   "html": "<span class=\"topic-pill\">Vœux de fête</span>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.99 (foreground color: #9f885d, background color: #f6f0df, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-n=\"4\"] > .li-body > .li-dest"
-                  ],
-                  "html": "<div class=\"li-dest\">Pour la bonne Sœur Giovannina </div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.18 (foreground color: #92897f, background color: #f9f6f0, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.15 (foreground color: #8a6e3a, background color: #f6eedb, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
                 },
                 {
                   "target": [
                     "button[data-n=\"4\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill"
                   ],
                   "html": "<span class=\"topic-pill\">Sainteté</span>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.99 (foreground color: #9f885d, background color: #f6f0df, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-n=\"5\"] > .li-body > .li-dest"
-                  ],
-                  "html": "<div class=\"li-dest\">une bonne fille dans le Vouloir Divin</div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.18 (foreground color: #92897f, background color: #f9f6f0, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.15 (foreground color: #8a6e3a, background color: #f6eedb, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
                 },
                 {
                   "target": [
                     "button[data-n=\"5\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill:nth-child(1)"
                   ],
                   "html": "<span class=\"topic-pill\">Prière pour le Don</span>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.99 (foreground color: #9f885d, background color: #f6f0df, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.15 (foreground color: #8a6e3a, background color: #f6eedb, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
                 },
                 {
                   "target": [
                     "button[data-n=\"5\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill:nth-child(2)"
                   ],
                   "html": "<span class=\"topic-pill\">Sainteté</span>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.99 (foreground color: #9f885d, background color: #f6f0df, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-n=\"6\"] > .li-body > .li-dest"
-                  ],
-                  "html": "<div class=\"li-dest\">une bonne fille dans le Vouloir Divin</div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.18 (foreground color: #92897f, background color: #f9f6f0, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.15 (foreground color: #8a6e3a, background color: #f6eedb, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
                 }
               ]
             }
@@ -214,7 +95,22 @@
         },
         {
           "label": "help",
-          "violations": []
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "nodes": [
+                {
+                  "target": [
+                    "#toast"
+                  ],
+                  "html": "<div class=\"toast\" id=\"toast\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\">Mode clair</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.19 (foreground color: #d7bf7c, background color: #5c667b, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ]
+            }
+          ]
         },
         {
           "label": "reader",
@@ -312,7 +208,7 @@
                     "#snav-home"
                   ],
                   "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.2 (foreground color: #878d95, background color: #1c2b4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.21 (foreground color: #888d96, background color: #1c2b4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
                 },
                 {
                   "target": [
@@ -592,7 +488,22 @@
         },
         {
           "label": "help",
-          "violations": []
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "nodes": [
+                {
+                  "target": [
+                    "#toast"
+                  ],
+                  "html": "<div class=\"toast\" id=\"toast\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\">Mode clair</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.02 (foreground color: #f8f4ec, background color: #f4f1ec, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ]
+            }
+          ]
         },
         {
           "label": "reader",
@@ -672,7 +583,183 @@
         },
         {
           "label": "p-list",
-          "violations": []
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "nodes": [
+                {
+                  "target": [
+                    "button[data-filter=\"all\"]"
+                  ],
+                  "html": "<button class=\"chip active\" data-action=\"filter\" data-filter=\"all\" aria-pressed=\"true\">Toutes</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.99 (foreground color: #9d7d35, background color: #1a243a, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"fav\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"fav\" aria-pressed=\"false\">♥ Favoris</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.62 (foreground color: #7b7167, background color: #1e1a16, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"unread\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"unread\" aria-pressed=\"false\">Non lues</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.62 (foreground color: #7b7167, background color: #1e1a16, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Divine Volonté\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Divine Volonté\" aria-pressed=\"false\">Divine Volonté</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.62 (foreground color: #7b7167, background color: #1e1a16, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Croix\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Croix\" aria-pressed=\"false\">Croix</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.62 (foreground color: #7b7167, background color: #1e1a16, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Paix\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Paix\" aria-pressed=\"false\">Paix</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.62 (foreground color: #7b7167, background color: #1e1a16, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Prêtres\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Prêtres\" aria-pressed=\"false\">Prêtres</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.62 (foreground color: #7b7167, background color: #1e1a16, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Deuil\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Deuil\" aria-pressed=\"false\">Deuil</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.62 (foreground color: #7b7167, background color: #1e1a16, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Confiance\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Confiance\" aria-pressed=\"false\">Confiance</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.62 (foreground color: #7b7167, background color: #1e1a16, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Propagation des écrits\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Propagation des écrits\" aria-pressed=\"false\">Propagation</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.62 (foreground color: #7b7167, background color: #1e1a16, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    ".lrp-label"
+                  ],
+                  "html": "<div class=\"lrp-label\" style=\"font-size:10px;color:var(--muted);font-family:var(--body)\">0 / 136 lues (0%)</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.76 (foreground color: #7b7167, background color: #1a1612, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"1\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">Supérieurs généraux des Pères Rogationnistes et des Filles du Divin Zèle · 24 février 1932</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.76 (foreground color: #7b7167, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"1\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill"
+                  ],
+                  "html": "<span class=\"topic-pill\">Deuil</span>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.07 (foreground color: #9d773e, background color: #251d11, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"2\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">Sœur Giovannina · 14 mai 1932</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.76 (foreground color: #7b7167, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"2\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill"
+                  ],
+                  "html": "<span class=\"topic-pill\">Sainteté</span>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.07 (foreground color: #9d773e, background color: #251d11, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"3\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">la Mère Générale des Filles du Divin Zèle · 22 juillet 1932</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.76 (foreground color: #7b7167, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"3\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill:nth-child(1)"
+                  ],
+                  "html": "<span class=\"topic-pill\">Jésus fait tout en nous</span>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.07 (foreground color: #9d773e, background color: #251d11, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"3\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill:nth-child(2)"
+                  ],
+                  "html": "<span class=\"topic-pill\">Vœux de fête</span>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.07 (foreground color: #9d773e, background color: #251d11, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"4\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">Pour la bonne Sœur Giovannina </div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.76 (foreground color: #7b7167, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"4\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill"
+                  ],
+                  "html": "<span class=\"topic-pill\">Sainteté</span>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.07 (foreground color: #9d773e, background color: #251d11, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"5\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">une bonne fille dans le Vouloir Divin</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.76 (foreground color: #7b7167, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"5\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill:nth-child(1)"
+                  ],
+                  "html": "<span class=\"topic-pill\">Prière pour le Don</span>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.07 (foreground color: #9d773e, background color: #251d11, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"5\"] > .li-body > .li-topics[aria-hidden=\"true\"] > .topic-pill:nth-child(2)"
+                  ],
+                  "html": "<span class=\"topic-pill\">Sainteté</span>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.07 (foreground color: #9d773e, background color: #251d11, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"6\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">une bonne fille dans le Vouloir Divin</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.76 (foreground color: #7b7167, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ]
+            }
+          ]
         },
         {
           "label": "p-search",
@@ -794,7 +881,7 @@
                     "#snav-home"
                   ],
                   "html": "<button class=\"snav-item\" onclick=\"switchPanel('p-home')\" id=\"snav-home\" aria-label=\"Accueil\"><svg class=\"ti ti-home\" aria-hidden=\"true\" focusable=\"false\"><use href=\"./vendor/tabler/tabler-sprite.svg#tabler-home\"></use></svg>Accueil</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.11 (foreground color: #848b99, background color: #1b2b4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.22 (foreground color: #898d95, background color: #1c2b4a, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
                 },
                 {
                   "target": [
@@ -837,6 +924,132 @@
                   ],
                   "html": "<div class=\"build-meta\" style=\"font-family:var(--body);font-size:9px;color:rgba(255,255,255,.2);letter-spacing:.06em;padding:4px 0 2px;\">v2.4 · 2026-09-29</div>",
                   "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 1.89 (foreground color: #48556e, background color: #1a2a4a, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"fav\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"fav\" aria-pressed=\"false\">♥ Favoris</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.25 (foreground color: #887d72, background color: #1f1b17, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"unread\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"unread\" aria-pressed=\"false\">Non lues</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.25 (foreground color: #887d72, background color: #1f1b17, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Divine Volonté\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Divine Volonté\" aria-pressed=\"false\">Divine Volonté</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.25 (foreground color: #887d72, background color: #1f1b17, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Croix\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Croix\" aria-pressed=\"false\">Croix</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.25 (foreground color: #887d72, background color: #1f1b17, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Paix\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Paix\" aria-pressed=\"false\">Paix</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.25 (foreground color: #887d72, background color: #1f1b17, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Prêtres\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Prêtres\" aria-pressed=\"false\">Prêtres</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.25 (foreground color: #887d72, background color: #1f1b17, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Deuil\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Deuil\" aria-pressed=\"false\">Deuil</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.25 (foreground color: #887d72, background color: #1f1b17, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Confiance\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Confiance\" aria-pressed=\"false\">Confiance</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.25 (foreground color: #887d72, background color: #1f1b17, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-filter=\"Propagation des écrits\"]"
+                  ],
+                  "html": "<button class=\"chip\" data-action=\"filter\" data-filter=\"Propagation des écrits\" aria-pressed=\"false\">Propagation</button>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.25 (foreground color: #887d72, background color: #1f1b17, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    ".lrp-label"
+                  ],
+                  "html": "<div class=\"lrp-label\" style=\"font-size:10px;color:var(--muted);font-family:var(--body)\">0 / 136 lues (0%)</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.47 (foreground color: #887d72, background color: #1a1612, font size: 9.8pt (13px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"1\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">Supérieurs généraux des Pères Rogationnistes et des Filles du Divin Zèle · 24 février 1932</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.47 (foreground color: #887d72, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"2\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">Sœur Giovannina · 14 mai 1932</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.47 (foreground color: #887d72, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"3\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">la Mère Générale des Filles du Divin Zèle · 22 juillet 1932</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.47 (foreground color: #887d72, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"4\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">Pour la bonne Sœur Giovannina </div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.47 (foreground color: #887d72, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"5\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">une bonne fille dans le Vouloir Divin</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.47 (foreground color: #887d72, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"6\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">une bonne fille dans le Vouloir Divin</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.47 (foreground color: #887d72, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"7\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">une bonne fille</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.47 (foreground color: #887d72, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                },
+                {
+                  "target": [
+                    "button[data-n=\"8\"] > .li-body > .li-dest"
+                  ],
+                  "html": "<div class=\"li-dest\">très révérend Vicaire</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.47 (foreground color: #887d72, background color: #1a1612, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
                 }
               ]
             }
@@ -958,36 +1171,7 @@
         },
         {
           "label": "note-modal",
-          "violations": [
-            {
-              "id": "color-contrast",
-              "impact": "serious",
-              "help": "Elements must meet minimum color contrast ratio thresholds",
-              "nodes": [
-                {
-                  "target": [
-                    "#note-modal-subtitle"
-                  ],
-                  "html": "<div class=\"modal-subtitle\" id=\"note-modal-subtitle\">Jour 2 · VM_DV.D02.P001 · nouvelle note</div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.66 (foreground color: #878298, background color: #dcdae0, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "#note-modal-excerpt"
-                  ],
-                  "html": "<div class=\"note-excerpt\" id=\"note-modal-excerpt\">Ô céleste Maman, me voici de nouveau sur tes genoux maternels pour entendre tes leçons. La fille indigente que je suis se place sous ton autorité. Je suis très …</div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.61 (foreground color: #868197, background color: #d9d6df, font size: 11.6pt (15.5px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-csp-click=\"App.closeNoteModal()\"]"
-                  ],
-                  "html": "<button class=\"modal-btn modal-btn-cancel\" data-csp-click=\"App.closeNoteModal()\">Annuler</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.66 (foreground color: #878298, background color: #dcdae0, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                }
-              ]
-            }
-          ]
+          "violations": []
         },
         {
           "label": "espace",
@@ -1003,7 +1187,22 @@
         },
         {
           "label": "help",
-          "violations": []
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "nodes": [
+                {
+                  "target": [
+                    "#toast"
+                  ],
+                  "html": "<div class=\"toast\" id=\"toast\" role=\"status\" aria-live=\"polite\">Thème clair activé</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.63 (foreground color: #f8f6fc, background color: #9b98a6, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ]
+            }
+          ]
         }
       ],
       "errors": []
@@ -1197,43 +1396,7 @@
         },
         {
           "label": "note-modal",
-          "violations": [
-            {
-              "id": "color-contrast",
-              "impact": "serious",
-              "help": "Elements must meet minimum color contrast ratio thresholds",
-              "nodes": [
-                {
-                  "target": [
-                    "#note-modal-subtitle"
-                  ],
-                  "html": "<div class=\"modal-subtitle\" id=\"note-modal-subtitle\">Jour 2 · VM_DV.D02.P001 · nouvelle note</div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.87 (foreground color: #625d6c, background color: #16141b, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "#note-modal-excerpt"
-                  ],
-                  "html": "<div class=\"note-excerpt\" id=\"note-modal-excerpt\">Ô céleste Maman, me voici de nouveau sur tes genoux maternels pour entendre tes leçons. La fille indigente que je suis se place sous ton autorité. Je suis très …</div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.84 (foreground color: #625e6f, background color: #181622, font size: 11.6pt (15.5px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "#note-modal > .modal-sheet[data-csp-click=\"event.stopPropagation()\"] > .modal-body > div:nth-child(3)"
-                  ],
-                  "html": "<div data-csp-style=\"text-align:right;font-size:11px;color:var(--muted);margin-top:4px\" style=\"text-align: right; font-size: 11px; color: var(--muted); margin-top: 4px;\"><span id=\"note-char-count\">0</span> / 1000</div>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.87 (foreground color: #625d6c, background color: #16141b, font size: 8.3pt (11px), font weight: normal). Expected contrast ratio of 4.5:1"
-                },
-                {
-                  "target": [
-                    "button[data-csp-click=\"App.closeNoteModal()\"]"
-                  ],
-                  "html": "<button class=\"modal-btn modal-btn-cancel\" data-csp-click=\"App.closeNoteModal()\">Annuler</button>",
-                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.87 (foreground color: #625d6c, background color: #16141b, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
-                }
-              ]
-            }
-          ]
+          "violations": []
         },
         {
           "label": "espace",
@@ -1249,7 +1412,22 @@
         },
         {
           "label": "help",
-          "violations": []
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "help": "Elements must meet minimum color contrast ratio thresholds",
+              "nodes": [
+                {
+                  "target": [
+                    "#toast"
+                  ],
+                  "html": "<div class=\"toast\" id=\"toast\" role=\"status\" aria-live=\"polite\">Thème sombre activé</div>",
+                  "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 3.36 (foreground color: #1a1720, background color: #6e6a78, font size: 10.5pt (14px), font weight: normal). Expected contrast ratio of 4.5:1"
+                }
+              ]
+            }
+          ]
         }
       ],
       "errors": []
