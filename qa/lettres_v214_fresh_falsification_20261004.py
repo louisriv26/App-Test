@@ -16,7 +16,7 @@ def rec(name, ok, detail=None):
     if not ok:
         raise AssertionError(f'{name}: {detail}')
 
-def ready(pg, version='2.13'):
+def ready(pg, version='2.14'):
     pg.locator('#loading').wait_for(state='detached',timeout=25000)
     expect(pg.locator('#list-title')).to_have_text('136 Lettres')
     expect(pg.locator('.build-meta').first).to_contain_text('v'+version)
@@ -233,14 +233,14 @@ with sync_playwright() as p:
     rec('update:banner_visible',True,pg.locator('#update-banner-message').inner_text())
     pg.locator('#update-apply-btn').click()
     expect(pg.locator('.build-meta').first).to_contain_text('v2.14',timeout=25000)
-    ready(pg,'2.13')
+    ready(pg,'2.14')
     succ_state=protected_storage(pg)
     rec('update:state_exactly_preserved',all(succ_state.get(k)==pred_state.get(k) for k in ['lp_favs','lp_notes','lp_read','lp_theme','lp_state_schema']),{'before':pred_state,'after':succ_state})
     succ_caches=pg.evaluate("caches.keys()")
     rec('update:successor_cache_ids',any('shell-v2.14-b1' in x for x in succ_caches) and any('corpus-v2.14-b1' in x for x in succ_caches),succ_caches)
     rec('update:predecessor_caches_removed',not any('v2.12-b1' in x for x in succ_caches),succ_caches)
     pg.close(); ctx.set_offline(True); off=ctx.new_page(); c2,e2=errors(off)
-    off.goto(LOCAL+'?letter=LP.LETTER.002',wait_until='domcontentloaded',timeout=20000); ready(off,'2.13')
+    off.goto(LOCAL+'?letter=LP.LETTER.002',wait_until='domcontentloaded',timeout=20000); ready(off,'2.14')
     expect(off.locator('#pr-pos')).to_have_text('2 / 136')
     fav=off.evaluate("JSON.parse(localStorage.getItem('lp_favs')||'[]')")
     note=off.evaluate("localStorage.getItem('lp_notes')||''")
