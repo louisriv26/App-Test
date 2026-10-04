@@ -1,0 +1,43 @@
+name: LDC v139 final bounded blind challenge 2026-10-04
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-ldc-v139-final-blind/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  blind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8153 --bind 127.0.0.1 >/tmp/ldc139-final-blind.log 2>&1 &
+          sleep 2
+      - run: timeout 180s node qa-ldc-v139-final-blind.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-final-blind, path: qa-ldc-v139-final-blind-results.json}
+      - name: Record blind evidence
+        if: always()
+        shell: bash
+        run: |
+          test -f qa-ldc-v139-final-blind-results.json
+          python3 - <<'PY'
+          import json,sys
+          j=json.load(open('qa-ldc-v139-final-blind-results.json'))
+          print(j.get('overall'),j.get('assertions'))
+          if j.get('overall')!='PASS': sys.exit(1)
+          PY
+          mkdir -p .github/qa-ldc-v139-final-blind
+          cp qa-ldc-v139-final-blind-results.json .github/qa-ldc-v139-final-blind/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa-ldc-v139-final-blind/qa-ldc-v139-final-blind-results.json
+          git commit -m 'Record final independent LDC v139 blind challenge' || true
+          git pull --rebase origin main
+          git push origin HEAD:main
