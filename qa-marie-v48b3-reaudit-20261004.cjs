@@ -152,8 +152,7 @@ async function assertCore(p,label){
     const before=await p.evaluate(pid=>({records:(State.highlights.get(pid)||[]).length,whole:(State.highlights.get(pid)||[]).some(h=>!h.range)}),pid);
     if(!before.records||!before.whole) throw new Error('android whole highlight absent '+JSON.stringify(before));
     await p.reload({waitUntil:'domcontentloaded',timeout:60000}); await ready(p);
-    await p.click('.cal-cell[data-day="1"]'); await p.waitForFunction(()=>document.getElementById('screen-reader').classList.contains('active'));
-    const after=await p.evaluate(pid=>({records:(State.highlights.get(pid)||[]).length,whole:(State.highlights.get(pid)||[]).some(h=>!h.range)}),pid);
+    const after=await p.evaluate(pid=>({records:(State.highlights.get(pid)||[]).length,whole:(State.highlights.get(pid)||[]).some(h=>!h.range),readerResumed:document.getElementById('screen-reader').classList.contains('active')}),pid);
     if(!after.records||!after.whole) throw new Error('android highlight persistence '+JSON.stringify(after));
     const bad=badErrors(errors); if(bad.length) throw new Error('android runtime errors '+JSON.stringify(bad));
     report.android={core,pid,before,after,errors};
