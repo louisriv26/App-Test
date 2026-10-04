@@ -1,0 +1,27 @@
+name: Stage Lettres v2.13 CSP-cleanup successor
+on:
+  push:
+    branches: [main]
+    paths: ['.github/lettres-v2.13-stage/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind immutable v2.12 predecessor
+        run: test "$(git rev-parse HEAD:lettres-v2.12-b1-darkmode)" = "03617ce508bb9cce7e114c1cec4aa40c3a0b6dc9"
+      - name: Build bounded v2.13 successor
+        run: python3 .github/scripts/stage_lettres_v2_13.py
+      - name: Commit staged successor
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lettres-v2.13-b1-csp-cleanup
+          git diff --cached --quiet && { echo "No staged successor"; exit 1; }
+          git commit -m "Stage Lettres v2.13 CSP-cleanup successor"
+          git push
