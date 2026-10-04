@@ -80,9 +80,9 @@ with sync_playwright() as p:
                 expect(b).to_have_count(1); b.click(); pg.wait_for_timeout(80)
                 got=pg.locator('#letter-list .letter-item').count()
                 rec('filter:'+key,got==want,{'got':got,'want':want})
-            pg.locator('#pnav-home').click(); pg.wait_for_timeout(100)
+            pg.locator('#pnav-explore').click(); pg.wait_for_timeout(100)
             for pid,want in PATHS.items():
-                card=pg.locator('#home-paths [data-path-id="'+pid+'"]')
+                card=pg.locator('#exp-paths-grid [data-path-id="'+pid+'"]')
                 expect(card).to_have_count(1); card.click()
                 expect(pg.locator('#path-modal')).to_have_class(re.compile('show'))
                 got=[int(x) for x in pg.locator('#path-letter-list .path-letter-item').evaluate_all("els=>els.map(e=>e.dataset.n)")]
@@ -90,7 +90,7 @@ with sync_playwright() as p:
                 if pid=='abandon':
                     pg.locator('#path-letter-list .path-letter-item').first.click(); pg.wait_for_timeout(250)
                     expect(pg.locator('#pr-pos')).to_have_text('44 / 136'); rec('path:abandon:open44',True)
-                    pg.get_by_role('button',name='Retour à la liste').click(); pg.locator('#pnav-home').click()
+                    pg.get_by_role('button',name='Retour à la liste').click(); pg.locator('#pnav-explore').click()
                 else:
                     pg.locator('#path-modal-back').click()
                     expect(pg.locator('#path-modal')).not_to_have_class(re.compile('show'))
