@@ -62,15 +62,15 @@ async function marieScenes(browser,viewport,theme){
     const inp=p.locator('#wide-search-input');if(await inp.count()){await inp.fill('Fiat');await p.waitForTimeout(180);}await scan('search');
     const res=p.locator('#wide-list-scroll .snippet-card').first();if(await res.count()){await res.click();await p.waitForTimeout(180);await scan('reader');}
     await p.evaluate(()=>App.wideNav('espace'));await p.waitForTimeout(120);await scan('espace');
-    await p.evaluate(()=>App.toggleWideTextsizePanel());await p.waitForTimeout(100);await scan('textsize');
-    await p.evaluate(()=>App.openThemePicker(document.getElementById('wnav-dark')));await p.waitForTimeout(100);await scan('theme-picker');
+    await p.evaluate(()=>App.toggleWideTextsizePanel());await p.waitForTimeout(350);await scan('textsize');
+    await p.evaluate(()=>App.openThemePicker(document.getElementById('wnav-dark')));await p.waitForTimeout(350);await scan('theme-picker');
     await p.evaluate(()=>App.closeThemePicker());await p.waitForTimeout(50);
-    await p.evaluate(()=>App.openHelp());await p.waitForTimeout(120);await scan('help');
+    await p.evaluate(()=>App.openHelp());await p.waitForTimeout(350);await scan('help');
   } else {
     await p.evaluate(()=>App.openSearchNav());await p.waitForTimeout(80);
     const inp=p.locator('#search-input');if(await inp.count()){await inp.fill('Fiat');await p.waitForTimeout(180);}await scan('search');
     const res=p.locator('#list-scroll .snippet-card').first();if(await res.count()){await res.click();await p.waitForTimeout(180);await scan('reader');
-      const pid=await p.locator('#reader-body p[data-pid]').first().getAttribute('data-pid');if(pid){await p.evaluate(pid=>App.openNoteModal(pid),pid);await p.waitForTimeout(100);await scan('note-modal');await p.evaluate(()=>App.closeNoteModal());await p.waitForTimeout(50);}
+      const pid=await p.locator('#reader-body p[data-pid]').first().getAttribute('data-pid');if(pid){await p.evaluate(pid=>App.openNoteModal(pid),pid);await p.waitForTimeout(400);await scan('note-modal');await p.evaluate(()=>App.closeNoteModal());await p.waitForTimeout(50);}
     }
     await p.evaluate(()=>App.showScreen('espace'));await p.waitForTimeout(120);await scan('espace');
     await p.evaluate(()=>App.toggleTextsizePanel());await p.waitForTimeout(100);await scan('textsize');
