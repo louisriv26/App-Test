@@ -57,7 +57,7 @@ jobs:
           def norm(s,v):
               s=re.sub(r'(<meta http-equiv="Content-Security-Policy" content=")[^"]+(")',r'\1<CSP>\2',s,count=1)
               return s.replace("const APP_VERSION = '"+v+"';","const APP_VERSION = '<VERSION>';")
-                    nold=norm(old,'47'); nnew=norm(new,'48')
+          nold=norm(old,'47'); nnew=norm(new,'48')
           addition='.note-textarea::placeholder { color: var(--muted); }'
           assert nnew.count(addition)==1
           nnew=nnew.replace(addition+'\n','',1)
