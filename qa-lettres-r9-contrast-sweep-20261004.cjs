@@ -14,24 +14,37 @@ function contrastJS(){
   function lum(c){return .2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b)}
   function ratio(a,b){return (Math.max(lum(a),lum(b))+.05)/(Math.min(lum(a),lum(b))+.05)}
   function bgFor(el){
-    let bg={r:0,g:0,b:0,a:0}, n=el;
-    while(n){
-      const c=parseColor(getComputedStyle(n).backgroundColor);
-      if(c&&c.a>0) bg=comp(bg,c);
-      if(bg.a>=.999) break;
-      n=n.parentElement;
-    }
-    if(bg.a<1) bg=comp(bg,{r:255,g:255,b:255,a:1});
+    let layers=[], n=el;
+    while(n){const c=parseColor(getComputedStyle(n).backgroundColor);if(c&&c.a>0)layers.push(c);n=n.parentElement;}
+    let bg={r:255,g:255,b:255,a:1};
+    for(let i=layers.length-1;i>=0;i--)bg=comp(layers[i],bg);
     return bg;
   }
   function visible(el){const r=el.getBoundingClientRect(),cs=getComputedStyle(el);return r.width>1&&r.height>1&&cs.display!=='none'&&cs.visibility!=='hidden'&&+cs.opacity>0;}
   const roots=[...document.querySelectorAll('button,a,[role="button"],summary,input,select,textarea')].filter(visible);
   return roots.map((el,idx)=>{
-    const bg=bgFor(el), cs=getComputedStyle(el);
-    const nodes=[el,...el.querySelectorAll('span,i,strong')].filter(visible);
-    const samples=nodes.map(n=>{const c=parseColor(getComputedStyle(n).color); return c?{tag:n.tagName,cls:n.className,color:getComputedStyle(n).color,ratio:ratio(comp(c,bg),bg)}:null}).filter(Boolean);
-    const min=samples.length?Math.min(...samples.map(x=>x.ratio)):99;
-    return {idx,tag:el.tagName,id:el.id||'',cls:String(el.className||''),text:(el.innerText||el.getAttribute('aria-label')||el.value||el.placeholder||'').trim().replace(/\s+/g,' ').slice(0,120),bg:getComputedStyle(el).backgroundColor,color:cs.color,minRatio:min,samples};
+    const samples=[];
+    const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);
+    let n;
+    while(n=walker.nextNode()){
+      const text=(n.nodeValue||'').replace(/\s+/g,' ').trim();
+      if(!text)continue;
+      const pe=n.parentElement;if(!pe||!visible(pe))continue;
+      const fg=parseColor(getComputedStyle(pe).color),bg=bgFor(pe);if(!fg)continue;
+      samples.push({kind:'text',text:text.slice(0,80),tag:pe.tagName,cls:String(pe.className||''),color:getComputedStyle(pe).color,bg:getComputedStyle(pe).backgroundColor,ratio:ratio(comp(fg,bg),bg)});
+    }
+    for(const icon of el.querySelectorAll('i[class*="ti"]')){
+      if(!visible(icon))continue;
+      const fg=parseColor(getComputedStyle(icon).color),bg=bgFor(icon);if(!fg)continue;
+      samples.push({kind:'icon',text:'',tag:'I',cls:String(icon.className||''),color:getComputedStyle(icon).color,bg:getComputedStyle(icon).backgroundColor,ratio:ratio(comp(fg,bg),bg)});
+    }
+    // Controls with value/placeholder but no child text.
+    if(samples.length===0 && ['INPUT','SELECT','TEXTAREA'].includes(el.tagName)){
+      const fg=parseColor(getComputedStyle(el).color),bg=bgFor(el);if(fg)samples.push({kind:'text',text:(el.value||el.placeholder||'').slice(0,80),tag:el.tagName,cls:String(el.className||''),color:getComputedStyle(el).color,bg:getComputedStyle(el).backgroundColor,ratio:ratio(comp(fg,bg),bg)});
+    }
+    const minText=samples.filter(x=>x.kind==='text').reduce((m,x)=>Math.min(m,x.ratio),99);
+    const minIcon=samples.filter(x=>x.kind==='icon').reduce((m,x)=>Math.min(m,x.ratio),99);
+    return {idx,tag:el.tagName,id:el.id||'',cls:String(el.className||''),label:(el.getAttribute('aria-label')||el.innerText||el.value||el.placeholder||'').trim().replace(/\s+/g,' ').slice(0,120),minText,minIcon,samples};
   });
 }
 
@@ -69,9 +82,9 @@ function contrastJS(){
  const severe=[], low=[];
  for(const s of out) for(const r of s.rows){
    const item={viewport:s.viewport,theme:s.theme,surface:s.surface,...r};
-   if(r.minRatio<2) severe.push(item); else if(r.minRatio<4.5) low.push(item);
+   if(r.minText<2 || r.minIcon<1.5) severe.push(item); else if(r.minText<4.5 || r.minIcon<3) low.push(item);
  }
- const uniq=a=>{const m=new Map();for(const x of a){const k=[x.theme,x.surface,x.id,x.cls,x.text,x.minRatio.toFixed(3)].join('|');if(!m.has(k))m.set(k,x)}return [...m.values()]}
+ const uniq=a=>{const m=new Map();for(const x of a){const k=[x.viewport,x.theme,x.surface,x.id,x.cls,x.label,x.minText.toFixed(3),x.minIcon.toFixed(3)].join('|');if(!m.has(k))m.set(k,x)}return [...m.values()]}
  const report={severe:uniq(severe),low:uniq(low),sceneCount:out.length,status:'DONE'};
  fs.writeFileSync('LETTRES_R9_CONTRAST_SWEEP_2026-10-04.json',JSON.stringify(report,null,2));
  console.log('SEVERE',JSON.stringify(report.severe,null,2));
