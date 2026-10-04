@@ -1,0 +1,58 @@
+{
+  "candidate": "LDC v137/R10 independent blind challenge",
+  "generated_at": "2026-10-04T04:29:49.205Z",
+  "overall": "PASS",
+  "probes": {
+    "app": "v2.19.137-R1B-UX-ACCESS-R10",
+    "pub": "137",
+    "swExpected": "ldc-v2.19.137-R1B-ux-access-r10",
+    "versionApp": "v2.19.137-R1B-UX-ACCESS-R10",
+    "versionPub": "137",
+    "versionWorker": "ldc-v2.19.137-R1B-ux-access-r10",
+    "offlineApp": "v2.19.137-R1B-UX-ACCESS-R10",
+    "offlineWorker": "ldc-v2.19.137-R1B-ux-access-r10",
+    "swHasVersion": true,
+    "swHasShell": true,
+    "swHasRuntime": true,
+    "swHasStale": false,
+    "caches": [
+      "ldc-le-livre-du-ciel-4bbe876e-runtime-v2.19.137-R1B-ux-access-r10",
+      "ldc-le-livre-du-ciel-4bbe876e-shell-v2.19.137-R1B-ux-access-r10",
+      "ldc-le-livre-du-ciel-offline-persistent-v3-4bbe876e"
+    ],
+    "tomes": 36,
+    "entries": 46,
+    "loadingVisible": false,
+    "versionPill": "v137",
+    "css": [
+      {
+        "tag": "DIV",
+        "fg": "rgb(212, 168, 67)",
+        "bg": "rgb(42, 32, 16)"
+      },
+      {
+        "tag": "SUMMARY",
+        "fg": "rgb(212, 200, 188)",
+        "bg": "rgba(0, 0, 0, 0)"
+      }
+    ]
+  },
+  "index": {
+    "served": "93fb31a3f7b7c2ba77f9c2eaa984178cafd18cd15398b338550c954ce0c3bab4",
+    "local": "93fb31a3f7b7c2ba77f9c2eaa984178cafd18cd15398b338550c954ce0c3bab4"
+  },
+  "errors": {
+    "page": [],
+    "console": []
+  },
+  "falsification": {
+    "servedExact": true,
+    "identity": true,
+    "workerText": true,
+    "caches": true,
+    "ready": true,
+    "navigation": true,
+    "noErrors": true,
+    "staleCaches": []
+  }
+}
