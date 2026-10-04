@@ -1,0 +1,24 @@
+name: Final blind Lettres v2.12 public-edge challenge
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-lettres-v212-final-blind/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  blind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact frozen Lettres candidate
+        run: test "$(git rev-parse HEAD:lettres-v2.12-b1-darkmode)" = "03617ce508bb9cce7e114c1cec4aa40c3a0b6dc9"
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install independent browser engines
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
+      - name: Run public-edge blind challenge
+        run: python qa/lettres_v212_final_blind_20261004.py
