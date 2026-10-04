@@ -81,10 +81,11 @@ jobs:
             ("const RELEASE_SEQUENCE = 120000013;",f"const RELEASE_SEQUENCE = {SEQ};"),
             ("const RELEASE_ID = '24h-v120-b13-20261003-cross-theme-update-banner-closure';",f"const RELEASE_ID = '{RID}';"),
             ("const CANONICAL_SHELL_SHA256 = '765784949a85e64c8715f478a71117e10accaaff8dcf8614936a4d76bb7492dd';",f"const CANONICAL_SHELL_SHA256 = '{shell_sha}';"),
-            ("const CACHE_NAME = \`\${CACHE_PREFIX}v120-b13\`;","const CACHE_NAME = \`\${CACHE_PREFIX}v120-1-b1\`;")
           ]:
               assert a in sw, a
               sw=sw.replace(a,b,1)
+          assert sw.count('v120-b13') == 1
+          sw=sw.replace('v120-b13','v120-1-b1',1)
           p.write_text(sw,encoding='utf-8',newline='')
 
           p=out/'version.json'; v=json.loads(p.read_text(encoding='utf-8'))
