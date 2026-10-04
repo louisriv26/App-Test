@@ -39,10 +39,10 @@ async function pseudoContrast(p, sel) {
     let q=el.parentElement;
     while(bg.a<1 && q){const b=pc(getComputedStyle(q).backgroundColor);if(b&&b.a>0)bg=comp(bg,b);q=q.parentElement}
     if(bg.a<1)bg=comp(bg,{r:255,g:255,b:255,a:1});
-    const fg=pc(ps.color); if(!fg)return {sel,ratio:null,color:ps.color,bg:cs.backgroundColor};
+    const fg=pc(ps.color); if(!fg)return {selector:el.id||String(el.className||""),ratio:null,color:ps.color,bg:cs.backgroundColor};
     fg.a*=Number(ps.opacity||1);
     const rendered=comp(fg,bg);
-    return {sel,ratio:R(rendered,bg),color:ps.color,opacity:ps.opacity,bg:cs.backgroundColor};
+    return {selector:el.id||String(el.className||""),ratio:R(rendered,bg),color:ps.color,opacity:ps.opacity,bg:cs.backgroundColor};
   });
 }
 async function elementContrast(p, sel, pseudo=null) {
