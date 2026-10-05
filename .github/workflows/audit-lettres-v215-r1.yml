@@ -106,7 +106,7 @@ jobs:
           sleep 2
 
       - name: Pass 2 v2.14 to B2 update preservation
-        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-v2.14-b1-csp-repair --pre-version 2.14 --pre-cache v2.14-b1 --port 8132 --label audit-v214 | tee /tmp/upgrade-v214.log
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-v2.14-b1-csp-repair --pre-version 2.14 --pre-cache v2.14-b1 --port 8132 --label audit-v214 --scope /tmp/lettres-v215-v214-scope | tee /tmp/upgrade-v214.log
 
       - name: Prepare deployed v2.4 same-scope predecessor
         run: |
@@ -117,7 +117,7 @@ jobs:
           sleep 2
 
       - name: Pass 2 deployed v2.4 to B2 update preservation
-        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label audit-v24 | tee /tmp/upgrade-v24.log
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label audit-v24 --scope /tmp/lettres-v215-v24-scope | tee /tmp/upgrade-v24.log
 
       - name: Verify exact public App-Test edge bytes
         run: |
