@@ -179,4 +179,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Record broad regression evidence for frozen 24H v120.2 B2"
+          git pull --rebase origin main
           git push origin HEAD:main
