@@ -1,0 +1,73 @@
+name: Stage exact LDC v140 R15 Search text anchor closure
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/stage-ldc-v140-r15.yml'
+permissions:
+  contents: write
+concurrency:
+  group: stage-ldc-v140-r15
+  cancel-in-progress: false
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reconstruct exact R15 from frozen R14
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="ldc-v140-r14-search-scroll-repair"
+          DST="ldc-v140-r15-search-scroll-text-anchor"
+          test "$(git rev-parse HEAD:$SRC)" = "44da8d6b791de04e3115bf1773b3de34fc8a89be"
+          rm -rf "$DST"
+          cp -a "$SRC" "$DST"
+          printf '%s' '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' | base64 -d | gzip -d > /tmp/r15.patch
+          (cd "$DST" && patch -p1 --fuzz=0 < /tmp/r15.patch)
+          python3 - <<'PY'
+          import pathlib,hashlib,json
+          a=pathlib.Path('ldc-v140-r14-search-scroll-repair')
+          b=pathlib.Path('ldc-v140-r15-search-scroll-text-anchor')
+          expected={
+            'index.html':'86240b968dc5be3b41eb453b8e2c8d919d9ed40b836f97eee1808b528fb822f7',
+            'offline_manifest.json':'7004fd69630dfc5f77231de66e6f4196e0607d6734a668909b2d023f3eb36bfe',
+            'sw.js':'8548d60dd20889460a827645c70c2bfc1b642f2b4311766f393f9d91e42304ea',
+            'version.json':'595917cf6ebb629c65fd462c304f1f0b4ce324383abda8d13d00fa150901bfb2'
+          }
+          def fs(root): return {str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
+          x,y=fs(a),fs(b)
+          assert len(x)==len(y)==248
+          changed={p for p in x|y if x.get(p)!=y.get(p)}
+          assert changed==set(expected),changed
+          for p,h in expected.items(): assert y[p]==h,(p,y[p],h)
+          for p in x:
+            if p not in expected: assert x[p]==y[p],p
+          for p in b.rglob('*.json'): json.loads(p.read_text(encoding='utf-8'))
+          m=json.loads((b/'offline_manifest.json').read_text())
+          v=json.loads((b/'version.json').read_text())
+          assert v['app_version']=='v2.19.140-R1B-UX-ACCESS-R15'
+          assert str(v['public_version'])=='140'
+          assert v['page_worker_revision']=='ldc-v2.19.140-R1B-ux-access-r15'
+          assert m['app_version']==v['app_version'] and m['page_worker_revision']==v['page_worker_revision']
+          assert v['offline_manifest_sha256']==hashlib.sha256((b/'offline_manifest.json').read_bytes()).hexdigest()
+          assert len(m['assets'])==204 and m['total_bytes']==114483048
+          assert m['content_binding_sha256']=='1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384'
+          print('R15_BOUNDARY_PASS',sorted(changed))
+          PY
+          for f in $(find "$DST" -type f -name '*.js'); do node --check "$f" >/dev/null; done
+          git add "$DST"
+          test "$(git write-tree --prefix="$DST/")" = "05e1e69338b8061d7da915daa60bf3dc9f1abb18"
+      - name: Commit staged R15
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/stage-ldc-v140-r15.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Stage exact LDC v140 R15 Search text anchor closure'
+          git push origin HEAD:main
