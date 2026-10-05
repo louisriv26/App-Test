@@ -52,7 +52,7 @@ jobs:
       - name: Write focused adversarial Search test
         shell: bash
         run: |
-          cat >/tmp/qa-v140-scroll.cjs <<'NODE'
+          cat >qa-v140-scroll.cjs <<'NODE'
           const {chromium}=require('playwright');
           const fs=require('fs');
           const URL='http://127.0.0.1:8140/ldc-v140-r13-search-scroll-repair/';
@@ -96,7 +96,6 @@ jobs:
 
             await p.setViewportSize({width:390,height:700});await p.evaluate(()=>setTextLevel('normal'));await p.waitForTimeout(150);await searchForRoute(p,'amour');
             const before=await p.evaluate(()=>{const sc=document.getElementById('search-scroll'),cards=[...document.querySelectorAll('#search-results .result-card')],card=cards[Math.min(5,cards.length-1)];card.scrollIntoView({block:'start'});sc.scrollTop=Math.max(0,sc.scrollTop-24);const r=card.getBoundingClientRect(),sr=sc.getBoundingClientRect();return{key:card.dataset.resultKey,offset:r.top-sr.top,count:cards.length};});
-            const target=p.locator('#search-results .result-card').filter({has:p.locator(`[data-result-key="${before.key}"]`)}); // unused fallback
             await p.evaluate(key=>{const c=[...document.querySelectorAll('#search-results .result-card')].find(x=>x.dataset.resultKey===key);c.click();},before.key);
             await p.waitForFunction(()=>getComputedStyle(document.getElementById('screen-reader')).display!=='none',{timeout:90000});
             await p.evaluate(()=>backFromReader());
@@ -119,7 +118,7 @@ jobs:
       - run: |
           python3 -m http.server 8140 --bind 127.0.0.1 >/tmp/v140-focused-http.log 2>&1 &
           sleep 2
-          node /tmp/qa-v140-scroll.cjs
+          node qa-v140-scroll.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -156,12 +155,12 @@ jobs:
             ('qa-ldc-v139-current-results.json','qa-ldc-v140-current-results.json')
           ]
           for a,b in reps:s=s.replace(a,b)
-          Path('/tmp/qa-v140-current.cjs').write_text(s)
+          Path('qa-v140-current.cjs').write_text(s)
           PY
       - run: |
           python3 -m http.server 8130 --bind 127.0.0.1 >/tmp/v140-current-http.log 2>&1 &
           sleep 2
-          node /tmp/qa-v140-current.cjs
+          node qa-v140-current.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -200,13 +199,13 @@ jobs:
             ('LDC v139/R12 predecessor upgrade','LDC v140/R13 predecessor upgrade')
           ]
           for a,b in reps:s=s.replace(a,b)
-          Path('/tmp/qa-v140-update.cjs').write_text(s)
+          Path('qa-v140-update.cjs').write_text(s)
           PY
       - run: |
           mkdir -p qa-ldc-v139-upgrade
           python3 -m http.server 8131 --bind 127.0.0.1 --directory qa-ldc-v139-upgrade >/tmp/v140-update-http.log 2>&1 &
           sleep 2
-          node /tmp/qa-v140-update.cjs
+          node qa-v140-update.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
