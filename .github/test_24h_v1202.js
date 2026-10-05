@@ -39,9 +39,11 @@ async function runCase(browser,cfg){
     assert(rec.checks.top_status==='Statut de l’Heure','top status');
     const recovery='[data-meditee-action-hour="1"][data-meditee-role="recovery"]';
     await tabTo(page,recovery);
-    const focus=await page.locator(recovery).evaluate(el=>{const s=getComputedStyle(el);return {style:s.outlineStyle,width:s.outlineWidth,color:s.outlineColor}});
+    await page.keyboard.press('Shift+Tab');
+    await page.keyboard.press('Tab');
+    const focus=await page.locator(recovery).evaluate(el=>{const s=getComputedStyle(el);return {style:s.outlineStyle,width:s.outlineWidth,color:s.outlineColor,focusVisible:el.matches(':focus-visible'),active:document.activeElement===el}});
     rec.checks.recovery_focus=focus;
-    assert(focus.style!=='none' && parseFloat(focus.width)>=3,'recovery focus ring');
+    assert(focus.active && focus.focusVisible && focus.style!=='none' && parseFloat(focus.width)>=3,'recovery focus ring');
 
     const end=page.locator('[data-meditee-action-hour="1"][data-meditee-role="primary-end"]');
     await end.scrollIntoViewIfNeeded();
