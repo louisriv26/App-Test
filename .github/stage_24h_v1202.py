@@ -47,7 +47,7 @@ for a,b in [
 ("const RELEASE_SEQUENCE = 120001001;","const RELEASE_SEQUENCE = 120002001;"),
 ("const RELEASE_ID = '24h-v120-1-b1-20261004-visible-version-v-closure';",f"const RELEASE_ID = '{RID}';"),
 ("const CANONICAL_SHELL_SHA256 = '71315aadb1806819e42860f10bffd37662660ae0ab49af805f5e9a3ea9357c00';",f"const CANONICAL_SHELL_SHA256 = '{SHELL}';"),
-("const CACHE_NAME = \`${CACHE_PREFIX}v120-1-b1\`;","const CACHE_NAME = \`${CACHE_PREFIX}v120-2-b1\`;")
+("const CACHE_NAME = `${CACHE_PREFIX}v120-1-b1`;","const CACHE_NAME = `${CACHE_PREFIX}v120-2-b1`;")
 ]:
     assert sw.count(a)==1, a
     sw=sw.replace(a,b,1)
