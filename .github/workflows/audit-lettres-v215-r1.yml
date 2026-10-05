@@ -44,7 +44,7 @@ jobs:
           git archive origin/lettres-v215-qualification lettres-v2.15-b1-contrast-repair | tar -x
           test "$(git rev-parse origin/lettres-v215-qualification:lettres-v2.15-b1-contrast-repair)" = "3caebc39f22be6053463b5c577ab8991074a1c81"
           python qa/stage_lettres_v215_b2.py | tee /tmp/build-rederive.log
-          test "$LETTRES_V215_TREE" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+          test "$(cat /tmp/LETTRES_V2_15_B2_TREE.txt)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
           echo "BUILD_REDERIVATION_PASS"
 
       - name: Verify package boundary, identities and deterministic package
