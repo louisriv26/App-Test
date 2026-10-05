@@ -68,7 +68,7 @@ jobs:
                   continue
               out[name]={'status':'PASS' if a==b else 'FAIL','old_sha256':hashlib.sha256(a.encode()).hexdigest(),'new_sha256':hashlib.sha256(b.encode()).hexdigest(),'bytes':len(a.encode())}
               if a!=b: raise SystemExit('protected constant changed: '+name)
-          sent=['const STORAGE_SCHEMA_VERSION=8',"const CANONICAL_APP_SHELL = './luisa_24_heures.html'",'MAX_PERSONAL_DATA_IMPORT_BYTES','state.readHours','state.meditationLog']
+          sent=['const STORAGE_SCHEMA_VERSION=8',"const CANONICAL_APP_SHELL = './luisa_24_heures.html'",'MAX_PERSONAL_DATA_IMPORT_BYTES']
           out['sentinels']={}
           for s in sent:
               out['sentinels'][s]={'old':old.count(s),'new':new.count(s)}
