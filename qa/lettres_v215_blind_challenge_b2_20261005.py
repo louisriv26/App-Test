@@ -63,7 +63,7 @@ cur=html.splitlines()
 allowed=[
  'li-read','path-letter-item.done','export-btn.primary','rgba(255,255,255,.45)','rgba(255,255,255,.55)',
  'reader-empty small','v2.14','v2.15','2026-10-04','2026-10-05','APP_VERSION','shell-v2.14-b1','shell-v2.15-b2','corpus-v2.14-b1','corpus-v2.15-b2',
- 'Content-Security-Policy','sha256-'
+ "const APP_BUILD = 'B1';","const APP_BUILD = 'B2';",'Content-Security-Policy','sha256-'
 ]
 bad=[]
 for line in difflib.unified_diff(pre,cur,n=0):

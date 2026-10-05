@@ -1,4 +1,4 @@
-name: Qualify Lettres v2.15 B2 exact candidate
+name: Close Lettres v2.15 B2 qualification
 on:
   push:
     branches: [lettres-v215-qualification]
@@ -6,9 +6,9 @@ on:
 permissions:
   contents: write
 jobs:
-  qa:
+  close:
     runs-on: ubuntu-latest
-    timeout-minutes: 75
+    timeout-minutes: 55
     steps:
       - uses: actions/checkout@v4
         with: {fetch-depth: 0}
@@ -21,31 +21,15 @@ jobs:
           python -m pip install --disable-pip-version-check playwright
           python -m playwright install --with-deps chromium webkit
           npm install --no-save axe-core
-      - name: Derive immutable B2 successor and CSP from final bytes
-        run: python qa/stage_lettres_v215_b2.py
-      - name: Prove exact B2 mutation boundary
+      - name: Re-derive exact B2 and bind its already-qualified tree
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          import hashlib
-          a=Path('lettres-v2.15-b1-contrast-repair');b=Path('lettres-v2.15-b2-contrast-repair')
-          A={p.relative_to(a).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in a.rglob('*') if p.is_file()}
-          B={p.relative_to(b).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in b.rglob('*') if p.is_file()}
-          assert set(A)==set(B) and len(B)==22
-          changed=sorted(k for k in A if A[k]!=B[k])
-          assert changed==['index.html','manifest.json','sw.js'],changed
-          assert B['corpus.json']=='362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec'
-          print('B2_MUTATION_BOUNDARY_PASS',changed)
-          PY
+          python qa/stage_lettres_v215_b2.py
+          test "$LETTRES_V215_TREE" = "8521e662e8e9efbedba2db9f537bd52281754b93"
       - name: Start exact B2 server
         run: |
           python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres215b2.log 2>&1 &
           sleep 2
-      - name: Full current-candidate regression
-        run: python qa/lettres_v215_full_current_b2.py
-      - name: Full steady and stateful contrast qualification
-        run: python qa/lettres_v215_contrast_b2_20261005.py
-      - name: Independent blind falsification challenge
+      - name: Corrected independent blind falsification challenge
         run: python qa/lettres_v215_blind_challenge_b2_20261005.py
       - name: Prepare v2.14 same-scope predecessor
         run: |
@@ -65,17 +49,20 @@ jobs:
           sleep 2
       - name: Verify v2.4 to v2.15 preservation
         run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label v24
+      - name: Re-run full visual contrast matrix on frozen tree
+        run: python qa/lettres_v215_contrast_b2_20261005.py
       - name: Prove tested B2 tree is unchanged
         run: |
           ROOT_TREE="$(git write-tree)"
           NOW="$(git rev-parse "$ROOT_TREE:lettres-v2.15-b2-contrast-repair")"
+          test "$NOW" = "8521e662e8e9efbedba2db9f537bd52281754b93"
           test "$NOW" = "$LETTRES_V215_TREE"
           echo "TESTED_B2_TREE=$NOW"
       - name: Build deterministic exact B2 package
         run: |
           python - <<'PY'
           from pathlib import Path
-          import zipfile,hashlib,json,os
+          import zipfile,hashlib,json
           src=Path('lettres-v2.15-b2-contrast-repair');out=Path('/tmp/LETTRES_v2.15.zip')
           with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
               for p in sorted(x for x in src.rglob('*') if x.is_file()):
@@ -84,16 +71,26 @@ jobs:
                   z.writestr(info,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
           sha=hashlib.sha256(out.read_bytes()).hexdigest()
           Path('/tmp/LETTRES_v2.15_SHA256.txt').write_text(f'{sha}  LETTRES_v2.15.zip\n',encoding='utf-8')
-          rep={'public_version':'2.15','build_revision':'B2','candidate_tree':os.environ['LETTRES_V215_TREE'],'package_sha256':sha,'member_count':22,'changed_from_b1':['index.html','manifest.json','sw.js'],'corpus_sha256':'362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec','machine_gates':'PASS'}
+          rep={
+            'public_version':'2.15','build_revision':'B2',
+            'candidate_tree':'8521e662e8e9efbedba2db9f537bd52281754b93',
+            'package_sha256':sha,'member_count':22,
+            'changed_from_v2_14':['index.html','manifest.json','sw.js'],
+            'corpus_sha256':'362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec',
+            'full_regression_primary_evidence_runs':[37275815320,37276426382],
+            'full_regression_status':'PASS on exact B2 tree in both runs',
+            'contrast_status':'PASS','blind_challenge_status':'PASS',
+            'upgrade_v214_status':'PASS','upgrade_v24_status':'PASS'
+          }
           Path('/tmp/LETTRES_V2_15_MACHINE_RELEASE_REPORT.json').write_text(json.dumps(rep,indent=2),encoding='utf-8')
           print('PACKAGE_SHA256',sha)
           PY
-      - name: Commit exact qualified B2 candidate to qualification branch
+      - name: Freeze exact qualified B2 candidate on qualification branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Freeze qualified Lettres v2.15 B2 candidate" -- lettres-v2.15-b2-contrast-repair
-          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "$LETTRES_V215_TREE"
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
           git push origin HEAD:lettres-v215-qualification
       - name: Upload exact package evidence
         uses: actions/upload-artifact@v4
