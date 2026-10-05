@@ -21,8 +21,16 @@ jobs:
           mkdir "$dst"
           files=(.nojekyll apple-touch-icon.png favicon-16.png favicon-32.png favicon.ico icon-120.png icon-192.png icon-512.png icon-60.png icon-maskable-512.png index.html luisa_24_heures.html manifest.json sw.js version.json)
           for f in "${files[@]}"; do cp "$src/$f" "$dst/$f"; done
-          cat .github/deploy/24h-v120-3-b1-transform.py.b64.* | base64 -d > /tmp/24h-v120-3-b1-transform.py
-          python3 /tmp/24h-v120-3-b1-transform.py "$dst"
+          decode_patch() { base64 -d ".github/deploy/24h-v120-3-b1-$1.diff.gz.b64" | gzip -dc > "/tmp/$1.diff"; }
+          decode_patch shell
+          patch "$dst/index.html" < /tmp/shell.diff
+          cp "$dst/index.html" "$dst/luisa_24_heures.html"
+          decode_patch manifest
+          patch "$dst/manifest.json" < /tmp/manifest.diff
+          decode_patch sw
+          patch "$dst/sw.js" < /tmp/sw.diff
+          decode_patch version
+          patch "$dst/version.json" < /tmp/version.diff
           cat > /tmp/expected.sha256 <<'EOF'
           e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  24h-v120-3-b1-contextual-stage-navigation/.nojekyll
           dd8efc8111a51b98c4c93dcab7357ecc4c2d5448b8a08aa97da7381dc0b56864  24h-v120-3-b1-contextual-stage-navigation/apple-touch-icon.png
@@ -48,7 +56,7 @@ jobs:
         run: |
           set -euo pipefail
           rm -f .github/workflows/deploy-24h-v120-3-b1.yml
-          rm -f .github/deploy/24h-v120-3-b1-transform.py.b64.*
+          rm -f .github/deploy/24h-v120-3-b1-*.diff.gz.b64
           rm -f deploy-24h-v120-3-b1-trigger.txt
           git add -A
           git config user.name "github-actions[bot]"
