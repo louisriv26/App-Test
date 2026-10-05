@@ -36,63 +36,63 @@ jobs:
           cp -a "$SRC" "$DST"
 
           cat > /tmp/build_v141.py <<'PY'
-from pathlib import Path
-import json,sys
-root=Path(sys.argv[1])
-V140_PKG='a158c24b889fedf7ea71193668b99adadbf3752004bbc5e579772dfb1ab2eb6c'
-V140_TREE='fa5d57065f328351ae4d7c9fa75c50cd27fadb70'
-V139_TREE='b9aaaa762034d9a21398bc8c242c802f59062492'
-V139_COMMIT='e82ef8d5d64a7e89b65436924b04883c96c7dadb'
-p=root/'index.html'; s=p.read_text(encoding='utf-8')
-old="""function revealSearchOutput(){
-  const sc=searchScrollElement();if(!sc)return;
-  const meta=document.getElementById('search-meta'),results=document.getElementById('search-results');
-  const target=meta&&getComputedStyle(meta).display!=='none'?meta:results;if(!target)return;
-  const apply=()=>{if(!sc.isConnected||!target.isConnected)return;const sr=sc.getBoundingClientRect(),tr=target.getBoundingClientRect();sc.scrollTop=Math.max(0,sc.scrollTop+(tr.top-sr.top)-8);};
-  requestAnimationFrame(()=>{apply();requestAnimationFrame(apply);});
-}
-"""
-new="""function revealSearchOutput(){
-  const sc=searchScrollElement();if(!sc)return;
-  const meta=document.getElementById('search-meta'),results=document.getElementById('search-results');
-  const target=meta&&getComputedStyle(meta).display!=='none'?meta:results;if(!target)return;
-  const apply=()=>{
-    if(!sc.isConnected||!target.isConnected)return;
-    const sr=sc.getBoundingClientRect(),tr=target.getBoundingClientRect();
-    sc.scrollTop=Math.max(0,sc.scrollTop+(tr.top-sr.top)-8);
-    const first=results&&results.querySelector('.result-card');
-    if(first){
-      const sr2=sc.getBoundingClientRect(),fr=first.getBoundingClientRect();
-      const overflow=fr.bottom-(sr2.bottom-8);
-      if(overflow>0){
-        const max=Math.max(0,sc.scrollHeight-sc.clientHeight);
-        sc.scrollTop=Math.min(max,sc.scrollTop+overflow);
-      }
-    }
-  };
-  requestAnimationFrame(()=>{apply();requestAnimationFrame(apply);});
-}
-"""
-assert old in s
-s=s.replace(old,new,1)
-s=s.replace("const APP_VERSION = 'v2.19.140-R1B-UX-ACCESS-R13'; // v140 bounded Search vertical-scroll and query-state repair over exact deployed v139; corpus/Search payloads and algorithms preserved; Semantic V3 remains fail-closed","const APP_VERSION = 'v2.19.141-R1B-UX-ACCESS-R14'; // v141 adaptive Search-output reveal successor of frozen v140; single-scroll repair preserved; corpus/Search payloads and algorithms preserved; Semantic V3 remains fail-closed",1)
-s=s.replace("const PUBLIC_VERSION = (APP_VERSION.match(/v2\\.19\\.(\\d+)/)||[])[1] || '140';","const PUBLIC_VERSION = (APP_VERSION.match(/v2\\.19\\.(\\d+)/)||[])[1] || '141';",1)
-s=s.replace("const SW_CACHE_VERSION = 'ldc-v2.19.140-R1B-ux-access-r13';","const SW_CACHE_VERSION = 'ldc-v2.19.141-R1B-ux-access-r14';",1)
-p.write_text(s,encoding='utf-8')
-p=root/'sw.js'; s=p.read_text(encoding='utf-8')
-s=s.replace("const VERSION = 'ldc-v2.19.140-R1B-ux-access-r13';","const VERSION = 'ldc-v2.19.141-R1B-ux-access-r14';",1).replace("shell-v2.19.140-R1B-ux-access-r13","shell-v2.19.141-R1B-ux-access-r14",1).replace("runtime-v2.19.140-R1B-ux-access-r13","runtime-v2.19.141-R1B-ux-access-r14",1).replace("m.app_version!=='v2.19.140-R1B-UX-ACCESS-R13'","m.app_version!=='v2.19.141-R1B-UX-ACCESS-R14'",1)
-p.write_text(s,encoding='utf-8')
-p=root/'version.json'; d=json.load(open(p,encoding='utf-8'))
-d.update(app_version='v2.19.141-R1B-UX-ACCESS-R14',build_date='2026-10-05',current_release_authority='V141_R14_ADAPTIVE_SEARCH_OUTPUT_REVEAL_SUCCESSOR__V140_SINGLE_SCROLL_REPAIR_INHERITED__MACHINE_REAUDIT_REQUIRED__PHYSICAL_IPHONE_IPAD_REQUIRED__PRODUCTION_NOT_AUTHORIZED',current_runtime_browser_validation='SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_OR_PHYSICAL_GATE_RESULTS__EXACT_V141_BYTES_REQUIRE_REPRODUCIBLE_EVIDENCE_BINDING__IPHONE_IPAD_PHYSICAL_TEST_REQUIRED_BEFORE_PRODUCTION',external_validation_status='SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_GATE_RESULTS__EXACT_V141_BYTES_REQUIRE_APP_TEST_BINDING_AND_PHYSICAL_IPHONE_IPAD_PASS__PRODUCTION_NOT_AUTHORIZED',offline_scope='v141 adaptive Search-output reveal successor of frozen v140. The v140 single-scroll/query-state repair is inherited unchanged; only fresh-result reveal is hardened so the first complete result fits when possible in ultra-short viewports with Large/Très grand text and warning/suggestion chrome. Persistent offline content assets/binding, corpus/Search-V2.1A payloads/algorithms and Semantic V3 fail-closed state are unchanged.',package_predecessor_app_version='v2.19.140-R1B-UX-ACCESS-R13',package_predecessor_zip_sha256=V140_PKG,package_state_at_freeze='V141_R14_PRE_PHYSICAL_CANDIDATE__DIRECT_SUCCESSOR_OF_FROZEN_V140_R13__V140_SINGLE_SCROLL_QUERY_STATE_REPAIR_INHERITED__ADAPTIVE_FIRST_RESULT_REVEAL_HARDENING_ONLY__EXACT_DEPLOYED_V139_ULTIMATE_PRODUCTION_BASELINE__CORPUS_SEARCH_PAYLOADS_ALGORITHMS_USER_DATA_PROVENANCE_UNCHANGED__SEMANTIC_V3_FAIL_CLOSED__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED',page_worker_revision='ldc-v2.19.141-R1B-ux-access-r14',physical_ipad_gate='OPEN__EXACT_V141_BYTES_REQUIRE_PHYSICAL_IPAD_SEARCH_SCROLL_RESULT_REACHABILITY_ADAPTIVE_REVEAL_AND_RETURN_RESTORE_PASS',physical_iphone_gate='OPEN__EXACT_V141_BYTES_REQUIRE_PHYSICAL_IPHONE_SEARCH_SCROLL_RESULT_REACHABILITY_ADAPTIVE_REVEAL_AND_RETURN_RESTORE_PASS',public_version='141',wide_public_release='EXTERNAL_AUTHORITY_REQUIRED__PACKAGE_DOES_NOT_SELF_AUTHORIZE_RELEASE__EXACT_V141_PHYSICALLY_TESTED_BYTES_MUST_EQUAL_PROMOTED_BYTES',wide_public_release_gate='NOT_AUTHORIZED__V141_EXACT_APP_TEST_BINDING_AND_PHYSICAL_IPHONE_IPAD_GATES_OPEN',rebuild_status='V141_R14_ADAPTIVE_SEARCH_OUTPUT_REVEAL__V140_SINGLE_SCROLL_QUERY_STATE_REPAIR_INHERITED__EXACT_DEPLOYED_V139_ULTIMATE_PRODUCTION_BASELINE__CORPUS_SEARCH_PAYLOADS_ALGORITHMS_UNCHANGED__PERSISTENT_OFFLINE_BINDING_UNCHANGED__SEMANTIC_V3_FAIL_CLOSED__PRODUCTION_NOT_AUTHORIZED')
-v140=d['search_scroll_v140_r13']; v140.update(candidate_status='FROZEN_SUPERSEDED_BEFORE_PHYSICAL_TEST',exact_candidate_tree=V140_TREE,exact_candidate_package_sha256=V140_PKG,superseded_reason='POST_FREEZE_BLIND_LAYOUT_CHALLENGE_FOUND_FIRST_RESULT_NOT_FULLY_VISIBLE_IMMEDIATELY_AFTER_OUTPUT_REVEAL_IN_3_OF_36_EXTREME_SHORT_VIEWPORT_LARGE_OR_XLARGE_CASES__STRUCTURAL_SCROLL_REPAIR_ITSELF_PASSED__NO_PHYSICAL_TEST_STARTED',superseded_by='v2.19.141-R1B-UX-ACCESS-R14')
-d['search_scroll_v141_r14']={'date':'2026-10-05','classification':'BOUNDED_POST_BLIND_SEARCH_OUTPUT_REVEAL_HARDENING','direct_predecessor_app_version':'v2.19.140-R1B-UX-ACCESS-R13','direct_predecessor_tree':V140_TREE,'direct_predecessor_package_sha256':V140_PKG,'ultimate_production_baseline_app_version':'v2.19.139-R1B-UX-ACCESS-R12','ultimate_production_baseline_tree':V139_TREE,'ultimate_production_baseline_commit':V139_COMMIT,'trigger':'POST_FREEZE_INDEPENDENT_BLIND_LAYOUT_CHALLENGE__3_OF_36_EXTREME_SHORT_VIEWPORT_PLUS_LARGE_XLARGE_CASES_LEFT_FIRST_RESULT_BOTTOM_14_TO_52PX_BELOW_VISIBLE_SEARCH_SCROLL_VIEWPORT_AFTER_META_FIRST_REVEAL','finding_scope':'REACHABILITY_AND_SINGLE_SCROLL_ARCHITECTURE_PASSED__DATE_NAVIGATION_STATE_PASSED__FOCUS_PRESERVATION_PASSED__PAGER_REACHABILITY_PASSED__ONLY_IMMEDIATE_FIRST_COMPLETE_RESULT_VISIBILITY_CRITERION_FAILED_IN_3_EDGE_CASES','repair':['Preserve v140 one-vertical-scroll-owner Search architecture unchanged.','After preferred metadata reveal, measure the first .result-card against the Search scroller viewport.','If the first card bottom exceeds the viewport bottom minus 8px, advance scrollTop only by the exact overflow amount, capped to the scroller maximum.','Do not move keyboard or accessibility focus.','Do not invoke adaptive fresh-result reveal during Reader return; stable result-key context restoration remains authoritative.'],'protected_surfaces':['all v140 structural single-scroll/query-state repair semantics except reveal positioning','all 205 devotional corpus files','Search-V2 BM25 and Search-V2.1A payloads/manifests/topology/reference streams','Search matching/ranking/exact/foundation/near algorithms and search worker','provenance public wording','user-state schemas and semantics','204 persistent offline assets and content binding','Semantic Search V3 unreleased/not-qualified/fail-closed state'],'expected_mutation_universe':['index.html','offline_manifest.json','sw.js','version.json'],'machine_gate':'SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_GATE_RESULT','physical_iphone_gate':'OPEN','physical_ipad_gate':'OPEN','production_deployment_authority':'NONE'}
-p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-p=root/'offline_manifest.json'; m=json.load(open(p,encoding='utf-8'))
-m.update(app_version='v2.19.141-R1B-UX-ACCESS-R14',page_worker_revision='ldc-v2.19.141-R1B-ux-access-r14',rebuild_status='V141_R14_ADAPTIVE_SEARCH_OUTPUT_REVEAL__V140_SINGLE_SCROLL_QUERY_STATE_REPAIR_INHERITED__PERSISTENT_CONTENT_BINDING_UNCHANGED__SEARCH_V21A_PAYLOADS_ALGORITHMS_UNCHANGED__SEMANTIC_V3_FAIL_CLOSED__PHYSICAL_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED',scope='v141 adaptive Search-output reveal successor of frozen v140. Inherits v140 one-vertical-scroll-owner Search body, query-state synchronization and stable return/text-size anchoring. Fresh-result reveal now measures the first result after metadata positioning and advances only by any remaining bottom overflow, so the first complete result fits when possible even in ultra-short viewports with Large/Très grand text and warning/suggestion chrome. The 204 persistent content assets and content binding are unchanged; corpus/Search-V2.1A payloads and algorithms, provenance wording, user-state schema and Semantic V3 fail-closed qualification state are unchanged.')
-v140=m['search_scroll_v140_r13'];v140.update(candidate_status='FROZEN_SUPERSEDED_BEFORE_PHYSICAL_TEST',exact_candidate_tree=V140_TREE,exact_candidate_package_sha256=V140_PKG,superseded_by='v2.19.141-R1B-UX-ACCESS-R14',superseded_reason='POST_FREEZE_BLIND_LAYOUT_CHALLENGE_FIRST_COMPLETE_RESULT_VISIBILITY_FAILED_IN_3_OF_36_EXTREME_SHORT_VIEWPORT_LARGE_XLARGE_CASES')
-m['search_scroll_v141_r14']={'classification':'BOUNDED_POST_BLIND_SEARCH_OUTPUT_REVEAL_HARDENING','date':'2026-10-05','direct_predecessor_app_version':'v2.19.140-R1B-UX-ACCESS-R13','direct_predecessor_tree':V140_TREE,'direct_predecessor_package_sha256':V140_PKG,'repair_contract':['V140_SINGLE_VERTICAL_SEARCH_SCROLL_OWNER_UNCHANGED','PREFERRED_METADATA_REVEAL_RETAINED_WHEN_FIRST_COMPLETE_RESULT_ALREADY_FITS','ADAPT_SCROLL_ONLY_BY_FIRST_RESULT_BOTTOM_OVERFLOW_WHEN_NEEDED','NO_FOCUS_MOVEMENT','READER_RETURN_PRESERVE_CONTEXT_REMAINS_AUTHORITATIVE'],'protected_contract':'205_CORPUS_FILES__SEARCH_V2_V21A_PAYLOADS_AND_ALGORITHMS__PROVENANCE__USER_STATE_SCHEMA__204_OFFLINE_CONTENT_ASSETS_AND_BINDING__SEMANTIC_V3_FAIL_CLOSED_UNCHANGED','machine_gate':'SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_GATE_RESULT','physical_iphone_gate':'OPEN','physical_ipad_gate':'OPEN','production_deployment_authority':'NONE'}
-p.write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-PY
+          from pathlib import Path
+          import json,sys
+          root=Path(sys.argv[1])
+          V140_PKG='a158c24b889fedf7ea71193668b99adadbf3752004bbc5e579772dfb1ab2eb6c'
+          V140_TREE='fa5d57065f328351ae4d7c9fa75c50cd27fadb70'
+          V139_TREE='b9aaaa762034d9a21398bc8c242c802f59062492'
+          V139_COMMIT='e82ef8d5d64a7e89b65436924b04883c96c7dadb'
+          p=root/'index.html'; s=p.read_text(encoding='utf-8')
+          old="""function revealSearchOutput(){
+            const sc=searchScrollElement();if(!sc)return;
+            const meta=document.getElementById('search-meta'),results=document.getElementById('search-results');
+            const target=meta&&getComputedStyle(meta).display!=='none'?meta:results;if(!target)return;
+            const apply=()=>{if(!sc.isConnected||!target.isConnected)return;const sr=sc.getBoundingClientRect(),tr=target.getBoundingClientRect();sc.scrollTop=Math.max(0,sc.scrollTop+(tr.top-sr.top)-8);};
+            requestAnimationFrame(()=>{apply();requestAnimationFrame(apply);});
+          }
+          """
+          new="""function revealSearchOutput(){
+            const sc=searchScrollElement();if(!sc)return;
+            const meta=document.getElementById('search-meta'),results=document.getElementById('search-results');
+            const target=meta&&getComputedStyle(meta).display!=='none'?meta:results;if(!target)return;
+            const apply=()=>{
+              if(!sc.isConnected||!target.isConnected)return;
+              const sr=sc.getBoundingClientRect(),tr=target.getBoundingClientRect();
+              sc.scrollTop=Math.max(0,sc.scrollTop+(tr.top-sr.top)-8);
+              const first=results&&results.querySelector('.result-card');
+              if(first){
+                const sr2=sc.getBoundingClientRect(),fr=first.getBoundingClientRect();
+                const overflow=fr.bottom-(sr2.bottom-8);
+                if(overflow>0){
+                  const max=Math.max(0,sc.scrollHeight-sc.clientHeight);
+                  sc.scrollTop=Math.min(max,sc.scrollTop+overflow);
+                }
+              }
+            };
+            requestAnimationFrame(()=>{apply();requestAnimationFrame(apply);});
+          }
+          """
+          assert old in s
+          s=s.replace(old,new,1)
+          s=s.replace("const APP_VERSION = 'v2.19.140-R1B-UX-ACCESS-R13'; // v140 bounded Search vertical-scroll and query-state repair over exact deployed v139; corpus/Search payloads and algorithms preserved; Semantic V3 remains fail-closed","const APP_VERSION = 'v2.19.141-R1B-UX-ACCESS-R14'; // v141 adaptive Search-output reveal successor of frozen v140; single-scroll repair preserved; corpus/Search payloads and algorithms preserved; Semantic V3 remains fail-closed",1)
+          s=s.replace("const PUBLIC_VERSION = (APP_VERSION.match(/v2\\.19\\.(\\d+)/)||[])[1] || '140';","const PUBLIC_VERSION = (APP_VERSION.match(/v2\\.19\\.(\\d+)/)||[])[1] || '141';",1)
+          s=s.replace("const SW_CACHE_VERSION = 'ldc-v2.19.140-R1B-ux-access-r13';","const SW_CACHE_VERSION = 'ldc-v2.19.141-R1B-ux-access-r14';",1)
+          p.write_text(s,encoding='utf-8')
+          p=root/'sw.js'; s=p.read_text(encoding='utf-8')
+          s=s.replace("const VERSION = 'ldc-v2.19.140-R1B-ux-access-r13';","const VERSION = 'ldc-v2.19.141-R1B-ux-access-r14';",1).replace("shell-v2.19.140-R1B-ux-access-r13","shell-v2.19.141-R1B-ux-access-r14",1).replace("runtime-v2.19.140-R1B-ux-access-r13","runtime-v2.19.141-R1B-ux-access-r14",1).replace("m.app_version!=='v2.19.140-R1B-UX-ACCESS-R13'","m.app_version!=='v2.19.141-R1B-UX-ACCESS-R14'",1)
+          p.write_text(s,encoding='utf-8')
+          p=root/'version.json'; d=json.load(open(p,encoding='utf-8'))
+          d.update(app_version='v2.19.141-R1B-UX-ACCESS-R14',build_date='2026-10-05',current_release_authority='V141_R14_ADAPTIVE_SEARCH_OUTPUT_REVEAL_SUCCESSOR__V140_SINGLE_SCROLL_REPAIR_INHERITED__MACHINE_REAUDIT_REQUIRED__PHYSICAL_IPHONE_IPAD_REQUIRED__PRODUCTION_NOT_AUTHORIZED',current_runtime_browser_validation='SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_OR_PHYSICAL_GATE_RESULTS__EXACT_V141_BYTES_REQUIRE_REPRODUCIBLE_EVIDENCE_BINDING__IPHONE_IPAD_PHYSICAL_TEST_REQUIRED_BEFORE_PRODUCTION',external_validation_status='SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_GATE_RESULTS__EXACT_V141_BYTES_REQUIRE_APP_TEST_BINDING_AND_PHYSICAL_IPHONE_IPAD_PASS__PRODUCTION_NOT_AUTHORIZED',offline_scope='v141 adaptive Search-output reveal successor of frozen v140. The v140 single-scroll/query-state repair is inherited unchanged; only fresh-result reveal is hardened so the first complete result fits when possible in ultra-short viewports with Large/Très grand text and warning/suggestion chrome. Persistent offline content assets/binding, corpus/Search-V2.1A payloads/algorithms and Semantic V3 fail-closed state are unchanged.',package_predecessor_app_version='v2.19.140-R1B-UX-ACCESS-R13',package_predecessor_zip_sha256=V140_PKG,package_state_at_freeze='V141_R14_PRE_PHYSICAL_CANDIDATE__DIRECT_SUCCESSOR_OF_FROZEN_V140_R13__V140_SINGLE_SCROLL_QUERY_STATE_REPAIR_INHERITED__ADAPTIVE_FIRST_RESULT_REVEAL_HARDENING_ONLY__EXACT_DEPLOYED_V139_ULTIMATE_PRODUCTION_BASELINE__CORPUS_SEARCH_PAYLOADS_ALGORITHMS_USER_DATA_PROVENANCE_UNCHANGED__SEMANTIC_V3_FAIL_CLOSED__PUBLIC_DEPLOYMENT_NOT_AUTHORIZED',page_worker_revision='ldc-v2.19.141-R1B-ux-access-r14',physical_ipad_gate='OPEN__EXACT_V141_BYTES_REQUIRE_PHYSICAL_IPAD_SEARCH_SCROLL_RESULT_REACHABILITY_ADAPTIVE_REVEAL_AND_RETURN_RESTORE_PASS',physical_iphone_gate='OPEN__EXACT_V141_BYTES_REQUIRE_PHYSICAL_IPHONE_SEARCH_SCROLL_RESULT_REACHABILITY_ADAPTIVE_REVEAL_AND_RETURN_RESTORE_PASS',public_version='141',wide_public_release='EXTERNAL_AUTHORITY_REQUIRED__PACKAGE_DOES_NOT_SELF_AUTHORIZE_RELEASE__EXACT_V141_PHYSICALLY_TESTED_BYTES_MUST_EQUAL_PROMOTED_BYTES',wide_public_release_gate='NOT_AUTHORIZED__V141_EXACT_APP_TEST_BINDING_AND_PHYSICAL_IPHONE_IPAD_GATES_OPEN',rebuild_status='V141_R14_ADAPTIVE_SEARCH_OUTPUT_REVEAL__V140_SINGLE_SCROLL_QUERY_STATE_REPAIR_INHERITED__EXACT_DEPLOYED_V139_ULTIMATE_PRODUCTION_BASELINE__CORPUS_SEARCH_PAYLOADS_ALGORITHMS_UNCHANGED__PERSISTENT_OFFLINE_BINDING_UNCHANGED__SEMANTIC_V3_FAIL_CLOSED__PRODUCTION_NOT_AUTHORIZED')
+          v140=d['search_scroll_v140_r13']; v140.update(candidate_status='FROZEN_SUPERSEDED_BEFORE_PHYSICAL_TEST',exact_candidate_tree=V140_TREE,exact_candidate_package_sha256=V140_PKG,superseded_reason='POST_FREEZE_BLIND_LAYOUT_CHALLENGE_FOUND_FIRST_RESULT_NOT_FULLY_VISIBLE_IMMEDIATELY_AFTER_OUTPUT_REVEAL_IN_3_OF_36_EXTREME_SHORT_VIEWPORT_LARGE_OR_XLARGE_CASES__STRUCTURAL_SCROLL_REPAIR_ITSELF_PASSED__NO_PHYSICAL_TEST_STARTED',superseded_by='v2.19.141-R1B-UX-ACCESS-R14')
+          d['search_scroll_v141_r14']={'date':'2026-10-05','classification':'BOUNDED_POST_BLIND_SEARCH_OUTPUT_REVEAL_HARDENING','direct_predecessor_app_version':'v2.19.140-R1B-UX-ACCESS-R13','direct_predecessor_tree':V140_TREE,'direct_predecessor_package_sha256':V140_PKG,'ultimate_production_baseline_app_version':'v2.19.139-R1B-UX-ACCESS-R12','ultimate_production_baseline_tree':V139_TREE,'ultimate_production_baseline_commit':V139_COMMIT,'trigger':'POST_FREEZE_INDEPENDENT_BLIND_LAYOUT_CHALLENGE__3_OF_36_EXTREME_SHORT_VIEWPORT_PLUS_LARGE_XLARGE_CASES_LEFT_FIRST_RESULT_BOTTOM_14_TO_52PX_BELOW_VISIBLE_SEARCH_SCROLL_VIEWPORT_AFTER_META_FIRST_REVEAL','finding_scope':'REACHABILITY_AND_SINGLE_SCROLL_ARCHITECTURE_PASSED__DATE_NAVIGATION_STATE_PASSED__FOCUS_PRESERVATION_PASSED__PAGER_REACHABILITY_PASSED__ONLY_IMMEDIATE_FIRST_COMPLETE_RESULT_VISIBILITY_CRITERION_FAILED_IN_3_EDGE_CASES','repair':['Preserve v140 one-vertical-scroll-owner Search architecture unchanged.','After preferred metadata reveal, measure the first .result-card against the Search scroller viewport.','If the first card bottom exceeds the viewport bottom minus 8px, advance scrollTop only by the exact overflow amount, capped to the scroller maximum.','Do not move keyboard or accessibility focus.','Do not invoke adaptive fresh-result reveal during Reader return; stable result-key context restoration remains authoritative.'],'protected_surfaces':['all v140 structural single-scroll/query-state repair semantics except reveal positioning','all 205 devotional corpus files','Search-V2 BM25 and Search-V2.1A payloads/manifests/topology/reference streams','Search matching/ranking/exact/foundation/near algorithms and search worker','provenance public wording','user-state schemas and semantics','204 persistent offline assets and content binding','Semantic Search V3 unreleased/not-qualified/fail-closed state'],'expected_mutation_universe':['index.html','offline_manifest.json','sw.js','version.json'],'machine_gate':'SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_GATE_RESULT','physical_iphone_gate':'OPEN','physical_ipad_gate':'OPEN','production_deployment_authority':'NONE'}
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          p=root/'offline_manifest.json'; m=json.load(open(p,encoding='utf-8'))
+          m.update(app_version='v2.19.141-R1B-UX-ACCESS-R14',page_worker_revision='ldc-v2.19.141-R1B-ux-access-r14',rebuild_status='V141_R14_ADAPTIVE_SEARCH_OUTPUT_REVEAL__V140_SINGLE_SCROLL_QUERY_STATE_REPAIR_INHERITED__PERSISTENT_CONTENT_BINDING_UNCHANGED__SEARCH_V21A_PAYLOADS_ALGORITHMS_UNCHANGED__SEMANTIC_V3_FAIL_CLOSED__PHYSICAL_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED',scope='v141 adaptive Search-output reveal successor of frozen v140. Inherits v140 one-vertical-scroll-owner Search body, query-state synchronization and stable return/text-size anchoring. Fresh-result reveal now measures the first result after metadata positioning and advances only by any remaining bottom overflow, so the first complete result fits when possible even in ultra-short viewports with Large/Très grand text and warning/suggestion chrome. The 204 persistent content assets and content binding are unchanged; corpus/Search-V2.1A payloads and algorithms, provenance wording, user-state schema and Semantic V3 fail-closed qualification state are unchanged.')
+          v140=m['search_scroll_v140_r13'];v140.update(candidate_status='FROZEN_SUPERSEDED_BEFORE_PHYSICAL_TEST',exact_candidate_tree=V140_TREE,exact_candidate_package_sha256=V140_PKG,superseded_by='v2.19.141-R1B-UX-ACCESS-R14',superseded_reason='POST_FREEZE_BLIND_LAYOUT_CHALLENGE_FIRST_COMPLETE_RESULT_VISIBILITY_FAILED_IN_3_OF_36_EXTREME_SHORT_VIEWPORT_LARGE_XLARGE_CASES')
+          m['search_scroll_v141_r14']={'classification':'BOUNDED_POST_BLIND_SEARCH_OUTPUT_REVEAL_HARDENING','date':'2026-10-05','direct_predecessor_app_version':'v2.19.140-R1B-UX-ACCESS-R13','direct_predecessor_tree':V140_TREE,'direct_predecessor_package_sha256':V140_PKG,'repair_contract':['V140_SINGLE_VERTICAL_SEARCH_SCROLL_OWNER_UNCHANGED','PREFERRED_METADATA_REVEAL_RETAINED_WHEN_FIRST_COMPLETE_RESULT_ALREADY_FITS','ADAPT_SCROLL_ONLY_BY_FIRST_RESULT_BOTTOM_OVERFLOW_WHEN_NEEDED','NO_FOCUS_MOVEMENT','READER_RETURN_PRESERVE_CONTEXT_REMAINS_AUTHORITATIVE'],'protected_contract':'205_CORPUS_FILES__SEARCH_V2_V21A_PAYLOADS_AND_ALGORITHMS__PROVENANCE__USER_STATE_SCHEMA__204_OFFLINE_CONTENT_ASSETS_AND_BINDING__SEMANTIC_V3_FAIL_CLOSED_UNCHANGED','machine_gate':'SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_GATE_RESULT','physical_iphone_gate':'OPEN','physical_ipad_gate':'OPEN','production_deployment_authority':'NONE'}
+          p.write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
           python /tmp/build_v141.py "$DST"
 
           rm -f .github/workflows/stage-ldc-v141-search-reveal.yml
