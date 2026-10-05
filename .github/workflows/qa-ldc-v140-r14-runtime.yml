@@ -1,0 +1,88 @@
+name: LDC v140 R14 runtime and Search layout QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/qa-ldc-v140-r14-runtime.yml'
+permissions:
+  contents: read
+jobs:
+  runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - name: Adapt proven v139 core runtime harness to exact v140 identity
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('qa-ldc-v139-current.cjs').read_text()
+          reps={
+            "ldc-v139-r12-search-v21a-recert":"ldc-v140-r14-search-scroll-repair",
+            "8130":"8135",
+            ".qa-ldc-v139-profile":".qa-ldc-v140-r14-profile",
+            "v2.19.139-R1B-UX-ACCESS-R12":"v2.19.140-R1B-UX-ACCESS-R14",
+            "pub:'139'":"pub:'140'",
+            "ldc-v2.19.139-R1B-ux-access-r12":"ldc-v2.19.140-R1B-ux-access-r14",
+            "LDC v139/R12":"LDC v140/R14",
+            "has139Shell":"has140Shell",
+            "has139Runtime":"has140Runtime",
+            "cache139:has139":"cache140:has140",
+            "shell-v2\\.19\\.139-R1B-ux-access-r12":"shell-v2\\.19\\.140-R1B-ux-access-r14",
+            "runtime-v2\\.19\\.139-R1B-ux-access-r12":"runtime-v2\\.19\\.140-R1B-ux-access-r14",
+            "(135|136|137|138)":"(135|136|137|138|139)"
+          }
+          for a,b in reps.items(): s=s.replace(a,b)
+          Path('/tmp/qa-v140-current.cjs').write_text(s)
+          PY
+          node --check /tmp/qa-v140-current.cjs
+      - name: Serve exact repository tree
+        shell: bash
+        run: |
+          python3 -m http.server 8135 --bind 127.0.0.1 >/tmp/ldc-v140.log 2>&1 &
+          sleep 2
+      - name: Core runtime, offline, backup and Search smoke
+        run: node /tmp/qa-v140-current.cjs
+      - name: Require core runtime PASS
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,sys
+          d=json.load(open('qa-ldc-v139-current-results.json'))
+          print(json.dumps({'overall':d.get('overall'),'journeys':d.get('journeys'),'cache_binding':d.get('cache_binding')},indent=2))
+          sys.exit(0 if d.get('overall')=='PASS' else 1)
+          PY
+      - name: Search semantics, hostile vertical geometry, return and text-size anchors
+        shell: bash
+        run: |
+          node <<'NODE'
+          const {chromium}=require('playwright');
+          const V139='http://127.0.0.1:8135/ldc-v139-r12-search-v21a-recert/';
+          const V140='http://127.0.0.1:8135/ldc-v140-r14-search-scroll-repair/';
+          const out={semantic:{},layouts:[],returnAnchor:null,textSize:null};
+          async function ready(p){await p.waitForFunction(()=>{const l=document.getElementById('loading'),v=document.getElementById('version-pill-home');return l&&getComputedStyle(l).display==='none'&&v&&v.textContent&&!/v—|v-$/.test(v.textContent);},{timeout:90000});}
+          async function open(browser,url,vp){const c=await browser.newContext({viewport:vp,serviceWorkers:'allow'}),p=await c.newPage();await p.goto(url,{waitUntil:'domcontentloaded',timeout:90000});await ready(p);return{c,p};}
+          async function search(p,q,mode,via=false){await p.evaluate(async({q,mode,via})=>{await goSearch();if(supplementMode!==mode)await setSupplementMode(mode,{rerender:false,silent:true});searchIntentMode='words';renderSearchIntentMode();const i=document.getElementById('search-input');i.value=q;if(via){searchFor(q);}else{onSearchInput();await runSearch();}},{q,mode,via});await p.waitForFunction(()=>document.getElementById('search-meta')?.textContent!=='Recherche…'&&document.querySelectorAll('#search-results .result-card').length>0,{timeout:90000});await p.waitForTimeout(300);}
+          async function snap(browser,url,q,mode){const {c,p}=await open(browser,url,{width:1180,height:850});await search(p,q,mode);const x=await p.evaluate(()=>({meta:document.getElementById('search-meta').textContent,lane:document.getElementById('search-lane-row').textContent.replace(/\s+/g,' ').trim(),keys:[...document.querySelectorAll('#search-results .result-card')].map(e=>e.dataset.resultKey||'')}));await c.close();return x;}
+          async function layout(browser,vp,level,q,mode,via){const {c,p}=await open(browser,V140,vp);await p.evaluate(l=>applyTextLevel(l),level);await search(p,q,mode,via);const x=await p.evaluate(()=>{const s=document.getElementById('screen-search'),sc=document.getElementById('search-scroll'),r=document.getElementById('search-results'),f=r.querySelector('.result-card'),d=document.querySelector('.date-nav-entry'),sr=sc.getBoundingClientRect(),fr=f.getBoundingClientRect();const vs=[...s.querySelectorAll('*')].filter(e=>{const c=getComputedStyle(e);return /auto|scroll/.test(c.overflowY)&&e.scrollHeight>e.clientHeight+1;}).map(e=>e.id||e.className||e.tagName);return{first:fr.top>=sr.top-1&&fr.bottom<=sr.bottom+1,date:getComputedStyle(d).display,screenY:getComputedStyle(s).overflowY,scrollables:vs,client:sc.clientHeight,height:sc.scrollHeight,innerDelta:Math.abs(r.scrollHeight-r.clientHeight)};});await c.close();return x;}
+          (async()=>{const b=await chromium.launch({headless:true});try{
+            for(const [q,m] of [['Professeur','aflp'],['Amour','enriched'],['bateau','enriched'],['de','aflp']]){const a=await snap(b,V139,q,m),z=await snap(b,V140,q,m);out.semantic[q]={same:a.meta===z.meta&&a.lane===z.lane&&JSON.stringify(a.keys)===JSON.stringify(z.keys),v139:a.meta,v140:z.meta,count:z.keys.length};}
+            for(const c of [[{width:390,height:700},'normal','Professeur','aflp',false],[{width:390,height:700},'xlarge','Professeur','aflp',false],[{width:390,height:500},'xlarge','Professeur','aflp',false],[{width:820,height:560},'normal','Amour','enriched',true],[{width:820,height:560},'xlarge','Amour','enriched',true],[{width:1024,height:700},'normal','Professeur','aflp',false]])out.layouts.push({case:c,result:await layout(b,...c)});
+            {const {c,p}=await open(b,V140,{width:390,height:700});await search(p,'Professeur','aflp');const key=await p.evaluate(()=>{const sc=document.getElementById('search-scroll'),cs=[...document.querySelectorAll('#search-results .result-card')],x=cs[Math.min(8,cs.length-1)],sr=sc.getBoundingClientRect(),xr=x.getBoundingClientRect();sc.scrollTop+=xr.top-sr.top-70;return x.dataset.resultKey;});await p.waitForTimeout(150);const a=await p.evaluate(k=>{const sc=document.getElementById('search-scroll'),x=[...document.querySelectorAll('.result-card')].find(e=>e.dataset.resultKey===k);return x.getBoundingClientRect().top-sc.getBoundingClientRect().top;},key);await p.evaluate(k=>[...document.querySelectorAll('.result-card')].find(e=>e.dataset.resultKey===k).click(),key);await p.waitForFunction(()=>document.getElementById('screen-reader')?.classList.contains('active'),{timeout:60000});await p.evaluate(()=>backFromReader());await p.waitForFunction(()=>document.getElementById('screen-search')?.classList.contains('active')&&document.querySelectorAll('#search-results .result-card').length>0,{timeout:90000});await p.waitForTimeout(500);const z=await p.evaluate(k=>{const sc=document.getElementById('search-scroll'),x=[...document.querySelectorAll('.result-card')].find(e=>e.dataset.resultKey===k);return x?x.getBoundingClientRect().top-sc.getBoundingClientRect().top:null;},key);out.returnAnchor={key,before:a,after:z,delta:z==null?null:Math.abs(z-a)};await c.close();}
+            {const {c,p}=await open(b,V140,{width:390,height:700});await search(p,'Professeur','aflp');const key=await p.evaluate(()=>{applyTextLevel('normal');const sc=document.getElementById('search-scroll'),cs=[...document.querySelectorAll('#search-results .result-card')],x=cs[Math.min(8,cs.length-1)],sr=sc.getBoundingClientRect(),xr=x.getBoundingClientRect();sc.scrollTop+=xr.top-sr.top-70;return x.dataset.resultKey;});await p.waitForTimeout(150);const a=await p.evaluate(k=>{const sc=document.getElementById('search-scroll'),x=[...document.querySelectorAll('.result-card')].find(e=>e.dataset.resultKey===k);return x.getBoundingClientRect().top-sc.getBoundingClientRect().top;},key);await p.evaluate(()=>setTextLevel('xlarge'));await p.waitForTimeout(400);const z=await p.evaluate(k=>{const sc=document.getElementById('search-scroll'),x=[...document.querySelectorAll('.result-card')].find(e=>e.dataset.resultKey===k);return{pos:x?x.getBoundingClientRect().top-sc.getBoundingClientRect().top:null,level:document.documentElement.getAttribute('data-text-level')};},key);out.textSize={key,before:a,after:z.pos,level:z.level,delta:z.pos==null?null:Math.abs(z.pos-a)};await c.close();}
+            const sem=Object.values(out.semantic).every(x=>x.same&&x.count>0);const lay=out.layouts.every(x=>{const r=x.result;return r.first&&r.date==='none'&&r.screenY==='hidden'&&r.scrollables.length===1&&r.scrollables[0]==='search-scroll'&&r.height>r.client&&r.innerDelta<=1;});const ret=out.returnAnchor.delta!=null&&out.returnAnchor.delta<=12;const siz=out.textSize.level==='xlarge'&&out.textSize.delta!=null&&out.textSize.delta<=12;out.checks={semantic:sem,layout:lay,returnAnchor:ret,textSize:siz};out.overall=Object.values(out.checks).every(Boolean)?'PASS':'FAIL';console.log(JSON.stringify(out,null,2));require('fs').writeFileSync('qa-ldc-v140-layout-results.json',JSON.stringify(out,null,2)+'\n');if(out.overall!=='PASS')process.exitCode=1;
+          }finally{await b.close();}})().catch(e=>{console.error(e);process.exit(2);});
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v140-r14-runtime-qa
+          path: |
+            qa-ldc-v139-current-results.json
+            qa-ldc-v140-layout-results.json
