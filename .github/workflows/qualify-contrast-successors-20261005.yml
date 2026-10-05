@@ -113,35 +113,44 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
 
-          def successorize(s):
+          def successorize(s, require_csp=False):
               s=s.replace('lettres-v2.14-b1-csp-repair','lettres-v2.15-b1-contrast-closure')
               s=s.replace('92530b7219fae7940be525b73b92d0a3782451ac','2e9c48b93ec9a2246615cca00f910a2d4c2d2664')
               s=s.replace('LETTRES_V2_14','LETTRES_V2_15').replace('v2.14','v2.15').replace('2.14','2.15')
-              old='''m=re.search(r"script-src-elem\\\\s+(\'sha256-[^\']+\')",index_text)
-rec(\'csp:script_src_elem_exact\',bool(m and m.group(1)==main_hash),m.group(1) if m else None)'''
-              new='''csp_policy=re.search(r\'Content-Security-Policy" content="([^"]+)"\',index_text).group(1)
-directives={}
-for part in csp_policy.split(\';\'):
-    bits=part.strip().split()
-    if bits: directives[bits[0]]=bits[1:]
-elem=directives.get(\'script-src-elem\',[])
-hashes=[x for x in elem if x.startswith("\'sha256-")]
-rec(\'csp:script_src_elem_exact\',hashes==[main_hash],{\'tokens\':elem,\'hashes\':hashes,\'expected\':main_hash})'''
-              if old in s:
-                  s=s.replace(old,new)
-              return s
+              lines=s.splitlines()
+              out=[]
+              found=False
+              i=0
+              while i < len(lines):
+                  if lines[i].startswith('m=re.search(r"script-src-elem'):
+                      found=True
+                      out.extend([
+                          'csp_policy=re.search(r\'Content-Security-Policy" content="([^"]+)"\',index_text).group(1)',
+                          'directives={}',
+                          'for part in csp_policy.split(";"):',
+                          '    bits=part.strip().split()',
+                          '    if bits: directives[bits[0]]=bits[1:]',
+                          'elem=directives.get("script-src-elem",[])',
+                          'hashes=[x for x in elem if x.startswith("\'sha256-")]',
+                          'rec("csp:script_src_elem_exact",hashes==[main_hash],{"tokens":elem,"hashes":hashes,"expected":main_hash})',
+                      ])
+                      i += 2
+                      continue
+                  out.append(lines[i])
+                  i += 1
+              if require_csp and not found:
+                  raise SystemExit('expected legacy CSP verifier not found in falsification source')
+              return '\n'.join(out)+'\n'
 
           # Complete runtime harness.
           full=Path('qa/lettres_v214_full_current.py').read_text()
-          full=successorize(full)
+          full=successorize(full,False)
           Path('/tmp/lettres_v215_full.py').write_text(full)
 
           base=Path('qa/lettres_v214_fresh_falsification_20261004.py').read_text()
-          if 'script-src-elem\\\\s+' not in base:
-              raise SystemExit('expected legacy CSP verifier not found in falsification source')
 
           # Immediate predecessor: exact v2.14 -> v2.15.
-          imm=successorize(base)
+          imm=successorize(base,True)
           imm=imm.replace("PRE=Path('lettres-v2.12-b1-darkmode')","PRE=Path('lettres-v2.14-b1-csp-repair')")
           imm=imm.replace("SCOPE=Path('/tmp/lettres-v214-fresh-scope')","SCOPE=Path('/tmp/lettres-v215-fresh-scope')")
           imm=imm.replace("LOCAL='http://127.0.0.1:8132/index.html'","LOCAL='http://127.0.0.1:8132/lettres-v215-fresh-scope/index.html'")
@@ -151,7 +160,7 @@ rec(\'csp:script_src_elem_exact\',hashes==[main_hash],{\'tokens\':elem,\'hashes\
           Path('/tmp/lettres_v215_falsify.py').write_text(imm)
 
           # Real deployed lineage: exact live v2.4 / lettres-r9 -> v2.15.
-          live=successorize(base)
+          live=successorize(base,True)
           live=live.replace("PRE=Path('lettres-v2.12-b1-darkmode')","PRE=Path('lettres-r9')")
           live=live.replace("SCOPE=Path('/tmp/lettres-v214-fresh-scope')","SCOPE=Path('/tmp/lettres-v215-live-scope')")
           live=live.replace("LOCAL='http://127.0.0.1:8132/index.html'","LOCAL='http://127.0.0.1:8133/lettres-v215-live-scope/index.html'")
