@@ -29,7 +29,7 @@ jobs:
           patch "$dst/manifest.json" < /tmp/manifest.diff
           decode_patch sw
           patch "$dst/sw.js" < /tmp/sw.diff
-          decode_patch version
+          cat .github/deploy/24h-v120-3-b1-version.diff.gz.b64.0 .github/deploy/24h-v120-3-b1-version.diff.gz.b64.1 | base64 -d | gzip -dc > /tmp/version.diff
           patch "$dst/version.json" < /tmp/version.diff
           cat > /tmp/expected.sha256 <<'EOF'
           e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  24h-v120-3-b1-contextual-stage-navigation/.nojekyll
