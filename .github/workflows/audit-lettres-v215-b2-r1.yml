@@ -99,7 +99,7 @@ jobs:
           python3 -m http.server 8132 --bind 127.0.0.1 >/tmp/lettres-v214-audit.log 2>&1 &
           sleep 2
       - name: Fresh v2.14 to B2 update/preservation
-        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-v2.14-b1-csp-repair --pre-version 2.14 --pre-cache v2.14-b1 --port 8132 --label audit-v214
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-v2.14-b1-csp-repair --pre-version 2.14 --pre-cache v2.14-b1 --port 8132 --label audit-v214 --scope /tmp/lettres-v215-v214-scope
       - name: Prepare production v2.4 predecessor
         run: |
           rm -rf /tmp/lettres-v215-v24-scope
@@ -108,7 +108,7 @@ jobs:
           python3 -m http.server 8134 --bind 127.0.0.1 >/tmp/lettres-v24-audit.log 2>&1 &
           sleep 2
       - name: Fresh production v2.4 to B2 update/preservation
-        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label audit-v24
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label audit-v24 --scope /tmp/lettres-v215-v24-scope
       - name: Fresh independent B2-only blind falsification
         run: python qa/lettres_v215_independent_blind_audit_r1.py
       - name: Rebuild deterministic delivered package and bind hash
