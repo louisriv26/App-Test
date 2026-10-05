@@ -55,7 +55,7 @@ with sync_playwright() as pw:
     p.on('pageerror',lambda e:errs.append('page:'+str(e)))
     p.on('console',lambda m:errs.append('console:'+m.text) if m.type=='error' else None)
 
-    p.goto(PUBLIC+'index.html?screen=search&q=confiance&letter=999&dp=bogus',{ 'wait_until':'domcontentloaded','timeout':30000})
+    p.goto(PUBLIC+'index.html?screen=search&q=confiance&letter=999&dp=bogus',wait_until='domcontentloaded',timeout=30000)
     ready(p)
     rec(name+':invalid_mixed_route_survives',p.locator('#search-input').input_value()=='confiance',p.url)
     rec(name+':search_results',p.locator('#search-results [data-action="search-result"]').count()>0,None)
