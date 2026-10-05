@@ -1,0 +1,38 @@
+name: Diagnose Lettres v2.14 to v2.15 SW update
+on:
+  push:
+    branches: [audit-lettres-v215-20261005-r1]
+    paths: ['.github/audit-lettres-v215-update-diag/TRIGGER']
+permissions:
+  contents: read
+defaults:
+  run:
+    shell: bash --noprofile --norc -eo pipefail {0}
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+      - name: Prepare v2.14 scope
+        run: |
+          rm -rf /tmp/lettres-v215-update-diag
+          cp -a lettres-v2.14-b1-csp-repair /tmp/lettres-v215-update-diag
+          cd /tmp/lettres-v215-update-diag
+          python3 -m http.server 8136 --bind 127.0.0.1 >/tmp/diag-server.log 2>&1 &
+          sleep 2
+      - name: Diagnose lifecycle
+        run: python qa/lettres_v215_update_diagnostic_r1.py | tee /tmp/update-diag.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lettres-v215-update-diagnostic
+          path: |
+            /tmp/update-diag.log
+            /tmp/LETTRES_V215_UPDATE_DIAGNOSTIC.json
+          if-no-files-found: warn
