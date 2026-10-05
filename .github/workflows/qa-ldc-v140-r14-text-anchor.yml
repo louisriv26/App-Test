@@ -1,0 +1,62 @@
+name: LDC v140 R14 text-size anchor diagnostic
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/qa-ldc-v140-r14-text-anchor.yml'
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8136 --bind 127.0.0.1 >/tmp/ldc-v140-anchor.log 2>&1 &
+          sleep 2
+      - name: Diagnose competing scroll authorities
+        shell: bash
+        run: |
+          node <<'NODE'
+          const {chromium}=require('playwright');
+          const URL='http://127.0.0.1:8136/ldc-v140-r14-search-scroll-repair/';
+          async function ready(p){await p.waitForFunction(()=>{const l=document.getElementById('loading'),v=document.getElementById('version-pill-home');return l&&getComputedStyle(l).display==='none'&&v&&v.textContent&&!/v—|v-$/.test(v.textContent);},{timeout:90000});}
+          async function search(p){await p.evaluate(async()=>{await goSearch();if(supplementMode!=='aflp')await setSupplementMode('aflp',{rerender:false,silent:true});const i=document.getElementById('search-input');i.value='Professeur';onSearchInput();await runSearch();});await p.waitForFunction(()=>document.querySelectorAll('#search-results .result-card').length>=10,{timeout:90000});await p.waitForTimeout(300);}
+          async function prep(p){await p.evaluate(()=>applyTextLevel('normal'));await p.waitForTimeout(100);return p.evaluate(()=>{const sc=document.getElementById('search-scroll'),cs=[...document.querySelectorAll('#search-results .result-card')],x=cs[8],sr=sc.getBoundingClientRect(),xr=x.getBoundingClientRect();sc.scrollTop+=xr.top-sr.top-70;return x.dataset.resultKey;});}
+          async function sample(p,key,label){return p.evaluate(({key,label})=>{const sc=document.getElementById('search-scroll'),x=[...document.querySelectorAll('#search-results .result-card')].find(e=>e.dataset.resultKey===key),r=x&&x.getBoundingClientRect(),sr=sc.getBoundingClientRect();return{label,scrollTop:sc.scrollTop,pos:r?r.top-sr.top:null,anchor:getComputedStyle(sc).overflowAnchor,scrollHeight:sc.scrollHeight,clientHeight:sc.clientHeight};},{key,label});}
+          async function raf(p,n=1){for(let i=0;i<n;i++)await p.evaluate(()=>new Promise(requestAnimationFrame));}
+          const browser=await chromium.launch({headless:true});
+          const out={};
+          try{
+            for(const mode of ['native','suppressed']){
+              const c=await browser.newContext({viewport:{width:390,height:700},serviceWorkers:'allow'}),p=await c.newPage();
+              await p.goto(URL,{waitUntil:'domcontentloaded',timeout:90000});await ready(p);await search(p);const key=await prep(p);await p.waitForTimeout(100);
+              const rows=[];rows.push(await sample(p,key,'before'));
+              if(mode==='suppressed')await p.evaluate(()=>document.getElementById('search-scroll').style.overflowAnchor='none');
+              const ctx=await p.evaluate(()=>captureTextSizeContext());
+              rows.push(await sample(p,key,'captured'));
+              await p.evaluate(()=>applyTextLevel('xlarge'));
+              rows.push(await sample(p,key,'after-apply-sync'));
+              await raf(p,1);rows.push(await sample(p,key,'after-apply-raf1'));
+              await p.evaluate(ctx=>restoreTextSizeContext(ctx),ctx);
+              rows.push(await sample(p,key,'after-restore-call'));
+              for(let i=1;i<=4;i++){await raf(p,1);rows.push(await sample(p,key,'post-restore-raf'+i));}
+              await p.waitForTimeout(80);rows.push(await sample(p,key,'post-80ms'));
+              await p.waitForTimeout(250);rows.push(await sample(p,key,'post-330ms'));
+              out[mode]={key,ctx,rows};
+              await c.close();
+            }
+            console.log(JSON.stringify(out,null,2));
+            require('fs').writeFileSync('qa-ldc-v140-r14-text-anchor-diagnostic.json',JSON.stringify(out,null,2)+'\n');
+          }finally{await browser.close();}
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ldc-v140-r14-text-anchor-diagnostic
+          path: qa-ldc-v140-r14-text-anchor-diagnostic.json
