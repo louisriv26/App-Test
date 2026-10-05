@@ -1,0 +1,46 @@
+{
+  "CORPUS": {
+    "status": "PASS",
+    "old_sha256": "ea14762b83350d2c986bcf3a962a83625f26136a77bb5d434bb0d4ce88a8e4cb",
+    "new_sha256": "ea14762b83350d2c986bcf3a962a83625f26136a77bb5d434bb0d4ce88a8e4cb",
+    "bytes": 514354
+  },
+  "TEXT_LIBRARY": {
+    "status": "PASS",
+    "old_sha256": "15a6dd2c595095d22000bbe26c2cd6fd7859758854aac68128a9bc3153223009",
+    "new_sha256": "15a6dd2c595095d22000bbe26c2cd6fd7859758854aac68128a9bc3153223009",
+    "bytes": 567986
+  },
+  "PROVENANCE_PUBLIC_PROJECTION": {
+    "status": "PASS",
+    "old_sha256": "8383f4652730e98d0d4704c543d00d994bcb89b254e44912f25bc92ac490219e",
+    "new_sha256": "8383f4652730e98d0d4704c543d00d994bcb89b254e44912f25bc92ac490219e",
+    "bytes": 129220
+  },
+  "PROVENANCE_PUBLIC_GUIDE": {
+    "status": "PASS",
+    "old_sha256": "3efa9c4eb304d4d07a3adb47d3de7b9086c2ff034a7172f2883e28104706e01c",
+    "new_sha256": "3efa9c4eb304d4d07a3adb47d3de7b9086c2ff034a7172f2883e28104706e01c",
+    "bytes": 16062
+  },
+  "sentinels": {
+    "const STORAGE_SCHEMA_VERSION=8": {
+      "old": 1,
+      "new": 1
+    },
+    "const CANONICAL_APP_SHELL = './luisa_24_heures.html'": {
+      "old": 1,
+      "new": 1
+    },
+    "MAX_PERSONAL_DATA_IMPORT_BYTES": {
+      "old": 3,
+      "new": 3
+    }
+  },
+  "bounded": {
+    "old_question_new": 0,
+    "old_detail_new": 0,
+    "completion": 3,
+    "unmarked_forward": 3
+  }
+}
