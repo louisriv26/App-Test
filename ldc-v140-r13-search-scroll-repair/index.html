@@ -3710,6 +3710,7 @@ async function goSearch() {
   renderSpeakerFilterRow();
   renderVolFilterRow();
   const input=document.getElementById('search-input');
+  if(input)syncSearchQueryUI(input.value);
   if(input&&shouldAutofocusSearchInput())input.focus({preventScroll:true});
   if (!input.value) refreshSearchSuggestions().catch(()=>{});
   // Stage 10: SEARCH-V2 is the sole active retrieval engine and loads lazily in its worker.
@@ -8422,7 +8423,7 @@ async function runSearch({navigation='reveal-output'}={}) {
   const raw=syncSearchQueryUI(document.getElementById('search-input').value);
   if(!raw){cancelActiveSearch('empty');return;}
   const normCheck=normalise(raw).replace(/\s+/g,'');
-  if(!normCheck){cancelActiveSearch('empty-normalised');const meta=document.getElementById('search-meta');meta.style.display='block';meta.textContent='Saisissez un mot ou une référence.';document.getElementById('search-results').innerHTML='';if(navigation==='reveal-output')revealSearchOutput();return;}
+  if(!normCheck){cancelActiveSearch('empty-normalised');const meta=document.getElementById('search-meta');meta.style.display='block';meta.textContent='Saisissez un mot ou une référence.';document.getElementById('search-results').innerHTML='';return;}
   saveRecentSearch(raw).catch(()=>{});
   cancelActiveSearch('new-search');const generation=searchRunSeq;
   const metaEl=document.getElementById('search-meta');metaEl.style.display='block';metaEl.textContent='Recherche…';

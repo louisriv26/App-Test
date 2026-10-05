@@ -1138,7 +1138,7 @@
     "user_state_schema_changed": false,
     "ux_logic_changed": false
   },
-  "rebuild_status": "V140_R13_SEARCH_SCROLL_AND_QUERY_STATE_REPAIR__EXACT_DEPLOYED_V139_PREDECESSOR__PERSISTENT_CONTENT_BINDING_UNCHANGED__SEARCH_V21A_PAYLOADS_ALGORITHMS_UNCHANGED__SEMANTIC_V3_FAIL_CLOSED__PHYSICAL_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED",
+  "rebuild_status": "V140_R13_SEARCH_SINGLE_SCROLL_QUERY_STATE_REPAIR__EXACT_DEPLOYED_V139_PREDECESSOR__SEARCH_OUTPUT_REACHABILITY_AND_RETURN_ANCHOR_REPAIR__CORPUS_SEARCH_PAYLOADS_ALGORITHMS_PROVENANCE_USER_DATA_UNCHANGED__SEMANTIC_V3_FAIL_CLOSED__PUBLIC_RELEASE_NOT_AUTHORIZED",
   "retention_contract": {
     "clear_policy": "CURRENT_SCOPE_ONLY_FOR_SHARED_LEGACY_CACHES",
     "copy_migration_required": false,
@@ -1149,7 +1149,7 @@
     "shell_runtime_caches": "APP_VERSIONED"
   },
   "schema": "ldc-offline-manifest-v3",
-  "scope": "v140 bounded Search presentation/navigation successor of exact deployed v139. Replaces the nested shrink-to-zero Search-results scroller with one Search-body vertical scroller below the existing top bar; centralizes non-empty-query date-navigation visibility; reveals fresh Search output without moving focus; preserves stable result-anchor restoration for Reader return and text-size changes. The 204 persistent content assets and content binding are unchanged; corpus/Search-V2.1A payloads and algorithms, provenance wording, user-state schema and Semantic V3 fail-closed qualification state are unchanged.",
+  "scope": "v140 bounded Search presentation/navigation successor of exact deployed v139. Establishes one vertical Search-body scroll owner, centralizes query-dependent chrome, reveals fresh Search output, and preserves semantic result anchors for Reader return/text-size changes. All 204 persistent offline content assets and their content binding remain unchanged; devotional corpus, Search-V2/V2.1A payloads and algorithms, provenance, user-data schemas and Semantic V3 qualification state are unchanged.",
   "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
   "semantic_vector_search_included": false,
   "semantic_vector_search_note": "R18D Search-V3 engineering evidence is preserved externally and v113 Search-V3 runtime modules remain byte-identical. No neural model, vectors or qualified semantic pack are bundled. Par le sens remains fail-closed.",
@@ -1244,33 +1244,30 @@
     "physical_retest_required": true,
     "modal_focus_contract": "SHARED_MODAL_INVOKER_CAPTURE_OCCURS_BEFORE_SHELL_INERT__SHELL_INERT_REMOVED_BEFORE_INVOKER_FOCUS_RESTORE__SIZE_AND_OTHER_SHARED_DIALOGS_RETURN_FOCUS_TO_ORIGINATING_CONTROL"
   },
-  "search_scroll_v140_r13": {
-    "classification": "P0_BOUNDED_SEARCH_PRESENTATION_NAVIGATION_REPAIR",
+  "ux_search_scroll_v140_r13": {
     "date": "2026-10-05",
+    "classification": "BOUNDED_SEARCH_VERTICAL_SCROLL_AND_QUERY_STATE_REPAIR",
     "predecessor_app_version": "v2.19.139-R1B-UX-ACCESS-R12",
     "predecessor_package_sha256": "3000b8e7692805a7116ac025a8a056b06db2dc6bc6fc12c7acba475bc4e29653",
-    "predecessor_production_tree": "b9aaaa762034d9a21398bc8c242c802f59062492",
     "predecessor_production_commit": "e82ef8d5d64a7e89b65436924b04883c96c7dadb",
-    "physical_trigger": "OWNER_IPHONE_AND_IPAD_PHYSICAL_TEST__SEARCH_RESULTS_SQUEEZED_TO_BOTTOM_AND_NOT_PRACTICALLY_SCROLLABLE",
-    "root_cause": "SEARCH_CONTROLS_ARE_NONSHRINKING_FLEX_SIBLINGS_WHILE_ONLY_SEARCH_RESULTS_OWNS_VERTICAL_SCROLL_AND_MIN_HEIGHT_ZERO__RESULT_VIEWPORT_CAN_COLLAPSE_TOWARD_ZERO; PROGRAMMATIC_SEARCHFOR_PATH_ALSO_FAILED_TO_HIDE_DATE_NAVIGATION",
-    "repair_contract": [
-      "ONE_VERTICAL_SEARCH_BODY_SCROLL_OWNER_BELOW_EXISTING_TOP_BAR",
-      "SEARCH_RESULTS_BECOMES_NORMAL_CONTENT_NOT_NESTED_VERTICAL_SCROLLER",
-      "NONEMPTY_QUERY_CENTRALLY_HIDES_DATE_NAVIGATION_FOR_TYPED_SUGGESTED_RECENT_DEEPLINK_AND_RESTORED_SEARCHES",
-      "FRESH_SEARCH_FILTER_AND_PAGINATION_RUNS_REVEAL_OUTPUT_STATUS_AND_FIRST_RESULTS_WITHOUT_FOCUS_THEFT",
-      "READER_RETURN_SUPPRESSES_AUTO_REVEAL_AND_RESTORES_STABLE_DATA_RESULT_KEY_ANCHOR",
-      "TEXT_SIZE_REFLOW_USES_SAME_STABLE_RESULT_ANCHOR"
+    "predecessor_tree": "b9aaaa762034d9a21398bc8c242c802f59062492",
+    "trigger": "OWNER_PHYSICAL_IPHONE_IPAD_EVIDENCE__SEARCH_RESULTS_VIEWPORT_COLLAPSED_TO_NEAR_ZERO_OR_ZERO_HEIGHT",
+    "root_cause": "SEARCH_CONTROLS_WERE_NONSHRINKING_SIBLINGS_ABOVE_A_NESTED_SEARCH_RESULTS_SCROLLER_WITH_MIN_HEIGHT_ZERO__FLEXBOX_SACRIFICED_THE_RESULTS_VIEWPORT__PROGRAMMATIC_SEARCHFOR_PATH_ALSO_FAILED_TO_HIDE_DATE_NAVIGATOR",
+    "repair": [
+      "ONE_SEARCH_BODY_VERTICAL_SCROLL_OWNER_BELOW_TOP_BAR",
+      "SEARCH_RESULTS_BECOMES_NORMAL_FLOW_CONTENT",
+      "CENTRAL_QUERY_UI_AUTHORITY_FOR_CLEAR_AND_DATE_NAV",
+      "FRESH_SEARCH_REVEALS_OUTPUT_REGION",
+      "READER_RETURN_AND_TEXT_SIZE_PRESERVE_RESULT_CARD_SEMANTIC_ANCHOR"
     ],
-    "protected_surfaces": [
-      "ALL_205_CORPUS_FILES_UNCHANGED",
-      "SEARCH_V2_BM25_AND_V21A_PAYLOADS_UNCHANGED",
-      "SEARCH_MATCHING_RANKING_EXACT_FOUNDATION_NEAR_ALGORITHMS_UNCHANGED",
-      "PROVENANCE_PUBLIC_WORDING_UNCHANGED",
-      "USER_STATE_SCHEMA_UNCHANGED",
-      "204_PERSISTENT_OFFLINE_ASSETS_AND_CONTENT_BINDING_UNCHANGED",
-      "SEMANTIC_V3_REMAINS_UNRELEASED_NOT_QUALIFIED_FAIL_CLOSED"
-    ],
-    "machine_gate": "SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_GATE_RESULT",
+    "persistent_offline_assets_changed": false,
+    "offline_content_binding_changed": false,
+    "corpus_changed": false,
+    "search_payloads_changed": false,
+    "search_algorithms_changed": false,
+    "provenance_changed": false,
+    "user_state_schema_changed": false,
+    "semantic_v3_changed": false,
     "physical_iphone_gate": "OPEN",
     "physical_ipad_gate": "OPEN",
     "production_deployment_authority": "NONE"

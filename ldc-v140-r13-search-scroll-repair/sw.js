@@ -10,8 +10,8 @@ function scopeFingerprint(scope) {
 }
 const OFFLINE_SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
 const SCOPE_CACHE_PREFIX = `${CACHE_PREFIX}${OFFLINE_SCOPE_FINGERPRINT}-`;
-const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.140-R1B-ux-access-r13`;
-const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.140-R1B-ux-access-r13`;
+const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.139-R1B-ux-access-r12`;
+const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.139-R1B-ux-access-r12`;
 const LEGACY_V76_WORKER_VERSION = 'ldc-v2.19.76-R1B-report-r2';
 const UPDATE_COMPAT_META_PATH = '__ldc_update_compat__.json';
 const INSTALL_FETCH_NONCE = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
