@@ -76,6 +76,7 @@ jobs:
               for engine,name,vp in [(pw.chromium,'chromium',{'width':390,'height':844}),(pw.webkit,'webkit',{'width':834,'height':1112})]:
                   for scheme in ['light','dark']:
                       b=engine.launch(headless=True);c=b.new_context(viewport=vp,locale='fr-FR',color_scheme=scheme,service_workers='allow')
+                      c.add_init_script("localStorage.setItem('lp_onboarded','1')")
                       p=c.new_page();errs=[];p.on('pageerror',lambda e:errs.append('PAGE '+str(e)));p.on('console',lambda m:errs.append('CONSOLE '+m.text) if m.type=='error' else None)
                       p.goto(BASE+f'?edge={name}-{scheme}',wait_until='domcontentloaded',timeout=30000);ready(p)
                       p.locator('#home-settings-btn').click();expect(p.locator('#settings-export-btn')).to_be_visible()
@@ -93,6 +94,7 @@ jobs:
                       c.close();b.close()
               # Cold offline/deep-link on Chromium after online SW install.
               b=pw.chromium.launch(headless=True);c=b.new_context(viewport={'width':390,'height':844},locale='fr-FR',service_workers='allow')
+              c.add_init_script("localStorage.setItem('lp_onboarded','1')")
               p=c.new_page();p.goto(BASE+'?edge=offline-prep',wait_until='networkidle',timeout=30000);ready(p);p.wait_for_timeout(4500);p.reload(wait_until='networkidle');ready(p);p.close()
               c.set_offline(True);q=c.new_page();q.goto(BASE+'?letter=LP.LETTER.010',wait_until='domcontentloaded',timeout=20000);ready(q);expect(q.locator('#pr-pos')).to_have_text('10 / 136')
               print('EDGE_OFFLINE_PASS')
