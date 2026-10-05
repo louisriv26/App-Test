@@ -39,7 +39,7 @@ jobs:
           rm -rf "$DST"
           cp -a "$SRC" "$DST"
 
-          printf '%s' "$PATCH_GZ_B64" | base64 -d | gzip -d > /tmp/v141.patch
+          printf '%s' "$PATCH_GZ_B64" | tr -cd 'A-Za-z0-9+/=' | base64 -d | gzip -d > /tmp/v141.patch
           echo "$EXPECTED_PATCH_SHA256  /tmp/v141.patch" | sha256sum -c -
           git apply --check --directory="$DST" /tmp/v141.patch
           git apply --directory="$DST" /tmp/v141.patch
