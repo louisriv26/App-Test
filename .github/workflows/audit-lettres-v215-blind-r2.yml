@@ -1,0 +1,53 @@
+name: Lettres v2.15 B2 blind challenge continuation R2
+on:
+  push:
+    branches: [audit-lettres-v215-20261005-r1]
+    paths: ['.github/audit-lettres-v215-blind-r2/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  blind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact unchanged B2
+        run: |
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install fresh browsers
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
+      - name: Run corrected independent B2-only falsification
+        run: python qa/lettres_v215_independent_blind_audit_r1.py | tee /tmp/blind-r2.log
+      - name: Rebuild deterministic package and prove exact identity
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile,hashlib
+          src=Path('lettres-v2.15-b2-contrast-repair');out=Path('/tmp/LETTRES_v2.15_B2_BLIND_R2_REBUILD.zip')
+          with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for p in sorted(x for x in src.rglob('*') if x.is_file()):
+                  rel=p.relative_to(src).as_posix()
+                  info=zipfile.ZipInfo(rel,date_time=(1980,1,1,0,0,0))
+                  info.compress_type=zipfile.ZIP_DEFLATED
+                  info.external_attr=(0o100644 & 0xFFFF)<<16
+                  z.writestr(info,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          sha=hashlib.sha256(out.read_bytes()).hexdigest()
+          assert sha=='d3543eeaf9f403ba8384d74983da2beb04e3c6912f30f6f168e6852b4f905a93',sha
+          print('BLIND_R2_PACKAGE_SHA256',sha)
+          PY
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+          test -z "$(git status --porcelain -- lettres-v2.15-b2-contrast-repair)"
+          echo "BLIND_R2_FINAL_TREE_PASS 8521e662e8e9efbedba2db9f537bd52281754b93"
+      - name: Upload evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: lettres-v2.15-b2-blind-r2
+          path: |
+            /tmp/LETTRES_V2_15_INDEPENDENT_BLIND_AUDIT_R1.json
+            /tmp/blind-r2.log
+          if-no-files-found: error
