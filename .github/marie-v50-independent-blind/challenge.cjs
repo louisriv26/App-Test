@@ -55,7 +55,7 @@ async function wideChallenge(bt,engine){
 async function systemThemeChallenge(bt,engine){
  const b=await bt.launch();const c=await b.newContext({viewport:{width:1215,height:751},colorScheme:'dark'});
  await c.addInitScript(()=>{localStorage.setItem('mjv_onboarded','1');localStorage.removeItem('mjv_theme')});
- const p=await c.newPage(),done=capture(p,'system:'+engine);await p.goto(BASE,{waitUntil:'domcontentloaded'});await ready(p);await p.evaluate(()=>App.openDay(5));await p.evaluate(()=>App.applyTextSize('xlarge',false));assert(document!==null);
+ const p=await c.newPage(),done=capture(p,'system:'+engine);await p.goto(BASE,{waitUntil:'domcontentloaded'});await ready(p);await p.evaluate(()=>App.openDay(5));await p.evaluate(()=>App.applyTextSize('xlarge',false));
  const dark=await p.evaluate(()=>({theme:document.documentElement.getAttribute('data-theme'),bg:getComputedStyle(document.body).backgroundColor}));
  assert(dark.theme==='dark','system dark unresolved '+JSON.stringify(dark));await p.emulateMedia({colorScheme:'light'});await p.waitForFunction(()=>document.documentElement.getAttribute('data-theme')!=='dark');const light=await p.evaluate(()=>({theme:document.documentElement.getAttribute('data-theme'),bg:getComputedStyle(document.body).backgroundColor}));
  const m=await geom(p);assert(Math.abs(m.free)<=1.5,'system light free '+m.free);pass(engine+':live_system_theme',{dark,light,free:m.free});done();await c.close();await b.close();
