@@ -53,7 +53,7 @@ rec('style_src_elem_exact',dirs.get('style-src-elem')==styles,dirs.get('style-sr
 rec('no_v214_identity_token',not re.search(r'v?2\.14\b',html),[x for x in re.findall(r'.{0,40}v?2\.14.{0,40}',html)][:5])
 rec('muted_variable_unchanged',re.findall(r'--muted\s*:[^;]+;',PRE.joinpath('index.html').read_text(encoding='utf-8'))==re.findall(r'--muted\s*:[^;]+;',html))
 manifest=json.loads(CUR.joinpath('manifest.json').read_text(encoding='utf-8'))
-rec('manifest_identity',(manifest.get('version'),manifest.get('build_revision'),manifest.get('release_id'))==('2.15','B1','lettres-v2.15-b2-contrast-repair'),manifest)
+rec('manifest_identity',(manifest.get('version'),manifest.get('build_revision'),manifest.get('release_id'))==('2.15','B2','lettres-v2.15-b2-contrast-repair'),manifest)
 sw=CUR.joinpath('sw.js').read_text(encoding='utf-8')
 rec('sw_identity','v2.14' not in sw and 'shell-v2.15-b2' in sw and 'corpus-v2.15-b2' in sw,None)
 
