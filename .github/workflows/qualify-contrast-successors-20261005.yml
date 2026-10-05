@@ -129,10 +129,10 @@ jobs:
           node --check /tmp/lettres-v215-stable.cjs
 
       - name: Lettres complete functional regression
-        run: python /tmp/lettres-v215_full.py
+        run: python /tmp/lettres_v215_full.py
 
       - name: Lettres served-edge successor falsification and update
-        run: python /tmp/lettres-v215_falsify.py
+        run: python /tmp/lettres_v215_falsify.py
 
       - name: Lettres stateful and steady contrast qualification
         run: |
