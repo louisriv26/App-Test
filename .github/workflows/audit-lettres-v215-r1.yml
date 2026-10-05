@@ -1,0 +1,174 @@
+name: Fresh full audit Lettres v2.15 B2 R1
+on:
+  push:
+    branches: [audit-lettres-v215-20261005-r1]
+    paths:
+      - '.github/audit-lettres-v215-r1/TRIGGER'
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Bind current candidate before any audit operation
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+          test "$(git rev-parse HEAD:lettres-v2.14-b1-csp-repair)" = "92530b7219fae7940be525b73b92d0a3782451ac"
+          echo "CURRENT_B2_TREE=$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install independent test engines
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
+          npm install --no-save axe-core
+
+      - name: Reconstruct authoritative B1 source and rederive B2
+        run: |
+          set -euo pipefail
+          git fetch origin lettres-v215-qualification
+          rm -rf lettres-v2.15-b1-contrast-repair
+          git archive origin/lettres-v215-qualification lettres-v2.15-b1-contrast-repair | tar -x
+          test "$(git rev-parse origin/lettres-v215-qualification:lettres-v2.15-b1-contrast-repair)" = "3caebc39f22be6053463b5c577ab8991074a1c81"
+          python qa/stage_lettres_v215_b2.py | tee /tmp/build-rederive.log
+          test "$LETTRES_V215_TREE" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+          echo "BUILD_REDERIVATION_PASS"
+
+      - name: Verify package boundary, identities and deterministic package
+        run: |
+          python - <<'PY' | tee /tmp/package-integrity.log
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import hashlib,json,zipfile,base64,re
+          root=Path('lettres-v2.15-b2-contrast-repair')
+          pre=Path('lettres-v2.14-b1-csp-repair')
+          A={p.relative_to(pre).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in pre.rglob('*') if p.is_file()}
+          B={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
+          assert len(A)==22 and len(B)==22 and set(A)==set(B),(len(A),len(B))
+          changed=sorted(k for k in A if A[k]!=B[k])
+          assert changed==['index.html','manifest.json','sw.js'],changed
+          assert B['corpus.json']=='362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec'
+          m=json.loads((root/'manifest.json').read_text(encoding='utf-8'))
+          assert (m.get('version'),m.get('build_revision'),m.get('release_id'))==('2.15','B2','lettres-v2.15-b2-contrast-repair'),m
+          sw=(root/'sw.js').read_text(encoding='utf-8')
+          assert 'shell-v2.15-b2' in sw and 'corpus-v2.15-b2' in sw and 'v2.15-b1' not in sw and 'v2.14-b1' not in sw
+          html=(root/'index.html').read_text(encoding='utf-8')
+          assert "const APP_VERSION = '2.15';" in html and "const APP_BUILD = 'B2';" in html
+          assert not re.search(r'v?2\.14\b',html)
+          out=Path('/tmp/LETTRES_v2.15_B2_FRESH_AUDIT.zip')
+          with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for p in sorted(x for x in root.rglob('*') if x.is_file()):
+                  rel=p.relative_to(root).as_posix()
+                  info=zipfile.ZipInfo(rel,date_time=(1980,1,1,0,0,0))
+                  info.compress_type=zipfile.ZIP_DEFLATED
+                  info.external_attr=(0o100644 & 0xFFFF)<<16
+                  z.writestr(info,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          zsha=hashlib.sha256(out.read_bytes()).hexdigest()
+          assert zsha=='d3543eeaf9f403ba8384d74983da2beb04e3c6912f30f6f168e6852b4f905a93',zsha
+          print('MEMBERS',len(B));print('CHANGED',changed);print('PACKAGE_SHA256',zsha);print('CORPUS_SHA256',B['corpus.json'])
+          Path('/tmp/LETTRES_v2.15_B2_FRESH_AUDIT_SHA256.txt').write_text(zsha+'  LETTRES_v2.15_B2_FRESH_AUDIT.zip\n')
+          PY
+
+      - name: Start exact B2 runtime server
+        run: |
+          python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres-v215-audit-server.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8120/lettres-v2.15-b2-contrast-repair/index.html >/dev/null
+
+      - name: Pass 2 full current-candidate regression
+        run: python qa/lettres_v215_full_current_b2.py | tee /tmp/full-current.log
+
+      - name: Pass 2 rendered contrast and state matrix
+        run: python qa/lettres_v215_contrast_b2_20261005.py | tee /tmp/contrast.log
+
+      - name: Prepare v2.14 same-scope predecessor
+        run: |
+          rm -rf /tmp/lettres-v215-v214-scope
+          cp -a lettres-v2.14-b1-csp-repair /tmp/lettres-v215-v214-scope
+          cd /tmp/lettres-v215-v214-scope
+          python3 -m http.server 8132 --bind 127.0.0.1 >/tmp/lettres-v215-v214.log 2>&1 &
+          sleep 2
+
+      - name: Pass 2 v2.14 to B2 update preservation
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-v2.14-b1-csp-repair --pre-version 2.14 --pre-cache v2.14-b1 --port 8132 --label audit-v214 | tee /tmp/upgrade-v214.log
+
+      - name: Prepare deployed v2.4 same-scope predecessor
+        run: |
+          rm -rf /tmp/lettres-v215-v24-scope
+          cp -a lettres-r9 /tmp/lettres-v215-v24-scope
+          cd /tmp/lettres-v215-v24-scope
+          python3 -m http.server 8134 --bind 127.0.0.1 >/tmp/lettres-v215-v24.log 2>&1 &
+          sleep 2
+
+      - name: Pass 2 deployed v2.4 to B2 update preservation
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label audit-v24 | tee /tmp/upgrade-v24.log
+
+      - name: Verify exact public App-Test edge bytes
+        run: |
+          python - <<'PY' | tee /tmp/public-edge.log
+          from pathlib import Path
+          import urllib.request,hashlib,time
+          root=Path('lettres-v2.15-b2-contrast-repair')
+          base='https://louisriv26.github.io/App-Test/lettres-v2.15-b2-contrast-repair/'
+          files=sorted(p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file())
+          assert len(files)==22
+          for attempt in range(20):
+              try:
+                  req=urllib.request.Request(base+'manifest.json?fresh-audit-r1='+str(attempt),headers={'Cache-Control':'no-cache','Pragma':'no-cache','User-Agent':'Lettres-v215-fresh-audit'})
+                  got=urllib.request.urlopen(req,timeout=20).read()
+                  if hashlib.sha256(got).hexdigest()==hashlib.sha256((root/'manifest.json').read_bytes()).hexdigest():break
+              except Exception as e: print('WAIT',attempt,repr(e))
+              time.sleep(3)
+          else: raise SystemExit('public manifest not exact')
+          for rel in files:
+              req=urllib.request.Request(base+rel+'?fresh-audit-r1=1',headers={'Cache-Control':'no-cache','Pragma':'no-cache','User-Agent':'Lettres-v215-fresh-audit'})
+              with urllib.request.urlopen(req,timeout=45) as r:data=r.read();status=r.status
+              want=hashlib.sha256((root/rel).read_bytes()).hexdigest();got=hashlib.sha256(data).hexdigest()
+              assert status==200 and got==want,(rel,status,got,want)
+              print('PUBLIC_EDGE_PASS',rel,got)
+          print('PUBLIC_EDGE_ALL_22_PASS')
+          PY
+
+      - name: Final fresh independent blind challenge
+        run: python qa/lettres_v215_fresh_blind_audit_r1.py | tee /tmp/fresh-blind.log
+
+      - name: Confirm tested candidate remained byte-identical
+        run: |
+          set -euo pipefail
+          NOW="$(git write-tree)"
+          SUB="$(git rev-parse "$NOW:lettres-v2.15-b2-contrast-repair")"
+          test "$SUB" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+          echo "FINAL_TESTED_TREE=$SUB"
+          sha256sum /tmp/LETTRES_v2.15_B2_FRESH_AUDIT.zip
+
+      - name: Upload fresh audit evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: lettres-v2.15-b2-fresh-full-audit-r1
+          path: |
+            /tmp/LETTRES_v2.15_B2_FRESH_AUDIT.zip
+            /tmp/LETTRES_v2.15_B2_FRESH_AUDIT_SHA256.txt
+            /tmp/LETTRES_V2_15_FRESH_BLIND_AUDIT_R1.json
+            /tmp/build-rederive.log
+            /tmp/package-integrity.log
+            /tmp/full-current.log
+            /tmp/contrast.log
+            /tmp/upgrade-v214.log
+            /tmp/upgrade-v24.log
+            /tmp/public-edge.log
+            /tmp/fresh-blind.log
+            LETTRES_V2_15_CONTRAST_QUALIFICATION_2026-10-05.json
+          if-no-files-found: error
