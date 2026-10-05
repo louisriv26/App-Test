@@ -79,7 +79,7 @@ jobs:
                       c.add_init_script("localStorage.setItem('lp_onboarded','1')")
                       p=c.new_page();errs=[];p.on('pageerror',lambda e:errs.append('PAGE '+str(e)));p.on('console',lambda m:errs.append('CONSOLE '+m.text) if m.type=='error' else None)
                       p.goto(BASE+f'?edge={name}-{scheme}',wait_until='domcontentloaded',timeout=30000);ready(p)
-                      p.locator('#home-settings-btn').click();expect(p.locator('#settings-export-btn')).to_be_visible()
+                      p.locator('#home-settings-btn' if vp['width']<768 else '#snav-settings').click();expect(p.locator('#settings-export-btn')).to_be_visible()
                       d=p.locator('#settings-export-btn').evaluate("""el=>{const c=getComputedStyle(el);return {color:c.color,bg:c.backgroundColor}}""")
                       rr=ratio(rgb(d['color']),rgb(d['bg']))
                       if rr<4.5: raise AssertionError((name,scheme,'export',rr,d))
