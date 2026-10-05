@@ -1,0 +1,144 @@
+name: Independent full audit Lettres v2.15 B2 R1
+on:
+  push:
+    branches: [audit-lettres-v215-20261005-r1]
+    paths: ['.github/audit-lettres-v215-r1/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Bind exact current candidate
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+          echo "CANDIDATE_TREE=8521e662e8e9efbedba2db9f537bd52281754b93"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install fresh browser and accessibility runtimes
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
+          npm install --no-save axe-core
+      - name: Fresh static/package integrity audit
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import hashlib,json,base64,re
+          pre=Path('lettres-v2.14-b1-csp-repair')
+          cur=Path('lettres-v2.15-b2-contrast-repair')
+          def hm(root):
+              return {p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
+          A=hm(pre);B=hm(cur)
+          assert len(A)==22 and len(B)==22,(len(A),len(B))
+          assert set(A)==set(B),(sorted(set(A)-set(B)),sorted(set(B)-set(A)))
+          changed=sorted(k for k in A if A[k]!=B[k])
+          assert changed==['index.html','manifest.json','sw.js'],changed
+          assert B['corpus.json']=='362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec'
+          m=json.loads((cur/'manifest.json').read_text(encoding='utf-8'))
+          assert (m.get('version'),m.get('build_revision'),m.get('release_id'))==('2.15','B2','lettres-v2.15-b2-contrast-repair'),m
+          sw=(cur/'sw.js').read_text(encoding='utf-8')
+          assert 'shell-v2.15-b2' in sw and 'corpus-v2.15-b2' in sw and 'v2.14' not in sw
+          html=(cur/'index.html').read_text(encoding='utf-8')
+          assert "APP_VERSION = '2.15'" in html and "APP_BUILD = 'B2'" in html and 'v2.14' not in html
+          class P(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=False);self.csp=None;self.scripts=[];self.styles=[];self.tag=None;self.buf=[]
+              def handle_starttag(self,tag,attrs):
+                  d={k.lower():v for k,v in attrs}
+                  if tag.lower()=='meta' and (d.get('http-equiv') or '').lower()=='content-security-policy':self.csp=d.get('content')
+                  if tag.lower() in ('script','style') and not (tag.lower()=='script' and d.get('src')):
+                      self.tag=tag.lower();self.buf=[]
+              def handle_data(self,data):
+                  if self.tag:self.buf.append(data)
+              def handle_entityref(self,name):
+                  if self.tag:self.buf.append('&'+name+';')
+              def handle_charref(self,name):
+                  if self.tag:self.buf.append('&#'+name+';')
+              def handle_endtag(self,tag):
+                  if self.tag==tag.lower():
+                      s=''.join(self.buf);(self.scripts if self.tag=='script' else self.styles).append(s);self.tag=None;self.buf=[]
+          p=P();p.feed(html)
+          assert p.csp and len(p.scripts)==1 and len(p.styles)==2
+          tok=lambda s:"'sha256-"+base64.b64encode(hashlib.sha256(s.encode()).digest()).decode()+"'"
+          dirs={}
+          for raw in p.csp.split(';'):
+              z=raw.strip().split()
+              if z:dirs[z[0]]=z[1:]
+          mh=tok(p.scripts[0]);sh=[tok(x) for x in p.styles]
+          assert dirs.get('script-src-elem')==[mh],dirs.get('script-src-elem')
+          assert mh in dirs.get('script-src',[]),dirs.get('script-src')
+          assert dirs.get('style-src-elem')==sh,dirs.get('style-src-elem')
+          print('STATIC_AUDIT_PASS')
+          print('CHANGED_MEMBERS',changed)
+          print('CORPUS_SHA256',B['corpus.json'])
+          print('INDEX_SHA256',B['index.html'])
+          print('MANIFEST_SHA256',B['manifest.json'])
+          print('SW_SHA256',B['sw.js'])
+          PY
+      - name: Start exact local candidate
+        run: |
+          python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres-audit-r1.log 2>&1 &
+          sleep 2
+      - name: Fresh full runtime regression
+        run: python qa/lettres_v215_full_current_b2.py
+      - name: Fresh 12-context contrast/state audit
+        run: python qa/lettres_v215_contrast_b2_20261005.py
+      - name: Prepare v2.14 predecessor
+        run: |
+          rm -rf /tmp/lettres-v215-v214-scope
+          cp -a lettres-v2.14-b1-csp-repair /tmp/lettres-v215-v214-scope
+          cd /tmp/lettres-v215-v214-scope
+          python3 -m http.server 8132 --bind 127.0.0.1 >/tmp/lettres-v214-audit.log 2>&1 &
+          sleep 2
+      - name: Fresh v2.14 to B2 update/preservation
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-v2.14-b1-csp-repair --pre-version 2.14 --pre-cache v2.14-b1 --port 8132 --label audit-v214
+      - name: Prepare production v2.4 predecessor
+        run: |
+          rm -rf /tmp/lettres-v215-v24-scope
+          cp -a lettres-r9 /tmp/lettres-v215-v24-scope
+          cd /tmp/lettres-v215-v24-scope
+          python3 -m http.server 8134 --bind 127.0.0.1 >/tmp/lettres-v24-audit.log 2>&1 &
+          sleep 2
+      - name: Fresh production v2.4 to B2 update/preservation
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label audit-v24
+      - name: Fresh independent B2-only blind falsification
+        run: python qa/lettres_v215_independent_blind_audit_r1.py
+      - name: Rebuild deterministic delivered package and bind hash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile,hashlib
+          src=Path('lettres-v2.15-b2-contrast-repair');out=Path('/tmp/LETTRES_v2.15_AUDIT_REBUILD.zip')
+          with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for p in sorted(x for x in src.rglob('*') if x.is_file()):
+                  rel=p.relative_to(src).as_posix()
+                  info=zipfile.ZipInfo(rel,date_time=(1980,1,1,0,0,0))
+                  info.compress_type=zipfile.ZIP_DEFLATED
+                  info.external_attr=(0o100644 & 0xFFFF)<<16
+                  z.writestr(info,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          sha=hashlib.sha256(out.read_bytes()).hexdigest()
+          print('REBUILT_PACKAGE_SHA256',sha)
+          assert sha=='d3543eeaf9f403ba8384d74983da2beb04e3c6912f30f6f168e6852b4f905a93',sha
+          PY
+      - name: Prove candidate remained byte-identical after all testing
+        run: |
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+          test -z "$(git status --porcelain -- lettres-v2.15-b2-contrast-repair)"
+          echo "FINAL_CANDIDATE_UNCHANGED_PASS"
+      - name: Upload fresh audit evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: lettres-v2.15-b2-independent-full-audit-r1
+          path: |
+            /tmp/LETTRES_V2_15_INDEPENDENT_BLIND_AUDIT_R1.json
+            LETTRES_V2_15_CONTRAST_QUALIFICATION_2026-10-05.json
+            /tmp/LETTRES_v2.15_AUDIT_REBUILD.zip
+          if-no-files-found: error
