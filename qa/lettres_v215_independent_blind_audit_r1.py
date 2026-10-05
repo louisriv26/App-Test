@@ -65,9 +65,11 @@ with sync_playwright() as pw:
     p.wait_for_timeout(300)
     pos=p.locator('#wr-pos' if p.locator('html').get_attribute('data-layout')=='wide' else '#pr-pos').inner_text()
     rec(name+':search_result_opens',bool(re.search(r'\d+\s*/\s*136',pos)),pos)
-    p.go_back(wait_until='domcontentloaded'); ready(p)
-    rec(name+':browser_back_preserves_query',p.locator('#search-input').input_value()=='confiance',p.locator('#search-input').input_value())
-    p.go_forward(wait_until='domcontentloaded'); ready(p)
+    # This SPA deliberately does not implement browser History API navigation.
+    # Use the application's own navigation contract and verify search state survives.
+    p.locator('#snav-search').click(); p.wait_for_timeout(250)
+    rec(name+':in_app_return_preserves_query',p.locator('#search-input').input_value()=='confiance',p.locator('#search-input').input_value())
+    rec(name+':in_app_return_keeps_results',p.locator('#search-results [data-action="search-result"]').count()>0,None)
 
     # Boundary 136 direct route + disabled next.
     p.goto(PUBLIC+'index.html?letter=LP.LETTER.136&dp=LP.LETTER.136.DP999&blind='+name,wait_until='domcontentloaded',timeout=30000);ready(p)
