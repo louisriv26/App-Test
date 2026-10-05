@@ -36,7 +36,7 @@ jobs:
           python3 -m http.server 8132 --bind 127.0.0.1 >/tmp/lettres-v215-v214.log 2>&1 &
           sleep 2
       - name: Reverify v2.14 to B2 update preservation
-        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-v2.14-b1-csp-repair --pre-version 2.14 --pre-cache v2.14-b1 --port 8132 --label corrected-v214 | tee /tmp/corrected-upgrade-v214.log
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-v2.14-b1-csp-repair --pre-version 2.14 --pre-cache v2.14-b1 --port 8132 --label corrected-v214 --scope /tmp/lettres-v215-v214-scope | tee /tmp/corrected-upgrade-v214.log
       - name: Prepare deployed v2.4 same-scope predecessor
         run: |
           rm -rf /tmp/lettres-v215-v24-scope
@@ -45,7 +45,7 @@ jobs:
           python3 -m http.server 8134 --bind 127.0.0.1 >/tmp/lettres-v215-v24.log 2>&1 &
           sleep 2
       - name: Reverify deployed v2.4 to B2 update preservation
-        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label corrected-v24 | tee /tmp/corrected-upgrade-v24.log
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label corrected-v24 --scope /tmp/lettres-v215-v24-scope | tee /tmp/corrected-upgrade-v24.log
       - name: Start exact B2 local server
         run: |
           python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres-v215-b2.log 2>&1 &

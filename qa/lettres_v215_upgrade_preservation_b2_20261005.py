@@ -8,10 +8,11 @@ ap.add_argument('--pre-version',required=True)
 ap.add_argument('--pre-cache',required=True)
 ap.add_argument('--port',type=int,required=True)
 ap.add_argument('--label',required=True)
+ap.add_argument('--scope',default=None)
 a=ap.parse_args()
 ROOT=Path('lettres-v2.15-b2-contrast-repair')
 PRE=Path(a.pre)
-SCOPE=Path(f'/tmp/lettres-v215-{a.label}-scope')
+SCOPE=Path(a.scope) if a.scope else Path(f'/tmp/lettres-v215-{a.label}-scope')
 URL=f'http://127.0.0.1:{a.port}/index.html'
 R=[]
 def rec(n,ok,d=None):
