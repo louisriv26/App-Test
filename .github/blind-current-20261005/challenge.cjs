@@ -67,7 +67,7 @@ async function marie(bt,bname){
   assert((await p.locator('#mobile-version').textContent()).trim()==='v49','M mobile version');
   let op=+(await p.locator('#dark-toggle-btn').evaluate(e=>getComputedStyle(e).opacity)); assert(op>=.999,'M theme opacity '+op); rec('M:'+bname+':theme_control_opacity',op);
   assert(await p.evaluate(()=>document.documentElement.dataset.theme)==='dark','M initial system dark');
-  await p.emulateMedia({colorScheme:'light'}); await p.waitForFunction(()=>document.documentElement.dataset.theme==='light'); rec('M:'+bname+':live_system_theme_switch','dark→light');
+  await p.emulateMedia({colorScheme:'light'}); await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-theme')); rec('M:'+bname+':live_system_theme_switch','dark→system-light(no data-theme attr)');
   await p.locator('#nav-search').click(); await p.locator('#search-input').fill('Fiat'); await p.waitForFunction(()=>document.querySelectorAll('#screen-list .snippet-card').length>0); rec('M:'+bname+':search_fiat',await p.locator('#screen-list .snippet-card').count());
   await p.locator('#nav-espace').click(); await p.waitForTimeout(100);
   const saveBtn=p.locator('.backup-btn.primary').first(); await saveBtn.waitFor({state:'visible'});
