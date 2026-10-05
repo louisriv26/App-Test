@@ -1,0 +1,61 @@
+name: Lettres v2.15 B2 isolated qualification
+on:
+  push:
+    branches: [lettres-v215-b2-qa-20261005]
+    paths: ['.github/lettres-v215-b2-branchqa/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact B2 tree
+        run: |
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-closure)" = "e62ff29e25c26d523768f847cf1c03a2b355b3b5"
+          test "$(git rev-parse HEAD:lettres-v2.14-b1-csp-repair)" = "92530b7219fae7940be525b73b92d0a3782451ac"
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install runtime and Axe
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
+          npm install --no-save axe-core@4.10.3
+      - name: Start exact B2 local server
+        run: |
+          python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres215-b2-branch.log 2>&1 &
+          sleep 2
+      - name: Full functional regression
+        run: python qa/lettres_v215_b2_handover_full.py
+      - name: Full contrast matrix
+        run: python qa/lettres_v215_b2_handover_contrast.py
+      - name: Structural integrity, blind challenge and both upgrade lineages
+        run: python qa/lettres_v215_b2_branch_release_integrity.py
+      - name: Deterministic B2 package
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile,hashlib
+          src=Path('lettres-v2.15-b2-contrast-closure');out=Path('/tmp/LETTRES_v2.15.zip')
+          with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for p in sorted(x for x in src.rglob('*') if x.is_file()):
+                  rel=p.relative_to(src).as_posix()
+                  info=zipfile.ZipInfo(rel,date_time=(1980,1,1,0,0,0))
+                  info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=(0o100644 & 0xFFFF)<<16
+                  z.writestr(info,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          sha=hashlib.sha256(out.read_bytes()).hexdigest()
+          Path('/tmp/LETTRES_v2.15_SHA256.txt').write_text(f'{sha}  LETTRES_v2.15.zip\n')
+          print('PACKAGE_SHA256',sha)
+          PY
+          unzip -t /tmp/LETTRES_v2.15.zip
+      - name: Upload exact B2 qualification artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lettres-v2.15-b2-isolated-qualified
+          path: |
+            /tmp/LETTRES_v2.15.zip
+            /tmp/LETTRES_v2.15_SHA256.txt
+            LETTRES_V2_15_CONTRAST_QUALIFICATION_2026-10-05.json
+          if-no-files-found: error
