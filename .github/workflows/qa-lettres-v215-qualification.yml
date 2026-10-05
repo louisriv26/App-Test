@@ -1,18 +1,18 @@
-name: Qualify Lettres v2.15 exact candidate
+name: Qualify Lettres v2.15 B2 exact candidate
 on:
   push:
     branches: [lettres-v215-qualification]
     paths: ['.github/lettres-v2.15-qualification/TRIGGER']
 permissions:
-  contents: read
+  contents: write
 jobs:
   qa:
     runs-on: ubuntu-latest
-    timeout-minutes: 70
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
         with: {fetch-depth: 0}
-      - name: Bind exact v2.15 candidate
+      - name: Bind frozen B1 predecessor
         run: test "$(git rev-parse HEAD:lettres-v2.15-b1-contrast-repair)" = "3caebc39f22be6053463b5c577ab8991074a1c81"
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
@@ -21,31 +21,32 @@ jobs:
           python -m pip install --disable-pip-version-check playwright
           python -m playwright install --with-deps chromium webkit
           npm install --no-save axe-core
-      - name: Prove exact mutation boundary
+      - name: Derive immutable B2 successor and CSP from final bytes
+        run: python qa/stage_lettres_v215_b2.py
+      - name: Prove exact B2 mutation boundary
         run: |
           python - <<'PY'
           from pathlib import Path
           import hashlib
-          a=Path('lettres-v2.14-b1-csp-repair');b=Path('lettres-v2.15-b1-contrast-repair')
+          a=Path('lettres-v2.15-b1-contrast-repair');b=Path('lettres-v2.15-b2-contrast-repair')
           A={p.relative_to(a).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in a.rglob('*') if p.is_file()}
           B={p.relative_to(b).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in b.rglob('*') if p.is_file()}
-          assert set(A)==set(B) and len(B)==22,(len(A),len(B),set(A)^set(B))
+          assert set(A)==set(B) and len(B)==22
           changed=sorted(k for k in A if A[k]!=B[k])
           assert changed==['index.html','manifest.json','sw.js'],changed
           assert B['corpus.json']=='362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec'
-          print('MUTATION_BOUNDARY_PASS',changed)
-          print('CORPUS_SHA256',B['corpus.json'])
+          print('B2_MUTATION_BOUNDARY_PASS',changed)
           PY
-      - name: Start exact candidate server
+      - name: Start exact B2 server
         run: |
-          python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres215.log 2>&1 &
+          python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres215b2.log 2>&1 &
           sleep 2
       - name: Full current-candidate regression
-        run: python qa/lettres_v215_full_current.py
+        run: python qa/lettres_v215_full_current_b2.py
       - name: Full steady and stateful contrast qualification
-        run: python qa/lettres_v215_contrast_20261005.py
+        run: python qa/lettres_v215_contrast_b2_20261005.py
       - name: Independent blind falsification challenge
-        run: python qa/lettres_v215_blind_challenge_20261005.py
+        run: python qa/lettres_v215_blind_challenge_b2_20261005.py
       - name: Prepare v2.14 same-scope predecessor
         run: |
           rm -rf /tmp/lettres-v215-v214-scope
@@ -54,7 +55,7 @@ jobs:
           python3 -m http.server 8132 --bind 127.0.0.1 >/tmp/lettres215-v214.log 2>&1 &
           sleep 2
       - name: Verify v2.14 to v2.15 preservation
-        run: python qa/lettres_v215_upgrade_preservation_20261005.py --pre lettres-v2.14-b1-csp-repair --pre-version 2.14 --pre-cache v2.14-b1 --port 8132 --label v214
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-v2.14-b1-csp-repair --pre-version 2.14 --pre-cache v2.14-b1 --port 8132 --label v214
       - name: Prepare deployed v2.4 same-scope predecessor
         run: |
           rm -rf /tmp/lettres-v215-v24-scope
@@ -63,31 +64,41 @@ jobs:
           python3 -m http.server 8134 --bind 127.0.0.1 >/tmp/lettres215-v24.log 2>&1 &
           sleep 2
       - name: Verify v2.4 to v2.15 preservation
-        run: python qa/lettres_v215_upgrade_preservation_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label v24
-      - name: Build deterministic exact candidate package
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label v24
+      - name: Prove tested B2 tree is unchanged
+        run: |
+          ROOT_TREE="$(git write-tree)"
+          NOW="$(git rev-parse "$ROOT_TREE:lettres-v2.15-b2-contrast-repair")"
+          test "$NOW" = "$LETTRES_V215_TREE"
+          echo "TESTED_B2_TREE=$NOW"
+      - name: Build deterministic exact B2 package
         run: |
           python - <<'PY'
           from pathlib import Path
-          import zipfile,hashlib,json
-          src=Path('lettres-v2.15-b1-contrast-repair')
-          out=Path('/tmp/LETTRES_v2.15.zip')
+          import zipfile,hashlib,json,os
+          src=Path('lettres-v2.15-b2-contrast-repair');out=Path('/tmp/LETTRES_v2.15.zip')
           with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
               for p in sorted(x for x in src.rglob('*') if x.is_file()):
                   rel=p.relative_to(src).as_posix()
-                  info=zipfile.ZipInfo(rel,date_time=(1980,1,1,0,0,0))
-                  info.compress_type=zipfile.ZIP_DEFLATED
-                  info.external_attr=(0o100644 & 0xFFFF)<<16
+                  info=zipfile.ZipInfo(rel,date_time=(1980,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=(0o100644 & 0xFFFF)<<16
                   z.writestr(info,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
           sha=hashlib.sha256(out.read_bytes()).hexdigest()
           Path('/tmp/LETTRES_v2.15_SHA256.txt').write_text(f'{sha}  LETTRES_v2.15.zip\n',encoding='utf-8')
-          report={'candidate_tree':'3caebc39f22be6053463b5c577ab8991074a1c81','package_sha256':sha,'member_count':22,'changed_members':['index.html','manifest.json','sw.js'],'corpus_sha256':'362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec'}
-          Path('/tmp/LETTRES_V2_15_MACHINE_RELEASE_REPORT.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
+          rep={'public_version':'2.15','build_revision':'B2','candidate_tree':os.environ['LETTRES_V215_TREE'],'package_sha256':sha,'member_count':22,'changed_from_b1':['index.html','manifest.json','sw.js'],'corpus_sha256':'362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec','machine_gates':'PASS'}
+          Path('/tmp/LETTRES_V2_15_MACHINE_RELEASE_REPORT.json').write_text(json.dumps(rep,indent=2),encoding='utf-8')
           print('PACKAGE_SHA256',sha)
           PY
+      - name: Commit exact qualified B2 candidate to qualification branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Freeze qualified Lettres v2.15 B2 candidate" -- lettres-v2.15-b2-contrast-repair
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "$LETTRES_V215_TREE"
+          git push origin HEAD:lettres-v215-qualification
       - name: Upload exact package evidence
         uses: actions/upload-artifact@v4
         with:
-          name: lettres-v2.15-exact-candidate
+          name: lettres-v2.15-b2-exact-candidate
           path: |
             /tmp/LETTRES_v2.15.zip
             /tmp/LETTRES_v2.15_SHA256.txt
