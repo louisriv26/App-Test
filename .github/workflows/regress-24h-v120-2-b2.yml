@@ -113,8 +113,12 @@ jobs:
 
                 await page.evaluate(()=>openHour(1,false));
                 await page.waitForFunction(()=>state.view==='reader'&&state.currentHour===1);
-                const body=await page.locator('body').innerText();
-                ok(body.includes('1re Heure')||body.includes('1e Heure'),'reader heading');
+                rec.checks.readerStructure={
+                  topStatus:await page.locator('[data-meditee-bar-hour="1"]').count(),
+                  endCard:await page.locator('#hourEndActions').count(),
+                  primaryEnd:await page.locator('[data-meditee-action-hour="1"][data-meditee-role="primary-end"]').count()
+                };
+                ok(rec.checks.readerStructure.topStatus===1&&rec.checks.readerStructure.endCard===1&&rec.checks.readerStructure.primaryEnd===1,'reader structure');
                 rec.checks.tabs={};
                 for(const label of ['Méditation','Réflexion','Approfondir']){
                   const q=page.getByRole('button',{name:new RegExp(label,'i')});
