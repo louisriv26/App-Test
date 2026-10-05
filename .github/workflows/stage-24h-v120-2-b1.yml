@@ -1,0 +1,129 @@
+name: Stage exact 24H v120.2 B1 core-loop candidate
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/stage-24h-v120-2-b1.yml
+
+permissions:
+  contents: write
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct and verify exact frozen candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Bind exact production predecessor before mutation.
+          base="https://raw.githubusercontent.com/louisriv26/Les-24-Heures-de-la-Passion/380e61f7150d61c5d4745840de56b5a4c1c00fd0"
+          work="$(mktemp -d)"
+          files=".nojekyll apple-touch-icon.png favicon-16.png favicon-32.png favicon.ico icon-60.png icon-120.png icon-192.png icon-512.png icon-maskable-512.png index.html luisa_24_heures.html manifest.json sw.js version.json"
+          for f in $files; do
+            curl --fail --location --silent --show-error "$base/$f" -o "$work/$f"
+          done
+
+          test "$(git hash-object "$work/index.html")" = "1361d21d4f17d6a118717ff1dc6c57aa4b7cfc9d"
+          test "$(git hash-object "$work/luisa_24_heures.html")" = "1361d21d4f17d6a118717ff1dc6c57aa4b7cfc9d"
+          test "$(git hash-object "$work/manifest.json")" = "6b5f9cbc923e37ff5aa90adad66f7f5d2d21364f"
+          test "$(git hash-object "$work/sw.js")" = "9960dd472d844962ea6763c35dc5a8aebd78a335"
+          test "$(git hash-object "$work/version.json")" = "9ec2b1354d45a4a763a970f591a199a232b1e15d"
+
+          # Reconstruct the exact compressed delta supplied from the frozen local candidate.
+          cat             .github/24h_v1202_exact.patch.gz.b64.part1             .github/24h_v1202_exact.patch.gz.b64.part2             .github/24h_v1202_exact.patch.gz.b64.part3             > /tmp/patch.b64
+          test "$(sha256sum /tmp/patch.b64 | cut -d' ' -f1)" = "fd5629f9528cda0f544e9c48120b7070882d35a3b3f33eb2ee9d26dca40f7fbc"
+          base64 -d /tmp/patch.b64 > /tmp/patch.gz
+          test "$(sha256sum /tmp/patch.gz | cut -d' ' -f1)" = "21e03b8b5be73c295a09835983b55788d69631bb39fd411d1bb8899d5ff2ee01"
+          gzip -dc /tmp/patch.gz > /tmp/patch.diff
+          test "$(sha256sum /tmp/patch.diff | cut -d' ' -f1)" = "4e1a29fa96ec9c73f664b3482f3a7e2b6cc17315a3d9613e97cb1b7c097a0abf"
+
+          (cd "$work" && patch -p1 --fuzz=0 < /tmp/patch.diff)
+
+          # Exact frozen successor hashes.
+          test "$(sha256sum "$work/index.html" | cut -d' ' -f1)" = "568eec865918320af094669f61e3c3447a6d29aa07ec5a057a557c490e95b7f8"
+          test "$(sha256sum "$work/luisa_24_heures.html" | cut -d' ' -f1)" = "568eec865918320af094669f61e3c3447a6d29aa07ec5a057a557c490e95b7f8"
+          test "$(sha256sum "$work/manifest.json" | cut -d' ' -f1)" = "a9307442168251eec9750b3e0a675e55f0fc9cec6df2f35c8e0c60e3d1d4254d"
+          test "$(sha256sum "$work/sw.js" | cut -d' ' -f1)" = "5cbace63cb2af3555b1f491c97c81001509c38c5cf7dc5724083d6f024285d68"
+          test "$(sha256sum "$work/version.json" | cut -d' ' -f1)" = "d28b5b89fc1b2da48ab3ac2b622c3e70b6e607f585f67f5158485daa2c3147ba"
+
+          test "$(git hash-object "$work/index.html")" = "cd8aff5cf4ed4f7464ae20fbfa77845007b2c5fb"
+          test "$(git hash-object "$work/luisa_24_heures.html")" = "cd8aff5cf4ed4f7464ae20fbfa77845007b2c5fb"
+          test "$(git hash-object "$work/manifest.json")" = "3ca3e2c62b8d77385563ea83b7121ac116c172b6"
+          test "$(git hash-object "$work/sw.js")" = "437dc5b11febab464fa4f899e336c74c1799fd3a"
+          test "$(git hash-object "$work/version.json")" = "9dfe02c454d1c7e1aadb8c5520488326e7a83052"
+
+          # Protected assets remain exact.
+          test "$(git hash-object "$work/.nojekyll")" = "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+          test "$(git hash-object "$work/apple-touch-icon.png")" = "7b3a09fd4318a12e024219098475fbd28249c557"
+          test "$(git hash-object "$work/favicon-16.png")" = "1e484e9ccb82914bd480ca3b97357f897b284adb"
+          test "$(git hash-object "$work/favicon-32.png")" = "fadf7a05ea8b41061003270cb7cabc2f4ed59f13"
+          test "$(git hash-object "$work/favicon.ico")" = "e09991d1c3609b6fc460846ed37623fce6186ba6"
+          test "$(git hash-object "$work/icon-60.png")" = "6aeaa24c1f7ad63633b963a65a8df18167ae082c"
+          test "$(git hash-object "$work/icon-120.png")" = "716f5ed7fb42a866b802b9f03795a8145302134b"
+          test "$(git hash-object "$work/icon-192.png")" = "60340d238ec735ba4dbb84d376ee684ce06cba79"
+          test "$(git hash-object "$work/icon-512.png")" = "79c026a441d6fd6a5a7c07619eed2f82fc6f1a44"
+          test "$(git hash-object "$work/icon-maskable-512.png")" = "cace8615d782f7975f823cf76d76826e245bd02b"
+
+          cmp -s "$work/index.html" "$work/luisa_24_heures.html"
+
+          # Syntax and bounded-scope assertions.
+          python3 - "$work/index.html" <<'PY'
+          import pathlib,re,sys
+          s=pathlib.Path(sys.argv[1]).read_text(encoding="utf-8")
+          scripts=re.findall(r'<script(?:\s[^>]*)?>(.*?)</script>',s,flags=re.S|re.I)
+          assert len(scripts)==1
+          pathlib.Path("/tmp/app.js").write_text(scripts[0],encoding="utf-8")
+          assert "Vous avez déjà médité cette Heure ?" not in s
+          assert "Si vous avez oublié de la cocher à la fin." not in s
+          assert "J’ai médité cette Heure" in s
+          assert "Continuer sans marquer" in s
+          assert "var(--focus);" not in s
+          assert "const APP_VERSION = 'v120.2';" in s
+          assert "const APP_RELEASE_SEQUENCE = 120002001;" in s
+          PY
+          node --check /tmp/app.js
+          node --check "$work/sw.js"
+
+          route="24h-v120-2-b1-core-loop-closure"
+          rm -rf "$route"
+          mkdir "$route"
+          cp -a "$work"/. "$route"/
+
+          rm -rf qualification-24h-v120-2-b1
+          mkdir qualification-24h-v120-2-b1
+          cat > qualification-24h-v120-2-b1/STAGING.json <<'EOF'
+          {
+            "candidate": "v120.2/B1",
+            "release_sequence": 120002001,
+            "release_id": "24h-v120-2-b1-20261005-core-loop-closure",
+            "predecessor_commit": "380e61f7150d61c5d4745840de56b5a4c1c00fd0",
+            "predecessor_tree": "f1a24a2bb38fdf902a5ffb87bf4cb6a9a70949d6",
+            "shell_sha256": "568eec865918320af094669f61e3c3447a6d29aa07ec5a057a557c490e95b7f8",
+            "release_package_sha256": "4a506c6e94667005ee6dcd5269aa928d27974aeb21ba564dffab8c8b0a467213",
+            "release_package_size": 2006433,
+            "scope": "N1 + F-05 + F-03 + F-06-B core-loop closure only",
+            "production_deployment_authority": "NONE",
+            "physical_gate": "OPEN"
+          }
+          EOF
+
+      - name: Commit exact App-Test candidate and clean staging helpers
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/stage-24h-v120-2-b1.yml
+          rm -f .github/24h_v1202_patch.part*.b64
+          rm -f .github/24h_v1202_exact.patch.gz.b64.part*
+          git add -A
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Stage exact 24H v120.2 B1 core-loop candidate"
+          git push origin HEAD:main
