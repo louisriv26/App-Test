@@ -1,0 +1,214 @@
+name: LDC v140 R13 Search-scroll full QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/qa-ldc-v140-r13.yml'
+permissions:
+  contents: read
+
+jobs:
+  bind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Exact candidate binding and protected boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:ldc-v140-r13-search-scroll-repair)" = "5f4f78a273d8e03b021c21da34420f4acb08fc42"
+          python3 - <<'PY'
+          import pathlib,hashlib,json
+          a=pathlib.Path('ldc-v139-r12-search-v21a-recert')
+          b=pathlib.Path('ldc-v140-r13-search-scroll-repair')
+          def fs(r): return {str(p.relative_to(r)):hashlib.sha256(p.read_bytes()).hexdigest() for p in r.rglob('*') if p.is_file()}
+          x,y=fs(a),fs(b)
+          ch={p for p in set(x)|set(y) if x.get(p)!=y.get(p)}
+          assert len(x)==len(y)==248
+          assert ch=={'index.html','offline_manifest.json','sw.js','version.json'},ch
+          exp={
+            'index.html':'4ffc098d4ce6b4190e4a0e658c42d597aee54249ea1f9c6cb57b8a4e631451b4',
+            'offline_manifest.json':'1e5985b3f38e36385601d8a56211b45a93f999a20af158f1f409add4aeb4408e',
+            'sw.js':'ccc938df6908037110be669f9dfb4d0e9bcdcc5fe3351328a3dfcb58b977cbcf',
+            'version.json':'42e0d313d28e9ade6cbe10401ebf9714499737c451c963ff0b3db9dcbf73e587'
+          }
+          for p,h in exp.items(): assert y[p]==h,(p,y[p],h)
+          print('BIND_PASS',sorted(ch),'protected',244)
+          PY
+
+  focused:
+    needs: bind
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - name: Write focused adversarial Search test
+        shell: bash
+        run: |
+          cat >/tmp/qa-v140-scroll.cjs <<'NODE'
+          const {chromium}=require('playwright');
+          const fs=require('fs');
+          const URL='http://127.0.0.1:8140/ldc-v140-r13-search-scroll-repair/';
+          const out={candidate:'LDC v140/R13 focused Search-scroll',generated_at:new Date().toISOString(),overall:'UNKNOWN',checks:{},errors:[]};
+          const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+          async function ready(p){await p.waitForFunction(()=>{const l=document.getElementById('loading'),v=document.getElementById('version-pill-home');return l&&getComputedStyle(l).display==='none'&&v&&v.textContent&&!/v—|v-$/.test(v.textContent);},{timeout:90000});}
+          async function waitSearch(p){
+            await p.waitForFunction(()=>{const m=document.getElementById('search-meta'),c=document.querySelectorAll('#search-results .result-card');return m&&m.textContent!=='Recherche…'&&c.length>0;},{timeout:90000});
+            await p.waitForTimeout(150);
+          }
+          async function searchForRoute(p,q){
+            await p.evaluate(async q=>{await goSearch();searchFor(q);},q);
+            await waitSearch(p);
+          }
+          async function geom(p){
+            return p.evaluate(()=>{
+              const screen=document.getElementById('screen-search'),sc=document.getElementById('search-scroll'),res=document.getElementById('search-results'),first=res.querySelector('.result-card'),date=document.querySelector('.date-nav-entry');
+              const a=sc.getBoundingClientRect(),b=first&&first.getBoundingClientRect();
+              return {screenOverflowY:getComputedStyle(screen).overflowY,scrollOverflowY:getComputedStyle(sc).overflowY,resultsOverflowY:getComputedStyle(res).overflowY,clientHeight:sc.clientHeight,scrollHeight:sc.scrollHeight,scrollTop:sc.scrollTop,dateDisplay:date&&getComputedStyle(date).display,cardCount:res.querySelectorAll('.result-card').length,firstFullyVisible:!!(b&&b.top>=a.top-2&&b.bottom<=a.bottom+2),firstTop:b&&b.top-a.top,firstBottom:b&&b.bottom-a.top};
+            });
+          }
+          async function run(){
+            const profile='.qa-v140-focused-profile';fs.rmSync(profile,{recursive:true,force:true});
+            const c=await chromium.launchPersistentContext(profile,{headless:true,serviceWorkers:'allow',viewport:{width:390,height:700}});
+            const p=await c.newPage();const pageErrors=[],consoleErrors=[];
+            p.on('pageerror',e=>pageErrors.push(String(e)));p.on('console',m=>{if(m.type()==='error')consoleErrors.push(m.text())});
+            await p.goto(URL,{waitUntil:'domcontentloaded',timeout:90000});await ready(p);
+            await searchForRoute(p,'amour');
+            let g=await geom(p);
+            out.checks.iphone_normal={...g,pass:g.screenOverflowY==='hidden'&&['auto','scroll'].includes(g.scrollOverflowY)&&g.resultsOverflowY==='visible'&&g.clientHeight>450&&g.dateDisplay==='none'&&g.cardCount>0&&g.firstFullyVisible};
+            await p.evaluate(()=>setTextLevel('xlarge'));await p.waitForTimeout(250);
+            await p.evaluate(async()=>{const i=document.getElementById('search-input');i.value='amour';syncSearchQueryUI(i.value);await runSearch();});await waitSearch(p);
+            g=await geom(p);
+            out.checks.iphone_xlarge={...g,pass:g.clientHeight>450&&g.dateDisplay==='none'&&g.firstFullyVisible};
+            await p.setViewportSize({width:820,height:560});await p.waitForTimeout(200);
+            await p.evaluate(async()=>{const i=document.getElementById('search-input');i.value='amour';syncSearchQueryUI(i.value);await runSearch();});await waitSearch(p);
+            g=await geom(p);
+            out.checks.ipad_landscape_xlarge={...g,pass:g.clientHeight>350&&g.dateDisplay==='none'&&g.firstFullyVisible};
+
+            out.checks.clear=await p.evaluate(async()=>{const sc=document.getElementById('search-scroll');sc.scrollTop=Math.min(500,sc.scrollHeight-sc.clientHeight);await clearSearch();await new Promise(r=>setTimeout(r,50));const date=document.querySelector('.date-nav-entry');return{scrollTop:sc.scrollTop,dateDisplay:getComputedStyle(date).display,query:document.getElementById('search-input').value,pass:Math.abs(sc.scrollTop)<=1&&getComputedStyle(date).display!=='none'&&!document.getElementById('search-input').value};});
+
+            await p.setViewportSize({width:390,height:700});await p.evaluate(()=>setTextLevel('normal'));await p.waitForTimeout(150);await searchForRoute(p,'amour');
+            const before=await p.evaluate(()=>{const sc=document.getElementById('search-scroll'),cards=[...document.querySelectorAll('#search-results .result-card')],card=cards[Math.min(5,cards.length-1)];card.scrollIntoView({block:'start'});sc.scrollTop=Math.max(0,sc.scrollTop-24);const r=card.getBoundingClientRect(),sr=sc.getBoundingClientRect();return{key:card.dataset.resultKey,offset:r.top-sr.top,count:cards.length};});
+            const target=p.locator('#search-results .result-card').filter({has:p.locator(`[data-result-key="${before.key}"]`)}); // unused fallback
+            await p.evaluate(key=>{const c=[...document.querySelectorAll('#search-results .result-card')].find(x=>x.dataset.resultKey===key);c.click();},before.key);
+            await p.waitForFunction(()=>getComputedStyle(document.getElementById('screen-reader')).display!=='none',{timeout:90000});
+            await p.evaluate(()=>backFromReader());
+            await p.waitForFunction(key=>{const s=document.getElementById('screen-search');return getComputedStyle(s).display!=='none'&&[...document.querySelectorAll('#search-results .result-card')].some(x=>x.dataset.resultKey===key);},before.key,{timeout:90000});
+            await p.waitForTimeout(200);
+            const after=await p.evaluate(key=>{const sc=document.getElementById('search-scroll'),card=[...document.querySelectorAll('#search-results .result-card')].find(x=>x.dataset.resultKey===key);const r=card.getBoundingClientRect(),sr=sc.getBoundingClientRect();return{key:card.dataset.resultKey,offset:r.top-sr.top,scrollTop:sc.scrollTop};},before.key);
+            out.checks.reader_return={before,after,pass:after.key===before.key&&Math.abs(after.offset-before.offset)<=16};
+
+            const sizeBefore=await p.evaluate(()=>{const sc=document.getElementById('search-scroll'),cards=[...document.querySelectorAll('#search-results .result-card')],card=cards[Math.min(7,cards.length-1)];card.scrollIntoView({block:'start'});sc.scrollTop=Math.max(0,sc.scrollTop-20);const r=card.getBoundingClientRect(),sr=sc.getBoundingClientRect();return{key:card.dataset.resultKey,offset:r.top-sr.top};});
+            await p.evaluate(()=>setTextLevel('xlarge'));await p.waitForTimeout(300);
+            const sizeAfter=await p.evaluate(key=>{const sc=document.getElementById('search-scroll'),card=[...document.querySelectorAll('#search-results .result-card')].find(x=>x.dataset.resultKey===key);if(!card)return null;const r=card.getBoundingClientRect(),sr=sc.getBoundingClientRect();return{key:card.dataset.resultKey,offset:r.top-sr.top};},sizeBefore.key);
+            out.checks.text_size_anchor={before:sizeBefore,after:sizeAfter,pass:!!sizeAfter&&sizeAfter.key===sizeBefore.key&&Math.abs(sizeAfter.offset-sizeBefore.offset)<=24};
+
+            out.errors={page:pageErrors,console:consoleErrors};
+            out.overall=Object.values(out.checks).every(x=>x.pass===true)&&pageErrors.length===0&&consoleErrors.length===0?'PASS':'FAIL';
+            await c.close();
+          }
+          run().catch(e=>{out.overall='HARNESS_ERROR';out.error=String(e&&e.stack||e)}).finally(()=>{fs.writeFileSync('qa-ldc-v140-focused-results.json',JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(out,null,2));});
+          NODE
+      - run: |
+          python3 -m http.server 8140 --bind 127.0.0.1 >/tmp/v140-focused-http.log 2>&1 &
+          sleep 2
+          node /tmp/qa-v140-scroll.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v140-focused
+          path: qa-ldc-v140-focused-results.json
+
+  current:
+    needs: bind
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - name: Adapt v139 broad runtime suite to exact v140
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('qa-ldc-v139-current.cjs').read_text()
+          reps=[
+            ('ldc-v139-r12-search-v21a-recert','ldc-v140-r13-search-scroll-repair'),
+            ('.qa-ldc-v139-profile','.qa-ldc-v140-profile'),
+            ('v2.19.139-R1B-UX-ACCESS-R12','v2.19.140-R1B-UX-ACCESS-R13'),
+            ("pub:'139'","pub:'140'"),
+            ('ldc-v2.19.139-R1B-ux-access-r12','ldc-v2.19.140-R1B-ux-access-r13'),
+            ('LDC v139/R12','LDC v140/R13'),
+            ('has139Shell','has140Shell'),('has139Runtime','has140Runtime'),
+            ('qa_v139','qa_v140'),('keep-v139','keep-v140'),
+            ('qa-v139.json','qa-v140.json'),
+            ('qa-ldc-v139-current-results.json','qa-ldc-v140-current-results.json')
+          ]
+          for a,b in reps:s=s.replace(a,b)
+          Path('/tmp/qa-v140-current.cjs').write_text(s)
+          PY
+      - run: |
+          python3 -m http.server 8130 --bind 127.0.0.1 >/tmp/v140-current-http.log 2>&1 &
+          sleep 2
+          node /tmp/qa-v140-current.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v140-current
+          path: qa-ldc-v140-current-results.json
+
+  update:
+    needs: bind
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - name: Adapt v139 upgrade suite to v139-to-v140
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('qa-ldc-v139-update.cjs').read_text()
+          s=s.replace('ldc-v138-fullqa-corrective','__BASE140__').replace('ldc-v139-r12-search-v21a-recert','__TARGET140__')
+          s=s.replace('__BASE140__','ldc-v139-r12-search-v21a-recert').replace('__TARGET140__','ldc-v140-r13-search-scroll-repair')
+          reps=[
+            ('.qa-ldc-v139-upgrade-profile','.qa-ldc-v140-upgrade-profile'),
+            ('v2.19.139-R1B-UX-ACCESS-R12','v2.19.140-R1B-UX-ACCESS-R13'),
+            ("pub:'139'","pub:'140'"),
+            ('ldc-v2.19.139-R1B-ux-access-r12','ldc-v2.19.140-R1B-ux-access-r13'),
+            ("out.pre.app==='v2.19.138-R1B-UX-ACCESS-R11'&&out.pre.pub==='138'","out.pre.app==='v2.19.139-R1B-UX-ACCESS-R12'&&out.pre.pub==='139'"),
+            ('post139','post140'),('cache139','cache140'),('offline139','offline140'),('has139','has140'),
+            ('qa_v139','qa_v140'),('keep-v139','keep-v140'),
+            ('(135|136|137|138)','(135|136|137|138|139)'),
+            ('qa-ldc-v139-update-results.json','qa-ldc-v140-update-results.json'),
+            ('LDC v139/R12 predecessor upgrade','LDC v140/R13 predecessor upgrade')
+          ]
+          for a,b in reps:s=s.replace(a,b)
+          Path('/tmp/qa-v140-update.cjs').write_text(s)
+          PY
+      - run: |
+          mkdir -p qa-ldc-v139-upgrade
+          python3 -m http.server 8131 --bind 127.0.0.1 --directory qa-ldc-v139-upgrade >/tmp/v140-update-http.log 2>&1 &
+          sleep 2
+          node /tmp/qa-v140-update.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v140-update
+          path: qa-ldc-v140-update-results.json
