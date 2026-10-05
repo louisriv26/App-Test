@@ -1,0 +1,99 @@
+name: Lettres v2.15 B2 system-theme diagnostic
+on:
+  push:
+    branches: [audit-lettres-v215-20261005-r1]
+    paths: ['.github/audit-lettres-v215-system-theme/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact unchanged B2
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install fresh browsers
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
+      - name: Start exact candidate
+        run: |
+          set -euo pipefail
+          python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/system-theme-server.log 2>&1 &
+          sleep 2
+      - name: Verify live system dark-to-light rendering
+        run: |
+          set -euo pipefail
+          cat > /tmp/system_theme_diag.py <<'PY'
+          from playwright.sync_api import sync_playwright, expect
+          import json
+          URL='http://127.0.0.1:8120/lettres-v2.15-b2-contrast-repair/index.html?system-theme-diagnostic=1'
+          results=[]
+          def snap(p):
+              return p.evaluate("""()=>({
+                mode:document.documentElement.dataset.theme,
+                ivory:getComputedStyle(document.documentElement).getPropertyValue('--ivory').trim(),
+                ink:getComputedStyle(document.documentElement).getPropertyValue('--ink').trim(),
+                bodyBg:getComputedStyle(document.body).backgroundColor,
+                bodyColor:getComputedStyle(document.body).color,
+                meta:(document.querySelector('meta[name="theme-color"]')||{}).content||'',
+                effective:(typeof effectiveTheme==='function'?effectiveTheme():'missing')
+              })""")
+          with sync_playwright() as pw:
+              for engine,name in [(pw.chromium,'chromium'),(pw.webkit,'webkit')]:
+                  b=engine.launch(headless=True)
+                  c=b.new_context(viewport={'width':820,'height':1180},locale='fr-FR',color_scheme='dark')
+                  c.add_init_script("localStorage.setItem('lp_onboarded','1');localStorage.setItem('lp_theme','system')")
+                  p=c.new_page();errs=[]
+                  p.on('pageerror',lambda e:errs.append(str(e)))
+                  p.goto(URL,wait_until='domcontentloaded',timeout=30000)
+                  p.locator('#loading').wait_for(state='detached',timeout=30000)
+                  expect(p.locator('#letter-list .letter-item')).to_have_count(136)
+                  p.wait_for_timeout(300)
+                  dark=snap(p)
+                  assert dark['mode']=='system',dark
+                  assert dark['effective']=='dark',dark
+                  assert dark['ivory'].lower()=='#1a1612',dark
+                  assert dark['ink'].lower()=='#d4c8bc',dark
+                  assert dark['meta'].lower()=='#1a1612',dark
+                  p.emulate_media(color_scheme='light')
+                  p.wait_for_timeout(500)
+                  light=snap(p)
+                  assert light['mode']=='system',light
+                  assert light['effective']=='light',light
+                  assert light['ivory'].lower()=='#f9f6f0',light
+                  assert light['ink'].lower()=='#2c1810',light
+                  assert light['meta'].lower()=='#f9f6f0',light
+                  assert dark['bodyBg']!=light['bodyBg'],(dark,light)
+                  assert dark['bodyColor']!=light['bodyColor'],(dark,light)
+                  assert not errs,errs
+                  results.append({'engine':name,'dark':dark,'light':light})
+                  print('SYSTEM_THEME_LIVE_PASS',name,json.dumps({'dark':dark,'light':light},ensure_ascii=False))
+                  c.close();b.close()
+          print('SYSTEM_THEME_DIAGNOSTIC_PASS',len(results))
+          open('/tmp/LETTRES_V2_15_SYSTEM_THEME_DIAGNOSTIC.json','w',encoding='utf-8').write(json.dumps({'candidate_tree':'8521e662e8e9efbedba2db9f537bd52281754b93','status':'PASS','results':results},ensure_ascii=False,indent=2))
+          PY
+          python /tmp/system_theme_diag.py > /tmp/system-theme.log 2>&1
+          cat /tmp/system-theme.log
+          grep -q '^SYSTEM_THEME_DIAGNOSTIC_PASS 2$' /tmp/system-theme.log
+          test -s /tmp/LETTRES_V2_15_SYSTEM_THEME_DIAGNOSTIC.json
+      - name: Rebind final tree
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+          test -z "$(git status --porcelain -- lettres-v2.15-b2-contrast-repair)"
+          echo "SYSTEM_THEME_FINAL_TREE_PASS 8521e662e8e9efbedba2db9f537bd52281754b93"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lettres-v2.15-b2-system-theme-diagnostic
+          path: |
+            /tmp/system-theme.log
+            /tmp/LETTRES_V2_15_SYSTEM_THEME_DIAGNOSTIC.json
+          if-no-files-found: error
