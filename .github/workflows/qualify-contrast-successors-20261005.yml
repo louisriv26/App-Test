@@ -262,7 +262,7 @@ jobs:
             // Hero hover.
             await p.locator('.cal-cell[data-day="1"]').click();await p.waitForFunction(()=>document.getElementById('screen-reader').classList.contains('active'));
             await p.locator('.hero-read-btn').first().hover().catch(()=>{});
-            await p.evaluate(()=>App.goHome());await p.waitForTimeout(150);
+            await p.evaluate(()=>App.showScreen('home'));await p.waitForTimeout(150);
             const hero=p.locator('.hero-read-btn').first();await hero.hover();const hc=await hero.evaluate(e=>({c:getComputedStyle(e).color,b:getComputedStyle(e).backgroundColor}));
             const hr=contrast(rgba(hc.c),rgba(hc.b));if(hr<4.5)throw new Error('hero hover contrast '+hr);results.push({heroHover:hr});
             // Note modal save hover.
