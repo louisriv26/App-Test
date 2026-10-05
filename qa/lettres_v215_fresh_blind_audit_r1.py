@@ -114,7 +114,7 @@ with sync_playwright() as pw:
 
     # 3) Future-schema write guard must fail safe, preserving unknown newer state.
     c=b.new_context(viewport={'width':390,'height':844},locale='fr-FR')
-    c.add_init_script("""()=>{localStorage.setItem('lp_onboarded','1');localStorage.setItem('lp_state_schema','999');localStorage.setItem('lp_favs','[2]');}""")
+    c.add_init_script("""localStorage.setItem('lp_onboarded','1');localStorage.setItem('lp_state_schema','999');localStorage.setItem('lp_favs','[2]');""")
     p=c.new_page();done=trap(p,'chromium:future_schema')
     p.goto(BASE+'?blind=future',wait_until='domcontentloaded');ready(p)
     p.locator('#pnav-list').click();p.locator('#letter-list .letter-item[data-n="3"]').click();p.locator('#pr-fav-btn').click();p.wait_for_timeout(200)

@@ -6,6 +6,9 @@ on:
       - '.github/audit-lettres-v215-r1/TRIGGER'
 permissions:
   contents: read
+defaults:
+  run:
+    shell: bash --noprofile --norc -eo pipefail {0}
 jobs:
   audit:
     runs-on: ubuntu-latest
