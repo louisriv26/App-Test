@@ -75,7 +75,7 @@ async function marie(bt,bname){
   assert(env.format==='MJV_LOCAL_BACKUP'&&String(env.app.version)==='49'&&env.corpus.units===37&&env.corpus.paragraphs===753,'M backup '+JSON.stringify({format:env.format,app:env.app,corpus:env.corpus}));
   rec('M:'+bname+':actual_backup_download',{format:env.format,version:env.app.version,units:env.corpus.units,paragraphs:env.corpus.paragraphs});
   await p.locator('#backup-file-input').setInputFiles(fp); await p.locator('#restore-modal').waitFor({state:'visible'});
-  const wr=await ratio(p,'.restore-warning','#restore-modal .modal-box'); assert(wr.ratio>=4.5,'M restore warning '+wr.ratio); rec('M:'+bname+':restore_warning_contrast',wr.ratio);
+  const wr=await ratio(p,'.restore-warning','#restore-modal .modal-sheet'); assert(wr.ratio>=4.5,'M restore warning '+wr.ratio); rec('M:'+bname+':restore_warning_contrast',wr.ratio);
   await p.locator('#restore-confirm-btn').hover(); const sr=await ratio(p,'#restore-confirm-btn'); assert(sr.ratio>=4.5,'M restore confirm hover '+sr.ratio); rec('M:'+bname+':restore_confirm_hover',sr.ratio);
   done();await c.close();
 
