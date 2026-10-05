@@ -82,7 +82,7 @@ async function marie(bt,bname){
   // Wide dark: version badge + theme control.
   c=await browser.newContext({viewport:{width:820,height:1180},colorScheme:'dark'}); await c.addInitScript(()=>{localStorage.setItem('mjv_onboarded','1');localStorage.setItem('mjv_theme','dark')});
   p=await c.newPage();done=trap(p,'M:'+bname+':wide_dark');await p.goto('http://127.0.0.1:8142/',{waitUntil:'domcontentloaded'});await readyM(p);
-  const vr=await ratio(p,'#desktop-version','.wide-topbar');assert(vr.ratio>=4.5,'M badge '+vr.ratio);rec('M:'+bname+':wide_version_badge',vr.ratio);
+  const vr=await ratio(p,'#desktop-version','#wide-topbar');assert(vr.ratio>=4.5,'M badge '+vr.ratio);rec('M:'+bname+':wide_version_badge',vr.ratio);
   op=+(await p.locator('#wnav-dark').evaluate(e=>getComputedStyle(e).opacity));assert(op>=.999,'M wide theme opacity '+op);rec('M:'+bname+':wide_theme_control_opacity',op);done();await c.close();
 
   // Malformed stored state should degrade safely, not brick the shell.
