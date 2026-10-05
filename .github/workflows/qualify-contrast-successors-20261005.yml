@@ -127,9 +127,9 @@ for part in csp_policy.split(\';\'):
 elem=directives.get(\'script-src-elem\',[])
 hashes=[x for x in elem if x.startswith("\'sha256-")]
 rec(\'csp:script_src_elem_exact\',hashes==[main_hash],{\'tokens\':elem,\'hashes\':hashes,\'expected\':main_hash})'''
-              if old not in s:
-                  raise SystemExit('brittle CSP verifier pattern not found for replacement')
-              return s.replace(old,new)
+              if old in s:
+                  s=s.replace(old,new)
+              return s
 
           # Complete runtime harness.
           full=Path('qa/lettres_v214_full_current.py').read_text()
@@ -137,6 +137,8 @@ rec(\'csp:script_src_elem_exact\',hashes==[main_hash],{\'tokens\':elem,\'hashes\
           Path('/tmp/lettres_v215_full.py').write_text(full)
 
           base=Path('qa/lettres_v214_fresh_falsification_20261004.py').read_text()
+          if 'script-src-elem\\\\s+' not in base:
+              raise SystemExit('expected legacy CSP verifier not found in falsification source')
 
           # Immediate predecessor: exact v2.14 -> v2.15.
           imm=successorize(base)
