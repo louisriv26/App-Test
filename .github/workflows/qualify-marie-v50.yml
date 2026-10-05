@@ -33,8 +33,10 @@ jobs:
           sw=(M50/'sw.js').read_text(encoding='utf-8')
           assert "const APP_VERSION = '50';" in idx
           assert "const VERSION = '50';" in sw
-          m=re.search(r'\.ws-today-card\s*\{([^}]*)\}',idx,re.S); assert m
-          rule=m.group(1)
+          rules=re.findall(r'\.ws-today-card\s*\{([^}]*)\}',idx,re.S)
+          sizing=[x for x in rules if 'flex: 1 1 auto;' in x or 'max-height:' in x]
+          assert len(sizing)==1,sizing
+          rule=sizing[0]
           assert 'flex: 1 1 auto;' in rule,rule
           assert 'max-height: none;' in rule,rule
           assert 'padding-bottom: calc(12px + var(--safe-bottom));' in rule,rule
