@@ -1,0 +1,178 @@
+name: Broad regression 24H v120.2 B2
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  regression:
+    if: "contains(github.event.head_commit.message, 'Add regression note')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bind exact frozen B2
+        shell: bash
+        run: |
+          set -euo pipefail
+          r="24h-v120-2-b2-core-loop-csp-style-rebind"
+          test "$(git hash-object "$r/index.html")" = "4ff15b0b77429b301102ceec67dce58287751453"
+          test "$(git hash-object "$r/luisa_24_heures.html")" = "4ff15b0b77429b301102ceec67dce58287751453"
+          test "$(git hash-object "$r/manifest.json")" = "9c47603d0e865231fbd25c3b0bd21d76a280fa1d"
+          test "$(git hash-object "$r/sw.js")" = "f6002a41b4e383754304f015e60c160e71a318a9"
+          test "$(git hash-object "$r/version.json")" = "8fe406a7493c0e34c9181d17d9f0219c0dfef962"
+          curl --fail --location --silent --show-error "https://raw.githubusercontent.com/louisriv26/Les-24-Heures-de-la-Passion/380e61f7150d61c5d4745840de56b5a4c1c00fd0/index.html" -o /tmp/v1201.html
+          test "$(git hash-object /tmp/v1201.html)" = "1361d21d4f17d6a118717ff1dc6c57aa4b7cfc9d"
+      - name: Protected parity audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p qualification-24h-v120-2-b2
+          python3 - <<'PY'
+          import pathlib,re,hashlib,json
+          old=pathlib.Path('/tmp/v1201.html').read_text(encoding='utf-8')
+          new=pathlib.Path('24h-v120-2-b2-core-loop-csp-style-rebind/index.html').read_text(encoding='utf-8')
+          def extract(text,name):
+              m=re.search(r'\bconst\s+'+re.escape(name)+r'\s*=\s*',text)
+              if not m: return None
+              i=m.end()
+              while i<len(text) and text[i].isspace(): i+=1
+              start=i
+              if i>=len(text): return None
+              op=text[i]; cl={"{":"}","[":"]"}.get(op)
+              if not cl:
+                  j=text.find(';',i); return text[start:j+1] if j>=0 else None
+              depth=0; quote=None; esc=False
+              for j in range(i,len(text)):
+                  ch=text[j]
+                  if quote:
+                      if esc: esc=False
+                      elif ch=='\\': esc=True
+                      elif ch==quote: quote=None
+                      continue
+                  if ch in "'\"": quote=ch; continue
+                  if ch==op: depth+=1
+                  elif ch==cl:
+                      depth-=1
+                      if depth==0:
+                          k=j+1
+                          while k<len(text) and text[k].isspace(): k+=1
+                          if k<len(text) and text[k]==';': k+=1
+                          return text[start:k]
+              return None
+          names=['CORPUS','TEXT_LIBRARY','PROVENANCE_PUBLIC_PROJECTION','PROVENANCE_PUBLIC_GUIDE']
+          out={}
+          for name in names:
+              a=extract(old,name); b=extract(new,name)
+              if a is None or b is None:
+                  out[name]={'status':'NOT_FOUND'}
+                  continue
+              out[name]={'status':'PASS' if a==b else 'FAIL','old_sha256':hashlib.sha256(a.encode()).hexdigest(),'new_sha256':hashlib.sha256(b.encode()).hexdigest(),'bytes':len(a.encode())}
+              if a!=b: raise SystemExit('protected constant changed: '+name)
+          sent=['const STORAGE_SCHEMA_VERSION=8',"const CANONICAL_APP_SHELL = './luisa_24_heures.html'",'MAX_PERSONAL_DATA_IMPORT_BYTES','state.readHours','state.meditationLog']
+          out['sentinels']={}
+          for s in sent:
+              out['sentinels'][s]={'old':old.count(s),'new':new.count(s)}
+              if old.count(s)!=new.count(s): raise SystemExit('protected sentinel drift: '+s)
+          out['bounded']={'old_question_new':new.count('Vous avez déjà médité cette Heure ?'),'old_detail_new':new.count('Si vous avez oublié de la cocher à la fin.'),'completion':new.count('J’ai médité cette Heure'),'unmarked_forward':new.count('Continuer sans marquer')}
+          assert out['bounded']['old_question_new']==0 and out['bounded']['old_detail_new']==0 and out['bounded']['completion']>0 and out['bounded']['unmarked_forward']>0
+          pathlib.Path('qualification-24h-v120-2-b2/PROTECTED_PARITY.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+      - name: Broad Chromium smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/regpw
+          cd /tmp/regpw
+          npm init -y >/dev/null
+          npm install playwright@1.55.0 >/dev/null
+          npx playwright install --with-deps chromium >/dev/null
+          cat > /tmp/regression.js <<'JS'
+          const { chromium } = require('playwright');
+          const fs=require('fs');
+          const BASE='http://127.0.0.1:8899/24h-v120-2-b2-core-loop-csp-style-rebind/';
+          const cases=[['phone-light',390,844,'light'],['phone-dark',390,844,'dark'],['tablet-light',820,1180,'light'],['tablet-dark',820,1180,'dark']];
+          const out={candidate:'v120.2/B2',method:'broad non-regression smoke',cases:[],errors:[]};
+          const ok=(v,m)=>{if(!v)throw new Error(m)};
+          async function dismiss(page){const b=page.locator('.onboarding-primary');if(await b.count()&&await b.isVisible().catch(()=>false))await b.click();}
+          async function clickVisible(page,re){const q=page.getByRole('button',{name:re});for(let i=(await q.count())-1;i>=0;i--){const e=q.nth(i);if(await e.isVisible().catch(()=>false)){await e.click();return true}}return false}
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            for(const [name,w,h,scheme] of cases){
+              const ctx=await browser.newContext({viewport:{width:w,height:h},colorScheme:scheme});
+              const page=await ctx.newPage(); const errs=[]; const rec={name,checks:{}};
+              page.on('pageerror',e=>errs.push('page:'+e.message));
+              page.on('console',m=>{if(m.type()==='error')errs.push('console:'+m.text())});
+              try{
+                await page.goto(BASE,{waitUntil:'domcontentloaded'});
+                await page.waitForFunction(()=>typeof state!=='undefined'&&typeof APP_VERSION!=='undefined');
+                await dismiss(page);
+                rec.checks.identity=await page.evaluate(()=>({v:APP_VERSION,b:BUILD_REVISION,seq:APP_RELEASE_SEQUENCE,view:state.view}));
+                ok(rec.checks.identity.v==='v120.2'&&rec.checks.identity.b==='B2'&&rec.checks.identity.seq===120002002,'identity');
+                ok(await page.getByRole('button').count()>10,'home controls');
+
+                await page.evaluate(()=>openHour(1,false));
+                await page.waitForFunction(()=>state.view==='reader'&&state.currentHour===1);
+                const body=await page.locator('body').innerText();
+                ok(body.includes('1re Heure')||body.includes('1e Heure'),'reader heading');
+                rec.checks.tabs={};
+                for(const label of ['Méditation','Réflexion','Approfondir']){
+                  const q=page.getByRole('button',{name:new RegExp(label,'i')});
+                  rec.checks.tabs[label]=await q.count();
+                  if(await q.count()){for(let i=0;i<await q.count();i++){const e=q.nth(i);if(await e.isVisible().catch(()=>false)){await e.click();await page.waitForTimeout(80);break}}}
+                }
+
+                rec.checks.help=await clickVisible(page,/Aide/i);
+                if(rec.checks.help){await page.waitForTimeout(80);await page.keyboard.press('Escape').catch(()=>{});}
+                rec.checks.settings=await clickVisible(page,/Réglages|Paramètres/i);
+                if(rec.checks.settings){await page.waitForTimeout(80);await page.keyboard.press('Escape').catch(()=>{});}
+
+                rec.checks.search=await clickVisible(page,/Recherch/i);
+                if(rec.checks.search){
+                  await page.waitForTimeout(100);
+                  const inp=page.locator('input[type="search"], input[placeholder*="Recherch" i]').first();
+                  if(await inp.count()){await inp.fill('Jésus');await page.waitForTimeout(250);rec.checks.searchInput=true;rec.checks.searchBodyHasTerm=(await page.locator('body').innerText()).includes('Jésus');}
+                }
+
+                rec.checks.space=await clickVisible(page,/Mon Espace|Espace/i);
+                if(rec.checks.space)await page.waitForTimeout(80);
+
+                await page.evaluate(()=>openHour(1,false));
+                await page.waitForFunction(()=>state.view==='reader'&&state.currentHour===1);
+                const end=page.locator('[data-meditee-action-hour="1"][data-meditee-role="primary-end"]');
+                ok(await end.count()===1,'completion control');
+                const before=await page.evaluate(()=>state.readHours.has(1));
+                if(!before){await end.scrollIntoViewIfNeeded();await end.click();await page.waitForFunction(()=>state.readHours.has(1)&&document.querySelector('[data-meditee-role="primary-end"]')?.getAttribute('aria-pressed')==='true');}
+                ok(await page.evaluate(()=>state.readHours.has(1)),'mark state');
+                await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>typeof state!=='undefined');
+                ok(await page.evaluate(()=>state.readHours.has(1)),'persistence');
+                rec.checks.overflow=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);
+                ok(rec.checks.overflow,'overflow');
+                rec.checks.errors=errs;ok(errs.length===0,'runtime errors '+errs.join('|'));
+                rec.status='PASS';
+              }catch(e){rec.status='FAIL';rec.failure=e.message;out.errors.push(name+': '+e.message)}
+              out.cases.push(rec);await ctx.close();
+            }
+            await browser.close();out.status=out.errors.length?'FAIL':'PASS';
+            fs.mkdirSync('qualification-24h-v120-2-b2',{recursive:true});
+            fs.writeFileSync('qualification-24h-v120-2-b2/BROAD_REGRESSION.json',JSON.stringify(out,null,2)+'\n');
+            console.log(JSON.stringify(out,null,2));if(out.status!=='PASS')process.exit(1);
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
+          cd "$GITHUB_WORKSPACE"
+          python3 -m http.server 8899 >/tmp/reg-server.log 2>&1 &
+          server=$!
+          trap 'kill $server || true' EXIT
+          sleep 2
+          NODE_PATH=/tmp/regpw/node_modules node /tmp/regression.js
+      - name: Record evidence
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/regress-24h-v120-2-b2.yml regression-note.txt
+          git add -A
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Record broad regression evidence for frozen 24H v120.2 B2"
+          git push origin HEAD:main
