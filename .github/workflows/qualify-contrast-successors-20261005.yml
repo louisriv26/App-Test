@@ -71,8 +71,9 @@ jobs:
       - name: Install browser runtimes
         run: |
           python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
           npm install --no-save playwright@1.55.0 axe-core@4.10.3
-          npx playwright install --with-deps chromium webkit
+          npx playwright install chromium webkit
 
       - name: Wait for public Pages exact bytes
         run: |
@@ -135,8 +136,8 @@ jobs:
 
       - name: Lettres stateful and steady contrast qualification
         run: |
-          node /tmp/lettres-v215-stateful.cjs
-          node /tmp/lettres-v215-stable.cjs
+          NODE_PATH="$PWD/node_modules" node /tmp/lettres-v215-stateful.cjs
+          NODE_PATH="$PWD/node_modules" node /tmp/lettres-v215-stable.cjs
           python3 - <<'PY'
           import json
           a=json.load(open('LETTRES_V2_15_STATEFUL_CONTRAST_AUDIT_2026-10-04.json'))
@@ -173,13 +174,13 @@ jobs:
           node --check /tmp/m49-full.cjs
           node --check /tmp/m49-pwa.cjs
           node --check /tmp/m49-blind.cjs
-          node /tmp/m49-full.cjs
-          node /tmp/m49-pwa.cjs
+          NODE_PATH="$PWD/node_modules" node /tmp/m49-full.cjs
+          NODE_PATH="$PWD/node_modules" node /tmp/m49-pwa.cjs
           rm -rf qa-marie-v49-finalblind-package
           cp -a marie-v49-test qa-marie-v49-finalblind-package
           python3 -m http.server 8092 --bind 127.0.0.1 >/tmp/m49blind.log 2>&1 &
           sleep 2
-          node /tmp/m49-blind.cjs
+          NODE_PATH="$PWD/node_modules" node /tmp/m49-blind.cjs
 
       - name: Marie v49 targeted rendered contrast challenge
         run: |
