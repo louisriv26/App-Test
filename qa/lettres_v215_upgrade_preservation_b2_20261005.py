@@ -33,7 +33,8 @@ shutil.copytree(PRE,SCOPE)
 with sync_playwright() as pw:
     b=pw.chromium.launch(headless=True);c=b.new_context(viewport={'width':390,'height':844},locale='fr-FR',service_workers='allow')
     p=c.new_page();p.goto(URL+'?pre=1',wait_until='networkidle',timeout=30000);ready(p,a.pre_version)
-    p.wait_for_function("navigator.serviceWorker && navigator.serviceWorker.controller",timeout=20000)
+    p.wait_for_function("navigator.serviceWorker && navigator.serviceWorker.controller && window._swReg",timeout=20000)
+    rec(a.label+':app_update_listener_ready',bool(p.evaluate("()=>window._swReg && navigator.serviceWorker.controller")),None)
     p.locator('#pnav-list').click();p.locator('#letter-list .letter-item[data-n="2"]').click()
     p.locator('#pr-fav-btn').click();p.locator('#pr-read-btn').click()
     p.get_by_role('button',name='Ajouter une note').click();p.locator('#note-input').fill('v215 preservation sentinel');p.locator('#note-save-btn').click()
@@ -65,9 +66,10 @@ with sync_playwright() as pw:
     stamp=time.time()+10
     for fp in SCOPE.rglob('*'):
         if fp.is_file():os.utime(fp,(stamp,stamp))
-    p.evaluate("async()=>{const r=await navigator.serviceWorker.getRegistration();await r.update()}")
-    p.wait_for_function("async()=>{const r=await navigator.serviceWorker.getRegistration();return !!(r&&(r.waiting||r.installing))}",timeout=20000)
-    expect(p.locator('#update-banner')).to_be_visible(timeout=20000)
+    p.evaluate("async()=>{await window._swReg.update()}")
+    p.wait_for_function("()=>!!(window._swReg && window._swReg.waiting)",timeout=30000)
+    rec(a.label+':waiting_successor_detected',bool(p.evaluate("()=>window._swReg && window._swReg.waiting")),p.evaluate("()=>({waiting:window._swReg&&window._swReg.waiting&&window._swReg.waiting.state,installing:window._swReg&&window._swReg.installing&&window._swReg.installing.state,banner:getComputedStyle(document.getElementById('update-banner')).display})"))
+    expect(p.locator('#update-banner')).to_be_visible(timeout=10000)
     p.locator('#update-apply-btn').click();ready(p,'2.15')
     after=state(p)
     for k in ['lp_favs','lp_notes','lp_highlights','lp_read','lp_positions','lp_size','lp_theme','lp_state_schema','lp_paths']:

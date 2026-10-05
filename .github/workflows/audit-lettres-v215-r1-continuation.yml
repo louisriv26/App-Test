@@ -1,0 +1,86 @@
+name: Continue fresh audit Lettres v2.15 B2 R1
+on:
+  push:
+    branches: [audit-lettres-v215-20261005-r1]
+    paths:
+      - '.github/audit-lettres-v215-r1-cont/TRIGGER'
+permissions:
+  contents: read
+defaults:
+  run:
+    shell: bash --noprofile --norc -eo pipefail {0}
+jobs:
+  continuation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Bind exact candidate and predecessors
+        run: |
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+          test "$(git rev-parse HEAD:lettres-v2.14-b1-csp-repair)" = "92530b7219fae7940be525b73b92d0a3782451ac"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser engines
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
+      - name: Prepare v2.14 same-scope predecessor
+        run: |
+          rm -rf /tmp/lettres-v215-v214-scope
+          cp -a lettres-v2.14-b1-csp-repair /tmp/lettres-v215-v214-scope
+          cd /tmp/lettres-v215-v214-scope
+          python3 -m http.server 8132 --bind 127.0.0.1 >/tmp/lettres-v215-v214.log 2>&1 &
+          sleep 2
+      - name: Reverify v2.14 to B2 update preservation
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-v2.14-b1-csp-repair --pre-version 2.14 --pre-cache v2.14-b1 --port 8132 --label corrected-v214 | tee /tmp/corrected-upgrade-v214.log
+      - name: Prepare deployed v2.4 same-scope predecessor
+        run: |
+          rm -rf /tmp/lettres-v215-v24-scope
+          cp -a lettres-r9 /tmp/lettres-v215-v24-scope
+          cd /tmp/lettres-v215-v24-scope
+          python3 -m http.server 8134 --bind 127.0.0.1 >/tmp/lettres-v215-v24.log 2>&1 &
+          sleep 2
+      - name: Reverify deployed v2.4 to B2 update preservation
+        run: python qa/lettres_v215_upgrade_preservation_b2_20261005.py --pre lettres-r9 --pre-version 2.4 --pre-cache v2.4-b1 --port 8134 --label corrected-v24 | tee /tmp/corrected-upgrade-v24.log
+      - name: Start exact B2 local server
+        run: |
+          python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres-v215-b2.log 2>&1 &
+          sleep 2
+      - name: Reverify exact public App-Test bytes
+        run: |
+          python - <<'PY' | tee /tmp/corrected-public-edge.log
+          from pathlib import Path
+          import urllib.request,hashlib,time
+          root=Path('lettres-v2.15-b2-contrast-repair')
+          base='https://louisriv26.github.io/App-Test/lettres-v2.15-b2-contrast-repair/'
+          files=sorted(p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file())
+          assert len(files)==22
+          for rel in files:
+              req=urllib.request.Request(base+rel+'?fresh-cont=1',headers={'Cache-Control':'no-cache','Pragma':'no-cache','User-Agent':'Lettres-v215-fresh-continuation'})
+              with urllib.request.urlopen(req,timeout=45) as r:data=r.read();status=r.status
+              got=hashlib.sha256(data).hexdigest();want=hashlib.sha256((root/rel).read_bytes()).hexdigest()
+              assert status==200 and got==want,(rel,status,got,want)
+              print('PUBLIC_EDGE_PASS',rel,got)
+          print('PUBLIC_EDGE_ALL_22_PASS')
+          PY
+      - name: Corrected final fresh blind challenge
+        run: python qa/lettres_v215_fresh_blind_audit_r1.py | tee /tmp/corrected-fresh-blind.log
+      - name: Confirm exact B2 remained unchanged
+        run: |
+          test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+          echo "FINAL_TESTED_TREE=8521e662e8e9efbedba2db9f537bd52281754b93"
+      - name: Upload corrected continuation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: lettres-v2.15-b2-fresh-audit-r1-continuation
+          path: |
+            /tmp/corrected-upgrade-v214.log
+            /tmp/corrected-upgrade-v24.log
+            /tmp/corrected-public-edge.log
+            /tmp/corrected-fresh-blind.log
+            /tmp/LETTRES_V2_15_FRESH_BLIND_AUDIT_R1.json
+          if-no-files-found: error
