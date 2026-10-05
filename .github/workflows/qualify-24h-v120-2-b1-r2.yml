@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   qualify:
-    if: "contains(github.event.head_commit.message, 'Trigger 24H v1202 targeted qualification')"
+    if: "contains(github.event.head_commit.message, 'v1202 qualification marker')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
