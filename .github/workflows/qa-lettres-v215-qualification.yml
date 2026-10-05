@@ -21,10 +21,10 @@ jobs:
           python -m pip install --disable-pip-version-check playwright
           python -m playwright install --with-deps chromium webkit
           npm install --no-save axe-core
-      - name: Re-derive exact B2 and bind its already-qualified tree
-        run: |
-          python qa/stage_lettres_v215_b2.py
-          test "$LETTRES_V215_TREE" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+      - name: Re-derive exact B2
+        run: python qa/stage_lettres_v215_b2.py
+      - name: Bind exact B2 tree
+        run: test "$LETTRES_V215_TREE" = "8521e662e8e9efbedba2db9f537bd52281754b93"
       - name: Start exact B2 server
         run: |
           python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres215b2.log 2>&1 &
