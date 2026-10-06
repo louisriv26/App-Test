@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const VERSION = 'ldc-v2.19.142.2-R1B-pls-owner-prototype';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
@@ -31,59 +30,12 @@ let runtimeMutationQueue = Promise.resolve();
 // installation fails and the previous active worker remains in control.
 const SHELL = [
   './', './index.html', './manifest.json', './offline_manifest.json', './sw.js', './speech_model.js', './display_map.js', './interaction_anchor.js', './search_normalizer.js', './search_engine_v2.js', './search_exact_v21.js', './search_foundation_v21b.js', './search_near_v22.js', './search_worker_v2.js', './interim_user_state_migration.js', './search_semantic_pack_guard_r3.js', './search_semantic_v3_core_r4.js', './search_semantic_pack_registry_r5.js', './search_semantic_pack_lifecycle_r5.js', './pls_v15/hybrid_core_v1_5.js', './pls_v15/owner_runtime_v1_5.mjs', './icons/favicon-16.png', './icons/favicon-32.png', './icons/favicon.ico', './icons/icon-60.png', './icons/icon-120.png', './icons/apple-touch-icon.png', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './assets/fonts/fonts.css', './assets/fonts/im-fell-english-latin-400-normal.woff2', './assets/fonts/im-fell-english-latin-400-italic.woff2', './assets/fonts/crimson-text-latin-400-normal.woff2', './assets/fonts/crimson-text-latin-400-italic.woff2', './assets/fonts/crimson-text-latin-600-normal.woff2', './assets/icons/tabler-icons.min.css', './assets/icons/tabler-icons.woff2', './assets/js/sortable.min.js'
-=======
-// ── Version — must match APP_VERSION in index.html ───────────────────
-const VERSION = '51.1';
-
-// Stage 8 CACHE-SCOPE-COLL-01: Cache Storage ownership is deployment-scope
-// specific. This prevents a sibling deployment on the same origin from deleting
-// this installation's shell/content caches. Legacy unscoped mjv-* caches are
-// intentionally left untouched during the first transition.
-function scopeFingerprint(scope) {
-  let h = 2166136261;
-  const text = String(scope || '');
-  for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 16777619); }
-  return (h >>> 0).toString(16).padStart(8, '0');
-}
-const SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
-const CACHE_PREFIX = `mjv-${SCOPE_FINGERPRINT}-`;
-
-// H5 uses two deployment-scoped buckets. Local OFL fonts ship with the release shell.
-//   SHELL   — bumped per app version (index.html, manifest, icons, local fonts)
-//   CONTENT — bumped when governed corpus or migration assets change
-const SHELL_CACHE   = CACHE_PREFIX + 'shell-v' + VERSION;
-const CONTENT_CACHE = CACHE_PREFIX + 'content-v3';   // corpus 1.0.1 + hardened migration generation
-const ALL_CACHES = [SHELL_CACHE, CONTENT_CACHE];
-
-// Icons are precached too: without them a first-run-offline install showed
-// broken icons until one online visit populated the cache opportunistically.
-const REQUIRED_SHELL_ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './fonts/crimson-text-400.woff2',
-  './fonts/crimson-text-600.woff2',
-  './fonts/crimson-text-400-italic.woff2',
-  './fonts/im-fell-english-400.woff2',
-  './fonts/im-fell-english-400-italic.woff2',
-  './fonts/OFL-Crimson-Text.txt',
-  './fonts/OFL-IM-Fell-English.txt',
->>>>>>> c4ee5347db1f8e7892eafb72b74f62a3f7f85d05
 ];
 
-const OPTIONAL_SHELL_ASSETS = [
-  './icons/favicon-16.png',
-  './icons/favicon-32.png',
-  './icons/favicon.ico',
-  './icons/icon-60.png',
-  './icons/icon-120.png',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-maskable-512.png',
-  './icons/apple-touch-icon.png',
-];
+let offlineJob = null;
+const FILE_TIMEOUT_MS = 30000;
+const DOWNLOAD_CONCURRENCY = 3;
 
-<<<<<<< HEAD
 function isCurrentScopeShellRuntimeCacheName(name) {
   return name.startsWith(SCOPE_CACHE_PREFIX);
 }
@@ -356,173 +308,158 @@ async function handleOfflineMessage(event) {
     if(offlineJob){await broadcast(terminalPayload(offlineJob,offlineJob.state,'Impossible d’effacer pendant un téléchargement.'),clientId);return;}
     await clearCurrentScopeOfflineData();const runtime=await clearRuntimeCache();const m=await loadOfflineManifest();await broadcast({type:'LDC_OFFLINE_STATUS',state:'NOT_PREPARED',completed:0,total:m.assets.length,failed:[],total_bytes:m.total_bytes||0,cached_bytes:0,job_id:null,...statusBase(m),runtime,message:'Données hors ligne de cette installation et cache temporaire de lecture/recherche effacés.'},clientId);return;
   }
-=======
-const CONTENT_ASSETS = [
-  './corpus/manifest.json?cv=1.0.1',
-  './corpus/days.json?cv=1.0.1',
-  './corpus/migrations-v1.0.0-to-v1.0.1.json?mv=2.17.18'
-];
-
-
-// How long to wait for the network before falling back to a cached copy.
-// Without this, a "lie-fi" connection left the app on the loading screen for
-// the full request timeout even though a perfectly good cached copy existed.
-const NET_TIMEOUT_MS = 3500;
-
-// Install-time requests bypass the browser HTTP cache. This prevents a new
-// service-worker version from seeding its versioned shell cache with stale
-// bytes that happen to be fresh in the normal HTTP cache. Required reader
-// assets are atomic: if one cannot be obtained, this worker does not activate
-// and the previous working service worker remains in control.
-function scopedRequest(url, cacheMode = 'reload') {
-  return new Request(new URL(url, self.registration.scope).href, { cache: cacheMode });
->>>>>>> c4ee5347db1f8e7892eafb72b74f62a3f7f85d05
 }
 
-async function fetchRequired(url) {
-  const req = scopedRequest(url, 'reload');
-  const res = await fetch(req);
-  if (!res || !res.ok) throw new Error('required precache failed: ' + req.url);
-  return { req, res };
+async function readUpdateCompatMeta() {
+  try{const c=await caches.open(SHELL_CACHE),r=await c.match(new URL(UPDATE_COMPAT_META_PATH,self.registration.scope).href,{ignoreSearch:true});return r?await r.json():null;}catch(e){return null;}
 }
-
-async function putRequired(cache, url) {
-  const { req, res } = await fetchRequired(url);
-  await cache.put(req, res.clone());
+async function writeUpdateCompatMeta(meta) {
+  const c=await caches.open(SHELL_CACHE),u=new URL(UPDATE_COMPAT_META_PATH,self.registration.scope).href;
+  await c.put(u,new Response(JSON.stringify(meta),{status:200,headers:{'content-type':'application/json'}}));
 }
-
-async function putOptionalReload(cache, url) {
-  try {
-    const { req, res } = await fetchRequired(url);
-    await cache.put(req, res.clone());
-  } catch (_) { /* cosmetic asset: fallback UI remains usable */ }
+async function clearLegacyV76VersionAlias() {
+  const meta=await readUpdateCompatMeta();if(!meta||!meta.legacy_v76_alias_active)return;
+  meta.legacy_v76_alias_active=false;meta.alias_cleared_at=new Date().toISOString();await writeUpdateCompatMeta(meta);
 }
-
-async function ensureContent(cache, url) {
-  const req = scopedRequest(url, 'reload');
-  if (await cache.match(req)) return;
-  const res = await fetch(req);
-  if (!res || !res.ok) throw new Error('required content precache failed: ' + req.url);
-  await cache.put(req, res.clone());
+async function reportedWorkerVersion() {
+  const meta=await readUpdateCompatMeta();return meta&&meta.direct_v76_upgrade&&meta.legacy_v76_alias_active?LEGACY_V76_WORKER_VERSION:VERSION;
 }
-
-
-
-self.addEventListener('install', e => {
-  e.waitUntil((async () => {
-    const shell = await caches.open(SHELL_CACHE);
-    for (const u of REQUIRED_SHELL_ASSETS) await putRequired(shell, u);
-    await Promise.all(OPTIONAL_SHELL_ASSETS.map(u => putOptionalReload(shell, u)));
-
-    const content = await caches.open(CONTENT_CACHE);
-    for (const u of CONTENT_ASSETS) await ensureContent(content, u);
-
-    await self.skipWaiting();
-  })());
+async function respondWorkerVersion(e){
+  const version=await reportedWorkerVersion(),p=e.ports&&e.ports[0];
+  if(p)p.postMessage({type:'LDC_SW_VERSION',version});else if(e.source)e.source.postMessage({type:'LDC_SW_VERSION',version});
+}
+self.addEventListener('message',e=>{
+  if(e.data&&e.data.type==='LDC_GET_VERSION'){e.waitUntil(respondWorkerVersion(e));return;}
+  if(e.data&&e.data.type==='SKIP_WAITING'){self.skipWaiting();return;}
+  if(e.data&&String(e.data.type||'').startsWith('OFFLINE_'))e.waitUntil(handleOfflineMessage(e));
 });
 
-self.addEventListener('activate', e => {
-  e.waitUntil((async () => {
-    const keys = await caches.keys();
-    // Only touch older caches from this exact deployment scope. Ambiguous
-    // legacy unscoped mjv-* caches and sibling deployment caches are preserved.
-    await Promise.all(
-      keys.filter(k => k.startsWith(CACHE_PREFIX) && !ALL_CACHES.includes(k))
-          .map(k => caches.delete(k))
-    );
-    await self.clients.claim();
-    const clients = await self.clients.matchAll({ type: 'window' });
-    clients.forEach(c => c.postMessage({ type: 'SW_UPDATED', version: VERSION }));
-  })());
-});
-
-// Serve from cache immediately, then refresh the cache in the background so the
-// next launch is up to date. Used for the corpus, which is static text that
-// only changes on a deliberate content release.
-async function staleWhileRevalidate(request, cacheName) {
-  const cache = await caches.open(cacheName);
-  const cached = await cache.match(request);
-  const network = fetch(request).then(res => {
-    if (res && res.status === 200) cache.put(request, res.clone());
-    return res;
-  }).catch(() => null);
-  if (cached) return cached;              // instant, no network wait
-  const fresh = await network;
-  if (fresh) return fresh;
-  throw new Error('offline and not cached: ' + request.url);
-}
-
-// Prefer the network so a new deployment is picked up, but never let a slow
-// connection block startup: whichever resolves first within the timeout wins,
-// and the cached copy is the fallback.
-function shellCacheKey(request) {
-  // Deep links are query-string routes served by the same app shell. The
-  // install cache contains only './' and './index.html'; matching the full
-  // navigation URL would therefore fail offline for ?open=unit/search routes.
-  // Canonicalise only shell navigations, while preserving the browser's real
-  // URL so startup routing still sees window.location.search.
-  const url = new URL(request.url);
-  if (url.origin === self.location.origin &&
-      (url.pathname.endsWith('/') || url.pathname.endsWith('/index.html'))) {
-    url.search = '';
-    url.hash = '';
-    return new Request(url.href, { method: 'GET' });
-  }
-  return request;
-}
-
-async function networkFirstWithTimeout(request, cacheName) {
-  const cache = await caches.open(cacheName);
-  const cacheKey = shellCacheKey(request);
-  const cached = await cache.match(cacheKey);
-
-  const network = fetch(request, { cache: 'no-store' }).then(res => {
-    if (res && res.status === 200) cache.put(cacheKey, res.clone());
-    return res;
+const BOOT_CRITICAL_CORPUS = ['corpus/supplements.json','corpus/supplement_manifest.json'];
+function queryPredecessorWorkerVersion(timeoutMs=1200){
+  return new Promise(resolve=>{
+    const worker=self.registration&&self.registration.active;
+    if(!worker||typeof MessageChannel==='undefined'){resolve(null);return;}
+    const ch=new MessageChannel();let done=false;
+    const finish=v=>{if(done)return;done=true;clearTimeout(timer);try{ch.port1.close();ch.port2.close();}catch(e){}resolve(v||null);};
+    const timer=setTimeout(()=>finish(null),timeoutMs);
+    ch.port1.onmessage=e=>{const d=e&&e.data||{};finish(d.type==='LDC_SW_VERSION'?String(d.version||''):null);};
+    try{worker.postMessage({type:'LDC_GET_VERSION'},[ch.port2]);}catch(e){finish(null);}
   });
-
-  if (!cached) return network;            // nothing to fall back to
-
-  let timer;
-  const timeout = new Promise(resolve => { timer = setTimeout(() => resolve(null), NET_TIMEOUT_MS); });
-  try {
-    const winner = await Promise.race([network.catch(() => null), timeout]);
-    return winner || cached;
-  } finally {
-    clearTimeout(timer);
+}
+function revisionBoundUrl(input){const u=new URL(input,self.registration.scope);u.searchParams.set('ldc_sw_revision',`${VERSION}-${INSTALL_FETCH_NONCE}`);return u.href;}
+async function verifyPublishedRevisionMarker(){
+  const r=await fetch(new Request(revisionBoundUrl('./version.json'),{cache:'no-store'}));
+  if(!r||!r.ok)throw new Error(`version marker HTTP ${r&&r.status}`);
+  const meta=await r.json();
+  if(String(meta&&meta.page_worker_revision||'')!==VERSION)throw new Error(`published revision mismatch: ${String(meta&&meta.page_worker_revision||'missing')}`);
+  return meta;
+}
+async function verifyShellRevisionResponse(rel,response){
+  if(rel==='./'||rel==='./index.html'){
+    const text=await response.clone().text();if(!text.includes(`const SW_CACHE_VERSION = '${VERSION}';`))throw new Error(`index revision mismatch: ${rel}`);
+  }else if(rel==='./sw.js'){
+    const text=await response.clone().text();if(!text.includes(`const VERSION = '${VERSION}';`))throw new Error('worker self revision mismatch');
+  }else if(rel==='./offline_manifest.json'){
+    const meta=await response.clone().json();if(String(meta&&meta.page_worker_revision||'')!==VERSION)throw new Error(`offline manifest revision mismatch: ${String(meta&&meta.page_worker_revision||'missing')}`);
   }
 }
-
-async function cacheFirst(request, cacheName) {
-  const cache = await caches.open(cacheName);
-  const cached = await cache.match(request);
-  if (cached) return cached;
-  const res = await fetch(request);
-  if (res && res.status === 200 && request.method === 'GET') cache.put(request, res.clone());
-  return res;
+async function installFreshShell() {
+  const predecessorVersion=await queryPredecessorWorkerVersion();
+  const directV76=predecessorVersion===LEGACY_V76_WORKER_VERSION;
+  await caches.delete(SHELL_CACHE);
+  const c=await caches.open(SHELL_CACHE);
+  try{
+    await Promise.all(SHELL.map(async rel=>{
+      const canonical=new URL(rel,self.registration.scope).href;
+      const response=await fetch(new Request(revisionBoundUrl(rel),{cache:'no-store'}));
+      if(!response||!response.ok)throw new Error(`shell asset HTTP ${response&&response.status}: ${rel}`);
+      await verifyShellRevisionResponse(rel,response);
+      await c.put(canonical,response.clone());
+    }));
+    await writeUpdateCompatMeta({schema:'ldc-update-compat-v1',direct_v76_upgrade:directV76,legacy_v76_alias_active:directV76,installed_revision:VERSION,predecessor_worker_version:predecessorVersion,created_at:new Date().toISOString()});
+  }catch(e){await caches.delete(SHELL_CACHE);throw e;}
 }
+async function installVerifiedBootCorpus() {
+  const m=await loadOfflineManifest();
+  await caches.delete(RUNTIME_CACHE);
+  const cache=await caches.open(RUNTIME_CACHE), entries=[];
+  try{
+    for(const path of BOOT_CRITICAL_CORPUS){
+      const asset=m.assetMap.get(path);if(!asset)throw new Error(`boot-critical asset absent du manifeste: ${path}`);
+      const raw=await fetch(revisionBoundUrl(path),{cache:'no-store'});
+      const verified=await verifiedNetworkResponse(raw,asset,m);
+      await cache.put(cacheUrl(path),verified.clone());entries.push({path,bytes:Number(asset.bytes)});
+    }
+    await writeRuntimeMeta(cache,m,entries);
+  }catch(e){await caches.delete(RUNTIME_CACHE);throw e;}
+}
+async function installCurrentRevisionAtomically(){
+  try{await verifyPublishedRevisionMarker();await installFreshShell();await installVerifiedBootCorpus();await verifyPublishedRevisionMarker();}
+  catch(e){await Promise.all([caches.delete(SHELL_CACHE),caches.delete(RUNTIME_CACHE)]);throw e;}
+}
+self.addEventListener('install',e=>{e.waitUntil(installCurrentRevisionAtomically());});
+self.addEventListener('activate',e=>{e.waitUntil((async()=>{
+  const keep=new Set([SHELL_CACHE,RUNTIME_CACHE,OFFLINE_CACHE]);
+  const keys=await caches.keys();
+  // Offline corpus caches are persistent data. Preserve the offline family across
+  // shell updates and across sibling service-worker scopes on the same origin.
+  await Promise.all(keys.filter(k=>isCurrentScopeShellRuntimeCacheName(k)&&!keep.has(k)).map(k=>caches.delete(k)));
+  await self.clients.claim();
+})());});
 
-self.addEventListener('fetch', e => {
-  if (e.request.method !== 'GET') return;
-
-  const url = new URL(e.request.url);
-  const isCrossOrigin = url.origin !== self.location.origin;
-  const isCorpus = url.pathname.includes('/corpus/');
-  const isShell = url.pathname.endsWith('/') || url.pathname.endsWith('index.html');
-
-  if (isCrossOrigin) return;
-
-  if (isCorpus) {
-    // Static book content — serve instantly from cache, refresh in background
-    e.respondWith(staleWhileRevalidate(e.request, CONTENT_CACHE));
-    return;
+function corpusAssetPath(request) {
+  const u=new URL(request.url), scopePath=new URL(self.registration.scope).pathname;
+  let p=u.pathname.startsWith(scopePath)?u.pathname.slice(scopePath.length):u.pathname.replace(/^\/+/, '');
+  return p.replace(/^\/+/, '');
+}
+async function verifiedOfflineCachedCorpusHit(cache,request,asset) {
+  if(!requestBelongsToCurrentScope(request))return null;
+  const hit=await cache.match(request,{ignoreSearch:true});if(!hit)return null;
+  const h=hit.headers,ok=h.get('x-ldc-verified-sha256')===asset.sha256&&h.get('x-ldc-verified-bytes')===String(asset.bytes);
+  if(!ok){await cache.delete(request,{ignoreSearch:true});return null;}
+  return hit;
+}
+async function verifiedRuntimeCachedCorpusHit(cache,request,asset,m) {
+  const hit=await cache.match(request,{ignoreSearch:true});if(!hit)return null;
+  const h=hit.headers,ok=h.get('x-ldc-verified-sha256')===asset.sha256&&h.get('x-ldc-verified-bytes')===String(asset.bytes)&&h.get('x-ldc-content-binding')===m.content_binding_sha256;
+  if(!ok){await cache.delete(request,{ignoreSearch:true});return null;}
+  return hit;
+}
+async function persistentOfflineCorpusHit(request,asset) {
+  const sources=await offlineCacheSources();
+  for(const source of sources){const hit=await verifiedOfflineCachedCorpusHit(source.cache,request,asset);if(hit)return hit;}
+  return null;
+}
+async function cachedCorpusResponse(request,networkFirst=false) {
+  const m=await loadOfflineManifest(),asset=m.assetMap.get(corpusAssetPath(request));
+  if(!asset)return fetch(new Request(request,{cache:'reload'}));
+  const runtime=await caches.open(RUNTIME_CACHE);
+  if(!networkFirst){
+    const oc=await persistentOfflineCorpusHit(request,asset);if(oc)return oc;
+    const rc=await verifiedRuntimeCachedCorpusHit(runtime,request,asset,m);if(rc)return rc;
   }
-
-  if (isShell) {
-    // Fresh shell after a deploy, but bounded so lie-fi can't stall startup
-    e.respondWith(networkFirstWithTimeout(e.request, SHELL_CACHE));
-    return;
+  try{
+    const raw=await fetch(new Request(request,{cache:'reload'})),verified=await verifiedNetworkResponse(raw,asset,m);
+    await runtime.put(request,verified.clone());await recordRuntimeEntry(asset,m);return verified;
+  }catch(e){
+    const oc=await persistentOfflineCorpusHit(request,asset);if(oc)return oc;
+    const rc=await verifiedRuntimeCachedCorpusHit(runtime,request,asset,m);if(rc)return rc;
+    return Response.error();
   }
-
-  e.respondWith(cacheFirst(e.request, SHELL_CACHE));
+}
+self.addEventListener('fetch',e=>{
+  if(e.request.method!=='GET')return;
+  const url=new URL(e.request.url);if(url.origin!==self.location.origin)return;
+  const path=url.pathname;
+  if(path.endsWith('/version.json')){
+    e.respondWith(fetch(new Request(e.request,{cache:'no-store'})));return;
+  }
+  if(e.request.mode==='navigate'){
+    const freshNav=new Request(e.request,{cache:'reload'});
+    e.respondWith((async()=>{await clearLegacyV76VersionAlias();return fetch(freshNav).catch(async()=>{const c=await caches.open(SHELL_CACHE);return (await c.match('./index.html'))||(await c.match('./'));});})());return;
+  }
+  if(path.includes('/corpus/')){
+    e.respondWith(cachedCorpusResponse(e.request,false));return;
+  }
+  e.respondWith(fetch(e.request).catch(async()=>{const c=await caches.open(SHELL_CACHE);return (await c.match(e.request,{ignoreSearch:true}))||Response.error();}));
 });
