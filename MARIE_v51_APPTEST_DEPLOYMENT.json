@@ -1,0 +1,50 @@
+{
+  "app": "Marie",
+  "public_candidate_version": "51",
+  "deployed_surface": "App-Test",
+  "source_repository": "louisriv26/La-Vierge-Marie-dans-le-Royaume-de-la-Divine-Volont-",
+  "source_branch": "marie-v51-corrective-2026-10-06",
+  "source_commit": "3c9d8ec2d73bbfc0f23a3f3f4c9592e0f00f7294",
+  "production_baseline_commit": "e72e4de96a83bcd1628a58dddbcd834aab7b6b09",
+  "changed_source_files": [
+    "index.html",
+    "sw.js",
+    "404.html"
+  ],
+  "intended_repairs": [
+    "M-12",
+    "F-04",
+    "M-14",
+    "M-16A",
+    "M-19",
+    "F-08",
+    "B3",
+    "M-15",
+    "M-17",
+    "M-18",
+    "M-20"
+  ],
+  "deliberately_not_changed": [
+    "M-13",
+    "F-19",
+    "F-05",
+    "F-06",
+    "P3 items",
+    "corpus content"
+  ],
+  "machine_gates": {
+    "source_scope": "PASS",
+    "javascript_syntax": "PASS",
+    "csp_rehash": "PASS",
+    "page_sw_version_alignment": "PASS",
+    "production_main_unchanged": "PASS",
+    "physical_iphone_ipad": "OPEN"
+  },
+  "candidate_blob_shas": {
+    "index_html": "eedeb79b4e5d7fb4f36950a9ba71849328497031",
+    "sw_js": "8ea73de4fcf13126d3e68265362865968a15137c",
+    "html_404": "3798b639523b334b171e7dac31af2e65a322e996",
+    "corpus_days_json": "4821eb50b60246bfada390e24b5cccd4941c778b"
+  },
+  "created_on": "2026-10-06"
+}
