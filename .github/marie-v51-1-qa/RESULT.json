@@ -1,5 +1,10 @@
 {
-  "status": "PENDING",
+  "status": "FAIL",
+  "exit_code": 2,
   "candidate": "Marie v51.1",
-  "candidate_index_blob": "2fa89f62c0cc565463a87e6b714a9c42fa526b81"
+  "candidate_index_blob": "2fa89f62c0cc565463a87e6b714a9c42fa526b81",
+  "candidate_sw_blob": "d6866df9dd87bf25c506b182514f6ba8e3cd1bc0",
+  "trigger_sha": "16895e02ab0840277db0460a345f908406325701",
+  "run_id": "37418519374",
+  "log_tail": "PASS chromium:selftest 158\nPASS chromium:mobile_textsize_focus {\"inside\":true,\"active\":\"Normal\"}\nPASS chromium:mobile_to_wide {\"flip\":{\"mobileOpen\":false,\"wideOpen\":false,\"activeId\":\"wnav-textsize\",\"activeVisible\":true},\"afterTab\":{\"id\":\"wnav-aide\",\"visible\":true}}\nMARIE_V51_1_BROWSER_QA_FAIL Error: wide panel did not receive focus {\"inside\":false,\"active\":\"Aᵃ\"}\n    at assert (/home/runner/work/App-Test/App-Test/.github/marie-v51-1-qa/challenge.cjs:5:34)\n    at runEngine (/home/runner/work/App-Test/App-Test/.github/marie-v51-1-qa/challenge.cjs:48:3)\n    at async /home/runner/work/App-Test/App-Test/.github/marie-v51-1-qa/challenge.cjs:140:3\n"
 }
