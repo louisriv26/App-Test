@@ -69,10 +69,10 @@ async function runEngine(bt,name){
   await p.evaluate(()=>{
     const hidden=document.getElementById('wide-textsize-panel'); hidden.classList.add('open');
     const t=Array.from(document.querySelectorAll('.mobile-textsize-trigger')).find(el=>el.getClientRects().length); t.focus();
+    window.__qaStaleBefore=document.activeElement;
   });
-  const staleBefore=await p.evaluate(()=>document.activeElement);
   await p.keyboard.press('Tab');
-  x=await p.evaluate(()=>({same:document.activeElement===staleBefore,visible:document.activeElement?.getClientRects().length>0}));
+  x=await p.evaluate(()=>({same:document.activeElement===window.__qaStaleBefore,visible:document.activeElement?.getClientRects().length>0}));
   assert(!x.same&&x.visible,'hidden stale panel trapped Tab '+JSON.stringify(x));
   await p.evaluate(()=>document.getElementById('wide-textsize-panel').classList.remove('open'));
   pass(name+':hidden_stale_panel_ignored',x);
