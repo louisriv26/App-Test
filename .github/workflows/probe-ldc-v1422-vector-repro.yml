@@ -16,8 +16,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install exact Transformers.js
-        run: npm install --no-save @huggingface/transformers@3.8.1
+      - name: Install exact Transformers.js and browser driver
+        run: npm install --no-save @huggingface/transformers@3.8.1 playwright-core@1.55.0
       - name: Fetch and hash-pin exact E5 files
         shell: bash
         run: |
@@ -41,5 +41,25 @@ jobs:
           4d24e2bc01a447951524466ef533e52944bf48509e6552810bcee1a2711cb02c  /tmp/ldc-e5-models/e5/onnx/model_int8.onnx
           HASHES
           sha256sum -c /tmp/expected.sha256
-      - name: Reproduce protected sample vectors
-        run: node tools/ldc_v1422_vector_probe/probe.mjs
+      - name: Prepare exact browser runtime probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=/tmp/ldc-browser-probe
+          mkdir -p "$ROOT/runtime" "$ROOT/model/onnx"
+          cp tools/ldc_v1422_vector_probe/browser_probe.html "$ROOT/browser_probe.html"
+          cp node_modules/@huggingface/transformers/dist/transformers.min.js "$ROOT/runtime/transformers.min.js"
+          cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.jsep.mjs "$ROOT/runtime/ort-wasm-simd-threaded.jsep.mjs"
+          cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.jsep.wasm "$ROOT/runtime/ort-wasm-simd-threaded.jsep.wasm"
+          cp /tmp/ldc-e5-models/e5/config.json "$ROOT/model/config.json"
+          cp /tmp/ldc-e5-models/e5/tokenizer.json "$ROOT/model/tokenizer.json"
+          cp /tmp/ldc-e5-models/e5/sentencepiece.bpe.model "$ROOT/model/sentencepiece.bpe.model"
+          cp /tmp/ldc-e5-models/e5/tokenizer_config.json "$ROOT/model/tokenizer_config.json"
+          cp /tmp/ldc-e5-models/e5/special_tokens_map.json "$ROOT/model/special_tokens_map.json"
+          cp /tmp/ldc-e5-models/e5/onnx/model_int8.onnx "$ROOT/model/onnx/model_int8.onnx"
+          test "$(sha256sum "$ROOT/runtime/transformers.min.js" | cut -d' ' -f1)" = "aa5002b70e789798da263f5f99c62bd3e8fcd0c119258a493c40c180648365fa"
+          test "$(sha256sum "$ROOT/runtime/ort-wasm-simd-threaded.jsep.mjs" | cut -d' ' -f1)" = "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9"
+          test "$(sha256sum "$ROOT/runtime/ort-wasm-simd-threaded.jsep.wasm" | cut -d' ' -f1)" = "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39"
+          command -v google-chrome
+      - name: Browser WASM protected-row parity
+        run: node tools/ldc_v1422_vector_probe/browser_probe_runner.mjs

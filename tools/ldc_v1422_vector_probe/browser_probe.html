@@ -1,0 +1,17 @@
+<!doctype html><meta charset="utf-8"><pre id="status">boot</pre>
+<script type="module">
+import {AutoTokenizer,AutoModel,env,mean_pooling} from './runtime/transformers.min.js';
+const REV='761b726dd34fb83930e26aab4e9ac3899aa1fa78';
+env.allowRemoteModels=false;env.allowLocalModels=true;env.localModelPath=new URL('./',location.href).href;env.useBrowserCache=false;env.useFSCache=false;
+if(env.backends?.onnx?.wasm){env.backends.onnx.wasm.numThreads=1;env.backends.onnx.wasm.proxy=false;env.backends.onnx.wasm.wasmPaths=new URL('./runtime/',location.href).href;}
+let tok=null,mdl=null;
+window.embedPassage=async(text)=>{
+ if(!tok)tok=await AutoTokenizer.from_pretrained('model',{local_files_only:true,revision:REV});
+ if(!mdl)mdl=await AutoModel.from_pretrained('model',{local_files_only:true,revision:REV,subfolder:'onnx',model_file_name:'model',dtype:'int8',device:'wasm'});
+ const t=await tok(['passage: '+text],{padding:true,truncation:true,max_length:512});
+ const out=await mdl(t);const h=out.last_hidden_state||out[Object.keys(out)[0]];
+ const pooled=mean_pooling(h,t.attention_mask).normalize(2,-1);
+ return Array.from(pooled.data);
+};
+document.getElementById('status').textContent='ready';
+</script>
