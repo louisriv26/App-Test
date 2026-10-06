@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.142.7-R1B-PLS-OWNER-PROTOTYPE-RELEASE-METADATA-CLOSURE",
+  "app_version": "v2.19.142.9-R1B-PLS-INTERACTION-CLOSURE",
   "asset_count": 204,
   "assets": [
     {
@@ -1077,7 +1077,7 @@
   },
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.142.7-R1B-pls-owner-prototype-release-metadata-closure",
+  "page_worker_revision": "ldc-v2.19.142.9-R1B-pls-interaction-closure",
   "post_r6_date_id_a2_fixed_point": {
     "a2_sha256": "dd034a4d4bb329254818c3e62fd629c9b64c90f9d4bd533de9f6ed99247cb1d8",
     "date_id_sha256": "ed5bf462c47b8fb5a41f7c81591257d6e99f94bae08628aa27e5f7d667020c2a",
@@ -1149,7 +1149,7 @@
     "shell_runtime_caches": "APP_VERSIONED"
   },
   "schema": "ldc-offline-manifest-v3",
-  "scope": "v142.7 release-metadata coherence successor of exact frozen v142.6. It corrects stale active current-version lineage/gate metadata found only after the v142.6 frozen-byte adversarial recheck. Help/onboarding/offline wording from v142.6, Reader selection/selector repairs, Par les mots, semantic retrieval, corpus/**, supplements, pls_v15/**, offline asset ledger and content binding are unchanged. Production deployment is not authorized.",
+  "scope": "v142.9 identity/governance repair promotion of the exact corrected 569741 v142.8 functional bytes. Par le sens interaction/correctness behavior is unchanged from that source: stale-result ownership closure, app-level single-flight semantic preparation, visible preparing/searching feedback, native semantic textarea composition, canonical query execution, and 1024-character semantic deep-link contract. Both prior v142.8 byte candidates are superseded/non-deployable because the v142.8 identity was reused after freeze. Par les mots algorithms, semantic retrieval/ranking, corpus/**, supplements, pls_v15/**, interaction_anchor.js, offline asset ledger and content binding remain unchanged. Production deployment is not authorized.",
   "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
   "semantic_vector_search_included": false,
   "semantic_vector_search_note": "The personal Par le sens prototype resources are packaged under pls_v15/** for owner use, but they are lazy/network-only and excluded from this governed offline-content binding. semantic_vector_search_included=false therefore means not included in Préparer hors ligne; it does not mean the files are absent from the release ZIP. The prototype is not production-qualified or offline-qualified.",
@@ -1316,7 +1316,7 @@
     "production_deployment_authority": "NONE"
   },
   "pls_owner_prototype": {
-    "prototype_public_version": "142.7",
+    "prototype_public_version": "142.9",
     "semantic_assets_lazy_network_only": true,
     "not_part_of_offline_content_binding": true,
     "production_authorized": false
@@ -1368,6 +1368,66 @@
     "interaction_anchor_changed": false,
     "help_content_changed": false,
     "search_v2_changed": false,
+    "semantic_algorithm_changed": false,
+    "production_authorized": false,
+    "physical_iphone_gate": "OPEN",
+    "physical_ipad_gate": "OPEN"
+  },
+  "v142_8_interaction_correctness_closure": {
+    "direct_predecessor_public_version": "142.7",
+    "direct_predecessor_package_sha256": "d7b51c53f99484b7fe0a214851f687a8c837cd3de0572374e3a29c1600bcf043",
+    "classification": "PAR_LE_SENS_INTERACTION_AND_CORRECTNESS_CLOSURE",
+    "offline_asset_count": 204,
+    "offline_total_bytes": 114483048,
+    "offline_content_binding_changed": false,
+    "corpus_changed": false,
+    "pls_v15_changed": false,
+    "interaction_anchor_changed": false,
+    "search_v2_algorithm_changed": false,
+    "semantic_algorithm_changed": false,
+    "production_authorized": false,
+    "physical_iphone_gate": "OPEN",
+    "physical_ipad_gate": "OPEN",
+    "machine_qa_status": "PASS_BOUNDED_PREPHYSICAL",
+    "app_test_deployment_executed": false,
+    "application_mutation_universe": [
+      "index.html",
+      "offline_manifest.json",
+      "sw.js",
+      "version.json"
+    ],
+    "runtime_mutation_universe": [
+      "index.html",
+      "offline_manifest.json",
+      "sw.js",
+      "version.json"
+    ],
+    "evidence_only_mutation_universe": [
+      "LDC_v142.8_PLS_INTERACTION_CLOSURE_MACHINE_QA_2026-10-06.json",
+      "PACKAGE_MANIFEST_SHA256.json"
+    ],
+    "package_delta_universe": [
+      "index.html",
+      "offline_manifest.json",
+      "sw.js",
+      "version.json",
+      "LDC_v142.8_PLS_INTERACTION_CLOSURE_MACHINE_QA_2026-10-06.json",
+      "PACKAGE_MANIFEST_SHA256.json"
+    ]
+  },
+  "v142_9_identity_repair_promotion": {
+    "promotion_source_zip_sha256": "5697412951bef15ec7c49c17a13e0e9e05d57ccf228b1d9150505bc930d53160",
+    "first_frozen_v142_8_zip_sha256": "905fe6c4a456e8f56affca4f8c6451a1d86eeb9bb4f2706ec1f53c8bfd6cdd61",
+    "last_unambiguous_governed_predecessor_public_version": "142.7",
+    "last_unambiguous_governed_predecessor_zip_sha256": "d7b51c53f99484b7fe0a214851f687a8c837cd3de0572374e3a29c1600bcf043",
+    "classification": "IDENTITY_AND_GOVERNANCE_REPAIR__FUNCTIONAL_RUNTIME_CARRIED_FORWARD",
+    "offline_asset_count": 204,
+    "offline_total_bytes": 114483048,
+    "offline_content_binding_changed": false,
+    "corpus_changed": false,
+    "pls_v15_changed": false,
+    "interaction_anchor_changed": false,
+    "search_v2_algorithm_changed": false,
     "semantic_algorithm_changed": false,
     "production_authorized": false,
     "physical_iphone_gate": "OPEN",

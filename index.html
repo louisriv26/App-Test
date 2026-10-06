@@ -682,14 +682,24 @@ mark.hl-pink{background:#fce7f3;color:inherit;}
 .search-bar-wrap{padding:10px 12px 8px;flex-shrink:0;min-width:0;width:100%;max-width:100%;}
 .search-bar{display:flex;align-items:center;gap:8px;background:var(--white);min-width:0;width:100%;max-width:100%;
   border:0.5px solid var(--border);border-radius:10px;padding:9px 13px;}
-.search-bar input{flex:1 1 0;min-width:0;width:0;max-width:100%;border:none;background:transparent;font-size:16px;
+.search-bar input,.search-bar textarea{flex:1 1 0;min-width:0;width:0;max-width:100%;border:none;background:transparent;font-size:16px;
   font-family:var(--body);color:var(--ink);outline:none;}
-.search-bar input::placeholder{color:var(--muted);}
+.search-bar input::placeholder,.search-bar textarea::placeholder{color:var(--muted);}
+.search-bar textarea{resize:none;overflow-y:hidden;line-height:1.5;min-height:72px;max-height:none;padding:0;margin:0;}
+.search-bar.semantic-composer{align-items:flex-start;}
+.search-bar.semantic-composer>i{margin-top:4px;}
 .search-bar i{color:var(--muted);font-size:17px;flex-shrink:0;}
 .search-submit-form{margin:0;padding:0;min-width:0;width:100%;max-width:100%;}
 .search-submit-row{display:flex;min-width:0;width:100%;padding-top:8px;}
 .search-submit-btn{width:100%;min-width:0;min-height:44px;}
-.search-submit-btn:disabled{opacity:.45;cursor:default;}
+.search-submit-btn:disabled{opacity:.58;cursor:default;}
+.search-progress{display:none;margin-top:8px;padding:9px 11px;border-radius:9px;background:var(--gold-pale);color:var(--gold-text);font-size:var(--sem-strong-13);line-height:1.35;align-items:center;gap:8px;min-width:0;overflow-wrap:anywhere;}
+.search-progress.active{display:flex;}
+.search-progress-dots{display:inline-flex;gap:3px;flex-shrink:0;}
+.search-progress-dots>span{width:4px;height:4px;border-radius:50%;background:currentColor;opacity:.28;animation:search-progress-pulse 1.2s infinite ease-in-out;}
+.search-progress-dots>span:nth-child(2){animation-delay:.16s;}.search-progress-dots>span:nth-child(3){animation-delay:.32s;}
+@keyframes search-progress-pulse{0%,70%,100%{opacity:.28;transform:translateY(0)}35%{opacity:1;transform:translateY(-1px)}}
+@media (prefers-reduced-motion:reduce){.search-progress-dots>span{animation:none;opacity:.72;transform:none;}}
 
 /* v112 iPhone Search viewport containment. Flex inputs must be allowed to shrink;
    iOS touch browsers also require a >=16px form-control floor to avoid focus zoom. */
@@ -698,7 +708,7 @@ mark.hl-pink{background:#fce7f3;color:inherit;}
 #search-scroll{width:100%;max-width:100%;overflow-x:hidden;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;}
 #search-results{flex:none;width:100%;overflow:visible;}
 .search-suggestions,.search-meta,.trust-notice,.result-card{overflow-wrap:anywhere;word-break:normal;}
-@media (hover:none) and (pointer:coarse){.search-bar input{font-size:max(16px,var(--sem-strong-16));}}
+@media (hover:none) and (pointer:coarse){.search-bar input,.search-bar textarea{font-size:max(16px,var(--sem-strong-16));}}
 
 .search-meta{padding:4px 16px 8px;font-size:12px;color:var(--muted);flex-shrink:0;}
 .search-mode-badge{display:inline-flex;align-items:center;gap:4px;
@@ -735,7 +745,7 @@ mark.hl-pink{background:#fce7f3;color:inherit;}
   padding:5px 12px;font-size:12px;color:var(--night);font-family:var(--body);
   cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:4px;}
 .sugg-chip:hover{background:var(--gold-pale);border-color:var(--gold-light);}
-.sugg-chip-recent{color:var(--muted);}
+.sugg-chip-recent{color:var(--muted);max-width:100%;text-align:left;white-space:normal;overflow-wrap:anywhere;}
 mark.search-hl{background:rgba(201,168,76,.35);color:inherit;border-radius:2px;padding:0 1px;}
 
 /* Vol filter chips */
@@ -2104,10 +2114,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
   </div>
   <div class="search-bar-wrap">
     <form class="search-submit-form" role="search" aria-label="Recherche dans le Livre du Ciel" onsubmit="submitSearch(event)">
-      <div class="search-bar">
+      <div class="search-bar" id="search-query-bar">
         <i class="ti ti-search"></i>
-        <input type="search" id="search-input" placeholder="Mot, expression, citation…" aria-label="Rechercher dans le Livre du Ciel"
-          enterkeyhint="search" oninput="onSearchInput()">
+        <input type="search" id="search-input" placeholder="Mot, expression, citation…" aria-label="Rechercher par les mots dans le Livre du Ciel"
+          enterkeyhint="search" oninput="onSearchInput('words')">
+        <textarea id="search-input-meaning" rows="3" maxlength="1024" placeholder="Décrivez ce dont vous vous souvenez avec vos propres mots…" aria-label="Décrire un passage pour rechercher par le sens dans le Livre du Ciel" oninput="onSearchInput('meaning')" hidden></textarea>
         <button class="btn-icon" type="button" onclick="clearSearch()" id="search-clear" style="display:none;" aria-label="Effacer la recherche">
           <i class="ti ti-x" style="font-size:14px;"></i>
         </button>
@@ -2115,6 +2126,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
       <div class="search-submit-row">
         <button class="btn-primary search-submit-btn" type="submit" id="search-submit" disabled>Rechercher</button>
       </div>
+      <div id="search-progress" class="search-progress" role="status" aria-live="polite" aria-atomic="true"></div>
     </form>
   </div>
   <div class="filter-row" id="search-source-mode-row" data-label="Source"></div>
@@ -2275,13 +2287,13 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
         <div class="help-row"><span class="help-chip light">Passages contenant des paroles de Jésus</span><span class="help-text">Ce filtre affiche les paragraphes dans lesquels le corpus identifie au moins un passage comme paroles de Jésus. La recherche porte ensuite sur le paragraphe entier : un résultat peut donc contenir aussi du texte de Luisa ou d’une autre voix.</span></div>
         <div class="help-row"><span class="help-chip light">Tomes</span><span class="help-text">Limitez la recherche avec les groupes <b>T1–6 · T7–12 · T13–18 · T19–24 · T25–30 · T31–36</b>, ou laissez <b>Tous</b>.</span></div>
         <div class="help-row"><span class="help-chip light">Date</span><span class="help-text">Quand la zone de recherche est vide, <b>Parcourir par date</b> ouvre la navigation chronologique. Choisissez l’année, puis le mois et le jour ; l’application indique les dates disponibles, gère les jours comportant plusieurs entrées et propose aussi les entrées sans date lorsqu’il y en a.</span></div>
-        <div class="help-row"><span class="help-chip light">Aides de recherche</span><span class="help-text">Les <b>Recherches récentes</b> permettent de relancer rapidement une recherche et peuvent être effacées. <b>Vouliez-vous dire…</b> peut proposer une correction. Pour lancer une recherche saisie ou modifiée, appuyez sur <b>Rechercher</b>. Avec un clavier, la touche <b>Rechercher</b> ou <b>Entrée</b> constitue un raccourci équivalent.</span></div>
+        <div class="help-row"><span class="help-chip light">Aides de recherche</span><span class="help-text">Les <b>Recherches récentes</b> permettent de relancer rapidement une recherche et peuvent être effacées. <b>Vouliez-vous dire…</b> peut proposer une correction. Pour lancer une recherche saisie ou modifiée, appuyez sur <b>Rechercher</b>. En <b>Par les mots</b>, la touche <b>Entrée / Rechercher</b> du clavier peut aussi lancer la recherche. En <b>Par le sens</b>, <b>Entrée</b> ajoute une nouvelle ligne afin de vous laisser relire et corriger votre description ; utilisez ensuite le bouton <b>Rechercher</b>.</span></div>
         <div class="help-divider"></div>
         <div class="help-row"><span class="help-chip outline">Correspondance exacte</span><span class="help-text"><b>Phrase exacte</b> signifie que les mots sont contigus dans le texte réellement visible pour la source choisie. <b>Tous les termes</b> signifie que tous les mots utiles sont présents sans nécessairement former la même phrase.</span></div>
         <div class="help-row"><span class="help-chip outline">Formulation proche</span><span class="help-text">Pour une phrase de <b>3 à 14 mots</b> dont vous vous souvenez imparfaitement, l’application peut proposer une formulation présentant une ou quelques petites différences textuelles, par exemple un mot ajouté, omis ou remplacé, ou deux mots voisins inversés. Plus la phrase est courte, plus la tolérance est stricte. Elle affiche toujours les mots réellement présents dans la source et ne présente jamais ce résultat comme une <b>Phrase exacte</b>. Lorsque trop de formulations restent également plausibles, elle vous invite à préciser votre souvenir. Un badge <b>CRITICAL_DIFFERENCE</b> signale certaines différences potentiellement importantes qui ne doivent pas être assimilées silencieusement.</span></div>
         <div class="help-row"><span class="help-chip outline">Métadonnées</span><span class="help-text">Les résultats peuvent aussi correspondre au titre, à la date, à la référence ou à une autre métadonnée de l’entrée.</span></div>
         <div class="help-row"><span class="help-chip outline">Correspondance approchée</span><span class="help-text"><b>Élargir la recherche</b> permet, seulement si vous le choisissez, d’afficher <b>Certains termes</b> : une partie seulement des mots saisis a été retrouvée. Ces résultats ne sont jamais affichés comme résultat principal par défaut. Cela ne signifie pas qu’un lien thématique, doctrinal ou « par le sens » a été établi. Vérifiez toujours le passage avant de le citer.</span></div>
-        <div class="help-row"><span class="help-chip outline">Par le sens / Par les mots</span><span class="help-text"><b>Par les mots</b> conserve la recherche textuelle qualifiée. <b>Par le sens</b> est ici activé comme <b>prototype personnel</b> : lorsque vous recherchez un passage avec vos propres mots, il combine la recherche sémantique et une recherche lexicale bornée sur le corpus <b>ENRICHI</b>. Lors d’une première utilisation sur un appareil, il peut devoir charger des ressources supplémentaires importantes : la première recherche peut donc être sensiblement plus longue, et le message <b>chargement/recherche…</b> confirme que le travail est en cours ; une connexion Wi‑Fi est préférable pour ce premier chargement. Les résultats sont des <b>pistes classées</b> : ils ne signifient pas que vos mots figurent dans le texte ni qu’un lien doctrinal a été établi. Ouvrez et vérifiez toujours le passage avant de le citer. Ce prototype n’est pas la version de production qualifiée et n’est pas couvert par la préparation hors ligne.</span></div>
+        <div class="help-row"><span class="help-chip outline">Par le sens / Par les mots</span><span class="help-text"><b>Par les mots</b> conserve la recherche textuelle qualifiée. <b>Par le sens</b> est ici activé comme <b>prototype personnel</b> : décrivez avec vos propres mots ce dont vous vous souvenez et, si possible, donnez plusieurs <b>indices pertinents</b> — une idée, une image ou comparaison, le contexte, des paroles de Jésus ou de Luisa. Vous pouvez relire et corriger votre description avant de lancer la recherche ; il n’est pas nécessaire de retrouver les mots exacts. Si un Tome ou une date ne sont qu’un souvenir incertain, évitez de les présenter comme certains, car ils peuvent restreindre la recherche. Lors d’une première utilisation sur un appareil, le prototype peut devoir charger des ressources supplémentaires importantes : <b>Préparation de Par le sens…</b> indique cette étape, puis <b>Recherche des passages…</b> indique que la requête est en cours. Une connexion Wi‑Fi est préférable pour ce premier chargement. Les résultats sont des <b>pistes classées</b> : ils ne signifient pas que vos mots figurent dans le texte ni qu’un lien doctrinal a été établi. Ouvrez et vérifiez toujours le passage avant de le citer. Ce prototype n’est pas la version de production qualifiée et n’est pas couvert par la préparation hors ligne.</span></div>
         <div class="help-divider"></div>
         <div class="help-row"><span class="help-chip">Autour de ce passage</span><span class="help-text">Dans le lecteur, ouvrez <b>⋯ → Autour de ce passage</b> pour explorer des entrées du même Tome, des thèmes proches ou des familles d’images spirituelles.</span></div>
         <div class="help-row"><span class="help-chip outline">Badges de contexte</span><span class="help-text"><b>Éditorial</b> signale une explication éditoriale du Tome 1 ; <b>COMPLÉMENT</b> signale un contenu substantiel absent du corpus PRINCIPAL et conservé comme COMPLÉMENT retenu ; sa provenance détaillée est disponible dans les informations du passage ; le badge du filtre Jésus apparaît lorsque ce filtre est actif.</span></div>
@@ -2577,11 +2589,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.7-R1B-PLS-OWNER-PROTOTYPE-RELEASE-METADATA-CLOSURE'; // owner-only Help/release-truth closure from frozen v142.5; corpus, Reader selection, Par les mots and semantic retrieval preserved
-const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.7'; // single authoritative public identity derived from APP_VERSION
+const APP_VERSION = 'v2.19.142.9-R1B-PLS-INTERACTION-CLOSURE'; // bounded Par le sens interaction/correctness closure; protected corpus, retrieval runtime and ranking preserved
+const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.9'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-06';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.7-R1B-pls-owner-prototype-release-metadata-closure';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.9-R1B-pls-interaction-closure';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -3716,7 +3728,7 @@ async function finishReaderForPermanentNavigation(destination){
 
 async function goHome(){await finishReaderForPermanentNavigation('home');showScreen('home');await renderHome();}
 function resetRootHorizontalViewport(reason='reset'){
-  const input=document.getElementById('search-input');
+  const input=activeSearchQueryControl();
   if(input&&document.activeElement===input){try{input.blur();}catch(_){}}
   const apply=()=>{try{const y=Number(window.scrollY)||0;window.scrollTo(0,y);}catch(_){}const se=document.scrollingElement;if(se)se.scrollLeft=0;if(document.documentElement)document.documentElement.scrollLeft=0;if(document.body)document.body.scrollLeft=0;};
   apply();requestAnimationFrame(()=>{apply();requestAnimationFrame(apply);});
@@ -3733,9 +3745,9 @@ async function goSearch() {
   renderSearchOrderRow();
   renderSpeakerFilterRow();
   renderVolFilterRow();
-  const input=document.getElementById('search-input');
+  const input=activeSearchQueryControl();
   if(input&&shouldAutofocusSearchInput())input.focus({preventScroll:true});
-  if (!input.value) refreshSearchSuggestions().catch(()=>{});
+  if (!searchQueryDraftCanonical()) refreshSearchSuggestions().catch(()=>{});
   // Stage 10: SEARCH-V2 is the sole active retrieval engine and loads lazily in its worker.
 }
 
@@ -4436,7 +4448,7 @@ async function openFreshTomeFromTomes(vol,button){const token=beginNavigationTra
 function captureNavigationContext(kind){
   const screen=kind||currentScreenName();
   if(screen==='entries')return captureEntriesNavigationContext();
-  if(screen==='search')return {screen:'search',query:document.getElementById('search-input').value,intentMode:searchIntentMode,volMin:searchVolFilter,volMax:searchVolFilterMax,speaker:searchSpeakerFilter,source_mode:supplementMode,order:effectiveSearchOrder(),orderExplicit:!!searchOrderMode,lane:searchLastPayload&&searchLastPayload.foundation&&searchLastPayload.foundation.lane||searchResultLane,partialExpanded:searchPartialExpanded,page:searchPage,metadataPage:searchMetadataPage,scroll:captureScrollContext(searchScrollElement(),'.result-card','data-result-key'),focusKey:document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.resultKey:null};
+  if(screen==='search')return {screen:'search',query:searchQueryDraftValue(),intentMode:searchIntentMode,volMin:searchVolFilter,volMax:searchVolFilterMax,speaker:searchSpeakerFilter,source_mode:supplementMode,order:effectiveSearchOrder(),orderExplicit:!!searchOrderMode,lane:searchLastPayload&&searchLastPayload.foundation&&searchLastPayload.foundation.lane||searchResultLane,partialExpanded:searchPartialExpanded,page:searchPage,metadataPage:searchMetadataPage,scroll:captureScrollContext(searchScrollElement(),'.result-card','data-result-key'),focusKey:document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.resultKey:null};
   if(screen==='espace'){const panel=document.getElementById('ep-'+activeEspaceTab);return {screen:'espace',tab:activeEspaceTab,filter:document.getElementById('espace-filter-input').value,scroll:captureScrollContext(panel,'[data-filter-text]',null)};}
   if(screen==='date-nav')return {screen:'date-nav',year:dnYear,month:dnMonth,day:dnDay,scroll:captureScrollContext(document.querySelector('#screen-date-nav .scroll'),':scope > *',null)};
   if(screen==='tomes')return captureTomesNavigationContext();
@@ -4460,7 +4472,7 @@ async function restoreNavigationContext(ctx){
   if(ctx.screen==='search'){
     const sourceChanged=ctx.source_mode&&ctx.source_mode!==supplementMode;
     searchIntentMode=ctx.intentMode==='meaning'?'meaning':'words';searchVolFilter=Number(ctx.volMin)||0;searchVolFilterMax=Number(ctx.volMax)||0;searchSpeakerFilter=!!ctx.speaker;searchOrderMode=ctx.orderExplicit&&['book','relevance'].includes(ctx.order)?ctx.order:null;searchResultLane=['exact','words','partial'].includes(ctx.lane)?ctx.lane:null;searchPartialExpanded=!!ctx.partialExpanded||searchResultLane==='partial';searchPage=Math.max(1,Number(ctx.page)||1);searchMetadataPage=Math.max(1,Number(ctx.metadataPage)||1);
-    document.getElementById('search-input').value=ctx.query||'';showScreen('search');renderSearchIntentMode();renderSearchSourceModeRow();renderSearchOrderRow();renderSpeakerFilterRow();renderVolFilterRow();syncSearchQueryUI(ctx.query||'');
+    setSearchQueryDraft(ctx.query||'',{mode:searchIntentMode,syncOther:true});showScreen('search');renderSearchIntentMode();renderSearchSourceModeRow();renderSearchOrderRow();renderSpeakerFilterRow();renderVolFilterRow();syncSearchQueryUI(ctx.query||'');
     if(ctx.query)await runSearch({navigation:'preserve-context'});else {await refreshSearchSuggestions();resetSearchScrollToTop();}
     const sc=searchScrollElement(),results=document.getElementById('search-results');restoreScrollContext(sc,ctx.scroll,'.result-card','data-result-key');requestAnimationFrame(()=>{if(ctx.focusKey&&results){const c=[...results.querySelectorAll('.result-card')].find(x=>x.dataset.resultKey===ctx.focusKey);if(c){try{c.focus({preventScroll:true});}catch(_){c.focus();}}}});
     if(sourceChanged)showToast(`Recherche actualisée en ${searchSourceModeLabel(supplementMode)}.`);return;
@@ -7888,6 +7900,8 @@ let searchQueryPending = false; // manual input mutation awaits an explicit subm
 let searchCommittedQuery = ''; // trimmed query most recently submitted; filters rerun only this committed query
 let pendingSearchReaderTarget = null;
 let searchRunSeq = 0, activeSearchAbort = null;
+let searchBusyGeneration = null;
+let ownerSemanticPrepared = false, ownerSemanticPreparationPromise = null, ownerSemanticInferencePromise = null;
 let searchV2Worker = null;
 let searchV2Pending = new Map();
 let searchV2AuxSeq = 0;
@@ -7910,23 +7924,53 @@ function loadSearchIntentMode(){
   try{const v=localStorage.getItem(SEARCH_INTENT_MODE_KEY);if(v==='words'||v==='meaning')searchIntentMode=v;}catch(_){ }
   return searchIntentMode;
 }
+function canonicalSearchQuery(raw,mode=searchIntentMode){
+  const text=String(raw==null?'':raw).normalize('NFC');
+  return mode==='meaning'?text.replace(/\s+/g,' ').trim():text.trim();
+}
+function activeSearchQueryControl(mode=searchIntentMode){return document.getElementById(mode==='meaning'?'search-input-meaning':'search-input');}
+function inactiveSearchQueryControl(mode=searchIntentMode){return document.getElementById(mode==='meaning'?'search-input':'search-input-meaning');}
+function searchQueryDraftValue(){return activeSearchQueryControl()?.value||'';}
+function searchQueryDraftCanonical(){return canonicalSearchQuery(searchQueryDraftValue(),searchIntentMode);}
+function setSearchQueryDraft(raw,{mode=searchIntentMode,syncOther=false}={}){
+  const active=activeSearchQueryControl(mode),other=inactiveSearchQueryControl(mode),text=String(raw==null?'':raw);
+  if(active)active.value=text;
+  if(syncOther&&other)other.value=canonicalSearchQuery(text,mode);
+  if(mode==='meaning')autoGrowSemanticSearchInput();
+}
+function transferSearchDraft(fromMode,toMode){
+  const from=activeSearchQueryControl(fromMode),to=activeSearchQueryControl(toMode);if(!from||!to)return;
+  const source=from.value||'',sourceCanonical=canonicalSearchQuery(source,fromMode);
+  if(toMode==='meaning'){
+    const existingCanonical=canonicalSearchQuery(to.value||'','meaning');
+    if(existingCanonical!==sourceCanonical)to.value=sourceCanonical;
+  }else to.value=sourceCanonical;
+}
+function autoGrowSemanticSearchInput(){
+  const ta=document.getElementById('search-input-meaning');if(!ta||ta.hidden)return;
+  ta.style.height='auto';const cs=getComputedStyle(ta),lh=parseFloat(cs.lineHeight)||24,pad=(parseFloat(cs.paddingTop)||0)+(parseFloat(cs.paddingBottom)||0),border=(parseFloat(cs.borderTopWidth)||0)+(parseFloat(cs.borderBottomWidth)||0),max=lh*8+pad+border;
+  const next=Math.min(Math.max(72,ta.scrollHeight),max);ta.style.height=`${next}px`;ta.style.overflowY=ta.scrollHeight>max?'auto':'hidden';
+}
 function renderSearchIntentMode(){
-  const meaning=document.getElementById('search-intent-meaning'),words=document.getElementById('search-intent-words'),help=document.getElementById('search-intent-help'),input=document.getElementById('search-input');
-  if(meaning){const a=searchIntentMode==='meaning';meaning.classList.toggle('active',a);meaning.setAttribute('aria-pressed',a?'true':'false');}
-  if(words){const a=searchIntentMode==='words';words.classList.toggle('active',a);words.setAttribute('aria-pressed',a?'true':'false');}
-  if(input){input.placeholder=searchIntentMode==='meaning'?'Décrivez ce dont vous vous souvenez avec vos propres mots…':'Mot, expression, citation, date ou référence…';input.setAttribute('aria-label',searchIntentMode==='meaning'?'Rechercher par le sens dans le Livre du Ciel':'Rechercher par les mots dans le Livre du Ciel');}
-  if(help)help.textContent=searchIntentMode==='meaning'?'Décrivez librement l’idée ou le passage dont vous vous souvenez. Les mots exacts ne sont pas nécessaires.':'Recherchez un mot, une expression, une citation, une date ou une référence.';
+  const meaning=document.getElementById('search-intent-meaning'),words=document.getElementById('search-intent-words'),help=document.getElementById('search-intent-help'),wordInput=document.getElementById('search-input'),meaningInput=document.getElementById('search-input-meaning'),bar=document.getElementById('search-query-bar');
+  const semantic=searchIntentMode==='meaning';
+  if(meaning){meaning.classList.toggle('active',semantic);meaning.setAttribute('aria-pressed',semantic?'true':'false');}
+  if(words){words.classList.toggle('active',!semantic);words.setAttribute('aria-pressed',semantic?'false':'true');}
+  if(wordInput)wordInput.hidden=semantic;if(meaningInput)meaningInput.hidden=!semantic;if(bar)bar.classList.toggle('semantic-composer',semantic);
+  if(help)help.textContent=semantic?'Décrivez ce dont vous vous souvenez avec vos propres mots. Plusieurs indices pertinents peuvent aider ; pas besoin des mots exacts. Relisez et corrigez votre description si nécessaire.':'Recherchez un mot, une expression, une citation, une date ou une référence.';
   const order=document.getElementById('search-order-row'),lane=document.getElementById('search-lane-row');
-  if(order)order.style.display=searchIntentMode==='words'?'flex':'none';
-  if(lane&&searchIntentMode==='meaning')lane.style.display='none';
+  if(order)order.style.display=semantic?'none':'flex';
+  if(lane&&semantic)lane.style.display='none';
+  if(semantic)requestAnimationFrame(autoGrowSemanticSearchInput);
+  syncSearchQueryUI();
 }
 function setSearchIntentMode(mode,{rerun=true,persist=true}={}){
   if(mode!=='meaning'&&mode!=='words')return;
   if(searchIntentMode===mode){renderSearchIntentMode();return;}
-  cancelActiveSearch('search-intent-mode-changed');searchIntentMode=mode;resetSearchPaging({resetOrder:true,resetLane:true});searchLastPayload=null;
+  const previous=searchIntentMode;cancelActiveSearch('search-intent-mode-changed');transferSearchDraft(previous,mode);searchIntentMode=mode;resetSearchPaging({resetOrder:true,resetLane:true});searchLastPayload=null;
   if(persist){try{localStorage.setItem(SEARCH_INTENT_MODE_KEY,mode);}catch(_){ }}
   renderSearchIntentMode();document.getElementById('trust-notice').style.display='none';
-  const q=(document.getElementById('search-input')?.value||'').trim();
+  const q=searchQueryDraftCanonical();
   if(q&&rerun)rerunCommittedSearchIfReady();else if(!q)refreshSearchSuggestions().catch(()=>{});
 }
 function searchSemanticV3ParseStructural(raw){
@@ -7981,22 +8025,53 @@ function renderSemanticResultsV4(payload,raw,structural){
   }
   if(!(payload.results||[]).length){const e=document.createElement('div');e.className='empty-state';e.textContent='Aucun passage suffisamment proche n’a été identifié.';container.appendChild(e);}
 }
-async function runSemanticSearchV3(raw){
+async function ensureOwnerSemanticPrepared(generation){
+  const runtime=window.LDCPLSOwnerPrototypeV15;if(!runtime||typeof runtime.init!=='function')return true;
+  if(ownerSemanticPrepared)return true;
+  if(!ownerSemanticPreparationPromise){
+    ownerSemanticPreparationPromise=Promise.resolve().then(()=>runtime.init()).then(()=>{ownerSemanticPrepared=true;return true;}).catch(e=>{ownerSemanticPrepared=false;throw e;}).finally(()=>{ownerSemanticPreparationPromise=null;});
+  }
+  await ownerSemanticPreparationPromise;
+  return isSearchActive(generation);
+}
+async function runOwnerSemanticInference(query,options,generation){
+  const runtime=window.LDCPLSOwnerPrototypeV15;if(!runtime||typeof runtime.search!=='function')throw new Error('SEARCH_V3_OWNER_RUNTIME_NOT_BOUND');
+  while(ownerSemanticInferencePromise){
+    const prior=ownerSemanticInferencePromise;try{await prior;}catch(_){ }
+    if(!isSearchActive(generation))return null;
+    if(ownerSemanticInferencePromise===prior)ownerSemanticInferencePromise=null;
+  }
+  if(!isSearchActive(generation))return null;
+  const current=Promise.resolve().then(()=>runtime.search(query,options));ownerSemanticInferencePromise=current;
+  try{return await current;}finally{if(ownerSemanticInferencePromise===current)ownerSemanticInferencePromise=null;}
+}
+async function runSemanticSearchV3(raw,generation){
   const structural=searchSemanticV3ParseStructural(raw);
-  // Pure structural navigation is already governed and does not require embeddings.
-  if(structural.structuralOnly){const payload=await searchV2Request(raw,searchRunSeq);if(isSearchActive(searchRunSeq))renderSearchV2Results(payload,raw);return;}
-  const status=await semanticPackV3Status();if(!status.available){renderSemanticPackUnavailable(raw,structural,status);return;}
+  // Pure structural navigation is already governed and must not initialise semantic resources.
+  if(structural.structuralOnly){
+    setSearchProgressPhase('Recherche dans les références…',generation);
+    const payload=await searchV2Request(raw,generation);
+    if(isSearchActive(generation)&&searchQueryDraftCanonical()===raw)renderSearchV2Results(payload,raw);
+    return;
+  }
+  const status=await semanticPackV3Status();if(!isSearchActive(generation))return;
+  if(!status.available){renderSemanticPackUnavailable(raw,structural,status);return;}
   let sem;
   if(window.LDCPLSOwnerPrototypeV15&&typeof window.LDCPLSOwnerPrototypeV15.search==='function'){
-    const meta=document.getElementById('search-meta');if(meta){meta.style.display='block';meta.innerHTML='Recherche par le sens <span class="search-mode-badge">PROTOTYPE PERSONNEL · chargement/recherche…</span>';}
-    sem=await window.LDCPLSOwnerPrototypeV15.search(structural.residual||raw,{sourceMode:'enriched',volMin:structural.volume||searchVolFilter||0,volMax:structural.volume||searchVolFilterMax||0,dateIso:structural.date||null,year:structural.date?0:(structural.year||0),stableRef:structural.ref||null,jesus:!!searchSpeakerFilter,maxResults:20});
+    if(!ownerSemanticPrepared){setSearchProgressPhase('Préparation de Par le sens…',generation);const prepared=await ensureOwnerSemanticPrepared(generation);if(!prepared)return;}
+    if(!isSearchActive(generation))return;
+    setSearchProgressPhase('Recherche des passages…',generation);
+    sem=await runOwnerSemanticInference(structural.residual||raw,{sourceMode:'enriched',volMin:structural.volume||searchVolFilter||0,volMax:structural.volume||searchVolFilterMax||0,dateIso:structural.date||null,year:structural.date?0:(structural.year||0),stableRef:structural.ref||null,jesus:!!searchSpeakerFilter,maxResults:20},generation);
+    if(sem==null)return;
   }else{
     if(!window.LDCSemanticPackRegistryV5||typeof window.LDCSemanticPackRegistryV5.search!=='function')throw new Error('SEARCH_V3_SEMANTIC_REGISTRY_NOT_BOUND');
+    setSearchProgressPhase('Recherche des passages…',generation);
     sem=await window.LDCSemanticPackRegistryV5.search(structural.residual||raw,{sourceMode:supplementMode,volMin:structural.volume||searchVolFilter||0,volMax:structural.volume||searchVolFilterMax||0,dateIso:structural.date||null,year:structural.date?0:(structural.year||0),stableRef:structural.ref||null,jesus:!!searchSpeakerFilter,maxResults:20});
   }
-  if(!isSearchActive(searchRunSeq))return;
+  if(!isSearchActive(generation)||searchQueryDraftCanonical()!==raw)return;
   renderSemanticResultsV4(sem,raw,structural);
 }
+
 function resetSearchPaging({resetOrder=false,resetLane=false}={}) {
   searchPage=1;searchMetadataPage=1;
   if(resetLane){searchResultLane=null;searchPartialExpanded=false;}
@@ -8083,16 +8158,27 @@ function renderVolFilterRow() {
 
 function searchScrollElement(){return document.getElementById('search-scroll');}
 function syncSearchQueryUI(rawQuery){
-  const q=String(rawQuery==null?(document.getElementById('search-input')?.value||''):rawQuery).trim();
+  const q=canonicalSearchQuery(rawQuery==null?searchQueryDraftValue():rawQuery,searchIntentMode);
   const clear=document.getElementById('search-clear'),date=document.querySelector('.date-nav-entry'),submit=document.getElementById('search-submit');
   if(clear)clear.style.display=q?'':'none';
   if(date)date.style.display=q?'none':'';
-  if(submit)submit.disabled=!q;
+  if(submit&&!searchBusyGeneration)submit.disabled=!q;
   return q;
 }
 function canRerunCommittedSearch(){
-  const input=(document.getElementById('search-input')?.value||'').trim();
+  const input=searchQueryDraftCanonical();
   return !searchQueryPending&&!!searchCommittedQuery&&input===searchCommittedQuery;
+}
+function setSearchProgressPhase(label,generation){
+  if(generation!=null&&!isSearchActive(generation))return;
+  const el=document.getElementById('search-progress');if(!el)return;
+  el.classList.add('active');el.innerHTML=`<span>${escapeHtml(String(label||'Recherche en cours…'))}</span><span class="search-progress-dots" aria-hidden="true"><span></span><span></span><span></span></span>`;
+}
+function setSearchBusy(active,{generation=null,phase='Recherche en cours…'}={}){
+  const form=document.querySelector('.search-submit-form'),submit=document.getElementById('search-submit'),progress=document.getElementById('search-progress');
+  if(active){searchBusyGeneration=generation;if(form)form.setAttribute('aria-busy','true');if(submit){submit.disabled=true;submit.textContent='Recherche en cours…';}setSearchProgressPhase(phase,generation);return;}
+  if(generation!=null&&searchBusyGeneration!=null&&generation!==searchBusyGeneration)return;
+  searchBusyGeneration=null;if(form)form.removeAttribute('aria-busy');if(submit)submit.textContent='Rechercher';if(progress){progress.classList.remove('active');progress.textContent='';}syncSearchQueryUI();
 }
 function rerunCommittedSearchIfReady(){
   if(!canRerunCommittedSearch())return false;
@@ -8126,9 +8212,12 @@ function revealSearchOutput(){
 }
 function resetSearchScrollToTop(){const sc=searchScrollElement();if(sc)sc.scrollTop=0;}
 
-function onSearchInput() {
+function onSearchInput(mode=searchIntentMode) {
+  if(mode!==searchIntentMode)return;
   cancelActiveSearch('input-mutated');
-  const val = document.getElementById('search-input').value;
+  const active=activeSearchQueryControl(),other=inactiveSearchQueryControl(),val=active?active.value:'';
+  if(other)other.value=canonicalSearchQuery(val,searchIntentMode);
+  if(searchIntentMode==='meaning')autoGrowSemanticSearchInput();
   const q=syncSearchQueryUI(val);
   resetSearchPaging({resetOrder:true,resetLane:true});searchLastPayload=null;renderSearchIntentMode();renderSearchOrderRow();renderSearchLaneRow(null);
   if (!q) { clearSearch(); return; }
@@ -8141,7 +8230,7 @@ async function clearSearch() {
   cancelActiveSearch('cleared');
   searchQueryPending=false;searchCommittedQuery='';
   resetSearchPaging({resetOrder:true,resetLane:true});searchLastPayload=null;renderSearchIntentMode();renderSearchOrderRow();renderSearchLaneRow(null);
-  document.getElementById('search-input').value = '';
+  const word=document.getElementById('search-input'),meaning=document.getElementById('search-input-meaning');if(word)word.value='';if(meaning){meaning.value='';meaning.style.height='';meaning.style.overflowY='hidden';}
   syncSearchQueryUI('');
   document.getElementById('search-meta').style.display = 'none';
   document.getElementById('trust-notice').style.display = 'none';
@@ -8173,7 +8262,7 @@ async function getRecentSearches() {
 }
 
 async function saveRecentSearch(query) {
-  const q = query.trim();
+  const q = canonicalSearchQuery(query,searchIntentMode);
   if (!q) return;
   let list = await getRecentSearches();
   list = list.filter(x => x.toLowerCase() !== q.toLowerCase());
@@ -8216,7 +8305,7 @@ async function buildSuggestionsHTML() {
 
 function searchFor(term) {
   resetSearchPaging({resetOrder:true,resetLane:true});searchLastPayload=null;
-  document.getElementById('search-input').value = term;
+  setSearchQueryDraft(term,{mode:searchIntentMode,syncOther:true});
   syncSearchQueryUI(term);
   runSearch({commitSource:'suggestion'});
 }
@@ -8326,6 +8415,7 @@ function selectedSearchVolumes() {
 
 function cancelActiveSearch(reason) {
   searchRunSeq += 1;
+  setSearchBusy(false);
   if (activeSearchAbort) {
     try { activeSearchAbort.abort(new DOMException(reason || 'Search cancelled','AbortError')); } catch(e) {}
     activeSearchAbort = null;
@@ -8494,38 +8584,37 @@ function renderSearchV2Results(payload, raw) {
 }
 
 async function runSearch({navigation='reveal-output',commitSource='programmatic'}={}) {
-  const raw=syncSearchQueryUI(document.getElementById('search-input').value);
+  const raw=syncSearchQueryUI(searchQueryDraftValue());
   if(!raw){cancelActiveSearch('empty');return;}
   const normCheck=normalise(raw).replace(/\s+/g,'');
   if(!normCheck){cancelActiveSearch('empty-normalised');const meta=document.getElementById('search-meta');meta.style.display='block';meta.textContent='Saisissez un mot ou une référence.';document.getElementById('search-results').innerHTML='';if(navigation==='reveal-output')revealSearchOutput();return;}
+  if(searchBusyGeneration&&isSearchActive(searchBusyGeneration)&&!searchQueryPending&&raw===searchCommittedQuery)return;
   searchQueryPending=false;searchCommittedQuery=raw;
   saveRecentSearch(raw).catch(()=>{});
   cancelActiveSearch('new-search');const generation=searchRunSeq;
-  const metaEl=document.getElementById('search-meta');metaEl.style.display='block';
-  if(searchIntentMode==='meaning'&&window.LDCPLSOwnerPrototypeV15){
-    metaEl.innerHTML='Recherche par le sens <span class="search-mode-badge">PROTOTYPE PERSONNEL · chargement/recherche…</span>';
-  }else{
-    metaEl.textContent='Recherche…';
-  }
-  // Make the live progress state visible before any cold semantic initialisation
-  // can occupy the main thread. This changes no retrieval/ranking logic.
+  const metaEl=document.getElementById('search-meta');metaEl.style.display='none';metaEl.textContent='';document.getElementById('trust-notice').style.display='none';document.getElementById('search-results').innerHTML='';
+  const initialStructural=searchIntentMode==='meaning'?searchSemanticV3ParseStructural(raw):null;
+  const initialPhase=searchIntentMode==='meaning'?(initialStructural&&initialStructural.structuralOnly?'Recherche dans les références…':(ownerSemanticPrepared?'Recherche des passages…':'Préparation de Par le sens…')):'Recherche en cours…';
+  setSearchBusy(true,{generation,phase:initialPhase});
   if(navigation==='reveal-output')revealSearchOutput();
   try{
     if(searchIntentMode==='meaning'){
       await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
       if(!isSearchActive(generation))return;
-      await runSemanticSearchV3(raw);
-      if(navigation==='reveal-output')revealSearchOutput();
+      await runSemanticSearchV3(raw,generation);
+      if(navigation==='reveal-output'&&isSearchActive(generation))revealSearchOutput();
       return;
     }
     const payload=await searchV2Request(raw,generation);
-    if(!isSearchActive(generation)||document.getElementById('search-input').value.trim()!==raw)return;
+    if(!isSearchActive(generation)||searchQueryDraftCanonical()!==raw)return;
     renderSearchV2Results(payload,raw);
     if(navigation==='reveal-output')revealSearchOutput();
   }catch(e){
     if(!isSearchActive(generation))return;
-    console.error('LDC SEARCH-V2 failed',e);metaEl.textContent='Recherche indisponible pour le moment.';document.getElementById('trust-notice').style.display='none';document.getElementById('search-results').innerHTML='<div class="empty-state"><i class="ti ti-alert-triangle"></i>Le moteur de recherche n’a pas pu être vérifié. Aucun résultat partiel n’est affiché.</div>';
+    console.error('LDC search failed',e);metaEl.style.display='block';metaEl.textContent='Recherche indisponible pour le moment.';document.getElementById('trust-notice').style.display='none';document.getElementById('search-results').innerHTML='<div class="empty-state"><i class="ti ti-alert-triangle"></i>Le moteur de recherche n’a pas pu être vérifié. Aucun résultat partiel n’est affiché.</div>';
     if(navigation==='reveal-output')revealSearchOutput();
+  }finally{
+    if(isSearchActive(generation))setSearchBusy(false,{generation});
   }
 }
 
@@ -8877,7 +8966,7 @@ async function goToEntry(vol,entryId,paraId){if(paraId)pendingParaId=paraId;retu
 ═══════════════════════════════════════════════════════ */
 const DEEP_LINK_VIEWS = Object.freeze(['tome','entry','date','paragraph','search','collection','related']);
 function validDeepId(v){return typeof v==='string' && v.length>0 && v.length<=120 && /^[A-Za-z0-9._:-]+$/.test(v);}
-function validDeepQuery(v){return typeof v==='string' && v.length>0 && v.length<=240 && !/[\u0000-\u001F\u007F]/.test(v);}
+function validDeepQuery(v,intent='words'){if(typeof v!=='string'||v.length===0||v.length>2048||/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/.test(v))return false;const q=canonicalSearchQuery(v,intent);return q.length>0&&q.length<=1024;}
 function deepBaseUrl(){const u=new URL(window.location.href);u.search='';u.hash='';return u;}
 function buildDeepLink(spec){
   const u=deepBaseUrl(), s=spec||{}, view=String(s.view||'');
@@ -8887,9 +8976,8 @@ function buildDeepLink(spec){
   if(s.entry)u.searchParams.set('entry',String(s.entry));
   if(s.para)u.searchParams.set('para',String(s.para));
   if(s.date)u.searchParams.set('date',String(s.date));
-  if(s.q)u.searchParams.set('q',String(s.q));
   if(view==='search'){
-    const intent=s.intent_mode==='meaning'?'meaning':(s.intent_mode==='words'?'words':null);if(intent)u.searchParams.set('intent',intent);
+    const intent=s.intent_mode==='meaning'?'meaning':(s.intent_mode==='words'?'words':null);const q=canonicalSearchQuery(s.q||'',intent||'words');if(q)u.searchParams.set('q',q);if(intent)u.searchParams.set('intent',intent);
     const src={aflp:'principal',additions:'complement',enriched:'enrichi'}[s.source_mode];if(src)u.searchParams.set('src',src);
     if(['book','relevance'].includes(s.order))u.searchParams.set('order',s.order);
     if(['exact','words','partial'].includes(s.lane))u.searchParams.set('lane',s.lane);
@@ -8921,8 +9009,8 @@ function parseDeepLink(raw){
     const d=u.searchParams.get('date')||'';if(!/^\d{4}-\d{2}-(?:\d{2}|00)$/.test(d))return{ok:false,error:'Date invalide'};out.date=d;
   }
   if(view==='search'){
-    const q=u.searchParams.get('q')||'';if(!validDeepQuery(q))return{ok:false,error:'Recherche invalide'};out.q=q;
     const intent=u.searchParams.get('intent');if(intent){if(!['meaning','words'].includes(intent))return{ok:false,error:'Type de recherche invalide'};out.intent_mode=intent;}
+    const q=u.searchParams.get('q')||'',mode=out.intent_mode||'words';if(!validDeepQuery(q,mode))return{ok:false,error:'Recherche invalide'};out.q=canonicalSearchQuery(q,mode);
     const src=u.searchParams.get('src');if(src){const m={principal:'aflp',complement:'additions',enrichi:'enriched'}[src];if(!m)return{ok:false,error:'Source de recherche invalide'};out.source_mode=m;}
     const order=u.searchParams.get('order');if(order){if(!['book','relevance'].includes(order))return{ok:false,error:'Ordre de recherche invalide'};out.order=order;}
     const lane=u.searchParams.get('lane');if(lane){if(!['exact','words','partial'].includes(lane))return{ok:false,error:'Catégorie de résultats invalide'};out.lane=lane;}
@@ -8957,7 +9045,7 @@ async function copyCurrentPassageLink(){
   const ok=await copyPlainText(`${formatHumanReference(currentEntry,para)}\n${url}`);showToast(ok?'Lien copié':'Copie indisponible');
 }
 async function copySearchLink(){
-  const q=(document.getElementById('search-input').value||'').trim();if(!q){showToast('Saisissez une recherche');return;}
+  const q=searchQueryDraftCanonical();if(!q){showToast('Saisissez une recherche');return;}if(!validDeepQuery(q,searchIntentMode)){showToast('Recherche trop longue pour créer un lien');return;}
   const f=searchLastPayload&&searchLastPayload.foundation||{};const spec={view:'search',q,intent_mode:searchIntentMode,source_mode:supplementMode,volMin:searchVolFilter||null,volMax:searchVolFilter?searchVolFilterMax:null,jesus:!!searchSpeakerFilter,order:f.order||effectiveSearchOrder(),lane:f.lane||searchResultLane,partialExpanded:searchPartialExpanded,page:f.page||searchPage,metadataPage:f.metadataPage||searchMetadataPage};
   const ok=await copyPlainText(`Recherche : ${q}\n${buildDeepLink(spec)}`);showToast(ok?'Lien de recherche copié':'Copie indisponible');
 }
@@ -8980,7 +9068,7 @@ async function diagnosticsText(){
   const off=await dbGet('settings','offline_completion').catch(()=>null);
   const deploymentBase=(()=>{try{return new URL('./',window.location.href).pathname;}catch(e){return window.location.pathname.replace(/[^/]*$/,'');}})();
   const publicRef=currentEntry?`${currentEntry.stable_ref||currentEntry.id||''}`:'aucun';
-  return ['Livre du Ciel — diagnostic public',`App : ${APP_VERSION} · ${APP_BUILD}`,`SW attendu : ${SW_CACHE_VERSION}`,`SW contrôleur : ${sw}`,`Caches LDC : ${cachesOwned.join(', ')||'aucun détecté'}`,`Corpus composite : ${CORPUS_GENERATION}`,`Corpus principal : ${BACKBONE_GENERATION}`,`Lecture : ${sourceModeLabel()}`,`Backbone manifest SHA-256 : ${CORPUS_MANIFEST_SHA256}`,`Résumé des tomes : ${volumeSummary?'chargé · 36 tomes':'non chargé'}`,`Recherche : Par les mots v142 préservée · Par le sens v142.7 prototype personnel Dense96/72 + BM25 96/72 RRF60 · non qualifié production`,`Stockage IndexedDB : ${db?'ouvert':'indisponible'}`,`Hors ligne : navigator.onLine=${navigator.onLine!==false} · completion=${off?JSON.stringify(off.val??off.value??off):'non préparé'}`,`Thème : ${theme}`,`Texte : ${tl}`,`Repères : ${showReperes?'ON':'OFF'}`,`Diagnostics locaux récents : ${localDiagnosticBuffer.length}`,...localDiagnosticBuffer.slice(-5).map(x=>`Erreur locale ${x.ts} · ${x.kind||'runtime'} · ${x.name||'Erreur'}`),`Base de déploiement : ${deploymentBase}`,`Passage public courant : ${publicRef}`,`Reader A/B diagnostic : ${window.__ldcReaderOpenTraceExport?window.__ldcReaderOpenTraceExport():'indisponible'}`,`Trace navigation récente (sanitisée) : ${JSON.stringify(window.__ldcNavigationPublicDiagnosticTrace?window.__ldcNavigationPublicDiagnosticTrace():{available:false})}`].join('\n');
+  return ['Livre du Ciel — diagnostic public',`App : ${APP_VERSION} · ${APP_BUILD}`,`SW attendu : ${SW_CACHE_VERSION}`,`SW contrôleur : ${sw}`,`Caches LDC : ${cachesOwned.join(', ')||'aucun détecté'}`,`Corpus composite : ${CORPUS_GENERATION}`,`Corpus principal : ${BACKBONE_GENERATION}`,`Lecture : ${sourceModeLabel()}`,`Backbone manifest SHA-256 : ${CORPUS_MANIFEST_SHA256}`,`Résumé des tomes : ${volumeSummary?'chargé · 36 tomes':'non chargé'}`,`Recherche : Par les mots v142 préservée · Par le sens v142.9 prototype personnel Dense96/72 + BM25 96/72 RRF60 · interaction/correctness closure · non qualifié production`,`Stockage IndexedDB : ${db?'ouvert':'indisponible'}`,`Hors ligne : navigator.onLine=${navigator.onLine!==false} · completion=${off?JSON.stringify(off.val??off.value??off):'non préparé'}`,`Thème : ${theme}`,`Texte : ${tl}`,`Repères : ${showReperes?'ON':'OFF'}`,`Diagnostics locaux récents : ${localDiagnosticBuffer.length}`,...localDiagnosticBuffer.slice(-5).map(x=>`Erreur locale ${x.ts} · ${x.kind||'runtime'} · ${x.name||'Erreur'}`),`Base de déploiement : ${deploymentBase}`,`Passage public courant : ${publicRef}`,`Reader A/B diagnostic : ${window.__ldcReaderOpenTraceExport?window.__ldcReaderOpenTraceExport():'indisponible'}`,`Trace navigation récente (sanitisée) : ${JSON.stringify(window.__ldcNavigationPublicDiagnosticTrace?window.__ldcNavigationPublicDiagnosticTrace():{available:false})}`].join('\n');
 }
 async function copyDiagnostics(){const text=await diagnosticsText();const ok=await copyPlainText(text);showToast(ok?'Diagnostic copié':'Copie indisponible');return text;}
 async function routeFail(message,fallback){console.warn('LDC deep link:',message);showToast('Lien invalide ou cible introuvable');if(fallback==='search')goSearch();else if(fallback==='espace')goEspace();else goHome();return false;}
@@ -8992,7 +9080,7 @@ async function applyInitialDeepLink(){
     if(r.view==='search'){
       await goSearch();if(r.source_mode&&r.source_mode!==supplementMode)await setSupplementMode(r.source_mode,{rerender:false,silent:true});
       searchIntentMode=r.intent_mode==='meaning'?'meaning':'words';searchVolFilter=r.volMin||0;searchVolFilterMax=r.volMax||(r.volMin||0);searchSpeakerFilter=!!r.jesus;searchOrderMode=r.order||null;searchResultLane=r.lane||null;searchPartialExpanded=!!r.partialExpanded||searchResultLane==='partial';searchPage=r.page||1;searchMetadataPage=r.metadataPage||1;
-      document.getElementById('search-input').value=r.q;syncSearchQueryUI(r.q);renderSearchIntentMode();renderSearchSourceModeRow();renderSearchOrderRow();renderSpeakerFilterRow();renderVolFilterRow();await runSearch();return true;
+      setSearchQueryDraft(r.q,{mode:searchIntentMode,syncOther:true});syncSearchQueryUI(r.q);renderSearchIntentMode();renderSearchSourceModeRow();renderSearchOrderRow();renderSpeakerFilterRow();renderVolFilterRow();await runSearch();return true;
     }
     if(r.view==='date'){await openDateNav();const [y,m,d]=r.date.split('-').map(Number);dnYear=y;dnMonth=m;dnDay=d;renderDnYearStrip();renderDnMonthGrid();renderDnDayGrid();renderDnResultCard();const k=`${y}-${m}-${d}`;if(!DN_BY_YMD[k]||!DN_BY_YMD[k].length)return routeFail('date sans entrée','search');return true;}
     if(r.view==='collection'){await goCollections();const col=await dbGet('collections',r.collection).catch(()=>null);if(!col){showToast('Collection absente sur cet appareil');return true;}requestAnimationFrame(()=>{const el=document.querySelector(`.col-section[data-col-id="${r.collection}"]`);if(el)el.scrollIntoView({block:'start'});});return true;}
@@ -10403,11 +10491,11 @@ async function fetchPublishedVersion() {
   if(!res||!res.ok)throw new Error(`version HTTP ${res&&res.status}`);
   const meta=await res.json();
   const version=String(meta&&meta.app_version||'').trim();
-  if(!/^v\d+\.\d+\.\d+-R1B(?:-[A-Za-z0-9]+)*$/.test(version))throw new Error('version publiée invalide');
+  if(!/^v\d+\.\d+\.\d+(?:\.\d+)?-R1B(?:-[A-Za-z0-9]+)*$/.test(version))throw new Error('version publiée invalide');
   const explicitPublic=String(meta&&meta.public_version||'').trim();
-  const patchMatch=version.match(/^v\d+\.\d+\.(\d+)-R1B(?:-|$)/);
+  const patchMatch=version.match(/^v\d+\.\d+\.(\d+(?:\.\d+)?)-R1B(?:-|$)/);
   const derivedPublic=patchMatch?patchMatch[1]:version;
-  if(/^\d+$/.test(explicitPublic)&&patchMatch&&explicitPublic!==derivedPublic)console.warn('LDC: public_version incohérent; version dérivée utilisée',explicitPublic,derivedPublic);
+  if(/^\d+(?:\.\d+)?$/.test(explicitPublic)&&patchMatch&&explicitPublic!==derivedPublic)console.warn('LDC: public_version incohérent; version dérivée utilisée',explicitPublic,derivedPublic);
   const publicVersion=derivedPublic;
   return {version,publicVersion,meta};
 }
