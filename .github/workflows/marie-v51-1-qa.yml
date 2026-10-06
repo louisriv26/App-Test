@@ -5,7 +5,7 @@ on:
     paths:
       - '.github/marie-v51-1-qa/TRIGGER'
 permissions:
-  contents: read
+  contents: write
 jobs:
   qa:
     runs-on: ubuntu-latest
@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: {fetch-depth: 0}
+
       - name: Bind exact candidate bytes
         run: |
           set -euo pipefail
@@ -23,22 +24,60 @@ jobs:
           grep -F "const APP_VERSION = '51.1';" marie-v51-1-test/index.html
           grep -F "const VERSION = '51.1';" marie-v51-1-test/sw.js
           node --check marie-v51-1-test/sw.js
+
       - uses: actions/setup-node@v4
         with: {node-version: '22'}
+
       - name: Install browser runtimes
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium webkit
+
       - name: Serve exact candidate
         run: |
           python3 -m http.server 8131 --bind 127.0.0.1 >/tmp/marie-v51-1.log 2>&1 &
           sleep 2
           curl -fsS http://127.0.0.1:8131/marie-v51-1-test/index.html >/dev/null
-      - name: Run corrective adversarial browser challenge
-        run: NODE_PATH="$PWD/node_modules" node .github/marie-v51-1-qa/challenge.cjs
+
+      - name: Run corrective adversarial browser challenge and record result
+        shell: bash
+        run: |
+          set +e
+          NODE_PATH="$PWD/node_modules" node .github/marie-v51-1-qa/challenge.cjs 2>&1 | tee /tmp/marie-v51-1-qa.log
+          rc=${PIPESTATUS[0]}
+          set -e
+          python3 - "$rc" <<'PY'
+          import json, os, sys
+          from pathlib import Path
+          rc=int(sys.argv[1])
+          log=Path('/tmp/marie-v51-1-qa.log').read_text(errors='replace') if Path('/tmp/marie-v51-1-qa.log').exists() else ''
+          payload={
+            'status':'PASS' if rc==0 else 'FAIL',
+            'exit_code':rc,
+            'candidate':'Marie v51.1',
+            'candidate_index_blob':'2fa89f62c0cc565463a87e6b714a9c42fa526b81',
+            'candidate_sw_blob':'d6866df9dd87bf25c506b182514f6ba8e3cd1bc0',
+            'trigger_sha':os.environ.get('GITHUB_SHA'),
+            'run_id':os.environ.get('GITHUB_RUN_ID'),
+            'log_tail':log[-18000:]
+          }
+          Path('.github/marie-v51-1-qa/RESULT.json').write_text(json.dumps(payload,indent=2,ensure_ascii=False)+'\n')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/marie-v51-1-qa/RESULT.json
+          git commit -m "Record Marie v51.1 browser QA result [skip ci]" || true
+          git pull --rebase origin main
+          git push origin HEAD:main
+          exit "$rc"
+
       - name: Upload evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: marie-v51-1-browser-qa
-          path: /tmp/MARIE_v51_1_BROWSER_QA.json
-          if-no-files-found: error
+          path: |
+            /tmp/MARIE_v51_1_BROWSER_QA.json
+            .github/marie-v51-1-qa/RESULT.json
+            /tmp/marie-v51-1-qa.log
+          if-no-files-found: warn
