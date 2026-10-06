@@ -44,6 +44,7 @@ async function runEngine(bt,name){
 
   // Wide panel opens into selected option.
   await p.locator('#wnav-textsize').click(); await p.waitForSelector('#wide-textsize-panel.open');
+  await p.waitForFunction(()=>document.getElementById('wide-textsize-panel').contains(document.activeElement),null,{timeout:1500});
   x=await p.evaluate(()=>({inside:document.getElementById('wide-textsize-panel').contains(document.activeElement),active:document.activeElement?.textContent?.trim()}));
   assert(x.inside,'wide panel did not receive focus '+JSON.stringify(x));
 
