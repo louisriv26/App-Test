@@ -4,7 +4,7 @@ on:
     branches: [main]
     paths: ['.github/lettres-v216-prestage/TRIGGER']
 permissions:
-  contents: read
+  contents: write
 jobs:
   qa:
     runs-on: ubuntu-latest
@@ -248,3 +248,25 @@ jobs:
             /tmp/LETTRES_v2.16_B1_EXACT_CANDIDATE.zip
             /tmp/LETTRES_v2.16_B1_SHA256.txt
           if-no-files-found: error
+
+      - name: Publish prestage status
+        if: always()
+        shell: bash
+        run: |
+          set -u
+          cd qa_repo
+          mkdir -p qa-status
+          cat > qa-status/LETTRES_v216_PRESTAGE.txt <<EOF
+          run_id=${{ github.run_id }}
+          run_attempt=${{ github.run_attempt }}
+          job_status=${{ job.status }}
+          candidate=c79969776503e70a30bdc76c32898d3926aebfaa
+          predecessor=8c982ba69d7a4f109933212b9dba88b37397d38f
+          recorded_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          EOF
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git pull --rebase origin main
+          git add qa-status/LETTRES_v216_PRESTAGE.txt
+          git commit -m "Record Lettres v2.16 B1 prestage run ${{ github.run_id }}" || true
+          git push origin HEAD:main
