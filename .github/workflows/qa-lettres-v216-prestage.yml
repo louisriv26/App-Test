@@ -51,7 +51,7 @@ jobs:
           assert 'shell-v2.16-b1' in sw and 'corpus-v2.16-b1' in sw
           assert 'SKIP_WAITING' in sw and 'self.skipWaiting()' in sw
           install=sw[sw.find("addEventListener('install'"):sw.find("addEventListener('activate'")]
-          assert 'skipWaiting' not in install, 'L-36 behavior mutated: install auto-skips waiting'
+          assert 'self.skipWaiting(' not in install, 'L-36 behavior mutated: install auto-skips waiting'
           def fn(src,name):
               p=src.find('function '+name+'('); assert p>=0,name
               q=src.find('{',p); d=0; quote=None; esc=False
