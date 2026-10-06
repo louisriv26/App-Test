@@ -116,8 +116,8 @@ async function runEngine(bt,name){
   x=await p.evaluate(()=>({
     prevVisible:document.getElementById('reader-prev-label').textContent.trim(),
     prevAria:document.getElementById('reader-prev').getAttribute('aria-label'),
-    actVisible:document.getElementById('reader-activate-label').textContent.trim(),
-    actAria:document.getElementById('reader-btn-activate').getAttribute('aria-label')
+    actVisible:document.getElementById('activate-label').textContent.trim(),
+    actAria:document.getElementById('btn-activate').getAttribute('aria-label')
   }));
   assert(x.prevAria.startsWith(x.prevVisible),'prev Label-in-Name '+JSON.stringify(x));
   assert(x.actAria.startsWith(x.actVisible),'activate Label-in-Name '+JSON.stringify(x));
