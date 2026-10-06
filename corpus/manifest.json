@@ -1645,7 +1645,36 @@
     "exact_total_truth_cases": 20,
     "runtime_acceptance_status": "PASS_INTERNAL_REFERENCE_AND_PRODUCTION_JS_ORACLES__PHYSICAL_DEVICE_PERF_AND_NAVIGATION_OPEN",
     "perf_001": "OPEN_TARGET_DEVICE__REPRESENTATION_B_PROVISIONALLY_PREFERRED__NO_PUBLIC_DEPLOYMENT_AUTHORITY",
-    "stage2_221_current_status": "HISTORICAL_REFERENCE_EVALUATION__NOT_RECERTIFIED_FOR_STAGE2_221__CURRENT_TOPOLOGY_BINDINGS_REBUILT_SEPARATELY"
+    "stage2_221_current_status": "RECERTIFIED_FOR_STAGE2_221_2026_10_04__ALL_NONEMPTY_VISIBLE_TOKEN_STREAMS__SEMANTIC_V3_UNCHANGED_AND_FAIL_CLOSED",
+    "stage2_221_recertification_v139": {
+      "date": "2026-10-04",
+      "scope": "SEARCH_V2_1A_EXACT_VISIBLE_TOKEN_REFERENCE_METADATA_ONLY",
+      "normalizer": "NFC+SEARCH_V2_NORMALISE_V1_ALL_NONEMPTY_TOKENS",
+      "reference": {
+        "aflp": {
+          "tokens": 1466870,
+          "units": 2312,
+          "digest": "6bc37d012a23154af2d669cddb3f84078de606fadb43da3ab1dba516639a6c0f"
+        },
+        "additions": {
+          "tokens": 14333,
+          "units": 75,
+          "digest": "029c8f53c9a20cae460ff2ef8e76c82cbc50bba4aa518b357eabe1019f4c2c16"
+        },
+        "enriched": {
+          "tokens": 1480956,
+          "units": 2325,
+          "digest": "49bc61ea97e2218da594a713748da0f21beefabef4762516cdb14b4af42b1544"
+        }
+      },
+      "search_v21_topology_sha256": "9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f",
+      "search_v21_manifest_sha256": "86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996",
+      "search_v2_payloads_changed": false,
+      "search_algorithms_changed": false,
+      "devotional_text_changed": false,
+      "semantic_v3_recertification": "NOT_PERFORMED__FAIL_CLOSED",
+      "production_deployment_authority": "NONE"
+    }
   },
   "stage2_221_candidate": {
     "predecessor_zip_sha256": "21b7e284ebdd4d3c327cbc761f7ef6082bdbc9e3009627cbbfa6b68e63226c52",
@@ -1668,7 +1697,27 @@
     "runtime_audit_repair": "R2__SERVICE_WORKER_METADATA_AND_USER_STATE_PORTABILITY_REPAIR__NO_DEVOTIONAL_TEXT_MUTATION",
     "audit_repair_public_deployment": "NOT_AUTHORIZED",
     "hold_operations_excluded_historical": 23,
-    "tome1_holds_post_stage2_status": "23_OF_23_CLOSED_BY_TOME1_FINAL_R1_KEEP_CURRENT_LONG_STATE__NO_PARAGRAPH_MUTATION"
+    "tome1_holds_post_stage2_status": "23_OF_23_CLOSED_BY_TOME1_FINAL_R1_KEEP_CURRENT_LONG_STATE__NO_PARAGRAPH_MUTATION",
+    "search_v21a_exact_recertification": "PASS__V139_METADATA_RECERTIFICATION__ALL_NONEMPTY_VISIBLE_TOKEN_STREAMS",
+    "search_v21_topology_sha256": "9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f",
+    "search_v21_manifest_sha256": "86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996",
+    "search_v21_reference": {
+      "aflp": {
+        "tokens": 1466870,
+        "units": 2312,
+        "digest": "6bc37d012a23154af2d669cddb3f84078de606fadb43da3ab1dba516639a6c0f"
+      },
+      "additions": {
+        "tokens": 14333,
+        "units": 75,
+        "digest": "029c8f53c9a20cae460ff2ef8e76c82cbc50bba4aa518b357eabe1019f4c2c16"
+      },
+      "enriched": {
+        "tokens": 1480956,
+        "units": 2325,
+        "digest": "49bc61ea97e2218da594a713748da0f21beefabef4762516cdb14b4af42b1544"
+      }
+    }
   },
   "tome1_finalization_r1": {
     "status": "FINAL__USER_APPROVED_RECENSION_POLICY_APPLIED__23_OF_23_CLOSED_KEEP_CURRENT_LONG_STATE",

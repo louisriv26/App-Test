@@ -1,9 +1,9 @@
 'use strict';
 importScripts('./search_engine_v2.js','./search_exact_v21.js','./search_foundation_v21b.js','./search_near_v22.js');
-const EXPECTED_PREDECESSOR='5e3896468c6d822760fcd555c59e0042d3ed217ee7f389e8b2ab7a60d2b7d6dd';
-const EXPECTED_MANIFEST_SHA256='295c5361c70a8d150985cee888e96a7bee8bd46c4d5197b4f3c1c6996d8dafbd';
-const EXPECTED_V21_MANIFEST_SHA256='a656c6b39dd5a6e4ba5649aaf1dc2a32516009c87ec38422bc1a6472a67baec4';
-const CV='LDC-V74-FAST1-CERTIFIED-MUTATION';
+const EXPECTED_PREDECESSOR='295c5361c70a8d150985cee888e96a7bee8bd46c4d5197b4f3c1c6996d8dafbd';
+const EXPECTED_MANIFEST_SHA256='e87da88a709a1b81f6e76e1afe119a8ad946df602977a88c45c8b0d6e35dc250';
+const EXPECTED_V21_MANIFEST_SHA256='86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996';
+const CV='LDC-V139-STAGE2-221-SEARCH-V21A-RECERT';
 let enginePromise=null;
 function hex(buf){return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');}
 async function sha256(bytes){return hex(await crypto.subtle.digest('SHA-256',bytes));}

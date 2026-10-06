@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.125-R1B-HELP-TYPOGRAPHY-R1",
+  "app_version": "v2.19.142.2-R1B-PLS-OWNER-PROTOTYPE",
   "asset_count": 204,
   "assets": [
     {
@@ -373,9 +373,9 @@
       "sha256": "86bba85833289220cb6d475a86f5efd455c0e4eb5b58b904b0f1cbea6666fead"
     },
     {
-      "bytes": 82371,
+      "bytes": 84428,
       "path": "corpus/manifest.json",
-      "sha256": "d1e761c7e6cb046afe092abde992fffa18369f6192b7cae47b0194fbd583c3fb"
+      "sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b"
     },
     {
       "bytes": 908179,
@@ -558,14 +558,14 @@
       "sha256": "e4f72408be0d8d2766fca21ec8dcb6120690eab1dd53ab77f3098202fa0f90f4"
     },
     {
-      "bytes": 4872,
+      "bytes": 4958,
       "path": "corpus/search_v21_manifest.json",
-      "sha256": "09e0dd47cab26c0409d598b27b95857c9e1eedaf72467e558403dcb7f30a61a8"
+      "sha256": "86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996"
     },
     {
-      "bytes": 1480810,
+      "bytes": 1480896,
       "path": "corpus/search_v21_topology.json",
-      "sha256": "fc4684110a83493128839e0a139982457be2e139f3ecae3fbd5ac0d63c1b25f1"
+      "sha256": "9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f"
     },
     {
       "bytes": 13417678,
@@ -1025,9 +1025,9 @@
   ],
   "authorized_runtime_ledger_sha256": "f77fb79ab016c933d6b7cfcb830b2db52fd4f42e03d032988c5ac50c2a38cd35",
   "content_binding_schema": "ldc-offline-content-binding-v2",
-  "content_binding_sha256": "50f9e009bc4b4abe73f0cc114d04e3e7443c1d176db81fa4e33b8b24dffd0ee7",
+  "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
   "corpus_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
-  "corpus_manifest_sha256": "d1e761c7e6cb046afe092abde992fffa18369f6192b7cae47b0194fbd583c3fb",
+  "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
   "families": {
     "date_id_reconciliation": 1,
     "display": 37,
@@ -1048,9 +1048,36 @@
     "volume": 36
   },
   "fast_mode_authority_sha256": "09590abe803b99dadf696fbecd64fb88b4fee9a05b38280549b4abcb920e0c78",
+  "help_typography_v125": {
+    "classification": "BOUNDED_HELP_DOCUMENTATION_TYPOGRAPHY_SCALING",
+    "corpus_assets_changed": false,
+    "help_body_px": {
+      "large": 17,
+      "normal": 14,
+      "small": 13,
+      "xlarge": 20
+    },
+    "help_chip_curve_changed": false,
+    "help_tip_px": {
+      "large": 16,
+      "normal": 13,
+      "small": 12,
+      "xlarge": 19
+    },
+    "help_title_px": {
+      "large": 20,
+      "normal": 16,
+      "small": 15,
+      "xlarge": 23
+    },
+    "physical_device_retest_required": true,
+    "predecessor_app_version": "v2.19.124-R1B-PROVENANCE-R12-INTEGRITY-R1",
+    "reader_typography_changed": false,
+    "search_v2_payloads_changed": false
+  },
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.125-R1B-help-typography-r1",
+  "page_worker_revision": "ldc-v2.19.142.2-R1B-pls-owner-prototype",
   "post_r6_date_id_a2_fixed_point": {
     "a2_sha256": "dd034a4d4bb329254818c3e62fd629c9b64c90f9d4bd533de9f6ed99247cb1d8",
     "date_id_sha256": "ed5bf462c47b8fb5a41f7c81591257d6e99f94bae08628aa27e5f7d667020c2a",
@@ -1064,7 +1091,54 @@
   "predecessor_of_v72_zip_sha256": "ed925239f570293b54a4565a2666dc50ac71e43aa149b3567d8a55364e550d8c",
   "predecessor_of_v73_zip_sha256": "825e08ea96a8cf6a245cd56c47e30f3eb4a04bb838fc2e4d3940f8bd2f3f974c",
   "predecessor_semantic_authority_sha256": "d1a7450adf36368cc8609e21ccde3c51e0b3c90dc4f3c3305534cb40104d56f4",
-  "rebuild_status": "V124_PROVENANCE_R12_INTEGRITY_R1__CURRENT_DERIVED_METADATA_REPAIRED__DEVOTIONAL_TEXT_SEARCH_SPEAKER_DISPLAY_FLOW_USER_STATE_SEMANTICS_UNCHANGED__PUBLIC_RELEASE_NOT_AUTHORIZED",
+  "provenance_r12_integration": {
+    "devotional_text_mutations": 0,
+    "notice_authority_sha256": "70cbb93c7772e9f36c3e27f07996caebdfe481898a281688aba3a8b885f9524f",
+    "predecessor_app_version": "v2.19.122-R1B-TOME1-FINAL-R2",
+    "predecessor_zip_sha256": "684188fa7fd4ae4c7188fcf5eb3e775a9f4ae4b58406d53ebf303b4025ea92dd",
+    "search_v2_payload_mutations": 0,
+    "supplement_reader_provenance_strings_changed": 76
+  },
+  "provenance_r12_integrity_repair": {
+    "corpus_manifest_sha256": "d1e761c7e6cb046afe092abde992fffa18369f6192b7cae47b0194fbd583c3fb",
+    "predecessor_app_version": "v2.19.123-R1B-PROVENANCE-R12",
+    "predecessor_zip_sha256": "091bbec3c5d917c171626fb12d0d3c1d2824c55d877d3e92a90c94c61cc98bab",
+    "repairs": [
+      "SUPPLEMENT_MANIFEST_SUPPLEMENT_SPEAKERS_BYTES_SHA",
+      "OFFLINE_MANIFEST_TOTAL_BYTES"
+    ],
+    "search_v2_manifest_sha256": "e87da88a709a1b81f6e76e1afe119a8ad946df602977a88c45c8b0d6e35dc250",
+    "semantic_mutations": 0,
+    "supplement_manifest_sha256": "f439aa0045b04a1d5ed1d8dcf07288db645184001b6c28e5a6d6f690117d0187"
+  },
+  "provenance_ux_v126": {
+    "content_assets_changed": false,
+    "corpus_assets_changed": false,
+    "internal_qa_status": "PASS_WITH_LOCAL_RENDERED_BROWSER_BLOCKED_BY_ADMINISTRATOR__EXTERNAL_HOSTED_PWA_PHYSICAL_GATES_OPEN",
+    "offline_content_binding_changed": false,
+    "predecessor_app_version": "v2.19.125-R1B-HELP-TYPOGRAPHY-R1",
+    "predecessor_zip_sha256": "85cda08f57c04fd7d979ed6e1c0d2dcf9dcdc082282bc3e79385ff4ea5faa714",
+    "public_release_authorized": false,
+    "search_assets_changed": false,
+    "shell_revision_changed_for_update_delivery": true
+  },
+  "provenance_ux_v126_r2_integrity_repair": {
+    "classification": "RELEASE_METADATA_INTEGRITY_REPAIR_ONLY",
+    "corpus_assets_changed": false,
+    "defects_repaired": [
+      "VERSION_JSON_CURRENT_OFFLINE_MANIFEST_SHA256_STALE_V125",
+      "VERSION_JSON_TOP_LEVEL_PACKAGE_PREDECESSOR_STALE_V124"
+    ],
+    "public_release_authorized": false,
+    "rejected_predecessor_app_version": "v2.19.126-R1B-PROVENANCE-UX-R1",
+    "rejected_predecessor_zip_sha256": "528a70ffee9b8d9db3497b073ff7403ba72830f98f09ab435923b88219c8df21",
+    "search_assets_changed": false,
+    "service_worker_algorithm_changed": false,
+    "shell_revision_changed_for_update_delivery": true,
+    "user_state_schema_changed": false,
+    "ux_logic_changed": false
+  },
+  "rebuild_status": "V142_R15_EXPLICIT_SEARCH_SUBMISSION__V141_ADAPTIVE_SINGLE_SCROLL_REVEAL_PRESERVED__PERSISTENT_CONTENT_BINDING_UNCHANGED__SEARCH_V21A_PAYLOADS_ALGORITHMS_UNCHANGED__SEMANTIC_V3_FAIL_CLOSED__PHYSICAL_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED",
   "retention_contract": {
     "clear_policy": "CURRENT_SCOPE_ONLY_FOR_SHARED_LEGACY_CACHES",
     "copy_migration_required": false,
@@ -1075,78 +1149,176 @@
     "shell_runtime_caches": "APP_VERSIONED"
   },
   "schema": "ldc-offline-manifest-v3",
-  "scope": "v124 R12 metadata-integrity successor of v123: current supplement-manifest speaker binding and offline total-byte metadata repaired; R12 presentation and all textual/search/user-state semantics preserved.",
+  "scope": "v142 explicit Search-submission successor of exact frozen v141. Preserves the v141 one-vertical-scroll-owner Search body and adaptive complete-first-result reveal. Adds a stable always-visible Rechercher action, a narrowly scoped native Search form, explicit pending/committed query state, guarded filter reruns and revised Search Help. The 204 persistent content assets and content binding are unchanged; corpus/Search-V2.1A payloads and algorithms, provenance corpus wording, user-state schema and Semantic V3 fail-closed qualification state are unchanged.",
   "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
   "semantic_vector_search_included": false,
   "semantic_vector_search_note": "R18D Search-V3 engineering evidence is preserved externally and v113 Search-V3 runtime modules remain byte-identical. No neural model, vectors or qualified semantic pack are bundled. Par le sens remains fail-closed.",
+  "stage2_221_candidate": {
+    "implementation_authority_sha256": "f77fb79ab016c933d6b7cfcb830b2db52fd4f42e03d032988c5ac50c2a38cd35",
+    "migration_fixed_point_sha256": "24addfee378ad8fe08c5491e886baa1ae0df79089776b4fe7baeb67695e3ee65",
+    "semantic_v3_pack": "NOT_RECERTIFIED__FAIL_CLOSED",
+    "status": "V139_SEARCH_V21A_CURRENT_STAGE2_221_REFERENCE_RECERTIFIED__RUNTIME_EXACT_SEARCH_GATE_REOPENED",
+    "search_v21_topology_sha256": "9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f",
+    "search_v21_manifest_sha256": "86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996",
+    "reference": {
+      "aflp": {
+        "tokens": 1466870,
+        "units": 2312,
+        "digest": "6bc37d012a23154af2d669cddb3f84078de606fadb43da3ab1dba516639a6c0f"
+      },
+      "additions": {
+        "tokens": 14333,
+        "units": 75,
+        "digest": "029c8f53c9a20cae460ff2ef8e76c82cbc50bba4aa518b357eabe1019f4c2c16"
+      },
+      "enriched": {
+        "tokens": 1480956,
+        "units": 2325,
+        "digest": "49bc61ea97e2218da594a713748da0f21beefabef4762516cdb14b4af42b1544"
+      }
+    }
+  },
   "storage_cache_name_contract": "ldc-le-livre-du-ciel-offline-persistent-v3-<fnv1a32(service-worker-scope)>",
   "storage_schema": "ldc-offline-storage-v3",
   "terminal_mutation_ledger_sha256": "f77fb79ab016c933d6b7cfcb830b2db52fd4f42e03d032988c5ac50c2a38cd35",
-  "total_bytes": 114480819,
-  "stage2_221_candidate": {
-    "status": "R2_OFFLINE_MANIFEST_REBOUND__RUNTIME_REPAIR_ONLY",
-    "implementation_authority_sha256": "f77fb79ab016c933d6b7cfcb830b2db52fd4f42e03d032988c5ac50c2a38cd35",
-    "semantic_v3_pack": "NOT_RECERTIFIED__FAIL_CLOSED",
-    "migration_fixed_point_sha256": "24addfee378ad8fe08c5491e886baa1ae0df79089776b4fe7baeb67695e3ee65"
-  },
   "tome1_finalization_r1": {
+    "operations_closed": 23,
+    "paragraph_text_mutations": 0,
     "policy_id": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
     "variant_ledger": "corpus/tome1_recension_final_r1.json",
-    "variant_ledger_sha256": "39448df2ae5b9a2b0d4bdcee466afaf04ac162cf32cc095dc275492035eb0524",
-    "operations_closed": 23,
-    "paragraph_text_mutations": 0
+    "variant_ledger_sha256": "39448df2ae5b9a2b0d4bdcee466afaf04ac162cf32cc095dc275492035eb0524"
   },
   "tome1_finalization_release_integrity_r2": {
-    "predecessor_candidate_sha256": "d5341cd079a6c50bee148c497108a40f924a70f50f840702884a457fb88abe4b",
-    "volume_summary_sha256": "8d422e692c8d4c7d230bd270ec8f9d455e1949043ebe5bed75f5746b3d40b60a",
+    "current_tome1_holds": 0,
     "paragraph_text_mutations": 0,
-    "current_tome1_holds": 0
+    "predecessor_candidate_sha256": "d5341cd079a6c50bee148c497108a40f924a70f50f840702884a457fb88abe4b",
+    "volume_summary_sha256": "8d422e692c8d4c7d230bd270ec8f9d455e1949043ebe5bed75f5746b3d40b60a"
   },
-  "provenance_r12_integration": {
-    "predecessor_app_version": "v2.19.122-R1B-TOME1-FINAL-R2",
-    "predecessor_zip_sha256": "684188fa7fd4ae4c7188fcf5eb3e775a9f4ae4b58406d53ebf303b4025ea92dd",
-    "notice_authority_sha256": "70cbb93c7772e9f36c3e27f07996caebdfe481898a281688aba3a8b885f9524f",
-    "supplement_reader_provenance_strings_changed": 76,
-    "devotional_text_mutations": 0,
-    "search_v2_payload_mutations": 0
-  },
-  "provenance_r12_integrity_repair": {
-    "predecessor_app_version": "v2.19.123-R1B-PROVENANCE-R12",
-    "predecessor_zip_sha256": "091bbec3c5d917c171626fb12d0d3c1d2824c55d877d3e92a90c94c61cc98bab",
-    "repairs": [
-      "SUPPLEMENT_MANIFEST_SUPPLEMENT_SPEAKERS_BYTES_SHA",
-      "OFFLINE_MANIFEST_TOTAL_BYTES"
-    ],
-    "supplement_manifest_sha256": "f439aa0045b04a1d5ed1d8dcf07288db645184001b6c28e5a6d6f690117d0187",
-    "corpus_manifest_sha256": "d1e761c7e6cb046afe092abde992fffa18369f6192b7cae47b0194fbd583c3fb",
-    "search_v2_manifest_sha256": "e87da88a709a1b81f6e76e1afe119a8ad946df602977a88c45c8b0d6e35dc250",
-    "semantic_mutations": 0
-  },
-  "help_typography_v125": {
-    "classification": "BOUNDED_HELP_DOCUMENTATION_TYPOGRAPHY_SCALING",
-    "predecessor_app_version": "v2.19.124-R1B-PROVENANCE-R12-INTEGRITY-R1",
+  "total_bytes": 114483048,
+  "provenance_ux_v126_r3_navigation_repair": {
+    "classification": "BOUNDED_PROVENANCE_NAVIGATION_STATE_RESTORATION_REPAIR",
+    "date": "2026-09-27",
+    "predecessor_app_version": "v2.19.126-R1B-PROVENANCE-UX-R2",
+    "predecessor_zip_sha256": "30623681dd70e804e342db1f7b2659a03d904a5bdb2b412dead2cf55008fab7d",
+    "physical_defect": "HELP_TO_PROVENANCE_COULD_OPEN_MID_SCROLL__PROVENANCE_RETURN_COULD_RESET_HELP_TO_TOP",
+    "repair_contract": "CAPTURE_RAW_AND_VISUAL_ANCHOR__ACTIVATE__FOCUS__RESTORE__MULTIFRAME_VERIFY__ONE_BOUNDED_LATE_CORRECTION__CANCEL_ON_USER_INTERACTION",
+    "reader_info_parallel_path_hardened": true,
     "corpus_assets_changed": false,
-    "search_v2_payloads_changed": false,
-    "reader_typography_changed": false,
-    "help_body_px": {
-      "small": 13,
-      "normal": 14,
-      "large": 17,
-      "xlarge": 20
-    },
-    "help_tip_px": {
-      "small": 12,
-      "normal": 13,
-      "large": 16,
-      "xlarge": 19
-    },
-    "help_title_px": {
-      "small": 15,
-      "normal": 16,
-      "large": 20,
-      "xlarge": 23
-    },
-    "help_chip_curve_changed": false,
-    "physical_device_retest_required": true
+    "search_assets_changed": false,
+    "provenance_wording_changed": false,
+    "user_state_schema_changed": false,
+    "public_release_authorized": false,
+    "physical_pwa_iphone_ipad_retest_required": true
+  },
+  "provenance_ux_v126_r4_prepaint_repair": {
+    "classification": "BOUNDED_PROVENANCE_NAVIGATION_PREPAINT_REPAIR",
+    "date": "2026-09-27",
+    "predecessor_app_version": "v2.19.126-R1B-PROVENANCE-UX-R3",
+    "predecessor_zip_sha256": "f4163f589ba64c72aeb2026877250e1aefefecd95b4a5d21b9e8d13f42e11f44",
+    "trigger": "INDEPENDENT_POST_BUILD_REAUDIT__ACTUAL_R3_DOM_SHOWED_STALE_PROVENANCE_SCROLL_FOR_TWO_ANIMATION_FRAMES_BEFORE_VERIFIED_ZERO",
+    "root_cause": "R3_VERIFIED_TRANSACTION_DELAYED_FIRST_POSITION_ASSIGNMENT_UNTIL_AFTER_FOCUS_AND_LAYOUT_FRAMES__ALLOWING_PREPAINT_STALE_OFFSET_VISIBILITY",
+    "repair_contract": "IMMEDIATE_BEST_EFFORT_POSITIONING_IN_SAME_ACTIVATION_TASK__THEN_FOCUS_LAYOUT_MULTIFRAME_VERIFICATION__80MS_BOUNDED_LATE_CORRECTION__USER_INTERACTION_CANCELLATION_PRESERVED__READER_AND_INFO_SHEET_REOPENED_PREPAINT_AT_CAPTURED_POSITIONS",
+    "corpus_assets_changed": false,
+    "search_assets_changed": false,
+    "provenance_wording_changed": false,
+    "user_state_semantics_changed": false,
+    "public_release_authorized": false,
+    "reader_info_route": "FLUSH_WHILE_INFO_SHEET_STILL_COVERS_READER__CLOSE_SHEET_AND_SHOW_PROVENANCE_SAME_CONTINUATION__RETURN_REACTIVATES_READER_AND_REOPENS_INFO_SHEET_IN_SAME_TASK__RAW_AND_VISUAL_SHEET_POSITION_VERIFIED"
+  },
+  "ux_access_v127_r1": {
+    "classification": "BOUNDED_UX_ACCESSIBILITY_AND_RELEASE_IDENTITY_SUCCESSOR",
+    "predecessor_app_version": "v2.19.126-R1B-PROVENANCE-UX-R4",
+    "predecessor_zip_sha256": "2d4e86203354b70f9b3e57a077ca6231435b1882592b67514d2be0468a904659",
+    "release_integrity_trigger": "R4 index.html expected ldc-v2.19.126-R1B-provenance-ux-r2 while bundled sw.js reported ldc-v2.19.126-R1B-provenance-ux-r4; v127 binds page and worker to one new revision.",
+    "closed_findings": [
+      "NEW-LDC-RELEASE-ID-01",
+      "D-03",
+      "D-06",
+      "D-09",
+      "NEW-LDC-MODAL-FOCUS-01"
+    ],
+    "text_size_contract": "ONE_PERSISTENT_GLOBAL_PETIT_NORMAL_GRAND_TRES_GRAND_SETTING__DIRECT_ACCESS_ON_SUBSTANTIVE_NON_READER_SCREENS__READER_RETAINS_MORE_MENU_ACCESS__NO_PER_SCREEN_PREFERENCE__NO_AUTOMATIC_SWITCHING",
+    "position_contract": "TEXT_SIZE_REFLOW_RESTORES_ACTIVE_SCREEN_SEMANTIC_OR_VISUAL_SCROLL_CONTEXT__READER_RETAINS_SEMANTIC_ANCHOR_RESTORE",
+    "protected_contract": "205_CORPUS_FILES__SEARCH_ASSETS_MODULES__PROVENANCE_PUBLIC_WORDING__USER_DATA_SCHEMAS__204_OFFLINE_CONTENT_ASSETS_AND_BINDING_UNCHANGED",
+    "public_release_authorized": false,
+    "physical_retest_required": true,
+    "modal_focus_contract": "SHARED_MODAL_INVOKER_CAPTURE_OCCURS_BEFORE_SHELL_INERT__SHELL_INERT_REMOVED_BEFORE_INVOKER_FOCUS_RESTORE__SIZE_AND_OTHER_SHARED_DIALOGS_RETURN_FOCUS_TO_ORIGINATING_CONTROL"
+  },
+  "search_scroll_v140_r13": {
+    "classification": "P0_BOUNDED_SEARCH_PRESENTATION_NAVIGATION_REPAIR",
+    "date": "2026-10-05",
+    "predecessor_app_version": "v2.19.139-R1B-UX-ACCESS-R12",
+    "predecessor_package_sha256": "3000b8e7692805a7116ac025a8a056b06db2dc6bc6fc12c7acba475bc4e29653",
+    "predecessor_production_tree": "b9aaaa762034d9a21398bc8c242c802f59062492",
+    "predecessor_production_commit": "e82ef8d5d64a7e89b65436924b04883c96c7dadb",
+    "physical_trigger": "OWNER_IPHONE_AND_IPAD_PHYSICAL_TEST__SEARCH_RESULTS_SQUEEZED_TO_BOTTOM_AND_NOT_PRACTICALLY_SCROLLABLE",
+    "root_cause": "SEARCH_CONTROLS_ARE_NONSHRINKING_FLEX_SIBLINGS_WHILE_ONLY_SEARCH_RESULTS_OWNS_VERTICAL_SCROLL_AND_MIN_HEIGHT_ZERO__RESULT_VIEWPORT_CAN_COLLAPSE_TOWARD_ZERO; PROGRAMMATIC_SEARCHFOR_PATH_ALSO_FAILED_TO_HIDE_DATE_NAVIGATION",
+    "repair_contract": [
+      "ONE_VERTICAL_SEARCH_BODY_SCROLL_OWNER_BELOW_EXISTING_TOP_BAR",
+      "SEARCH_RESULTS_BECOMES_NORMAL_CONTENT_NOT_NESTED_VERTICAL_SCROLLER",
+      "NONEMPTY_QUERY_CENTRALLY_HIDES_DATE_NAVIGATION_FOR_TYPED_SUGGESTED_RECENT_DEEPLINK_AND_RESTORED_SEARCHES",
+      "FRESH_SEARCH_FILTER_AND_PAGINATION_RUNS_REVEAL_OUTPUT_STATUS_AND_FIRST_RESULTS_WITHOUT_FOCUS_THEFT",
+      "READER_RETURN_SUPPRESSES_AUTO_REVEAL_AND_RESTORES_STABLE_DATA_RESULT_KEY_ANCHOR",
+      "TEXT_SIZE_REFLOW_USES_SAME_STABLE_RESULT_ANCHOR"
+    ],
+    "protected_surfaces": [
+      "ALL_205_CORPUS_FILES_UNCHANGED",
+      "SEARCH_V2_BM25_AND_V21A_PAYLOADS_UNCHANGED",
+      "SEARCH_MATCHING_RANKING_EXACT_FOUNDATION_NEAR_ALGORITHMS_UNCHANGED",
+      "PROVENANCE_PUBLIC_WORDING_UNCHANGED",
+      "USER_STATE_SCHEMA_UNCHANGED",
+      "204_PERSISTENT_OFFLINE_ASSETS_AND_CONTENT_BINDING_UNCHANGED",
+      "SEMANTIC_V3_REMAINS_UNRELEASED_NOT_QUALIFIED_FAIL_CLOSED"
+    ],
+    "machine_gate": "SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_GATE_RESULT",
+    "physical_iphone_gate": "OPEN",
+    "physical_ipad_gate": "OPEN",
+    "production_deployment_authority": "NONE",
+    "candidate_status": "FROZEN_SUPERSEDED_BEFORE_PHYSICAL_TEST",
+    "exact_candidate_tree": "fa5d57065f328351ae4d7c9fa75c50cd27fadb70",
+    "exact_candidate_package_sha256": "a158c24b889fedf7ea71193668b99adadbf3752004bbc5e579772dfb1ab2eb6c",
+    "superseded_by": "v2.19.141-R1B-UX-ACCESS-R14",
+    "superseded_reason": "POST_FREEZE_BLIND_LAYOUT_CHALLENGE_FIRST_COMPLETE_RESULT_VISIBILITY_FAILED_IN_3_OF_36_EXTREME_SHORT_VIEWPORT_LARGE_XLARGE_CASES"
+  },
+  "search_scroll_v141_r14": {
+    "classification": "BOUNDED_POST_BLIND_SEARCH_OUTPUT_REVEAL_HARDENING",
+    "date": "2026-10-05",
+    "direct_predecessor_app_version": "v2.19.140-R1B-UX-ACCESS-R13",
+    "direct_predecessor_tree": "fa5d57065f328351ae4d7c9fa75c50cd27fadb70",
+    "direct_predecessor_package_sha256": "a158c24b889fedf7ea71193668b99adadbf3752004bbc5e579772dfb1ab2eb6c",
+    "repair_contract": [
+      "V140_SINGLE_VERTICAL_SEARCH_SCROLL_OWNER_UNCHANGED",
+      "PREFERRED_METADATA_REVEAL_RETAINED_WHEN_FIRST_COMPLETE_RESULT_ALREADY_FITS",
+      "ADAPT_SCROLL_ONLY_BY_FIRST_RESULT_BOTTOM_OVERFLOW_WHEN_NEEDED",
+      "NO_FOCUS_MOVEMENT",
+      "READER_RETURN_PRESERVE_CONTEXT_REMAINS_AUTHORITATIVE"
+    ],
+    "protected_contract": "205_CORPUS_FILES__SEARCH_V2_V21A_PAYLOADS_AND_ALGORITHMS__PROVENANCE__USER_STATE_SCHEMA__204_OFFLINE_CONTENT_ASSETS_AND_BINDING__SEMANTIC_V3_FAIL_CLOSED_UNCHANGED",
+    "machine_gate": "SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_GATE_RESULT",
+    "physical_iphone_gate": "OPEN",
+    "physical_ipad_gate": "OPEN",
+    "production_deployment_authority": "NONE"
+  },
+  "search_submit_v142_r15": {
+    "direct_predecessor_app_version": "v2.19.141-R1B-UX-ACCESS-R14",
+    "direct_predecessor_tree": "73cebf29a52e8051bb49b59eb8ec2d7ef5a10386",
+    "direct_predecessor_package_sha256": "c8951a8e3de087a72ebbd131bf42c54dfdbd5ceae91c5518ece798e8d2803836",
+    "mutation_universe": [
+      "index.html",
+      "offline_manifest.json",
+      "sw.js",
+      "version.json"
+    ],
+    "persistent_assets_changed": false,
+    "content_binding_changed": false,
+    "search_payloads_or_algorithms_changed": false,
+    "semantic_v3_qualification_changed": false,
+    "production_deployment_authority": "NONE"
+  },
+  "pls_owner_prototype": {
+    "prototype_public_version": "142.2",
+    "semantic_assets_lazy_network_only": true,
+    "not_part_of_offline_content_binding": true,
+    "production_authorized": false
   }
 }
