@@ -1,0 +1,7 @@
+const {chromium}=require('playwright'),crypto=require('crypto');
+const URL='https://louisriv26.github.io/App-Test/ldc-v133-r6-governed-r5/';
+const EXP='9e5b735e8b7c0882b428203badb1d76af68e5ce172a2d0cae1c30fd2935cf359';
+const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+(async()=>{const b=await chromium.launch({headless:true});const c=await b.newContext({serviceWorkers:'block'}),p=await c.newPage();const r=await p.goto(URL,{waitUntil:'domcontentloaded',timeout:90000});const nav=sha(Buffer.from(await r.body()));await p.waitForTimeout(500);
+const x=await p.evaluate(()=>{document.documentElement.setAttribute('data-theme','dark');const e=document.getElementById('resume-reading-btn'),cs=getComputedStyle(e);const parse=s=>{const m=String(s).match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);return m?[+m[1],+m[2],+m[3]]:null};const lum=a=>a.map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce((z,v,i)=>z+v*[.2126,.7152,.0722][i],0),fg=parse(cs.color),bg=parse(cs.backgroundColor),a=lum(fg),bb=lum(bg),ratio=(Math.max(a,bb)+.05)/(Math.min(a,bb)+.05);return{app:APP_VERSION,pub:PUBLIC_VERSION,swExpected:SW_CACHE_VERSION,color:cs.color,background:cs.backgroundColor,ratio};});
+const pass=r.status()===200&&nav===EXP&&x.app==='v2.19.133-R1B-UX-ACCESS-R6'&&x.pub==='133'&&x.swExpected==='ldc-v2.19.133-R1B-ux-access-r6'&&x.ratio>=4.5;console.log(JSON.stringify({status:r.status(),nav,exact:nav===EXP,...x,pass},null,2));await b.close();if(!pass)process.exitCode=1;})().catch(e=>{console.error(e);process.exitCode=2});

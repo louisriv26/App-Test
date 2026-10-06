@@ -1,0 +1,37 @@
+name: 24H v119 to B5 production-path upgrade offline
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b5-upgrade/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact predecessor and B5
+        run: |
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+          test "$(git rev-parse HEAD:24h-v120-b5-blind-repair)" = "b1000f0e0187ec8f77359c2df2e491746f0a24d2"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: mkdir -p qa-24h-upgrade
+      - name: Start same-scope origin
+        run: |
+          python3 -m http.server 8085 --bind 127.0.0.1 --directory qa-24h-upgrade >/tmp/24hup.log 2>&1 &
+          sleep 2
+      - name: Exercise real app update protocol and offline reopen
+        run: node 24h-b5-production-upgrade-offline.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 24h-b5-production-upgrade-offline-evidence
+          path: 24h-b5-production-upgrade-offline-results.json
+          if-no-files-found: warn

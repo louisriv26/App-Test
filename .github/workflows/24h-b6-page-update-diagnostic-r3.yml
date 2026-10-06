@@ -1,0 +1,36 @@
+name: 24H B6 page update diagnostic R3
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b6-page-r3/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact candidate and production predecessor
+        run: |
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+          test "$(git rev-parse HEAD:24h-v120-b6-blind-closure)" = "977b1d9c9475988d03aa6debb78cd9370e6e1192"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: mkdir -p qa-24h-b6-page-r3
+      - run: |
+          python3 -m http.server 8094 --bind 127.0.0.1 --directory qa-24h-b6-page-r3 >/tmp/24h-page-r3.log 2>&1 &
+          sleep 2
+      - name: Exercise exact visible update commit path
+        run: node 24h-b6-page-update-diagnostic-r3.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 24h-b6-page-update-diagnostic-r3-evidence
+          path: 24h-b6-page-update-diagnostic-r3-results.json
+          if-no-files-found: warn

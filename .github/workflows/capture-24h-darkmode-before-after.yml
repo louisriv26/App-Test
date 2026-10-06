@@ -1,0 +1,33 @@
+name: Capture 24H dark-mode before-after screenshots
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-darkmode-screenshots/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact before and after trees
+        run: |
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+          test "$(git rev-parse HEAD:24h-v120-b4-darkmode)" = "fa26ec9bf92f9d5ff8551113ad43d26fda45168e"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/http.log 2>&1 &
+          sleep 2
+      - run: node capture-24h-darkmode-before-after.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 24h-darkmode-before-after-screenshots-v2
+          path: 24h-darkmode-screenshots-v2/
+          if-no-files-found: error

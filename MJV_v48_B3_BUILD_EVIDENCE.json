@@ -1,0 +1,47 @@
+{
+  "candidate": "MJV v48/B3",
+  "public_version": "48",
+  "predecessor": "MJV v47/B1",
+  "predecessor_tree": "81acbb9f409c7c0e1695b0ab35f33dfdc4978631",
+  "date": "2026-10-04",
+  "root_causes": [
+    "v47 changed the inline stylesheet and main inline application script but omitted CSP hash rebinding, causing both blocks to be rejected.",
+    "After CSP execution was restored in failed/unfrozen B2, fresh dark-mode rendering exposed the note textarea placeholder at 3.606:1 because it had no authored placeholder colour and inherited the browser default."
+  ],
+  "corrections": [
+    "advance runtime/service-worker public version 47 to 48",
+    "add only .note-textarea::placeholder { color: var(--muted); } while leaving the existing search placeholder rule unchanged",
+    "recompute exact final script-src and style-src CSP hashes"
+  ],
+  "retired_candidates": [
+    "MJV v48/B1: over-broad placeholder+CSP staging candidate; never production authority",
+    "MJV v48/B2: minimal CSP-only candidate; Pass 1 passed but full runtime found note-placeholder contrast 3.606:1; unfrozen/never promoted"
+  ],
+  "changed_files": [
+    "index.html",
+    "sw.js"
+  ],
+  "index_sha256": "db36f50e6bb527a1f890f5359d7d60e5c16fc019f81c1b5119ecd77f4b3bedf2",
+  "sw_sha256": "968c4bde3aecf07f5fc27a0ad91e28ea845180aae0ccf80f7282f17434d2d2be",
+  "script_sha256_base64": [
+    "5W39i2zGuGfDHZfKEwbuS1MKiblbrLnqr7G2guPiZGU=",
+    "uP/3DHnPNw1vmYSQP5yW5xJHcF8kq3ep0KjSabSZxAY=",
+    "az6hdoIzEB1puFYA7JzzbBElnjCsICRM25uvhrLAY8s="
+  ],
+  "style_sha256_base64": [
+    "20NXDVxaZRNDz4UCdTe4kQvLHsPMHCQR9QWZTTRAfxY="
+  ],
+  "protected_surfaces": [
+    "corpus and migration bytes",
+    "manifest/icons/fonts",
+    "search placeholder styling",
+    "search/reader/navigation/help semantics",
+    "personal-state schema/transactions",
+    "backup/export/restore semantics",
+    "v47 backup-primary dark-mode repair"
+  ],
+  "corpus_mutation": false,
+  "personal_state_schema_mutation": false,
+  "production_deployment_authority": "NONE",
+  "physical_gate": "OPEN"
+}

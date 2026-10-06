@@ -1,0 +1,71 @@
+name: Exact dark-mode successor qualification R5
+on:
+  push:
+    branches: [main]
+    paths: ['.github/dark-mode-successor-qualification-r5/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact current trees
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:24h-v120-b4-darkmode)" = "fa26ec9bf92f9d5ff8551113ad43d26fda45168e"
+          test "$(git rev-parse HEAD:ldc-v136-r9-darkmode)" = "c8a300b6167f015c4895572c900d989ff63bd386"
+          test "$(git rev-parse HEAD:lettres-v2.12-b1-darkmode)" = "03617ce508bb9cce7e114c1cec4aa40c3a0b6dc9"
+          test "$(git rev-parse HEAD:marie-v47-b1-darkmode)" = "81acbb9f409c7c0e1695b0ab35f33dfdc4978631"
+      - name: Boundary, protected parity, static integrity
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,re,base64,subprocess
+          pairs=[
+           ('24h-v119-b1-governed-r4','24h-v120-b4-darkmode',{'index.html','luisa_24_heures.html','manifest.json','sw.js','version.json'}),
+           ('ldc-v135-r8-governed-r7','ldc-v136-r9-darkmode',{'index.html','offline_manifest.json','sw.js','version.json'}),
+           ('lettres-v2.10-b1-prephysical','lettres-v2.12-b1-darkmode',{'index.html','manifest.json','sw.js'}),
+           ('marie-v46','marie-v47-b1-darkmode',{'index.html','sw.js'})]
+          def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+          for a,b,allowed in pairs:
+           A=Path(a);B=Path(b);fa={str(p.relative_to(A)):sha(p) for p in A.rglob('*') if p.is_file()};fb={str(p.relative_to(B)):sha(p) for p in B.rglob('*') if p.is_file()};ch={k for k in set(fa)|set(fb) if fa.get(k)!=fb.get(k)};assert ch==allowed,(a,b,ch)
+          assert sha(Path('lettres-v2.10-b1-prephysical/corpus.json'))==sha(Path('lettres-v2.12-b1-darkmode/corpus.json'))
+          for sub,a,b in [('corpus','ldc-v135-r8-governed-r7','ldc-v136-r9-darkmode'),('corpus','marie-v46','marie-v47-b1-darkmode')]:
+           A=Path(a)/sub;B=Path(b)/sub
+           for p in A.rglob('*'):
+            if p.is_file():q=B/p.relative_to(A);assert q.exists() and sha(p)==sha(q),(p,q)
+          s=open('24h-v120-b4-darkmode/index.html',encoding='utf-8').read();m=re.search(r'<style id="dark-mode-contrast-closure-v120">(.*?)</style>',s,re.S);assert m
+          tok="'sha256-"+base64.b64encode(hashlib.sha256(m.group(1).encode()).digest()).decode()+"'";csp=re.search(r'Content-Security-Policy" content="([^"]+)"',s).group(1);assert tok in csp.split('style-src-elem',1)[1].split(';',1)[0]
+          assert '#948E84' in m.group(1) and '#D4A843' in m.group(1)
+          for p in ['24h-v120-b4-darkmode/manifest.json','24h-v120-b4-darkmode/version.json','ldc-v136-r9-darkmode/offline_manifest.json','ldc-v136-r9-darkmode/version.json','lettres-v2.12-b1-darkmode/manifest.json','marie-v47-b1-darkmode/manifest.json']:json.load(open(p,encoding='utf-8'))
+          print('BOUNDARY_PROTECTED_STATIC_PASS')
+          PY
+          node --check 24h-v120-b4-darkmode/sw.js
+          node --check ldc-v136-r9-darkmode/sw.js
+          node --check lettres-v2.12-b1-darkmode/sw.js
+          node --check marie-v47-b1-darkmode/sw.js
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/http.log 2>&1 &
+          sleep 2
+      - name: Rendered exact qualification
+        run: node dark-mode-successor-qualification-r5.cjs
+      - name: Forced colours / focus
+        run: |
+          node - <<'NODE'
+          const {chromium}=require('playwright');(async()=>{const b=await chromium.launch({headless:true});const cs=[['24H','24h-v120-b4-darkmode','#bnHome'],['LDC','ldc-v136-r9-darkmode','.btn-primary'],['Lettres','lettres-v2.12-b1-darkmode','.help-topic-select'],['Marie','marie-v47-b1-darkmode','.backup-btn.primary']];for(const [n,path,sel] of cs){const c=await b.newContext({colorScheme:'dark',forcedColors:'active'});const p=await c.newPage();await p.goto('http://127.0.0.1:8080/'+path+'/',{waitUntil:'domcontentloaded'});await p.evaluate(()=>document.documentElement.setAttribute('data-theme','dark'));let l=p.locator(sel).first();if(!(await l.count())){await p.evaluate(({sel})=>{let e=sel.includes('select')?document.createElement('select'):document.createElement('button');e.id='qa';e.className=sel.replaceAll('.',' ').replace('#','').trim();e.textContent='Test';document.body.appendChild(e)},{sel});l=p.locator('#qa')}await l.focus();const x=await l.evaluate(el=>{const s=getComputedStyle(el);return{outline:s.outline,boxShadow:s.boxShadow}});if((!x.outline||x.outline==='none')&&(!x.boxShadow||x.boxShadow==='none'))throw new Error(n+' focus indication missing');console.log(n,'FORCED_FOCUS_PASS');await c.close()}await b.close()})().catch(e=>{console.error(e);process.exit(1)});
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dark-mode-successor-qualification-r5-evidence
+          path: dark-mode-successor-qualification-r5-results.json
+          if-no-files-found: warn

@@ -1,0 +1,19 @@
+name: Lettres v2.12 CSP residue provenance probe
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-lettres-v212-csp-probe/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact frozen Lettres tree
+        run: test "$(git rev-parse HEAD:lettres-v2.12-b1-darkmode)" = "03617ce508bb9cce7e114c1cec4aa40c3a0b6dc9"
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: python qa/lettres_v212_csp_residue_probe.py

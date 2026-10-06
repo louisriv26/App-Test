@@ -1,0 +1,32 @@
+name: 24H B6 to B7 activation diagnostic
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b6-b7-diag/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          test "$(git rev-parse HEAD:24h-v120-b6-darkmode)" = "d16b05961a5efedd63669433f8ed0947582f6f80"
+          test "$(git rev-parse HEAD:24h-v120-b7-darkmode)" = "ffa6ae0129a39d9802fce6ec5b5b1967da1efc5f"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: |
+          mkdir -p qa-b6-b7-diag
+          python3 -m http.server 8095 --bind 127.0.0.1 --directory qa-b6-b7-diag >/tmp/diag.log 2>&1 &
+          sleep 2
+      - run: node qa-24h-b6-b7-activation-diag.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 24h-b6-b7-activation-diag
+          path: 24h-b6-b7-activation-diag.json
+          if-no-files-found: warn

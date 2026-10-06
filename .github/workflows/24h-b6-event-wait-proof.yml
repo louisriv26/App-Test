@@ -1,0 +1,35 @@
+name: 24H B6 event-driven activation proof
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b6-eventproof/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact trees
+        run: |
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+          test "$(git rev-parse HEAD:24h-v120-b6-blind-closure)" = "977b1d9c9475988d03aa6debb78cd9370e6e1192"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: mkdir -p qa-24h-b6-eventproof
+      - run: |
+          python3 -m http.server 8095 --bind 127.0.0.1 --directory qa-24h-b6-eventproof >/tmp/eventproof.log 2>&1 &
+          sleep 2
+      - run: node 24h-b6-event-wait-proof.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 24h-b6-event-wait-proof-evidence
+          path: 24h-b6-event-wait-proof-results.json
+          if-no-files-found: warn

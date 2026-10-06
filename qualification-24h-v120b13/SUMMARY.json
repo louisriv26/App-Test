@@ -1,0 +1,607 @@
+{
+  "static": {
+    "index_equals_luisa": true,
+    "app_version": "v120",
+    "cache_name": "scope-derived:luisa-24h-<scope-fingerprint>-v120-b13",
+    "manifest_start_url": "./luisa_24_heures.html",
+    "sw_has_v120b7": false,
+    "predecessor_bytes": 2829603,
+    "changed_index_bytes": 2048,
+    "closure_style_present": true,
+    "closure_style_sha256_base64": "WLj0DFZ2D1b1hR/2JC2FK3aNLqjx9Hipj0auK8YOfq8=",
+    "closure_style_authorized_by_csp": true,
+    "required_closure_selectors": {
+      "html[data-theme=\"dark\"] .onboarding-primary": true,
+      "html[data-theme=\"dark\"] .sr-badge.reflection": true,
+      "html[data-theme=\"dark\"] .sr-badge.speech": true,
+      "html[data-theme=\"dark\"] .stage6m-home-action .d": true,
+      "html[data-theme=\"dark\"] .bn-item": true
+    }
+  },
+  "delta": {
+    "newCustomFailures": [],
+    "afterCustomFailureCount": 0,
+    "beforeCustomFailureCount": 144,
+    "afterAxeCount": 0,
+    "beforeAxeCount": 0,
+    "overflowAfter": [],
+    "consoleErrorsAfter": [],
+    "pageErrorsAfter": []
+  },
+  "pwa": {
+    "registration": {
+      "supported": true,
+      "scope": "http://127.0.0.1:8080/24h-v120-b13-cross-theme-update-banner-closure/",
+      "active": "activated"
+    },
+    "offlineOk": true,
+    "sentinel": "keep",
+    "offlineText": "Aller directement au texte\nLES 24 HEURES DE LA PASSION\nLUISA PICCARRETA\n⚙\n✦ ✝ ✦\nLes 24 Heures de la Passion\nde Notre-Seigneur Jésus-Christ\n\nLuisa Piccarreta — Petite fille de la Divine Volonté\n\n120  ·  Aide & À propos →\n\n✝ Bienvenue dans les 24 Heures de la Passion\n\nAccompagnez Jésus heure par heure"
+  },
+  "targeted": [
+    {
+      "viewport": "iphone",
+      "themeMode": "dark",
+      "actual": {
+        "primary": null,
+        "desc": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "block",
+          "text": "Prières du parcours, introduction et textes complémentaires."
+        },
+        "navActive": {
+          "color": "rgb(212, 168, 67)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(212, 168, 67)",
+          "display": "flex",
+          "text": "Accueil"
+        },
+        "navInactive": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "flex",
+          "text": "Heures"
+        }
+      },
+      "badgeHits": {},
+      "nav": [
+        {
+          "clicked": "bnHome",
+          "active": [
+            "bnHome"
+          ],
+          "current": [
+            "bnHome"
+          ],
+          "stateView": "home"
+        },
+        {
+          "clicked": "bnHours",
+          "active": [
+            "bnHours"
+          ],
+          "current": [
+            "bnHours"
+          ],
+          "stateView": "hours"
+        },
+        {
+          "clicked": "bnSearch",
+          "active": [
+            "bnSearch"
+          ],
+          "current": [
+            "bnSearch"
+          ],
+          "stateView": "search"
+        },
+        {
+          "clicked": "bnEspace",
+          "active": [
+            "bnEspace"
+          ],
+          "current": [
+            "bnEspace"
+          ],
+          "stateView": "espace"
+        }
+      ]
+    },
+    {
+      "viewport": "iphone",
+      "themeMode": "system",
+      "actual": {
+        "primary": null,
+        "desc": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "block",
+          "text": "Prières du parcours, introduction et textes complémentaires."
+        },
+        "navActive": {
+          "color": "rgb(212, 168, 67)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(212, 168, 67)",
+          "display": "flex",
+          "text": "Accueil"
+        },
+        "navInactive": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "flex",
+          "text": "Heures"
+        }
+      },
+      "badgeHits": {},
+      "nav": [
+        {
+          "clicked": "bnHome",
+          "active": [
+            "bnHome"
+          ],
+          "current": [
+            "bnHome"
+          ],
+          "stateView": "home"
+        },
+        {
+          "clicked": "bnHours",
+          "active": [
+            "bnHours"
+          ],
+          "current": [
+            "bnHours"
+          ],
+          "stateView": "hours"
+        },
+        {
+          "clicked": "bnSearch",
+          "active": [
+            "bnSearch"
+          ],
+          "current": [
+            "bnSearch"
+          ],
+          "stateView": "search"
+        },
+        {
+          "clicked": "bnEspace",
+          "active": [
+            "bnEspace"
+          ],
+          "current": [
+            "bnEspace"
+          ],
+          "stateView": "espace"
+        }
+      ]
+    },
+    {
+      "viewport": "ipad",
+      "themeMode": "dark",
+      "actual": {
+        "primary": null,
+        "desc": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "block",
+          "text": "Prières du parcours, introduction et textes complémentaires."
+        },
+        "navActive": {
+          "color": "rgb(212, 168, 67)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(212, 168, 67)",
+          "display": "flex",
+          "text": "Accueil"
+        },
+        "navInactive": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "flex",
+          "text": "Heures"
+        }
+      },
+      "badgeHits": {},
+      "nav": [
+        {
+          "clicked": "bnHome",
+          "active": [
+            "bnHome"
+          ],
+          "current": [
+            "bnHome"
+          ],
+          "stateView": "home"
+        },
+        {
+          "clicked": "bnHours",
+          "active": [
+            "bnHours"
+          ],
+          "current": [
+            "bnHours"
+          ],
+          "stateView": "hours"
+        },
+        {
+          "clicked": "bnSearch",
+          "active": [
+            "bnSearch"
+          ],
+          "current": [
+            "bnSearch"
+          ],
+          "stateView": "search"
+        },
+        {
+          "clicked": "bnEspace",
+          "active": [
+            "bnEspace"
+          ],
+          "current": [
+            "bnEspace"
+          ],
+          "stateView": "espace"
+        }
+      ]
+    },
+    {
+      "viewport": "ipad",
+      "themeMode": "system",
+      "actual": {
+        "primary": null,
+        "desc": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "block",
+          "text": "Prières du parcours, introduction et textes complémentaires."
+        },
+        "navActive": {
+          "color": "rgb(212, 168, 67)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(212, 168, 67)",
+          "display": "flex",
+          "text": "Accueil"
+        },
+        "navInactive": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "flex",
+          "text": "Heures"
+        }
+      },
+      "badgeHits": {},
+      "nav": [
+        {
+          "clicked": "bnHome",
+          "active": [
+            "bnHome"
+          ],
+          "current": [
+            "bnHome"
+          ],
+          "stateView": "home"
+        },
+        {
+          "clicked": "bnHours",
+          "active": [
+            "bnHours"
+          ],
+          "current": [
+            "bnHours"
+          ],
+          "stateView": "hours"
+        },
+        {
+          "clicked": "bnSearch",
+          "active": [
+            "bnSearch"
+          ],
+          "current": [
+            "bnSearch"
+          ],
+          "stateView": "search"
+        },
+        {
+          "clicked": "bnEspace",
+          "active": [
+            "bnEspace"
+          ],
+          "current": [
+            "bnEspace"
+          ],
+          "stateView": "espace"
+        }
+      ]
+    }
+  ],
+  "focusCount": 18,
+  "contract": {
+    "results": [
+      {
+        "mode": "dark",
+        "id": "qa-on",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-sf",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-mark",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-cc",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-resume",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-note",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-chip",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-skip",
+        "color": "rgb(22, 20, 15)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.31
+      },
+      {
+        "mode": "dark",
+        "id": "qa-hourend",
+        "color": "rgb(23, 20, 15)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.29
+      },
+      {
+        "mode": "dark",
+        "id": "qa-theme",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-titlemark",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-update",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-refresh",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-dismiss",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-ink4",
+        "color": "rgb(142, 137, 129)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 4.52
+      },
+      {
+        "mode": "dark",
+        "state": "hover",
+        "id": "qa-help",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "state": "hover",
+        "id": "qa-panel",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "state": "hover",
+        "id": "qa-integrity",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "state": "android-active",
+        "id": "qa-android",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-on",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-sf",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-mark",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-cc",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-resume",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-note",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-chip",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-skip",
+        "color": "rgb(22, 20, 15)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.31
+      },
+      {
+        "mode": "system",
+        "id": "qa-hourend",
+        "color": "rgb(23, 20, 15)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.29
+      },
+      {
+        "mode": "system",
+        "id": "qa-theme",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-titlemark",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-update",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-refresh",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-dismiss",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-ink4",
+        "color": "rgb(142, 137, 129)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 4.52
+      },
+      {
+        "mode": "system",
+        "state": "hover",
+        "id": "qa-help",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "state": "hover",
+        "id": "qa-panel",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "state": "hover",
+        "id": "qa-integrity",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "state": "android-active",
+        "id": "qa-android",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      }
+    ],
+    "failures": []
+  }
+}

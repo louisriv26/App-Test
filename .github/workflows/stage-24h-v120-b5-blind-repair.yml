@@ -1,0 +1,37 @@
+name: Stage 24H v120 B5 blind-adversarial repair
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-v120-b5-stage/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind failed B4 predecessor
+        run: test "$(git rev-parse HEAD:24h-v120-b4-darkmode)" = "fa26ec9bf92f9d5ff8551113ad43d26fda45168e"
+      - name: Build bounded B5 successor
+        run: python3 .github/scripts/stage_24h_v120_b5_blind_repair.py
+      - name: Static syntax sanity
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          s=Path('24h-v120-b5-blind-repair/index.html').read_text()
+          js=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.S|re.I)
+          assert len(js)==1
+          Path('/tmp/24h-b5-inline.js').write_text(js[0])
+          PY
+          node --check /tmp/24h-b5-inline.js
+          node --check 24h-v120-b5-blind-repair/sw.js
+      - name: Commit immutable B5 candidate
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b5-blind-repair
+          git commit -m "Stage 24H v120 B5 blind-adversarial release-shell repair"
+          git push

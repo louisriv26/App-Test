@@ -1,0 +1,192 @@
+name: Qualify Marie v50 today-card flex closure
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/marie-v50-qa/TRIGGER'
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+
+      - name: Bind exact v50 tree and protected parity
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:marie-v50-test)" = "05f10479d5e9a5e476221cf7881fb5441cf5a909"
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64,hashlib,re
+          M49=Path('marie-v49-test'); M50=Path('marie-v50-test')
+          def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+          def files(root): return {str(p.relative_to(root)):sha(p) for p in root.rglob('*') if p.is_file()}
+          a,b=files(M49),files(M50)
+          diff=sorted(k for k in set(a)|set(b) if a.get(k)!=b.get(k))
+          assert diff==['index.html','sw.js'],diff
+          for p in sorted(set(a)&set(b)):
+              if p not in ('index.html','sw.js'): assert a[p]==b[p],p
+          idx=(M50/'index.html').read_text(encoding='utf-8')
+          sw=(M50/'sw.js').read_text(encoding='utf-8')
+          assert "const APP_VERSION = '50';" in idx
+          assert "const VERSION = '50';" in sw
+          rules=re.findall(r'\.ws-today-card\s*\{([^}]*)\}',idx,re.S)
+          sizing=[x for x in rules if 'flex: 1 1 auto;' in x or 'max-height:' in x]
+          assert len(sizing)==1,sizing
+          rule=sizing[0]
+          assert 'flex: 1 1 auto;' in rule,rule
+          assert 'max-height: none;' in rule,rule
+          assert 'padding-bottom: calc(12px + var(--safe-bottom));' in rule,rule
+          assert 'max-height: 220px' not in rule,rule
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',idx).group(1)
+          scripts=[x.group(1) for x in re.finditer(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>',idx,re.I)]
+          styles=re.findall(r'<style[^>]*>([\s\S]*?)</style>',idx,re.I)
+          tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
+          assert len(scripts)==3 and len(styles)==1,(len(scripts),len(styles))
+          assert all(tok(x) in csp for x in scripts+styles)
+          for p in ['corpus/days.json','corpus/manifest.json','corpus/migrations-v1.0.0-to-v1.0.1.json','manifest.json']:
+              assert sha(M49/p)==sha(M50/p),p
+          print('V50_STATIC_PARITY_CSP_BOUNDARY_PASS',diff)
+          PY
+          node --check marie-v50-test/sw.js
+
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+
+      - name: Install browser runtimes
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+
+      - name: Wait for public Pages exact v50 bytes
+        run: |
+          python3 - <<'PY'
+          import hashlib,time,urllib.request
+          pairs=[
+            ('marie-v50-test/index.html','https://louisriv26.github.io/App-Test/marie-v50-test/index.html?bind=v50-flex'),
+            ('marie-v50-test/sw.js','https://louisriv26.github.io/App-Test/marie-v50-test/sw.js?bind=v50-flex')
+          ]
+          for local,url in pairs:
+              want=hashlib.sha256(open(local,'rb').read()).hexdigest()
+              for i in range(90):
+                  try:
+                      req=urllib.request.Request(url,headers={'Cache-Control':'no-cache','Pragma':'no-cache','User-Agent':'APP-GOV-v50'})
+                      data=urllib.request.urlopen(req,timeout=20).read()
+                      if hashlib.sha256(data).hexdigest()==want:
+                          print('PUBLIC_EXACT_READY',local,want);break
+                  except Exception as e: print('wait',local,i,repr(e),flush=True)
+                  time.sleep(4)
+              else: raise SystemExit('public exact-byte bind failed '+local)
+          PY
+
+      - name: Start exact-tree servers
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/m50.log 2>&1 &
+          python3 -m http.server 8081 --bind 127.0.0.1 >/tmp/m50upgrade.log 2>&1 &
+          python3 -m http.server 8092 --bind 127.0.0.1 >/tmp/m50blind.log 2>&1 &
+          sleep 3
+
+      - name: Adapt proven Marie harnesses to exact v50
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          def successorize(s):
+              s=s.replace('marie-v48-b3-csp-note-placeholder-closure','marie-v50-test')
+              s=s.replace('qa-marie-v48b3-finalblind-package','qa-marie-v50-finalblind-package')
+              s=s.replace('MJV_v48_B3','MJV_v50').replace('MJV v48/B3','MJV v50')
+              s=s.replace('V48_B3','V50').replace('v48','v50').replace("'48'","'50'")
+              return s
+
+          full=successorize(Path('qa-marie-v48b3-full.cjs').read_text())
+          Path('/tmp/m50-full.cjs').write_text(full)
+
+          blind=successorize(Path('qa-marie-v48b3-final-fresh-blind-20261004.cjs').read_text())
+          Path('/tmp/m50-blind.cjs').write_text(blind)
+
+          pwa=Path('qa-marie-v48b3-pwa.cjs').read_text()
+          pwa=pwa.replace(
+              "const SRC46='marie-v46', SRC48='marie-v48-b3-csp-note-placeholder-closure', DST='qa-marie-v48b3-upgrade';",
+              "const SRC46='marie-v49-test', SRC48='marie-v50-test', DST='qa-marie-v50-upgrade';")
+          pwa=pwa.replace("ready(p,'46')","ready(p,'49')")
+          pwa=pwa.replace("pre.v!=='46'","pre.v!=='49'")
+          pwa=pwa.replace("'48'","'50'").replace("v48","v50").replace("MJV v48/B3","MJV v50").replace("MJV_v48_B3","MJV_v50")
+          pwa=pwa.replace('MARIE_V46_TO_V48_B3_PWA_PASS','MARIE_V49_TO_V50_PWA_PASS')
+          Path('/tmp/m50-pwa.cjs').write_text(pwa)
+          PY
+          node --check /tmp/m50-full.cjs
+          node --check /tmp/m50-pwa.cjs
+          node --check /tmp/m50-blind.cjs
+          node --check .github/marie-v50-qa/geometry.cjs
+
+      - name: Marie v50 complete functional regression
+        run: NODE_PATH="$PWD/node_modules" node /tmp/m50-full.cjs
+
+      - name: Marie v49 to v50 update, PWA, offline and state preservation
+        run: NODE_PATH="$PWD/node_modules" node /tmp/m50-pwa.cjs
+
+      - name: Marie v50 residual-height geometry challenge
+        run: NODE_PATH="$PWD/node_modules" node .github/marie-v50-qa/geometry.cjs
+
+      - name: Marie v50 fresh package blind challenge
+        run: |
+          rm -rf qa-marie-v50-finalblind-package
+          cp -a marie-v50-test qa-marie-v50-finalblind-package
+          NODE_PATH="$PWD/node_modules" node /tmp/m50-blind.cjs
+
+      - name: Additional screenshot-scenario interaction challenge
+        run: |
+          node - <<'NODE'
+          const {webkit,chromium}=require('playwright');
+          (async()=>{
+            const out=[];
+            for(const [engine,bt] of [['chromium',chromium],['webkit',webkit]]){
+              const b=await bt.launch();
+              for(const theme of ['light','dark']){
+                const c=await b.newContext({viewport:{width:1215,height:751},colorScheme:theme});
+                await c.addInitScript(t=>{localStorage.setItem('mjv_onboarded','1');localStorage.setItem('mjv_theme',t)},theme);
+                const p=await c.newPage(),errs=[];p.on('pageerror',e=>errs.push(String(e)));p.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
+                await p.goto('http://127.0.0.1:8080/marie-v50-test/',{waitUntil:'domcontentloaded'});
+                await p.waitForFunction(()=>typeof APP_VERSION!=='undefined'&&APP_VERSION==='50'&&State?.corpus?.length===37,null,{timeout:30000});
+                await p.evaluate(()=>App.openDay(5));await p.evaluate(()=>App.applyTextSize('xlarge',false));await p.waitForTimeout(80);
+                const x=await p.evaluate(()=>{const c=document.getElementById('ws-today-card'),s=document.getElementById('wide-sidebar'),o=document.querySelector('.ws-today-oraison'),C=c.getBoundingClientRect(),S=s.getBoundingClientRect(),O=o.getBoundingClientRect();return{free:S.bottom-C.bottom,overflow:c.scrollHeight-c.clientHeight,oraisonVisible:Math.max(0,Math.min(C.bottom,O.bottom)-Math.max(C.top,O.top))/O.height,version:APP_VERSION};});
+                if(Math.abs(x.free)>1.5||x.overflow>1||x.oraisonVisible<.999)throw new Error(engine+' '+theme+' screenshot scenario '+JSON.stringify(x));
+                const bad=errs.filter(v=>/content security policy|refused|uncaught|referenceerror|typeerror|syntaxerror/i.test(v));if(bad.length)throw new Error(engine+' '+theme+' errors '+JSON.stringify(bad));
+                out.push({engine,theme,...x});await c.close();
+              }
+              await b.close();
+            }
+            require('fs').writeFileSync('MJV_v50_SCREENSHOT_SCENARIO_EVIDENCE.json',JSON.stringify({status:'PASS',out},null,2));
+            console.log('MJV_V50_SCREENSHOT_SCENARIO_PASS',JSON.stringify(out));
+          })().catch(e=>{console.error(e);process.exit(2)});
+          NODE
+
+      - name: Deterministic v50 package
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,zipfile
+          src=Path('marie-v50-test'); out=Path('/tmp/MJV_v50.zip')
+          with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for p in sorted(x for x in src.rglob('*') if x.is_file()):
+                  zi=zipfile.ZipInfo(p.relative_to(src).as_posix(),(1980,1,1,0,0,0))
+                  zi.compress_type=zipfile.ZIP_DEFLATED; zi.external_attr=0o100644<<16
+                  z.writestr(zi,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          sha=hashlib.sha256(out.read_bytes()).hexdigest()
+          Path('/tmp/MJV_v50_SHA256.txt').write_text(f'{sha}  MJV_v50.zip\n')
+          print('PACKAGE MJV_v50.zip',sha,out.stat().st_size)
+          PY
+          unzip -t /tmp/MJV_v50.zip
+
+      - name: Upload v50 qualification evidence and frozen package
+        uses: actions/upload-artifact@v4
+        with:
+          name: marie-v50-qualified-candidate
+          path: |
+            /tmp/MJV_v50.zip
+            /tmp/MJV_v50_SHA256.txt
+            MJV_v50*.json
+          if-no-files-found: error

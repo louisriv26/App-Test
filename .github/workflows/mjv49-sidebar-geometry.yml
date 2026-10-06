@@ -1,0 +1,33 @@
+name: Marie v49 sidebar geometry diagnostic
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/mjv49-sidebar-geometry/TRIGGER'
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bind exact audited v49 tree
+        run: test "$(git rev-parse HEAD:marie-v49-test)" = "155347f9adeef1000f45ea57381223024cda0579"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install browsers
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+      - name: Serve exact v49 tree
+        run: |
+          python3 -m http.server 8142 --bind 127.0.0.1 --directory marie-v49-test >/tmp/mjv49-geom.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8142/index.html >/dev/null
+      - name: Measure current and candidate flex geometries
+        run: NODE_PATH="$PWD/node_modules" node .github/mjv49-sidebar-geometry/diagnose.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mjv49-sidebar-geometry-diagnostic
+          path: /tmp/MJV49_SIDEBAR_GEOMETRY_DIAGNOSTIC.json

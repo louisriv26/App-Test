@@ -1,0 +1,80 @@
+name: 24H B7 full blind adversarial qualification
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b7-full-blind/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  blind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact B6 predecessor and B7
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:24h-v120-b6-adversarial)" = "cdb60100c7576f99eb678a79f798946bc14f349e"
+          test "$(git rev-parse HEAD:24h-v120-b7-adversarial)" = "bca352b0b86e829c52bbc762273e77581d86a544"
+      - name: Exact mutation boundary and static integrity
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,re,base64
+          A=Path('24h-v120-b6-adversarial');B=Path('24h-v120-b7-adversarial')
+          def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+          fa={str(p.relative_to(A)):sha(p) for p in A.rglob('*') if p.is_file()}
+          fb={str(p.relative_to(B)):sha(p) for p in B.rglob('*') if p.is_file()}
+          allowed={'index.html','luisa_24_heures.html','manifest.json','sw.js','version.json'}
+          changed={k for k in set(fa)|set(fb) if fa.get(k)!=fb.get(k)}
+          assert changed==allowed,(changed,allowed)
+          assert (B/'index.html').read_bytes()==(B/'luisa_24_heures.html').read_bytes()
+          shell=sha(B/'index.html')
+          s=(B/'index.html').read_text()
+          scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.S|re.I)
+          styles=re.findall(r'<style[^>]*>(.*?)</style>',s,re.S|re.I)
+          tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',s).group(1)
+          assert len(scripts)==1 and tok(scripts[0]) in csp.split('script-src-elem',1)[1].split(';',1)[0]
+          stseg=csp.split('style-src-elem',1)[1].split(';',1)[0]
+          assert all(tok(x) in stseg for x in styles)
+          man=json.loads((B/'manifest.json').read_text());ver=json.loads((B/'version.json').read_text());sw=(B/'sw.js').read_text()
+          rid='24h-v120-b7-20261003-blind-accessibility-closure'
+          assert man['build_revision']=='B7' and man['release_sequence']==120000007 and man['release_id']==rid
+          assert ver['build_revision']=='B7' and ver['release_sequence']==120000007 and ver['release_id']==rid and ver['canonical_shell_sha256']==shell
+          assert "const BUILD_REVISION = 'B7';" in sw and "const RELEASE_SEQUENCE = 120000007;" in sw and rid in sw and shell in sw
+          assert 'role="progressbar"' in s and 'tabindex="0" aria-label="Zone principale de lecture"' in s
+          assert 'color: var(--ref-text)' in s and '--ink4: #8A857D;' in s
+          for k in set(fa)|set(fb):
+            if k not in allowed: assert fa.get(k)==fb.get(k),k
+          print('B7_STATIC_BOUNDARY_PASS',shell)
+          PY
+          node --check 24h-v120-b7-adversarial/sw.js
+          python3 - <<'PY'
+          import re,pathlib
+          s=pathlib.Path('24h-v120-b7-adversarial/index.html').read_text()
+          pathlib.Path('/tmp/b7-inline.js').write_text(re.search(r'<script(?![^>]*\bsrc=)[^>]*>(.*?)</script>',s,re.S|re.I).group(1))
+          PY
+          node --check /tmp/b7-inline.js
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install browser audit dependencies
+        run: |
+          npm install --no-save playwright@1.55.0 axe-core@4.10.3
+          npx playwright install --with-deps chromium
+      - name: Start exact-byte origins
+        run: |
+          mkdir -p qa-upgrade
+          python3 -m http.server 8090 --bind 127.0.0.1 >/tmp/http8090.log 2>&1 &
+          python3 -m http.server 8091 --bind 127.0.0.1 --directory qa-upgrade >/tmp/http8091.log 2>&1 &
+          sleep 2
+      - name: Full fresh blind browser/PWA/update audit
+        run: node 24h-b7-full-blind-adversarial.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 24h-b7-full-blind-adversarial-evidence
+          path: 24h-b7-full-blind-adversarial.json
+          if-no-files-found: warn

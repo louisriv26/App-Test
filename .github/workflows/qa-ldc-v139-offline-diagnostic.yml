@@ -1,0 +1,37 @@
+name: LDC v139 offline persistence diagnostic
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-ldc-v139-offline/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8140 --bind 127.0.0.1 >/tmp/ldc139-offdiag.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v139-offline-diagnostic.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-offline-diagnostic, path: qa-ldc-v139-offline-diagnostic-results.json}
+      - name: Commit diagnostic evidence
+        if: always()
+        shell: bash
+        run: |
+          set -e
+          mkdir -p .github/qa-ldc-v139-offline
+          cp qa-ldc-v139-offline-diagnostic-results.json .github/qa-ldc-v139-offline/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa-ldc-v139-offline/qa-ldc-v139-offline-diagnostic-results.json
+          git commit -m 'Record LDC v139 offline persistence diagnostic' || true
+          git pull --rebase origin main
+          git push origin HEAD:main

@@ -1,0 +1,3850 @@
+{
+  "candidate": "24h-v120-b13-cross-theme-update-banner-closure",
+  "predecessor": "24h-v119-b1-governed-r4",
+  "generated": "2026-10-03T20:18:35.487Z",
+  "static": {
+    "index_equals_luisa": true,
+    "app_version": "v120",
+    "cache_name": "scope-derived:luisa-24h-<scope-fingerprint>-v120-b13",
+    "manifest_start_url": "./luisa_24_heures.html",
+    "sw_has_v120b7": false,
+    "predecessor_bytes": 2829603,
+    "changed_index_bytes": 2048,
+    "closure_style_present": true,
+    "closure_style_sha256_base64": "WLj0DFZ2D1b1hR/2JC2FK3aNLqjx9Hipj0auK8YOfq8=",
+    "closure_style_authorized_by_csp": true,
+    "required_closure_selectors": {
+      "html[data-theme=\"dark\"] .onboarding-primary": true,
+      "html[data-theme=\"dark\"] .sr-badge.reflection": true,
+      "html[data-theme=\"dark\"] .sr-badge.speech": true,
+      "html[data-theme=\"dark\"] .stage6m-home-action .d": true,
+      "html[data-theme=\"dark\"] .bn-item": true
+    }
+  },
+  "runs": [
+    {
+      "label": "before-iphone-dark-home",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.onboarding-primary",
+          "text": "Commencer la 1re Heure →",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-dark-hours",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "hours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-dark-search",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.sf-btn.active",
+          "text": "Tout",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "search",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-dark-espace",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0/24 Heures",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Voir ma progression",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucun passage à vérifier.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucune lecture marquée pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucun surlignage pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucune note pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "⬇ Exporter la sauvegarde JSON",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.espace-journal-note",
+          "text": "Le fichier JSON normal sert à restaurer l’app. Si vos données dépassent 32 Mo, l’app crée une archiv",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "⬇ Exporter ma sauvegarde",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "espace",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-dark-reader",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.mark-btn",
+          "text": "Marquer comme méditée",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "reader",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-dark-help",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-dark-settings",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-dark-prayer",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "prayer",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-dark-section",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "section",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-dark-library",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.library-quick-chip.active",
+          "text": "Vue générale",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 800
+        },
+        {
+          "type": "text",
+          "sel": "div.library-source-line",
+          "text": "5 textes dans cette section.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.library-source-line",
+          "text": "26 textes dans cette section.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "library",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-dark-progress",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Revoir les Heures méditées",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "progress",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-dark-completed",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Voir ma progression",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "completedHours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-home",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.onboarding-primary",
+          "text": "Commencer la 1re Heure →",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-hours",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "hours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-search",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.sf-btn.active",
+          "text": "Tout",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "search",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-espace",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0/24 Heures",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Voir ma progression",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucun passage à vérifier.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucune lecture marquée pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucun surlignage pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucune note pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "⬇ Exporter la sauvegarde JSON",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.espace-journal-note",
+          "text": "Le fichier JSON normal sert à restaurer l’app. Si vos données dépassent 32 Mo, l’app crée une archiv",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "⬇ Exporter ma sauvegarde",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "espace",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-reader",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.mark-btn",
+          "text": "Marquer comme méditée",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "reader",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-help",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-settings",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-prayer",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "prayer",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-section",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "section",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-library",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.library-quick-chip.active",
+          "text": "Vue générale",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 800
+        },
+        {
+          "type": "text",
+          "sel": "div.library-source-line",
+          "text": "5 textes dans cette section.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.library-source-line",
+          "text": "26 textes dans cette section.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "library",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-progress",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Revoir les Heures méditées",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "progress",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-iphone-system-completed",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Voir ma progression",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "completedHours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-home",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.onboarding-primary",
+          "text": "Commencer la 1re Heure →",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-hours",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "hours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-search",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.sf-btn.active",
+          "text": "Tout",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "search",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-espace",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0/24 Heures",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Voir ma progression",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucun passage à vérifier.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucune lecture marquée pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucun surlignage pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucune note pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "⬇ Exporter la sauvegarde JSON",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.espace-journal-note",
+          "text": "Le fichier JSON normal sert à restaurer l’app. Si vos données dépassent 32 Mo, l’app crée une archiv",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "⬇ Exporter ma sauvegarde",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "espace",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-reader",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.mark-btn",
+          "text": "Marquer comme méditée",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "reader",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-help",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-settings",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-prayer",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "prayer",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-section",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "section",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-library",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.library-quick-chip.active",
+          "text": "Vue générale",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 800
+        },
+        {
+          "type": "text",
+          "sel": "div.library-source-line",
+          "text": "5 textes dans cette section.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.library-source-line",
+          "text": "26 textes dans cette section.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "library",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-progress",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Revoir les Heures méditées",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "progress",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-dark-completed",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Voir ma progression",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "completedHours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-home",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.onboarding-primary",
+          "text": "Commencer la 1re Heure →",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-hours",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "hours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-search",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.sf-btn.active",
+          "text": "Tout",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "search",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-espace",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0/24 Heures",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Voir ma progression",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucun passage à vérifier.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucune lecture marquée pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucun surlignage pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "span.espace-section-count",
+          "text": "0",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 13,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.fav-empty",
+          "text": "Aucune note pour le moment.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "⬇ Exporter la sauvegarde JSON",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        },
+        {
+          "type": "text",
+          "sel": "div.espace-journal-note",
+          "text": "Le fichier JSON normal sert à restaurer l’app. Si vos données dépassent 32 Mo, l’app crée une archiv",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "⬇ Exporter ma sauvegarde",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "espace",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-reader",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.mark-btn",
+          "text": "Marquer comme méditée",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "reader",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-help",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-settings",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Prières du parcours, introduction et textes complémentaires.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Passion divine de Jésus et douleurs de Marie.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Une Heure par jour, heure réelle ou parcours libre.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.d",
+          "text": "Progression, surlignages, notes, sauvegarde et reprise.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Ouvrir la recherche",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-prayer",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "prayer",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-section",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "section",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-library",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.library-quick-chip.active",
+          "text": "Vue générale",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 800
+        },
+        {
+          "type": "text",
+          "sel": "div.library-source-line",
+          "text": "5 textes dans cette section.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        },
+        {
+          "type": "text",
+          "sel": "div.library-source-line",
+          "text": "26 textes dans cette section.",
+          "ratio": 4.34,
+          "need": 4.5,
+          "color": "rgb(133, 128, 120)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "fontSize": 14,
+          "weight": 400
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "library",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-progress",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Revoir les Heures méditées",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "progress",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "before-ipad-system-completed",
+      "fails": [
+        {
+          "type": "text",
+          "sel": "button.resume-panel-btn.primary",
+          "text": "Voir ma progression",
+          "ratio": 2.21,
+          "need": 4.5,
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(212, 168, 67)",
+          "fontSize": 16,
+          "weight": 700
+        }
+      ],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "completedHours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-home",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-hours",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "hours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-search",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "search",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-espace",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "espace",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-reader",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "reader",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-help",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-settings",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-prayer",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "prayer",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-section",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "section",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-library",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "library",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-progress",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "progress",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-dark-completed",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "completedHours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-home",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-hours",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "hours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-search",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "search",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-espace",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "espace",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-reader",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "reader",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-help",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-settings",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-prayer",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "prayer",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-section",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "section",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-library",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "library",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-progress",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "progress",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-iphone-system-completed",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 390,
+        "clientWidth": 390,
+        "bodyScrollWidth": 390
+      },
+      "theme": "dark",
+      "view": "completedHours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-home",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-hours",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "hours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-search",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "search",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-espace",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "espace",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-reader",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "reader",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-help",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-settings",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-prayer",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "prayer",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-section",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "section",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-library",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "library",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-progress",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "progress",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-dark-completed",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "completedHours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-home",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-hours",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "hours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-search",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "search",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-espace",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "espace",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-reader",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "reader",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-help",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-settings",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "home",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-prayer",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "prayer",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-section",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "section",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-library",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "library",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-progress",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "progress",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "label": "after-ipad-system-completed",
+      "fails": [],
+      "overflow": {
+        "scrollWidth": 820,
+        "clientWidth": 820,
+        "bodyScrollWidth": 820
+      },
+      "theme": "dark",
+      "view": "completedHours",
+      "axe": [],
+      "consoleErrors": [],
+      "pageErrors": []
+    }
+  ],
+  "targeted": [
+    {
+      "viewport": "iphone",
+      "themeMode": "dark",
+      "actual": {
+        "primary": null,
+        "desc": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "block",
+          "text": "Prières du parcours, introduction et textes complémentaires."
+        },
+        "navActive": {
+          "color": "rgb(212, 168, 67)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(212, 168, 67)",
+          "display": "flex",
+          "text": "Accueil"
+        },
+        "navInactive": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "flex",
+          "text": "Heures"
+        }
+      },
+      "badgeHits": {},
+      "nav": [
+        {
+          "clicked": "bnHome",
+          "active": [
+            "bnHome"
+          ],
+          "current": [
+            "bnHome"
+          ],
+          "stateView": "home"
+        },
+        {
+          "clicked": "bnHours",
+          "active": [
+            "bnHours"
+          ],
+          "current": [
+            "bnHours"
+          ],
+          "stateView": "hours"
+        },
+        {
+          "clicked": "bnSearch",
+          "active": [
+            "bnSearch"
+          ],
+          "current": [
+            "bnSearch"
+          ],
+          "stateView": "search"
+        },
+        {
+          "clicked": "bnEspace",
+          "active": [
+            "bnEspace"
+          ],
+          "current": [
+            "bnEspace"
+          ],
+          "stateView": "espace"
+        }
+      ]
+    },
+    {
+      "viewport": "iphone",
+      "themeMode": "system",
+      "actual": {
+        "primary": null,
+        "desc": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "block",
+          "text": "Prières du parcours, introduction et textes complémentaires."
+        },
+        "navActive": {
+          "color": "rgb(212, 168, 67)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(212, 168, 67)",
+          "display": "flex",
+          "text": "Accueil"
+        },
+        "navInactive": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "flex",
+          "text": "Heures"
+        }
+      },
+      "badgeHits": {},
+      "nav": [
+        {
+          "clicked": "bnHome",
+          "active": [
+            "bnHome"
+          ],
+          "current": [
+            "bnHome"
+          ],
+          "stateView": "home"
+        },
+        {
+          "clicked": "bnHours",
+          "active": [
+            "bnHours"
+          ],
+          "current": [
+            "bnHours"
+          ],
+          "stateView": "hours"
+        },
+        {
+          "clicked": "bnSearch",
+          "active": [
+            "bnSearch"
+          ],
+          "current": [
+            "bnSearch"
+          ],
+          "stateView": "search"
+        },
+        {
+          "clicked": "bnEspace",
+          "active": [
+            "bnEspace"
+          ],
+          "current": [
+            "bnEspace"
+          ],
+          "stateView": "espace"
+        }
+      ]
+    },
+    {
+      "viewport": "ipad",
+      "themeMode": "dark",
+      "actual": {
+        "primary": null,
+        "desc": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "block",
+          "text": "Prières du parcours, introduction et textes complémentaires."
+        },
+        "navActive": {
+          "color": "rgb(212, 168, 67)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(212, 168, 67)",
+          "display": "flex",
+          "text": "Accueil"
+        },
+        "navInactive": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "flex",
+          "text": "Heures"
+        }
+      },
+      "badgeHits": {},
+      "nav": [
+        {
+          "clicked": "bnHome",
+          "active": [
+            "bnHome"
+          ],
+          "current": [
+            "bnHome"
+          ],
+          "stateView": "home"
+        },
+        {
+          "clicked": "bnHours",
+          "active": [
+            "bnHours"
+          ],
+          "current": [
+            "bnHours"
+          ],
+          "stateView": "hours"
+        },
+        {
+          "clicked": "bnSearch",
+          "active": [
+            "bnSearch"
+          ],
+          "current": [
+            "bnSearch"
+          ],
+          "stateView": "search"
+        },
+        {
+          "clicked": "bnEspace",
+          "active": [
+            "bnEspace"
+          ],
+          "current": [
+            "bnEspace"
+          ],
+          "stateView": "espace"
+        }
+      ]
+    },
+    {
+      "viewport": "ipad",
+      "themeMode": "system",
+      "actual": {
+        "primary": null,
+        "desc": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "block",
+          "text": "Prières du parcours, introduction et textes complémentaires."
+        },
+        "navActive": {
+          "color": "rgb(212, 168, 67)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(212, 168, 67)",
+          "display": "flex",
+          "text": "Accueil"
+        },
+        "navInactive": {
+          "color": "rgb(148, 142, 132)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(148, 142, 132)",
+          "display": "flex",
+          "text": "Heures"
+        }
+      },
+      "badgeHits": {},
+      "nav": [
+        {
+          "clicked": "bnHome",
+          "active": [
+            "bnHome"
+          ],
+          "current": [
+            "bnHome"
+          ],
+          "stateView": "home"
+        },
+        {
+          "clicked": "bnHours",
+          "active": [
+            "bnHours"
+          ],
+          "current": [
+            "bnHours"
+          ],
+          "stateView": "hours"
+        },
+        {
+          "clicked": "bnSearch",
+          "active": [
+            "bnSearch"
+          ],
+          "current": [
+            "bnSearch"
+          ],
+          "stateView": "search"
+        },
+        {
+          "clicked": "bnEspace",
+          "active": [
+            "bnEspace"
+          ],
+          "current": [
+            "bnEspace"
+          ],
+          "stateView": "espace"
+        }
+      ]
+    }
+  ],
+  "pwa": {
+    "registration": {
+      "supported": true,
+      "scope": "http://127.0.0.1:8080/24h-v120-b13-cross-theme-update-banner-closure/",
+      "active": "activated"
+    },
+    "offlineOk": true,
+    "sentinel": "keep",
+    "offlineText": "Aller directement au texte\nLES 24 HEURES DE LA PASSION\nLUISA PICCARRETA\n⚙\n✦ ✝ ✦\nLes 24 Heures de la Passion\nde Notre-Seigneur Jésus-Christ\n\nLuisa Piccarreta — Petite fille de la Divine Volonté\n\n120  ·  Aide & À propos →\n\n✝ Bienvenue dans les 24 Heures de la Passion\n\nAccompagnez Jésus heure par heure"
+  },
+  "errors": [],
+  "focus": {
+    "iphone_dark": [
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "stage6m-home-primary",
+        "label": "Reprendre la lecture",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 16,
+          "y": 364.453125,
+          "w": 358,
+          "h": 121.46875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "home-hours-title",
+        "label": "Les 24 Heures ›",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 16,
+          "y": 503.515625,
+          "w": 131.3125,
+          "h": 44
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 1e Heure : Jésus fait ses adieux à sa Mère — 17h à 18h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 16,
+          "y": 557.90625,
+          "w": 85.296875,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 2e Heure : Jésus se sépare de sa Très Sainte Mère et se rend au Cénacle — 18h à 19h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 106.890625,
+          "y": 557.90625,
+          "w": 85.3125,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 3e Heure : La Cène légale — 19h à 20h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 197.796875,
+          "y": 557.90625,
+          "w": 85.296875,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 4e Heure : Le lavement des pieds – La Cène Eucharistique — 20h à 21h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 288.6875,
+          "y": 557.90625,
+          "w": 85.3125,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  gethsemani",
+        "label": "Ouvrir la 5e Heure : Première Heure de l’Agonie dans le Jardin — 21h à 22h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 16,
+          "y": 631.671875,
+          "w": 85.296875,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  gethsemani",
+        "label": "Ouvrir la 6e Heure : Deuxième Heure de l’Agonie dans le Jardin — 22h à 23h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 106.890625,
+          "y": 631.671875,
+          "w": 85.3125,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  gethsemani",
+        "label": "Ouvrir la 7e Heure : Troisième Heure de l’Agonie dans le Jardin — 23h à 24h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 197.796875,
+          "y": 631.671875,
+          "w": 85.296875,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 8e Heure : L’arrestation de Jésus dans le Jardin des Oliviers — 24h à 1h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 288.6875,
+          "y": 631.671875,
+          "w": 85.3125,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 9e Heure : Jésus est précipité dans le torrent du Cédron — 1h à 2h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 16,
+          "y": 705.4375,
+          "w": 85.296875,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 10e Heure : Jésus est présenté à Anne — 2h à 3h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 106.890625,
+          "y": 705.4375,
+          "w": 85.3125,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 11e Heure : Chez Caïphe, Jésus est accusé par de faux témoins — 3h à 4h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 197.796875,
+          "y": 705.4375,
+          "w": 85.296875,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 12e Heure : Jésus est parmi les soldats — 4h à 5h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 288.6875,
+          "y": 705.4375,
+          "w": 85.3125,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 13e Heure : L’emprisonnement de Jésus — 5h à 6h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 16,
+          "y": 776.203125,
+          "w": 85.296875,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 14e Heure : Jésus est ramené chez Caïphe, puis conduit chez Pilate — 6h à 7h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 106.890625,
+          "y": 776.203125,
+          "w": 85.3125,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 15e Heure : Jésus est devant Pilate, puis devant Hérode — 7h à 8h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 197.796875,
+          "y": 776.203125,
+          "w": 85.296875,
+          "h": 68.171875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "hour-card  ",
+        "label": "Ouvrir la 16e Heure : Barabbas est préféré à Jésus – La flagellation — 8h à 9h",
+        "outline": "rgb(212, 168, 67) solid 3px",
+        "outlineColor": "rgb(212, 168, 67)",
+        "outlineWidth": "3px",
+        "rect": {
+          "x": 288.6875,
+          "y": 776.203125,
+          "w": 85.3125,
+          "h": 68.171875
+        }
+      }
+    ]
+  },
+  "contract": {
+    "results": [
+      {
+        "mode": "dark",
+        "id": "qa-on",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-sf",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-mark",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-cc",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-resume",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-note",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-chip",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-skip",
+        "color": "rgb(22, 20, 15)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.31
+      },
+      {
+        "mode": "dark",
+        "id": "qa-hourend",
+        "color": "rgb(23, 20, 15)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.29
+      },
+      {
+        "mode": "dark",
+        "id": "qa-theme",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-titlemark",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-update",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-refresh",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-dismiss",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "id": "qa-ink4",
+        "color": "rgb(142, 137, 129)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 4.52
+      },
+      {
+        "mode": "dark",
+        "state": "hover",
+        "id": "qa-help",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "state": "hover",
+        "id": "qa-panel",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "state": "hover",
+        "id": "qa-integrity",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "dark",
+        "state": "android-active",
+        "id": "qa-android",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-on",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-sf",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-mark",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-cc",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-resume",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-note",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-chip",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-skip",
+        "color": "rgb(22, 20, 15)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.31
+      },
+      {
+        "mode": "system",
+        "id": "qa-hourend",
+        "color": "rgb(23, 20, 15)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.29
+      },
+      {
+        "mode": "system",
+        "id": "qa-theme",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-titlemark",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-update",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-refresh",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-dismiss",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "id": "qa-ink4",
+        "color": "rgb(142, 137, 129)",
+        "background": "rgba(0, 0, 0, 0)",
+        "ratio": 4.52
+      },
+      {
+        "mode": "system",
+        "state": "hover",
+        "id": "qa-help",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "state": "hover",
+        "id": "qa-panel",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "state": "hover",
+        "id": "qa-integrity",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      },
+      {
+        "mode": "system",
+        "state": "android-active",
+        "id": "qa-android",
+        "color": "rgb(26, 23, 20)",
+        "background": "rgb(212, 168, 67)",
+        "ratio": 8.06
+      }
+    ],
+    "failures": []
+  },
+  "delta": {
+    "newCustomFailures": [],
+    "afterCustomFailureCount": 0,
+    "beforeCustomFailureCount": 144,
+    "afterAxeCount": 0,
+    "beforeAxeCount": 0,
+    "overflowAfter": [],
+    "consoleErrorsAfter": [],
+    "pageErrorsAfter": []
+  }
+}

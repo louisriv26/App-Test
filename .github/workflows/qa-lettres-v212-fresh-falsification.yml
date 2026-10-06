@@ -1,0 +1,33 @@
+name: Fresh falsification audit Lettres v2.12
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-lettres-v212-fresh-falsification/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact predecessor and successor trees
+        run: |
+          test "$(git rev-parse HEAD:lettres-v2.11-b1-darkmode)" = "35583b2234baaec5c43e7c2e08dc19b8e473d9d8"
+          test "$(git rev-parse HEAD:lettres-v2.12-b1-darkmode)" = "03617ce508bb9cce7e114c1cec4aa40c3a0b6dc9"
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install independent browser engines
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
+      - name: Prepare same-scope predecessor server
+        run: |
+          rm -rf /tmp/lettres-v212-fresh-scope
+          cp -a lettres-v2.11-b1-darkmode /tmp/lettres-v212-fresh-scope
+          cd /tmp/lettres-v212-fresh-scope
+          python3 -m http.server 8132 --bind 127.0.0.1 >/tmp/lettres-v212-fresh-server.log 2>&1 &
+          sleep 2
+      - name: Run fresh falsification audit
+        run: python qa/lettres_v212_fresh_falsification_20261004.py

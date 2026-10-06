@@ -1,0 +1,128 @@
+name: Fresh current release audit 2026-10-03
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-fresh-current-release-audit/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact candidates and static release integrity
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:24h-v120-b7-darkmode)" = "ffa6ae0129a39d9802fce6ec5b5b1967da1efc5f"
+          test "$(git rev-parse HEAD:24h-v120-b6-darkmode)" = "d16b05961a5efedd63669433f8ed0947582f6f80"
+          test "$(git rev-parse HEAD:ldc-v136-r9-darkmode)" = "c8a300b6167f015c4895572c900d989ff63bd386"
+          test "$(git rev-parse HEAD:lettres-v2.12-b1-darkmode)" = "03617ce508bb9cce7e114c1cec4aa40c3a0b6dc9"
+          test "$(git rev-parse HEAD:marie-v47-b1-darkmode)" = "81acbb9f409c7c0e1695b0ab35f33dfdc4978631"
+          python3 - <<'PY'
+          import hashlib,re,json,pathlib
+          A=pathlib.Path('24h-v120-b6-darkmode');B=pathlib.Path('24h-v120-b7-darkmode')
+          def sh(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+          fa={str(p.relative_to(A)):sh(p) for p in A.rglob('*') if p.is_file()}
+          fb={str(p.relative_to(B)):sh(p) for p in B.rglob('*') if p.is_file()}
+          changed={k for k in set(fa)|set(fb) if fa.get(k)!=fb.get(k)}
+          assert changed=={'index.html','luisa_24_heures.html','manifest.json','sw.js','version.json'},changed
+          idx=(B/'index.html').read_text(encoding='utf-8'); lu=(B/'luisa_24_heures.html').read_text(encoding='utf-8')
+          assert idx.encode()==lu.encode()
+          v=json.loads((B/'version.json').read_text(encoding='utf-8'))
+          assert v['build_revision']=='B7' and v['release_sequence']==120000007
+          shell=hashlib.sha256(idx.encode()).hexdigest()
+          assert shell==v['canonical_shell_sha256'],(shell,v['canonical_shell_sha256'])
+          sw=(B/'sw.js').read_text(encoding='utf-8'); assert shell in sw
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',idx).group(1)
+          scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>',idx,re.I)
+          executable=[s for s in scripts if len(s)>1000]
+          assert executable
+          main=max(executable,key=len)
+          tok="'sha256-"+__import__('base64').b64encode(hashlib.sha256(main.encode()).digest()).decode()+"'"
+          assert tok in csp.split('script-src-elem',1)[1].split(';',1)[0],tok
+          m=re.search(r'<style id="dark-mode-contrast-closure-v120">([\s\S]*?)</style>',idx)
+          assert m
+          stok="'sha256-"+__import__('base64').b64encode(hashlib.sha256(m.group(1).encode()).digest()).decode()+"'"
+          assert stok in csp.split('style-src-elem',1)[1].split(';',1)[0],stok
+          print('STATIC_RELEASE_INTEGRITY_PASS',sorted(changed),shell,tok,stok)
+          PY
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve exact checkout
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/fresh-current-http.log 2>&1 &
+          sleep 2
+      - name: Execute fresh audits and preserve all outcomes
+        run: |
+          set +e
+          node audit-24h-v120b7-blind-adversarial.cjs > /tmp/b7.log 2>&1
+          echo $? > /tmp/b7.exit
+          node qa-24h-b6-b7-pwa-20261003.cjs > /tmp/pwa.log 2>&1
+          echo $? > /tmp/pwa.exit
+          node qa-marie-placeholder-20261003.cjs > /tmp/marie.log 2>&1
+          echo $? > /tmp/marie.exit
+          set -e
+          cat /tmp/b7.log
+          cat /tmp/pwa.log
+          cat /tmp/marie.log
+      - name: Record exact fresh evidence
+        run: |
+          python3 - <<'PY'
+          import json,subprocess,hashlib,zipfile,pathlib,os
+          def tree(p):return subprocess.check_output(['git','rev-parse','HEAD:'+p],text=True).strip()
+          src=pathlib.Path('24h-v120-b7-darkmode'); z=pathlib.Path('/tmp/24H_v120_B7.zip')
+          with zipfile.ZipFile(z,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as f:
+            for p in sorted(x for x in src.rglob('*') if x.is_file()):
+              zi=zipfile.ZipInfo(str(p.relative_to(src)).replace(os.sep,'/'),(1980,1,1,0,0,0))
+              zi.compress_type=zipfile.ZIP_DEFLATED; zi.external_attr=0o100644<<16
+              f.writestr(zi,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          h=hashlib.sha256(z.read_bytes()).hexdigest()
+          adv=json.loads(pathlib.Path('24h-v120-b6-darkmode-adversarial/version.json').read_text()) if pathlib.Path('24h-v120-b6-darkmode-adversarial/version.json').exists() else None
+          out={
+            'date':'2026-10-03',
+            'trees':{
+              '24H_v120_B7':tree('24h-v120-b7-darkmode'),
+              '24H_v120_B6_predecessor':tree('24h-v120-b6-darkmode'),
+              'LDC_v136':tree('ldc-v136-r9-darkmode'),
+              'LETTRES_v2.12':tree('lettres-v2.12-b1-darkmode'),
+              'MJV_v47':tree('marie-v47-b1-darkmode')
+            },
+            '24H_B7_deterministic_zip_sha256':h,
+            '24H_B7_deterministic_zip_size':z.stat().st_size,
+            'exit':{
+              'strict_blind_b7':int(pathlib.Path('/tmp/b7.exit').read_text()),
+              'b6_to_b7_pwa_offline_state':int(pathlib.Path('/tmp/pwa.exit').read_text()),
+              'marie_placeholder':int(pathlib.Path('/tmp/marie.exit').read_text())
+            },
+            'parallel_b6_adversarial':None if adv is None else {
+              'release_sequence':adv.get('release_sequence'),'release_id':adv.get('release_id'),'build_revision':adv.get('build_revision')
+            },
+            'logs':{
+              'b7':pathlib.Path('/tmp/b7.log').read_text(errors='replace')[-16000:],
+              'pwa':pathlib.Path('/tmp/pwa.log').read_text(errors='replace')[-8000:],
+              'marie':pathlib.Path('/tmp/marie.log').read_text(errors='replace')[-8000:]
+            }
+          }
+          pathlib.Path('FRESH_CURRENT_RELEASE_AUDIT_2026-10-03.json').write_text(json.dumps(out,indent=2),encoding='utf-8')
+          print(json.dumps(out,indent=2))
+          PY
+      - name: Commit fresh evidence
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add FRESH_CURRENT_RELEASE_AUDIT_2026-10-03.json
+          git commit -m "Record fresh current release audit evidence 2026-10-03" || true
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: Enforce fresh gate
+        run: |
+          test "$(cat /tmp/b7.exit)" = "0"
+          test "$(cat /tmp/pwa.exit)" = "0"
+          test "$(cat /tmp/marie.exit)" = "0"

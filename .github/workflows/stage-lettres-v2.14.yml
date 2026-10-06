@@ -1,0 +1,27 @@
+name: Stage Lettres v2.14 CSP-repair successor
+on:
+  push:
+    branches: [main]
+    paths: ['.github/lettres-v2.14-stage/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind failed v2.13 predecessor
+        run: test "$(git rev-parse HEAD:lettres-v2.13-b1-csp-cleanup)" = "a0a2ae9f8b09fc0bac3fc0e61eaf51c66c307930"
+      - name: Build bounded v2.14 successor
+        run: python3 .github/scripts/stage_lettres_v2_14.py
+      - name: Commit staged successor
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lettres-v2.14-b1-csp-repair
+          git diff --cached --quiet && { echo "No staged successor"; exit 1; }
+          git commit -m "Stage Lettres v2.14 CSP-repair successor"
+          git push

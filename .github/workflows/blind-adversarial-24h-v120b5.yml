@@ -1,0 +1,38 @@
+name: Blind adversarial 24H v120 B5
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-v120b5-blind-adversarial/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  blind-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact B5, B4 and governed runtime baseline trees
+        run: |
+          test "$(git rev-parse HEAD:24h-v120-b5-darkmode-integrity)" = "6c4747edd3bda8e2158cc3ef6631771432f729db"
+          test "$(git rev-parse HEAD:24h-v120-b4-darkmode)" = "fa26ec9bf92f9d5ff8551113ad43d26fda45168e"
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve exact checkout
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/24h-b5-blind-http.log 2>&1 &
+          sleep 2
+      - name: Execute blind adversarial audit
+        run: node audit-24h-v120b5-blind-adversarial.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: blind-adversarial-24h-v120b5-evidence
+          path: blind-24h-v120b5-audit/
+          if-no-files-found: warn

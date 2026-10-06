@@ -1,0 +1,34 @@
+name: Package exact LDC v135 prephysical candidate
+on:
+  push:
+    paths:
+      - '.github/qualification-r7/PACKAGE_TRIGGER'
+  workflow_dispatch:
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build deterministic deploy zip
+        shell: bash
+        run: |
+          set -euo pipefail
+          src='ldc-v135-r8-governed-r7'
+          out="$GITHUB_WORKSPACE/LDC_v135_R8_PRE_PHYSICAL.zip"
+          find "$src" -type f -exec touch -t 202610011000.00 {} +
+          cd "$src"
+          find . -type f -print | LC_ALL=C sort | zip -X -q "$out" -@
+          cd "$GITHUB_WORKSPACE"
+          unzip -t "$out"
+          count=$(unzip -Z1 "$out" | wc -l)
+          sha=$(sha256sum "$out" | cut -d' ' -f1)
+          echo "PACKAGE_FILE=LDC_v135_R8_PRE_PHYSICAL.zip"
+          echo "PACKAGE_MEMBER_COUNT=$count"
+          echo "PACKAGE_SHA256=$sha"
+          printf '%s  %s\n' "$sha" "LDC_v135_R8_PRE_PHYSICAL.zip" > LDC_v135_R8_PRE_PHYSICAL_SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LDC_v135_R8_PRE_PHYSICAL
+          path: |
+            LDC_v135_R8_PRE_PHYSICAL.zip
+            LDC_v135_R8_PRE_PHYSICAL_SHA256.txt

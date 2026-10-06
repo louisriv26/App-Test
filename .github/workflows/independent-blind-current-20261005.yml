@@ -1,0 +1,41 @@
+name: Independent blind challenge current frozen candidates
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/blind-current-20261005/TRIGGER'
+permissions:
+  contents: read
+jobs:
+  challenge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact frozen candidate trees
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:lettres-v2.15-b1-contrast-closure)" = "2e9c48b93ec9a2246615cca00f910a2d4c2d2664"
+          test "$(git rev-parse HEAD:marie-v49-test)" = "155347f9adeef1000f45ea57381223024cda0579"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install independent browser runtimes
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+      - name: Start exact package-tree servers
+        run: |
+          python3 -m http.server 8141 --bind 127.0.0.1 --directory lettres-v2.15-b1-contrast-closure >/tmp/blind-l.log 2>&1 &
+          python3 -m http.server 8142 --bind 127.0.0.1 --directory marie-v49-test >/tmp/blind-m.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8141/index.html >/dev/null
+          curl -fsS http://127.0.0.1:8142/index.html >/dev/null
+      - name: Run independent falsification challenge
+        run: |
+          NODE_PATH="$PWD/node_modules" node .github/blind-current-20261005/challenge.cjs
+      - name: Upload blind challenge evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: independent-blind-current-20261005
+          path: /tmp/INDEPENDENT_BLIND_CHALLENGE_CURRENT_2026-10-05.json

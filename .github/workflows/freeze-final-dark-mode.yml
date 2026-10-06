@@ -1,0 +1,53 @@
+name: Freeze final dark-mode prephysical packages
+on:
+  push:
+    branches: [main]
+    paths: ['.github/freeze-final-dark-mode/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact frozen trees and reconcile lineage
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+          test "$(git rev-parse HEAD:24h-v119-b1-prephysical)" = "65ec50155f000ee8ae1cc4e0b7cce95705c973b7"
+          test "$(git rev-parse HEAD:24h-v120-b4-darkmode)" = "fa26ec9bf92f9d5ff8551113ad43d26fda45168e"
+          test "$(git rev-parse HEAD:ldc-v136-r9-darkmode)" = "c8a300b6167f015c4895572c900d989ff63bd386"
+          test "$(git rev-parse HEAD:lettres-v2.9-b1-governed-r4)" = "51585c1f3ede33617a9386315d35d9b539dad52b"
+          test "$(git rev-parse HEAD:lettres-v2.10-b1-prephysical)" = "1197deef9b1c6bc81f45bd4d9395fe04f894056b"
+          test "$(git rev-parse HEAD:lettres-v2.12-b1-darkmode)" = "03617ce508bb9cce7e114c1cec4aa40c3a0b6dc9"
+          test "$(git rev-parse HEAD:marie-v47-b1-darkmode)" = "81acbb9f409c7c0e1695b0ab35f33dfdc4978631"
+          test "f8d73f59ee09e302f7b860553adc946702917dfb" != "65ec50155f000ee8ae1cc4e0b7cce95705c973b7"
+          echo LINEAGE_BINDING_PASS
+      - name: Staleness and contradiction checks
+        run: |
+          python3 - <<'PY'
+          import json,re
+          h=open('24h-v120-b4-darkmode/index.html',encoding='utf-8').read()
+          hv=json.load(open('24h-v120-b4-darkmode/version.json'))
+          assert hv['release_id']=='24h-v120-b4-20261002-dark-mode-closure'
+          assert hv['overall_release_status'].endswith('PRODUCTION_NOT_AUTHORIZED')
+          l=open('ldc-v136-r9-darkmode/index.html',encoding='utf-8').read()
+          lv=json.load(open('ldc-v136-r9-darkmode/version.json'))
+          assert '136' in str(lv) and ('v136' in l or '136' in l)
+          e=open('lettres-v2.12-b1-darkmode/index.html',encoding='utf-8').read()
+          em=json.load(open('lettres-v2.12-b1-darkmode/manifest.json'))
+          assert "const APP_VERSION = '2.12';" in e and str(em.get('version'))=='2.12'
+          m=open('marie-v47-b1-darkmode/index.html',encoding='utf-8').read()
+          assert 'primary-action-hover-bg' in m and '#3D6399' in m
+          # protected corpus/source semantics remained outside changed boundaries, already byte-parity checked by R5.
+          print('STALENESS_CONTRADICTION_PASS')
+          PY
+      - name: Create deterministic packages
+        run: python3 .github/scripts/freeze_final_dark_mode_packages.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: final-dark-mode-prephysical-freeze
+          path: final-dark-mode-freeze/
+          if-no-files-found: error

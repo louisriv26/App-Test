@@ -1,0 +1,205 @@
+{
+  "candidate": "MJV v48/B3 fresh re-audit",
+  "firstRun": {
+    "core": {
+      "version": "48",
+      "corpus": 37,
+      "loading": false,
+      "mv": "v48",
+      "dv": "v48",
+      "self": {
+        "total": 156,
+        "passed": 156,
+        "failed": []
+      },
+      "sw": true,
+      "width": [
+        390,
+        390
+      ]
+    },
+    "navCount": 8,
+    "minNavContrast": 5.4402522826056945,
+    "arrow": {
+      "ratio": 5.110756840312723,
+      "color": "rgb(94, 146, 204)",
+      "background": "rgba(0, 0, 0, 0)",
+      "opacity": "1"
+    },
+    "onboarded": "1",
+    "errors": []
+  },
+  "mobile": {
+    "core": {
+      "version": "48",
+      "corpus": 37,
+      "loading": false,
+      "mv": "v48",
+      "dv": "v48",
+      "self": {
+        "total": 156,
+        "passed": 156,
+        "failed": []
+      },
+      "sw": true,
+      "width": [
+        390,
+        390
+      ]
+    },
+    "results": 40,
+    "unit": "VM_DV.D02",
+    "pre": {
+      "read": [
+        "VM_DV.D02"
+      ],
+      "activeDay": 2,
+      "activeAppendix": null,
+      "textSize": "xlarge",
+      "note": true,
+      "theme": "dark"
+    },
+    "persisted": {
+      "read": [
+        "VM_DV.D02"
+      ],
+      "activeDay": 2,
+      "activeAppendix": null,
+      "textSize": "xlarge",
+      "note": true,
+      "theme": "dark"
+    },
+    "afterCycle": {
+      "read": 0,
+      "activeDay": null,
+      "activeAppendix": null,
+      "note": true,
+      "textSize": "xlarge"
+    },
+    "errors": []
+  },
+  "android": {
+    "core": {
+      "version": "48",
+      "corpus": 37,
+      "loading": false,
+      "mv": "v48",
+      "dv": "v48",
+      "self": {
+        "total": 156,
+        "passed": 156,
+        "failed": []
+      },
+      "sw": true,
+      "width": [
+        412,
+        412
+      ]
+    },
+    "pid": "VM_DV.D01.P001",
+    "before": {
+      "records": 1,
+      "whole": true
+    },
+    "after": {
+      "records": 1,
+      "whole": true,
+      "readerResumed": true
+    },
+    "errors": []
+  },
+  "wide": {
+    "core": {
+      "version": "48",
+      "corpus": 37,
+      "loading": false,
+      "mv": "v48",
+      "dv": "v48",
+      "self": {
+        "total": 156,
+        "passed": 156,
+        "failed": []
+      },
+      "sw": true,
+      "width": [
+        820,
+        820
+      ]
+    },
+    "results": 40,
+    "pid": "VM_DV.D02.P001",
+    "notePlaceholder": {
+      "ratio": 4.616363561381832,
+      "color": "rgb(138, 132, 152)",
+      "background": "rgb(32, 28, 44)",
+      "opacity": "1"
+    },
+    "helpNav": {
+      "ratio": 5.4402522826056945,
+      "color": "rgb(94, 146, 204)",
+      "background": "rgb(26, 23, 32)",
+      "opacity": "1"
+    },
+    "helpArrow": {
+      "ratio": 5.110756840312723,
+      "color": "rgb(94, 146, 204)",
+      "background": "rgba(0, 0, 0, 0)",
+      "opacity": "1"
+    },
+    "errors": []
+  },
+  "deepLinks": {
+    "valid": {
+      "screen": true,
+      "q": "Fiat",
+      "results": 40,
+      "search": "?open=search&q=Fiat"
+    },
+    "invalid": {
+      "home": true,
+      "search": "",
+      "toast": "Lien non reconnu"
+    },
+    "errors": []
+  },
+  "backupValidation": {
+    "schema": 4,
+    "ok": true,
+    "okErrors": [],
+    "badFormat": false,
+    "badExtra": false,
+    "errors": []
+  },
+  "updateOffline": {
+    "post": {
+      "v": "48",
+      "read": 1,
+      "sentinel": "keep",
+      "loading": false,
+      "version": "v48",
+      "controller": true,
+      "caches": [
+        "mjv-ed403012-content-v3",
+        "mjv-ed403012-shell-v48"
+      ],
+      "stabilizationMs": 4,
+      "updateSignal": {
+        "controllerChanged": true,
+        "installing": false,
+        "waiting": false,
+        "active": true
+      }
+    },
+    "offline": {
+      "v": "48",
+      "loading": false,
+      "version": "v48",
+      "sentinel": "keep",
+      "read": 1,
+      "q": "Fiat",
+      "results": 40
+    },
+    "errors": []
+  },
+  "status": "PASS"
+}

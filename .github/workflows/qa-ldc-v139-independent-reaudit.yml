@@ -1,0 +1,141 @@
+name: LDC v139 independent re-audit 2026-10-04
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-ldc-v139-independent/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Fresh package-tree and metadata audit
+        shell: bash
+        run: |
+          set -e
+          tree=$(git rev-parse HEAD:ldc-v139-r12-search-v21a-recert)
+          test "$tree" = "b9aaaa762034d9a21398bc8c242c802f59062492"
+          test "$(find ldc-v139-r12-search-v21a-recert -type f | wc -l | tr -d ' ')" = "248"
+          python3 - <<'PY'
+          import json,hashlib,pathlib
+          r=pathlib.Path('ldc-v139-r12-search-v21a-recert')
+          for p in r.rglob('*.json'): json.loads(p.read_text(encoding='utf-8'))
+          v=json.loads((r/'version.json').read_text());o=json.loads((r/'offline_manifest.json').read_text())
+          assert v['app_version']=='v2.19.139-R1B-UX-ACCESS-R12'
+          assert v['public_version']=='139'
+          assert v['page_worker_revision']=='ldc-v2.19.139-R1B-ux-access-r12'
+          assert o['app_version']==v['app_version'] and o['page_worker_revision']==v['page_worker_revision']
+          assert len(o['assets'])==204
+          assert sum(x['bytes'] for x in o['assets'])==o['total_bytes']==114483048
+          assert v['offline_manifest_sha256']==hashlib.sha256((r/'offline_manifest.json').read_bytes()).hexdigest()
+          for x in o['assets']:
+              p=r/x['path'];b=p.read_bytes();assert len(b)==x['bytes'];assert hashlib.sha256(b).hexdigest()==x['sha256']
+          top=hashlib.sha256((r/'corpus/search_v21_topology.json').read_bytes()).hexdigest()
+          man=hashlib.sha256((r/'corpus/search_v21_manifest.json').read_bytes()).hexdigest()
+          assert top=='9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f'
+          assert man=='86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996'
+          print('STATIC_PRIMARY_EVIDENCE_PASS')
+          PY
+          for f in $(find ldc-v139-r12-search-v21a-recert -name '*.js' -type f); do node --check "$f" >/dev/null; done
+          node --check qa-ldc-v139-independent-reaudit.cjs >/dev/null
+          node --check qa-ldc-v139-independent-update.cjs >/dev/null
+      - name: Fresh 248-file GitHub Pages parity
+        shell: bash
+        run: |
+          set -e
+          base='https://louisriv26.github.io/App-Test/ldc-v139-r12-search-v21a-recert'
+          bad=0; checked=0
+          for attempt in $(seq 1 60); do
+            exp=$(sha256sum ldc-v139-r12-search-v21a-recert/index.html|cut -d' ' -f1)
+            got=$(curl -fsSL "$base/index.html?reaudit=$attempt" | sha256sum | cut -d' ' -f1 || true)
+            [ "$exp" = "$got" ] && break
+            sleep 5
+          done
+          while IFS= read -r -d '' f; do
+            rel=$(printf '%s' "$f"|sed 's#^ldc-v139-r12-search-v21a-recert/##')
+            exp=$(sha256sum "$f"|cut -d' ' -f1)
+            got=$(curl -fsSL "$base/$rel?fresh=20261004" | sha256sum|cut -d' ' -f1)
+            if [ "$exp" != "$got" ]; then echo "MISMATCH $rel"; bad=$((bad+1)); fi
+            checked=$((checked+1))
+          done < <(find ldc-v139-r12-search-v21a-recert -type f -print0)
+          python3 - "$checked" "$bad" <<'PY'
+          import json,sys,datetime
+          c,b=map(int,sys.argv[1:])
+          o={'candidate':'LDC v139 independent static/pages audit','generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'tree':'b9aaaa762034d9a21398bc8c242c802f59062492','pages_files_checked':c,'pages_mismatches':b,'overall':'PASS' if c==248 and b==0 else 'FAIL'}
+          open('qa-ldc-v139-independent-static-results.json','w').write(json.dumps(o,indent=2)+'\n');print(json.dumps(o,indent=2))
+          raise SystemExit(0 if o['overall']=='PASS' else 1)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-independent-static, path: qa-ldc-v139-independent-static-results.json}
+  runtime:
+    needs: static
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8150 --bind 127.0.0.1 >/tmp/ldc139-independent.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v139-independent-reaudit.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-independent-runtime, path: qa-ldc-v139-independent-reaudit-results.json}
+  update:
+    needs: static
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          mkdir -p qa-ldc-v139-independent-upgrade
+          python3 -m http.server 8151 --bind 127.0.0.1 --directory qa-ldc-v139-independent-upgrade >/tmp/ldc139-independent-update.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v139-independent-update.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-independent-update, path: qa-ldc-v139-independent-update-results.json}
+  publish:
+    needs: [static,runtime,update]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with: {pattern: 'ldc-v139-independent-*', path: qa-results, merge-multiple: true}
+      - name: Evaluate and record independent evidence
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,glob,os,sys
+          req={'qa-ldc-v139-independent-static-results.json','qa-ldc-v139-independent-reaudit-results.json','qa-ldc-v139-independent-update-results.json'}
+          d={}
+          for f in glob.glob('qa-results/*.json'):
+              try:d[os.path.basename(f)]=json.load(open(f)).get('overall')
+              except Exception:d[os.path.basename(f)]='INVALID'
+          print(d)
+          open('/tmp/status','w').write(json.dumps(d))
+          if not all(d.get(x)=='PASS' for x in req): sys.exit(1)
+          PY
+          mkdir -p .github/qa-ldc-v139-independent/results
+          cp qa-results/*.json .github/qa-ldc-v139-independent/results/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa-ldc-v139-independent/results
+          git commit -m 'Record independent LDC v139 re-audit evidence' || true
+          git pull --rebase origin main
+          git push origin HEAD:main

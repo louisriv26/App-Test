@@ -1,0 +1,21 @@
+name: LDC v133 bounded D11 diagnostic
+on:
+  push:
+    paths:
+      - '.github/qualification-r5/D11_TRIGGER'
+  workflow_dispatch:
+jobs:
+  d11:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: node governed-r5-ldc-v133-d11-diag.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v133-d11-diagnostic
+          path: ldc-v133-d11-diag.json

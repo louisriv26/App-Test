@@ -1,0 +1,25 @@
+name: Stage 24H v120 B3 semantic dark-mode successor
+on:
+  push:
+    paths: ['.github/24h-v120-b3-stage/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind B2 and live predecessor
+        run: |
+          test "$(git rev-parse HEAD:24h-v120-b2-darkmode)" = "96a86538fdd2781e4fb372d97d71adcfafe13374"
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+      - run: python3 .github/scripts/stage_24h_v120_b3.py
+      - name: Commit B3
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b3-darkmode
+          git commit -m "Stage 24H v120 B3 semantic dark-mode successor"
+          git push

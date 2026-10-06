@@ -1,0 +1,63 @@
+{
+    "name": "Lettres de Luisa Piccarreta",
+    "short_name": "Lettres",
+    "description": "Conseils spirituels pour vivre dans la Divine Volonté au quotidien",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#0E1A2E",
+    "theme_color": "#1A2A4A",
+    "orientation": "any",
+    "lang": "fr",
+    "categories": [
+        "lifestyle",
+        "books",
+        "education"
+    ],
+    "icons": [
+        {
+            "src": "icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "icons/icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Lettre du jour",
+            "url": "./index.html?screen=home&action=letter-of-day",
+            "icons": [
+                {
+                    "src": "icons/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ],
+            "description": "Ouvrir la lettre du jour"
+        },
+        {
+            "name": "Recherche",
+            "url": "./index.html?screen=search",
+            "icons": [
+                {
+                    "src": "icons/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ],
+            "description": "Rechercher dans les lettres"
+        }
+    ],
+    "version": "2.11",
+    "build_revision": "B1",
+    "release_id": "lettres-v2.11-b1-darkmode"
+}

@@ -1,0 +1,51 @@
+name: Dark-mode exact baseline reconciliation
+on:
+  push:
+    paths:
+      - '.github/dark-mode-baseline/TRIGGER'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch exact 24H production baseline
+        run: |
+          git clone -q https://github.com/louisriv26/Les-24-Heures-de-la-Passion.git /tmp/prod24
+          git -C /tmp/prod24 checkout -q 50a11cb67a79882e6e80088d6740b6db4827c06c
+          test "$(git -C /tmp/prod24 rev-parse HEAD)" = "50a11cb67a79882e6e80088d6740b6db4827c06c"
+          echo "24H_PROD_TREE=$(git -C /tmp/prod24 rev-parse HEAD^{tree})"
+          echo "24H_TEST_TREE=$(git rev-parse HEAD:24h-v119-b1-prephysical)"
+          echo "LETTRES_29_TREE=$(git rev-parse HEAD:lettres-v2.9-b1-governed-r4)"
+          echo "LETTRES_210_TREE=$(git rev-parse HEAD:lettres-v2.10-b1-prephysical)"
+          echo "--- 24H changed files exact production vs same-label App-Test ---"
+          diff -qr /tmp/prod24 24h-v119-b1-prephysical -x .git || true
+          echo "--- Lettres v2.9 -> v2.10 changed files ---"
+          diff -qr lettres-v2.9-b1-governed-r4 lettres-v2.10-b1-prephysical || true
+          echo "--- 24H selected diff hunks ---"
+          for f in index.html manifest.json sw.js version.json; do
+            echo "### $f"
+            git diff --no-index -U1 -- /tmp/prod24/$f 24h-v119-b1-prephysical/$f | grep -E '^(@@|[+-].*(v119|App-Test|scope|start_url|service|cache|version|onboarding|sf-btn|sr-badge|gold|github))' | head -200 || true
+          done
+          echo "--- Lettres selected diff hunks ---"
+          for f in index.html manifest.json sw.js; do
+            echo "### $f"
+            git diff --no-index -U1 -- lettres-v2.9-b1-governed-r4/$f lettres-v2.10-b1-prephysical/$f | grep -E '^(@@|[+-].*(APP_VERSION|2\.9|2\.10|help-topic|search-sort|path-step|search-term|help-dot|color-scheme|appearance|cache|scope|start_url|version))' | head -250 || true
+          done
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - name: Serve exact baselines
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/app-test-http.log 2>&1 &
+          python3 -m http.server 8766 --bind 127.0.0.1 --directory /tmp/prod24 >/tmp/prod24-http.log 2>&1 &
+          sleep 2
+      - run: node .github/scripts/dark_mode_baseline_reconcile.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dark-mode-baseline-reconcile
+          path: dark_mode_baseline_reconcile.json

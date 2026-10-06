@@ -1,0 +1,18 @@
+const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const pred='24h-v120-b6-darkmode',succ='24h-v120-b7-darkmode',root='qa-b6-b7-ui',dst=path.join(root,'app'),url='http://127.0.0.1:8097/app/luisa_24_heures.html';
+function cp(a,b){fs.rmSync(b,{recursive:true,force:true});fs.mkdirSync(path.dirname(b),{recursive:true});fs.cpSync(a,b,{recursive:true});}
+(async()=>{cp(pred,dst);const b=await chromium.launch({headless:true});const c=await b.newContext({viewport:{width:390,height:844},colorScheme:'dark'});let p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e)));
+await p.goto(url,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>window.__lp24Init==='done'&&APP_RELEASE_SEQUENCE===120000006);await p.evaluate(()=>navigator.serviceWorker.ready);await p.reload({waitUntil:'domcontentloaded'});await p.waitForFunction(()=>navigator.serviceWorker.controller&&APP_RELEASE_SEQUENCE===120000006);
+await p.evaluate(()=>localStorage.setItem('APP_GOV_SENTINEL','b6-b7-ui'));cp(succ,dst);
+const prep=await p.evaluate(async()=>{let ok=false;for(let i=0;i<20;i++){ok=await checkForUpdate(true,'ui-path-proof-'+i);await new Promise(r=>setTimeout(r,250));if(_preparedUpdate?.mode==='waiting'&&_preparedUpdate?.remote?.sequence===120000007)break;}return{ok,mode:_preparedUpdate?.mode||null,seq:_preparedUpdate?.remote?.sequence||null,status:document.getElementById('updateCheckStatus')?.textContent||''}});
+if(!prep.ok||prep.mode!=='waiting'||prep.seq!==120000007)throw new Error('not prepared '+JSON.stringify(prep));
+const before=await p.evaluate(()=>({seq:APP_RELEASE_SEQUENCE,id:APP_RELEASE_ID}));
+let refreshResult=null;try{refreshResult=await p.evaluate(()=>{const r=refreshAppForUpdate();return{started:true,isPromise:!!r&&typeof r.then==='function'}})}catch(e){refreshResult={error:String(e)}}
+for(let i=0;i<250;i++){let q=null;try{q=await p.evaluate(async()=>{let ci=null;try{ci=await queryWorkerRelease(navigator.serviceWorker.controller)}catch(e){}return{seq:typeof APP_RELEASE_SEQUENCE==='number'?APP_RELEASE_SEQUENCE:null,init:window.__lp24Init,ci,s:localStorage.getItem('APP_GOV_SENTINEL')}})}catch(e){}if(q&&q.seq===120000007&&q.init==='done'&&q.ci?.sequence===120000007&&q.s==='b6-b7-ui')break;await p.waitForTimeout(100)}
+const post=await p.evaluate(async()=>({seq:APP_RELEASE_SEQUENCE,id:APP_RELEASE_ID,s:localStorage.getItem('APP_GOV_SENTINEL'),controller:await queryWorkerRelease(navigator.serviceWorker.controller),title:document.title}));
+if(post.seq!==120000007||post.controller.sequence!==120000007||post.s!=='b6-b7-ui')throw new Error('UI commit path failed '+JSON.stringify({before,prep,refreshResult,post,errs}));
+await c.setOffline(true);await p.reload({waitUntil:'domcontentloaded',timeout:30000});await p.waitForFunction(()=>window.__lp24Init==='done'&&APP_RELEASE_SEQUENCE===120000007,null,{timeout:20000});
+const off=await p.evaluate(async()=>({seq:APP_RELEASE_SEQUENCE,s:localStorage.getItem('APP_GOV_SENTINEL'),controller:await queryWorkerRelease(navigator.serviceWorker.controller),title:document.title}));
+if(off.seq!==120000007||off.controller.sequence!==120000007||off.s!=='b6-b7-ui'||errs.length)throw new Error('offline fail '+JSON.stringify({off,errs}));
+console.log(JSON.stringify({before,prep,refreshResult,post,off,errs},null,2));console.log('B6_B7_UI_UPDATE_OFFLINE_PASS');await c.close();await b.close();
+})().catch(e=>{console.error(e);process.exit(2)});

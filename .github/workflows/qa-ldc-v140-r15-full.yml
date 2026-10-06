@@ -1,0 +1,197 @@
+name: LDC v140 R15 full prephysical QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/qa-ldc-v140-r15-full.yml'
+permissions:
+  contents: read
+jobs:
+  fullqa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Exact tree, boundary, release binding and protected surfaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          C='ldc-v140-r15-search-scroll-text-anchor'
+          P='ldc-v139-r12-search-v21a-recert'
+          test "$(git rev-parse HEAD:$C)" = '05e1e69338b8061d7da915daa60bf3dc9f1abb18'
+          test "$(git rev-parse HEAD:$P)" = 'b9aaaa762034d9a21398bc8c242c802f59062492'
+          test "$(find "$C" -type f | wc -l | tr -d ' ')" = '248'
+          python3 - <<'PY'
+          import pathlib,hashlib,json
+          p=pathlib.Path('ldc-v139-r12-search-v21a-recert')
+          c=pathlib.Path('ldc-v140-r15-search-scroll-text-anchor')
+          def files(root):
+              return {str(x.relative_to(root)):hashlib.sha256(x.read_bytes()).hexdigest() for x in root.rglob('*') if x.is_file()}
+          a,b=files(p),files(c)
+          assert len(a)==len(b)==248
+          expected={'index.html','offline_manifest.json','sw.js','version.json'}
+          changed={x for x in set(a)|set(b) if a.get(x)!=b.get(x)}
+          assert changed==expected,(changed,expected)
+          for x in set(a)-expected: assert a[x]==b[x],x
+          for f in c.rglob('*.json'): json.loads(f.read_text(encoding='utf-8'))
+          m=json.loads((c/'offline_manifest.json').read_text())
+          v=json.loads((c/'version.json').read_text())
+          assert v['app_version']=='v2.19.140-R1B-UX-ACCESS-R15'
+          assert str(v['public_version'])=='140'
+          assert v['page_worker_revision']=='ldc-v2.19.140-R1B-ux-access-r15'
+          assert m['app_version']==v['app_version']
+          assert m['page_worker_revision']==v['page_worker_revision']
+          assert v['offline_manifest_sha256']==hashlib.sha256((c/'offline_manifest.json').read_bytes()).hexdigest()
+          assert len(m['assets'])==m['asset_count']==204
+          assert m['total_bytes']==114483048
+          assert m['content_binding_sha256']=='1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384'
+          for x in m['assets']:
+              q=c/x['path']; d=q.read_bytes()
+              assert len(d)==int(x['bytes']),x['path']
+              assert hashlib.sha256(d).hexdigest()==x['sha256'],x['path']
+          for q in ['corpus/search_v21_manifest.json','corpus/search_v21_topology.json','corpus/search_v2_documents.json','corpus/search_v2_entries.json','corpus/search_v2_index.json','corpus/search_v2_jesus_filter.json','corpus/search_v2_manifest.json','search_engine_v2.js','search_exact_v21.js','search_foundation_v21b.js','search_near_v22.js','search_worker_v2.js']:
+              assert a[q]==b[q],q
+          assert v.get('physical_iphone_gate','').startswith('OPEN__')
+          assert v.get('physical_ipad_gate','').startswith('OPEN__')
+          assert 'PRODUCTION_NOT_AUTHORIZED' in v.get('current_release_authority','')
+          print('BOUNDARY_PASS',sorted(changed))
+          PY
+          for f in $(find "$C" -type f -name '*.js'); do node --check "$f" >/dev/null; done
+      - name: Wait for exact GitHub Pages index
+        shell: bash
+        run: |
+          set -euo pipefail
+          C='ldc-v140-r15-search-scroll-text-anchor'
+          exp="$(sha256sum "$C/index.html"|cut -d' ' -f1)"
+          ok=0
+          for i in $(seq 1 90); do
+            got="$(curl -fsSL "https://louisriv26.github.io/App-Test/$C/index.html?bind=$i" | sha256sum | cut -d' ' -f1 || true)"
+            if [ "$got" = "$exp" ]; then ok=1; break; fi
+            sleep 10
+          done
+          test "$ok" = 1
+      - name: Verify all 248 Pages bytes exactly
+        shell: bash
+        run: |
+          set -euo pipefail
+          C='ldc-v140-r15-search-scroll-text-anchor'
+          base="https://louisriv26.github.io/App-Test/$C"
+          checked=0
+          while IFS= read -r -d '' f; do
+            rel="${f#$C/}"
+            exp="$(sha256sum "$f"|cut -d' ' -f1)"
+            got="$(curl -fsSL "$base/$rel?exact=140r15" | sha256sum | cut -d' ' -f1)"
+            test "$got" = "$exp"
+            checked=$((checked+1))
+          done < <(find "$C" -type f -print0)
+          test "$checked" = 248
+          echo "PAGES_PARITY_PASS 248/248"
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - name: Serve exact repository trees
+        shell: bash
+        run: |
+          python3 -m http.server 8140 --bind 127.0.0.1 >/tmp/ldc-v140-r15.log 2>&1 &
+          sleep 2
+      - name: Core runtime, backup, full offline preparation and cold reopen
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('qa-ldc-v139-current.cjs').read_text()
+          reps=[
+            ('ldc-v139-r12-search-v21a-recert','ldc-v140-r15-search-scroll-text-anchor'),
+            ('8130','8140'),
+            ('.qa-ldc-v139-profile','.qa-ldc-v140-r15-profile'),
+            ('v2.19.139-R1B-UX-ACCESS-R12','v2.19.140-R1B-UX-ACCESS-R15'),
+            ("pub:'139'","pub:'140'"),
+            ('ldc-v2.19.139-R1B-ux-access-r12','ldc-v2.19.140-R1B-ux-access-r15'),
+            ('LDC v139/R12','LDC v140/R15'),
+            ('has139Shell','has140Shell'),
+            ('has139Runtime','has140Runtime'),
+            ('cache139:has139','cache140:has140'),
+            ('shell-v2\\.19\\.139-R1B-ux-access-r12','shell-v2\\.19\\.140-R1B-ux-access-r15'),
+            ('runtime-v2\\.19\\.139-R1B-ux-access-r12','runtime-v2\\.19\\.140-R1B-ux-access-r15'),
+            ('(135|136|137|138)','(135|136|137|138|139|140-R1B-ux-access-r14)')
+          ]
+          for a,b in reps:s=s.replace(a,b)
+          Path('/tmp/qa-r15-current.cjs').write_text(s)
+          PY
+          node --check /tmp/qa-r15-current.cjs
+          NODE_PATH="$GITHUB_WORKSPACE/node_modules" node /tmp/qa-r15-current.cjs
+          python3 - <<'PY'
+          import json,sys
+          d=json.load(open('qa-ldc-v139-current-results.json'))
+          print(json.dumps({'overall':d.get('overall'),'identity':d.get('identity'),'cache_binding':d.get('cache_binding'),'offline':d.get('offline'),'cold':d.get('cold')},indent=2))
+          sys.exit(0 if d.get('overall')=='PASS' else 1)
+          PY
+      - name: Search semantic equivalence, hostile geometry and anchor closures
+        shell: bash
+        run: |
+          node <<'NODE'
+          const {chromium}=require('playwright');
+          const fs=require('fs');
+          const V139='http://127.0.0.1:8140/ldc-v139-r12-search-v21a-recert/';
+          const V140='http://127.0.0.1:8140/ldc-v140-r15-search-scroll-text-anchor/';
+          const out={semantic:{},layouts:[],returnAnchor:null,textSizeUp:null,textSizeDown:null,routes:{}};
+          async function ready(p){await p.waitForFunction(()=>{const l=document.getElementById('loading'),v=document.getElementById('version-pill-home');return l&&getComputedStyle(l).display==='none'&&v&&v.textContent&&!/v—|v-$/.test(v.textContent);},{timeout:90000});}
+          async function open(browser,url,vp){const c=await browser.newContext({viewport:vp,serviceWorkers:'allow'}),p=await c.newPage();await p.goto(url,{waitUntil:'domcontentloaded',timeout:90000});await ready(p);return{c,p};}
+          async function search(p,q,mode,route='typed'){await p.evaluate(async({q,mode,route})=>{await goSearch();if(supplementMode!==mode)await setSupplementMode(mode,{rerender:false,silent:true});searchIntentMode='words';renderSearchIntentMode();const i=document.getElementById('search-input');i.value=q;if(route==='searchFor'){searchFor(q);}else{onSearchInput();await runSearch();}},{q,mode,route});await p.waitForFunction(()=>document.getElementById('search-meta')?.textContent!=='Recherche…'&&document.querySelectorAll('#search-results .result-card').length>0,{timeout:90000});await p.waitForTimeout(350);}
+          async function snap(browser,url,q,mode){const {c,p}=await open(browser,url,{width:1180,height:850});await search(p,q,mode);const x=await p.evaluate(()=>({meta:document.getElementById('search-meta').textContent,lane:document.getElementById('search-lane-row').textContent.replace(/\s+/g,' ').trim(),keys:[...document.querySelectorAll('#search-results .result-card')].map(e=>e.dataset.resultKey||'')}));await c.close();return x;}
+          async function layout(browser,vp,level,q,mode,route){const {c,p}=await open(browser,V140,vp);await p.evaluate(l=>applyTextLevel(l),level);await search(p,q,mode,route);const x=await p.evaluate(()=>{const s=document.getElementById('screen-search'),sc=document.getElementById('search-scroll'),r=document.getElementById('search-results'),f=r.querySelector('.result-card'),d=document.querySelector('.date-nav-entry'),sr=sc.getBoundingClientRect(),fr=f.getBoundingClientRect();const vs=[...s.querySelectorAll('*')].filter(e=>{const c=getComputedStyle(e);return /auto|scroll/.test(c.overflowY)&&e.scrollHeight>e.clientHeight+1;}).map(e=>e.id||e.className||e.tagName);return{first:fr.top>=sr.top-1&&fr.bottom<=sr.bottom+1,date:getComputedStyle(d).display,screenY:getComputedStyle(s).overflowY,scrollables:vs,client:sc.clientHeight,height:sc.scrollHeight,innerDelta:Math.abs(r.scrollHeight-r.clientHeight),scrollTop:sc.scrollTop};});await c.close();return x;}
+          async function anchorPosition(p,key){return p.evaluate(k=>{const sc=document.getElementById('search-scroll'),x=[...document.querySelectorAll('.result-card')].find(e=>e.dataset.resultKey===k);return x?x.getBoundingClientRect().top-sc.getBoundingClientRect().top:null;},key);}
+          async function putResultAt(p,n=8,offset=70){return p.evaluate(({n,offset})=>{const sc=document.getElementById('search-scroll'),cs=[...document.querySelectorAll('#search-results .result-card')],x=cs[Math.min(n,cs.length-1)],sr=sc.getBoundingClientRect(),xr=x.getBoundingClientRect();sc.scrollTop+=xr.top-sr.top-offset;return x.dataset.resultKey;},{n,offset});}
+          (async()=>{const b=await chromium.launch({headless:true});try{
+            for(const [q,m] of [['Professeur','aflp'],['Amour','enriched'],['bateau','enriched'],['de','aflp']]){const a=await snap(b,V139,q,m),z=await snap(b,V140,q,m);out.semantic[q]={same:a.meta===z.meta&&a.lane===z.lane&&JSON.stringify(a.keys)===JSON.stringify(z.keys),v139:a.meta,v140:z.meta,count:z.keys.length};}
+            const cases=[[{width:390,height:700},'normal','Professeur','aflp','typed'],[{width:390,height:700},'xlarge','Professeur','aflp','typed'],[{width:390,height:500},'xlarge','Professeur','aflp','typed'],[{width:820,height:560},'normal','Amour','enriched','searchFor'],[{width:820,height:560},'xlarge','Amour','enriched','searchFor'],[{width:1024,height:700},'normal','Professeur','aflp','typed']];
+            for(const c of cases)out.layouts.push({case:c,result:await layout(b,...c)});
+            {const {c,p}=await open(b,V140,{width:390,height:700});await search(p,'Professeur','aflp');const key=await putResultAt(p);await p.waitForTimeout(150);const before=await anchorPosition(p,key);await p.evaluate(k=>[...document.querySelectorAll('.result-card')].find(e=>e.dataset.resultKey===k).click(),key);await p.waitForFunction(()=>document.getElementById('screen-reader')?.classList.contains('active'),{timeout:60000});await p.evaluate(()=>backFromReader());await p.waitForFunction(()=>document.getElementById('screen-search')?.classList.contains('active')&&document.querySelectorAll('#search-results .result-card').length>0,{timeout:90000});await p.waitForTimeout(550);const after=await anchorPosition(p,key);out.returnAnchor={key,before,after,delta:after==null?null:Math.abs(after-before)};await c.close();}
+            {const {c,p}=await open(b,V140,{width:390,height:700});await search(p,'Professeur','aflp');await p.evaluate(()=>applyTextLevel('normal'));const key=await putResultAt(p);await p.waitForTimeout(150);const before=await anchorPosition(p,key);await p.evaluate(()=>setTextLevel('xlarge'));await p.waitForTimeout(500);const after=await anchorPosition(p,key);out.textSizeUp={key,before,after,delta:after==null?null:Math.abs(after-before),level:await p.evaluate(()=>document.documentElement.getAttribute('data-text-level'))};await p.evaluate(()=>setTextLevel('normal'));await p.waitForTimeout(500);const back=await anchorPosition(p,key);out.textSizeDown={key,before:after,after:back,delta:back==null||after==null?null:Math.abs(back-after),level:await p.evaluate(()=>document.documentElement.getAttribute('data-text-level'))};await c.close();}
+            {const {c,p}=await open(b,V140,{width:820,height:560});await search(p,'Amour','enriched','searchFor');out.routes.searchFor=await p.evaluate(()=>({date:getComputedStyle(document.querySelector('.date-nav-entry')).display,first:!!document.querySelector('#search-results .result-card'),scrollOwner:[...document.querySelectorAll('#screen-search *')].filter(e=>{const cs=getComputedStyle(e);return /auto|scroll/.test(cs.overflowY)&&e.scrollHeight>e.clientHeight+1}).map(e=>e.id||e.className||e.tagName)}));await p.evaluate(()=>clearSearch());await p.waitForTimeout(200);out.routes.clear=await p.evaluate(()=>({date:getComputedStyle(document.querySelector('.date-nav-entry')).display,scrollTop:document.getElementById('search-scroll').scrollTop}));await c.close();}
+            const sem=Object.values(out.semantic).every(x=>x.same&&x.count>0);
+            const lay=out.layouts.every(x=>{const r=x.result;return r.first&&r.date==='none'&&r.screenY==='hidden'&&r.scrollables.length===1&&r.scrollables[0]==='search-scroll'&&r.height>r.client&&r.innerDelta<=1;});
+            const ret=out.returnAnchor.delta!=null&&out.returnAnchor.delta<=12;
+            const up=out.textSizeUp.level==='xlarge'&&out.textSizeUp.delta!=null&&out.textSizeUp.delta<=12;
+            const down=out.textSizeDown.level==='normal'&&out.textSizeDown.delta!=null&&out.textSizeDown.delta<=12;
+            const routes=out.routes.searchFor.date==='none'&&out.routes.searchFor.first&&out.routes.searchFor.scrollOwner.length===1&&out.routes.searchFor.scrollOwner[0]==='search-scroll'&&out.routes.clear.date!=='none'&&out.routes.clear.scrollTop===0;
+            out.checks={semantic:sem,layout:lay,returnAnchor:ret,textSizeUp:up,textSizeDown:down,routes};out.overall=Object.values(out.checks).every(Boolean)?'PASS':'FAIL';
+            console.log(JSON.stringify(out,null,2));fs.writeFileSync('qa-ldc-v140-r15-layout-results.json',JSON.stringify(out,null,2)+'\n');if(out.overall!=='PASS')process.exitCode=1;
+          }finally{await b.close();}})().catch(e=>{console.error(e);process.exit(2);});
+          NODE
+      - name: v139 to R15 activation and user-state preservation
+        shell: bash
+        run: |
+          node <<'NODE'
+          const {chromium}=require('playwright');
+          const fs=require('fs'),path=require('path');
+          const SERVE=path.join(process.cwd(),'qa-r15-upgrade'),APP=path.join(SERVE,'app'),PROFILE=path.join(process.cwd(),'.qa-r15-upgrade-profile');
+          const URL='http://127.0.0.1:8141/app/';
+          function copy(src,dst){fs.rmSync(dst,{recursive:true,force:true});fs.cpSync(src,dst,{recursive:true});}
+          async function ready(p,t=90000){await p.waitForFunction(()=>{const l=document.getElementById('loading'),v=document.getElementById('version-pill-home');return l&&getComputedStyle(l).display==='none'&&v&&v.textContent&&!/v—|v-$/.test(v.textContent);},{timeout:t});}
+          (async()=>{fs.rmSync(PROFILE,{recursive:true,force:true});fs.mkdirSync(SERVE,{recursive:true});copy('ldc-v139-r12-search-v21a-recert',APP);
+            const server=require('child_process').spawn('python3',['-m','http.server','8141','--bind','127.0.0.1','--directory',SERVE],{stdio:'ignore'});
+            const c=await chromium.launchPersistentContext(PROFILE,{headless:true,serviceWorkers:'allow',viewport:{width:390,height:700}});const p=await c.newPage();
+            try{await p.goto(URL,{waitUntil:'domcontentloaded',timeout:90000});await ready(p);let ctrl=await p.evaluate(()=>!!navigator.serviceWorker.controller);if(!ctrl){await p.reload({waitUntil:'domcontentloaded'});await ready(p);}
+              await p.evaluate(async()=>{localStorage.setItem('qa_r15_local','keep-r15');await dbPut('settings',{key:'qa_r15_sentinel',val:'keep-r15',ts:Date.now()});});
+              const pre=await p.evaluate(()=>({app:APP_VERSION,pub:PUBLIC_VERSION,local:localStorage.getItem('qa_r15_local')}));
+              copy('ldc-v140-r15-search-scroll-text-anchor',APP);
+              const activation=await p.evaluate(async()=>{const reg=await navigator.serviceWorker.getRegistration();if(!reg)throw new Error('no registration');let changes=0;navigator.serviceWorker.addEventListener('controllerchange',()=>changes++);await reg.update();const end=Date.now()+30000;while(Date.now()<end&&!reg.waiting){await new Promise(r=>setTimeout(r,200));}if(reg.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'});const end2=Date.now()+30000;while(Date.now()<end2&&changes===0)await new Promise(r=>setTimeout(r,200));return{changes};});
+              await p.reload({waitUntil:'domcontentloaded',timeout:90000});await ready(p);
+              const post=await p.evaluate(async()=>({app:APP_VERSION,pub:PUBLIC_VERSION,local:localStorage.getItem('qa_r15_local'),idb:(await dbGet('settings','qa_r15_sentinel').catch(()=>null))?.val||null,caches:(await caches.keys()).filter(x=>x.startsWith('ldc-le-livre-du-ciel-')).sort()}));
+              await p.evaluate(async()=>{await goSearch();const i=document.getElementById('search-input');i.value='Professeur';onSearchInput();await runSearch();});await p.waitForFunction(()=>document.querySelectorAll('#search-results .result-card').length>0,{timeout:90000});
+              const search=await p.evaluate(()=>({cards:document.querySelectorAll('#search-results .result-card').length,meta:document.getElementById('search-meta').textContent}));
+              const out={pre,activation,post,search,overall:pre.app==='v2.19.139-R1B-UX-ACCESS-R12'&&post.app==='v2.19.140-R1B-UX-ACCESS-R15'&&post.pub==='140'&&post.local==='keep-r15'&&post.idb==='keep-r15'&&activation.changes>=1&&search.cards>0&&post.caches.some(x=>/shell-v2\.19\.140-R1B-ux-access-r15$/.test(x))&&post.caches.some(x=>/runtime-v2\.19\.140-R1B-ux-access-r15$/.test(x))&&!post.caches.some(x=>/shell-v2\.19\.139|runtime-v2\.19\.139/.test(x))?'PASS':'FAIL'};
+              console.log(JSON.stringify(out,null,2));fs.writeFileSync('qa-ldc-v140-r15-upgrade-results.json',JSON.stringify(out,null,2)+'\n');if(out.overall!=='PASS')process.exitCode=1;
+            }finally{await c.close();server.kill();}})().catch(e=>{console.error(e);process.exit(2);});
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v140-r15-fullqa
+          path: |
+            qa-ldc-v139-current-results.json
+            qa-ldc-v140-r15-layout-results.json
+            qa-ldc-v140-r15-upgrade-results.json

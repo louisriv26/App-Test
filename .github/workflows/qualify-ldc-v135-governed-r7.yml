@@ -1,0 +1,85 @@
+name: Qualify exact LDC v135 governed R7 successor
+on:
+  push:
+    paths:
+      - '.github/qualification-r7/TRIGGER'
+  workflow_dispatch:
+jobs:
+  bind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for exact Pages index bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://louisriv26.github.io/App-Test/ldc-v135-r8-governed-r7/index.html'
+          exp=$(sha256sum ldc-v135-r8-governed-r7/index.html | cut -d' ' -f1)
+          ok=0
+          for i in $(seq 1 60); do
+            got=$(curl -fsSL "$url?bind=$i" | sha256sum | cut -d' ' -f1 || true)
+            if [ "$got" = "$exp" ]; then ok=1; break; fi
+            sleep 10
+          done
+          test "$ok" -eq 1
+      - name: Full served-byte parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://louisriv26.github.io/App-Test/ldc-v135-r8-governed-r7'
+          bad=0
+          while IFS= read -r -d '' f; do
+            rel="${f#ldc-v135-r8-governed-r7/}"
+            [ "$rel" = ".nojekyll" ] && continue
+            exp=$(sha256sum "$f"|cut -d' ' -f1)
+            got=$(curl -fsSL "$base/$rel?fullbind=1"|sha256sum|cut -d' ' -f1) || { echo "FETCH_FAIL $rel"; bad=1; continue; }
+            [ "$exp" = "$got" ] || { echo "HASH_FAIL $rel $exp $got"; bad=1; }
+          done < <(find ldc-v135-r8-governed-r7 -type f -print0)
+          test "$bad" -eq 0
+      - name: Exact release-binding and staleness checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q "const APP_VERSION = 'v2.19.135-R1B-UX-ACCESS-R8'" ldc-v135-r8-governed-r7/index.html
+          grep -q "const SW_CACHE_VERSION = 'ldc-v2.19.135-R1B-ux-access-r8'" ldc-v135-r8-governed-r7/index.html
+          grep -q "const VERSION = 'ldc-v2.19.135-R1B-ux-access-r8'" ldc-v135-r8-governed-r7/sw.js
+          grep -q "shell-v2.19.135-R1B-ux-access-r8" ldc-v135-r8-governed-r7/sw.js
+          grep -q "runtime-v2.19.135-R1B-ux-access-r8" ldc-v135-r8-governed-r7/sw.js
+          grep -q '"page_worker_revision": "ldc-v2.19.135-R1B-ux-access-r8"' ldc-v135-r8-governed-r7/version.json
+          grep -q '"page_worker_revision": "ldc-v2.19.135-R1B-ux-access-r8"' ldc-v135-r8-governed-r7/offline_manifest.json
+          ! grep -n '"page_worker_revision": "ldc-v2.19.131-R1B-ux-access-r5"' ldc-v135-r8-governed-r7/version.json
+          ! grep -n 'shell-v2.19.131-R1B-ux-access-r5\|runtime-v2.19.131-R1B-ux-access-r5' ldc-v135-r8-governed-r7/sw.js
+  runtime:
+    needs: bind
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - name: Real-origin D04 D11 backup cold-offline gates
+        run: node governed-r7-ldc-v135.test.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v135-runtime-evidence
+          path: governed-r7-ldc-v135-results.json
+  upgrade:
+    needs: bind
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - name: Production-predecessor to v135 state-preservation update gate
+        run: node governed-r7-ldc-v135-upgrade.test.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v135-upgrade-evidence
+          path: governed-r7-ldc-v135-upgrade-results.json

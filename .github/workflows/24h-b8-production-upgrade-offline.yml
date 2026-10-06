@@ -1,0 +1,36 @@
+name: 24H v119 to B8 production-path upgrade offline
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b8-upgrade/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact predecessor and B8
+        run: |
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+          test "$(git rev-parse HEAD:24h-v120-b8-update-activation-closure)" = "3e5f03b4ff1c6d6ff36e8396d67193558ad7319c"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: mkdir -p qa-24h-b8-upgrade
+      - run: |
+          python3 -m http.server 8086 --bind 127.0.0.1 --directory qa-24h-b8-upgrade >/tmp/24hb8up.log 2>&1 &
+          sleep 2
+      - name: Exercise production-controlled update protocol, state and offline reopen
+        run: node 24h-b8-production-upgrade-offline.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 24h-b8-production-upgrade-offline-evidence
+          path: 24h-b8-production-upgrade-offline-results.json
+          if-no-files-found: warn

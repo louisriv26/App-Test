@@ -1,0 +1,616 @@
+{
+  "schema": "ldc-tome1-final-recension-ledger-v1",
+  "policy_id": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+  "date": "2026-09-26",
+  "base_candidate_sha256": "b762c86e36e913a1b04d23de73137e906e6b9672fcf5551f55f9b7a0d23762da",
+  "backbone_generation": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
+  "composite_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
+  "decision_rule": {
+    "principle": "When a destructive/contractive operation conflicts with positively attested longer wording and genealogy cannot prove the longer wording secondary, retain the current longer state and preserve the shorter alternative as a documented variant.",
+    "gamba_dependency": "WAIVED_BY_USER__ASSUME_UNAVAILABLE",
+    "variant_preservation": "All rejected R3 specifications and IT-PM/IT-DV short states remain recorded in this ledger.",
+    "reader_body_policy": "One coherent PRINCIPAL reading is retained; variants are documented rather than silently deleting attested text."
+  },
+  "counts": {
+    "governed_operations": 23,
+    "closed_keep_current": 23,
+    "target_refs": 49,
+    "paragraph_text_mutations": 0,
+    "physical_aflp_long_confirmed_operations": 20,
+    "eighth_excess_related_operations": 3
+  },
+  "decisions": [
+    {
+      "candidate_id": "C2C9-01",
+      "target_refs": [
+        "LDC.T01.SEC088.P001"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "DELETE_FULL_PARAGRAPH",
+      "rejected_r3_spec": "[DELETE P001; no replacement text]",
+      "retained_text": "À la suite des nombreuses grâces que Jésus m'accordait sans cesse, j'étais dévorée du saint désir d'être toujours unie à Lui, y compris quand mon âme sortait de mon corps et que Jésus me donnait de grandes douleurs à souffrir pour ceux qui manquent d'appréciation pour le Saint Sacrifice de la Messe et pour le sacrement d'Amour.",
+      "retained_text_sha256": "daa9e651788471605fc05cc92f666a9d31552125d184b7b1251359bdf2ce0984",
+      "short_itpm_variant": "Ora, in queste uscite che il Signore mi faceva fare, delle volte mi rinnovava la promessa dello sposalizio già detto.",
+      "short_itdv_variant": "Ora in queste uscite che il Signore mi faceva fare, delle volte mi rinnovava la promessa dello sponsalizio già detto",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "84",
+      "physical_aflp_2022_photos": [
+        "IMG_7250.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C9-04",
+      "target_refs": [
+        "LDC.T01.SEC088.P021",
+        "LDC.T01.SEC088.P022",
+        "LDC.T01.SEC088.P023",
+        "LDC.T01.SEC088.P024",
+        "LDC.T01.SEC088.P025",
+        "LDC.T01.SEC088.P026"
+      ],
+      "target_ref_count": 6,
+      "rejected_r3_operation": "DELETE_CONTIGUOUS_PARAGRAPH_BLOCK",
+      "rejected_r3_spec": "[DELETE P021-P026; no replacement text]",
+      "retained_text": "Dans cette précieuse tenue, je devins profondément pensive, méditant sur la pauvreté de ma personne et sur la signification de chaque ornement dont Il m'avait parée la nuit précédant notre mariage mystique.\nJe peux dire que jamais dans ma vie je ne m'étais sentie dans une si extravagante situation. Cela me fit ressentir le grand fardeau que Dieu peut donner à une créature considérée comme une amoureuse de Lui.\nOh ! quelle sensation vraiment étrange habita mon esprit. Plutôt que de ressentir la sublimité de ce que Jésus venait d'opérer sur ma personne, je ressentais tout l'opposé.\nJe me suis sentie anéantie d'une manière qui me faisait croire que j'étais hors de mon être, et que j'étais morte. Mais, dans cet état d'anéantissement, j'eus recours à mon bien-aimé Jésus.\nDans ma grande confusion, je n'arrivais pas à croire que c'était Dieu qui avait paré la plus petite de Ses servantes avec autant et de si précieux joyaux. Il me semblait inconvenant que non seulement Il m'ait fourni une telle tenue, mais qu'encore et plus que tout, un Dieu ait agi comme serviteur de l'épouse qu'Il a choisie, un Dieu à qui toute créature obéit au moindre de ses signes. Ainsi je Le suppliai d'avoir pitié de moi et de me pardonner.\nPour ce qui est de la signification des diverses parties de ma tenue, chacune considérée séparément, je les passe sous silence, puisque je me souviens très peu de cela maintenant, après tant d'années.",
+      "retained_text_sha256": "e262adab87e25e4b7ebf03ed4f86552026b1327691306ed4a20b321bf98307b4",
+      "short_itpm_variant": "Finalmente prese un velo e con quello tutta mi coprì, dalla testa fino ai piedi, e così mi lasciò. Ah, mi pareva che in quel velo ci fosse un grande significato, perché i demoni, nel vedermi ricoperta con quel velo, restavano tanto spaventati",
+      "short_itdv_variant": "Finalmente prese un velo e con quello tutta mi copri, della testa fino ai piedi, e così mi lasciò. Ah! mi pareva che in quel velo ci stasse un grande significato, perché i demoni al vedermi ricoperta con quel velo, restavano tanto spaventati",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "86–87",
+      "physical_aflp_2022_photos": [
+        "IMG_7252.JPG",
+        "IMG_7253.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C9-18",
+      "target_refs": [
+        "LDC.T01.SEC113.005.R02.P008",
+        "LDC.T01.SEC113.005.R02.P009"
+      ],
+      "target_ref_count": 2,
+      "rejected_r3_operation": "REPLACE_ADJACENT_PARAGRAPH_BLOCK",
+      "rejected_r3_spec": "Je suis descendu du Ciel pour M'en emparer.\nDe grâce, ne Me les refusez pas !",
+      "retained_text": "Au contact de Mon Cœur, Je réchaufferai vos cœurs. Je les ferai éclater dans les flammes de Mon Amour et Je détruirai en eux ce qui n'est pas du Paradis.\nSachez que Mon but en quittant le Paradis pour M'incarner dans le sein de Ma Maman, était que vous puissiez entrer dans le Sein de Mon Père Éternel.",
+      "retained_text_sha256": "b687b2c71ae26cf6f32eec6c8154418fb6463ff119c246bdfc5386f3d1189f4d",
+      "short_itpm_variant": "dammi il tuo cuore; tutto ciò che tu vuoi Io ti darò, purché mi dia in cambio il cuore tuo. Sono sceso dal Cielo per farne preda: deh, non me lo negare! Non rendere deluse le mie speranze!",
+      "short_itdv_variant": "dammi il tuo cuore, tutto ciò che tu vuoi Io ti darò purchè mi dai in cambio il cuore tuo; sono sceso dal Cielo per farne preda, deh! non me lo negare! non rendere deluso le mie speranze!",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "EIGHTH_EXCESS_NOT_PRINTED_IN_THIS_EDITION__RECENSION_DIVERGENCE_CONFIRMED",
+      "physical_aflp_2022_pages": "opening; 4–5; 139",
+      "physical_aflp_2022_photos": [
+        "IMG_7171.JPG",
+        "IMG_7172.JPG",
+        "IMG_7167.JPG",
+        "IMG_7305.JPG"
+      ],
+      "evidence_basis": "GE_LUMEN_2021_LONG_PLUS_CURRENT_LUMEN_LONG_PLUS_LONG_ITALIAN_PLUS_ENGLISH_UPSTREAM__AFLP_2022_OMITS_STANDALONE_BLOCK__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C9-19",
+      "target_refs": [
+        "LDC.T01.SEC113.005.R02.P016",
+        "LDC.T01.SEC113.005.R02.P017"
+      ],
+      "target_ref_count": 2,
+      "rejected_r3_operation": "DELETE_CONTIGUOUS_PARAGRAPH_BLOCK",
+      "rejected_r3_spec": "[DELETE P016-P017; no replacement text]",
+      "retained_text": "Mon enfant, ne semble-t-il pas que les créatures raisonnables ont perdu la raison. Alors qu'elles devraient se réjouir d'être submergées et réchauffées par les flammes de Mon Amour divin, elles essaient de s'en détacher en allant à la recherche d'amours bestiaux aptes à les conduire dans le chaos infernal pour y pleurer éternellement.»\nÀ ces Paroles de Jésus, je me sentis fondre. J'étais terrifiée. Je tremblais en pensant aux dommages irréparables entraînés par l'ingratitude des hommes et à leurs éternelles conséquences.",
+      "retained_text_sha256": "fae28083ec7f3d4115839007cf8fda6382c859b8ffe262df0a94200f2cecc2af",
+      "short_itpm_variant": "E poi mi sentivo dire: “E tu, non vuoi darmi il tuo cuore? Forse anche tu vuoi che gema, preghi e pianga per darmi il tuo cuore? Vuoi negarmi l’elemosina che ti chiedo?”.",
+      "short_itdv_variant": "E poi mi sentivo dire: “E tu non vuoi darmi il tuo cuore? Forse anche tu vuoi che gema, preghi e pianga per darmi il tuo cuore? Vuoi negarmi la elemosina che ti chiedo?”",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "EIGHTH_EXCESS_NOT_PRINTED_IN_THIS_EDITION__RECENSION_DIVERGENCE_CONFIRMED",
+      "physical_aflp_2022_pages": "opening; 4–5; 139",
+      "physical_aflp_2022_photos": [
+        "IMG_7171.JPG",
+        "IMG_7172.JPG",
+        "IMG_7167.JPG",
+        "IMG_7305.JPG"
+      ],
+      "evidence_basis": "GE_LUMEN_2021_LONG_PLUS_CURRENT_LUMEN_LONG_PLUS_LONG_ITALIAN_PLUS_ENGLISH_UPSTREAM__AFLP_2022_OMITS_STANDALONE_BLOCK__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C9-20",
+      "target_refs": [
+        "LDC.T01.SEC113.005.R02.P021",
+        "LDC.T01.SEC113.005.R02.P022"
+      ],
+      "target_ref_count": 2,
+      "rejected_r3_operation": "REPLACE_ADJACENT_PARAGRAPH_BLOCK",
+      "rejected_r3_spec": "Et moi : «Mon Jésus, ne pleure pas ; je Te donne mon cœur et je me donne tout entière.»\nPuis la voix intérieure poursuivit : «Va plus loin, passe au neuvième excès de Mon Amour.»",
+      "retained_text": "Et sanglotant d'un vif amour jamais ressenti auparavant, je dis : «Mon bien-aimé Jésus, ne pleure plus. Oui, oui ! Je Te donne non seulement mon cœur, mais je me donne moi-même. Je n'hésite pas à tout Te donner. Mais pour que mon don soit plus beau, je veux enlever de mon cœur tout ce qui n'est pas de Toi.\nAussi, s'il Te plaît, donne-moi cette grâce efficace pour rendre mon cœur comme le Tien, pour que Tu puisses y trouver une demeure stable et permanente.»",
+      "retained_text_sha256": "b921c7da1d9f36af14ab3d7b4f82e073a0aeac43c498ce484b80ff6427fe8c4a",
+      "short_itpm_variant": "Ed io: “Mio Gesù, non piangere, Vi dono il mio cuore e tutta me stessa”. Onde la voce interna proseguiva: “Passa più oltre, passa al nono eccesso del mio Amore”.",
+      "short_itdv_variant": "ed io: “Mio Gesù, non piangere, vi dono il mio cuore e tutta me estessa.” Onde la voce interna seguiva: “Passa più oltre, e passa al nono eccesso del mio amore.”",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "EIGHTH_EXCESS_NOT_PRINTED_IN_THIS_EDITION__RECENSION_DIVERGENCE_CONFIRMED",
+      "physical_aflp_2022_pages": "opening; 4–5; 139",
+      "physical_aflp_2022_photos": [
+        "IMG_7171.JPG",
+        "IMG_7172.JPG",
+        "IMG_7167.JPG",
+        "IMG_7305.JPG"
+      ],
+      "evidence_basis": "GE_LUMEN_2021_LONG_PLUS_CURRENT_LUMEN_LONG_PLUS_LONG_ITALIAN_PLUS_ENGLISH_UPSTREAM__AFLP_2022_OMITS_STANDALONE_BLOCK__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C9-21",
+      "target_refs": [
+        "LDC.T01.SEC084.P007"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "REPLACE_FULL_PARAGRAPH",
+      "rejected_r3_spec": "Il me disait : «Puisque tu souffres tant d'être privée de Moi, viens maintenant avec Moi : Je veux te consoler.»",
+      "retained_text": "Il me disait : «Puisque tu as expérimenté de grandes souffrances quand tu étais privée de Ma Présence visuelle pendant une heure ou à peu près, maintenant vole avec Moi. Je veux te consoler et te griser de Mon Amour.»",
+      "retained_text_sha256": "18ac2ce4bd7bb6e4f3dc4b659f54035ce141ada47a78bb6b25cd1dbad02b4d1a",
+      "short_itpm_variant": "Se tanto ti dà pena l’essere priva di Me, adesso vieni insieme con Me, che voglio consolarti",
+      "short_itdv_variant": "Se tanto ti dà pena l’essere priva di Me, adesso vieni insieme con Me, che voglio consolarti.",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "77",
+      "physical_aflp_2022_photos": [
+        "IMG_7243.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C9-22",
+      "target_refs": [
+        "LDC.T01.SEC084.P018",
+        "LDC.T01.SEC084.P019",
+        "LDC.T01.SEC084.P020",
+        "LDC.T01.SEC084.P021"
+      ],
+      "target_ref_count": 4,
+      "rejected_r3_operation": "REPLACE_ADJACENT_PARAGRAPH_BLOCK",
+      "rejected_r3_spec": "Oh ! combien de fois la mort s'est moquée de moi !\nMais viendra un jour où c'est moi qui me moquerai d'elle.\nAlors Jésus venait, me prenait dans Ses bras et m'approchait de Son Cœur ; oh ! comme je sentais la vie revenir en moi !\nPuis, de Ses lèvres, Il versait une liqueur très douce, et ainsi les souffrances s'apaisaient.",
+      "retained_text": "Les gens sur la terre, non seulement ne peuvent ressentir de telles souffrances, mais ne peuvent même pas imaginer leur profondeur.\nEn analysant l'histoire de mon âme cette âme pauvre et misérable qui a bien des fois imité son bien-aimé Jésus on pourrait croire que la mort se moquait de moi.\nMême si je n'étais alors pas digne de mourir, je savais que la mort viendrait bientôt. Elle viendra en son temps, et elle ne se moquera plus de moi. Ce sera plutôt moi qui la ridiculiserai en lui disant : «J'ai badiné bien des fois avec toi. Je t'ai effleurée au moins cent mille fois. Je n'ai plus qu'égalisé le compte avec toi !» Je dis cela car, à bien des occasions, j'aurais quitté ce monde sans Jésus qui, après avoir communiqué directement d'atroces souffrances à mon âme, me réanimait, en m'attirant près de son Cœur qui est Vie pour moi, ou, en me prenant dans ses bras qui sont Force pour moi, ou en versant de sa bouche en moi un très doux élixir.\nEt puisque les souffrances communiquées directement à mon âme sont plus terribles que celles communiquées à mon corps, je serais sûrement morte bien des fois sans ce merveilleux Jésus.",
+      "retained_text_sha256": "b2767fa5f1d74888c0276709def9d84872356950ee4c012630397ee0f09d2d1f",
+      "short_itpm_variant": "oh, quante volte la morte si è burlata di me, ma verrà un giorno che io mi burlerò di lei), allora veniva Gesù, mi prendeva fra le sue braccia, mi avvicinava al suo Cuore ed, oh, come mi sentivo ritornare la vita! Poi, dalle sue labbra versava un liquore dolcissimo, e così si mitigavano le pene.",
+      "short_itdv_variant": "Oh! quante volte la morte si è burlata di me, ma verrà un giorno che io mi burlerò di lei. Allora veniva Gesù, mi prendeva fra le sue braccia, m’avvicinava al suo cuore ed oh!, come mi sentivo ritornare la vita, poi, dalle sue labbra versava un liquore dolcissimo, e così si mitigavano le pene.",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "78",
+      "physical_aflp_2022_photos": [
+        "IMG_7244.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C9-24",
+      "target_refs": [
+        "LDC.T01.SEC101.P006"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "DELETE_ADDED_RECIPROCAL_CLAUSE",
+      "rejected_r3_spec": "Je ne peux pas décrire le changement qui s'établit en moi. Je me suis sentie comme si j'avais été évincée de moi-même, c'est-à-dire comme si je ne vivais plus en moi-même. Très assurément, les Personnes Divines vivaient en moi.",
+      "retained_text": "Je ne peux pas décrire le changement qui s'établit en moi. Je me suis sentie comme si j'avais été évincée de moi-même, c'est-à-dire comme si je ne vivais plus en moi-même. Très assurément, les Personnes Divines vivaient en moi et moi en Elles.",
+      "retained_text_sha256": "e38484e1bf0b7b82bd359d2d255bbb1b03fc9cf1e2aa3bbbda69fa96c0118a15",
+      "short_itpm_variant": "Mi sentivo divinizzata; non più io vivevo, ma Loro vivevano in me 113.",
+      "short_itdv_variant": "Mi sentivo divinizzata, non più io vivevo, ma loro vivevano in me.",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "103",
+      "physical_aflp_2022_photos": [
+        "IMG_7269.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C9-26",
+      "target_refs": [
+        "LDC.T01.SEC101.P021"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "REPLACE_FIRST_SENTENCE",
+      "rejected_r3_spec": "Quand je regardais les Trois, je n'en trouvais plus qu'Un.",
+      "retained_text": "Si j'en regardais Un, j'en voyais Trois. Quand j'en tenais Un dans mes bras, soudain j'en tenais Trois. Que j'en aie tenu Un ou Trois, la pesanteur semblait être la même. Je ressentais beaucoup d'Amour pour les trois.",
+      "retained_text_sha256": "424da267a6c7df6feeaf704d8ced2a8cae7497f9107013ed32769fedfb5e98ef",
+      "short_itpm_variant": "tra la meraviglia facevo per guardare e da Tre trovavo Uno solo.",
+      "short_itdv_variant": "tra la meraviglia facevo per guardare, e da tre trovavo un solo.",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "104",
+      "physical_aflp_2022_photos": [
+        "IMG_7270.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-01",
+      "target_refs": [
+        "LDC.T01.SEC033.P003"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "REPLACE_FINAL_CLAUSE",
+      "rejected_r3_spec": "C'est Moi qui souffrirai et combattrai en toi.",
+      "retained_text": "Jésus poursuivit : «Très bien ! Je veux purifier ton âme de tout défaut qui pourrait faire obstacle à Mon Amour en toi. Je veux savoir si tu M'es vraiment fidèle, assez pour être toute Mienne. Et pour que tu Me prouves que tout ce que tu M'as dit est vrai, Je vais te mettre à l'épreuve dans une très âpre bataille. Tu n'as rien à craindre et tu ne souffriras d'aucun mal. Je serai ton bras et ta force, et Je Me battrai à tes côtés.",
+      "retained_text_sha256": "41a411ad421f42c2a9d866bca1b2892a316cfedee91f53931d4a41e9212b8e46",
+      "short_itpm_variant": "L1255 | che soffrirò e combatterò in te. Vedi, voglio purificare l’anima tua da ogni minimo neo che",
+      "short_itdv_variant": "L640 | forza, non tu soffrirai, ma Io che soffrirò e combattirò in te. Vedi, voglio",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "28",
+      "physical_aflp_2022_photos": [
+        "IMG_7194.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-02",
+      "target_refs": [
+        "LDC.T01.SEC033.P010",
+        "LDC.T01.SEC033.P011"
+      ],
+      "target_ref_count": 2,
+      "rejected_r3_operation": "REPLACE_PARAGRAPH_BLOCK",
+      "rejected_r3_spec": "Mais garde toujours les yeux fixés sur ce que Je veux faire de toi, c'est-à-dire te rendre semblable à Moi.\nTu ne pourras y parvenir que par de nombreuses et grandes tribulations ; ainsi tu auras plus de courage pour en supporter les peines.»",
+      "retained_text": "Mais tu devras toujours garder en mémoire ceci : commence la bataille en Mon Nom. Invoque continuellement ce bouclier de sécurité.\nUtilise Mon Nom comme le sceau d'achèvement de ce très douloureux combat, qui commencera, se continuera, et se terminera victorieusement dans Ma Volonté. Ma Volonté te rendra complètement semblable à Moi. Il n'y a pas d'autre voie, d'autre manière pour parvenir à la victoire. Tu seras plus tard bien récompensée.»",
+      "retained_text_sha256": "d3048cd0239ff78c8a2f2cf57ce619ba94aca4f577e59f50728ba9ff407711bc",
+      "short_itpm_variant": "L1265 | ma tu abbi sempre la mira a quello che voglio fare di te, cioè di farti simile a Me, come è che a",
+      "short_itdv_variant": "L653 | mira a quello che voglio fare di te, cioè di farti simile a me, e che a ciò non",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "29",
+      "physical_aflp_2022_photos": [
+        "IMG_7195.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-03",
+      "target_refs": [
+        "LDC.T01.SEC082.P010",
+        "LDC.T01.SEC082.P011",
+        "LDC.T01.SEC082.P012",
+        "LDC.T01.SEC082.P013",
+        "LDC.T01.SEC082.P014"
+      ],
+      "target_ref_count": 5,
+      "rejected_r3_operation": "REPLACE_PARAGRAPH_BLOCK_WITH_SOURCE_BRIDGE",
+      "rejected_r3_spec": "Qui pourrait dire ce que j'éprouvais, tant dans l'âme que dans le corps, par ces grâces que Jésus me faisait ? Si je voulais les raconter, je serais trop longue.",
+      "retained_text": "Que dire de tout ce que j'expérimentai d'Amour céleste à la suite de tant de grâces inhabituelles paradisiaques ? Si je devais dire tout ce que mon très doux Jésus me communiquait, je risquerais de devenir ennuyeuse. À mon confesseur non plus je ne pouvais pas tout dire, parce que ça aurait pris beaucoup trop de temps.\nJe me limiterai ici à dire brièvement ce qu'il suffit de savoir pour comprendre un peu l'état d'une âme qui est en pleine possession de Jésus, le plus délicieux Époux de l'âme.\nEt, avec toute la véhémence de mon cœur, je veux m'exclamer en Lui disant : «Ô Jésus, comme j'ai apprécié toutes Tes douces et délicieuses communications !»\nLes souffrances qui me sont départies par mon Jésus sont à la fois amères, douces et intermittentes, Lui-même si rempli d'amertume. Mais si la douceur et l'amertume n'étaient pas données simultanément à l'âme qui est devenue une victime d'amour, d'expiation et de réparation, cette âme ne pourrait tenir bien longtemps sans mourir.\nLe corps se désintégrerait et l'âme irait rapidement rejoindre son Dieu. D'où mes gémissements et mes plaintes quand je pensais qu'Il m'avait laissée.",
+      "retained_text_sha256": "2bac2ff5156c615045dad33cd9d675c30644aa4446596796519147f4f8028fa4",
+      "short_itpm_variant": "L2302 | Chi può dire ciò che io sperimentavo, tanto nell’anima quanto nel corpo, da queste grazie che Gesù mi faceva? Se io le volessi [126] dire, andrei troppo per le lunghe. Ricordo che delle volte, quando non ci veniva presto, io mi lamentavo con Lui, dicendogli: “Deh,",
+      "short_itdv_variant": "L1779 | quanto nel corpo, da queste grazie che Gesù mi faceva? Se io le volessi dire, anderei troppo per le lunghe. Ricordo che delle volte quando non ci veniva presto, io mi lamentavo con Lui dicendogli: “Deh! oh! Sposo Santo,",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "71–72",
+      "physical_aflp_2022_photos": [
+        "IMG_7237.JPG",
+        "IMG_7238.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-04",
+      "target_refs": [
+        "LDC.T01.SEC080.P010"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "REPLACE_FULL_PARAGRAPH",
+      "rejected_r3_spec": "Ainsi, le confesseur me dit : «Pour ne pas montrer de singularité, désormais je veux que tu prennes de la nourriture une seule fois par jour», et il suspendit aussi la quinine.",
+      "retained_text": "Ainsi donc le confesseur m'accorda que je ne prenne ni nourriture ni quinine. Par la suite cependant, pour ne pas que je sois mise en évidence, il voulait que je prenne de la nourriture une fois par jour.",
+      "retained_text_sha256": "d8496b208091f9907a116fd102a487e6c934b32871c74b4c1927730ffc4d1d3a",
+      "short_itpm_variant": "L2192 | Così venne il Confessore e glielo dissi, e lui mi disse: “Per non mostrare singolarità, d’ora in poi",
+      "short_itdv_variant": "L1677 | singolarità, d’ora in poi voglio che prendi il cibo una sol volta al giorno e",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "66",
+      "physical_aflp_2022_photos": [
+        "IMG_7232.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-05",
+      "target_refs": [
+        "LDC.T01.SEC080.P013"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "REPLACE_FULL_PARAGRAPH",
+      "rejected_r3_spec": "Mais le confesseur ne m'accorda jamais cette obéissance ; il me disait : «Ce n'est rien si tu vomis ; c'est une autre mortification.»",
+      "retained_text": "Mais, à chaque fois, il refusait en disant : «Accepte la nourriture qui t'est donnée comme un acte de mortification en réparation des nombreuses offenses faites au Seigneur par la gourmandise des hommes.»",
+      "retained_text_sha256": "d147bd42c52c3faba533130a6cb9f00a07f8039750d812a85ed70724291d080c",
+      "short_itpm_variant": "L2197 | mi ha dato mai questa ubbidienza; mi diceva: “Fa niente che vomiti, è un’altra mortificazione”.",
+      "short_itdv_variant": "L1682 | diceva: “Fa niente che vomiti, è un’altra mortificazione.”",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "66–67",
+      "physical_aflp_2022_photos": [
+        "IMG_7232.JPG",
+        "IMG_7233.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-06",
+      "target_refs": [
+        "LDC.T01.SEC080.P017"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "REPLACE_FULL_PARAGRAPH",
+      "rejected_r3_spec": "Après environ quarante jours — durée que j'avais déduite des paroles du Seigneur («pour un certain temps») et que j'avais ainsi indiquée au confesseur — les souffrances continuaient à me surprendre chaque jour, et il était obligé de venir chaque jour.",
+      "retained_text": "La raison de sa réaction était peut-être la suivante : se souvenant que je lui avais dit que mes souffrances ne dureraient que quarante jours, alors qu'elles perduraient, il fut amené à croire que je ne lui disais pas la vérité concernant l'état de souffrance qui m'était demandé ou concernant le fait que je ne devais plus prendre de nourriture.",
+      "retained_text_sha256": "fe6ef38d4461819dea6cfdf4fe1a42fc4ef20526114b9c3eebb06d77ff340603",
+      "short_itpm_variant": "L2216 | indifferenza voglio che tu stia a ciò che ti dice l’ubbidienza”. E così continuai a fare. [119] Quando furono passati circa quaranta giorni, da me presi da quella parola che disse il Signore (“per un certo dato tempo”) e che io così avevo detto al Confessore, e le",
+      "short_itdv_variant": "L1686 | l’ubbidienza.” E così continuai a fare. Quando furono passati circa quaranta giorni, da me presi da quella parola che disse il Signore (per un certo dato tempo) e che io così avevo",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "67",
+      "physical_aflp_2022_photos": [
+        "IMG_7233.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-07",
+      "target_refs": [
+        "LDC.T01.SEC080.P021"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "DELETE_FINAL_SENTENCE",
+      "rejected_r3_spec": "[DELETE final sentence; no replacement text]",
+      "retained_text": "Il y avait aussi la souffrance d'avoir à me soumettre en tout, même en ces choses qui me répugnaient tant (les nécessités naturelles) : c'était vraiment un sacrifice que je faisais pour me conformer à la Volonté de Dieu. D'ailleurs, sans ce motif de la conformité à la Volonté Divine, même les plus grands saints auraient renoncé.",
+      "retained_text_sha256": "908057492a113ad8b10667e481d3adf00231e7c9a6a8b08f16f267e17ac270d5",
+      "short_itpm_variant": "L2223 | cose più ripugnanti e necessarie alla natura, ed essere costretta a dirle agli altri è un vero sacrificio.",
+      "short_itdv_variant": "L1705 | la vera rassegnazione sa cambiare la natura alle cose, e l’amaro lo",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "67",
+      "physical_aflp_2022_photos": [
+        "IMG_7233.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-11",
+      "target_refs": [
+        "LDC.T01.SEC002.003.P001"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "REPLACE_FULL_PARAGRAPH",
+      "rejected_r3_spec": "C'est ainsi que se passait la deuxième heure du jour, puis ainsi de suite pour le reste, car tout raconter serait trop fastidieux.",
+      "retained_text": "C'est ainsi que se sont passées ma deuxième et ma troisième heure de méditation. Et j'ai ainsi continué jusqu'à la neuvième heure, que j'ai omise, à cause de mes insipides et regrettables distractions.",
+      "retained_text_sha256": "0b887be05a54a9847b36319ff8a67d8079a3dc4a42d6cd278e60a18151884071",
+      "short_itpm_variant": "L755 | E così passava la seconda ora del giorno, e poi via, via, il resto, ché dirlo tutto sarebbe troppo",
+      "short_itdv_variant": "L82 | E così passavo la seconda ora del giorno, e poi, via via il resto, che",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "5",
+      "physical_aflp_2022_photos": [
+        "IMG_7167.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-12",
+      "target_refs": [
+        "LDC.T01.SEC002.003.P005"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "REPLACE_SENTENCE",
+      "rejected_r3_spec": "Mais Il tremblait.",
+      "retained_text": "Il était si beau et si charmant ! Mais à cause du manque d'amour qui Lui était donné par les créatures ingrates, Il tremblait de froid. Il agissait comme s'Il voulait m'embrasser. J'étais ravie de joie. Je me suis levée immédiatement et j'ai couru pour L'embrasser. Mais quand j'ai essayé de Le serrer dans mes bras, Il disparut. Ceci arriva par trois fois, et chaque fois je n'ai pu L'embrasser.",
+      "retained_text_sha256": "edb03c2eb035c685e15395cf86a78e3f0cf899110f50dd1b96fac24180542615",
+      "short_itpm_variant": "L760 | nella stanza, ed eccomi che mi si fa dinanzi il Bambinello Gesù, tutto bello, sì, ma tremante, in atto di",
+      "short_itdv_variant": "L89 | mi si fa d’innanzi il Bambinello Gesù tutto bello, sì, ma tremante, in atto di",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "5",
+      "physical_aflp_2022_photos": [
+        "IMG_7167.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-13",
+      "target_refs": [
+        "LDC.T01.SEC002.003.P006",
+        "LDC.T01.SEC002.003.P007"
+      ],
+      "target_ref_count": 2,
+      "rejected_r3_operation": "REPLACE_PARAGRAPH_BLOCK",
+      "rejected_r3_spec": "J'en restai si émue et enflammée que je ne saurais l'expliquer.\nMais, après quelque temps, je n'y attachai plus autant d'importance ; je n'en parlai à personne et, de temps en temps, je retombais dans mes fautes habituelles.",
+      "retained_text": "J'en fus très contrariée. Toute pénétrée d'amour, je suis tombée dans une ivresse amoureuse. C'est difficile pour moi de mettre tout ça dans des mots, car je n'ai pas la bonne manière de m'exprimer.\nJe ne nie pas que j'étais toute transformée d'Amour par Jésus. Cette ferveur inhabituelle dura plusieurs jours. Ensuite, elle diminua graduellement. Pendant longtemps, je n'ai laissé transpirer absolument rien de tout cela à qui que ce soit.",
+      "retained_text_sha256": "e0b268f308e950295bfba0be20dee1beb6b3e0af87296ff621049e64c16ff644",
+      "short_itpm_variant": "L762 | questo si ripeté per ben tre volte. Restai tanto commossa ed accesa, che non so spiegarlo. Ma però",
+      "short_itdv_variant": "L95 | volermi abbracciare, ed io mi alzai e corsi per abbracciarlo, ma nell’atto di stringerlo mi scomparve, e questo si ripetette per ben tre volte. Restai tanto comossa ed accessa che non so spiegarlo. Ma però dopo qualche tempo",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "5",
+      "physical_aflp_2022_photos": [
+        "IMG_7167.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-14",
+      "target_refs": [
+        "LDC.T01.SEC094.P002",
+        "LDC.T01.SEC094.P003"
+      ],
+      "target_ref_count": 2,
+      "rejected_r3_operation": "REPLACE_PARAGRAPH_BLOCK",
+      "rejected_r3_spec": "Ainsi, je retournais dans mon corps.\nQui pourrait dire les souffrances qui m'envahissaient ? Seul le Seigneur, qui en était témoin, les connaît.",
+      "retained_text": "Je consentis à la requête de Jésus, et Il me ramena promptement à mon corps. Je ne peux pas décrire les souffrances que j'expérimentai quand je repris contact avec mon corps. Ce dernier sembla s'objecter au retour de mon esprit et me fit me sentir toute dilatée.\nAu même moment, mon âme se sentit oppressée et sans vie, comme si je suffoquais et que j'en étais à ma dernière respiration. Je n'arrivais pas à porter cela. Jésus était le seul témoin de tant de souffrance. Lui seulement pourrait décrire les souffrances atroces et extrêmes que mon âme et mon corps endurèrent.",
+      "retained_text_sha256": "b10fa466c89a065f7f16117893f8d1f1c8a954ae93f7971c435d658fdac57973",
+      "short_itpm_variant": "L2639 | Così mi portavo di nuovo al corpo. Chi può dire le sofferenze che mi venivano? [153] Lo sa solo",
+      "short_itdv_variant": "L2146 | giustizia e per fare arrendere il peccatore.” Così mi portava di nuovo al corpo. Chi può dire le sofferenze che mi venivano? Lo sa solo il Signore che n’era testimone. Dopo qualche giorni poi, mi faceva vedere quell’anima",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "95",
+      "physical_aflp_2022_photos": [
+        "IMG_7261.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-16",
+      "target_refs": [
+        "LDC.T01.SEC079.P001",
+        "LDC.T01.SEC079.P002",
+        "LDC.T01.SEC079.P003",
+        "LDC.T01.SEC079.P004",
+        "LDC.T01.SEC079.P005",
+        "LDC.T01.SEC079.P006"
+      ],
+      "target_ref_count": 6,
+      "rejected_r3_operation": "REPLACE_PARAGRAPH_BLOCK_WITH_SINGLE_BRIDGE",
+      "rejected_r3_spec": "Puis Il poursuivit en me disant :",
+      "retained_text": "Si, en retour des nombreuses grâces que mon Jésus bien-aimé m'a accordées, mon cœur ne débordait pas d'amour reconnaissant envers Lui, je mériterais d'être qualifiée du plus détestable de tous les noms.\nSi je n'acquiesçais pas totalement aux désirs de sa Sainte Volonté, tout le Ciel et la terre devraient me pointer du doigt y compris les générations futures comme étant l'âme la plus ingrate et la plus méprisable qui ait jamais existé.\nCe serait comme si un va-nu-pieds couvert de guenilles sales boudait un seigneur très fortuné qui l'inviterait à devenir copropriétaire de ses immenses possessions et de s'en occuper comme si elles étaient siennes. Ce pauvre indigent ne deviendrait-il pas la risée de tous ?\nJésus a agi ainsi avec moi. En échange de mon néant, Il m'a accordé de posséder en commun avec Lui ses biens infinis, à la seule condition que j'en prenne soin. Je ne Lui ai rien apporté, si ce n'est mon néant.\nAvez-vous déjà vu quelque chose de semblable ? Je me sens toute gênée d'en parler. Et Jésus devint non seulement propriétaire de mon néant, mais aussi de mes imperfections, qu'Il veut totalement purifier dans son infinie Perfection.\nOh ! comme je suis endettée envers Lui ! Lui qui jamais ne s'est lassé, ne se lasse, et ne se lassera de me répéter :",
+      "retained_text_sha256": "166506bc17e623b490429901b53f2b1b0a8533bbe47f0bbc828807d5483bb1a8",
+      "short_itpm_variant": "L2168 | Poi proseguì a dirmi: “Voglio da te conformità perfetta alla mia Volontà, in modo da disfarsi",
+      "short_itdv_variant": "L1644 | Proseguì a dirmi: “Voglio da te conformità perfetta alla mia Volontà,",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "64–65",
+      "physical_aflp_2022_photos": [
+        "IMG_7230.JPG",
+        "IMG_7231.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C10-17",
+      "target_refs": [
+        "LDC.T01.SEC051.P003",
+        "LDC.T01.SEC051.P004",
+        "LDC.T01.SEC051.P005",
+        "LDC.T01.SEC051.P006"
+      ],
+      "target_ref_count": 4,
+      "rejected_r3_operation": "REPLACE_PARAGRAPH_BLOCK",
+      "rejected_r3_spec": "Pendant ce temps, je Lui disais : «Seigneur, ne permets pas qu'ils me voient.» J'avais une telle honte d'être vue que je ne saurais dire pourquoi, et je cherchais autant que possible à me cacher dans des endroits où l'on ne pouvait pas me voir.\nQuand j'étais surprise à l'improviste, sans avoir le temps de me cacher ou au moins de m'agenouiller, je restais telle que je me trouvais, dans cette position, de sorte qu'on pouvait dire que je priais.",
+      "retained_text": "«Mon bon Seigneur, c'est un dur tourment pour moi de voir ma famille si ennuyée par ce qui m'arrive, et cela pour une si injuste raison. Ne permets pas qu'ils me voient dans cet état. Je préférerais mourir, plutôt que de leur laisser connaître ce qui se passe entre nous deux.\nCe sentiment est si fort en moi que, sans trop que je sache pourquoi, je ne puis m'empêcher de me cacher pour que personne ne puisse me voir ainsi.\nQuand je suis surprise et que je n'ai pas le temps de dissimuler mes souffrances et mes larmes, je me sens anéantie et comme si tout mon être fondait comme de la neige dans un feu. Mon corps éprouve alors une chaleur anormale qui me fait transpirer abondamment et qui, par la suite, me fait trembler de froid.\nÔ mon bon Jésus, seulement Toi peux changer cet état de choses. Garde-moi cachée de la vue des autres. Donne à ma famille de réaliser que je ne m'éloigne d'eux que pour prier. Et j'aimerais beaucoup, ô mon Dieu, que ce qui m'arrive ne soit connu que de Toi.»",
+      "retained_text_sha256": "f9fa2409fcf1345a6cd80c14e16e2915b3667cfea8571d419da543caeeed80a7",
+      "short_itpm_variant": "L1540 | vergogna di essere vista, che non so dire il perché, e cercavo quanto più potevo di nascondermi in",
+      "short_itdv_variant": "L980 | il perché, e cercavo quanto piú potevo di nascondermi in luoghi dove non",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "42",
+      "physical_aflp_2022_photos": [
+        "IMG_7208.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    },
+    {
+      "candidate_id": "C2C11-01",
+      "target_refs": [
+        "LDC.T01.SEC037.P001"
+      ],
+      "target_ref_count": 1,
+      "rejected_r3_operation": "DELETE_FULL_PARAGRAPH",
+      "rejected_r3_spec": "[DELETE full paragraph; no replacement text]",
+      "retained_text": "Les pauvres démons ne pouvaient pas voir à l'intérieur de mon âme. Là j'étais toujours unie à Jésus, pour qui j'avais un océan de bons désirs et pour qui je pleurais et j'embrassais sans cesse les morceaux d'image. Ils se fâchaient quand ils me voyaient prier et me prosterner par terre.",
+      "retained_text_sha256": "13f7f97e6057ebb5304903d964a4c904520553e6f2a9b2f4bee528811fd615e2",
+      "short_itpm_variant": "L1328 | sei nostra? Non ci resta altro che portarti all’inferno, anima e corpo, e poi vedrai che lo faremo”. Delle volte mi sentivo tirare, ora le vesti, ora la sedia dove stavo inginocchiata, e tanto la movevano e strepitavano, che non potevo pregare; e delle volte era tanto il timore che, credendomi",
+      "short_itdv_variant": "L731 | sei nostra, non ci resta altro che portarti all’inferno, anima e corpo, e poi lo vedrai che lo faremo.” Delle volte mi sentivo tirare, ora le vesti, ora la sedia dove stavo inginocchiata, e tanto la movevano e strepitavano che non",
+      "long_italian_evidence": "https://luisalasanta33.blogspot.com/p/volumi-di-luisa-1-2-3-4-5-6-7-8-910-11.html",
+      "physical_aflp_2022_result": "CONFIRMS_CURRENT_V119_LONG_STATE",
+      "physical_aflp_2022_pages": "32",
+      "physical_aflp_2022_photos": [
+        "IMG_7198.JPG"
+      ],
+      "evidence_basis": "AFLP_2022_PHYSICAL_LONG_PLUS_LONG_ITALIAN__SHORT_ITPM_ITDV_PRESERVED_AS_VARIANT",
+      "final_disposition": "CLOSED__KEEP_CURRENT_LONG_STATE__REJECT_DESTRUCTIVE_R3_OPERATION",
+      "user_policy_authority": "TOME1_FINAL_RECENSION_POLICY_R1__USER_APPROVED_2026_09_26",
+      "text_mutation_required": false,
+      "variant_preserved_in_ledger": true
+    }
+  ],
+  "fixed_point_sha256": "0aa022df020fe66a472d3bff5a6a9fc4a87d60b2a3aa09fd538b2b78c1fc8b40"
+}

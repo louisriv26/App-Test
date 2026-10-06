@@ -1,0 +1,155 @@
+{
+  "candidate": "v120.2/B2",
+  "cases": [
+    {
+      "name": "phone-light",
+      "checks": {
+        "old_prompt_absent": true,
+        "top_status": "Statut de l’Heure",
+        "recovery_focus": {
+          "style": "solid",
+          "width": "3px",
+          "color": "rgb(122, 92, 16)",
+          "focusVisible": true,
+          "active": true
+        },
+        "forward_without_mark": {
+          "currentHour": 2,
+          "h1": false,
+          "count": 0
+        },
+        "marked": {
+          "endText": "✓ Heure méditée — Retirer",
+          "top": "✓ Heure méditée",
+          "next": "Prier la 2e Heure",
+          "activeRole": "primary-end"
+        },
+        "persisted": true,
+        "marked_forward": {
+          "currentHour": 2,
+          "h1": true
+        },
+        "hour24": {
+          "end": 1,
+          "next": 0
+        },
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "phone-dark",
+      "checks": {
+        "old_prompt_absent": true,
+        "top_status": "Statut de l’Heure",
+        "recovery_focus": {
+          "style": "solid",
+          "width": "3px",
+          "color": "rgb(212, 168, 67)",
+          "focusVisible": true,
+          "active": true
+        },
+        "forward_without_mark": {
+          "currentHour": 2,
+          "h1": false,
+          "count": 0
+        },
+        "marked": {
+          "endText": "✓ Heure méditée — Retirer",
+          "top": "✓ Heure méditée",
+          "next": "Prier la 2e Heure",
+          "activeRole": "primary-end"
+        },
+        "persisted": true,
+        "marked_forward": {
+          "currentHour": 2,
+          "h1": true
+        },
+        "hour24": {
+          "end": 1,
+          "next": 0
+        },
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "tablet-light",
+      "checks": {
+        "old_prompt_absent": true,
+        "top_status": "Statut de l’Heure",
+        "recovery_focus": {
+          "style": "solid",
+          "width": "3px",
+          "color": "rgb(122, 92, 16)",
+          "focusVisible": true,
+          "active": true
+        },
+        "forward_without_mark": {
+          "currentHour": 2,
+          "h1": false,
+          "count": 0
+        },
+        "marked": {
+          "endText": "✓ Heure méditée — Retirer",
+          "top": "✓ Heure méditée",
+          "next": "Prier la 2e Heure",
+          "activeRole": "primary-end"
+        },
+        "persisted": true,
+        "marked_forward": {
+          "currentHour": 2,
+          "h1": true
+        },
+        "hour24": {
+          "end": 1,
+          "next": 0
+        },
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "tablet-dark",
+      "checks": {
+        "old_prompt_absent": true,
+        "top_status": "Statut de l’Heure",
+        "recovery_focus": {
+          "style": "solid",
+          "width": "3px",
+          "color": "rgb(212, 168, 67)",
+          "focusVisible": true,
+          "active": true
+        },
+        "forward_without_mark": {
+          "currentHour": 2,
+          "h1": false,
+          "count": 0
+        },
+        "marked": {
+          "endText": "✓ Heure méditée — Retirer",
+          "top": "✓ Heure méditée",
+          "next": "Prier la 2e Heure",
+          "activeRole": "primary-end"
+        },
+        "persisted": true,
+        "marked_forward": {
+          "currentHour": 2,
+          "h1": true
+        },
+        "hour24": {
+          "end": 1,
+          "next": 0
+        },
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "status": "PASS"
+}

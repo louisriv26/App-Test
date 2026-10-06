@@ -1,0 +1,103 @@
+name: Verify Lettres v2.15 B2 App-Test edge
+on:
+  push:
+    branches: [main]
+    paths: ['.github/lettres-v2.15-app-test/TRIGGER']
+permissions:
+  contents: read
+jobs:
+  edge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact staged candidate
+        run: test "$(git rev-parse HEAD:lettres-v2.15-b2-contrast-repair)" = "8521e662e8e9efbedba2db9f537bd52281754b93"
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install browser engines
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
+      - name: Wait for exact GitHub Pages bytes and verify all 22 members
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import urllib.request,hashlib,time,sys
+          root=Path('lettres-v2.15-b2-contrast-repair')
+          base='https://louisriv26.github.io/App-Test/lettres-v2.15-b2-contrast-repair/'
+          files=sorted(p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file())
+          assert len(files)==22,len(files)
+          want_manifest=hashlib.sha256((root/'manifest.json').read_bytes()).hexdigest()
+          for i in range(100):
+              try:
+                  q=urllib.request.Request(base+'manifest.json?edge=20261005',headers={'Cache-Control':'no-cache','Pragma':'no-cache','User-Agent':'Lettres-v215-edge'})
+                  data=urllib.request.urlopen(q,timeout=15).read()
+                  if hashlib.sha256(data).hexdigest()==want_manifest:break
+              except Exception as e: print('wait',i,repr(e),flush=True)
+              time.sleep(4)
+          else: raise SystemExit('Pages did not reach exact v2.15 B2 manifest')
+          for rel in files:
+              want=hashlib.sha256((root/rel).read_bytes()).hexdigest()
+              q=urllib.request.Request(base+rel+'?edge=20261005b',headers={'Cache-Control':'no-cache','Pragma':'no-cache','User-Agent':'Lettres-v215-edge'})
+              with urllib.request.urlopen(q,timeout=40) as r:
+                  data=r.read(); status=r.status
+              got=hashlib.sha256(data).hexdigest()
+              if status!=200 or got!=want: raise SystemExit(f'EDGE_MISMATCH {rel} {status} {got} {want}')
+              print('EDGE22_PASS',rel,want)
+          print('EDGE_ALL_22_PASS',len(files))
+          PY
+      - name: Browser edge verification Chromium and WebKit
+        run: |
+          cat > /tmp/edge.py <<'PY'
+          from playwright.sync_api import sync_playwright, expect
+          import re,math
+          BASE='https://louisriv26.github.io/App-Test/lettres-v2.15-b2-contrast-repair/index.html'
+          def rgb(s):
+              m=re.match(r'rgba?\(([^)]+)\)',s or '')
+              if not m:return None
+              a=[float(x.strip()) for x in m.group(1).split(',')]
+              return [a[0],a[1],a[2],a[3] if len(a)>3 else 1]
+          def lum(c):
+              z=[]
+              for v in c[:3]:
+                  x=v/255;z.append(x/12.92 if x<=.03928 else ((x+.055)/1.055)**2.4)
+              return .2126*z[0]+.7152*z[1]+.0722*z[2]
+          def ratio(a,b):
+              A,B=lum(a),lum(b);return (max(A,B)+.05)/(min(A,B)+.05)
+          def ready(p):
+              p.locator('#loading').wait_for(state='detached',timeout=30000)
+              expect(p.locator('#letter-list .letter-item')).to_have_count(136)
+              expect(p.locator('.build-meta').first).to_contain_text('v2.15')
+              if p.locator('#help-overlay').is_visible():
+                  p.locator('#help-close-btn').click()
+          with sync_playwright() as pw:
+              for engine,name,vp in [(pw.chromium,'chromium',{'width':390,'height':844}),(pw.webkit,'webkit',{'width':834,'height':1112})]:
+                  for scheme in ['light','dark']:
+                      b=engine.launch(headless=True);c=b.new_context(viewport=vp,locale='fr-FR',color_scheme=scheme,service_workers='allow')
+                      c.add_init_script("localStorage.setItem('lp_onboarded','1')")
+                      p=c.new_page();errs=[];p.on('pageerror',lambda e:errs.append('PAGE '+str(e)));p.on('console',lambda m:errs.append('CONSOLE '+m.text) if m.type=='error' else None)
+                      p.goto(BASE+f'?edge={name}-{scheme}',wait_until='domcontentloaded',timeout=30000);ready(p)
+                      p.locator('#home-settings-btn' if vp['width']<768 else '#snav-settings').click();expect(p.locator('#settings-export-btn')).to_be_visible()
+                      d=p.locator('#settings-export-btn').evaluate("""el=>{const c=getComputedStyle(el);return {color:c.color,bg:c.backgroundColor}}""")
+                      rr=ratio(rgb(d['color']),rgb(d['bg']))
+                      if rr<4.5: raise AssertionError((name,scheme,'export',rr,d))
+                      p.locator('#settings-export-btn').hover();d=p.locator('#settings-export-btn').evaluate("""el=>{const c=getComputedStyle(el);return {color:c.color,bg:c.backgroundColor}}""");rr=ratio(rgb(d['color']),rgb(d['bg']))
+                      if rr<4.5: raise AssertionError((name,scheme,'export-hover',rr,d))
+                      p.get_by_role('button',name='Fermer les réglages').click()
+                      p.locator('#pnav-search' if vp['width']<768 else '#snav-search').click()
+                      p.locator('#search-input').fill('confiance');p.wait_for_timeout(500)
+                      assert p.locator('#search-results [data-action="search-result"]').count()>0
+                      if errs: raise AssertionError((name,scheme,'errors',errs))
+                      print('EDGE_BROWSER_PASS',name,scheme,'export_ratio',rr)
+                      c.close();b.close()
+              # Cold offline/deep-link on Chromium after online SW install.
+              b=pw.chromium.launch(headless=True);c=b.new_context(viewport={'width':390,'height':844},locale='fr-FR',service_workers='allow')
+              c.add_init_script("localStorage.setItem('lp_onboarded','1')")
+              p=c.new_page();p.goto(BASE+'?edge=offline-prep',wait_until='networkidle',timeout=30000);ready(p);p.wait_for_timeout(4500);p.reload(wait_until='networkidle');ready(p);p.close()
+              c.set_offline(True);q=c.new_page();q.goto(BASE+'?letter=LP.LETTER.010',wait_until='domcontentloaded',timeout=20000);ready(q);expect(q.locator('#pr-pos')).to_have_text('10 / 136')
+              print('EDGE_OFFLINE_PASS')
+              c.close();b.close()
+          PY
+          python /tmp/edge.py

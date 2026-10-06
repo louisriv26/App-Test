@@ -1,0 +1,128 @@
+{
+  "candidate": "v120.2/B2",
+  "method": "broad non-regression smoke",
+  "cases": [
+    {
+      "name": "phone-light",
+      "checks": {
+        "identity": {
+          "v": "v120.2",
+          "b": "B2",
+          "seq": 120002002,
+          "view": "reader"
+        },
+        "readerStructure": {
+          "topStatus": 1,
+          "endCard": 1,
+          "primaryEnd": 1
+        },
+        "tabs": {
+          "Méditation": 0,
+          "Réflexion": 0,
+          "Approfondir": 0
+        },
+        "help": false,
+        "settings": true,
+        "search": true,
+        "searchInput": true,
+        "searchBodyHasTerm": true,
+        "space": true,
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "phone-dark",
+      "checks": {
+        "identity": {
+          "v": "v120.2",
+          "b": "B2",
+          "seq": 120002002,
+          "view": "reader"
+        },
+        "readerStructure": {
+          "topStatus": 1,
+          "endCard": 1,
+          "primaryEnd": 1
+        },
+        "tabs": {
+          "Méditation": 0,
+          "Réflexion": 0,
+          "Approfondir": 0
+        },
+        "help": false,
+        "settings": true,
+        "search": true,
+        "searchInput": true,
+        "searchBodyHasTerm": true,
+        "space": true,
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "tablet-light",
+      "checks": {
+        "identity": {
+          "v": "v120.2",
+          "b": "B2",
+          "seq": 120002002,
+          "view": "reader"
+        },
+        "readerStructure": {
+          "topStatus": 1,
+          "endCard": 1,
+          "primaryEnd": 1
+        },
+        "tabs": {
+          "Méditation": 0,
+          "Réflexion": 0,
+          "Approfondir": 0
+        },
+        "help": false,
+        "settings": true,
+        "search": true,
+        "searchInput": true,
+        "searchBodyHasTerm": true,
+        "space": true,
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "tablet-dark",
+      "checks": {
+        "identity": {
+          "v": "v120.2",
+          "b": "B2",
+          "seq": 120002002,
+          "view": "reader"
+        },
+        "readerStructure": {
+          "topStatus": 1,
+          "endCard": 1,
+          "primaryEnd": 1
+        },
+        "tabs": {
+          "Méditation": 0,
+          "Réflexion": 0,
+          "Approfondir": 0
+        },
+        "help": false,
+        "settings": true,
+        "search": true,
+        "searchInput": true,
+        "searchBodyHasTerm": true,
+        "space": true,
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "status": "PASS"
+}

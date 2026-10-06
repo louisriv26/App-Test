@@ -1,0 +1,38 @@
+name: Marie v50 independent blind audit
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/marie-v50-independent-blind/TRIGGER'
+permissions:
+  contents: read
+jobs:
+  blind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact frozen v50 tree
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:marie-v50-test)" = "05f10479d5e9a5e476221cf7881fb5441cf5a909"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install independent browsers
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+      - name: Serve exact frozen route
+        run: |
+          python3 -m http.server 8150 --bind 127.0.0.1 >/tmp/m50-independent.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8150/marie-v50-test/index.html >/dev/null
+      - name: Run independent adversarial challenge
+        run: NODE_PATH="$PWD/node_modules" node .github/marie-v50-independent-blind/challenge.cjs
+      - name: Upload independent evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: marie-v50-independent-blind-audit
+          path: /tmp/MJV_v50_INDEPENDENT_BLIND_AUDIT_2026-10-05.json
+          if-no-files-found: error

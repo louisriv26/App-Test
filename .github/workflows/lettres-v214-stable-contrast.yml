@@ -1,0 +1,36 @@
+name: Lettres v2.14 steady-state contrast audit
+on:
+  push:
+    branches: [main]
+    paths: ['.github/lettres-v214-contrast/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bind exact candidate
+        run: test "$(git rev-parse HEAD:lettres-v2.14-b1-csp-repair)" = "92530b7219fae7940be525b73b92d0a3782451ac"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install runtime
+        run: |
+          npm install --no-save playwright@1.55.0 axe-core@4.10.3
+          npx playwright install --with-deps chromium
+      - name: Serve exact repository tree
+        run: |
+          python3 -m http.server 8096 --bind 127.0.0.1 >/tmp/lettres-v214-contrast.log 2>&1 &
+          sleep 2
+      - name: Run steady-state contrast audit
+        run: node qa-lettres-v214-stable-contrast-20261004.cjs
+      - name: Record evidence only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add LETTRES_V2_14_STABLE_RENDERED_CONTRAST_AUDIT_2026-10-04.json
+          git commit -m "Record steady-state contrast audit for Lettres v2.14"
+          git pull --rebase origin main
+          test "$(git rev-parse HEAD:lettres-v2.14-b1-csp-repair)" = "92530b7219fae7940be525b73b92d0a3782451ac"
+          git push origin HEAD:main

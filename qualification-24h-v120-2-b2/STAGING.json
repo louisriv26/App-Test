@@ -1,0 +1,14 @@
+{
+  "candidate": "v120.2/B2",
+  "release_sequence": 120002002,
+  "release_id": "24h-v120-2-b2-20261005-core-loop-csp-style-rebind",
+  "predecessor_failed_candidate": "v120.2/B1",
+  "predecessor_failed_run_id": 37332458884,
+  "root_cause": "B1 modified inline style block 2 but retained the predecessor CSP style hash, causing Chromium to block the intended focus/style rules.",
+  "shell_sha256": "26c212952cb8d8c099922ed910a41c4d3e9aff516741fd7c5bf0d5d00e4302a7",
+  "release_package_sha256": "b40a6b6f8375026ef4945eeb83a9031be140838cff244a52608723a8f51e8ada",
+  "release_package_size": 2006943,
+  "scope": "B1 core-loop semantics unchanged; exact CSP style binding repaired and candidate identity mechanically advanced.",
+  "production_deployment_authority": "NONE",
+  "physical_gate": "OPEN"
+}

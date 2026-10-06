@@ -1,0 +1,991 @@
+{
+  "app_version": "v120",
+  "build_date": "2026-10-03",
+  "cache_name": "scope-derived:luisa-24h-<scope-fingerprint>-v120-b13",
+  "storage_schema": 8,
+  "personal_snapshot": 5,
+  "ldc_source_public_version": "COMPOSITE_29_62_65_PLUS_FAST_MODE_DERIVATIVE_SYNC",
+  "ldc_source_app_version": "LDC_CURRENT_SYNC_AUTHORITY",
+  "ldc_source_package_sha256": null,
+  "release_scope": "v120/B13 successor to exact frozen v120/B10. Corrects stale current-candidate B8 references found by Pass 3 and closes the update-banner control contrast/touch-target defect across light, dark and system themes after B11 exposed dark/system failure and B12 exposed the light-theme overlay failure. B10 update activation, B7 integrity-button transient contrast, corpus, Search, provenance, personal-state schema/semantics, backup/import, native-selection and devotional content are preserved.",
+  "real_device_status": "V120_B13_CANDIDATE__REAL_DEVICE_GATES_OPEN",
+  "overall_release_status": "V120_B13_RELEASE_RECONCILIATION_UPDATE_BANNER_CLOSURE_CANDIDATE__PRODUCTION_NOT_AUTHORIZED",
+  "known_blockers": [
+    "Exact production v119/B1 → v120/B13 installed-PWA update/activation and acknowledged-state preservation on iPhone and iPad.",
+    "v120/B13 iPad H03/P013 physical A–D replay of the inherited native-selection surface: direct P013 selection; highlight/persistence; P012→P013 regression; selection inside existing cross-record highlight.",
+    "v120/B13 provenance panels for normal Hours and H08/H23/H24, plus methodology and Help, at Très grand in portrait and landscape.",
+    "Installed-PWA personal-state durability across full close/reopen cycles on required Apple devices.",
+    "True offline cold reopen on required Apple devices, including repeat offline reopen and online recovery.",
+    "Real cross-device JSON transfer if retained in public-release scope.",
+    "Samsung/Android standalone operation if Android remains in public-release scope.",
+    "Representative VoiceOver verification if retained in public-release scope.",
+    "Representative TalkBack verification if Android/assistive-technology testing remains in public-release scope.",
+    "Platform Larger Text / approximately 200% verification if retained in public-release scope.",
+    "Live-origin exact-byte binding after staging/deployment before public promotion."
+  ],
+  "external_open_gates": [
+    "Exact production v119/B1 → v120/B13 installed-PWA update/activation and acknowledged-state preservation on iPhone and iPad.",
+    "v120/B13 iPad H03/P013 physical A–D replay of the inherited native-selection surface: direct P013 selection; highlight/persistence; P012→P013 regression; selection inside existing cross-record highlight.",
+    "v120/B13 provenance panels for normal Hours and H08/H23/H24, plus methodology and Help, at Très grand in portrait and landscape.",
+    "Installed-PWA personal-state durability across full close/reopen cycles on required Apple devices.",
+    "True offline cold reopen on required Apple devices, including repeat offline reopen and online recovery.",
+    "Real cross-device JSON transfer if retained in public-release scope.",
+    "Samsung/Android standalone operation if Android remains in public-release scope.",
+    "Representative VoiceOver verification if retained in public-release scope.",
+    "Representative TalkBack verification if Android/assistive-technology testing remains in public-release scope.",
+    "Platform Larger Text / approximately 200% verification if retained in public-release scope.",
+    "Live-origin exact-byte binding after staging/deployment before public promotion."
+  ],
+  "ldc_source_alignment_generation": "COMPOSITE__SEE_ldc_current_sync_authority",
+  "ldc_source_enriched_generation": "COMPOSITE__SEE_ldc_current_sync_authority",
+  "ldc_source_corpus_manifest_sha256": null,
+  "postfreeze_reopen_evidence": "B8 supersedes exact B6 after fresh full-QA falsification found a reproducible page-driven Update-v2 activation defect. Direct worker activation passed; page refresh failed target_worker_not_active. Event-driven waiting on the exact prepared worker was proven on unchanged B6 before mutation.",
+  "build_revision": "B13",
+  "forced_colors_stage7": "TEST_ONLY__PASS_EMULATED_CHROMIUM__23_23_WAVE_SLICE__ZERO_MUTATION__EXTERNAL_WAVE_QA_PACK",
+  "stage7_authorization_proposal_sha256": "42126e52c63d114d1b3a42bdf2bcac8f19e88dc70417fd95accfe33f809312a6",
+  "stage7_predecessor_zip_sha256": "3eb86f5d9f1686a8851664020be4060c85dbf20228351d1d1c442e583c8ece5c",
+  "stage8_authorization_proposal_sha256": "ee305aee932c56ca54c155041aa659e64f39d73493248837fd743dafb2225b06",
+  "stage8_predecessor_zip_sha256": "d5a99636350c8ad92422e0f6009b73cb715a2dc300911007222ac4fb56d4c527",
+  "stage8_cache_scope": "CACHE-SCOPE-COLL-01__AUTHORIZED__CURRENT_SCOPE_ONLY__LEGACY_UNSCOPED_PRESERVED",
+  "blind_adversarial_predecessor_zip_sha256": "40519583e73758eade42875d2294e1a6a754698fbfeec3fa82a4b1d753466603",
+  "blind_adversarial_finding": "B24H-001: predecessor manifest.json declared v101.145 while active page/SW/version identity was v101.146 R1.",
+  "four_pass_predecessor_zip_sha256": "50a9cfcac85d058ddc65f676dbb8aa1e1c94c8aac175884390ccf438361dd8c4",
+  "four_pass_finding": "B24H-002: at exactly 768 CSS px, the 768–1149 tablet rule hid .bottom-nav while the legacy sidebar/menu were globally disabled; 767px and 769px retained navigation.",
+  "search_projection_version": "24h-search-v2-reader-projection-r1",
+  "search_predecessor_zip_sha256": "3f69f8b948494d70e728287998efe6a0fefafa649ac9e0a7759934fbcefe458a",
+  "scroll_performance_predecessor_zip_sha256": "f9bee241f08181a31b63e4284bc82422f5cdc820a2d4033017ef5c1d95004478",
+  "release_sequence": 120000013,
+  "release_id": "24h-v120-b13-20261003-cross-theme-update-banner-closure",
+  "canonical_shell": "./luisa_24_heures.html",
+  "canonical_shell_sha256": "765784949a85e64c8715f478a71117e10accaaff8dcf8614936a4d76bb7492dd",
+  "update_protocol": 2,
+  "pwa_update_predecessor_version": "v119",
+  "pwa_update_predecessor_zip_sha256": "9f1b83a313330b3b57553851e73612dc006819afee6915b3cda8881c427b9b1a",
+  "pwa_update_architecture": "verified_prepare_commit_v2_waiting_worker_explicit_activation__R29_UPDATE_PROTOCOL_PRESERVED__R32_STRUCTURAL_RENDERER_ONLY_WITH_RELEASE_HASH_REBIND",
+  "legacy_bootstrap": "R15 preserves the R14/R13/R12/R11 unique-lineage Update-v2 architecture. Automatic install does not claim clients; only a verified explicit user commit arms same-scope takeover.",
+  "rollback_policy": "No downgrade. Candidate verification fails closed; predecessor cache retained until matching successor BOOT_OK. Functional rollback must be shipped as a new higher release_sequence.",
+  "manifest_identity_binding": "version/build/release_sequence/release_id/start_url verified by installing worker; index.html must hash-identically match canonical shell",
+  "functional_convergence_predecessor_version": "v101.156 R1",
+  "functional_convergence_predecessor_zip_sha256": "9b73b16dfc26c6b5cc1efaa652cdf7264b3331040022477bcbed6ddecabfdc9a",
+  "functional_convergence_scope": [
+    "R9 760px Reader shell and R8 467/555/643/760px prose measures preserved unchanged",
+    "R11 unique fork convergence remains in the governed lineage; R13 is the immediate runtime predecessor",
+    "Update-v2 explicit commit, successor claim and requester controller verification preserved unchanged in behavior",
+    "R10/R11 narrow Reader-tab and prayer-trigger containment retained",
+    "20px Très-grand Reader-tab typography preserved; no Reader-tab shrink-to-fit workaround",
+    "R12 bottom navigation uses geometry redistribution rather than font suppression at normal supported phone widths",
+    "R12 bottom-navigation geometry behavior inherited unchanged",
+    "R14 release identity, cache and CSP script/style hashes mechanically rebound to exact successor bytes"
+  ],
+  "functional_freeze_status": "V120_B13_B10_UPDATE_ACTIVATION_PRESERVED__B7_TRANSIENT_CONTRAST_PRESERVED__UPDATE_BANNER_CONTRAST_TOUCH_CLOSED__PROTECTED_CONTENT_UNCHANGED__PHYSICAL_GATES_OPEN",
+  "security_stage_status": "CSP3_EXACT_B13_INLINE_SCRIPT_STYLE_BINDINGS__SERVICE_WORKER_CANONICAL_SHELL_HASH_BOUND_TO_765784949A85E64C8715F478A71117E10ACCAAFF8DCF8614936A4D76BB7492DD",
+  "security_predecessor_version": "v102.0 R4",
+  "security_predecessor_zip_sha256": "79d8d88ed80622841dcf989edc5d777e2c2c6e3f5f3e17cad9042a679e7b5fc4",
+  "security_csp_strategy": "CSP3 split directives: hash-locked script/style elements; inline handler/style attributes retained for compatibility and mature architecture; legacy script-src/style-src fallback retained.",
+  "security_inline_script_sha256_base64": [
+    "N8XoqZI3Z+3fDNBAcRKDU2t4dfdJApgPE68H+WJ2xHI="
+  ],
+  "security_inline_style_sha256_base64": [
+    "UQ2LZMV8vpixa50rjbFhb0lgGCv04EY1sB1SyGNLL0k=",
+    "M2PqUQmZeL2+DuWG5timTn9bq9xhgUKlH+hhm+uY1s8=",
+    "4AfsRj8AWkdWUFWpaxT/0+3244PorRYCufbvVPHqiRU=",
+    "WLj0DFZ2D1b1hR/2JC2FK3aNLqjx9Hipj0auK8YOfq8="
+  ],
+  "blind_adversarial_r3_predecessor_version": "v102.0 R2",
+  "blind_adversarial_r3_predecessor_zip_sha256": "9c2a565bde543f22b7050d0dee05b41c53db250e5044c38d56bac6ae358af739",
+  "blind_adversarial_r3_findings": [
+    "B24H-R3-001: validatePersonalDataImport used Number(data.schema_version || 1), allowing explicitly present 0, empty string, null or false to masquerade as absent legacy schema 1; R3 uses presence-aware validation and requires an integer schema in range while preserving truly missing legacy schema compatibility.",
+    "B24H-R3-002: checkForUpdate equal-sequence handling compared page release ID/version but did not verify an already-active current-scope worker against remote canonical shell identity; R3 queries active RELEASE_INFO_V2 and requires workerMatchesRemote before declaring current."
+  ],
+  "physical_migration_baseline_version": "v101.153 R1",
+  "physical_migration_baseline_zip_sha256": "6869dbf8e9f100cae66c9f710ee86073941a6670b705286a39de95c468375e5d",
+  "four_pass_r4_predecessor_version": "v102.0 R3",
+  "four_pass_r4_predecessor_zip_sha256": "717bb213f01426a73760e9e7b69109823cf78d1d2d49eaf2d78f77a99b077742",
+  "four_pass_r4_finding": "B24H-R4-001: Settings close button was below the explicit 44px important-target requirement at widths >=768px (about 33px Small to 40px X-Large); R4 applies min-height:44px. B24H-R4-002: 320px + X-Large Settings header overflowed by about 5px; R4 allows the header to wrap. Evidence-only defect B24H-EVID-R3-001: prior R3 handback harnesses contained hard-coded development paths and were not self-contained; R4 handback harnesses use handback-relative/explicit candidate paths.",
+  "semantic_scaling_r5_predecessor_version": "v102.0 R4",
+  "semantic_scaling_r5_predecessor_zip_sha256": "79d8d88ed80622841dcf989edc5d777e2c2c6e3f5f3e17cad9042a679e7b5fc4",
+  "semantic_scaling_r5_contract": "Meaningful Reading/Primary/Secondary/Tertiary/Prominent rendered text must respond monotonically Petit < Normal < Grand < Très grand unless explicitly whitelisted as technical micro-data; audit must inspect computed rendered sizes, overflow/wrapping and important touch targets across the governed viewport matrix.",
+  "semantic_scaling_r5_audit_status": "PASS__9_WIDTHS__16_UI_STATES__4_PRESETS__576_RENDERED_COMBINATIONS__UNCLASSIFIED_FIXED_MEANINGFUL_TEXT_ZERO__HORIZONTAL_OVERFLOW_ZERO__IMPORTANT_BUTTON_TARGETS_AT_LEAST_44PX",
+  "four_pass_r5_status": "PASS_REQUIRED_AND_EVIDENCED_IN_SELF_CONTAINED_HANDOFF__PHYSICAL_GATES_REMAIN_OPEN",
+  "semantic_scaling_r6_predecessor_version": "v102.0 R5",
+  "semantic_scaling_r6_predecessor_zip_sha256": "8e88b00c78700fdd6bee4c255eec44dc72fcc061d345e31e6b1a69249694ad21",
+  "semantic_scaling_r6_contract": "Meaningful visible UI must scale according to semantic role across all four presets, including conditional progress/history/recovery states, empty/transient states, content-specific structured prayer/section/library renderers and on-demand selection tools. Form controls with iOS anti-zoom constraints keep a 16px floor but scale upward for Grand/Très grand.",
+  "semantic_scaling_r6_audit_status": "PASS__576_INHERITED_WHOLE_INTERFACE__720_CONDITIONAL_STATE_COMBINATIONS__5_PRAYERS__4_STRUCTURED_SECTIONS__33_VISIBLE_LIBRARY_TEXTS__HIDDEN_GENERATED_STATES__FORM_CONTROLS__OVERFLOW_TARGETS",
+  "four_pass_r6_status": "PASS__FRESH_SELF_CONTAINED_FOUR_PASS__HOSTILE_NEGATIVE_CONTROLS_VERIFIED__EXTERNAL_GATES_OPEN",
+  "progression_continuity_r7_contract": "24/24 Méditée is the sole cycle-completion definition. Accueil daily continuity considers only dated entries whose Hours remain Méditée in the current cycle; each Hour has at most one current-cycle dated row; Suivante selects the next unmeditated Hour with wrap-around. Reading resume and annotations remain independent state families.",
+  "semantic_scaling_r7_contract": "Every meaningful visible text item either follows an approved semantic tier or an explicit compact/decorative exception. Grand/Très grand must preserve meaningful information rather than increasing ellipsis/off-screen loss. Input controls retain the iOS 16px anti-zoom floor.",
+  "help_r7_status": "ALIGNED_TO_R7_PROGRESSION_UPDATE_SEARCH_SCALING_AND_DEVICE_TRANSFER_CONTRACT__STALE_MANUAL_UPDATE_HELP_REMOVED",
+  "progression_r7_audit_status": "PASS__TARGETED_RUNTIME_29_29__ADVERSARIAL_CYCLE_ORPHAN_NEXT_UNMEDITATED_RESET_HELP_TOAST_SCALING_CASES",
+  "semantic_scaling_r7_audit_status": "PASS__576_INHERITED_WHOLE_INTERFACE__720_CONDITIONAL_STATE__33_LIBRARY__5_PRAYERS__4_SECTIONS__HIDDEN_GENERATED__FORM_CONTROL_FLOOR__TARGETED_INFORMATION_PRESERVATION",
+  "mutation_boundary_r7_status": "PASS__23_23__CORPUS_PRAYERS_LIBRARY_SEARCH_IMPORT_VALIDATION_UPDATE_V2_ASSETS_STORAGE_IDENTITIES_AND_SW_PROTOCOL_PROTECTED",
+  "hostile_r7_status": "PASS__INHERITED_R4_REAL_CHROMIUM_CSP_IMPORT_LAYOUT_TARGET_MATRIX",
+  "four_pass_r7_status": "PASS__FILES_BUILD_RUNTIME_REPORT_EVIDENCE_AND_STALE_CLAIM_RECONCILIATION__EXTERNAL_PHYSICAL_GATES_OPEN",
+  "reader_measure_r8_contract": {
+    "font": "EB Garamond",
+    "target": "BALANCED_P50_APPROX_75__P95_APPROX_80_FULL_LINES",
+    "reader_max_px_by_font_level": {
+      "small": 467,
+      "normal": 555,
+      "large": 643,
+      "xlarge": 760
+    },
+    "measurement_corpus": "1193_MAIN_MEDITATION_AND_REFLECTION_PARAGRAPHS",
+    "general_page_max_px": 880,
+    "viewport_rule": "VIEWPORT_CONSTRAINS_MEASURE__NO_ORIENTATION_SPECIFIC_LAYOUT"
+  },
+  "semantic_reflow_r8_contract": "STRICT_STAGE6A_CONTEXT_IDENTITY_PRESERVED__ORIENTATION_RESIZE_ANCHOR_ADDS_FRACTION_WITHIN_BLOCK__FONT_SIZE_VISIBLE_PARAGRAPH_ADDS_FRACTION_AND_VIEWPORT_ANCHOR_OFFSET__LEGACY_SNAPSHOTS_FALL_BACK_COMPATIBLY",
+  "reader_measure_r8_internal_audit_status": "PASS__255_CROSS_APP_PRE_FREEZE_CHECKS_PLUS_9_SEMANTIC_REFLOW_RUNTIME_CHECKS__DETERMINISTIC_BUILD_AND_FINAL_FOUR_PASS_BOUND_AT_FREEZE",
+  "reader_measure_r8_predecessor_version": "v102.0 R7",
+  "reader_measure_r8_predecessor_zip_sha256": "98c56b62e2885b59e48eec8c2e42c2550e0526a8da78e449e95ea4831db6fc08",
+  "reader_shell_r9_contract": {
+    "functional_reader_shell_max_px": 760,
+    "general_page_max_px": 880,
+    "prose_measure_inherited_from": "v102.0 R8",
+    "prose_max_px_by_font_level": {
+      "small": 467,
+      "normal": 555,
+      "large": 643,
+      "xlarge": 760
+    },
+    "prose_axis_surfaces": [
+      "reader-header",
+      "meditationContent",
+      "reflectionsContent",
+      "linkedTextsContent",
+      "prayer-buttons-row"
+    ],
+    "shell_surfaces": [
+      "tabs",
+      "meditee/status",
+      "hour-end-actions",
+      "hour-navigation"
+    ],
+    "orientation_rule": "VIEWPORT_CONSTRAINS_SHELL_AND_PROSE__NO_ORIENTATION_SPECIFIC_LAYOUT",
+    "semantic_reflow_position_logic": "UNCHANGED_FROM_R8"
+  },
+  "reader_shell_r9_predecessor_version": "v102.0 R8",
+  "reader_shell_r9_predecessor_zip_sha256": "af7d0867f07467f3d7003812885ef295e3205dd61ec441cbd1c0035b65deacf6",
+  "reader_shell_r9_internal_audit_status": "PASS__36_VIEWPORT_PRESET_GEOMETRY__288_ALL_HOUR_GEOMETRY__288_R8_R9_PROSE_PARITY__12_SEMANTIC_REFLOW_STRESS__10_MUTATION_BOUNDARY__JS_SW_SYNTAX_AND_CSP_BINDING_PASS__FINAL_REOPEN_EVIDENCE_EXTERNAL_TO_ZIP",
+  "update_takeover_r10_predecessor_version": "v102.0 R9",
+  "update_takeover_r10_predecessor_zip_sha256": "c572ba57ffe43f7d9b1d2e0e0a4127b521aa3480424cbc6659096b6a5bc94ae4",
+  "update_takeover_r10_contract": "PREPARE_VERIFY_UNCHANGED__EXPLICIT_USER_COMMIT_ARMS_CLAIM__SUCCESSOR_CLAIMS_SAME_SCOPE_CLIENTS_DURING_ACTIVATE__REQUESTER_VERIFIES_TARGET_CONTROLLER_BEFORE_RELOAD__FAIL_CLOSED_WITH_CLOSE_REOPEN_FALLBACK",
+  "narrow_tabs_r10_contract": "BELOW_360PX_AND_XLARGE_ONLY__TWO_COLUMNS__THIRD_TAB_SPANS_ROW_2__PRAYER_TRIGGER_WRAP__20PX_UI_TEXT_PRESERVED__NO_DOCUMENT_OR_COMPONENT_CLIPPING",
+  "r10_update_takeover_internal_status": "PASS__22_SERVICE_WORKER_LIFECYCLE_ASSERTIONS__PAGE_CONTROLLER_TAKEOVER_AND_TIMEOUT_PATH_PASS__PHYSICAL_INSTALLED_PWA_CONFIRMATION_OPEN",
+  "r10_narrow_layout_audit_status": "PASS__116_CASES__1624_CONTAINMENT_ASSERTIONS__ALL_24_HOURS_AT_320_340_360_XLARGE_INCLUDED__NO_TAB_OR_PRAYER_COMPONENT_CLIPPING",
+  "r10_core_runtime_smoke_status": "PASS__25_ASSERTIONS__NO_PAGE_ERRORS__STORAGE_COMMIT_MOCKED_ONLY_BECAUSE_SET_CONTENT_HAS_OPAQUE_ORIGIN",
+  "r10_r9_protected_reader_parity_status": "PASS__288_COMBINATIONS__2880_ASSERTIONS__MEDITATION_REFLECTION_LINKED_TEXT_AND_PROSE_GEOMETRY_UNCHANGED",
+  "r10_governed_declarations_parity_status": "PASS__15_OF_15_GOVERNED_CONTENT_PRESENTATION_DECLARATIONS_BYTE_IDENTICAL_TO_R9",
+  "r10_blind_challenge_status": "CORRECTED_AND_REVERIFIED__R9_320_XLARGE_TAB_CLIP_CLOSED__FINE_POINTER_CLOSING_PRAYER_CLIP_CLOSED__COMPACT_HEADER_BRAND_ELLIPSIS_RETAINED_AS_EXPLICIT_LOW_VALUE_CHROME_EXCEPTION_WITH_FULL_ARIA_LABEL",
+  "four_pass_r10_status": "PASS_INTERNAL__BUILD_PACKAGE_RUNTIME_EVIDENCE_AND_STALENESS_RECONCILED__PHYSICAL_INSTALLED_UPDATE_LIVE_OFFLINE_TRANSFER_AND_AT_GATES_OPEN",
+  "r10_fork_reconciliation_r11": {
+    "status": "UNIQUE_HIGHER_SEQUENCE_SUCCESSOR",
+    "r10_sequence": 102000010,
+    "r11_sequence": 102000011,
+    "working_branch_b6fd": {
+      "release_id": "24h-v102.0-r10-20260916-b6fd81e4e1ba",
+      "deploy_sha256": "26f6b052313f8ccadd522b870aae5561d6b4aed7fce7839e8f6bf193431444f3",
+      "canonical_shell_sha256": "36377d14cb25e13f62012d9c66417c0e336d0731227994414ed23ced24c8c0e3"
+    },
+    "parallel_branch_a6c3": {
+      "release_id": "24h-v102.0-r10-20260916-a6c3f10d82b7",
+      "deploy_sha256": "fd76c8de9680f3d7b71b38628cf3d6242b571bc23734345d48036c7b8046d007",
+      "canonical_shell_sha256": "6290776287a4b399bf36d51e1b916a50bfbfdf374d4597dcdf1de01cdf3e4c5d"
+    },
+    "retained_from_b6fd": [
+      "global .tab-btn min-width:0 intrinsic containment",
+      "global .bn-item min-width:0 intrinsic containment"
+    ],
+    "retained_from_a6c3": [
+      "explicit ACTIVATE_UPDATE_V2 claim marker",
+      "clients.claim() only after verified explicit commit",
+      "requester waits for expected controller before canonical reload",
+      "two-row narrow Reader-tab strategy",
+      "narrow prayer-trigger wrap/containment"
+    ],
+    "content_authority": "unchanged; governed content/presentation declarations protected",
+    "r11_hostile_layout_closure": [
+      "xlarge two-row tabs through 374.98px",
+      "large two-row tabs through 329.98px",
+      "small/normal hostile 280-319px two-row tabs",
+      "responsive #bnSearch cap only below 400px"
+    ],
+    "provenance_ui": "not implemented in R11"
+  },
+  "r11_internal_status": "PASS__SYNTAX_CSP_PROTECTED_CONTENT_PARITY_20_OF_20__RESPONSIVE_READER_768_OF_768_AND_HOME_32_OF_32__SW_EXPLICIT_COMMIT_LIFECYCLE_PASS__CONTROLLER_WAIT_PASS__REAL_DEVICE_EXTERNAL",
+  "ldc_source_identity_model": "CURRENT_COMPOSITE_SYNC_AUTHORITY__NO_SINGLE_PACKAGE_IDENTITY",
+  "ldc_interim_r6_component": {
+    "public_version": "65",
+    "app_version": "v2.19.65-R1B",
+    "package_sha256": "35ee5c69fe0468d2e3ee2d963a7fa6667169c24d6c8023da2726b4cd8b50ed20",
+    "align_generation": "G036-AFLP-R6-UWR2",
+    "enriched_generation": "G036-AFLP-R6-SUP-T5",
+    "corpus_manifest_sha256": "0d04190b166932086ed45141368bd4ae88b5a22806ca1e525a3e6a60a267f3ad"
+  },
+  "ldc_current_sync_authority": {
+    "authority_model": "BASE_FLOW_RA19B_PLUS_TARGETED_R5_SYNC",
+    "base_flow_source_public_version": "Version 29",
+    "base_flow_source_app_version": "v2.19.29-R1B",
+    "base_flow_source_package_sha256": "eb2fa6abce1525399547f469ad1c2d64e818ff8685fe11cc20a57571c59f92fc",
+    "base_flow_sync_date": "2026-08-21",
+    "base_flow_mapped_source_blocks": 115,
+    "base_flow_ra19b_changed_blocks_vs_ra18": 61,
+    "base_flow_explicit_preserve_breaks": 100,
+    "base_flow_explicit_preserve_list_breaks": 0,
+    "base_flow_runtime_flow_overrides": 66,
+    "targeted_successor_source_public_version": "62",
+    "targeted_successor_source_app_version": "v2.19.62-R1B",
+    "targeted_successor_align_generation": "G036-AFLP-R5-UWR2",
+    "targeted_successor_enriched_generation": "G036-AFLP-R5-SUP-T4",
+    "targeted_successor_package_sha256": "3e1d234c2de11ea8032cb7d56c3e5eb0d5faac1c8858e227fd730db61481eb50",
+    "targeted_successor_corpus_manifest_sha256": "76895194f21e21c058d8c7f1547977abad220caa501406b97ac4b4e05f1772e7",
+    "targeted_sync_date": "2026-08-31",
+    "targeted_operation_count": 15,
+    "targeted_scope": "ONLY_THE_15_GOVERNED_LINKED_CORRECTIONS; no claim of full 115-block reimport from v62",
+    "interim_r6_sync": {
+      "source_public_version": "65",
+      "source_app_version": "v2.19.65-R1B",
+      "corpus_version": "G036-AFLP-R6-SUP-T5",
+      "backbone_corpus_version": "G036-AFLP-R6-UWR2",
+      "source_package_sha256": "35ee5c69fe0468d2e3ee2d963a7fa6667169c24d6c8023da2726b4cd8b50ed20",
+      "source_corpus_manifest_sha256": "0d04190b166932086ed45141368bd4ae88b5a22806ca1e525a3e6a60a267f3ad",
+      "sync_date": "2026-09-07",
+      "operation_count": 13,
+      "scope": "ONLY_13_OFFICIAL_R6_DERIVATIVE_SYNCHRONIZATIONS__NO_FULL_LINKED_LIBRARY_REIMPORT"
+    },
+    "interim_closed_local_qa": {
+      "operation_count": 83,
+      "date": "2026-09-07",
+      "scope": "ONLY_CLOSED_PREAUTHORIZED_24H_TEXT_RECORDS__H23_SOURCE_CRITICAL_AND_300_LDC_UPSTREAM_FINDINGS_EXCLUDED"
+    },
+    "post_r6_local_grammar_corrections": {
+      "operation_count": 1,
+      "date": "2026-09-07",
+      "scope": "ONE_EXPLICIT_USER_AUTHORIZED_FRENCH_GRAMMAR_REPAIR_ONLY",
+      "records": [
+        "PASSION24.TEXT.RELATED_HOUR_13.BODY.P124"
+      ],
+      "note": "Inherited French-source omission “à la porte leur cœur” repaired to grammatical “à la porte de leur cœur”. Governing LDC R6 source remains unchanged and should receive separate upstream QA."
+    },
+    "fast_mode_derivative_correction_sync": {
+      "date": "2026-09-09",
+      "predecessor_app_version": "v101.139 R1",
+      "predecessor_zip_sha256": "07c58c551046ec186428b7075b9a6225b6b36d97359439d3a92c69ad58271726",
+      "certified_fast_mode_accepted_entries": 2707,
+      "source_terminal_counts": {
+        "NOT_PRESENT_IN_24H": 2668,
+        "PRESENT_ALL_ALREADY_CORRECT": 2,
+        "PRESENT_WITH_APPLICABLE_DERIVATIVES": 37,
+        "BLOCKED_MAPPING_OR_CONFLICT": 0
+      },
+      "authorized_source_corrections_applied": 37,
+      "already_correct_noops": 2,
+      "changed_current_derivative_records": 36,
+      "boundary_repairs_applied": 5,
+      "cross_record_flow_joins": 3,
+      "derivative_authority_sha256": "c5ed40fcc0b9db71b742606ce90de55dc82606204d8b8d989271bd2a227b015b",
+      "scope": "ONLY_CORRECTION_CERTAIN_ACCEPTED_FAST_MODE_DEFECTS_PROVEN_PRESENT_IN_CURRENT_24H_LDC_DERIVATIVES__NO_NEW_LINGUISTIC_SWEEP"
+    }
+  },
+  "ldc_current_sync_authority_canonical_sha256": "87c6d2dfcac5b1613112e78a6e6bfd195941fcda2a27b26a3ebc7a59dff31028",
+  "ldc_current_sync_authority_raw_rhs_sha256": "f69ea19551a34fed5ca07de20759d6e321288b57519fc173d83ad05953bad092",
+  "ldc_current_derivative_authority_sha256": "c5ed40fcc0b9db71b742606ce90de55dc82606204d8b8d989271bd2a227b015b",
+  "documentary_content_authority_set_sha256": "53c360d938e8fd84d1191788d5c06a27d303ed478ac85b86602dbd58005303b2",
+  "r12_runtime_hygiene": {
+    "predecessor_release_id": "24h-v102.0-r11-20260918-c66cee9aa99e",
+    "predecessor_release_sequence": 102000011,
+    "predecessor_deploy_sha256": "011456101542b26820e7468053c394b714c0a6dc9af646c263ac508a4aba9470",
+    "scope": [
+      "semantic bottom-navigation geometry/scaling",
+      "current-facing release metadata cleanup",
+      "explicit current composite linked-LDC authority metadata",
+      "release/CSP/cache identity rebinding only"
+    ],
+    "semantic_nav_contract": "AT_WIDTHS_GTE_320PX_BOTTOM_NAV_COMPUTED_FONT_SIZE_EQUALS_SELECTED_NAV_PRESET_FOR_ALL_FOUR_ITEMS__SUB320_BOUNDED_EMERGENCY_CAP_ALLOWED",
+    "update_v2_architecture": "BYTE_SEMANTICS_PRESERVED_EXCEPT_SUCCESSOR_IDENTITY_HASH_CACHE_COMMENT",
+    "provenance_ui": "NOT_IMPLEMENTED_IN_R12"
+  },
+  "r12_internal_status": "PASS__STATIC_76_OF_76__IOS_READER_1152_OF_1152__BOTTOM_CLEARANCE_144_OF_144__CROSSPLATFORM_NAV_88_OF_88__SW_LIFECYCLE_PASS__CONTROLLER_WAIT_PASS__REAL_DEVICE_EXTERNAL",
+  "r13_source_critical": {
+    "predecessor_release_id": "24h-v102.0-r12-20260918-6822c0a9996a",
+    "predecessor_release_sequence": 102000012,
+    "predecessor_deploy_sha256": "f5a8cba3f50a307f83af719c1f1838a2d0c9c2a46aa2a4c61f9c428e6f484ba9",
+    "candidate_universe": 46,
+    "correction_operation_count": 52,
+    "pass2_ledger_sha256": "7470bb080125b1fa987f4f7c66b03c120384c8bd4d895559016094f81414c32d",
+    "stable_id_topology": "PRESERVED",
+    "provenance_ui": "NOT_IMPLEMENTED_IN_R13"
+  },
+  "canonical_shell_inline_script_sha256_csp": "sha256-E3Di8qgm6kJ+KCiF7yCB3Tm4sksP0jgPexBpy7LHtSs=",
+  "r13_documentary_integrity_set_contract": "SHA256_UTF8_NFC_SORTED_KEYS_COMPACT_JSON_ARRAY_ORDER_PRESERVED_OF_72_RECORD_ARRAY__ledger_id_content_presentation_linked_source_documentary_assertion",
+  "r13_documentary_integrity_set_sha256": "50c3509c87887150d484a3e0b186e0ac718f447befd1f96164c4b03681f689f0",
+  "r13_documentary_changed_counts": {
+    "content": 25,
+    "presentation": 11,
+    "linked_source_identity": 0,
+    "documentary_assertion": 25
+  },
+  "provenance_ui_status": "R25_SYSTEMATIC_CHAIN_FIRST__CALIBRATED_READER_ASSURANCE__PLAIN_LANGUAGE_AI_AFLP_ECCLESIAL_RESPONSES__TECHNICAL_TRACEABILITY_PRESERVED",
+  "r14_provenance": {
+    "predecessor_release_id": "24h-v102.0-r13-20260919-5540c021d1a3",
+    "predecessor_deploy_sha256": "effff5ca9d48d1a3730506327612d43a3ee9568863bbac6ebce926144e71a1b0",
+    "p5_frozen_package_sha256": "9fc9bc6307138ffc4834bb7a5b12ab1442e765d6152a1127e5116c4341f5ebf8",
+    "public_projection_sha256": "d6a6f5de9c01be8baac79e0a927b9ec2f849068ac7ada0cc9814ef77c998a495",
+    "projection_record_count": 72,
+    "documentary_note_records": [
+      "H08.REFLECTIONS_PRACTICE",
+      "H23.MEDITATION",
+      "H24.MEDITATION"
+    ],
+    "search_index_inclusion": false,
+    "accordion_state_persisted": false
+  },
+  "provenance_public_projection_sha256": "0de47bbce8d64df7de23854a4843ca62d92ea2541a4a4d6f4786532395cabf9f",
+  "provenance_p5_package_sha256": "9fc9bc6307138ffc4834bb7a5b12ab1442e765d6152a1127e5116c4341f5ebf8",
+  "provenance_r13_documentary_integrity_set_sha256": "50c3509c87887150d484a3e0b186e0ac718f447befd1f96164c4b03681f689f0",
+  "r15_provenance": {
+    "predecessor_release_id": "24h-v102.0-r14-20260919-889789ce9500",
+    "predecessor_deploy_sha256": "5d4e8ebb5790d820305b25d4575630160b3de2ba7392bcab683ffe87bfc254fa",
+    "h23_v2_report_sha256": "7eb85778e524fae4d7ad3835a8ffa5256afb998c350023d7da80aec31075e6d3",
+    "source_critical_master_dossier_sha256": "1baf12467328f395a13f05917358b1cec7047dda47356a8d128e442cd2f898ea",
+    "public_projection_sha256": "54530c05fdce35f9b1894090c7cd40c2400cc1cb13b6e677de94f8f72730b272",
+    "projection_record_count": 72,
+    "documentary_note_records": [
+      "H08.REFLECTIONS_PRACTICE",
+      "H23.MEDITATION",
+      "H23.REFLECTIONS_PRACTICE",
+      "H24.MEDITATION"
+    ],
+    "new_issue_id": "OPEN_H23_REFLECTION_SHORT_EXPANDED_GENEALOGY",
+    "devotional_mutation_authority": "NONE",
+    "source_detail_change": "SPECIFIC_SOURCE_NAMES_AND_ROLES_ADDED_WITHOUT_EXPANDING_EVIDENCE_CLAIMS",
+    "search_index_inclusion": false,
+    "accordion_state_persisted": false
+  },
+  "provenance_h23_v2_report_sha256": "7eb85778e524fae4d7ad3835a8ffa5256afb998c350023d7da80aec31075e6d3",
+  "provenance_source_critical_master_dossier_sha256": "1baf12467328f395a13f05917358b1cec7047dda47356a8d128e442cd2f898ea",
+  "r16_provenance": {
+    "predecessor_release_id": "24h-v102.0-r15-20260919-2662b75198c9",
+    "predecessor_deploy_sha256": "78a3a9cc9513377908cb3f6863dcbaa14040a97a5365670ed0b4fcdc7a35e790",
+    "public_projection_sha256": "f6c1d88aefa5fd9b35c599dd0fae293a00455a9571697b6dec6cc090d798c93d",
+    "projection_record_count": 72,
+    "documentary_note_records": [
+      "H08.REFLECTIONS_PRACTICE",
+      "H23.MEDITATION",
+      "H23.REFLECTIONS_PRACTICE",
+      "H24.MEDITATION"
+    ],
+    "scope": "STRUCTURED_SOURCE_CHAIN_AND_PUBLIC_PROVENANCE_CLARITY_ONLY",
+    "devotional_mutation_authority": "NONE",
+    "systematic_evidence_chain": [
+      "GE/Lumen Luminis 2021",
+      "Italian critical master R3 (IT174/IT364/ITDV + targeted ITPM)",
+      "AFLP 27 complete 24/24 + 48/48 photo-verified control"
+    ],
+    "secondary_targeted_controls": [
+      "English Hours of the Passion",
+      "additional Italian/French witnesses",
+      "historical/archival materials at difficult loci"
+    ],
+    "multilingual_search_caveat": "Search/discovery breadth is not represented as validation evidence unless an identifiable source was acquired and adjudicated."
+  },
+  "r17_provenance": {
+    "predecessor_release_id": "24h-v102.0-r16-20260919-61e3b0c2d742",
+    "predecessor_deploy_sha256": "7713b1e753888249dabb97128bdf01216ff5de811544ae256b0255d319dbe7b7",
+    "public_projection_sha256": "7c5d56af2c7cc26649091fdbc0201200a01f91113ce9e0c09e5ddfefb371eb70",
+    "projection_record_count": 72,
+    "documentary_note_records": [
+      "H08.REFLECTIONS_PRACTICE",
+      "H23.MEDITATION",
+      "H23.REFLECTIONS_PRACTICE",
+      "H24.MEDITATION"
+    ],
+    "scope": "EVIDENCE_ARCHITECTURE_AND_PUBLIC_PROVENANCE_UX_ONLY",
+    "devotional_mutation_authority": "NONE",
+    "systematic_evidence_chain": [
+      "GE/Lumen Luminis 2021 target lineage",
+      "Italian critical master R3 (IT174 base + IT364/ITDV comparisons + targeted ITPM)",
+      "AFLP 27 complete 24/24 + 48/48 photo-verified French control"
+    ],
+    "targeted_controls": [
+      "English Hours of the Passion",
+      "additional Italian/French witnesses",
+      "H23 Résiac 1999 / Form A provenance / Form B witnesses / item 05681 / boundary materials",
+      "multilingual discovery only when acquired/adjudicated"
+    ],
+    "r16_identity_defect_corrected": "R16 shell embedded APP_RELEASE_SEQUENCE 102000015 and R15 release_id while manifest/version/SW identified R16. R17 binds shell, manifest, version and SW coherently.",
+    "internal_verification": "PASS__STATIC_135_CHECKS__BROWSER_576_STATES__JS_SYNTAX_PASS__DETERMINISTIC_ZIP_PASS"
+  },
+  "r18_provenance": {
+    "predecessor_release_id": "24h-v102.0-r17-20260919-1ddd8b5e24d1",
+    "predecessor_deploy_sha256": "e66c91842d678359d00c1aed50194245278e8a6dd901260c7e86751259e7ef75",
+    "public_projection_sha256": "0de47bbce8d64df7de23854a4843ca62d92ea2541a4a4d6f4786532395cabf9f",
+    "projection_record_count": 72,
+    "documentary_note_records": [
+      "H08.REFLECTIONS_PRACTICE",
+      "H23.MEDITATION",
+      "H23.REFLECTIONS_PRACTICE",
+      "H24.MEDITATION"
+    ],
+    "scope": "AUTHORIZED_PUBLIC_WORDING_REFINEMENT_AND_THREE_LEVEL_EVIDENCE_PRESENTATION_ONLY",
+    "devotional_mutation_authority": "NONE",
+    "public_heading": "Sources et validation documentaire",
+    "terminology_change": "Public UI uses “référence italienne de travail R3”; “corpus critique italien R3” removed from ordinary public wording.",
+    "witness_independence_rule": "IT174/IT364/ITDV agreement is not presented as three historically independent confirmations.",
+    "h23_governance": "Meditation A/B, reflection short/expanded, and H23/H24 boundary are explicitly separated; no devotional macro-text mutation.",
+    "technical_evidence_layer": "Witness codes, evidence filenames, page counts and SHA-256 values available in nested methodology disclosure."
+  },
+  "r19_reader_repairs": {
+    "scope": "authorized_two_fix_successor",
+    "predecessor": "v102.0 R18",
+    "h24_target": "PASSION24.HOUR.24.DESOL.P081",
+    "h24_canonical_text_mutated": false,
+    "h24_display_segments": 9,
+    "browser_header_fix": "browser layouts >=769px: header/progress remain outside scrolling content and are promoted above an explicit lower .main stacking context; unnecessary .content compositor transform removed in this width band; narrow/mobile scroll-shell rules remain unchanged",
+    "protected": "R18 provenance projection; CORPUS canonical bytes; TEXT_LIBRARY; SPEECH_DATA; Search; personal state/storage schema; backup format; Update-v2 behavior",
+    "h24_display_punctuation_patches": [
+      {
+        "from": "et seule je ne peux, ni ne veux vivre",
+        "to": "et seule, je ne peux ni ne veux vivre",
+        "reason": "punctuation_coordination",
+        "length_preserving": true
+      },
+      {
+        "from": "non seulement tu les sens cloués, mais comme arrachés",
+        "to": "tu les sens non seulement cloués, mais comme arrachés",
+        "reason": "syntax_parallelism",
+        "length_preserving": true
+      },
+      {
+        "from": "épées. D’autant plus qu’ayant en toi",
+        "to": "épées, d’autant que tu portes en toi",
+        "reason": "syntax_participle_clause",
+        "length_preserving": true
+      },
+      {
+        "from": "battements de tous, à chaque",
+        "to": "battements de tous. À chaque",
+        "reason": "sentence_boundary",
+        "length_preserving": true
+      }
+    ]
+  },
+  "provenance_projection_version": "R22-H24-TRAILING-SEPARATOR-CLEANUP-R1",
+  "provenance_projection_sha256": "8ad8c6e341490bc259ec8587661f28850cae9fb1cd018ed4271494687faf3f78",
+  "provenance_wording_candidate_sha256": "31c26c0fc329e3540acb0d4bf2d950400c022f5876b311e427ed8ee00d143156",
+  "provenance_r13_reconciliation_ledger_sha256": "7470bb080125b1fa987f4f7c66b03c120384c8bd4d895559016094f81414c32d",
+  "r21_repair": {
+    "predecessor_release_id": "24h-v102.0-r20-20260920-7f1c6b911d5d",
+    "predecessor_deploy_sha256": "77fbc57cc4d3ac0a8720f42c9962ad313cd713d61fc0f92012c88b4130f5428a",
+    "scope_tag": "R21|font-button-scope|toolbar-content-flex|r13-52ids|h23-rpn008|csp-meta",
+    "r13_apply_rows": 46,
+    "r13_target_entries": 52,
+    "r13_distinct_stable_ids": 52,
+    "h23_overlap": "RPN-008/C0071 same stable paragraph, distinct sequential corrections",
+    "devotional_mutation_authority": "NONE"
+  },
+  "r22_cleanup": {
+    "predecessor_release_id": "24h-v102.0-r21-20260920-6c1807b13aa6",
+    "predecessor_deploy_sha256": "88344a8a07baf5bbdd85293b6e7ff23d7f8259989a1cd3cc8fd0a25aee8f03d2",
+    "scope": "R22|H24-PROVENANCE-TRAILING-SEPARATOR-CLEANUP|NO-DEVOTIONAL-MUTATION",
+    "product_mutation": "PROVENANCE_PUBLIC_PROJECTION.hour_conclusions[24]: remove trailing \\n\\n--- only",
+    "devotional_mutation_authority": "NONE"
+  },
+  "r23_provenance_public_ux": {
+    "predecessor_release_id": "24h-v102.0-r22-20260920-1757c2a1dd7f",
+    "predecessor_deploy_sha256": "652bfdb5e8c8cfc23d04427a8b3a48dbdf203f585308f0bd8d8e69591cba4409",
+    "scope": "PUBLIC_INFORMATION_ARCHITECTURE_AND_WORDING_ONLY",
+    "frozen_documentary_projection_sha256": "8ad8c6e341490bc259ec8587661f28850cae9fb1cd018ed4271494687faf3f78",
+    "public_guide_sha256": "47e4691a18eeae7baf287da3d49c736500a405c4fe5dc3f004fef6bcc065aa5b",
+    "devotional_mutation_authority": "NONE",
+    "principles": [
+      "plain-language first",
+      "systematic verification before findings",
+      "technical labels optional",
+      "open uncertainty preserved",
+      "one public guide reused by per-Hour methodology and Help surfaces"
+    ]
+  },
+  "provenance_public_guide_version": "R34-PROVENANCE-PRESENTATION-R2",
+  "provenance_public_guide_sha256": "a62fd61f86809f7d3031aeb582d808b7d83f339b9c67f5facf1c6f6c779247e1",
+  "provenance_public_guide_basis_projection_sha256": "8ad8c6e341490bc259ec8587661f28850cae9fb1cd018ed4271494687faf3f78",
+  "r23_internal_qa": {
+    "provenance_ui_matrix": "PASS__6_WIDTHS_X_4_TEXT_SIZES_X_24_HOURS__4224_CHECKS__ZERO_FAILURES",
+    "traceability": "PASS__148_CHECKS__72_TECHNICAL_RECORD_SUMMARIES_AND_OUTCOMES_PRESERVED",
+    "reopened_static": "PASS__29_GATES",
+    "reopened_blind_runtime": "PASS__113_CHECKS",
+    "external_limitations": "physical installed iPhone/iPad/Samsung, live-origin service-worker/update/offline, assistive-technology and platform text-enlargement gates remain external"
+  },
+  "r24_provenance_confidence_ux": {
+    "predecessor_release_id": "24h-v102.0-r23-20260920-2fcdee8e68b9",
+    "predecessor_deploy_sha256": "c42f13998055a24d582750bf8cffda0e8150feb45c7e5d6d44c0bb65bc565486",
+    "scope": "PUBLIC_PROVENANCE_CONFIDENCE_TRANSPARENCY_PLUS_MODAL_STICKY_HEADER_DISPLAY_REPAIR",
+    "frozen_documentary_projection_sha256": "8ad8c6e341490bc259ec8587661f28850cae9fb1cd018ed4271494687faf3f78",
+    "public_guide_sha256": "0914cd3f0db18c562cca6d03a6fb3923c8bac766d46593871b8900e08c4b40bd",
+    "devotional_mutation_authority": "NONE"
+  },
+  "r24_internal_qa": {
+    "methodology_modal_matrix": "PASS__5_WIDTHS_X_4_TEXT_SIZES__20_CASES__ZERO_FAILURES__SCROLL_RESET_AND_STICKY_HEADER_TOP_OWNERSHIP_CONFIRMED",
+    "per_hour_provenance_matrix": "PASS__24_HOURS_X_4_TEXT_SIZES_AT_320PX__96_CASES__ZERO_FAILURES",
+    "functional_smoke": "PASS__11_11__HOME_READER_H23_PROVENANCE_MODAL_SEARCH_HELP",
+    "protected_payload_parity": "CORPUS_SPEECH_DATA_TEXT_LIBRARY_PROVENANCE_PUBLIC_PROJECTION_BYTE_IDENTICAL_TO_R23",
+    "external_limitations": "physical installed iPhone/iPad/Samsung, live-origin service-worker/update/offline, assistive-technology and platform text-enlargement gates remain external"
+  },
+  "r25_provenance_clarity_confidence": {
+    "predecessor_release_id": "24h-v102.0-r24-20260920-0914cd3f0db1",
+    "scope": "Public methodology wording/order only; no documentary projection or devotional corpus mutation.",
+    "ordering": "Scope intro → three-step systematic chain → calibrated reader assurance → quantified work markers → AFLP/AI FAQs → targeted controls/decision rules/open issues/limits/technical traceability.",
+    "evidence_guardrail": "Claims are limited to the documents actually examined; no claim of definitive, globally best, official, or ecclesially approved text.",
+    "qa_status": "PASS__BUILD_TREE_272_272__DETERMINISTIC_PACKAGE__REOPENED_STATIC_AND_RUNTIME_PRELOCK_PASS__FINAL_DELIVERED_ZIP_TO_BE_VERIFIED_EXTERNALLY_BY_HANDOFF_REPORT"
+  },
+  "r25_internal_qa": {
+    "build_tree_provenance_ui": "PASS__272_OF_272",
+    "prepackage_static": "PASS__14_OF_14",
+    "deterministic_package_prelock": "PASS__BYTE_IDENTICAL_DOUBLE_BUILD",
+    "reopened_prelock_static": "PASS__30_OF_30",
+    "reopened_prelock_runtime": "PASS__272_OF_272"
+  },
+  "r26_help_version_clarity": {
+    "predecessor_release_id": "24h-v102.0-r25-20260920-e6237c4cb953",
+    "predecessor_deploy_sha256": "7165a4291a00432225824bf9f4ba9e290ab6b22399bd7119ba5d96a5be066daf",
+    "scope": "PUBLIC_VERSION_IDENTITY_PLUS_HELP_INFORMATION_ARCHITECTURE_AND_EXISTING_MANUAL_UPDATE_CHECK_SURFACE",
+    "public_version_rule": "Material delivered application changes receive a new user-visible version; Rxx remains an engineering/build revision.",
+    "help_changes": [
+      "Version installed shown as the primary public identifier without requiring users to interpret Rxx.",
+      "Existing manual update-check function exposed in Help with live status feedback.",
+      "Exact pixel implementation values removed from ordinary text-size Help.",
+      "Backup wording simplified while retaining JSON as a secondary format detail.",
+      "Application/version information separated from Sources et vérification des textes.",
+      "Direct quick-navigation entry added for source verification.",
+      "Home-screen public version display normalized to 103.0 while technical metadata retains v103.0."
+    ],
+    "protected_payloads": "CORPUS, TEXT_LIBRARY, SPEECH_DATA, PROVENANCE_PUBLIC_PROJECTION and PROVENANCE_PUBLIC_GUIDE wording preserved byte-for-byte at object-literal level.",
+    "external_limitations": "physical installed iPhone/iPad/Samsung, live-origin service-worker/update/offline, assistive-technology and platform text-enlargement gates remain external",
+    "qa_status": "SUPERSEDED__R27_ADVERSARIAL_REAUDIT_FOUND_RELEASE_BLOCKING_SERVICE_WORKER_CANONICAL_SHELL_HASH_MISMATCH",
+    "superseded_by": "v104.0 R27"
+  },
+  "r26_internal_qa": {
+    "static_audit": "PASS__56_OF_56",
+    "rendered_help_template_audit": "PASS__11_OF_11",
+    "javascript_syntax": "PASS__NODE_CHECK_INLINE_SCRIPT",
+    "service_worker_syntax": "PASS__NODE_CHECK",
+    "protected_payload_parity": "PASS__CORPUS_TEXT_LIBRARY_SPEECH_DATA_PROVENANCE_PUBLIC_PROJECTION_PROVENANCE_PUBLIC_GUIDE_UNCHANGED",
+    "style_payload_parity": "PASS__3_OF_3_INLINE_STYLE_BLOCKS_UNCHANGED",
+    "update_function_parity": "PASS__checkForUpdate_AND_manualUpdateCheck_BYTE_IDENTICAL_TO_R25",
+    "service_worker_protocol_parity": "PASS__BEHAVIORAL_BODY_IDENTICAL_AFTER_NORMALIZING_RELEASE_IDENTITY_CONSTANTS",
+    "browser_runtime_status": "NOT_FULLY_TESTABLE__CHROMIUM_BLOCKS_LOCAL_AND_FILE_NAVIGATION_WITH_ERR_BLOCKED_BY_ADMINISTRATOR_IN_CURRENT_ENVIRONMENT",
+    "external_limitations": "physical installed iPhone/iPad/Samsung, live-origin service-worker/update/offline, assistive-technology and platform text-enlargement gates remain external"
+  },
+  "r27_release_integrity_correction": {
+    "predecessor_release_id": "24h-v103.0-r26-20260921-faa80f7aa63a",
+    "predecessor_deploy_sha256": "3cf5bedfd836fe0f0afe39ac885dc9a377854f22e963e6bb8bdbd4c483241f36",
+    "r26_reaudit_evidence": "R26_REAUDIT_ADVERSARIAL_R2_2026-09-21.json",
+    "root_cause": "R26 sw.js retained the exact R25 canonical shell SHA-256 after the R26 HTML shell changed. version.json held the correct R26 shell hash, but the installing service worker still verified against the predecessor hash.",
+    "impact": "Fresh R26 service-worker verifiedInstall would reject its own canonical shell with canonical_shell_hash_mismatch, preventing the successor worker from becoming a verified waiting/active candidate.",
+    "correction": "Public successor advanced to v104.0/R27 under the standing material-change versioning rule. The exact final R27 shell SHA-256 is bound identically in version.json and sw.js; index.html is byte-identical to the canonical shell.",
+    "help_clarity_retained": true,
+    "additional_wording_clarity": [
+      "Automatic update Help now says the device must be connected to Internet.",
+      "Post-update recovery wording now explicitly says to reopen with an Internet connection."
+    ],
+    "browser_runtime_status": "NOT_FULLY_TESTABLE__CURRENT_CHROMIUM_HEADLESS_ENVIRONMENT_DOES_NOT_COMPLETE_LOCAL_NAVIGATION",
+    "external_gates": "UNCHANGED__PHYSICAL_INSTALLED_PWA_LIVE_ORIGIN_OFFLINE_ASSISTIVE_TECH_PLATFORM_ENLARGEMENT"
+  },
+  "r28_ipad_native_selection_correction": {
+    "predecessor_release_id": "24h-v104.0-r27-20260921-bb7124dd7ad8",
+    "predecessor_deploy_sha256": "194ba5b94fc30cb838178a20412922107b19ca486950d51bdd11f565263f035a",
+    "scope": "MINIMAL_IOS_NATIVE_SELECTION_EXPERIMENT__NO_RENDERER_OR_DATA_REFACTOR",
+    "mutations": [
+      "Suppress legacy app-owned 480 ms reader long-press timer on ios-device runtime.",
+      "Explicitly set user-select:text, WebKit touch-callout:default and touch-action:auto on the complete continuity-flow selection chain for ios-device.",
+      "Advance public version/build/release identity and rebind CSP/service-worker release integrity to final bytes."
+    ],
+    "protected_payloads": "CORPUS, TEXT_LIBRARY, SPEECH_DATA, continuity membership, display segments, canonical paragraph IDs/offsets, provenance/source-critical/devotional wording unchanged.",
+    "physical_gate": "H03 final visible paragraph native WebKit selection/handles/menu/highlight persistence must pass on physical iPad before defect closure.",
+    "fallback": "If physical H03 still fails, do not stack more CSS/event patches; execute the packaged VisualParagraph + CanonicalSlice architecture after a DOM-assumption impact audit."
+  },
+  "r29_predecessor_version": "v105.0 R28",
+  "r29_predecessor_zip_sha256": "fa2d1a22381df7102bef72b9ee997ccc08c7803f5973d8257ff12d399ef54ac7",
+  "r29_physical_evidence": "On physical iPad, R28 H03 cross-P012→P013 native selection, handle drag and persisted cross-join highlight all passed. Direct highlighting wholly inside P013 then failed. R29 addresses two independently reproduced R28 failure modes relevant to that sequence.",
+  "structural_refactor_predecessor_version": "v106.0 R29",
+  "structural_refactor_predecessor_zip_sha256": "38edd47745b3ed707726b4390e3db36e871f522c21258c9db43b4e71695ff238",
+  "structural_refactor_qa_summary": {
+    "runtime_core": "90/90 PASS",
+    "deep_runtime": "51/51 PASS",
+    "all_nine_annotation_workflows": "63/63 PASS",
+    "r29_backup_compatibility": "10/10 PASS",
+    "full_hour_visible_text_identity": "24/24 PASS",
+    "protected_dataset_identity": "8/8 PASS",
+    "random_same_record_mappings": "2000 cases PASS",
+    "random_cross_record_mappings": "900 cases PASS"
+  },
+  "r32_physical_closure_status": "PASS__2026-09-24__TARGETED_H03_P013_A_D_GATE__EXACT_RUNTIME_SHELL_SHA256_2d76ca82f93ef40af7ac6d11059fb8e24322a598f685465422e99245f229256c",
+  "r34_provenance_presentation_successor": {
+    "predecessor_version": "v110.0 R33",
+    "predecessor_zip_sha256": "b7a1e17410c25930174eecfe1a64c235710a3f4dd49c27b7d81dab39f4d025cd",
+    "scope": "PUBLIC_PROVENANCE_WORDING_INFORMATION_ARCHITECTURE_HELP_LABELS_AND_GE_PAGE_FORMATTER_ONLY",
+    "wording_authority": "02_FINAL_PUBLIC_WORDING_SPEC_R2.md",
+    "wording_authority_sha256": "ec57c57ec9a099b033373368ce9a7fce82a9f44207a872f158ac2404c4e431ee",
+    "guide_sha256": "a62fd61f86809f7d3031aeb582d808b7d83f339b9c67f5facf1c6f6c779247e1",
+    "documentary_projection_mutation": "NONE",
+    "devotional_mutation_authority": "NONE",
+    "personal_state_mutation_authority": "NONE",
+    "search_mutation_authority": "NONE"
+  },
+  "r35_post_audit_metadata_correction": {
+    "predecessor_version": "v111.0 R34",
+    "predecessor_zip_sha256": "490052b93cfa17016a943185dac38fdabeaa6f7df3c2b8f70a43161ea5e01ed0",
+    "scope": "RELEASE_IDENTITY_AND_GOVERNANCE_METADATA_CORRECTION_ONLY__NO_PROVENANCE_COPY_OR_APPLICATION_LOGIC_CHANGE",
+    "audit_findings_closed": [
+      "STALE_LOCAL_STATIC_QA_PENDING_STATUS",
+      "INCOMPLETE_INHERITANCE_OF_OPEN_R33_PHYSICAL_PUBLIC_RELEASE_GATES"
+    ],
+    "provenance_public_guide_sha256": "a62fd61f86809f7d3031aeb582d808b7d83f339b9c67f5facf1c6f6c779247e1",
+    "documentary_projection_mutation": "NONE",
+    "devotional_mutation_authority": "NONE",
+    "personal_state_mutation_authority": "NONE",
+    "search_mutation_authority": "NONE"
+  },
+  "r36_full_application_qa_correction": {
+    "predecessor_version": "v111.0 R35",
+    "predecessor_zip_sha256": "e309f4961f7c67bcd3fc0c149d26c8debec6b4191e9431fca2cc863fb29df018",
+    "scope": "STALE_ACTIVE_SECURITY_STAGE_METADATA_CORRECTION_ONLY__MECHANICAL_RELEASE_CSP_CACHE_HASH_REBIND__NO_APPLICATION_OR_PROVENANCE_LOGIC_CHANGE",
+    "blind_finding": "B24H-R35-001: version.json.security_stage_status stated that the service-worker canonical-shell hash was bound to the exact R33 shell although the actual R35 service worker correctly bound the R35 shell SHA-256 3bec0773db39c375b5d393d1cd9d52c4e0fb4965867170c12dd93b3cb1cd331c.",
+    "root_cause": "Historical R33 wording survived in an active top-level security-status field during R35 metadata correction.",
+    "correction": "Advance to R36 and make the active security-stage status describe the exact R36 shell; mechanically rebind build revision, release sequence, release ID, cache identity, CSP inline-script hash and service-worker canonical-shell hash.",
+    "devotional_mutation_authority": "NONE",
+    "documentary_projection_mutation": "NONE",
+    "provenance_copy_mutation": "NONE",
+    "personal_state_mutation_authority": "NONE",
+    "search_mutation_authority": "NONE"
+  },
+  "wave0_v114_b1": {
+    "predecessor_release_id": "24h-v111.0-r36-20260926-21af645e9f39",
+    "predecessor_main_commit": "9d55c3a3238b6dac2fbbd1b9d4a9347d284e0c69",
+    "supersedes_failed_candidate": "v113/B1",
+    "finding": "BKP-24H-01",
+    "mutation": "Normal JSON backup and direct import share a 32 MiB ceiling; larger exports are explicitly named emergency archives and do not advance the restorable-backup timestamp.",
+    "protected_surfaces": [
+      "CORPUS",
+      "TEXT_LIBRARY",
+      "SPEECH_DATA",
+      "provenance projection",
+      "Search",
+      "personal-state schema",
+      "IndexedDB/Web-Locks concurrency architecture",
+      "update-v2 protocol"
+    ],
+    "qualification_status": "STATIC_QA_PENDING"
+  },
+  "v115_b1_toolbar_cleanup": {
+    "predecessor_version": "v114/B1",
+    "predecessor_zip_sha256": "8aa02262e2cd77620dd2f09738eef1298fb752e939e81e900e7680917fe30d27",
+    "finding": "24H-SEL-NAV-01",
+    "root_cause": "Home navigation did not dismiss the body-level contextActionBar created from a text selection; later selection collapse did not remove an already-open contextual toolbar.",
+    "functional_mutation": "showHome() now closes contextual actions with target/pending/selection cleanup and cancels any pending search-destination selection-clear timer before rendering Home.",
+    "protected_surfaces": [
+      "CORPUS",
+      "TEXT_LIBRARY",
+      "SPEECH_DATA",
+      "provenance projection",
+      "Search semantics",
+      "personal-state schema",
+      "IndexedDB/Web-Locks concurrency architecture",
+      "backup/import logic",
+      "update-v2 protocol"
+    ],
+    "production_deployment_authority": "NONE",
+    "qualification_status": "STATIC_AND_CONTROLLED_REGRESSION_PASS__REAL_ORIGIN_PWA_OFFLINE_PHYSICAL_OPEN"
+  },
+  "v116_b1_selection_home_terminal": {
+    "predecessor_version": "v115/B1",
+    "predecessor_zip_sha256": "76177603e4c9f6e9df17bd8f1f82def48601b760d3010ec478fd3dc9c8ac5001",
+    "finding": "24H-SEL-NAV-02",
+    "root_cause": "handleSelectionEnd created an untracked delayed finalization timeout. Home could clear current contextual state, then the stale callback could repopulate state._pending and reopen contextual UI while state.view was home.",
+    "functional_mutation": "Selection capture and finalization timers are tracked; Home invalidates/cancels both; callbacks are generation/view guarded; Home-state capture scheduling/finalization is rejected. Mandatory v116 identity/CSP/cache/SW/canonical-shell bindings are mechanically rebound.",
+    "protected_surfaces": [
+      "CORPUS",
+      "TEXT_LIBRARY",
+      "SPEECH_DATA",
+      "provenance projection",
+      "Search semantics",
+      "personal-state schema",
+      "IndexedDB/Web-Locks concurrency architecture",
+      "backup/import logic",
+      "update-v2 protocol"
+    ],
+    "production_deployment_authority": "NONE",
+    "qualification_status": "PRE_PHYSICAL_REQUALIFICATION_REQUIRED"
+  },
+  "v117_b1_wave1_accessibility": {
+    "date": "2026-10-01",
+    "predecessor": "v116/B1",
+    "scope": [
+      "F-04 contrast",
+      "F-07 accessible reader tabs",
+      "F-28 durable note textarea name"
+    ],
+    "already_closed_without_new_mutation": [
+      "F-03 focus-visible token/current cascade"
+    ],
+    "protected": [
+      "corpus",
+      "Search semantics",
+      "provenance",
+      "backup/import",
+      "personal-state schema"
+    ]
+  },
+  "v118_b1_wave2_ux": {
+    "date": "2026-10-01",
+    "predecessor": "v117/B1",
+    "scope": [
+      "F-01 desktop/tablet navigation no longer overlays reading text",
+      "F-30 forced-colors boundary refinement"
+    ],
+    "already_closed_without_new_mutation": [
+      "F-09 ordinalHeure()",
+      "F-13 search-destination-flash"
+    ],
+    "protected": [
+      "corpus",
+      "Search semantics/results",
+      "provenance",
+      "backup/import",
+      "personal-state schema"
+    ]
+  },
+  "v119_b1_adversarial_correction": {
+    "date": "2026-10-01",
+    "predecessor_version": "v118/B1",
+    "predecessor_zip_sha256": "ab1430f9a7a292444fc78a4a54e467d343ead7115c9f0745f982ec7b16572c4d",
+    "findings": [
+      "F-03 focus ring used low-contrast accent-light override",
+      "F-07 meditation panel lacked role=tabpanel/aria-labelledby",
+      "F-30 forced-colors repair was narrower than the button-family finding",
+      "active version.json metadata remained v116"
+    ],
+    "scope": "CSS/ARIA/release-metadata correction only; no corpus, Search semantics, provenance, backup/import, personal-state schema or update-protocol semantic change",
+    "production_deployment_authority": "NONE"
+  },
+  "dark_mode_v120_b1": {
+    "date": "2026-10-02",
+    "exact_predecessor_commit": "50a11cb67a79882e6e80088d6740b6db4827c06c",
+    "exact_predecessor_tree": "f8d73f59ee09e302f7b860553adc946702917dfb",
+    "exact_predecessor_package_sha256": "9f1b83a313330b3b57553851e73612dc006819afee6915b3cda8881c427b9b1a",
+    "corpus_changed": false,
+    "search_changed": false,
+    "provenance_changed": false,
+    "personal_state_changed": false,
+    "backup_semantics_changed": false,
+    "physical_pass_inferred": false,
+    "production_deployment_authority": "NONE"
+  },
+  "dark_mode_v120_b2": {
+    "date": "2026-10-02",
+    "supersedes_failed_candidate": "v120/B1",
+    "failure_root_cause": "CSP style-src-elem blocked the new bounded dark-mode style block",
+    "repair": "add exact sha256 CSP authorization for the bounded style block",
+    "corpus_changed": false,
+    "search_changed": false,
+    "provenance_changed": false,
+    "personal_state_changed": false,
+    "backup_semantics_changed": false,
+    "physical_pass_inferred": false,
+    "production_deployment_authority": "NONE"
+  },
+  "dark_mode_v120_b3": {
+    "date": "2026-10-02",
+    "supersedes": [
+      "v120/B1",
+      "v120/B2"
+    ],
+    "root_cause_b2": "div.d selector lost cascade to .stage6m-home-action .d",
+    "repair": "exact affected selector uses existing semantic --ink3 token",
+    "corpus_changed": false,
+    "search_changed": false,
+    "provenance_changed": false,
+    "personal_state_changed": false,
+    "physical_pass_inferred": false,
+    "production_deployment_authority": "NONE"
+  },
+  "dark_mode_v120_b4": {
+    "date": "2026-10-02",
+    "supersedes": [
+      "v120/B1",
+      "v120/B2",
+      "v120/B3"
+    ],
+    "new_blind_finding": "bottom navigation text used effective light-palette colours in dark rendering: muted 3.36:1, active 2.95:1",
+    "repair": "bounded dark selectors use exact existing dark-palette values #948E84 and #D4A843",
+    "settings_gear": "no mutation; non-text icon measured 3.11:1 and passes 3:1",
+    "corpus_changed": false,
+    "search_changed": false,
+    "provenance_changed": false,
+    "personal_state_changed": false,
+    "physical_pass_inferred": false,
+    "production_deployment_authority": "NONE"
+  },
+  "blind_adversarial_v120_b5": {
+    "date": "2026-10-02",
+    "predecessor": "v120/B4",
+    "predecessor_tree": "fa26ec9bf92f9d5ff8551113ad43d26fda45168e",
+    "b4_status": "FAILED_SUPERSEDED",
+    "findings": [
+      "B24H-B4-001: page and service-worker BUILD_REVISION remained B1 while manifest declared B4.",
+      "B24H-B4-002: version.json active build revision and real-device status remained B1.",
+      "B24H-B4-003: CSP script-src-elem did not authorize the actual B4 inline application script, blocking JavaScript initialization on a fresh load.",
+      "B24H-B4-004: current physical-gate wording still targeted v119/B1 rather than the current v120 candidate."
+    ],
+    "root_cause": "B1→B4 dark-mode mutations updated release IDs/CSS/style CSP but did not perform a complete release-shell identity/CSP rebind after script-affecting release metadata changed.",
+    "repair": "Create immutable B5 from exact B4; reconcile page/SW/manifest/version identity; rebuild exact inline CSP hashes from current bytes; rebind cache and canonical-shell SHA; update only active current-gate wording.",
+    "protected_surfaces": [
+      "CORPUS",
+      "TEXT_LIBRARY",
+      "SPEECH_DATA",
+      "Search semantics/results",
+      "provenance",
+      "personal-state schema/semantics",
+      "backup/import semantics",
+      "IndexedDB/Web-Locks architecture",
+      "update-v2 protocol"
+    ],
+    "physical_pass_inferred": false,
+    "production_deployment_authority": "NONE"
+  },
+  "blind_adversarial_v120_b6": {
+    "date": "2026-10-02",
+    "predecessor": "v120/B5",
+    "predecessor_tree": "b1000f0e0187ec8f77359c2df2e491746f0a24d2",
+    "b5_status": "FAILED_SUPERSEDED",
+    "findings": [
+      "B24H-B5-001: CACHE_NAME created a literal ${CACHE_PREFIX}v120-b5 cache instead of the scope-derived cache.",
+      "B24H-B5-002: dark-mode accent-filled primary controls used white text on #d4a843 (~2.21:1), a systemic on-accent polarity defect.",
+      "B24H-B5-003: dark tertiary --ink4 text on common bg2 surfaces measured ~4.34:1, below 4.5:1.",
+      "B24H-B5-004: the governed search input rendered ~43.4px high, below the 44px touch floor.",
+      "B24H-B5-005: the home cross ornament is decorative and is now explicitly aria-hidden; its decorative low contrast is not treated as information loss."
+    ],
+    "root_cause": "The dark theme inverted the accent luminance without a semantic on-accent token; tertiary dark token and search control geometry were not covered by the earlier bounded target list. B5 cache repair script also escaped template interpolation.",
+    "repair": "Introduce light/dark --on-accent tokens and apply them systematically to accent-filled CSS rules; raise dark --ink4 to #8e8981; impose min-height:44px on search inputs; mark the ornamental cross aria-hidden; correct CACHE_NAME to the true scope-derived template; fully rebind identity/CSP/canonical-shell metadata.",
+    "protected_surfaces": [
+      "CORPUS",
+      "TEXT_LIBRARY",
+      "SPEECH_DATA",
+      "Search semantics/results",
+      "provenance",
+      "personal-state schema/semantics",
+      "backup/import semantics",
+      "IndexedDB/Web-Locks architecture",
+      "update-v2 protocol"
+    ],
+    "physical_pass_inferred": false,
+    "production_deployment_authority": "NONE"
+  },
+  "full_qa_20261003_update_activation_repair": {
+    "status": "HISTORICAL_B6_TO_B8_STAGE__SUPERSEDED_BY_B10_AND_B13",
+    "superseded_candidate": "v120/B6",
+    "superseded_tree": "977b1d9c9475988d03aa6debb78cd9370e6e1192",
+    "defect": "B24H-FQA-001: v119/B1 to v120/B6 page-driven refresh prepared the correct waiting worker but refreshAppForUpdate failed after 15 seconds with target_worker_not_active, leaving v119 active and B6 waiting.",
+    "root_cause": "After ACTIVATE_UPDATE_V2 was accepted, waitForActiveRelease repeatedly queried registration.active. The same B6 worker activated and claimed the controller when activation was awaited through its own statechange instead.",
+    "repair": "Await waitForWorkerState on the exact prepared worker until activated, verify that worker identity, then retain the existing controller-release verification.",
+    "proof": "Fresh unchanged-B6 event-driven activation proof passed: acknowledgement accepted, prepared worker activated, controller changed to exact B6.",
+    "protected_surfaces": [
+      "CORPUS",
+      "TEXT_LIBRARY",
+      "SPEECH_DATA",
+      "Search semantics/results",
+      "provenance",
+      "personal-state schema/semantics",
+      "backup/import semantics",
+      "native-selection renderer and persistence",
+      "Update-v2 service-worker activation/isolation protocol"
+    ],
+    "physical_pass_inferred": false,
+    "production_deployment_authority": "NONE"
+  },
+  "full_qa_20261003_b10": {
+    "predecessor_authority": {
+      "candidate": "v120/B8",
+      "tree": "3e5f03b4ff1c6d6ff36e8396d67193558ad7319c",
+      "release_sequence": 120000008
+    },
+    "superseded_attempt": {
+      "candidate": "v120/B9",
+      "release_sequence": 120000009,
+      "status": "NOT_FROZEN__UPDATE_GATE_FAILED"
+    },
+    "finding": "B8/B9 attempted to repair v119→successor activation in successor page code, but the already-loaded v119 predecessor page remains the update orchestrator and cannot be repaired by successor-page bytes.",
+    "root_cause": "The v119 predecessor receives ACTIVATE_UPDATE_ACCEPTED_V2 before successor activate/claim completes, then enters active-worker polling. The exact-worker event wait proved activation can complete when predecessor polling is not started prematurely.",
+    "repair": "Successor service worker retains the MessagePort and sends ACTIVATE_UPDATE_ACCEPTED_V2 from its activate event only after explicit claim verification and clients.claim(); two-client isolation rejections remain immediate and fail closed.",
+    "contrast_convergence": "Exact B7 dark/system-dark integrity-button transition:none closure retained.",
+    "mutation_boundary": [
+      "index.html",
+      "luisa_24_heures.html",
+      "manifest.json",
+      "sw.js",
+      "version.json"
+    ],
+    "protected_surfaces": [
+      "corpus",
+      "Search",
+      "provenance",
+      "personal-state schema/semantics",
+      "backup/import",
+      "native-selection",
+      "devotional content"
+    ],
+    "production_deployment_authority": "NONE",
+    "physical_gate": "OPEN"
+  },
+  "full_qa_20261003_b11_failed_attempt": {
+    "candidate": "v120/B11",
+    "release_sequence": 120000011,
+    "status": "FAILED_UNFROZEN__NEVER_PROMOTED",
+    "finding": "The broad adversarial contract rendered the update banner in dark/system-dark and found white/light update controls on the dark-theme gold accent: Actualiser and dismiss controls failed the 4.5:1 text contrast contract; the controls also lacked the governed 44px important-target floor.",
+    "disposition": "B11 identity retired without freeze. B13 starts again from exact frozen B10 and incorporates both the release-metadata reconciliation and the bounded update-banner correction."
+  },
+  "full_qa_20261003_b12_failed_attempt": {
+    "candidate": "v120/B12",
+    "release_sequence": 120000012,
+    "status": "FAILED_UNFROZEN__NEVER_PROMOTED",
+    "finding": "B12 passed exact static/protected parity and the broad runtime matrix, but real-state narrow light-theme update-banner qualification found the refresh control at approximately 3.59:1 because the 25% white overlay lightened the accent beneath white --on-accent text.",
+    "root_cause": "The first repair corrected foreground polarity and target size but retained the pre-existing translucent white refresh background, which is incompatible with the light theme's white --on-accent token.",
+    "disposition": "B12 identity retired without freeze. B13 starts again from exact frozen B10 and removes the overlay in normal/active states while retaining the B11/B12 corrections."
+  },
+  "full_qa_20261003_b13": {
+    "predecessor_authority": {
+      "candidate": "v120/B10",
+      "tree": "2a12ff7881832645adfa41ebddd5772f3a5c406a",
+      "release_sequence": 120000010,
+      "zip_sha256": "42937d636f0c44a78e9969bb8410fd374784e6ef6b3d937270ccd4ed81e6adc9"
+    },
+    "findings": [
+      "B24H-FQA-002: frozen B10 current release metadata retained B8 labels in known_blockers/external_open_gates and functional_freeze_status.",
+      "B24H-FQA-003: update banner controls hard-coded white/light foregrounds over the dark-theme gold accent, failing the adversarial contrast contract; refresh/dismiss controls were also below the governed 44px important-target floor."
+    ],
+    "root_causes": [
+      "Candidate lineage advanced faster than current-status fields in version.json.",
+      "The update banner predated the semantic --on-accent token and retained hard-coded white control colors; its compact controls predated the 44px target requirement."
+    ],
+    "repair": "Replace current-status B8 labels with B13; bind update controls to var(--on-accent); make refresh background transparent with currentColor border in normal/active states; give refresh min-height 44px and dismiss min-width/min-height 44px; rebind identity/CSP/cache/canonical shell. No update-protocol or content mutation.",
+    "mutation_boundary": [
+      "index.html",
+      "luisa_24_heures.html",
+      "manifest.json",
+      "sw.js",
+      "version.json"
+    ],
+    "protected_surfaces": [
+      "corpus",
+      "Search",
+      "provenance",
+      "personal-state schema/semantics",
+      "backup/import",
+      "native-selection",
+      "devotional content",
+      "B10 activation semantics",
+      "B7 integrity-button transient contrast semantics"
+    ],
+    "production_deployment_authority": "NONE",
+    "physical_gate": "OPEN"
+  }
+}

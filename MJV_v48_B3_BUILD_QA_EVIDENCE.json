@@ -1,0 +1,87 @@
+{
+  "candidate": "MJV v48/B3",
+  "candidate_tree_pending_freeze": true,
+  "deterministic_zip": "MJV_v48_B3_CSP_NOTE_PLACEHOLDER_RELEASE.zip",
+  "zip_sha256": "974fa966ed9f215812c7eb03248edbe32a80d7459069a2d326556fa572d58e0b",
+  "zip_size": 1769608,
+  "members": {
+    ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "404.html": "876e14eb55943bb03f701750f09593904f8d1ea14eb97a79fa772b9a4d1016dc",
+    "corpus/days.json": "884b83aaf28e51d2eb6318f4f044e6d58568211f41d6df25c0ef43d4bb8560b8",
+    "corpus/manifest.json": "94a4ce0945c7656961a8b51396c30a532670eb493656e97a6274de4470c77e80",
+    "corpus/migrations-v1.0.0-to-v1.0.1.json": "a6cd97cc65f3d607aba9760c41ba30b74bf6b65f37547cbabd971c677c7b05b8",
+    "fonts/OFL-Crimson-Text.txt": "168f7f27a2b6b737827a0dcf4cac71914d4fb370d83d16d1156e2956a377f766",
+    "fonts/OFL-IM-Fell-English.txt": "e1025338fa4769414d66a20af47f29482263929537ff3be0bccc1f13efbd415e",
+    "fonts/crimson-text-400-italic.woff2": "01f6ca6adafc5049720d579cb70d8eb322460bdff3283da029fb2d479213eb8f",
+    "fonts/crimson-text-400.woff2": "135ed9f97138b094f406b7ede6c50b33c028a3125be81d21c09847eabd837453",
+    "fonts/crimson-text-600.woff2": "98efdcf22d7862d2fec70d05d8d77aafacfe62d325e588859a6f68dbb8bdaf30",
+    "fonts/im-fell-english-400-italic.woff2": "e0e73494e38aafdd9c1506001fabc03e73b029a97ae31143cd89840f0cdaf16e",
+    "fonts/im-fell-english-400.woff2": "0aa92ef9faca61c105739bbcf52b2faa62e0e74291b1f658a2f9861390531334",
+    "icons/apple-touch-icon.png": "23698fdc6bd8ffc6d791521aaf4d054c211f3c4234e692cd346e44c00047a189",
+    "icons/favicon-16.png": "91d784e32027a61cd4898855f97b7bac9280d14c265fd5e873498c2ad5640510",
+    "icons/favicon-32.png": "659bead9fee2b643d4d0888c3b90454810c713f3da18bcf40b1411cc1250d557",
+    "icons/favicon.ico": "ac2cabd84433b05d98d3e7c7014eb5d2186ea17791e768de70650bc69dde402e",
+    "icons/icon-120.png": "4ac5dc60e976e947601de08cdc9753d8c3249f55e0f961ac1951df37f4f680c6",
+    "icons/icon-192.png": "5fcb0e79393d7b6c0efb351c15f7453543d8e3fad26f27ff28609675d1b7e034",
+    "icons/icon-512.png": "c016a0ca5526361ac36b811b9186f115a38d8efd1e0243f63b7866b86f0d138d",
+    "icons/icon-60.png": "124f3a502046eef8864dba9cb8161b3688b12cab6b9fdc1ba09bfc529ceec786",
+    "icons/icon-maskable-512.png": "7685ee0b32376ab025b5ca856db90fb7fcdb1a36bcf17e58142ceae8aa686cb5",
+    "index.html": "db36f50e6bb527a1f890f5359d7d60e5c16fc019f81c1b5119ecd77f4b3bedf2",
+    "manifest.json": "446bc9ab8e525795082605d299fd64ba6fb6be402ea10a1eecd4a2d533938d7a",
+    "sw.js": "968c4bde3aecf07f5fc27a0ad91e28ea845180aae0ccf80f7282f17434d2d2be"
+  },
+  "build": {
+    "candidate": "MJV v48/B3",
+    "public_version": "48",
+    "predecessor": "MJV v47/B1",
+    "predecessor_tree": "81acbb9f409c7c0e1695b0ab35f33dfdc4978631",
+    "date": "2026-10-04",
+    "root_causes": [
+      "v47 changed the inline stylesheet and main inline application script but omitted CSP hash rebinding, causing both blocks to be rejected.",
+      "After CSP execution was restored in failed/unfrozen B2, fresh dark-mode rendering exposed the note textarea placeholder at 3.606:1 because it had no authored placeholder colour and inherited the browser default."
+    ],
+    "corrections": [
+      "advance runtime/service-worker public version 47 to 48",
+      "add only .note-textarea::placeholder { color: var(--muted); } while leaving the existing search placeholder rule unchanged",
+      "recompute exact final script-src and style-src CSP hashes"
+    ],
+    "retired_candidates": [
+      "MJV v48/B1: over-broad placeholder+CSP staging candidate; never production authority",
+      "MJV v48/B2: minimal CSP-only candidate; Pass 1 passed but full runtime found note-placeholder contrast 3.606:1; unfrozen/never promoted"
+    ],
+    "changed_files": [
+      "index.html",
+      "sw.js"
+    ],
+    "index_sha256": "db36f50e6bb527a1f890f5359d7d60e5c16fc019f81c1b5119ecd77f4b3bedf2",
+    "sw_sha256": "968c4bde3aecf07f5fc27a0ad91e28ea845180aae0ccf80f7282f17434d2d2be",
+    "script_sha256_base64": [
+      "5W39i2zGuGfDHZfKEwbuS1MKiblbrLnqr7G2guPiZGU=",
+      "uP/3DHnPNw1vmYSQP5yW5xJHcF8kq3ep0KjSabSZxAY=",
+      "az6hdoIzEB1puFYA7JzzbBElnjCsICRM25uvhrLAY8s="
+    ],
+    "style_sha256_base64": [
+      "20NXDVxaZRNDz4UCdTe4kQvLHsPMHCQR9QWZTTRAfxY="
+    ],
+    "protected_surfaces": [
+      "corpus and migration bytes",
+      "manifest/icons/fonts",
+      "search placeholder styling",
+      "search/reader/navigation/help semantics",
+      "personal-state schema/transactions",
+      "backup/export/restore semantics",
+      "v47 backup-primary dark-mode repair"
+    ],
+    "corpus_mutation": false,
+    "personal_state_schema_mutation": false,
+    "production_deployment_authority": "NONE",
+    "physical_gate": "OPEN"
+  },
+  "runtime_status": "PASS",
+  "runtime_scenes": 9,
+  "pwa_status": "PASS",
+  "pass1": "CORRECTED & REVERIFIED",
+  "pass2": "CORRECTED & REVERIFIED",
+  "physical_gate": "OPEN",
+  "production_deployment_authority": "NONE"
+}

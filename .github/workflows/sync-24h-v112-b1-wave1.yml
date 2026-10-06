@@ -1,0 +1,53 @@
+name: Sync 24H v112 B1 Wave-1 exact test deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sync-24h-v112-b1-wave1.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout App-Test
+        uses: actions/checkout@v4
+
+      - name: Fetch exact 24H candidate
+        run: |
+          rm -rf /tmp/24h-v112-b1-wave1
+          git clone --depth 1 --branch candidate-v112-b1-wave1 https://github.com/louisriv26/Les-24-Heures-de-la-Passion.git /tmp/24h-v112-b1-wave1
+          test "$(git -C /tmp/24h-v112-b1-wave1 rev-parse HEAD)" = "cb3ad7435b8b83480841ad2f4e53e93adb301ccb"
+          rm -rf 24h-v112-b1-wave1
+          mkdir -p 24h-v112-b1-wave1
+          cp -a /tmp/24h-v112-b1-wave1/. 24h-v112-b1-wave1/
+          rm -rf 24h-v112-b1-wave1/.git
+
+      - name: Verify exact candidate markers
+        run: |
+          grep -q "const APP_VERSION = 'v112'" 24h-v112-b1-wave1/index.html
+          grep -q "const BUILD_REVISION = 'B1'" 24h-v112-b1-wave1/index.html
+          grep -q "edf2b91f76d43b966e07b1c8dc957ce225cfb45282c507204b1f1c96f5f7e455" 24h-v112-b1-wave1/sw.js
+          cmp -s 24h-v112-b1-wave1/index.html 24h-v112-b1-wave1/luisa_24_heures.html
+
+      - name: Write external deployment receipt
+        run: |
+          mkdir -p qa/wave1-deploy-receipts
+          printf '%s\n' "repo=louisriv26/Les-24-Heures-de-la-Passion" "branch=candidate-v112-b1-wave1" "commit=cb3ad7435b8b83480841ad2f4e53e93adb301ccb" "target=24h-v112-b1-wave1" > qa/wave1-deploy-receipts/24h-v112-b1-wave1.txt
+
+      - name: Commit isolated test deployment
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v112-b1-wave1 qa/wave1-deploy-receipts/24h-v112-b1-wave1.txt
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Sync exact 24H v112 B1 Wave-1 test deployment [skip ci]"
+          git pull --rebase origin main
+          git push

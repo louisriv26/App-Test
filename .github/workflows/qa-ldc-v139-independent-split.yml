@@ -1,0 +1,70 @@
+name: LDC v139 independent split challenge 2026-10-04
+on:
+  push:
+    branches: [main]
+    paths: ['.github/qa-ldc-v139-independent-split/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  functional:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8150 --bind 127.0.0.1 >/tmp/ldc139-independent-functional.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v139-independent-functional.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-independent-functional, path: qa-ldc-v139-independent-functional-results.json}
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8152 --bind 127.0.0.1 >/tmp/ldc139-independent-offline.log 2>&1 &
+          sleep 2
+      - run: node qa-ldc-v139-independent-offline.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: ldc-v139-independent-offline, path: qa-ldc-v139-independent-offline-results.json}
+  publish:
+    needs: [functional,offline]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/download-artifact@v4
+        with: {pattern: 'ldc-v139-independent-*', path: qa-results, merge-multiple: true}
+      - name: Evaluate split challenge
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,glob,os,sys
+          req={'qa-ldc-v139-independent-functional-results.json','qa-ldc-v139-independent-offline-results.json'}
+          d={}
+          for f in glob.glob('qa-results/*.json'):
+              try:d[os.path.basename(f)]=json.load(open(f)).get('overall')
+              except Exception:d[os.path.basename(f)]='INVALID'
+          print(d)
+          if not all(d.get(x)=='PASS' for x in req): sys.exit(1)
+          PY
+          mkdir -p .github/qa-ldc-v139-independent-split/results
+          cp qa-results/*.json .github/qa-ldc-v139-independent-split/results/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/qa-ldc-v139-independent-split/results
+          git commit -m 'Record split independent LDC v139 challenge evidence' || true
+          git pull --rebase origin main
+          git push origin HEAD:main

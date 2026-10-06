@@ -1,0 +1,310 @@
+name: Qualify Lettres v2.16 B1 prestage
+on:
+  push:
+    branches: [main]
+    paths: ['.github/lettres-v216-prestage/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout QA repository
+        uses: actions/checkout@v4
+        with:
+          path: qa_repo
+          fetch-depth: 0
+      - name: Checkout exact v2.16 candidate
+        uses: actions/checkout@v4
+        with:
+          repository: louisriv26/Les-lettres-de-Luisa
+          ref: c79969776503e70a30bdc76c32898d3926aebfaa
+          path: candidate
+          fetch-depth: 0
+      - name: Checkout exact v2.15 predecessor
+        uses: actions/checkout@v4
+        with:
+          repository: louisriv26/Les-lettres-de-Luisa
+          ref: 8c982ba69d7a4f109933212b9dba88b37397d38f
+          path: predecessor
+          fetch-depth: 0
+      - name: Exact identity, mutation boundary, CSP and protected surfaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C candidate rev-parse HEAD)" = "c79969776503e70a30bdc76c32898d3926aebfaa"
+          test "$(git -C predecessor rev-parse HEAD)" = "8c982ba69d7a4f109933212b9dba88b37397d38f"
+          git -C candidate diff --name-only 8c982ba69d7a4f109933212b9dba88b37397d38f..c79969776503e70a30bdc76c32898d3926aebfaa > /tmp/changed.txt
+          printf 'index.html\nmanifest.json\nsw.js\n' > /tmp/expected.txt
+          diff -u /tmp/expected.txt /tmp/changed.txt
+          test "$(sha256sum candidate/corpus.json | cut -d' ' -f1)" = "362e763684e19d818722082b88348d912f06f434d8960e2a278db07b7f63f8ec"
+          cmp predecessor/corpus.json candidate/corpus.json
+          python - <<'PY'
+          from pathlib import Path
+          from html.parser import HTMLParser
+          import hashlib,base64,json,re
+          root=Path('candidate'); idx=(root/'index.html').read_text(encoding='utf-8'); pred=(Path('predecessor')/'index.html').read_text(encoding='utf-8')
+          m=json.loads((root/'manifest.json').read_text(encoding='utf-8'))
+          assert (m['version'],m['build_revision'],m['release_id'])==('2.16','B1','lettres-v2.16-b1-ux-audit-core-repair'),m
+          sw=(root/'sw.js').read_text(encoding='utf-8')
+          assert 'shell-v2.16-b1' in sw and 'corpus-v2.16-b1' in sw
+          assert 'SKIP_WAITING' in sw and 'self.skipWaiting()' in sw
+          install=sw[sw.find("addEventListener('install'"):sw.find("addEventListener('activate'")]
+          assert 'self.skipWaiting(' not in install, 'L-36 behavior mutated: install auto-skips waiting'
+          def fn(src,name):
+              p=src.find('function '+name+'('); assert p>=0,name
+              q=src.find('{',p); d=0; quote=None; esc=False
+              for i in range(q,len(src)):
+                  c=src[i]
+                  if quote:
+                      if esc: esc=False
+                      elif c=='\\': esc=True
+                      elif c==quote: quote=None
+                      continue
+                  if c in "'\"\`": quote=c; continue
+                  if c=='{': d+=1
+                  elif c=='}':
+                      d-=1
+                      if d==0:return src[p:i+1]
+              raise AssertionError(name)
+          assert fn(pred,'validateHighlightInsert')==fn(idx,'validateHighlightInsert'),'F4 interactive overlap guard changed'
+          assert not re.search(r'\bhistory\.(?:pushState|replaceState)\s*\(',idx),'L-30 history mutation entered candidate'
+          assert 'mergeImportedAgainstDurable' in idx and 'highlight_conflicts_skipped' in idx
+          merge=fn(idx,'mergeImportedAgainstDurable')
+          assert "return conflictResult('lp_highlights'" not in merge
+          assert 'openExistingHighlightMenu' in idx and 'data-action="highlight-manage"' in idx
+          assert not re.search(r'<button[^>]*role=["\']listitem["\']',idx)
+          assert '<main id="left-panel"' in idx and 'id="wide-reader"' in idx and 'role="region"' in idx
+          assert 'search-live-status' in idx and 'announceSearchStatus' in idx
+          assert '#E4BC58' in idx
+          class P(HTMLParser):
+              def __init__(self): super().__init__(convert_charrefs=False); self.csp=None; self.active=None; self.buf=[]; self.s=[]; self.st=[]
+              def handle_starttag(self,t,a):
+                  d=dict(a)
+                  if t=='meta' and (d.get('http-equiv') or '').lower()=='content-security-policy': self.csp=d.get('content')
+                  if t in ('script','style') and not (t=='script' and d.get('src')): self.active=t; self.buf=[]
+              def handle_data(self,d):
+                  if self.active:self.buf.append(d)
+              def handle_entityref(self,n):
+                  if self.active:self.buf.append('&'+n+';')
+              def handle_charref(self,n):
+                  if self.active:self.buf.append('&#'+n+';')
+              def handle_endtag(self,t):
+                  if self.active==t:
+                      x=''.join(self.buf); (self.s if t=='script' else self.st).append(x); self.active=None; self.buf=[]
+          p=P();p.feed(idx); assert p.csp and len(p.s)==1 and len(p.st)==2
+          tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
+          assert tok(p.s[0]) in p.csp
+          for x in p.st: assert tok(x) in p.csp
+          Path('/tmp/main.js').write_text(p.s[0],encoding='utf-8')
+          print('STATIC_APP_GOV_PASS')
+          PY
+          node --check /tmp/main.js
+          node --check candidate/sw.js
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install Playwright and axe
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium webkit
+          cd qa_repo && npm install --no-save axe-core@4.10.3
+      - name: Start local exact-source server
+        run: |
+          python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres216-prestage.log 2>&1 &
+          sleep 2
+      - name: Browser boot diagnostic
+        run: |
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          URL='http://127.0.0.1:8120/candidate/index.html?bootdiag=1'
+          with sync_playwright() as pw:
+              b=pw.chromium.launch(headless=True);ctx=b.new_context(viewport={'width':390,'height':844},locale='fr-FR',service_workers='block')
+              ctx.add_init_script("localStorage.setItem('lp_onboarded','1')")
+              p=ctx.new_page();cons=[];errs=[];fails=[]
+              p.on('console',lambda m:cons.append(m.type+': '+m.text))
+              p.on('pageerror',lambda e:errs.append(str(e)))
+              p.on('requestfailed',lambda r:fails.append(r.url+' :: '+str(r.failure)))
+              resp=p.goto(URL,wait_until='domcontentloaded',timeout=30000)
+              p.wait_for_timeout(3000)
+              state=p.evaluate("""()=>({
+                loading:!!document.getElementById('loading'),
+                loadingClass:document.getElementById('loading')?document.getElementById('loading').className:null,
+                letters:document.querySelectorAll('#letter-list .letter-item').length,
+                error:(document.querySelector('.error-state')||{}).innerText||'',
+                scriptTest:typeof window.__LET_A_TEST,
+                body:(document.body.innerText||'').slice(0,500)
+              })""")
+              print('BOOT_HTTP',resp.status if resp else None)
+              print('BOOT_STATE',state)
+              print('BOOT_CONSOLE',cons)
+              print('BOOT_PAGEERRORS',errs)
+              print('BOOT_REQUESTFAIL',fails)
+              assert not errs,errs
+              assert state['letters']==136 and not state['loading'],state
+              ctx.close();b.close()
+          PY
+      - name: Full inherited functional regression on exact v2.16 candidate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('qa_repo/qa/lettres_v215_handover_full.py').read_text(encoding='utf-8')
+          p=p.replace('lettres-v2.15-b1-contrast-closure/','candidate/').replace("'lettres-v2.15-b1-contrast-closure/'","'candidate/'")
+          p=p.replace('v2.15','v2.16').replace("'2.15'","'2.16'")
+          Path('/tmp/full216.py').write_text(p,encoding='utf-8')
+          PY
+          python /tmp/full216.py
+      - name: Full visual contrast matrix on exact v2.16 candidate
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('qa_repo/qa/lettres_v215_handover_contrast.py').read_text(encoding='utf-8')
+          p=p.replace('lettres-v2.15-b1-contrast-closure/','candidate/').replace("Path('node_modules/axe-core/axe.min.js')","Path('qa_repo/node_modules/axe-core/axe.min.js')")
+          Path('/tmp/contrast216.py').write_text(p,encoding='utf-8')
+          PY
+          python /tmp/contrast216.py
+      - name: P0 L-39, F3 and approved P1 acceptance challenge
+        run: |
+          cat > /tmp/v216_targeted.py <<'PY'
+          from playwright.sync_api import sync_playwright, expect
+          import json,re
+          URL='http://127.0.0.1:8120/candidate/index.html'
+          def ready(p):
+              p.locator('#loading').wait_for(state='detached',timeout=25000)
+              expect(p.locator('#letter-list .letter-item')).to_have_count(136)
+              expect(p.locator('.build-meta').first).to_contain_text('v2.16')
+              p.wait_for_timeout(500)
+              if p.locator('#help-overlay').is_visible(): p.locator('#help-close-btn').click()
+          with sync_playwright() as pw:
+              b=pw.chromium.launch(headless=True);c=b.new_context(viewport={'width':390,'height':844},locale='fr-FR',service_workers='block')
+              c.add_init_script("localStorage.setItem('lp_onboarded','1')")
+              p=c.new_page(); errors=[]; p.on('pageerror',lambda e:errors.append(str(e))); p.goto(URL,wait_until='domcontentloaded');ready(p)
+              assert p.locator('main:visible').count()==1
+              p.locator('#pnav-list').click(); p.locator('#letter-list .letter-item[data-n="1"]').click()
+              assert p.locator('main:visible').count()==1
+              dps=p.locator('#phone-reader-scroll [data-dp-id]')
+              dp=None
+              for i in range(dps.count()):
+                  cand=dps.nth(i)
+                  if len(cand.inner_text().strip())>=80: dp=cand; break
+              assert dp is not None
+              selected=dp.evaluate("""el=>{const w=document.createTreeWalker(el,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){const t=n.nodeValue||'';let a=t.search(/\\S/);if(a>=0&&t.slice(a).trim().length>=30){let z=Math.min(t.length,a+10);let r=document.createRange();r.setStart(n,a);r.setEnd(n,z);let s=getSelection();s.removeAllRanges();s.addRange(r);return s.toString();}}return ''}""")
+              assert len(selected.strip())>=2
+              p.locator('#phone-reader-scroll').dispatch_event('mouseup');expect(p.locator('#hl-popup')).to_have_class(re.compile('show'))
+              p.get_by_role('button',name='Surligner').click();p.get_by_role('button',name='Jaune').click();p.wait_for_timeout(200)
+              state=p.evaluate("__LET_A_TEST.getState()"); assert len(state['highlights'])==1
+              local=state['highlights'][0]; source=dp.inner_text()
+              start=max(local['offset_end']+8,25)
+              while start<len(source) and source[start].isspace(): start+=1
+              end=min(len(source),start+12); assert end-start>=2 and start>=local['offset_end']
+              incoming=dict(local);incoming.update({'id':'qa_import_new','offset_start':start,'offset_end':end,'text':source[start:end],'text_snapshot':source[start:end],'color':'blue'})
+              collision=dict(local); collision['color']='pink' if local['color']!='pink' else 'blue'
+              data=p.evaluate("__LET_A_TEST.getState()")
+              data['favourites']=sorted(set(data['favourites']+[3])); data['read_state']=sorted(set(data['read_state']+[3])); data['highlights']=[collision,incoming]
+              env=p.evaluate('(d)=>__LET_A_TEST.buildBackupEnvelope(d)',data)
+              p.locator('#phone-reader-scroll').evaluate('(e)=>e.scrollTop=120');before=p.locator('#phone-reader-scroll').evaluate('(e)=>e.scrollTop')
+              p.locator('#import-input').set_input_files({'name':'collision.json','mimeType':'application/json','buffer':json.dumps(env).encode()})
+              expect(p.locator('#import-sheet')).to_be_visible();p.locator('#import-merge-btn').click();expect(p.locator('#import-sheet')).to_be_hidden();p.wait_for_timeout(350)
+              after_state=p.evaluate("__LET_A_TEST.getState()")
+              assert 3 in after_state['favourites'] and 3 in after_state['read_state']
+              byid={h['id']:h for h in after_state['highlights']}
+              assert local['id'] in byid and byid[local['id']]['color']==local['color']
+              assert 'qa_import_new' in byid
+              expect(p.locator('mark[data-hl-id="qa_import_new"]')).to_have_count(1)
+              after=p.locator('#phone-reader-scroll').evaluate('(e)=>e.scrollTop');assert abs(after-before)<=3,(before,after)
+              count=len(after_state['highlights']);p.locator('mark[data-hl-id="qa_import_new"]').click();expect(p.locator('#existing-highlight-panel')).to_be_visible();assert len(p.evaluate('__LET_A_TEST.getState().highlights'))==count
+              p.locator('#pnav-list').click();assert p.locator('button[role="listitem"]').count()==0
+              row=p.locator('#letter-list .letter-item').first; lab=row.get_attribute('aria-label') or ''; assert ('lue' in lab or 'non lue' in lab) and len(lab)>20,lab
+              p.locator('#pnav-search').click();p.locator('#search-input').fill('croix');p.wait_for_timeout(700);live=p.locator('#search-live-status');assert live.count()==1 and live.inner_text().strip(),live.inner_text()
+              p.locator('#pnav-notes').click();p.locator('#tab-highlights').click();btn=p.locator('#t-highlights [data-action="highlight-open"]').first; assert btn.count()==1; aria=btn.get_attribute('aria-label') or '';assert 'LP.LETTER.' not in aria or len(aria)>35,aria
+              p.locator('#pnav-explore').click();last=p.locator('#p-explore button:visible').last;last.focus();p.wait_for_timeout(250);geom=last.evaluate("""el=>{let r=el.getBoundingClientRect(),n=document.querySelector('.phone-nav').getBoundingClientRect();return {b:r.bottom,limit:n.top}}""");assert geom['b']<=geom['limit']-2,geom
+              p.evaluate("showToast('Message critique de contrôle très long qui doit rester lisible sur plusieurs lignes sans être tronqué',{type:'error',persistent:true})")
+              t=p.locator('#toast');expect(t).to_have_attribute('role','alert');assert t.locator('button[aria-label*="Fermer"]').count()==1;assert t.evaluate('(e)=>getComputedStyle(e).whiteSpace')!='nowrap'
+              p.set_viewport_size({'width':1000,'height':800});p.wait_for_timeout(300);x=p.locator('#snav-search');x.focus();p.wait_for_timeout(80);col=x.evaluate('(e)=>getComputedStyle(e).outlineColor');assert col in ('rgb(228, 188, 88)','rgb(228,188,88)'),col
+              assert not errors,errors
+              print('TARGETED_AUTHORIZED_FIXES_PASS')
+              c.close();b.close()
+          PY
+          python /tmp/v216_targeted.py
+      - name: Same-scope v2.15 to v2.16 update, state and offline preservation
+        run: |
+          rm -rf upgrade-slot && cp -a predecessor upgrade-slot
+          cat > /tmp/v216_upgrade.py <<'PY'
+          from playwright.sync_api import sync_playwright,expect
+          import shutil
+          URL='http://127.0.0.1:8120/upgrade-slot/index.html'
+          def ready(p,v):
+              p.locator('#loading').wait_for(state='detached',timeout=25000);expect(p.locator('.build-meta').first).to_contain_text(v)
+              p.wait_for_timeout(700)
+              if p.locator('#help-overlay').is_visible():p.locator('#help-close-btn').click()
+          with sync_playwright() as pw:
+              b=pw.chromium.launch(headless=True);c=b.new_context(viewport={'width':390,'height':844},locale='fr-FR',service_workers='allow');c.add_init_script("localStorage.setItem('lp_onboarded','1')")
+              p=c.new_page();p.goto(URL,wait_until='networkidle',timeout=30000);ready(p,'v2.15')
+              p.locator('#pnav-list').click();p.locator('#letter-list .letter-item[data-n="2"]').click();p.locator('#pr-fav-btn').click();p.locator('#pr-read-btn').click();p.get_by_role('button',name='Ajouter une note').click();p.locator('#note-input').fill('upgrade sentinel');p.locator('#note-save-btn').click()
+              keys=['lp_favs','lp_notes','lp_highlights','lp_read','lp_positions','lp_last','lp_size','lp_theme','lp_state_schema','lp_paths']
+              pre=p.evaluate('(ks)=>Object.fromEntries(ks.map(k=>[k,localStorage.getItem(k)]))',keys)
+              p.evaluate("navigator.serviceWorker.ready")
+              shutil.rmtree('upgrade-slot');shutil.copytree('candidate','upgrade-slot')
+              p.evaluate("async()=>{const r=await navigator.serviceWorker.getRegistration();await r.update();return true}")
+              expect(p.locator('#update-banner')).to_be_visible(timeout=15000)
+              reg=p.evaluate("async()=>{const r=await navigator.serviceWorker.getRegistration();return {waiting:!!r.waiting,active:!!r.active}}");assert reg['waiting'] and reg['active'],reg
+              p.locator('#update-apply-btn').click();expect(p.locator('.build-meta').first).to_contain_text('v2.16',timeout=20000);ready(p,'v2.16')
+              post=p.evaluate('(ks)=>Object.fromEntries(ks.map(k=>[k,localStorage.getItem(k)]))',keys);assert pre==post,(pre,post)
+              caches=p.evaluate('caches.keys()');assert any('v2.16-b1' in x for x in caches),caches;assert not any('v2.15-b2' in x for x in caches),caches
+              c.set_offline(True);p.reload(wait_until='domcontentloaded',timeout=20000);ready(p,'v2.16');post2=p.evaluate('(ks)=>Object.fromEntries(ks.map(k=>[k,localStorage.getItem(k)]))',keys);assert post2==pre
+              print('UPGRADE_OFFLINE_STATE_PASS',caches)
+              c.close();b.close()
+          PY
+          python /tmp/v216_upgrade.py
+      - name: Deterministic exact candidate package
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile,hashlib
+          src=Path('candidate'); outs=[Path('/tmp/LETTRES_v2.16_B1_EXACT_CANDIDATE.zip'),Path('/tmp/rebuild.zip')]
+          for out in outs:
+              with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+                  for p in sorted(x for x in src.rglob('*') if x.is_file() and '.git' not in x.parts):
+                      rel=p.relative_to(src).as_posix();info=zipfile.ZipInfo(rel,date_time=(1980,1,1,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=(0o100644 & 0xffff)<<16;z.writestr(info,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          a,b=[x.read_bytes() for x in outs];assert a==b
+          sha=hashlib.sha256(a).hexdigest();Path('/tmp/LETTRES_v2.16_B1_SHA256.txt').write_text(f'{sha}  LETTRES_v2.16_B1_EXACT_CANDIDATE.zip\n')
+          print('DETERMINISTIC_PACKAGE_PASS',len(a),sha)
+          PY
+          unzip -t /tmp/LETTRES_v2.16_B1_EXACT_CANDIDATE.zip
+      - name: Upload prestage evidence and exact package
+        uses: actions/upload-artifact@v4
+        with:
+          name: lettres-v2.16-b1-prestage-qualified
+          path: |
+            /tmp/LETTRES_v2.16_B1_EXACT_CANDIDATE.zip
+            /tmp/LETTRES_v2.16_B1_SHA256.txt
+          if-no-files-found: error
+
+      - name: Publish prestage status
+        if: always()
+        shell: bash
+        run: |
+          set -u
+          cat > /tmp/LETTRES_v216_PRESTAGE.txt <<EOF
+          run_id=${{ github.run_id }}
+          run_attempt=${{ github.run_attempt }}
+          job_status=${{ job.status }}
+          candidate=c79969776503e70a30bdc76c32898d3926aebfaa
+          predecessor=8c982ba69d7a4f109933212b9dba88b37397d38f
+          recorded_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          EOF
+          cd qa_repo
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git reset --hard
+          git clean -fd
+          git pull --rebase origin main
+          mkdir -p qa-status
+          cp /tmp/LETTRES_v216_PRESTAGE.txt qa-status/LETTRES_v216_PRESTAGE.txt
+          git add qa-status/LETTRES_v216_PRESTAGE.txt
+          git commit -m "Record Lettres v2.16 B1 prestage run ${{ github.run_id }}" || true
+          for try in 1 2 3; do
+            git push origin HEAD:main && exit 0
+            git pull --rebase origin main || exit 1
+          done
+          exit 1

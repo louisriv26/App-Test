@@ -1,0 +1,25 @@
+name: Freeze 24H v120 B7 blind-adversarial prephysical
+on:
+  push:
+    branches: [main]
+    paths: ['.github/freeze-24h-b7/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  freeze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact B7
+        run: test "$(git rev-parse HEAD:24h-v120-b7-adversarial)" = "bca352b0b86e829c52bbc762273e77581d86a544"
+      - name: Freeze deterministic package
+        run: python3 .github/scripts/freeze_24h_b7.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 24h-v120-b7-frozen-prephysical
+          path: |
+            24H_v120_B7_BLIND_ADVERSARIAL_PREPHYSICAL.zip
+            24H_v120_B7_FREEZE_MANIFEST.json
+          if-no-files-found: error

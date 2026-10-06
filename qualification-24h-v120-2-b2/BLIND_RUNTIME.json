@@ -1,0 +1,116 @@
+{
+  "candidate": "v120.2/B2",
+  "method": "independent blind challenge",
+  "cases": [
+    {
+      "name": "phone-light",
+      "checks": {
+        "version": {
+          "v": "v120.2",
+          "b": "B2",
+          "seq": 120002002,
+          "id": "24h-v120-2-b2-20261005-core-loop-csp-style-rebind"
+        },
+        "focus": {
+          "active": true,
+          "fv": true,
+          "style": "solid",
+          "width": "3px",
+          "color": "rgb(122, 92, 16)"
+        },
+        "endButtonCount": 1,
+        "marked": {
+          "read": true,
+          "logs": 1,
+          "active": "primary-end"
+        },
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "phone-dark",
+      "checks": {
+        "version": {
+          "v": "v120.2",
+          "b": "B2",
+          "seq": 120002002,
+          "id": "24h-v120-2-b2-20261005-core-loop-csp-style-rebind"
+        },
+        "focus": {
+          "active": true,
+          "fv": true,
+          "style": "solid",
+          "width": "3px",
+          "color": "rgb(212, 168, 67)"
+        },
+        "endButtonCount": 1,
+        "marked": {
+          "read": true,
+          "logs": 1,
+          "active": "primary-end"
+        },
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "tablet-light",
+      "checks": {
+        "version": {
+          "v": "v120.2",
+          "b": "B2",
+          "seq": 120002002,
+          "id": "24h-v120-2-b2-20261005-core-loop-csp-style-rebind"
+        },
+        "focus": {
+          "active": true,
+          "fv": true,
+          "style": "solid",
+          "width": "3px",
+          "color": "rgb(122, 92, 16)"
+        },
+        "endButtonCount": 1,
+        "marked": {
+          "read": true,
+          "logs": 1,
+          "active": "primary-end"
+        },
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    },
+    {
+      "name": "tablet-dark",
+      "checks": {
+        "version": {
+          "v": "v120.2",
+          "b": "B2",
+          "seq": 120002002,
+          "id": "24h-v120-2-b2-20261005-core-loop-csp-style-rebind"
+        },
+        "focus": {
+          "active": true,
+          "fv": true,
+          "style": "solid",
+          "width": "3px",
+          "color": "rgb(212, 168, 67)"
+        },
+        "endButtonCount": 1,
+        "marked": {
+          "read": true,
+          "logs": 1,
+          "active": "primary-end"
+        },
+        "overflow": true,
+        "errors": []
+      },
+      "status": "PASS"
+    }
+  ],
+  "errors": [],
+  "status": "PASS"
+}

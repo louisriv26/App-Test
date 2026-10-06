@@ -1,0 +1,63 @@
+{
+  "dir": "24h-v120-b5-blind-adversarial-closure",
+  "release_id": "24h-v120-b5-20261003-blind-adversarial-integrity-closure",
+  "release_sequence": 120000002,
+  "shell_sha256": "88fa5244a953fd022351c330e4ccca740656ec06eef680a8ad1284036a7ccd6b",
+  "inline_script_sha256": "sha256-UnF2h8aYOhvEnVR7VK5coakqu8Vjp00a/Bfovzz4loI=",
+  "inline_style_sha256": [
+    "sha256-UQ2LZMV8vpixa50rjbFhb0lgGCv04EY1sB1SyGNLL0k=",
+    "sha256-O4gvWXrooCpGlZH4pYc2ZLJOgkmS30SZULWdVIOzng8=",
+    "sha256-4AfsRj8AWkdWUFWpaxT/0+3244PorRYCufbvVPHqiRU=",
+    "sha256-poxoonw4ItlDf/MiKAgvlvPvnjPjd1H32fBcGRHdPKA="
+  ],
+  "index_luisa_equal": true,
+  "manifest": {
+    "name": "Les 24 Heures de la Passion",
+    "short_name": "24 Heures",
+    "description": "Les 24 Heures de la Passion — parcours de prière.",
+    "start_url": "./luisa_24_heures.html",
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#3D1212",
+    "theme_color": "#3D1212",
+    "lang": "fr",
+    "icons": [
+      {
+        "src": "icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "icon-maskable-512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+      }
+    ],
+    "id": "./",
+    "scope": "./",
+    "categories": [
+      "books",
+      "education",
+      "lifestyle"
+    ],
+    "display_override": [
+      "standalone",
+      "browser"
+    ],
+    "version": "v120",
+    "build_revision": "B5",
+    "release_sequence": 120000002,
+    "release_id": "24h-v120-b5-20261003-blind-adversarial-integrity-closure",
+    "build": "B5"
+  },
+  "sw_revision": "B5",
+  "version_revision": "B5"
+}

@@ -1,0 +1,65 @@
+name: Package Lettres R8 R6 deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/package-lettres-r8-r6.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout packaging workspace
+        uses: actions/checkout@v4
+
+      - name: Clone exact Lettres R8 R6
+        run: |
+          rm -rf /tmp/lettres-r8-r6
+          git clone --depth 1 --branch ux-lettres-v2.3-r8-r6 https://github.com/louisriv26/Les-lettres-de-Luisa.git /tmp/lettres-r8-r6
+          cd /tmp/lettres-r8-r6
+          test "$(git rev-parse HEAD)" = "9f08810751d60beb189e94da1bc184c10baa8ffd"
+          test "$(git rev-parse HEAD^{tree})" = "010f8b0bf048262c2f606d4b31c606602a17043d"
+
+      - name: Build exact GitHub deploy ZIP and manifests
+        run: |
+          mkdir -p out
+          cd /tmp/lettres-r8-r6
+          git archive --format=zip --output="$GITHUB_WORKSPACE/out/LETTRES_v2.3_R8_R6_GITHUB_DEPLOY.zip" HEAD
+          sha256sum "$GITHUB_WORKSPACE/out/LETTRES_v2.3_R8_R6_GITHUB_DEPLOY.zip" | sed 's#  .*/#  #' > "$GITHUB_WORKSPACE/out/LETTRES_v2.3_R8_R6_GITHUB_DEPLOY_SHA256.txt"
+          python - <<'PY'
+          import csv, hashlib, pathlib, subprocess
+          root=pathlib.Path('/tmp/lettres-r8-r6')
+          out=pathlib.Path(__import__('os').environ['GITHUB_WORKSPACE'])/'out'
+          paths=subprocess.check_output(['git','-C',str(root),'ls-tree','-r','--name-only','HEAD'],text=True).splitlines()
+          with (out/'LETTRES_v2.3_R8_R6_PACKAGE_FILE_MANIFEST_SHA256.csv').open('w',newline='',encoding='utf-8') as f:
+              w=csv.writer(f); w.writerow(['path','bytes','sha256'])
+              for p in sorted(paths):
+                  b=(root/p).read_bytes()
+                  w.writerow([p,len(b),hashlib.sha256(b).hexdigest()])
+          with (out/'LETTRES_v2.3_R8_R6_GIT_BLOB_MANIFEST.csv').open('w',newline='',encoding='utf-8') as f:
+              w=csv.writer(f); w.writerow(['path','git_blob_sha','bytes'])
+              lines=subprocess.check_output(['git','-C',str(root),'ls-tree','-r','-l','HEAD'],text=True).splitlines()
+              for line in lines:
+                  meta,p=line.split('\t',1)
+                  mode,typ,sha,size=meta.split()
+                  w.writerow([p,sha,size])
+          PY
+
+      - name: Verify ZIP
+        run: |
+          unzip -t out/LETTRES_v2.3_R8_R6_GITHUB_DEPLOY.zip
+          FILE_COUNT=$(unzip -Z1 out/LETTRES_v2.3_R8_R6_GITHUB_DEPLOY.zip | awk '!/\/$/' | wc -l)
+          test "$FILE_COUNT" -eq 22
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LETTRES_v2.3_R8_R6_GITHUB_DEPLOY_PACKAGE
+          path: out/*
+          if-no-files-found: error
+          retention-days: 30

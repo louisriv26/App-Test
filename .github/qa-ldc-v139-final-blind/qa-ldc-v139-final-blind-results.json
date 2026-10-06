@@ -1,0 +1,150 @@
+{
+  "candidate": "LDC v139 final independent blind challenge",
+  "generated_at": "2026-10-04T07:54:18.496Z",
+  "overall": "PASS",
+  "probes": {
+    "identity": {
+      "app": "v2.19.139-R1B-UX-ACCESS-R12",
+      "pub": "139",
+      "sw": "ldc-v2.19.139-R1B-ux-access-r12",
+      "pill": "v139",
+      "version": "v2.19.139-R1B-UX-ACCESS-R12",
+      "versionPub": "139",
+      "keys": [
+        "ldc-le-livre-du-ciel-207a82aa-runtime-v2.19.139-R1B-ux-access-r12",
+        "ldc-le-livre-du-ciel-207a82aa-shell-v2.19.139-R1B-ux-access-r12",
+        "ldc-le-livre-du-ciel-offline-persistent-v3-207a82aa"
+      ],
+      "controller": true
+    },
+    "search": {
+      "aflp": {
+        "mode": "aflp",
+        "meta": "Phrase exacte : 17 · 2 entrées correspondantes Recherche lexicale · PRINCIPAL",
+        "cards": 19,
+        "failed": false
+      },
+      "additions": {
+        "mode": "additions",
+        "meta": "0 résultat Recherche lexicale · COMPLÉMENT",
+        "cards": 0,
+        "failed": false
+      },
+      "enriched": {
+        "mode": "enriched",
+        "meta": "Phrase exacte : 17 · 2 entrées correspondantes Recherche lexicale · ENRICHI",
+        "cards": 19,
+        "failed": false
+      }
+    },
+    "reader": {
+      "id": "ldc_t01_sec001",
+      "open": "ldc_t01_sec001",
+      "top": 0,
+      "fav": true,
+      "pressed": "true",
+      "next": true,
+      "nextId": "ldc_t01_sec002",
+      "screen": "screen-entries",
+      "marker": true
+    },
+    "espace": {
+      "cards": 1,
+      "stored": 1
+    },
+    "settings": {
+      "theme": "dark",
+      "text": "xlarge"
+    },
+    "settingsReload": {
+      "theme": "dark",
+      "themeDb": "dark",
+      "text": "xlarge"
+    },
+    "help": {
+      "before": 500,
+      "after": 500,
+      "ptop": 0,
+      "ok": true
+    },
+    "responsive": [
+      {
+        "w": 390,
+        "h": 844,
+        "body": 390,
+        "inner": 390,
+        "overflow": false,
+        "version": "v139"
+      },
+      {
+        "w": 820,
+        "h": 1180,
+        "body": 820,
+        "inner": 820,
+        "overflow": false,
+        "version": "v139"
+      },
+      {
+        "w": 1440,
+        "h": 900,
+        "body": 1440,
+        "inner": 1440,
+        "overflow": false,
+        "version": "v139"
+      }
+    ],
+    "assets": [
+      {
+        "url": "./manifest.json",
+        "ok": true,
+        "status": 200,
+        "bytes": 673
+      },
+      {
+        "url": "./sw.js",
+        "ok": true,
+        "status": 200,
+        "bytes": 32141
+      },
+      {
+        "url": "./assets/fonts/fonts.css",
+        "ok": true,
+        "status": 200,
+        "bytes": 1345
+      },
+      {
+        "url": "./icons/icon-192.png",
+        "ok": true,
+        "status": 200,
+        "bytes": 36359
+      },
+      {
+        "url": "./corpus/volume_36.json",
+        "ok": true,
+        "status": 200,
+        "bytes": 127600
+      }
+    ],
+    "backup": {
+      "ok": true,
+      "theme": "dark",
+      "warnings": []
+    }
+  },
+  "errors": {
+    "page": [],
+    "console": []
+  },
+  "assertions": {
+    "identity": true,
+    "searchModes": true,
+    "reader": true,
+    "espace": true,
+    "settings": true,
+    "help": true,
+    "responsive": true,
+    "assets": true,
+    "backup": true,
+    "noErrors": true
+  }
+}

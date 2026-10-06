@@ -1,0 +1,234 @@
+name: Build qualify and freeze 24H v120 B12 release reconciliation and update-banner closure
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b12-build/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+
+      - name: Bind exact B10 authority
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:24h-v120-b10-predecessor-compatible-closure)" = "2a12ff7881832645adfa41ebddd5772f3a5c406a"
+          echo "42937d636f0c44a78e9969bb8410fd374784e6ef6b3d937270ccd4ed81e6adc9  24H_v120_B10_PREDECESSOR_COMPATIBLE_RELEASE.zip" | sha256sum -c -
+
+      - name: Build bounded B12 successor
+        run: python3 build-24h-v120b12.py
+
+      - name: Pass 1 static integrity and exact protected parity
+        run: |
+          set -euo pipefail
+          node --check 24h-v120-b12-release-reconciliation-contrast-closure/sw.js
+          python3 - <<'PY'
+          import base64,hashlib,json,pathlib,re
+          b10=pathlib.Path('24h-v120-b10-predecessor-compatible-closure')
+          b12=pathlib.Path('24h-v120-b12-release-reconciliation-contrast-closure')
+          def hs(root):
+              return {str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in root.rglob('*') if p.is_file()}
+          a,c=hs(b10),hs(b12)
+          changed=sorted(k for k in set(a)|set(c) if a.get(k)!=c.get(k))
+          assert changed==['index.html','luisa_24_heures.html','manifest.json','sw.js','version.json'],changed
+          # Every non-identity binary/static asset is byte-identical.
+          for k in sorted(set(a)&set(c)):
+              if k not in changed: assert a[k]==c[k],k
+          h10=(b10/'index.html').read_text(encoding='utf-8')
+          h11=(b12/'index.html').read_text(encoding='utf-8')
+          assert (b12/'index.html').read_bytes()==(b12/'luisa_24_heures.html').read_bytes()
+          # Normalize only release identity + CSP binding. Any other shell difference is a failure.
+          def norm_html(s,rev,seq,rid,stage):
+              s=re.sub(r'(<meta http-equiv="Content-Security-Policy" content=")[^"]+(")',r'\1<CSP>\2',s,count=1)
+              s=s.replace("const BUILD_REVISION = '"+rev+"';","const BUILD_REVISION = '<REV>';")
+              s=s.replace("const APP_RELEASE_SEQUENCE = "+str(seq)+";","const APP_RELEASE_SEQUENCE = <SEQ>;")
+              s=s.replace("const APP_RELEASE_ID = '"+rid+"';","const APP_RELEASE_ID = '<RID>';")
+              s=s.replace("const APP_EVIDENCE_STAGE = '"+stage+"';","const APP_EVIDENCE_STAGE = '<STAGE>';")
+              return s
+          n10=norm_html(h10,'B10',120000010,'24h-v120-b10-20261003-predecessor-compatible-activation-closure','24H_V120_PREDECESSOR_COMPATIBLE_ACTIVATION_CLOSURE_B10')
+          n11=norm_html(h11,'B12',120000012,'24h-v120-b12-20261003-release-reconciliation-update-banner-closure','24H_V120_RELEASE_RECONCILIATION_UPDATE_BANNER_CLOSURE_B12')
+          # Normalize only the two explicitly authorized B12 update-banner CSS changes back to B10.
+          old_refresh='.update-refresh-btn { flex-shrink: 0; padding: 0.4rem 0.8rem;\n  background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.4);\n  color: #fff; border-radius: 8px; font-family: var(--font-ui); font-size: 0.82rem;\n  cursor: pointer; white-space: nowrap; }'
+          new_refresh='.update-refresh-btn { flex-shrink: 0; min-height: 44px; padding: 0.4rem 0.8rem;\n  background: rgba(255,255,255,0.25); border: 1px solid rgba(255,255,255,0.4);\n  color: var(--on-accent); border-radius: 8px; font-family: var(--font-ui); font-size: 0.82rem;\n  cursor: pointer; white-space: nowrap; }'
+          old_dismiss='.update-dismiss-btn { flex-shrink: 0; background: none; border: none; color: rgba(255,255,255,0.7);\n  font-size: 1.1rem; cursor: pointer; padding: 2px 4px; line-height: 1; }'
+          new_dismiss='.update-dismiss-btn { flex-shrink: 0; min-width: 44px; min-height: 44px; background: none; border: none; color: var(--on-accent);\n  font-size: 1.1rem; cursor: pointer; padding: 2px 4px; line-height: 1; }'
+          assert n11.count(new_refresh)==1 and n11.count(new_dismiss)==1
+          n11=n11.replace(new_refresh,old_refresh,1).replace(new_dismiss,old_dismiss,1)
+          assert n10==n11,'B12 shell changed beyond release identity/CSP and authorized update-banner closure'
+          # Normalize SW identity/cache/shell hash/comment. Any semantic SW change is a failure.
+          s10=(b10/'sw.js').read_text(encoding='utf-8'); s11=(b12/'sw.js').read_text(encoding='utf-8')
+          def norm_sw(s,rev,seq,rid,cache,sha):
+              s=re.sub(r'^/\* v120 B\d+[^*]*\*/','/* <HEADER> */',s,count=1,flags=re.M)
+              s=s.replace("const BUILD_REVISION = '"+rev+"';","const BUILD_REVISION = '<REV>';")
+              s=s.replace("const RELEASE_SEQUENCE = "+str(seq)+";","const RELEASE_SEQUENCE = <SEQ>;")
+              s=s.replace("const RELEASE_ID = '"+rid+"';","const RELEASE_ID = '<RID>';")
+              s=s.replace("v120-"+cache,"v120-<CACHE>")
+              s=s.replace("const CANONICAL_SHELL_SHA256 = '"+sha+"';","const CANONICAL_SHELL_SHA256 = '<SHA>';")
+              return s
+          assert norm_sw(s10,'B10',120000010,'24h-v120-b10-20261003-predecessor-compatible-activation-closure','b10','85d11653074dda89eaa1e45c1da6c88fc2dc9b4c738317bad0263c4b9f3c563b') == norm_sw(s11,'B12',120000012,'24h-v120-b12-20261003-release-reconciliation-update-banner-closure','b12',hashlib.sha256((b12/'index.html').read_bytes()).hexdigest()), 'B12 SW semantic drift'
+          v=json.loads((b12/'version.json').read_text()); m=json.loads((b12/'manifest.json').read_text())
+          shell=hashlib.sha256((b12/'index.html').read_bytes()).hexdigest()
+          assert v['build_revision']=='B12' and v['release_sequence']==120000012 and v['release_id']=='24h-v120-b12-20261003-release-reconciliation-update-banner-closure'
+          assert m['build_revision']=='B12' and m['release_sequence']==120000012 and m['release_id']==v['release_id']
+          assert v['canonical_shell_sha256']==shell and shell in s11
+          assert all('v120/B8' not in x for x in v['known_blockers'])
+          assert all('v120/B8' not in x for x in v['external_open_gates'])
+          assert 'V120_B8' not in v['functional_freeze_status']
+          assert 'full_qa_20261003_b12' in v
+          # Fresh exact CSP authorization for every inline script/style.
+          csp=re.search(r'Content-Security-Policy" content="([^"]+)"',h11).group(1)
+          tok=lambda x:"'sha256-"+base64.b64encode(hashlib.sha256(x.encode()).digest()).decode()+"'"
+          scripts=re.findall(r'<script(?![^>]*\bsrc=)[^>]*>([\s\S]*?)</script>',h11,re.I)
+          styles=re.findall(r'<style[^>]*>([\s\S]*?)</style>',h11,re.I)
+          assert scripts and styles and all(tok(x) in csp for x in scripts+styles)
+          pathlib.Path('/tmp/b12-main.js').write_text(max(scripts,key=len))
+          print('PASS1_B12_STATIC_PARITY',changed,shell,len(scripts),len(styles))
+          PY
+          node --check /tmp/b12-main.js
+
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install browser tooling
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Serve exact checkout
+        run: |
+          python3 -m http.server 8080 --bind 127.0.0.1 >/tmp/b12-http.log 2>&1 &
+          sleep 2
+
+      - name: Pass 2 fresh rendered runtime and transient contrast
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('audit-24h-v120b7-blind-adversarial.cjs').read_text()
+          s=s.replace("const CANDIDATE='24h-v120-b7-darkmode';","const CANDIDATE='24h-v120-b12-release-reconciliation-contrast-closure';")
+          s=s.replace("const OUT='blind-24h-v120b7-audit';","const OUT='qualification-24h-v120b12';")
+          # B12 retains the exact atomic transition repair but it is merged into the governed style block.
+          s=s.replace("if(!report.static.closure_style_authorized_by_csp)hard.push('closure CSP not authorized');",
+                      "if(!fs.readFileSync(CANDIDATE+'/index.html','utf8').includes('html[data-theme=\\\"dark\\\"] .integrity-btn { transition:none !important; }'))hard.push('atomic dark transition missing');")
+          Path('qa-b12-broad.cjs').write_text(s)
+          PY
+          node qa-b12-broad.cjs
+          test -f qualification-24h-v120b12/REPORT.json
+
+      - name: Update banner real-state contrast touch and narrow-width qualification
+        run: |
+          cat > qa-b12-update-banner.cjs <<'JS'
+          const {chromium}=require('playwright');
+          function parse(s){const m=String(s).match(/rgba?\(([^)]+)\)/);if(!m)return null;const a=m[1].split(/[,\s/]+/).filter(Boolean).map(Number);return{r:a[0],g:a[1],b:a[2],a:a[3]===undefined?1:a[3]}}
+          function comp(fg,bg){const a=fg.a+(bg.a||1)*(1-fg.a);return{r:(fg.r*fg.a+bg.r*(bg.a||1)*(1-fg.a))/a,g:(fg.g*fg.a+bg.g*(bg.a||1)*(1-fg.a))/a,b:(fg.b*fg.a+bg.b*(bg.a||1)*(1-fg.a))/a,a}}
+          function lin(v){v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)} function L(c){return .2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b)} function cr(a,b){return(Math.max(L(a),L(b))+.05)/(Math.min(L(a),L(b))+.05)}
+          (async()=>{const b=await chromium.launch({headless:true});const out=[];
+          for(const vp of [{n:'narrow',w:320,h:700},{n:'iphone',w:390,h:844},{n:'ipad',w:820,h:1180}]){
+            for(const mode of ['light','dark','system']){
+              const c=await b.newContext({viewport:{width:vp.w,height:vp.h},colorScheme:mode==='light'?'light':'dark'});const p=await c.newPage();const ce=[],pe=[];
+              p.on('console',m=>{if(m.type()==='error')ce.push(m.text())});p.on('pageerror',e=>pe.push(String(e)));
+              await p.goto('http://127.0.0.1:8080/24h-v120-b12-release-reconciliation-contrast-closure/luisa_24_heures.html',{waitUntil:'domcontentloaded',timeout:120000});
+              await p.waitForFunction(()=>window.__lp24Init==='done'&&BUILD_REVISION==='B12'&&APP_RELEASE_SEQUENCE===120000012,null,{timeout:30000});
+              await p.evaluate(mode=>{state.themePreference=mode;applyTheme();showHome();showUpdateBanner('v999','',true,'Nouvelle version vérifiée et prête.');},mode);
+              const x=await p.evaluate(()=>{
+                function parse(s){const m=String(s).match(/rgba?\(([^)]+)\)/);if(!m)return null;const a=m[1].split(/[,\s/]+/).filter(Boolean).map(Number);return{r:a[0],g:a[1],b:a[2],a:a[3]===undefined?1:a[3]}}
+                function comp(fg,bg){const ba=bg.a===undefined?1:bg.a,a=fg.a+ba*(1-fg.a);return{r:(fg.r*fg.a+bg.r*ba*(1-fg.a))/a,g:(fg.g*fg.a+bg.g*ba*(1-fg.a))/a,b:(fg.b*fg.a+bg.b*ba*(1-fg.a))/a,a}}
+                function bg(el){const chain=[];for(let q=el;q;q=q.parentElement)chain.unshift(q);let acc={r:255,g:255,b:255,a:1};for(const q of chain){const c=parse(getComputedStyle(q).backgroundColor);if(c&&c.a>0)acc=comp(c,acc)}return acc}
+                function lin(v){v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)} function L(c){return .2126*lin(c.r)+.7152*lin(c.g)+.0722*lin(c.b)} function ratio(a,b){return(Math.max(L(a),L(b))+.05)/(Math.min(L(a),L(b))+.05)}
+                function m(sel){const e=document.querySelector(sel),s=getComputedStyle(e),b=bg(e),f=parse(s.color),op=Number(s.opacity||1);f.a*=op;const rendered=comp(f,b),r=e.getBoundingClientRect();return{sel,ratio:+ratio(rendered,b).toFixed(3),w:r.width,h:r.height,color:s.color,bg:s.backgroundColor,opacity:op}}
+                return {items:[m('.update-banner-text'),m('.update-banner-text strong'),m('.update-refresh-btn'),m('.update-dismiss-btn')],scrollWidth:document.documentElement.scrollWidth,clientWidth:document.documentElement.clientWidth};
+              });
+              for(const i of x.items)if(i.ratio<4.5)throw new Error(vp.n+' '+mode+' low contrast '+JSON.stringify(i));
+              const rr=x.items.find(i=>i.sel==='.update-refresh-btn'),dd=x.items.find(i=>i.sel==='.update-dismiss-btn');
+              if(rr.h<43.9||dd.h<43.9||dd.w<43.9)throw new Error(vp.n+' '+mode+' touch floor '+JSON.stringify({rr,dd}));
+              if(x.scrollWidth>x.clientWidth+1)throw new Error(vp.n+' '+mode+' horizontal overflow '+JSON.stringify(x));
+              if(pe.length||ce.some(z=>/content security policy|uncaught|referenceerror|typeerror/i.test(z)))throw new Error('runtime error '+JSON.stringify({pe,ce}));
+              out.push({vp:vp.n,mode,...x});await c.close();
+            }
+          }
+          require('fs').writeFileSync('24h-v120-b12-update-banner-evidence.json',JSON.stringify(out,null,2));await b.close();console.log('B12_UPDATE_BANNER_REAL_STATE_PASS');
+          })().catch(e=>{console.error(e);process.exit(2)});
+          JS
+          node qa-b12-update-banner.cjs
+
+      - name: Exact v119 to B12 update persistence offline qualification
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('24h-b8-production-upgrade-offline.cjs').read_text()
+          reps=[
+            ('24h-v120-b8-update-activation-closure','24h-v120-b12-release-reconciliation-contrast-closure'),
+            ('24h-v120-b8-20261003-update-activation-closure','24h-v120-b12-20261003-release-reconciliation-update-banner-closure'),
+            ('120000008','120000012'),('v120-b8','v120-b12'),('B8','B12'),('b8','b12'),
+            ('http://127.0.0.1:8086/app/','http://127.0.0.1:8080/qa-24h-b12-upgrade/app/')
+          ]
+          for a,b in reps:s=s.replace(a,b)
+          Path('qa-b12-upgrade.cjs').write_text(s)
+          PY
+          node qa-b12-upgrade.cjs
+
+      - name: Two-client fail-closed and retry qualification
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          y=Path('.github/workflows/build-qualify-freeze-24h-b10.yml').read_text()
+          start=y.index("          cat > qa-b10-multiclient.cjs <<'JS'\n")
+          body_start=start+len("          cat > qa-b10-multiclient.cjs <<'JS'\n")
+          end=y.index("\n          JS\n          node qa-b10-multiclient.cjs",body_start)
+          lines=y[body_start:end].splitlines()
+          s='\n'.join(line[10:] if line.startswith('          ') else line for line in lines)+'\n'
+          reps=[
+            ('24h-v120-b10-predecessor-compatible-closure','24h-v120-b12-release-reconciliation-contrast-closure'),
+            ('24h-v120-b10-20261003-predecessor-compatible-activation-closure','24h-v120-b12-20261003-release-reconciliation-update-banner-closure'),
+            ('120000010','120000012'),('B10','B12'),('b10','b12')
+          ]
+          for a,b in reps:s=s.replace(a,b)
+          Path('qa-b12-multiclient.cjs').write_text(s)
+          PY
+          node qa-b12-multiclient.cjs
+
+      - name: Deterministic freeze package and evidence
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,os,pathlib,zipfile
+          src=pathlib.Path('24h-v120-b12-release-reconciliation-contrast-closure')
+          z=pathlib.Path('24H_v120_B12_RELEASE_RECONCILIATION_UPDATE_BANNER_RELEASE.zip')
+          with zipfile.ZipFile(z,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as f:
+              for p in sorted(x for x in src.rglob('*') if x.is_file()):
+                  zi=zipfile.ZipInfo(str(p.relative_to(src)).replace(os.sep,'/'),(1980,1,1,0,0,0))
+                  zi.compress_type=zipfile.ZIP_DEFLATED; zi.external_attr=0o100644<<16
+                  f.writestr(zi,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)
+          zh=hashlib.sha256(z.read_bytes()).hexdigest()
+          pathlib.Path('24H_v120_B12_RELEASE_RECONCILIATION_UPDATE_BANNER_RELEASE_SHA256.txt').write_text(zh+'  '+z.name+'\n')
+          e=json.loads(pathlib.Path('24h-v120-b12-build-evidence.json').read_text())
+          e.update({
+            'deterministic_zip_sha256':zh,'deterministic_zip_size':z.stat().st_size,
+            'broad_runtime_evidence':'qualification-24h-v120b12/REPORT.json',
+            'upgrade_evidence':'24h-b12-production-upgrade-offline-results.json',
+            'multiclient_evidence':'24h-v120-b12-multiclient-evidence.json','update_banner_evidence':'24h-v120-b12-update-banner-evidence.json',
+            'qualification':'PASS_NONPHYSICAL',
+            'production_deployment_authority':'NONE','physical_gate':'OPEN'
+          })
+          pathlib.Path('24H_v120_B12_BUILD_QA_EVIDENCE.json').write_text(json.dumps(e,indent=2)+'\n')
+          print('B12_ZIP',zh,z.stat().st_size)
+          PY
+          unzip -t 24H_v120_B12_RELEASE_RECONCILIATION_UPDATE_BANNER_RELEASE.zip
+
+      - name: Freeze exact qualified B12 candidate
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b12-release-reconciliation-contrast-closure \
+            24H_v120_B12_RELEASE_RECONCILIATION_UPDATE_BANNER_RELEASE.zip \
+            24H_v120_B12_RELEASE_RECONCILIATION_UPDATE_BANNER_RELEASE_SHA256.txt \
+            24H_v120_B12_BUILD_QA_EVIDENCE.json \
+            qualification-24h-v120b12/REPORT.json \
+            qualification-24h-v120b12/SUMMARY.json \
+            24h-b12-production-upgrade-offline-results.json \
+            24h-v120-b12-multiclient-evidence.json \
+            24h-v120-b12-update-banner-evidence.json
+          git commit -m "Freeze 24H v120 B12 state reconciliation candidate after fresh qualification"
+          git pull --rebase origin main
+          test "$(git rev-parse HEAD:24h-v120-b10-predecessor-compatible-closure)" = "2a12ff7881832645adfa41ebddd5772f3a5c406a"
+          git push origin HEAD:main

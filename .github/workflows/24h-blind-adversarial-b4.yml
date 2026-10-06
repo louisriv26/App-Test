@@ -1,0 +1,44 @@
+name: 24H blind adversarial B4 verification
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-blind-b4/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact candidate and live predecessor
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD:24h-v120-b4-darkmode)" = "fa26ec9bf92f9d5ff8551113ad43d26fda45168e"
+          test "$(git rev-parse HEAD:24h-v119-b1-governed-r4)" = "f8d73f59ee09e302f7b860553adc946702917dfb"
+      - name: Independent static/package audit
+        run: python3 24h-blind-adversarial-b4-static.py
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install browser
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start exact-byte origin
+        run: |
+          python3 -m http.server 8084 --bind 127.0.0.1 >/tmp/24hblind.log 2>&1 &
+          sleep 2
+      - name: Independent rendered/runtime audit
+        run: node 24h-blind-adversarial-b4.cjs
+      - name: Upload full evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 24h-blind-adversarial-b4-evidence
+          path: |
+            24h-blind-adversarial-b4-static.json
+            24h-blind-adversarial-b4-results.json
+            24h-blind-adversarial-b4-fatal.txt
+          if-no-files-found: warn

@@ -1,0 +1,64 @@
+name: LDC v140 R14 exact Pages binding
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/qa-ldc-v140-r14-bind.yml'
+permissions:
+  contents: read
+jobs:
+  bind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify repository candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          C='ldc-v140-r14-search-scroll-repair'
+          test "$(git rev-parse HEAD:$C)" = '44da8d6b791de04e3115bf1773b3de34fc8a89be'
+          test "$(find "$C" -type f | wc -l | tr -d ' ')" = '248'
+          python3 - <<'PY'
+          import pathlib,hashlib,json
+          r=pathlib.Path('ldc-v140-r14-search-scroll-repair')
+          v=json.loads((r/'version.json').read_text())
+          m=json.loads((r/'offline_manifest.json').read_text())
+          assert v['app_version']=='v2.19.140-R1B-UX-ACCESS-R14'
+          assert str(v['public_version'])=='140'
+          assert v['page_worker_revision']=='ldc-v2.19.140-R1B-ux-access-r14'
+          assert m['app_version']==v['app_version']
+          assert m['page_worker_revision']==v['page_worker_revision']
+          assert v['offline_manifest_sha256']==hashlib.sha256((r/'offline_manifest.json').read_bytes()).hexdigest()
+          assert len(m['assets'])==204
+          print('REPOSITORY_BINDING_PASS')
+          PY
+      - name: Wait for exact Pages index
+        shell: bash
+        run: |
+          set -euo pipefail
+          C='ldc-v140-r14-search-scroll-repair'
+          exp="$(sha256sum "$C/index.html"|cut -d' ' -f1)"
+          ok=0
+          for i in $(seq 1 90); do
+            got="$(curl -fsSL "https://louisriv26.github.io/App-Test/$C/index.html?bind=$i" | sha256sum | cut -d' ' -f1 || true)"
+            if [ "$got" = "$exp" ]; then ok=1; break; fi
+            sleep 10
+          done
+          test "$ok" = 1
+      - name: Verify all 248 served bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          C='ldc-v140-r14-search-scroll-repair'
+          base="https://louisriv26.github.io/App-Test/$C"
+          checked=0
+          while IFS= read -r -d '' f; do
+            rel="${f#$C/}"
+            exp="$(sha256sum "$f"|cut -d' ' -f1)"
+            got="$(curl -fsSL "$base/$rel?exact=140r14" | sha256sum | cut -d' ' -f1)"
+            test "$got" = "$exp"
+            checked=$((checked+1))
+          done < <(find "$C" -type f -print0)
+          test "$checked" = 248
+          echo "PAGES_PARITY_PASS 248/248"

@@ -1,0 +1,31 @@
+name: 24H B6 independent rendered adversarial sweep
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-b6-rendered-sweep/TRIGGER']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bind exact B6
+        run: test "$(git rev-parse HEAD:24h-v120-b6-adversarial)" = "cdb60100c7576f99eb678a79f798946bc14f349e"
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm install --no-save playwright@1.55.0 axe-core@4.10.3
+          npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8092 --bind 127.0.0.1 >/tmp/http8092.log 2>&1 &
+          sleep 2
+      - run: node 24h-b6-independent-rendered-sweep.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: 24h-b6-independent-rendered-sweep
+          path: 24h-b6-independent-rendered-sweep.json
+          if-no-files-found: warn

@@ -1,0 +1,26 @@
+name: Build 24H v120 B6 dark-mode adversarial closure
+on:
+  push:
+    branches: [main]
+    paths: ['.github/24h-v120b6-build/TRIGGER']
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Bind exact B5 predecessor
+        run: test "$(git rev-parse HEAD:24h-v120-b5-darkmode)" = "6fc3cd1506e25c3f706513a7624e9586b7744a7d"
+      - name: Build bounded B6 successor
+        run: python3 build-24h-v120b6.py
+      - name: Commit immutable B6 candidate
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 24h-v120-b6-darkmode 24h-v120-b6-build-evidence.json
+          git commit -m "Create 24H v120 B6 dark-mode adversarial closure candidate"
+          git pull --rebase origin main
+          git push origin HEAD:main
