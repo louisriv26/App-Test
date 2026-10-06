@@ -1,0 +1,562 @@
+{
+  "schema": "ldc-v142.6-help-release-truth-machine-qa-v1",
+  "candidate_root": "/mnt/data/ldc_v1426",
+  "direct_predecessor_zip_sha256": "2af04c8d7689159b3d214904d52ffc15937c7cdfdd3212e06f0250fd3cc9278d",
+  "protected_v1422_zip_sha256": "1e46d13fbc5628802695e7dd7ac90de998c5b1c22736bb9206646e6860ffdb8e",
+  "checks": [
+    {
+      "check": "DIRECT_PREDECESSOR_V1425_ZIP_SHA256",
+      "status": "PASS",
+      "detail": "2af04c8d7689159b3d214904d52ffc15937c7cdfdd3212e06f0250fd3cc9278d"
+    },
+    {
+      "check": "PROTECTED_BASELINE_V1422_ZIP_SHA256",
+      "status": "PASS",
+      "detail": "1e46d13fbc5628802695e7dd7ac90de998c5b1c22736bb9206646e6860ffdb8e"
+    },
+    {
+      "check": "DIRECT_PREDECESSOR_BOUNDED_APPLICATION_MUTATION_SET",
+      "status": "PASS",
+      "detail": {
+        "changed": [
+          "index.html",
+          "offline_manifest.json",
+          "sw.js",
+          "version.json"
+        ],
+        "expected": [
+          "index.html",
+          "offline_manifest.json",
+          "sw.js",
+          "version.json"
+        ]
+      }
+    },
+    {
+      "check": "NO_PREDECESSOR_FILES_REMOVED",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "INTERACTION_ANCHOR_INHERITED_BYTE_IDENTICAL",
+      "status": "PASS",
+      "detail": "04b147a84cdc0be240973a64f8a019ae6e0090b1bee562f61d46319407e31b38"
+    },
+    {
+      "check": "CORPUS_BYTE_IDENTICAL_TO_FROZEN_V1422",
+      "status": "PASS",
+      "detail": {
+        "files": 205,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "PLS_V15_BYTE_IDENTICAL_TO_FROZEN_V1422",
+      "status": "PASS",
+      "detail": {
+        "files": 23,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "OFFLINE_ASSET_LEDGER_UNCHANGED",
+      "status": "PASS",
+      "detail": 204
+    },
+    {
+      "check": "OFFLINE_TOTAL_BYTES_AUTHORITATIVE",
+      "status": "PASS",
+      "detail": 114483048
+    },
+    {
+      "check": "OFFLINE_CONTENT_BINDING_UNCHANGED",
+      "status": "PASS",
+      "detail": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384"
+    },
+    {
+      "check": "FULL_HYBRID_FROZEN_RANKS",
+      "status": "PASS",
+      "detail": [
+        9,
+        2,
+        1
+      ]
+    },
+    {
+      "check": "JS_SYNTAX_INTERACTION_ANCHOR_JS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "JS_SYNTAX_SW_JS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "INDEX_INLINE_JS_SYNTAX",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "INDEX_ACTIVE_IDENTITY",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "VERSION_JSON_ACTIVE_IDENTITY",
+      "status": "PASS",
+      "detail": {
+        "app_version": "v2.19.142.6-R1B-PLS-OWNER-PROTOTYPE-HELP-RELEASE-TRUTH-CLOSURE",
+        "public_version": "142.6",
+        "page_worker_revision": "ldc-v2.19.142.6-R1B-pls-owner-prototype-help-release-truth-closure"
+      }
+    },
+    {
+      "check": "OFFLINE_MANIFEST_ACTIVE_IDENTITY",
+      "status": "PASS",
+      "detail": {
+        "app_version": "v2.19.142.6-R1B-PLS-OWNER-PROTOTYPE-HELP-RELEASE-TRUTH-CLOSURE",
+        "page_worker_revision": "ldc-v2.19.142.6-R1B-pls-owner-prototype-help-release-truth-closure"
+      }
+    },
+    {
+      "check": "SW_VERSION_IDENTITY",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "SW_SHELL_RUNTIME_CACHE_IDENTITY",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "SW_NO_STALE_1425_ACTIVE_NAMESPACE",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "PRODUCTION_DEPLOYMENT_FALSE",
+      "status": "PASS",
+      "detail": {
+        "public_deployment_authorized": false,
+        "public_release": "NOT_AUTHORIZED"
+      }
+    },
+    {
+      "check": "HELP_NO_STALE_102_MB",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ACTIVE_UI_NO_STALE_74346",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ONBOARDING_PRINCIPAL_74351",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HELP_READER_SELECTOR_LAYOUT_TRUTH",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HELP_SOURCE_SCOPE_EXCEPTION",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HELP_SEMANTIC_FIRST_LOAD_PROGRESS",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HELP_SEMANTIC_RESULT_LIMITS",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HELP_SEMANTIC_OFFLINE_LIMIT",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HELP_SELECTION_FAIL_CLOSED",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HELP_ANDROID_GENERIC",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HELP_OFFLINE_TEXT_SEARCH_SCOPE",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "OFFLINE_PREFLIGHT_EQUALS_MANIFEST",
+      "status": "PASS",
+      "detail": 114483048
+    },
+    {
+      "check": "OFFLINE_MANIFEST_SEMANTIC_TRUTH",
+      "status": "PASS",
+      "detail": "The personal Par le sens prototype resources are packaged under pls_v15/** for owner use, but they are lazy/network-only and excluded from this governed offline-content binding. semantic_vector_search_included=false therefore means not included in Préparer hors ligne; it does not mean the files are absent from the release ZIP. The prototype is not production-qualified or offline-qualified."
+    },
+    {
+      "check": "FUNCTION_INHERITED_BYTE_IDENTICAL_ONPARACLICK",
+      "status": "PASS",
+      "detail": "identical"
+    },
+    {
+      "check": "FUNCTION_INHERITED_BYTE_IDENTICAL_RUNSEMANTICSEARCHV3",
+      "status": "PASS",
+      "detail": "identical"
+    },
+    {
+      "check": "FUNCTION_INHERITED_BYTE_IDENTICAL_RENDERSEARCHSOURCEMODEROW",
+      "status": "PASS",
+      "detail": "identical"
+    },
+    {
+      "check": "FUNCTION_INHERITED_BYTE_IDENTICAL_RUNSEARCH",
+      "status": "PASS",
+      "detail": "identical"
+    },
+    {
+      "check": "FUNCTION_INHERITED_BYTE_IDENTICAL_OPENPROVENANCEDETAILS",
+      "status": "PASS",
+      "detail": "identical"
+    },
+    {
+      "check": "FUNCTION_INHERITED_BYTE_IDENTICAL_CLOSEPROVENANCEDETAILS",
+      "status": "PASS",
+      "detail": "identical"
+    },
+    {
+      "check": "BROWSER_HARNESS_ALL_PASS",
+      "status": "PASS",
+      "detail": {
+        "pass": 56,
+        "total": 56,
+        "failed": []
+      }
+    },
+    {
+      "check": "SELECTOR_STRICT_MATRIX_28_OF_28",
+      "status": "PASS",
+      "detail": {
+        "pass": 28,
+        "total": 28
+      }
+    },
+    {
+      "check": "HELP_RESPONSIVE_MATRIX_16_OF_16",
+      "status": "PASS",
+      "detail": {
+        "pass": 16,
+        "total": 16
+      }
+    },
+    {
+      "check": "BROWSER_CANONICAL_PLAIN",
+      "status": "PASS",
+      "detail": {
+        "got": [
+          [
+            "p1",
+            6,
+            11,
+            "bravo"
+          ]
+        ],
+        "want": [
+          [
+            "p1",
+            6,
+            11,
+            "bravo"
+          ]
+        ]
+      }
+    },
+    {
+      "check": "BROWSER_CANONICAL_AFTERPAINT",
+      "status": "PASS",
+      "detail": {
+        "got": [
+          [
+            "p1",
+            6,
+            11,
+            "bravo"
+          ]
+        ],
+        "want": [
+          [
+            "p1",
+            6,
+            11,
+            "bravo"
+          ]
+        ]
+      }
+    },
+    {
+      "check": "BROWSER_CANONICAL_CROSSEXISTING",
+      "status": "PASS",
+      "detail": {
+        "got": [
+          [
+            "p1",
+            0,
+            19,
+            "Alpha bravo charlie"
+          ]
+        ],
+        "want": [
+          [
+            "p1",
+            0,
+            19,
+            "Alpha bravo charlie"
+          ]
+        ]
+      }
+    },
+    {
+      "check": "BROWSER_CANONICAL_LAZYAFTERNORMALIZE",
+      "status": "PASS",
+      "detail": {
+        "got": [
+          [
+            "p1",
+            6,
+            11,
+            "bravo"
+          ]
+        ],
+        "want": [
+          [
+            "p1",
+            6,
+            11,
+            "bravo"
+          ]
+        ]
+      }
+    },
+    {
+      "check": "BROWSER_CANONICAL_LAZYAFTERTRANSIENTREMOVAL",
+      "status": "PASS",
+      "detail": {
+        "got": [
+          [
+            "p1",
+            0,
+            5,
+            "Alpha"
+          ]
+        ],
+        "want": [
+          [
+            "p1",
+            0,
+            5,
+            "Alpha"
+          ]
+        ]
+      }
+    },
+    {
+      "check": "BROWSER_CANONICAL_TWO",
+      "status": "PASS",
+      "detail": {
+        "got": [
+          [
+            "p1",
+            6,
+            19,
+            "bravo charlie"
+          ],
+          [
+            "p2",
+            0,
+            5,
+            "Delta"
+          ]
+        ],
+        "want": [
+          [
+            "p1",
+            6,
+            19,
+            "bravo charlie"
+          ],
+          [
+            "p2",
+            0,
+            5,
+            "Delta"
+          ]
+        ]
+      }
+    },
+    {
+      "check": "BROWSER_CANONICAL_THREE",
+      "status": "PASS",
+      "detail": {
+        "got": [
+          [
+            "p1",
+            6,
+            19,
+            "bravo charlie"
+          ],
+          [
+            "p2",
+            0,
+            18,
+            "Delta echo foxtrot"
+          ],
+          [
+            "p3",
+            0,
+            4,
+            "Golf"
+          ]
+        ],
+        "want": [
+          [
+            "p1",
+            6,
+            19,
+            "bravo charlie"
+          ],
+          [
+            "p2",
+            0,
+            18,
+            "Delta echo foxtrot"
+          ],
+          [
+            "p3",
+            0,
+            4,
+            "Golf"
+          ]
+        ]
+      }
+    },
+    {
+      "check": "BROWSER_CANONICAL_BACKWARD",
+      "status": "PASS",
+      "detail": {
+        "got": [
+          [
+            "p1",
+            6,
+            19,
+            "bravo charlie"
+          ],
+          [
+            "p2",
+            0,
+            5,
+            "Delta"
+          ]
+        ],
+        "want": [
+          [
+            "p1",
+            6,
+            19,
+            "bravo charlie"
+          ],
+          [
+            "p2",
+            0,
+            5,
+            "Delta"
+          ]
+        ]
+      }
+    },
+    {
+      "check": "BROWSER_CANONICAL_OUTSIDE",
+      "status": "PASS",
+      "detail": {
+        "got": [],
+        "want": []
+      }
+    },
+    {
+      "check": "BROWSER_TOAST_ABOVE_ENTRY_NAV",
+      "status": "PASS",
+      "detail": {
+        "toast": {
+          "top": 586,
+          "bottom": 638
+        },
+        "nav": {
+          "top": 650,
+          "bottom": 720
+        },
+        "styleTop": "566px",
+        "styleBottom": "auto"
+      }
+    },
+    {
+      "check": "BROWSER_SELECTION_PRECEDENCE",
+      "status": "PASS",
+      "detail": {
+        "live": "selection",
+        "collapsed": "edit"
+      }
+    },
+    {
+      "check": "BROWSER_SEARCH_PROGRESS_VISIBLE_BEFORE_COMPLETION",
+      "status": "PASS",
+      "detail": {
+        "text": "Recherche par le sens PROTOTYPE PERSONNEL · chargement/recherche…",
+        "display": "block",
+        "scrollTop": 336
+      }
+    },
+    {
+      "check": "V1425_RECORDED_AS_DIRECT_PREDECESSOR",
+      "status": "PASS",
+      "detail": {
+        "app": "v2.19.142.5-R1B-PLS-OWNER-PROTOTYPE-READER-SELECTOR-CLOSURE",
+        "sha": "2af04c8d7689159b3d214904d52ffc15937c7cdfdd3212e06f0250fd3cc9278d"
+      }
+    },
+    {
+      "check": "V1426_CLOSURE_METADATA_PRESENT",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HISTORICAL_OLDER_OFFLINE_FIGURES_PRESERVED_IN_VERSION_JSON",
+      "status": "PASS",
+      "detail": null
+    }
+  ],
+  "summary": {
+    "pass": 58,
+    "fail": 0,
+    "total": 58,
+    "failed": []
+  },
+  "app_gov": {
+    "pass_1_build_package_integrity": "PASS",
+    "pass_2_machine_browser_functionality": "PASS",
+    "pass_3_evidence_reconciliation": "PASS",
+    "pass_4_contradiction_staleness": "PASS",
+    "independent_adversarial_changed_surface_challenge": "PASS"
+  }
+}

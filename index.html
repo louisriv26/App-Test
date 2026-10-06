@@ -509,12 +509,25 @@ h2.dn-section-title{margin-bottom:0;}
 .reader-context-bar .source-mode-segment{flex:1 1 auto;min-width:0;justify-content:center;}
 .reader-context-bar .source-mode-btn{flex:1 1 0;min-width:0;padding-left:9px;padding-right:9px;}
 .reader-source-short{display:none;}
-@media(max-width:360px){
-  .source-mode-bar.reader-context-bar{gap:3px;padding-left:4px;padding-right:4px;}
+/* Inherited from v142.5: phone-safe Reader source selector closure. Short labels remain the
+   canonical phone labels. The three source buttons use a real grid and never
+   rely on clipping to avoid overlap. At Grand / Très grand, the source grid
+   moves to its own row so the user's requested typography is preserved. */
+@media(max-width:420px){
+  .source-mode-bar.reader-context-bar{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:4px;padding-left:4px;padding-right:4px;overflow:visible;}
   .reader-context-back{padding-left:8px;padding-right:8px;}
-  .reader-context-bar .source-mode-btn{padding-left:4px;padding-right:4px;letter-spacing:.01em;}
+  .reader-context-bar .source-mode-segment{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;min-width:0;flex:none;}
+  .reader-context-bar .source-mode-btn{width:100%;min-width:0;padding-left:4px;padding-right:4px;letter-spacing:.01em;}
   .reader-context-bar .reader-source-long{display:none;}
   .reader-context-bar .reader-source-short{display:inline;}
+}
+/* Grand and Très grand use a separate selector row. This is a structural
+   fallback: no font reduction, no truncation, no overflow masking. */
+@media(max-width:420px){
+  html[data-text-level="large"] .source-mode-bar.reader-context-bar,
+  html[data-text-level="xlarge"] .source-mode-bar.reader-context-bar{grid-template-columns:1fr;align-items:stretch;}
+  html[data-text-level="large"] .reader-context-back,
+  html[data-text-level="xlarge"] .reader-context-back{justify-self:start;}
 }
 .journey-state-block{margin:0 0 12px;}
 .journey-intent-indicator{display:inline-flex;align-items:center;gap:5px;margin:0 0 6px;padding:4px 9px;border-radius:999px;font:600 var(--reader-orientation-size) var(--body);letter-spacing:.04em;background:var(--gold-pale);color:var(--gold-text);}
@@ -1832,7 +1845,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
         <div class="ob-icon" style="font-size:48px;margin-bottom:24px;">✦</div>
         <div class="ob-title">Livre du Ciel</div>
         <div class="ob-body">Les 36 Tomes du Livre du Ciel rassemblent des écrits de Luisa Piccarreta datés de 1899 à 1938. Dans ces écrits, elle rapporte ses expériences spirituelles et des paroles qu’elle présente comme venant de Jésus.</div>
-        <div class="ob-sub">Corpus PRINCIPAL · 74 346 paragraphes</div>
+        <div class="ob-sub">Corpus PRINCIPAL · 74 351 paragraphes</div>
       </div>
       <!-- Slide 1: Speech layer -->
       <div class="ob-slide" id="ob-slide-1">
@@ -2214,7 +2227,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
         <div class="help-row"><span class="help-chip light">♥</span><span class="help-text">Ajoute ou retire l’entrée des Favoris. Le cœur est rempli lorsqu’elle est enregistrée ; elle apparaît aussi dans <b>Mon Espace → Favoris</b> et dans la liste du Tome.</span></div>
         <div class="help-row"><span class="help-chip light">Lu / ✓ Lu</span><span class="help-text">Marque explicitement l’entrée comme lue. Appuyez de nouveau sur <b>✓ Lu</b> pour retirer ce marquage. L’ouverture seule d’une entrée ne la marque pas comme lue.</span></div>
         <div class="help-row"><span class="help-chip light">◂ ▸</span><span class="help-text">Passe à l’entrée précédente ou suivante sans revenir à la liste.</span></div>
-        <div class="help-row"><span class="help-chip light">← Tome</span><span class="help-text">Dans le lecteur, le bouton de retour reste visible sur la même ligne que <b>PRINCIPAL · COMPLÉMENT · ENRICHI</b>. Il revient à la liste du Tome et restaure autant que possible le passage sélectionné au même endroit dans la liste, afin de poursuivre votre exploration sans repartir du début.</span></div>
+        <div class="help-row"><span class="help-chip light">← Tome</span><span class="help-text">Dans le lecteur, le bouton de retour reste visible. Le sélecteur <b>PRINCIPAL · COMPLÉMENT · ENRICHI</b> reste à proximité et peut passer sur sa propre ligne lorsque la largeur de l’écran ou la taille du texte l’exige. Le bouton revient à la liste du Tome et restaure autant que possible le passage sélectionné au même endroit dans la liste, afin de poursuivre votre exploration sans repartir du début.</span></div>
         <div class="help-row"><span class="help-chip light">⋯</span><span class="help-text">Ouvre les outils du lecteur : Favori, Autour de ce passage, Partager la référence, Copier le lien, Signaler un problème de texte, Copier le diagnostic, Infos et source, Version du texte, l’action de lecture suivie lorsqu’elle est pertinente, Taille du texte et Thème.</span></div>
         <div class="help-row"><span class="help-chip light">Taille</span><span class="help-text">Choisissez <b>Petit · Normal · Grand · Très grand</b>. Il s’agit d’<b>un seul réglage mémorisé pour toute l’application</b> : le même choix adapte la lecture, l’Aide et les autres textes utiles, avec des proportions adaptées à chaque type de contenu. Le bouton <b>Taille du texte</b> est disponible directement sur les principaux écrans ; dans le lecteur, ouvrez <b>⋯ → Taille du texte</b>. Vous pouvez donc, par exemple, choisir <b>Très grand</b> pendant la lecture de l’Aide puis revenir à <b>Grand</b> dans le lecteur. Le dernier choix reste actif jusqu’à ce que vous le changiez.</span></div>
         <div class="help-row"><span class="help-chip light">Thème</span><span class="help-text">Choisissez <b>Automatique · Clair · Sombre</b>. <b>Automatique</b> suit le réglage clair ou sombre de votre appareil. La préférence est mémorisée.</span></div>
@@ -2228,7 +2241,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
         <div class="help-row"><span class="help-chip light">PRINCIPAL</span><span class="help-text">Affiche le corpus français principal utilisé pour la lecture continue.</span></div>
         <div class="help-row"><span class="help-chip">COMPLÉMENT</span><span class="help-text">Affiche les 75 COMPLÉMENTS retenus : 13 entrées distinctes et 62 passages ajoutés dans une entrée, soit 177 paragraphes. « Retenu » désigne une décision éditoriale interne au projet, sans signification théologique ou ecclésiastique.</span></div>
         <div class="help-row"><span class="help-chip light">ENRICHI</span><span class="help-text">Réunit PRINCIPAL et COMPLÉMENTS à leur position de lecture sans effacer leur différence de statut éditorial.</span></div>
-        <div class="help-row"><span class="help-chip outline">Portée du choix</span><span class="help-text">La version choisie s’applique à l’ensemble de l’application : Bibliothèque, lecture, Recherche, navigation par date et statistiques liées aux textes visibles. Changer de version ne supprime pas vos données personnelles.</span></div>
+        <div class="help-row"><span class="help-chip outline">Portée du choix</span><span class="help-text">La version choisie s’applique à la Bibliothèque, à la lecture, à la recherche <b>Par les mots</b>, à la navigation par date et aux statistiques liées aux textes visibles. <b>Exception :</b> lorsque vous recherchez un passage avec vos propres mots, le prototype personnel <b>Par le sens</b> interroge actuellement le corpus <b>ENRICHI</b>. Changer de version ne supprime pas vos données personnelles.</span></div>
       </div>
     </div>
 
@@ -2246,8 +2259,8 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
     <div class="help-section">
       <div class="help-section-head"><div class="help-section-icon hsi-gold"><i class="ti ti-highlight"></i></div><h2 class="help-section-title">Surligner, noter et conserver</h2></div>
       <div class="help-card">
-        <div class="help-row"><span class="help-chip light">Sélection</span><span class="help-text">Sur iPhone, iPad et ordinateur, sélectionnez exactement le passage voulu. Le panneau contextuel propose <b>Surligner · Note · Copier · Fermer</b>.</span></div>
-        <div class="help-row"><span class="help-chip light">Paragraphe</span><span class="help-text">Sur Samsung/Android, activez le mode <b>Paragraphe</b> puis touchez le paragraphe à surligner en entier, sans dépendre de la sélection native Android.</span></div>
+        <div class="help-row"><span class="help-chip light">Sélection</span><span class="help-text">Sur iPhone, iPad et ordinateur, sélectionnez exactement le passage voulu. Le panneau contextuel propose <b>Surligner · Note · Copier · Fermer</b>, ainsi que l’ajout à une collection. Si l’application ne peut pas rattacher la sélection au texte avec certitude, elle vous demande de sélectionner à nouveau plutôt que d’enregistrer l’action au mauvais endroit.</span></div>
+        <div class="help-row"><span class="help-chip light">Paragraphe</span><span class="help-text">Sur Android, activez le mode <b>Paragraphe</b> puis touchez le paragraphe à surligner en entier, sans dépendre de la sélection native Android.</span></div>
         <div class="help-row"><span class="help-chip light">Surligner</span><span class="help-text">Palette active : <b>Jaune · Bleu · Vert · Violet · Rose</b>. Les anciens surlignages Or restent lisibles et peuvent être recolorés.</span></div>
         <div class="help-row"><span class="help-chip light">Note</span><span class="help-text">Ajoute une note au passage sélectionné et conserve son contexte pour pouvoir y revenir depuis <b>Mon Espace → Notes</b>.</span></div>
         <div class="help-row"><span class="help-chip light">＋ Collection</span><span class="help-text"><b>Ajouter à une collection</b> enregistre le passage dans une collection existante ou nouvelle. Dans Mon Espace, vous pouvez réordonner les passages, leur ajouter une note, copier leurs références/liens et exporter la collection.</span></div>
@@ -2268,7 +2281,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
         <div class="help-row"><span class="help-chip outline">Formulation proche</span><span class="help-text">Pour une phrase de <b>3 à 14 mots</b> dont vous vous souvenez imparfaitement, l’application peut proposer une formulation présentant une ou quelques petites différences textuelles, par exemple un mot ajouté, omis ou remplacé, ou deux mots voisins inversés. Plus la phrase est courte, plus la tolérance est stricte. Elle affiche toujours les mots réellement présents dans la source et ne présente jamais ce résultat comme une <b>Phrase exacte</b>. Lorsque trop de formulations restent également plausibles, elle vous invite à préciser votre souvenir. Un badge <b>CRITICAL_DIFFERENCE</b> signale certaines différences potentiellement importantes qui ne doivent pas être assimilées silencieusement.</span></div>
         <div class="help-row"><span class="help-chip outline">Métadonnées</span><span class="help-text">Les résultats peuvent aussi correspondre au titre, à la date, à la référence ou à une autre métadonnée de l’entrée.</span></div>
         <div class="help-row"><span class="help-chip outline">Correspondance approchée</span><span class="help-text"><b>Élargir la recherche</b> permet, seulement si vous le choisissez, d’afficher <b>Certains termes</b> : une partie seulement des mots saisis a été retrouvée. Ces résultats ne sont jamais affichés comme résultat principal par défaut. Cela ne signifie pas qu’un lien thématique, doctrinal ou « par le sens » a été établi. Vérifiez toujours le passage avant de le citer.</span></div>
-        <div class="help-row"><span class="help-chip outline">Par le sens / Par les mots</span><span class="help-text"><b>Par les mots</b> conserve la recherche textuelle qualifiée. <b>Par le sens</b> est ici activé comme <b>prototype personnel</b> : il combine la recherche sémantique et une recherche lexicale bornée pour retrouver un passage dont vous vous souvenez avec vos propres mots. Ce prototype n’est pas la version de production qualifiée.</span></div>
+        <div class="help-row"><span class="help-chip outline">Par le sens / Par les mots</span><span class="help-text"><b>Par les mots</b> conserve la recherche textuelle qualifiée. <b>Par le sens</b> est ici activé comme <b>prototype personnel</b> : lorsque vous recherchez un passage avec vos propres mots, il combine la recherche sémantique et une recherche lexicale bornée sur le corpus <b>ENRICHI</b>. Lors d’une première utilisation sur un appareil, il peut devoir charger des ressources supplémentaires importantes : la première recherche peut donc être sensiblement plus longue, et le message <b>chargement/recherche…</b> confirme que le travail est en cours ; une connexion Wi‑Fi est préférable pour ce premier chargement. Les résultats sont des <b>pistes classées</b> : ils ne signifient pas que vos mots figurent dans le texte ni qu’un lien doctrinal a été établi. Ouvrez et vérifiez toujours le passage avant de le citer. Ce prototype n’est pas la version de production qualifiée et n’est pas couvert par la préparation hors ligne.</span></div>
         <div class="help-divider"></div>
         <div class="help-row"><span class="help-chip">Autour de ce passage</span><span class="help-text">Dans le lecteur, ouvrez <b>⋯ → Autour de ce passage</b> pour explorer des entrées du même Tome, des thèmes proches ou des familles d’images spirituelles.</span></div>
         <div class="help-row"><span class="help-chip outline">Badges de contexte</span><span class="help-text"><b>Éditorial</b> signale une explication éditoriale du Tome 1 ; <b>COMPLÉMENT</b> signale un contenu substantiel absent du corpus PRINCIPAL et conservé comme COMPLÉMENT retenu ; sa provenance détaillée est disponible dans les informations du passage ; le badge du filtre Jésus apparaît lorsque ce filtre est actif.</span></div>
@@ -2313,7 +2326,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
     <div class="help-section">
       <div class="help-section-head"><div class="help-section-icon hsi-amber"><i class="ti ti-wifi-off"></i></div><h2 class="help-section-title">Hors ligne et mises à jour</h2></div>
       <div class="help-card">
-        <div class="help-text" style="padding:2px 0 10px;">L’application peut se rouvrir hors ligne grâce à son shell et aux fichiers déjà mis en cache. <b>Sans préparation complète, cela ne garantit pas qu’un Tome jamais chargé puisse s’ouvrir.</b> <b>Préparer hors ligne</b> télécharge et vérifie les 36 Tomes, les compléments et les données de recherche de cette version (environ 102 Mo), afin que l’ensemble soit disponible sans connexion. Le cache temporaire utilisé pendant la lecture et la recherche reste limité automatiquement.</div>
+        <div class="help-text" style="padding:2px 0 10px;">L’application peut se rouvrir hors ligne grâce à son shell et aux fichiers déjà mis en cache. <b>Sans préparation complète, cela ne garantit pas qu’un Tome jamais chargé puisse s’ouvrir.</b> <b>Préparer hors ligne</b> télécharge et vérifie les 36 Tomes, les 75 compléments et les données de la recherche textuelle <b>Par les mots</b> de cette version ; la taille exacte est affichée dans l’état de préparation ci-dessous. Le prototype personnel <b>Par le sens</b> utilise des ressources supplémentaires chargées séparément et n’est pas qualifié pour un usage hors ligne. Le cache temporaire utilisé pendant la lecture et la recherche reste limité automatiquement.</div>
         <div id="offline-state-label" class="help-text">Vérification de l’état hors ligne…</div>
         <div id="offline-at-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
         <div style="height:8px;background:var(--border);border-radius:999px;overflow:hidden;margin:9px 0 5px;" aria-hidden="true"><div id="offline-progress-bar" style="height:100%;width:0;background:var(--gold-text);transition:width .15s ease;"></div></div>
@@ -2564,11 +2577,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.2-R1B-PLS-OWNER-PROTOTYPE'; // owner-only Par le sens prototype successor of frozen production v142; existing corpus and Par les mots preserved
-const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.2'; // single authoritative public identity derived from APP_VERSION
+const APP_VERSION = 'v2.19.142.7-R1B-PLS-OWNER-PROTOTYPE-RELEASE-METADATA-CLOSURE'; // owner-only Help/release-truth closure from frozen v142.5; corpus, Reader selection, Par les mots and semantic retrieval preserved
+const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.7'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD = '2026-10-05';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.2-R1B-pls-owner-prototype';
+const APP_BUILD = '2026-10-06';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.7-R1B-pls-owner-prototype-release-metadata-closure';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -6039,11 +6052,27 @@ function startAndroidParagraphHighlight(paraId) {
 
 
 function onParaClick(e) {
-  if (e.target.classList.contains('hl')) {
-    showExistingHighlightPopup(e.target);
+  const directFrag = e.target.closest('.para-fragment');
+  const sel = window.getSelection();
+  // v142.4 inherited precedence: a live native selection is authoritative even when the
+  // synthetic click lands on an existing <mark>. This prevents selection-handle
+  // interaction from being misread as “edit old highlight”.
+  if (!isAndroidHighlightPlatform() && sel && !sel.isCollapsed && String(sel).trim().length > 0) {
+    checkAndShowHighlightPopup(e.currentTarget);
     return;
   }
-  const directFrag = e.target.closest('.para-fragment');
+  // A just-captured selection also wins if Safari collapses it immediately before
+  // dispatching the synthetic click.
+  if (!isAndroidHighlightPlatform() && selectionCaptureAt && (Date.now() - selectionCaptureAt) < 650 &&
+      window.lastSelParts && window.lastSelParts.length) {
+    showSelectionContext();
+    return;
+  }
+  const existingMark=e.target.closest&&e.target.closest('mark.hl');
+  if (existingMark && e.currentTarget.contains(existingMark)) {
+    showExistingHighlightPopup(existingMark);
+    return;
+  }
   if (isAndroidHighlightPlatform() && androidParagraphHighlightMode) {
     // F8: never guess a paragraph from a flow-level tap. Joiners and Repères
     // metadata are not paragraph targets; ignoring them is safer than silently
@@ -6055,19 +6084,6 @@ function onParaClick(e) {
     return;
   }
   const frag = directFrag || e.currentTarget.querySelector('.para-fragment');
-  const sel = window.getSelection();
-  if (sel && !sel.isCollapsed && String(sel).trim().length > 0) {
-    checkAndShowHighlightPopup(e.currentTarget);
-    return;
-  }
-  // Desktop browsers can collapse the native Selection immediately before the
-  // synthetic click that follows mouse-up. If we just captured a valid text
-  // selection, that click must NOT be reinterpreted as “whole paragraph”.
-  if (selectionCaptureAt && (Date.now() - selectionCaptureAt) < 650 &&
-      window.lastSelParts && window.lastSelParts.length) {
-    showSelectionContext();
-    return;
-  }
   if (frag && frag.dataset.paraId) showParagraphContext(frag.dataset.paraId);
 }
 
@@ -6122,7 +6138,7 @@ function checkAndShowHighlightPopup(paraEl, opts) {
     const liveFold = window.LDCAnchor ? LDCAnchor.fold(sel.toString()) : String(sel.toString()).trim();
     const parts = window.LDCAnchor ? LDCAnchor.selectionParts(range) : [];
     if (!parts.length) {
-      if(opts.allowUnsafeToast)showToast('Sélection instable — relâchez puis sélectionnez à nouveau');
+      if(opts.allowUnsafeToast)showToast('Cette sélection n’a pas pu être reconnue. Réessayez.');
       else scheduleSelectionSafetyRetry(paraEl,range,liveFold);
       return;
     }
@@ -6136,7 +6152,7 @@ function checkAndShowHighlightPopup(paraEl, opts) {
     const ratio = Math.max(groupedFold.length, liveFold.length) / Math.max(1, Math.min(groupedFold.length, liveFold.length));
     if (delta > 96 && ratio > 1.35) {
       console.warn('LDC: selection mapping rejected as disproportionate', {live:liveFold.length, canonical:groupedFold.length, parts:parts.length});
-      if(opts.allowUnsafeToast)showToast('Sélection instable — relâchez puis sélectionnez à nouveau');
+      if(opts.allowUnsafeToast)showToast('Cette sélection n’a pas pu être reconnue. Réessayez.');
       else scheduleSelectionSafetyRetry(paraEl,range,liveFold);
       return;
     }
@@ -6474,10 +6490,12 @@ function replaceHighlightColorClass(markEl, color) {
 }
 function unwrapHighlightMark(markEl) {
   if (!markEl || !markEl.parentNode) return;
+  const frag=markEl.closest('.para-fragment');
   const parent = markEl.parentNode;
   while (markEl.firstChild) parent.insertBefore(markEl.firstChild, markEl);
   parent.removeChild(markEl);
   if (parent.normalize) parent.normalize();
+  if (frag && window.LDCAnchor && LDCAnchor.reindexCanonicalFragment) LDCAnchor.reindexCanonicalFragment(frag);
 }
 async function recolorHighlight(id, color) {
   const hl = await dbGet('highlights', id);
@@ -6681,7 +6699,7 @@ async function applyHighlight(color, frozenParts, viewport) {
     const canonText = rec ? rec.text : '';
     if (!frag || !rec || pt.start_char < 0 || pt.end_char <= pt.start_char || pt.end_char > canonText.length || canonText.slice(pt.start_char,pt.end_char) !== pt.text) {
       console.warn('LDC: highlight part rejected before persistence', pt);
-      showToast('Sélection instable — réessayez');
+      showToast('Cette sélection n’a pas pu être reconnue. Réessayez.');
       return;
     }
     let pos = 0, occ = 0;
@@ -7782,6 +7800,9 @@ function paintHighlightsInPara(paraEl, hls) {
       } catch (e) { /* node re-split by a previous piece; skip */ }
     });
   });
+  // Legacy fallback also mutates text nodes; restore the canonical node map only
+  // after all wrapping is complete.
+  if (window.LDCAnchor && LDCAnchor.reindexCanonicalFragment) LDCAnchor.reindexCanonicalFragment(paraEl);
   makeHighlightMarksAccessible(paraEl);
 }
 
@@ -8480,9 +8501,23 @@ async function runSearch({navigation='reveal-output',commitSource='programmatic'
   searchQueryPending=false;searchCommittedQuery=raw;
   saveRecentSearch(raw).catch(()=>{});
   cancelActiveSearch('new-search');const generation=searchRunSeq;
-  const metaEl=document.getElementById('search-meta');metaEl.style.display='block';metaEl.textContent='Recherche…';
+  const metaEl=document.getElementById('search-meta');metaEl.style.display='block';
+  if(searchIntentMode==='meaning'&&window.LDCPLSOwnerPrototypeV15){
+    metaEl.innerHTML='Recherche par le sens <span class="search-mode-badge">PROTOTYPE PERSONNEL · chargement/recherche…</span>';
+  }else{
+    metaEl.textContent='Recherche…';
+  }
+  // Make the live progress state visible before any cold semantic initialisation
+  // can occupy the main thread. This changes no retrieval/ranking logic.
+  if(navigation==='reveal-output')revealSearchOutput();
   try{
-    if(searchIntentMode==='meaning'){await runSemanticSearchV3(raw);if(navigation==='reveal-output')revealSearchOutput();return;}
+    if(searchIntentMode==='meaning'){
+      await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+      if(!isSearchActive(generation))return;
+      await runSemanticSearchV3(raw);
+      if(navigation==='reveal-output')revealSearchOutput();
+      return;
+    }
     const payload=await searchV2Request(raw,generation);
     if(!isSearchActive(generation)||document.getElementById('search-input').value.trim()!==raw)return;
     renderSearchV2Results(payload,raw);
@@ -8494,10 +8529,18 @@ async function runSearch({navigation='reveal-output',commitSource='programmatic'
   }
 }
 
-function removeTransientSearchMarks(){document.querySelectorAll('mark.search-target-mark').forEach(m=>{const p=m.parentNode;if(!p)return;p.replaceChild(document.createTextNode(m.textContent||''),m);p.normalize();});}
+function removeTransientSearchMarks(){
+  const touched=new Set();
+  document.querySelectorAll('mark.search-target-mark').forEach(m=>{
+    const frag=m.closest('.para-fragment'),p=m.parentNode;if(!p)return;
+    if(frag)touched.add(frag);
+    p.replaceChild(document.createTextNode(m.textContent||''),m);p.normalize();
+  });
+  if(window.LDCAnchor&&LDCAnchor.reindexCanonicalFragment)touched.forEach(frag=>LDCAnchor.reindexCanonicalFragment(frag));
+}
 function paintTransientSearchTarget(target){
   removeTransientSearchMarks();if(!target||!window.LDCAnchor)return;const parts=(target.match_parts||[]).filter(p=>p&&p.para_id&&Number.isFinite(p.canonical_start)&&Number.isFinite(p.canonical_end));let seq=0;
-  for(const p of parts){const rec=paragraphRecordById(currentVolume,p.para_id);if(!rec)continue;const h={id:`__search_target_${Date.now()}_${seq++}`,start_char:p.canonical_start,end_char:p.canonical_end,text:String(rec.text||'').slice(p.canonical_start,p.canonical_end),color:'yellow'};for(const frag of fragmentEls(p.para_id)){LDCAnchor.paintParts(frag,[h]);for(const m of frag.querySelectorAll(`mark[data-hl-id="${h.id}"]`)){m.className='search-target-mark';m.removeAttribute('data-hl-id');}}}
+  for(const p of parts){const rec=paragraphRecordById(currentVolume,p.para_id);if(!rec)continue;const h={id:`__search_target_${Date.now()}_${seq++}`,start_char:p.canonical_start,end_char:p.canonical_end,text:String(rec.text||'').slice(p.canonical_start,p.canonical_end),color:'yellow'};for(const frag of fragmentEls(p.para_id)){LDCAnchor.paintParts(frag,[h]);for(const m of frag.querySelectorAll(`mark[data-hl-id="${h.id}"]`)){m.className='search-target-mark';m.removeAttribute('data-hl-id');}if(LDCAnchor.reindexCanonicalFragment)LDCAnchor.reindexCanonicalFragment(frag);}}
   setTimeout(removeTransientSearchMarks,5000);
 }
 function focusPendingSearchReaderTarget(target){
@@ -8937,7 +8980,7 @@ async function diagnosticsText(){
   const off=await dbGet('settings','offline_completion').catch(()=>null);
   const deploymentBase=(()=>{try{return new URL('./',window.location.href).pathname;}catch(e){return window.location.pathname.replace(/[^/]*$/,'');}})();
   const publicRef=currentEntry?`${currentEntry.stable_ref||currentEntry.id||''}`:'aucun';
-  return ['Livre du Ciel — diagnostic public',`App : ${APP_VERSION} · ${APP_BUILD}`,`SW attendu : ${SW_CACHE_VERSION}`,`SW contrôleur : ${sw}`,`Caches LDC : ${cachesOwned.join(', ')||'aucun détecté'}`,`Corpus composite : ${CORPUS_GENERATION}`,`Corpus principal : ${BACKBONE_GENERATION}`,`Lecture : ${sourceModeLabel()}`,`Backbone manifest SHA-256 : ${CORPUS_MANIFEST_SHA256}`,`Résumé des tomes : ${volumeSummary?'chargé · 36 tomes':'non chargé'}`,`Recherche : Par les mots v142 préservée · Par le sens v142.2 prototype personnel Dense96/72 + BM25 96/72 RRF60 · non qualifié production`,`Stockage IndexedDB : ${db?'ouvert':'indisponible'}`,`Hors ligne : navigator.onLine=${navigator.onLine!==false} · completion=${off?JSON.stringify(off.val??off.value??off):'non préparé'}`,`Thème : ${theme}`,`Texte : ${tl}`,`Repères : ${showReperes?'ON':'OFF'}`,`Diagnostics locaux récents : ${localDiagnosticBuffer.length}`,...localDiagnosticBuffer.slice(-5).map(x=>`Erreur locale ${x.ts} · ${x.kind||'runtime'} · ${x.name||'Erreur'}`),`Base de déploiement : ${deploymentBase}`,`Passage public courant : ${publicRef}`,`Reader A/B diagnostic : ${window.__ldcReaderOpenTraceExport?window.__ldcReaderOpenTraceExport():'indisponible'}`,`Trace navigation récente (sanitisée) : ${JSON.stringify(window.__ldcNavigationPublicDiagnosticTrace?window.__ldcNavigationPublicDiagnosticTrace():{available:false})}`].join('\n');
+  return ['Livre du Ciel — diagnostic public',`App : ${APP_VERSION} · ${APP_BUILD}`,`SW attendu : ${SW_CACHE_VERSION}`,`SW contrôleur : ${sw}`,`Caches LDC : ${cachesOwned.join(', ')||'aucun détecté'}`,`Corpus composite : ${CORPUS_GENERATION}`,`Corpus principal : ${BACKBONE_GENERATION}`,`Lecture : ${sourceModeLabel()}`,`Backbone manifest SHA-256 : ${CORPUS_MANIFEST_SHA256}`,`Résumé des tomes : ${volumeSummary?'chargé · 36 tomes':'non chargé'}`,`Recherche : Par les mots v142 préservée · Par le sens v142.7 prototype personnel Dense96/72 + BM25 96/72 RRF60 · non qualifié production`,`Stockage IndexedDB : ${db?'ouvert':'indisponible'}`,`Hors ligne : navigator.onLine=${navigator.onLine!==false} · completion=${off?JSON.stringify(off.val??off.value??off):'non préparé'}`,`Thème : ${theme}`,`Texte : ${tl}`,`Repères : ${showReperes?'ON':'OFF'}`,`Diagnostics locaux récents : ${localDiagnosticBuffer.length}`,...localDiagnosticBuffer.slice(-5).map(x=>`Erreur locale ${x.ts} · ${x.kind||'runtime'} · ${x.name||'Erreur'}`),`Base de déploiement : ${deploymentBase}`,`Passage public courant : ${publicRef}`,`Reader A/B diagnostic : ${window.__ldcReaderOpenTraceExport?window.__ldcReaderOpenTraceExport():'indisponible'}`,`Trace navigation récente (sanitisée) : ${JSON.stringify(window.__ldcNavigationPublicDiagnosticTrace?window.__ldcNavigationPublicDiagnosticTrace():{available:false})}`].join('\n');
 }
 async function copyDiagnostics(){const text=await diagnosticsText();const ok=await copyPlainText(text);showToast(ok?'Diagnostic copié':'Copie indisponible');return text;}
 async function routeFail(message,fallback){console.warn('LDC deep link:',message);showToast('Lien invalide ou cible introuvable');if(fallback==='search')goSearch();else if(fallback==='espace')goEspace();else goHome();return false;}
@@ -9476,17 +9519,33 @@ function escapeHtml(s) {
 }
 
 let toastTimer = null;
-function resetToast(){const t=document.getElementById('toast');t.classList.remove('show','has-action');t.replaceChildren();}
+function positionToastForContext(t){
+  if(!t)return;
+  const reader=document.getElementById('screen-reader'),entryNav=reader&&reader.querySelector('.entry-nav');
+  if(reader&&reader.classList.contains('active')&&entryNav){
+    const navTop=entryNav.getBoundingClientRect().top;
+    const toastHeight=t.getBoundingClientRect().height||t.offsetHeight||0;
+    t.style.bottom='auto';
+    // Reserve the toast's 20px entrance travel as well as a 12px visual gap,
+    // so it cannot transiently sweep across Reader navigation while animating.
+    t.style.top=Math.max(8,Math.floor(navTop-toastHeight-32))+'px';
+  }else{
+    t.style.removeProperty('top');
+    t.style.removeProperty('bottom');
+  }
+}
+function resetToast(){const t=document.getElementById('toast');t.classList.remove('show','has-action');t.style.removeProperty('top');t.style.removeProperty('bottom');t.replaceChildren();}
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.classList.remove('has-action'); t.textContent = msg; t.classList.add('show');
+  positionToastForContext(t);
   clearTimeout(toastTimer);
   toastTimer = setTimeout(resetToast, 2200);
 }
 function showToastWithAction(msg,actionLabel,fn,timeoutMs=10000){
   const t=document.getElementById('toast'); clearTimeout(toastTimer); t.replaceChildren(); t.classList.add('has-action','show');
   const span=document.createElement('span');span.textContent=msg;const btn=document.createElement('button');btn.type='button';btn.className='toast-action';btn.textContent=actionLabel;
-  btn.addEventListener('click',async()=>{btn.disabled=true;try{const result=await fn();if(result===false){span.textContent='Restauration impossible — réessayez';btn.disabled=false;clearTimeout(toastTimer);toastTimer=setTimeout(resetToast,timeoutMs);return;}resetToast();if(typeof result==='string'&&result)showToast(result);}catch(e){console.error('LDC toast action failed',e);span.textContent='Restauration impossible — réessayez';btn.disabled=false;clearTimeout(toastTimer);toastTimer=setTimeout(resetToast,timeoutMs);}});t.append(span,btn);toastTimer=setTimeout(resetToast,timeoutMs);
+  btn.addEventListener('click',async()=>{btn.disabled=true;try{const result=await fn();if(result===false){span.textContent='Restauration impossible — réessayez';btn.disabled=false;positionToastForContext(t);clearTimeout(toastTimer);toastTimer=setTimeout(resetToast,timeoutMs);return;}resetToast();if(typeof result==='string'&&result)showToast(result);}catch(e){console.error('LDC toast action failed',e);span.textContent='Restauration impossible — réessayez';btn.disabled=false;positionToastForContext(t);clearTimeout(toastTimer);toastTimer=setTimeout(resetToast,timeoutMs);}});t.append(span,btn);positionToastForContext(t);toastTimer=setTimeout(resetToast,timeoutMs);
 }
 let undoBuffer=null; const UNDO_WINDOW_MS=10000;
 function stageUndo(store,records,label,onRestore){
@@ -10152,11 +10211,11 @@ function renderHomeOfflineNotice(){
   }
   if(state==='PARTIAL'||state==='ERROR'||state==='CANCELLED'){
     title.textContent='Préparation hors ligne incomplète';
-    detail.textContent='Reprenez le téléchargement pour rendre les 36 Tomes et la recherche disponibles sans connexion (environ 102 Mo au total).';
+    detail.textContent='Reprenez le téléchargement pour rendre les 36 Tomes, les 75 compléments et la recherche Par les mots disponibles sans connexion.';
     action.textContent='Reprendre';return;
   }
   title.textContent='Préparer la lecture hors ligne';
-  detail.textContent='Téléchargez et vérifiez les 36 Tomes et la recherche pour les utiliser sans connexion (environ 102 Mo).';
+  detail.textContent='Téléchargez et vérifiez les 36 Tomes, les 75 compléments et la recherche Par les mots pour les utiliser sans connexion.';
   action.textContent='Préparer';
 }
 function announceOfflineMilestone(st,pct,total,completed,failedCount){
@@ -10244,7 +10303,7 @@ async function requestOfflineStatus(timeoutMs=15000){
   });
 }
 async function ensureOfflineStorageCapacity(){
-  const requiredBytes=114480819;
+  const requiredBytes=114483048;
   try{
     if(navigator.storage&&typeof navigator.storage.persist==='function') await navigator.storage.persist();
     if(navigator.storage&&typeof navigator.storage.estimate==='function'){

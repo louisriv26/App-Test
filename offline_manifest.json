@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.142.2-R1B-PLS-OWNER-PROTOTYPE",
+  "app_version": "v2.19.142.7-R1B-PLS-OWNER-PROTOTYPE-RELEASE-METADATA-CLOSURE",
   "asset_count": 204,
   "assets": [
     {
@@ -1077,7 +1077,7 @@
   },
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.142.2-R1B-pls-owner-prototype",
+  "page_worker_revision": "ldc-v2.19.142.7-R1B-pls-owner-prototype-release-metadata-closure",
   "post_r6_date_id_a2_fixed_point": {
     "a2_sha256": "dd034a4d4bb329254818c3e62fd629c9b64c90f9d4bd533de9f6ed99247cb1d8",
     "date_id_sha256": "ed5bf462c47b8fb5a41f7c81591257d6e99f94bae08628aa27e5f7d667020c2a",
@@ -1149,10 +1149,10 @@
     "shell_runtime_caches": "APP_VERSIONED"
   },
   "schema": "ldc-offline-manifest-v3",
-  "scope": "v142 explicit Search-submission successor of exact frozen v141. Preserves the v141 one-vertical-scroll-owner Search body and adaptive complete-first-result reveal. Adds a stable always-visible Rechercher action, a narrowly scoped native Search form, explicit pending/committed query state, guarded filter reruns and revised Search Help. The 204 persistent content assets and content binding are unchanged; corpus/Search-V2.1A payloads and algorithms, provenance corpus wording, user-state schema and Semantic V3 fail-closed qualification state are unchanged.",
+  "scope": "v142.7 release-metadata coherence successor of exact frozen v142.6. It corrects stale active current-version lineage/gate metadata found only after the v142.6 frozen-byte adversarial recheck. Help/onboarding/offline wording from v142.6, Reader selection/selector repairs, Par les mots, semantic retrieval, corpus/**, supplements, pls_v15/**, offline asset ledger and content binding are unchanged. Production deployment is not authorized.",
   "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
   "semantic_vector_search_included": false,
-  "semantic_vector_search_note": "R18D Search-V3 engineering evidence is preserved externally and v113 Search-V3 runtime modules remain byte-identical. No neural model, vectors or qualified semantic pack are bundled. Par le sens remains fail-closed.",
+  "semantic_vector_search_note": "The personal Par le sens prototype resources are packaged under pls_v15/** for owner use, but they are lazy/network-only and excluded from this governed offline-content binding. semantic_vector_search_included=false therefore means not included in Préparer hors ligne; it does not mean the files are absent from the release ZIP. The prototype is not production-qualified or offline-qualified.",
   "stage2_221_candidate": {
     "implementation_authority_sha256": "f77fb79ab016c933d6b7cfcb830b2db52fd4f42e03d032988c5ac50c2a38cd35",
     "migration_fixed_point_sha256": "24addfee378ad8fe08c5491e886baa1ae0df79089776b4fe7baeb67695e3ee65",
@@ -1316,9 +1316,61 @@
     "production_deployment_authority": "NONE"
   },
   "pls_owner_prototype": {
-    "prototype_public_version": "142.2",
+    "prototype_public_version": "142.7",
     "semantic_assets_lazy_network_only": true,
     "not_part_of_offline_content_binding": true,
     "production_authorized": false
+  },
+  "v142_5_reader_selector_closure": {
+    "direct_predecessor_public_version": "142.4",
+    "direct_predecessor_package_sha256": "143af4b6249276d52522222f377d5dc4098402f6b2a3bdbb28e31fb10bed6e76",
+    "classification": "BOUNDED_READER_SOURCE_SELECTOR_LAYOUT_AND_QA_CLOSURE",
+    "repair_contract": [
+      "GRAND_AND_TRES_GRAND_PHONE_SELECTOR_OWN_ROW",
+      "NO_FONT_REDUCTION",
+      "NO_OVERFLOW_HIDDEN_CLIPPING",
+      "LABEL_CONTENT_MUST_FIT_OWN_BUTTON"
+    ],
+    "persistent_assets_changed": false,
+    "content_binding_changed": false,
+    "corpus_changed": false,
+    "pls_v15_changed": false,
+    "production_authorized": false,
+    "physical_iphone_gate": "OPEN",
+    "physical_ipad_gate": "OPEN"
+  },
+  "semantic_vector_search_packaged_in_release": true,
+  "semantic_vector_search_included_in_offline_binding": false,
+  "v142_6_help_release_truth_closure": {
+    "direct_predecessor_public_version": "142.5",
+    "direct_predecessor_package_sha256": "2af04c8d7689159b3d214904d52ffc15937c7cdfdd3212e06f0250fd3cc9278d",
+    "classification": "BOUNDED_HELP_ONBOARDING_OFFLINE_COPY_AND_RELEASE_TRUTH_CLOSURE",
+    "offline_asset_count": 204,
+    "offline_total_bytes": 114483048,
+    "offline_content_binding_changed": false,
+    "corpus_changed": false,
+    "pls_v15_changed": false,
+    "interaction_anchor_changed": false,
+    "production_authorized": false,
+    "physical_iphone_gate": "OPEN",
+    "physical_ipad_gate": "OPEN"
+  },
+  "v142_7_release_metadata_closure": {
+    "direct_predecessor_public_version": "142.6",
+    "direct_predecessor_package_sha256": "a4da4c7e90cde403f73e1d1c5f2bc75f6646785a360b7a3d90c059ae0f1392a3",
+    "classification": "RELEASE_METADATA_COHERENCE_CLOSURE",
+    "trigger": "POST_FREEZE_V142_6_ADVERSARIAL_RECHECK_FOUND_STALE_ACTIVE_V142_4_GATE_AND_PACKAGE_STATE_METADATA",
+    "offline_asset_count": 204,
+    "offline_total_bytes": 114483048,
+    "offline_content_binding_changed": false,
+    "corpus_changed": false,
+    "pls_v15_changed": false,
+    "interaction_anchor_changed": false,
+    "help_content_changed": false,
+    "search_v2_changed": false,
+    "semantic_algorithm_changed": false,
+    "production_authorized": false,
+    "physical_iphone_gate": "OPEN",
+    "physical_ipad_gate": "OPEN"
   }
 }

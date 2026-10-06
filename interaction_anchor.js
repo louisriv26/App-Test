@@ -2,7 +2,7 @@
    LDC R1B — canonical interaction anchoring (instruction v2 §8)
    ----------------------------------------------------------------------------
    Offsets are NEVER reconstructed from visible text. Each .para-fragment is
-   indexed once after insertion against its canonical p.text and its display
+   indexed after insertion and rebuilt after DOM text-node mutation against its canonical p.text and display
    atoms, giving an explicit text-node -> canonical-offset map.
 
    Public API
@@ -56,6 +56,17 @@
 
   function recordFor(fragEl) { return fragEl ? REG.get(fragEl) : null; }
 
+  // Rebuild only the DOM-node layer for an already-authoritative fragment.
+  // Canonical paragraph text/atoms and canonical slice bounds are preserved
+  // exactly; this is safe after mark wrapping/unwrapping/normalisation.
+  function reindexCanonicalFragment(fragEl) {
+    var rec = recordFor(fragEl);
+    if (!fragEl || !rec) return null;
+    return indexFragment(fragEl, rec.paraId, rec.text, rec.atoms, {
+      canonicalStart: rec.canonicalStart, canonicalEnd: rec.canonicalEnd
+    });
+  }
+
   function fragmentOf(node) {
     if (!node) return null;
     var el = node.nodeType === 3 ? node.parentElement : node;
@@ -75,11 +86,13 @@
     if (node.nodeType === 3) {
       var exact = entryFor(rec, node);
       if (exact) return exact.ds + Math.min(Math.max(0, offset), node.nodeValue.length);
-      // The text node itself is presentation-only (for example
-      // .speech-attribution-sr). Skip the whole injected presentation wrapper in
-      // the requested direction and bind to neighbouring canonical content.
-      var frag = fragmentOf(node), carrier = presentationOnlyAncestor(node, frag) || node;
-      return indexedOffsetFromNodeBoundary(rec, carrier, bias);
+      // Presentation-only injected text (for example .speech-attribution-sr)
+      // may legitimately resolve to neighbouring canonical content. An unmatched
+      // ordinary content node, however, means the registry is stale after a DOM
+      // text-node mutation; return null so canonicalPosition can re-index this
+      // exact fragment once instead of snapping the endpoint.
+      var frag = fragmentOf(node), carrier = presentationOnlyAncestor(node, frag);
+      return carrier ? indexedOffsetFromNodeBoundary(rec, carrier, bias) : null;
     }
     return indexedOffsetFromElementBoundary(rec, node, offset, bias);
   }
@@ -216,6 +229,14 @@
     var rec = recordFor(frag);
     if (!rec) return null;
     var d = displayOffsetOf(rec, node, offset, bias);
+    if (d === null) {
+      // One bounded self-heal: only the exact fragment containing the Safari
+      // endpoint is rebuilt, using its existing canonical authority. No sibling
+      // guessing, nearest-paragraph snapping or range expansion is permitted.
+      rec = reindexCanonicalFragment(frag);
+      if (!rec) return null;
+      d = displayOffsetOf(rec, node, offset, bias);
+    }
     if (d === null) return null;
     return { paraId: rec.paraId, canonical: toCanonical(rec, d), fragment: frag };
   }
@@ -333,6 +354,9 @@
         r.surroundContents(mk);
       } catch (e) { /* node already re-split by a later piece */ }
     });
+    // surroundContents() can split/replace text nodes. The registry must describe
+    // the final DOM, not the pre-paint nodes used to calculate the pieces.
+    reindexCanonicalFragment(fragEl);
     return { painted: painted, fallback: fallback };
   }
 
@@ -353,6 +377,7 @@
 
   root.LDCAnchor = {
     indexFragment: indexFragment,
+    reindexCanonicalFragment: reindexCanonicalFragment,
     recordFor: recordFor,
     fragmentOf: fragmentOf,
     canonicalPosition: canonicalPosition,

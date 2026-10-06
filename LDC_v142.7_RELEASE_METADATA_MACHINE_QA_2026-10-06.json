@@ -1,0 +1,218 @@
+{
+  "schema": "ldc-v142.7-release-metadata-machine-qa-v1",
+  "checks": [
+    {
+      "check": "DIRECT_PREDECESSOR_V1426_ZIP_SHA256",
+      "status": "PASS",
+      "detail": "a4da4c7e90cde403f73e1d1c5f2bc75f6646785a360b7a3d90c059ae0f1392a3"
+    },
+    {
+      "check": "PROTECTED_V1422_ZIP_SHA256",
+      "status": "PASS",
+      "detail": "1e46d13fbc5628802695e7dd7ac90de998c5b1c22736bb9206646e6860ffdb8e"
+    },
+    {
+      "check": "BOUNDED_APPLICATION_MUTATION_SET",
+      "status": "PASS",
+      "detail": {
+        "changed": [
+          "index.html",
+          "offline_manifest.json",
+          "sw.js",
+          "version.json"
+        ]
+      }
+    },
+    {
+      "check": "NO_APP_FILES_ADDED_PRE_FREEZE",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "NO_FILES_REMOVED",
+      "status": "PASS",
+      "detail": []
+    },
+    {
+      "check": "INTERACTION_ANCHOR_IDENTICAL_TO_V1426",
+      "status": "PASS",
+      "detail": "04b147a84cdc0be240973a64f8a019ae6e0090b1bee562f61d46319407e31b38"
+    },
+    {
+      "check": "CORPUS_BYTE_IDENTICAL_TO_V1422",
+      "status": "PASS",
+      "detail": {
+        "files": 205,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "PLS_V15_BYTE_IDENTICAL_TO_V1422",
+      "status": "PASS",
+      "detail": {
+        "files": 23,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "OFFLINE_ASSET_LEDGER_UNCHANGED",
+      "status": "PASS",
+      "detail": 204
+    },
+    {
+      "check": "OFFLINE_TOTAL_BYTES_UNCHANGED",
+      "status": "PASS",
+      "detail": 114483048
+    },
+    {
+      "check": "OFFLINE_BINDING_UNCHANGED",
+      "status": "PASS",
+      "detail": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384"
+    },
+    {
+      "check": "FULL_HYBRID_RANKS_9_2_1",
+      "status": "PASS",
+      "detail": [
+        9,
+        2,
+        1
+      ]
+    },
+    {
+      "check": "JS_SYNTAX_INTERACTION_ANCHOR_JS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "JS_SYNTAX_SW_JS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "INDEX_INLINE_JS_SYNTAX",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "INDEX_IDENTITY",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "VERSION_IDENTITY",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "MANIFEST_IDENTITY",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "SW_IDENTITY",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "SW_NO_STALE_1426_ACTIVE_NAMESPACE",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HELP_CONTENT_BYTE_IDENTICAL_TO_V1426",
+      "status": "PASS",
+      "detail": "3f41ee88bbf9be1a8a478beb6364e0da00eae3d4342369ab6fe145d8e59a6502"
+    },
+    {
+      "check": "HELP_NO_STALE_102_MB",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ACTIVE_UI_NO_74346",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "ONBOARDING_74351",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "OFFLINE_PREFLIGHT_MATCHES_MANIFEST",
+      "status": "PASS",
+      "detail": 114483048
+    },
+    {
+      "check": "CURRENT_PACKAGE_STATE_IS_V1427",
+      "status": "PASS",
+      "detail": "V142_7_PRE_PHYSICAL_OWNER_PROTOTYPE_CANDIDATE__DIRECT_SUCCESSOR_OF_EXACT_FROZEN_V142_6__RELEASE_METADATA_COHERENCE_ONLY__V142_6_HELP_RELEASE_TRUTH_READER_SELECTION_SELECTOR_SEARCH_AND_OFFLINE_CONTENT_BINDING_PRESERVED__PRODUCTION_NOT_AUTHORIZED"
+    },
+    {
+      "check": "CURRENT_IPHONE_GATE_IS_V1427",
+      "status": "PASS",
+      "detail": "OPEN__EXACT_V142_7_BYTES_REQUIRE_PHYSICAL_IPHONE_READER_SELECTION_SELECTOR_HELP_SEARCH_PROGRESS_OFFLINE_COPY_AND_GENERAL_ACCEPTANCE"
+    },
+    {
+      "check": "CURRENT_IPAD_GATE_IS_V1427",
+      "status": "PASS",
+      "detail": "OPEN__EXACT_V142_7_BYTES_REQUIRE_PHYSICAL_IPAD_READER_SELECTION_SELECTOR_HELP_SEARCH_PROGRESS_OFFLINE_COPY_AND_GENERAL_ACCEPTANCE"
+    },
+    {
+      "check": "CURRENT_PROTOTYPE_LINEAGE",
+      "status": "PASS",
+      "detail": {
+        "base_public_version": "142",
+        "prototype_public_version": "142.7",
+        "supersedes_prototype": "142.6",
+        "supersession_reason": "V142_6_POST_FREEZE_RELEASE_METADATA_RECHECK_FOUND_STALE_ACTIVE_V142_4_GATE_AND_PACKAGE_STATE_STRINGS__V142_7_COHERENCE_CLOSURE",
+        "retrieval": "DENSE96_72_PLUS_BM25_96_72_RRF60",
+        "compatible_passages": 20236,
+        "excluded_stale_passages": 347,
+        "production_authorized": false
+      }
+    },
+    {
+      "check": "DIRECT_PREDECESSOR_METADATA",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "PRODUCTION_NOT_AUTHORIZED",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "BROWSER_ALL_PASS",
+      "status": "PASS",
+      "detail": {
+        "pass": 56,
+        "total": 56,
+        "failed": []
+      }
+    },
+    {
+      "check": "SELECTOR_28_28",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "check": "HELP_LAYOUT_16_16",
+      "status": "PASS",
+      "detail": null
+    }
+  ],
+  "summary": {
+    "pass": 34,
+    "fail": 0,
+    "total": 34,
+    "failed": []
+  },
+  "app_gov": {
+    "pass_1_build_package_integrity": "PASS",
+    "pass_2_machine_browser_functionality": "PASS",
+    "pass_3_evidence_reconciliation": "PASS",
+    "pass_4_contradiction_staleness": "PASS",
+    "independent_adversarial_changed_surface_challenge": "PASS"
+  }
+}
