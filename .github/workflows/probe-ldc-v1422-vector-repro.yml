@@ -23,7 +23,7 @@ jobs:
         run: |
           set -euo pipefail
           REV='761b726dd34fb83930e26aab4e9ac3899aa1fa78'
-          BASE="https://huggingface.co/intfloat/multilingual-e5-small/resolve/$REV"
+          BASE="https://huggingface.co/Xenova/multilingual-e5-small/resolve/$REV"
           ROOT=/tmp/ldc-e5-models/e5
           mkdir -p "$ROOT/onnx"
           curl -fL --retry 3 "$BASE/config.json" -o "$ROOT/config.json"
