@@ -113,6 +113,37 @@ jobs:
         run: |
           python3 -m http.server 8120 --bind 127.0.0.1 >/tmp/lettres216-prestage.log 2>&1 &
           sleep 2
+      - name: Browser boot diagnostic
+        run: |
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          URL='http://127.0.0.1:8120/candidate/index.html?bootdiag=1'
+          with sync_playwright() as pw:
+              b=pw.chromium.launch(headless=True);ctx=b.new_context(viewport={'width':390,'height':844},locale='fr-FR',service_workers='block')
+              ctx.add_init_script("localStorage.setItem('lp_onboarded','1')")
+              p=ctx.new_page();cons=[];errs=[];fails=[]
+              p.on('console',lambda m:cons.append(m.type+': '+m.text))
+              p.on('pageerror',lambda e:errs.append(str(e)))
+              p.on('requestfailed',lambda r:fails.append(r.url+' :: '+str(r.failure)))
+              resp=p.goto(URL,wait_until='domcontentloaded',timeout=30000)
+              p.wait_for_timeout(3000)
+              state=p.evaluate("""()=>({
+                loading:!!document.getElementById('loading'),
+                loadingClass:document.getElementById('loading')?document.getElementById('loading').className:null,
+                letters:document.querySelectorAll('#letter-list .letter-item').length,
+                error:(document.querySelector('.error-state')||{}).innerText||'',
+                scriptTest:typeof window.__LET_A_TEST,
+                body:(document.body.innerText||'').slice(0,500)
+              })""")
+              print('BOOT_HTTP',resp.status if resp else None)
+              print('BOOT_STATE',state)
+              print('BOOT_CONSOLE',cons)
+              print('BOOT_PAGEERRORS',errs)
+              print('BOOT_REQUESTFAIL',fails)
+              assert not errs,errs
+              assert state['letters']==136 and not state['loading'],state
+              ctx.close();b.close()
+          PY
       - name: Full inherited functional regression on exact v2.16 candidate
         run: |
           python - <<'PY'
@@ -254,9 +285,7 @@ jobs:
         shell: bash
         run: |
           set -u
-          cd qa_repo
-          mkdir -p qa-status
-          cat > qa-status/LETTRES_v216_PRESTAGE.txt <<EOF
+          cat > /tmp/LETTRES_v216_PRESTAGE.txt <<EOF
           run_id=${{ github.run_id }}
           run_attempt=${{ github.run_attempt }}
           job_status=${{ job.status }}
@@ -264,9 +293,18 @@ jobs:
           predecessor=8c982ba69d7a4f109933212b9dba88b37397d38f
           recorded_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
           EOF
+          cd qa_repo
           git config user.name github-actions
           git config user.email github-actions@github.com
+          git reset --hard
+          git clean -fd
           git pull --rebase origin main
+          mkdir -p qa-status
+          cp /tmp/LETTRES_v216_PRESTAGE.txt qa-status/LETTRES_v216_PRESTAGE.txt
           git add qa-status/LETTRES_v216_PRESTAGE.txt
           git commit -m "Record Lettres v2.16 B1 prestage run ${{ github.run_id }}" || true
-          git push origin HEAD:main
+          for try in 1 2 3; do
+            git push origin HEAD:main && exit 0
+            git pull --rebase origin main || exit 1
+          done
+          exit 1
