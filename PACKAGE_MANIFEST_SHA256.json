@@ -1,18 +1,25 @@
 {
   "schema": "ldc-package-manifest-sha256-v1",
-  "candidate_public_version": "142.9",
-  "technical_identity": "v2.19.142.9-R1B-PLS-INTERACTION-CLOSURE",
+  "candidate_public_version": "142.10",
+  "technical_identity": "v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE",
   "generated_date": "2026-10-06",
-  "byte_predecessor_zip_sha256": "5697412951bef15ec7c49c17a13e0e9e05d57ccf228b1d9150505bc930d53160",
-  "byte_predecessor_status": "SUPERSEDED_NONDEPLOYABLE_AS_V142_8__PROMOTION_SOURCE_ONLY",
-  "last_unambiguous_governed_predecessor_public_version": "142.7",
-  "last_unambiguous_governed_predecessor_zip_sha256": "d7b51c53f99484b7fe0a214851f687a8c837cd3de0572374e3a29c1600bcf043",
+  "byte_predecessor_public_version": "142.9",
+  "byte_predecessor_app_version": "v2.19.142.9-R1B-PLS-INTERACTION-CLOSURE",
+  "byte_predecessor_zip_sha256": "4be6830f42ea3b541ecb2bb89d4684f7cd3f48453d5e8269bc26dbd152b9a47e",
+  "byte_predecessor_status": "FROZEN_PREDECESSOR__APP_TEST_AND_MASSFINDERBETA_DEPLOYED__PRODUCTION_NOT_AUTHORIZED",
+  "last_unambiguous_governed_predecessor_public_version": "142.9",
+  "last_unambiguous_governed_predecessor_zip_sha256": "4be6830f42ea3b541ecb2bb89d4684f7cd3f48453d5e8269bc26dbd152b9a47e",
   "superseded_conflicted_v142_8_zip_sha256": [
     "905fe6c4a456e8f56affca4f8c6451a1d86eeb9bb4f2706ec1f53c8bfd6cdd61",
     "5697412951bef15ec7c49c17a13e0e9e05d57ccf228b1d9150505bc930d53160"
   ],
-  "file_count_excluding_manifest": 278,
+  "file_count_excluding_manifest": 279,
   "files": [
+    {
+      "path": "LDC_v142.10_PLS_RESULTS_UX_CLOSURE_MACHINE_QA_2026-10-06.json",
+      "size": 5043,
+      "sha256": "8b9947ad71e99550e05b478fe619e45a74d9e66537ab7b0ce01bdcf0c1410110"
+    },
     {
       "path": "LDC_v142.2_PLS_OWNER_PROTOTYPE_MACHINE_QA_2026-10-06.json",
       "size": 8422,
@@ -1200,8 +1207,8 @@
     },
     {
       "path": "index.html",
-      "size": 911481,
-      "sha256": "621dcae6d950f2e7eb9f2a6ecc1290ef7fecf7db32c0edb8f68067b5b84b8821"
+      "size": 912301,
+      "sha256": "337dc986e5a15e85894c5e43dc05c1f026f22bbce032253bc8880a3fcc0c073a"
     },
     {
       "path": "interaction_anchor.js",
@@ -1220,8 +1227,8 @@
     },
     {
       "path": "offline_manifest.json",
-      "size": 54981,
-      "sha256": "8b88b32ad4e184067e5695efb0e0007aeff04da8cf50c1f59eba7fa17429dba4"
+      "size": 54856,
+      "sha256": "64b58f741433f2f233fb48eef863b65fde5ce15864c8993ba9aafea5596213a5"
     },
     {
       "path": "pls_v15/FILTERED_V142_COMPAT_SMOKETEST.json",
@@ -1396,12 +1403,12 @@
     {
       "path": "sw.js",
       "size": 32258,
-      "sha256": "a20433df964e18ddd48e48b7d84b3690765841c58911184d1b74140a11f8b80a"
+      "sha256": "2d259db80c9968e0d53774c339a44d75d9f611bca5fbf1d996f1d6d5d182b088"
     },
     {
       "path": "version.json",
-      "size": 237267,
-      "sha256": "b31f2b905faaffeb238d46481c2592f5dcae6da858540aa8377aa6999abbe88a"
+      "size": 239039,
+      "sha256": "ff3ae29ead9ac7b839e6660647f789c2e0425bf3e4157dfdd52ceb3f76751dfe"
     }
   ]
 }
