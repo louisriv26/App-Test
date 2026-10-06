@@ -1,0 +1,35 @@
+name: Stage LDC v142.3 Par le sens owner prototype
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/stage-ldc-v1423-pls-owner.yml'
+      - 'tools/ldc_v1423_pls_owner/**'
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build from exact staged v142 authority
+        run: python tools/ldc_v1423_pls_owner/build.py
+      - name: Independent prototype QA
+        run: python tools/ldc_v1423_pls_owner/qa.py
+      - name: Commit exact staged prototype
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add ldc-v142-3-pls-owner-prototype
+          git diff --cached --quiet && exit 0
+          git commit -m 'Stage LDC v142.3 Par le sens owner prototype [skip ci]'
+          git push origin HEAD:main
