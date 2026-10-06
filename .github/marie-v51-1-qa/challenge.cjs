@@ -104,6 +104,7 @@ async function runEngine(bt,name){
 
   // M-16/M-15 initial destructive focus + truthful consequence text.
   await p.evaluate(()=>App.startNewCycle()); await p.waitForSelector('#cycle-reset-modal.open');
+  await p.waitForFunction(()=>document.getElementById('cycle-reset-modal').contains(document.activeElement),null,{timeout:1500});
   x=await p.evaluate(()=>({focus:document.activeElement?.textContent?.trim(),text:document.getElementById('cycle-reset-modal').innerText}));
   assert(x.focus==='Annuler','cycle reset initial focus '+JSON.stringify(x));
   assert(/pratique active/i.test(x.text)&&/positions de lecture/i.test(x.text),'cycle reset wording '+x.text);
