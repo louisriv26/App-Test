@@ -1,10 +1,6 @@
 {
-  "status": "FAIL",
-  "exit_code": 2,
+  "status": "PENDING",
   "candidate": "Marie v51.1",
   "candidate_index_blob": "2fa89f62c0cc565463a87e6b714a9c42fa526b81",
-  "candidate_sw_blob": "d6866df9dd87bf25c506b182514f6ba8e3cd1bc0",
-  "trigger_sha": "3d332fb54f5fc118ccbfaeec4bc05841179eac8e",
-  "run_id": "37418702412",
-  "log_tail": "PASS chromium:selftest 158\nPASS chromium:mobile_textsize_focus {\"inside\":true,\"active\":\"Normal\"}\nPASS chromium:mobile_to_wide {\"flip\":{\"mobileOpen\":false,\"wideOpen\":false,\"activeId\":\"wnav-textsize\",\"activeVisible\":true},\"afterTab\":{\"id\":\"wnav-aide\",\"visible\":true}}\nPASS chromium:wide_to_mobile {\"flip\":{\"mobileOpen\":false,\"wideOpen\":false,\"mobileTrigger\":true,\"activeVisible\":true},\"afterTab\":{\"cls\":\"topbar-action\",\"visible\":true}}\nMARIE_V51_1_BROWSER_QA_FAIL page.evaluate: ReferenceError: staleBefore is not defined\n    at eval (eval at evaluate (:291:30), <anonymous>:1:37)\n    at UtilityScript.evaluate (<anonymous>:293:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at runEngine (/home/runner/work/App-Test/App-Test/.github/marie-v51-1-qa/challenge.cjs:75:13)\n    at async /home/runner/work/App-Test/App-Test/.github/marie-v51-1-qa/challenge.cjs:141:3\n"
+  "note": "rerun after stale-panel harness correction"
 }
