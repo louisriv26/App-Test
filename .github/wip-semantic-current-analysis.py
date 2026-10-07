@@ -40,6 +40,23 @@ for r in old:
                     if sv in ids: covered.add(ids[sv])
 
 word_counts=[len(TOKEN_RE.findall(str(r.get('text','')))) for r in old]
+kind_counts=collections.Counter(str(r.get('kind')) for r in old)
+span_count_dist=collections.Counter(len(r.get('source_spans') or []) for r in old)
+starts_by_unit=collections.defaultdict(list)
+for r in old: starts_by_unit[str(r.get('unit_id'))].append(int(r.get('start_word',0)))
+stride_deviations=[]
+for u,starts in starts_by_unit.items():
+    starts=sorted(starts)
+    for a,b in zip(starts,starts[1:]):
+        if b-a!=72: stride_deviations.append({'unit_id':u,'from':a,'to':b,'delta':b-a})
+atom_shapes=collections.Counter(); atom_examples=[]
+for k in ('base_units','enriched_overrides','complete_units','complement_units'):
+    for row in top.get(k) or []:
+        atoms=(row[1] if k=='enriched_overrides' else (row[4] if k=='base_units' else row[6]))
+        for a in atoms or []:
+            key='int' if isinstance(a,int) else ('list:'+str(len(a)) if isinstance(a,list) else type(a).__name__)
+            atom_shapes[key]+=1
+            if not isinstance(a,int) and len(atom_examples)<20: atom_examples.append({'collection':k,'atom':a})
 missing=sorted(set(range(len(docs)))-covered)
 missing_by_entry=collections.Counter()
 missing_by_volume=collections.Counter()
@@ -80,6 +97,8 @@ report={
    'enriched_override_sample':sample_unit((top.get('enriched_overrides') or [None])[0]),
    'complete_unit_sample':sample_unit((top.get('complete_units') or [None])[0]),
    'complement_unit_sample':sample_unit((top.get('complement_units') or [None])[0]),
+   'atom_shape_counts':dict(atom_shapes),
+   'atom_examples':atom_examples,
    'document_sample':docs[:3],
  },
  'old_pack':{
@@ -90,6 +109,11 @@ report={
    'word_count_max':max(word_counts) if word_counts else 0,
    'word_count_median':statistics.median(word_counts) if word_counts else 0,
    'word_count_96':sum(1 for x in word_counts if x==96),
+   'kind_counts':dict(kind_counts),
+   'source_span_count_distribution':dict(sorted(span_count_dist.items())),
+   'stride_72_deviation_count':len(stride_deviations),
+   'stride_72_deviation_examples':stride_deviations[:20],
+   'non_principal_samples':[small_row(x) for x in old if str(x.get('kind'))!='principal'][:5],
    'row_samples':[small_row(x) for x in old[:3]],
  },
  'compat_coverage_recomputed':{
