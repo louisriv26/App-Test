@@ -5,10 +5,13 @@ on:
       - ldc-v142-16-search-integrity-wip-20261007
     paths:
       - '.github/wip-semantic-v16-vector-build.mjs'
+      - '.github/wip-semantic-v16-vector-build-browser.mjs'
+      - '.github/wip-semantic-v16-vector-build-browser.html'
       - '.github/workflows/wip-semantic-v16-vector-build.yml'
       - '.github/wip-semantic-current-pack-build.cjs'
       - 'pls_v16/BINDING_CONTRACT.json'
       - 'pls_v15/model/**'
+      - 'pls_v15/runtime/**'
       - 'tools/ldc_v1422_vector_probe/fixtures.json'
       - 'corpus/search_v2_documents.json'
       - 'corpus/search_v2_entries.json'
@@ -23,20 +26,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install browser driver and verify Chrome
-        run: |
-          npm install --no-save playwright-core@1.55.0
-          command -v google-chrome
-      - name: Build current-corpus vectors
+      - name: Install pinned browser driver
+        run: npm install --no-save playwright-core@1.55.0
+      - name: Require hosted Chrome
+        run: command -v google-chrome
+      - name: Build current-corpus vectors with protected browser/WASM parity
         env:
           PLS_V16_OUT: wip-pls-v16-vector-build
           PLS_V16_BATCH: '8'
+          CHROME_PATH: /usr/bin/google-chrome
         shell: bash
         run: |
           set -o pipefail
           mkdir -p wip-pls-v16-vector-build
-          node .github/wip-semantic-v16-vector-build.mjs 2>&1 | tee wip-pls-v16-vector-build/build.log
+          node .github/wip-semantic-v16-vector-build-browser.mjs 2>&1 | tee wip-pls-v16-vector-build/build.log
       - name: Bind contract copy into evidence
+        if: always()
         run: cp pls_v16/BINDING_CONTRACT.json wip-pls-v16-vector-build/BINDING_CONTRACT.json
       - uses: actions/upload-artifact@v4
         if: always()
