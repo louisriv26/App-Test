@@ -215,13 +215,26 @@ for(let oi=0;oi<oldRows.length&&builderDiagnostics.length<12;oi++){
  });
 }
 
-let cleanRows=0,cleanOverlap=0,cleanFullParity=0,affectedRows=0,affectedOverlap=0;
+const newByUnitText=new Map(),newByUnitStart=new Map();
+for(let i=0;i<rows.length;i++){
+ const r=rows[i],kt=r.unit_id+'|'+r.text,ks=r.unit_id+'|'+r.start_word+'|'+r.end_word;
+ if(!newByUnitText.has(kt))newByUnitText.set(kt,[]);newByUnitText.get(kt).push(i);
+ if(!newByUnitStart.has(ks))newByUnitStart.set(ks,[]);newByUnitStart.get(ks).push(i);
+}
+let cleanRows=0,cleanOverlap=0,cleanTextOverlap=0,cleanStartOverlap=0,cleanStartTextParity=0,cleanFullParity=0,affectedRows=0,affectedOverlap=0;
+const cleanMismatchExamples=[];
 for(let oi=0;oi<oldRows.length;oi++){
  const o=oldRows[oi],ni=(newBySig.get(sig(o))||[])[0],clean=!affectedEntries.has(String(o.entry_id));
  if(clean)cleanRows++;else affectedRows++;
+ if(clean&&(newByUnitText.get(o.unit_id+'|'+o.text)||[]).length)cleanTextOverlap++;
+ const startMatches=newByUnitStart.get(o.unit_id+'|'+o.start_word+'|'+o.end_word)||[];
+ if(clean&&startMatches.length){cleanStartOverlap++;if(startMatches.some(i=>rows[i].text===o.text))cleanStartTextParity++;}
  if(ni!=null){
   if(clean)cleanOverlap++;else affectedOverlap++;
   if(clean){const n=rows[ni],cloneN={...n,passage_id:o.passage_id};if(JSON.stringify(o)===JSON.stringify(cloneN))cleanFullParity++;}
+ }else if(clean&&cleanMismatchExamples.length<20){
+  const same=startMatches[0]!=null?rows[startMatches[0]]:null;
+  cleanMismatchExamples.push({old_row:oi,passage_id:o.passage_id,unit_id:o.unit_id,start:o.start_word,end:o.end_word,old_text:String(o.text).slice(0,900),same_start_text:same?String(same.text).slice(0,900):null,same_start_spans:same?same.source_spans:null,old_spans:o.source_spans,text_match_at_same_start:same?o.text===same.text:false,any_text_match_in_unit:(newByUnitText.get(o.unit_id+'|'+o.text)||[]).length>0});
  }
 }
 const unaffectedControl={
@@ -230,7 +243,13 @@ const unaffectedControl={
  clean_old_rows:cleanRows,
  clean_exact_signature_overlap:cleanOverlap,
  clean_signature_overlap_fraction:cleanRows?cleanOverlap/cleanRows:0,
+ clean_text_overlap:cleanTextOverlap,
+ clean_text_overlap_fraction:cleanRows?cleanTextOverlap/cleanRows:0,
+ clean_same_start_end_exists:cleanStartOverlap,
+ clean_same_start_end_text_parity:cleanStartTextParity,
+ clean_same_start_end_text_parity_fraction:cleanRows?cleanStartTextParity/cleanRows:0,
  clean_full_row_parity_after_passage_id_rebind:cleanFullParity,
+ clean_mismatch_examples:cleanMismatchExamples,
  affected_old_rows:affectedRows,
  affected_exact_signature_overlap:affectedOverlap
 };
