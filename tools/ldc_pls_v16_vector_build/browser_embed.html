@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><pre id="status">boot</pre>
+<script type="module">
+import {AutoTokenizer,AutoModel,env,mean_pooling} from '../../pls_v15/runtime/transformers.min.js';
+const BASE=new URL('../../pls_v15/',location.href),MODEL_ID='model',REV='761b726dd34fb83930e26aab4e9ac3899aa1fa78';
+env.allowRemoteModels=false;env.allowLocalModels=true;env.localModelPath=BASE.href;env.useBrowserCache=false;env.useFSCache=false;
+if(env.backends?.onnx?.wasm){env.backends.onnx.wasm.numThreads=1;env.backends.onnx.wasm.proxy=false;env.backends.onnx.wasm.wasmPaths=new URL('runtime/',BASE).href;}
+const parts=['model/onnx/model_int8.onnx.part01','model/onnx/model_int8.onnx.part02','model/onnx/model_int8.onnx.part03','model/onnx/model_int8.onnx.part04'];let joined=null,tok=null,mdl=null;
+async function bytes(rel){const r=await fetch(new URL(rel,BASE),{cache:'no-store'});if(!r.ok)throw new Error(rel+':'+r.status);return new Uint8Array(await r.arrayBuffer());}
+env.useCustomCache=true;env.customCache={async match(key){const k=String(key||'');if(!k.endsWith('/model/onnx/model_int8.onnx')&&!k.endsWith('model/onnx/model_int8.onnx'))return undefined;if(joined)return joined.clone();const xs=[];let n=0;for(const p of parts){const u=await bytes(p);xs.push(u);n+=u.length;}const all=new Uint8Array(n);let o=0;for(const u of xs){all.set(u,o);o+=u.length;}joined=new Response(all,{status:200,headers:{'content-type':'application/octet-stream','content-length':String(n)}});return joined.clone();},async put(){}};
+async function init(){if(!tok)tok=await AutoTokenizer.from_pretrained(MODEL_ID,{local_files_only:true,revision:REV});if(!mdl)mdl=await AutoModel.from_pretrained(MODEL_ID,{local_files_only:true,revision:REV,subfolder:'onnx',model_file_name:'model',dtype:'int8',device:'wasm'});}
+window.embedBatch=async texts=>{await init();const t=await tok(texts.map(x=>'passage: '+String(x||'')),{padding:true,truncation:true,max_length:512});const out=await mdl(t),h=out.last_hidden_state||out[Object.keys(out)[0]];const pooled=mean_pooling(h,t.attention_mask).normalize(2,-1),d=Array.from(pooled.data),dim=384,res=[];for(let i=0;i<texts.length;i++)res.push(d.slice(i*dim,(i+1)*dim));return res;};
+await init();window.__plsV16Ready=true;document.getElementById('status').textContent='ready';
+</script>
