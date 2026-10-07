@@ -3353,8 +3353,27 @@ function syncDocumentaryViewUI(){
 }
 function openDocumentaryView(){syncDocumentaryViewUI();openModalOverlay('documentary-view-overlay','closeDocumentaryView');}
 function closeDocumentaryView(){closeModalOverlay('documentary-view-overlay');}
-async function chooseDocumentaryView(mode){closeDocumentaryView();await setSupplementMode(mode,{persist:true,origin:'user'});}
-async function returnToNormalReading(){await setSupplementMode('enriched',{persist:true,origin:'user'});}
+function focusAfterDocumentaryViewChange(){
+  const cur=document.activeElement;
+  if(cur&&cur!==document.body&&cur.isConnected&&cur.getClientRects().length>0)return true;
+  const screen=document.querySelector('.screen.active');if(!screen)return false;
+  let target=null;
+  if(screen.id==='screen-search')target=document.getElementById(searchIntentMode==='meaning'?'search-input-meaning':'search-input');
+  else if(screen.id==='screen-reader')target=document.getElementById('reader-back-btn');
+  else target=screen.querySelector('.btn-back,button:not([disabled])');
+  if(!target||!target.isConnected||target.getClientRects().length===0)return false;
+  try{target.focus({preventScroll:true});}catch(_){target.focus();}
+  return document.activeElement===target;
+}
+async function chooseDocumentaryView(mode){
+  closeDocumentaryView();
+  await setSupplementMode(mode,{persist:true,origin:'user'});
+  requestAnimationFrame(focusAfterDocumentaryViewChange);
+}
+async function returnToNormalReading(){
+  await setSupplementMode('enriched',{persist:true,origin:'user'});
+  requestAnimationFrame(focusAfterDocumentaryViewChange);
+}
 
 async function loadSupplementRegistryData() {
   if (supplementRegistry && supplementManifest) return supplementRegistry;
