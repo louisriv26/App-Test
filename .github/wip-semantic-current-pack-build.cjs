@@ -50,20 +50,42 @@ function starts96_72(n){
  s.add(Math.max(0,n-96));
  return [...s].sort((a,b)=>a-b);
 }
-function protectedChunkTokens(unitId){
- const base=authority.tokens('enriched',unitId), out=[];
- for(const t0 of base){
-  const t={...t0};
-  const prev=out[out.length-1];
-  if(prev&&prev.di===t.di&&Number(t.s)>=Number(prev.e)){
-   const raw=String(docs[t.di]?.[5]||'').slice(Number(prev.e),Number(t.s));
-   if(/^['’]+$/u.test(raw)){
-    prev.e=t.e;prev.surface=String(prev.surface||'')+raw+String(t.surface||'');
-    prev.w=String(prev.w||'')+String(t.w||'');
-    continue;
-   }
-  }
-  out.push(t);
+const enrichedOverrides=new Map((topology.enriched_overrides||[]).map(r=>[String(r[0]),r[1]]));
+const unitAtoms=new Map();
+for(const r of topology.base_units||[])unitAtoms.set('P:'+String(r[0]),enrichedOverrides.get(String(r[0]))||r[4]||[]);
+for(const r of topology.complete_units||[])unitAtoms.set(String(r[0]),r[6]||[]);
+function atomPartsRaw(a){
+ if(Number.isInteger(a))return [a,0,String(docs[a]?.[5]||'').length];
+ assert(Array.isArray(a)&&a.length===3&&Number.isInteger(a[0])&&Number.isInteger(a[1])&&Number.isInteger(a[2]),'RAW_ATOM_SHAPE');
+ return a;
+}
+const unitCache=new Map();
+function protectedRawUnit(unitId){
+ if(unitCache.has(unitId))return unitCache.get(unitId);
+ const atoms=unitAtoms.get(String(unitId));assert(Array.isArray(atoms),'UNIT_ATOMS_MISSING '+unitId);
+ let full='',cursor=0;const layout=[];
+ for(let ai=0;ai<atoms.length;ai++){
+  const [di,cs,ce]=atomPartsRaw(atoms[ai]), raw=String(docs[di]?.[5]||'');
+  assert(cs>=0&&ce>=cs&&ce<=raw.length,'RAW_ATOM_RANGE '+unitId);
+  if(ai){full+=' ';cursor++;}
+  const text=raw.slice(cs,ce),fs=cursor;full+=text;cursor+=text.length;
+  layout.push({di,canonical_start:cs,canonical_end:ce,full_start:fs,full_end:cursor});
+ }
+ const tokens=[];const re=/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu;let m,li=0;
+ while((m=re.exec(full))){
+  const s=m.index,e=s+m[0].length;
+  while(li<layout.length&&s>=layout[li].full_end)li++;
+  const a=layout[li];assert(a&&s>=a.full_start&&e<=a.full_end,'WORD_CROSSES_ATOM '+unitId+' '+m[0]);
+  tokens.push({di:a.di,s:a.canonical_start+(s-a.full_start),e:a.canonical_start+(e-a.full_start),full_s:s,full_e:e,surface:m[0]});
+ }
+ const out={full,layout,tokens};unitCache.set(unitId,out);return out;
+}
+function spansForVisibleRange(U,vstart,vend){
+ const out=[];
+ for(const a of U.layout){
+  const s=Math.max(vstart,a.full_start),e=Math.min(vend,a.full_end);
+  if(e<=s)continue;
+  out.push({doc_index:a.di,para_id:String(docs[a.di][0]),stable_ref:String(docs[a.di][4]),canonical_start:a.canonical_start+(s-a.full_start),canonical_end:a.canonical_start+(e-a.full_start)});
  }
  return out;
 }
@@ -82,26 +104,15 @@ for(let i=0;i<oldRows.length;i++){const k=sig(oldRows[i]);let a=oldBySig.get(k);
 const rows=[], rowJesus=[], cover=new Uint8Array(docs.length), unitReports=[];
 let ordinal=1, visibleFailures=0, emptyTokenUnits=0;
 for(const u of units){
- const tokens=protectedChunkTokens(u.id);
+ const U=protectedRawUnit(u.id),tokens=U.tokens,fullText=U.full;
  if(!tokens.length){emptyTokenUnits++;unitReports.push({unit_id:u.id,tokens:0,windows:0});continue;}
- const wholeSpans=coalesce(tokens), fullText=authority.visibleText(wholeSpans);
  const starts=starts96_72(tokens.length);
- let priorVisible=-1;
  for(const start of starts){
   const end=Math.min(tokens.length,start+96), slice=tokens.slice(start,end);
   assert(slice.length>0&&slice.length<=96,'WINDOW_GEOMETRY');
-  const spans=coalesce(slice), text=authority.visibleText(spans);
+  const vstart=slice[0].full_s,vend=slice[slice.length-1].full_e;
+  const spans=spansForVisibleRange(U,vstart,vend),text=fullText.slice(vstart,vend);
   assert(text.length>0,'WINDOW_TEXT_EMPTY '+u.id+' '+start);
-  let vstart=fullText.indexOf(text,Math.max(0,priorVisible+1));
-  if(vstart<0){
-   // Extremely defensive fallback for a repeated/overlap ambiguity: enumerate
-   // occurrences and choose the first one whose position is strictly monotone.
-   let at=fullText.indexOf(text),cand=-1;
-   while(at>=0){if(at>priorVisible){cand=at;break;}at=fullText.indexOf(text,at+1);}
-   vstart=cand;
-  }
-  if(vstart<0){visibleFailures++;throw new Error('VISIBLE_OFFSET_NOT_FOUND '+u.id+' '+start);}
-  priorVisible=vstart;
   for(const s of spans)cover[s.doc_index]=1;
   const entRec=entryById.get(String(u.entry_id));
   assert(entRec,'ENTRY_NOT_FOUND '+u.entry_id);
@@ -124,7 +135,7 @@ for(const u of units){
    end_word:end,
    word_count:end-start,
    visible_char_start:vstart,
-   visible_char_end:vstart+text.length,
+   visible_char_end:vend,
    text,
    source_spans:spans
   });
@@ -174,14 +185,14 @@ function countsForText(s){
 function rawFromSpans(spans){
  return (spans||[]).map(s=>String(docs[s.doc_index]?.[5]||'').slice(Number(s.canonical_start),Number(s.canonical_end))).join(' ');
 }
-const oldTokenizerParity={unicode_apostrophe:0,whitespace:0,search_all:0};
-for(const o of oldRows){const cc=countsForText(o.text);if(cc.unicode_apostrophe===Number(o.word_count))oldTokenizerParity.unicode_apostrophe++;if(cc.whitespace===Number(o.word_count))oldTokenizerParity.whitespace++;if(cc.search_all===Number(o.word_count))oldTokenizerParity.search_all++;}
+const oldTokenizerParity={unicode_apostrophe:0,whitespace:0,search_all:0,mismatch_examples:[]};
+for(const o of oldRows){const cc=countsForText(o.text);if(cc.unicode_apostrophe===Number(o.word_count))oldTokenizerParity.unicode_apostrophe++;else if(oldTokenizerParity.mismatch_examples.length<20)oldTokenizerParity.mismatch_examples.push({passage_id:o.passage_id,unit_id:o.unit_id,word_count:o.word_count,counts:cc,text:String(o.text).slice(0,1000)});if(cc.whitespace===Number(o.word_count))oldTokenizerParity.whitespace++;if(cc.search_all===Number(o.word_count))oldTokenizerParity.search_all++;}
 const builderDiagnostics=[];
 for(let oi=0;oi<oldRows.length&&builderDiagnostics.length<12;oi++){
  const o=oldRows[oi];if((newBySig.get(sig(o))||[]).length)continue;
  const nu=newByUnit.get(o.unit_id)||[], nearest=nu.reduce((best,x)=>!best||Math.abs(x.start_word-o.start_word)<Math.abs(best.start_word-o.start_word)?x:best,null);
  const ou=oldByUnit.get(o.unit_id)||[], raw=rawFromSpans(o.source_spans), rawCollapsed=raw.replace(/\s+/g,' ').trim(), visible=authority.visibleText(o.source_spans||[]);
- const unitTokens=protectedChunkTokens(o.unit_id);
+ const unitTokens=protectedRawUnit(o.unit_id).tokens;
  builderDiagnostics.push({
   old_row:oi,passage_id:o.passage_id,unit_id:o.unit_id,
   old_start:o.start_word,old_end:o.end_word,old_word_count:o.word_count,
