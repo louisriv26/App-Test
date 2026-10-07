@@ -1,0 +1,24 @@
+name: LDC WIP semantic metadata identity transfer QA
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - '.github/wip-semantic-metadata-identity-transfer-qa.cjs'
+      - '.github/workflows/wip-semantic-metadata-identity-transfer-qa.yml'
+jobs:
+  transfer-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Prove vector input equivalence across metadata identity correction
+        run: node .github/wip-semantic-metadata-identity-transfer-qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-semantic-metadata-identity-transfer-qa
+          path: wip-semantic-metadata-identity-transfer-qa.json
+          if-no-files-found: error
+          retention-days: 2
