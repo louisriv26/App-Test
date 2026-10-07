@@ -29,7 +29,11 @@ jobs:
         env:
           PLS_V16_OUT: wip-pls-v16-vector-build
           PLS_V16_BATCH: '16'
-        run: node .github/wip-semantic-v16-vector-build.mjs
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p wip-pls-v16-vector-build
+          node .github/wip-semantic-v16-vector-build.mjs 2>&1 | tee wip-pls-v16-vector-build/build.log
       - name: Bind contract copy into evidence
         run: cp pls_v16/BINDING_CONTRACT.json wip-pls-v16-vector-build/BINDING_CONTRACT.json
       - uses: actions/upload-artifact@v4
