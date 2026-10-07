@@ -8674,15 +8674,25 @@ function renderSearchV2Results(payload, raw) {
   if(payload.structuralError){meta.textContent=payload.structuralError.message||'Recherche structurelle invalide.';document.getElementById('trust-notice').style.display='none';container.innerHTML='<div class="empty-state"><i class="ti ti-alert-triangle"></i>'+escapeHtml(payload.structuralError.message||'Recherche invalide')+'</div>';return;}
   const selectedTotal=Number(payload.totalMatches||0),totalBody=Number(payload.totalBodyMatches||0),metadataTotal=Number(payload.metadataTotalMatches||0),page=Number(f.page||1),pageCount=Number(f.pageCount||1),metaPage=Number(f.metadataPage||1),metaPageCount=Number(f.metadataPageCount||1);
   const laneLabel={exact:'Phrase exacte',words:'Tous les termes',partial:'Certains termes'}[f.lane]||'Passages';
+  const partialCount=Number(counts.partial||0),partialAvailable=partialCount>0&&!searchPartialExpanded;
   const parts=[];if(selectedTotal)parts.push(`${laneLabel} : ${selectedTotal}`);if(searchPartialExpanded&&totalBody&&totalBody!==selectedTotal)parts.push(`${totalBody} passages lexicaux au total`);if(near&&near.eligible&&near.results&&near.results.length)parts.push(near.ambiguous?`Formulation proche : plusieurs possibilités`:`Formulation proche : ${near.totalAccepted}`);if(metadataTotal)parts.push(`${metadataTotal} entrées correspondantes`);
-  meta.innerHTML=`${escapeHtml(parts.join(' · ')||'0 résultat')} <span class="search-mode-badge">Recherche lexicale · ${escapeHtml(searchSourceModeLabel(f.mode||supplementMode))}</span>${renderStructuralChips(payload)}`;
+  const zeroSummary=partialAvailable?`Aucun passage avec tous les termes · ${partialCount} correspondance${partialCount===1?'':'s'} partielle${partialCount===1?'':'s'} disponible${partialCount===1?'':'s'}`:'0 résultat';
+  meta.innerHTML=`${escapeHtml(parts.join(' · ')||zeroSummary)} <span class="search-mode-badge">Recherche lexicale · ${escapeHtml(searchSourceModeLabel(f.mode||supplementMode))}</span>${renderStructuralChips(payload)}`;
   document.getElementById('trust-notice').style.display=f.lane==='partial'?'block':'none';
   const sug=document.getElementById('search-suggestions');if(sug)sug.style.display='none';const lexical=(payload.parsed&&payload.parsed.lexical)||raw;
   if(payload.suggestions&&payload.suggestions.length){const box=document.createElement('div');box.className='search-suggestion-box';const sg=payload.suggestions[0];box.innerHTML=`Vouliez-vous dire : <button type="button">${escapeHtml(sg.to)}</button> ?`;box.querySelector('button').onclick=()=>searchFor(sg.to);container.appendChild(box);}
   if(results.length){const h=document.createElement('div');h.className='sugg-label';h.textContent=`${laneLabel} — page ${page}/${pageCount}`;container.appendChild(h);for(const r of results)renderSearchV2Card(container,r,lexical,false);appendSearchPager(container,'body',page,pageCount);}
   renderSearchNearSection(container,payload);
   if(metadata.length){const h=document.createElement('div');h.className='sugg-label';h.textContent=`Entrées correspondantes — ${metadataTotal}`;container.appendChild(h);for(const r of metadata)renderSearchV2Card(container,r,lexical,true);appendSearchPager(container,'metadata',metaPage,metaPageCount);}
-  if(!results.length&&!metadata.length&&!(near&&near.eligible&&near.results&&near.results.length)&&!payload.suggestions?.length){const hasPartial=Number(counts.partial||0)>0&&!searchPartialExpanded;container.innerHTML=hasPartial?'<div class="empty-state"><i class="ti ti-search"></i>Aucun passage avec tous les termes. Utilisez « Élargir la recherche » pour voir les passages qui n’en contiennent qu’une partie.</div>':'<div class="empty-state"><i class="ti ti-search-off"></i>Aucun résultat. Essayez d’autres mots ou vérifiez les filtres.</div>';}
+  if(!results.length&&!metadata.length&&!(near&&near.eligible&&near.results&&near.results.length)&&!payload.suggestions?.length){
+    if(partialAvailable){
+      const empty=document.createElement('div');empty.className='empty-state';
+      const icon=document.createElement('i');icon.className='ti ti-search';empty.appendChild(icon);
+      const copy=document.createElement('div');copy.textContent=`Aucun passage ne contient tous les termes. ${partialCount} correspondance${partialCount===1?'':'s'} partielle${partialCount===1?'':'s'} ${partialCount===1?'est disponible':'sont disponibles'}.`;empty.appendChild(copy);
+      const action=document.createElement('button');action.type='button';action.className='btn-secondary';action.textContent='Voir les résultats élargis';action.onclick=()=>{searchPartialExpanded=true;searchResultLane='partial';searchPage=1;rerunCommittedSearchIfReady();};empty.appendChild(action);
+      container.replaceChildren(empty);
+    }else container.innerHTML='<div class="empty-state"><i class="ti ti-search-off"></i>Aucun résultat. Essayez d’autres mots ou vérifiez les filtres.</div>';
+  }
 }
 
 async function runSearch({navigation='reveal-output',commitSource='programmatic'}={}) {
