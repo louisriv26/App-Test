@@ -1,0 +1,46 @@
+name: LDC WIP PLS v16 vector build
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - '.github/wip-semantic-v16-vector-build.mjs'
+      - '.github/workflows/wip-semantic-v16-vector-build.yml'
+      - '.github/wip-semantic-current-pack-build.cjs'
+      - 'pls_v16/BINDING_CONTRACT.json'
+      - 'pls_v15/model/**'
+      - 'tools/ldc_v1422_vector_probe/fixtures.json'
+      - 'corpus/search_v2_documents.json'
+      - 'corpus/search_v2_entries.json'
+      - 'corpus/search_v2_jesus_filter.json'
+      - 'corpus/search_v21_topology.json'
+jobs:
+  build-vectors:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install exact embedding runtime
+        run: npm install --no-save @huggingface/transformers@3.8.1
+      - name: Build current-corpus vectors
+        env:
+          PLS_V16_OUT: wip-pls-v16-vector-build
+          PLS_V16_BATCH: '16'
+        run: node .github/wip-semantic-v16-vector-build.mjs
+      - name: Bind contract copy into evidence
+        run: cp pls_v16/BINDING_CONTRACT.json wip-pls-v16-vector-build/BINDING_CONTRACT.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-pls-v16-vector-build
+          path: |
+            wip-pls-v16-vector-build/
+            wip-current-semantic-pack/metadata.jsonl
+            wip-current-semantic-pack/jesus_mask.bits
+            wip-current-semantic-pack-build-report.json
+          if-no-files-found: error
+          retention-days: 2
+          compression-level: 6
