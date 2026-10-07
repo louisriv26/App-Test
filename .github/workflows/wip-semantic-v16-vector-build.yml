@@ -33,7 +33,7 @@ jobs:
       - name: Build current-corpus vectors with protected browser/WASM parity
         env:
           PLS_V16_OUT: wip-pls-v16-vector-build
-          PLS_V16_BATCH: '8'
+          PLS_V16_BATCH: '1'
           CHROME_PATH: /usr/bin/google-chrome
         shell: bash
         run: |
