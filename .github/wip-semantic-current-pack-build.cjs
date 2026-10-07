@@ -1,5 +1,6 @@
 const fs=require('fs'),crypto=require('crypto');
 const Exact=require('../search_exact_v21.js');
+const Core=require('../search_engine_v2.js');
 
 const OUT_DIR='wip-current-semantic-pack';
 fs.mkdirSync(OUT_DIR,{recursive:true});
@@ -141,6 +142,46 @@ for(let oi=0;oi<oldRows.length;oi++){
  if(overlapExamples.length<8)overlapExamples.push({old_passage_id:o.passage_id,new_passage_id:n.passage_id,unit_id:o.unit_id,old_start:o.start_word,new_start:n.start_word,visible_equal:o.visible_char_start===n.visible_char_start&&o.visible_char_end===n.visible_char_end,jesus_equal:oj===nj});
 }
 
+const newByUnit=new Map();for(const r of rows){let a=newByUnit.get(r.unit_id);if(!a){a=[];newByUnit.set(r.unit_id,a);}a.push(r);}
+const oldByUnit=new Map();for(const r of oldRows){let a=oldByUnit.get(r.unit_id);if(!a){a=[];oldByUnit.set(r.unit_id,a);}a.push(r);}
+function countsForText(s){
+ const str=String(s||'');
+ return {
+  whitespace:(str.match(/\S+/g)||[]).length,
+  unicode_apostrophe:(str.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu)||[]).length,
+  unicode_plain:(str.match(/[\p{L}\p{N}]+/gu)||[]).length,
+  search_all:Core.normalise(str).split(' ').filter(Boolean).length,
+  search_min3:Core.terms(str,3).length
+ };
+}
+function rawFromSpans(spans){
+ return (spans||[]).map(s=>String(docs[s.doc_index]?.[5]||'').slice(Number(s.canonical_start),Number(s.canonical_end))).join(' ');
+}
+const builderDiagnostics=[];
+for(let oi=0;oi<oldRows.length&&builderDiagnostics.length<12;oi++){
+ const o=oldRows[oi];if((newBySig.get(sig(o))||[]).length)continue;
+ const nu=newByUnit.get(o.unit_id)||[], nearest=nu.reduce((best,x)=>!best||Math.abs(x.start_word-o.start_word)<Math.abs(best.start_word-o.start_word)?x:best,null);
+ const ou=oldByUnit.get(o.unit_id)||[], raw=rawFromSpans(o.source_spans), rawCollapsed=raw.replace(/\s+/g,' ').trim(), visible=authority.visibleText(o.source_spans||[]);
+ const unitTokens=authority.tokens('enriched',o.unit_id);
+ builderDiagnostics.push({
+  old_row:oi,passage_id:o.passage_id,unit_id:o.unit_id,
+  old_start:o.start_word,old_end:o.end_word,old_word_count:o.word_count,
+  old_unit_max_end:Math.max(...ou.map(x=>Number(x.end_word)||0)),
+  current_exact_unit_tokens:unitTokens.length,
+  old_text_chars:String(o.text||'').length,
+  token_counts_old_text:countsForText(o.text),
+  old_text_equals_raw_join:o.text===raw,
+  old_text_equals_raw_collapsed:o.text===rawCollapsed,
+  old_text_equals_exact_visible:o.text===visible,
+  raw_join_chars:raw.length,raw_collapsed_chars:rawCollapsed.length,exact_visible_chars:visible.length,
+  nearest_new:nearest?{start:nearest.start_word,end:nearest.end_word,word_count:nearest.word_count,text_chars:nearest.text.length,token_counts:countsForText(nearest.text),same_text:o.text===nearest.text,same_spans:JSON.stringify(o.source_spans)===JSON.stringify(nearest.source_spans)}:null,
+  old_text_prefix:String(o.text||'').slice(0,500),
+  raw_prefix:raw.slice(0,500),
+  exact_visible_prefix:visible.slice(0,500),
+  nearest_new_prefix:nearest?nearest.text.slice(0,500):null
+ });
+}
+
 const report={
  schema:'ldc-wip-current-semantic-pack-build-report-v1',
  status:'ENGINEERING_ONLY__NOT_QUALIFIED__NOT_DEPLOYABLE',
@@ -151,6 +192,7 @@ const report={
  coverage_fraction:covered/docs.length,
  coverage_pass:covered===docs.length,
  missing_documents:missing,
+ builder_diagnostics:builderDiagnostics,
  protected_filtered_overlap:{
    old_rows:oldRows.length,
    exact_source_text_signature_overlap:overlap,
