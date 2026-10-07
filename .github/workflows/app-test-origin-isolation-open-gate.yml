@@ -1,0 +1,24 @@
+name: App-Test origin isolation open-gate baseline
+on:
+  push:
+    branches:
+      - app-test-origin-isolation-wip-20261007
+    paths:
+      - 'APP_TEST_ORIGIN_ISOLATION_CONTRACT.md'
+      - 'tools/app_test_origin_isolation_audit.py'
+      - '.github/check-app-test-origin-isolation-open-gate.sh'
+      - '.github/workflows/app-test-origin-isolation-open-gate.yml'
+jobs:
+  verify-open-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify current topology is rejected
+        run: bash .github/check-app-test-origin-isolation-open-gate.sh
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: app-test-origin-isolation-open-gate-baseline
+          path: app-test-origin-isolation-current-baseline.json
+          if-no-files-found: error
+          retention-days: 7
