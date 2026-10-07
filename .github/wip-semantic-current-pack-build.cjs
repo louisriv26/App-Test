@@ -13,6 +13,7 @@ const EXPECTED=Object.freeze({
  'corpus/search_v2_jesus_filter.json':'67bd9e80c8ed1702c95072adff9859e7a25a521df14fd1be6efb496aa0ddf31d',
  'corpus/search_v21_topology.json':'9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f',
  'pls_v15/pack/metadata.jsonl':'58246f6906d1f5fce6b726a443f43c3d875ef4e2ca850b17c0e87521cb67dda1',
+ 'pls_v15/pack/excluded_rows.json':'df26822c0495eef471e757444436e1cfa7d4f9975df4502a1be34534c4d6c9e3',
  'pls_v15/pack/jesus_mask.bits':'9b84ce9dc9a66c3498111769fb10d2f3e56b6309f659be8c343fc6c946bbb739'
 });
 function shaFile(p){const h=crypto.createHash('sha256');h.update(fs.readFileSync(p));return h.digest('hex');}
@@ -96,6 +97,8 @@ function bitHas(bits,i){return !!(bits[i>>3]&(1<<(i&7)));}
 function setBit(bits,i,v){if(v)bits[i>>3]|=(1<<(i&7));}
 
 const oldRows=fs.readFileSync('pls_v15/pack/metadata.jsonl','utf8').trimEnd().split(/\r?\n/).filter(Boolean).map(JSON.parse);
+const excludedInfo=JSON.parse(fs.readFileSync('pls_v15/pack/excluded_rows.json','utf8'));
+const affectedEntries=new Set((excludedInfo.excluded||[]).map(x=>String(x.entry_id||'')));
 const oldBits=fs.readFileSync('pls_v15/pack/jesus_mask.bits');
 assert(oldRows.length===20236,'OLD_FILTERED_ROWS');
 const oldBySig=new Map();
@@ -212,6 +215,26 @@ for(let oi=0;oi<oldRows.length&&builderDiagnostics.length<12;oi++){
  });
 }
 
+let cleanRows=0,cleanOverlap=0,cleanFullParity=0,affectedRows=0,affectedOverlap=0;
+for(let oi=0;oi<oldRows.length;oi++){
+ const o=oldRows[oi],ni=(newBySig.get(sig(o))||[])[0],clean=!affectedEntries.has(String(o.entry_id));
+ if(clean)cleanRows++;else affectedRows++;
+ if(ni!=null){
+  if(clean)cleanOverlap++;else affectedOverlap++;
+  if(clean){const n=rows[ni],cloneN={...n,passage_id:o.passage_id};if(JSON.stringify(o)===JSON.stringify(cloneN))cleanFullParity++;}
+ }
+}
+const unaffectedControl={
+ excluded_rows:Number(excludedInfo.excluded_count||0),
+ affected_entries:affectedEntries.size,
+ clean_old_rows:cleanRows,
+ clean_exact_signature_overlap:cleanOverlap,
+ clean_signature_overlap_fraction:cleanRows?cleanOverlap/cleanRows:0,
+ clean_full_row_parity_after_passage_id_rebind:cleanFullParity,
+ affected_old_rows:affectedRows,
+ affected_exact_signature_overlap:affectedOverlap
+};
+
 const report={
  schema:'ldc-wip-current-semantic-pack-build-report-v1',
  status:'ENGINEERING_ONLY__NOT_QUALIFIED__NOT_DEPLOYABLE',
@@ -223,6 +246,7 @@ const report={
  coverage_pass:covered===docs.length,
  missing_documents:missing,
  protected_tokenizer_parity:oldTokenizerParity,
+ unaffected_entry_control:unaffectedControl,
  builder_diagnostics:builderDiagnostics,
  protected_filtered_overlap:{
    old_rows:oldRows.length,
