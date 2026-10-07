@@ -1,0 +1,81 @@
+name: Package LDC v142.15 exact manifest payload
+
+on:
+  push:
+    branches:
+      - package-v14215-temp-20261007
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Build exact manifest-governed package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, shutil, zipfile
+          root=pathlib.Path('.')
+          manifest_path=root/'PACKAGE_MANIFEST_SHA256.json'
+          manifest=json.loads(manifest_path.read_text(encoding='utf-8'))
+          out=root/'_ldc_v14215_package'
+          if out.exists(): shutil.rmtree(out)
+          out.mkdir()
+          failures=[]
+          for rec in manifest['files']:
+              p=root/rec['path']
+              if not p.is_file():
+                  failures.append(f"MISSING {rec['path']}")
+                  continue
+              b=p.read_bytes()
+              h=hashlib.sha256(b).hexdigest()
+              if len(b)!=rec['bytes'] or h!=rec['sha256']:
+                  failures.append(f"MISMATCH {rec['path']} size={len(b)}/{rec['bytes']} sha={h}/{rec['sha256']}")
+                  continue
+              dest=out/rec['path']
+              dest.parent.mkdir(parents=True,exist_ok=True)
+              shutil.copyfile(p,dest)
+          if failures:
+              raise SystemExit("\n".join(failures))
+          shutil.copyfile(manifest_path,out/'PACKAGE_MANIFEST_SHA256.json')
+          zip_name=root/'LDC_v142.15_RELEASE_TRUTH_SCOPE_GITHUB_PACKAGE_2026-10-07.zip'
+          if zip_name.exists(): zip_name.unlink()
+          with zipfile.ZipFile(zip_name,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for p in sorted(out.rglob('*')):
+                  if p.is_file():
+                      z.write(p,p.relative_to(out).as_posix())
+          zb=zip_name.read_bytes()
+          receipt={
+              'candidate_public_version': manifest['candidate_public_version'],
+              'technical_identity': manifest['technical_identity'],
+              'source_commit': os.environ.get('GITHUB_SHA'),
+              'manifest_sha256': hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
+              'manifest_entries': len(manifest['files']),
+              'zip_filename': zip_name.name,
+              'zip_size_bytes': len(zb),
+              'zip_sha256': hashlib.sha256(zb).hexdigest(),
+              'verified_before_packaging': True
+          }
+          (root/'LDC_v142.15_GITHUB_PACKAGE_RECEIPT.json').write_text(json.dumps(receipt,indent=2)+'\n',encoding='utf-8')
+          print(json.dumps(receipt,indent=2))
+          PY
+
+      - name: Upload exact GitHub package
+        uses: actions/upload-artifact@v4
+        with:
+          name: LDC-v142.15-GitHub-package
+          path: |
+            LDC_v142.15_RELEASE_TRUTH_SCOPE_GITHUB_PACKAGE_2026-10-07.zip
+            LDC_v142.15_GITHUB_PACKAGE_RECEIPT.json
+          if-no-files-found: error
+          retention-days: 2
+          compression-level: 0
