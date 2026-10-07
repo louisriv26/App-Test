@@ -72,7 +72,7 @@ function protectedRawUnit(unitId){
   const text=raw.slice(cs,ce),fs=cursor;full+=text;cursor+=text.length;
   layout.push({di,canonical_start:cs,canonical_end:ce,full_start:fs,full_end:cursor});
  }
- const tokens=[];const re=/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu;let m,li=0;
+ const tokens=[];const re=/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)?/gu;let m,li=0;
  while((m=re.exec(full))){
   const s=m.index,e=s+m[0].length;
   while(li<layout.length&&s>=layout[li].full_end)li++;
@@ -179,7 +179,7 @@ function countsForText(s){
  const str=String(s||'');
  return {
   whitespace:(str.match(/\S+/g)||[]).length,
-  unicode_apostrophe:(str.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu)||[]).length,
+  unicode_apostrophe:(str.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)?/gu)||[]).length,
   unicode_plain:(str.match(/[\p{L}\p{N}]+/gu)||[]).length,
   search_all:Core.normalise(str).split(' ').filter(Boolean).length,
   search_min3:Core.terms(str,3).length
