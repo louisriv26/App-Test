@@ -1,0 +1,183 @@
+name: LDC v142.16 full qualification temporary
+on:
+  push:
+    branches: [qa-v14216-full-20261007]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+
+      - name: Pass 1 v142.16 exact integrity and correction verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,hashlib,pathlib,subprocess,sys,datetime
+          root=pathlib.Path('.'); BASE='572d9df7927765b575a76eaee98fd3cc9d455e74'; CAND='6c202baf5090c6135d366a18ecc0b2447e432e9f'
+          out={'candidate':CAND,'generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'checks':{},'failures':[]}
+          def sha(b):return hashlib.sha256(b).hexdigest()
+          def ck(n,v,d=None):out['checks'][n]={'pass':bool(v),'detail':d};out['failures'].extend([] if v else [n])
+          delta=subprocess.check_output(['git','diff','--name-only',BASE,CAND],text=True).splitlines()
+          ck('exact_four_file_delta',sorted(delta)==sorted(['index.html','offline_manifest.json','sw.js','version.json']),delta)
+          oldman=json.loads(subprocess.check_output(['git','show',f'{BASE}:PACKAGE_MANIFEST_SHA256.json']))
+          protected=[x for x in oldman['files'] if x['path'] not in {'index.html','offline_manifest.json','sw.js','version.json'}]
+          drift=[]
+          for x in protected:
+            old=subprocess.check_output(['git','show',f'{BASE}:{x["path"]}'])
+            p=root/x['path']
+            if not p.is_file() or sha(p.read_bytes())!=sha(old):drift.append(x['path'])
+          ck('protected_304_exact',len(protected)==304 and not drift,{'count':len(protected),'drift':drift[:20]})
+          v=json.load(open('version.json'));o=json.load(open('offline_manifest.json'))
+          offsha=sha(pathlib.Path('offline_manifest.json').read_bytes())
+          ck('public_identity',v['public_version']=='142.16' and v['app_version']=='v2.19.142.16-R1B-RELEASE-INTEGRITY-CLOSURE' and o['app_version']==v['app_version'],{'public':v['public_version'],'app':v['app_version'],'off':o['app_version']})
+          ck('offline_manifest_self_binding',v['offline_manifest_sha256']==offsha,{'declared':v['offline_manifest_sha256'],'actual':offsha})
+          ck('immediate_predecessor_app',v['package_predecessor_app_version']=='v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE',v['package_predecessor_app_version'])
+          ck('immediate_predecessor_zip',v['package_predecessor_zip_sha256']=='cca03c4a6e07cd7f25b4a6a8cc6caadaf912ede76354a0b71236c93d2dd728bc',v['package_predecessor_zip_sha256'])
+          ck('baseline_predecessor',v['baseline_candidate_version']=='v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE' and v['baseline_candidate_sha256']=='cca03c4a6e07cd7f25b4a6a8cc6caadaf912ede76354a0b71236c93d2dd728bc',{'version':v['baseline_candidate_version'],'sha':v['baseline_candidate_sha256']})
+          ck('offline_204',o['asset_count']==204 and len(o['assets'])==204,o['asset_count'])
+          bad=[]
+          for a in o['assets']:
+            p=root/a['path']; b=p.read_bytes() if p.is_file() else None
+            if b is None or len(b)!=a['bytes'] or sha(b)!=a['sha256']:bad.append(a['path'])
+          ck('offline_assets_exact',not bad,bad[:20])
+          obj={'assets':[{'bytes':int(x['bytes']),'path':str(x['path']),'sha256':str(x['sha256'])} for x in o['assets']],'corpus_generation':o['corpus_generation'],'corpus_manifest_sha256':o['corpus_manifest_sha256'],'schema':'ldc-offline-content-binding-v2'}
+          bind=sha(json.dumps(obj,separators=(',',':'),ensure_ascii=False).encode())
+          ck('offline_content_binding',bind==o['content_binding_sha256']==v['offline_content_binding_sha256'],bind)
+          idx=pathlib.Path('index.html').read_text();sw=pathlib.Path('sw.js').read_text()
+          ck('index_identity',all(x in idx for x in ["v2.19.142.16-R1B-RELEASE-INTEGRITY-CLOSURE","|| '142.16'","ldc-v2.19.142.16-R1B-release-integrity-closure"]),None)
+          ck('sw_identity',all(x in sw for x in ["ldc-v2.19.142.16-R1B-release-integrity-closure","v2.19.142.16-R1B-RELEASE-INTEGRITY-CLOSURE"]),None)
+          ck('e15_preserved',"qualifié séparément de la campagne de correction textuelle décrite ici" not in idx and "que la campagne de correction textuelle décrite ici ne couvre pas" in idx,None)
+          ck('e07_preserved',"Par le sens recherche toujours dans la lecture normale." in idx and "note.hidden=!(searchIntentMode==='meaning'&&documentaryViewActive());" in idx,None)
+          ck('production_not_authorized',v.get('public_deployment_authorized') is False and v['v142_16_release_integrity_closure']['production_authorized'] is False,None)
+          out['overall']='PASS' if not out['failures'] else 'FAIL';pathlib.Path('qa-v14216-integrity.json').write_text(json.dumps(out,indent=2)+'\n');print(json.dumps(out,indent=2))
+          if out['overall']!='PASS':sys.exit(1)
+          PY
+          while IFS= read -r f; do node --check "$f" >/dev/null; done < <(python3 - <<'PY'
+          import json
+          m=json.load(open('PACKAGE_MANIFEST_SHA256.json'))
+          for x in m['files']:
+            if x['path'].endswith(('.js','.mjs')):print(x['path'])
+          print('sw.js')
+          PY
+          )
+
+      - name: Fresh Search-V2 recertification
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs=require('fs'),crypto=require('crypto');
+          const Core=require('./search_engine_v2.js'),Exact=require('./search_exact_v21.js'),Foundation=require('./search_foundation_v21b.js'),Near=require('./search_near_v22.js');
+          const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+          const payload={index:read('corpus/search_v2_index.json'),documents:read('corpus/search_v2_documents.json'),entries:read('corpus/search_v2_entries.json'),jesusFilter:read('corpus/search_v2_jesus_filter.json'),topology:read('corpus/search_v21_topology.json')};
+          const m2=read('corpus/search_v2_manifest.json'),m21=read('corpus/search_v21_manifest.json');
+          const exact=Exact.createExactLayer(payload),lexical=Core.createEngine({index:payload.index,documents:payload.documents,entries:payload.entries,jesusFilter:payload.jesusFilter});
+          const foundation=Foundation.createFoundation({lexical,exact,documents:payload.documents.documents,entries:payload.entries.entries,jesusFilter:payload.jesusFilter,topology:payload.topology,index:payload.index});
+          const near=Near.createNearLayer({index:payload.index,documents:payload.documents,entries:payload.entries,jesusFilter:payload.jesusFilter,topology:payload.topology,exact});
+          const out={overall:'PASS',checks:{},samples:{},errors:[]},assert=(c,m)=>{if(!c){out.overall='FAIL';out.errors.push(m);throw new Error(m)}};
+          try{for(const mode of ['aflp','additions','enriched']){const u=exact.nearAuthority.units(mode),tokens=u.reduce((n,x)=>n+(x.stream?x.stream.split(' ').length:0),0),digest=sha(Buffer.from(JSON.stringify(u.map(x=>[x.id,x.stream]))));assert(u.length===m21.reference[mode].units,mode+' units');assert(tokens===m21.reference[mode].tokens,mode+' tokens');assert(digest===m21.reference[mode].digest,mode+' digest');let n=0;for(let i=0;i<u.length;i+=17){const ts=(u[i].stream||'').split(' ').filter(Boolean);if(!ts.length)continue;assert(exact.verifyUnitQuery(mode,u[i].id,ts.slice(0,3).join(' ')),mode+' verify');n++;}out.checks[mode]={units:u.length,tokens,digest,verified:n};}
+          for(const [q,mode] of [['Fiat','enriched'],['bateau','enriched'],['divine volonté','enriched'],['volonte\u0301','enriched']]){const r=foundation.search(q,{mode});assert(!r.structuralError&&r.results.length>0,q);out.samples[q]={results:r.results.length,total:r.totalMatches,first:r.results[0]?.stable_ref};}
+          const u=exact.nearAuthority.units('enriched').find(x=>(x.stream||'').split(' ').length>7),ts=u.stream.split(' ').slice(0,5);ts[2]+='x';const nr=near.search(ts.join(' '),{mode:'enriched',limit:5});assert(nr.eligible&&nr.results.length,'near');}catch(e){out.error=String(e&&e.stack||e)}
+          fs.writeFileSync('qa-v14216-search.json',JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(out,null,2));if(out.overall!=='PASS')process.exit(1);
+          NODE
+
+      - name: Recompute semantic coverage gap
+        run: |
+          python3 - <<'PY'
+          import json,pathlib
+          docs=json.load(open('corpus/search_v2_documents.json'))['documents'];docids={str(x[0]) for x in docs}
+          passages=[json.loads(x) for x in open('pls_v15/pack/metadata.jsonl',encoding='utf-8') if x.strip()]
+          ids={str(s['para_id']) for p in passages for s in p.get('source_spans',[]) if s.get('para_id')}
+          miss=sorted(docids-ids)
+          o={'documents':len(docids),'passages':len(passages),'source_para_ids':len(ids),'missing':len(miss),'missing_pct':100*len(miss)/len(docids),'sample':miss[:20],'overall':'FINDING' if miss else 'PASS'}
+          pathlib.Path('qa-v14216-semantic-coverage.json').write_text(json.dumps(o,indent=2)+'\n');print(json.dumps(o,indent=2))
+          PY
+
+      - name: Install Chromium and WebKit
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+
+      - name: Serve exact frozen v142.16
+        run: |
+          python3 -m http.server 8315 --bind 127.0.0.1 >/tmp/qa14216.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8315/index.html >/dev/null
+
+      - name: Pass 2 full runtime/offline/update/WebKit
+        shell: bash
+        run: |
+          set +e
+          node .github/qa-v14216-full/qa-v14216-full.cjs
+          echo "$?" >/tmp/runtime_rc
+          exit 0
+
+      - name: Material feature sweep
+        shell: bash
+        run: |
+          set +e
+          node .github/qa-v14216-full/qa-v14216-material.cjs
+          echo "$?" >/tmp/material_rc
+          exit 0
+
+      - name: Independent blind challenge
+        shell: bash
+        run: |
+          set +e
+          node <<'NODE'
+          const {chromium}=require('playwright'),fs=require('fs');
+          const out={overall:'UNKNOWN',checks:{},findings:[],errors:[]};const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+          (async()=>{const b=await chromium.launch({headless:true});const c=await b.newContext({viewport:{width:320,height:640},serviceWorkers:'allow',colorScheme:'dark',locale:'fr-FR'});const p=await c.newPage();p.on('pageerror',e=>out.errors.push(String(e)));try{
+            await p.goto('http://127.0.0.1:8315/',{waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>{const l=document.getElementById('loading');return l&&getComputedStyle(l).display==='none'&&APP_VERSION==='v2.19.142.16-R1B-RELEASE-INTEGRITY-CLOSURE';},null,{timeout:120000});
+            await p.evaluate(()=>{const o=document.getElementById('onboarding-overlay');if(o&&getComputedStyle(o).display!=='none'&&typeof finishOnboarding==='function')finishOnboarding();applyTextLevel('xlarge');});
+            const rapid=await p.evaluate(async()=>{await goSearch();const a=[];for(let i=0;i<18;i++){const v=['enriched','aflp','additions'][i%3],m=i%2?'meaning':'words';await setSupplementMode(v,{persist:false,rerender:false,silent:true});setSearchIntentMode(m,{rerun:false,persist:false});a.push({v,m,h:document.getElementById('search-semantic-scope-note').hidden});}return a;});out.checks.rapid_e07=rapid.every(x=>x.h===!(x.m==='meaning'&&(x.v==='aflp'||x.v==='additions')));
+            const lay=await p.evaluate(()=>({w:innerWidth,doc:document.documentElement.scrollWidth,body:document.body.scrollWidth}));out.checks.xlarge_320_no_horizontal_overflow=lay.doc<=lay.w+1&&lay.body<=lay.w+1;
+            const focus=await p.evaluate(()=>{openDocumentaryView();return {active:document.activeElement?.id||document.activeElement?.tagName,open:getComputedStyle(document.getElementById('documentary-view-overlay')).display!=='none'};});await p.keyboard.press('Escape');await sleep(100);const f2=await p.evaluate(()=>({active:document.activeElement?.id||document.activeElement?.tagName,open:getComputedStyle(document.getElementById('documentary-view-overlay')).display!=='none'}));out.checks.escape_closes_modal=focus.open&&!f2.open;out.findings.push({id:'E12_FOCUS',before:focus,after:f2});
+            await p.evaluate(async()=>{await goSearch();setSearchIntentMode('meaning',{rerun:false,persist:false});const t=document.getElementById('search-input-meaning');t.value='zxqv pizza nébuleuse 84917 banane';onSearchInput('meaning');await runSearch();});await p.waitForTimeout(25000);const sem=await p.evaluate(()=>({cards:document.querySelectorAll('#search-results .result-card').length,confidence:searchLastPayload?.payload?.confidence||searchLastPayload?.confidence||null,text:document.getElementById('search-results').innerText.slice(0,300)}));if(sem.cards>0)out.findings.push({id:'E04_REPRODUCED',severity:'MATERIAL',sem});
+            await p.evaluate(()=>{setSearchIntentMode('words',{rerun:false,persist:false});const i=document.getElementById('search-input');i.value="Jésus explique que l'âme doit abandonner sa volonté humaine pour vivre entièrement dans la volonté divine";onSearchInput('words');});await p.evaluate(()=>runSearch());await sleep(1000);const lex=await p.evaluate(()=>({cards:document.querySelectorAll('#search-results .result-card').length,text:document.getElementById('search-results').innerText.slice(0,400),expanded:searchPartialExpanded}));out.findings.push({id:'E20_LONG_DESCRIPTION',lex});
+            const meta=await p.evaluate(async()=>({scope:(await navigator.serviceWorker.ready).scope,origin:location.origin,version:APP_VERSION}));out.findings.push({id:'ENVIRONMENT_SCOPE',meta});
+            out.overall=Object.values(out.checks).every(Boolean)&&out.errors.length===0?'PASS_WITH_FINDINGS':'FAIL';
+          }catch(e){out.errors.push(String(e&&e.stack||e));out.overall='HARNESS_ERROR';}finally{await c.close();await b.close();}
+          fs.writeFileSync('qa-v14216-blind.json',JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(out,null,2));if(!out.overall.startsWith('PASS'))process.exitCode=1;})();
+          NODE
+          echo "$?" >/tmp/blind_rc
+          exit 0
+
+      - name: Final nonphysical qualification summary
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,sys
+          names=['qa-v14216-integrity.json','qa-v14216-search.json','qa-v14216-semantic-coverage.json','qa-v14215-full-runtime-results.json','qa-v14216-material-results.json','qa-v14216-blind.json']
+          d={n:(json.load(open(n)) if pathlib.Path(n).exists() else {'overall':'MISSING'}) for n in names}
+          s={'integrity':d[names[0]].get('overall'),'search':d[names[1]].get('overall'),'semantic_coverage':d[names[2]],'runtime':d[names[3]].get('overall'),'material':d[names[4]].get('overall'),'blind':d[names[5]].get('overall'),'runtime_findings':d[names[3]].get('findings'),'blind_findings':d[names[5]].get('findings'),'runtime_errors':d[names[3]].get('errors'),'material_errors':d[names[4]].get('errors'),'blind_errors':d[names[5]].get('errors')}
+          pathlib.Path('qa-v14216-final-summary.json').write_text(json.dumps(s,indent=2)+'\n');print(json.dumps(s,indent=2))
+          ok=s['integrity']=='PASS' and s['search']=='PASS' and s['runtime']=='PASS_TESTED_SCOPE' and s['material']=='PASS' and str(s['blind']).startswith('PASS')
+          sys.exit(0 if ok else 1)
+          PY
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ldc-v14216-full-qualification
+          path: |
+            qa-v14216-integrity.json
+            qa-v14216-search.json
+            qa-v14216-semantic-coverage.json
+            qa-v14215-full-runtime-results.json
+            qa-v14216-material-results.json
+            qa-v14216-blind.json
+            qa-v14216-final-summary.json
+          if-no-files-found: warn
+          retention-days: 3
