@@ -690,6 +690,7 @@ mark.hl-pink{background:#fce7f3;color:inherit;}
 .search-intent-btn{min-width:0;min-height:40px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-family:var(--body);font-size:var(--sem-strong-13);font-weight:600;cursor:pointer;white-space:normal;overflow-wrap:anywhere;}
 .search-intent-btn.active{background:var(--accent-fill);color:var(--accent-fill-ink);}
 .search-intent-help{padding:6px 4px 0;color:var(--muted);font-size:var(--sem-strong-12);line-height:1.35;min-width:0;max-width:100%;overflow-wrap:anywhere;}
+.search-semantic-scope-note{padding:5px 4px 0;color:var(--gold-text);font-size:var(--sem-strong-11);line-height:1.35;min-width:0;max-width:100%;overflow-wrap:anywhere;}
 .search-intent-lab{font-weight:700;letter-spacing:.02em;}
 .semantic-pack-panel{margin:10px 16px;padding:14px;border:.5px solid var(--border);border-radius:12px;background:var(--white);font-size:var(--sem-strong-13);line-height:1.5;min-width:0;max-width:calc(100% - 32px);overflow-wrap:anywhere;}
 .semantic-pack-panel b{color:var(--night);}
@@ -2136,6 +2137,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
       <button id="search-intent-words" class="search-intent-btn active" type="button" aria-pressed="true" onclick="setSearchIntentMode('words')">Par les mots</button>
     </div>
     <div id="search-intent-help" class="search-intent-help">Recherchez un mot, une expression, une citation, une date ou une référence.</div>
+    <div id="search-semantic-scope-note" class="search-semantic-scope-note" hidden>Par le sens recherche toujours dans la lecture normale.</div>
   </div>
   <div class="search-bar-wrap">
     <form class="search-submit-form" role="search" aria-label="Recherche dans le Livre du Ciel" onsubmit="submitSearch(event)">
@@ -2512,7 +2514,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
           <li><strong>75 COMPLÉMENTS / 177 paragraphes</strong></li>
           <li><strong>74 528 documents textuels</strong> dans l’index Search‑V2 de la lecture normale</li>
         </ul>
-        <p>Search‑V2 reste la recherche textuelle active. <strong>« Par le sens »</strong> utilise un moteur de recherche distinct, qualifié séparément de la campagne de correction textuelle décrite ici. Les chiffres de validation ci-dessus concernent la qualité et la traçabilité des textes ; ils ne constituent pas une mesure de la qualité du classement des résultats de « Par le sens ».</p>
+        <p>Search‑V2 reste la recherche textuelle active. <strong>« Par le sens »</strong> utilise un moteur de recherche distinct, que la campagne de correction textuelle décrite ici ne couvre pas. Les chiffres de validation ci-dessus concernent la qualité et la traçabilité des textes ; ils ne constituent pas une mesure de la qualité du classement des résultats de « Par le sens ».</p>
       </div></details>
 
       <details class="provenance-details"><summary>Traçabilité interne et codes de traitement</summary><div class="provenance-details-body">
@@ -2617,11 +2619,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.14-R1B-BLIND-AUDIT-CLOSURE'; // bounded blind-audit truth successor of frozen v142.13; protected corpus, provenance records, retrieval runtime and ranking preserved
-const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.14'; // single authoritative public identity derived from APP_VERSION
+const APP_VERSION = 'v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE'; // bounded release-truth/scope successor of frozen v142.14; protected corpus, provenance records, retrieval runtime and ranking preserved
+const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.15'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-07';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.14-R1B-blind-audit-closure';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.15-R1B-release-truth-scope-closure';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -3347,6 +3349,7 @@ function syncDocumentaryViewUI(){
   document.querySelectorAll('[data-documentary-view-label]').forEach(el=>{el.textContent=documentaryViewLabel();});
   document.querySelectorAll('[data-documentary-choice]').forEach(btn=>{const on=btn.dataset.documentaryChoice===supplementMode;btn.classList.toggle('active',on);btn.setAttribute('aria-pressed',on?'true':'false');});
   const more=document.getElementById('reader-supplement-mode-action');if(more){const span=more.querySelector('span');if(span)span.textContent=active?documentaryViewLabel():'Vue documentaire';more.classList.toggle('active',active);}
+  renderSearchSemanticScopeNote();
 }
 function openDocumentaryView(){syncDocumentaryViewUI();openModalOverlay('documentary-view-overlay','closeDocumentaryView');}
 function closeDocumentaryView(){closeModalOverlay('documentary-view-overlay');}
@@ -8048,6 +8051,10 @@ function autoGrowSemanticSearchInput(){
   ta.style.height='auto';const cs=getComputedStyle(ta),lh=parseFloat(cs.lineHeight)||24,pad=(parseFloat(cs.paddingTop)||0)+(parseFloat(cs.paddingBottom)||0),border=(parseFloat(cs.borderTopWidth)||0)+(parseFloat(cs.borderBottomWidth)||0),max=lh*8+pad+border;
   const next=Math.min(Math.max(72,ta.scrollHeight),max);ta.style.height=`${next}px`;ta.style.overflowY=ta.scrollHeight>max?'auto':'hidden';
 }
+function renderSearchSemanticScopeNote(){
+  const note=document.getElementById('search-semantic-scope-note');if(!note)return;
+  note.hidden=!(searchIntentMode==='meaning'&&documentaryViewActive());
+}
 function renderSearchIntentMode(){
   const meaning=document.getElementById('search-intent-meaning'),words=document.getElementById('search-intent-words'),help=document.getElementById('search-intent-help'),wordInput=document.getElementById('search-input'),meaningInput=document.getElementById('search-input-meaning'),bar=document.getElementById('search-query-bar');
   const semantic=searchIntentMode==='meaning';
@@ -8055,6 +8062,7 @@ function renderSearchIntentMode(){
   if(words){words.classList.toggle('active',!semantic);words.setAttribute('aria-pressed',semantic?'false':'true');}
   if(wordInput)wordInput.hidden=semantic;if(meaningInput)meaningInput.hidden=!semantic;if(bar)bar.classList.toggle('semantic-composer',semantic);
   if(help)help.textContent=semantic?'Décrivez ce dont vous vous souvenez avec vos propres mots. Plusieurs indices pertinents peuvent aider ; pas besoin des mots exacts. Relisez et corrigez votre description si nécessaire.':'Recherchez un mot, une expression, une citation, une date ou une référence.';
+  renderSearchSemanticScopeNote();
   const order=document.getElementById('search-order-row'),lane=document.getElementById('search-lane-row');
   if(order)order.style.display=semantic?'none':'flex';
   if(lane&&semantic)lane.style.display='none';
@@ -9164,7 +9172,7 @@ async function diagnosticsText(){
   const off=await dbGet('settings','offline_completion').catch(()=>null);
   const deploymentBase=(()=>{try{return new URL('./',window.location.href).pathname;}catch(e){return window.location.pathname.replace(/[^/]*$/,'');}})();
   const publicRef=currentEntry?`${currentEntry.stable_ref||currentEntry.id||''}`:'aucun';
-  return ['Livre du Ciel — diagnostic public',`App : ${APP_VERSION} · ${APP_BUILD}`,`SW attendu : ${SW_CACHE_VERSION}`,`SW contrôleur : ${sw}`,`Caches LDC : ${cachesOwned.join(', ')||'aucun détecté'}`,`Corpus composite : ${CORPUS_GENERATION}`,`Corpus principal : ${BACKBONE_GENERATION}`,`Lecture : ${sourceModeLabel()}`,`Backbone manifest SHA-256 : ${CORPUS_MANIFEST_SHA256}`,`Résumé des tomes : ${volumeSummary?'chargé · 36 tomes':'non chargé'}`,`Recherche : Par les mots v142 préservée · Par le sens moteur v142.10 préservé · interface documentaire v142.14 · exposition utilisateur owner-acceptée en production depuis v142.10 · Dense96/72 + BM25 96/72 RRF60 inchangé · aucun niveau de confiance scientifique calibré n’est revendiqué`,`Stockage IndexedDB : ${db?'ouvert':'indisponible'}`,`Hors ligne : navigator.onLine=${navigator.onLine!==false} · completion=${off?JSON.stringify(off.val??off.value??off):'non préparé'}`,`Thème : ${theme}`,`Texte : ${tl}`,`Repères : ${showReperes?'ON':'OFF'}`,`Diagnostics locaux récents : ${localDiagnosticBuffer.length}`,...localDiagnosticBuffer.slice(-5).map(x=>`Erreur locale ${x.ts} · ${x.kind||'runtime'} · ${x.name||'Erreur'}`),`Base de déploiement : ${deploymentBase}`,`Passage public courant : ${publicRef}`,`Reader A/B diagnostic : ${window.__ldcReaderOpenTraceExport?window.__ldcReaderOpenTraceExport():'indisponible'}`,`Trace navigation récente (sanitisée) : ${JSON.stringify(window.__ldcNavigationPublicDiagnosticTrace?window.__ldcNavigationPublicDiagnosticTrace():{available:false})}`].join('\n');
+  return ['Livre du Ciel — diagnostic public',`App : ${APP_VERSION} · ${APP_BUILD}`,`SW attendu : ${SW_CACHE_VERSION}`,`SW contrôleur : ${sw}`,`Caches LDC : ${cachesOwned.join(', ')||'aucun détecté'}`,`Corpus composite : ${CORPUS_GENERATION}`,`Corpus principal : ${BACKBONE_GENERATION}`,`Lecture : ${sourceModeLabel()}`,`Backbone manifest SHA-256 : ${CORPUS_MANIFEST_SHA256}`,`Résumé des tomes : ${volumeSummary?'chargé · 36 tomes':'non chargé'}`,`Recherche : Par les mots v142 préservée · Par le sens moteur v142.10 préservé · interface documentaire v142.15 · exposition utilisateur owner-acceptée en production depuis v142.10 · Dense96/72 + BM25 96/72 RRF60 inchangé · aucun niveau de confiance scientifique calibré n’est revendiqué`,`Stockage IndexedDB : ${db?'ouvert':'indisponible'}`,`Hors ligne : navigator.onLine=${navigator.onLine!==false} · completion=${off?JSON.stringify(off.val??off.value??off):'non préparé'}`,`Thème : ${theme}`,`Texte : ${tl}`,`Repères : ${showReperes?'ON':'OFF'}`,`Diagnostics locaux récents : ${localDiagnosticBuffer.length}`,...localDiagnosticBuffer.slice(-5).map(x=>`Erreur locale ${x.ts} · ${x.kind||'runtime'} · ${x.name||'Erreur'}`),`Base de déploiement : ${deploymentBase}`,`Passage public courant : ${publicRef}`,`Reader A/B diagnostic : ${window.__ldcReaderOpenTraceExport?window.__ldcReaderOpenTraceExport():'indisponible'}`,`Trace navigation récente (sanitisée) : ${JSON.stringify(window.__ldcNavigationPublicDiagnosticTrace?window.__ldcNavigationPublicDiagnosticTrace():{available:false})}`].join('\n');
 }
 async function copyDiagnostics(){const text=await diagnosticsText();const ok=await copyPlainText(text);showToast(ok?'Diagnostic copié':'Copie indisponible');return text;}
 async function routeFail(message,fallback){console.warn('LDC deep link:',message);showToast('Lien invalide ou cible introuvable');if(fallback==='search')goSearch();else if(fallback==='espace')goEspace();else goHome();return false;}

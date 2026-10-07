@@ -1,0 +1,168 @@
+{
+  "schema": "ldc-v142.15-release-truth-scope-machine-qa-v2-final-runtime",
+  "date": "2026-10-07",
+  "candidate_public_version": "142.15",
+  "technical_identity": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
+  "direct_predecessor_public_version": "142.14",
+  "direct_predecessor_package_sha256": "f02098cf3432c0373c9fbd698b0551d79b3a024f739883a501293a6932ce24cd",
+  "production_baseline_public_version": "142.10",
+  "scope": "E-15 public release-truth wording + E-07 Par le sens documentary-scope disclosure + mechanical release identity only",
+  "summary": {
+    "total": 27,
+    "pass": 27,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "name": "exact_authorized_delta",
+      "pass": true,
+      "detail": [
+        "index.html",
+        "offline_manifest.json",
+        "sw.js",
+        "version.json"
+      ]
+    },
+    {
+      "name": "index_sha256",
+      "pass": true,
+      "detail": "73f8092aa5ecef482d015d3f62847f1e0d4343410c0375657b92388dc3a8af9d"
+    },
+    {
+      "name": "sw_sha256",
+      "pass": true,
+      "detail": "715f3f7c8847473ec5ee6522991e19f7f314da995c6be9af7e821ddc17f84491"
+    },
+    {
+      "name": "index_js_syntax_external_check",
+      "pass": true,
+      "detail": "node --check exact extracted inline JS: PASS"
+    },
+    {
+      "name": "sw_js_syntax_external_check",
+      "pass": true,
+      "detail": "node --check exact sw.js: PASS"
+    },
+    {
+      "name": "version_json_parse",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "offline_json_parse",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "e15_old_claim_absent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "e15_truth_wording_present",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "e07_note_present",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "e07_note_default_hidden",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "e07_exact_condition",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "e07_refresh_on_search_mode",
+      "pass": true,
+      "detail": 2
+    },
+    {
+      "name": "e07_six_state_matrix_external_check",
+      "pass": true,
+      "detail": "words/enriched hidden; words/aflp hidden; words/additions hidden; meaning/enriched hidden; meaning/aflp shown; meaning/additions shown: PASS 6/6"
+    },
+    {
+      "name": "semantic_retrieval_universe_preserved",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "public_version_current",
+      "pass": true,
+      "detail": "142.15"
+    },
+    {
+      "name": "stage_current",
+      "pass": true,
+      "detail": "LDC_V142_15_RELEASE_TRUTH_SCOPE_CLOSURE_PRE_PHYSICAL_CANDIDATE"
+    },
+    {
+      "name": "page_worker_identity_coherent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "no_stale_current_exact_v14214_gate",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "production_not_authorized",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "offline_assets_unchanged",
+      "pass": true,
+      "detail": 204
+    },
+    {
+      "name": "offline_content_binding_unchanged",
+      "pass": true,
+      "detail": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384"
+    },
+    {
+      "name": "offline_asset_count_204",
+      "pass": true,
+      "detail": 204
+    },
+    {
+      "name": "protected_surfaces_unchanged_by_git_delta",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "predecessor_bound_exactly",
+      "pass": true,
+      "detail": "f02098cf3432c0373c9fbd698b0551d79b3a024f739883a501293a6932ce24cd"
+    },
+    {
+      "name": "freeze_metadata_current",
+      "pass": true,
+      "detail": "V142_15_PRE_PHYSICAL_FROZEN__MACHINE_QA_AND_INDEPENDENT_CHANGED_SURFACE_CHALLENGE_PASS__DIRECT_EXACT_V142_14_PREDECESSOR__E07_E15_AND_RELEASE_IDENTITY_ONLY__PROTECTED_CORPUS_SEARCH_PLS_V15_PROVENANCE_DOCUMENTARY_RESOLVER_SESSION_BACKUP_USER_SCHEMA_PRESERVED__APP_TEST_AND_PHYSICAL_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED"
+    },
+    {
+      "name": "mutation_authority_none",
+      "pass": true,
+      "detail": "NONE_AFTER_FREEZE__ANY_MATERIAL_BYTE_CHANGE_CREATES_SUCCESSOR"
+    }
+  ],
+  "open_external_gates": [
+    "exact-byte App-Test deployment/binding of final frozen v142.15",
+    "hosted exact v142.15 browser smoke including Par le sens",
+    "installed-PWA update/offline on target hardware",
+    "physical iPhone",
+    "physical iPad",
+    "VoiceOver",
+    "E-01 repeated Par le sens memory/reload challenge on oldest supported iPhone/iPad"
+  ],
+  "production_authorized": false,
+  "exact_frozen_runtime_commit": "b2d0a75dcae90f56f2a107f8a455faf6c98f3720"
+}

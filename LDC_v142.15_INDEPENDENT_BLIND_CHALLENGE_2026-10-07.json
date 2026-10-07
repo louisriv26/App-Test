@@ -1,0 +1,81 @@
+{
+  "schema": "ldc-v142.15-independent-blind-challenge-v2-final-runtime",
+  "date": "2026-10-07",
+  "candidate_public_version": "142.15",
+  "principle": "Trust no predecessor PASS label; challenge the actual v142.15 changed surface and protected boundaries.",
+  "summary": {
+    "total": 12,
+    "pass": 12,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "name": "challenge_no_scope_leak_words",
+      "pass": true,
+      "detail": "E-07 six-state matrix hides disclosure for Par les mots in all documentary states"
+    },
+    {
+      "name": "challenge_no_false_scope_normal",
+      "pass": true,
+      "detail": "E-07 hides disclosure for Par le sens in Lecture normale"
+    },
+    {
+      "name": "challenge_disclosure_principal",
+      "pass": true,
+      "detail": "E-07 shows disclosure for Par le sens + Corpus principal"
+    },
+    {
+      "name": "challenge_disclosure_complements",
+      "pass": true,
+      "detail": "E-07 shows disclosure for Par le sens + Compléments"
+    },
+    {
+      "name": "challenge_semantic_engine_not_filtered",
+      "pass": true,
+      "detail": "semantic retrieval remains normal-reading/enriched"
+    },
+    {
+      "name": "challenge_no_unsupported_qualification",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "challenge_public_validation_boundary",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "challenge_only_four_runtime_metadata_files",
+      "pass": true,
+      "detail": [
+        "index.html",
+        "offline_manifest.json",
+        "sw.js",
+        "version.json"
+      ]
+    },
+    {
+      "name": "challenge_offline_binding_exact",
+      "pass": true,
+      "detail": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384"
+    },
+    {
+      "name": "challenge_user_schema_not_in_delta",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "challenge_identity_fail_closed",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "challenge_no_production_authority",
+      "pass": true,
+      "detail": null
+    }
+  ],
+  "verdict": "PASS_PRE_PHYSICAL__EXTERNAL_APP_TEST_PWA_DEVICE_VOICEOVER_GATES_OPEN",
+  "production_authorized": false,
+  "exact_frozen_runtime_commit": "b2d0a75dcae90f56f2a107f8a455faf6c98f3720"
+}

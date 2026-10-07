@@ -1,0 +1,33 @@
+{
+  "schema": "ldc-v142.15-evidence-index-v2",
+  "date": "2026-10-07",
+  "candidate_public_version": "142.15",
+  "technical_identity": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
+  "direct_predecessor": {
+    "public_version": "142.14",
+    "package_sha256": "f02098cf3432c0373c9fbd698b0551d79b3a024f739883a501293a6932ce24cd"
+  },
+  "current_qualification_evidence": [
+    "LDC_v142.15_RELEASE_TRUTH_SCOPE_MACHINE_QA_2026-10-07.json",
+    "LDC_v142.15_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json"
+  ],
+  "historical_predecessor_evidence": [
+    "LDC_v142.14_PASS1_BUILD_PROTECTED_INTEGRITY_2026-10-07.json",
+    "LDC_v142.14_PASS2_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
+    "LDC_v142.14_PASS3_EVIDENCE_RECONCILIATION_2026-10-07.json",
+    "LDC_v142.14_PASS4_CONTRADICTION_STALENESS_2026-10-07.json",
+    "LDC_v142.14_PLS_PACK_BROWSER_QUALIFICATION_2026-10-07.json",
+    "LDC_v142.14_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
+    "LDC_v142.14_EVIDENCE_INDEX_2026-10-07.json"
+  ],
+  "evidence_hierarchy": [
+    "exact bytes/hashes and Git delta",
+    "fresh v142.15 machine assertions",
+    "fresh v142.15 independent changed-surface challenge",
+    "v142.14 hosted/browser evidence as predecessor evidence",
+    "historical earlier labels"
+  ],
+  "package_manifest_status": "TO_BE_GENERATED_LAST_AFTER_FINAL_RUNTIME_EVIDENCE",
+  "production_authorized": false,
+  "exact_frozen_runtime_commit": "b2d0a75dcae90f56f2a107f8a455faf6c98f3720"
+}
