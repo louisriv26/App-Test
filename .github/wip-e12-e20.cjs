@@ -14,5 +14,8 @@ try{
  O.checks.e20_truthful=before.cards===0&&before.partial>0&&!/^0 résultat/.test(before.meta)&&/correspondance/.test(before.meta)&&before.button==='Voir les résultats élargis';
  await p.getByRole('button',{name:'Voir les résultats élargis'}).click();await p.waitForFunction(()=>!searchBusyGeneration,null,{timeout:120000});await sl(300);
  const after=await p.evaluate(()=>({cards:document.querySelectorAll('#search-results .result-card').length,lane:searchResultLane,expanded:searchPartialExpanded,meta:document.getElementById('search-meta').innerText}));O.details.e20_after=after;O.checks.e20_expand=after.cards>0&&after.lane==='partial'&&after.expanded===true;
+ await p.evaluate(()=>renderSearchV2Results({results:[],metadata:[],matchCounts:{exact:0,words:2,partial:7},foundation:{lane:'exact',mode:supplementMode,page:1,pageCount:1,metadataPage:1,metadataPageCount:1},totalMatches:0,totalBodyMatches:9,metadataTotalMatches:0,parsed:{lexical:'test'},suggestions:[],near:{eligible:false,results:[]}},'test'));
+ const boundary=await p.evaluate(()=>({meta:document.getElementById('search-meta').innerText,button:[...document.querySelectorAll('#search-results button')].some(b=>b.textContent.includes('Voir les résultats élargis'))}));
+ O.details.e20_boundary=boundary;O.checks.e20_no_false_partial_disclosure=!/Aucun passage avec tous les termes/.test(boundary.meta)&&boundary.button===false;
  O.checks.no_errors=O.errors.length===0;O.overall=Object.values(O.checks).every(Boolean)?'PASS':'FAIL';
 }catch(e){O.errors.push(String(e&&e.stack||e));O.overall='HARNESS_ERROR'}finally{await c.close();await b.close()}fs.writeFileSync('wip-e12-e20.json',JSON.stringify(O,null,2)+'\n');console.log(JSON.stringify(O,null,2));if(O.overall!=='PASS')process.exitCode=1})();
