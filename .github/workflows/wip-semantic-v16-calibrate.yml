@@ -1,0 +1,53 @@
+name: LDC WIP PLS v16 calibration
+on:
+  workflow_run:
+    workflows: ["LDC WIP PLS v16 vector build"]
+    types: [completed]
+    branches: [ldc-v142-16-search-integrity-wip-20261007]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  calibrate:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install pinned browser driver
+        run: npm install --no-save playwright-core@1.55.0
+      - name: Download exact successful vector artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          rm -rf /tmp/v16-artifact
+          mkdir -p /tmp/v16-artifact
+          gh run download "$RUN_ID" -n wip-pls-v16-vector-build -D /tmp/v16-artifact
+          VEC="$(find /tmp/v16-artifact -type f -name vectors.i8 -print -quit)"
+          NORM="$(find /tmp/v16-artifact -type f -name inverse_norms.f32le -print -quit)"
+          META="$(find /tmp/v16-artifact -type f -name metadata.jsonl -print -quit)"
+          MASK="$(find /tmp/v16-artifact -type f -name jesus_mask.bits -print -quit)"
+          test -n "$VEC" && test -n "$NORM" && test -n "$META" && test -n "$MASK"
+          echo "PLS_V16_PACK_DIR=$(dirname "$VEC")" >> "$GITHUB_ENV"
+          echo "PLS_V16_METADATA=$META" >> "$GITHUB_ENV"
+          echo "PLS_V16_MASK=$MASK" >> "$GITHUB_ENV"
+      - name: Require hosted Chrome
+        run: command -v google-chrome
+      - name: Execute frozen prospective calibration and blind challenge
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          PLS_V16_CAL_OUT: wip-pls-v16-calibration
+        run: node .github/wip-semantic-v16-calibrate.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-pls-v16-calibration
+          path: wip-pls-v16-calibration/
+          if-no-files-found: warn
+          retention-days: 2
