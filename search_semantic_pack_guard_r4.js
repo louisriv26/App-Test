@@ -74,10 +74,9 @@ function validateManifestShape(m){
  const c=m.calibration,qualified=c.status==='QUALIFIED';
  if(qualified){
    if(c.owner_real_query_gate!=='PASS'||c.hard_negative_gate!=='PASS'||c.blind_challenge_gate!=='PASS')return fail('QUALIFICATION_GATES_OPEN');
-   const p=c.hybrid_policy,ks=['close_min_rrf','close_min_margin','possible_min_rrf','possible_min_margin','close_min_channels','possible_min_channels'];
-   if(!p||p.policy_id!=='HYBRID_RRF60_ABSTENTION_V1'||ks.some(k=>!Number.isFinite(Number(p[k]))))return fail('HYBRID_CALIBRATION_POLICY_INVALID');
-   if(Number(p.close_min_rrf)<Number(p.possible_min_rrf)||Number(p.close_min_margin)<Number(p.possible_min_margin)||Number(p.possible_min_margin)<0)return fail('HYBRID_CALIBRATION_POLICY_ORDER');
-   if(Number(p.close_min_channels)<Number(p.possible_min_channels)||Number(p.possible_min_channels)<1||Number(p.close_min_channels)>2)return fail('HYBRID_CALIBRATION_CHANNEL_ORDER');
+   const p=c.hybrid_policy;
+   if(!p||p.policy_id!=='HYBRID_DENSE_ABSTENTION_V1'||p.close_enabled!==false||!Number.isFinite(Number(p.possible_min_dense))||!Number.isFinite(Number(p.possible_min_channels)))return fail('HYBRID_CALIBRATION_POLICY_INVALID');
+   if(Number(p.possible_min_dense)<-1||Number(p.possible_min_dense)>1||Number(p.possible_min_channels)!==2)return fail('HYBRID_CALIBRATION_POLICY_ORDER');
  }
  return {ok:true,code:qualified?'MANIFEST_QUALIFIED':'MANIFEST_ENGINEERING_ONLY',activation:false,qualified,fileMap:map};
 }
