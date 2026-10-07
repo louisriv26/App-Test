@@ -1,7 +1,7 @@
 const fs=require('fs'),crypto=require('crypto');
 const G=require('../search_semantic_pack_guard_r4.js');
 const CONTRACT='pls_v16/BINDING_CONTRACT.json';
-const EXPECTED_CONTRACT_SHA='54b8fa9a9e21224d02377371c96e5c878e1e92ab45dff461b826c341f608f2d9';
+const EXPECTED_CONTRACT_SHA='6e8558b4545c1084b3a8342eb2f66611de97dc2e78db46f60919666313164140';
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 const ok=(c,m)=>{if(!c)throw new Error(m);};
 const C=JSON.parse(fs.readFileSync(CONTRACT,'utf8'));
@@ -30,15 +30,16 @@ ok(proto.status==='OWNER_PROTOTYPE_ONLY__NOT_PRODUCTION_QUALIFIED','OLD_PROTOTYP
 ok(proto.original_rows===20583&&proto.compatible_rows===20236&&proto.excluded_rows===347,'OLD_COMPAT_COUNTS');
 ok(!fs.readFileSync('index.html','utf8').includes('search_semantic_pack_guard_r4.js'),'NO_RUNTIME_WIRING_AT_BINDING_STAGE');
 const fake=(path,bytes,hash='a'.repeat(64))=>({path,bytes,sha256:hash});
-const model=fake('model/onnx/model_int8.onnx',118054593,G.MODEL.model_sha256);
-const tok=fake('model/tokenizer.json',10,'b'.repeat(64)),vec=fake('pack/vectors.i8',22873*384,'c'.repeat(64)),norm=fake('pack/inverse_norms.f32le',22873*4,'d'.repeat(64)),meta=fake('pack/metadata.jsonl',100,'e'.repeat(64)),mask=fake('pack/jesus_mask.bits',Math.ceil(22873/8),'f'.repeat(64)),cov=fake('evidence/coverage.json',50,'1'.repeat(64)),cal=fake('evidence/calibration.json',50,'2'.repeat(64));
+const vec=fake('pls_v16/pack/vectors.i8',22873*384,'c'.repeat(64)),norm=fake('pls_v16/pack/inverse_norms.f32le',22873*4,'d'.repeat(64)),meta=fake('pls_v16/pack/metadata.jsonl',100,'e'.repeat(64)),mask=fake('pls_v16/pack/jesus_mask.bits',Math.ceil(22873/8),'f'.repeat(64)),cov=fake('pls_v16/evidence/coverage.json',50,'1'.repeat(64)),cal=fake('pls_v16/evidence/calibration.json',50,'2'.repeat(64));
+const support=[...G.MODEL_SUPPORT.tokenizer_and_config_files,...G.MODEL_SUPPORT.delivery.parts,...G.RUNTIME_SUPPORT];
 const manifest={
  schema:'ldc-search-v3-semantic-pack-r3',pack_id:G.PACK_ID,binding_contract_sha256:G.BINDING_CONTRACT_SHA256,bindings:{...G.EXPECTED},
  chunker:{mode:'enriched',policy_id:'96-72-current-v14215-r1',window_words:96,stride_words:72,tail_anchor:'ADD_MAX_0_N_MINUS_96_IF_DISTINCT',expected_passages:22873},
- model:{...G.MODEL,tokenizer_files:[tok]},index:{rows:22873,cols:384,dtype:'int8_row_symmetric',vectors_file:vec,metadata_file:meta,inverse_norms_file:norm},
+ model:{...G.MODEL,tokenizer_files:G.MODEL_SUPPORT.tokenizer_and_config_files,delivery:G.MODEL_SUPPORT.delivery},
+ index:{rows:22873,cols:384,dtype:'int8_row_symmetric',vectors_file:vec,metadata_file:meta,inverse_norms_file:norm},
  speaker_filter:{rows:22873,mode:'enriched',policy_id:'96-72-current-v14215-r1',rule:'HIGH_CONFIDENCE_JESUS_CANONICAL_SPAN_OVERLAP_GT_0',eligible_count:20098,jesus_mask_file:mask},
- runtime:{files:[]},retrieval:{...G.RETRIEVAL},coverage:{status:'PASS',current_documents:74528,covered_documents:74528,missing_documents:0,proof_file:cov},
- calibration:{status:'ENGINEERING_ONLY',evidence_file:cal},files:[model,tok,vec,norm,meta,mask,cov,cal]
+ runtime:{files:G.RUNTIME_SUPPORT},retrieval:{...G.RETRIEVAL},coverage:{status:'PASS',current_documents:74528,covered_documents:74528,missing_documents:0,proof_file:cov},
+ calibration:{status:'ENGINEERING_ONLY',evidence_file:cal},files:[...support,vec,norm,meta,mask,cov,cal]
 };
 let v=G.validateManifestShape(manifest);ok(v.ok&&v.qualified===false&&v.activation===false,'ENGINEERING_MANIFEST_FAIL_CLOSED');
 v=G.validateManifestShape({...manifest,bindings:{...manifest.bindings,search_documents_sha256:'0'.repeat(64)}});ok(!v.ok&&v.code==='STALE_PACK_BINDING','STALE_BINDING_REJECTED');
