@@ -61,7 +61,7 @@ assert(oldRows.length===20236,'OLD_FILTERED_ROWS');
 const oldBySig=new Map();
 for(let i=0;i<oldRows.length;i++){const k=sig(oldRows[i]);let a=oldBySig.get(k);if(!a){a=[];oldBySig.set(k,a);}a.push(i);}
 
-const rows=[], cover=new Uint8Array(docs.length), unitReports=[];
+const rows=[], rowJesus=[], cover=new Uint8Array(docs.length), unitReports=[];
 let ordinal=1, visibleFailures=0, emptyTokenUnits=0;
 for(const u of units){
  const tokens=authority.tokens('enriched',u.id);
@@ -88,6 +88,7 @@ for(const u of units){
   const entRec=entryById.get(String(u.entry_id));
   assert(entRec,'ENTRY_NOT_FOUND '+u.entry_id);
   const e=entRec.row;
+  rowJesus.push(authority.touchesJesus(slice));
   rows.push({
    passage_id:'E-96-72-'+String(ordinal++).padStart(6,'0'),
    chunk_policy_id:'96-72',
@@ -115,10 +116,7 @@ for(const u of units){
 
 const bits=Buffer.alloc(Math.ceil(rows.length/8));
 let jesusRows=0;
-for(let i=0;i<rows.length;i++){
- const r=rows[i], toks=authority.tokens('enriched',r.unit_id).slice(r.start_word,r.end_word);
- const yes=authority.touchesJesus(toks);setBit(bits,i,yes);if(yes)jesusRows++;
-}
+for(let i=0;i<rows.length;i++){const yes=!!rowJesus[i];setBit(bits,i,yes);if(yes)jesusRows++;}
 const metadataText=rows.map(x=>JSON.stringify(x)).join('\n')+'\n';
 fs.writeFileSync(OUT_DIR+'/metadata.jsonl',metadataText);
 fs.writeFileSync(OUT_DIR+'/jesus_mask.bits',bits);
@@ -128,10 +126,6 @@ for(let i=0;i<cover.length;i++)if(!cover[i])missing.push({doc_index:i,id:docs[i]
 
 let overlap=0,jesusParity=0,visibleParity=0,startParity=0,fullParity=0;
 const overlapExamples=[],oldUnmatched=[];
-for(let oi=0;oi<oldRows.length;oi++){
- const o=oldRows[oi], candidates=rows.filter(()=>false); // no-op: prevent accidental O(n^2) use below
- const ids=oldBySig.get(sig(o)); // signature exists in old map by construction; candidate lookup below
-}
 const newBySig=new Map();
 for(let i=0;i<rows.length;i++){const k=sig(rows[i]);let a=newBySig.get(k);if(!a){a=[];newBySig.set(k,a);}a.push(i);}
 for(let oi=0;oi<oldRows.length;oi++){
