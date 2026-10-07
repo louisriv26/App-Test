@@ -1,6 +1,6 @@
 import fs from 'node:fs';import path from 'node:path';import crypto from 'node:crypto';import cp from 'node:child_process';import {chromium} from 'playwright-core';
 const CONTRACT_PATH='pls_v16/BINDING_CONTRACT.json',CONTRACT_SHA='6e8558b4545c1084b3a8342eb2f66611de97dc2e78db46f60919666313164140';
-const META_SHA='55499700d4e760671573c7e476a3709d08a9aa3aeb4ce8ce7861ee7f40d36909',MASK_SHA='8935332736286b4b8238966e7a12ee2049d5fab0816a666061db7cb2c9ee56b0';
+const META_SHA='25d1032044996d2eed8cab3b2c9d6bfbfab91349f0ac6e49ef168c307654b24f',MASK_SHA='8935332736286b4b8238966e7a12ee2049d5fab0816a666061db7cb2c9ee56b0';
 const OUT=process.env.PLS_V16_OUT||'wip-pls-v16-vector-build',BATCH=1;
 const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex'),hash=b=>crypto.createHash('sha256').update(b).digest('hex'),ok=(c,m)=>{if(!c)throw new Error(m);};
 fs.mkdirSync(OUT,{recursive:true});ok(sha(CONTRACT_PATH)===CONTRACT_SHA,'BINDING_CONTRACT_SHA');const C=JSON.parse(fs.readFileSync(CONTRACT_PATH,'utf8'));ok(C.status==='ENGINEERING_INPUT_FROZEN__NOT_QUALIFIED__NOT_DEPLOYABLE','CONTRACT_STATUS');
