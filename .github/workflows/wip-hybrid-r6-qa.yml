@@ -1,0 +1,25 @@
+name: LDC WIP hybrid R6 QA
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - 'search_semantic_hybrid_r6.js'
+      - 'search_semantic_pack_registry_r6.js'
+      - '.github/wip-hybrid-r6-qa.cjs'
+      - '.github/workflows/wip-hybrid-r6-qa.yml'
+      - 'pls_v15/hybrid_core_v1_5.js'
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify protected retrieval parity and abstention mechanics
+        run: node .github/wip-hybrid-r6-qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-hybrid-r6-qa
+          path: wip-hybrid-r6-qa.json
+          if-no-files-found: error
+          retention-days: 2
