@@ -1,22 +1,18 @@
 {
   "schema": "ldc-package-manifest-sha256-v1",
-  "candidate_public_version": "142.14",
-  "technical_identity": "v2.19.142.14-R1B-BLIND-AUDIT-CLOSURE",
+  "candidate_public_version": "142.15",
+  "technical_identity": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
   "generated_date": "2026-10-07",
-  "byte_predecessor_public_version": "142.13",
-  "byte_predecessor_app_version": "v2.19.142.13-R1B-RELEASE-TRUTH-CLOSURE",
-  "byte_predecessor_zip_sha256": "f3a6ac7d957a43adb250d0c809d3584de2764cbfd36174bc71e4594ff0689030",
-  "byte_predecessor_status": "FROZEN_PRE_PHYSICAL_REJECTED_BY_V142_14_POST_FREEZE_BLIND_AUDIT_FOR_PUBLIC_PAR_LE_SENS_LEGACY_SEMANTIC_V3_CONFLATION_AND_STALE_MIGRATION_GATE_METADATA",
+  "byte_predecessor_public_version": "142.14",
+  "byte_predecessor_app_version": "v2.19.142.14-R1B-BLIND-AUDIT-CLOSURE",
+  "byte_predecessor_zip_sha256": "f02098cf3432c0373c9fbd698b0551d79b3a024f739883a501293a6932ce24cd",
+  "byte_predecessor_status": "FROZEN_PRE_PHYSICAL_SUPERSEDED_BY_V142_15_BOUNDED_RELEASE_TRUTH_SCOPE_CLOSURE",
   "protected_production_baseline_public_version": "142.10",
   "protected_production_baseline_zip_sha256": "c5ef73e6738ef8e2b586dfeb5ff44d4569860d023706e704e940fd365692a460",
   "current_qualification_evidence": [
-    "LDC_v142.14_PASS1_BUILD_PROTECTED_INTEGRITY_2026-10-07.json",
-    "LDC_v142.14_PASS2_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
-    "LDC_v142.14_PASS3_EVIDENCE_RECONCILIATION_2026-10-07.json",
-    "LDC_v142.14_PASS4_CONTRADICTION_STALENESS_2026-10-07.json",
-    "LDC_v142.14_PLS_PACK_BROWSER_QUALIFICATION_2026-10-07.json",
-    "LDC_v142.14_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
-    "LDC_v142.14_EVIDENCE_INDEX_2026-10-07.json"
+    "LDC_v142.15_RELEASE_TRUTH_SCOPE_MACHINE_QA_2026-10-07.json",
+    "LDC_v142.15_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
+    "LDC_v142.15_EVIDENCE_INDEX_2026-10-07.json"
   ],
   "superseded_or_historical_predecessor_evidence": [
     "LDC_v142.11_DOCUMENTARY_READING_UX_ADVERSARIAL_REVIEW_2026-10-06.json",
@@ -37,188 +33,19 @@
     "LDC_v142.13_PLS_PACK_INDEPENDENT_INTEGRITY_2026-10-07.json",
     "LDC_v142.13_RELEASE_TRUTH_RECONCILIATION_2026-10-07.json",
     "LDC_v142.13_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
-    "LDC_v142.13_STATIC_AND_PROTECTED_INTEGRITY_QA_2026-10-07.json"
+    "LDC_v142.13_STATIC_AND_PROTECTED_INTEGRITY_QA_2026-10-07.json",
+    "LDC_v142.14_PASS1_BUILD_PROTECTED_INTEGRITY_2026-10-07.json",
+    "LDC_v142.14_PASS2_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
+    "LDC_v142.14_PASS3_EVIDENCE_RECONCILIATION_2026-10-07.json",
+    "LDC_v142.14_PASS4_CONTRADICTION_STALENESS_2026-10-07.json",
+    "LDC_v142.14_PLS_PACK_BROWSER_QUALIFICATION_2026-10-07.json",
+    "LDC_v142.14_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
+    "LDC_v142.14_EVIDENCE_INDEX_2026-10-07.json"
   ],
-  "qualification_scope": "PRE_PHYSICAL_ONLY__FOUR_PASS_AND_INDEPENDENT_BLIND_CHALLENGE_PASS_IN_TESTABLE_SCOPE__FULL_BROWSER_WASM_HOSTED_APP_TEST_INSTALLED_PWA_AND_PHYSICAL_DEVICE_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED",
-  "application_mutation_boundary_relative_to_v14213": [
-    "index.html",
-    "offline_manifest.json",
-    "sw.js",
-    "version.json"
-  ],
-  "predecessor_manifest_handling": "V142_13_PACKAGE_MANIFEST_DISCARDED_AS_STALE_AND_REGENERATED_LAST_FOR_V142_14",
-  "file_count_excluding_manifest": 305,
+  "qualification_scope": "V142_15_BOUNDED_E15_PUBLIC_RELEASE_TRUTH_AND_E07_PAR_LE_SENS_SCOPE_DISCLOSURE_CLOSURE__PROTECTED_CORPUS_SEARCH_PLS_V15_PROVENANCE_DOCUMENTARY_RESOLVER_SESSION_BACKUP_USER_SCHEMA_UNCHANGED__PRE_PHYSICAL_ONLY",
+  "predecessor_manifest_handling": "V142_14_PACKAGE_MANIFEST_USED_AS_VERIFIED_INHERITED_LEDGER__REGENERATED_LAST_FOR_V142_15_AFTER_FINAL_RUNTIME_FREEZE_AND_FRESH_V142_15_EVIDENCE",
+  "file_count_excluding_manifest": 308,
   "files": [
-    {
-      "path": "LDC_v142.10_PLS_RESULTS_UX_CLOSURE_MACHINE_QA_2026-10-06.json",
-      "bytes": 5043,
-      "sha256": "8b9947ad71e99550e05b478fe619e45a74d9e66537ab7b0ce01bdcf0c1410110"
-    },
-    {
-      "path": "LDC_v142.11_DOCUMENTARY_READING_UX_ADVERSARIAL_REVIEW_2026-10-06.json",
-      "bytes": 6737,
-      "sha256": "b62ac83c1f786a90067c5eddca0c2dcfebcc92591ede50b681b85e877c7f76ef"
-    },
-    {
-      "path": "LDC_v142.11_DOCUMENTARY_READING_UX_MACHINE_QA_2026-10-06.json",
-      "bytes": 7273,
-      "sha256": "fb963259677c259ca037277cfc54493007a732a11871ba7cb28608357985c184"
-    },
-    {
-      "path": "LDC_v142.11_DOCUMENTARY_RESOLVER_STATE_QA_2026-10-06.json",
-      "bytes": 1244,
-      "sha256": "60df8ee9f7148e49e51794e6f79d3f82bf7eaa7c15bed14d1b8ca4c99799aa8b"
-    },
-    {
-      "path": "LDC_v142.11_HEADLESS_BROWSER_QA_2026-10-06.json",
-      "bytes": 323,
-      "sha256": "19fde6b45cf8973113e8549b902f3253116471d4e361ccc418d26bb748f06a06"
-    },
-    {
-      "path": "LDC_v142.11_PROTECTED_FUNCTION_IDENTITY_2026-10-06.json",
-      "bytes": 3502,
-      "sha256": "08fe14239837ca15d5241ce4409a7956a648c7238b9f64b7853b0dfdb038269e"
-    },
-    {
-      "path": "LDC_v142.11_PROTECTED_SURFACE_BYTE_IDENTITY_2026-10-06.json",
-      "bytes": 8695,
-      "sha256": "adbe0bb5b53a2295d6dd7b00584fbfcbaaf5c7aa5cbe15674a4b8f640af9b1c2"
-    },
-    {
-      "path": "LDC_v142.11_PUBLIC_PROVENANCE_LABEL_AUDIT_2026-10-06.json",
-      "bytes": 46292,
-      "sha256": "98b87affa90660b8053ba6e41dffa35f4d52dfbce1cec7977bebf6705fbc1843"
-    },
-    {
-      "path": "LDC_v142.12_DOCUMENTARY_CONSISTENCY_ADVERSARIAL_REVIEW_2026-10-07.json",
-      "bytes": 1953,
-      "sha256": "0b2e020e08c27f14cd41029c2893a4c3a19e43e659ad9c2d4e18f0e2e225627c"
-    },
-    {
-      "path": "LDC_v142.12_DOCUMENTARY_CONSISTENCY_MACHINE_QA_2026-10-07.json",
-      "bytes": 9933,
-      "sha256": "f0f616e077b7ca3fc578bbee666c329ad84a86415e32e1dcf3655be7eb2e12d3"
-    },
-    {
-      "path": "LDC_v142.12_HEADLESS_BROWSER_QA_2026-10-07.json",
-      "bytes": 517,
-      "sha256": "db890d7e911235c2648b78c73112b47a5b98651b7f6fb2076453dbb0b79e104c"
-    },
-    {
-      "path": "LDC_v142.12_PUBLIC_PROVENANCE_CONSISTENCY_AUDIT_2026-10-07.json",
-      "bytes": 1627,
-      "sha256": "bf3a4d4c6cba5c08ace15bf4e5009ee35dd593642dd026e2db98fcaa9d7aa88e"
-    },
-    {
-      "path": "LDC_v142.12_TWO_BASELINE_INTEGRITY_2026-10-07.json",
-      "bytes": 66339,
-      "sha256": "f09f47312bb6f6e66702cabbbc32b3ec2075a771fd736a6f046904e7e4ca96f5"
-    },
-    {
-      "path": "LDC_v142.13_EVIDENCE_INDEX_2026-10-07.json",
-      "bytes": 1711,
-      "sha256": "d2f7b2f9d65cd520e0a9b25be248bd7853dbbf88ece5fa99f8915ae4ffd5cef9"
-    },
-    {
-      "path": "LDC_v142.13_HEADLESS_BROWSER_QA_2026-10-07.json",
-      "bytes": 899,
-      "sha256": "a1787bdc14cbed9900d9571c21867c4a48263c3fbe83b6191afc73d3490b73d1"
-    },
-    {
-      "path": "LDC_v142.13_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
-      "bytes": 3905,
-      "sha256": "8593da859a91d460a6871656b2ab0561cab0e0693f44504c8ae413f148c8f543"
-    },
-    {
-      "path": "LDC_v142.13_PLS_PACK_INDEPENDENT_INTEGRITY_2026-10-07.json",
-      "bytes": 1597,
-      "sha256": "83fe43543f8f66a1551f1a571e5e35657a64c1bb1ce02d2594009dba6faabb3b"
-    },
-    {
-      "path": "LDC_v142.13_RELEASE_TRUTH_RECONCILIATION_2026-10-07.json",
-      "bytes": 3042,
-      "sha256": "7840d5ca1ca7c055ba80ef589cb0265f512dcc7c93f20b2273bfda8ba1f429b4"
-    },
-    {
-      "path": "LDC_v142.13_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
-      "bytes": 6680,
-      "sha256": "65d845b1cefb90c68e61d03bf1bb37e55d63ec88db9aff4a3d907c8fdf48ede6"
-    },
-    {
-      "path": "LDC_v142.13_STATIC_AND_PROTECTED_INTEGRITY_QA_2026-10-07.json",
-      "bytes": 49463,
-      "sha256": "7988e8687b991e9af2bc60bc8e797a15937ba7e68f859c74a54361079fb76efd"
-    },
-    {
-      "path": "LDC_v142.14_EVIDENCE_INDEX_2026-10-07.json",
-      "bytes": 2389,
-      "sha256": "f46bda2dcba72c5ccc51b336921803a0dbf99380ff6ca7bf539833a4c49f637a"
-    },
-    {
-      "path": "LDC_v142.14_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
-      "bytes": 9011,
-      "sha256": "e1d29a6f9949e5ee8decbdebb5bb7f7fc6fc2866b337a14b9793778820dd8c67"
-    },
-    {
-      "path": "LDC_v142.14_PASS1_BUILD_PROTECTED_INTEGRITY_2026-10-07.json",
-      "bytes": 8603,
-      "sha256": "a08f9edbfe5ade3cb005f134f31d0fefa80388ce6b810733748ecc3b7dc97059"
-    },
-    {
-      "path": "LDC_v142.14_PASS2_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
-      "bytes": 7143,
-      "sha256": "30c3e7076a8aa42cc94828c7ad3a699afcf33e9a17bf19c5309794fe8e733857"
-    },
-    {
-      "path": "LDC_v142.14_PASS3_EVIDENCE_RECONCILIATION_2026-10-07.json",
-      "bytes": 3390,
-      "sha256": "c0f009171307587fc7e3660179ee763a957d5ddfddb47f24fdac5ffebd2f887a"
-    },
-    {
-      "path": "LDC_v142.14_PASS4_CONTRADICTION_STALENESS_2026-10-07.json",
-      "bytes": 4733,
-      "sha256": "672a4431f9ab7f878a6ed987fa8d4c986aadaad1a594effa946c91588cd2d5e1"
-    },
-    {
-      "path": "LDC_v142.14_PLS_PACK_BROWSER_QUALIFICATION_2026-10-07.json",
-      "bytes": 1742,
-      "sha256": "8e1f8580d63af02649dbd20a57582edfdc72a3e22f9019f63024d87f82ddad2d"
-    },
-    {
-      "path": "LDC_v142.2_PLS_OWNER_PROTOTYPE_MACHINE_QA_2026-10-06.json",
-      "bytes": 8422,
-      "sha256": "25b476f85887cfd41807c634609b2a609dcd57ee8652e29a86d268847ba946c5"
-    },
-    {
-      "path": "LDC_v142.4_READER_REPAIR_MACHINE_QA_2026-10-06.json",
-      "bytes": 34667,
-      "sha256": "ce4408d82d47adabe2a152d6b8fe9787d1d7f7eac72f51badf4d211cdd16838a"
-    },
-    {
-      "path": "LDC_v142.5_READER_SELECTOR_CLOSURE_MACHINE_QA_2026-10-06.json",
-      "bytes": 78056,
-      "sha256": "b107de1cf7ab91c5192f216705ccbaef193c3095cb24596739eeb5fb88576bdf"
-    },
-    {
-      "path": "LDC_v142.6_HELP_RELEASE_TRUTH_MACHINE_QA_2026-10-06.json",
-      "bytes": 12261,
-      "sha256": "f8dc7c93f0ec278bc536378dd3d0c4c29cc970c08782c7dad0af3a6d8dba0fa6"
-    },
-    {
-      "path": "LDC_v142.7_RELEASE_METADATA_MACHINE_QA_2026-10-06.json",
-      "bytes": 5506,
-      "sha256": "505dc4df39e7aabd3b15395faf41ab2f7af37e32ef2eabb837a15c838ae8019f"
-    },
-    {
-      "path": "LDC_v142.8_PLS_INTERACTION_CLOSURE_MACHINE_QA_2026-10-06.json",
-      "bytes": 4608,
-      "sha256": "bb2d3e7afa6b81ed1ab1da16d9c8866efe3132fcb51eb85a0415889e2f91dc24"
-    },
-    {
-      "path": "LDC_v142.9_PLS_INTERACTION_CLOSURE_MACHINE_QA_2026-10-06.json",
-      "bytes": 5738,
-      "sha256": "bb71531b5c3005a600719dbbc62f935700f3e3fa98047b14d46ea4d9a83fd803"
-    },
     {
       "path": "assets/fonts/crimson-text-latin-400-italic.woff",
       "bytes": 20988,
@@ -293,11 +120,6 @@
       "path": "assets/js/sortable.min.js",
       "bytes": 44581,
       "sha256": "ca68430703c4f5960e90735867c6e94d29b5a3de37107d8100e5a301007e9e6e"
-    },
-    {
-      "path": "corpus/M2_INDEPENDENT_INDEX_VERIFICATION.json",
-      "bytes": 830,
-      "sha256": "9a8da5d065ce69cd22cd4f6478f16e8e4da045030ff2f4af879bc5cc5261cdd5"
     },
     {
       "path": "corpus/date_id_reconciliation_r7.json",
@@ -670,6 +492,11 @@
       "sha256": "86bba85833289220cb6d475a86f5efd455c0e4eb5b58b904b0f1cbea6666fead"
     },
     {
+      "path": "corpus/M2_INDEPENDENT_INDEX_VERIFICATION.json",
+      "bytes": 830,
+      "sha256": "9a8da5d065ce69cd22cd4f6478f16e8e4da045030ff2f4af879bc5cc5261cdd5"
+    },
+    {
       "path": "corpus/manifest.json",
       "bytes": 84428,
       "sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b"
@@ -855,16 +682,6 @@
       "sha256": "e4f72408be0d8d2766fca21ec8dcb6120690eab1dd53ab77f3098202fa0f90f4"
     },
     {
-      "path": "corpus/search_v21_manifest.json",
-      "bytes": 4958,
-      "sha256": "86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996"
-    },
-    {
-      "path": "corpus/search_v21_topology.json",
-      "bytes": 1480896,
-      "sha256": "9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f"
-    },
-    {
       "path": "corpus/search_v2_documents.json",
       "bytes": 13417678,
       "sha256": "65cfeb954ce9ecaa02c761024f2802436c9fcd07982e20438486d1a793fc195a"
@@ -888,6 +705,16 @@
       "path": "corpus/search_v2_manifest.json",
       "bytes": 12837,
       "sha256": "e87da88a709a1b81f6e76e1afe119a8ad946df602977a88c45c8b0d6e35dc250"
+    },
+    {
+      "path": "corpus/search_v21_manifest.json",
+      "bytes": 4958,
+      "sha256": "86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996"
+    },
+    {
+      "path": "corpus/search_v21_topology.json",
+      "bytes": 1480896,
+      "sha256": "9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f"
     },
     {
       "path": "corpus/speakers_01.json",
@@ -1371,8 +1198,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 925450,
-      "sha256": "f64bce33847057fb62ed00471d93fdd74f972fbe12c4087e7887fc74a80c56f6"
+      "bytes": 926044,
+      "sha256": "73f8092aa5ecef482d015d3f62847f1e0d4343410c0375657b92388dc3a8af9d"
     },
     {
       "path": "interaction_anchor.js",
@@ -1385,24 +1212,204 @@
       "sha256": "a0a65e316ce4330e9c7159d1e5781c79e6c6b2ed68114ce21828882446ad3a97"
     },
     {
+      "path": "LDC_v142.10_PLS_RESULTS_UX_CLOSURE_MACHINE_QA_2026-10-06.json",
+      "bytes": 5043,
+      "sha256": "8b9947ad71e99550e05b478fe619e45a74d9e66537ab7b0ce01bdcf0c1410110"
+    },
+    {
+      "path": "LDC_v142.11_DOCUMENTARY_READING_UX_ADVERSARIAL_REVIEW_2026-10-06.json",
+      "bytes": 6737,
+      "sha256": "b62ac83c1f786a90067c5eddca0c2dcfebcc92591ede50b681b85e877c7f76ef"
+    },
+    {
+      "path": "LDC_v142.11_DOCUMENTARY_READING_UX_MACHINE_QA_2026-10-06.json",
+      "bytes": 7273,
+      "sha256": "fb963259677c259ca037277cfc54493007a732a11871ba7cb28608357985c184"
+    },
+    {
+      "path": "LDC_v142.11_DOCUMENTARY_RESOLVER_STATE_QA_2026-10-06.json",
+      "bytes": 1244,
+      "sha256": "60df8ee9f7148e49e51794e6f79d3f82bf7eaa7c15bed14d1b8ca4c99799aa8b"
+    },
+    {
+      "path": "LDC_v142.11_HEADLESS_BROWSER_QA_2026-10-06.json",
+      "bytes": 323,
+      "sha256": "19fde6b45cf8973113e8549b902f3253116471d4e361ccc418d26bb748f06a06"
+    },
+    {
+      "path": "LDC_v142.11_PROTECTED_FUNCTION_IDENTITY_2026-10-06.json",
+      "bytes": 3502,
+      "sha256": "08fe14239837ca15d5241ce4409a7956a648c7238b9f64b7853b0dfdb038269e"
+    },
+    {
+      "path": "LDC_v142.11_PROTECTED_SURFACE_BYTE_IDENTITY_2026-10-06.json",
+      "bytes": 8695,
+      "sha256": "adbe0bb5b53a2295d6dd7b00584fbfcbaaf5c7aa5cbe15674a4b8f640af9b1c2"
+    },
+    {
+      "path": "LDC_v142.11_PUBLIC_PROVENANCE_LABEL_AUDIT_2026-10-06.json",
+      "bytes": 46292,
+      "sha256": "98b87affa90660b8053ba6e41dffa35f4d52dfbce1cec7977bebf6705fbc1843"
+    },
+    {
+      "path": "LDC_v142.12_DOCUMENTARY_CONSISTENCY_ADVERSARIAL_REVIEW_2026-10-07.json",
+      "bytes": 1953,
+      "sha256": "0b2e020e08c27f14cd41029c2893a4c3a19e43e659ad9c2d4e18f0e2e225627c"
+    },
+    {
+      "path": "LDC_v142.12_DOCUMENTARY_CONSISTENCY_MACHINE_QA_2026-10-07.json",
+      "bytes": 9933,
+      "sha256": "f0f616e077b7ca3fc578bbee666c329ad84a86415e32e1dcf3655be7eb2e12d3"
+    },
+    {
+      "path": "LDC_v142.12_HEADLESS_BROWSER_QA_2026-10-07.json",
+      "bytes": 517,
+      "sha256": "db890d7e911235c2648b78c73112b47a5b98651b7f6fb2076453dbb0b79e104c"
+    },
+    {
+      "path": "LDC_v142.12_PUBLIC_PROVENANCE_CONSISTENCY_AUDIT_2026-10-07.json",
+      "bytes": 1627,
+      "sha256": "bf3a4d4c6cba5c08ace15bf4e5009ee35dd593642dd026e2db98fcaa9d7aa88e"
+    },
+    {
+      "path": "LDC_v142.12_TWO_BASELINE_INTEGRITY_2026-10-07.json",
+      "bytes": 66339,
+      "sha256": "f09f47312bb6f6e66702cabbbc32b3ec2075a771fd736a6f046904e7e4ca96f5"
+    },
+    {
+      "path": "LDC_v142.13_EVIDENCE_INDEX_2026-10-07.json",
+      "bytes": 1711,
+      "sha256": "d2f7b2f9d65cd520e0a9b25be248bd7853dbbf88ece5fa99f8915ae4ffd5cef9"
+    },
+    {
+      "path": "LDC_v142.13_HEADLESS_BROWSER_QA_2026-10-07.json",
+      "bytes": 899,
+      "sha256": "a1787bdc14cbed9900d9571c21867c4a48263c3fbe83b6191afc73d3490b73d1"
+    },
+    {
+      "path": "LDC_v142.13_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
+      "bytes": 3905,
+      "sha256": "8593da859a91d460a6871656b2ab0561cab0e0693f44504c8ae413f148c8f543"
+    },
+    {
+      "path": "LDC_v142.13_PLS_PACK_INDEPENDENT_INTEGRITY_2026-10-07.json",
+      "bytes": 1597,
+      "sha256": "83fe43543f8f66a1551f1a571e5e35657a64c1bb1ce02d2594009dba6faabb3b"
+    },
+    {
+      "path": "LDC_v142.13_RELEASE_TRUTH_RECONCILIATION_2026-10-07.json",
+      "bytes": 3042,
+      "sha256": "7840d5ca1ca7c055ba80ef589cb0265f512dcc7c93f20b2273bfda8ba1f429b4"
+    },
+    {
+      "path": "LDC_v142.13_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
+      "bytes": 6680,
+      "sha256": "65d845b1cefb90c68e61d03bf1bb37e55d63ec88db9aff4a3d907c8fdf48ede6"
+    },
+    {
+      "path": "LDC_v142.13_STATIC_AND_PROTECTED_INTEGRITY_QA_2026-10-07.json",
+      "bytes": 49463,
+      "sha256": "7988e8687b991e9af2bc60bc8e797a15937ba7e68f859c74a54361079fb76efd"
+    },
+    {
+      "path": "LDC_v142.14_EVIDENCE_INDEX_2026-10-07.json",
+      "bytes": 2389,
+      "sha256": "f46bda2dcba72c5ccc51b336921803a0dbf99380ff6ca7bf539833a4c49f637a"
+    },
+    {
+      "path": "LDC_v142.14_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
+      "bytes": 9011,
+      "sha256": "e1d29a6f9949e5ee8decbdebb5bb7f7fc6fc2866b337a14b9793778820dd8c67"
+    },
+    {
+      "path": "LDC_v142.14_PASS1_BUILD_PROTECTED_INTEGRITY_2026-10-07.json",
+      "bytes": 8603,
+      "sha256": "a08f9edbfe5ade3cb005f134f31d0fefa80388ce6b810733748ecc3b7dc97059"
+    },
+    {
+      "path": "LDC_v142.14_PASS2_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
+      "bytes": 7143,
+      "sha256": "30c3e7076a8aa42cc94828c7ad3a699afcf33e9a17bf19c5309794fe8e733857"
+    },
+    {
+      "path": "LDC_v142.14_PASS3_EVIDENCE_RECONCILIATION_2026-10-07.json",
+      "bytes": 3390,
+      "sha256": "c0f009171307587fc7e3660179ee763a957d5ddfddb47f24fdac5ffebd2f887a"
+    },
+    {
+      "path": "LDC_v142.14_PASS4_CONTRADICTION_STALENESS_2026-10-07.json",
+      "bytes": 4733,
+      "sha256": "672a4431f9ab7f878a6ed987fa8d4c986aadaad1a594effa946c91588cd2d5e1"
+    },
+    {
+      "path": "LDC_v142.14_PLS_PACK_BROWSER_QUALIFICATION_2026-10-07.json",
+      "bytes": 1742,
+      "sha256": "8e1f8580d63af02649dbd20a57582edfdc72a3e22f9019f63024d87f82ddad2d"
+    },
+    {
+      "path": "LDC_v142.15_EVIDENCE_INDEX_2026-10-07.json",
+      "bytes": 1447,
+      "sha256": "a9bf3fd758aa28c77c10fc4b95f9c36a5f85d2734a9c734db9f64ea130cd3130"
+    },
+    {
+      "path": "LDC_v142.15_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
+      "bytes": 2257,
+      "sha256": "2331de61848335407692cf7a310e1fb27e3ffe73aa16db800e9634e7adf540c1"
+    },
+    {
+      "path": "LDC_v142.15_RELEASE_TRUTH_SCOPE_MACHINE_QA_2026-10-07.json",
+      "bytes": 4702,
+      "sha256": "f06ec3b1493cb0f0d64bef4a5b140de7f9f1059343ed36b2463a1ec61c7b1993"
+    },
+    {
+      "path": "LDC_v142.2_PLS_OWNER_PROTOTYPE_MACHINE_QA_2026-10-06.json",
+      "bytes": 8422,
+      "sha256": "25b476f85887cfd41807c634609b2a609dcd57ee8652e29a86d268847ba946c5"
+    },
+    {
+      "path": "LDC_v142.4_READER_REPAIR_MACHINE_QA_2026-10-06.json",
+      "bytes": 34667,
+      "sha256": "ce4408d82d47adabe2a152d6b8fe9787d1d7f7eac72f51badf4d211cdd16838a"
+    },
+    {
+      "path": "LDC_v142.5_READER_SELECTOR_CLOSURE_MACHINE_QA_2026-10-06.json",
+      "bytes": 78056,
+      "sha256": "b107de1cf7ab91c5192f216705ccbaef193c3095cb24596739eeb5fb88576bdf"
+    },
+    {
+      "path": "LDC_v142.6_HELP_RELEASE_TRUTH_MACHINE_QA_2026-10-06.json",
+      "bytes": 12261,
+      "sha256": "f8dc7c93f0ec278bc536378dd3d0c4c29cc970c08782c7dad0af3a6d8dba0fa6"
+    },
+    {
+      "path": "LDC_v142.7_RELEASE_METADATA_MACHINE_QA_2026-10-06.json",
+      "bytes": 5506,
+      "sha256": "505dc4df39e7aabd3b15395faf41ab2f7af37e32ef2eabb837a15c838ae8019f"
+    },
+    {
+      "path": "LDC_v142.8_PLS_INTERACTION_CLOSURE_MACHINE_QA_2026-10-06.json",
+      "bytes": 4608,
+      "sha256": "bb2d3e7afa6b81ed1ab1da16d9c8866efe3132fcb51eb85a0415889e2f91dc24"
+    },
+    {
+      "path": "LDC_v142.9_PLS_INTERACTION_CLOSURE_MACHINE_QA_2026-10-06.json",
+      "bytes": 5738,
+      "sha256": "bb71531b5c3005a600719dbbc62f935700f3e3fa98047b14d46ea4d9a83fd803"
+    },
+    {
       "path": "manifest.json",
       "bytes": 673,
       "sha256": "6f8c116ad7258f912c8f17c15a3afbfdafaa6e49a9156f477f1b6bd1512b4955"
     },
     {
       "path": "offline_manifest.json",
-      "bytes": 58776,
-      "sha256": "2dd045040d6b779f162cb36617315733b4b5f1229f687473b035de017f313443"
+      "bytes": 59968,
+      "sha256": "dfd462fda6f38481ea195f373273db17473e9d3b4b47d955c4f77808ac9f2264"
     },
     {
       "path": "pls_v15/FILTERED_V142_COMPAT_SMOKETEST.json",
       "bytes": 2745,
       "sha256": "34b7a869ff69bb11b928e7cf5e3877b193112541a78cd91591219940ff682117"
-    },
-    {
-      "path": "pls_v15/THREE_REAL_QUERY_MANIFEST.json",
-      "bytes": 1465,
-      "sha256": "e5bb4c1d6350dbf3b59c80fc45935f9f2f6202e374ec9fef2f5719a2c62aa4a6"
     },
     {
       "path": "pls_v15/hybrid_core_v1_5.js",
@@ -1450,14 +1457,14 @@
       "sha256": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7"
     },
     {
-      "path": "pls_v15/model/tokenizer.json",
-      "bytes": 17082730,
-      "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
-    },
-    {
       "path": "pls_v15/model/tokenizer_config.json",
       "bytes": 443,
       "sha256": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+    },
+    {
+      "path": "pls_v15/model/tokenizer.json",
+      "bytes": 17082730,
+      "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
     },
     {
       "path": "pls_v15/owner_runtime_v1_5.mjs",
@@ -1508,6 +1515,11 @@
       "path": "pls_v15/runtime/transformers.min.js",
       "bytes": 888173,
       "sha256": "aa5002b70e789798da263f5f99c62bd3e8fcd0c119258a493c40c180648365fa"
+    },
+    {
+      "path": "pls_v15/THREE_REAL_QUERY_MANIFEST.json",
+      "bytes": 1465,
+      "sha256": "e5bb4c1d6350dbf3b59c80fc45935f9f2f6202e374ec9fef2f5719a2c62aa4a6"
     },
     {
       "path": "search_engine_v2.js",
@@ -1566,13 +1578,19 @@
     },
     {
       "path": "sw.js",
-      "bytes": 32246,
-      "sha256": "dc8dfa4b9aafcc085a44181ce3acd8ffbaee6b19ea56c549d60f3cdfe0817bc5"
+      "bytes": 32278,
+      "sha256": "715f3f7c8847473ec5ee6522991e19f7f314da995c6be9af7e821ddc17f84491"
     },
     {
       "path": "version.json",
-      "bytes": 251986,
-      "sha256": "73dc8abd8ad04a0810d4446971772b21ef2a8e0818010d1ba9e91c12c27379ca"
+      "bytes": 253556,
+      "sha256": "9f317209af27610a9dab4b9e1cf7a2392151644eefbff86401e28718ed286d20"
     }
+  ],
+  "application_mutation_boundary_relative_to_v14214": [
+    "index.html",
+    "offline_manifest.json",
+    "sw.js",
+    "version.json"
   ]
 }
