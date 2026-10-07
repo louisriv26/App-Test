@@ -50,6 +50,23 @@ function starts96_72(n){
  s.add(Math.max(0,n-96));
  return [...s].sort((a,b)=>a-b);
 }
+function protectedChunkTokens(unitId){
+ const base=authority.tokens('enriched',unitId), out=[];
+ for(const t0 of base){
+  const t={...t0};
+  const prev=out[out.length-1];
+  if(prev&&prev.di===t.di&&Number(t.s)>=Number(prev.e)){
+   const raw=String(docs[t.di]?.[5]||'').slice(Number(prev.e),Number(t.s));
+   if(/^['’]+$/u.test(raw)){
+    prev.e=t.e;prev.surface=String(prev.surface||'')+raw+String(t.surface||'');
+    prev.w=String(prev.w||'')+String(t.w||'');
+    continue;
+   }
+  }
+  out.push(t);
+ }
+ return out;
+}
 function sig(row){
  return String(row.unit_id)+'|'+JSON.stringify(row.source_spans)+'|'+String(row.text);
 }
@@ -65,7 +82,7 @@ for(let i=0;i<oldRows.length;i++){const k=sig(oldRows[i]);let a=oldBySig.get(k);
 const rows=[], rowJesus=[], cover=new Uint8Array(docs.length), unitReports=[];
 let ordinal=1, visibleFailures=0, emptyTokenUnits=0;
 for(const u of units){
- const tokens=authority.tokens('enriched',u.id);
+ const tokens=protectedChunkTokens(u.id);
  if(!tokens.length){emptyTokenUnits++;unitReports.push({unit_id:u.id,tokens:0,windows:0});continue;}
  const wholeSpans=coalesce(tokens), fullText=authority.visibleText(wholeSpans);
  const starts=starts96_72(tokens.length);
@@ -157,12 +174,14 @@ function countsForText(s){
 function rawFromSpans(spans){
  return (spans||[]).map(s=>String(docs[s.doc_index]?.[5]||'').slice(Number(s.canonical_start),Number(s.canonical_end))).join(' ');
 }
+const oldTokenizerParity={unicode_apostrophe:0,whitespace:0,search_all:0};
+for(const o of oldRows){const cc=countsForText(o.text);if(cc.unicode_apostrophe===Number(o.word_count))oldTokenizerParity.unicode_apostrophe++;if(cc.whitespace===Number(o.word_count))oldTokenizerParity.whitespace++;if(cc.search_all===Number(o.word_count))oldTokenizerParity.search_all++;}
 const builderDiagnostics=[];
 for(let oi=0;oi<oldRows.length&&builderDiagnostics.length<12;oi++){
  const o=oldRows[oi];if((newBySig.get(sig(o))||[]).length)continue;
  const nu=newByUnit.get(o.unit_id)||[], nearest=nu.reduce((best,x)=>!best||Math.abs(x.start_word-o.start_word)<Math.abs(best.start_word-o.start_word)?x:best,null);
  const ou=oldByUnit.get(o.unit_id)||[], raw=rawFromSpans(o.source_spans), rawCollapsed=raw.replace(/\s+/g,' ').trim(), visible=authority.visibleText(o.source_spans||[]);
- const unitTokens=authority.tokens('enriched',o.unit_id);
+ const unitTokens=protectedChunkTokens(o.unit_id);
  builderDiagnostics.push({
   old_row:oi,passage_id:o.passage_id,unit_id:o.unit_id,
   old_start:o.start_word,old_end:o.end_word,old_word_count:o.word_count,
@@ -192,6 +211,7 @@ const report={
  coverage_fraction:covered/docs.length,
  coverage_pass:covered===docs.length,
  missing_documents:missing,
+ protected_tokenizer_parity:oldTokenizerParity,
  builder_diagnostics:builderDiagnostics,
  protected_filtered_overlap:{
    old_rows:oldRows.length,
