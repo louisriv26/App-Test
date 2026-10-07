@@ -1,0 +1,55 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>LDC PLS v16 browser vector builder</title>
+<pre id="status">boot</pre>
+<script type="module">
+import {AutoTokenizer,AutoModel,env,mean_pooling} from './runtime/transformers.min.js';
+const REV='761b726dd34fb83930e26aab4e9ac3899aa1fa78';
+const DIM=384,MAXLEN=512;
+env.allowRemoteModels=false;
+env.allowLocalModels=true;
+env.localModelPath=new URL('./',location.href).href;
+env.useBrowserCache=false;
+env.useFSCache=false;
+if(env.backends?.onnx?.wasm){
+  env.backends.onnx.wasm.numThreads=1;
+  env.backends.onnx.wasm.proxy=false;
+  env.backends.onnx.wasm.wasmPaths=new URL('./runtime/',location.href).href;
+}
+let tokenizer=null,model=null,loading=null;
+async function init(){
+  if(tokenizer&&model)return true;
+  if(!loading)loading=(async()=>{
+    document.getElementById('status').textContent='loading-model';
+    tokenizer=await AutoTokenizer.from_pretrained('model',{local_files_only:true,revision:REV});
+    model=await AutoModel.from_pretrained('model',{local_files_only:true,revision:REV,subfolder:'onnx',model_file_name:'model',dtype:'int8',device:'wasm'});
+    document.getElementById('status').textContent='ready';
+    return true;
+  })();
+  return loading;
+}
+function quantize(v){
+  let m=0;for(let i=0;i<v.length;i++)m=Math.max(m,Math.abs(v[i]));
+  if(!(m>0))throw new Error('ZERO_EMBEDDING');
+  const scale=127/m,q=new Array(v.length);let ss=0;
+  for(let i=0;i<v.length;i++){
+    const z=Math.max(-127,Math.min(127,Math.round(v[i]*scale)));
+    q[i]=z;ss+=z*z;
+  }
+  return {q,inv:1/Math.sqrt(ss)};
+}
+window.initModel=init;
+window.embedQuantizedBatch=async(texts)=>{
+  await init();
+  if(!Array.isArray(texts)||!texts.length)throw new Error('TEXT_BATCH_REQUIRED');
+  const t=await tokenizer(texts.map(x=>'passage: '+String(x)),{padding:true,truncation:true,max_length:MAXLEN});
+  const out=await model(t),h=out.last_hidden_state||out[Object.keys(out)[0]];
+  if(!h)throw new Error('MODEL_OUTPUT');
+  const pooled=mean_pooling(h,t.attention_mask).normalize(2,-1),data=pooled.data;
+  if(data.length!==texts.length*DIM)throw new Error('EMBED_GEOMETRY '+data.length);
+  const rows=[];
+  for(let i=0;i<texts.length;i++)rows.push(quantize(data.subarray(i*DIM,(i+1)*DIM)));
+  return rows;
+};
+document.getElementById('status').textContent='module-ready';
+</script>
