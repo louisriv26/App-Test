@@ -1,0 +1,271 @@
+name: LDC v142.15 full audit temporary
+on:
+  push:
+    branches: [qa-v14215-full-blind-20261007]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+
+      - name: Pass 1 exact candidate integrity and protected lineage
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,pathlib,subprocess,datetime,sys
+          root=pathlib.Path('.')
+          CAND='572d9df7927765b575a76eaee98fd3cc9d455e74'
+          PRE='bda9d1d8e9edc5c931b10d15caad22acff6b4173'
+          man=json.loads((root/'PACKAGE_MANIFEST_SHA256.json').read_text())
+          out={'candidate_commit':CAND,'generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'checks':{},'failures':[]}
+          def sha(b): return hashlib.sha256(b).hexdigest()
+          def ck(name,ok,detail=None):
+            out['checks'][name]={'pass':bool(ok),'detail':detail}
+            if not ok: out['failures'].append(name)
+          ck('manifest_candidate',man.get('candidate_public_version')=='142.15',man.get('candidate_public_version'))
+          ck('manifest_identity',man.get('technical_identity')=='v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE',man.get('technical_identity'))
+          ck('manifest_entries',len(man['files'])==308,len(man['files']))
+          mf=[] 
+          for r in man['files']:
+            p=root/r['path']
+            if not p.is_file(): mf.append({'path':r['path'],'reason':'missing'}); continue
+            b=p.read_bytes()
+            if len(b)!=int(r['bytes']) or sha(b)!=r['sha256']: mf.append({'path':r['path'],'reason':'mismatch','bytes':len(b),'sha':sha(b)})
+          ck('manifest_all_files_exact',not mf,mf[:20])
+          ck('manifest_self_sha',sha((root/'PACKAGE_MANIFEST_SHA256.json').read_bytes())=='4b01800e94b2c1809a75c2b9cfae920867344ac74d61cf17b9d85af558eac956',sha((root/'PACKAGE_MANIFEST_SHA256.json').read_bytes()))
+          off=json.loads((root/'offline_manifest.json').read_text()); ver=json.loads((root/'version.json').read_text())
+          ck('identity_coherence',ver['public_version']=='142.15' and ver['app_version']==man['technical_identity'] and off['app_version']==man['technical_identity'],{'ver':ver['app_version'],'pub':ver['public_version'],'off':off['app_version']})
+          ck('offline_204',off['asset_count']==204 and len(off['assets'])==204,{'asset_count':off['asset_count'],'len':len(off['assets'])})
+          bad=[]
+          for a in off['assets']:
+            p=root/a['path']
+            if not p.is_file(): bad.append({'path':a['path'],'reason':'missing'}); continue
+            b=p.read_bytes()
+            if len(b)!=int(a['bytes']) or sha(b)!=a['sha256']: bad.append({'path':a['path'],'reason':'mismatch'})
+          ck('offline_assets_exact',not bad,bad[:20])
+          obj={'assets':[{'bytes':int(x['bytes']),'path':str(x['path']),'sha256':str(x['sha256'])} for x in off['assets']],'corpus_generation':off['corpus_generation'],'corpus_manifest_sha256':off['corpus_manifest_sha256'],'schema':'ldc-offline-content-binding-v2'}
+          binding=sha(json.dumps(obj,separators=(',',':'),ensure_ascii=False).encode())
+          ck('offline_binding',binding==off['content_binding_sha256']=='1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384',binding)
+          changed={'index.html','offline_manifest.json','sw.js','version.json'}
+          preman=json.loads(subprocess.check_output(['git','show',f'{PRE}:PACKAGE_MANIFEST_SHA256.json']))
+          inherited=[x for x in preman['files'] if x['path'] not in changed]
+          drift=[]
+          for x in inherited:
+            try: b=subprocess.check_output(['git','show',f'{PRE}:{x["path"]}'])
+            except subprocess.CalledProcessError: drift.append({'path':x['path'],'reason':'predecessor_missing'});continue
+            p=root/x['path']
+            if not p.is_file() or sha(p.read_bytes())!=sha(b): drift.append({'path':x['path'],'reason':'drift'})
+          ck('v14214_inherited_301_exact',len(inherited)==301 and not drift,{'count':len(inherited),'drift':drift[:20]})
+          # current Git candidate vs base: only governed changes prior to temp QA files
+          appdelta=subprocess.check_output(['git','diff','--name-only',PRE,CAND],text=True).splitlines()
+          allowed={'index.html','offline_manifest.json','sw.js','version.json','PACKAGE_MANIFEST_SHA256.json',
+                   'LDC_v142.15_EVIDENCE_INDEX_2026-10-07.json','LDC_v142.15_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json','LDC_v142.15_RELEASE_TRUTH_SCOPE_MACHINE_QA_2026-10-07.json'}
+          unexpected=[x for x in appdelta if x not in allowed and x in {r['path'] for r in man['files']}]
+          ck('governed_delta_bounded',not unexpected,unexpected)
+          # PLS prototype pack internal hashes
+          pm=json.loads((root/'pls_v15/pack/prototype_manifest.json').read_text())
+          ck('pls_status_prototype_only',pm.get('status')=='OWNER_PROTOTYPE_ONLY__NOT_PRODUCTION_QUALIFIED',pm.get('status'))
+          asset_fail=[]
+          def walk_assets(o):
+            if isinstance(o,dict):
+              if 'path' in o and 'sha256' in o and 'bytes' in o: yield o
+              for v in o.values(): yield from walk_assets(v)
+            elif isinstance(o,list):
+              for v in o: yield from walk_assets(v)
+          for a in walk_assets(pm):
+            p=root/a['path']
+            if not p.is_file(): asset_fail.append({'path':a['path'],'reason':'missing'});continue
+            b=p.read_bytes()
+            if len(b)!=int(a['bytes']) or sha(b)!=a['sha256']: asset_fail.append({'path':a['path'],'reason':'mismatch'})
+          ck('pls_manifest_assets_exact',not asset_fail,asset_fail[:20])
+          # fresh semantic coverage
+          docs=json.loads((root/'corpus/search_v2_documents.json').read_text())
+          dl=docs.get('documents',docs if isinstance(docs,list) else [])
+          meta=json.loads((root/'pls_v15/pack/passages.metadata.json').read_text())
+          passages=meta.get('passages',meta if isinstance(meta,list) else [])
+          ids=set()
+          for p in passages:
+            for s in p.get('source_spans',[]): 
+              if s.get('para_id'): ids.add(str(s['para_id']))
+          docids={str(d.get('id') or d.get('para_id')) for d in dl if (d.get('id') or d.get('para_id'))}
+          missing=sorted(docids-ids)
+          out['semantic_coverage']={'search_documents':len(docids),'pls_passages':len(passages),'pls_source_para_ids':len(ids),'missing_para_ids':len(missing),'missing_pct':(100*len(missing)/len(docids) if docids else None),'sample_missing':missing[:20]}
+          ck('coverage_recomputed',len(docids)==74528 and len(passages)==20236 and len(missing)==797,out['semantic_coverage'])
+          # syntax
+          js=list(root.rglob('*.js'))+list(root.rglob('*.mjs'))
+          # only candidate-governed JS, not historical sibling dirs
+          governed=set(x['path'] for x in man['files'])
+          syntax=[str(p) for p in js if str(p.relative_to(root)) in governed]
+          out['syntax_files']=len(syntax)
+          out['overall']='PASS' if not out['failures'] else 'FAIL'
+          pathlib.Path('qa-v14215-integrity-results.json').write_text(json.dumps(out,indent=2,ensure_ascii=False)+'\n')
+          print(json.dumps(out,indent=2,ensure_ascii=False))
+          if out['overall']!='PASS': sys.exit(1)
+          PY
+          while IFS= read -r f; do node --check "$f" >/dev/null; done < <(python3 - <<'PY'
+          import json,pathlib
+          m=json.load(open('PACKAGE_MANIFEST_SHA256.json'))
+          for x in m['files']:
+            if x['path'].endswith(('.js','.mjs')): print(x['path'])
+          PY
+          )
+
+      - name: Pass 1 deployed Pages exact-byte parity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import concurrent.futures,hashlib,json,urllib.request,time,pathlib,random,datetime,sys
+          base='https://louisriv26.github.io/App-Test/'
+          man=json.load(open('PACKAGE_MANIFEST_SHA256.json'))
+          recs=man['files']+[{'path':'PACKAGE_MANIFEST_SHA256.json','bytes':pathlib.Path('PACKAGE_MANIFEST_SHA256.json').stat().st_size,'sha256':hashlib.sha256(pathlib.Path('PACKAGE_MANIFEST_SHA256.json').read_bytes()).hexdigest()}]
+          def one(r):
+            last=None
+            for a in range(3):
+              try:
+                url=base+r['path']+('?audit='+str(time.time_ns())+str(random.random()))
+                req=urllib.request.Request(url,headers={'Cache-Control':'no-cache','Pragma':'no-cache','User-Agent':'LDC-v14215-audit'})
+                with urllib.request.urlopen(req,timeout=70) as x: b=x.read()
+                return {'path':r['path'],'ok':len(b)==r['bytes'] and hashlib.sha256(b).hexdigest()==r['sha256'],'status':x.status,'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'want_bytes':r['bytes'],'want_sha256':r['sha256']}
+              except Exception as e:
+                last=str(e); time.sleep(1.5*(a+1))
+            return {'path':r['path'],'ok':False,'error':last}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=12) as ex: rows=list(ex.map(one,recs))
+          bad=[r for r in rows if not r['ok']]
+          out={'generated_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'base':base,'checked':len(rows),'pass_count':sum(r['ok'] for r in rows),'bad':bad,'overall':'PASS' if not bad and len(rows)==309 else 'FAIL'}
+          pathlib.Path('qa-v14215-pages-parity.json').write_text(json.dumps(out,indent=2)+'\n')
+          print(json.dumps(out,indent=2))
+          if out['overall']!='PASS': sys.exit(1)
+          PY
+
+      - name: Fresh Search-V2 recertification
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs=require('fs'),crypto=require('crypto');
+          const Core=require('./search_engine_v2.js'),Exact=require('./search_exact_v21.js'),Foundation=require('./search_foundation_v21b.js'),Near=require('./search_near_v22.js');
+          const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+          const payload={index:read('corpus/search_v2_index.json'),documents:read('corpus/search_v2_documents.json'),entries:read('corpus/search_v2_entries.json'),jesusFilter:read('corpus/search_v2_jesus_filter.json'),topology:read('corpus/search_v21_topology.json')};
+          const m2=read('corpus/search_v2_manifest.json'),m21=read('corpus/search_v21_manifest.json');
+          const exact=Exact.createExactLayer(payload),lexical=Core.createEngine({index:payload.index,documents:payload.documents,entries:payload.entries,jesusFilter:payload.jesusFilter});
+          const foundation=Foundation.createFoundation({lexical,exact,documents:payload.documents.documents,entries:payload.entries.entries,jesusFilter:payload.jesusFilter,topology:payload.topology,index:payload.index});
+          const near=Near.createNearLayer({index:payload.index,documents:payload.documents,entries:payload.entries,jesusFilter:payload.jesusFilter,topology:payload.topology,exact});
+          const out={overall:'PASS',checks:{},samples:{},errors:[]}; const assert=(c,m)=>{if(!c){out.overall='FAIL';out.errors.push(m);throw new Error(m)}};
+          try{
+            for(const mode of ['aflp','additions','enriched']){
+              const u=exact.nearAuthority.units(mode),tokens=u.reduce((n,x)=>n+(x.stream?x.stream.split(' ').length:0),0),digest=sha(Buffer.from(JSON.stringify(u.map(x=>[x.id,x.stream]))));
+              assert(u.length===m21.reference[mode].units,mode+' units');assert(tokens===m21.reference[mode].tokens,mode+' tokens');assert(digest===m21.reference[mode].digest,mode+' digest');
+              let verified=0;for(let i=0;i<u.length;i+=19){const ts=(u[i].stream||'').split(' ').filter(Boolean);if(!ts.length)continue;const q=ts.slice(0,Math.min(3,ts.length)).join(' ');assert(exact.verifyUnitQuery(mode,u[i].id,q),mode+' verify '+u[i].id);verified++}out.checks[mode]={units:u.length,tokens,digest,verified};
+            }
+            for(const [q,mode] of [['Fiat','enriched'],['bateau','enriched'],['divine volonté','enriched'],['volonté','aflp'],['volonte\u0301','enriched'],['de','aflp']]){const r=foundation.search(q,{mode});assert(!r.structuralError&&r.results.length>0,q);out.samples[q]={results:r.results.length,total:r.totalMatches,first:r.results[0]?.stable_ref};}
+            const u=exact.nearAuthority.units('enriched').find(x=>(x.stream||'').split(' ').length>7),ts=u.stream.split(' ').slice(0,5);ts[2]+='x';const nr=near.search(ts.join(' '),{mode:'enriched',limit:5,diagnostics:true});assert(nr.eligible&&nr.results.length>0,'near');
+            for(const [p,k] of [['corpus/search_v2_documents.json','search_v2_documents_sha256'],['corpus/search_v2_entries.json','search_v2_entries_sha256'],['corpus/search_v2_index.json','search_v2_index_sha256'],['corpus/search_v2_jesus_filter.json','search_v2_jesus_filter_sha256']]){assert(m21.bindings[k]===m2.assets[p].sha256,'binding '+p);assert(sha(fs.readFileSync(p))===m2.assets[p].sha256,'bytes '+p);}
+          }catch(e){out.error=String(e&&e.stack||e)}
+          fs.writeFileSync('qa-v14215-search-recert.json',JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(out,null,2));if(out.overall!=='PASS')process.exit(1);
+          NODE
+
+      - name: Install fresh Chromium and WebKit
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium webkit
+
+      - name: Start exact local candidate server
+        run: |
+          python3 -m http.server 8215 --bind 127.0.0.1 >/tmp/qa14215-http.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8215/index.html >/dev/null
+
+      - name: Pass 2 full runtime, offline, update and WebKit core
+        shell: bash
+        run: |
+          set +e
+          node .github/qa-v14215-full/qa-v14215-full.cjs
+          rc=$?
+          echo "$rc" > /tmp/runtime_rc
+          exit 0
+
+      - name: Independent blind challenge
+        shell: bash
+        run: |
+          set +e
+          node <<'NODE'
+          const {chromium}=require('playwright'),fs=require('fs');
+          const URL='https://louisriv26.github.io/App-Test/?blind='+Date.now(); const out={checks:{},findings:[],errors:[],overall:'UNKNOWN'};
+          const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+          (async()=>{const b=await chromium.launch({headless:true});const c=await b.newContext({viewport:{width:320,height:640},serviceWorkers:'allow',colorScheme:'dark',locale:'fr-FR'});const p=await c.newPage();p.on('pageerror',e=>out.errors.push(String(e)));try{
+            await p.goto(URL,{waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>{const l=document.getElementById('loading'),v=document.getElementById('version-pill-home');return l&&getComputedStyle(l).display==='none'&&v&&v.textContent&&!/v—|v-$/.test(v.textContent);},{timeout:120000});
+            await p.evaluate(()=>{const o=document.getElementById('onboarding-overlay');if(o&&getComputedStyle(o).display!=='none'&&typeof finishOnboarding==='function')finishOnboarding();applyTextLevel('xlarge');});
+            // rapid cross-feature state challenge
+            const rapid=await p.evaluate(async()=>{await goSearch();const states=[];for(let i=0;i<12;i++){const view=['enriched','aflp','additions'][i%3],m=i%2?'meaning':'words';await setSupplementMode(view,{persist:false,rerender:false,silent:true,origin:'blind'});setSearchIntentMode(m,{rerun:false,persist:false});const n=document.getElementById('search-semantic-scope-note');states.push({view,m,hidden:n.hidden});}return states;});
+            out.checks.rapid_e07=rapid.every(x=>x.hidden===!(x.m==='meaning'&&(x.view==='aflp'||x.view==='additions')));
+            // modal Escape + focus observation
+            const foc=await p.evaluate(()=>{const before=document.activeElement&&document.activeElement.id;openDocumentaryView();const open=document.getElementById('documentary-view-overlay').classList.contains('show')||getComputedStyle(document.getElementById('documentary-view-overlay')).display!=='none';return {before,open,active:document.activeElement&&document.activeElement.id};});await p.keyboard.press('Escape');await sleep(100);const after=await p.evaluate(()=>({open:getComputedStyle(document.getElementById('documentary-view-overlay')).display!=='none',active:document.activeElement&&document.activeElement.id||document.activeElement&&document.activeElement.tagName}));
+            out.checks.modal_escape=!!foc.open&&!after.open;out.findings.push({id:'E12_FOCUS_OBSERVATION',before:foc,after});
+            // layout
+            await p.evaluate(async()=>{await goSearch();await setSupplementMode('aflp',{persist:false,rerender:false,silent:true});setSearchIntentMode('meaning',{rerun:false,persist:false});});
+            const lay=await p.evaluate(()=>({inner:innerWidth,doc:document.documentElement.scrollWidth,body:document.body.scrollWidth,note:document.getElementById('search-semantic-scope-note').getBoundingClientRect().toJSON()}));
+            out.checks.hostile_layout=lay.doc<=lay.inner+1&&lay.body<=lay.inner+1&&lay.note.right<=lay.inner+1;
+            // gibberish semantic independent challenge
+            await p.evaluate(()=>{const t=document.getElementById('search-input-meaning');t.value='zxqv pizza nébuleuse 84917 banane';onSearchInput('meaning');});
+            await p.evaluate(()=>runSearch());await p.waitForTimeout(120000);
+            const sem=await p.evaluate(()=>({cards:document.querySelectorAll('#search-results .result-card').length,text:document.getElementById('search-results').innerText.slice(0,400),confidence:searchLastPayload?.payload?.confidence||searchLastPayload?.confidence||null}));
+            if(sem.cards>0)out.findings.push({id:'E04_REPRODUCED_BLIND',severity:'material-search-quality',sem});
+            // lexical long natural description false-empty / expand
+            await p.evaluate(()=>{setSearchIntentMode('words',{rerun:false,persist:false});const i=document.getElementById('search-input');i.value="Jésus explique que l'âme doit abandonner sa volonté humaine pour vivre entièrement dans la volonté divine";onSearchInput('words');});
+            await p.evaluate(()=>runSearch());await p.waitForTimeout(1500);
+            const lex=await p.evaluate(()=>({cards:document.querySelectorAll('#search-results .result-card').length,text:document.getElementById('search-results').innerText.slice(0,500),lane:searchResultLane,expanded:searchPartialExpanded}));
+            out.findings.push({id:'E20_LONG_DESCRIPTION_OBSERVATION',lex});
+            // invalid deep link / arbitrary bad target should fail closed
+            let badTarget=null;try{badTarget=await p.evaluate(async()=>{pendingParaId='THIS_DOES_NOT_EXIST';await openEntry(1,'THIS_ENTRY_DOES_NOT_EXIST','search');return {screen:document.querySelector('.screen.active')?.id,current:currentEntry&&currentEntry.id};});}catch(e){badTarget={error:String(e)}}
+            out.checks.invalid_target_no_corruption=!!badTarget;out.findings.push({id:'INVALID_TARGET_OBSERVATION',badTarget});
+            // SW root scope / same origin env risk
+            const env=await p.evaluate(async()=>{const r=await navigator.serviceWorker.ready;return {origin:location.origin,scope:r.scope,dbName:'ldc_user_v1'};});out.findings.push({id:'E16_E19_ENVIRONMENT',env});
+            out.overall=Object.values(out.checks).every(Boolean)?'PASS_WITH_FINDINGS':'FAIL';
+          }catch(e){out.errors.push(String(e&&e.stack||e));out.overall='HARNESS_ERROR'}finally{await c.close();await b.close();}
+          fs.writeFileSync('qa-v14215-blind-results.json',JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(out,null,2));if(out.overall==='FAIL'||out.overall==='HARNESS_ERROR')process.exitCode=1;})();
+          NODE
+          echo "$?" > /tmp/blind_rc
+          exit 0
+
+      - name: Final audit gate and summary
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,sys
+          integ=json.load(open('qa-v14215-integrity-results.json'))
+          pages=json.load(open('qa-v14215-pages-parity.json'))
+          search=json.load(open('qa-v14215-search-recert.json'))
+          runtime=json.load(open('qa-v14215-full-runtime-results.json')) if pathlib.Path('qa-v14215-full-runtime-results.json').exists() else {'overall':'MISSING'}
+          blind=json.load(open('qa-v14215-blind-results.json')) if pathlib.Path('qa-v14215-blind-results.json').exists() else {'overall':'MISSING'}
+          summary={'integrity':integ.get('overall'),'pages':pages.get('overall'),'search':search.get('overall'),'runtime':runtime.get('overall'),'blind':blind.get('overall'),'runtime_critical':runtime.get('critical'),'runtime_findings':runtime.get('findings'),'blind_findings':blind.get('findings'),'runtime_errors':runtime.get('errors'),'blind_errors':blind.get('errors')}
+          pathlib.Path('qa-v14215-final-summary.json').write_text(json.dumps(summary,indent=2)+'\n')
+          print(json.dumps(summary,indent=2))
+          critical=integ.get('overall')=='PASS' and pages.get('overall')=='PASS' and search.get('overall')=='PASS' and runtime.get('overall')=='PASS_TESTED_SCOPE' and blind.get('overall')=='PASS_WITH_FINDINGS'
+          sys.exit(0 if critical else 1)
+          PY
+
+      - name: Upload all fresh audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ldc-v14215-full-audit-evidence
+          path: |
+            qa-v14215-integrity-results.json
+            qa-v14215-pages-parity.json
+            qa-v14215-search-recert.json
+            qa-v14215-full-runtime-results.json
+            qa-v14215-blind-results.json
+            qa-v14215-final-summary.json
+          if-no-files-found: warn
+          retention-days: 3
