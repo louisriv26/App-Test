@@ -77,18 +77,19 @@
     }
   ],
   "prospective_policy_selection": {
-    "family": "DUAL_CHANNEL_RRF60_TOP_SCORE_V1",
+    "family": "TOP_HYBRID_ENTRY_DENSE_SCORE_WITH_DUAL_CHANNEL_CORROBORATION_V1",
+    "confidence_signal": "Dense cosine similarity of the top RRF60-ranked entry; RRF60 remains ranking-only.",
     "close_enabled": false,
     "required_positive_top1_channels": 2,
     "possible_min_channels": 2,
-    "possible_min_margin": 0,
-    "threshold_rule": "If and only if min(owner_positive_top1_rrf) > max(development_negative_top1_rrf), set possible_min_rrf to their arithmetic midpoint. Otherwise calibration FAILS.",
+    "threshold_rule": "If and only if min(owner_positive_top_hybrid_dense_score) > max(development_negative_top_hybrid_dense_score), set possible_min_dense to their arithmetic midpoint. Otherwise calibration FAILS.",
+    "no_margin_threshold": "No post-hoc dense or RRF margin threshold is introduced in this cycle.",
     "close_thresholds": "DISABLED; no 'close' confidence label is authorized from this evidence.",
     "no_posthoc_complexity": "If development separation fails, do not add query-specific rules, extra features, or relaxed exceptions in this calibration cycle."
   },
   "gates": {
     "owner_real_query_gate": "All 3 intended targets rank <=10 and all 3 queries are accepted by the frozen policy.",
-    "hard_negative_development_gate": "All 8 development negatives abstain under the selected policy.",
+    "hard_negative_development_gate": "All 8 development negatives abstain under the selected dense-score + dual-channel policy.",
     "blind_challenge_gate": "All 4 holdout negatives abstain without changing the selected policy.",
     "ranking_immutability_gate": "Dense-160, BM25-160, equal RRF60 and top-20 entry deduplication remain unchanged.",
     "activation_rule": "Only a pack passing all gates may set calibration.status=QUALIFIED. Otherwise it remains ENGINEERING_ONLY and Guard R4 activation=false."
