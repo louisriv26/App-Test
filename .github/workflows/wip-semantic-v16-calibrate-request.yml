@@ -36,7 +36,7 @@ jobs:
           test "$(jq -r '.head_sha' <<<"$RUN_JSON")" = "$SOURCE_HEAD"
           test "$(jq -r '.head_branch' <<<"$RUN_JSON")" = "ldc-v142-16-search-integrity-wip-20261007"
           git cat-file -e "$SOURCE_HEAD^{commit}"
-          git diff --exit-code "$SOURCE_HEAD" --             pls_v16/BINDING_CONTRACT.json             pls_v16/CALIBRATION_PROTOCOL.json             search_semantic_v3_core_r4.js             search_semantic_hybrid_r6.js             search_semantic_pack_guard_r4.js             search_semantic_pack_registry_r6.js
+          git diff --exit-code "$SOURCE_HEAD" -- pls_v16/BINDING_CONTRACT.json .github/wip-semantic-current-pack-build.cjs .github/wip-semantic-v16-vector-build-browser.mjs pls_v15/model pls_v15/runtime corpus/search_v2_documents.json corpus/search_v2_entries.json corpus/search_v2_jesus_filter.json corpus/search_v21_topology.json
           rm -rf /tmp/v16-cal-artifact
           mkdir -p /tmp/v16-cal-artifact
           gh run download "$RUN_ID" -n "$ARTIFACT" -D /tmp/v16-cal-artifact
