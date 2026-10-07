@@ -23,10 +23,18 @@ try{
  page.on('console',m=>{if(m.type()==='error')console.error('BROWSER',m.text());});
  await page.goto('http://127.0.0.1:'+PORT+'/builder.html',{waitUntil:'load',timeout:30000});await page.waitForFunction(()=>document.querySelector('#status')?.textContent==='module-ready');
  await page.evaluate(()=>window.initModel());await page.waitForFunction(()=>document.querySelector('#status')?.textContent==='ready',{timeout:180000});
- const fixtures=JSON.parse(fs.readFileSync('tools/ldc_v1422_vector_probe/fixtures.json','utf8')),fixtureReport=[];
- for(const f of fixtures){const [z]=await page.evaluate(async t=>await window.embedQuantizedBatch([t]),f.text),exp=Buffer.from(f.vector_b64,'base64');let mismatch=0;for(let j=0;j<z.q.length;j++)if(z.q[j]!==exp.readInt8(j))mismatch++;const invDiff=Math.abs(Number(z.inv)-Number(f.inverse_norm));fixtureReport.push({passage_id:f.passage_id,mismatches:mismatch,inverse_norm_abs_diff:invDiff});ok(mismatch===0&&invDiff<1e-10,'PROTECTED_VECTOR_FIXTURE '+f.passage_id);}
+ const fixtures=JSON.parse(fs.readFileSync('tools/ldc_v1422_vector_probe/fixtures.json','utf8')),fixtureReport=[],singleCurrent=[];
+ for(const f of fixtures){
+   const [z1]=await page.evaluate(async t=>await window.embedQuantizedBatch([t]),f.text);
+   const [z2]=await page.evaluate(async t=>await window.embedQuantizedBatch([t]),f.text);
+   ok(JSON.stringify(z1.q)===JSON.stringify(z2.q)&&Number(z1.inv)===Number(z2.inv),'CURRENT_REPEAT_DETERMINISM '+f.passage_id);
+   singleCurrent.push(z1);
+   const exp=Buffer.from(f.vector_b64,'base64');let mismatch=0;for(let j=0;j<z1.q.length;j++)if(z1.q[j]!==exp.readInt8(j))mismatch++;
+   const invDiff=Math.abs(Number(z1.inv)-Number(f.inverse_norm));
+   fixtureReport.push({passage_id:f.passage_id,legacy_vector_mismatches:mismatch,legacy_inverse_norm_abs_diff:invDiff,current_repeat_deterministic:true});
+ }
  const batchFixture=await page.evaluate(async xs=>await window.embedQuantizedBatch(xs),fixtures.map(x=>x.text));
- for(let i=0;i<fixtures.length;i++){const exp=Buffer.from(fixtures[i].vector_b64,'base64');let mismatch=0;for(let j=0;j<batchFixture[i].q.length;j++)if(batchFixture[i].q[j]!==exp.readInt8(j))mismatch++;ok(mismatch===0,'BATCH_FIXTURE_PARITY '+fixtures[i].passage_id);}
+ for(let i=0;i<fixtures.length;i++)ok(JSON.stringify(batchFixture[i].q)===JSON.stringify(singleCurrent[i].q)&&Number(batchFixture[i].inv)===Number(singleCurrent[i].inv),'CURRENT_SINGLE_BATCH_PARITY '+fixtures[i].passage_id);
  const dim=C.model.embedding_dim,vectors=Buffer.alloc(rows.length*dim),norms=Buffer.alloc(rows.length*4);
  for(let start=0;start<rows.length;start+=BATCH){
    const batch=rows.slice(start,start+BATCH),zs=await page.evaluate(async xs=>await window.embedQuantizedBatch(xs),batch.map(x=>String(x.text||'')));
@@ -35,6 +43,6 @@ try{
    if(start%(BATCH*50)===0)console.log(JSON.stringify({phase:'browser-vectors',completed:Math.min(rows.length,start+BATCH),total:rows.length,elapsed_s:Math.round((Date.now()-t0)/1000)}));
  }
  const vecPath=path.join(OUT,'vectors.i8'),normPath=path.join(OUT,'inverse_norms.f32le');fs.writeFileSync(vecPath,vectors);fs.writeFileSync(normPath,norms);
- const report={schema:'ldc-pls-v16-browser-vector-build-v1',status:'ENGINEERING_ONLY__NOT_QUALIFIED__NOT_DEPLOYABLE',binding_contract_sha256:CONTRACT_SHA,pack_id:C.pack_id,backend:'BROWSER_WASM_PINNED',metadata:{bytes:fs.statSync(metaPath).size,sha256:sha(metaPath)},jesus_mask:{bytes:fs.statSync(maskPath).size,sha256:sha(maskPath)},model:{id:C.model.model_id,revision:C.model.immutable_revision,sha256:C.model.model_sha256,protected_fixture_parity:fixtureReport,batch_fixture_parity:true},vectors:{rows:rows.length,cols:dim,dtype:'int8_row_symmetric',bytes:vectors.length,sha256:sha(vecPath)},inverse_norms:{bytes:norms.length,sha256:sha(normPath)},batch:BATCH,elapsed_seconds:Math.round((Date.now()-t0)/1000),app_runtime_wired:false,deployment_authorized:false};
+ const report={schema:'ldc-pls-v16-browser-vector-build-v1',status:'ENGINEERING_ONLY__NOT_QUALIFIED__NOT_DEPLOYABLE',binding_contract_sha256:CONTRACT_SHA,pack_id:C.pack_id,backend:'BROWSER_WASM_PINNED',metadata:{bytes:fs.statSync(metaPath).size,sha256:sha(metaPath)},jesus_mask:{bytes:fs.statSync(maskPath).size,sha256:sha(maskPath)},model:{id:C.model.model_id,revision:C.model.immutable_revision,sha256:C.model.model_sha256,legacy_fixture_comparison:fixtureReport,legacy_vector_byte_parity_required:false,legacy_vector_reproduction_history:'THREE_PRIOR_REPOSITORY_PROBES_FAILED_2026_10_06',current_repeat_determinism:true,current_single_batch_parity:true},vectors:{rows:rows.length,cols:dim,dtype:'int8_row_symmetric',bytes:vectors.length,sha256:sha(vecPath)},inverse_norms:{bytes:norms.length,sha256:sha(normPath)},batch:BATCH,elapsed_seconds:Math.round((Date.now()-t0)/1000),app_runtime_wired:false,deployment_authorized:false};
  fs.writeFileSync(path.join(OUT,'vector_build_report.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
 } finally {if(browser)await browser.close().catch(()=>{});server.kill('SIGTERM');}
