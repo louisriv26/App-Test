@@ -1,0 +1,30 @@
+name: LDC WIP E12 E20 verification
+on:
+  push:
+    branches: [ldc-v142-16-search-integrity-wip-20261007]
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: |
+          python3 -m http.server 8217 --bind 127.0.0.1 >/tmp/wip-http.log 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8217/index.html >/dev/null
+      - run: node .github/wip-e12-e20.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-e12-e20-evidence
+          path: wip-e12-e20.json
+          if-no-files-found: error
+          retention-days: 2
