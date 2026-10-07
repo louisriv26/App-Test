@@ -1,0 +1,61 @@
+name: LDC WIP PLS v16 sharded singleton vector build
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - '.github/wip-semantic-v16-vector-shard.mjs'
+      - '.github/wip-semantic-v16-vector-shard-merge.mjs'
+      - '.github/workflows/wip-semantic-v16-vector-sharded.yml'
+jobs:
+  shard:
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0,1,2,3,4,5,6,7]
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install --no-save playwright-core@1.55.0
+      - name: Build singleton vector shard
+        env:
+          PLS_V16_SHARD_COUNT: '8'
+          PLS_V16_SHARD_INDEX: ${{ matrix.shard }}
+          PLS_V16_SHARD_OUT: wip-pls-v16-vector-shards
+          PLS_V16_SHARD_PORT: ${{ 8800 + matrix.shard }}
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/wip-semantic-v16-vector-shard.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wip-pls-v16-vector-shard-${{ matrix.shard }}
+          path: wip-pls-v16-vector-shards/
+          if-no-files-found: error
+          retention-days: 2
+          compression-level: 6
+  merge:
+    needs: shard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wip-pls-v16-vector-shard-*
+          path: wip-pls-v16-vector-shards
+          merge-multiple: true
+      - name: Verify and merge all singleton shards
+        env:
+          PLS_V16_SHARD_COUNT: '8'
+          PLS_V16_SHARD_DIR: wip-pls-v16-vector-shards
+          PLS_V16_MERGED_OUT: wip-pls-v16-vector-sharded
+        run: node .github/wip-semantic-v16-vector-shard-merge.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wip-pls-v16-vector-sharded-build
+          path: wip-pls-v16-vector-sharded/
+          if-no-files-found: error
+          retention-days: 2
+          compression-level: 6
