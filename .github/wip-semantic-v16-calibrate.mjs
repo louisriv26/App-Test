@@ -19,9 +19,10 @@ const server=cp.spawn('python3',['-m','http.server',String(PORT),'--bind','127.0
 function targetRank(rows,target){const i=(rows||[]).findIndex(x=>String(x.entry_id)===String(target));return i<0?null:i+1;}
 function features(rows){return Hybrid.features(rows);}
 async function evaluateQuery(page,id,text,target=null){
- const raw=await page.evaluate(async q=>await window.embedQuery(q),text),vec=Float32Array.from(raw),opt={sourceMode:'enriched',volMin:0,volMax:0,dateIso:null,year:0,stableRef:null,jesus:false};
+ const raw=await page.evaluate(async q=>await window.embedQuery(q),text),raw2=await page.evaluate(async q=>await window.embedQuery(q),text);ok(raw.length===raw2.length&&raw.every((v,i)=>Object.is(Number(v),Number(raw2[i]))),'QUERY_SINGLETON_NONDETERMINISTIC '+id);
+ const vec=Float32Array.from(raw),opt={sourceMode:'enriched',volMin:0,volMax:0,dateIso:null,year:0,stableRef:null,jesus:false};
  const dense=index.denseSearch(vec,{...opt,candidatePool:160,maxResults:160,collapseThreshold:.5}),sparse=Hybrid.bm25Search(bm25,text,{...opt,maxCandidates:160}),fused=Hybrid.fuse(dense.dense_candidates,sparse.results,{maxResults:20}),f=features(fused);
- return {id,text_sha256:shaBytes(Buffer.from(text,'utf8')),target_entry_id:target,target_rank:target?targetRank(fused,target):null,top_entry_id:fused[0]?.entry_id||null,top20:fused.map(x=>x.entry_id),features:f,dense_candidates:dense.dense_candidates.length,bm25_candidates:sparse.results.length};
+ return {id,text_sha256:shaBytes(Buffer.from(text,'utf8')),query_singleton_deterministic:true,target_entry_id:target,target_rank:target?targetRank(fused,target):null,top_entry_id:fused[0]?.entry_id||null,top20:fused.map(x=>x.entry_id),features:f,dense_candidates:dense.dense_candidates.length,bm25_candidates:sparse.results.length};
 }
 try{
  await new Promise(r=>setTimeout(r,900));const exe=process.env.CHROME_PATH||'/usr/bin/google-chrome';ok(fs.existsSync(exe),'CHROME_NOT_FOUND');browser=await chromium.launch({headless:true,executablePath:exe,args:['--no-sandbox']});const page=await browser.newPage();page.setDefaultTimeout(180000);await page.goto('http://127.0.0.1:'+PORT+'/query.html',{waitUntil:'load'});await page.waitForFunction(()=>document.querySelector('#status')?.textContent==='module-ready');await page.evaluate(()=>window.initModel());await page.waitForFunction(()=>document.querySelector('#status')?.textContent==='ready');
