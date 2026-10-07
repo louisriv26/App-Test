@@ -1,0 +1,25 @@
+name: LDC E12 targeted WIP
+on:
+  push:
+    branches: [ldc-v142-16-search-integrity-wip-20261007]
+permissions:
+  contents: read
+jobs:
+  e12:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - run: node .github/e12-targeted.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e12-targeted
+          path: e12-targeted.json
+          retention-days: 1
