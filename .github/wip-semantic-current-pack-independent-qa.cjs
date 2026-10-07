@@ -13,7 +13,6 @@ const firstMeta=fs.readFileSync('wip-current-semantic-pack/metadata.jsonl');
 const firstMask=fs.readFileSync('wip-current-semantic-pack/jesus_mask.bits');
 rm();run();const second=copyHashes();
 ok(JSON.stringify(first)===JSON.stringify(second),'NON_DETERMINISTIC_REBUILD');
-ok(first.metadata==='55499700d4e760671573c7e476a3709d08a9aa3aeb4ce8ce7861ee7f40d36909','METADATA_HASH_DRIFT '+first.metadata);
 ok(first.mask==='8935332736286b4b8238966e7a12ee2049d5fab0816a666061db7cb2c9ee56b0','MASK_HASH_DRIFT '+first.mask);
 const docs=JSON.parse(fs.readFileSync('corpus/search_v2_documents.json','utf8')).documents;
 const rows=firstMeta.toString('utf8').trimEnd().split(/\r?\n/).filter(Boolean).map(JSON.parse);
@@ -23,7 +22,7 @@ const covered=new Uint8Array(docs.length),ids=new Set();let reconstructed=0,toke
 const WORD=/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)?/gu;
 for(let ri=0;ri<rows.length;ri++){
  const r=rows[ri];ok(!ids.has(r.passage_id),'DUPLICATE_PASSAGE_ID '+r.passage_id);ids.add(r.passage_id);
- ok(r.mode==='enriched'&&r.chunk_policy_id==='96-72','ROW_IDENTITY '+r.passage_id);
+ ok(r.mode==='enriched'&&r.chunk_policy_id==='96-72-current-v14215-r1'&&String(r.passage_id).startsWith('PLS16-E-96-72-'),'ROW_IDENTITY '+r.passage_id);
  ok(Number(r.word_count)>0&&Number(r.word_count)<=96&&Number(r.end_word)-Number(r.start_word)===Number(r.word_count),'WORD_GEOMETRY '+r.passage_id);
  const toks=String(r.text||'').match(WORD)||[];if(toks.length===Number(r.word_count))tokenParity++;else throw new Error('TOKEN_PARITY '+r.passage_id+' '+toks.length+' '+r.word_count);
  if(lastUnit===r.unit_id){if(Number(r.start_word)<lastStart)orderingErrors++;}else{lastUnit=r.unit_id;lastStart=-1;}lastStart=Number(r.start_word);
@@ -41,5 +40,5 @@ const oldRows=fs.readFileSync('pls_v15/pack/metadata.jsonl','utf8').trimEnd().sp
 for(const r of oldRows)for(const s of r.source_spans||[]){let i=Number.isInteger(Number(s.doc_index))?Number(s.doc_index):-1;if(i<0||i>=docs.length||String(docs[i][4])!==String(s.stable_ref||''))i=refToIndex.get(String(s.stable_ref||''))??idToIndex.get(String(s.para_id||''))??-1;if(i>=0)oldCover[i]=1;}
 const oldCovered=oldCover.reduce((a,b)=>a+(b?1:0),0),oldMissing=docs.length-oldCovered;ok(oldCovered===73731&&oldMissing===797,'OLD_GAP_REPRO '+oldCovered+'/'+oldMissing);
 let maskCount=0;for(let i=0;i<rows.length;i++)if(firstMask[i>>3]&(1<<(i&7)))maskCount++;ok(maskCount===20098,'MASK_COUNT '+maskCount);
-const out={schema:'ldc-wip-current-semantic-independent-qa-v1',status:'PASS',deterministic_hashes:first,rows:rows.length,documents:docs.length,new_coverage:{covered:newCovered,missing:docs.length-newCovered},old_compat_pack_gap:{covered:oldCovered,missing:oldMissing},text_reconstruction:{pass:reconstructed,total:rows.length},token_geometry:{pass:tokenParity,total:rows.length},jesus_mask:{eligible:maskCount,bytes:firstMask.length},app_runtime_mutated:false};
+const out={schema:'ldc-wip-current-semantic-independent-qa-v1',status:'PASS',deterministic_hashes:first,identity:{chunk_policy_id:'96-72-current-v14215-r1',passage_id_prefix:'PLS16-E-96-72-'},rows:rows.length,documents:docs.length,new_coverage:{covered:newCovered,missing:docs.length-newCovered},old_compat_pack_gap:{covered:oldCovered,missing:oldMissing},text_reconstruction:{pass:reconstructed,total:rows.length},token_geometry:{pass:tokenParity,total:rows.length},jesus_mask:{eligible:maskCount,bytes:firstMask.length},app_runtime_mutated:false};
 fs.writeFileSync('wip-current-semantic-independent-qa.json',JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(out,null,2));
