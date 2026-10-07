@@ -1,0 +1,29 @@
+name: LDC WIP current semantic analysis
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - '.github/wip-semantic-current-analysis.py'
+      - '.github/workflows/wip-semantic-current-analysis.yml'
+      - 'corpus/search_v2_documents.json'
+      - 'corpus/search_v2_entries.json'
+      - 'corpus/search_v21_topology.json'
+      - 'corpus/search_v2_manifest.json'
+      - 'corpus/search_v21_manifest.json'
+      - 'corpus/manifest.json'
+      - 'offline_manifest.json'
+      - 'pls_v15/pack/metadata.jsonl'
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Analyze exact current semantic inputs
+        run: python3 .github/wip-semantic-current-analysis.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wip-current-semantic-analysis
+          path: wip-semantic-current-analysis.json
+          if-no-files-found: error
+          retention-days: 2
