@@ -1,0 +1,24 @@
+name: LDC WIP R7 semantic reproduction
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - '.github/wip-semantic-r7-reproduction.cjs'
+      - '.github/workflows/wip-semantic-r7-reproduction.yml'
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reproduce frozen R7 96/72 passage texts
+        run: node .github/wip-semantic-r7-reproduction.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-r7-semantic-reproduction
+          path: wip-r7-semantic-text-reproduction.json
+          if-no-files-found: warn
+          retention-days: 2
