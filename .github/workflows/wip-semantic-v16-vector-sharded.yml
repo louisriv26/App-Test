@@ -26,7 +26,7 @@ jobs:
           PLS_V16_SHARD_COUNT: '8'
           PLS_V16_SHARD_INDEX: ${{ matrix.shard }}
           PLS_V16_SHARD_OUT: wip-pls-v16-vector-shards
-          PLS_V16_SHARD_PORT: ${{ 8800 + matrix.shard }}
+          PLS_V16_SHARD_PORT: '8768'
           CHROME_PATH: /usr/bin/google-chrome
         run: node .github/wip-semantic-v16-vector-shard.mjs
       - uses: actions/upload-artifact@v4
