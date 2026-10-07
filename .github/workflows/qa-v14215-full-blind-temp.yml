@@ -82,7 +82,7 @@ jobs:
             elif isinstance(o,list):
               for v in o: yield from walk_assets(v)
           for a in walk_assets(pm):
-            p=root/a['path']
+            p=root/'pls_v15'/a['path']
             if not p.is_file(): asset_fail.append({'path':a['path'],'reason':'missing'});continue
             b=p.read_bytes()
             if len(b)!=int(a['bytes']) or sha(b)!=a['sha256']: asset_fail.append({'path':a['path'],'reason':'mismatch'})
@@ -90,13 +90,16 @@ jobs:
           # fresh semantic coverage
           docs=json.loads((root/'corpus/search_v2_documents.json').read_text())
           dl=docs.get('documents',docs if isinstance(docs,list) else [])
-          meta=json.loads((root/'pls_v15/pack/passages.metadata.json').read_text())
-          passages=meta.get('passages',meta if isinstance(meta,list) else [])
+          passages=[]
+          with (root/'pls_v15/pack/metadata.jsonl').open(encoding='utf-8') as fh:
+            for line in fh:
+              line=line.strip()
+              if line: passages.append(json.loads(line))
           ids=set()
           for p in passages:
-            for s in p.get('source_spans',[]): 
-              if s.get('para_id'): ids.add(str(s['para_id']))
-          docids={str(d.get('id') or d.get('para_id')) for d in dl if (d.get('id') or d.get('para_id'))}
+            for sp in p.get('source_spans',[]):
+              if sp.get('para_id'): ids.add(str(sp['para_id']))
+          docids={str(d[0]) for d in dl if isinstance(d,list) and d}
           missing=sorted(docids-ids)
           out['semantic_coverage']={'search_documents':len(docids),'pls_passages':len(passages),'pls_source_para_ids':len(ids),'missing_para_ids':len(missing),'missing_pct':(100*len(missing)/len(docids) if docids else None),'sample_missing':missing[:20]}
           ck('coverage_recomputed',len(docids)==74528 and len(passages)==20236 and len(missing)==797,out['semantic_coverage'])
