@@ -1,0 +1,37 @@
+name: LDC WIP current semantic pack metadata
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - '.github/wip-semantic-current-pack-build.cjs'
+      - '.github/workflows/wip-semantic-current-pack-build.yml'
+      - 'search_engine_v2.js'
+      - 'search_exact_v21.js'
+      - 'corpus/manifest.json'
+      - 'corpus/search_v2_manifest.json'
+      - 'corpus/search_v21_manifest.json'
+      - 'corpus/search_v2_documents.json'
+      - 'corpus/search_v2_entries.json'
+      - 'corpus/search_v2_jesus_filter.json'
+      - 'corpus/search_v21_topology.json'
+      - 'pls_v15/pack/metadata.jsonl'
+      - 'pls_v15/pack/jesus_mask.bits'
+jobs:
+  build-metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build current-corpus 96/72 metadata and prove coverage
+        run: node .github/wip-semantic-current-pack-build.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wip-current-semantic-pack-metadata
+          path: |
+            wip-current-semantic-pack-build-report.json
+            wip-current-semantic-pack/engineering_manifest.json
+            wip-current-semantic-pack/metadata.jsonl
+            wip-current-semantic-pack/jesus_mask.bits
+          if-no-files-found: error
+          retention-days: 2
+          compression-level: 6
