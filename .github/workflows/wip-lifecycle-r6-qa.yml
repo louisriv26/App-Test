@@ -1,0 +1,23 @@
+name: LDC WIP semantic lifecycle R6 failure injection
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - 'search_semantic_pack_lifecycle_r6.js'
+      - '.github/wip-lifecycle-r6-qa.cjs'
+      - '.github/workflows/wip-lifecycle-r6-qa.yml'
+jobs:
+  lifecycle-failure-injection:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Challenge install rollback, restore and removal paths
+        run: node .github/wip-lifecycle-r6-qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-lifecycle-r6-qa
+          path: wip-lifecycle-r6-qa.json
+          if-no-files-found: error
+          retention-days: 2
