@@ -3,6 +3,7 @@ const Exact=require('../search_exact_v21.js');
 const Core=require('../search_engine_v2.js');
 
 const OUT_DIR='wip-current-semantic-pack';
+const CHUNK_POLICY_ID='96-72-current-v14215-r1',PASSAGE_ID_PREFIX='PLS16-E-96-72-';
 fs.mkdirSync(OUT_DIR,{recursive:true});
 const EXPECTED=Object.freeze({
  'corpus/manifest.json':'92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b',
@@ -122,8 +123,8 @@ for(const u of units){
   const e=entRec.row;
   rowJesus.push(authority.touchesJesus(slice));
   rows.push({
-   passage_id:'E-96-72-'+String(ordinal++).padStart(6,'0'),
-   chunk_policy_id:'96-72',
+   passage_id:PASSAGE_ID_PREFIX+String(ordinal++).padStart(6,'0'),
+   chunk_policy_id:CHUNK_POLICY_ID,
    mode:'enriched',
    unit_id:String(u.id),
    entry_id:String(u.entry_id),
@@ -259,7 +260,7 @@ const report={
  status:'ENGINEERING_ONLY__NOT_QUALIFIED__NOT_DEPLOYABLE',
  exact_text_authority:'search_exact_v21.js nearAuthority enriched logical-unit token/span stream',
  current_authorities:EXPECTED,
- chunk_policy:{id:'96-72',window_words:96,stride_words:72,tail_anchor:'ADD_MAX_0_N_MINUS_96_IF_DISTINCT',ordering:'ASCENDING_START_WITHIN_ENRICHED_UNIT_ORDER'},
+ chunk_policy:{id:CHUNK_POLICY_ID,passage_id_prefix:PASSAGE_ID_PREFIX,window_words:96,stride_words:72,tail_anchor:'ADD_MAX_0_N_MINUS_96_IF_DISTINCT',ordering:'ASCENDING_START_WITHIN_ENRICHED_UNIT_ORDER'},
  counts:{documents:docs.length,entries:ents.length,enriched_units:units.length,windows:rows.length,jesus_windows:jesusRows,covered_documents:covered,missing_documents:missing.length,empty_token_units:emptyTokenUnits,visible_offset_failures:visibleFailures},
  coverage_fraction:covered/docs.length,
  coverage_pass:covered===docs.length,
