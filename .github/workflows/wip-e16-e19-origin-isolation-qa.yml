@@ -1,0 +1,30 @@
+name: LDC WIP E16 E19 origin isolation QA
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - '.github/wip-e16-e19-origin-isolation-qa.mjs'
+      - '.github/workflows/wip-e16-e19-origin-isolation-qa.yml'
+      - 'docs/LDC_v14216_E16_E19_ORIGIN_ISOLATION_PLAN.md'
+jobs:
+  origin-isolation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Prove origin isolation and same-origin path collision control
+        run: node .github/wip-e16-e19-origin-isolation-qa.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-e16-e19-origin-isolation-qa
+          path: wip-e16-e19-origin-isolation-qa.json
+          if-no-files-found: error
+          retention-days: 2
