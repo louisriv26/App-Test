@@ -52,13 +52,89 @@
     "passage_prefix": "passage: ",
     "max_length": 512,
     "quantization": "int8_row_symmetric_round_127_over_maxabs",
-    "inverse_norm": "1/sqrt(sum(q_i^2))"
+    "inverse_norm": "1/sqrt(sum(q_i^2))",
+    "tokenizer_and_config_files": [
+      {
+        "path": "pls_v15/model/config.json",
+        "bytes": 658,
+        "sha256": "cb99455288675345e1a4f411438d5d0adbba5fbd3a67ea4fb03c015433b996c1"
+      },
+      {
+        "path": "pls_v15/model/quant_config.json",
+        "bytes": 674,
+        "sha256": "59d175f15264115f18c698d76e443b5d49fc6c8c599911c421405ef4f236e87d"
+      },
+      {
+        "path": "pls_v15/model/tokenizer.json",
+        "bytes": 17082730,
+        "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
+      },
+      {
+        "path": "pls_v15/model/sentencepiece.bpe.model",
+        "bytes": 5069051,
+        "sha256": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865"
+      },
+      {
+        "path": "pls_v15/model/tokenizer_config.json",
+        "bytes": 443,
+        "sha256": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+      },
+      {
+        "path": "pls_v15/model/special_tokens_map.json",
+        "bytes": 167,
+        "sha256": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7"
+      }
+    ],
+    "delivery": {
+      "strategy": "FOUR_STATIC_PARTS_REASSEMBLED",
+      "original_model_bytes": 118054593,
+      "original_model_sha256": "4d24e2bc01a447951524466ef533e52944bf48509e6552810bcee1a2711cb02c",
+      "parts": [
+        {
+          "path": "pls_v15/model/onnx/model_int8.onnx.part01",
+          "bytes": 33554432,
+          "sha256": "9c7a0217a704e04730bfab95b5e7bb30fbfce8e7b52d3ff99e1c3e27b61ab154"
+        },
+        {
+          "path": "pls_v15/model/onnx/model_int8.onnx.part02",
+          "bytes": 33554432,
+          "sha256": "29568675ff4b34bd1bc095c7d1cea2199ec3c1982abe55774abb581dccf348f9"
+        },
+        {
+          "path": "pls_v15/model/onnx/model_int8.onnx.part03",
+          "bytes": 33554432,
+          "sha256": "e7c83ce9252e21adda1c217a34227b7908373e60f8a4d9372a7de227e3bf09be"
+        },
+        {
+          "path": "pls_v15/model/onnx/model_int8.onnx.part04",
+          "bytes": 17391297,
+          "sha256": "3d139d822eda2faa724472b251e7773dc85cd6be643388367cc10346f1fe57ca"
+        }
+      ]
+    }
   },
   "runtime": {
     "transformers_js_version": "3.8.1",
     "transformers_min_js_sha256": "aa5002b70e789798da263f5f99c62bd3e8fcd0c119258a493c40c180648365fa",
     "ort_wasm_mjs_sha256": "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9",
-    "ort_wasm_sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39"
+    "ort_wasm_sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
+    "files": [
+      {
+        "path": "pls_v15/runtime/transformers.min.js",
+        "bytes": 888173,
+        "sha256": "aa5002b70e789798da263f5f99c62bd3e8fcd0c119258a493c40c180648365fa"
+      },
+      {
+        "path": "pls_v15/runtime/ort-wasm-simd-threaded.jsep.mjs",
+        "bytes": 44484,
+        "sha256": "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9"
+      },
+      {
+        "path": "pls_v15/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "bytes": 21596019,
+        "sha256": "c46655e8a94fc45338d4cb2b840475f88e5012d524509916e505079c00bfa39"
+      }
+    ]
   },
   "retrieval": {
     "id": "DENSE96_72_PLUS_BM25_96_72_EQUAL_RRF60",
