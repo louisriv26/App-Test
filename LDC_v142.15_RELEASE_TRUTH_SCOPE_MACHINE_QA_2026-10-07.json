@@ -1,16 +1,15 @@
 {
-  "schema": "ldc-v142.15-release-truth-scope-machine-qa-v1",
+  "schema": "ldc-v142.15-release-truth-scope-machine-qa-v2-final-runtime",
   "date": "2026-10-07",
   "candidate_public_version": "142.15",
   "technical_identity": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
-  "runtime_candidate_commit": "32dbb9688a4389359b73db6e2f91604246ff095d",
   "direct_predecessor_public_version": "142.14",
   "direct_predecessor_package_sha256": "f02098cf3432c0373c9fbd698b0551d79b3a024f739883a501293a6932ce24cd",
   "production_baseline_public_version": "142.10",
   "scope": "E-15 public release-truth wording + E-07 Par le sens documentary-scope disclosure + mechanical release identity only",
   "summary": {
-    "total": 25,
-    "pass": 25,
+    "total": 27,
+    "pass": 27,
     "fail": 0
   },
   "checks": [
@@ -143,6 +142,16 @@
       "name": "predecessor_bound_exactly",
       "pass": true,
       "detail": "f02098cf3432c0373c9fbd698b0551d79b3a024f739883a501293a6932ce24cd"
+    },
+    {
+      "name": "freeze_metadata_current",
+      "pass": true,
+      "detail": "V142_15_PRE_PHYSICAL_FROZEN__MACHINE_QA_AND_INDEPENDENT_CHANGED_SURFACE_CHALLENGE_PASS__DIRECT_EXACT_V142_14_PREDECESSOR__E07_E15_AND_RELEASE_IDENTITY_ONLY__PROTECTED_CORPUS_SEARCH_PLS_V15_PROVENANCE_DOCUMENTARY_RESOLVER_SESSION_BACKUP_USER_SCHEMA_PRESERVED__APP_TEST_AND_PHYSICAL_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED"
+    },
+    {
+      "name": "mutation_authority_none",
+      "pass": true,
+      "detail": "NONE_AFTER_FREEZE__ANY_MATERIAL_BYTE_CHANGE_CREATES_SUCCESSOR"
     }
   ],
   "open_external_gates": [
@@ -154,5 +163,6 @@
     "VoiceOver",
     "E-01 repeated Par le sens memory/reload challenge on oldest supported iPhone/iPad"
   ],
-  "production_authorized": false
+  "production_authorized": false,
+  "exact_frozen_runtime_commit": "b2d0a75dcae90f56f2a107f8a455faf6c98f3720"
 }
