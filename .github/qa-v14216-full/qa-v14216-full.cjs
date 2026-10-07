@@ -153,8 +153,8 @@ function staticServer(){
 async function upgrade(){
   try{
     const old='/tmp/ldc14210-tree',cur='/tmp/ldc14215-tree';fs.rmSync(old,{recursive:true,force:true});fs.rmSync(cur,{recursive:true,force:true});fs.mkdirSync(old,{recursive:true});fs.mkdirSync(cur,{recursive:true});
-    cp.execFileSync('bash',['-lc',`git archive 6c202baf5090c6135d366a18ecc0b2447e432e9f | tar -x -C ${old}`],{stdio:'inherit'});
-    cp.execFileSync('bash',['-lc',`git archive 572d9df7927765b575a76eaee98fd3cc9d455e74 | tar -x -C ${cur}`],{stdio:'inherit'});
+    cp.execFileSync('bash',['-lc',`git archive 572d9df7927765b575a76eaee98fd3cc9d455e74 | tar -x -C ${old}`],{stdio:'inherit'});
+    cp.execFileSync('bash',['-lc',`git archive 6c202baf5090c6135d366a18ecc0b2447e432e9f | tar -x -C ${cur}`],{stdio:'inherit'});
     fs.writeFileSync('/tmp/ldc14215_active_root',old);
     const server=staticServer();await sleep(1500);
     const profile=path.join(process.cwd(),'.qa14215-upgrade-profile');fs.rmSync(profile,{recursive:true,force:true});
