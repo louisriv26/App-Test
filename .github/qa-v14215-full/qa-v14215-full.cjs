@@ -70,9 +70,14 @@ async function userState(p,entryId){
   const note=await p.evaluate(async()=>{
     const para=document.querySelector('#reader-body .para-fragment');
     if(!para)return {saved:false,reason:'no para'};
-    const walker=document.createTreeWalker(para,NodeFilter.SHOW_TEXT);let n=null;while(walker.nextNode()){if((walker.currentNode.textContent||'').trim().length>12){n=walker.currentNode;break;}}
-    if(!n)return {saved:false,reason:'no text'};
-    const r=document.createRange();r.setStart(n,0);r.setEnd(n,Math.min(12,n.textContent.length));const s=getSelection();s.removeAllRanges();s.addRange(r);handleSelectionEnd();await new Promise(x=>setTimeout(x,120));showNoteSheet();document.getElementById('note-input').value='QA v142.15 note sentinel';await saveNote();const all=await dbGetAll('notes');return {saved:all.some(x=>x.text==='QA v142.15 note sentinel'),count:all.length};
+    const pid=para.dataset.paraId;
+    if(!pid)return {saved:false,reason:'no para id'};
+    showParagraphContext(pid);
+    contextNote();
+    document.getElementById('note-input').value='QA v142.15 note sentinel';
+    await saveNote();
+    const all=await dbGetAll('notes');
+    return {saved:all.some(x=>x.text==='QA v142.15 note sentinel'),count:all.length,para_id:pid};
   });
   const pos=await p.evaluate(async()=>{
     const sc=document.getElementById('reader-scroll');sc.scrollTop=Math.min(700,Math.max(0,sc.scrollHeight-sc.clientHeight));onReaderScroll();await new Promise(r=>setTimeout(r,900));if(typeof flushActiveReaderSession==='function')await flushActiveReaderSession({invalidate:false}).catch(()=>{});const rows=await dbGetAll('reading_pos');return {count:rows.length,main:rows.find(x=>x.key==='main')||null,scrollTop:sc.scrollTop};
@@ -180,7 +185,7 @@ async function upgrade(){
     lexical:(out.remote.search?.initial?.cards||0)>0&&out.remote.search?.present,
     semantic:(out.remote.semantic_natural?.cards||0)>0,
     offline:out.local.offline_prepare?.state==='READY'&&out.local.offline_warm?.nav?.entries>0&&(out.local.offline_warm?.lex?.cards||0)>0&&out.local.offline_cold?.navok,
-    upgrade:out.upgrade?.pre?.app==='v2.19.142.10-R1B-PLS-UX-CLOSURE'&&out.upgrade?.post?.app===EXPECT_APP&&out.upgrade?.post?.local==='keep'&&out.upgrade?.post?.idb==='keep'&&out.upgrade?.activation?.changes>=1&&(out.upgrade?.lex?.cards||0)>0,
+    upgrade:out.upgrade?.pre?.app==='v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE'&&out.upgrade?.post?.app===EXPECT_APP&&out.upgrade?.post?.local==='keep'&&out.upgrade?.post?.idb==='keep'&&out.upgrade?.activation?.changes>=1&&(out.upgrade?.lex?.cards||0)>0,
     webkit:out.webkit?.identity?.app===EXPECT_APP&&(out.webkit?.lexical?.cards||0)>0&&out.webkit?.journey?.reader?.paras>0
   };
   out.critical=critical;
