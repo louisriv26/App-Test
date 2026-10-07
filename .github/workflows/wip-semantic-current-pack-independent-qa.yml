@@ -1,0 +1,30 @@
+name: LDC WIP current semantic independent QA
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - '.github/wip-semantic-current-pack-build.cjs'
+      - '.github/wip-semantic-current-pack-independent-qa.cjs'
+      - '.github/workflows/wip-semantic-current-pack-independent-qa.yml'
+      - 'pls_v16/BINDING_CONTRACT.json'
+      - 'corpus/search_v2_documents.json'
+      - 'corpus/search_v2_entries.json'
+      - 'corpus/search_v2_jesus_filter.json'
+      - 'corpus/search_v21_topology.json'
+      - 'pls_v15/pack/metadata.jsonl'
+jobs:
+  independent-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild twice and independently challenge E-06 closure
+        run: node .github/wip-semantic-current-pack-independent-qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-current-semantic-independent-qa
+          path: wip-current-semantic-independent-qa.json
+          if-no-files-found: error
+          retention-days: 2
