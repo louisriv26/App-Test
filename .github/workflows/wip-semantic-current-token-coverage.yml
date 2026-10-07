@@ -1,0 +1,25 @@
+name: LDC WIP current semantic token coverage
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - '.github/wip-semantic-current-token-coverage.cjs'
+      - '.github/workflows/wip-semantic-current-token-coverage.yml'
+      - '.github/wip-semantic-current-pack-build.cjs'
+      - 'corpus/search_v2_documents.json'
+      - 'corpus/search_v21_topology.json'
+jobs:
+  token-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prove every current enriched-topology token is covered
+        run: node .github/wip-semantic-current-token-coverage.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-current-semantic-token-coverage
+          path: wip-current-semantic-token-coverage.json
+          if-no-files-found: error
+          retention-days: 2
