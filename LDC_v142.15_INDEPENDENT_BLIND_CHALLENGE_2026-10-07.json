@@ -1,8 +1,7 @@
 {
-  "schema": "ldc-v142.15-independent-blind-challenge-v1",
+  "schema": "ldc-v142.15-independent-blind-challenge-v2-final-runtime",
   "date": "2026-10-07",
   "candidate_public_version": "142.15",
-  "runtime_candidate_commit": "32dbb9688a4389359b73db6e2f91604246ff095d",
   "principle": "Trust no predecessor PASS label; challenge the actual v142.15 changed surface and protected boundaries.",
   "summary": {
     "total": 12,
@@ -76,6 +75,7 @@
       "detail": null
     }
   ],
-  "verdict": "PASS_BOUNDED_PRE_PHYSICAL__EXTERNAL_DEVICE_PWA_VOICEOVER_GATES_OPEN",
-  "production_authorized": false
+  "verdict": "PASS_PRE_PHYSICAL__EXTERNAL_APP_TEST_PWA_DEVICE_VOICEOVER_GATES_OPEN",
+  "production_authorized": false,
+  "exact_frozen_runtime_commit": "b2d0a75dcae90f56f2a107f8a455faf6c98f3720"
 }
