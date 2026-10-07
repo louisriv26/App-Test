@@ -23,12 +23,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install exact embedding runtime
-        run: npm install --no-save @huggingface/transformers@3.8.1
+      - name: Install browser driver and verify Chrome
+        run: |
+          npm install --no-save playwright-core@1.55.0
+          command -v google-chrome
       - name: Build current-corpus vectors
         env:
           PLS_V16_OUT: wip-pls-v16-vector-build
-          PLS_V16_BATCH: '16'
+          PLS_V16_BATCH: '8'
         shell: bash
         run: |
           set -o pipefail
