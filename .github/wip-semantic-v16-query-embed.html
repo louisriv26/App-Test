@@ -1,0 +1,21 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>LDC PLS v16 query encoder</title>
+<pre id="status">boot</pre>
+<script type="module">
+import {AutoTokenizer,AutoModel,env,mean_pooling} from './runtime/transformers.min.js';
+const REV='761b726dd34fb83930e26aab4e9ac3899aa1fa78',DIM=384,MAXLEN=512;
+env.allowRemoteModels=false;env.allowLocalModels=true;env.localModelPath=new URL('./',location.href).href;env.useBrowserCache=false;env.useFSCache=false;
+if(env.backends?.onnx?.wasm){env.backends.onnx.wasm.numThreads=1;env.backends.onnx.wasm.proxy=false;env.backends.onnx.wasm.wasmPaths=new URL('./runtime/',location.href).href;}
+let tokenizer=null,model=null,loading=null;
+async function init(){
+ if(tokenizer&&model)return true;
+ if(!loading)loading=(async()=>{document.getElementById('status').textContent='loading-model';tokenizer=await AutoTokenizer.from_pretrained('model',{local_files_only:true,revision:REV});model=await AutoModel.from_pretrained('model',{local_files_only:true,revision:REV,subfolder:'onnx',model_file_name:'model',dtype:'int8',device:'wasm'});document.getElementById('status').textContent='ready';return true;})();
+ return loading;
+}
+window.initModel=init;
+window.embedQuery=async text=>{
+ await init();const t=await tokenizer(['query: '+String(text||'')],{padding:true,truncation:true,max_length:MAXLEN});const out=await model(t),h=out.last_hidden_state||out[Object.keys(out)[0]];if(!h)throw new Error('MODEL_OUTPUT');const pooled=mean_pooling(h,t.attention_mask).normalize(2,-1),v=Array.from(pooled.data);if(v.length!==DIM)throw new Error('QUERY_DIMENSION '+v.length);return v;
+};
+document.getElementById('status').textContent='module-ready';
+</script>
