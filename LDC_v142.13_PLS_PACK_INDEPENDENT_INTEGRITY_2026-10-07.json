@@ -1,0 +1,71 @@
+{
+  "schema": "ldc-v142.13-pls-pack-independent-integrity-v2",
+  "summary": {
+    "total": 8,
+    "pass": 8,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "name": "prototype_manifest_file_ledger_exact",
+      "pass": true,
+      "detail": {
+        "file_count": 20,
+        "bad": []
+      }
+    },
+    {
+      "name": "model_four_part_reassembly_exact",
+      "pass": true,
+      "detail": {
+        "bytes": 118054593,
+        "sha256": "4d24e2bc01a447951524466ef533e52944bf48509e6552810bcee1a2711cb02c"
+      }
+    },
+    {
+      "name": "dense_vector_geometry",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "inverse_norm_geometry",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "jesus_mask_geometry",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "excluded_rows_count",
+      "pass": true,
+      "detail": {
+        "actual": 347,
+        "file_declared": 347,
+        "manifest": 347
+      }
+    },
+    {
+      "name": "metadata_rows_count_unique",
+      "pass": true,
+      "detail": {
+        "rows": 20236,
+        "unique": 20236,
+        "declared": 20236
+      }
+    },
+    {
+      "name": "metadata_all_source_spans_exact_current_corpus",
+      "pass": true,
+      "detail": {
+        "errors": [],
+        "spans_checked": 119021,
+        "rows_with_supplement_span": 266
+      }
+    }
+  ],
+  "candidate": "v2.19.142.13-R1B-RELEASE-TRUTH-CLOSURE",
+  "date": "2026-10-07",
+  "interpretation": "PASS for packaged PLS asset integrity/corpus compatibility; does not substitute for full real-browser inference testing."
+}

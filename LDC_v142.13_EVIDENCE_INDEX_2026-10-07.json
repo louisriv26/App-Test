@@ -1,0 +1,29 @@
+{
+  "schema": "ldc-v142.13-evidence-index-v1",
+  "date": "2026-10-07",
+  "candidate": "v2.19.142.13-R1B-RELEASE-TRUTH-CLOSURE",
+  "current_qualification_evidence": [
+    "LDC_v142.13_STATIC_AND_PROTECTED_INTEGRITY_QA_2026-10-07.json",
+    "LDC_v142.13_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
+    "LDC_v142.13_PLS_PACK_INDEPENDENT_INTEGRITY_2026-10-07.json",
+    "LDC_v142.13_RELEASE_TRUTH_RECONCILIATION_2026-10-07.json",
+    "LDC_v142.13_HEADLESS_BROWSER_QA_2026-10-07.json",
+    "LDC_v142.13_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json"
+  ],
+  "superseded_or_historical_predecessor_evidence": [
+    "LDC_v142.11_DOCUMENTARY_READING_UX_ADVERSARIAL_REVIEW_2026-10-06.json",
+    "LDC_v142.11_DOCUMENTARY_READING_UX_MACHINE_QA_2026-10-06.json",
+    "LDC_v142.11_DOCUMENTARY_RESOLVER_STATE_QA_2026-10-06.json",
+    "LDC_v142.11_HEADLESS_BROWSER_QA_2026-10-06.json",
+    "LDC_v142.11_PROTECTED_FUNCTION_IDENTITY_2026-10-06.json",
+    "LDC_v142.11_PROTECTED_SURFACE_BYTE_IDENTITY_2026-10-06.json",
+    "LDC_v142.11_PUBLIC_PROVENANCE_LABEL_AUDIT_2026-10-06.json",
+    "LDC_v142.12_DOCUMENTARY_CONSISTENCY_ADVERSARIAL_REVIEW_2026-10-07.json",
+    "LDC_v142.12_DOCUMENTARY_CONSISTENCY_MACHINE_QA_2026-10-07.json",
+    "LDC_v142.12_HEADLESS_BROWSER_QA_2026-10-07.json",
+    "LDC_v142.12_PUBLIC_PROVENANCE_CONSISTENCY_AUDIT_2026-10-07.json",
+    "LDC_v142.12_TWO_BASELINE_INTEGRITY_2026-10-07.json"
+  ],
+  "qualification_rule": "Only v142.13 current qualification evidence plus exact primary candidate bytes govern v142.13. Earlier PASS labels are historical claims and do not transfer.",
+  "state_document_location": "external to deployment ZIP; generated after exact ZIP freeze so it can bind the final ZIP SHA-256."
+}

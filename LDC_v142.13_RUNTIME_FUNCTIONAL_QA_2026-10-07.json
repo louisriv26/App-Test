@@ -1,0 +1,185 @@
+{
+  "schema": "ldc-v142.13-runtime-functional-qa-v1",
+  "date": "2026-10-07",
+  "candidate": "v2.19.142.13-R1B-RELEASE-TRUTH-CLOSURE",
+  "documentary_resolver_state": {
+    "status": "PASS",
+    "evidence": "DOCUMENTARY_RUNTIME_TESTS PASS 10/10"
+  },
+  "search_v2_packaged_worker": {
+    "status": "PASS",
+    "queries": [
+      {
+        "query": "Fiat",
+        "opt": {
+          "mode": "enriched"
+        },
+        "ok": true,
+        "error": null,
+        "total": 2690,
+        "metadataTotal": 129,
+        "near": {
+          "eligible": false,
+          "total": 0
+        },
+        "first": {
+          "stable_ref": "LDC.T02.1899-09-01.E001.P002",
+          "volume": 2,
+          "matchType": "exact",
+          "is_supplement": false
+        }
+      },
+      {
+        "query": "Tome 12",
+        "opt": {
+          "mode": "enriched"
+        },
+        "ok": true,
+        "error": null,
+        "total": 0,
+        "metadataTotal": 163,
+        "near": {
+          "eligible": false,
+          "total": 0
+        }
+      },
+      {
+        "query": "4 janvier 1919",
+        "opt": {
+          "mode": "enriched"
+        },
+        "ok": true,
+        "error": null,
+        "total": 0,
+        "metadataTotal": 1,
+        "near": {
+          "eligible": false,
+          "total": 0
+        }
+      },
+      {
+        "query": "LDC.T12",
+        "opt": {
+          "mode": "enriched"
+        },
+        "ok": true,
+        "error": null,
+        "total": 0,
+        "metadataTotal": 163,
+        "near": {
+          "eligible": false,
+          "total": 0
+        }
+      },
+      {
+        "query": "volonté divine",
+        "opt": {
+          "mode": "enriched"
+        },
+        "ok": true,
+        "error": null,
+        "total": 2872,
+        "metadataTotal": 830,
+        "near": {
+          "eligible": false,
+          "total": 0
+        },
+        "first": {
+          "stable_ref": "LDC.T29.E0031.P018",
+          "volume": 29,
+          "matchType": "exact",
+          "is_supplement": false
+        }
+      },
+      {
+        "query": "volonté divine",
+        "opt": {
+          "mode": "aflp"
+        },
+        "ok": true,
+        "error": null,
+        "total": 2866,
+        "metadataTotal": 826,
+        "near": {
+          "eligible": false,
+          "total": 0
+        },
+        "first": {
+          "stable_ref": "LDC.T29.E0031.P018",
+          "volume": 29,
+          "matchType": "exact",
+          "is_supplement": false
+        }
+      },
+      {
+        "query": "volonté divine",
+        "opt": {
+          "mode": "additions"
+        },
+        "ok": true,
+        "error": null,
+        "total": 6,
+        "metadataTotal": 20,
+        "near": {
+          "eligible": false,
+          "total": 0
+        },
+        "first": {
+          "stable_ref": "LDCSUP.T06.1904-06-17.SUPT2.M2-0082.F01.P001",
+          "volume": 6,
+          "matchType": "exact",
+          "is_supplement": true
+        }
+      }
+    ]
+  },
+  "service_worker_upgrade_offline_simulation": {
+    "status": "PASS",
+    "result": {
+      "status": "PASS",
+      "install": true,
+      "upgrade_from_v14210": true,
+      "old_caches_removed": true,
+      "persistent_offline_preserved": true,
+      "offline_navigation_fallback": true,
+      "cache_count": 3
+    }
+  },
+  "par_le_sens_runtime_import": {
+    "status": "PASS_IMPORT_ONLY",
+    "available_reported": true
+  },
+  "par_le_sens_full_inference": {
+    "status": "NOT_TESTABLE_IN_NODE_ENVIRONMENT",
+    "environment_error": "Unsupported device: wasm; browser-oriented runtime expects a supported execution backend",
+    "interpretation": "environment limitation; not evidence of application failure"
+  },
+  "local_http_exact_byte_serve": {
+    "status": "PASS",
+    "served_index_sha256": "00a0d0f04148cb2290fbf809191a643d0ae46f74528146c17c1347480e833abd",
+    "candidate_index_sha256": "00a0d0f04148cb2290fbf809191a643d0ae46f74528146c17c1347480e833abd"
+  },
+  "headless_chromium_navigation": {
+    "status": "NOT_FULLY_TESTABLE",
+    "result": "timeout before DOM output in container",
+    "stderr_tail": [
+      "[5475:5504:1007/044409.036938:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")",
+      "[5475:5475:1007/044409.123496:ERROR:dbus/object_proxy.cc:573] Failed to call method: org.freedesktop.DBus.Properties.GetAll: object_path= /org/freedesktop/UPower/devices/DisplayDevice: unknown error type: ",
+      "[5475:5475:1007/044409.125020:ERROR:dbus/object_proxy.cc:573] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: ",
+      "[5475:5504:1007/044409.125131:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")",
+      "[5475:5475:1007/044409.135512:ERROR:dbus/object_proxy.cc:573] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: ",
+      "[5475:5504:1007/044409.135604:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")",
+      "[5475:5475:1007/044409.139337:ERROR:dbus/object_proxy.cc:573] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: ",
+      "[5475:5504:1007/044409.139464:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")",
+      "[5475:5475:1007/044409.139848:ERROR:dbus/object_proxy.cc:573] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: ",
+      "[5475:5504:1007/044409.139945:ERROR:dbus/bus.cc:406] Failed to connect to the bus: Could not parse server address: Unknown address type (examples of valid types are \"tcp\" and on UNIX \"unix\")",
+      "[5475:5475:1007/044409.140925:ERROR:dbus/object_proxy.cc:573] Failed to call method: org.freedesktop.DBus.NameHasOwner: object_path= /org/freedesktop/DBus: unknown error type: ",
+      "[5475:5475:1007/044423.692370:ERROR:content/common/zygote/zygote_communication_linux.cc:293] Failed to send GetTerminationStatus message to zygote"
+    ]
+  },
+  "physical_ios_ipados_voiceover_installed_pwa": {
+    "status": "NOT_TESTED",
+    "gate": "OPEN"
+  },
+  "overall_runtime_disposition": "NOT_FULLY_TESTABLE__TESTABLE_CORE_PATHS_PASS__REAL_BROWSER_FULL_PLS_INFERENCE_HOSTED_PWA_AND_PHYSICAL_DEVICE_GATES_OPEN"
+}

@@ -1,0 +1,157 @@
+{
+  "schema": "ldc-v142.13-independent-blind-challenge-v1",
+  "date": "2026-10-07",
+  "candidate": "v2.19.142.13-R1B-RELEASE-TRUTH-CLOSURE",
+  "method": "Fresh falsification-focused challenge after all known corrections; previous PASS labels not accepted as evidence.",
+  "summary": {
+    "total": 22,
+    "pass": 22,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "name": "runtime_delta_only_four_release_files_pre_evidence",
+      "pass": true,
+      "detail": [
+        "index.html",
+        "offline_manifest.json",
+        "sw.js",
+        "version.json"
+      ]
+    },
+    {
+      "name": "public_diagnostic_no_nonqualified_production",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "public_diagnostic_no_prototype_personnel",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "public_no_three_mode_selector_label",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "source_mode_user_labels_no_public_enrichi",
+      "pass": true,
+      "detail": {
+        "aflp": "PRINCIPAL uniquement",
+        "additions": "COMPLÉMENTS uniquement",
+        "enriched": "LECTURE NORMALE"
+      }
+    },
+    {
+      "name": "source_mode_internal_values_preserved",
+      "pass": true,
+      "detail": [
+        "aflp",
+        "additions",
+        "enriched"
+      ]
+    },
+    {
+      "name": "reading_contract_matches_documentary_model",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "par_le_sens_current_production_truth",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "legacy_semantic_v3_separate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "offline_note_does_not_equate_standard_offline_exclusion_with_production_rejection",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "generic_rejected_predecessor_fields_absent",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "historical_rejected_v37_scoped",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "search_words_gate_current",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "current_production_binding_scoped_to_v14210",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "candidate_production_not_authorized",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "sw_cache_namespace_current",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "offline_manifest_hash_bound",
+      "pass": true,
+      "detail": [
+        "91c9e1d61d54b80da0473ed0fef30ee049837141f25231bb829419ca1af585fd",
+        "91c9e1d61d54b80da0473ed0fef30ee049837141f25231bb829419ca1af585fd"
+      ]
+    },
+    {
+      "name": "protected_surfaces_exact",
+      "pass": true,
+      "detail": {
+        "files_checked": 243,
+        "mismatches_vs_v142_10": 0,
+        "mismatches_vs_v142_12": 0,
+        "status": "PASS"
+      }
+    },
+    {
+      "name": "documentary_runtime_fresh_pass",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "search_runtime_fresh_pass",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "service_worker_runtime_fresh_pass",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "pls_pack_integrity_fresh_pass",
+      "pass": true,
+      "detail": {
+        "total": 8,
+        "pass": 8,
+        "fail": 0
+      }
+    }
+  ],
+  "new_material_defect_after_final_corrections": null,
+  "untestable_classes": [
+    "real browser DOM/rendering/interactions in this container",
+    "full Par le sens WASM/browser inference",
+    "hosted exact-byte App-Test binding",
+    "installed PWA/offline/update on real browser",
+    "physical iPhone/iPad/VoiceOver; representative Android if release scope includes Android"
+  ],
+  "disposition": "NOT_FULLY_TESTABLE__NO_UNRESOLVED_MATERIAL_DEFECT_FOUND_IN_TESTABLE_SCOPE__EXTERNAL_RUNTIME_AND_DEVICE_GATES_OPEN"
+}

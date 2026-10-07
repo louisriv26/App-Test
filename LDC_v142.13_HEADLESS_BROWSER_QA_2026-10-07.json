@@ -1,0 +1,22 @@
+{
+  "schema": "ldc-v142.13-headless-browser-qa-v1",
+  "date": "2026-10-07",
+  "candidate": "v2.19.142.13-R1B-RELEASE-TRUTH-CLOSURE",
+  "local_http": {
+    "status": "PASS",
+    "http_status": "200 OK",
+    "served_index_sha256": "00a0d0f04148cb2290fbf809191a643d0ae46f74528146c17c1347480e833abd",
+    "candidate_index_sha256": "00a0d0f04148cb2290fbf809191a643d0ae46f74528146c17c1347480e833abd",
+    "byte_identical": true
+  },
+  "chromium": {
+    "binary": "/usr/bin/chromium",
+    "mode": "headless=new",
+    "result": "TIMEOUT",
+    "exit_code": 124,
+    "dom_output_bytes": 0,
+    "qualification": "NOT_TESTABLE_IN_THIS_CONTAINER",
+    "note": "The local server recorded the curl GET; Chromium did not produce a DOM before timeout. Container DBus/runtime errors are present. This is not treated as an app PASS or app FAIL."
+  },
+  "release_effect": "Hosted real-browser/PWA gate remains open."
+}

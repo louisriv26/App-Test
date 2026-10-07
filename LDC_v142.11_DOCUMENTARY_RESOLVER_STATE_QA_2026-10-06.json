@@ -1,0 +1,75 @@
+{
+  "total": 17,
+  "pass": 17,
+  "fail": 0,
+  "tests": [
+    [
+      "principal paragraph",
+      true
+    ],
+    [
+      "internal AFTER supplement",
+      true
+    ],
+    [
+      "internal BETWEEN supplement",
+      true
+    ],
+    [
+      "WITHIN_PARAGRAPH supplement",
+      true
+    ],
+    [
+      "principal before internal supplement same host",
+      true
+    ],
+    [
+      "principal after internal supplement same host",
+      true
+    ],
+    [
+      "selection principal -> supplement",
+      true
+    ],
+    [
+      "selection supplement -> principal",
+      true
+    ],
+    [
+      "selection principal -> supplement -> principal",
+      true
+    ],
+    [
+      "stale selection after navigation ignored",
+      true
+    ],
+    [
+      "entry fallback principal",
+      true
+    ],
+    [
+      "reader focus fallback supplement",
+      true
+    ],
+    [
+      "complete-entry supplement",
+      true
+    ],
+    [
+      "temporary navigation does not persist",
+      true
+    ],
+    [
+      "deep-link override does not persist",
+      true
+    ],
+    [
+      "explicit Vue documentaire choice persists and clears temporary restore",
+      true
+    ],
+    [
+      "explicit same-mode choice still persists",
+      true
+    ]
+  ]
+}

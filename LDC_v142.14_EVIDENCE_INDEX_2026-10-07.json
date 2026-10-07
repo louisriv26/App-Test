@@ -1,0 +1,64 @@
+{
+  "candidate_public_version": "142.14",
+  "current_evidence": [
+    "LDC_v142.14_PASS1_BUILD_PROTECTED_INTEGRITY_2026-10-07.json",
+    "LDC_v142.14_PASS2_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
+    "LDC_v142.14_PASS3_EVIDENCE_RECONCILIATION_2026-10-07.json",
+    "LDC_v142.14_PASS4_CONTRADICTION_STALENESS_2026-10-07.json",
+    "LDC_v142.14_PLS_PACK_BROWSER_QUALIFICATION_2026-10-07.json",
+    "LDC_v142.14_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json"
+  ],
+  "direct_predecessor": {
+    "public_version": "142.13",
+    "status": "FROZEN_PRE_PHYSICAL_REJECTED_AS_FINAL_BY_POST_FREEZE_BLIND_AUDIT",
+    "zip_sha256": "f3a6ac7d957a43adb250d0c809d3584de2764cbfd36174bc71e4594ff0689030"
+  },
+  "evidence_kind": "CURRENT_V14214_EVIDENCE_INDEX",
+  "generated_date": "2026-10-07",
+  "package_manifest_rule": "PACKAGE_MANIFEST_SHA256.json is generated after all listed evidence as the final in-tree freeze artifact; final package acceptance requires full manifest and ZIP reopen reconciliation.",
+  "production_authorized": false,
+  "protected_production_baseline": {
+    "public_version": "142.10",
+    "zip_sha256": "c5ef73e6738ef8e2b586dfeb5ff44d4569860d023706e704e940fd365692a460"
+  },
+  "runtime_release_files": [
+    {
+      "bytes": 925450,
+      "path": "index.html",
+      "sha256": "f64bce33847057fb62ed00471d93fdd74f972fbe12c4087e7887fc74a80c56f6"
+    },
+    {
+      "bytes": 251986,
+      "path": "version.json",
+      "sha256": "73dc8abd8ad04a0810d4446971772b21ef2a8e0818010d1ba9e91c12c27379ca"
+    },
+    {
+      "bytes": 58776,
+      "path": "offline_manifest.json",
+      "sha256": "2dd045040d6b779f162cb36617315733b4b5f1229f687473b035de017f313443"
+    },
+    {
+      "bytes": 32246,
+      "path": "sw.js",
+      "sha256": "dc8dfa4b9aafcc085a44181ce3acd8ffbaee6b19ea56c549d60f3cdfe0817bc5"
+    }
+  ],
+  "schema": "ldc-v142.14-qualification-evidence-v1",
+  "technical_identity": "v2.19.142.14-R1B-BLIND-AUDIT-CLOSURE",
+  "unresolved_gates": [
+    "full browser/WASM Par-le-sens inference",
+    "hosted App-Test exact bytes",
+    "installed PWA update/offline",
+    "physical iPhone",
+    "physical iPad",
+    "VoiceOver",
+    "Android if in scope"
+  ],
+  "verdicts": {
+    "independent_blind_challenge": "PASS_IN_TESTABLE_SCOPE__NOT_FULLY_TESTABLE",
+    "pass_1": "PASS",
+    "pass_2": "PASS_IN_TESTABLE_SCOPE__NOT_FULLY_TESTABLE",
+    "pass_3": "PASS",
+    "pass_4": "PASS"
+  }
+}

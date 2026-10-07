@@ -1,0 +1,317 @@
+{
+  "schema": "ldc-v142.11-machine-qa-v1",
+  "candidate_public_version": "142.11",
+  "generated_date": "2026-10-06",
+  "summary": {
+    "total": 61,
+    "pass": 61,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "name": "baseline_zip_hash_recorded_in_version",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "bounded_four_file_app_delta",
+      "pass": true,
+      "detail": "['index.html', 'offline_manifest.json', 'sw.js', 'version.json']"
+    },
+    {
+      "name": "corpus_byte_identity",
+      "pass": true,
+      "detail": "205 files; mismatches=[]"
+    },
+    {
+      "name": "pls_v15_byte_identity",
+      "pass": true,
+      "detail": "23 files; mismatches=[]"
+    },
+    {
+      "name": "protected_interaction_anchor.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_display_map.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_interim_user_state_migration.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_search_engine_v2.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_search_exact_v21.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_search_foundation_v21b.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_search_near_v22.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_search_normalizer.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_search_worker_v2.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_search_semantic_pack_guard_r3.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_search_semantic_pack_lifecycle_r5.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_search_semantic_pack_registry_r5.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "protected_search_semantic_v3_core_r4.js",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "supplement_counts_75_13_62_177",
+      "pass": true,
+      "detail": "{'complete_entries': 13, 'internal_supplements': 62, 'items': 75, 'legacy_sup_t1_inline_supplements': 2, 'paragraphs': 177, 'search_records': 177, 'speaker_segments': 141, 'sup_t1_items': 13, 'sup_t2_items': 43, 'sup_t2_speaker_segments': 63, 'sup_t3_items': 1, 'sup_t4_items': 15, 'sup_t4_speaker_segments': 22, 'sup_t5_items': 3, 'sup_t5_speaker_segments': 3}"
+    },
+    {
+      "name": "supplement_ids_unique_75",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "supplement_registry_exact_identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "supplement_speaker_exact_identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "all_75_public_provenance_required_fields",
+      "pass": true,
+      "detail": "{'reader_french_wording_label': [], 'reader_provenance_text': [], 'translation_status': [], 'source_origin': []}"
+    },
+    {
+      "name": "no_public_ENRICHI_outside_internal_comments",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "no_html_permanent_data_source_mode_controls",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "documentary_view_sheet_present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "non_normal_status_surfaces",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "search_old_source_row_hidden",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "reader_more_routes_documentary_view",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "internal_supplement_visual_cue_reperes_off",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "internal_supplement_explicit_cue_reperes_on",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "internal_supplement_accessible_boundary",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "explicit_user_only_persistence",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "deep_link_nonpersistent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "temporary_reader_nonpersistent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "legacy_saved_modes_load",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "legacy_src_mapping_preserved",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "resolver_function_documentaryParagraphComponent",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "resolver_function_documentaryContextFromParts",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "resolver_function_resolveReaderDocumentaryContext",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "resolver_function_freezeDocumentaryContext",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "activeReaderSupplement_not_repurposed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen_context_info",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen_context_report",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen_context_autour",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "share_uses_resolver",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "copy_link_uses_resolver",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no_date_entry_null_template",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "date_supplement_semantics",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "normal_stats_exclude_internal_extra_credit",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "release_identity_index",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "release_identity_version_json",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "release_identity_offline_manifest",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "release_identity_service_worker",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "new_shell_runtime_cache_identity",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "offline_manifest_self_binding",
+      "pass": true,
+      "detail": "version=a61bbe4ed68a115e02f1731b787189cb7d718b53b151f25f8031abd051ce8371 actual=a61bbe4ed68a115e02f1731b787189cb7d718b53b151f25f8031abd051ce8371"
+    },
+    {
+      "name": "offline_content_binding_recomputes",
+      "pass": true,
+      "detail": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384 vs 1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384"
+    },
+    {
+      "name": "offline_asset_ledger_204_exact",
+      "pass": true,
+      "detail": "assets=204 bad=[]"
+    },
+    {
+      "name": "index_inline_js_syntax",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "service_worker_js_syntax",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "all_json_parse",
+      "pass": true,
+      "detail": "[]"
+    },
+    {
+      "name": "production_not_authorized",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

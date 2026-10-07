@@ -1,0 +1,40 @@
+{
+  "active_runtime_binding": "PASS: current UI path is bound through window.LDCPLSOwnerPrototypeV15/runtime.search meaning-search path",
+  "browser_inference": {
+    "reason": "Chromium available but local navigation blocked by administrator",
+    "verdict": "OPEN"
+  },
+  "candidate_public_version": "142.14",
+  "claim_boundary": "No new scientific/calibration claim is inferred from structural/source-integrity PASS.",
+  "direct_predecessor": {
+    "public_version": "142.13",
+    "status": "FROZEN_PRE_PHYSICAL_REJECTED_AS_FINAL_BY_POST_FREEZE_BLIND_AUDIT",
+    "zip_sha256": "f3a6ac7d957a43adb250d0c809d3584de2764cbfd36174bc71e4594ff0689030"
+  },
+  "evidence_kind": "PLS_PACK_SOURCE_BINDING_AND_RUNTIME_QUALIFICATION",
+  "generated_date": "2026-10-07",
+  "geometry": {
+    "passages": 20236,
+    "verdict": "PASS"
+  },
+  "manifest_files": "PASS exact hashes",
+  "model_reassembly": "PASS exact bytes",
+  "node_inference": {
+    "reason": "device=wasm rejected by Node backend",
+    "verdict": "NOT_TESTABLE_ENVIRONMENT"
+  },
+  "production_authorized": false,
+  "protected_production_baseline": {
+    "public_version": "142.10",
+    "zip_sha256": "c5ef73e6738ef8e2b586dfeb5ff44d4569860d023706e704e940fd365692a460"
+  },
+  "schema": "ldc-v142.14-qualification-evidence-v1",
+  "source_span_validation": {
+    "method": "stable_ref + para_id/canonical offsets against current paragraph bytes",
+    "note": "Historical doc_index values are not the compatibility authority because inserted documents can shift positional indices.",
+    "validated_source_spans": 119021,
+    "verdict": "PASS"
+  },
+  "technical_identity": "v2.19.142.14-R1B-BLIND-AUDIT-CLOSURE",
+  "verdict": "PACK_AND_SOURCE_BINDING_PASS__FULL_BROWSER_WASM_RUNTIME_GATE_OPEN"
+}

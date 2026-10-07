@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE",
+  "app_version": "v2.19.142.14-R1B-BLIND-AUDIT-CLOSURE",
   "asset_count": 204,
   "assets": [
     {
@@ -1075,9 +1075,27 @@
     "reader_typography_changed": false,
     "search_v2_payloads_changed": false
   },
+  "historical_pls_owner_prototype_preproduction": {
+    "historical_scope": "PREPRODUCTION_STATUS_BEFORE_V142_10_OWNER_ACCEPTANCE_AND_PRODUCTION_PROMOTION",
+    "not_part_of_offline_content_binding": true,
+    "production_authorized": false,
+    "prototype_public_version": "142.10",
+    "semantic_assets_lazy_network_only": true
+  },
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.142.10-R1B-pls-results-ux-closure",
+  "page_worker_revision": "ldc-v2.19.142.14-R1B-blind-audit-closure",
+  "par_le_sens_current": {
+    "general_scientific_confidence_calibration_claimed": false,
+    "internal_prototype_lineage_labels_preserved": true,
+    "internal_runtime_namespace": "LDCPLSOwnerPrototypeV15",
+    "legacy_semantic_v3_registry_is_separate": true,
+    "not_part_of_standard_offline_content_binding": true,
+    "owner_acceptance": "PASS_AND_PRODUCTION_PROMOTED_V142_10",
+    "production_user_exposure_authorized": true,
+    "public_user_function_since": "142.10",
+    "semantic_assets_lazy_loaded_separately": true
+  },
   "post_r6_date_id_a2_fixed_point": {
     "a2_sha256": "dd034a4d4bb329254818c3e62fd629c9b64c90f9d4bd533de9f6ed99247cb1d8",
     "date_id_sha256": "ed5bf462c47b8fb5a41f7c81591257d6e99f94bae08628aa27e5f7d667020c2a",
@@ -1138,7 +1156,37 @@
     "user_state_schema_changed": false,
     "ux_logic_changed": false
   },
-  "rebuild_status": "V142_R15_EXPLICIT_SEARCH_SUBMISSION__V141_ADAPTIVE_SINGLE_SCROLL_REVEAL_PRESERVED__PERSISTENT_CONTENT_BINDING_UNCHANGED__SEARCH_V21A_PAYLOADS_ALGORITHMS_UNCHANGED__SEMANTIC_V3_FAIL_CLOSED__PHYSICAL_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED",
+  "provenance_ux_v126_r3_navigation_repair": {
+    "classification": "BOUNDED_PROVENANCE_NAVIGATION_STATE_RESTORATION_REPAIR",
+    "corpus_assets_changed": false,
+    "date": "2026-09-27",
+    "physical_defect": "HELP_TO_PROVENANCE_COULD_OPEN_MID_SCROLL__PROVENANCE_RETURN_COULD_RESET_HELP_TO_TOP",
+    "physical_pwa_iphone_ipad_retest_required": true,
+    "predecessor_app_version": "v2.19.126-R1B-PROVENANCE-UX-R2",
+    "predecessor_zip_sha256": "30623681dd70e804e342db1f7b2659a03d904a5bdb2b412dead2cf55008fab7d",
+    "provenance_wording_changed": false,
+    "public_release_authorized": false,
+    "reader_info_parallel_path_hardened": true,
+    "repair_contract": "CAPTURE_RAW_AND_VISUAL_ANCHOR__ACTIVATE__FOCUS__RESTORE__MULTIFRAME_VERIFY__ONE_BOUNDED_LATE_CORRECTION__CANCEL_ON_USER_INTERACTION",
+    "search_assets_changed": false,
+    "user_state_schema_changed": false
+  },
+  "provenance_ux_v126_r4_prepaint_repair": {
+    "classification": "BOUNDED_PROVENANCE_NAVIGATION_PREPAINT_REPAIR",
+    "corpus_assets_changed": false,
+    "date": "2026-09-27",
+    "predecessor_app_version": "v2.19.126-R1B-PROVENANCE-UX-R3",
+    "predecessor_zip_sha256": "f4163f589ba64c72aeb2026877250e1aefefecd95b4a5d21b9e8d13f42e11f44",
+    "provenance_wording_changed": false,
+    "public_release_authorized": false,
+    "reader_info_route": "FLUSH_WHILE_INFO_SHEET_STILL_COVERS_READER__CLOSE_SHEET_AND_SHOW_PROVENANCE_SAME_CONTINUATION__RETURN_REACTIVATES_READER_AND_REOPENS_INFO_SHEET_IN_SAME_TASK__RAW_AND_VISUAL_SHEET_POSITION_VERIFIED",
+    "repair_contract": "IMMEDIATE_BEST_EFFORT_POSITIONING_IN_SAME_ACTIVATION_TASK__THEN_FOCUS_LAYOUT_MULTIFRAME_VERIFICATION__80MS_BOUNDED_LATE_CORRECTION__USER_INTERACTION_CANCELLATION_PRESERVED__READER_AND_INFO_SHEET_REOPENED_PREPAINT_AT_CAPTURED_POSITIONS",
+    "root_cause": "R3_VERIFIED_TRANSACTION_DELAYED_FIRST_POSITION_ASSIGNMENT_UNTIL_AFTER_FOCUS_AND_LAYOUT_FRAMES__ALLOWING_PREPAINT_STALE_OFFSET_VISIBILITY",
+    "search_assets_changed": false,
+    "trigger": "INDEPENDENT_POST_BUILD_REAUDIT__ACTUAL_R3_DOM_SHOWED_STALE_PROVENANCE_SCROLL_FOR_TWO_ANIMATION_FRAMES_BEFORE_VERIFIED_ZERO",
+    "user_state_semantics_changed": false
+  },
+  "rebuild_status": "V142_14_BLIND_AUDIT_CLOSURE__FROZEN_V142_13_PREDECESSOR__FOUR_PASS_AND_BLIND_CHALLENGE_PASS_IN_TESTABLE_SCOPE__204_ASSET_OFFLINE_BINDING_UNCHANGED__CORPUS_SEARCH_PLS_V15_PROVENANCE_RECORDS_UNCHANGED__REAL_BROWSER_FULL_PLS_HOSTED_PWA_AND_PHYSICAL_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED",
   "retention_contract": {
     "clear_policy": "CURRENT_SCOPE_ONLY_FOR_SHARED_LEGACY_CACHES",
     "copy_migration_required": false,
@@ -1149,34 +1197,107 @@
     "shell_runtime_caches": "APP_VERSIONED"
   },
   "schema": "ldc-offline-manifest-v3",
-  "scope": "v142.10 bounded Par le sens results UX closure from exact frozen v142.9. Normal user-facing semantic results remove prototype/internal retrieval terminology and uncalibrated confidence-style labels, add a plain-language ranking explanation with a Comment ça marche disclosure, and reorder result metadata to Tome/date first with technical reference secondary. Semantic retrieval, ranking, confidence/abstention logic, corpus/**, supplements, pls_v15/**, interaction_anchor.js, Search-V2/Search-V3 engines, offline asset ledger and content binding remain unchanged. Production deployment is not authorized.",
+  "scope": "v142.14 bounded blind-audit truth successor of frozen v142.13. Preserves the v142.13 documentary/release-truth implementation and exact persistent offline content binding. Corrects the remaining public validation-scope conflation of current Par le sens with legacy Semantic Search V3 and reconciles stale migration-concurrency gate metadata with the already-present Stage-8 migration guard. corpus/**, supplement provenance, Search-V2, pls_v15/**, speaker data, stable IDs and user-data schemas remain unchanged. Production deployment of v142.14 is not authorized.",
   "scope_isolation_contract": "ONLY_CURRENT_SERVICE_WORKER_SCOPE_URLS_MAY_SATISFY_REUSE_OR_BE_CLEARED_FROM_SHARED_LEGACY_CACHES",
+  "search_scroll_v140_r13": {
+    "candidate_status": "FROZEN_SUPERSEDED_BEFORE_PHYSICAL_TEST",
+    "classification": "P0_BOUNDED_SEARCH_PRESENTATION_NAVIGATION_REPAIR",
+    "date": "2026-10-05",
+    "exact_candidate_package_sha256": "a158c24b889fedf7ea71193668b99adadbf3752004bbc5e579772dfb1ab2eb6c",
+    "exact_candidate_tree": "fa5d57065f328351ae4d7c9fa75c50cd27fadb70",
+    "machine_gate": "SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_GATE_RESULT",
+    "physical_ipad_gate": "OPEN",
+    "physical_iphone_gate": "OPEN",
+    "physical_trigger": "OWNER_IPHONE_AND_IPAD_PHYSICAL_TEST__SEARCH_RESULTS_SQUEEZED_TO_BOTTOM_AND_NOT_PRACTICALLY_SCROLLABLE",
+    "predecessor_app_version": "v2.19.139-R1B-UX-ACCESS-R12",
+    "predecessor_package_sha256": "3000b8e7692805a7116ac025a8a056b06db2dc6bc6fc12c7acba475bc4e29653",
+    "predecessor_production_commit": "e82ef8d5d64a7e89b65436924b04883c96c7dadb",
+    "predecessor_production_tree": "b9aaaa762034d9a21398bc8c242c802f59062492",
+    "production_deployment_authority": "NONE",
+    "protected_surfaces": [
+      "ALL_205_CORPUS_FILES_UNCHANGED",
+      "SEARCH_V2_BM25_AND_V21A_PAYLOADS_UNCHANGED",
+      "SEARCH_MATCHING_RANKING_EXACT_FOUNDATION_NEAR_ALGORITHMS_UNCHANGED",
+      "PROVENANCE_PUBLIC_WORDING_UNCHANGED",
+      "USER_STATE_SCHEMA_UNCHANGED",
+      "204_PERSISTENT_OFFLINE_ASSETS_AND_CONTENT_BINDING_UNCHANGED",
+      "SEMANTIC_V3_REMAINS_UNRELEASED_NOT_QUALIFIED_FAIL_CLOSED"
+    ],
+    "repair_contract": [
+      "ONE_VERTICAL_SEARCH_BODY_SCROLL_OWNER_BELOW_EXISTING_TOP_BAR",
+      "SEARCH_RESULTS_BECOMES_NORMAL_CONTENT_NOT_NESTED_VERTICAL_SCROLLER",
+      "NONEMPTY_QUERY_CENTRALLY_HIDES_DATE_NAVIGATION_FOR_TYPED_SUGGESTED_RECENT_DEEPLINK_AND_RESTORED_SEARCHES",
+      "FRESH_SEARCH_FILTER_AND_PAGINATION_RUNS_REVEAL_OUTPUT_STATUS_AND_FIRST_RESULTS_WITHOUT_FOCUS_THEFT",
+      "READER_RETURN_SUPPRESSES_AUTO_REVEAL_AND_RESTORES_STABLE_DATA_RESULT_KEY_ANCHOR",
+      "TEXT_SIZE_REFLOW_USES_SAME_STABLE_RESULT_ANCHOR"
+    ],
+    "root_cause": "SEARCH_CONTROLS_ARE_NONSHRINKING_FLEX_SIBLINGS_WHILE_ONLY_SEARCH_RESULTS_OWNS_VERTICAL_SCROLL_AND_MIN_HEIGHT_ZERO__RESULT_VIEWPORT_CAN_COLLAPSE_TOWARD_ZERO; PROGRAMMATIC_SEARCHFOR_PATH_ALSO_FAILED_TO_HIDE_DATE_NAVIGATION",
+    "superseded_by": "v2.19.141-R1B-UX-ACCESS-R14",
+    "superseded_reason": "POST_FREEZE_BLIND_LAYOUT_CHALLENGE_FIRST_COMPLETE_RESULT_VISIBILITY_FAILED_IN_3_OF_36_EXTREME_SHORT_VIEWPORT_LARGE_XLARGE_CASES"
+  },
+  "search_scroll_v141_r14": {
+    "classification": "BOUNDED_POST_BLIND_SEARCH_OUTPUT_REVEAL_HARDENING",
+    "date": "2026-10-05",
+    "direct_predecessor_app_version": "v2.19.140-R1B-UX-ACCESS-R13",
+    "direct_predecessor_package_sha256": "a158c24b889fedf7ea71193668b99adadbf3752004bbc5e579772dfb1ab2eb6c",
+    "direct_predecessor_tree": "fa5d57065f328351ae4d7c9fa75c50cd27fadb70",
+    "machine_gate": "SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_GATE_RESULT",
+    "physical_ipad_gate": "OPEN",
+    "physical_iphone_gate": "OPEN",
+    "production_deployment_authority": "NONE",
+    "protected_contract": "205_CORPUS_FILES__SEARCH_V2_V21A_PAYLOADS_AND_ALGORITHMS__PROVENANCE__USER_STATE_SCHEMA__204_OFFLINE_CONTENT_ASSETS_AND_BINDING__SEMANTIC_V3_FAIL_CLOSED_UNCHANGED",
+    "repair_contract": [
+      "V140_SINGLE_VERTICAL_SEARCH_SCROLL_OWNER_UNCHANGED",
+      "PREFERRED_METADATA_REVEAL_RETAINED_WHEN_FIRST_COMPLETE_RESULT_ALREADY_FITS",
+      "ADAPT_SCROLL_ONLY_BY_FIRST_RESULT_BOTTOM_OVERFLOW_WHEN_NEEDED",
+      "NO_FOCUS_MOVEMENT",
+      "READER_RETURN_PRESERVE_CONTEXT_REMAINS_AUTHORITATIVE"
+    ]
+  },
+  "search_submit_v142_r15": {
+    "content_binding_changed": false,
+    "direct_predecessor_app_version": "v2.19.141-R1B-UX-ACCESS-R14",
+    "direct_predecessor_package_sha256": "c8951a8e3de087a72ebbd131bf42c54dfdbd5ceae91c5518ece798e8d2803836",
+    "direct_predecessor_tree": "73cebf29a52e8051bb49b59eb8ec2d7ef5a10386",
+    "mutation_universe": [
+      "index.html",
+      "offline_manifest.json",
+      "sw.js",
+      "version.json"
+    ],
+    "persistent_assets_changed": false,
+    "production_deployment_authority": "NONE",
+    "search_payloads_or_algorithms_changed": false,
+    "semantic_v3_qualification_changed": false
+  },
   "semantic_vector_search_included": false,
-  "semantic_vector_search_note": "The personal Par le sens prototype resources are packaged under pls_v15/** for owner use, but they are lazy/network-only and excluded from this governed offline-content binding. semantic_vector_search_included=false therefore means not included in Préparer hors ligne; it does not mean the files are absent from the release ZIP. The prototype is not production-qualified or offline-qualified.",
+  "semantic_vector_search_included_in_offline_binding": false,
+  "semantic_vector_search_note": "Par le sens is an owner-accepted production user function since v142.10. Its protected pls_v15/** resources are packaged in the release and loaded separately/lazily, but they are excluded from the governed standard Préparer hors ligne content binding. semantic_vector_search_included=false and semantic_vector_search_included_in_offline_binding=false mean only that Par le sens is not part of standard offline preparation; they do not mean unavailable, retired, or unauthorized for production user exposure. The older Semantic Search V3 registry/vector lane remains a separate fail-closed historical subsystem.",
+  "semantic_vector_search_packaged_in_release": true,
   "stage2_221_candidate": {
     "implementation_authority_sha256": "f77fb79ab016c933d6b7cfcb830b2db52fd4f42e03d032988c5ac50c2a38cd35",
     "migration_fixed_point_sha256": "24addfee378ad8fe08c5491e886baa1ae0df79089776b4fe7baeb67695e3ee65",
-    "semantic_v3_pack": "NOT_RECERTIFIED__FAIL_CLOSED",
-    "status": "V139_SEARCH_V21A_CURRENT_STAGE2_221_REFERENCE_RECERTIFIED__RUNTIME_EXACT_SEARCH_GATE_REOPENED",
-    "search_v21_topology_sha256": "9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f",
-    "search_v21_manifest_sha256": "86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996",
     "reference": {
-      "aflp": {
-        "tokens": 1466870,
-        "units": 2312,
-        "digest": "6bc37d012a23154af2d669cddb3f84078de606fadb43da3ab1dba516639a6c0f"
-      },
       "additions": {
+        "digest": "029c8f53c9a20cae460ff2ef8e76c82cbc50bba4aa518b357eabe1019f4c2c16",
         "tokens": 14333,
-        "units": 75,
-        "digest": "029c8f53c9a20cae460ff2ef8e76c82cbc50bba4aa518b357eabe1019f4c2c16"
+        "units": 75
+      },
+      "aflp": {
+        "digest": "6bc37d012a23154af2d669cddb3f84078de606fadb43da3ab1dba516639a6c0f",
+        "tokens": 1466870,
+        "units": 2312
       },
       "enriched": {
+        "digest": "49bc61ea97e2218da594a713748da0f21beefabef4762516cdb14b4af42b1544",
         "tokens": 1480956,
-        "units": 2325,
-        "digest": "49bc61ea97e2218da594a713748da0f21beefabef4762516cdb14b4af42b1544"
+        "units": 2325
       }
-    }
+    },
+    "search_v21_manifest_sha256": "86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996",
+    "search_v21_topology_sha256": "9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f",
+    "semantic_v3_pack": "NOT_RECERTIFIED__FAIL_CLOSED",
+    "status": "V139_SEARCH_V21A_CURRENT_STAGE2_221_REFERENCE_RECERTIFIED__RUNTIME_EXACT_SEARCH_GATE_REOPENED"
   },
   "storage_cache_name_contract": "ldc-le-livre-du-ciel-offline-persistent-v3-<fnv1a32(service-worker-scope)>",
   "storage_schema": "ldc-offline-storage-v3",
@@ -1195,41 +1316,8 @@
     "volume_summary_sha256": "8d422e692c8d4c7d230bd270ec8f9d455e1949043ebe5bed75f5746b3d40b60a"
   },
   "total_bytes": 114483048,
-  "provenance_ux_v126_r3_navigation_repair": {
-    "classification": "BOUNDED_PROVENANCE_NAVIGATION_STATE_RESTORATION_REPAIR",
-    "date": "2026-09-27",
-    "predecessor_app_version": "v2.19.126-R1B-PROVENANCE-UX-R2",
-    "predecessor_zip_sha256": "30623681dd70e804e342db1f7b2659a03d904a5bdb2b412dead2cf55008fab7d",
-    "physical_defect": "HELP_TO_PROVENANCE_COULD_OPEN_MID_SCROLL__PROVENANCE_RETURN_COULD_RESET_HELP_TO_TOP",
-    "repair_contract": "CAPTURE_RAW_AND_VISUAL_ANCHOR__ACTIVATE__FOCUS__RESTORE__MULTIFRAME_VERIFY__ONE_BOUNDED_LATE_CORRECTION__CANCEL_ON_USER_INTERACTION",
-    "reader_info_parallel_path_hardened": true,
-    "corpus_assets_changed": false,
-    "search_assets_changed": false,
-    "provenance_wording_changed": false,
-    "user_state_schema_changed": false,
-    "public_release_authorized": false,
-    "physical_pwa_iphone_ipad_retest_required": true
-  },
-  "provenance_ux_v126_r4_prepaint_repair": {
-    "classification": "BOUNDED_PROVENANCE_NAVIGATION_PREPAINT_REPAIR",
-    "date": "2026-09-27",
-    "predecessor_app_version": "v2.19.126-R1B-PROVENANCE-UX-R3",
-    "predecessor_zip_sha256": "f4163f589ba64c72aeb2026877250e1aefefecd95b4a5d21b9e8d13f42e11f44",
-    "trigger": "INDEPENDENT_POST_BUILD_REAUDIT__ACTUAL_R3_DOM_SHOWED_STALE_PROVENANCE_SCROLL_FOR_TWO_ANIMATION_FRAMES_BEFORE_VERIFIED_ZERO",
-    "root_cause": "R3_VERIFIED_TRANSACTION_DELAYED_FIRST_POSITION_ASSIGNMENT_UNTIL_AFTER_FOCUS_AND_LAYOUT_FRAMES__ALLOWING_PREPAINT_STALE_OFFSET_VISIBILITY",
-    "repair_contract": "IMMEDIATE_BEST_EFFORT_POSITIONING_IN_SAME_ACTIVATION_TASK__THEN_FOCUS_LAYOUT_MULTIFRAME_VERIFICATION__80MS_BOUNDED_LATE_CORRECTION__USER_INTERACTION_CANCELLATION_PRESERVED__READER_AND_INFO_SHEET_REOPENED_PREPAINT_AT_CAPTURED_POSITIONS",
-    "corpus_assets_changed": false,
-    "search_assets_changed": false,
-    "provenance_wording_changed": false,
-    "user_state_semantics_changed": false,
-    "public_release_authorized": false,
-    "reader_info_route": "FLUSH_WHILE_INFO_SHEET_STILL_COVERS_READER__CLOSE_SHEET_AND_SHOW_PROVENANCE_SAME_CONTINUATION__RETURN_REACTIVATES_READER_AND_REOPENS_INFO_SHEET_IN_SAME_TASK__RAW_AND_VISUAL_SHEET_POSITION_VERIFIED"
-  },
   "ux_access_v127_r1": {
     "classification": "BOUNDED_UX_ACCESSIBILITY_AND_RELEASE_IDENTITY_SUCCESSOR",
-    "predecessor_app_version": "v2.19.126-R1B-PROVENANCE-UX-R4",
-    "predecessor_zip_sha256": "2d4e86203354b70f9b3e57a077ca6231435b1882592b67514d2be0468a904659",
-    "release_integrity_trigger": "R4 index.html expected ldc-v2.19.126-R1B-provenance-ux-r2 while bundled sw.js reported ldc-v2.19.126-R1B-provenance-ux-r4; v127 binds page and worker to one new revision.",
     "closed_findings": [
       "NEW-LDC-RELEASE-ID-01",
       "D-03",
@@ -1237,158 +1325,122 @@
       "D-09",
       "NEW-LDC-MODAL-FOCUS-01"
     ],
-    "text_size_contract": "ONE_PERSISTENT_GLOBAL_PETIT_NORMAL_GRAND_TRES_GRAND_SETTING__DIRECT_ACCESS_ON_SUBSTANTIVE_NON_READER_SCREENS__READER_RETAINS_MORE_MENU_ACCESS__NO_PER_SCREEN_PREFERENCE__NO_AUTOMATIC_SWITCHING",
+    "modal_focus_contract": "SHARED_MODAL_INVOKER_CAPTURE_OCCURS_BEFORE_SHELL_INERT__SHELL_INERT_REMOVED_BEFORE_INVOKER_FOCUS_RESTORE__SIZE_AND_OTHER_SHARED_DIALOGS_RETURN_FOCUS_TO_ORIGINATING_CONTROL",
+    "physical_retest_required": true,
     "position_contract": "TEXT_SIZE_REFLOW_RESTORES_ACTIVE_SCREEN_SEMANTIC_OR_VISUAL_SCROLL_CONTEXT__READER_RETAINS_SEMANTIC_ANCHOR_RESTORE",
+    "predecessor_app_version": "v2.19.126-R1B-PROVENANCE-UX-R4",
+    "predecessor_zip_sha256": "2d4e86203354b70f9b3e57a077ca6231435b1882592b67514d2be0468a904659",
     "protected_contract": "205_CORPUS_FILES__SEARCH_ASSETS_MODULES__PROVENANCE_PUBLIC_WORDING__USER_DATA_SCHEMAS__204_OFFLINE_CONTENT_ASSETS_AND_BINDING_UNCHANGED",
     "public_release_authorized": false,
-    "physical_retest_required": true,
-    "modal_focus_contract": "SHARED_MODAL_INVOKER_CAPTURE_OCCURS_BEFORE_SHELL_INERT__SHELL_INERT_REMOVED_BEFORE_INVOKER_FOCUS_RESTORE__SIZE_AND_OTHER_SHARED_DIALOGS_RETURN_FOCUS_TO_ORIGINATING_CONTROL"
+    "release_integrity_trigger": "R4 index.html expected ldc-v2.19.126-R1B-provenance-ux-r2 while bundled sw.js reported ldc-v2.19.126-R1B-provenance-ux-r4; v127 binds page and worker to one new revision.",
+    "text_size_contract": "ONE_PERSISTENT_GLOBAL_PETIT_NORMAL_GRAND_TRES_GRAND_SETTING__DIRECT_ACCESS_ON_SUBSTANTIVE_NON_READER_SCREENS__READER_RETAINS_MORE_MENU_ACCESS__NO_PER_SCREEN_PREFERENCE__NO_AUTOMATIC_SWITCHING"
   },
-  "search_scroll_v140_r13": {
-    "classification": "P0_BOUNDED_SEARCH_PRESENTATION_NAVIGATION_REPAIR",
-    "date": "2026-10-05",
-    "predecessor_app_version": "v2.19.139-R1B-UX-ACCESS-R12",
-    "predecessor_package_sha256": "3000b8e7692805a7116ac025a8a056b06db2dc6bc6fc12c7acba475bc4e29653",
-    "predecessor_production_tree": "b9aaaa762034d9a21398bc8c242c802f59062492",
-    "predecessor_production_commit": "e82ef8d5d64a7e89b65436924b04883c96c7dadb",
-    "physical_trigger": "OWNER_IPHONE_AND_IPAD_PHYSICAL_TEST__SEARCH_RESULTS_SQUEEZED_TO_BOTTOM_AND_NOT_PRACTICALLY_SCROLLABLE",
-    "root_cause": "SEARCH_CONTROLS_ARE_NONSHRINKING_FLEX_SIBLINGS_WHILE_ONLY_SEARCH_RESULTS_OWNS_VERTICAL_SCROLL_AND_MIN_HEIGHT_ZERO__RESULT_VIEWPORT_CAN_COLLAPSE_TOWARD_ZERO; PROGRAMMATIC_SEARCHFOR_PATH_ALSO_FAILED_TO_HIDE_DATE_NAVIGATION",
-    "repair_contract": [
-      "ONE_VERTICAL_SEARCH_BODY_SCROLL_OWNER_BELOW_EXISTING_TOP_BAR",
-      "SEARCH_RESULTS_BECOMES_NORMAL_CONTENT_NOT_NESTED_VERTICAL_SCROLLER",
-      "NONEMPTY_QUERY_CENTRALLY_HIDES_DATE_NAVIGATION_FOR_TYPED_SUGGESTED_RECENT_DEEPLINK_AND_RESTORED_SEARCHES",
-      "FRESH_SEARCH_FILTER_AND_PAGINATION_RUNS_REVEAL_OUTPUT_STATUS_AND_FIRST_RESULTS_WITHOUT_FOCUS_THEFT",
-      "READER_RETURN_SUPPRESSES_AUTO_REVEAL_AND_RESTORES_STABLE_DATA_RESULT_KEY_ANCHOR",
-      "TEXT_SIZE_REFLOW_USES_SAME_STABLE_RESULT_ANCHOR"
-    ],
-    "protected_surfaces": [
-      "ALL_205_CORPUS_FILES_UNCHANGED",
-      "SEARCH_V2_BM25_AND_V21A_PAYLOADS_UNCHANGED",
-      "SEARCH_MATCHING_RANKING_EXACT_FOUNDATION_NEAR_ALGORITHMS_UNCHANGED",
-      "PROVENANCE_PUBLIC_WORDING_UNCHANGED",
-      "USER_STATE_SCHEMA_UNCHANGED",
-      "204_PERSISTENT_OFFLINE_ASSETS_AND_CONTENT_BINDING_UNCHANGED",
-      "SEMANTIC_V3_REMAINS_UNRELEASED_NOT_QUALIFIED_FAIL_CLOSED"
-    ],
-    "machine_gate": "SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_GATE_RESULT",
-    "physical_iphone_gate": "OPEN",
+  "v142_12_documentary_consistency_closure": {
+    "classification": "BOUNDED_DOCUMENTARY_CONSISTENCY_AND_RELEASE_TRUTH_CLOSURE",
+    "corpus_changed": false,
+    "direct_predecessor_package_sha256": "448372a797001c5fdaf9814f477f0a3edf540a80ff4be7535de17df0f4705f27",
+    "direct_predecessor_public_version": "142.11",
+    "offline_asset_count": 204,
+    "offline_content_binding_changed": false,
+    "offline_total_bytes": 114483048,
     "physical_ipad_gate": "OPEN",
-    "production_deployment_authority": "NONE",
-    "candidate_status": "FROZEN_SUPERSEDED_BEFORE_PHYSICAL_TEST",
-    "exact_candidate_tree": "fa5d57065f328351ae4d7c9fa75c50cd27fadb70",
-    "exact_candidate_package_sha256": "a158c24b889fedf7ea71193668b99adadbf3752004bbc5e579772dfb1ab2eb6c",
-    "superseded_by": "v2.19.141-R1B-UX-ACCESS-R14",
-    "superseded_reason": "POST_FREEZE_BLIND_LAYOUT_CHALLENGE_FIRST_COMPLETE_RESULT_VISIBILITY_FAILED_IN_3_OF_36_EXTREME_SHORT_VIEWPORT_LARGE_XLARGE_CASES"
-  },
-  "search_scroll_v141_r14": {
-    "classification": "BOUNDED_POST_BLIND_SEARCH_OUTPUT_REVEAL_HARDENING",
-    "date": "2026-10-05",
-    "direct_predecessor_app_version": "v2.19.140-R1B-UX-ACCESS-R13",
-    "direct_predecessor_tree": "fa5d57065f328351ae4d7c9fa75c50cd27fadb70",
-    "direct_predecessor_package_sha256": "a158c24b889fedf7ea71193668b99adadbf3752004bbc5e579772dfb1ab2eb6c",
-    "repair_contract": [
-      "V140_SINGLE_VERTICAL_SEARCH_SCROLL_OWNER_UNCHANGED",
-      "PREFERRED_METADATA_REVEAL_RETAINED_WHEN_FIRST_COMPLETE_RESULT_ALREADY_FITS",
-      "ADAPT_SCROLL_ONLY_BY_FIRST_RESULT_BOTTOM_OVERFLOW_WHEN_NEEDED",
-      "NO_FOCUS_MOVEMENT",
-      "READER_RETURN_PRESERVE_CONTEXT_REMAINS_AUTHORITATIVE"
-    ],
-    "protected_contract": "205_CORPUS_FILES__SEARCH_V2_V21A_PAYLOADS_AND_ALGORITHMS__PROVENANCE__USER_STATE_SCHEMA__204_OFFLINE_CONTENT_ASSETS_AND_BINDING__SEMANTIC_V3_FAIL_CLOSED_UNCHANGED",
-    "machine_gate": "SEE_EXTERNAL_GOVERNANCE_STATE__PACKAGE_DOES_NOT_SELF_ATTEST_CURRENT_MACHINE_GATE_RESULT",
     "physical_iphone_gate": "OPEN",
+    "pls_v15_changed": false,
+    "post_freeze_blind_audit_status": "REJECTED_AS_FINAL_CANDIDATE__ACTIVE_RELEASE_TRUTH_STALENESS_FOUND__CORE_RUNTIME_NOT_IMPLICATED",
+    "production_authorized": false,
+    "search_v2_changed": false,
+    "superseded_by": "v2.19.142.13-R1B-RELEASE-TRUTH-CLOSURE",
+    "supplement_provenance_records_changed": false
+  },
+  "v142_13_release_truth_closure": {
+    "classification": "BOUNDED_CURRENT_RELEASE_TRUTH_AND_METADATA_SCOPE_CLOSURE",
+    "corpus_changed": false,
+    "direct_predecessor_package_sha256": "94fdc04b5dafa2e9470e05eca30a37230c942146ac6c99f3f577e7469b54fa58",
+    "direct_predecessor_public_version": "142.12",
+    "machine_qa_status": "PASS_TESTABLE_SCOPE__204_ASSET_LEDGER_EXACT__SW_UPGRADE_OFFLINE_SIMULATION_PASS",
+    "offline_asset_count": 204,
+    "offline_content_binding_changed": false,
+    "offline_total_bytes": 114483048,
     "physical_ipad_gate": "OPEN",
-    "production_deployment_authority": "NONE"
+    "physical_iphone_gate": "OPEN",
+    "pls_v15_changed": false,
+    "post_freeze_blind_audit_status": "REJECTED_AS_FINAL_CANDIDATE__PUBLIC_VALIDATION_SCOPE_AND_MIGRATION_GATE_STALENESS_FOUND__CORE_RUNTIME_NOT_IMPLICATED",
+    "production_authorized": false,
+    "release_disposition": "READY_FOR_APP_TEST_AND_PHYSICAL_QUALIFICATION_ONLY__PRODUCTION_NOT_AUTHORIZED",
+    "runtime_qualification": "NOT_FULLY_TESTABLE__LOCAL_HTTP_EXACT_INDEX_200_HASH_MATCH__HEADLESS_CHROMIUM_NAVIGATION_TIMEOUT_IN_CONTAINER__HOSTED_INSTALLED_PWA_AND_DEVICE_GATES_OPEN",
+    "search_v2_changed": false,
+    "superseded_by": "v2.19.142.14-R1B-BLIND-AUDIT-CLOSURE",
+    "supplement_provenance_records_changed": false
   },
-  "search_submit_v142_r15": {
-    "direct_predecessor_app_version": "v2.19.141-R1B-UX-ACCESS-R14",
-    "direct_predecessor_tree": "73cebf29a52e8051bb49b59eb8ec2d7ef5a10386",
-    "direct_predecessor_package_sha256": "c8951a8e3de087a72ebbd131bf42c54dfdbd5ceae91c5518ece798e8d2803836",
-    "mutation_universe": [
-      "index.html",
-      "offline_manifest.json",
-      "sw.js",
-      "version.json"
-    ],
-    "persistent_assets_changed": false,
-    "content_binding_changed": false,
-    "search_payloads_or_algorithms_changed": false,
-    "semantic_v3_qualification_changed": false,
-    "production_deployment_authority": "NONE"
-  },
-  "pls_owner_prototype": {
-    "prototype_public_version": "142.10",
-    "semantic_assets_lazy_network_only": true,
-    "not_part_of_offline_content_binding": true,
-    "production_authorized": false
+  "v142_14_blind_audit_closure": {
+    "app_test_deployment_executed": false,
+    "blind_challenge_status": "PASS_TESTABLE_SCOPE__FULL_BROWSER_WASM_HOSTED_PWA_PHYSICAL_GATES_OPEN",
+    "classification": "BOUNDED_POST_FREEZE_BLIND_CHALLENGE_TRUTH_CLOSURE",
+    "corpus_changed": false,
+    "direct_predecessor_package_sha256": "f3a6ac7d957a43adb250d0c809d3584de2764cbfd36174bc71e4594ff0689030",
+    "direct_predecessor_public_version": "142.13",
+    "machine_qa_status": "PASS_TESTABLE_SCOPE_PRE_PHYSICAL",
+    "offline_asset_count": 204,
+    "offline_content_binding_changed": false,
+    "offline_total_bytes": 114483048,
+    "physical_ipad_gate": "OPEN",
+    "physical_iphone_gate": "OPEN",
+    "pls_v15_changed": false,
+    "production_authorized": false,
+    "release_disposition": "READY_FOR_EXACT_BYTE_APP_TEST_AND_PHYSICAL_QUALIFICATION_ONLY__PRODUCTION_NOT_AUTHORIZED",
+    "search_v2_changed": false
   },
   "v142_5_reader_selector_closure": {
-    "direct_predecessor_public_version": "142.4",
-    "direct_predecessor_package_sha256": "143af4b6249276d52522222f377d5dc4098402f6b2a3bdbb28e31fb10bed6e76",
     "classification": "BOUNDED_READER_SOURCE_SELECTOR_LAYOUT_AND_QA_CLOSURE",
+    "content_binding_changed": false,
+    "corpus_changed": false,
+    "direct_predecessor_package_sha256": "143af4b6249276d52522222f377d5dc4098402f6b2a3bdbb28e31fb10bed6e76",
+    "direct_predecessor_public_version": "142.4",
+    "persistent_assets_changed": false,
+    "physical_ipad_gate": "OPEN",
+    "physical_iphone_gate": "OPEN",
+    "pls_v15_changed": false,
+    "production_authorized": false,
     "repair_contract": [
       "GRAND_AND_TRES_GRAND_PHONE_SELECTOR_OWN_ROW",
       "NO_FONT_REDUCTION",
       "NO_OVERFLOW_HIDDEN_CLIPPING",
       "LABEL_CONTENT_MUST_FIT_OWN_BUTTON"
-    ],
-    "persistent_assets_changed": false,
-    "content_binding_changed": false,
-    "corpus_changed": false,
-    "pls_v15_changed": false,
-    "production_authorized": false,
-    "physical_iphone_gate": "OPEN",
-    "physical_ipad_gate": "OPEN"
+    ]
   },
-  "semantic_vector_search_packaged_in_release": true,
-  "semantic_vector_search_included_in_offline_binding": false,
   "v142_6_help_release_truth_closure": {
-    "direct_predecessor_public_version": "142.5",
-    "direct_predecessor_package_sha256": "2af04c8d7689159b3d214904d52ffc15937c7cdfdd3212e06f0250fd3cc9278d",
     "classification": "BOUNDED_HELP_ONBOARDING_OFFLINE_COPY_AND_RELEASE_TRUTH_CLOSURE",
-    "offline_asset_count": 204,
-    "offline_total_bytes": 114483048,
-    "offline_content_binding_changed": false,
     "corpus_changed": false,
-    "pls_v15_changed": false,
+    "direct_predecessor_package_sha256": "2af04c8d7689159b3d214904d52ffc15937c7cdfdd3212e06f0250fd3cc9278d",
+    "direct_predecessor_public_version": "142.5",
     "interaction_anchor_changed": false,
-    "production_authorized": false,
+    "offline_asset_count": 204,
+    "offline_content_binding_changed": false,
+    "offline_total_bytes": 114483048,
+    "physical_ipad_gate": "OPEN",
     "physical_iphone_gate": "OPEN",
-    "physical_ipad_gate": "OPEN"
+    "pls_v15_changed": false,
+    "production_authorized": false
   },
   "v142_7_release_metadata_closure": {
-    "direct_predecessor_public_version": "142.6",
-    "direct_predecessor_package_sha256": "a4da4c7e90cde403f73e1d1c5f2bc75f6646785a360b7a3d90c059ae0f1392a3",
     "classification": "RELEASE_METADATA_COHERENCE_CLOSURE",
-    "trigger": "POST_FREEZE_V142_6_ADVERSARIAL_RECHECK_FOUND_STALE_ACTIVE_V142_4_GATE_AND_PACKAGE_STATE_METADATA",
-    "offline_asset_count": 204,
-    "offline_total_bytes": 114483048,
-    "offline_content_binding_changed": false,
     "corpus_changed": false,
-    "pls_v15_changed": false,
-    "interaction_anchor_changed": false,
+    "direct_predecessor_package_sha256": "a4da4c7e90cde403f73e1d1c5f2bc75f6646785a360b7a3d90c059ae0f1392a3",
+    "direct_predecessor_public_version": "142.6",
     "help_content_changed": false,
+    "interaction_anchor_changed": false,
+    "offline_asset_count": 204,
+    "offline_content_binding_changed": false,
+    "offline_total_bytes": 114483048,
+    "physical_ipad_gate": "OPEN",
+    "physical_iphone_gate": "OPEN",
+    "pls_v15_changed": false,
+    "production_authorized": false,
     "search_v2_changed": false,
     "semantic_algorithm_changed": false,
-    "production_authorized": false,
-    "physical_iphone_gate": "OPEN",
-    "physical_ipad_gate": "OPEN"
+    "trigger": "POST_FREEZE_V142_6_ADVERSARIAL_RECHECK_FOUND_STALE_ACTIVE_V142_4_GATE_AND_PACKAGE_STATE_METADATA"
   },
   "v142_8_interaction_correctness_closure": {
-    "direct_predecessor_public_version": "142.7",
-    "direct_predecessor_package_sha256": "d7b51c53f99484b7fe0a214851f687a8c837cd3de0572374e3a29c1600bcf043",
-    "classification": "PAR_LE_SENS_INTERACTION_AND_CORRECTNESS_CLOSURE",
-    "offline_asset_count": 204,
-    "offline_total_bytes": 114483048,
-    "offline_content_binding_changed": false,
-    "corpus_changed": false,
-    "pls_v15_changed": false,
-    "interaction_anchor_changed": false,
-    "search_v2_algorithm_changed": false,
-    "semantic_algorithm_changed": false,
-    "production_authorized": false,
-    "physical_iphone_gate": "OPEN",
-    "physical_ipad_gate": "OPEN",
-    "machine_qa_status": "PASS_BOUNDED_PREPHYSICAL",
     "app_test_deployment_executed": false,
     "application_mutation_universe": [
       "index.html",
@@ -1396,16 +1448,19 @@
       "sw.js",
       "version.json"
     ],
-    "runtime_mutation_universe": [
-      "index.html",
-      "offline_manifest.json",
-      "sw.js",
-      "version.json"
-    ],
+    "classification": "PAR_LE_SENS_INTERACTION_AND_CORRECTNESS_CLOSURE",
+    "corpus_changed": false,
+    "direct_predecessor_package_sha256": "d7b51c53f99484b7fe0a214851f687a8c837cd3de0572374e3a29c1600bcf043",
+    "direct_predecessor_public_version": "142.7",
     "evidence_only_mutation_universe": [
       "LDC_v142.8_PLS_INTERACTION_CLOSURE_MACHINE_QA_2026-10-06.json",
       "PACKAGE_MANIFEST_SHA256.json"
     ],
+    "interaction_anchor_changed": false,
+    "machine_qa_status": "PASS_BOUNDED_PREPHYSICAL",
+    "offline_asset_count": 204,
+    "offline_content_binding_changed": false,
+    "offline_total_bytes": 114483048,
     "package_delta_universe": [
       "index.html",
       "offline_manifest.json",
@@ -1413,24 +1468,36 @@
       "version.json",
       "LDC_v142.8_PLS_INTERACTION_CLOSURE_MACHINE_QA_2026-10-06.json",
       "PACKAGE_MANIFEST_SHA256.json"
-    ]
+    ],
+    "physical_ipad_gate": "OPEN",
+    "physical_iphone_gate": "OPEN",
+    "pls_v15_changed": false,
+    "production_authorized": false,
+    "runtime_mutation_universe": [
+      "index.html",
+      "offline_manifest.json",
+      "sw.js",
+      "version.json"
+    ],
+    "search_v2_algorithm_changed": false,
+    "semantic_algorithm_changed": false
   },
   "v142_9_identity_repair_promotion": {
-    "promotion_source_zip_sha256": "5697412951bef15ec7c49c17a13e0e9e05d57ccf228b1d9150505bc930d53160",
+    "classification": "IDENTITY_AND_GOVERNANCE_REPAIR__FUNCTIONAL_RUNTIME_CARRIED_FORWARD",
+    "corpus_changed": false,
     "first_frozen_v142_8_zip_sha256": "905fe6c4a456e8f56affca4f8c6451a1d86eeb9bb4f2706ec1f53c8bfd6cdd61",
+    "interaction_anchor_changed": false,
     "last_unambiguous_governed_predecessor_public_version": "142.7",
     "last_unambiguous_governed_predecessor_zip_sha256": "d7b51c53f99484b7fe0a214851f687a8c837cd3de0572374e3a29c1600bcf043",
-    "classification": "IDENTITY_AND_GOVERNANCE_REPAIR__FUNCTIONAL_RUNTIME_CARRIED_FORWARD",
     "offline_asset_count": 204,
-    "offline_total_bytes": 114483048,
     "offline_content_binding_changed": false,
-    "corpus_changed": false,
-    "pls_v15_changed": false,
-    "interaction_anchor_changed": false,
-    "search_v2_algorithm_changed": false,
-    "semantic_algorithm_changed": false,
-    "production_authorized": false,
+    "offline_total_bytes": 114483048,
+    "physical_ipad_gate": "OPEN",
     "physical_iphone_gate": "OPEN",
-    "physical_ipad_gate": "OPEN"
+    "pls_v15_changed": false,
+    "production_authorized": false,
+    "promotion_source_zip_sha256": "5697412951bef15ec7c49c17a13e0e9e05d57ccf228b1d9150505bc930d53160",
+    "search_v2_algorithm_changed": false,
+    "semantic_algorithm_changed": false
   }
 }

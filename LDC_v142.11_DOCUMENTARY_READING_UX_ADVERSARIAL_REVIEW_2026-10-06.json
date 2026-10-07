@@ -1,0 +1,168 @@
+{
+  "schema": "ldc-v142.11-adversarial-review-v1",
+  "generated_date": "2026-10-06",
+  "candidate_public_version": "142.11",
+  "result": "PASS_PRE_PHYSICAL_WITH_EXPLICIT_OPEN_RUNTIME_DEVICE_GATES",
+  "baseline": {
+    "public_version": "142.10",
+    "sha256": "c5ef73e6738ef8e2b586dfeb5ff44d4569860d023706e704e940fd365692a460",
+    "status": "PRODUCTION_DEPLOYED_CLOSED_IMMUTABLE"
+  },
+  "fresh_evidence": {
+    "machine_qa": {
+      "total": 61,
+      "pass": 61,
+      "fail": 0
+    },
+    "resolver_state_qa": {
+      "total": 17,
+      "pass": 17,
+      "fail": 0,
+      "tests": [
+        [
+          "principal paragraph",
+          true
+        ],
+        [
+          "internal AFTER supplement",
+          true
+        ],
+        [
+          "internal BETWEEN supplement",
+          true
+        ],
+        [
+          "WITHIN_PARAGRAPH supplement",
+          true
+        ],
+        [
+          "principal before internal supplement same host",
+          true
+        ],
+        [
+          "principal after internal supplement same host",
+          true
+        ],
+        [
+          "selection principal -> supplement",
+          true
+        ],
+        [
+          "selection supplement -> principal",
+          true
+        ],
+        [
+          "selection principal -> supplement -> principal",
+          true
+        ],
+        [
+          "stale selection after navigation ignored",
+          true
+        ],
+        [
+          "entry fallback principal",
+          true
+        ],
+        [
+          "reader focus fallback supplement",
+          true
+        ],
+        [
+          "complete-entry supplement",
+          true
+        ],
+        [
+          "temporary navigation does not persist",
+          true
+        ],
+        [
+          "deep-link override does not persist",
+          true
+        ],
+        [
+          "explicit Vue documentaire choice persists and clears temporary restore",
+          true
+        ],
+        [
+          "explicit same-mode choice still persists",
+          true
+        ]
+      ]
+    },
+    "protected_surfaces": "PASS",
+    "public_provenance_label_audit": "PASS",
+    "served_origin_headless_browser": {
+      "name": "route_boot",
+      "pass": false,
+      "detail": "Error('Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at https://ldc.test/index.html\\nCall log:\\n  - navigating to \"https://ldc.test/index.html\", waiting until \"domcontentloaded\"\\n')"
+    }
+  },
+  "adversarial_challenges": [
+    {
+      "challenge": "Could navigation/deep-link transitions silently replace the saved documentary preference?",
+      "finding": "NO in the changed controller: persistence requires persist=true AND origin=user; deep-link and temporary-reader calls are explicitly nonpersistent; legacy saved enriched/aflp/additions values remain loadable.",
+      "status": "PASS"
+    },
+    {
+      "challenge": "Could activeReaderSupplement be repurposed and destabilize Reader/session identity?",
+      "finding": "NO; activeReaderSupplement and sampled reading-position/session persistence functions are byte-identical to v142.10. A separate local documentary resolver was added.",
+      "status": "PASS"
+    },
+    {
+      "challenge": "Could a selection crossing PRINCIPAL/COMPLÉMENT be falsely assigned one source?",
+      "finding": "NO in targeted tests; mixed selection returns kind=mixed, exact paragraph IDs, and all involved supplement IDs for principal→supplement, supplement→principal and principal→supplement→principal.",
+      "status": "PASS"
+    },
+    {
+      "challenge": "Could stale selection data contaminate provenance after navigation?",
+      "finding": "Resolver reuses current Reader binding/validity checks; targeted stale-selection case falls through to the current visible paragraph.",
+      "status": "PASS"
+    },
+    {
+      "challenge": "Could scrolling over an internal complement still show host PRINCIPAL provenance?",
+      "finding": "Resolver prioritizes explicit/valid selection, then explicit paragraph, then top visible paragraph before Reader focus/entry fallback. Infos/source freezes that local target on open.",
+      "status": "PASS_LOGIC_PHYSICAL_SCROLL_CONFIRMATION_OPEN"
+    },
+    {
+      "challenge": "Could ordinary UI hide a non-normal documentary view?",
+      "finding": "All normal Library/Tome/Reader/Search surfaces carry compact status components synchronized from supplementMode; normal HTML contains no permanent data-source-mode selector controls.",
+      "status": "PASS_STATIC_PHYSICAL_LAYOUT_CONFIRMATION_OPEN"
+    },
+    {
+      "challenge": "Could Repères OFF erase all documentary distinction?",
+      "finding": "Internal complement blocks retain background/left-border styling and an accessible group label with Repères OFF; Repères ON exposes the explicit banner/provenance. Complete-entry complement identity remains separately handled.",
+      "status": "PASS_STATIC_PHYSICAL_VISUAL_AT_CONFIRMATION_OPEN"
+    },
+    {
+      "challenge": "Could internal complements inflate ordinary read statistics or date rows show seq:null?",
+      "finding": "Normal stats only credit principal records plus complete-entry complements; internal supplement records do not add normal-reading entry credit. Date rows use documentary-specific subtitles for supplement records.",
+      "status": "PASS_LOGIC"
+    },
+    {
+      "challenge": "Could this change alter retrieval/corpus/speaker/user schemas?",
+      "finding": "corpus/**, pls_v15/**, all Search/runtime files, interaction_anchor.js and sampled core persistence/backup functions are byte-identical. Supplement registry/speaker hashes and 75/13/62/177 invariants are unchanged.",
+      "status": "PASS"
+    },
+    {
+      "challenge": "Could release metadata activate stale caches or self-bind to the wrong manifest?",
+      "finding": "v142.11 has its own worker/shell/runtime identity; offline content binding remains unchanged; version.json offline_manifest_sha256 matches the current manifest.",
+      "status": "PASS"
+    },
+    {
+      "challenge": "Could local automated evidence be mistaken for hosted/PWA/physical proof?",
+      "finding": "NO claim made. Full fake-origin Chromium navigation is blocked by environment policy (ERR_BLOCKED_BY_ADMINISTRATOR). Hosted App-Test, installed-PWA update/offline, iPhone/iPad and VoiceOver remain OPEN.",
+      "status": "OPEN_EXTERNAL_GATE"
+    }
+  ],
+  "failed_gates": [],
+  "open_gates": [
+    "hosted App-Test exact-byte/runtime binding",
+    "installed PWA upgrade from v142.10",
+    "true offline reopen",
+    "physical iPhone acceptance",
+    "physical iPad acceptance",
+    "VoiceOver/accessibility spot check",
+    "production deployment decision"
+  ],
+  "production_authorized": false
+}

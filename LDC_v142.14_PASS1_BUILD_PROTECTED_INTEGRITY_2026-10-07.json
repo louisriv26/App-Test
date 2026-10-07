@@ -1,0 +1,305 @@
+{
+  "authoritative_source_chain": "exact v142.13 frozen ZIP -> reconstructed v142.14 four-file application mutation -> generated v142.14 qualification evidence -> package manifest generated last",
+  "candidate_public_version": "142.14",
+  "direct_predecessor": {
+    "public_version": "142.13",
+    "status": "FROZEN_PRE_PHYSICAL_REJECTED_AS_FINAL_BY_POST_FREEZE_BLIND_AUDIT",
+    "zip_sha256": "f3a6ac7d957a43adb250d0c809d3584de2764cbfd36174bc71e4594ff0689030"
+  },
+  "evidence_kind": "PASS_1_BUILD_PACKAGE_PROTECTED_INTEGRITY_PRE_MANIFEST",
+  "generated_date": "2026-10-07",
+  "independent_checks": [
+    {
+      "detail": "f3a6ac7d957a43adb250d0c809d3584de2764cbfd36174bc71e4594ff0689030",
+      "name": "predecessor_v14213_exact_sha",
+      "pass": true
+    },
+    {
+      "detail": "c5ef73e6738ef8e2b586dfeb5ff44d4569860d023706e704e940fd365692a460",
+      "name": "production_v14210_exact_sha",
+      "pass": true
+    },
+    {
+      "detail": {
+        "bad": [],
+        "manifest_files": 298
+      },
+      "name": "v14213_manifest_reconciles_actual_predecessor",
+      "pass": true
+    },
+    {
+      "detail": [
+        "index.html",
+        "offline_manifest.json",
+        "sw.js",
+        "version.json"
+      ],
+      "name": "direct_app_mutation_universe_four_files",
+      "pass": true
+    },
+    {
+      "detail": {
+        "added": [],
+        "missing": [
+          "PACKAGE_MANIFEST_SHA256.json"
+        ]
+      },
+      "name": "pre_freeze_packaging_artifact_absence_only",
+      "pass": true
+    },
+    {
+      "detail": {
+        "bad": [],
+        "count": 243
+      },
+      "name": "protected_identity_vs_real_v14210",
+      "pass": true
+    },
+    {
+      "detail": {
+        "bad": [],
+        "count": 243
+      },
+      "name": "protected_identity_vs_v14213",
+      "pass": true
+    },
+    {
+      "detail": [],
+      "name": "all_json_parse",
+      "pass": true
+    },
+    {
+      "detail": [],
+      "name": "all_js_mjs_syntax",
+      "pass": true
+    },
+    {
+      "detail": [],
+      "name": "inline_script_syntax",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "identity_cross_file",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "sw_shell_runtime_current",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "public_par_le_sens_not_conflated_with_legacy_semantic_v3",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "migration_metadata_matches_runtime_present",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "function_preserved_resolveReaderDocumentaryContext",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "function_preserved_freezeDocumentaryContext",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "function_preserved_setSupplementMode",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "function_preserved_runStage8StartupMigrationGate",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "function_preserved_runStage8MigrationChain",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "function_preserved_confirmImportBackupStream",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "function_preserved_confirmImportBackup",
+      "pass": true
+    },
+    {
+      "detail": {
+        "bad": []
+      },
+      "name": "offline_asset_ledger_exact_204",
+      "pass": true
+    },
+    {
+      "detail": {
+        "calc": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+        "declared": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384"
+      },
+      "name": "offline_content_binding_recomputes",
+      "pass": true
+    },
+    {
+      "detail": {
+        "asset_bad": [],
+        "historical_build_source_hash_differences": [
+          "corpus/supplement_speakers.json",
+          "corpus/supplements.json"
+        ],
+        "interpretation": "two supplement files received later provenance/metadata-only changes; search payload assets remain exact and all other source hashes match"
+      },
+      "name": "search_v2_assets_and_semantic_sources_coherent",
+      "pass": true
+    },
+    {
+      "detail": {
+        "complete_entries": 13,
+        "internal_supplements": 62,
+        "items": 75,
+        "legacy_sup_t1_inline_supplements": 2,
+        "paragraphs": 177,
+        "search_records": 177,
+        "speaker_segments": 141,
+        "sup_t1_items": 13,
+        "sup_t2_items": 43,
+        "sup_t2_speaker_segments": 63,
+        "sup_t3_items": 1,
+        "sup_t4_items": 15,
+        "sup_t4_speaker_segments": 22,
+        "sup_t5_items": 3,
+        "sup_t5_speaker_segments": 3
+      },
+      "name": "supplement_counts",
+      "pass": true
+    },
+    {
+      "detail": {
+        "reader_french_wording_label": 0,
+        "reader_provenance_text": 0,
+        "source_origin": 0,
+        "translation_status": 0
+      },
+      "name": "supplement_public_provenance_fields_complete",
+      "pass": true
+    },
+    {
+      "detail": [],
+      "name": "pls_pack_manifest_files_exact",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "pls_model_reassembly_exact",
+      "pass": true
+    },
+    {
+      "detail": {
+        "rows": 20236
+      },
+      "name": "pls_geometry",
+      "pass": true
+    },
+    {
+      "detail": {
+        "historical_doc_index_shift_spans": 97727,
+        "span_bad": [],
+        "span_count": 119021,
+        "text_bad": []
+      },
+      "name": "pls_all_source_spans_and_reconstructed_text_exact_by_stable_ref",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "active_pls_user_runtime_bound",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "legacy_semantic_v3_metadata_separate",
+      "pass": true
+    },
+    {
+      "detail": {
+        "occurrences": 11,
+        "unsafe": []
+      },
+      "name": "v14213_occurrences_operationally_historical_or_predecessor",
+      "pass": true
+    },
+    {
+      "detail": null,
+      "name": "package_manifest_intentionally_absent_pre_freeze",
+      "pass": true
+    }
+  ],
+  "independent_prefreeze_audit_summary": {
+    "fail": 0,
+    "pass": 34,
+    "total": 34
+  },
+  "mutation_boundary": {
+    "application_replacements": [
+      "index.html",
+      "version.json",
+      "offline_manifest.json",
+      "sw.js"
+    ],
+    "reason": "The v142.13 package manifest describes predecessor bytes and is intentionally discarded before v142.14 freeze. Generated v142.14 evidence files are qualification artifacts, not application-surface mutations.",
+    "removed_predecessor_packaging_artifact": [
+      "PACKAGE_MANIFEST_SHA256.json"
+    ]
+  },
+  "package_manifest_rule": "NOT_CREATED_YET_AT_THIS_EVIDENCE_STEP; must be generated only after all current evidence bytes are final.",
+  "pre_manifest_runtime_release_hashes": [
+    {
+      "bytes": 925450,
+      "path": "index.html",
+      "sha256": "f64bce33847057fb62ed00471d93fdd74f972fbe12c4087e7887fc74a80c56f6"
+    },
+    {
+      "bytes": 251986,
+      "path": "version.json",
+      "sha256": "73dc8abd8ad04a0810d4446971772b21ef2a8e0818010d1ba9e91c12c27379ca"
+    },
+    {
+      "bytes": 58776,
+      "path": "offline_manifest.json",
+      "sha256": "2dd045040d6b779f162cb36617315733b4b5f1229f687473b035de017f313443"
+    },
+    {
+      "bytes": 32246,
+      "path": "sw.js",
+      "sha256": "dc8dfa4b9aafcc085a44181ce3acd8ffbaee6b19ea56c549d60f3cdfe0817bc5"
+    }
+  ],
+  "production_authorized": false,
+  "protected_production_baseline": {
+    "public_version": "142.10",
+    "zip_sha256": "c5ef73e6738ef8e2b586dfeb5ff44d4569860d023706e704e940fd365692a460"
+  },
+  "protected_surface_result": {
+    "files_compared": 243,
+    "mismatches": 0,
+    "versus_real_v14210": "243/243 byte-identical",
+    "versus_v14213": "243/243 byte-identical"
+  },
+  "qa_harness_correction": {
+    "classification": "TEST_HARNESS_CLASSIFICATION_DEFECT_NOT_APPLICATION_DEFECT",
+    "correct_rule": "Four application/release files are replaced; predecessor package manifest is a separately classified discarded packaging artifact; generated current evidence is separate again.",
+    "finding": "The inherited run_static_qa.py four-file-delta assertion counted the intentionally absent predecessor PACKAGE_MANIFEST_SHA256.json as a fifth application mutation.",
+    "observed_old_result": "52/53 when run against a predecessor tree that still contained its package manifest"
+  },
+  "schema": "ldc-v142.14-qualification-evidence-v1",
+  "technical_identity": "v2.19.142.14-R1B-BLIND-AUDIT-CLOSURE",
+  "verdict": "PASS_PRE_FREEZE_TESTABLE_SCOPE"
+}
