@@ -1,0 +1,34 @@
+name: LDC WIP semantic binding contract
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - 'pls_v16/BINDING_CONTRACT.json'
+      - 'search_semantic_pack_guard_r4.js'
+      - '.github/wip-semantic-binding-contract.cjs'
+      - '.github/workflows/wip-semantic-binding-contract.yml'
+      - 'corpus/manifest.json'
+      - 'corpus/search_v2_manifest.json'
+      - 'corpus/search_v21_manifest.json'
+      - 'corpus/search_v2_documents.json'
+      - 'corpus/search_v2_entries.json'
+      - 'corpus/search_v2_index.json'
+      - 'corpus/search_v2_jesus_filter.json'
+      - 'corpus/search_v21_topology.json'
+      - 'offline_manifest.json'
+      - 'version.json'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify exact current-corpus binding and fail-closed guard
+        run: node .github/wip-semantic-binding-contract.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-semantic-binding-contract-qa
+          path: wip-semantic-binding-contract-qa.json
+          if-no-files-found: error
+          retention-days: 2
