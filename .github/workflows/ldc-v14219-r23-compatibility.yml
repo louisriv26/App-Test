@@ -1,0 +1,28 @@
+name: LDC 142.19 R23 installation compatibility QA
+on:
+  push:
+    branches:
+      - ldc-v142-19-reader-root-height-fix-wip-20261008
+    paths:
+      - .github/workflows/ldc-v14219-r23-compatibility.yml
+permissions:
+  contents: read
+jobs:
+  compatibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: npm install --no-save playwright@1.55.0
+      - run: |
+          mkdir -p /tmp/ldc-r23-root
+          nohup python3 -m http.server 8999 --bind 127.0.0.1 --directory /tmp/ldc-r23-live >/tmp/ldc-r23-http.log 2>&1 &
+      - run: node .github/ldc-v14219-r23-ephemeral-upgrade-lifecycle-diagnostic.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14219-r23-installation-check
+          path: LDC_v142.19_R23_LOCAL_UPGRADE_WORKER_LIFECYCLE_DIAGNOSTIC.json
+          retention-days: 14
