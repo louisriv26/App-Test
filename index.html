@@ -5705,7 +5705,9 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
   let focusedSupplement=opts.supplementId?supplementById(opts.supplementId):supplementForTarget(vol,entryId,requestedPara&&requestedPara.id);
   const targetIsSupplement=!!focusedSupplement;
   const effectiveSupplementMode=(targetIsSupplement&&supplementMode==='aflp')?'additions':((supplementMode==='additions'&&!targetIsSupplement)?'enriched':supplementMode);
-  const nextCurrentEntry=corpusCache[vol].byId[entryId] || (effectiveSupplementMode==='additions'&&focusedSupplement&&isInternalSupplementItem(focusedSupplement)?requestedEntry:null);
+  const nextCurrentEntry=corpusCache[vol].byId[entryId]
+    || (effectiveSupplementMode==='enriched'&&supplementMode==='additions'&&requestedEntry&&!requestedEntry.is_supplement?requestedEntry:null)
+    || (effectiveSupplementMode==='additions'&&focusedSupplement&&isInternalSupplementItem(focusedSupplement)?requestedEntry:null);
   if(!nextCurrentEntry)return;
 
   if(priorReaderSession&&!sameReaderRerender&&opts.skipSessionFlush!==true)await flushReaderForTransition('reader-navigation');
