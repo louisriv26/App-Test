@@ -1,0 +1,35 @@
+name: LDC v142.19 R22 synthetic old-PWA same-origin migration (NO DEPLOYMENT)
+on:
+  push:
+    branches: [ldc-v142-19-reader-root-height-fix-wip-20261008]
+    paths:
+      - '.github/workflows/ldc-v14219-r22-local-upgrade-qa.yml'
+      - '.github/ldc-v14219-r22-synthetic-upgrade.mjs'
+permissions: {contents: read}
+jobs:
+  synthetic-predecessor-migration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Playwright Chrome
+        run: |
+          npm install --no-save playwright@1.55.0
+          command -v google-chrome
+      - name: Start disposable browser origin server with switchable exact source trees
+        run: |
+          nohup python3 -m http.server 8998 --bind 127.0.0.1 --directory /tmp/ldc-r22-served >/tmp/ldc-r22-migration-server.log 2>&1 &
+          sleep 2
+      - name: Investigate fresh synthetic predecessor root and nested old-to-new PWA route without touching owner data
+        continue-on-error: true
+        run: node .github/ldc-v14219-r22-synthetic-upgrade.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: R22-synthetic-upgrade-local-old-nested-to-root
+          path: LDC_v142.19_R22_LOCAL_SAME_ORIGIN_UPGRADE_PATH_MIGRATION.json
+          retention-days: 14
+      - name: Fail closed unless contract checks completed
+        run: python3 -c "import json;r=json.load(open('LDC_v142.19_R22_LOCAL_SAME_ORIGIN_UPGRADE_PATH_MIGRATION.json')); assert r['status']=='PASS_SCOPED_LOCAL_SYNTHETIC_UPGRADE_WITH_LEGACY_ROUTE_RISK',r['status']"
