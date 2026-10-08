@@ -1,0 +1,78 @@
+name: LDC WIP PLS v16 V2 artifact-bound calibration
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - 'pls_v16/CALIBRATION_V2_RUN_REQUEST.json'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  calibrate-v2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Bind exact successful vector run and immutable vector inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          REQ=pls_v16/CALIBRATION_V2_RUN_REQUEST.json
+          RUN_ID="$(jq -r '.vector_run_id' "$REQ")"
+          ARTIFACT="$(jq -r '.artifact_name' "$REQ")"
+          SOURCE_HEAD="$(jq -r '.source_head_sha' "$REQ")"
+          RUN_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$RUN_ID")"
+          test "$(jq -r '.conclusion' <<<"$RUN_JSON")" = "success"
+          test "$(jq -r '.head_sha' <<<"$RUN_JSON")" = "$SOURCE_HEAD"
+          test "$(jq -r '.head_branch' <<<"$RUN_JSON")" = "ldc-v142-16-search-integrity-wip-20261007"
+          git cat-file -e "$SOURCE_HEAD^{commit}"
+          git diff --exit-code "$SOURCE_HEAD" -- pls_v16/BINDING_CONTRACT.json .github/wip-semantic-current-pack-build.cjs .github/wip-semantic-v16-vector-build-browser.mjs pls_v15/model pls_v15/runtime corpus/search_v2_documents.json corpus/search_v2_entries.json corpus/search_v2_jesus_filter.json corpus/search_v21_topology.json
+          rm -rf /tmp/v16-cal-v2-artifact && mkdir -p /tmp/v16-cal-v2-artifact
+          gh run download "$RUN_ID" -n "$ARTIFACT" -D /tmp/v16-cal-v2-artifact
+          VEC="$(find /tmp/v16-cal-v2-artifact -type f -name vectors.i8 -print -quit)"
+          NORM="$(find /tmp/v16-cal-v2-artifact -type f -name inverse_norms.f32le -print -quit)"
+          test -n "$VEC" && test -n "$NORM"
+          test "$(sha256sum "$VEC" | awk '{print $1}')" = "$(jq -r '.expected_vector_sha256' "$REQ")"
+          test "$(sha256sum "$NORM" | awk '{print $1}')" = "$(jq -r '.expected_inverse_norms_sha256' "$REQ")"
+          echo "PLS_V16_PACK_DIR=$(dirname "$VEC")" >> "$GITHUB_ENV"
+          echo "VECTOR_RUN_ID=$RUN_ID" >> "$GITHUB_ENV"
+          echo "VECTOR_SOURCE_HEAD=$SOURCE_HEAD" >> "$GITHUB_ENV"
+          echo "VECTOR_ARTIFACT=$ARTIFACT" >> "$GITHUB_ENV"
+      - name: Rebuild exact current metadata and Jesus mask
+        run: node .github/wip-semantic-current-pack-build.cjs
+      - name: Install pinned browser driver
+        run: npm install --no-save playwright-core@1.55.0
+      - name: Execute frozen V2 retrieval qualification
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          PLS_V16_METADATA: wip-current-semantic-pack/metadata.jsonl
+          PLS_V16_MASK: wip-current-semantic-pack/jesus_mask.bits
+          PLS_V16_CAL_OUT: wip-pls-v16-calibration-v2
+        run: node .github/wip-semantic-v16-calibrate-v2.mjs
+      - name: Bind exact vector authority into V2 evidence
+        if: always()
+        shell: bash
+        run: |
+          if test -f wip-pls-v16-calibration-v2/calibration_evidence_v2.json; then
+            jq --arg run "$VECTOR_RUN_ID" --arg head "$VECTOR_SOURCE_HEAD" --arg artifact "$VECTOR_ARTIFACT" '. + {vector_authority:{run_id:($run|tonumber),source_head_sha:$head,artifact_name:$artifact}}' wip-pls-v16-calibration-v2/calibration_evidence_v2.json > /tmp/cal-v2.json
+            mv /tmp/cal-v2.json wip-pls-v16-calibration-v2/calibration_evidence_v2.json
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-pls-v16-calibration-v2
+          path: |
+            wip-pls-v16-calibration-v2/
+            pls_v16/CALIBRATION_V2_RUN_REQUEST.json
+            pls_v16/CALIBRATION_PROTOCOL_V2.json
+            pls_v16/CALIBRATION_V1_ADJUDICATION.md
+          if-no-files-found: warn
+          retention-days: 2
