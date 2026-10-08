@@ -1,0 +1,19 @@
+{
+  "schema": "ldc-v14218-r16-hosted-highlight-Reader-MonEspace-layout-QA-v1",
+  "status": "FAIL",
+  "url": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/",
+  "tested_at": "2026-10-08T10:33:53.182Z",
+  "checks": {
+    "actual_hosted_candidate_boot_14218": true
+  },
+  "details": {},
+  "errors": [
+    "page.waitForFunction: Timeout 90000ms exceeded.\n    at /home/runner/work/App-Test/App-Test/.github/ldc-v14218-r16-hosted-highlight-qa.mjs:19:10"
+  ],
+  "warnings": [],
+  "scope": "Fresh disposable real Chromium hosted site, canonical synthetic highlight via app persistence function; NOT native iOS text-selection equivalence",
+  "source": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+  "mutation_authority": "NONE",
+  "deployment_authority": "NONE",
+  "physical_gate": "OPEN"
+}
