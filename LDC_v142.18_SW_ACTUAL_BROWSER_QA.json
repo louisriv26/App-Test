@@ -1,12 +1,63 @@
 {
   "schema": "ldc-v14218-new-profile-service-worker-actual-browser-v1",
   "status": "FAIL",
-  "source_sha": "f2249504c630ae70b9047dfab1cc6795b7c8fdbc",
-  "checks": {},
-  "details": {},
-  "errors": [
-    "page.evaluate: Error: SW_NOT_REGISTERED_AFTER_30S\n    at eval (eval at evaluate (:291:30), <anonymous>:5:19)\n    at async <anonymous>:317:30\n    at /home/runner/work/App-Test/App-Test/.github/ldc-v14218-sw-qa.mjs:19:27"
-  ],
+  "source_sha": "d42fc38df249e19d1c0439e87eea5bf6628d7b14",
+  "checks": {
+    "registered_worker_active": false,
+    "shell_14218_cache_created": false,
+    "correct_v14218_app_and_offline_manifest": false,
+    "qualified_small_runtime_scripts_cached": false,
+    "frozen_204_corpus_binding": false,
+    "no_heavy_model_in_shell": true
+  },
+  "details": {
+    "worker_install_snapshot": {
+      "supported": true,
+      "active": false,
+      "scope": null,
+      "cacheName": null,
+      "requests": [],
+      "otherCaches": [],
+      "version": "142.18",
+      "sw_expected": "ldc-v2.19.142.18-R1B-reader-semantic-integration-wip",
+      "offline_count": null,
+      "binding": null,
+      "app_manifest_version": null,
+      "controller": false,
+      "boot_stage": "POST_INIT",
+      "origin": "http://127.0.0.1:8899",
+      "secure_context": true,
+      "register_probe_error": null,
+      "registrations": [],
+      "requests_count": 0
+    },
+    "registered_worker_active": null,
+    "shell_14218_cache_created": null,
+    "correct_v14218_app_and_offline_manifest": {
+      "version": "142.18",
+      "offline_version": null
+    },
+    "qualified_small_runtime_scripts_cached": {
+      "scripts": [
+        "/search_semantic_pack_guard_r4.js",
+        "/search_semantic_v3_core_r4.js",
+        "/search_semantic_hybrid_r6.js",
+        "/search_semantic_pack_registry_r6.js",
+        "/pls_v16/runtime_v1.mjs"
+      ],
+      "missing": [
+        "/search_semantic_pack_guard_r4.js",
+        "/search_semantic_v3_core_r4.js",
+        "/search_semantic_hybrid_r6.js",
+        "/search_semantic_pack_registry_r6.js",
+        "/pls_v16/runtime_v1.mjs"
+      ]
+    },
+    "no_heavy_model_in_shell": {
+      "shell_entries": 0
+    }
+  },
+  "errors": [],
   "real_hosted_origin": false,
   "physical_ios": false,
   "deployment_authority": "NONE"
