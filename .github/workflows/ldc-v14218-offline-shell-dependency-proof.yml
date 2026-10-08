@@ -1,0 +1,55 @@
+name: LDC v142.18 R7 P0 immutable package controlled offline module dependency proof
+on:
+  push:
+    branches: [ldc-v142-18-reader-semantic-integration-wip-20261008]
+    paths: ['.github/workflows/ldc-v14218-offline-shell-dependency-proof.yml']
+permissions: {contents: write}
+jobs:
+  proof-no-app-mutation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/checkout@v4
+        with:
+          ref: 7c292d6221bb350fac3aeaa83750b8784706d45c
+          path: pinned-app
+          fetch-depth: 0
+      - name: Rebuild untouched pinned ZIP and extract in /ldc
+        run: |
+          set -euo pipefail
+          cd pinned-app
+          git switch -c ldc-v142-18-reader-semantic-integration-wip-20261008
+          python3 .github/ldc-v14218-curated-wip-package.py
+          echo '954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb  LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip' | sha256sum -c -
+          cd ..
+          mkdir -p isolated-host/ldc
+          printf '<!doctype html><title>neutral</title>' > isolated-host/index.html
+          unzip -q pinned-app/LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip -d isolated-host/ldc
+          npm install --no-save playwright-core@1.55.0
+      - name: Exact-ZIP two-origins natural FAIL versus one immutable module manually cached in SW shell
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          LDC_NESTED_FIXTURE_DIR: ${{ github.workspace }}/isolated-host
+        run: node .github/ldc-v14218-offline-shell-dependency-proof.mjs
+      - name: Preserve QA proof to isolated branch only
+        if: always()
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_OFFLINE_TRANSITIVE_MODULE_ROOT_CAUSE_PROOF.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_OFFLINE_TRANSITIVE_MODULE_ROOT_CAUSE_PROOF.json
+          git commit -m 'test(ldc): record exact v142.18 offline shell dependency controlled QA, no app source edits'
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-frozen-source-R7-offline-root-cause-evidence
+          path: LDC_v142.18_OFFLINE_TRANSITIVE_MODULE_ROOT_CAUSE_PROOF.json
+          retention-days: 14
+      - name: Pass proof gate ONLY, leave frozen 142.18 marked defective
+        run: python3 -c "import json;d=json.load(open('LDC_v142.18_OFFLINE_TRANSITIVE_MODULE_ROOT_CAUSE_PROOF.json'));assert d['status']=='PASS_ROOT_CAUSE_PROOF_ONLY_FROZEN_APP_REMAINS_DEFECTIVE' and d['deployment_authority']=='NONE'"
