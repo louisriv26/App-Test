@@ -1,0 +1,130 @@
+{
+  "schema": "ldc-pls-v16-calibration-protocol-v2",
+  "status": "FROZEN_BEFORE_V2_BLIND_OUTCOMES",
+  "predecessor": {
+    "protocol": "pls_v16/CALIBRATION_PROTOCOL.json",
+    "v1_status": "FAIL_ENGINEERING_ONLY",
+    "adjudication": "pls_v16/CALIBRATION_V1_ADJUDICATION.md",
+    "reason": "V1 conflated retrieval relatedness with entailment/truth verification; the single blind failure returned a directly relevant corrective sacrament/confession passage."
+  },
+  "binding_contract_sha256": "6e8558b4545c1084b3a8342eb2f66611de97dc2e78db46f60919666313164140",
+  "pack_id": "ldc-pls-v16-current-v14215-enriched-96-72-r1",
+  "purpose": "Qualify fail-closed remembered-meaning retrieval: retrieve validated remembered passages while abstaining on unrelated queries. Search results are retrieval candidates, not truth/entailment judgements.",
+  "frozen_policy": {
+    "policy_id": "HYBRID_DENSE_ABSTENTION_V1",
+    "close_enabled": false,
+    "possible_min_dense": 0.8845798510542678,
+    "possible_min_channels": 2,
+    "provenance": "Exact V1 prospective midpoint selected before V1 blind outcomes; unchanged in V2."
+  },
+  "positives": [
+    {
+      "id": "OWNER-REAL-01",
+      "text": "La volonté de Dieu et la volonté de l'homme peuvent être comme deux bâtons de la croix. Quand la volonté des hommes est alignée sur la volonté de Dieu, les deux poteaux de la croix sont alignés, donc il n'y a plus de croix. Voilà, donc ça serait un texte que je demanderais de chercher en disant cela.",
+      "target_entry_id": "ldc_t11_1913_11_18_e001",
+      "gate": "TARGET_ENTRY_RANK_LE_10_AND_ACCEPTED"
+    },
+    {
+      "id": "OWNER-REAL-02",
+      "text": "Deuxième, il ne faut pas regarder le passé. Le passé est passé et il faut vivre dans le présent. Ce n'est pas utile du tout de regarder dans le passé. C'est un affront à Jésus. C'est le deuxième texte.",
+      "target_entry_id": "ldc_t09_1909_11_02_e001",
+      "gate": "TARGET_ENTRY_RANK_LE_10_AND_ACCEPTED"
+    },
+    {
+      "id": "OWNER-REAL-03",
+      "text": "Un troisième texte, la potence de garder le silence. Plus quelqu'un est proche de Dieu et en Dieu, plus il veut rester à l'intérieur de lui et garder le silence. Plus il parle, plus c'est qu'il est vide de Dieu. Voilà un troisième texte.",
+      "target_entry_id": "ldc_t09_1909_05_08_e001",
+      "gate": "TARGET_ENTRY_RANK_LE_10_AND_ACCEPTED"
+    }
+  ],
+  "development_negatives": [
+    {
+      "id": "NEG-DEV-01",
+      "text": "Comment configurer un routeur Wi-Fi avec une adresse IPv6 statique et un réseau invité ?"
+    },
+    {
+      "id": "NEG-DEV-02",
+      "text": "Quelle est la recette d'un risotto aux champignons avec du parmesan et du bouillon ?"
+    },
+    {
+      "id": "NEG-DEV-03",
+      "text": "Comment réparer une fuite d'huile sur un moteur diesel moderne ?"
+    },
+    {
+      "id": "NEG-DEV-04",
+      "text": "Comment calculer la prime pure d'un contrat d'assurance automobile à partir de la fréquence et du coût moyen ?"
+    },
+    {
+      "id": "NEG-DEV-05",
+      "text": "Comment optimiser une requête SQL avec plusieurs jointures et un index composite ?"
+    },
+    {
+      "id": "NEG-DEV-06",
+      "text": "Quelle stratégie d'allocation d'actifs réduit la volatilité d'un portefeuille d'actions internationales ?"
+    },
+    {
+      "id": "NEG-DEV-07",
+      "text": "Comment remplacer la batterie d'un ordinateur portable et recalibrer son contrôleur de charge ?"
+    },
+    {
+      "id": "NEG-DEV-08",
+      "text": "zxqv flurim nastro qopel venzik tarum"
+    }
+  ],
+  "blind_holdout_negatives": [
+    {
+      "id": "NEG-V2-HOLD-01",
+      "text": "Comment rédiger une clause de testament pour exprimer clairement ma dernière volonté ?"
+    },
+    {
+      "id": "NEG-V2-HOLD-02",
+      "text": "Pourquoi le ciel devient-il rouge au coucher du soleil et comment la lumière est-elle diffusée dans l'atmosphère ?"
+    },
+    {
+      "id": "NEG-V2-HOLD-03",
+      "text": "Comment calculer la puissance nécessaire pour soulever une charge et réduire l'effort mécanique ?"
+    },
+    {
+      "id": "NEG-V2-HOLD-04",
+      "text": "Comment un enfant acquiert-il progressivement le langage et l'autonomie au cours de ses premières années de vie ?"
+    }
+  ],
+  "revealed_truth_neutral_probes": [
+    {
+      "id": "V1-HOLD-01",
+      "text": "Jésus fixe l'année 2035 comme date précise de la fin du monde.",
+      "v1_behavior": "ABSTAIN"
+    },
+    {
+      "id": "V1-HOLD-02",
+      "text": "La Divine Volonté rend inutile la confession sacramentelle et remplace tous les sacrements.",
+      "v1_behavior": "RETURNED_RELEVANT_CORRECTIVE_PASSAGE",
+      "top_entry_id": "LDC.T18.E0010"
+    },
+    {
+      "id": "V1-HOLD-03",
+      "text": "Marie demande d'abandonner définitivement le rosaire parce qu'il n'est plus nécessaire.",
+      "v1_behavior": "ABSTAIN"
+    },
+    {
+      "id": "V1-HOLD-04",
+      "text": "Luisa affirme que l'obéissance à l'Église doit être rejetée pour vivre dans la Divine Volonté.",
+      "v1_behavior": "ABSTAIN"
+    }
+  ],
+  "gates": {
+    "owner_real_query_gate": "All 3 intended targets rank <=10 and all 3 queries are accepted by the unchanged frozen policy.",
+    "hard_negative_development_gate": "All 8 development negatives abstain under the unchanged frozen policy.",
+    "blind_unrelated_query_gate": "All 4 new blind unrelated lexical-overlap negatives abstain without changing policy.",
+    "ranking_immutability_gate": "Dense-160, BM25-160, equal RRF60, top-20 entry deduplication unchanged.",
+    "truth_neutrality_gate": "Search output must be framed as candidate passages, not as confirmation that the user's proposition is true.",
+    "activation_rule": "Only all retrieval gates PASS may support successor qualification; physical/browser acceptance remains separate."
+  },
+  "interpretation_limits": {
+    "entailment_claim": false,
+    "doctrinal_truth_validation_claim": false,
+    "general_accuracy_claim": false,
+    "formal_human_study_claim": false,
+    "deployment_authority": "NONE"
+  }
+}

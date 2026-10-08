@@ -1684,12 +1684,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
 <script src="speech_model.js"></script>
 <script src="search_normalizer.js"></script>
 <script src="interim_user_state_migration.js"></script>
-<script src="search_semantic_pack_guard_r3.js"></script>
+<script src="search_semantic_pack_guard_r4.js"></script>
 <script src="search_semantic_v3_core_r4.js"></script>
-<script src="search_semantic_pack_registry_r5.js"></script>
-<script src="search_semantic_pack_lifecycle_r5.js"></script>
-<script src="pls_v15/hybrid_core_v1_5.js"></script>
-<script type="module" src="pls_v15/owner_runtime_v1_5.mjs"></script>
+<script src="search_semantic_hybrid_r6.js"></script>
+<script src="search_semantic_pack_registry_r6.js"></script>
+<script type="module" src="pls_v16/runtime_v1.mjs"></script>
 </head>
 <body class="app-state-boot">
 
@@ -3369,8 +3368,27 @@ function syncDocumentaryViewUI(){
 }
 function openDocumentaryView(){syncDocumentaryViewUI();openModalOverlay('documentary-view-overlay','closeDocumentaryView');}
 function closeDocumentaryView(){closeModalOverlay('documentary-view-overlay');}
-async function chooseDocumentaryView(mode){closeDocumentaryView();await setSupplementMode(mode,{persist:true,origin:'user'});}
-async function returnToNormalReading(){await setSupplementMode('enriched',{persist:true,origin:'user'});}
+function focusAfterDocumentaryViewChange(){
+  const cur=document.activeElement;
+  if(cur&&cur!==document.body&&cur.isConnected&&cur.getClientRects().length>0)return true;
+  const screen=document.querySelector('.screen.active');if(!screen)return false;
+  let target=null;
+  if(screen.id==='screen-search')target=document.getElementById(searchIntentMode==='meaning'?'search-input-meaning':'search-input');
+  else if(screen.id==='screen-reader')target=document.getElementById('reader-back-btn');
+  else target=screen.querySelector('.btn-back,button:not([disabled])');
+  if(!target||!target.isConnected||target.getClientRects().length===0)return false;
+  try{target.focus({preventScroll:true});}catch(_){target.focus();}
+  return document.activeElement===target;
+}
+async function chooseDocumentaryView(mode){
+  closeDocumentaryView();
+  await setSupplementMode(mode,{persist:true,origin:'user'});
+  requestAnimationFrame(focusAfterDocumentaryViewChange);
+}
+async function returnToNormalReading(){
+  await setSupplementMode('enriched',{persist:true,origin:'user'});
+  requestAnimationFrame(focusAfterDocumentaryViewChange);
+}
 
 async function loadSupplementRegistryData() {
   if (supplementRegistry && supplementManifest) return supplementRegistry;
@@ -8248,17 +8266,14 @@ function searchSemanticV3ParseStructural(raw){
   out.residual=residual.replace(/\s+/g,' ').trim();out.hasStructural=!!(out.volume||out.date||out.year||out.ref);out.structuralOnly=out.hasStructural&&!out.residual;return out;
 }
 async function semanticPackV3Status(){
-  if(window.LDCPLSOwnerPrototypeV15&&typeof window.LDCPLSOwnerPrototypeV15.status==='function'){const p=window.LDCPLSOwnerPrototypeV15.status();if(p&&p.available)return p;}
-  // LAB R3 is deliberately fail-closed. A future bound runtime can provide a status hook,
-  // but only a QUALIFIED status may ever make semantic execution available.
+  const runtime=window.LDCPLSV16Runtime;
+  if(!runtime||typeof runtime.status!=='function')return {available:false,ready:false,can_initialize:false,reason:'PLS_V16_RUNTIME_NOT_BOUND',schema:'ldc-semantic-pack-v3'};
   try{
-    if(window.LDCSemanticPackRegistryV5&&typeof window.LDCSemanticPackRegistryV5.status==='function'){
-      const s=await window.LDCSemanticPackRegistryV5.status(supplementMode);
-      if(s&&s.available===true&&s.calibration_status==='QUALIFIED')return s;
-      if(s)return {...s,available:false};
-    }
-  }catch(e){return {available:false,reason:'PACK_STATUS_ERROR',error:String(e&&e.message||e),schema:'ldc-semantic-pack-v3'};}
-  return {available:false,reason:'PACK_NOT_QUALIFIED_OR_INSTALLED',schema:'ldc-semantic-pack-v3'};
+    const s=runtime.status();
+    if(s&&s.available===true&&s.calibration_status==='QUALIFIED')return s;
+    if(s)return {...s,available:false};
+  }catch(e){return {available:false,ready:false,can_initialize:false,reason:'PACK_STATUS_ERROR',error:String(e&&e.message||e),schema:'ldc-semantic-pack-v3'};}
+  return {available:false,ready:false,can_initialize:false,reason:'PACK_NOT_QUALIFIED_OR_INSTALLED',schema:'ldc-semantic-pack-v3'};
 }
 function renderSemanticPackUnavailable(raw,structural,status){
   searchLastPayload=null;renderSearchIntentMode();renderSearchSourceModeRow();renderSpeakerFilterRow();renderVolFilterRow();
@@ -8277,7 +8292,7 @@ function renderSemanticResultsV4(payload,raw,structural){
   searchLastPayload={semantic:true,payload};renderSearchIntentMode();renderSearchSourceModeRow();renderSpeakerFilterRow();renderVolFilterRow();
   const meta=document.getElementById('search-meta');meta.style.display='block';meta.innerHTML='<span class="semantic-results-heading">Recherche par le sens</span>';
   document.getElementById('trust-notice').style.display='none';const container=document.getElementById('search-results');container.innerHTML='';
-  const intro=document.createElement('div');intro.className='semantic-results-intro';intro.innerHTML='Passages classés selon leur proximité avec votre description.<details class="semantic-how"><summary>Comment ça marche ?</summary><div class="semantic-how-body">La recherche compare votre description aux passages du Livre du Ciel et les classe selon leur proximité. Le premier passage n’est pas nécessairement celui que vous recherchez : ouvrez les résultats qui semblent correspondre et vérifiez leur contexte.</div></details>';container.appendChild(intro);
+  const intro=document.createElement('div');intro.className='semantic-results-intro';intro.innerHTML='Passages classés selon leur proximité avec votre description. Cette recherche ne confirme pas que votre formulation est exacte ou vraie.<details class="semantic-how"><summary>Comment ça marche ?</summary><div class="semantic-how-body">La recherche compare votre description aux passages du Livre du Ciel et les classe selon leur proximité. Elle peut aussi retrouver un passage qui corrige un souvenir imprécis. Le premier passage n’est pas nécessairement celui que vous recherchez : ouvrez les résultats qui semblent correspondre et vérifiez leur contexte.</div></details>';container.appendChild(intro);
   if(payload.confidence&&payload.confidence.state==='abstain'){const e=document.createElement('div');e.className='empty-state';e.innerHTML='<i class="ti ti-search-off"></i>Aucun passage suffisamment proche n’a été identifié.';container.appendChild(e);return;}
   for(const r of (payload.results||[])){
     const item=semanticResultToSearchTargetR4(r),card=document.createElement('button');card.type='button';card.className='result-card';card.dataset.resultKey='semantic:'+String(r.passage_id||r.entry_id||'');
@@ -8295,16 +8310,21 @@ function renderSemanticResultsV4(payload,raw,structural){
 }
 
 async function ensureOwnerSemanticPrepared(generation){
-  const runtime=window.LDCPLSOwnerPrototypeV15;if(!runtime||typeof runtime.init!=='function')return true;
-  if(ownerSemanticPrepared)return true;
+  const runtime=window.LDCPLSV16Runtime;
+  if(!runtime||typeof runtime.init!=='function')throw new Error('PLS_V16_RUNTIME_NOT_BOUND');
+  const current=runtime.status&&runtime.status();
+  if(ownerSemanticPrepared&&current&&current.available===true)return isSearchActive(generation);
   if(!ownerSemanticPreparationPromise){
-    ownerSemanticPreparationPromise=Promise.resolve().then(()=>runtime.init()).then(()=>{ownerSemanticPrepared=true;return true;}).catch(e=>{ownerSemanticPrepared=false;throw e;}).finally(()=>{ownerSemanticPreparationPromise=null;});
+    ownerSemanticPreparationPromise=Promise.resolve().then(()=>runtime.init()).then(s=>{
+      if(!s||s.available!==true||s.calibration_status!=='QUALIFIED')throw new Error('PLS_V16_RUNTIME_NOT_QUALIFIED');
+      ownerSemanticPrepared=true;return true;
+    }).catch(e=>{ownerSemanticPrepared=false;throw e;}).finally(()=>{ownerSemanticPreparationPromise=null;});
   }
   await ownerSemanticPreparationPromise;
   return isSearchActive(generation);
 }
 async function runOwnerSemanticInference(query,options,generation){
-  const runtime=window.LDCPLSOwnerPrototypeV15;if(!runtime||typeof runtime.search!=='function')throw new Error('SEARCH_V3_OWNER_RUNTIME_NOT_BOUND');
+  const runtime=window.LDCPLSV16Runtime;if(!runtime||typeof runtime.search!=='function')throw new Error('PLS_V16_RUNTIME_NOT_BOUND');
   while(ownerSemanticInferencePromise){
     const prior=ownerSemanticInferencePromise;try{await prior;}catch(_){ }
     if(!isSearchActive(generation))return null;
@@ -8316,28 +8336,28 @@ async function runOwnerSemanticInference(query,options,generation){
 }
 async function runSemanticSearchV3(raw,generation){
   const structural=searchSemanticV3ParseStructural(raw);
-  // Pure structural navigation is already governed and must not initialise semantic resources.
+  // Pure structural navigation remains governed by Search-V2 and must not initialise semantic resources.
   if(structural.structuralOnly){
     setSearchProgressPhase('Recherche dans les références…',generation);
     const payload=await searchV2Request(raw,generation);
     if(isSearchActive(generation)&&searchQueryDraftCanonical()===raw)renderSearchV2Results(payload,raw);
     return;
   }
-  const status=await semanticPackV3Status();if(!isSearchActive(generation))return;
-  if(!status.available){renderSemanticPackUnavailable(raw,structural,status);return;}
-  let sem;
-  if(window.LDCPLSOwnerPrototypeV15&&typeof window.LDCPLSOwnerPrototypeV15.search==='function'){
-    if(!ownerSemanticPrepared){setSearchProgressPhase('Préparation de Par le sens…',generation);const prepared=await ensureOwnerSemanticPrepared(generation);if(!prepared)return;}
-    if(!isSearchActive(generation))return;
-    setSearchProgressPhase('Recherche des passages…',generation);
-    sem=await runOwnerSemanticInference(structural.residual||raw,{sourceMode:'enriched',volMin:structural.volume||searchVolFilter||0,volMax:structural.volume||searchVolFilterMax||0,dateIso:structural.date||null,year:structural.date?0:(structural.year||0),stableRef:structural.ref||null,jesus:!!searchSpeakerFilter,maxResults:20},generation);
-    if(sem==null)return;
-  }else{
-    if(!window.LDCSemanticPackRegistryV5||typeof window.LDCSemanticPackRegistryV5.search!=='function')throw new Error('SEARCH_V3_SEMANTIC_REGISTRY_NOT_BOUND');
-    setSearchProgressPhase('Recherche des passages…',generation);
-    sem=await window.LDCSemanticPackRegistryV5.search(structural.residual||raw,{sourceMode:supplementMode,volMin:structural.volume||searchVolFilter||0,volMax:structural.volume||searchVolFilterMax||0,dateIso:structural.date||null,year:structural.date?0:(structural.year||0),stableRef:structural.ref||null,jesus:!!searchSpeakerFilter,maxResults:20});
+  let status=await semanticPackV3Status();if(!isSearchActive(generation))return;
+  if(!status.available&&status.can_initialize){
+    setSearchProgressPhase('Préparation de Par le sens…',generation);
+    const prepared=await ensureOwnerSemanticPrepared(generation);if(!prepared)return;
+    status=await semanticPackV3Status();if(!isSearchActive(generation))return;
   }
-  if(!isSearchActive(generation)||searchQueryDraftCanonical()!==raw)return;
+  if(!status.available){renderSemanticPackUnavailable(raw,structural,status);return;}
+  if(!ownerSemanticPrepared){
+    setSearchProgressPhase('Préparation de Par le sens…',generation);
+    const prepared=await ensureOwnerSemanticPrepared(generation);if(!prepared)return;
+  }
+  if(!isSearchActive(generation))return;
+  setSearchProgressPhase('Recherche des passages…',generation);
+  const sem=await runOwnerSemanticInference(structural.residual||raw,{sourceMode:'enriched',volMin:structural.volume||searchVolFilter||0,volMax:structural.volume||searchVolFilterMax||0,dateIso:structural.date||null,year:structural.date?0:(structural.year||0),stableRef:structural.ref||null,jesus:!!searchSpeakerFilter,maxResults:20},generation);
+  if(sem==null||!isSearchActive(generation)||searchQueryDraftCanonical()!==raw)return;
   renderSemanticResultsV4(sem,raw,structural);
 }
 
@@ -8834,15 +8854,25 @@ function renderSearchV2Results(payload, raw) {
   if(payload.structuralError){meta.textContent=payload.structuralError.message||'Recherche structurelle invalide.';document.getElementById('trust-notice').style.display='none';container.innerHTML='<div class="empty-state"><i class="ti ti-alert-triangle"></i>'+escapeHtml(payload.structuralError.message||'Recherche invalide')+'</div>';return;}
   const selectedTotal=Number(payload.totalMatches||0),totalBody=Number(payload.totalBodyMatches||0),metadataTotal=Number(payload.metadataTotalMatches||0),page=Number(f.page||1),pageCount=Number(f.pageCount||1),metaPage=Number(f.metadataPage||1),metaPageCount=Number(f.metadataPageCount||1);
   const laneLabel={exact:'Phrase exacte',words:'Tous les termes',partial:'Certains termes'}[f.lane]||'Passages';
+  const partialCount=Number(counts.partial||0),hasStrongLexical=Number(counts.exact||0)>0||Number(counts.words||0)>0,partialAvailable=!hasStrongLexical&&partialCount>0&&!searchPartialExpanded;
   const parts=[];if(selectedTotal)parts.push(`${laneLabel} : ${selectedTotal}`);if(searchPartialExpanded&&totalBody&&totalBody!==selectedTotal)parts.push(`${totalBody} passages lexicaux au total`);if(near&&near.eligible&&near.results&&near.results.length)parts.push(near.ambiguous?`Formulation proche : plusieurs possibilités`:`Formulation proche : ${near.totalAccepted}`);if(metadataTotal)parts.push(`${metadataTotal} entrées correspondantes`);
-  meta.innerHTML=`${escapeHtml(parts.join(' · ')||'0 résultat')} <span class="search-mode-badge">Recherche lexicale · ${escapeHtml(searchSourceModeLabel(f.mode||supplementMode))}</span>${renderStructuralChips(payload)}`;
+  const zeroSummary=partialAvailable?`Aucun passage avec tous les termes · ${partialCount} correspondance${partialCount===1?'':'s'} partielle${partialCount===1?'':'s'} disponible${partialCount===1?'':'s'}`:'0 résultat';
+  meta.innerHTML=`${escapeHtml(parts.join(' · ')||zeroSummary)} <span class="search-mode-badge">Recherche lexicale · ${escapeHtml(searchSourceModeLabel(f.mode||supplementMode))}</span>${renderStructuralChips(payload)}`;
   document.getElementById('trust-notice').style.display=f.lane==='partial'?'block':'none';
   const sug=document.getElementById('search-suggestions');if(sug)sug.style.display='none';const lexical=(payload.parsed&&payload.parsed.lexical)||raw;
   if(payload.suggestions&&payload.suggestions.length){const box=document.createElement('div');box.className='search-suggestion-box';const sg=payload.suggestions[0];box.innerHTML=`Vouliez-vous dire : <button type="button">${escapeHtml(sg.to)}</button> ?`;box.querySelector('button').onclick=()=>searchFor(sg.to);container.appendChild(box);}
   if(results.length){const h=document.createElement('div');h.className='sugg-label';h.textContent=`${laneLabel} — page ${page}/${pageCount}`;container.appendChild(h);for(const r of results)renderSearchV2Card(container,r,lexical,false);appendSearchPager(container,'body',page,pageCount);}
   renderSearchNearSection(container,payload);
   if(metadata.length){const h=document.createElement('div');h.className='sugg-label';h.textContent=`Entrées correspondantes — ${metadataTotal}`;container.appendChild(h);for(const r of metadata)renderSearchV2Card(container,r,lexical,true);appendSearchPager(container,'metadata',metaPage,metaPageCount);}
-  if(!results.length&&!metadata.length&&!(near&&near.eligible&&near.results&&near.results.length)&&!payload.suggestions?.length){const hasPartial=Number(counts.partial||0)>0&&!searchPartialExpanded;container.innerHTML=hasPartial?'<div class="empty-state"><i class="ti ti-search"></i>Aucun passage avec tous les termes. Utilisez « Élargir la recherche » pour voir les passages qui n’en contiennent qu’une partie.</div>':'<div class="empty-state"><i class="ti ti-search-off"></i>Aucun résultat. Essayez d’autres mots ou vérifiez les filtres.</div>';}
+  if(!results.length&&!metadata.length&&!(near&&near.eligible&&near.results&&near.results.length)&&!payload.suggestions?.length){
+    if(partialAvailable){
+      const empty=document.createElement('div');empty.className='empty-state';
+      const icon=document.createElement('i');icon.className='ti ti-search';empty.appendChild(icon);
+      const copy=document.createElement('div');copy.textContent=`Aucun passage ne contient tous les termes. ${partialCount} correspondance${partialCount===1?'':'s'} partielle${partialCount===1?'':'s'} ${partialCount===1?'est disponible':'sont disponibles'}.`;empty.appendChild(copy);
+      const action=document.createElement('button');action.type='button';action.className='btn-secondary';action.textContent='Voir les résultats élargis';action.onclick=()=>{searchPartialExpanded=true;searchResultLane='partial';searchPage=1;rerunCommittedSearchIfReady();};empty.appendChild(action);
+      container.replaceChildren(empty);
+    }else container.innerHTML='<div class="empty-state"><i class="ti ti-search-off"></i>Aucun résultat. Essayez d’autres mots ou vérifiez les filtres.</div>';
+  }
 }
 
 async function runSearch({navigation='reveal-output',commitSource='programmatic'}={}) {
