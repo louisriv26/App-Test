@@ -1,0 +1,28 @@
+name: LDC v142.19 R25 offline interruption and accessibility verification
+on:
+  push:
+    branches:
+      - ldc-v142-19-reader-root-height-fix-wip-20261008
+    paths:
+      - .github/workflows/ldc-v14219-r25-disconnect-qa.yml
+permissions:
+  contents: read
+jobs:
+  interrupted-offline-and-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser
+        run: npm install --no-save playwright@1.55.0
+      - name: Run hosted offline interruption, recovery, modal and screen tests
+        continue-on-error: true
+        run: node .github/ldc-v14219-r25-hosted-offline-interruption-ui.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14219-r25-interruption-and-ui-report
+          path: LDC_v142.19_R25_HOSTED_INTERRUPTED_OFFLINE_UI_QA.json
+          retention-days: 14
+      - name: Require all completed checks
+        run: python3 -c "import json;x=json.load(open('LDC_v142.19_R25_HOSTED_INTERRUPTED_OFFLINE_UI_QA.json'));assert x['status']=='PASS_SCOPED_R25',x['status']"
