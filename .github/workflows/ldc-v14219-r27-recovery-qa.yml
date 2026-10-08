@@ -1,0 +1,33 @@
+name: LDC v142.19 R27 simulated existing-user update recovery
+on:
+  push:
+    branches:
+      - ldc-v142-19-reader-root-height-fix-wip-20261008
+    paths:
+      - .github/workflows/ldc-v14219-r27-recovery-qa.yml
+permissions:
+  contents: read
+jobs:
+  browser-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: npm install --no-save playwright@1.55.0
+      - name: Start isolated browser test site with repeatable current content responses
+        run: |
+          mkdir -p /tmp/ldc-r23-root
+          nohup python3 .github/ldc-v14219-r23c-qa-server.py >/tmp/ldc-r27-http.log 2>&1 &
+      - name: Exercise user-visible repair of obsolete worker while two old tabs remain
+        continue-on-error: true
+        run: node .github/ldc-v14219-r27-multitab-recovery.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14219-r27-multitab-user-recovery
+          path: LDC_v142.19_R27_BLOCKED_MULTITAB_USER_REPAIR_DIAGNOSTIC.json
+          retention-days: 14
+      - name: Audit outcome flag
+        run: python3 -c "import json;x=json.load(open('LDC_v142.19_R27_BLOCKED_MULTITAB_USER_REPAIR_DIAGNOSTIC.json'));assert x['status']=='PASS_SCOPED_SYNTHETIC_SAME_ROOT_OLD_TO_NEW',x['status']"
