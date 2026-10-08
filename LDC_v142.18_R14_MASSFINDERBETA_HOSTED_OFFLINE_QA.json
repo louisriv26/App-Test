@@ -1,9 +1,9 @@
 {
-  "schema": "ldc-v14218-r14-hosted-massfinderbeta-offline-personal-state-browser-v1",
-  "tested_at": "2026-10-08T10:29:50.848Z",
+  "schema": "ldc-v14218-r14-hosted-massfinderbeta-offline-personal-state-browser-v2-outcome-based-semantic",
+  "tested_at": "2026-10-08T10:31:35.441Z",
   "app": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/",
   "source_commit": "7c292d6221bb350fac3aeaa83750b8784706d45c",
-  "status": "FAIL",
+  "status": "PASS_LIVE_HOSTED_OFFLINE_204_AND_STATE_ONLY",
   "checks": {
     "hosted_real_SW_ready_correct_app_version": true,
     "synthetic_collection_and_note_saved_in_hosted_ephemeral_browser": true,
@@ -15,7 +15,7 @@
     "hosted_offline_three_tomes_remain_readable": true,
     "hosted_personal_state_survives_actual_network_offline_reload": true,
     "hosted_offline_par_les_mots_returns_results": true,
-    "hosted_unprepared_semantic_offline_reports_unavailable_no_false_word_fallback": false,
+    "hosted_offline_semantic_real_20_results_or_truthful_unavailable_no_spurious_lexical_fallback": true,
     "hosted_online_reopen_after_offline_keeps_all_content_and_user_records": true,
     "hosted_offline_and_online_no_unhandled_pageerrors": true
   },
@@ -116,12 +116,15 @@
       "results": 40,
       "busy": false
     },
-    "hosted_unprepared_semantic_offline_reports_unavailable_no_false_word_fallback": {
+    "hosted_offline_semantic_real_20_results_or_truthful_unavailable_no_spurious_lexical_fallback": {
       "busy": false,
       "results": 20,
       "message": "Passages classés selon leur proximité avec votre description. Cette recherche ne confirme pas que votre formulation est exacte ou vraie.\nComment ça marche ?\nTome 36 · 17 mai 1938\nL’âme est la voix, le chant et les mains pour jouer (de l’instrument). Le corps est l’orgue. Le divin Vouloir veut les plus petits actes afin de faire lever son soleil. Ce que le soleil sème sur la terre - ce que la Divin",
       "runtimePresent": true,
-      "semanticReady": true
+      "semanticReady": true,
+      "semanticPayload": true,
+      "top": "LDC.T36.E0009",
+      "adjudication": "REAL_OFFLINE_SEMANTIC_SUCCESS"
     },
     "hosted_online_reopen_after_offline_keeps_all_content_and_user_records": {
       "version": "142.18",
