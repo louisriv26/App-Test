@@ -1,0 +1,138 @@
+{
+  "schema": "ldc-v14218-r10-real-restore-diagnostic-redaction-and-corruption-QA-v1",
+  "app_zip_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
+  "source_commit": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+  "status": "PASS_SCOPED_REAL_BROWSER_RESTORE_AND_PRIVACY",
+  "checks": {
+    "exact_package_source_bound": true,
+    "two_fresh_profiles_same_exact_application_separate_databases": true,
+    "source_synthetic_note_and_collection_created": true,
+    "public_diagnostic_excludes_synthetic_note_and_search_query": true,
+    "backup_stream_contains_private_note_and_terminal_integrity": true,
+    "destination_initially_separate_from_source": true,
+    "truncated_stream_rejected_without_state_mutation": true,
+    "modified_stream_CRC_rejected_without_state_mutation": true,
+    "real_restore_staged_migrated_validated": true,
+    "full_atomic_stream_restore_replaces_fresh_profile_state": true,
+    "restored_state_survives_browsing_restart": true,
+    "no_unhandled_page_errors": true
+  },
+  "details": {
+    "exact_package_source_bound": {
+      "source": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+      "files": 273
+    },
+    "two_fresh_profiles_same_exact_application_separate_databases": {
+      "a": {
+        "app": "142.18",
+        "db": "ldc_user_v1",
+        "stores": [
+          "reading_pos",
+          "highlights",
+          "notes",
+          "favorites",
+          "collections",
+          "col_items",
+          "settings",
+          "read_entries"
+        ]
+      },
+      "b": {
+        "app": "142.18",
+        "db": "ldc_user_v1",
+        "stores": [
+          "reading_pos",
+          "highlights",
+          "notes",
+          "favorites",
+          "collections",
+          "col_items",
+          "settings",
+          "read_entries"
+        ]
+      }
+    },
+    "source_synthetic_note_and_collection_created": {
+      "collection": 1,
+      "add": "ADDED",
+      "note": 1,
+      "notes": 1,
+      "collections": 1
+    },
+    "public_diagnostic_excludes_synthetic_note_and_search_query": {
+      "hasNote": false,
+      "hasSearch": false,
+      "containsDiagHeader": true,
+      "hasAppVersion": true,
+      "length": 4027,
+      "recentErrorNames": true,
+      "rawNoteCount": 1
+    },
+    "backup_stream_contains_private_note_and_terminal_integrity": {
+      "records": 4,
+      "bytes": 1601,
+      "hasNote": true,
+      "trailerComplete": true
+    },
+    "destination_initially_separate_from_source": {
+      "collection": 1,
+      "colls": [
+        "R10 DESTINATION BEFORE RESTORE"
+      ]
+    },
+    "truncated_stream_rejected_without_state_mutation": {
+      "rejected": true,
+      "reason": "INTEGRITY_OR_TRUNCATION",
+      "unchanged": true
+    },
+    "modified_stream_CRC_rejected_without_state_mutation": {
+      "truncatedRejected": true,
+      "truncatedErrorType": "INTEGRITY_OR_TRUNCATION",
+      "tamperedRejected": true,
+      "tamperedReason": "CRC",
+      "stateUnchanged": true
+    },
+    "real_restore_staged_migrated_validated": {
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "counts": {
+        "reading_pos": 0,
+        "highlights": 0,
+        "notes": 1,
+        "favorites": 0,
+        "collections": 1,
+        "col_items": 1,
+        "settings": 1,
+        "read_entries": 0
+      },
+      "migrationSteps": []
+    },
+    "full_atomic_stream_restore_replaces_fresh_profile_state": {
+      "committed": true,
+      "collectionNames": [
+        "R10 SOURCE COLLECTION"
+      ],
+      "noteCount": 1,
+      "restoredNoteExact": true,
+      "childCount": 1,
+      "textSetting": "grand",
+      "stageCleared": true
+    },
+    "restored_state_survives_browsing_restart": {
+      "col": [
+        "R10 SOURCE COLLECTION"
+      ],
+      "notes": 1,
+      "children": 1,
+      "textLevel": "grand"
+    },
+    "no_unhandled_page_errors": []
+  },
+  "errors": [],
+  "scope": "Only exact archived ZIP, local Chromium, synthetic user records, independent fresh browser profiles",
+  "app_mutation_authority": "NONE",
+  "deploy_authority": "NONE",
+  "hosted_e16_e19": "OPEN",
+  "physical_iphone_ipad": "OPEN"
+}
