@@ -1,0 +1,13 @@
+{
+  "schema": "ldc-v14218-new-profile-service-worker-actual-browser-v1",
+  "status": "FAIL",
+  "source_sha": "f2249504c630ae70b9047dfab1cc6795b7c8fdbc",
+  "checks": {},
+  "details": {},
+  "errors": [
+    "page.evaluate: Error: SW_NOT_REGISTERED_AFTER_30S\n    at eval (eval at evaluate (:291:30), <anonymous>:5:19)\n    at async <anonymous>:317:30\n    at /home/runner/work/App-Test/App-Test/.github/ldc-v14218-sw-qa.mjs:19:27"
+  ],
+  "real_hosted_origin": false,
+  "physical_ios": false,
+  "deployment_authority": "NONE"
+}
