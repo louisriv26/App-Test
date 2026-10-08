@@ -1,0 +1,95 @@
+{
+  "schema": "ldc-v14218-webkit-actual-app-navigation-qa-v1",
+  "status": "PASS",
+  "checks": {
+    "full_app_booted": true,
+    "semantic_initially_lazy": true,
+    "semantic_app_search_displayed": true,
+    "semantic_result_has_valid_reader_target": true,
+    "semantic_result_opens_correct_entry": true,
+    "semantic_result_paragraph_visible": true,
+    "reader_remains_visible_across_viewport_changes": true,
+    "return_preserves_semantic_results": true,
+    "no_browser_errors": true
+  },
+  "details": {
+    "initial": {
+      "version": "142.18",
+      "semantic": {
+        "schema": "ldc-pls-v16-runtime-status-v1",
+        "version": "ldc-pls-v16-runtime-v1",
+        "pack_id": "ldc-pls-v16-current-v14215-enriched-96-72-r1",
+        "available": false,
+        "ready": false,
+        "loading": false,
+        "can_initialize": true,
+        "calibration_status": "PENDING_VERIFICATION",
+        "model_ready": false,
+        "persistent_semantic_storage": false,
+        "error": null,
+        "registry": {
+          "schema": "ldc-semantic-pack-registry-v6",
+          "version": "ldc-search-v3-pack-registry-r6",
+          "mode": "enriched",
+          "label": "ENRICHI",
+          "available": false,
+          "calibration_status": "UNQUALIFIED",
+          "reason": "PACK_NOT_INSTALLED_OR_QUALIFIED",
+          "detail": null
+        }
+      },
+      "user_db": true
+    },
+    "selected": {
+      "entry_id": "ldc_t09_1909_11_02_e001",
+      "volume": 9,
+      "passage_id": "PLS16-E-96-72-005048",
+      "para_id": "ldc_t09_1909_11_02_e001_p001",
+      "source_spans": 2,
+      "confidence": "possible",
+      "cards": 20,
+      "first_card_key": "semantic:PLS16-E-96-72-005048",
+      "visible": true
+    },
+    "opened": {
+      "entry_id": "ldc_t09_1909_11_02_e001",
+      "volume": 9,
+      "screen": "screen active",
+      "para_id": "ldc_t09_1909_11_02_e001_p001",
+      "fragment_found": true,
+      "fragment_visible": true,
+      "fragment_y": 380,
+      "scroll_top": 0,
+      "reader_has_text": true,
+      "active_intent": "CONSULTATION"
+    },
+    "viewport_responsiveness": {
+      "landscape": {
+        "entry_id": "ldc_t09_1909_11_02_e001",
+        "volume": 9,
+        "body_text": 565,
+        "reader_visible": true
+      },
+      "portrait": {
+        "entry_id": "ldc_t09_1909_11_02_e001",
+        "volume": 9,
+        "body_text": 565,
+        "reader_visible": true
+      }
+    },
+    "return_to_search": {
+      "cards": 20,
+      "query": "Deuxième, il ne faut pas regarder le passé. Le passé est passé et il faut vivre dans le présent. Ce n'est pas utile du tout de regarder dans le passé. C'est un affront à Jésus. C'est le deuxième texte.",
+      "semantic": true
+    }
+  },
+  "errors": [],
+  "head": "a7d70b53c255c0615d4a58c4acf576ff1ee19da7",
+  "hosted_app_test_authorized": false,
+  "deployment_authorized": false,
+  "physical_safari_evidence": false,
+  "engine": "PLAYWRIGHT_WEBKIT_LINUX",
+  "source_commit": "a7d70b53c255c0615d4a58c4acf576ff1ee19da7",
+  "physical_iphone_ipad": "NOT_TESTED",
+  "hosted_e16_e19": "OPEN"
+}
