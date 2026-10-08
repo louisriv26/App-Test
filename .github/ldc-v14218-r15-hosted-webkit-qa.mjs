@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import {webkit} from 'playwright';
 const APP='https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/';
-const r={schema:'ldc-v14218-r15-actual-hosted-linux-webkit-independent-qa-v1',
+const r={schema:'ldc-v14218-r15-actual-hosted-linux-webkit-independent-qa-v2-navigation-probe',
  tested_at:new Date().toISOString(),url:APP,status:'NOT_RUN',checks:{},details:{},errors:[],
  scope:'Real hosted MassFinderBeta, actual Linux Playwright WebKit; NOT iOS Safari/physical iPhone or iPad; disposable browsing session.',
  deployment_authority:'NONE',iOS_gate:'OPEN'};
@@ -22,8 +22,25 @@ try{
  await page.waitForFunction(()=>!searchBusyGeneration,null,{timeout:180000});
  const lex=await page.evaluate(()=>({count:document.querySelectorAll('#search-results .result-card').length,busy:!!searchBusyGeneration}));
  ck('hosted_Linux_WebKit_real_lexical_search',lex.count>0&&!lex.busy,lex);
+ const firstCard=await page.locator('#search-results .result-card').first().evaluate(el=>({text:el.innerText.slice(0,180),html:el.outerHTML.slice(0,850),tag:el.tagName}));
+ r.details.first_clicked_card=firstCard;
  await page.locator('#search-results .result-card').first().click();
- await page.waitForFunction(()=>document.getElementById('screen-reader')?.classList.contains('active'),null,{timeout:120000});
+ let opened=false;
+ try{await page.waitForFunction(()=>document.getElementById('screen-reader')?.classList.contains('active'),null,{timeout:55000});opened=true}
+ catch(e){r.warnings=[{type:'WEBKIT_READER_NAVIGATION_TIMEOUT',message:String(e).slice(0,250)}]}
+ const diagnostic=await page.evaluate(()=>({
+   screens:[...document.querySelectorAll('.screen.active')].map(e=>e.id), currentEntryId:typeof currentEntry!=='undefined'?currentEntry?.id:null,
+   selectedSearchResult:searchLastPayload?.payload?.results?.[0]?.entry_id||null,
+   loading:document.getElementById('loading')?getComputedStyle(document.getElementById('loading')).display:null,
+   readerText:document.getElementById('reader-body')?.innerText?.trim().length||0,
+   readerActive:document.getElementById('screen-reader')?.classList.contains('active'),
+   results:document.querySelectorAll('#search-results .result-card').length,
+   bodyText:document.body.innerText.slice(-550),
+   location:location.href
+ }));
+ r.details.navigation_after_55s={opened,diagnostic,jsErrors:err.slice(-20),failedRequests:failed.slice(-20)};
+ ck('hosted_Linux_WebKit_search_result_enters_Reader',opened,diagnostic);
+ if(!opened)throw Error('WEBKIT_READER_DID_NOT_OPEN_AFTER_CLICK__SEE_DIAGNOSTICS');
  const before=await page.evaluate(()=>({entry:currentEntry?.id,characters:document.querySelector('#reader-body')?.innerText?.trim().length||0,
   readerScroll:document.getElementById('reader-scroll')?.getBoundingClientRect().toJSON(),viewport:{w:window.innerWidth,h:window.innerHeight}}));
  ck('hosted_Linux_WebKit_Reader_content_visible_portrait',before.characters>100&&before.readerScroll.height>100,before);
