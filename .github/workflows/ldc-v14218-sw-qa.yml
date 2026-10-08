@@ -6,6 +6,10 @@ on:
     paths:
       - '.github/workflows/ldc-v14218-sw-qa.yml'
       - '.github/ldc-v14218-sw-qa.mjs'
+      - 'version.json'
+      - 'offline_manifest.json'
+      - 'sw.js'
+      - 'index.html'
 permissions:
   contents: write
 jobs:
