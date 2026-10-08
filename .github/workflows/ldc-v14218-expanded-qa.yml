@@ -1,0 +1,50 @@
+name: LDC v142.18 expanded real-application search and integrity QA
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-expanded-qa.yml'
+      - '.github/ldc-v14218-expanded-qa.mjs'
+permissions:
+  contents: write
+jobs:
+  expanded-actual-dom:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Protect canonical corpus, Search V2 and inherited model bytes
+        run: git diff --exit-code 56a306997a37ab975a573774a97fa976a40ffe40 -- corpus pls_v15 search_engine_v2.js search_exact_v21.js search_foundation_v21b.js search_near_v22.js search_worker_v2.js
+      - run: npm install --no-save playwright-core@1.55.0
+      - name: Verify actual current v142.18 UI and runtime
+        id: qa
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/ldc-v14218-expanded-qa.mjs
+      - name: Preserve source-bound verification evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_EXPANDED_ACTUAL_DOM_QA.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_EXPANDED_ACTUAL_DOM_QA.json
+          git commit -m "test(ldc): preserve 142.18 actual-application expanded QA evidence"
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-expanded-actual-dom
+          path: LDC_v142.18_EXPANDED_ACTUAL_DOM_QA.json
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Gate expanded actual DOM results
+        run: python3 -c "import json;assert json.load(open('LDC_v142.18_EXPANDED_ACTUAL_DOM_QA.json'))['status']=='PASS'"
