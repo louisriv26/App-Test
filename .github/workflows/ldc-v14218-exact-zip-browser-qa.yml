@@ -30,6 +30,8 @@ jobs:
           set -euo pipefail
           cd pinned-app
           test "$(git rev-parse HEAD)" = "7c292d6221bb350fac3aeaa83750b8784706d45c"
+          git switch -c ldc-v142-18-reader-semantic-integration-wip-20261008
+          test "$(git rev-parse HEAD)" = "7c292d6221bb350fac3aeaa83750b8784706d45c"
           python3 .github/ldc-v14218-curated-wip-package.py
           echo '954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb  LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip' | sha256sum -c -
           cd ..
