@@ -1,0 +1,58 @@
+name: LDC v142.18 R10 exact frozen ZIP actual full restore, corrupted-file rejection and diagnostic privacy
+on:
+  push:
+    branches: [ldc-v142-18-reader-semantic-integration-wip-20261008]
+    paths:
+      - '.github/workflows/ldc-v14218-r10-restore-diag-qa.yml'
+      - '.github/ldc-v14218-r10-restore-diag-qa.mjs'
+permissions: {contents: write}
+jobs:
+  two-tab-frozen-app-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/checkout@v4
+        with:
+          ref: 7c292d6221bb350fac3aeaa83750b8784706d45c
+          path: pinned-app
+          fetch-depth: 0
+      - name: Recreate exact frozen candidate ZIP, hash it, extract to isolated local origin
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd pinned-app
+          test "$(git rev-parse HEAD)" = "7c292d6221bb350fac3aeaa83750b8784706d45c"
+          git switch -c ldc-v142-18-reader-semantic-integration-wip-20261008
+          python3 .github/ldc-v14218-curated-wip-package.py
+          echo '954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb  LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip' | sha256sum -c -
+          cd ..
+          mkdir -p isolated-site
+          unzip -q pinned-app/LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip -d isolated-site
+          npm install --no-save playwright-core@1.55.0
+      - name: Run actual fresh-profile full backup restore, diagnostics privacy and corruption rejection
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          LDC_ARCHIVE_EXTRACT_DIR: ${{ github.workspace }}/isolated-site
+        run: node .github/ldc-v14218-r10-restore-diag-qa.mjs
+      - name: Preserve all PASS/FAIL evidence without editing executable
+        if: always()
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_R10_BACKUP_FULL_RESTORE_AND_DIAG_PRIVACY_QA.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_R10_BACKUP_FULL_RESTORE_AND_DIAG_PRIVACY_QA.json
+          git commit -m 'test(ldc): R10 exact frozen ZIP full restore privacy adverse backup evidence, no app mutation'
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-r10-fresh-profile-restore-privacy-NOT-DEPLOY
+          path: LDC_v142.18_R10_BACKUP_FULL_RESTORE_AND_DIAG_PRIVACY_QA.json
+          retention-days: 14
+      - name: Fail closed unless every scoped P1 integrity test passes
+        run: python3 -c "import json;x=json.load(open('LDC_v142.18_R10_BACKUP_FULL_RESTORE_AND_DIAG_PRIVACY_QA.json'));assert x['status']=='PASS_SCOPED_REAL_BROWSER_RESTORE_AND_PRIVACY' and all(x['checks'].values())"
