@@ -1,0 +1,39 @@
+name: LDC R10 diagnostic status of frozen backup/restore QA
+on:
+  push:
+    branches: [ldc-v142-18-reader-semantic-integration-wip-20261008]
+    paths: ['.github/workflows/ldc-v14218-r10-status-diag.yml']
+permissions: {contents: write, actions: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Query source-bound workflow job status
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json,os,urllib.request,pathlib
+          base='https://api.github.com/repos/louisriv26/App-Test'
+          def get(p):
+            req=urllib.request.Request(base+p,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'LDC-R10-qa-diagnostics','X-GitHub-Api-Version':'2022-11-28'})
+            with urllib.request.urlopen(req,timeout=35) as x:return json.load(x)
+          out={'schema':'ldc-v14218-r10-job-diagnostic-v1','status':'DIAGNOSTICS_ONLY_NOT_APPLICATION_QA','authority':'NONE','runs':[]}
+          for r in get('/actions/workflows/ldc-v14218-r10-restore-diag-qa.yml/runs?per_page=5&branch=ldc-v142-18-reader-semantic-integration-wip-20261008').get('workflow_runs',[]):
+            e={'id':r['id'],'status':r['status'],'conclusion':r.get('conclusion'),'head_sha':r['head_sha'],'url':r.get('html_url'),'steps':[]}
+            for j in get('/actions/runs/'+str(r['id'])+'/jobs?per_page=25').get('jobs',[]):
+              e['steps'] += [{'name':s.get('name'),'conclusion':s.get('conclusion'),'status':s.get('status')} for s in j.get('steps',[])]
+            out['runs'].append(e)
+          pathlib.Path('LDC_v142.18_R10_QA_WORKFLOW_DIAGNOSTIC.json').write_text(json.dumps(out,indent=2)+'\n')
+          print(json.dumps(out,indent=2))
+          PY
+      - name: Commit only diagnostic evidence
+        run: |
+          set -euo pipefail
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_R10_QA_WORKFLOW_DIAGNOSTIC.json
+          git commit -m 'ci(ldc): record R10 exact-candidate QA workflow run diagnostic'
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
