@@ -30,7 +30,7 @@ ok(proto.status==='OWNER_PROTOTYPE_ONLY__NOT_PRODUCTION_QUALIFIED','OLD_PROTOTYP
 ok(proto.original_rows===20583&&proto.compatible_rows===20236&&proto.excluded_rows===347,'OLD_COMPAT_COUNTS');
 ok(!fs.readFileSync('index.html','utf8').includes('search_semantic_pack_guard_r4.js'),'NO_RUNTIME_WIRING_AT_BINDING_STAGE');
 const fake=(path,bytes,hash='a'.repeat(64))=>({path,bytes,sha256:hash});
-const vec=fake('pls_v16/pack/vectors.i8',22873*384,'c'.repeat(64)),norm=fake('pls_v16/pack/inverse_norms.f32le',22873*4,'d'.repeat(64)),meta=fake('pls_v16/pack/metadata.jsonl',100,'e'.repeat(64)),mask=fake('pls_v16/pack/jesus_mask.bits',Math.ceil(22873/8),'f'.repeat(64)),cov=fake('pls_v16/evidence/coverage.json',50,'1'.repeat(64)),cal=fake('pls_v16/evidence/calibration.json',50,'2'.repeat(64));
+const vec=fake('pls_v16/pack/vectors.i8',22873*384,'c'.repeat(64)),norm=fake('pls_v16/pack/inverse_norms.f32le',22873*4,'d'.repeat(64)),meta=fake('pls_v16/pack/metadata.jsonl',100,'e'.repeat(64)),mask=fake('pls_v16/pack/jesus_mask.bits',Math.ceil(22873/8),'f'.repeat(64)),cov=fake('pls_v16/evidence/coverage.json',50,'1'.repeat(64)),tok=fake('pls_v16/evidence/token_coverage.json',50,'3'.repeat(64)),cal=fake('pls_v16/evidence/calibration_evidence_v2.json',50,'2'.repeat(64));
 const support=[...G.MODEL_SUPPORT.tokenizer_and_config_files,...G.MODEL_SUPPORT.delivery.parts,...G.RUNTIME_SUPPORT];
 const manifest={
  schema:'ldc-search-v3-semantic-pack-r3',pack_id:G.PACK_ID,binding_contract_sha256:G.BINDING_CONTRACT_SHA256,bindings:{...G.EXPECTED},
@@ -38,12 +38,12 @@ const manifest={
  model:{...G.MODEL,tokenizer_files:G.MODEL_SUPPORT.tokenizer_and_config_files,delivery:G.MODEL_SUPPORT.delivery},
  index:{rows:22873,cols:384,dtype:'int8_row_symmetric',vectors_file:vec,metadata_file:meta,inverse_norms_file:norm},
  speaker_filter:{rows:22873,mode:'enriched',policy_id:'96-72-current-v14215-r1',rule:'HIGH_CONFIDENCE_JESUS_CANONICAL_SPAN_OVERLAP_GT_0',eligible_count:20098,jesus_mask_file:mask},
- runtime:{files:G.RUNTIME_SUPPORT},retrieval:{...G.RETRIEVAL},coverage:{status:'PASS',current_documents:74528,covered_documents:74528,missing_documents:0,proof_file:cov},
- calibration:{status:'ENGINEERING_ONLY',evidence_file:cal},files:[...support,vec,norm,meta,mask,cov,cal]
+ runtime:{files:G.RUNTIME_SUPPORT},retrieval:{...G.RETRIEVAL},coverage:{status:'PASS',current_documents:74528,covered_documents:74528,missing_documents:0,tokens_expected:1403861,tokens_covered:1403861,tokens_missing:0,coverage_outside_current_enriched_topology:0,proof_file:cov,token_proof_file:tok},
+ calibration:{status:'ENGINEERING_ONLY',evidence_file:cal},files:[...support,vec,norm,meta,mask,cov,tok,cal]
 };
 let v=G.validateManifestShape(manifest);ok(v.ok&&v.qualified===false&&v.activation===false,'ENGINEERING_MANIFEST_FAIL_CLOSED');
 v=G.validateManifestShape({...manifest,bindings:{...manifest.bindings,search_documents_sha256:'0'.repeat(64)}});ok(!v.ok&&v.code==='STALE_PACK_BINDING','STALE_BINDING_REJECTED');
 v=G.validateManifestShape({...manifest,pack_id:'wrong'});ok(!v.ok&&v.code==='PACK_ID','WRONG_PACK_REJECTED');
-v=G.validateManifestShape({...manifest,calibration:{...manifest.calibration,status:'QUALIFIED'}});ok(!v.ok&&v.code==='QUALIFICATION_GATES_OPEN','UNPROVEN_QUALIFICATION_REJECTED');
+v=G.validateManifestShape({...manifest,calibration:{...manifest.calibration,status:'QUALIFIED',protocol_version:'V2',protocol_authority_commit:'5c89b2cb7abac92987f403ec6c6f0e3c443b35eb',predecessor_v1_status:'FAIL_ENGINEERING_ONLY',owner_real_query_gate:'PASS',hard_negative_gate:'PASS',blind_unrelated_query_gate:'FAIL',truth_neutrality_gate:'PASS',hybrid_policy:{policy_id:'HYBRID_DENSE_ABSTENTION_V1',close_enabled:false,possible_min_dense:0.8845798510542678,possible_min_channels:2}}});ok(!v.ok&&v.code==='QUALIFICATION_GATES_OPEN','UNPROVEN_QUALIFICATION_REJECTED');
 const out={schema:'ldc-wip-semantic-binding-contract-qa-v1',status:'PASS',binding_contract_sha256:EXPECTED_CONTRACT_SHA,guard_version:G.VERSION,current_authorities:actual,old_prototype:{original_rows:proto.original_rows,compatible_rows:proto.compatible_rows,excluded_rows:proto.excluded_rows},checks:['CURRENT_AUTHORITY_HASHES','FROZEN_BASE_IDENTITY','NO_RUNTIME_WIRING','ENGINEERING_FAIL_CLOSED','STALE_BINDING_REJECTED','UNPROVEN_QUALIFICATION_REJECTED']};
 fs.writeFileSync('wip-semantic-binding-contract-qa.json',JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(out,null,2));
