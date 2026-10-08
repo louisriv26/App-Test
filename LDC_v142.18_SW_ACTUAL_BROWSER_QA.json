@@ -1,7 +1,7 @@
 {
   "schema": "ldc-v14218-new-profile-service-worker-actual-browser-v1",
   "status": "FAIL",
-  "source_sha": "d42fc38df249e19d1c0439e87eea5bf6628d7b14",
+  "source_sha": "dd65b8641a1bbeda28009ed6aaeb3acc6118c2f3",
   "checks": {
     "registered_worker_active": false,
     "shell_14218_cache_created": false,
@@ -31,6 +31,46 @@
       "registrations": [],
       "requests_count": 0
     },
+    "sw_bootstrap_trace": [
+      {
+        "at": 1791441811979,
+        "phase": "register-instrumented",
+        "info": true
+      },
+      {
+        "at": 1791441812334,
+        "phase": "register-called",
+        "info": [
+          "./sw.js",
+          "[object Object]"
+        ]
+      },
+      {
+        "at": 1791441812691,
+        "phase": "register-resolved",
+        "info": {
+          "scope": "http://127.0.0.1:8899/",
+          "active": null,
+          "installing": "installing"
+        }
+      },
+      {
+        "at": 1791441815274,
+        "phase": "register-called",
+        "info": [
+          "./sw.js"
+        ]
+      },
+      {
+        "at": 1791441815325,
+        "phase": "register-resolved",
+        "info": {
+          "scope": "http://127.0.0.1:8899/",
+          "active": null,
+          "installing": "installing"
+        }
+      }
+    ],
     "registered_worker_active": null,
     "shell_14218_cache_created": null,
     "correct_v14218_app_and_offline_manifest": {
