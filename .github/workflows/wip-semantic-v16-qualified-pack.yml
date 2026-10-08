@@ -1,0 +1,93 @@
+name: LDC WIP PLS v16 qualified engineering pack
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - 'pls_v16/PACK_BUILD_REQUEST.json'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  build-and-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Bind exact successful vector and V2 calibration artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          REQ=pls_v16/PACK_BUILD_REQUEST.json
+          VRUN="$(jq -r '.vector.run_id' "$REQ")"; VART="$(jq -r '.vector.artifact_name' "$REQ")"; VHEAD="$(jq -r '.vector.source_head_sha' "$REQ")"
+          CRUN="$(jq -r '.calibration_v2.run_id' "$REQ")"; CART="$(jq -r '.calibration_v2.artifact_name' "$REQ")"; CHEAD="$(jq -r '.calibration_v2.source_head_sha' "$REQ")"
+          VJSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$VRUN")"; CJSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$CRUN")"
+          test "$(jq -r '.conclusion' <<<"$VJSON")" = success
+          test "$(jq -r '.head_sha' <<<"$VJSON")" = "$VHEAD"
+          test "$(jq -r '.conclusion' <<<"$CJSON")" = success
+          test "$(jq -r '.head_sha' <<<"$CJSON")" = "$CHEAD"
+          rm -rf /tmp/v16-pack-vector /tmp/v16-pack-cal && mkdir -p /tmp/v16-pack-vector /tmp/v16-pack-cal
+          gh run download "$VRUN" -n "$VART" -D /tmp/v16-pack-vector
+          gh run download "$CRUN" -n "$CART" -D /tmp/v16-pack-cal
+          VEC="$(find /tmp/v16-pack-vector -type f -name vectors.i8 -print -quit)"; NORM="$(find /tmp/v16-pack-vector -type f -name inverse_norms.f32le -print -quit)"; CAL="$(find /tmp/v16-pack-cal -type f -name calibration_evidence_v2.json -print -quit)"
+          test -n "$VEC" && test -n "$NORM" && test -n "$CAL"
+          test "$(sha256sum "$VEC"|awk '{print $1}')" = "$(jq -r '.vector.vector_sha256' "$REQ")"
+          test "$(sha256sum "$NORM"|awk '{print $1}')" = "$(jq -r '.vector.inverse_norms_sha256' "$REQ")"
+          test "$(jq -r '.status' "$CAL")" = PASS_QUALIFIABLE
+          test "$(jq -r '.vector_authority.run_id' "$CAL")" = "$VRUN"
+          echo "PLS_V16_PACK_DIR=$(dirname "$VEC")" >> "$GITHUB_ENV"
+          echo "PLS_V16_CALIBRATION=$CAL" >> "$GITHUB_ENV"
+      - name: Rebuild exact metadata and Jesus mask
+        run: node .github/wip-semantic-current-pack-build.cjs
+      - name: Recompute token-level coverage proof
+        run: node .github/wip-semantic-current-token-coverage.cjs
+      - name: Build V2-qualified manifest
+        env:
+          PLS_V16_METADATA: wip-current-semantic-pack/metadata.jsonl
+          PLS_V16_MASK: wip-current-semantic-pack/jesus_mask.bits
+          PLS_V16_TOKEN_COVERAGE: wip-current-semantic-token-coverage.json
+          PLS_V16_MANIFEST_OUT: wip-pls-v16-manifest
+        run: node .github/wip-semantic-v16-build-manifest.cjs
+      - name: Assemble exact engineering pack
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=wip-pls-v16-qualified-pack
+          rm -rf "$ROOT"
+          mkdir -p "$ROOT/pls_v16/pack" "$ROOT/pls_v16/evidence"
+          cp wip-current-semantic-pack/metadata.jsonl "$ROOT/pls_v16/pack/metadata.jsonl"
+          cp "$PLS_V16_PACK_DIR/vectors.i8" "$ROOT/pls_v16/pack/vectors.i8"
+          cp "$PLS_V16_PACK_DIR/inverse_norms.f32le" "$ROOT/pls_v16/pack/inverse_norms.f32le"
+          cp wip-current-semantic-pack/jesus_mask.bits "$ROOT/pls_v16/pack/jesus_mask.bits"
+          cp wip-pls-v16-manifest/coverage.json "$ROOT/pls_v16/evidence/coverage.json"
+          cp wip-current-semantic-token-coverage.json "$ROOT/pls_v16/evidence/token_coverage.json"
+          cp "$PLS_V16_CALIBRATION" "$ROOT/pls_v16/evidence/calibration_evidence_v2.json"
+          cp wip-pls-v16-manifest/semantic_pack_manifest.json "$ROOT/pls_v16/semantic_pack_manifest.json"
+          cp wip-pls-v16-manifest/manifest_build_report.json "$ROOT/pls_v16/manifest_build_report.json"
+          cp pls_v16/BINDING_CONTRACT.json pls_v16/METADATA_IDENTITY.json pls_v16/CALIBRATION_PROTOCOL_V2.json pls_v16/CALIBRATION_V1_ADJUDICATION.md "$ROOT/pls_v16/"
+      - name: Real-pack Guard R4 verification and adversarial evidence challenge
+        env:
+          PLS_V16_STAGE: wip-pls-v16-qualified-pack
+        run: node .github/wip-semantic-v16-qualified-pack-guard-qa.cjs
+      - name: Bind final engineering hashes
+        shell: bash
+        run: |
+          sha256sum wip-pls-v16-qualified-pack/pls_v16/semantic_pack_manifest.json wip-pls-v16-qualified-pack/pls_v16/pack/vectors.i8 wip-pls-v16-qualified-pack/pls_v16/pack/inverse_norms.f32le wip-pls-v16-qualified-pack/pls_v16/pack/metadata.jsonl wip-pls-v16-qualified-pack/pls_v16/pack/jesus_mask.bits > wip-pls-v16-qualified-pack/SHA256SUMS.txt
+          cp wip-pls-v16-qualified-pack-guard-qa.json wip-pls-v16-qualified-pack/pls_v16/guard_qa.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-pls-v16-qualified-engineering-pack
+          path: |
+            wip-pls-v16-qualified-pack/
+            wip-pls-v16-qualified-pack-guard-qa.json
+          if-no-files-found: error
+          retention-days: 2
+          compression-level: 6
