@@ -1,0 +1,43 @@
+name: LDC v142.18 R13 real hosted MassFinder Beta independent QA
+on:
+  push:
+    branches: [ldc-v142-18-reader-semantic-integration-wip-20261008]
+    paths:
+      - '.github/workflows/ldc-v14218-r13-hosted-massfinderbeta-qa.yml'
+      - '.github/ldc-v14218-r13-hosted-massfinderbeta-qa.mjs'
+permissions: {contents: write}
+jobs:
+  hosted-browser-and-sha:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install isolated Chrome automation
+        run: npm install --no-save playwright-core@1.55.0
+      - name: Test actually served GitHub Pages resources and real browser functionality
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/ldc-v14218-r13-hosted-massfinderbeta-qa.mjs
+      - name: Preserve all PASS and FAIL evidence on engineering branch only
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f LDC_v142.18_R13_MASSFINDERBETA_HOSTED_QA.json ]; then
+            printf '{"status":"FAIL","errors":["HOSTED_SCRIPT_DID_NOT_EMIT_JSON"],"checks":{}}\n' > LDC_v142.18_R13_MASSFINDERBETA_HOSTED_QA.json
+          fi
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_R13_MASSFINDERBETA_HOSTED_QA.json
+          git commit -m 'test(ldc): record actual MassFinder Beta hosted R13 byte and browser evidence; NO production writes'
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-r13-massfinderbeta-real-hosted-qa-NOT-DEPLOY
+          path: LDC_v142.18_R13_MASSFINDERBETA_HOSTED_QA.json
+          retention-days: 14
+      - name: Fail closed on any observed hosted regression
+        run: python3 -c "import json;x=json.load(open('LDC_v142.18_R13_MASSFINDERBETA_HOSTED_QA.json')); assert x.get('status')=='PASS_HOSTED_REMOTE_BYTES_AND_REAL_CHROME_SCOPED',x.get('status')"
