@@ -1,0 +1,45 @@
+name: LDC R19 QA-only hosted Reader geometry WebKit Chromium independent counterfactual
+on:
+  push:
+    branches: [ldc-v142-18-reader-semantic-integration-wip-20261008]
+    paths:
+      - '.github/workflows/ldc-v14218-r19-hosted-geometry-counterfactual-qa.yml'
+      - '.github/ldc-v14218-r19-hosted-geometry-counterfactual-qa.mjs'
+permissions: {contents: write}
+jobs:
+  hosted-geometry-r19:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Chromium executable and Playwright Linux WebKit
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps webkit
+          command -v google-chrome
+      - name: Run independent actual-hosted R19 geometry probes, CSS injection only in ephemeral contexts
+        continue-on-error: true
+        run: node .github/ldc-v14218-r19-hosted-geometry-counterfactual-qa.mjs
+      - name: Preserve separate R19 evidence on WIP only; never modify R17 JSON
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ ! -f LDC_v142.18_R19_HOSTED_READER_GEOMETRY_COUNTERFACTUAL_QA.json ]; then
+            printf '{"status":"INCOMPLETE_QA_OR_ENVIRONMENT","errors":["R19_NO_REPORT"]}\n' > LDC_v142.18_R19_HOSTED_READER_GEOMETRY_COUNTERFACTUAL_QA.json
+          fi
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_R19_HOSTED_READER_GEOMETRY_COUNTERFACTUAL_QA.json
+          git diff --cached --quiet || git commit -m 'test(ldc): preserve new hosted R19 cross-engine geometry and counterfactual evidence'
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-r19-independent-hosted-layout-and-screenshots
+          path: |
+            LDC_v142.18_R19_HOSTED_READER_GEOMETRY_COUNTERFACTUAL_QA.json
+            r19_*.png
+          retention-days: 14
+      - name: Fail closed if geometry or execution is unresolved
+        run: python3 -c "import json;x=json.load(open('LDC_v142.18_R19_HOSTED_READER_GEOMETRY_COUNTERFACTUAL_QA.json'));assert x.get('status')=='PASS_LINUX_ENGINE_RESPONSIVE_GEOMETRY_SCOPED',x.get('status')"
