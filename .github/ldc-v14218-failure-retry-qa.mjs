@@ -29,9 +29,9 @@ try{
  const afterFail=await page.evaluate(()=>({pack:window.LDCPLSV16Runtime.status(),
    user_text:document.getElementById('search-results')?.innerText,
    meta:document.getElementById('search-meta')?.innerText,
-   query:searchQueryDraftCanonical()}));
+   query:searchQueryDraftCanonical(),payload:!!searchLastPayload}));
  report.details.after_initial_failure={phase:afterFail.pack,interface:afterFail.user_text,meta:afterFail.meta,query:afterFail.query};
- report.checks.failure_does_not_fabricate_results=!afterFail.user_text?.includes('Tome 9')&&!page.searchLastPayload;
+ report.checks.failure_does_not_fabricate_results=!afterFail.payload;
  report.checks.user_query_preserved=!!afterFail.query.includes('présent');
  await page.evaluate(async()=>{await runSearch();});
  await page.waitForFunction(()=>!searchBusyGeneration,null,{timeout:90000});
