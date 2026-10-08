@@ -604,11 +604,9 @@ h2.dn-section-title{margin-bottom:0;}
    reserved; the mode is measurement-driven, not orientation- or device-name-driven. */
 body.reader-low-height{padding-bottom:var(--sat-bot);}
 body.reader-low-height #nav{display:none;}
-body.reader-low-height #version-badge{bottom:calc(var(--sat-bot) + 6px);}
-body.reader-low-height #update-banner{bottom:calc(var(--sat-bot) + 18px);}
-body.reader-low-height #toast{bottom:calc(var(--sat-bot) + 14px);}
-body.reader-low-height #seltext-panel{bottom:calc(var(--sat-bot) + 8px);}
-body.reader-low-height #cp-overlay{bottom:var(--sat-bot);}
+/* Fixed Reader auxiliaries intentionally keep their existing var(--nav-safe-h)
+   bottom offset: with global nav yielded, that same band protects the in-flow
+   entry navigation from toast/selection-panel overlap. */
 body.reader-low-height #screen-reader .reader-top{padding-top:calc(var(--sat-top) + 4px);padding-bottom:4px;}
 body.reader-low-height #screen-reader .source-mode-bar.reader-context-bar{padding-top:4px;padding-bottom:4px;}
 body.reader-low-height #screen-reader .reader-context-back{min-height:44px;padding-top:6px;padding-bottom:6px;}
