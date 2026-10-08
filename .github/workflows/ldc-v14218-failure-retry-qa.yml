@@ -1,0 +1,49 @@
+name: LDC v142.18 forced semantic-model failure and in-app retry
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-failure-retry-qa.yml'
+      - '.github/ldc-v14218-failure-retry-qa.mjs'
+      - 'pls_v16/runtime_v1.mjs'
+permissions:
+  contents: write
+jobs:
+  failure-retry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright-core@1.55.0
+      - name: Deliberately fail model manifest then exercise same-session user retry
+        id: qa
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/ldc-v14218-failure-retry-qa.mjs
+      - name: Preserve actual evidence on WIP only
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_FAILURE_RETRY_DOM_EVIDENCE.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_FAILURE_RETRY_DOM_EVIDENCE.json
+          git commit -m "test(ldc): preserve model fetch failure/retry DOM evidence"
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-failure-retry
+          path: LDC_v142.18_FAILURE_RETRY_DOM_EVIDENCE.json
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Assert retry passes (fail safely if not)
+        run: python3 -c "import json; assert json.load(open('LDC_v142.18_FAILURE_RETRY_DOM_EVIDENCE.json'))['status']=='PASS'"
