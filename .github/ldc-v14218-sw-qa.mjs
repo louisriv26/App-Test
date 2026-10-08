@@ -11,6 +11,21 @@ try{
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',args:['--no-sandbox']});
   const context=await browser.newContext({serviceWorkers:'allow',viewport:{width:390,height:844}});
   const page=await context.newPage();page.setDefaultTimeout(90000);
+  await page.addInitScript(()=>{
+    window.__swBootstrapTrace=[];
+    const c=navigator.serviceWorker;
+    if(!c)return;
+    const record=(phase,info)=>{window.__swBootstrapTrace.push({at:Date.now(),phase,info});};
+    try{
+      const original=c.register.bind(c);
+      c.register=(...args)=>{
+        record('register-called',args.map(x=>String(x)));
+        return original(...args).then(reg=>{record('register-resolved',{scope:reg.scope,active:reg.active?.state||null,installing:reg.installing?.state||null});return reg;},
+          error=>{record('register-rejected',String(error));throw error});
+      };
+      record('register-instrumented',true);
+    }catch(e){record('register-instrumentation-failed',String(e));}
+  });
   page.on('pageerror',e=>report.errors.push('PAGEERROR:'+String(e)));
   page.on('console',m=>{if(m.type()==='error')report.errors.push('CONSOLE:'+m.text())});
   page.on('response',r=>{if(r.status()>=400)report.errors.push('HTTP_'+r.status()+':'+r.url())});
@@ -35,6 +50,7 @@ try{
       app_manifest_version:m.app_version,controller:!!navigator.serviceWorker.controller};
   });
   report.details.worker_install_snapshot={...worker,requests_count:worker.requests.length};
+  report.details.sw_bootstrap_trace=await page.evaluate(()=>window.__swBootstrapTrace||null);
   const names=['/search_semantic_pack_guard_r4.js','/search_semantic_v3_core_r4.js','/search_semantic_hybrid_r6.js','/search_semantic_pack_registry_r6.js','/pls_v16/runtime_v1.mjs'];
   test('registered_worker_active',worker.active&&!!worker.scope,worker.scope);
   test('shell_14218_cache_created',!!worker.cacheName,worker.cacheName);
