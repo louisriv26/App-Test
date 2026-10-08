@@ -1,0 +1,63 @@
+{
+  "schema": "ldc-v14218-reader-session-highlight-dom-v1",
+  "status": "FAIL",
+  "checks": {
+    "fresh_private_profile": true,
+    "real_highlight_persisted": true,
+    "real_highlight_painted_and_scroll_stable": true,
+    "rapid_A_to_B_actual_DOM_latest_target_wins": true,
+    "new_explicit_same_entry_open_new_session": false,
+    "consultation_does_not_create_sequential_saved_position": false,
+    "search_return_preserves_highlight_data": true,
+    "highlight_repainted_on_reader_reentry": true,
+    "no_unhandled_page_error": true
+  },
+  "details": {
+    "fresh_private_profile": {
+      "reading_pos": 0,
+      "highlights": 0
+    },
+    "real_highlight_persisted": {
+      "para_id": "ldc_t09_1909_11_02_e001_p001",
+      "saved": 1,
+      "marks": 1,
+      "delta": 0
+    },
+    "real_highlight_painted_and_scroll_stable": {
+      "para_id": "ldc_t09_1909_11_02_e001_p001",
+      "saved": 1,
+      "marks": 1,
+      "delta": 0
+    },
+    "rapid_A_to_B_actual_DOM_latest_target_wins": {
+      "entry": "ldc_t01_sec113",
+      "expected": "ldc_t01_sec113",
+      "session": "reader-1791441692747-2",
+      "bodyLength": 874,
+      "targetVisible": true
+    },
+    "new_explicit_same_entry_open_new_session": {
+      "prior": "reader-1791441692747-2",
+      "newId": "reader-1791441692747-2",
+      "entry": "ldc_t01_sec113"
+    },
+    "consultation_does_not_create_sequential_saved_position": {
+      "pos": 2,
+      "highlights": 1,
+      "cards": 20
+    },
+    "search_return_preserves_highlight_data": {
+      "pos": 2,
+      "highlights": 1,
+      "cards": 20
+    },
+    "highlight_repainted_on_reader_reentry": {
+      "n": 1,
+      "marks": 1
+    },
+    "no_unhandled_page_error": []
+  },
+  "errors": [],
+  "source_sha": "6c73be95dd5602acb08c667a55b6fd17ef6ab187",
+  "scope": "isolated local Chromium"
+}
