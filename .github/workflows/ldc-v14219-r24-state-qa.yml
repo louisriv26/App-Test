@@ -1,0 +1,30 @@
+name: LDC v142.19 R24 additional hosted personal-state verification
+on:
+  push:
+    branches:
+      - ldc-v142-19-reader-root-height-fix-wip-20261008
+    paths:
+      - .github/workflows/ldc-v14219-r24-state-qa.yml
+permissions:
+  contents: read
+jobs:
+  browser-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install browser runner
+        run: |
+          npm install --no-save playwright@1.55.0
+          command -v google-chrome
+      - name: Run new scoped hosted backup and preference tests using disposable browser data
+        continue-on-error: true
+        run: node .github/ldc-v14219-r24-hosted-backup-preferences.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc14219-r24-personal-state-report
+          path: LDC_v142.19_R24_HOSTED_BACKUP_PREFERENCES_AND_RECOVERY.json
+          retention-days: 14
+      - name: Fail if checks are incomplete or negative
+        run: python3 -c "import json;x=json.load(open('LDC_v142.19_R24_HOSTED_BACKUP_PREFERENCES_AND_RECOVERY.json'));assert x['status']=='PASS_SCOPED_HOSTED_R24',x['status']"
