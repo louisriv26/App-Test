@@ -46,13 +46,16 @@ def main():
     assert sw.count(BINDING)==old_sw.count(BINDING),"corpus binding altered"
     assert "50331648" in sw and "50331648" in old_sw,"runtime corpus cache limit altered"
     old_off["app_version"]=NEW
+    old_off["page_worker_revision"]=NEW_SW
     # Preserve the complete 204-asset immutable list and content-binding bytes.
     off=json.dumps(old_off,ensure_ascii=False,indent=2)+"\n"
     check_off=json.loads(off)
     assert check_off["assets"]==json.loads(paths[3].read_text())["assets"]
     assert check_off["content_binding_sha256"]==BINDING
+    assert check_off["page_worker_revision"]==NEW_SW
     ver=old_version
     ver["app_version"]=NEW
+    ver["page_worker_revision"]=NEW_SW
     ver["public_version"]="142.18"
     ver["baseline_candidate_version"]=OLD
     ver["baseline_candidate_sha256"]=None
@@ -84,6 +87,7 @@ def main():
         "corpus_payload_or_user_state_schema_changed":False
     }
     ver_bytes=json.dumps(ver,ensure_ascii=False,indent=2)+"\n"
+    assert json.loads(ver_bytes)["page_worker_revision"]==NEW_SW
     assert json.loads(ver_bytes)["user_data_schema_version"]==old_version["user_data_schema_version"]
     assert json.loads(ver_bytes)["user_data_db_internal_version"]==old_version["user_data_db_internal_version"]
     for p,data in zip(paths,[index,sw,ver_bytes,off]):p.write_text(data)
