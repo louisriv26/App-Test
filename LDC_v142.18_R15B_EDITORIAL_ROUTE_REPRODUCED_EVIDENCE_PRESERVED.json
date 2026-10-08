@@ -1,0 +1,72 @@
+{
+  "schema": "ldc-v14218-r15-actual-hosted-linux-webkit-independent-qa-v2-navigation-probe",
+  "tested_at": "2026-10-08T10:35:33.053Z",
+  "url": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/",
+  "status": "FAIL",
+  "checks": {
+    "real_hosted_Linux_WebKit_mobile_app_boot": true,
+    "hosted_Linux_WebKit_real_lexical_search": true,
+    "hosted_Linux_WebKit_search_result_enters_Reader": false
+  },
+  "details": {
+    "real_hosted_Linux_WebKit_mobile_app_boot": {
+      "version": "142.18",
+      "db": "ldc_user_v1",
+      "screen": "screen-home",
+      "viewport": {
+        "w": 390,
+        "h": 844
+      }
+    },
+    "hosted_Linux_WebKit_real_lexical_search": {
+      "count": 40,
+      "busy": false
+    },
+    "first_clicked_card": {
+      "text": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE001.P001 · TOME 1\nExplication éditoriale — note 1\nVolonté\nÉditorial\n",
+      "html": "<button class=\"result-card\" type=\"button\" data-result-key=\"ldc_t01_editorial_explications_note001_p001\"><div class=\"rc-stable\">LDC.T01.EDITORIAL.EXPLICATIONS.NOTE001.P001 · Tome 1</div><div class=\"rc-title\">Explication éditoriale — note 1</div><div class=\"rc-body-text\"><mark class=\"search-hl\">Volonté</mark></div><div class=\"rc-tags\"><span class=\"rc-tag exact\">Éditorial</span></div></button>",
+      "tag": "BUTTON"
+    },
+    "navigation_after_55s": {
+      "opened": false,
+      "diagnostic": {
+        "screens": [
+          "screen-editorial"
+        ],
+        "selectedSearchResult": null,
+        "loading": "none",
+        "readerText": 0,
+        "readerActive": false,
+        "results": 40,
+        "bodyText": "éré.\nExplication éditoriale — note 15\nC'est alors que Luisa commença l'exercice des «Heures de la Passion» que, 32 ans plus tard, par obéissance, elle mettra sur papier.\nAucun repère numéroté explicite prouvé dans le corps source — aucun rattachement inféré.\nExplication éditoriale — note 16\nÀ l'instar de sainte Marie-Madeleine, dont Luisa porta le nom en tant que membre du tiers ordre de Saint-Dominique.\nAucun repère numéroté explicite prouvé dans le corps source — aucun rattachement inféré.\n\nAccueil\n\nTomes\n\nRecherche\n\nMon Espace\nVersion 142.18",
+        "location": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/"
+      },
+      "jsErrors": [],
+      "failedRequests": []
+    },
+    "hosted_Linux_WebKit_search_result_enters_Reader": {
+      "screens": [
+        "screen-editorial"
+      ],
+      "selectedSearchResult": null,
+      "loading": "none",
+      "readerText": 0,
+      "readerActive": false,
+      "results": 40,
+      "bodyText": "éré.\nExplication éditoriale — note 15\nC'est alors que Luisa commença l'exercice des «Heures de la Passion» que, 32 ans plus tard, par obéissance, elle mettra sur papier.\nAucun repère numéroté explicite prouvé dans le corps source — aucun rattachement inféré.\nExplication éditoriale — note 16\nÀ l'instar de sainte Marie-Madeleine, dont Luisa porta le nom en tant que membre du tiers ordre de Saint-Dominique.\nAucun repère numéroté explicite prouvé dans le corps source — aucun rattachement inféré.\n\nAccueil\n\nTomes\n\nRecherche\n\nMon Espace\nVersion 142.18",
+      "location": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/"
+    }
+  },
+  "errors": [
+    "Error: WEBKIT_READER_DID_NOT_OPEN_AFTER_CLICK__SEE_DIAGNOSTICS\n    at file:///home/runner/work/App-Test/App-Test/.github/ldc-v14218-r15-hosted-webkit-qa.mjs:43:19"
+  ],
+  "scope": "Real hosted MassFinderBeta, actual Linux Playwright WebKit; NOT iOS Safari/physical iPhone or iPad; disposable browsing session.",
+  "deployment_authority": "NONE",
+  "iOS_gate": "OPEN",
+  "warnings": [
+    {
+      "type": "WEBKIT_READER_NAVIGATION_TIMEOUT",
+      "message": "TimeoutError: page.waitForFunction: Timeout 55000ms exceeded."
+    }
+  ]
+}
