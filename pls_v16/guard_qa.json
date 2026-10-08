@@ -1,0 +1,48 @@
+{
+  "schema": "ldc-pls-v16-qualified-pack-guard-qa-v1",
+  "checks": {
+    "real_pack_activates": true,
+    "rehashed_calibration_contradiction_rejected": true,
+    "rehashed_token_contradiction_rejected": true,
+    "rehashed_metadata_identity_mutation_rejected": true
+  },
+  "details": {
+    "good": {
+      "ok": true,
+      "code": "READY_QUALIFIED",
+      "activation": true,
+      "qualified": true,
+      "verified_files": 20,
+      "jesus_eligible_count": 20098,
+      "model_reassembly_sha256": "4d24e2bc01a447951524466ef533e52944bf48509e6552810bcee1a2711cb02c",
+      "metadata_rows": 22873,
+      "coverage_documents": 74528,
+      "coverage_tokens": 1403861,
+      "calibration_evidence_verified": true
+    },
+    "rehashed_calibration_contradiction": {
+      "ok": false,
+      "code": "CALIBRATION_EVIDENCE_GATES",
+      "detail": null,
+      "activation": false
+    },
+    "rehashed_token_contradiction": {
+      "ok": false,
+      "code": "TOKEN_COVERAGE_EVIDENCE_CONTRADICTION",
+      "detail": null,
+      "activation": false
+    },
+    "rehashed_metadata_identity_mutation": {
+      "ok": false,
+      "code": "METADATA_IDENTITY",
+      "detail": {
+        "row": 0,
+        "passage_id": "PLS16-E-96-72-TAMPER",
+        "chunk_policy_id": "96-72-current-v14215-r1",
+        "mode": "enriched"
+      },
+      "activation": false
+    }
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "ldc-pls-v16-manifest-build-v2",
+  "status": "QUALIFIED_MANIFEST_BUILT__NOT_DEPLOYED",
+  "manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
+  "manifest_bytes": 11263,
+  "qualification_source_status": "PASS_QUALIFIABLE",
+  "gates": {
+    "owner_real_query_gate": "PASS",
+    "hard_negative_gate": "PASS",
+    "blind_unrelated_query_gate": "PASS",
+    "truth_neutrality_gate": "PASS"
+  },
+  "vector_authority": {
+    "run_id": 37672229541,
+    "source_head_sha": "c379199d71d50da343f6be3a7517af1faed1bb8e",
+    "artifact_name": "wip-pls-v16-vector-build"
+  },
+  "coverage": {
+    "documents": 74528,
+    "covered": 74528,
+    "missing": 0,
+    "tokens_expected": 1403861,
+    "tokens_covered": 1403861,
+    "tokens_missing": 0
+  },
+  "jesus_eligible": 20098,
+  "deployment_authorized": false,
+  "app_runtime_wired": false
+}
