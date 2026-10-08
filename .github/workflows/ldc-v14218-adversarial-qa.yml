@@ -5,6 +5,8 @@ on:
       - ldc-v142-18-reader-semantic-integration-wip-20261008
     paths:
       - '.github/workflows/ldc-v14218-adversarial-qa.yml'
+      - '.github/ldc-v14218-adversarial-qa.mjs'
+      - 'index.html'
 permissions:
   contents: write
 jobs:
