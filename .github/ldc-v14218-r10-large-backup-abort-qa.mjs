@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import cp from 'node:child_process';
 import {chromium} from 'playwright-core';
 const dir=process.env.LDC_ARCHIVE_EXTRACT_DIR,port=8999,url='http://127.0.0.1:'+port+'/';
-const report={schema:'ldc-v14218-r10-large-backup-atomic-abort-qa-v1',source:'7c292d6221bb350fac3aeaa83750b8784706d45c',zip_sha256:'954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb',
+const report={schema:'ldc-v14218-r10-large-backup-atomic-abort-qa-v2',source:'7c292d6221bb350fac3aeaa83750b8784706d45c',zip_sha256:'954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb',
   status:'NOT_RUN',checks:{},details:{},errors:[],scope:'Synthetic-only 750 notes in two fresh Chromium browser profiles; no physical or hosted test',
   no_app_mutation:true,deployment_authority:'NONE',physical_iOS:'OPEN',hosted_E16_E19:'OPEN'};
 const ck=(k,ok,x)=>{report.checks[k]=!!ok;if(x!==undefined)report.details[k]=x};
@@ -22,7 +22,7 @@ try{
  const seeded=await p.evaluate(async ref=>new Promise((resolve,reject)=>{
   const tx=db.transaction('notes','readwrite'),st=tx.objectStore('notes');let seeded=0;
   for(let i=0;i<750;i++){
-    const row={...ref,ts:Date.now()+i,text:'R10_SYNTHETIC_NOTE_'+i.toString().padStart(4,'0')+' '+('abcde'.repeat(40)),quote:'synth'};
+    const row={...ref,ts:Date.now()+i,text:'R10_SYNTHETIC_NOTE_'+i.toString().padStart(4,'0')+' '+('abcde'.repeat(115)),quote:'synth'};
     const request=st.add(row);request.onsuccess=()=>seeded++;request.onerror=()=>reject(request.error);
   }
   tx.oncomplete=()=>resolve({count:seeded});tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error);
@@ -33,8 +33,8 @@ try{
   const raw=await new File(r.parts,'stress.ldcbackup',{type:'application/x-ndjson'}).text();
   return {raw,bytes:new Blob(r.parts).size,records:r.totalRecords,parts:r.parts.length};
  });
- ck('multi_chunk_stress_backup_stream_created',data.records>=750&&data.bytes>100000&&data.parts.length>=1,
-  {records:data.records,bytes:data.bytes,parts:data.parts.length});
+ ck('genuine_two_part_stream_backup_larger_than_512KiB',data.records>=750&&data.bytes>512*1024&&data.parts>=2,
+  {records:data.records,bytes:data.bytes,parts:data.parts});
  const original=await q.evaluate(async()=>{
   const id=await dbPut('collections',{name:'DO_NOT_LOSE_PRIOR_TARGET',ts:Date.now()});
   return {id,previous:(await dbGetAll('collections')).length};
@@ -88,7 +88,11 @@ try{
  ck('injected_invalid_staged_key_aborts_entire_atomic_import_without_data_loss',
    hold.rejected&&hold.unchanged&&hold.after.notes===750&&hold.after.collection.includes('R10_ROLLBACK_SENTINEL'),
    hold);
- ck('no_unhandled_browser_page_errors',errs.length===0,errs.slice(0,3));
+ const expectedInjectedDataError=errs.filter(x=>x.includes('DataError')&&x.includes('IDBObjectStore'));
+ const unexpectedErrors=errs.filter(x=>!(x.includes('DataError')&&x.includes('IDBObjectStore')));
+ ck('intentional_injected_IDB_DataError_observed_once',expectedInjectedDataError.length===1,
+   {expected:expectedInjectedDataError.length,unexpected:unexpectedErrors});
+ ck('no_unexpected_browser_page_errors',unexpectedErrors.length===0,unexpectedErrors.slice(0,3));
  report.details.total_elapsed_seconds=Math.round((Date.now()-t0)/1000);
  report.status=Object.values(report.checks).every(Boolean)?'PASS_SCOPED_750_NOTE_RESTORE_AND_FAULT_ROLLBACK':'FAIL';
 }catch(e){report.status='FAIL';report.errors.push(String(e?.stack||e))}
