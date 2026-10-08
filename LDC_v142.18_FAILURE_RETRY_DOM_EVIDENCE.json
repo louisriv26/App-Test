@@ -4,7 +4,7 @@
   "checks": {
     "failure_does_not_fabricate_results": true,
     "user_query_preserved": true,
-    "retry_attempts_manifest_again": false,
+    "retry_attempts_manifest_again": true,
     "retry_recovers_without_reload": false
   },
   "details": {
@@ -16,7 +16,7 @@
         "available": false,
         "ready": false,
         "loading": false,
-        "can_initialize": false,
+        "can_initialize": true,
         "calibration_status": "UNAVAILABLE",
         "model_ready": false,
         "persistent_semantic_storage": false,
@@ -41,33 +41,38 @@
         "schema": "ldc-pls-v16-runtime-status-v1",
         "version": "ldc-pls-v16-runtime-v1",
         "pack_id": "ldc-pls-v16-current-v14215-enriched-96-72-r1",
-        "available": false,
-        "ready": false,
+        "available": true,
+        "ready": true,
         "loading": false,
         "can_initialize": false,
-        "calibration_status": "UNAVAILABLE",
-        "model_ready": false,
+        "calibration_status": "QUALIFIED",
+        "model_ready": true,
         "persistent_semantic_storage": false,
-        "error": "PLS_V16_MANIFEST_HTTP_503",
+        "error": null,
         "registry": {
           "schema": "ldc-semantic-pack-registry-v6",
           "version": "ldc-search-v3-pack-registry-r6",
           "mode": "enriched",
           "label": "ENRICHI",
-          "available": false,
-          "calibration_status": "UNQUALIFIED",
-          "reason": "PACK_NOT_INSTALLED_OR_QUALIFIED",
-          "detail": null
+          "available": true,
+          "calibration_status": "QUALIFIED",
+          "pack_id": "ldc-pls-v16-current-v14215-enriched-96-72-r1",
+          "model_id": "Xenova/multilingual-e5-small",
+          "chunker_id": "96-72-current-v14215-r1",
+          "retrieval_id": "DENSE96_72_PLUS_BM25_96_72_EQUAL_RRF60",
+          "calibration_policy_id": "HYBRID_DENSE_ABSTENTION_V1",
+          "jesus_filter_bound": true,
+          "verified_files": 20
         }
       },
       "results": 0,
-      "user_text": "Recherche par le sens indisponible pour le moment.\nVotre description n’a pas été remplacée par une recherche « Par les mots ». Réessayez plus tard ou utilisez « Par les mots » si vous souhaitez rechercher des termes précis.",
-      "payload": false,
-      "manifest_requests": 1,
+      "user_text": "Passages classés selon leur proximité avec votre description. Cette recherche ne confirme pas que votre formulation est exacte ou vraie.\nComment ça marche ?\nAucun passage suffisamment proche n’a été identifié.",
+      "payload": true,
+      "manifest_requests": 2,
       "first_manifest_failed": 1
     }
   },
   "errors": [],
-  "source_sha": "00eced2f0f4f84440cf7c5b438fac44c106845b6",
+  "source_sha": "474de5bbd77220a70eaa9a1561d7f1b4503ad456",
   "deployment": "NONE"
 }
