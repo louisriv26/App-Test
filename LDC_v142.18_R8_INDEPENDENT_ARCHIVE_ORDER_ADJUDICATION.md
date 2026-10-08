@@ -1,30 +1,35 @@
-# LDC 142.18 — R8 independent archive-order adjudication (2026-10-08)
+# LDC v142.18 — R8 adversarial packaging-order clarification (8 October 2026)
 
-**Scope:** Audit-only evidence. No application source mutation and no deployment authority.
+**Scope: independent audit/documentation, no app change, no deployment. This revision explicitly supersedes the first R8 draft's unsupported manifest-last ZIP-order FAIL.**
 
-## Directly reverified frozen package
-- Archive: `LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip`
-- SHA-256: `954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb`
-- Size: 125604084 bytes
-- Manifest-declared application files: **273**, all 273 independently hashed and size-checked against actual ZIP bytes; CRC PASS.
-- 204 corpus assets individually verified; offline corpus binding and all 20 qualified semantic asset digests verified.
-- GitHub Actions outer downloadable ZIP contains byte-identical inner frozen application ZIP.
-- R7 full documentary handover contains hash-indexed members with correct sizes/checksums; its `99_HANDOVER_MEMBER_SHA256.json` **is** the final member.
+## Precise independently reverified bytes
 
-## Confirmed newly found packaging-process breach
-- **FAIL: application ZIP's `PACKAGE_MANIFEST_SHA256.json` is the FIRST member (index 0), not the LAST (index 273).**
-- The WIP builder `.github/ldc-v14218-curated-wip-package.py` has `for p in sorted(runtime|{"PACKAGE_MANIFEST_SHA256.json"}):` at approximately line 115. Sorting all paths lexicographically necessarily places uppercase `PACKAGE_` ahead of lowercase `assets/`, `corpus/`, etc.
-- Existing `zip_members_exact` compares sets, not required order. Thus its historical **564/564 PASS** does not cover the manifest-last claim. The source/docs asserting the package was manifest-last are inaccurate.
-- This is a **release-procedure/evidence defect**, not a demonstrated change in any extracted application file or observed browser malfunction.
-- Independent current audit: **27/28 checks PASS; 1 procedural check FAIL**.
-- Do **NOT** silently rewrite or replace the immutable 142.18 archive. A manifest-last corrected ZIP has different SHA-256 and is a new engineering package candidate under APP-GOV; requires distinct identity and separate mutation/release/deployment authorizations.
-- Treat complete packaging-procedure closure as **OPEN/FAIL** until independently rebuilt, rehashed, verified for order, and requalified under appropriate authority.
+- Application ZIP: `LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip`
+- Exact SHA-256: `954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb`, size **125,604,084 bytes**.
+- 273 application resources plus `PACKAGE_MANIFEST_SHA256.json`. All 273 application files match the embedded manifest's SHA-256 and exact byte lengths; ZIP CRC PASS.
+- All 204 offline-corpus assets and 20 semantic-qualified pack assets match their expected exact digests; canonical corpus binding recomputed.
+- GitHub Actions downloaded outer artifact includes precisely the same frozen inner app ZIP.
+- Full R7 documentary handover is separately complete and has its own `99_HANDOVER_MEMBER_SHA256.json` as last entry with verified member digests.
 
-## Remaining open gates
-- Hosted distinct-origin App-Test E16/E19: OPEN.
-- Real iPhone/iPad Safari/installed PWA, rotation, highlights, VoiceOver, updates, peak memory: OPEN.
-- Semantic inference offline: not qualified; current offline text + explicit Par les mots / unavailable Par le sens user-facing test passed its narrower scope.
-- Full public version promotion, App-Test deployment and production deployment: **NONE AUTHORIZED**.
-- Local independent Chromium re-execution inside the ChatGPT container could not begin because navigation to localhost was blocked by the container administrator. Earlier real Chromium evidence was produced by GitHub Actions and is separately available; do not conflate them.
+## ZIP member-order observation: not a proven defect
 
-**R8 conclusion: NO-GO for package release/deployment. Audit documentation correction only; source app remains frozen.**
+The application ZIP does have `PACKAGE_MANIFEST_SHA256.json` as its **first** entry (index 0/274). But the pinned authoritative builder at source commit `7c292d6221bb350fac3aeaa83750b8784706d45c` works in this sequence:
+
+1. Copy **all application resources to staging**, capture each file's SHA-256 and length;
+2. **Generate and write the package manifest after those application-file hashes are known**;
+3. Write the archive members in a deterministic sorted order. This lexicographically puts the uppercase `PACKAGE_` file ahead of lowercase app paths;
+4. Reopen the archive, validate members, extract all bytes and independently rehash every declared resource.
+
+Thus the prior description **“manifest generated last” is correct regarding manifest generation order**. No available governing requirement has been established demanding that the manifest be the final **ZIP member**. The initial R8 tool mistakenly conflated these two meanings and created a non-authoritative `manifest_last_REQUIRED_REPRODUCIBILITY` assertion.
+
+**Correct adjudication:** 27/27 applicable independent archive/content/handover checks PASS; ZIP member order is an informational observation, **not an extra release failure**. The initial R8 27/28 FAIL report is retained as a methodology correction, **not a current release result**. No successor repackaging is needed merely to reorder entries; altering the frozen ZIP without authority would be counterproductive.
+
+## Still-open actual release blockers
+
+- E16/E19: same-origin hosted App-Test vs production and root/sibling Service Worker isolation remain **OPEN**; two localhost-port origins test architecture, not hosted closure.
+- Real physical iPhone and iPad Safari, installed PWA, update/offline, VoiceOver, highlights/orientation, older-device peak memory remain **OPEN**. Linux WebKit and Chromium viewports are not physical devices.
+- Semantic model inference offline is **not qualified**, while narrower offline 204 text/lexical search and truthful unavailable-semantic UX did pass local R7D2 tests.
+- Various source-text/documentary validation gates must not be silently deemed complete solely from byte fidelity.
+- App-Test deployment and production deployment authority remain **NONE**. Frozen v142.18 mutation authority remains **NONE**.
+
+**Final decision: complete applicable archive-byte integrity audit PASS, local browser evidence scoped PASS, release/deployment NO-GO solely because existing hosted/physical/authority gates remain open—not because of archive ordering.**
