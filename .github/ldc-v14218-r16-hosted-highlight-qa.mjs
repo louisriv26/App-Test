@@ -1,6 +1,6 @@
 import fs from 'node:fs';import {chromium} from 'playwright-core';
 const APP='https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/';
-const out={schema:'ldc-v14218-r16-hosted-highlight-Reader-MonEspace-layout-QA-v1',status:'NOT_RUN',url:APP,
+const out={schema:'ldc-v14218-r16-hosted-highlight-Reader-MonEspace-layout-QA-v2-editorial-aware',status:'NOT_RUN',url:APP,
  tested_at:new Date().toISOString(),checks:{},details:{},errors:[],warnings:[],
  scope:'Fresh disposable real Chromium hosted site, canonical synthetic highlight via app persistence function; NOT native iOS text-selection equivalence',
  source:'7c292d6221bb350fac3aeaa83750b8784706d45c',mutation_authority:'NONE',deployment_authority:'NONE',physical_gate:'OPEN'};
@@ -15,8 +15,12 @@ let browser;try{
  ck('actual_hosted_candidate_boot_14218',(await p.evaluate(()=>PUBLIC_VERSION))==='142.18');
  await p.evaluate(async()=>{await goSearch();setSearchIntentMode('words',{rerun:false,persist:false});setSearchQueryDraft('volonté',{mode:'words',syncOther:true});await runSearch()});
  await p.waitForFunction(()=>!searchBusyGeneration&&document.querySelectorAll('#search-results .result-card').length>0,null,{timeout:160000});
- await p.locator('#search-results .result-card').first().click();
- await p.waitForFunction(()=>document.getElementById('screen-reader')?.classList.contains('active'),null,{timeout:90000});
+ const searchCards=await p.locator('#search-results .result-card').evaluateAll(els=>els.slice(0,8).map(x=>({title:x.querySelector('.rc-title')?.innerText||'',key:x.dataset.resultKey,excerpt:x.innerText.slice(0,70)})));
+ out.details.word_search_initial_cards=searchCards;
+ const directReaderCard=p.locator('#search-results .result-card').filter({hasNotText:/Explication éditoriale/i}).first();
+ ck('lexical_search_has_non_editorial_Reader_result',(await directReaderCard.count())===1,searchCards);
+ await directReaderCard.click();
+ await p.waitForFunction(()=>document.getElementById('screen-reader')?.classList.contains('active'),null,{timeout:95000});
  const selection=await p.evaluate(async()=>{
   const frags=Array.from(document.querySelectorAll('#reader-body .para-fragment'));
   const possible=frags.map(e=>({el:e,para:e.dataset.paraId,rec:window.LDCAnchor?.recordFor(e)}))
