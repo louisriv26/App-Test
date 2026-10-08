@@ -69,6 +69,22 @@ try{
  report.details.opened=opened;
  report.checks.semantic_result_opens_correct_entry=String(opened.entry_id)===String(found.entry_id)&&Number(opened.volume)===Number(found.volume);
  report.checks.semantic_result_paragraph_visible=opened.fragment_found&&opened.fragment_visible&&opened.reader_has_text;
+ // Desktop-Chromium responsive-orientation challenge (not a substitute for iOS Safari).
+ await page.setViewportSize({width:844,height:390});
+ await page.waitForTimeout(450);
+ const landscape=await page.evaluate(target=>({entry_id:currentEntry?.id||null,volume:currentVolume,body_text:document.getElementById('reader-body')?.innerText?.trim().length||0,reader_visible:!!document.getElementById('screen-reader')?.getClientRects().length}),found);
+ await page.setViewportSize({width:390,height:844});
+ await page.waitForTimeout(450);
+ const portrait=await page.evaluate(target=>({entry_id:currentEntry?.id||null,volume:currentVolume,body_text:document.getElementById('reader-body')?.innerText?.trim().length||0,reader_visible:!!document.getElementById('screen-reader')?.getClientRects().length}),found);
+ report.details.viewport_responsiveness={landscape,portrait};
+ report.checks.reader_remains_visible_across_viewport_changes=[landscape,portrait].every(x=>x.entry_id===found.entry_id&&x.volume===Number(found.volume)&&x.body_text>0&&x.reader_visible);
+ // Actual Return button, not programmatic navigation: the search results must survive.
+ await page.locator('#reader-back-btn').click();
+ await page.waitForFunction(()=>document.getElementById('screen-search')?.classList.contains('active'),null,{timeout:30000});
+ const returning=await page.evaluate(()=>({cards:document.querySelectorAll('#search-results .result-card').length,query:searchQueryDraftCanonical(),semantic:!!searchLastPayload?.semantic}));
+ report.details.return_to_search=returning;
+ report.checks.return_preserves_semantic_results=returning.cards>0&&returning.query===query.text&&returning.semantic===true;
+
  report.checks.no_browser_errors=report.errors.length===0;
  report.status=Object.values(report.checks).every(Boolean)?'PASS':'FAIL';
 } catch(e){report.errors.push('HARNESS_OR_APP:'+String(e&&e.stack||e));report.status='FAIL';}
