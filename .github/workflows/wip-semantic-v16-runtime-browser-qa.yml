@@ -1,0 +1,59 @@
+name: LDC WIP PLS v16 local runtime integration QA
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - 'index.html'
+      - 'search_semantic_pack_guard_r4.js'
+      - 'search_semantic_v3_core_r4.js'
+      - 'search_semantic_hybrid_r6.js'
+      - 'search_semantic_pack_registry_r6.js'
+      - 'pls_v16/runtime_v1.mjs'
+      - 'pls_v16/semantic_pack_manifest.json'
+      - 'pls_v16/pack/**'
+      - 'pls_v16/evidence/**'
+      - '.github/wip-semantic-v16-runtime-browser-qa.html'
+      - '.github/wip-semantic-v16-runtime-browser-qa.mjs'
+      - '.github/workflows/wip-semantic-v16-runtime-browser-qa.yml'
+jobs:
+  runtime-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Protected release surfaces remain frozen at v142.15
+        run: |
+          git diff --exit-code 572d9df7927765b575a76eaee98fd3cc9d455e74 --             sw.js version.json offline_manifest.json             corpus search_engine_v2.js search_exact_v21.js search_foundation_v21b.js search_near_v22.js search_worker_v2.js interim_user_state_migration.js
+      - name: Index uses only the qualified v16 semantic runtime
+        shell: bash
+        run: |
+          grep -q 'search_semantic_pack_guard_r4.js' index.html
+          grep -q 'search_semantic_hybrid_r6.js' index.html
+          grep -q 'search_semantic_pack_registry_r6.js' index.html
+          grep -q 'pls_v16/runtime_v1.mjs' index.html
+          ! grep -q 'search_semantic_pack_guard_r3.js' index.html
+          ! grep -q 'search_semantic_pack_registry_r5.js' index.html
+          ! grep -q 'pls_v15/owner_runtime_v1_5.mjs' index.html
+          grep -q 'Cette recherche ne confirme pas que votre formulation est exacte ou vraie' index.html
+          ! grep -Eq 'indexedDB|localStorage|caches\.open' pls_v16/runtime_v1.mjs
+      - name: Install pinned browser driver
+        run: npm install --no-save playwright-core@1.55.0
+      - name: Require hosted Chrome
+        run: command -v google-chrome
+      - name: Execute actual qualified runtime and retrieval gates
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/wip-semantic-v16-runtime-browser-qa.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-pls-v16-runtime-browser-qa
+          path: wip-pls-v16-runtime-browser-qa.json
+          if-no-files-found: error
+          retention-days: 2
