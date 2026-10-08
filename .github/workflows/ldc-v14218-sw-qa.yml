@@ -36,6 +36,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git add LDC_v142.18_SW_ACTUAL_BROWSER_QA.json
           git commit -m "test(ldc): record v142.18 isolated Chrome worker boot evidence"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
           git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
       - uses: actions/upload-artifact@v4
         if: always()
