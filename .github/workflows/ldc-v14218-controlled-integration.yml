@@ -1,0 +1,87 @@
+name: LDC v142.18 isolated two-parent integration and real-app smoke QA
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-controlled-integration.yml'
+permissions:
+  contents: write
+jobs:
+  integrate-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify parents and isolation
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse origin/main)" = "572d9df7927765b575a76eaee98fd3cc9d455e74"
+          test "$(git rev-parse origin/ldc-v142.17-reader-transaction-repair-candidate)" = "56a306997a37ab975a573774a97fa976a40ffe40"
+          test "$(git rev-parse origin/ldc-v142-16-search-integrity-wip-20261007)" = "39b9ec90ab3b2199b1738e96b353cc6b27d9cac0"
+          test "$(git rev-parse origin/app-test-origin-isolation-wip-20261007)" = "68fb4bbaf7e51629a5092180787572f7dc20e2a8"
+          test "$GITHUB_REF_NAME" = "ldc-v142-18-reader-semantic-integration-wip-20261008"
+      - name: Apply exact hunk splice; restore frozen qualified assets; full 20-asset SHA verification
+        run: python3 .github/ldc-v14218-integrate.py
+      - name: Verify excluded protected file changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code 56a306997a37ab975a573774a97fa976a40ffe40 -- corpus pls_v15 search_engine_v2.js search_exact_v21.js search_foundation_v21b.js search_near_v22.js search_worker_v2.js search_normalizer.js interim_user_state_migration.js sw.js version.json offline_manifest.json
+          git diff --name-only 56a306997a37ab975a573774a97fa976a40ffe40 -- corpus pls_v15 | grep -q . && exit 1 || true
+      - name: Bring known full-app QA harness from qualified semantic source
+        run: git show 39b9ec90ab3b2199b1738e96b353cc6b27d9cac0:.github/wip-pls-v16-real-app-navigation-qa.mjs > .github/wip-pls-v16-real-app-navigation-qa.mjs
+      - name: Install pinned Chromium driver
+        run: npm install --no-save playwright-core@1.55.0
+      - name: Actual DOM Chromium full-app semantic-to-Reader navigation and orientation/Return QA
+        id: appqa
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/wip-pls-v16-real-app-navigation-qa.mjs
+      - name: Write isolated WIP attestation (NOT release authority)
+        if: always()
+        shell: bash
+        env:
+          APPQA_OUTCOME: ${{ steps.appqa.outcome }}
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, os, subprocess
+          p=pathlib.Path("LDC_v142.18_INITIAL_SPLICE_EVIDENCE.json")
+          if not p.exists():raise RuntimeError("No verified functional splice evidence; stop, do not commit")
+          r=json.loads(p.read_text())
+          r["actual_browser_test"]="PASS" if os.environ.get("APPQA_OUTCOME")=="success" else "FAIL_OR_NOT_EXECUTED"
+          r["app_test_hosted_gate"]="OPEN"
+          r["physical_iphone_ipad_gate"]="OPEN"
+          r["curated_zip_gate"]="OPEN"
+          r["release_promotion_gate"]="BLOCKED"
+          r["source_tree_candidate"]="WIP_ONLY__NOT_RELEASE"
+          p.write_text(json.dumps(r,ensure_ascii=False,indent=2)+"\n")
+          PY
+      - name: Commit integrated WIP (never merge or deploy)
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_INITIAL_SPLICE_EVIDENCE.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add index.html .github/wip-pls-v16-real-app-navigation-qa.mjs search_semantic_pack_guard_r4.js search_semantic_hybrid_r6.js search_semantic_pack_registry_r6.js pls_v16 LDC_v142.18_INITIAL_SPLICE_EVIDENCE.json
+          git commit -m "wip(ldc): two-parent Reader+qualified v16 integration, no deployment" 
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-initial-integrated-source-qa
+          path: |
+            LDC_v142.18_INITIAL_SPLICE_EVIDENCE.json
+            wip-pls-v16-real-app-navigation-qa.json
+          if-no-files-found: warn
+          retention-days: 14
