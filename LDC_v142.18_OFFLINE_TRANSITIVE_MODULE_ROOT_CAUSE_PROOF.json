@@ -1,0 +1,84 @@
+{
+  "schema": "ldc-v14218-offline-transitive-module-root-cause-controlled-challenge-v1",
+  "app_zip_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
+  "frozen_app_source": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+  "status": "FAIL",
+  "checks": {
+    "immutable_package_and_dependency_bound": true,
+    "separate_origin_sw_boot_both_online_without_preloading_model": true,
+    "original_sw_shell_excludes_critical_static_module": true,
+    "QA_only_prime_exact_transformer_bytes": true,
+    "unprimed_exact_frozen_zip_offline_boot_missing_module_reproduced": false,
+    "same_exact_frozen_zip_only_cache_primed_boot_recovers": true,
+    "only_failed_unprimed_request_is_omitted_transformer": false,
+    "offline_no_model_semantic_query_fails_closed_with_no_spurious_results": false
+  },
+  "observations": {
+    "immutable_package_and_dependency_bound": {
+      "path": "pls_v15/runtime/transformers.min.js",
+      "bytes": 888173,
+      "sha256": "aa5002b70e789798da263f5f99c62bd3e8fcd0c119258a493c40c180648365fa"
+    },
+    "separate_origin_sw_boot_both_online_without_preloading_model": {
+      "a": {
+        "scope": [
+          "http://127.0.0.1:8995/ldc/"
+        ],
+        "ready": false
+      },
+      "b": {
+        "scope": [
+          "http://127.0.0.1:8996/ldc/"
+        ],
+        "ready": false
+      }
+    },
+    "original_sw_shell_excludes_critical_static_module": {
+      "cache": "ldc-le-livre-du-ciel-29ccbf2d-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+      "alreadyCached": false
+    },
+    "QA_only_prime_exact_transformer_bytes": {
+      "url": "http://127.0.0.1:8996/ldc/pls_v15/runtime/transformers.min.js",
+      "sha256": "aa5002b70e789798da263f5f99c62bd3e8fcd0c119258a493c40c180648365fa",
+      "bytes": 888173,
+      "cache": "ldc-le-livre-du-ciel-29ccbf2d-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+      "cachedAfter": true
+    },
+    "unprimed_exact_frozen_zip_offline_boot_missing_module_reproduced": {
+      "modulePresent": true,
+      "appJS": true,
+      "controller": true,
+      "screen": "screen-home",
+      "modelReady": false
+    },
+    "same_exact_frozen_zip_only_cache_primed_boot_recovers": {
+      "modulePresent": true,
+      "appJS": true,
+      "controller": true,
+      "screen": "screen-home",
+      "modelReady": false
+    },
+    "only_failed_unprimed_request_is_omitted_transformer": [
+      {
+        "url": "http://127.0.0.1:8995/ldc/corpus/user_state_migration_v4.json?cv=cm-92426c8aaac6fc7c",
+        "failure": {
+          "errorText": "net::ERR_FAILED"
+        }
+      }
+    ],
+    "offline_no_model_semantic_query_fails_closed_with_no_spurious_results": {
+      "busy": false,
+      "ready": false,
+      "cards": 0,
+      "message": "",
+      "meta": ""
+    }
+  },
+  "errors": [],
+  "experimental_cache_priming_only": true,
+  "no_app_source_or_SW_mutated": true,
+  "hosted_e16": "OPEN",
+  "hosted_e19": "OPEN",
+  "physical_ios": "OPEN",
+  "deployment_authority": "NONE"
+}
