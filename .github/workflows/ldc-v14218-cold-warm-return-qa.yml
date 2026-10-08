@@ -1,0 +1,49 @@
+name: LDC v142.18 cold/warm model resources and repeated Return QA
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-cold-warm-return-qa.yml'
+      - '.github/ldc-v14218-cold-warm-return-qa.mjs'
+permissions:
+  contents: write
+jobs:
+  cold-warm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright-core@1.55.0
+      - name: Real app Chromium cold load, warm inference, back/Return and frozen assets
+        id: test
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/ldc-v14218-cold-warm-return-qa.mjs
+      - name: Preserve source-bound resource evidence
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_COLD_WARM_RETURN_RESOURCES_QA.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_COLD_WARM_RETURN_RESOURCES_QA.json
+          git commit -m "test(ldc): preserve v142.18 model memory/repeated search/return real browser evidence"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-cold-warm-resources
+          path: LDC_v142.18_COLD_WARM_RETURN_RESOURCES_QA.json
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Require source-scoped QA gate
+        run: python3 -c "import json;assert json.load(open('LDC_v142.18_COLD_WARM_RETURN_RESOURCES_QA.json'))['status']=='PASS'"
