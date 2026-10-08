@@ -1,0 +1,171 @@
+{
+  "schema": "ldc-v14218-r13-hosted-massfinderbeta-real-https-adversarial-v1",
+  "tested_at": "2026-10-08T10:27:26.792Z",
+  "origin": "https://louisriv26.github.io",
+  "root": "https://louisriv26.github.io/mauritius-mass-finder-beta/",
+  "application_url": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/",
+  "status": "PASS_HOSTED_REMOTE_BYTES_AND_REAL_CHROME_SCOPED",
+  "checks": {
+    "hosted_root_and_app_and_worker_and_manifest_http_200": true,
+    "hosted_application_source_and_version_identical_frozen_R12": true,
+    "hosted_worker_version_matches_app": true,
+    "neutral_root_is_launcher_to_ldc": true,
+    "hosted_ALL_273_executable_resources_exact_bytes_sha256": true,
+    "hosted_root_launcher_link_present": true,
+    "hosted_fresh_Chromium_application_boot_exact_v14218": true,
+    "hosted_service_worker_scope_nested_ldc_only": true,
+    "hosted_manifest_relative_identity_correct": true,
+    "hosted_semantic_model_lazy_on_initial_boot": true,
+    "hosted_neutral_root_has_no_controlling_ldc_worker": true,
+    "E19_same_origin_storage_collision_REPRODUCED_on_fresh_test_profile": true,
+    "hosted_real_words_search_returns_results": true,
+    "hosted_real_semantic_search_finds_qualified_intended_passage": true,
+    "hosted_mobile_viewport_rotation_does_not_blank_Reader": true,
+    "hosted_Reader_return_restores_search_query_and_results": true,
+    "hosted_offline_manifest_count_204": true,
+    "no_unhandled_js_errors_in_hosted_browser": true
+  },
+  "details": {
+    "hosted_root_and_app_and_worker_and_manifest_http_200": [
+      {
+        "status": 200,
+        "url": "https://louisriv26.github.io/mauritius-mass-finder-beta/",
+        "bytes": 735,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "status": 200,
+        "url": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/",
+        "bytes": 936861,
+        "type": "text/html; charset=utf-8"
+      },
+      {
+        "status": 200,
+        "url": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/sw.js",
+        "bytes": 32245,
+        "type": "application/javascript; charset=utf-8"
+      },
+      {
+        "status": 200,
+        "url": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/version.json",
+        "bytes": 258823,
+        "type": "application/json; charset=utf-8"
+      },
+      {
+        "status": 200,
+        "url": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/PACKAGE_MANIFEST_SHA256.json",
+        "bytes": 44792,
+        "type": "application/json; charset=utf-8"
+      }
+    ],
+    "hosted_application_source_and_version_identical_frozen_R12": {
+      "manifestSource": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+      "manifestFiles": 273,
+      "manifestVersion": "142.18",
+      "versionJson": "v2.19.142.18-R1B-READER-SEMANTIC-INTEGRATION-WIP"
+    },
+    "hosted_worker_version_matches_app": {
+      "workerStart": "const VERSION = 'ldc-v2.19.142.18-R1B-reader-semantic-integration-wip';\nconst CACHE_PREFIX = 'l"
+    },
+    "neutral_root_is_launcher_to_ldc": {
+      "title": "Collection Luisa — Test isolé du Livre du Ciel",
+      "snippet": "ad>\n<body>\n<h1>Le Livre du Ciel — environnement de test</h1>\n<p>Ce site est destiné aux essais sur une origine web distincte de celle de la production. Il n’installe aucun service worker à sa racine.</p>\n<p><a href=\"./ldc/\">Ouvrir le Livre du Ciel v142.18</a></p>\n</body>\n</html>\n"
+    },
+    "e19_same_browser_origin": {
+      "remoteOrigin": "https://louisriv26.github.io",
+      "productionOrigin": "https://louisriv26.github.io",
+      "isSame": true,
+      "rootClaimsDistinct": true
+    },
+    "hosted_manifest_sha256": "c65f50fa03927dea32af64bc5beaec36e2ae0d28224359a5062d8973c26d72d9",
+    "hosted_ALL_273_executable_resources_exact_bytes_sha256": {
+      "count_exact": 273,
+      "bytes_hashed": 331750763,
+      "errors": [],
+      "digest_mismatches": [],
+      "httpStatusCounts": {
+        "200": 273
+      }
+    },
+    "hosted_root_launcher_link_present": {
+      "links": 1
+    },
+    "hosted_fresh_Chromium_application_boot_exact_v14218": {
+      "version": "142.18",
+      "app": "v2.19.142.18-R1B-READER-SEMANTIC-INTEGRATION-WIP",
+      "db": "ldc_user_v1",
+      "dbver": 4,
+      "registrations": [
+        {
+          "scope": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/",
+          "script": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/sw.js"
+        }
+      ],
+      "controller": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/sw.js",
+      "semanticReady": false,
+      "manifestUrl": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/manifest.json"
+    },
+    "hosted_service_worker_scope_nested_ldc_only": [
+      {
+        "scope": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/",
+        "script": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/sw.js"
+      }
+    ],
+    "hosted_manifest_relative_identity_correct": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/manifest.json",
+    "hosted_semantic_model_lazy_on_initial_boot": false,
+    "E19_same_origin_storage_collision_REPRODUCED_on_fresh_test_profile": {
+      "same_origin_proof": "QA_ONLY_DO_NOT_KEEP"
+    },
+    "hosted_real_words_search_returns_results": {
+      "cards": 40,
+      "busy": false
+    },
+    "hosted_real_semantic_search_finds_qualified_intended_passage": {
+      "top": "ldc_t09_1909_11_02_e001",
+      "model": true,
+      "cards": 20,
+      "error": "Passages classés selon leur proximité avec votre description. Cette recherche ne confirme pas que votre formulation est exacte ou vraie.\nComment ça marche ?\nTome 9 · 2 novembre 1909\nNe pas s'attarder au passé, mais seulement au présent.\naux choses de mon passé. Le bon Jésus se montra brièvement et I"
+    },
+    "hosted_mobile_viewport_rotation_does_not_blank_Reader": {
+      "before": {
+        "text": 567,
+        "height": 570,
+        "entry": "ldc_t09_1909_11_02_e001"
+      },
+      "after": {
+        "text": 567,
+        "height": 130,
+        "entry": "ldc_t09_1909_11_02_e001",
+        "visible": true
+      }
+    },
+    "hosted_Reader_return_restores_search_query_and_results": {
+      "cards": 20,
+      "q": "Deuxième, il ne faut pas regarder le passé. Le passé est passé et il faut vivre dans le présent. Ce n'est pas utile du tout de regarder dans le passé. C'est un affront à Jésus. C'est le deuxième texte.",
+      "screen": "screen-search"
+    },
+    "hosted_offline_manifest_count_204": {
+      "state": "NOT_PREPARED",
+      "total": 204,
+      "completed": 0
+    },
+    "no_unhandled_js_errors_in_hosted_browser": {
+      "errors": [],
+      "networkFailures": []
+    }
+  },
+  "errors": [],
+  "warnings": [
+    "E19: MassFinder Beta and LDC production are still the same browser origin. Different repo paths do not isolate regular Safari IndexedDB.",
+    "R12 launcher says different web origin, which is false when hosted on louisriv26.github.io."
+  ],
+  "scope": "Live GitHub Pages remote HTTP + real Chromium automation on fresh ephemeral CI browser context; no owner Safari/device data touched",
+  "constraints": [
+    "Not physical iPhone/iPad",
+    "Fresh browser profile cannot detect old Safari root-scope worker leftovers",
+    "No main/App-Test/prod deployment mutation",
+    "No capacity/real crash simulation",
+    "GitHub Pages URL content not automatically proof of a prior iPhone installation"
+  ],
+  "public_release_authority": "NONE"
+}
