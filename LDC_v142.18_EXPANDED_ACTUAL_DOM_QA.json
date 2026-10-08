@@ -1,0 +1,129 @@
+{
+  "schema": "ldc-v14218-expanded-actual-app-dom-v1",
+  "status": "PASS",
+  "source_sha": "6bb8533a7ce943fcf3779ce4799f4df278ac9aba",
+  "checks": {
+    "new_identity_v142_18": true,
+    "semantic_lazy_boot": true,
+    "structural_only_uses_v2_lazily": true,
+    "positive_OWNER-REAL-01": true,
+    "positive_OWNER-REAL-02": true,
+    "positive_OWNER-REAL-03": true,
+    "negative_NEG-DEV-01": true,
+    "negative_NEG-DEV-02": true,
+    "negative_NEG-DEV-03": true,
+    "negative_NEG-DEV-04": true,
+    "jesus_mask_filter_applied_all_returned_rows": true,
+    "lexical_e20_truthful_partial_action": true,
+    "lexical_partial_expansion_shows_results": true,
+    "semantic_pack_still_ready_after_mode_switch": true,
+    "no_unhandled_browser_errors": true
+  },
+  "results": {
+    "new_identity_v142_18": {
+      "version": "142.18",
+      "sw": "ldc-v2.19.142.18-R1B-reader-semantic-integration-wip"
+    },
+    "structural_only_uses_v2_lazily": {
+      "pack": {
+        "schema": "ldc-pls-v16-runtime-status-v1",
+        "version": "ldc-pls-v16-runtime-v1",
+        "pack_id": "ldc-pls-v16-current-v14215-enriched-96-72-r1",
+        "available": false,
+        "ready": false,
+        "loading": false,
+        "can_initialize": true,
+        "calibration_status": "PENDING_VERIFICATION",
+        "model_ready": false,
+        "persistent_semantic_storage": false,
+        "error": null,
+        "registry": {
+          "schema": "ldc-semantic-pack-registry-v6",
+          "version": "ldc-search-v3-pack-registry-r6",
+          "mode": "enriched",
+          "label": "ENRICHI",
+          "available": false,
+          "calibration_status": "UNQUALIFIED",
+          "reason": "PACK_NOT_INSTALLED_OR_QUALIFIED",
+          "detail": null
+        }
+      },
+      "semantic": false,
+      "text": "55 entrées correspondantes Recherche lexicale · Lecture normaleTome 9"
+    },
+    "positive_OWNER-REAL-01": {
+      "rank": 9,
+      "target": "ldc_t11_1913_11_18_e001",
+      "count": 20,
+      "state": "possible",
+      "heap": 535148547
+    },
+    "positive_OWNER-REAL-02": {
+      "rank": 1,
+      "target": "ldc_t09_1909_11_02_e001",
+      "count": 20,
+      "state": "possible",
+      "heap": 548854468
+    },
+    "positive_OWNER-REAL-03": {
+      "rank": 1,
+      "target": "ldc_t09_1909_05_08_e001",
+      "count": 20,
+      "state": "possible",
+      "heap": 526576680
+    },
+    "negative_NEG-DEV-01": {
+      "state": "abstain",
+      "count": 0
+    },
+    "negative_NEG-DEV-02": {
+      "state": "abstain",
+      "count": 0
+    },
+    "negative_NEG-DEV-03": {
+      "state": "abstain",
+      "count": 0
+    },
+    "negative_NEG-DEV-04": {
+      "state": "abstain",
+      "count": 0
+    },
+    "jesus_mask_filter_applied_all_returned_rows": {
+      "items": 20,
+      "all_allowed": true,
+      "confidence": "possible",
+      "ui_results": 20
+    },
+    "lexical_e20_truthful_partial_action": {
+      "partialCount": 14023,
+      "cards": 0,
+      "actionCount": 1,
+      "beforeLex": {
+        "partial": 14023,
+        "lane": "words",
+        "visible": "none"
+      }
+    },
+    "lexical_partial_expansion_shows_results": {
+      "lane": "partial",
+      "cards": 30,
+      "trust": "block"
+    },
+    "end_state": {
+      "heap_last": 538269039,
+      "ready": true,
+      "version": "142.18"
+    },
+    "no_unhandled_browser_errors": []
+  },
+  "errors": [],
+  "open_gates": [
+    "HOSTED_E16_E19",
+    "PHYSICAL_SAFARI",
+    "WEBKIT",
+    "PWA",
+    "OFFLINE_204_CORPUS",
+    "VOICEOVER",
+    "LONG_RUN_MEMORY"
+  ]
+}
