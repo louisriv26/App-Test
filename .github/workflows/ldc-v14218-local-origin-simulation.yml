@@ -1,0 +1,49 @@
+name: LDC 142.18 LOCAL two-origin SW/DB/Cache architectural simulation (NOT hosted E16/E19)
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-local-origin-simulation.yml'
+      - '.github/ldc-v14218-local-origin-simulation.mjs'
+permissions:
+  contents: write
+jobs:
+  local-separate-origin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright-core@1.55.0
+      - name: Simulate two distinct localhost origins, real worker scopes and real IndexedDB separation
+        id: actual
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/ldc-v14218-local-origin-simulation.mjs
+      - name: Preserve source-bound LOCAL ONLY evidence; E16/E19 stay open
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_LOCAL_E16_E19_SIMULATION_QA.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_LOCAL_E16_E19_SIMULATION_QA.json
+          git commit -m "test(ldc): record local origin/scope/storage isolation architecture simulation; hosted gates open"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-local-origin-simulation-NOT-HOSTED
+          path: LDC_v142.18_LOCAL_E16_E19_SIMULATION_QA.json
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Require isolated simulation PASS, never claim hosted E16/E19
+        run: python3 -c "import json;d=json.load(open('LDC_v142.18_LOCAL_E16_E19_SIMULATION_QA.json'));assert d['status']=='PASS_LOCAL_SIMULATION_ONLY' and d['hosted_e16']=='OPEN' and d['hosted_e19']=='OPEN'"
