@@ -1,11 +1,11 @@
 {
   "schema": "ldc-v14218-semantic-cold-warm-return-resource-dom-v1",
-  "status": "FAIL",
-  "source_sha": "43da8faff0488b1c12791565dc02a85569840583",
+  "status": "PASS",
+  "source_sha": "12ca2b4bb2a805a7f1548b3c5b394bddf4eb0e2d",
   "checks": {
     "cold_boot_lazy_no_legacy_runtime": true,
     "cold_loaded_qualified_pack_and_found_owner_target": true,
-    "cold_verified_four_static_onnx_parts": false,
+    "cold_verified_four_static_onnx_parts": true,
     "warm_reuses_existing_model_part_requests": true,
     "return_does_not_refetch_frozen_model_parts": true,
     "no_runtime_errors": true
@@ -14,53 +14,57 @@
     "cold_boot_lazy_no_legacy_runtime": {
       "ready": false,
       "legacy": false,
-      "heap": 14911680
+      "heap": 14943104
     },
     "cold_loaded_qualified_pack_and_found_owner_target": {
-      "ms": 4993,
+      "ms": 3467,
       "ready": true,
       "confidence": "possible",
       "rank": 1,
       "n": 20,
-      "heap": 313131769,
-      "total": 327785577,
+      "heap": 301712495,
+      "total": 359021311,
       "network": {
         "modelParts": 8,
-        "metadata": 0,
-        "vectors": 0,
+        "distinctModelParts": 4,
+        "metadata": 1,
+        "vectors": 1,
         "totalPLSRequests": 32,
         "distinctResources": 22
       }
     },
     "cold_verified_four_static_onnx_parts": {
       "modelParts": 8,
-      "metadata": 0,
-      "vectors": 0,
+      "distinctModelParts": 4,
+      "metadata": 1,
+      "vectors": 1,
       "totalPLSRequests": 32,
       "distinctResources": 22
     },
     "warm_reuses_existing_model_part_requests": {
-      "ms": 304,
+      "ms": 131,
       "ready": true,
-      "heap": 293023219,
+      "heap": 312776097,
       "cards": 20,
       "network": {
         "modelParts": 8,
-        "metadata": 0,
-        "vectors": 0,
+        "distinctModelParts": 4,
+        "metadata": 1,
+        "vectors": 1,
         "totalPLSRequests": 32,
         "distinctResources": 22
       }
     },
     "return_does_not_refetch_frozen_model_parts": {
-      "ms": 202,
+      "ms": 168,
       "cards": 20,
-      "heap": 304813810,
+      "heap": 292183485,
       "ready": true,
       "network": {
         "modelParts": 8,
-        "metadata": 0,
-        "vectors": 0,
+        "distinctModelParts": 4,
+        "metadata": 1,
+        "vectors": 1,
         "totalPLSRequests": 32,
         "distinctResources": 22
       }
@@ -69,22 +73,25 @@
     "resource_details": {
       "first": {
         "modelParts": 8,
-        "metadata": 0,
-        "vectors": 0,
+        "distinctModelParts": 4,
+        "metadata": 1,
+        "vectors": 1,
         "totalPLSRequests": 32,
         "distinctResources": 22
       },
       "warm": {
         "modelParts": 8,
-        "metadata": 0,
-        "vectors": 0,
+        "distinctModelParts": 4,
+        "metadata": 1,
+        "vectors": 1,
         "totalPLSRequests": 32,
         "distinctResources": 22
       },
       "returned": {
         "modelParts": 8,
-        "metadata": 0,
-        "vectors": 0,
+        "distinctModelParts": 4,
+        "metadata": 1,
+        "vectors": 1,
         "totalPLSRequests": 32,
         "distinctResources": 22
       },
@@ -112,6 +119,7 @@
         "pls_v16/evidence/token_coverage.json",
         "pls_v16/evidence/calibration_evidence_v2.json"
       ],
+      "request_note": "Completed browser requests can include HTTP-cache re-reads; they do not establish twice the over-network bytes.",
       "heap_note": "Chromium JS heap is not device peak memory. All memory gates physical OPEN."
     }
   },
