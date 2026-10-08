@@ -1,0 +1,58 @@
+name: LDC 142.18 curate UNRELEASED WIP app ZIP - NO deployment
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-curated-wip-package.yml'
+      - '.github/ldc-v14218-curated-wip-package.py'
+permissions:
+  contents: write
+jobs:
+  curate-and-rehash:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify protected source refs and passing full 204-asset offline evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse origin/main)" = "572d9df7927765b575a76eaee98fd3cc9d455e74"
+          test "$(git rev-parse origin/ldc-v142.17-reader-transaction-repair-candidate)" = "56a306997a37ab975a573774a97fa976a40ffe40"
+          test "$(git rev-parse origin/ldc-v142-16-search-integrity-wip-20261007)" = "39b9ec90ab3b2199b1738e96b353cc6b27d9cac0"
+          python3 - <<'PY'
+          import json
+          j=json.load(open('LDC_v142.18_204_ASSET_OFFLINE_DOM_QA.json'))
+          assert j['status']=='PASS' and all(j['checks'].values())
+          assert j['details']['independent_browser_sha256_all_204']['verified']==204
+          PY
+      - name: Build manifest-last curated engineering ZIP then independently extract and rehash every member
+        id: curate
+        continue-on-error: true
+        run: python3 .github/ldc-v14218-curated-wip-package.py
+      - name: Save package integrity report to isolated WIP branch (NOT ZIP)
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_CURATED_WIP_PACKAGE_AUDIT.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_CURATED_WIP_PACKAGE_AUDIT.json
+          git commit -m "build(ldc): preserve manifest-last extracted WIP ZIP rehash evidence without publishing ZIP"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-14218-curated-WIP-APP-NEVER-DEPLOY-WITHOUT-AUTHORITY
+          path: |
+            LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip
+            LDC_v142.18_CURATED_WIP_PACKAGE_AUDIT.json
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Fail closed unless package integrity PASS (not deployment authority)
+        run: python3 -c "import json;assert json.load(open('LDC_v142.18_CURATED_WIP_PACKAGE_AUDIT.json'))['status']=='PASS_PACKAGE_INTEGRITY_ONLY_NOT_RELEASE_AUTHORITY'"
