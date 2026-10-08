@@ -63,6 +63,49 @@ try{
  report.details.jesus_filter={state:jesus.confidence.state,result_count:jesus.results.length};
  report.checks.jesus_filter_executes=jesus&&jesus.pack_id===PACK_ID&&['possible','abstain'].includes(jesus.confidence.state);
 
+ // Verify the real returned passage IDs against the independently hashed, frozen speaker mask.
+ // The verified pack Guard binds sequential PLS16 IDs to mask row indices.
+ const jesusMask=fs.readFileSync('pls_v16/pack/jesus_mask.bits');
+ const jesusEligible=x=>{
+   const m=/^PLS16-E-96-72-(\\d{6})$/.exec(String(x&&x.passage_id||''));
+   const row=m?Number(m[1])-1:-1;
+   return row>=0&&row<22873&&!!(jesusMask[row>>3]&(1<<(row&7)));
+ };
+ const eligibleResults=(jesus.results||[]).map(x=>({passage_id:x.passage_id,entry_id:x.entry_id,mask_eligible:jesusEligible(x)}));
+ report.details.jesus_eligibility={checked:eligibleResults.length,all_eligible:eligibleResults.every(x=>x.mask_eligible),rows:eligibleResults};
+ report.checks.jesus_filter_mask_correct=eligibleResults.length>0&&eligibleResults.every(x=>x.mask_eligible);
+ 
+ // Separate falsification challenge: a row excluded by the mask must be rejected
+ // by both retrieval lanes, even if it contains the query terms and scores highly.
+ const Core=(await import('../search_semantic_v3_core_r4.js')).default||globalThis.LDCSearchSemanticV3R4;
+ const Hybrid=(await import('../search_semantic_hybrid_r6.js')).default||globalThis.LDCSemanticHybridR6;
+ const toyPassages=[
+   {passage_id:'toy-allowed',entry_id:'toy-a',mode:'enriched',volume:1,text:'amour lumière promesse',source_spans:[]},
+   {passage_id:'toy-rejected',entry_id:'toy-b',mode:'enriched',volume:1,text:'amour lumière promesse',source_spans:[]}
+ ];
+ const toyMask=Uint8Array.from([1]);
+ const toyDense=Core.createIndex({passages:toyPassages,dim:2,vectors:Float32Array.from([1,0,1,0]),jesusBits:toyMask});
+ const toyBm25=Hybrid.buildBm25(toyPassages,toyMask);
+ const d0=toyDense.denseSearch(Float32Array.from([1,0]),{sourceMode:'enriched',candidatePool:2,maxResults:2});
+ const d1=toyDense.denseSearch(Float32Array.from([1,0]),{sourceMode:'enriched',candidatePool:2,maxResults:2,jesus:true});
+ const b0=Hybrid.bm25Search(toyBm25,'amour lumière',{sourceMode:'enriched',maxCandidates:2});
+ const b1=Hybrid.bm25Search(toyBm25,'amour lumière',{sourceMode:'enriched',maxCandidates:2,jesus:true});
+ const ids=x=>x.map(r=>r.entry_id);
+ report.details.jesus_negative_control={dense_unfiltered:ids(d0.dense_candidates),dense_filtered:ids(d1.dense_candidates),bm25_unfiltered:ids(b0.results),bm25_filtered:ids(b1.results)};
+ report.checks.jesus_filter_excludes_negative_control=d0.dense_candidates.length===2&&d1.dense_candidates.length===1&&d1.dense_candidates[0].entry_id==='toy-a'&&b0.results.length===2&&b1.results.length===1&&b1.results[0].entry_id==='toy-a';
+ 
+
+
+ // Prove the browser error gate remains sensitive to genuine page console errors,
+ // while keeping the deliberate challenge off the qualified runtime page.
+ const challenge=await ctx.newPage(),seen=[];
+ challenge.on('console',m=>{if(m.type()==='error')seen.push('console:'+m.text())});
+ challenge.on('pageerror',e=>seen.push('page:'+String(e)));
+ await challenge.evaluate(()=>{console.error('QA_INTENTIONAL_ERROR_SENTINEL');setTimeout(()=>{throw Error('QA_INTENTIONAL_PAGEERROR_SENTINEL')},0)});
+ await challenge.waitForFunction(()=>false,null,{timeout:300}).catch(()=>{});
+ report.details.browser_error_detector_control={console:seen.some(x=>x.includes('QA_INTENTIONAL_ERROR_SENTINEL')),pageerror:seen.some(x=>x.includes('QA_INTENTIONAL_PAGEERROR_SENTINEL'))};
+ report.checks.browser_error_detector_sensitive=report.details.browser_error_detector_control.console&&report.details.browser_error_detector_control.pageerror;
+ await challenge.close();
  const finalStatus=await page.evaluate(()=>LDCPLSV16Runtime.status());
  report.details.final_status=finalStatus;report.details.browser_errors=errors;
  report.checks.no_browser_errors=errors.length===0;
