@@ -1,0 +1,36 @@
+name: LDC v142.19 R22B independent synthetic prior-version update diagnostic
+on:
+  push:
+    branches: [ldc-v142-19-reader-root-height-fix-wip-20261008]
+    paths:
+      - '.github/workflows/ldc-v14219-r22b-local-upgrade-diagnostic.yml'
+      - '.github/ldc-v14219-r22b-upgrade-diagnostic.mjs'
+permissions: {contents: read}
+jobs:
+  synthetic-serviceworker-upgrade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Install actual Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          command -v google-chrome
+      - name: Start throwaway local fixed-origin server for synthetic source versions
+        run: |
+          nohup python3 -m http.server 8998 --bind 127.0.0.1 --directory /tmp/ldc-r22-served >/tmp/ldc-r22b.log 2>&1 &
+          sleep 2
+      - name: Try predecessor v142.18 to successor update, record boot and SW evidence even on FAIL
+        continue-on-error: true
+        run: node .github/ldc-v14219-r22b-upgrade-diagnostic.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: R22B-old-to-new-root-synthetic-boot-lifecycle-diagnostics
+          path: |
+            LDC_v142.19_R22B_SYNTHETIC_UPGRADE_DIAGNOSTIC.json
+            R22B_*.png
+          retention-days: 14
+      - name: Preserve explicit FAIL as failing workflow, no release inference
+        run: python3 -c "import json;r=json.load(open('LDC_v142.19_R22B_SYNTHETIC_UPGRADE_DIAGNOSTIC.json'));assert r['status']=='PASS_SCOPED_LOCAL_SYNTHETIC_UPGRADE_WITH_LEGACY_ROUTE_RISK',r['status']"
