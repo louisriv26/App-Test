@@ -1,8 +1,8 @@
 {
-  "schema": "ldc-v14218-r9-cross-tab-transaction-and-stream-backup-browser-v1",
+  "schema": "ldc-v14218-r9-cross-tab-transaction-and-stream-backup-browser-v2-valid-paragraph-fixtures",
   "exact_zip_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
   "exact_source_commit": "7c292d6221bb350fac3aeaa83750b8784706d45c",
-  "status": "FAIL",
+  "status": "PASS_SCOPED_REAL_BROWSER_P1_INTEGRITY_ONLY",
   "checks": {
     "exact_archive_source_and_same_origin_fresh_multi_tab": true,
     "atomic_parent_and_two_children_created": true,
@@ -13,7 +13,10 @@
     "atomic_parent_deletion_and_orphan_guard": true,
     "malformed_undo_snapshot_rejected": true,
     "complete_atomic_collection_undo_restores_children": true,
-    "canonical_streaming_backup_contains_records_and_terminal_crc": true
+    "canonical_streaming_backup_contains_records_and_terminal_crc": true,
+    "normal_streaming_backup_stage_validation_succeeds_without_commit": true,
+    "backup_validation_does_not_mutate_current_personal_state": true,
+    "no_unhandled_browser_page_errors": true
   },
   "details": {
     "exact_archive_source_and_same_origin_fresh_multi_tab": [
@@ -51,32 +54,38 @@
       "first": {
         "status": "ADDED",
         "record": {
-          "entry_id": "ldc_t01_sec001",
+          "entry_id": "ldc_t01_editorial_explications_note001",
+          "para_id": "ldc_t01_editorial_explications_note001_p001",
+          "volume": 1,
+          "stable_ref": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE001.P001",
           "note": "base",
-          "ts": 1791450890162,
+          "ts": 1791451044508,
           "col_id": 1,
           "order": 1,
           "id": 1
         },
         "parent": {
           "name": "R9 synthetic fixture",
-          "ts": 1791450890155,
+          "ts": 1791451044507,
           "id": 1
         }
       },
       "second": {
         "status": "ADDED",
         "record": {
-          "entry_id": "ldc_t01_sec002",
+          "entry_id": "ldc_t01_editorial_explications_note002",
+          "para_id": "ldc_t01_editorial_explications_note002_p001",
+          "volume": 1,
+          "stable_ref": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE002.P001",
           "note": "note 2",
-          "ts": 1791450890165,
+          "ts": 1791451044511,
           "col_id": 1,
           "order": 2,
           "id": 2
         },
         "parent": {
           "name": "R9 synthetic fixture",
-          "ts": 1791450890155,
+          "ts": 1791451044507,
           "id": 1
         }
       }
@@ -141,16 +150,49 @@
     },
     "canonical_streaming_backup_contains_records_and_terminal_crc": {
       "parts": 1,
-      "size": 7459,
-      "records": 27,
+      "size": 8547,
+      "records": 28,
       "header": "{\"type\":\"header\",\"schema\":\"LDC_USER_BACKUP_STREAM_V1\",\"envelope_schema\":\"ldc-user-data-envelope\",\"envelope_version\":4,\"app_version\":\"v2.19.142.18-R1B-READER-SEM",
-      "tail": "{\"type\":\"trailer\",\"schema\":\"LDC_USER_BACKUP_STREAM_V1\",\"complete\":true,\"counts\":{\"reading_pos\":0,\"highlights\":0,\"notes\":0,\"favorites\":0,\"collections\":1,\"col_items\":3,\"settings\":23,",
+      "tail": "{\"type\":\"trailer\",\"schema\":\"LDC_USER_BACKUP_STREAM_V1\",\"complete\":true,\"counts\":{\"reading_pos\":0,\"highlights\":0,\"notes\":0,\"favorites\":0,\"collections\":1,\"col_items\":3,\"settings\":24,",
       "goodTrailer": true
-    }
+    },
+    "normal_streaming_backup_stage_validation_succeeds_without_commit": {
+      "errors": [],
+      "warnings": [],
+      "valid": true,
+      "parsed_counts": {
+        "reading_pos": 0,
+        "highlights": 0,
+        "notes": 0,
+        "favorites": 0,
+        "collections": 1,
+        "col_items": 3,
+        "settings": 24,
+        "read_entries": 0
+      },
+      "records": 28
+    },
+    "backup_validation_does_not_mutate_current_personal_state": {
+      "item": {
+        "entry_id": "ldc_t01_editorial_explications_note001",
+        "para_id": "ldc_t01_editorial_explications_note001_p001",
+        "volume": 1,
+        "stable_ref": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE001.P001",
+        "note": "fresh-edit-B",
+        "ts": 1791451044508,
+        "col_id": 1,
+        "order": 2,
+        "id": 1
+      },
+      "parent": {
+        "name": "R9 fresh B",
+        "ts": 1791451044507,
+        "id": 1
+      }
+    },
+    "no_unhandled_browser_page_errors": []
   },
-  "errors": [
-    "page.evaluate: Error: Un passage de collection n’a pas de référence stable entrée/paragraphe.\n    at http://127.0.0.1:8988/:9186:1582\n    at consume (http://127.0.0.1:8988/:9166:570)\n    at async forEachBackupFileLine (http://127.0.0.1:8988/:9166:1000)\n    at async parseBackupStreamToStage (http://127.0.0.1:8988/:9186:773)\n    at async eval (eval at evaluate (:291:30), <anonymous>:4:16)\n    at async <anonymous>:317:30\n    at /home/runner/work/App-Test/App-Test/.github/ldc-v14218-r9-p1-concurrency-backup-qa.mjs:65:22"
-  ],
+  "errors": [],
   "scope": "Fresh, disposable local Chromium origin only. Full actual frozen ZIP. No live app or device.",
   "hosted_e16_e19": "OPEN",
   "physical_gate": "OPEN",
