@@ -1,0 +1,82 @@
+{
+  "schema": "ldc-v14218-r7-nested-qa-workflow-diagnostic-v1",
+  "status": "DIAGNOSTICS_ONLY_NOT_A_QA_PASS",
+  "deploy_authority": "NONE",
+  "runs": [
+    {
+      "id": 37745394424,
+      "head_sha": "a38c963ce30de9334ae3d2bdb87d7c34b9bf6bff",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/louisriv26/App-Test/actions/runs/37745394424",
+      "steps": [
+        {
+          "job": "no-deploy-exact-frozen-archive-nested-test",
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "job": "no-deploy-exact-frozen-archive-nested-test",
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "job": "no-deploy-exact-frozen-archive-nested-test",
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "job": "no-deploy-exact-frozen-archive-nested-test",
+          "name": "Build EXACT 125.6MB archived application byte identity (no mutation)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "job": "no-deploy-exact-frozen-archive-nested-test",
+          "name": "Real Chromium architecture/scope/storage/semantic/rotation/offline tests in nested exact archive",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "job": "no-deploy-exact-frozen-archive-nested-test",
+          "name": "Preserve failure evidence and report on WIP only",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "job": "no-deploy-exact-frozen-archive-nested-test",
+          "name": "Run actions/upload-artifact@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "job": "no-deploy-exact-frozen-archive-nested-test",
+          "name": "Fail closed on any test, never close hosted or physical gates",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "job": "no-deploy-exact-frozen-archive-nested-test",
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "job": "no-deploy-exact-frozen-archive-nested-test",
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "job": "no-deploy-exact-frozen-archive-nested-test",
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}
