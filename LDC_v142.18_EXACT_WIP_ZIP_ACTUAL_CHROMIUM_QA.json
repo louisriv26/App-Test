@@ -1,0 +1,58 @@
+{
+  "schema": "ldc-v14218-exact-archived-zip-runtime-real-chrome-v1",
+  "artifact_app_zip_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
+  "source_built_commit": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+  "status": "PASS_EXACT_PACKAGED_ZIP_ACTUAL_CHROMIUM",
+  "checks": {
+    "exact_archived_zip_matches_frozen_sha": true,
+    "source_commit_in_package_manifest": true,
+    "package_manifest_is_WIP_no_deploy": true,
+    "fresh_exact_zip_boots_and_lazy_model": true,
+    "exact_zip_sw_installs_coherent_revision": true,
+    "exact_zip_real_semantic_model_working": true,
+    "exact_zip_search_opens_correct_reader": true,
+    "exact_zip_Reader_Return_reinstates_semantic_results": true,
+    "no_page_or_404_errors": true
+  },
+  "details": {
+    "exact_archived_zip_matches_frozen_sha": {
+      "actual": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
+      "expected": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb"
+    },
+    "source_commit_in_package_manifest": {
+      "source": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+      "entries": 273
+    },
+    "fresh_exact_zip_boots_and_lazy_model": {
+      "public": "142.18",
+      "modelLoaded": false,
+      "db": "ldc_user_v1"
+    },
+    "exact_zip_sw_installs_coherent_revision": {
+      "active": true,
+      "scope": "http://127.0.0.1:8981/",
+      "shell": [
+        "ldc-le-livre-du-ciel-379365f7-shell-v2.19.142.18-R1B-reader-semantic-integration-wip"
+      ]
+    },
+    "exact_zip_real_semantic_model_working": {
+      "first": "ldc_t09_1909_11_02_e001",
+      "count": 20,
+      "confidence": "possible"
+    },
+    "exact_zip_search_opens_correct_reader": {
+      "entry": "ldc_t09_1909_11_02_e001",
+      "body": 567,
+      "height": 570
+    },
+    "exact_zip_Reader_Return_reinstates_semantic_results": {
+      "cards": 20,
+      "queryMatches": true
+    },
+    "no_page_or_404_errors": []
+  },
+  "errors": [],
+  "scopes": "EXACT UNRELEASED ZIP EXTRACTED TO FRESH LOCALHOST CHROMIUM; NOT HOSTED, NOT IOS",
+  "app_test_deployment_authority": "NONE",
+  "production_deployment_authority": "NONE"
+}
