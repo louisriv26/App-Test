@@ -1,7 +1,7 @@
 {
   "schema": "ldc-v14218-combined-dom-adversarial-r1",
   "identity": "v14218-ADVERSARIAL-DOM-R1",
-  "status": "FAIL",
+  "status": "PASS",
   "checks": {
     "lazy_semantic_initialization": true,
     "reader_ownership_present": true,
@@ -15,7 +15,11 @@
     "reader_aflp_correct_entry": true,
     "reader_aflp_target": true,
     "reader_aflp_usable": true,
-    "reader_additions_target": false,
+    "reader_additions_correct_entry": true,
+    "reader_additions_target": true,
+    "reader_additions_usable": true,
+    "additions_temporary_enriched_reader": true,
+    "additions_mode_restored_after_back": true,
     "abstain_NEG-DEV-01": true,
     "abstain_NEG-DEV-02": true,
     "abstain_NEG-DEV-03": true
@@ -116,6 +120,33 @@
       "root_scroll": 0,
       "intent": "CONSULTATION"
     },
+    "reader_additions": {
+      "mode": "additions",
+      "supplementMode": "enriched",
+      "entry_id": "ldc_t09_1909_11_02_e001",
+      "expected_entry": "ldc_t09_1909_11_02_e001",
+      "para_id": "ldc_t09_1909_11_02_e001_p001",
+      "para_present": true,
+      "paragraph_visible": true,
+      "scroller_height": 570,
+      "body_length": 567,
+      "root_scroll": 0,
+      "intent": "CONSULTATION"
+    },
+    "reader_additions_target": {
+      "mode": "additions",
+      "supplementMode": "enriched",
+      "entry_id": "ldc_t09_1909_11_02_e001",
+      "expected_entry": "ldc_t09_1909_11_02_e001",
+      "para_id": "ldc_t09_1909_11_02_e001_p001",
+      "para_present": true,
+      "paragraph_visible": true,
+      "scroller_height": 570,
+      "body_length": 567,
+      "root_scroll": 0,
+      "intent": "CONSULTATION"
+    },
+    "additions_mode_restored_after_back": "additions",
     "NEG-DEV-01": {
       "state": "abstain",
       "count": 0
@@ -129,17 +160,15 @@
       "count": 0
     },
     "memory_end": {
-      "jsHeap": 173788665,
-      "total": 178953365,
+      "jsHeap": 572346014,
+      "total": 656556250,
       "runtime": null
     }
   },
-  "risks": [
-    "MODE_additions:TimeoutError: page.waitForFunction: Timeout 30000ms exceeded."
-  ],
+  "risks": [],
   "errors": [],
   "scope": "LOCAL_CHROMIUM_ONLY; no device/hosted/release claim",
-  "tested_source_commit": "5409e6536a6cdc68d5e2510fa89a08dcd3e7fe1f",
+  "tested_source_commit": "4ac8bf9afac57c8de03847467837a62b0ae7bffc",
   "hosted_origin_e16_e19": "OPEN",
   "physical_iphone_ipad_pwa": "OPEN",
   "deployment_authority": "NONE"
