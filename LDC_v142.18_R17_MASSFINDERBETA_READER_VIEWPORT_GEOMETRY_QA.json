@@ -1,0 +1,369 @@
+{
+  "schema": "ldc-v14218-r17-adversarial-actual-hosted-reader-viewport-comparison-v1",
+  "tested_at": "2026-10-08T11:04:01.032Z",
+  "app": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/",
+  "status": "FAIL_GEOMETRY_OR_QA",
+  "checks": {
+    "webkit_mobile_reader_content_visible_both_orientations": true,
+    "webkit_mobile_reader_scroll_container_within_viewport": false,
+    "webkit_mobile_reader_no_js_errors": true,
+    "webkit_desktop_viewport_reader_content_visible_both_orientations": true,
+    "webkit_desktop_viewport_reader_scroll_container_within_viewport": false,
+    "webkit_desktop_viewport_reader_no_js_errors": true,
+    "chromium_mobile_scenario_completed": false
+  },
+  "details": {
+    "webkit_mobile": {
+      "portrait": {
+        "viewport": {
+          "innerWidth": 390,
+          "innerHeight": 844,
+          "docClientH": 844,
+          "visualH": 844,
+          "windowOuterH": 844
+        },
+        "active": "screen-reader",
+        "entry": "ldc_t01_sec003",
+        "readerChars": 1303,
+        "layout": {
+          "html": {
+            "top": 0,
+            "bottom": 844,
+            "height": 844,
+            "clientHeight": 844,
+            "scrollHeight": 1782,
+            "overflowY": "auto",
+            "display": "block",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "body": {
+            "top": 0,
+            "bottom": 1782,
+            "height": 1782,
+            "clientHeight": 1782,
+            "scrollHeight": 1782,
+            "overflowY": "hidden",
+            "display": "flex",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "-webkit-fill-available",
+            "maxHeight": "none"
+          },
+          "#screen-reader": {
+            "top": 0,
+            "bottom": 1724,
+            "height": 1724,
+            "clientHeight": 1724,
+            "scrollHeight": 1724,
+            "overflowY": "visible",
+            "display": "flex",
+            "flex": "1 1 0%",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "#reader-scroll": {
+            "top": 124,
+            "bottom": 1636,
+            "height": 1512,
+            "clientHeight": 1512,
+            "scrollHeight": 1512,
+            "overflowY": "auto",
+            "display": "block",
+            "flex": "1 1 0%",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "#reader-body": {
+            "top": 299,
+            "bottom": 1636,
+            "height": 1337,
+            "clientHeight": 1337,
+            "scrollHeight": 1337,
+            "overflowY": "visible",
+            "display": "block",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          }
+        },
+        "scrollMoved": false,
+        "bottomAtViewport": "<button class=\"nav-item\" onclick=\"goEspace()\" id=\"nav-espace\" aria-label=\"Mon Espace\">\n    <i class=\"ti ti-bookmark\" aria-hidden=\"true\"></i><span>Mon Espace</span>\n  </button>"
+      },
+      "landscape": {
+        "viewport": {
+          "innerWidth": 844,
+          "innerHeight": 390,
+          "docClientH": 390,
+          "visualH": 390,
+          "windowOuterH": 390
+        },
+        "active": "screen-reader",
+        "entry": "ldc_t01_sec003",
+        "readerChars": 1303,
+        "layout": {
+          "html": {
+            "top": 0,
+            "bottom": 390,
+            "height": 390,
+            "clientHeight": 390,
+            "scrollHeight": 1339,
+            "overflowY": "auto",
+            "display": "block",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "body": {
+            "top": 0,
+            "bottom": 1339,
+            "height": 1339,
+            "clientHeight": 1339,
+            "scrollHeight": 1339,
+            "overflowY": "hidden",
+            "display": "flex",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "-webkit-fill-available",
+            "maxHeight": "none"
+          },
+          "#screen-reader": {
+            "top": 0,
+            "bottom": 1281,
+            "height": 1281,
+            "clientHeight": 1281,
+            "scrollHeight": 1281,
+            "overflowY": "visible",
+            "display": "flex",
+            "flex": "1 1 0%",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "#reader-scroll": {
+            "top": 124,
+            "bottom": 1204,
+            "height": 1080,
+            "clientHeight": 1080,
+            "scrollHeight": 1080,
+            "overflowY": "auto",
+            "display": "block",
+            "flex": "1 1 0%",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "#reader-body": {
+            "top": 322,
+            "bottom": 1204,
+            "height": 882,
+            "clientHeight": 882,
+            "scrollHeight": 882,
+            "overflowY": "visible",
+            "display": "block",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          }
+        },
+        "scrollMoved": false,
+        "bottomAtViewport": "<button class=\"nav-item\" onclick=\"goEspace()\" id=\"nav-espace\" aria-label=\"Mon Espace\">\n    <i class=\"ti ti-bookmark\" aria-hidden=\"true\"></i><span>Mon Espace</span>\n  </button>"
+      },
+      "pageErrors": [],
+      "badPortrait": true,
+      "badLandscape": true
+    },
+    "webkit_mobile_reader_scroll_container_within_viewport": {
+      "portraitExcess": 792,
+      "landscapeExcess": 814
+    },
+    "webkit_mobile_reader_no_js_errors": [],
+    "webkit_desktop_viewport": {
+      "portrait": {
+        "viewport": {
+          "innerWidth": 390,
+          "innerHeight": 844,
+          "docClientH": 844,
+          "visualH": 844,
+          "windowOuterH": 844
+        },
+        "active": "screen-reader",
+        "entry": "ldc_t01_sec003",
+        "readerChars": 1303,
+        "layout": {
+          "html": {
+            "top": 0,
+            "bottom": 844,
+            "height": 844,
+            "clientHeight": 844,
+            "scrollHeight": 1784,
+            "overflowY": "auto",
+            "display": "block",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "body": {
+            "top": 0,
+            "bottom": 1784,
+            "height": 1784,
+            "clientHeight": 1784,
+            "scrollHeight": 1784,
+            "overflowY": "hidden",
+            "display": "flex",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "-webkit-fill-available",
+            "maxHeight": "none"
+          },
+          "#screen-reader": {
+            "top": 0,
+            "bottom": 1726,
+            "height": 1726,
+            "clientHeight": 1726,
+            "scrollHeight": 1726,
+            "overflowY": "visible",
+            "display": "flex",
+            "flex": "1 1 0%",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "#reader-scroll": {
+            "top": 125,
+            "bottom": 1637,
+            "height": 1512,
+            "clientHeight": 1512,
+            "scrollHeight": 1512,
+            "overflowY": "auto",
+            "display": "block",
+            "flex": "1 1 0%",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "#reader-body": {
+            "top": 300,
+            "bottom": 1637,
+            "height": 1337,
+            "clientHeight": 1337,
+            "scrollHeight": 1337,
+            "overflowY": "visible",
+            "display": "block",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          }
+        },
+        "scrollMoved": false,
+        "bottomAtViewport": "<button class=\"nav-item\" onclick=\"goEspace()\" id=\"nav-espace\" aria-label=\"Mon Espace\">\n    <i class=\"ti ti-bookmark\" aria-hidden=\"true\"></i><span>Mon Espace</span>\n  </button>"
+      },
+      "landscape": {
+        "viewport": {
+          "innerWidth": 844,
+          "innerHeight": 390,
+          "docClientH": 390,
+          "visualH": 390,
+          "windowOuterH": 390
+        },
+        "active": "screen-reader",
+        "entry": "ldc_t01_sec003",
+        "readerChars": 1303,
+        "layout": {
+          "html": {
+            "top": 0,
+            "bottom": 390,
+            "height": 390,
+            "clientHeight": 390,
+            "scrollHeight": 1340,
+            "overflowY": "auto",
+            "display": "block",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "body": {
+            "top": 0,
+            "bottom": 1340,
+            "height": 1340,
+            "clientHeight": 1340,
+            "scrollHeight": 1340,
+            "overflowY": "hidden",
+            "display": "flex",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "-webkit-fill-available",
+            "maxHeight": "none"
+          },
+          "#screen-reader": {
+            "top": 0,
+            "bottom": 1282,
+            "height": 1282,
+            "clientHeight": 1282,
+            "scrollHeight": 1282,
+            "overflowY": "visible",
+            "display": "flex",
+            "flex": "1 1 0%",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "#reader-scroll": {
+            "top": 125,
+            "bottom": 1205,
+            "height": 1080,
+            "clientHeight": 1080,
+            "scrollHeight": 1080,
+            "overflowY": "auto",
+            "display": "block",
+            "flex": "1 1 0%",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          },
+          "#reader-body": {
+            "top": 323,
+            "bottom": 1205,
+            "height": 882,
+            "clientHeight": 882,
+            "scrollHeight": 882,
+            "overflowY": "visible",
+            "display": "block",
+            "flex": "0 1 auto",
+            "position": "static",
+            "minHeight": "0px",
+            "maxHeight": "none"
+          }
+        },
+        "scrollMoved": false,
+        "bottomAtViewport": "<button class=\"nav-item\" onclick=\"goEspace()\" id=\"nav-espace\" aria-label=\"Mon Espace\">\n    <i class=\"ti ti-bookmark\" aria-hidden=\"true\"></i><span>Mon Espace</span>\n  </button>"
+      },
+      "pageErrors": [],
+      "badPortrait": true,
+      "badLandscape": true
+    },
+    "webkit_desktop_viewport_reader_scroll_container_within_viewport": {
+      "portraitExcess": 793,
+      "landscapeExcess": 815
+    },
+    "webkit_desktop_viewport_reader_no_js_errors": []
+  },
+  "errors": [
+    "chromium_mobile: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1187/chrome-linux/headless_shell\n╔═════════════════════════════════════════════════════════════════════════╗\n║ Looks like Playwright Test or Playwright was just installed or updated. ║\n║ Please run the following command to download new browsers:              ║\n║                                                                         ║\n║     npx playwright install                                              ║\n║                                                                         ║\n║ <3 Playwright Team                                                      ║\n╚═════════════════════════════════════════════════════════════════════════╝\n    at probe (/home/runner/work/App-Test/App-Test/.github/ldc-v14218-r17-hosted-viewport-geometry-qa.mjs:12:24)\n    at /home/runner/work/App-Test/App-Test/.github/ldc-v14218-r17-hosted-viewport-geometry-qa.mjs:48:8"
+  ],
+  "source": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+  "scope": "Actual live hosted app. Linux WebKit isMobile true and false; Chromium reference. No real iOS device or app source changes.",
+  "mutation_authority": "NONE",
+  "release_authority": "NONE",
+  "ios_gate": "OPEN"
+}
