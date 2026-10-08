@@ -1,0 +1,30 @@
+{
+  "schema": "ldc-142.17-source-qa-v1",
+  "date": "2026-10-08",
+  "branch": "ldc-v142.17-reader-transaction-repair-candidate",
+  "predecessor": "d1970a527bf94325c78c2c396adf4987d9001a3e",
+  "runtime_files_changed": [
+    "index.html",
+    "sw.js",
+    "version.json",
+    "offline_manifest.json"
+  ],
+  "gates": {
+    "identity": "PASS: HTML, worker cache names/compatibility, offline and version metadata agree at 142.17",
+    "javascript_syntax": "PASS: main inline script and worker parse",
+    "protected_assets": "PASS: 308 baseline Git blobs unchanged; 204 offline assets and content binding unchanged",
+    "scroll_target_regressions": "14/14 PASS: extracted exact code with deterministic callback scheduling",
+    "semantic_and_layout_regressions": "6/6 PASS: extracted exact code with controlled callback scheduling",
+    "browser": "OPEN: current candidate not hosted",
+    "physical_ios": "OPEN: real iPhone and iPad required",
+    "pwa": "OPEN",
+    "voiceover": "OPEN",
+    "production": "BLOCKED"
+  },
+  "limitations": "Mocks validate narrow asynchronous causal paths, not complete Safari/WebKit behavior or live app state. Prior reports must not substitute for current hosted/device testing.",
+  "authority": {
+    "mutation": "BOUNDED_CANDIDATE_IMPLEMENTATION",
+    "deployment": "NONE",
+    "production": false
+  }
+}
