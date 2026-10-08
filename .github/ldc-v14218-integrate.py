@@ -122,8 +122,8 @@ def apply():
             subprocess.check_call(["node","--check",path])
     import re
     html=pathlib.Path("index.html").read_text()
-    for i,match in enumerate(re.finditer(r"<script(?![^>]*\\bsrc=)([^>]*)>([\\s\\S]*?)</script>",html,re.I)):
-        if "application/json" in match.group(1).lower():continue
+    for i,match in enumerate(re.finditer(r"<script([^>]*)>(.*?)</script>",html,re.I|re.S)):
+        if "src=" in match.group(1).lower() or "application/json" in match.group(1).lower():continue
         data=pathlib.Path("/tmp/ldc-v14218-inline-%d.js"%i)
         data.write_text(match.group(2))
         subprocess.check_call(["node","--check",str(data)])
