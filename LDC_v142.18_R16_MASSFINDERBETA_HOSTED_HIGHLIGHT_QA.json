@@ -1,15 +1,184 @@
 {
-  "schema": "ldc-v14218-r16-hosted-highlight-Reader-MonEspace-layout-QA-v1",
-  "status": "FAIL",
+  "schema": "ldc-v14218-r16-hosted-highlight-Reader-MonEspace-layout-QA-v2-editorial-aware",
+  "status": "PASS_SCOPED_HOSTED_HIGHLIGHT_MON_ESPACE",
   "url": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/",
-  "tested_at": "2026-10-08T10:33:53.182Z",
+  "tested_at": "2026-10-08T10:37:46.268Z",
   "checks": {
-    "actual_hosted_candidate_boot_14218": true
+    "actual_hosted_candidate_boot_14218": true,
+    "lexical_search_has_non_editorial_Reader_result": true,
+    "hosted_canonical_highlight_saved_in_actual_user_database": true,
+    "hosted_new_highlight_painted_without_Reader_jump": true,
+    "hosted_new_highlight_findable_under_Mon_Espace": true,
+    "hosted_Mon_Espace_highlight_link_opens_correct_nonblank_reader": true,
+    "hosted_Mon_Espace_link_reader_scroll_not_collapsed_half_screen": true,
+    "hosted_highlight_persists_after_browser_reopen": true,
+    "hosted_highlight_no_unhandled_errors": true
   },
-  "details": {},
-  "errors": [
-    "page.waitForFunction: Timeout 90000ms exceeded.\n    at /home/runner/work/App-Test/App-Test/.github/ldc-v14218-r16-hosted-highlight-qa.mjs:19:10"
-  ],
+  "details": {
+    "word_search_initial_cards": [
+      {
+        "title": "Explication éditoriale — note 1",
+        "key": "ldc_t01_editorial_explications_note001_p001",
+        "excerpt": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE001.P001 · TOME 1\nExplication édito"
+      },
+      {
+        "title": "Explication éditoriale — note 12",
+        "key": "ldc_t01_editorial_explications_note012_p001",
+        "excerpt": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE012.P001 · TOME 1\nExplication édito"
+      },
+      {
+        "title": "Explication éditoriale — note 14",
+        "key": "ldc_t01_editorial_explications_note014_p001",
+        "excerpt": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE014.P001 · TOME 1\nExplication édito"
+      },
+      {
+        "title": "Jésus agit dans l'âme de Luisa, la détachant du monde extérieur.",
+        "key": "ldc_t01_sec003_p005",
+        "excerpt": "LDC.T01.SEC003.P005 · TOME 1\nJésus agit dans l'âme de Luisa, la détach"
+      },
+      {
+        "title": "Jésus agit dans l'âme de Luisa, la détachant du monde extérieur.",
+        "key": "ldc_t01_sec003_p006",
+        "excerpt": "LDC.T01.SEC003.P006 · TOME 1\nJésus agit dans l'âme de Luisa, la détach"
+      },
+      {
+        "title": "Jésus continue son travail dans l'âme de Luisa, la dégageant d'elle- même et purifiant son cœur.",
+        "key": "ldc_t01_sec007_p004",
+        "excerpt": "LDC.T01.SEC007.P004 · TOME 1\nJésus continue son travail dans l'âme de "
+      },
+      {
+        "title": "La créature doit garder son regard fixé sur Jésus, et n'agir qu'avec Lui et que pour Lui.",
+        "key": "ldc_t01_sec011_p005",
+        "excerpt": "LDC.T01.SEC011.P005 · TOME 1\nLa créature doit garder son regard fixé s"
+      },
+      {
+        "title": "L'âme doit totalement mourir à elle-même. Elle doit mortifier sa volonté dans tous ses choix.",
+        "key": "ldc_t01_sec013_p002",
+        "excerpt": "LDC.T01.SEC013.P002 · TOME 1\nL'âme doit totalement mourir à elle-même."
+      }
+    ],
+    "lexical_search_has_non_editorial_Reader_result": [
+      {
+        "title": "Explication éditoriale — note 1",
+        "key": "ldc_t01_editorial_explications_note001_p001",
+        "excerpt": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE001.P001 · TOME 1\nExplication édito"
+      },
+      {
+        "title": "Explication éditoriale — note 12",
+        "key": "ldc_t01_editorial_explications_note012_p001",
+        "excerpt": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE012.P001 · TOME 1\nExplication édito"
+      },
+      {
+        "title": "Explication éditoriale — note 14",
+        "key": "ldc_t01_editorial_explications_note014_p001",
+        "excerpt": "LDC.T01.EDITORIAL.EXPLICATIONS.NOTE014.P001 · TOME 1\nExplication édito"
+      },
+      {
+        "title": "Jésus agit dans l'âme de Luisa, la détachant du monde extérieur.",
+        "key": "ldc_t01_sec003_p005",
+        "excerpt": "LDC.T01.SEC003.P005 · TOME 1\nJésus agit dans l'âme de Luisa, la détach"
+      },
+      {
+        "title": "Jésus agit dans l'âme de Luisa, la détachant du monde extérieur.",
+        "key": "ldc_t01_sec003_p006",
+        "excerpt": "LDC.T01.SEC003.P006 · TOME 1\nJésus agit dans l'âme de Luisa, la détach"
+      },
+      {
+        "title": "Jésus continue son travail dans l'âme de Luisa, la dégageant d'elle- même et purifiant son cœur.",
+        "key": "ldc_t01_sec007_p004",
+        "excerpt": "LDC.T01.SEC007.P004 · TOME 1\nJésus continue son travail dans l'âme de "
+      },
+      {
+        "title": "La créature doit garder son regard fixé sur Jésus, et n'agir qu'avec Lui et que pour Lui.",
+        "key": "ldc_t01_sec011_p005",
+        "excerpt": "LDC.T01.SEC011.P005 · TOME 1\nLa créature doit garder son regard fixé s"
+      },
+      {
+        "title": "L'âme doit totalement mourir à elle-même. Elle doit mortifier sa volonté dans tous ses choix.",
+        "key": "ldc_t01_sec013_p002",
+        "excerpt": "LDC.T01.SEC013.P002 · TOME 1\nL'âme doit totalement mourir à elle-même."
+      }
+    ],
+    "hosted_canonical_highlight_saved_in_actual_user_database": {
+      "entryId": "ldc_t01_sec003",
+      "para": "ldc_t01_sec003_p001",
+      "text": "Puis mon Bon et Divin Maî",
+      "start": 0,
+      "end": 25,
+      "length": 187,
+      "color": "yellow",
+      "canonicalStart": 0,
+      "canonicalEnd": 187,
+      "matchingFragment": true,
+      "ok": true,
+      "rows": [
+        {
+          "id": 1,
+          "entry": "ldc_t01_sec003",
+          "text": "Puis mon Bon et Divin Maî",
+          "para": "ldc_t01_sec003_p001",
+          "color": "yellow"
+        }
+      ],
+      "paintedMarks": 1,
+      "scrollAfter": 844,
+      "scrollBefore": 844
+    },
+    "hosted_new_highlight_painted_without_Reader_jump": {
+      "marks": 1,
+      "before": 844,
+      "after": 844
+    },
+    "hosted_new_highlight_findable_under_Mon_Espace": {
+      "count": 1,
+      "tab": "highlights",
+      "rowText": "LDC.T01.SEC003\nPuis mon Bon et Divin Maî\n08/10/2026"
+    },
+    "hosted_Mon_Espace_highlight_link_opens_correct_nonblank_reader": {
+      "entry": "ldc_t01_sec003",
+      "characters": 1308,
+      "highlightMarks": 1,
+      "viewportH": 844,
+      "reader": {
+        "top": 0,
+        "bottom": 786,
+        "height": 786
+      },
+      "scroll": {
+        "top": 125,
+        "bottom": 695.40625,
+        "height": 570.40625
+      },
+      "cssOverflow": "auto",
+      "scrollHeight": 1568,
+      "clientHeight": 570
+    },
+    "hosted_Mon_Espace_link_reader_scroll_not_collapsed_half_screen": {
+      "entry": "ldc_t01_sec003",
+      "characters": 1308,
+      "highlightMarks": 1,
+      "viewportH": 844,
+      "reader": {
+        "top": 0,
+        "bottom": 786,
+        "height": 786
+      },
+      "scroll": {
+        "top": 125,
+        "bottom": 695.40625,
+        "height": 570.40625
+      },
+      "cssOverflow": "auto",
+      "scrollHeight": 1568,
+      "clientHeight": 570
+    },
+    "hosted_highlight_persists_after_browser_reopen": {
+      "saved": 1,
+      "entry": "ldc_t01_sec003"
+    },
+    "hosted_highlight_no_unhandled_errors": []
+  },
+  "errors": [],
   "warnings": [],
   "scope": "Fresh disposable real Chromium hosted site, canonical synthetic highlight via app persistence function; NOT native iOS text-selection equivalence",
   "source": "7c292d6221bb350fac3aeaa83750b8784706d45c",
