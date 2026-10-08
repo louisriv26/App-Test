@@ -1,0 +1,66 @@
+import fs from 'node:fs';import {createHash} from 'node:crypto';import {chromium} from 'playwright';
+const APP='https://louisriv26.github.io/mauritius-mass-finder-beta/';
+const OLD=APP+'ldc/';
+const FILE='LDC_v142.19_R22_ACTUAL_HOSTED_BYTES_CHROME_SEARCH_AND_SCOPE.json';
+const EXPECT={app:'v2.19.142.19-R1B-READER-GEOMETRY-CANDIDATE',sw:'ldc-v2.19.142.19-R1B-reader-geometry-candidate',source:'0542656639432481c32bd70f354a6271b63dd93e',pack:'3826f8abb1d87c82398fb6394dc17a7807ea552365e35b42d4e7789a09f4267a'};
+const out={schema:'ldc-v14219-r22-real-https-hosted-integrity-and-semantic-v1',tested:new Date().toISOString(),app:APP,old_url:OLD,checks:{},details:{},warnings:[],errors:[],status:'NOT_RUN',production_mutation:false,ios_physical:'NOT_TESTED'};
+const ck=(k,v,d)=>{out.checks[k]=!!v;if(d!==undefined)out.details[k]=d};
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const get=async(url)=>{let c=new AbortController(),timer=setTimeout(()=>c.abort(),115000);try{const r=await fetch(url,{redirect:'follow',headers:{'cache-control':'no-cache'},signal:c.signal});return{ok:r.ok,status:r.status,url:r.url,type:r.headers.get('content-type'),bytes:Buffer.from(await r.arrayBuffer())}}finally{clearTimeout(timer)}};
+let browser,context;
+try{
+ const head=await Promise.all(['index.html','sw.js','version.json','offline_manifest.json','PACKAGE_MANIFEST_SHA256.json','manifest.json'].map(path=>get(APP+path)));
+ const [index,sw,vers,offline,pkg,pwa]=head;
+ ck('six_hosted_root_resource_HTTP_200',head.every(x=>x.ok),head.map(x=>({status:x.status,url:x.url,len:x.bytes.length})));
+ if(!head.every(x=>x.ok))throw Error('CRITICAL_NOT_HOSTED');
+ const v=JSON.parse(vers.bytes.toString()),o=JSON.parse(offline.bytes.toString()),m=JSON.parse(pkg.bytes.toString()),p=JSON.parse(pwa.bytes.toString());
+ ck('served_exact_public_and_worker_revision',v.app_version===EXPECT.app&&v.page_worker_revision===EXPECT.sw&&o.page_worker_revision===EXPECT.sw&&o.app_version===EXPECT.app&&sw.bytes.toString().includes("const VERSION = '"+EXPECT.sw+"'"),{v:v.app_version,worker:v.page_worker_revision,offline:o.app_version});
+ ck('remote_manifest_source_and_file_count',m.source_commit===EXPECT.source&&m.public_version==='142.19'&&m.files.length===273,{source:m.source_commit,version:m.public_version,files:m.files.length});
+ ck('hosted_root_is_app_not_legacy_neutral_launcher',index.bytes.toString().includes("const APP_VERSION = '"+EXPECT.app+"'"),{indexBytes:index.bytes.length});
+ ck('old_ldc_path_and_root_location_migration_detected',true,{old_url:OLD,new_url:APP,warning:'Old PWA URL may not update after root restructure; test installed PWA on physical device.'});
+ ck('PWA_start_url_is_relative_root',p.start_url==='./'&&p.display==='standalone',p);
+ ck('204_offline_corpus_metadata_unchanged',o.asset_count===204&&o.assets.length===204&&o.content_binding_sha256==='1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384', {assetCount:o.asset_count,binding:o.content_binding_sha256});
+ const failed=[],mismatch=[],good=[],http={};let idx=0;const files=m.files;
+ const workers=Array.from({length:12},async()=>{while(idx<files.length){const z=files[idx++];try{const got=await get(APP+z.path);http[got.status]=(http[got.status]||0)+1;if(!got.ok){failed.push({path:z.path,status:got.status});continue;}const digest=sha(got.bytes);if(got.bytes.length!==z.bytes||digest!==z.sha256)mismatch.push({path:z.path,bytes:got.bytes.length,want:z.bytes,sha:digest,wantSha:z.sha256});else good.push(z.path);}catch(e){failed.push({path:z.path,error:String(e)})}}});
+ await Promise.all(workers);
+ ck('all_273_served_resources_match_exact_SHA256_and_bytes',good.length===273&&failed.length===0&&mismatch.length===0,{good:good.length,fail:failed.slice(0,20),mismatch:mismatch.slice(0,20),status:http});
+ ck('four_bound_runtime_files_present_in_manifest',['index.html','sw.js','version.json','offline_manifest.json'].every(name=>m.files.some(x=>x.path===name)));
+ const oldresp=await get(OLD+'version.json');
+ out.details.legacy_nested_path_response={status:oldresp.status,uri:oldresp.url,returned_bytes:oldresp.bytes.length};
+ if(oldresp.ok){let oldVersion;try{oldVersion=JSON.parse(oldresp.bytes.toString()).app_version}catch(e){}out.details.legacy_nested_path_response.app_version=oldVersion}
+ browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox']});
+ context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'allow'});
+ const page=await context.newPage(),errors=[],failedRequests=[];page.setDefaultTimeout(170000);
+ page.on('pageerror',e=>errors.push(String(e)));page.on('requestfailed',r=>failedRequests.push({path:r.url().slice(0,140),failure:r.failure()}));
+ await page.goto(APP,{waitUntil:'domcontentloaded',timeout:135000});
+ await page.waitForFunction(()=>{const x=document.getElementById('loading');return x&&getComputedStyle(x).display==='none'},null,{timeout:160000});
+ await page.evaluate(()=>{const o=document.getElementById('onboarding-overlay');if(o&&getComputedStyle(o).display!=='none')finishOnboarding()});
+ const base=await page.evaluate(async()=>{await navigator.serviceWorker.ready;return{public:PUBLIC_VERSION,app:APP_VERSION,db:DB_NAME,dbVersion:DB_VER,controller:navigator.serviceWorker.controller?.scriptURL,
+ registrations:(await navigator.serviceWorker.getRegistrations()).map(r=>({scope:r.scope,script:r.active?.scriptURL})),manifest:new URL(document.querySelector('link[rel="manifest"]').getAttribute('href'),location.href).href,model:typeof LDCPLSV16Runtime!=='undefined'&&LDCPLSV16Runtime.status().ready}});
+ ck('actual_hosted_page_and_fresh_worker_root_scope',base.public==='142.19'&&base.registrations.some(x=>x.scope===APP)&&base.manifest===APP+'manifest.json',base);
+ ck('model_not_eager_at_clean_boot',!base.model,base.model);
+ ck('E19_same_origin_with_production_remains_open',new URL(APP).origin===new URL('https://louisriv26.github.io/Le-livre-du-Ciel---Github/').origin,{note:'True is risk, not isolation pass',same_origin:true});
+ await page.evaluate(async()=>{await goSearch();setSearchIntentMode('words',{rerun:false,persist:false});setSearchQueryDraft('volonté',{mode:'words',syncOther:true});await runSearch()});
+ await page.waitForFunction(()=>!searchBusyGeneration&&document.querySelectorAll('#search-results .result-card').length>5,null,{timeout:170000});
+ const words=await page.evaluate(()=>({cards:document.querySelectorAll('#search-results .result-card').length,first:document.querySelector('#search-results .result-card')?.innerText?.slice(0,160)}));
+ ck('real_lexical_search_40_results_editorial_first',words.cards===40&&/Explication éditoriale/i.test(words.first),words);
+ const ordinary=page.locator('#search-results .result-card').filter({hasNotText:/Explication éditoriale/i}).first();
+ await ordinary.click();await page.waitForFunction(()=>document.querySelector('#screen-reader')?.classList.contains('active'),null,{timeout:100000});
+ const before=await page.evaluate(()=>({entry:currentEntry?.id,chars:document.getElementById('reader-body')?.innerText.trim().length||0}));
+ await page.setViewportSize({width:844,height:390});await page.waitForTimeout(500);
+ const after=await page.evaluate(()=>{const sc=document.getElementById('reader-scroll'),rect=sc.getBoundingClientRect();return {entry:currentEntry?.id,chars:document.getElementById('reader-body')?.innerText.trim().length||0,scrollHeight:sc.scrollHeight,clientHeight:sc.clientHeight,bottom:rect.bottom,viewport:innerHeight,rootScroll:document.documentElement.scrollHeight-document.documentElement.clientHeight}});
+ ck('root_hosted_reader_rotate_no_blank_and_scrolling',before.chars>100&&after.chars>100&&before.entry===after.entry&&after.scrollHeight>after.clientHeight&&after.bottom<after.viewport&&after.rootScroll<4,{before,after});
+ await page.evaluate(async()=>await goSearch());await page.waitForFunction(()=>document.querySelector('#screen-search')?.classList.contains('active'),null,{timeout:60000});
+ ck('hosted_reader_return_recovers_word_results',await page.locator('#search-results .result-card').count()===40);
+ const query="Deuxième, il ne faut pas regarder le passé. Le passé est passé et il faut vivre dans le présent. Ce n'est pas utile du tout de regarder dans le passé. C'est un affront à Jésus. C'est le deuxième texte.";
+ await page.evaluate(async q=>{setSearchIntentMode('meaning',{rerun:false,persist:false});setSearchQueryDraft(q,{mode:'meaning',syncOther:true});await runSearch()},query);
+ await page.waitForFunction(()=>!searchBusyGeneration,null,{timeout:300000});
+ const sem=await page.evaluate(()=>({top:searchLastPayload?.payload?.results?.[0]?.entry_id||null,ready:LDCPLSV16Runtime.status().ready,cards:document.querySelectorAll('#search-results .result-card').length,error:document.querySelector('#search-results')?.innerText?.slice(0,200)}));
+ ck('hosted_real_semantic_search_20_ranked_matches',sem.top==='ldc_t09_1909_11_02_e001'&&sem.cards===20&&sem.ready,sem);
+ const off=await page.evaluate(async()=>await requestOfflineStatus());
+ ck('fresh_hosted_offline_204_status',off.total===204,{state:off.state,total:off.total,completed:off.completed});
+ ck('zero_unhandled_page_errors_in_hosted_search',errors.length===0,{errors,requestFailures:failedRequests.slice(0,20)});
+ out.warnings.push('E19 remains an origin-level risk; scoped root worker does not prove storage isolation.');
+ out.status=Object.values(out.checks).every(Boolean)&&out.errors.length===0?'PASS_SCOPED_REAL_ROOT_HOSTED':'FAIL_SCOPED_OR_ENVIRONMENT';
+}catch(e){out.errors.push(String(e?.stack||e));out.status='FAIL_SCOPED_OR_ENVIRONMENT'}
+finally{fs.writeFileSync(FILE,JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify({status:out.status,checks:out.checks,errors:out.errors},null,2));if(browser)await browser.close().catch(()=>{})}
