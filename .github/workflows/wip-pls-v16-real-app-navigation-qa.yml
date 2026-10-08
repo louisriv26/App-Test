@@ -1,0 +1,42 @@
+name: LDC WIP PLS v16 real application reader navigation QA
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - '.github/wip-pls-v16-real-app-navigation-qa.mjs'
+      - '.github/workflows/wip-pls-v16-real-app-navigation-qa.yml'
+      - 'index.html'
+      - 'pls_v16/runtime_v1.mjs'
+      - 'search_semantic_pack_registry_r6.js'
+      - 'search_semantic_hybrid_r6.js'
+      - 'search_semantic_v3_core_r4.js'
+      - 'pls_v16/semantic_pack_manifest.json'
+      - 'pls_v16/pack/**'
+jobs:
+  actual-app-navigation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Protect released baseline
+        run: |
+          git diff --exit-code 572d9df7927765b575a76eaee98fd3cc9d455e74 -- sw.js version.json offline_manifest.json corpus search_engine_v2.js search_exact_v21.js search_foundation_v21b.js search_near_v22.js search_worker_v2.js interim_user_state_migration.js
+      - name: Install pinned browser driver
+        run: npm install --no-save playwright-core@1.55.0
+      - name: Exercise real app search and reader navigation
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/wip-pls-v16-real-app-navigation-qa.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: wip-pls-v16-real-app-navigation-qa
+          path: wip-pls-v16-real-app-navigation-qa.json
+          if-no-files-found: error
+          retention-days: 3
