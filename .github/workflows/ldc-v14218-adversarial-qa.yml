@@ -1,0 +1,71 @@
+name: LDC v142.18 real DOM adversarial QA (local isolated origin only)
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-adversarial-qa.yml'
+permissions:
+  contents: write
+jobs:
+  semantic-reader:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify this exact integration branch and frozen pack identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF_NAME" = "ldc-v142-18-reader-semantic-integration-wip-20261008"
+          test -f pls_v16/pack/vectors.i8
+          test -f LDC_v142.18_INITIAL_SPLICE_EVIDENCE.json
+          git diff --exit-code 56a306997a37ab975a573774a97fa976a40ffe40 -- corpus pls_v15 search_engine_v2.js search_exact_v21.js search_foundation_v21b.js search_near_v22.js search_worker_v2.js sw.js version.json offline_manifest.json
+      - name: Install pinned Playwright driver
+        run: npm install --no-save playwright-core@1.55.0
+      - name: Exercise actual Reader DOM and semantic cross-source failures
+        id: qa
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/ldc-v14218-adversarial-qa.mjs
+      - name: Attach tested source commit identity
+        if: always()
+        env:
+          TESTED_COMMIT: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          import json,os,pathlib
+          p=pathlib.Path("LDC_v142.18_ADVERSARIAL_DOM_QA.json")
+          if not p.exists():raise RuntimeError("QA report missing; cannot certify")
+          j=json.loads(p.read_text());j["tested_source_commit"]=os.environ["TESTED_COMMIT"]
+          j["hosted_origin_e16_e19"]="OPEN"
+          j["physical_iphone_ipad_pwa"]="OPEN"
+          j["deployment_authority"]="NONE"
+          p.write_text(json.dumps(j,ensure_ascii=False,indent=2)+"\n")
+          PY
+      - name: Save evidence to isolated branch, never deploy
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_ADVERSARIAL_DOM_QA.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_ADVERSARIAL_DOM_QA.json
+          git commit -m "test(ldc): preserve v142.18 actual-DOM adversarial evidence"
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-adversarial-browser-qa
+          path: LDC_v142.18_ADVERSARIAL_DOM_QA.json
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Fail if any integrated DOM gate failed
+        run: python3 -c "import json; assert json.load(open('LDC_v142.18_ADVERSARIAL_DOM_QA.json'))['status']=='PASS'"
