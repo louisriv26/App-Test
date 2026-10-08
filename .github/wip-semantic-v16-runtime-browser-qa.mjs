@@ -67,7 +67,7 @@ try{
  // The verified pack Guard binds sequential PLS16 IDs to mask row indices.
  const jesusMask=fs.readFileSync('pls_v16/pack/jesus_mask.bits');
  const jesusEligible=x=>{
-   const m=/^PLS16-E-96-72-(\\d{6})$/.exec(String(x&&x.passage_id||''));
+   const m=/^PLS16-E-96-72-(\d{6})$/.exec(String(x&&x.passage_id||''));
    const row=m?Number(m[1])-1:-1;
    return row>=0&&row<22873&&!!(jesusMask[row>>3]&(1<<(row&7)));
  };
