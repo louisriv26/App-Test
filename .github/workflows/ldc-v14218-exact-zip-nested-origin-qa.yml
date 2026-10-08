@@ -1,0 +1,61 @@
+name: LDC v142.18 exact ZIP nested /ldc two local origins + cold offline adversarial QA
+on:
+  push:
+    branches: [ldc-v142-18-reader-semantic-integration-wip-20261008]
+    paths: ['.github/workflows/ldc-v14218-exact-zip-nested-origin-qa.yml', '.github/ldc-v14218-exact-zip-nested-origin-qa.mjs']
+permissions:
+  contents: write
+jobs:
+  no-deploy-exact-frozen-archive-nested-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/checkout@v4
+        with:
+          ref: 7c292d6221bb350fac3aeaa83750b8784706d45c
+          path: pinned-app
+          fetch-depth: 0
+      - name: Build EXACT 125.6MB archived application byte identity (no mutation)
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd pinned-app
+          test "$(git rev-parse HEAD)" = '7c292d6221bb350fac3aeaa83750b8784706d45c'
+          git switch -c ldc-v142-18-reader-semantic-integration-wip-20261008
+          python3 .github/ldc-v14218-curated-wip-package.py
+          echo '954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb  LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip' | sha256sum -c -
+          cd ..
+          mkdir -p isolated-host/ldc isolated-host/24h isolated-host/marie isolated-host/lettres isolated-host/hub
+          printf '<!doctype html><meta charset="utf-8"><title>Neutral test launcher</title><a href="./ldc/">LDC test</a>' > isolated-host/index.html
+          for app in 24h marie lettres hub; do printf '<!doctype html><title>Sibling scope sentinel</title>' > isolated-host/$app/index.html; done
+          unzip -q pinned-app/LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip -d isolated-host/ldc
+          npm install --no-save playwright-core@1.55.0
+      - name: Real Chromium architecture/scope/storage/semantic/rotation/offline tests in nested exact archive
+        id: browser
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          LDC_NESTED_FIXTURE_DIR: ${{ github.workspace }}/isolated-host
+        run: node .github/ldc-v14218-exact-zip-nested-origin-qa.mjs
+      - name: Preserve failure evidence and report on WIP only
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_EXACT_ZIP_NESTED_ORIGIN_OFFLINE_QA.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_EXACT_ZIP_NESTED_ORIGIN_OFFLINE_QA.json
+          git commit -m "test(ldc): exact SHA-locked ZIP under nested paths and separate local origins, include FAIL evidence"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-exact-frozen-zip-nested-and-offline-evidence-only
+          path: LDC_v142.18_EXACT_ZIP_NESTED_ORIGIN_OFFLINE_QA.json
+          retention-days: 14
+      - name: Fail closed on any test, never close hosted or physical gates
+        run: python3 -c "import json;d=json.load(open('LDC_v142.18_EXACT_ZIP_NESTED_ORIGIN_OFFLINE_QA.json'));assert d['status']=='PASS_EXACT_ARCHIVE_NESTED_TWO_ORIGINS_LOCAL_ONLY' and all(d['checks'].values()) and d['hosted_e16']=='OPEN' and d['hosted_e19']=='OPEN'"
