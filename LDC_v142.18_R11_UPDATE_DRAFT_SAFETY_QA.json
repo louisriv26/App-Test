@@ -1,0 +1,94 @@
+{
+  "schema": "ldc-v14218-r11-dirty-draft-update-and-beforeunload-browser-qa-v1",
+  "app_source": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+  "app_zip_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
+  "status": "PASS_SCOPED_UPDATE_DRAFT_SAFETY_NO_DEPLOY",
+  "checks": {
+    "exact_frozen_package_manifest": true,
+    "clean_start_update_safe_and_public_version": true,
+    "unsaved_note_blocks_update_before_SW_interaction": true,
+    "cancelled_note_removes_block_without_data_write": true,
+    "unsaved_collection_name_blocks_reload": true,
+    "unsaved_collection_item_note_blocks_reload": true,
+    "unsaved_documentary_report_blocks_reload": true,
+    "pending_backup_preview_blocks_reload": true,
+    "backup_import_in_progress_blocks_reload": true,
+    "synthetic_drafts_did_not_modify_personal_database": true,
+    "no_unexpected_page_errors": true
+  },
+  "details": {
+    "clean_start_update_safe_and_public_version": {
+      "before": {
+        "unsafe": false,
+        "reasons": []
+      },
+      "version": "142.18",
+      "draft": "",
+      "banner": ""
+    },
+    "unsaved_note_blocks_update_before_SW_interaction": {
+      "before": {
+        "unsafe": true,
+        "reasons": [
+          "note"
+        ]
+      },
+      "decision": {
+        "status": "BLOCKED",
+        "reasons": [
+          "note"
+        ]
+      },
+      "status": "Mise à jour différée — terminez, enregistrez ou annulez votre note avant d’actualiser."
+    },
+    "cancelled_note_removes_block_without_data_write": {
+      "unsafe": false,
+      "reasons": []
+    },
+    "unsaved_collection_name_blocks_reload": {
+      "status": "BLOCKED",
+      "reasons": [
+        "new_collection"
+      ]
+    },
+    "unsaved_collection_item_note_blocks_reload": {
+      "status": "BLOCKED",
+      "reasons": [
+        "collection_note"
+      ]
+    },
+    "unsaved_documentary_report_blocks_reload": {
+      "status": "BLOCKED",
+      "reasons": [
+        "issue_comment"
+      ]
+    },
+    "pending_backup_preview_blocks_reload": {
+      "status": "BLOCKED",
+      "reasons": [
+        "backup_preview"
+      ]
+    },
+    "backup_import_in_progress_blocks_reload": {
+      "status": "BLOCKED",
+      "reasons": [
+        "backup_busy"
+      ]
+    },
+    "synthetic_drafts_did_not_modify_personal_database": {
+      "state": {
+        "unsafe": false,
+        "reasons": []
+      },
+      "notes": 0,
+      "collections": 0
+    },
+    "no_unexpected_page_errors": []
+  },
+  "errors": [],
+  "scope": "Exact immutable ZIP, local Chromium only. No update published, no real user data touched.",
+  "deploy_authority": "NONE",
+  "app_mutation_authority": "NONE",
+  "hosted_gate": "OPEN",
+  "physical_gate": "OPEN"
+}
