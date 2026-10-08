@@ -1,0 +1,34 @@
+name: LDC v142.19 R23C independent update re-test with conditional HTTP 304 controlled
+on:
+  push:
+    branches:
+      - ldc-v142-19-reader-root-height-fix-wip-20261008
+    paths:
+      - .github/workflows/ldc-v14219-r23c-cache-control.yml
+permissions:
+  contents: read
+jobs:
+  update-compatibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: npm install --no-save playwright@1.55.0
+      - name: Start local fixture with unconditional script response
+        run: |
+          mkdir -p /tmp/ldc-r23-root
+          nohup python3 .github/ldc-v14219-r23c-qa-server.py >/tmp/ldc-r23c-http.log 2>&1 &
+          sleep 2
+      - name: Run update compatibility checks and preserve old negative case independently
+        continue-on-error: true
+        run: node .github/ldc-v14219-r23-ephemeral-upgrade-lifecycle-diagnostic.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14219-r23c-cache-neutral-update-report
+          path: LDC_v142.19_R23_LOCAL_UPGRADE_WORKER_LIFECYCLE_DIAGNOSTIC.json
+          retention-days: 14
+      - name: Check two genuine simulated browser update cases
+        run: python3 -c "import json;x=json.load(open('LDC_v142.19_R23_LOCAL_UPGRADE_WORKER_LIFECYCLE_DIAGNOSTIC.json'));assert x['status']=='PASS_SCOPED_SYNTHETIC_SAME_ROOT_OLD_TO_NEW',x['status']"
