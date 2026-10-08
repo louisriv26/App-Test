@@ -1,0 +1,84 @@
+name: LDC v142.19 isolated geometry candidate ZIP + strict cross-engine QA (NO DEPLOYMENT)
+on:
+  push:
+    branches: [ldc-v142-19-reader-root-height-fix-wip-20261008]
+    paths:
+      - '.github/workflows/ldc-v14219-geometry-candidate-build-and-qa.yml'
+      - '.github/ldc-v14219-curated-geometry-candidate-package.py'
+      - '.github/ldc-v14219-geometry-exactzip-qa.mjs'
+      - 'index.html'
+      - 'sw.js'
+      - 'version.json'
+      - 'offline_manifest.json'
+permissions: {contents: write}
+jobs:
+  qa-and-curated-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Enforce protected repo, original baseline, and candidate authority boundary
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse origin/main)" = "572d9df7927765b575a76eaee98fd3cc9d455e74"
+          test "$(git rev-parse origin/ldc-v142.17-reader-transaction-repair-candidate)" = "56a306997a37ab975a573774a97fa976a40ffe40"
+          test "$(git rev-parse origin/ldc-v142-16-search-integrity-wip-20261007)" = "39b9ec90ab3b2199b1738e96b353cc6b27d9cac0"
+          test "$(git rev-parse origin/app-test-origin-isolation-wip-20261007)" = "68fb4bbaf7e51629a5092180787572f7dc20e2a8"
+          git merge-base --is-ancestor 7c292d6221bb350fac3aeaa83750b8784706d45c HEAD
+      - name: Build reproducible manifest-last 273-resource candidate ZIP with full extraction and rehash
+        continue-on-error: true
+        run: python3 .github/ldc-v14219-curated-geometry-candidate-package.py
+      - name: Install actual Playwright Linux WebKit and Chromium
+        if: always()
+        continue-on-error: true
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps webkit
+          command -v google-chrome
+      - name: Browser QA against the actual extracted candidate ZIP only, never the development tree
+        if: always()
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/ldc14219-site
+          unzip -q LDC_v142.19_GEOMETRY_CANDIDATE_DO_NOT_DEPLOY.zip -d /tmp/ldc14219-site
+          nohup python3 -m http.server 8997 --bind 127.0.0.1 --directory /tmp/ldc14219-site >/tmp/ldc14219-http.log 2>&1 &
+          sleep 2
+          curl -fsS -o /dev/null http://127.0.0.1:8997/index.html
+          node .github/ldc-v14219-geometry-exactzip-qa.mjs
+      - name: Commit independent QA JSON only on isolated successor WIP branch
+        if: always()
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          test -f LDC_v142.19_GEOMETRY_CANDIDATE_PACKAGE_AUDIT.json || printf '{"status":"PACKAGE_REPORT_MISSING"}\n' > LDC_v142.19_GEOMETRY_CANDIDATE_PACKAGE_AUDIT.json
+          test -f LDC_v142.19_GEOMETRY_EXACT_ZIP_LOCAL_CROSS_ENGINE_QA.json || printf '{"status":"BROWSER_REPORT_MISSING"}\n' > LDC_v142.19_GEOMETRY_EXACT_ZIP_LOCAL_CROSS_ENGINE_QA.json
+          git add LDC_v142.19_GEOMETRY_CANDIDATE_PACKAGE_AUDIT.json LDC_v142.19_GEOMETRY_EXACT_ZIP_LOCAL_CROSS_ENGINE_QA.json
+          git diff --cached --quiet || git commit -m 'test(ldc): retain v142.19 frozen candidate package and real cross-engine evidence'
+          git pull --rebase origin ldc-v142-19-reader-root-height-fix-wip-20261008
+          git push origin HEAD:ldc-v142-19-reader-root-height-fix-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: LDC-v14219-READER-GEOMETRY-CANDIDATE-NOT-FOR-PRODUCTION
+          path: |
+            LDC_v142.19_GEOMETRY_CANDIDATE_DO_NOT_DEPLOY.zip
+            LDC_v142.19_GEOMETRY_CANDIDATE_PACKAGE_AUDIT.json
+            LDC_v142.19_GEOMETRY_EXACT_ZIP_LOCAL_CROSS_ENGINE_QA.json
+            v14219_*.png
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Fail closed unless source/package and extracted candidate browser QA both pass
+        run: |
+          python3 - <<'PY'
+          import json
+          a=json.load(open('LDC_v142.19_GEOMETRY_CANDIDATE_PACKAGE_AUDIT.json'))
+          b=json.load(open('LDC_v142.19_GEOMETRY_EXACT_ZIP_LOCAL_CROSS_ENGINE_QA.json'))
+          print({'package':a['status'],'browser':b['status']})
+          assert a['status']=='PASS_PACKAGE_INTEGRITY_ONLY_NOT_RELEASE_AUTHORITY',a['status']
+          assert b['status']=='PASS_EXACT_ZIP_LINUX_ENGINES_SCOPED',b['status']
+          PY
