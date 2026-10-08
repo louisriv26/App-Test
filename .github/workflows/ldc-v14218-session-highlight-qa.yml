@@ -1,0 +1,48 @@
+name: LDC v142.18 Reader session, highlight, race and return QA
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-session-highlight-qa.yml'
+permissions:
+  contents: write
+jobs:
+  session-highlight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright-core@1.55.0
+      - name: Fresh private-profile real Chrome Reader session and highlight QA
+        id: qa
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/ldc-v14218-session-highlight-qa.mjs
+      - name: Preserve exact-tested-source evidence without deployment
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_SESSION_HIGHLIGHT_DOM_QA.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_SESSION_HIGHLIGHT_DOM_QA.json
+          git commit -m "test(ldc): record v142.18 Reader session/highlight actual DOM evidence"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-session-highlight
+          path: LDC_v142.18_SESSION_HIGHLIGHT_DOM_QA.json
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Fail closed on any regression
+        run: python3 -c "import json;assert json.load(open('LDC_v142.18_SESSION_HIGHLIGHT_DOM_QA.json'))['status']=='PASS'"
