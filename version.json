@@ -1,9 +1,9 @@
 {
-  "app_version": "v2.19.142.16-R1B-READER-PHYSICAL-GATE-REPAIR",
+  "app_version": "v2.19.142.17-R1B-READER-TRANSACTION-REPAIR",
   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
-  "baseline_candidate_sha256": "cca03c4a6e07cd7f25b4a6a8cc6caadaf912ede76354a0b71236c93d2dd728bc",
-  "baseline_candidate_version": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
+  "baseline_candidate_sha256": null,
+  "baseline_candidate_version": "v2.19.142.16-R1B-READER-PHYSICAL-GATE-REPAIR",
   "build_date": "2026-10-08",
   "collection_link_contract": "LOCAL_COLLECTION_ID_LINK_DOES_NOT_TRANSFER_USER_DATA",
   "collections_visibility": "VISIBLE_MON_ESPACE_WORKSPACE_AND_EXPLICIT_ENTRYPOINT",
@@ -51,7 +51,7 @@
     "state_recorded_status": "PRODUCTION_DEPLOYED_CLOSED_IMMUTABLE__EXACT_REPOSITORY_TREE_AND_SUCCESSFUL_DEPLOYMENT_BINDING_RECORDED",
     "technical_identity": "v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE"
   },
-  "current_release_authority": "OWNER_ONLY_V142_16_READER_PHYSICAL_GATE_REPAIR__SUCCESSOR_OF_FROZEN_V142_15_AFTER_IPHONE_PHYSICAL_GATE_FAILURES__PRODUCTION_NOT_AUTHORIZED",
+  "current_release_authority": "OWNER_AUTHORIZED_V142_17_BOUNDED_READER_TRANSACTION_REPAIR__APP_TEST_DEPLOYMENT_NOT_AUTHORIZED__PRODUCTION_NOT_AUTHORIZED",
   "current_runtime_browser_validation": "V142_15_EXACT_APP_TEST_BINDING_309_OF_309_PASS_IS_PREDECESSOR_EVIDENCE_ONLY__V142_16_READER_SCROLL_AND_LOW_HEIGHT_RUNTIME_DELTA_REQUIRES_FRESH_MACHINE_BROWSER_AND_PHYSICAL_IPHONE_IPAD_RETEST",
   "dark_mode_v136_r9": {
     "corpus_changed": false,
@@ -71,7 +71,7 @@
   "diagnostic_default_copy_contract": "ALLOWLIST_PUBLIC_TECHNICAL_METADATA__NO_RAW_QUERY__NO_RAW_ERROR_MESSAGE__NO_USER_AUTHORED_TEXT",
   "entry_start_contract": "V107__V106_ENTRY_START_SEMANTIC_FIXED_POINT_AND_USER_INTENT_LOCK_PRESERVED__DIRECT_TOME_LIST_OPEN_ADDS_SOURCE_SCROLL_HANDOFF_TRANSACTION__CAPTURE_BACK_CONTEXT_BEFORE_BLUR__BLUR_FOCUSED_LIST_BUTTON_BEFORE_FIRST_AWAIT__FREEZE_SOURCE_MOMENTUM__RENEW_READER_SCROLL_DOM_SURFACE__PIN_TOP_BEFORE_EXPOSURE_AND_FOR_TWO_SETTLING_FRAMES__PREVIOUS_NEXT_SEARCH_RESUME_NOTE_HIGHLIGHT_DEEP_LINK_TARGET_SEMANTICS_UNCHANGED",
   "external_decision_authority": "FINAL_DECISION_LOCK_EXTERNAL_TO_DEPLOY_ZIP__WRITTEN_LAST_AFTER_PRIMARY_AND_INDEPENDENT_REOPEN_AUDITS",
-  "external_validation_status": "V142_15_IPHONE_PHYSICAL_READER_GATE_FAILED__MON_ESPACE_PARAGRAPH_TARGET_ROOT_SCROLL_CONTAMINATION_AND_SHORT_LANDSCAPE_READER_VIEWPORT_DISCOVERED__V142_16_REPAIR_CANDIDATE_NOT_YET_PHYSICALLY_QUALIFIED__PRODUCTION_NOT_AUTHORIZED",
+  "external_validation_status": "V142_15_PHYSICAL_IPHONE_READER_DEFECTS_OPEN__V142_16_INDEPENDENT_P1_STALE_TRANSACTION_RACES_CONFIRMED__V142_17_REPAIR_IN_PROGRESS__NO_HOSTED_OR_DEVICE_QUALIFICATION",
   "f1_poisoned_http_cache_regression_gate": "REQUIRED_AND_EXTERNAL_EVIDENCE",
   "f7_release_metadata_generation": "CURRENT_RELEASE_COUNTS_AND_BINDINGS_GENERATED_AFTER_CORPUS_PAYLOAD_FREEZE__V32_VALUES_RETAINED_ONLY_UNDER_HISTORICAL_KEYS",
   "f8_android_nonfragment_highlight_targeting": {
@@ -571,7 +571,7 @@
   "offline_integrity_contract": "PERSISTENT_OFFLINE_REUSE_REQUIRES_CURRENT_SCOPE_URL_PLUS_EXACT_ASSET_SHA256_AND_BYTE_LENGTH_MARKERS__GLOBAL_PREDECESSOR_BINDING_NOT_REQUIRED__CHANGED_OR_INVALID_ASSETS_FAIL_CLOSED",
   "offline_manifest_schema": "ldc-offline-manifest-v3",
   "offline_manifest_sha256": "91c9e1d61d54b80da0473ed0fef30ee049837141f25231bb829419ca1af585fd",
-  "offline_scope": "v142.15 bounded release-truth/scope successor of exact frozen v142.14. Preserves the v142.14 documentary implementation and all protected corpus/Search/PLS/provenance/session/backup/user-schema surfaces. Corrects E-15 public validation wording and adds the E-07 Par le sens scope disclosure. Persistent offline content assets and content binding remain unchanged. Production deployment of v142.15 is not authorized.",
+  "offline_scope": "v142.17 direct successor of v142.16 frozen Reader physical repair: bounded reader transaction ownership, session and screen-lifecycle guards; offline content asset set and content binding unchanged. v142.16 not physically qualified. No App-Test or production authorization.",
   "offline_state_schema": "ldc-offline-state-v3",
   "offline_status_typography_v98_contract": "IMPORTANT_STATUS_TITLE_DETAIL_SCALE_12_13_16_19_AND_11_12_15_18_SMALL_NORMAL_LARGE_XLARGE",
   "offline_storage_cache_name_contract": "ldc-le-livre-du-ciel-offline-persistent-v3-<fnv1a32(service-worker-scope)>",
@@ -591,8 +591,8 @@
   "owner_user_acceptance": "USER_EXPLICITLY_REQUESTED_CONTINUED_DEVELOPMENT_WITHOUT_IMMEDIATE_DEVICE_CHECKING__NO_PUBLIC_DEPLOYMENT_AUTHORITY__2026_09_14",
   "package_predecessor_app_version": "v2.19.142.13-R1B-RELEASE-TRUTH-CLOSURE",
   "package_predecessor_zip_sha256": "f3a6ac7d957a43adb250d0c809d3584de2764cbfd36174bc71e4594ff0689030",
-  "package_state_at_freeze": "V142_15_PRE_PHYSICAL_FROZEN__MACHINE_QA_AND_INDEPENDENT_CHANGED_SURFACE_CHALLENGE_PASS__DIRECT_EXACT_V142_14_PREDECESSOR__E07_E15_AND_RELEASE_IDENTITY_ONLY__PROTECTED_CORPUS_SEARCH_PLS_V15_PROVENANCE_DOCUMENTARY_RESOLVER_SESSION_BACKUP_USER_SCHEMA_PRESERVED__APP_TEST_AND_PHYSICAL_GATES_OPEN__PRODUCTION_NOT_AUTHORIZED",
-  "page_worker_revision": "ldc-v2.19.142.15-R1B-release-truth-scope-closure",
+  "package_state_at_freeze": "NOT_FROZEN_V142_17_CANDIDATE_WORK_IN_PROGRESS__READER_TRANSACTION_RACE_CORRECTION__ALL_EXTERNAL_GATES_OPEN",
+  "page_worker_revision": "ldc-v2.19.142.17-R1B-reader-transaction-repair",
   "par_le_sens_current": {
     "compatible_passages": 20236,
     "excluded_stale_passages": 347,
@@ -816,7 +816,7 @@
   },
   "public_deployment_authorized": false,
   "public_release": "NOT_AUTHORIZED",
-  "public_version": "142.15",
+  "public_version": "142.17",
   "quote_display_contract": "CANONICAL_GUILLEMETS_PRESERVED_IN_CORPUS__ADJACENT_OUTER_DELIMITERS_HIDDEN__TWO_SOURCE_SPAN_GAP_OPENERS_WITH_EXPLICIT_JESUS_ATTRIBUTION_HIDDEN__SIX_PUNCTUATION_GAP_CLOSERS_HIDDEN__NESTED_AND_REPORTED_QUOTES_PRESERVED",
   "r16_authority_fencing_reaudit": {
     "corpus_changed": false,
@@ -1871,7 +1871,7 @@
     "superseded v2.19.0 key-claim-only report audit with exhaustive active-report line/row audit and exact shipped-function tests"
   ],
   "reaudit_static_validator": "HISTORICAL_RA1_PRE_FINAL_TARGETED_TESTS__CURRENT_RA5C_FINAL_AUTHORITY_IN_EXTERNAL_DECISION_LOCK",
-  "rebuild_status": "V142_15_RELEASE_TRUTH_SCOPE_CLOSURE__DIRECT_FROZEN_V142_14_PREDECESSOR__E15_PUBLIC_QUALIFICATION_WORDING_CORRECTED__E07_PAR_LE_SENS_SCOPE_DISCLOSURE_ADDED__CORPUS_SEARCH_PLS_V15_PROVENANCE_DOCUMENTARY_RESOLVER_SESSION_BACKUP_USER_DATA_PROTECTED__PRODUCTION_NOT_AUTHORIZED",
+  "rebuild_status": "V142_17_BOUNDED_READER_SCROLL_EPOCH_AND_LIFECYCLE_REPAIR__DIRECT_V142_16_PREDECESSOR__NO_PRODUCTION_AUTHORITY",
   "remembered_meaning_search_product_gate": "CLOSED_BY_OWNER_ACCEPTED_PRODUCTION_PAR_LE_SENS_V142_10__ACTIVE_USER_FUNCTION_PRESERVED__PLS_V15_RETRIEVAL_BYTES_UNCHANGED__NO_GENERAL_SCIENTIFIC_CALIBRATION_CLAIM",
   "reperes_dual_attribution": {
     "canonical_text_changed": false,
@@ -4527,7 +4527,7 @@
   "volume_lru_max": 4,
   "whole_collection_undo_contract": "TEN_SECOND_ATOMIC_PARENT_PLUS_ALL_CAPTURED_CHILDREN__FAIL_CLOSED_ON_PARENT_CHILD_OR_UNEXPECTED_ORPHAN_CONFLICT",
   "wide_public_release": "EXTERNAL_AUTHORITY_REQUIRED__PACKAGE_DOES_NOT_SELF_AUTHORIZE_RELEASE__EXACT_V142_15_PHYSICALLY_TESTED_BYTES_MUST_EQUAL_PROMOTED_BYTES",
-  "wide_public_release_gate": "NOT_AUTHORIZED__EXACT_V142_15_APP_TEST_BINDING_AND_PHYSICAL_IPHONE_IPAD_GATES_OPEN",
+  "wide_public_release_gate": "NOT_AUTHORIZED__V142_17_REQUIRES_COMPLETED_INDEPENDENT_MACHINE_BROWSER_AND_PHYSICAL_QUALIFICATION",
   "v142_15_release_truth_scope_closure": {
     "classification": "BOUNDED_RELEASE_TRUTH_AND_SEARCH_SCOPE_DISCLOSURE_CLOSURE",
     "direct_predecessor_public_version": "142.14",
@@ -4592,5 +4592,46 @@
     ],
     "mutation_authority": "OWNER_AUTHORIZED_SUCCESSOR_IMPLEMENTATION",
     "deployment_authority": "NONE_UNTIL_FRESH_APP_TEST_AND_PHYSICAL_REQUALIFICATION"
+  },
+  "reader_transaction_repair_v142_17": {
+    "date": "2026-10-08",
+    "public_version": "142.17",
+    "direct_predecessor_public_version": "142.16",
+    "direct_predecessor_exact_frozen_runtime_commit": "15fb524cc8929c04d2e92f560374cdbe5404148c",
+    "direct_predecessor_branch_head": "d1970a527bf94325c78c2c396adf4987d9001a3e",
+    "historical_v142_16_reader_repair": "reader_physical_gate_repair_v142_16",
+    "trigger": [
+      "P1-A stale target RAF could clear global semanticRestoreInProgress while a newer scroll transaction remained active",
+      "P1-B stale target/viewport callbacks could reset root scroll or restore hidden Reader after leaving screen"
+    ],
+    "implementation": [
+      "Programmatic Reader scroll suppression now uses an owning epoch shared across target positioning, entry-start lock and semantic restore",
+      "Reader identity now binds visible screen, entry, volume, source mode, supplement and active session",
+      "Reader exit and newly committed Reader entry invalidate pending target/layout transaction callbacks",
+      "Target placement only accepts elements contained in the Reader scroller"
+    ],
+    "qualified_here": [
+      "extracted-code deterministic target ownership race proof",
+      "extracted-code exit and new-session stale-callback proof"
+    ],
+    "remains_open": [
+      "source code syntax and comprehensive browser/WebKit coverage",
+      "service-worker/index/offline/version exact same-release binding",
+      "App-Test deployment and exact-file integrity",
+      "iPhone/iPad/PWA/VoiceOver physical gates",
+      "four-pass audit and independent challenge"
+    ],
+    "offline_content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+    "protected_surfaces": [
+      "corpus",
+      "Par les mots",
+      "Par le sens",
+      "provenance",
+      "user-state schema",
+      "offline content assets"
+    ],
+    "mutation_authority": "OWNER_AUTHORIZED_BOUNDED_SUCCESSOR",
+    "deployment_authority": "NONE",
+    "production_authorized": false
   }
 }
