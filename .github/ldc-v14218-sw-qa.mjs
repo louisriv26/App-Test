@@ -11,21 +11,28 @@ try{
   browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||'/usr/bin/google-chrome',args:['--no-sandbox']});
   const context=await browser.newContext({serviceWorkers:'allow',viewport:{width:390,height:844}});
   const page=await context.newPage();page.setDefaultTimeout(90000);
-  page.on('pageerror',e=>report.errors.push(String(e)));
+  page.on('pageerror',e=>report.errors.push('PAGEERROR:'+String(e)));
+  page.on('console',m=>{if(m.type()==='error')report.errors.push('CONSOLE:'+m.text())});
+  page.on('response',r=>{if(r.status()>=400)report.errors.push('HTTP_'+r.status()+':'+r.url())});
   await page.goto(base+'/',{waitUntil:'domcontentloaded',timeout:120000});
   await page.waitForFunction(()=>getComputedStyle(document.getElementById('loading')).display==='none',null,{timeout:120000});
   const worker=await page.evaluate(async()=>{
-    const reg=await navigator.serviceWorker.ready;
+    const startedReady=Date.now();
+    let reg=await navigator.serviceWorker.getRegistration('./');
+    while(!reg&&Date.now()-startedReady<30000){await new Promise(r=>setTimeout(r,250));reg=await navigator.serviceWorker.getRegistration('./');}
+    if(!reg)throw new Error('SW_NOT_REGISTERED_AFTER_30S');
     const started=Date.now();
     while(!reg.active&&Date.now()-started<30000)await new Promise(r=>setTimeout(r,250));
     let cacheName=null,requests=[];
     const all=await caches.keys(),shell=all.find(x=>x.includes('shell-v2.19.142.18-R1B-reader-semantic-integration-wip'));
+    const otherCaches=all.filter(x=>!x.includes('shell-v2.19.142.18-R1B-reader-semantic-integration-wip'));
     if(shell){cacheName=shell;const c=await caches.open(shell);requests=(await c.keys()).map(x=>new URL(x.url).pathname);}
     const m=await (await fetch('./offline_manifest.json',{cache:'reload'})).json();
-    return {active:!!reg.active,scope:reg.scope,cacheName,requests,version:PUBLIC_VERSION,
+    return {active:!!reg.active,installing:reg.installing?.state||null,waiting:reg.waiting?.state||null,scope:reg.scope,cacheName,requests,otherCaches,version:PUBLIC_VERSION,
       sw_expected:SW_CACHE_VERSION,offline_count:m.asset_count,binding:m.content_binding_sha256,
       app_manifest_version:m.app_version,controller:!!navigator.serviceWorker.controller};
   });
+  report.details.worker_install_snapshot={active:worker.active,scope:worker.scope,cacheName:worker.cacheName,script_count:worker.requests.length,extra_caches:worker.otherCaches,controller:worker.controller};
   const names=['/search_semantic_pack_guard_r4.js','/search_semantic_v3_core_r4.js','/search_semantic_hybrid_r6.js','/search_semantic_pack_registry_r6.js','/pls_v16/runtime_v1.mjs'];
   test('registered_worker_active',worker.active&&!!worker.scope,worker.scope);
   test('shell_14218_cache_created',!!worker.cacheName,worker.cacheName);
