@@ -1,0 +1,63 @@
+name: LDC v142.18 provisional version and worker reconciliation
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-reconcile-identity.yml'
+permissions:
+  contents: write
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Confirm no main mutation and existing positive adversarial test
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse origin/main)" = "572d9df7927765b575a76eaee98fd3cc9d455e74"
+          test "$GITHUB_REF_NAME" = "ldc-v142-18-reader-semantic-integration-wip-20261008"
+          python3 - <<'PY'
+          import json
+          j=json.load(open("LDC_v142.18_ADVERSARIAL_DOM_QA.json"))
+          assert j["status"]=="PASS" and all(j["checks"].values())
+          assert j["tested_source_commit"]=="4ac8bf9afac57c8de03847467837a62b0ae7bffc"
+          assert len(j["checks"])>=19
+          PY
+      - name: Reconcile four candidate metadata/runtime-shell surfaces atomically
+        run: python3 .github/ldc-v14218-reconcile-identity.py
+      - name: Protect canonical corpus, model and search algorithms
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --exit-code 56a306997a37ab975a573774a97fa976a40ffe40 -- corpus pls_v15 search_engine_v2.js search_exact_v21.js search_foundation_v21b.js search_near_v22.js search_worker_v2.js
+          python3 - <<'PY'
+          import json
+          s=json.load(open("LDC_v142.18_PROVISIONAL_VERSION_RECONCILIATION.json"))
+          assert len(s['new_sha256'])==4
+          assert s["offline_corpus_assets_unchanged"]==204
+          assert s["curated_release_zip"]=="NOT_BUILT"
+          PY
+      - name: Commit coherent provisional version identity, no deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add index.html sw.js version.json offline_manifest.json LDC_v142.18_PROVISIONAL_VERSION_RECONCILIATION.json
+          git commit -m "wip(ldc): reconcile 142.18 app, service-worker and immutable offline corpus identity"
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-version-reconciliation-evidence
+          path: LDC_v142.18_PROVISIONAL_VERSION_RECONCILIATION.json
+          if-no-files-found: warn
+          retention-days: 14
