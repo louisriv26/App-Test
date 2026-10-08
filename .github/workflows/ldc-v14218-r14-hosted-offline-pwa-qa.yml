@@ -1,0 +1,43 @@
+name: LDC v142.18 R14 actual hosted MassFinder Beta offline and state QA
+on:
+  push:
+    branches: [ldc-v142-18-reader-semantic-integration-wip-20261008]
+    paths:
+      - '.github/workflows/ldc-v14218-r14-hosted-offline-pwa-qa.yml'
+      - '.github/ldc-v14218-r14-hosted-offline-pwa-qa.mjs'
+permissions: {contents: write}
+jobs:
+  hosted-offline-read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install isolated Chrome automation
+        run: npm install --no-save playwright-core@1.55.0
+      - name: Exercise 204 hosted corpus assets, offline reopen and test data durability
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/ldc-v14218-r14-hosted-offline-pwa-qa.mjs
+      - name: Preserve PASS and FAIL evidence on isolated engineering branch only
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f LDC_v142.18_R14_MASSFINDERBETA_HOSTED_OFFLINE_QA.json ]; then
+            printf '{"status":"FAIL","errors":["HOSTED_OFFLINE_SCRIPT_DID_NOT_EMIT_JSON"],"checks":{}}\n' > LDC_v142.18_R14_MASSFINDERBETA_HOSTED_OFFLINE_QA.json
+          fi
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_R14_MASSFINDERBETA_HOSTED_OFFLINE_QA.json
+          git commit -m 'test(ldc): R14 real hosted MassFinder Beta offline corpus and ephemeral storage evidence'
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-r14-massfinderbeta-hosted-offline-evidence-NOT-DEPLOY
+          path: LDC_v142.18_R14_MASSFINDERBETA_HOSTED_OFFLINE_QA.json
+          retention-days: 14
+      - name: Fail closed unless all scoped hosted offline checks pass
+        run: python3 -c "import json;x=json.load(open('LDC_v142.18_R14_MASSFINDERBETA_HOSTED_OFFLINE_QA.json')); assert x.get('status')=='PASS_LIVE_HOSTED_OFFLINE_204_AND_STATE_ONLY',x.get('status')"
