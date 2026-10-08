@@ -7,7 +7,7 @@ Public identity **142.17** (format N or N.M); technical build identity `v2.19.14
 - Successor branch: `ldc-v142.17-reader-transaction-repair-candidate`.
 - Frozen reference from v142.16: runtime commit `15fb524cc8929c04d2e92f560374cdbe5404148c`; evidence-complete branch head `d1970a527bf94325c78c2c396adf4987d9001a3e`.
 - **Current v142.17 exact runtime candidate commit:** `87000d27a1ebeef3b18e185d21462088dd32e8c1`. Evidence/docs/manifest updates after this commit must not change its four runtime blobs. Treat this as the runtime freeze for source/hosted qualification; a later material runtime-byte mutation requires a new governed candidate.
-- Current state: **SOURCE REGRESSION TESTS PASS; MANIFEST/ZIP/HOSTED/PHYSICAL GATES SEPARATE**. No approval to deploy to App-Test. No production authorization.
+- Current state: **SOURCE REGRESSION TESTS PASS; 317-ENTRY SOURCE MANIFEST VERIFIED; ZIP/HOSTED/PHYSICAL GATES OPEN**. No approval to deploy to App-Test. No production authorization.
 
 ## 1. Verified exact runtime identities (SHA-256 over UTF-8 bytes)
 | File | Bytes | SHA-256 |
@@ -17,7 +17,7 @@ Public identity **142.17** (format N or N.M); technical build identity `v2.19.14
 | `version.json` | 257768 | `39bdba39c21cb93e890fdd01cd33bc792449991cd8cd52bb8358557b81ad9be2` |
 | `offline_manifest.json` | 59964 | `dcf1c0e1c04a3b2a06de5ca85ccc6bd5525a2b62b6c0e7398051b0fb37a5a18f` |
 
-All four are on the candidate branch at the runtime-freeze commit. The existing generic package manifest remains an **old v142.16 manifest** until regenerated as the final step. A manifest SHA-256 is **not** a ZIP SHA-256, and no v142.17 deploy ZIP has yet been adjudicated.
+All four are on the candidate branch at the runtime-freeze commit. The generic `PACKAGE_MANIFEST_SHA256.json` has now been regenerated as the **final repository edit** to cover **317 files excluding itself**. Baseline unchanged files are bound by identical Git blob IDs; the four changed runtime files and five added or revised evidence/state files were freshly rehashed. A manifest SHA-256 is **not** a ZIP SHA-256, and no v142.17 deploy ZIP has been assembled or adjudicated. Do not insert the manifest's own hash into this state file: it is itself one of the manifest entries, creating a circular hash dependency.
 
 ## 2. Historical exact lineage and status
 ### v142.10 — production reference recorded previously
@@ -65,6 +65,6 @@ Git compare v142.16→v142.17 shows *only* four runtime files changed, plus evid
 **Runtime mutation authority:** NONE after declared v142.17 freeze at `87000d27...`. Reopen only on demonstrated defect with new successor candidate/version. **App-Test deployment authority:** NONE. **Production deployment authority:** NONE. Deployment must never silently update `main` or any protected surface. Exact live-tested bytes must be promoted without rebuilding. A source-only PASS is not a release PASS.
 
 ## 7. Remaining mandatory gates / next authorized decision
-Finish the last v142.17 evidence/manifest ledger; verify its exact entries and hashes. A ZIP if independently assembled must receive its own SHA-256. For App-Test, obtain explicit owner authorization and bind every served runtime asset to the candidate. Then browser smoke and the focused physical protocol `LDC_v142.17_PHYSICAL_RETEST_PROTOCOL_2026-10-08.md`: iPhone Mon Espace paragraph target, iPhone portrait→landscape×5 with browser chrome, iPad, installed PWA, VoiceOver, Resume and Search. Any FAIL blocks promotion and requires governed successor bytes.
+The v142.17 317-entry evidence/manifest ledger has been generated and checked against repository paths and byte counts; 308 predecessor paths are Git-blob-identical and the other nine files have current SHA-256 values. A ZIP if independently assembled must receive its own SHA-256. For App-Test, obtain explicit owner authorization and bind every served runtime asset to the candidate. Then browser smoke and the focused physical protocol `LDC_v142.17_PHYSICAL_RETEST_PROTOCOL_2026-10-08.md`: iPhone Mon Espace paragraph target, iPhone portrait→landscape×5 with browser chrome, iPad, installed PWA, VoiceOver, Resume and Search. Any FAIL blocks promotion and requires governed successor bytes.
 
 **Current decision: source correction promising; NO App-Test or production authority; no physical claim.**
