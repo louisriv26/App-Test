@@ -599,6 +599,24 @@ h2.dn-section-title{margin-bottom:0;}
 
 /* Prev/next nav */
 .entry-nav{display:flex;gap:8px;padding:12px 22px 20px;flex-shrink:0;border-top:0.5px solid var(--border);}
+/* v142.16 physical-gate repair: in a genuinely short Reader viewport, preserve
+   a useful reading window by yielding global chrome before text. Safe areas stay
+   reserved; the mode is measurement-driven, not orientation- or device-name-driven. */
+body.reader-low-height{padding-bottom:var(--sat-bot);}
+body.reader-low-height #nav{display:none;}
+body.reader-low-height #version-badge{bottom:calc(var(--sat-bot) + 6px);}
+body.reader-low-height #update-banner{bottom:calc(var(--sat-bot) + 18px);}
+body.reader-low-height #toast{bottom:calc(var(--sat-bot) + 14px);}
+body.reader-low-height #seltext-panel{bottom:calc(var(--sat-bot) + 8px);}
+body.reader-low-height #cp-overlay{bottom:var(--sat-bot);}
+body.reader-low-height #screen-reader .reader-top{padding-top:calc(var(--sat-top) + 4px);padding-bottom:4px;}
+body.reader-low-height #screen-reader .source-mode-bar.reader-context-bar{padding-top:4px;padding-bottom:4px;}
+body.reader-low-height #screen-reader .reader-context-back{min-height:44px;padding-top:6px;padding-bottom:6px;}
+body.reader-low-height #screen-reader .documentary-view-status.show{padding:4px 8px;gap:6px;align-items:center;flex-direction:row;}
+body.reader-low-height #screen-reader .documentary-view-status-actions{flex-wrap:nowrap;}
+body.reader-low-height #screen-reader .entry-nav{padding-top:4px;padding-bottom:4px;}
+body.reader-low-height #screen-reader .enav-btn{min-height:44px;padding:6px 8px;}
+body.reader-low-height #screen-reader .mark-read-btn{min-height:44px;}
 /* R18 R3: favourite state must change paint, never geometry.
    The bundled Tabler font has no ti-heart-filled glyph; the former Arial ♥ fallback
    was visibly smaller than the outline heart. Both states now use the same closed
@@ -2619,11 +2637,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE'; // bounded release-truth/scope successor of frozen v142.14; protected corpus, provenance records, retrieval runtime and ranking preserved
-const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.15'; // single authoritative public identity derived from APP_VERSION
+const APP_VERSION = 'v2.19.142.16-R1B-READER-PHYSICAL-GATE-REPAIR'; // bounded successor of frozen v142.15 after physical iPhone Reader findings; corpus/search/provenance/user-state schemas preserved
+const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.16'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD = '2026-10-07';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.15-R1B-release-truth-scope-closure';
+const APP_BUILD = '2026-10-08';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.16-R1B-reader-physical-gate-repair';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -3791,7 +3809,7 @@ function showScreen(id) {
   const leavingSearch=id!=='search'&&document.getElementById('screen-search')?.classList.contains('active');
   if(leavingSearch)resetRootHorizontalViewport('leave-search');
   if (id !== 'entries') { if(typeof releaseEntriesReturnLock==='function')releaseEntriesReturnLock('screen:'+id); if(typeof releaseTomeStartLock==='function')releaseTomeStartLock('screen:'+id); }
-  if (id !== 'reader') {clearEntryStartTargetLock('screen:'+id);resetReaderInteractionContext('screen:'+id);}
+  if (id !== 'reader') {clearEntryStartTargetLock('screen:'+id);resetReaderInteractionContext('screen:'+id);clearReaderLowHeightMode('screen:'+id);}
   if (id !== 'search') cancelActiveSearch('navigation');
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-' + id).classList.add('active');
@@ -3803,7 +3821,7 @@ function showScreen(id) {
   if (ni) ni.classList.add('active');
   if(journeyPointSelectionGuide&&!['tomes','entries','reader'].includes(id))clearJourneyPointSelectionGuide();
   if(id==='reader'&&journeyPointSelectionGuide&&!journeyRecoverableReplacementIntent)clearJourneyPointSelectionGuide();else syncJourneySelectionGuide();
-  if(id==='reader')scheduleJourneyUiRefresh();
+  if(id==='reader'){scheduleJourneyUiRefresh();requestAnimationFrame(()=>updateReaderLowHeightMode('show-reader'));}
 }
 
 async function finishReaderForPermanentNavigation(destination){
@@ -4587,12 +4605,33 @@ async function restoreNavigationContext(ctx){
   if(ctx.screen==='home'){await goHome();return;}if(ctx.screen==='parcours'){goParcours();return;}if(ctx.screen==='tomes'){await finishReaderForPermanentNavigation('tomes');await restoreTomesNavigationContext(ctx);return;}await goTomes();
 }
 
+let semanticLayoutRestoreSeq=0;
 function scheduleSemanticLayoutRestore(){
-  if(!document.getElementById('screen-reader')?.classList.contains('active')||!liveSemanticPosition)return;
+  const reader=document.getElementById('screen-reader');
+  if(!reader?.classList.contains('active')){clearReaderLowHeightMode('reader-inactive');return;}
   clearTimeout(semanticResizeTimer);
-  if(entryStartLockMatchesVisible()){semanticResizeTimer=setTimeout(()=>enforceEntryStartTargetLock('semantic-layout-restore'),140);return;}
-  const pos=Object.assign({},liveSemanticPosition);
-  semanticResizeTimer=setTimeout(()=>restoreSemanticReadingPosition(pos),140);
+  const seq=++semanticLayoutRestoreSeq;
+  const identity=visibleReaderIdentitySnapshot();
+  const pos=(liveSemanticPosition&&semanticPositionMatchesVisibleEntry(liveSemanticPosition))
+    ? Object.assign({},liveSemanticPosition)
+    : captureSemanticReadingPosition();
+  const entryStartWasLocked=entryStartLockMatchesVisible();
+  semanticResizeTimer=setTimeout(()=>{
+    if(seq!==semanticLayoutRestoreSeq||!visibleReaderIdentityMatches(identity))return;
+    updateReaderLowHeightMode('viewport-settle');
+    resetRootScrollForReaderHandoff();
+    requestAnimationFrame(()=>{
+      if(seq!==semanticLayoutRestoreSeq||!visibleReaderIdentityMatches(identity))return;
+      if(entryStartWasLocked&&entryStartLockMatchesVisible())enforceEntryStartTargetLock('semantic-layout-restore');
+      else if(pos)restoreSemanticReadingPosition(pos);
+      resetRootScrollForReaderHandoff();
+      requestAnimationFrame(()=>{
+        if(seq!==semanticLayoutRestoreSeq||!visibleReaderIdentityMatches(identity))return;
+        resetRootScrollForReaderHandoff();
+        if(!entryStartLockMatchesVisible()&&!semanticRestoreInProgress)liveSemanticPosition=captureSemanticReadingPosition()||pos||liveSemanticPosition;
+      });
+    });
+  },180);
 }
 window.addEventListener('resize',scheduleSemanticLayoutRestore,{passive:true});
 window.addEventListener('orientationchange',scheduleSemanticLayoutRestore,{passive:true});
@@ -5188,6 +5227,60 @@ function beginEntriesToReaderHandoff(button,originContext){
 }
 function resetRootScrollForReaderHandoff(){
   try{window.scrollTo(0,0);}catch(_){}const se=document.scrollingElement;if(se)se.scrollTop=0;if(document.documentElement)document.documentElement.scrollTop=0;if(document.body)document.body.scrollTop=0;
+}
+function readerMinimumUsefulHeightPx(){
+  const raw=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--reader-size'))||19;
+  return Math.max(110,Math.ceil(raw*1.85*3+18));
+}
+function readerNavHeightPx(){
+  const raw=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'));
+  return Number.isFinite(raw)?raw:58;
+}
+function readerLowHeightDecision(currentHeight,alreadyCompact,minHeight,navHeight){
+  const current=Math.max(0,Number(currentHeight)||0),min=Math.max(0,Number(minHeight)||0),nav=Math.max(0,Number(navHeight)||0);
+  if(!alreadyCompact)return current<min;
+  // Compact mode itself recovers the global nav plus roughly 40 px of Reader
+  // vertical padding. Exit only when the projected normal layout has headroom,
+  // preventing resize/orientation oscillation around the threshold.
+  const projectedNormal=Math.max(0,current-nav-40);
+  return projectedNormal<(min+36);
+}
+function clearReaderLowHeightMode(reason='clear'){
+  if(document.body.classList.contains('reader-low-height'))document.body.classList.remove('reader-low-height');
+}
+function updateReaderLowHeightMode(reason='layout'){
+  const reader=document.getElementById('screen-reader'),sc=document.getElementById('reader-scroll');
+  if(!reader?.classList.contains('active')||!sc){clearReaderLowHeightMode(reason);return {active:false,changed:false,reason};}
+  const was=document.body.classList.contains('reader-low-height');
+  const min=readerMinimumUsefulHeightPx(),current=sc.clientHeight,nav=readerNavHeightPx();
+  const next=readerLowHeightDecision(current,was,min,nav);
+  if(next!==was)document.body.classList.toggle('reader-low-height',next);
+  return {active:next,changed:next!==was,reason,current_height:current,min_height:min,nav_height:nav};
+}
+function positionReaderElementInScroller(target,opts={}){
+  const sc=document.getElementById('reader-scroll'),identity=visibleReaderIdentitySnapshot();
+  if(!target||!sc||!identity||!readerScreenIsVisible())return false;
+  const offset=Math.max(0,Number(opts.offset)||0),max=Math.max(0,sc.scrollHeight-sc.clientHeight);
+  const sr=sc.getBoundingClientRect(),tr=target.getBoundingClientRect();
+  const desired=Math.max(0,Math.min(max,sc.scrollTop+(tr.top-sr.top)-offset));
+  semanticRestoreInProgress=true;
+  resetRootScrollForReaderHandoff();
+  sc.scrollTop=desired;
+  requestAnimationFrame(()=>{
+    if(!visibleReaderIdentityMatches(identity)){semanticRestoreInProgress=false;return;}
+    resetRootScrollForReaderHandoff();
+    const sr2=sc.getBoundingClientRect(),tr2=target.getBoundingClientRect(),max2=Math.max(0,sc.scrollHeight-sc.clientHeight);
+    const correction=(tr2.top-sr2.top)-offset;
+    if(Math.abs(correction)>.5)sc.scrollTop=Math.max(0,Math.min(max2,sc.scrollTop+correction));
+    requestAnimationFrame(()=>{
+      semanticRestoreInProgress=false;
+      if(!visibleReaderIdentityMatches(identity))return;
+      resetRootScrollForReaderHandoff();
+      liveSemanticPosition=captureSemanticReadingPosition()||liveSemanticPosition;
+      readerDiagStage('reader target positioned',{reason:opts.reason||'target',root_scroll_y:Number(window.scrollY)||0,reader_scroll_top:Number(sc.scrollTop)||0});
+    });
+  });
+  return true;
 }
 async function isolateEntriesSourceBeforeReaderExposure(token){
   if(!token||token.source_isolated)return;const list=document.getElementById('entries-list');if(!list)return;
@@ -5903,7 +5996,7 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
       const el   = document.getElementById('p_' + paraId);
       const frag = fragmentEl(paraId) || el;
       if (!el) { failClosedVisibleReaderToEntryStart(readerIdentity); return; }
-      el.scrollIntoView({ behavior: reduceMotionPreferred() ? 'auto' : 'smooth', block: 'start' });
+      if(!positionReaderElementInScroller(el,{offset:0,reason:'pending-paragraph'})){failClosedVisibleReaderToEntryStart(readerIdentity);return;}
       if (frag) {
         frag.classList.add('target');
         setTimeout(() => frag.classList.remove('target'), 2000);
@@ -8735,8 +8828,9 @@ function paintTransientSearchTarget(target){
   setTimeout(removeTransientSearchMarks,5000);
 }
 function focusPendingSearchReaderTarget(target){
-  if(!target)return false;const first=(target.match_parts&&target.match_parts[0])||target.primary_target||target;const paraId=first.para_id||first.id;if(!paraId)return false;const frag=fragmentEl(paraId,Number(first.canonical_start));const sc=document.getElementById('reader-scroll');if(!frag||!sc)return false;
-  const sr=sc.getBoundingClientRect(),fr=frag.getBoundingClientRect(),rootY=window.scrollY;sc.scrollTop=Math.max(0,sc.scrollTop+(fr.top-sr.top)-24);requestAnimationFrame(()=>{if(window.scrollY!==rootY)window.scrollTo(window.scrollX,rootY);});paintTransientSearchTarget(target);return true;
+  if(!target)return false;const first=(target.match_parts&&target.match_parts[0])||target.primary_target||target;const paraId=first.para_id||first.id;if(!paraId)return false;const frag=fragmentEl(paraId,Number(first.canonical_start));if(!frag)return false;
+  if(!positionReaderElementInScroller(frag,{offset:24,reason:'search-target'}))return false;
+  paintTransientSearchTarget(target);return true;
 }
 async function openFromSearch(item) {
   const editorialNo=tome1EditorialNoteNumber(item&&item.entry_id);if(editorialNo)return openTome1EditorialAppendix('search',editorialNo);
@@ -9676,7 +9770,10 @@ async function setTextLevel(level) {
   const context = captureTextSizeContext();
   applyTextLevel(level);
   await new Promise(requestAnimationFrame);
+  updateReaderLowHeightMode('text-level');
+  await new Promise(requestAnimationFrame);
   restoreTextSizeContext(context);
+  if(context&&context.kind==='reader')resetRootScrollForReaderHandoff();
   // Font-size changes rewrap the active reading/documentation surface without
   // necessarily emitting resize. Preserve the same semantic/visual place.
   if(contextOcclusionState.active)requestAnimationFrame(()=>refreshContextOcclusionCompensation());
