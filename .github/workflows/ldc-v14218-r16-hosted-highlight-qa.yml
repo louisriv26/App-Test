@@ -1,0 +1,42 @@
+name: LDC v142.18 R16 hosted MassFinder Beta highlighted Reader and Mon Espace QA
+on:
+  push:
+    branches: [ldc-v142-18-reader-semantic-integration-wip-20261008]
+    paths:
+      - '.github/workflows/ldc-v14218-r16-hosted-highlight-qa.yml'
+      - '.github/ldc-v14218-r16-hosted-highlight-qa.mjs'
+permissions: {contents: write}
+jobs:
+  hosted-highlight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ephemeral Chromium automation
+        run: npm install --no-save playwright-core@1.55.0
+      - name: Test hosted highlight and Mon Espace Reader geometry
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/ldc-v14218-r16-hosted-highlight-qa.mjs
+      - name: Preserve exact PASS and FAIL evidence without touching live hosted site
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ ! -f LDC_v142.18_R16_MASSFINDERBETA_HOSTED_HIGHLIGHT_QA.json ]; then
+            printf '{"status":"FAIL","errors":["HIGHLIGHT_TEST_EMITTED_NO_JSON"],"checks":{}}\n' > LDC_v142.18_R16_MASSFINDERBETA_HOSTED_HIGHLIGHT_QA.json
+          fi
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_R16_MASSFINDERBETA_HOSTED_HIGHLIGHT_QA.json
+          git commit -m 'test(ldc): real hosted synthetic highlight, return and layout QA'
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-r16-massfinderbeta-hosted-highlight-MON-ESPACE
+          path: LDC_v142.18_R16_MASSFINDERBETA_HOSTED_HIGHLIGHT_QA.json
+          retention-days: 14
+      - name: Fail closed if hosted highlight regression was observed
+        run: python3 -c "import json;x=json.load(open('LDC_v142.18_R16_MASSFINDERBETA_HOSTED_HIGHLIGHT_QA.json')); assert x.get('status')=='PASS_SCOPED_HOSTED_HIGHLIGHT_MON_ESPACE',x.get('status')"
