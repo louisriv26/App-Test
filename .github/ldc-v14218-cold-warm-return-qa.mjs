@@ -27,8 +27,9 @@ try{
  const positive=protocol.positives.find(p=>p.id==='OWNER-REAL-02');
  const resourceMetrics=()=>({
    modelParts:finished.filter(x=>/model_int8\.onnx\.part0[1-4]/.test(x.url)).length,
-   metadata:finished.filter(x=>x.url.includes('/pls_v16/pack/metadata.jsonl')).length,
-   vectors:finished.filter(x=>x.url.includes('/pls_v16/pack/vectors.i8')).length,
+   distinctModelParts:[...new Set(finished.filter(x=>/model_int8\.onnx\.part0[1-4]/.test(x.url)).map(x=>x.url))].length,
+   metadata:finished.filter(x=>x.url.includes('pls_v16/pack/metadata.jsonl')).length,
+   vectors:finished.filter(x=>x.url.includes('pls_v16/pack/vectors.i8')).length,
    totalPLSRequests:finished.length,
    distinctResources:[...new Set(finished.map(x=>x.url))].length
  });
@@ -48,7 +49,7 @@ try{
    total:performance.memory?.totalJSHeapSize||null}),positive.target_entry_id);
  const resourceCold=resourceMetrics();
  measured('cold_loaded_qualified_pack_and_found_owner_target',cold.ready&&cold.confidence==='possible'&&cold.rank===1&&cold.n>0,{ms:coldElapsed,...cold,network:resourceCold});
- measured('cold_verified_four_static_onnx_parts',resourceCold.modelParts===4,resourceCold);
+ measured('cold_verified_four_static_onnx_parts',resourceCold.distinctModelParts===4&&resourceCold.modelParts>=4&&resourceCold.metadata>0&&resourceCold.vectors>0,resourceCold);
  const t1=Date.now();
  await page.evaluate(async q=>{setSearchQueryDraft(q,{mode:'meaning',syncOther:true});await runSearch()},positive.text);
  await page.waitForFunction(()=>!searchBusyGeneration,null,{timeout:180000});
@@ -71,7 +72,7 @@ try{
    {ms:returnMs,...returned,network:resourceReturn});
  measured('no_runtime_errors',errors.length===0,errors);
  report.measurements.resource_details={first:(resourceCold),warm:resourceWarm,returned:resourceReturn,
-   loaded_urls:[...new Set(finished.map(x=>x.url))],heap_note:'Chromium JS heap is not device peak memory. All memory gates physical OPEN.'};
+   loaded_urls:[...new Set(finished.map(x=>x.url))],request_note:'Completed browser requests can include HTTP-cache re-reads; they do not establish twice the over-network bytes.',heap_note:'Chromium JS heap is not device peak memory. All memory gates physical OPEN.'};
  report.status=Object.values(report.checks).every(Boolean)?'PASS':'FAIL';
 }catch(e){report.errors.push('HARNESS_OR_APP:'+String(e.stack||e));report.status='FAIL'}
 finally{
