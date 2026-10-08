@@ -1,0 +1,134 @@
+{
+  "schema": "ldc-v14218-204-resource-real-offline-browser-v1",
+  "source_sha": "adcb0ca39250ac62b3f0a997e2da7fbe02d2427b",
+  "status": "PASS",
+  "checks": {
+    "fresh_profile_sw_ready": true,
+    "fresh_profile_offline_not_prepared": true,
+    "verified_all_204_assets_downloaded": true,
+    "frozen_corpus_binding_preserved": true,
+    "independent_browser_sha256_all_204": true,
+    "offline_reload_and_SW_status_ready": true,
+    "offline_first_middle_last_tomes_readable": true,
+    "no_unhandled_page_errors": true
+  },
+  "details": {
+    "fresh_profile_sw_ready": {
+      "active": true,
+      "scope": "http://127.0.0.1:8951/",
+      "controller": true,
+      "version": "142.18"
+    },
+    "fresh_profile_offline_not_prepared": {
+      "state": "NOT_PREPARED",
+      "total": 204,
+      "completed": 0,
+      "failed": []
+    },
+    "elapsed_prepare_seconds": 1,
+    "verified_all_204_assets_downloaded": {
+      "state": "READY",
+      "completed": 204,
+      "total": 204,
+      "failed": [],
+      "totalBytes": 114483048,
+      "manifestCount": 204,
+      "manifestTotalBytes": 114483048,
+      "manifestBinding": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+      "elapsedUiMessage": "Préparation complète."
+    },
+    "frozen_corpus_binding_preserved": {
+      "state": "READY",
+      "completed": 204,
+      "total": 204,
+      "failed": [],
+      "totalBytes": 114483048,
+      "manifestCount": 204,
+      "manifestTotalBytes": 114483048,
+      "manifestBinding": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+      "elapsedUiMessage": "Préparation complète."
+    },
+    "independent_browser_sha256_all_204": {
+      "cache": "ldc-le-livre-du-ciel-offline-persistent-v3-cf925474",
+      "verified": 204,
+      "errors": [],
+      "bytes": 114483048,
+      "examples": [
+        {
+          "p": "corpus/date_id_reconciliation_r7.json",
+          "size": 7519,
+          "sha256": "8c7f5e6620a4eba719a2ea272a8809b4ea6af29350046958206eaf982baa7162"
+        },
+        {
+          "p": "corpus/display_01.json",
+          "size": 2496,
+          "sha256": "9774ad6430982a15b1b0321e5967052d8b22cb4effcdfa6c2723fa80c2c70b93"
+        },
+        {
+          "p": "corpus/display_02.json",
+          "size": 1982,
+          "sha256": "8157821949fbf32564efb158a6ca6f3100940c0e3b17e279789139eeed3b99da"
+        },
+        {
+          "p": "corpus/display_03.json",
+          "size": 2544,
+          "sha256": "e5cc1a9e8960cb00cd05c0557f01b088b3ab350895aac57fa6066cab4d16f2ce"
+        },
+        {
+          "p": "corpus/display_04.json",
+          "size": 10621,
+          "sha256": "e8545d4639ad766a1a42392a65ee946dd6adf65a290c471c4ca37a1ba716987f"
+        }
+      ],
+      "cacheEntryCount": 205,
+      "manifestTotal": 114483048
+    },
+    "offline_reload_and_SW_status_ready": {
+      "state": "READY",
+      "completed": 204,
+      "total": 204,
+      "version": "142.18",
+      "screen": "screen-home",
+      "volumeEntries": [
+        {
+          "vol": 1,
+          "n": 124,
+          "first": "ldc_t01_sec001"
+        },
+        {
+          "vol": 18,
+          "n": 26,
+          "first": "LDC.T18.E0001"
+        },
+        {
+          "vol": 36,
+          "n": 46,
+          "first": "LDC.T36.E0001"
+        }
+      ]
+    },
+    "offline_first_middle_last_tomes_readable": [
+      {
+        "vol": 1,
+        "n": 124,
+        "first": "ldc_t01_sec001"
+      },
+      {
+        "vol": 18,
+        "n": 26,
+        "first": "LDC.T18.E0001"
+      },
+      {
+        "vol": 36,
+        "n": 46,
+        "first": "LDC.T36.E0001"
+      }
+    ],
+    "no_unhandled_page_errors": []
+  },
+  "errors": [],
+  "evidence_scope": "FRESH LOCAL CHROMIUM PROFILE ONLY; NOT LIVE ORIGIN, NOT PHYSICAL SAFARI",
+  "deployment_authority": "NONE",
+  "app_test_hosted_gate": "OPEN",
+  "physical_device_gate": "OPEN"
+}
