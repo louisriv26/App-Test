@@ -81,6 +81,9 @@ try{
  // Actual Return button, not programmatic navigation: the search results must survive.
  await page.locator('#reader-back-btn').click();
  await page.waitForFunction(()=>document.getElementById('screen-search')?.classList.contains('active'),null,{timeout:30000});
+ // The real Return handler intentionally reruns the search asynchronously; do not
+ // confuse the intermediate cleared results pane with a failed restoration.
+ await page.waitForFunction(()=>!searchBusyGeneration&&document.querySelectorAll('#search-results .result-card').length>0,null,{timeout:180000});
  const returning=await page.evaluate(()=>({cards:document.querySelectorAll('#search-results .result-card').length,query:searchQueryDraftCanonical(),semantic:!!searchLastPayload?.semantic}));
  report.details.return_to_search=returning;
  report.checks.return_preserves_semantic_results=returning.cards>0&&returning.query===query.text&&returning.semantic===true;
