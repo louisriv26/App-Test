@@ -1,0 +1,246 @@
+{
+  "schema": "ldc-v14218-exact-current-source-asset-attestation-v1",
+  "status": "PASS_SOURCE_ONLY",
+  "head": "d6e4c0c9a3e54d1c45e0977ed8ef19429379f5cd",
+  "branch": "ldc-v142-18-reader-semantic-integration-wip-20261008",
+  "authoritative_reader": "56a306997a37ab975a573774a97fa976a40ffe40",
+  "authoritative_semantic": "39b9ec90ab3b2199b1738e96b353cc6b27d9cac0",
+  "deployment_authorized": false,
+  "physical_iphone_ipad": "OPEN",
+  "hosted_origin_e16_e19": "OPEN",
+  "curated_release_zip": "NOT_CREATED",
+  "checks": {
+    "proper_branch": true,
+    "main_immutable": true,
+    "reader_immutable": true,
+    "semantic_immutable": true,
+    "protected_byte_delta_empty": true,
+    "path_exists_index.html": true,
+    "path_exists_sw.js": true,
+    "path_exists_version.json": true,
+    "path_exists_offline_manifest.json": true,
+    "path_exists_pls_v16/semantic_pack_manifest.json": true,
+    "path_exists_pls_v16/runtime_v1.mjs": true,
+    "path_exists_search_semantic_pack_guard_r4.js": true,
+    "path_exists_search_semantic_hybrid_r6.js": true,
+    "path_exists_search_semantic_pack_registry_r6.js": true,
+    "pack_manifest_frozen": true,
+    "pack_verified_v16_status": true,
+    "frozen_pack_flag_immutable": true,
+    "pack_bind_matches_current_corpus": true,
+    "qualified_file_count_20": true,
+    "exists_pls_v15/model/config.json": true,
+    "bytes_pls_v15/model/config.json": true,
+    "sha256_pls_v15/model/config.json": true,
+    "exists_pls_v15/model/quant_config.json": true,
+    "bytes_pls_v15/model/quant_config.json": true,
+    "sha256_pls_v15/model/quant_config.json": true,
+    "exists_pls_v15/model/tokenizer.json": true,
+    "bytes_pls_v15/model/tokenizer.json": true,
+    "sha256_pls_v15/model/tokenizer.json": true,
+    "exists_pls_v15/model/sentencepiece.bpe.model": true,
+    "bytes_pls_v15/model/sentencepiece.bpe.model": true,
+    "sha256_pls_v15/model/sentencepiece.bpe.model": true,
+    "exists_pls_v15/model/tokenizer_config.json": true,
+    "bytes_pls_v15/model/tokenizer_config.json": true,
+    "sha256_pls_v15/model/tokenizer_config.json": true,
+    "exists_pls_v15/model/special_tokens_map.json": true,
+    "bytes_pls_v15/model/special_tokens_map.json": true,
+    "sha256_pls_v15/model/special_tokens_map.json": true,
+    "exists_pls_v15/model/onnx/model_int8.onnx.part01": true,
+    "bytes_pls_v15/model/onnx/model_int8.onnx.part01": true,
+    "sha256_pls_v15/model/onnx/model_int8.onnx.part01": true,
+    "exists_pls_v15/model/onnx/model_int8.onnx.part02": true,
+    "bytes_pls_v15/model/onnx/model_int8.onnx.part02": true,
+    "sha256_pls_v15/model/onnx/model_int8.onnx.part02": true,
+    "exists_pls_v15/model/onnx/model_int8.onnx.part03": true,
+    "bytes_pls_v15/model/onnx/model_int8.onnx.part03": true,
+    "sha256_pls_v15/model/onnx/model_int8.onnx.part03": true,
+    "exists_pls_v15/model/onnx/model_int8.onnx.part04": true,
+    "bytes_pls_v15/model/onnx/model_int8.onnx.part04": true,
+    "sha256_pls_v15/model/onnx/model_int8.onnx.part04": true,
+    "exists_pls_v15/runtime/transformers.min.js": true,
+    "bytes_pls_v15/runtime/transformers.min.js": true,
+    "sha256_pls_v15/runtime/transformers.min.js": true,
+    "exists_pls_v15/runtime/ort-wasm-simd-threaded.jsep.mjs": true,
+    "bytes_pls_v15/runtime/ort-wasm-simd-threaded.jsep.mjs": true,
+    "sha256_pls_v15/runtime/ort-wasm-simd-threaded.jsep.mjs": true,
+    "exists_pls_v15/runtime/ort-wasm-simd-threaded.jsep.wasm": true,
+    "bytes_pls_v15/runtime/ort-wasm-simd-threaded.jsep.wasm": true,
+    "sha256_pls_v15/runtime/ort-wasm-simd-threaded.jsep.wasm": true,
+    "exists_pls_v16/pack/metadata.jsonl": true,
+    "bytes_pls_v16/pack/metadata.jsonl": true,
+    "sha256_pls_v16/pack/metadata.jsonl": true,
+    "exists_pls_v16/pack/vectors.i8": true,
+    "bytes_pls_v16/pack/vectors.i8": true,
+    "sha256_pls_v16/pack/vectors.i8": true,
+    "exists_pls_v16/pack/inverse_norms.f32le": true,
+    "bytes_pls_v16/pack/inverse_norms.f32le": true,
+    "sha256_pls_v16/pack/inverse_norms.f32le": true,
+    "exists_pls_v16/pack/jesus_mask.bits": true,
+    "bytes_pls_v16/pack/jesus_mask.bits": true,
+    "sha256_pls_v16/pack/jesus_mask.bits": true,
+    "exists_pls_v16/evidence/coverage.json": true,
+    "bytes_pls_v16/evidence/coverage.json": true,
+    "sha256_pls_v16/evidence/coverage.json": true,
+    "exists_pls_v16/evidence/token_coverage.json": true,
+    "bytes_pls_v16/evidence/token_coverage.json": true,
+    "sha256_pls_v16/evidence/token_coverage.json": true,
+    "exists_pls_v16/evidence/calibration_evidence_v2.json": true,
+    "bytes_pls_v16/evidence/calibration_evidence_v2.json": true,
+    "sha256_pls_v16/evidence/calibration_evidence_v2.json": true,
+    "frozen_assets_total_213290251": true,
+    "html_identity": true,
+    "worker_identity": true,
+    "version_manifest_revision_identity": true,
+    "offline_manifest_revision_identity": true,
+    "offline204_count": true,
+    "offline_corpus_binding": true,
+    "binding_recomputed_exactly": true,
+    "worker_has_shell_list": true,
+    "shell_search_semantic_pack_guard_r4.js": true,
+    "shell_search_semantic_v3_core_r4.js": true,
+    "shell_search_semantic_hybrid_r6.js": true,
+    "shell_search_semantic_pack_registry_r6.js": true,
+    "shell_pls_v16/runtime_v1.mjs": true,
+    "heavy_213mb_not_mandatory_shell": true,
+    "bounded_50_mb_runtime_corpus_cache": true,
+    "cache_corpus_unchanged": true
+  },
+  "sha256": {
+    "index.html": "88e5c30d20175956dbf8c0d50d3acaa9b0c5ba5fe38e03132fe6278ae01d24a2",
+    "sw.js": "e1325ff22ecbcb91b3da0806917f0744a02d803b1fe414e05eb8d796b33fab3e",
+    "version.json": "87f0ecd8c9bd0dd644cc8faf3bb10c28c43fbc03725678d6ab357c52b3e03e07",
+    "offline_manifest.json": "cf65b9bd1891ac9f97254e59ec3173a3418e62fc65f3932d32c2b62a5a7eeebb",
+    "pls_v16/semantic_pack_manifest.json": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
+    "pls_v16/runtime_v1.mjs": "e5e50095ddf357d91c66f1cef041454d137b025fcc048626568578f17a714831",
+    "search_semantic_pack_guard_r4.js": "aced3565042d321acde4a57fe8eb2f66dc9ecf440f7998fbb262640e41d154bc",
+    "search_semantic_hybrid_r6.js": "8f9932f1820bb2b609ed4faa55c0a332d04cbd3891b083b697e298c6bf276be5",
+    "search_semantic_pack_registry_r6.js": "46311725f9f4652cbaabe8f5ff4fa156a98490c173870dc41a1b4953dead9681"
+  },
+  "git_blob": {
+    "index.html": "7c589ad28c28225ae06e91638f14aed9281a8a92",
+    "sw.js": "edf16e62df857668eeb6e9050ab01c663849c950",
+    "version.json": "00bdc71d5ca8dc34d6762838ba68e9c5e996228d",
+    "offline_manifest.json": "46b5701a8685ab359c8d12c4efe845cc49987c9b",
+    "pls_v16/semantic_pack_manifest.json": "ce2db3a22936a1458204578ef30f26b59a5b1666",
+    "pls_v16/runtime_v1.mjs": "f1cad887ba3d66b5779b7b297fa82fa34de42244",
+    "search_semantic_pack_guard_r4.js": "881310837947a4be302b99840c9ac48369cd2ef0",
+    "search_semantic_hybrid_r6.js": "741b157757e4337414474b1aad33bf8a54174016",
+    "search_semantic_pack_registry_r6.js": "f95905ae8965c95f86768fbf4c1d1f774df074dc"
+  },
+  "bytes": {
+    "index.html": 936861,
+    "sw.js": 32245,
+    "version.json": 258823,
+    "offline_manifest.json": 59976,
+    "pls_v16/semantic_pack_manifest.json": 11263,
+    "pls_v16/runtime_v1.mjs": 8351,
+    "search_semantic_pack_guard_r4.js": 19176,
+    "search_semantic_hybrid_r6.js": 7012,
+    "search_semantic_pack_registry_r6.js": 8968
+  },
+  "assets": [
+    {
+      "path": "pls_v15/model/config.json",
+      "bytes": 658,
+      "sha256": "cb99455288675345e1a4f411438d5d0adbba5fbd3a67ea4fb03c015433b996c1"
+    },
+    {
+      "path": "pls_v15/model/quant_config.json",
+      "bytes": 674,
+      "sha256": "59d175f15264115f18c698d76e443b5d49fc6c8c599911c421405ef4f236e87d"
+    },
+    {
+      "path": "pls_v15/model/tokenizer.json",
+      "bytes": 17082730,
+      "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
+    },
+    {
+      "path": "pls_v15/model/sentencepiece.bpe.model",
+      "bytes": 5069051,
+      "sha256": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865"
+    },
+    {
+      "path": "pls_v15/model/tokenizer_config.json",
+      "bytes": 443,
+      "sha256": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+    },
+    {
+      "path": "pls_v15/model/special_tokens_map.json",
+      "bytes": 167,
+      "sha256": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7"
+    },
+    {
+      "path": "pls_v15/model/onnx/model_int8.onnx.part01",
+      "bytes": 33554432,
+      "sha256": "9c7a0217a704e04730bfab95b5e7bb30fbfce8e7b52d3ff99e1c3e27b61ab154"
+    },
+    {
+      "path": "pls_v15/model/onnx/model_int8.onnx.part02",
+      "bytes": 33554432,
+      "sha256": "29568675ff4b34bd1bc095c7d1cea2199ec3c1982abe55774abb581dccf348f9"
+    },
+    {
+      "path": "pls_v15/model/onnx/model_int8.onnx.part03",
+      "bytes": 33554432,
+      "sha256": "e7c83ce9252e21adda1c217a34227b7908373e60f8a4d9372a7de227e3bf09be"
+    },
+    {
+      "path": "pls_v15/model/onnx/model_int8.onnx.part04",
+      "bytes": 17391297,
+      "sha256": "3d139d822eda2faa724472b251e7773dc85cd6be643388367cc10346f1fe57ca"
+    },
+    {
+      "path": "pls_v15/runtime/transformers.min.js",
+      "bytes": 888173,
+      "sha256": "aa5002b70e789798da263f5f99c62bd3e8fcd0c119258a493c40c180648365fa"
+    },
+    {
+      "path": "pls_v15/runtime/ort-wasm-simd-threaded.jsep.mjs",
+      "bytes": 44484,
+      "sha256": "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9"
+    },
+    {
+      "path": "pls_v15/runtime/ort-wasm-simd-threaded.jsep.wasm",
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39"
+    },
+    {
+      "path": "pls_v16/pack/metadata.jsonl",
+      "bytes": 41639213,
+      "sha256": "25d1032044996d2eed8cab3b2c9d6bfbfab91349f0ac6e49ef168c307654b24f"
+    },
+    {
+      "path": "pls_v16/pack/vectors.i8",
+      "bytes": 8783232,
+      "sha256": "e7c252118ad8b867737da54c9dcfba36932f54f67f036d6240380140e8c05708"
+    },
+    {
+      "path": "pls_v16/pack/inverse_norms.f32le",
+      "bytes": 91492,
+      "sha256": "27c6d376f1021f56b7c2e365eedf97603cc519a403bf1bcfc9c94d772fdeea47"
+    },
+    {
+      "path": "pls_v16/pack/jesus_mask.bits",
+      "bytes": 2860,
+      "sha256": "8935332736286b4b8238966e7a12ee2049d5fab0816a666061db7cb2c9ee56b0"
+    },
+    {
+      "path": "pls_v16/evidence/coverage.json",
+      "bytes": 726,
+      "sha256": "7b801284ce5c81f3db7d7cf53f170e8a4653acb8939bee643669aecfff47f4fe"
+    },
+    {
+      "path": "pls_v16/evidence/token_coverage.json",
+      "bytes": 570,
+      "sha256": "7b72be25dd61d72df9cda6cfbcfc6351af341b25d3b1d172f78e3f86ab59e403"
+    },
+    {
+      "path": "pls_v16/evidence/calibration_evidence_v2.json",
+      "bytes": 35166,
+      "sha256": "8d6205b096fb7094a3ab42e34bc8ec55049c1caa148f39a3750f911961ff8c9b"
+    }
+  ],
+  "recomputed_offline_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384"
+}
