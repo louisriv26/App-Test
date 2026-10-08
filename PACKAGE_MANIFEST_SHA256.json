@@ -1,39 +1,28 @@
 {
   "schema": "ldc-package-manifest-sha256-v1",
-  "candidate_public_version": "142.15",
-  "technical_identity": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
-  "generated_date": "2026-10-07",
-  "byte_predecessor_public_version": "142.14",
-  "byte_predecessor_app_version": "v2.19.142.14-R1B-BLIND-AUDIT-CLOSURE",
-  "byte_predecessor_zip_sha256": "f02098cf3432c0373c9fbd698b0551d79b3a024f739883a501293a6932ce24cd",
-  "byte_predecessor_status": "FROZEN_PRE_PHYSICAL_SUPERSEDED_BY_V142_15_BOUNDED_RELEASE_TRUTH_SCOPE_CLOSURE",
+  "candidate_public_version": "142.16",
+  "technical_identity": "v2.19.142.16-R1B-READER-PHYSICAL-GATE-REPAIR",
+  "generated_date": "2026-10-08",
+  "exact_frozen_runtime_commit": "15fb524cc8929c04d2e92f560374cdbe5404148c",
+  "byte_predecessor_public_version": "142.15",
+  "byte_predecessor_app_version": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
+  "byte_predecessor_zip_sha256": "cca03c4a6e07cd7f25b4a6a8cc6caadaf912ede76354a0b71236c93d2dd728bc",
+  "byte_predecessor_manifest_sha256": "4b01800e94b2c1809a75c2b9cfae920867344ac74d61cf17b9d85af558eac956",
+  "byte_predecessor_status": "FROZEN_PRE_PHYSICAL_REJECTED_BY_IPHONE_READER_PHYSICAL_FINDINGS__SUPERSEDED_BY_V142_16_BOUNDED_READER_PHYSICAL_GATE_REPAIR",
   "protected_production_baseline_public_version": "142.10",
   "protected_production_baseline_zip_sha256": "c5ef73e6738ef8e2b586dfeb5ff44d4569860d023706e704e940fd365692a460",
   "current_qualification_evidence": [
-    "LDC_v142.15_RELEASE_TRUTH_SCOPE_MACHINE_QA_2026-10-07.json",
-    "LDC_v142.15_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
-    "LDC_v142.15_EVIDENCE_INDEX_2026-10-07.json"
+    "LDC_v142.16_READER_PHYSICAL_GATE_REPAIR_MACHINE_QA_2026-10-08.json",
+    "LDC_v142.16_READER_PHYSICAL_GATE_REPAIR_INDEPENDENT_BLIND_CHALLENGE_2026-10-08.json",
+    "LDC_v142.16_EVIDENCE_INDEX_2026-10-08.json"
+  ],
+  "open_gate_material": [
+    "LDC_v142.16_PHYSICAL_RETEST_PROTOCOL_2026-10-08.md"
   ],
   "superseded_or_historical_predecessor_evidence": [
-    "LDC_v142.11_DOCUMENTARY_READING_UX_ADVERSARIAL_REVIEW_2026-10-06.json",
-    "LDC_v142.11_DOCUMENTARY_READING_UX_MACHINE_QA_2026-10-06.json",
-    "LDC_v142.11_DOCUMENTARY_RESOLVER_STATE_QA_2026-10-06.json",
-    "LDC_v142.11_HEADLESS_BROWSER_QA_2026-10-06.json",
-    "LDC_v142.11_PROTECTED_FUNCTION_IDENTITY_2026-10-06.json",
-    "LDC_v142.11_PROTECTED_SURFACE_BYTE_IDENTITY_2026-10-06.json",
-    "LDC_v142.11_PUBLIC_PROVENANCE_LABEL_AUDIT_2026-10-06.json",
-    "LDC_v142.12_DOCUMENTARY_CONSISTENCY_ADVERSARIAL_REVIEW_2026-10-07.json",
-    "LDC_v142.12_DOCUMENTARY_CONSISTENCY_MACHINE_QA_2026-10-07.json",
-    "LDC_v142.12_HEADLESS_BROWSER_QA_2026-10-07.json",
-    "LDC_v142.12_PUBLIC_PROVENANCE_CONSISTENCY_AUDIT_2026-10-07.json",
-    "LDC_v142.12_TWO_BASELINE_INTEGRITY_2026-10-07.json",
-    "LDC_v142.13_EVIDENCE_INDEX_2026-10-07.json",
-    "LDC_v142.13_HEADLESS_BROWSER_QA_2026-10-07.json",
-    "LDC_v142.13_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
-    "LDC_v142.13_PLS_PACK_INDEPENDENT_INTEGRITY_2026-10-07.json",
-    "LDC_v142.13_RELEASE_TRUTH_RECONCILIATION_2026-10-07.json",
-    "LDC_v142.13_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
-    "LDC_v142.13_STATIC_AND_PROTECTED_INTEGRITY_QA_2026-10-07.json",
+    "LDC_v142.15_RELEASE_TRUTH_SCOPE_MACHINE_QA_2026-10-07.json",
+    "LDC_v142.15_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
+    "LDC_v142.15_EVIDENCE_INDEX_2026-10-07.json",
     "LDC_v142.14_PASS1_BUILD_PROTECTED_INTEGRITY_2026-10-07.json",
     "LDC_v142.14_PASS2_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
     "LDC_v142.14_PASS3_EVIDENCE_RECONCILIATION_2026-10-07.json",
@@ -42,9 +31,18 @@
     "LDC_v142.14_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
     "LDC_v142.14_EVIDENCE_INDEX_2026-10-07.json"
   ],
-  "qualification_scope": "V142_15_BOUNDED_E15_PUBLIC_RELEASE_TRUTH_AND_E07_PAR_LE_SENS_SCOPE_DISCLOSURE_CLOSURE__PROTECTED_CORPUS_SEARCH_PLS_V15_PROVENANCE_DOCUMENTARY_RESOLVER_SESSION_BACKUP_USER_SCHEMA_UNCHANGED__PRE_PHYSICAL_ONLY",
-  "predecessor_manifest_handling": "V142_14_PACKAGE_MANIFEST_USED_AS_VERIFIED_INHERITED_LEDGER__REGENERATED_LAST_FOR_V142_15_AFTER_FINAL_RUNTIME_FREEZE_AND_FRESH_V142_15_EVIDENCE",
-  "file_count_excluding_manifest": 308,
+  "qualification_scope": "V142_16_BOUNDED_IPHONE_READER_PHYSICAL_GATE_REPAIR__PARAGRAPH_TARGET_ROOT_SCROLL_OWNERSHIP__LOW_HEIGHT_READER_LAYOUT__ROTATION_RESTORE_HARDENING__PROTECTED_CORPUS_SEARCH_PLS_PROVENANCE_USER_SCHEMA_OFFLINE_CONTENT_UNCHANGED__PRE_HOSTED_PRE_PHYSICAL",
+  "runtime_mutation_boundary_relative_to_v14215": [
+    "index.html",
+    "offline_manifest.json",
+    "sw.js",
+    "version.json"
+  ],
+  "predecessor_manifest_handling": "V142_15_PACKAGE_MANIFEST_USED_AS_VERIFIED_INHERITED_LEDGER__ONLY_CHANGED_RUNTIME_FILES_AND_NEW_V142_16_EVIDENCE_REHASHED__MANIFEST_REGENERATED_LAST",
+  "mutation_authority": "NONE_FOR_RUNTIME_AFTER_15fb524c__ANY_RUNTIME_BYTE_CHANGE_CREATES_SUCCESSOR",
+  "deployment_authority": "NONE",
+  "production_authorized": false,
+  "file_count_excluding_manifest": 312,
   "files": [
     {
       "path": "assets/fonts/crimson-text-latin-400-italic.woff",
@@ -1198,8 +1196,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 926044,
-      "sha256": "73f8092aa5ecef482d015d3f62847f1e0d4343410c0375657b92388dc3a8af9d"
+      "bytes": 932474,
+      "sha256": "c1b6af56b25d5d7ee419d765f76c2c73d374730578915cd0f4e209a1b0b531c3"
     },
     {
       "path": "interaction_anchor.js",
@@ -1362,6 +1360,26 @@
       "sha256": "f06ec3b1493cb0f0d64bef4a5b140de7f9f1059343ed36b2463a1ec61c7b1993"
     },
     {
+      "path": "LDC_v142.16_EVIDENCE_INDEX_2026-10-08.json",
+      "bytes": 3009,
+      "sha256": "1e876ef29a53566619c5778502aee3b25d175ff69e4305a7f0e247f3933a2041"
+    },
+    {
+      "path": "LDC_v142.16_PHYSICAL_RETEST_PROTOCOL_2026-10-08.md",
+      "bytes": 5165,
+      "sha256": "33cf75d6d378772f8d4c27bd84797ad6501c9ed32e908451320d10830b4ad33f"
+    },
+    {
+      "path": "LDC_v142.16_READER_PHYSICAL_GATE_REPAIR_INDEPENDENT_BLIND_CHALLENGE_2026-10-08.json",
+      "bytes": 4310,
+      "sha256": "ca5305a7ad794dd2a44b79ec4a9eee7e1140010576280b565001c52f108648d7"
+    },
+    {
+      "path": "LDC_v142.16_READER_PHYSICAL_GATE_REPAIR_MACHINE_QA_2026-10-08.json",
+      "bytes": 5543,
+      "sha256": "55b8d5b00e43061509cdc3cd24f4efd4d5e4d1e9d70c2c3c189fe435f8aa92b1"
+    },
+    {
       "path": "LDC_v142.2_PLS_OWNER_PROTOTYPE_MACHINE_QA_2026-10-06.json",
       "bytes": 8422,
       "sha256": "25b476f85887cfd41807c634609b2a609dcd57ee8652e29a86d268847ba946c5"
@@ -1404,7 +1422,7 @@
     {
       "path": "offline_manifest.json",
       "bytes": 59968,
-      "sha256": "dfd462fda6f38481ea195f373273db17473e9d3b4b47d955c4f77808ac9f2264"
+      "sha256": "35721f05cc13d6b85abca309206e50d85d480cc10d0b2fdec0690130043f51a6"
     },
     {
       "path": "pls_v15/FILTERED_V142_COMPAT_SMOKETEST.json",
@@ -1579,18 +1597,12 @@
     {
       "path": "sw.js",
       "bytes": 32278,
-      "sha256": "715f3f7c8847473ec5ee6522991e19f7f314da995c6be9af7e821ddc17f84491"
+      "sha256": "1c0b9168c72bfbd514838041963101a59f0487335fa79269a4713ceb65a6309d"
     },
     {
       "path": "version.json",
-      "bytes": 253556,
-      "sha256": "9f317209af27610a9dab4b9e1cf7a2392151644eefbff86401e28718ed286d20"
+      "bytes": 255947,
+      "sha256": "4cbccfcad4b3306b4a3ad700d9f92c108071a11da1adf3a5212bcf4e214a42c4"
     }
-  ],
-  "application_mutation_boundary_relative_to_v14214": [
-    "index.html",
-    "offline_manifest.json",
-    "sw.js",
-    "version.json"
   ]
 }
