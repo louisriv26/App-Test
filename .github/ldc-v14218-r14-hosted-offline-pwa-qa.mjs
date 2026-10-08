@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { chromium } from 'playwright-core';
 const APP='https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/';
-const report={schema:'ldc-v14218-r14-hosted-massfinderbeta-offline-personal-state-browser-v1',
+const report={schema:'ldc-v14218-r14-hosted-massfinderbeta-offline-personal-state-browser-v2-outcome-based-semantic',
  tested_at:new Date().toISOString(),app:APP,source_commit:'7c292d6221bb350fac3aeaa83750b8784706d45c',
  status:'NOT_RUN',checks:{},details:{},errors:[],warnings:[],
  scope:'Actual live GitHub Pages MassFinder Beta, fresh isolated Chromium profile, synthetic notes/collections only, no repository/production mutation',
@@ -72,9 +72,13 @@ try{
  const unready=await p.evaluate(()=>({busy:!!searchBusyGeneration,
   results:document.querySelectorAll('#search-results .result-card').length,
   message:document.getElementById('search-results')?.innerText?.slice(0,400),
-  runtimePresent:typeof LDCPLSV16Runtime==='object',semanticReady:typeof LDCPLSV16Runtime==='object'&&LDCPLSV16Runtime.status().ready}));
- ck('hosted_unprepared_semantic_offline_reports_unavailable_no_false_word_fallback',
-  !unready.busy&&unready.results===0&&/par le sens indisponible/i.test(unready.message||''),unready);
+  runtimePresent:typeof LDCPLSV16Runtime==='object',semanticReady:typeof LDCPLSV16Runtime==='object'&&LDCPLSV16Runtime.status().ready,
+  semanticPayload:searchLastPayload?.semantic===true, top:searchLastPayload?.payload?.results?.[0]?.entry_id||null}));
+ const offlineSemanticSucceeded=unready.semanticReady&&unready.semanticPayload&&unready.results===20&&!unready.busy;
+ const offlineSemanticTruthfulUnavailable=unready.results===0&&!unready.busy&&/par le sens indisponible/i.test(unready.message||'');
+ ck('hosted_offline_semantic_real_20_results_or_truthful_unavailable_no_spurious_lexical_fallback',
+  offlineSemanticSucceeded||offlineSemanticTruthfulUnavailable,
+  {...unready,adjudication:offlineSemanticSucceeded?'REAL_OFFLINE_SEMANTIC_SUCCESS':offlineSemanticTruthfulUnavailable?'TRUTHFUL_UNAVAILABLE':'INVALID_OFFLINE_RESULT'});
  // After return online, demonstrate the exact notes/corpus remain.
  await ctx.setOffline(false);
  await p.reload({waitUntil:'domcontentloaded',timeout:120000});
