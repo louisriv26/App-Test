@@ -1,0 +1,185 @@
+{
+  "schema": "ldc-v142.16-reader-physical-gate-repair-machine-qa-v1",
+  "date": "2026-10-08",
+  "candidate_public_version": "142.16",
+  "technical_identity": "v2.19.142.16-R1B-READER-PHYSICAL-GATE-REPAIR",
+  "exact_frozen_runtime_commit": "15fb524cc8929c04d2e92f560374cdbe5404148c",
+  "direct_predecessor": {
+    "public_version": "142.15",
+    "technical_identity": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
+    "commit": "572d9df7927765b575a76eaee98fd3cc9d455e74",
+    "package_sha256": "cca03c4a6e07cd7f25b4a6a8cc6caadaf912ede76354a0b71236c93d2dd728bc",
+    "package_manifest_sha256": "4b01800e94b2c1809a75c2b9cfae920867344ac74d61cf17b9d85af558eac956",
+    "physical_status": "REJECTED_FOR_READER_IPHONE_FINDINGS"
+  },
+  "trigger": [
+    "iPhone physical test: Mon Espace -> paragraph-targeted highlight could shift the root document, leaving Reader chrome mid-screen with a large gap below.",
+    "iPhone Safari physical test: portrait -> landscape could compress #reader-scroll to an unusably short window while Reader/global chrome remained visible."
+  ],
+  "exact_runtime_hashes": {
+    "index.html": {
+      "bytes": 932474,
+      "sha256": "c1b6af56b25d5d7ee419d765f76c2c73d374730578915cd0f4e209a1b0b531c3"
+    },
+    "sw.js": {
+      "bytes": 32278,
+      "sha256": "1c0b9168c72bfbd514838041963101a59f0487335fa79269a4713ceb65a6309d"
+    },
+    "version.json": {
+      "bytes": 255947,
+      "sha256": "4cbccfcad4b3306b4a3ad700d9f92c108071a11da1adf3a5212bcf4e214a42c4"
+    },
+    "offline_manifest.json": {
+      "bytes": 59968,
+      "sha256": "35721f05cc13d6b85abca309206e50d85d480cc10d0b2fdec0690130043f51a6"
+    }
+  },
+  "changed_runtime_files": [
+    "index.html",
+    "offline_manifest.json",
+    "sw.js",
+    "version.json"
+  ],
+  "summary": {
+    "total": 28,
+    "pass": 28,
+    "fail": 0
+  },
+  "checks": [
+    {
+      "name": "index_inline_js_syntax",
+      "pass": true
+    },
+    {
+      "name": "sw_js_syntax",
+      "pass": true
+    },
+    {
+      "name": "four_way_release_identity_coherent",
+      "pass": true
+    },
+    {
+      "name": "exact_v142_15_predecessor_package_bound",
+      "pass": true
+    },
+    {
+      "name": "production_not_authorized",
+      "pass": true
+    },
+    {
+      "name": "offline_asset_count_preserved_204",
+      "pass": true
+    },
+    {
+      "name": "offline_content_binding_preserved",
+      "pass": true,
+      "detail": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384"
+    },
+    {
+      "name": "offline_assets_ledger_identical_to_v142_15",
+      "pass": true,
+      "detail": 204
+    },
+    {
+      "name": "pending_paragraph_scrollIntoView_removed",
+      "pass": true
+    },
+    {
+      "name": "pending_paragraph_uses_internal_reader_scroller",
+      "pass": true
+    },
+    {
+      "name": "search_target_uses_same_internal_reader_scroller",
+      "pass": true
+    },
+    {
+      "name": "reader_target_root_scroll_reset_before_after",
+      "pass": true,
+      "detail": "3 reset calls in target primitive"
+    },
+    {
+      "name": "reader_target_stale_callback_guard",
+      "pass": true
+    },
+    {
+      "name": "reader_target_immediate_semantic_refresh",
+      "pass": true
+    },
+    {
+      "name": "low_height_mode_measurement_driven_not_orientation_driven",
+      "pass": true
+    },
+    {
+      "name": "low_height_mode_preserves_safe_area",
+      "pass": true
+    },
+    {
+      "name": "low_height_mode_yields_global_nav",
+      "pass": true
+    },
+    {
+      "name": "low_height_mode_focus_protection",
+      "pass": true
+    },
+    {
+      "name": "fixed_auxiliary_bottom_offset_contract_preserved",
+      "pass": true
+    },
+    {
+      "name": "viewport_restore_identity_bound_and_debounced",
+      "pass": true
+    },
+    {
+      "name": "viewport_restore_root_scroll_reset",
+      "pass": true
+    },
+    {
+      "name": "text_size_rechecks_low_height_before_anchor_restore",
+      "pass": true
+    },
+    {
+      "name": "compact_hysteresis_normal_too_short",
+      "pass": true
+    },
+    {
+      "name": "compact_hysteresis_normal_adequate",
+      "pass": true
+    },
+    {
+      "name": "compact_hysteresis_compact_stays_short",
+      "pass": true
+    },
+    {
+      "name": "compact_hysteresis_compact_exits_with_headroom",
+      "pass": true
+    },
+    {
+      "name": "root_cause_present_in_exact_v142_15_predecessor",
+      "pass": true
+    },
+    {
+      "name": "bounded_git_delta_only_four_runtime_metadata_files",
+      "pass": true
+    }
+  ],
+  "protected_surfaces": [
+    "all corpus payload files unchanged",
+    "Par les mots index/payload/ranking files unchanged",
+    "Par le sens engine/model/pack/ranking files unchanged",
+    "provenance payloads and public documentary wording unchanged",
+    "user-state schema/IndexedDB stores unchanged",
+    "offline content asset list and content binding unchanged"
+  ],
+  "open_gates": [
+    "fresh hosted App-Test browser smoke after deployment of the exact v142.16 candidate",
+    "physical iPhone Reader paragraph-target regression",
+    "physical iPhone portrait-landscape-portrait Reader regression including Safari chrome visible",
+    "physical iPad regression",
+    "installed-PWA low-height/orientation regression",
+    "existing v142.15 open VoiceOver/PWA/update gates as applicable"
+  ],
+  "mutation_authority": "NONE_FOR_RUNTIME_AFTER_COMMIT_15fb524c__ANY_RUNTIME_BYTE_CHANGE_REQUIRES_NEW_SUCCESSOR",
+  "deployment_authority": "NONE",
+  "production_authorized": false,
+  "verdict": "PASS_MACHINE_SCOPE__RUNTIME_FROZEN__HOSTED_AND_PHYSICAL_GATES_OPEN"
+}
