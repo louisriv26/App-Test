@@ -1,0 +1,47 @@
+name: LDC inspect exact frozen ZIP QA workflow run (non-deploy)
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-inspect-zip-ci-status.yml'
+permissions:
+  contents: write
+  actions: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch recent actual GitHub workflow run steps
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json,os,urllib.request,pathlib
+          base='https://api.github.com/repos/louisriv26/App-Test'
+          def get(s):
+            req=urllib.request.Request(base+s,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'LDC-status-probe','X-GitHub-Api-Version':'2022-11-28'})
+            with urllib.request.urlopen(req,timeout=35) as x:return json.load(x)
+          result={'schema':'ldc-v14218-exact-archived-zip-run-status-v1','status':'DIAGNOSTIC_ONLY','deploy_authority':'NONE','runs':[]}
+          for a in get('/actions/workflows/ldc-v14218-exact-zip-browser-qa.yml/runs?per_page=8&branch=ldc-v142-18-reader-semantic-integration-wip-20261008').get('workflow_runs',[])[:8]:
+            rec={'id':a['id'],'head_sha':a['head_sha'],'status':a['status'],'conclusion':a['conclusion'],'url':a['html_url'],'jobs':[]}
+            if a['status']=='completed':
+              try:
+                for job in get('/actions/runs/'+str(a['id'])+'/jobs?per_page=25').get('jobs',[]):
+                  rec['jobs'].append({'name':job.get('name'),'status':job.get('status'),'conclusion':job.get('conclusion'),'steps':[{'name':s.get('name'),'conclusion':s.get('conclusion')} for s in job.get('steps',[])]})
+              except Exception as e:rec['jobs_error']=str(e)
+            result['runs'].append(rec)
+          pathlib.Path('LDC_v142.18_EXACT_ZIP_WORKFLOW_DIAGNOSTIC.json').write_text(json.dumps(result,indent=2)+'\n')
+          print(json.dumps(result,indent=2))
+          PY
+      - name: Commit diagnostic only to isolated branch
+        run: |
+          set -euo pipefail
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_EXACT_ZIP_WORKFLOW_DIAGNOSTIC.json
+          git commit -m "test(ldc): record source-bound exact-ZIP workflow run diagnostics"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
