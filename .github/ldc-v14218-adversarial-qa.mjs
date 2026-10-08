@@ -64,6 +64,7 @@ try{
       check('reader_'+mode+'_correct_entry',String(opened.entry_id)===String(item.entry_id));
       check('reader_'+mode+'_target',opened.para_present&&opened.paragraph_visible,opened);
       check('reader_'+mode+'_usable',opened.scroller_height>=65&&opened.body_length>0);
+      if(mode==='additions')check('additions_temporary_enriched_reader',opened.supplementMode==='enriched');
       if(mode==='enriched'){
         await page.setViewportSize({width:844,height:390});await page.waitForTimeout(500);
         const land=await evalPage(page,()=>({height:document.getElementById('reader-scroll')?.clientHeight||0,text:document.getElementById('reader-body')?.innerText?.trim()?.length||0}));
@@ -76,6 +77,7 @@ try{
       await page.locator('#reader-back-btn').click();
       await page.waitForFunction(()=>document.getElementById('screen-search')?.classList.contains('active'),null,{timeout:30000});
       await page.waitForFunction(()=>!searchBusyGeneration&&searchLastPayload?.semantic===true,null,{timeout:180000});
+      if(mode==='additions'){const restored=await evalPage(page,()=>supplementMode);check('additions_mode_restored_after_back',restored==='additions',restored);}
     }catch(e){err=String(e);report.risks.push('MODE_'+mode+':'+err);
       check('reader_'+mode+'_target',false);
       await evalPage(page,async()=>{await goSearch();}).catch(()=>{});
