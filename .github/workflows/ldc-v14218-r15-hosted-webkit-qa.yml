@@ -1,0 +1,42 @@
+name: LDC v142.18 R15 actual hosted Linux WebKit browser qualification
+on:
+  push:
+    branches: [ldc-v142-18-reader-semantic-integration-wip-20261008]
+    paths:
+      - '.github/workflows/ldc-v14218-r15-hosted-webkit-qa.yml'
+      - '.github/ldc-v14218-r15-hosted-webkit-qa.mjs'
+permissions: {contents: write}
+jobs:
+  hosted-webkit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Playwright WebKit dependencies and browser on isolated GitHub runner
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps webkit
+      - name: Test actual hosted MassFinder Beta in Linux WebKit engine
+        continue-on-error: true
+        run: node .github/ldc-v14218-r15-hosted-webkit-qa.mjs
+      - name: Preserve evidence separately from deployed site
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ ! -f LDC_v142.18_R15_MASSFINDERBETA_HOSTED_WEBKIT_QA.json ]; then
+            printf '{"status":"FAIL","errors":["WEBKIT_SCRIPT_DID_NOT_EMIT_JSON"],"checks":{}}\n' > LDC_v142.18_R15_MASSFINDERBETA_HOSTED_WEBKIT_QA.json
+          fi
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_R15_MASSFINDERBETA_HOSTED_WEBKIT_QA.json
+          git commit -m 'test(ldc): R15 hosted Linux WebKit browser evidence; no app mutation'
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-r15-hosted-webkit-evidence-NOT-PHYSICAL-IOS
+          path: LDC_v142.18_R15_MASSFINDERBETA_HOSTED_WEBKIT_QA.json
+          retention-days: 14
+      - name: Fail closed unless all hosted WebKit scope tests pass
+        run: python3 -c "import json;x=json.load(open('LDC_v142.18_R15_MASSFINDERBETA_HOSTED_WEBKIT_QA.json')); assert x.get('status')=='PASS_SCOPED_HOSTED_LINUX_WEBKIT',x.get('status')"
