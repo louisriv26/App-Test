@@ -1,0 +1,143 @@
+{
+  "schema": "ldc-v14218-r14-hosted-massfinderbeta-offline-personal-state-browser-v1",
+  "tested_at": "2026-10-08T10:29:50.848Z",
+  "app": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/",
+  "source_commit": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+  "status": "FAIL",
+  "checks": {
+    "hosted_real_SW_ready_correct_app_version": true,
+    "synthetic_collection_and_note_saved_in_hosted_ephemeral_browser": true,
+    "real_hosted_offline_manifest_has_204_assets": true,
+    "live_github_pages_prepares_all_204_corpus_assets": true,
+    "hosted_offline_preparation_does_not_eagerly_load_semantic_model": true,
+    "hosted_persistent_test_data_survived_offline_preparation": true,
+    "hosted_real_offline_reload_from_204_cache": true,
+    "hosted_offline_three_tomes_remain_readable": true,
+    "hosted_personal_state_survives_actual_network_offline_reload": true,
+    "hosted_offline_par_les_mots_returns_results": true,
+    "hosted_unprepared_semantic_offline_reports_unavailable_no_false_word_fallback": false,
+    "hosted_online_reopen_after_offline_keeps_all_content_and_user_records": true,
+    "hosted_offline_and_online_no_unhandled_pageerrors": true
+  },
+  "details": {
+    "hosted_real_SW_ready_correct_app_version": {
+      "version": "142.18",
+      "db": "ldc_user_v1",
+      "reg": [
+        "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/"
+      ],
+      "cacheCount": 3,
+      "prepared": "NOT_PREPARED"
+    },
+    "synthetic_collection_and_note_saved_in_hosted_ephemeral_browser": {
+      "collectionId": 1,
+      "added": "ADDED",
+      "noteId": 1,
+      "notes": 1
+    },
+    "real_hosted_offline_manifest_has_204_assets": {
+      "state": "NOT_PREPARED",
+      "total": 204,
+      "completed": 0
+    },
+    "live_github_pages_prepares_all_204_corpus_assets": {
+      "state": "READY",
+      "completed": 204,
+      "total": 204,
+      "failed": [],
+      "semanticReady": false
+    },
+    "hosted_offline_preparation_does_not_eagerly_load_semantic_model": false,
+    "hosted_persistent_test_data_survived_offline_preparation": {
+      "notes": [
+        "R14_HOSTED_PERSONAL_STATE_DUMMY"
+      ],
+      "collections": [
+        "R14_HOSTED_COLLECTION_DISPOSABLE"
+      ],
+      "children": 1
+    },
+    "hosted_real_offline_reload_from_204_cache": {
+      "loadingHidden": true,
+      "controller": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/sw.js",
+      "status": {
+        "state": "READY",
+        "completed": 204,
+        "total": 204
+      },
+      "counts": [
+        {
+          "volume": 1,
+          "entries": 124
+        },
+        {
+          "volume": 18,
+          "entries": 26
+        },
+        {
+          "volume": 36,
+          "entries": 46
+        }
+      ],
+      "store": {
+        "notes": [
+          "R14_HOSTED_PERSONAL_STATE_DUMMY"
+        ],
+        "collections": [
+          "R14_HOSTED_COLLECTION_DISPOSABLE"
+        ],
+        "colItems": 1
+      }
+    },
+    "hosted_offline_three_tomes_remain_readable": [
+      {
+        "volume": 1,
+        "entries": 124
+      },
+      {
+        "volume": 18,
+        "entries": 26
+      },
+      {
+        "volume": 36,
+        "entries": 46
+      }
+    ],
+    "hosted_personal_state_survives_actual_network_offline_reload": {
+      "notes": [
+        "R14_HOSTED_PERSONAL_STATE_DUMMY"
+      ],
+      "collections": [
+        "R14_HOSTED_COLLECTION_DISPOSABLE"
+      ],
+      "colItems": 1
+    },
+    "hosted_offline_par_les_mots_returns_results": {
+      "results": 40,
+      "busy": false
+    },
+    "hosted_unprepared_semantic_offline_reports_unavailable_no_false_word_fallback": {
+      "busy": false,
+      "results": 20,
+      "message": "Passages classés selon leur proximité avec votre description. Cette recherche ne confirme pas que votre formulation est exacte ou vraie.\nComment ça marche ?\nTome 36 · 17 mai 1938\nL’âme est la voix, le chant et les mains pour jouer (de l’instrument). Le corps est l’orgue. Le divin Vouloir veut les plus petits actes afin de faire lever son soleil. Ce que le soleil sème sur la terre - ce que la Divin",
+      "runtimePresent": true,
+      "semanticReady": true
+    },
+    "hosted_online_reopen_after_offline_keeps_all_content_and_user_records": {
+      "version": "142.18",
+      "status": "READY",
+      "notes": 1,
+      "collections": 1
+    },
+    "hosted_offline_and_online_no_unhandled_pageerrors": {
+      "errors": [],
+      "failures": []
+    }
+  },
+  "errors": [],
+  "warnings": [],
+  "scope": "Actual live GitHub Pages MassFinder Beta, fresh isolated Chromium profile, synthetic notes/collections only, no repository/production mutation",
+  "deployment_authority": "NONE",
+  "iPhone_iPad_physical": "OPEN",
+  "old_beta_root_worker_lifecycle": "NOT_TESTED"
+}
