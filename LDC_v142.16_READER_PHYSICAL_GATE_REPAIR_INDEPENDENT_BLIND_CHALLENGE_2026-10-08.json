@@ -1,0 +1,119 @@
+{
+  "schema": "ldc-v142.16-reader-physical-gate-repair-independent-blind-challenge-v1",
+  "date": "2026-10-08",
+  "candidate_public_version": "142.16",
+  "technical_identity": "v2.19.142.16-R1B-READER-PHYSICAL-GATE-REPAIR",
+  "principle": "Treat the machine PASS and predecessor PASS labels as claims; challenge the actual frozen runtime surfaces and plausible failure paths independently.",
+  "exact_frozen_runtime_commit": "15fb524cc8929c04d2e92f560374cdbe5404148c",
+  "summary": {
+    "total": 19,
+    "pass": 19,
+    "fail": 0
+  },
+  "challenges": [
+    {
+      "name": "runtime_delta_exactly_four_files",
+      "pass": true,
+      "detail": [
+        "index.html",
+        "offline_manifest.json",
+        "sw.js",
+        "version.json"
+      ]
+    },
+    {
+      "name": "post_runtime_changes_are_evidence_only",
+      "pass": true,
+      "detail": [
+        "LDC_v142.16_READER_PHYSICAL_GATE_REPAIR_MACHINE_QA_2026-10-08.json"
+      ]
+    },
+    {
+      "name": "challenge_no_scrollIntoView_in_pending_para",
+      "pass": true
+    },
+    {
+      "name": "challenge_target_helper_never_scrolls_root_to_target",
+      "pass": true
+    },
+    {
+      "name": "challenge_target_helper_resets_all_root_scrollers",
+      "pass": true
+    },
+    {
+      "name": "challenge_target_helper_cancels_stale_viewport_restore",
+      "pass": true
+    },
+    {
+      "name": "challenge_target_helper_cancels_own_stale_callbacks",
+      "pass": true
+    },
+    {
+      "name": "challenge_search_regression_uses_same_primitive",
+      "pass": true
+    },
+    {
+      "name": "challenge_compact_mode_not_hardcoded_to_landscape",
+      "pass": true
+    },
+    {
+      "name": "challenge_compact_mode_safe_area_retained",
+      "pass": true
+    },
+    {
+      "name": "challenge_compact_mode_does_not_hide_reader_back_or_entry_nav",
+      "pass": true
+    },
+    {
+      "name": "challenge_compact_mode_global_nav_focus_escape",
+      "pass": true
+    },
+    {
+      "name": "challenge_compact_mode_cleared_on_reader_exit",
+      "pass": true
+    },
+    {
+      "name": "challenge_rotation_restore_identity_bound",
+      "pass": true
+    },
+    {
+      "name": "challenge_rotation_layout_before_semantic_restore",
+      "pass": true
+    },
+    {
+      "name": "challenge_rotation_root_reset_after_layout",
+      "pass": true
+    },
+    {
+      "name": "challenge_offline_content_binding_unchanged",
+      "pass": true,
+      "detail": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384"
+    },
+    {
+      "name": "challenge_no_production_authority",
+      "pass": true
+    },
+    {
+      "name": "challenge_generic_package_manifest_not_yet_current",
+      "pass": true,
+      "detail": "Expected WIP state before final evidence/index creation. PACKAGE_MANIFEST_SHA256.json must be regenerated last before candidate freeze."
+    }
+  ],
+  "adversarial_findings": [
+    "The two photographed iPhone defects remain treated as independent until physical retest: paragraph-target root-scroll contamination and low-height landscape Reader collapse.",
+    "The compact-mode design intentionally yields the global bottom navigation, not Reader Back or previous/read/next controls.",
+    "Focus is moved to Reader Back before the global navigation is hidden if DOM focus was inside that navigation.",
+    "Existing fixed Reader auxiliaries retain their original bottom offset rather than being moved down over the in-flow entry navigation.",
+    "The target-position transaction now cancels stale viewport restoration and stale target callbacks, reducing race risk during rotation/navigation."
+  ],
+  "open_risks": [
+    "No hosted browser execution has yet exercised the exact v142.16 branch bytes.",
+    "No physical iPhone/iPad/PWA execution has yet confirmed Safari geometry and orientation behavior.",
+    "VoiceOver must be rechecked because low-height mode can temporarily remove the global bottom navigation from the accessibility tree.",
+    "The final generic package manifest is intentionally stale until regenerated after all v142.16 evidence files are written."
+  ],
+  "verdict": "PASS_IMPLEMENTATION_SCOPE__NO_RUNTIME_REOPEN__FINAL_MANIFEST_AND_HOSTED_PHYSICAL_GATES_OPEN",
+  "mutation_authority": "NONE_FOR_RUNTIME_AFTER_15fb524c",
+  "deployment_authority": "NONE",
+  "production_authorized": false
+}
