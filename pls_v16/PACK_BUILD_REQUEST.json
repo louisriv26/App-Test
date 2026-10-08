@@ -1,0 +1,27 @@
+{
+  "schema": "ldc-pls-v16-pack-build-request-v1",
+  "status": "AUTHORIZED_ENGINEERING_PACK_BUILD_ONLY__NOT_DEPLOYMENT",
+  "vector": {
+    "run_id": 37672229541,
+    "artifact_name": "wip-pls-v16-vector-build",
+    "source_head_sha": "c379199d71d50da343f6be3a7517af1faed1bb8e",
+    "vector_sha256": "e7c252118ad8b867737da54c9dcfba36932f54f67f036d6240380140e8c05708",
+    "inverse_norms_sha256": "27c6d376f1021f56b7c2e365eedf97603cc519a403bf1bcfc9c94d772fdeea47"
+  },
+  "calibration_v2": {
+    "run_id": 37721901512,
+    "artifact_name": "wip-pls-v16-calibration-v2",
+    "source_head_sha": "99119628f0be3c121f6c4b7d40dcff6649052aa9",
+    "expected_status": "PASS_QUALIFIABLE",
+    "protocol_authority_commit": "5c89b2cb7abac92987f403ec6c6f0e3c443b35eb"
+  },
+  "metadata_sha256": "25d1032044996d2eed8cab3b2c9d6bfbfab91349f0ac6e49ef168c307654b24f",
+  "jesus_mask_sha256": "8935332736286b4b8238966e7a12ee2049d5fab0816a666061db7cb2c9ee56b0",
+  "token_coverage": {
+    "expected": 1403861,
+    "covered": 1403861,
+    "missing": 0
+  },
+  "deployment_authorized": false,
+  "app_runtime_wired": false
+}
