@@ -1,0 +1,68 @@
+{
+  "schema": "ldc-v14218-r10-large-backup-atomic-abort-qa-v1",
+  "source": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+  "zip_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
+  "status": "FAIL",
+  "checks": {
+    "frozen_273_resource_manifest": true,
+    "750_synthetic_user_notes_created": true,
+    "multi_chunk_stress_backup_stream_created": false,
+    "750_note_backup_staged_and_validated": true,
+    "real_750_note_atomic_replacement_in_fresh_profile": true,
+    "750_note_restore_persists_after_reopen": true,
+    "injected_invalid_staged_key_aborts_entire_atomic_import_without_data_loss": true,
+    "no_unhandled_browser_page_errors": false
+  },
+  "details": {
+    "750_synthetic_user_notes_created": {
+      "count": 750
+    },
+    "multi_chunk_stress_backup_stream_created": {
+      "records": 756,
+      "bytes": 375801
+    },
+    "750_note_backup_staged_and_validated": {
+      "valid": true,
+      "notes": 750,
+      "errors": [],
+      "warnings": []
+    },
+    "real_750_note_atomic_replacement_in_fresh_profile": {
+      "committed": true,
+      "notes": 750,
+      "oldCollections": 0
+    },
+    "750_note_restore_persists_after_reopen": {
+      "n": 750,
+      "first": true,
+      "last": true
+    },
+    "injected_invalid_staged_key_aborts_entire_atomic_import_without_data_loss": {
+      "rejected": true,
+      "reason": "AbortError",
+      "unchanged": true,
+      "before": {
+        "collection": [
+          "R10_ROLLBACK_SENTINEL"
+        ],
+        "notes": 750
+      },
+      "after": {
+        "collection": [
+          "R10_ROLLBACK_SENTINEL"
+        ],
+        "notes": 750
+      }
+    },
+    "no_unhandled_browser_page_errors": [
+      "DataError: Failed to execute 'put' on 'IDBObjectStore': Evaluating the object store's key path yielded a value that is not a valid key."
+    ],
+    "total_elapsed_seconds": 1
+  },
+  "errors": [],
+  "scope": "Synthetic-only 750 notes in two fresh Chromium browser profiles; no physical or hosted test",
+  "no_app_mutation": true,
+  "deployment_authority": "NONE",
+  "physical_iOS": "OPEN",
+  "hosted_E16_E19": "OPEN"
+}
