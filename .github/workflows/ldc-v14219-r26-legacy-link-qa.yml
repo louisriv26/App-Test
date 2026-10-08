@@ -1,0 +1,33 @@
+name: LDC v142.19 R26 old installed Home Screen link compatibility
+on:
+  push:
+    branches:
+      - ldc-v142-19-reader-root-height-fix-wip-20261008
+    paths:
+      - .github/workflows/ldc-v14219-r26-legacy-link-qa.yml
+permissions:
+  contents: read
+jobs:
+  old-nested-link:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: npm install --no-save playwright@1.55.0
+      - name: Start isolated synthetic old/new application browser server
+        run: |
+          mkdir -p /tmp/ldc-r22-upgrade-sites
+          nohup python3 -m http.server 8998 --bind 127.0.0.1 --directory /tmp/ldc-r22-served >/tmp/ldc-r26.log 2>&1 &
+      - name: Inspect the old installed icon destination and user data separately from new root
+        continue-on-error: true
+        run: node .github/ldc-v14219-r26-nested-old-icon.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14219-r26-old-icon-compatibility
+          path: LDC_v142.19_R26_LEGACY_NESTED_HOME_SCREEN_PATH_ADJUDICATION.json
+          retention-days: 14
+      - name: Require completed synthetic observation
+        run: python3 -c "import json;x=json.load(open('LDC_v142.19_R26_LEGACY_NESTED_HOME_SCREEN_PATH_ADJUDICATION.json'));assert 'old_nested_ldc_to_new_root' in x['details'] and 'existing_installed_old_icon_route' in x['details']['old_nested_ldc_to_new_root']"
