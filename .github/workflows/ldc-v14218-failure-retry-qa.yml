@@ -37,6 +37,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git add LDC_v142.18_FAILURE_RETRY_DOM_EVIDENCE.json
           git commit -m "test(ldc): preserve model fetch failure/retry DOM evidence"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
           git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
       - uses: actions/upload-artifact@v4
         if: always()
