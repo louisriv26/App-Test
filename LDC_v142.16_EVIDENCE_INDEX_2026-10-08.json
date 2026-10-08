@@ -1,0 +1,69 @@
+{
+  "schema": "ldc-v142.16-evidence-index-v1",
+  "date": "2026-10-08",
+  "candidate_public_version": "142.16",
+  "technical_identity": "v2.19.142.16-R1B-READER-PHYSICAL-GATE-REPAIR",
+  "direct_predecessor": {
+    "public_version": "142.15",
+    "technical_identity": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
+    "package_sha256": "cca03c4a6e07cd7f25b4a6a8cc6caadaf912ede76354a0b71236c93d2dd728bc",
+    "package_manifest_sha256": "4b01800e94b2c1809a75c2b9cfae920867344ac74d61cf17b9d85af558eac956",
+    "exact_commit": "572d9df7927765b575a76eaee98fd3cc9d455e74",
+    "physical_adjudication": "REJECTED_FOR_READER_IPHONE_FINDINGS"
+  },
+  "exact_frozen_runtime_commit": "15fb524cc8929c04d2e92f560374cdbe5404148c",
+  "current_qualification_evidence": [
+    "LDC_v142.16_READER_PHYSICAL_GATE_REPAIR_MACHINE_QA_2026-10-08.json",
+    "LDC_v142.16_READER_PHYSICAL_GATE_REPAIR_INDEPENDENT_BLIND_CHALLENGE_2026-10-08.json"
+  ],
+  "open_gate_material": [
+    "LDC_v142.16_PHYSICAL_RETEST_PROTOCOL_2026-10-08.md"
+  ],
+  "historical_predecessor_evidence": [
+    "LDC_v142.15_RELEASE_TRUTH_SCOPE_MACHINE_QA_2026-10-07.json",
+    "LDC_v142.15_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
+    "LDC_v142.15_EVIDENCE_INDEX_2026-10-07.json",
+    "LDC_v142.14_PASS1_BUILD_PROTECTED_INTEGRITY_2026-10-07.json",
+    "LDC_v142.14_PASS2_RUNTIME_FUNCTIONAL_QA_2026-10-07.json",
+    "LDC_v142.14_PASS3_EVIDENCE_RECONCILIATION_2026-10-07.json",
+    "LDC_v142.14_PASS4_CONTRADICTION_STALENESS_2026-10-07.json",
+    "LDC_v142.14_PLS_PACK_BROWSER_QUALIFICATION_2026-10-07.json",
+    "LDC_v142.14_INDEPENDENT_BLIND_CHALLENGE_2026-10-07.json",
+    "LDC_v142.14_EVIDENCE_INDEX_2026-10-07.json"
+  ],
+  "evidence_hierarchy": [
+    "exact frozen v142.16 runtime bytes/hashes and Git delta",
+    "fresh v142.16 machine QA",
+    "fresh v142.16 independent blind challenge",
+    "fresh physical-device evidence after exact App-Test deployment",
+    "v142.15 exact candidate binding and predecessor evidence",
+    "historical earlier PASS labels"
+  ],
+  "runtime_mutation_boundary": [
+    "index.html",
+    "offline_manifest.json",
+    "sw.js",
+    "version.json"
+  ],
+  "protected_surfaces": [
+    "corpus payloads unchanged",
+    "Par les mots payload/index/ranking unchanged",
+    "Par le sens engine/model/pack/ranking unchanged",
+    "provenance payloads/public wording unchanged",
+    "user-state schema/IndexedDB semantics unchanged",
+    "offline content asset set/content binding unchanged"
+  ],
+  "open_external_gates": [
+    "exact-byte App-Test deployment/binding",
+    "hosted browser smoke",
+    "physical iPhone paragraph-target regression",
+    "physical iPhone portrait-landscape-portrait Reader regression",
+    "physical iPad regression",
+    "installed-PWA regression",
+    "VoiceOver delta/remainder gates"
+  ],
+  "package_manifest_status": "TO_BE_REGENERATED_LAST_AFTER_THIS_EVIDENCE_INDEX",
+  "mutation_authority": "NONE_FOR_RUNTIME_AFTER_15fb524c",
+  "deployment_authority": "NONE",
+  "production_authorized": false
+}
