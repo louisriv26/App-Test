@@ -1,0 +1,143 @@
+{
+  "schema": "ldc-v14218-exact-archived-zip-run-status-v1",
+  "status": "DIAGNOSTIC_ONLY",
+  "deploy_authority": "NONE",
+  "runs": [
+    {
+      "id": 37741295061,
+      "head_sha": "159ef897f161cb082c1ff3be40088c158be13331",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/louisriv26/App-Test/actions/runs/37741295061",
+      "jobs": [
+        {
+          "name": "exact-frozen-package-browser",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "name": "Checkout exact previously packaged source SHA, never moving WIP branch",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@v4",
+              "conclusion": "success"
+            },
+            {
+              "name": "Reproduce existing GitHub artifact bytes from pinned source and extract",
+              "conclusion": "success"
+            },
+            {
+              "name": "Launch exact frozen ZIP as isolated local website and verify real Chromium model/Reader/SW/Return",
+              "conclusion": "success"
+            },
+            {
+              "name": "Record QA of literal archived bytes, not current moving branch",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "conclusion": "success"
+            },
+            {
+              "name": "Assert archived candidate browser QA, never release authority",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-node@v4",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Checkout exact previously packaged source SHA, never moving WIP branch",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 37741051735,
+      "head_sha": "01935a3e44f330adec8a4fbc4ffd448a3da69ac7",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/louisriv26/App-Test/actions/runs/37741051735",
+      "jobs": [
+        {
+          "name": "exact-frozen-package-browser",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "name": "Checkout exact previously packaged source SHA, never moving WIP branch",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-node@v4",
+              "conclusion": "success"
+            },
+            {
+              "name": "Reproduce existing GitHub artifact bytes from pinned source and extract",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Launch exact frozen ZIP as isolated local website and verify real Chromium model/Reader/SW/Return",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Record QA of literal archived bytes, not current moving branch",
+              "conclusion": "failure"
+            },
+            {
+              "name": "Run actions/upload-artifact@v4",
+              "conclusion": "success"
+            },
+            {
+              "name": "Assert archived candidate browser QA, never release authority",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Run actions/setup-node@v4",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Checkout exact previously packaged source SHA, never moving WIP branch",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
