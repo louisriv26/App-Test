@@ -1,0 +1,121 @@
+{
+  "schema": "ldc-v14218-semantic-cold-warm-return-resource-dom-v1",
+  "status": "FAIL",
+  "source_sha": "43da8faff0488b1c12791565dc02a85569840583",
+  "checks": {
+    "cold_boot_lazy_no_legacy_runtime": true,
+    "cold_loaded_qualified_pack_and_found_owner_target": true,
+    "cold_verified_four_static_onnx_parts": false,
+    "warm_reuses_existing_model_part_requests": true,
+    "return_does_not_refetch_frozen_model_parts": true,
+    "no_runtime_errors": true
+  },
+  "measurements": {
+    "cold_boot_lazy_no_legacy_runtime": {
+      "ready": false,
+      "legacy": false,
+      "heap": 14911680
+    },
+    "cold_loaded_qualified_pack_and_found_owner_target": {
+      "ms": 4993,
+      "ready": true,
+      "confidence": "possible",
+      "rank": 1,
+      "n": 20,
+      "heap": 313131769,
+      "total": 327785577,
+      "network": {
+        "modelParts": 8,
+        "metadata": 0,
+        "vectors": 0,
+        "totalPLSRequests": 32,
+        "distinctResources": 22
+      }
+    },
+    "cold_verified_four_static_onnx_parts": {
+      "modelParts": 8,
+      "metadata": 0,
+      "vectors": 0,
+      "totalPLSRequests": 32,
+      "distinctResources": 22
+    },
+    "warm_reuses_existing_model_part_requests": {
+      "ms": 304,
+      "ready": true,
+      "heap": 293023219,
+      "cards": 20,
+      "network": {
+        "modelParts": 8,
+        "metadata": 0,
+        "vectors": 0,
+        "totalPLSRequests": 32,
+        "distinctResources": 22
+      }
+    },
+    "return_does_not_refetch_frozen_model_parts": {
+      "ms": 202,
+      "cards": 20,
+      "heap": 304813810,
+      "ready": true,
+      "network": {
+        "modelParts": 8,
+        "metadata": 0,
+        "vectors": 0,
+        "totalPLSRequests": 32,
+        "distinctResources": 22
+      }
+    },
+    "no_runtime_errors": [],
+    "resource_details": {
+      "first": {
+        "modelParts": 8,
+        "metadata": 0,
+        "vectors": 0,
+        "totalPLSRequests": 32,
+        "distinctResources": 22
+      },
+      "warm": {
+        "modelParts": 8,
+        "metadata": 0,
+        "vectors": 0,
+        "totalPLSRequests": 32,
+        "distinctResources": 22
+      },
+      "returned": {
+        "modelParts": 8,
+        "metadata": 0,
+        "vectors": 0,
+        "totalPLSRequests": 32,
+        "distinctResources": 22
+      },
+      "loaded_urls": [
+        "pls_v16/runtime_v1.mjs",
+        "pls_v15/runtime/transformers.min.js",
+        "pls_v16/semantic_pack_manifest.json",
+        "pls_v15/model/config.json",
+        "pls_v15/model/quant_config.json",
+        "pls_v15/model/tokenizer.json",
+        "pls_v15/model/sentencepiece.bpe.model",
+        "pls_v15/model/tokenizer_config.json",
+        "pls_v15/model/special_tokens_map.json",
+        "pls_v15/model/onnx/model_int8.onnx.part01",
+        "pls_v15/model/onnx/model_int8.onnx.part02",
+        "pls_v15/model/onnx/model_int8.onnx.part03",
+        "pls_v15/model/onnx/model_int8.onnx.part04",
+        "pls_v15/runtime/ort-wasm-simd-threaded.jsep.mjs",
+        "pls_v15/runtime/ort-wasm-simd-threaded.jsep.wasm",
+        "pls_v16/pack/metadata.jsonl",
+        "pls_v16/pack/vectors.i8",
+        "pls_v16/pack/inverse_norms.f32le",
+        "pls_v16/pack/jesus_mask.bits",
+        "pls_v16/evidence/coverage.json",
+        "pls_v16/evidence/token_coverage.json",
+        "pls_v16/evidence/calibration_evidence_v2.json"
+      ],
+      "heap_note": "Chromium JS heap is not device peak memory. All memory gates physical OPEN."
+    }
+  },
+  "errors": [],
+  "scope": "LOCAL_CHROMIUM_ONLY__NOT_PEAK_PROCESS_OR_PHYSICAL_SAFARI",
+  "deployment_authority": "NONE"
+}
