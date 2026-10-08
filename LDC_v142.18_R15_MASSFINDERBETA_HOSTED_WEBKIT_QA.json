@@ -1,0 +1,31 @@
+{
+  "schema": "ldc-v14218-r15-actual-hosted-linux-webkit-independent-qa-v1",
+  "tested_at": "2026-10-08T10:31:24.092Z",
+  "url": "https://louisriv26.github.io/mauritius-mass-finder-beta/ldc/",
+  "status": "FAIL",
+  "checks": {
+    "real_hosted_Linux_WebKit_mobile_app_boot": true,
+    "hosted_Linux_WebKit_real_lexical_search": true
+  },
+  "details": {
+    "real_hosted_Linux_WebKit_mobile_app_boot": {
+      "version": "142.18",
+      "db": "ldc_user_v1",
+      "screen": "screen-home",
+      "viewport": {
+        "w": 390,
+        "h": 844
+      }
+    },
+    "hosted_Linux_WebKit_real_lexical_search": {
+      "count": 40,
+      "busy": false
+    }
+  },
+  "errors": [
+    "page.waitForFunction: Timeout 120000ms exceeded.\n    at /home/runner/work/App-Test/App-Test/.github/ldc-v14218-r15-hosted-webkit-qa.mjs:26:13"
+  ],
+  "scope": "Real hosted MassFinderBeta, actual Linux Playwright WebKit; NOT iOS Safari/physical iPhone or iPad; disposable browsing session.",
+  "deployment_authority": "NONE",
+  "iOS_gate": "OPEN"
+}
