@@ -1,0 +1,49 @@
+name: LDC v142.18 isolated 204 corpus cache download/hash/offline-reopen QA
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-offline-204-qa.yml'
+      - '.github/ldc-v14218-offline-204-qa.mjs'
+permissions:
+  contents: write
+jobs:
+  actual-offline-204:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install --no-save playwright-core@1.55.0
+      - name: Fresh local Chromium PWA full 204-asset offline download and real cache SHA-256 checks
+        id: actual
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+        run: node .github/ldc-v14218-offline-204-qa.mjs
+      - name: Preserve byte-bound evidence without touching application files
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_204_ASSET_OFFLINE_DOM_QA.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_204_ASSET_OFFLINE_DOM_QA.json
+          git commit -m "test(ldc): preserve full 204-resource offline cache and offline reopen QA"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-full-204-offline-browser-evidence
+          path: LDC_v142.18_204_ASSET_OFFLINE_DOM_QA.json
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Fail closed unless every isolated local offline gate passes
+        run: python3 -c "import json;assert json.load(open('LDC_v142.18_204_ASSET_OFFLINE_DOM_QA.json'))['status']=='PASS'"
