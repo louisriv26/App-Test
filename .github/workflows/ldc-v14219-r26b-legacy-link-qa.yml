@@ -1,0 +1,25 @@
+name: LDC R26B old icon actual browser check
+on:
+  push:
+    branches: [ldc-v142-19-reader-root-height-fix-wip-20261008]
+    paths: [.github/workflows/ldc-v14219-r26b-legacy-link-qa.yml]
+permissions: {contents: read}
+jobs:
+  observe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - run: npm install --no-save playwright@1.55.0
+      - run: |
+          mkdir -p /tmp/ldc-r22-upgrade-sites
+          nohup python3 -m http.server 8998 --bind 127.0.0.1 --directory /tmp/ldc-r22-served >/tmp/ldc-r26b.log 2>&1 &
+      - continue-on-error: true
+        run: node .github/ldc-v14219-r26b-old-icon-real-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-r26b-real-old-icon-report
+          path: LDC_v142.19_R26B_LEGACY_OLD_ICON_ACTUAL_BROWSER_ADJUDICATION.json
+      - run: python3 -c "import json;x=json.load(open('LDC_v142.19_R26B_LEGACY_OLD_ICON_ACTUAL_BROWSER_ADJUDICATION.json'));assert x['checks']['legacy_nested_home_screen_url_compatibility_observed']"
