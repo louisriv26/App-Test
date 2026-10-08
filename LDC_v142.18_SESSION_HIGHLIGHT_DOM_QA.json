@@ -1,15 +1,16 @@
 {
   "schema": "ldc-v14218-reader-session-highlight-dom-v1",
-  "status": "FAIL",
+  "status": "PASS",
   "checks": {
     "fresh_private_profile": true,
     "real_highlight_persisted": true,
     "real_highlight_painted_and_scroll_stable": true,
     "rapid_A_to_B_actual_DOM_latest_target_wins": true,
-    "new_explicit_same_entry_open_new_session": false,
-    "consultation_does_not_create_sequential_saved_position": false,
+    "same_visible_reader_rerender_preserves_session": true,
+    "consultation_does_not_overwrite_authoritative_sequential_main": true,
     "search_return_preserves_highlight_data": true,
     "highlight_repainted_on_reader_reentry": true,
+    "new_reader_session_after_actual_search_return_and_reentry": true,
     "no_unhandled_page_error": true
   },
   "details": {
@@ -32,16 +33,16 @@
     "rapid_A_to_B_actual_DOM_latest_target_wins": {
       "entry": "ldc_t01_sec113",
       "expected": "ldc_t01_sec113",
-      "session": "reader-1791441692747-2",
+      "session": "reader-1791441991801-2",
       "bodyLength": 874,
       "targetVisible": true
     },
-    "new_explicit_same_entry_open_new_session": {
-      "prior": "reader-1791441692747-2",
-      "newId": "reader-1791441692747-2",
+    "same_visible_reader_rerender_preserves_session": {
+      "prior": "reader-1791441991801-2",
+      "newId": "reader-1791441991801-2",
       "entry": "ldc_t01_sec113"
     },
-    "consultation_does_not_create_sequential_saved_position": {
+    "consultation_does_not_overwrite_authoritative_sequential_main": {
       "pos": 2,
       "highlights": 1,
       "cards": 20
@@ -53,11 +54,16 @@
     },
     "highlight_repainted_on_reader_reentry": {
       "n": 1,
-      "marks": 1
+      "marks": 1,
+      "new_session": "reader-1791441992696-3"
+    },
+    "new_reader_session_after_actual_search_return_and_reentry": {
+      "first": "reader-1791441991729-1",
+      "second": "reader-1791441992696-3"
     },
     "no_unhandled_page_error": []
   },
   "errors": [],
-  "source_sha": "6c73be95dd5602acb08c667a55b6fd17ef6ab187",
+  "source_sha": "ddc061827acefe07a07095d10d5e325cd5c64983",
   "scope": "isolated local Chromium"
 }
