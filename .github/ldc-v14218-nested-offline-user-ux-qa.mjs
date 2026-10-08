@@ -6,7 +6,7 @@ const ROOT=process.env.LDC_NESTED_FIXTURE_DIR||'',PORTS=[8992,8993],
  report={
  schema:'ldc-v14218-exact-zip-nested-two-origin-adversarial-browser-v1',
  candidate_zip_sha256:EXPECT_ZIP,candidate_source_commit:'7c292d6221bb350fac3aeaa83750b8784706d45c',
- tested_at:new Date().toISOString(),qa_iteration:'R7D_FROZEN_ZIP_USER_FACING_OFFLINE_TEXT_LEXICAL_AND_SEMANTIC_DEGRADATION',qa_script_commit:process.env.GITHUB_SHA||null,status:'NOT_RUN',checks:{},measurements:{},errors:[],
+ tested_at:new Date().toISOString(),qa_iteration:'R7D2_CORRECTED_BOTH_ORIGINS_PREPARE_WHILE_ONLINE_THEN_HARD_OFFLINE',qa_script_commit:process.env.GITHUB_SHA||null,status:'NOT_RUN',checks:{},measurements:{},errors:[],
  limits:['Ephemeral localhost:8992 vs :8993 only; NOT hosted E16/E19 closure','Chromium emulated viewport only; NOT physical iPhone/iPad Safari','No GitHub Pages or production origin visited','No permission to deploy'],
  hosted_e16:'OPEN',hosted_e19:'OPEN',physical_gate:'OPEN',deploy_authority:'NONE'};
 const check=(n,ok,info)=>{report.checks[n]=!!ok;if(info!==undefined)report.measurements[n]=info};
@@ -78,6 +78,11 @@ try{
  await a.waitForFunction(()=>['READY','ERROR','PARTIAL'].includes(offlineUiState.state),null,{timeout:20*60*1000,polling:500});
  const ready=await a.evaluate(async()=>await requestOfflineStatus());
  check('nested_exact_zip_all_204_offline_assets_cached',ready.state==='READY'&&ready.completed===204&&ready.total===204,{state:ready.state,completed:ready.completed,total:ready.total,failed:ready.failed});
+ // Also prepare origin B's exact corpus while ONLINE, without running semantic inference.
+ await b.evaluate(async()=>await startOfflinePreparation());
+ await b.waitForFunction(()=>['READY','PARTIAL','ERROR'].includes(offlineUiState.state),null,{timeout:20*60*1000,polling:500});
+ const bCorpusReady=await b.evaluate(async()=>{const x=await requestOfflineStatus();return {state:x.state,completed:x.completed,total:x.total,semanticReady:LDCPLSV16Runtime.status().ready}});
+ check('origin_B_text_corpus_prepared_without_semantic_model',bCorpusReady.state==='READY'&&bCorpusReady.completed===204&&!bCorpusReady.semanticReady,bCorpusReady);
  await context.setOffline(true);
  await a.reload({waitUntil:'domcontentloaded',timeout:90000});
  await a.waitForFunction(()=>document.getElementById('loading')&&getComputedStyle(document.getElementById('loading')).display==='none',null,{timeout:90000});
@@ -88,12 +93,8 @@ try{
  });
  check('nested_offline_fresh_reload_and_3_tomes',off.state==='READY'&&off.completed===204&&off.counts.length===3&&off.counts.every(x=>x.count>0),off);
  // Test cold offline semantic error as an explicit fail-safe, not as a promised offline feature.
- // Download TEXT corpus on origin B without ever initialising the optional semantic model:
- // this is the proper user-facing offline contract to test, not model availability offline.
- await b.evaluate(async()=>await startOfflinePreparation());
- await b.waitForFunction(()=>['READY','PARTIAL','ERROR'].includes(offlineUiState.state),null,{timeout:20*60*1000,polling:500});
- const bCorpusReady=await b.evaluate(async()=>{const s=await requestOfflineStatus();return {state:s.state,completed:s.completed,total:s.total,semanticReady:LDCPLSV16Runtime.status().ready}});
- check('origin_B_text_corpus_prepared_without_semantic_model',bCorpusReady.state==='READY'&&bCorpusReady.completed===204&&!bCorpusReady.semanticReady,bCorpusReady);
+ // Origin B text preparation was completed BEFORE context-wide offline mode.
+ // No network prepare can legitimately start after navigator.onLine becomes false.
  // Real network outage: kill origin-B HTTP server instead of trusting only browser offline emulation.
  const bBeforeHardOffline=await b.evaluate(()=>({ready:LDCPLSV16Runtime.status().ready,cacheNames:[],busy:!!searchBusyGeneration}));
  servers[1].kill('SIGTERM');await new Promise(resolve=>servers[1].once('exit',resolve));
