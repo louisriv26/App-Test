@@ -1,0 +1,90 @@
+{
+  "schema": "ldc-v14218-architectural-two-distinct-local-origins-v1",
+  "source_sha": "e824674ac26768ec40ea77365b592b1be78356e7",
+  "status": "PASS_LOCAL_SIMULATION_ONLY",
+  "checks": {
+    "local_ports_are_distinct_origins": true,
+    "same_stable_local_DB_name_each_origin": true,
+    "local_scoped_workers_only_control_ldc_folder": true,
+    "test_origin_DB_write_invisible_to_production_simulation": true,
+    "test_origin_localStorage_invisible_to_second_origin": true,
+    "test_origin_CacheStorage_invisible_to_second_origin": true,
+    "reverse_origin_DB_write_invisible_to_test_simulation": true,
+    "reverse_origin_localStorage_invisible_to_test_simulation": true,
+    "reverse_origin_CacheStorage_invisible_to_test_simulation": true,
+    "local_ldc_worker_not_controlling_sibling_path": true,
+    "neutral_local_root_has_no_worker_or_DB_logic": true
+  },
+  "measurements": {
+    "local_ports_are_distinct_origins": {
+      "a": "http://127.0.0.1:8963",
+      "b": "http://127.0.0.1:8964"
+    },
+    "local_scoped_workers_only_control_ldc_folder": {
+      "a": {
+        "origin": "http://127.0.0.1:8963",
+        "path": "/ldc/",
+        "controller": true,
+        "scope": [
+          "http://127.0.0.1:8963/ldc/"
+        ],
+        "db_name": "ldc_user_v1",
+        "cache_keys": [
+          "ldc-le-livre-du-ciel-a8d1c2d5-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-a8d1c2d5-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-offline-persistent-v3-a8d1c2d5"
+        ]
+      },
+      "b": {
+        "origin": "http://127.0.0.1:8964",
+        "path": "/ldc/",
+        "controller": true,
+        "scope": [
+          "http://127.0.0.1:8964/ldc/"
+        ],
+        "db_name": "ldc_user_v1",
+        "cache_keys": [
+          "ldc-le-livre-du-ciel-0dd1e51a-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-0dd1e51a-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-offline-persistent-v3-0dd1e51a"
+        ]
+      }
+    },
+    "test_origin_localStorage_invisible_to_second_origin": null,
+    "test_origin_CacheStorage_invisible_to_second_origin": [
+      "ldc-le-livre-du-ciel-0dd1e51a-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+      "ldc-le-livre-du-ciel-0dd1e51a-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+      "ldc-le-livre-du-ciel-offline-persistent-v3-0dd1e51a"
+    ],
+    "reverse_origin_DB_write_invisible_to_test_simulation": {
+      "key": "E19_LOCAL_EPHEMERAL_T1",
+      "val": "TEST_ONLY_ALPHA",
+      "ts": 1791442747287
+    },
+    "reverse_origin_localStorage_invisible_to_test_simulation": "TEST_ONLY_ALPHA",
+    "reverse_origin_CacheStorage_invisible_to_test_simulation": [
+      "ldc-le-livre-du-ciel-a8d1c2d5-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+      "ldc-le-livre-du-ciel-a8d1c2d5-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+      "ldc-le-livre-du-ciel-offline-persistent-v3-a8d1c2d5",
+      "E19_LOCAL_EPHEMERAL_ALPHA"
+    ],
+    "local_ldc_worker_not_controlling_sibling_path": {
+      "controller": false,
+      "scopes": [],
+      "url": "http://127.0.0.1:8963/24h/index.html",
+      "text": "Sibling app sentinel"
+    },
+    "neutral_local_root_has_no_worker_or_DB_logic": {
+      "controller": false,
+      "title": "Neutral test launcher",
+      "serviceWorkerMarkup": false
+    },
+    "isolation_scope": "ONLY local Chromium simulation; cannot close E16/E19 on GitHub-hosted same-origin environments"
+  },
+  "errors": [],
+  "hosted_e16": "OPEN",
+  "hosted_e19": "OPEN",
+  "real_production_origin_visited": false,
+  "deployment_authority": "NONE",
+  "scope": "two LOCAL ephemeral HTTP localhost:port origins in a single Chromium browser context"
+}
