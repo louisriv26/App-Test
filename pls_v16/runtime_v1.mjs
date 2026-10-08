@@ -122,7 +122,7 @@ function status(){
   const ready=phase==='ready'&&registry?.available===true&&registry?.calibration_status==='QUALIFIED';
   return {
     schema:'ldc-pls-v16-runtime-status-v1',version:VERSION,pack_id:PACK_ID,
-    available:!!ready,ready:!!ready,loading:phase==='loading',can_initialize:phase==='idle'||phase==='loading',
+    available:!!ready,ready:!!ready,loading:phase==='loading',can_initialize:phase==='idle'||phase==='loading'||phase==='failed',
     calibration_status:ready?'QUALIFIED':(phase==='failed'?'UNAVAILABLE':'PENDING_VERIFICATION'),
     model_ready:!!(tokenizer&&model),persistent_semantic_storage:false,
     error:lastError,registry
