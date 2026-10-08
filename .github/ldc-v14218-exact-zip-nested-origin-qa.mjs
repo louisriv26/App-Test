@@ -68,7 +68,10 @@ try{
  await a.setViewportSize({width:390,height:844});
  await a.locator('#reader-back-btn').click();
  await a.waitForFunction(()=>document.getElementById('screen-search')?.classList.contains('active'),null,{timeout:60000});
- check('nested_reader_return_retains_20_results',await a.evaluate(()=>document.querySelectorAll('#search-results .result-card').length===20));
+ const retImmediately=await a.evaluate(()=>({count:document.querySelectorAll('#search-results .result-card').length,searchBusy:!!searchBusyGeneration}));
+ try{await a.waitForFunction(()=>document.querySelectorAll('#search-results .result-card').length===20,null,{timeout:20000,polling:100})}catch(_){}
+ const retFinal=await a.evaluate(()=>({count:document.querySelectorAll('#search-results .result-card').length,screen:document.querySelector('.screen.active')?.id,query:searchQueryDraftCanonical(),searchBusy:!!searchBusyGeneration}));
+ check('nested_reader_return_retains_20_results',retFinal.count===20&&retFinal.screen==='screen-search'&&retFinal.query===query,{immediate:retImmediately,afterAsyncReentry:retFinal});
  const offlineBefore=await a.evaluate(async()=>await requestOfflineStatus());
  check('nested_sw_reports_exact_offline_asset_count',offlineBefore.total===204,{state:offlineBefore.state,total:offlineBefore.total});
  await a.evaluate(async()=>await startOfflinePreparation());
@@ -85,14 +88,21 @@ try{
  });
  check('nested_offline_fresh_reload_and_3_tomes',off.state==='READY'&&off.completed===204&&off.counts.length===3&&off.counts.every(x=>x.count>0),off);
  // Test cold offline semantic error as an explicit fail-safe, not as a promised offline feature.
+ // Do not mistake Playwright offline emulation for a proven outage of Service Worker network fetches:
+ // shut down port B's actual server before reloading, to prohibit every origin-B network fallback.
+ const bBeforeHardOffline=await b.evaluate(()=>({ready:LDCPLSV16Runtime.status().ready,cacheNames:[],busy:!!searchBusyGeneration}));
+ servers[1].kill('SIGTERM');await new Promise(resolve=>servers[1].once('exit',resolve));
  await b.reload({waitUntil:'domcontentloaded',timeout:90000});
  await b.waitForFunction(()=>document.getElementById('loading')&&getComputedStyle(document.getElementById('loading')).display==='none',null,{timeout:90000});
+ const bBeforeColdQuery=await b.evaluate(()=>({ready:LDCPLSV16Runtime.status().ready,canInitialize:LDCPLSV16Runtime.status().can_initialize}));
  await b.evaluate(async()=>{await goSearch();setSearchIntentMode('meaning',{rerun:false,persist:false});setSearchQueryDraft('Jésus appelle notre volonté à vivre dans la Divine Volonté',{mode:'meaning',syncOther:true});await runSearch()});
  await b.waitForFunction(()=>!searchBusyGeneration,null,{timeout:120000});
  const offlineSemantic=await b.evaluate(()=>({busy:!!searchBusyGeneration,heading:document.getElementById('search-meta')?.innerText?.slice(0,250)||'',
   cards:document.querySelectorAll('#search-results .result-card').length,notice:document.getElementById('search-results')?.innerText?.slice(0,500)||'',ready:LDCPLSV16Runtime.status().ready}));
- check('offline_uncached_semantic_fails_closed_without_spinner',!offlineSemantic.busy&&offlineSemantic.cards===0&&!offlineSemantic.ready&&
-  /(indisponible|impossible|connexion|hors ligne|pas pu|erreur)/i.test(offlineSemantic.heading+' '+offlineSemantic.notice),offlineSemantic);
+ check('offline_uncached_semantic_fails_closed_without_spinner',
+  !bBeforeColdQuery.ready&&!offlineSemantic.busy&&offlineSemantic.cards===0&&!offlineSemantic.ready&&
+  /(indisponible|impossible|connexion|hors ligne|pas pu|erreur|non encore qualifié)/i.test(offlineSemantic.heading+' '+offlineSemantic.notice),
+  {beforeOfflineMode:bBeforeHardOffline,beforeColdQuery:bBeforeColdQuery,afterAttempt:offlineSemantic,serverBTerminated:true});
  check('no_unhandled_pageerrors',!pageErrors.length,pageErrors);
  report.status=Object.values(report.checks).every(Boolean)?'PASS_EXACT_ARCHIVE_NESTED_TWO_ORIGINS_LOCAL_ONLY':'FAIL';
 }catch(e){report.status='FAIL';report.errors.push(String(e?.stack||e))}
