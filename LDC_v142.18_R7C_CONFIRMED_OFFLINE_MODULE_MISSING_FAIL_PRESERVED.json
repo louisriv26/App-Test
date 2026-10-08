@@ -1,0 +1,346 @@
+{
+  "schema": "ldc-v14218-exact-zip-nested-two-origin-adversarial-browser-v1",
+  "candidate_zip_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
+  "candidate_source_commit": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+  "tested_at": "2026-10-08T07:51:18.132Z",
+  "qa_iteration": "R7C_OFFLINE_HARD_SERVER_SHUTDOWN_AND_ASYNC_SHELL_BOOT_PROBE",
+  "qa_script_commit": "c479c5fd7507b7e151ea93bb9716da6cafd66a00",
+  "status": "FAIL",
+  "checks": {
+    "fixture_uses_exact_frozen_package_identity": true,
+    "neutral_root_not_a_PWA_and_no_DB": true,
+    "sibling_before_LDC_has_no_worker": true,
+    "nested_LDC_both_ports_boot_exact_version": true,
+    "worker_scopes_strictly_app_folder_both_origins": true,
+    "semantic_model_lazy_at_nested_boot": true,
+    "nested_worker_never_controls_sibling_24h": true,
+    "nested_worker_never_controls_neutral_root": true,
+    "origin_A_cannot_modify_B_db_or_local_or_cache": true,
+    "origin_B_cannot_modify_A_db_or_local_or_cache": true,
+    "nested_exact_zip_semantic_real_search": true,
+    "nested_reader_portrait_landscape_no_blank": true,
+    "nested_reader_return_retains_20_results": true,
+    "nested_sw_reports_exact_offline_asset_count": true,
+    "nested_exact_zip_all_204_offline_assets_cached": true,
+    "nested_offline_fresh_reload_and_3_tomes": true,
+    "offline_first_open_shell_can_boot_without_corpus_or_model": false,
+    "offline_uncached_semantic_fails_closed_without_spinner": false,
+    "no_unhandled_pageerrors": true
+  },
+  "measurements": {
+    "fixture_uses_exact_frozen_package_identity": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+    "neutral_root_not_a_PWA_and_no_DB": {
+      "controller": false,
+      "regs": [],
+      "hasIndexedDB": false
+    },
+    "sibling_before_LDC_has_no_worker": {
+      "controller": false,
+      "title": "Sibling scope sentinel"
+    },
+    "nested_LDC_both_ports_boot_exact_version": {
+      "a": {
+        "version": "142.18",
+        "db": "ldc_user_v1",
+        "scope": [
+          "http://127.0.0.1:8992/ldc/"
+        ],
+        "controller": true,
+        "cacheKeys": [
+          "ldc-le-livre-du-ciel-aad6daf1-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-aad6daf1-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-offline-persistent-v3-aad6daf1"
+        ],
+        "semanticLazy": true
+      },
+      "b": {
+        "version": "142.18",
+        "db": "ldc_user_v1",
+        "scope": [
+          "http://127.0.0.1:8993/ldc/"
+        ],
+        "controller": true,
+        "cacheKeys": [
+          "ldc-le-livre-du-ciel-4d5c7da0-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-4d5c7da0-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-offline-persistent-v3-4d5c7da0"
+        ],
+        "semanticLazy": true
+      }
+    },
+    "worker_scopes_strictly_app_folder_both_origins": {
+      "a": [
+        "http://127.0.0.1:8992/ldc/"
+      ],
+      "b": [
+        "http://127.0.0.1:8993/ldc/"
+      ]
+    },
+    "semantic_model_lazy_at_nested_boot": {
+      "a": true,
+      "b": true
+    },
+    "origin_A_cannot_modify_B_db_or_local_or_cache": {
+      "local": null,
+      "caches": [
+        "ldc-le-livre-du-ciel-4d5c7da0-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+        "ldc-le-livre-du-ciel-4d5c7da0-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+        "ldc-le-livre-du-ciel-offline-persistent-v3-4d5c7da0"
+      ]
+    },
+    "origin_B_cannot_modify_A_db_or_local_or_cache": {
+      "db": {
+        "key": "__r7_origin_probe",
+        "val": "ORIGIN_A_R7"
+      },
+      "local": "A",
+      "caches": [
+        "ldc-le-livre-du-ciel-aad6daf1-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+        "ldc-le-livre-du-ciel-aad6daf1-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+        "ldc-le-livre-du-ciel-offline-persistent-v3-aad6daf1",
+        "__r7_origin_probe_A"
+      ]
+    },
+    "nested_exact_zip_semantic_real_search": {
+      "top": "ldc_t09_1909_11_02_e001",
+      "model": true,
+      "count": 20
+    },
+    "nested_reader_portrait_landscape_no_blank": {
+      "portrait": {
+        "entry": "ldc_t09_1909_11_02_e001",
+        "body": 567,
+        "scroll": 570
+      },
+      "landscape": {
+        "entry": "ldc_t09_1909_11_02_e001",
+        "body": 567,
+        "scroll": 130,
+        "visible": true
+      }
+    },
+    "nested_reader_return_retains_20_results": {
+      "immediate": {
+        "count": 0,
+        "searchBusy": true
+      },
+      "afterAsyncReentry": {
+        "count": 20,
+        "screen": "screen-search",
+        "query": "Deuxième, il ne faut pas regarder le passé. Le passé est passé et il faut vivre dans le présent. Ce n'est pas utile du tout de regarder dans le passé. C'est un affront à Jésus. C'est le deuxième texte.",
+        "searchBusy": false
+      }
+    },
+    "nested_sw_reports_exact_offline_asset_count": {
+      "state": "NOT_PREPARED",
+      "total": 204
+    },
+    "nested_exact_zip_all_204_offline_assets_cached": {
+      "state": "READY",
+      "completed": 204,
+      "total": 204,
+      "failed": []
+    },
+    "nested_offline_fresh_reload_and_3_tomes": {
+      "state": "READY",
+      "total": 204,
+      "completed": 204,
+      "counts": [
+        {
+          "vol": 1,
+          "count": 124
+        },
+        {
+          "vol": 18,
+          "count": 26
+        },
+        {
+          "vol": 36,
+          "count": 46
+        }
+      ]
+    },
+    "offline_first_open_shell_can_boot_without_corpus_or_model": {
+      "state": {
+        "swControlled": true,
+        "registrations": [
+          {
+            "scope": "http://127.0.0.1:8993/ldc/",
+            "active": true
+          }
+        ],
+        "publicVersion": "142.18",
+        "runtimePresent": false,
+        "goSearchPresent": true,
+        "bootLoadingDisplay": "none",
+        "pageTitle": "Livre du Ciel — Luisa Piccarreta",
+        "appScreen": "screen-home",
+        "scripts": [
+          {
+            "src": "assets/js/sortable.min.js",
+            "type": ""
+          },
+          {
+            "src": "display_map.js",
+            "type": ""
+          },
+          {
+            "src": "interaction_anchor.js",
+            "type": ""
+          },
+          {
+            "src": "speech_model.js",
+            "type": ""
+          },
+          {
+            "src": "search_normalizer.js",
+            "type": ""
+          },
+          {
+            "src": "interim_user_state_migration.js",
+            "type": ""
+          },
+          {
+            "src": "search_semantic_pack_guard_r4.js",
+            "type": ""
+          },
+          {
+            "src": "search_semantic_v3_core_r4.js",
+            "type": ""
+          },
+          {
+            "src": "search_semantic_hybrid_r6.js",
+            "type": ""
+          },
+          {
+            "src": "search_semantic_pack_registry_r6.js",
+            "type": ""
+          },
+          {
+            "src": "pls_v16/runtime_v1.mjs",
+            "type": "module"
+          }
+        ]
+      },
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:8993/ldc/pls_v15/runtime/transformers.min.js",
+          "failure": {
+            "errorText": "net::ERR_FAILED"
+          }
+        },
+        {
+          "url": "http://127.0.0.1:8993/ldc/version.json?ldc_update_probe=muz8mvgu-i8wbt7c7jod",
+          "failure": {
+            "errorText": "net::ERR_FAILED"
+          }
+        },
+        {
+          "url": "http://127.0.0.1:8993/ldc/version.json?ldc_update_probe=muz8mvh1-pugd6jwrv3",
+          "failure": {
+            "errorText": "net::ERR_FAILED"
+          }
+        }
+      ],
+      "jsErrors": []
+    },
+    "offline_uncached_semantic_fails_closed_without_spinner": {
+      "reason": "Cold offline app shell did not initialise the application, semantic search cannot be executed",
+      "offlineBoot": {
+        "swControlled": true,
+        "registrations": [
+          {
+            "scope": "http://127.0.0.1:8993/ldc/",
+            "active": true
+          }
+        ],
+        "publicVersion": "142.18",
+        "runtimePresent": false,
+        "goSearchPresent": true,
+        "bootLoadingDisplay": "none",
+        "pageTitle": "Livre du Ciel — Luisa Piccarreta",
+        "appScreen": "screen-home",
+        "scripts": [
+          {
+            "src": "assets/js/sortable.min.js",
+            "type": ""
+          },
+          {
+            "src": "display_map.js",
+            "type": ""
+          },
+          {
+            "src": "interaction_anchor.js",
+            "type": ""
+          },
+          {
+            "src": "speech_model.js",
+            "type": ""
+          },
+          {
+            "src": "search_normalizer.js",
+            "type": ""
+          },
+          {
+            "src": "interim_user_state_migration.js",
+            "type": ""
+          },
+          {
+            "src": "search_semantic_pack_guard_r4.js",
+            "type": ""
+          },
+          {
+            "src": "search_semantic_v3_core_r4.js",
+            "type": ""
+          },
+          {
+            "src": "search_semantic_hybrid_r6.js",
+            "type": ""
+          },
+          {
+            "src": "search_semantic_pack_registry_r6.js",
+            "type": ""
+          },
+          {
+            "src": "pls_v16/runtime_v1.mjs",
+            "type": "module"
+          }
+        ]
+      }
+    },
+    "no_unhandled_pageerrors": {
+      "js": [],
+      "failedNetwork": [
+        {
+          "url": "http://127.0.0.1:8993/ldc/pls_v15/runtime/transformers.min.js",
+          "failure": {
+            "errorText": "net::ERR_FAILED"
+          }
+        },
+        {
+          "url": "http://127.0.0.1:8993/ldc/version.json?ldc_update_probe=muz8mvgu-i8wbt7c7jod",
+          "failure": {
+            "errorText": "net::ERR_FAILED"
+          }
+        },
+        {
+          "url": "http://127.0.0.1:8993/ldc/version.json?ldc_update_probe=muz8mvh1-pugd6jwrv3",
+          "failure": {
+            "errorText": "net::ERR_FAILED"
+          }
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "limits": [
+    "Ephemeral localhost:8992 vs :8993 only; NOT hosted E16/E19 closure",
+    "Chromium emulated viewport only; NOT physical iPhone/iPad Safari",
+    "No GitHub Pages or production origin visited",
+    "No permission to deploy"
+  ],
+  "hosted_e16": "OPEN",
+  "hosted_e19": "OPEN",
+  "physical_gate": "OPEN",
+  "deploy_authority": "NONE"
+}
