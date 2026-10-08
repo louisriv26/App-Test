@@ -7,6 +7,10 @@ on:
       - '.github/workflows/ldc-v14218-adversarial-qa.yml'
       - '.github/ldc-v14218-adversarial-qa.mjs'
       - 'index.html'
+      - 'pls_v16/runtime_v1.mjs'
+      - 'sw.js'
+      - 'version.json'
+      - 'offline_manifest.json'
 permissions:
   contents: write
 jobs:
