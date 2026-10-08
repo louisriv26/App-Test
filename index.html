@@ -2635,11 +2635,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.16-R1B-READER-PHYSICAL-GATE-REPAIR'; // bounded successor of frozen v142.15 after physical iPhone Reader findings; corpus/search/provenance/user-state schemas preserved
-const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.16'; // single authoritative public identity derived from APP_VERSION
+const APP_VERSION = 'v2.19.142.17-R1B-READER-TRANSACTION-REPAIR'; // bounded successor of frozen v142.15 after physical iPhone Reader findings; corpus/search/provenance/user-state schemas preserved
+const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.17'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-08';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.16-R1B-reader-physical-gate-repair';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.17-R1B-reader-transaction-repair';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -3807,7 +3807,7 @@ function showScreen(id) {
   const leavingSearch=id!=='search'&&document.getElementById('screen-search')?.classList.contains('active');
   if(leavingSearch)resetRootHorizontalViewport('leave-search');
   if (id !== 'entries') { if(typeof releaseEntriesReturnLock==='function')releaseEntriesReturnLock('screen:'+id); if(typeof releaseTomeStartLock==='function')releaseTomeStartLock('screen:'+id); }
-  if (id !== 'reader') {clearEntryStartTargetLock('screen:'+id);resetReaderInteractionContext('screen:'+id);clearReaderLowHeightMode('screen:'+id);}
+  if (id !== 'reader') {invalidateReaderAsyncTransactions('screen:'+id);clearEntryStartTargetLock('screen:'+id);resetReaderInteractionContext('screen:'+id);clearReaderLowHeightMode('screen:'+id);}
   if (id !== 'search') cancelActiveSearch('navigation');
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-' + id).classList.add('active');
@@ -4209,14 +4209,19 @@ function installEntryStartTargetLock(session=activeReaderSession){
 function enforceEntryStartTargetLock(reason='enforce'){
   if(!entryStartLockMatchesVisible())return false;
   const sc=document.getElementById('reader-scroll');if(!sc)return false;
+  const binding=visibleReaderIdentitySnapshot();if(!binding)return false;
   const before=Number(sc.scrollTop)||0;
-  semanticRestoreInProgress=true;
+  const owner=beginReaderProgrammaticScroll();
   sc.scrollTop=0;
   liveSemanticPosition=makeEntryStartSemanticPosition();
   entryStartTraceEvent('LOCK_ENFORCE',{reason,before});
   requestAnimationFrame(()=>{
-    if(entryStartLockMatchesVisible()){sc.scrollTop=0;liveSemanticPosition=makeEntryStartSemanticPosition();entryStartTraceEvent('LOCK_ENFORCE_RAF',{reason});}
-    semanticRestoreInProgress=false;
+    if(!ownsReaderProgrammaticScroll(owner)||!visibleReaderIdentityMatches(binding)||!entryStartLockMatchesVisible()){
+      endReaderProgrammaticScroll(owner);return;
+    }
+    sc.scrollTop=0;liveSemanticPosition=makeEntryStartSemanticPosition();
+    entryStartTraceEvent('LOCK_ENFORCE_RAF',{reason});
+    requestAnimationFrame(()=>endReaderProgrammaticScroll(owner));
   });
   return true;
 }
@@ -4279,10 +4284,48 @@ function semanticPositionMatchesVisibleEntry(pos){
   return Number(pos.vol)===Number(currentVolume)&&String(pos.entry_id||'')===String(currentEntry.id||'');
 }
 function visibleReaderIdentitySnapshot(){
-  return currentEntry&&currentVolume?{vol:Number(currentVolume),entry_id:String(currentEntry.id||'')}:null;
+  if(!readerScreenIsVisible()||!currentEntry||!currentVolume||!activeReaderSession)return null;
+  return {
+    vol:Number(currentVolume),
+    entry_id:String(currentEntry.id||''),
+    session_id:String(activeReaderSession.session_id||''),
+    supplement_id:String(visibleReaderSupplementId()||''),
+    source_mode:String(supplementMode||'')
+  };
 }
 function visibleReaderIdentityMatches(snapshot){
-  return !!(snapshot&&currentEntry&&Number(currentVolume)===Number(snapshot.vol)&&String(currentEntry.id||'')===String(snapshot.entry_id||''));
+  return !!(
+    snapshot&&readerScreenIsVisible()&&currentEntry&&activeReaderSession&&
+    Number(currentVolume)===Number(snapshot.vol)&&
+    String(currentEntry.id||'')===String(snapshot.entry_id||'')&&
+    String(activeReaderSession.session_id||'')===String(snapshot.session_id||'')&&
+    String(visibleReaderSupplementId()||'')===String(snapshot.supplement_id||'')&&
+    String(supplementMode||'')===String(snapshot.source_mode||'')
+  );
+}
+/* v142.17: every programmatic Reader scroll has one owning epoch.
+   Stale callbacks cannot clear suppression belonging to a successor. */
+let readerProgrammaticScrollEpoch=0;
+function beginReaderProgrammaticScroll(){
+  const owner=++readerProgrammaticScrollEpoch;
+  semanticRestoreInProgress=true;
+  return owner;
+}
+function ownsReaderProgrammaticScroll(owner){return owner===readerProgrammaticScrollEpoch;}
+function endReaderProgrammaticScroll(owner){
+  if(!ownsReaderProgrammaticScroll(owner))return false;
+  semanticRestoreInProgress=false;
+  return true;
+}
+/* Screen exit or a newly committed Reader session invalidates the three
+   Reader-only asynchronous channels together. It does not alter user storage. */
+function invalidateReaderAsyncTransactions(reason='reader-lifecycle'){
+  readerTargetPositionSeq++;
+  semanticLayoutRestoreSeq++;
+  clearTimeout(semanticResizeTimer);
+  semanticResizeTimer=null;
+  readerProgrammaticScrollEpoch++;
+  semanticRestoreInProgress=false;
 }
 function failClosedVisibleReaderToEntryStart(snapshot){
   if(!visibleReaderIdentityMatches(snapshot))return false;
@@ -4294,16 +4337,25 @@ function failClosedVisibleReaderToEntryStart(snapshot){
 }
 function restoreSemanticReadingPosition(pos){
   const sc=document.getElementById('reader-scroll');
-  if(!sc||!pos||!semanticPositionMatchesVisibleEntry(pos))return false;
-  semanticRestoreInProgress=true;
+  if(!sc||!pos||!readerScreenIsVisible()||!semanticPositionMatchesVisibleEntry(pos))return false;
+  const binding=visibleReaderIdentitySnapshot();if(!binding)return false;
+  const owner=beginReaderProgrammaticScroll();
   if(semanticPositionIsEntryStart(pos)){
     sc.scrollTop=0;
-    requestAnimationFrame(()=>{if(semanticPositionMatchesVisibleEntry(pos))sc.scrollTop=0;semanticRestoreInProgress=false;const locked=resumeLockedSemanticPosition();liveSemanticPosition=locked||makeEntryStartSemanticPosition()||pos;});
+    requestAnimationFrame(()=>{
+      if(!ownsReaderProgrammaticScroll(owner)||!visibleReaderIdentityMatches(binding)){
+        endReaderProgrammaticScroll(owner);return;
+      }
+      sc.scrollTop=0;
+      const locked=resumeLockedSemanticPosition();
+      liveSemanticPosition=locked||makeEntryStartSemanticPosition()||pos;
+      requestAnimationFrame(()=>endReaderProgrammaticScroll(owner));
+    });
     return 'entry-start';
   }
   let used='fallback';
   const frag=pos.para_id?fragmentEl(pos.para_id):null;
-  if(frag){
+  if(frag&&sc.contains(frag)){
     const sr=sc.getBoundingClientRect(),r=frag.getBoundingClientRect();
     const frac=clamp01(pos.fraction_within_paragraph);
     const delta=(r.top-sr.top)+(r.height*frac)-8;
@@ -4313,10 +4365,13 @@ function restoreSemanticReadingPosition(pos){
     sc.scrollTop=clamp01(pos.fallback_entry_fraction)*max;
   }
   requestAnimationFrame(()=>{
-    semanticRestoreInProgress=false;
+    if(!ownsReaderProgrammaticScroll(owner)||!visibleReaderIdentityMatches(binding)){
+      endReaderProgrammaticScroll(owner);return;
+    }
     const locked=resumeLockedSemanticPosition();
     if(locked)liveSemanticPosition=locked;
     else if(!(activeReaderSession&&activeReaderSession.persistence_suspended))liveSemanticPosition=captureSemanticReadingPosition()||pos;
+    requestAnimationFrame(()=>endReaderProgrammaticScroll(owner));
   });
   return used;
 }
@@ -5264,27 +5319,31 @@ function updateReaderLowHeightMode(reason='layout'){
 let readerTargetPositionSeq=0;
 function positionReaderElementInScroller(target,opts={}){
   const sc=document.getElementById('reader-scroll'),identity=visibleReaderIdentitySnapshot();
-  if(!target||!sc||!identity||!readerScreenIsVisible())return false;
+  if(!target||!sc||!sc.contains(target)||!identity||!readerScreenIsVisible())return false;
   const seq=++readerTargetPositionSeq;
-  clearTimeout(semanticResizeTimer);semanticLayoutRestoreSeq++;
+  clearTimeout(semanticResizeTimer);semanticResizeTimer=null;semanticLayoutRestoreSeq++;
   const offset=Math.max(0,Number(opts.offset)||0),max=Math.max(0,sc.scrollHeight-sc.clientHeight);
   const sr=sc.getBoundingClientRect(),tr=target.getBoundingClientRect();
   const desired=Math.max(0,Math.min(max,sc.scrollTop+(tr.top-sr.top)-offset));
-  semanticRestoreInProgress=true;
+  const owner=beginReaderProgrammaticScroll();
+  const current=()=>seq===readerTargetPositionSeq&&ownsReaderProgrammaticScroll(owner)&&
+    visibleReaderIdentityMatches(identity)&&sc.contains(target);
   resetRootScrollForReaderHandoff();
   sc.scrollTop=desired;
   requestAnimationFrame(()=>{
-    if(seq!==readerTargetPositionSeq||!visibleReaderIdentityMatches(identity)){semanticRestoreInProgress=false;return;}
+    if(!current()){endReaderProgrammaticScroll(owner);return;}
     resetRootScrollForReaderHandoff();
     const sr2=sc.getBoundingClientRect(),tr2=target.getBoundingClientRect(),max2=Math.max(0,sc.scrollHeight-sc.clientHeight);
     const correction=(tr2.top-sr2.top)-offset;
     if(Math.abs(correction)>.5)sc.scrollTop=Math.max(0,Math.min(max2,sc.scrollTop+correction));
     requestAnimationFrame(()=>{
-      semanticRestoreInProgress=false;
-      if(seq!==readerTargetPositionSeq||!visibleReaderIdentityMatches(identity))return;
+      if(!current()){endReaderProgrammaticScroll(owner);return;}
       resetRootScrollForReaderHandoff();
       liveSemanticPosition=captureSemanticReadingPosition()||liveSemanticPosition;
       readerDiagStage('reader target positioned',{reason:opts.reason||'target',root_scroll_y:Number(window.scrollY)||0,reader_scroll_top:Number(sc.scrollTop)||0});
+      // Allow the second positioning scroll event to arrive before releasing
+      // suppression, while still bounded to one additional animation frame.
+      requestAnimationFrame(()=>endReaderProgrammaticScroll(owner));
     });
   });
   return true;
@@ -5641,6 +5700,7 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
     keepScrollTop=null;
     clearResumeSemanticTargetLock();
   }
+  invalidateReaderAsyncTransactions('open-entry-commit');
   readerOriginContext=stagedOriginContext;
   readerBack=backDest;
   currentVolume=vol;
