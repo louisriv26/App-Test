@@ -1,0 +1,67 @@
+name: LDC 142.18 independent exact frozen ZIP extraction actual Chromium QA (NO deployment)
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-exact-zip-browser-qa.yml'
+permissions:
+  contents: write
+jobs:
+  exact-frozen-package-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Checkout exact previously packaged source SHA, never moving WIP branch
+        uses: actions/checkout@v4
+        with:
+          ref: 7c292d6221bb350fac3aeaa83750b8784706d45c
+          path: pinned-app
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Reproduce existing GitHub artifact bytes from pinned source and extract
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd pinned-app
+          test "$(git rev-parse HEAD)" = "7c292d6221bb350fac3aeaa83750b8784706d45c"
+          python3 .github/ldc-v14218-curated-wip-package.py
+          echo '954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb  LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip' | sha256sum -c -
+          cd ..
+          mkdir exact-extracted
+          unzip -q pinned-app/LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip -d exact-extracted
+          npm install --no-save playwright-core@1.55.0
+      - name: Launch exact frozen ZIP as isolated local website and verify real Chromium model/Reader/SW/Return
+        id: qa
+        continue-on-error: true
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+          LDC_PACKAGE_EXTRACT_DIR: ${{ github.workspace }}/exact-extracted
+          LDC_PACKAGE_ZIP_PATH: ${{ github.workspace }}/pinned-app/LDC_v142.18_INTEGRATED_WIP_APP_DO_NOT_DEPLOY.zip
+        run: node .github/ldc-v14218-exact-zip-browser-qa.mjs
+      - name: Record QA of literal archived bytes, not current moving branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_EXACT_WIP_ZIP_ACTUAL_CHROMIUM_QA.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_EXACT_WIP_ZIP_ACTUAL_CHROMIUM_QA.json
+          git commit -m "test(ldc): source-bound actual Chromium runtime qualification of exact 125.6 MB WIP ZIP"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-actual-browser-exact-frozen-zip-QA-only
+          path: LDC_v142.18_EXACT_WIP_ZIP_ACTUAL_CHROMIUM_QA.json
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Assert archived candidate browser QA, never release authority
+        run: python3 -c "import json;d=json.load(open('LDC_v142.18_EXACT_WIP_ZIP_ACTUAL_CHROMIUM_QA.json'));assert d['status']=='PASS_EXACT_PACKAGED_ZIP_ACTUAL_CHROMIUM' and all(d['checks'].values())"
