@@ -1,0 +1,63 @@
+name: LDC v142.18 independent Linux WebKit combined app DOM QA
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-webkit-qa.yml'
+permissions:
+  contents: write
+jobs:
+  webkit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned WebKit test driver
+        run: |
+          npm install --no-save playwright-core@1.55.0
+          npx playwright-core install --with-deps webkit
+      - name: Execute actual application DOM semantic navigation in Linux WebKit
+        id: qa
+        continue-on-error: true
+        run: node .github/ldc-v14218-webkit-qa.mjs
+      - name: Bind evidence to exact tested commit
+        if: always()
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,pathlib,os
+          p=pathlib.Path('LDC_v142.18_WEBKIT_ACTUAL_APP_QA.json')
+          if not p.exists():raise RuntimeError('WebKit report missing')
+          j=json.loads(p.read_text())
+          j['source_commit']=os.environ['GITHUB_SHA']
+          j['physical_iphone_ipad']='NOT_TESTED'
+          j['hosted_e16_e19']='OPEN'
+          p.write_text(json.dumps(j,indent=2,ensure_ascii=False)+'\n')
+          PY
+      - name: Save evidence only in isolated branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_WEBKIT_ACTUAL_APP_QA.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_WEBKIT_ACTUAL_APP_QA.json
+          git commit -m "test(ldc): preserve WebKit exact-source combined app evidence"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-linux-webkit-actual-app
+          path: LDC_v142.18_WEBKIT_ACTUAL_APP_QA.json
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Verify independent real WebKit gate
+        run: python3 -c "import json;assert json.load(open('LDC_v142.18_WEBKIT_ACTUAL_APP_QA.json'))['status']=='PASS'"
