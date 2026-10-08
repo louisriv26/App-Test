@@ -6,7 +6,7 @@ const ROOT=process.env.LDC_NESTED_FIXTURE_DIR||'',PORTS=[8992,8993],
  report={
  schema:'ldc-v14218-exact-zip-nested-two-origin-adversarial-browser-v1',
  candidate_zip_sha256:EXPECT_ZIP,candidate_source_commit:'7c292d6221bb350fac3aeaa83750b8784706d45c',
- tested_at:new Date().toISOString(),status:'NOT_RUN',checks:{},measurements:{},errors:[],
+ tested_at:new Date().toISOString(),qa_iteration:'R7C_OFFLINE_HARD_SERVER_SHUTDOWN_AND_ASYNC_SHELL_BOOT_PROBE',qa_script_commit:process.env.GITHUB_SHA||null,status:'NOT_RUN',checks:{},measurements:{},errors:[],
  limits:['Ephemeral localhost:8992 vs :8993 only; NOT hosted E16/E19 closure','Chromium emulated viewport only; NOT physical iPhone/iPad Safari','No GitHub Pages or production origin visited','No permission to deploy'],
  hosted_e16:'OPEN',hosted_e19:'OPEN',physical_gate:'OPEN',deploy_authority:'NONE'};
 const check=(n,ok,info)=>{report.checks[n]=!!ok;if(info!==undefined)report.measurements[n]=info};
@@ -27,8 +27,8 @@ try{
  check('neutral_root_not_a_PWA_and_no_DB',!rootState.controller&&!rootState.regs.length&&!rootState.hasIndexedDB,rootState);
  const siblingBefore=await sib.evaluate(()=>({controller:!!navigator.serviceWorker.controller,title:document.title}));
  check('sibling_before_LDC_has_no_worker',!siblingBefore.controller,siblingBefore);
- const pageErrors=[];
- for(const pg of [a,b]){pg.on('pageerror',err=>pageErrors.push(String(err)));pg.setDefaultTimeout(180000)}
+ const pageErrors=[],failedRequests=[];
+ for(const pg of [a,b]){pg.on('pageerror',err=>pageErrors.push(String(err)));pg.on('requestfailed',req=>failedRequests.push({url:req.url(),failure:req.failure()}));pg.setDefaultTimeout(180000)}
  async function boot(page,origin){
   await page.goto(origin+'ldc/',{waitUntil:'domcontentloaded',timeout:120000});
   await page.waitForFunction(()=>document.getElementById('loading')&&getComputedStyle(document.getElementById('loading')).display==='none',null,{timeout:150000});
@@ -94,16 +94,31 @@ try{
  servers[1].kill('SIGTERM');await new Promise(resolve=>servers[1].once('exit',resolve));
  await b.reload({waitUntil:'domcontentloaded',timeout:90000});
  await b.waitForFunction(()=>document.getElementById('loading')&&getComputedStyle(document.getElementById('loading')).display==='none',null,{timeout:90000});
- const bBeforeColdQuery=await b.evaluate(()=>({ready:LDCPLSV16Runtime.status().ready,canInitialize:LDCPLSV16Runtime.status().can_initialize}));
- await b.evaluate(async()=>{await goSearch();setSearchIntentMode('meaning',{rerun:false,persist:false});setSearchQueryDraft('Jésus appelle notre volonté à vivre dans la Divine Volonté',{mode:'meaning',syncOther:true});await runSearch()});
- await b.waitForFunction(()=>!searchBusyGeneration,null,{timeout:120000});
- const offlineSemantic=await b.evaluate(()=>({busy:!!searchBusyGeneration,heading:document.getElementById('search-meta')?.innerText?.slice(0,250)||'',
-  cards:document.querySelectorAll('#search-results .result-card').length,notice:document.getElementById('search-results')?.innerText?.slice(0,500)||'',ready:LDCPLSV16Runtime.status().ready}));
- check('offline_uncached_semantic_fails_closed_without_spinner',
-  !bBeforeColdQuery.ready&&!offlineSemantic.busy&&offlineSemantic.cards===0&&!offlineSemantic.ready&&
-  /(indisponible|impossible|connexion|hors ligne|pas pu|erreur|non encore qualifié)/i.test(offlineSemantic.heading+' '+offlineSemantic.notice),
-  {beforeOfflineMode:bBeforeHardOffline,beforeColdQuery:bBeforeColdQuery,afterAttempt:offlineSemantic,serverBTerminated:true});
- check('no_unhandled_pageerrors',!pageErrors.length,pageErrors);
+ try {await b.waitForFunction(()=>typeof window.LDCPLSV16Runtime==='object'&&typeof goSearch==='function',null,{timeout:20000,polling:200});}catch(_){}
+ const bOfflineBoot=await b.evaluate(async()=>({
+   swControlled:!!navigator.serviceWorker.controller,
+   registrations:(await navigator.serviceWorker.getRegistrations()).map(r=>({scope:r.scope,active:!!r.active})),
+   publicVersion:(typeof PUBLIC_VERSION==='undefined'?null:PUBLIC_VERSION),
+   runtimePresent:typeof window.LDCPLSV16Runtime==='object',
+   goSearchPresent:typeof goSearch==='function',
+   bootLoadingDisplay:document.getElementById('loading')&&getComputedStyle(document.getElementById('loading')).display,
+   pageTitle:document.title,
+   appScreen:document.querySelector('.screen.active')?.id||null,
+   scripts:[...document.scripts].map(s=>({src:s.getAttribute('src'),type:s.type})).filter(x=>x.src)
+ }));
+ check('offline_first_open_shell_can_boot_without_corpus_or_model',bOfflineBoot.swControlled&&bOfflineBoot.runtimePresent&&bOfflineBoot.goSearchPresent&&bOfflineBoot.publicVersion==='142.18',{state:bOfflineBoot,failedRequests:failedRequests.slice(-15),jsErrors:pageErrors.slice(-15)});
+ if(bOfflineBoot.runtimePresent&&bOfflineBoot.goSearchPresent){
+   const bBeforeColdQuery=await b.evaluate(()=>({ready:LDCPLSV16Runtime.status().ready,canInitialize:LDCPLSV16Runtime.status().can_initialize}));
+   await b.evaluate(async()=>{await goSearch();setSearchIntentMode('meaning',{rerun:false,persist:false});setSearchQueryDraft('Jésus appelle notre volonté à vivre dans la Divine Volonté',{mode:'meaning',syncOther:true});await runSearch()});
+   await b.waitForFunction(()=>!searchBusyGeneration,null,{timeout:120000});
+   const offlineSemantic=await b.evaluate(()=>({busy:!!searchBusyGeneration,heading:document.getElementById('search-meta')?.innerText?.slice(0,250)||'',
+      cards:document.querySelectorAll('#search-results .result-card').length,notice:document.getElementById('search-results')?.innerText?.slice(0,500)||'',ready:LDCPLSV16Runtime.status().ready}));
+   check('offline_uncached_semantic_fails_closed_without_spinner',
+     !bBeforeColdQuery.ready&&!offlineSemantic.busy&&offlineSemantic.cards===0&&!offlineSemantic.ready&&
+     /(indisponible|impossible|connexion|hors ligne|pas pu|erreur|non encore qualifié)/i.test(offlineSemantic.heading+' '+offlineSemantic.notice),
+     {beforeOfflineMode:bBeforeHardOffline,beforeColdQuery:bBeforeColdQuery,afterAttempt:offlineSemantic,serverBTerminated:true,failedRequests:failedRequests.slice(-15)});
+ }else check('offline_uncached_semantic_fails_closed_without_spinner',false,{reason:'Cold offline app shell did not initialise the application, semantic search cannot be executed',offlineBoot:bOfflineBoot});
+ check('no_unhandled_pageerrors',!pageErrors.length,{js:pageErrors,failedNetwork:failedRequests.slice(-15)});
  report.status=Object.values(report.checks).every(Boolean)?'PASS_EXACT_ARCHIVE_NESTED_TWO_ORIGINS_LOCAL_ONLY':'FAIL';
 }catch(e){report.status='FAIL';report.errors.push(String(e?.stack||e))}
 finally{
