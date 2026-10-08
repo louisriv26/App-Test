@@ -1,0 +1,42 @@
+name: LDC v142.18 exact 20-asset/corpus + SW revision identity attestation
+on:
+  push:
+    branches:
+      - ldc-v142-18-reader-semantic-integration-wip-20261008
+    paths:
+      - '.github/workflows/ldc-v14218-identity-attest.yml'
+permissions:
+  contents: write
+jobs:
+  source-identity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Read exact current tree and recompute immutable asset and corpus bindings
+        id: attestation
+        continue-on-error: true
+        run: python3 .github/ldc-v14218-identity-attest.py
+      - name: Bind report to current commit without declaring release
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f LDC_v142.18_SOURCE_IDENTITY_ATTESTATION.json
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_SOURCE_IDENTITY_ATTESTATION.json
+          git commit -m "test(ldc): record source-bounded full app/semantic/offline attestation"
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-source-identity-attestation
+          path: LDC_v142.18_SOURCE_IDENTITY_ATTESTATION.json
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Do not promote without source PASS
+        run: python3 -c "import json;assert json.load(open('LDC_v142.18_SOURCE_IDENTITY_ATTESTATION.json'))['status']=='PASS_SOURCE_ONLY'"
