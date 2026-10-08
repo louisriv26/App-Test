@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import cp from 'node:child_process';
 import {chromium} from 'playwright-core';
 const port=8988,base='http://127.0.0.1:'+port+'/',dir=process.env.LDC_ARCHIVE_EXTRACT_DIR;
-const report={schema:'ldc-v14218-r9-cross-tab-transaction-and-stream-backup-browser-v1',
+const report={schema:'ldc-v14218-r9-cross-tab-transaction-and-stream-backup-browser-v2-valid-paragraph-fixtures',
  exact_zip_sha256:'954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb',
  exact_source_commit:'7c292d6221bb350fac3aeaa83750b8784706d45c',
  status:'NOT_RUN',checks:{},details:{},errors:[],
@@ -24,8 +24,8 @@ try{
  ck('exact_archive_source_and_same_origin_fresh_multi_tab',dbs.every(x=>x.public==='142.18'&&x.dbName==='ldc_user_v1'&&x.stores.includes('col_items')),dbs);
  const ids=await a.evaluate(async()=>{
   const id=await dbPut('collections',{name:'R9 synthetic fixture',ts:Date.now()});
-  const x=await dbAddCollectionItemAtomic(id,{entry_id:'ldc_t01_sec001',note:'base',ts:Date.now()});
-  const y=await dbAddCollectionItemAtomic(id,{entry_id:'ldc_t01_sec002',note:'note 2',ts:Date.now()});
+  const x=await dbAddCollectionItemAtomic(id,{entry_id:'ldc_t01_editorial_explications_note001',para_id:'ldc_t01_editorial_explications_note001_p001',volume:1,stable_ref:'LDC.T01.EDITORIAL.EXPLICATIONS.NOTE001.P001',note:'base',ts:Date.now()});
+  const y=await dbAddCollectionItemAtomic(id,{entry_id:'ldc_t01_editorial_explications_note002',para_id:'ldc_t01_editorial_explications_note002_p001',volume:1,stable_ref:'LDC.T01.EDITORIAL.EXPLICATIONS.NOTE002.P001',note:'note 2',ts:Date.now()});
   return {col:id,first:x,second:y};
  });
  ck('atomic_parent_and_two_children_created',ids.first.status==='ADDED'&&ids.second.status==='ADDED'&&ids.first.record.col_id===ids.col,ids);
@@ -38,7 +38,7 @@ try{
  const renameStale=await a.evaluate(async col=>dbRenameCollectionAtomic(col,'R9 synthetic fixture','R9 stale A'),col);
  const actualCol=await a.evaluate(async col=>dbGet('collections',col),col);
  ck('cross_tab_stale_collection_rename_rejected',renameFresh.status==='UPDATED'&&renameStale.status==='CONFLICT'&&actualCol.name==='R9 fresh B',{fresh:renameFresh.status,stale:renameStale.status,name:actualCol.name});
- const addThird=await b.evaluate(async col=>dbAddCollectionItemAtomic(col,{entry_id:'ldc_t01_sec003',note:'third'}),col);
+ const addThird=await b.evaluate(async col=>dbAddCollectionItemAtomic(col,{entry_id:'ldc_t01_editorial_explications_note003',para_id:'ldc_t01_editorial_explications_note003_p001',volume:1,stable_ref:'LDC.T01.EDITORIAL.EXPLICATIONS.NOTE003.P001',note:'third'}),col);
  const staleDrag=await a.evaluate(async v=>dbReorderCollectionAtomic(v.col,{kind:'drag',ids:v.ids}),{col,ids:[idB,idA]});
  const afterDrag=await a.evaluate(async col=>(await dbGetAll('col_items')).filter(r=>r.col_id===col).sort((x,y)=>x.order-y.order).map(x=>({id:x.id,order:x.order})),col);
  ck('stale_drag_does_not_drop_newly_added_item',addThird.status==='ADDED'&&staleDrag.status==='MEMBERSHIP_CHANGED'&&afterDrag.length===3&&afterDrag.every((x,i)=>x.order===i+1),{add:addThird.status,drag:staleDrag.status,rows:afterDrag});
