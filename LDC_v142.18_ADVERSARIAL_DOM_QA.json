@@ -1,0 +1,146 @@
+{
+  "schema": "ldc-v14218-combined-dom-adversarial-r1",
+  "identity": "v14218-ADVERSARIAL-DOM-R1",
+  "status": "FAIL",
+  "checks": {
+    "lazy_semantic_initialization": true,
+    "reader_ownership_present": true,
+    "positive_owner_rank_at_most_10": true,
+    "semantic_card_shown": true,
+    "reader_enriched_correct_entry": true,
+    "reader_enriched_target": true,
+    "reader_enriched_usable": true,
+    "reader_responsive_nonempty": true,
+    "stale_scroll_epoch_rejection": true,
+    "reader_aflp_correct_entry": true,
+    "reader_aflp_target": true,
+    "reader_aflp_usable": true,
+    "reader_additions_target": false,
+    "abstain_NEG-DEV-01": true,
+    "abstain_NEG-DEV-02": true,
+    "abstain_NEG-DEV-03": true
+  },
+  "measurements": {
+    "boot": {
+      "semantic": {
+        "schema": "ldc-pls-v16-runtime-status-v1",
+        "version": "ldc-pls-v16-runtime-v1",
+        "pack_id": "ldc-pls-v16-current-v14215-enriched-96-72-r1",
+        "available": false,
+        "ready": false,
+        "loading": false,
+        "can_initialize": true,
+        "calibration_status": "PENDING_VERIFICATION",
+        "model_ready": false,
+        "persistent_semantic_storage": false,
+        "error": null,
+        "registry": {
+          "schema": "ldc-semantic-pack-registry-v6",
+          "version": "ldc-search-v3-pack-registry-r6",
+          "mode": "enriched",
+          "label": "ENRICHI",
+          "available": false,
+          "calibration_status": "UNQUALIFIED",
+          "reason": "PACK_NOT_INSTALLED_OR_QUALIFIED",
+          "detail": null
+        }
+      },
+      "offlineBinding": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+      "readerOwner": true,
+      "layoutHelper": true
+    },
+    "semantic_positive": {
+      "count": 20,
+      "rank": 1,
+      "confidence": "possible"
+    },
+    "reader_enriched": {
+      "mode": "enriched",
+      "supplementMode": "enriched",
+      "entry_id": "ldc_t09_1909_11_02_e001",
+      "expected_entry": "ldc_t09_1909_11_02_e001",
+      "para_id": "ldc_t09_1909_11_02_e001_p001",
+      "para_present": true,
+      "paragraph_visible": true,
+      "scroller_height": 570,
+      "body_length": 567,
+      "root_scroll": 0,
+      "intent": "CONSULTATION"
+    },
+    "reader_enriched_target": {
+      "mode": "enriched",
+      "supplementMode": "enriched",
+      "entry_id": "ldc_t09_1909_11_02_e001",
+      "expected_entry": "ldc_t09_1909_11_02_e001",
+      "para_id": "ldc_t09_1909_11_02_e001_p001",
+      "para_present": true,
+      "paragraph_visible": true,
+      "scroller_height": 570,
+      "body_length": 567,
+      "root_scroll": 0,
+      "intent": "CONSULTATION"
+    },
+    "rotate_simulation": {
+      "land": {
+        "height": 130,
+        "text": 567
+      },
+      "port": {
+        "height": 570,
+        "text": 567
+      }
+    },
+    "reader_aflp": {
+      "mode": "aflp",
+      "supplementMode": "aflp",
+      "entry_id": "ldc_t09_1909_11_02_e001",
+      "expected_entry": "ldc_t09_1909_11_02_e001",
+      "para_id": "ldc_t09_1909_11_02_e001_p001",
+      "para_present": true,
+      "paragraph_visible": true,
+      "scroller_height": 494,
+      "body_length": 567,
+      "root_scroll": 0,
+      "intent": "CONSULTATION"
+    },
+    "reader_aflp_target": {
+      "mode": "aflp",
+      "supplementMode": "aflp",
+      "entry_id": "ldc_t09_1909_11_02_e001",
+      "expected_entry": "ldc_t09_1909_11_02_e001",
+      "para_id": "ldc_t09_1909_11_02_e001_p001",
+      "para_present": true,
+      "paragraph_visible": true,
+      "scroller_height": 494,
+      "body_length": 567,
+      "root_scroll": 0,
+      "intent": "CONSULTATION"
+    },
+    "NEG-DEV-01": {
+      "state": "abstain",
+      "count": 0
+    },
+    "NEG-DEV-02": {
+      "state": "abstain",
+      "count": 0
+    },
+    "NEG-DEV-03": {
+      "state": "abstain",
+      "count": 0
+    },
+    "memory_end": {
+      "jsHeap": 173788665,
+      "total": 178953365,
+      "runtime": null
+    }
+  },
+  "risks": [
+    "MODE_additions:TimeoutError: page.waitForFunction: Timeout 30000ms exceeded."
+  ],
+  "errors": [],
+  "scope": "LOCAL_CHROMIUM_ONLY; no device/hosted/release claim",
+  "tested_source_commit": "5409e6536a6cdc68d5e2510fa89a08dcd3e7fe1f",
+  "hosted_origin_e16_e19": "OPEN",
+  "physical_iphone_ipad_pwa": "OPEN",
+  "deployment_authority": "NONE"
+}
