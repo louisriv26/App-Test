@@ -1,0 +1,92 @@
+name: LDC v142.19 R22 live MassFinderBeta independent hosted verification (QA ONLY)
+on:
+  push:
+    branches: [ldc-v142-19-reader-root-height-fix-wip-20261008]
+    paths:
+      - '.github/workflows/ldc-v14219-r22-hosted-adversarial-qa.yml'
+      - '.github/ldc-v14219-r22-hosted-*.mjs'
+permissions: {contents: read}
+jobs:
+  real-hosted-bytes-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Google Chrome and Playwright runner
+        run: |
+          npm install --no-save playwright@1.55.0
+          command -v google-chrome
+      - name: Check genuine hosted 273 resources byte-for-byte and semantic + lexical browser search
+        continue-on-error: true
+        run: node .github/ldc-v14219-r22-hosted-integrity-search.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: R22-actual-hosted-273-byte-and-real-search
+          path: LDC_v142.19_R22_ACTUAL_HOSTED_BYTES_CHROME_SEARCH_AND_SCOPE.json
+          retention-days: 14
+      - name: Fail closed against actual report
+        run: python3 -c "import json; r=json.load(open('LDC_v142.19_R22_ACTUAL_HOSTED_BYTES_CHROME_SEARCH_AND_SCOPE.json')); assert r['status']=='PASS_SCOPED_REAL_ROOT_HOSTED',r['status']"
+  real-hosted-offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install real Chromium runner
+        run: |
+          npm install --no-save playwright@1.55.0
+          command -v google-chrome
+      - name: Test 204 real hosted offline assets, offline lexical and synthetic-data persistence
+        continue-on-error: true
+        run: node .github/ldc-v14219-r22-hosted-offline.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: R22-actual-hosted-cold-offline-and-state
+          path: LDC_v142.19_R22_MASSFINDERBETA_HOSTED_OFFLINE_QA.json
+          retention-days: 14
+      - name: Fail closed against actual report
+        run: python3 -c "import json; r=json.load(open('LDC_v142.19_R22_MASSFINDERBETA_HOSTED_OFFLINE_QA.json')); assert r['status']=='PASS_V14219_LIVE_HOSTED_OFFLINE_204_AND_STATE_ONLY',r['status']"
+  real-hosted-highlights:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install real Chromium runner
+        run: |
+          npm install --no-save playwright@1.55.0
+          command -v google-chrome
+      - name: Test disposable highlights deep link, rotation, root containment and reopening
+        continue-on-error: true
+        run: node .github/ldc-v14219-r22-hosted-highlights.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: R22-actual-hosted-highlights-Mon-Espace
+          path: LDC_v142.19_R16_MASSFINDERBETA_HOSTED_HIGHLIGHT_QA.json
+          retention-days: 14
+      - name: Fail closed against actual report
+        run: python3 -c "import json; r=json.load(open('LDC_v142.19_R16_MASSFINDERBETA_HOSTED_HIGHLIGHT_QA.json')); assert r['status']=='PASS_V14219_SCOPED_HOSTED_HIGHLIGHT_MON_ESPACE',r['status']"
+  real-hosted-webkit-chromium-ux:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Playwright real Linux WebKit and Google Chrome
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps webkit
+          command -v google-chrome
+      - name: Cross-engine viewport and Reader UX, real text-size app control
+        continue-on-error: true
+        run: node .github/ldc-v14219-r22-hosted-crossengine-ui.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: R22-actual-hosted-WebKit-Chromium-Reader-UX
+          path: |
+            LDC_v142.19_R22_HOSTED_WEBKIT_CHROMIUM_UX_ACCESSIBILITY.json
+            R22_*.png
+          retention-days: 14
+      - name: Fail closed against actual report
+        run: python3 -c "import json; r=json.load(open('LDC_v142.19_R22_HOSTED_WEBKIT_CHROMIUM_UX_ACCESSIBILITY.json')); assert r['status']=='PASS_SCOPED_HOSTED_CROSS_ENGINE_UX',r['status']"
