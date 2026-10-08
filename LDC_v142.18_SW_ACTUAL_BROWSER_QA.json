@@ -1,44 +1,84 @@
 {
   "schema": "ldc-v14218-new-profile-service-worker-actual-browser-v1",
-  "status": "FAIL",
-  "source_sha": "dd65b8641a1bbeda28009ed6aaeb3acc6118c2f3",
+  "status": "PASS",
+  "source_sha": "97ed7ee4485984db52b06fe6f30b498b593893ac",
   "checks": {
-    "registered_worker_active": false,
-    "shell_14218_cache_created": false,
-    "correct_v14218_app_and_offline_manifest": false,
-    "qualified_small_runtime_scripts_cached": false,
-    "frozen_204_corpus_binding": false,
+    "registered_worker_active": true,
+    "shell_14218_cache_created": true,
+    "correct_v14218_app_and_offline_manifest": true,
+    "qualified_small_runtime_scripts_cached": true,
+    "frozen_204_corpus_binding": true,
     "no_heavy_model_in_shell": true
   },
   "details": {
     "worker_install_snapshot": {
       "supported": true,
-      "active": false,
-      "scope": null,
-      "cacheName": null,
-      "requests": [],
-      "otherCaches": [],
+      "active": true,
+      "installing": null,
+      "waiting": null,
+      "scope": "http://127.0.0.1:8899/",
+      "cacheName": "ldc-le-livre-du-ciel-a6e91b95-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+      "requests": [
+        "/manifest.json",
+        "/speech_model.js",
+        "/offline_manifest.json",
+        "/sw.js",
+        "/display_map.js",
+        "/interaction_anchor.js",
+        "/search_normalizer.js",
+        "/search_engine_v2.js",
+        "/search_exact_v21.js",
+        "/search_foundation_v21b.js",
+        "/index.html",
+        "/search_near_v22.js",
+        "/",
+        "/search_worker_v2.js",
+        "/interim_user_state_migration.js",
+        "/search_semantic_pack_guard_r4.js",
+        "/search_semantic_v3_core_r4.js",
+        "/search_semantic_hybrid_r6.js",
+        "/search_semantic_pack_registry_r6.js",
+        "/pls_v16/runtime_v1.mjs",
+        "/icons/favicon-16.png",
+        "/icons/favicon-32.png",
+        "/icons/favicon.ico",
+        "/icons/icon-60.png",
+        "/icons/icon-120.png",
+        "/icons/apple-touch-icon.png",
+        "/icons/icon-192.png",
+        "/icons/icon-maskable-512.png",
+        "/icons/icon-512.png",
+        "/assets/fonts/fonts.css",
+        "/assets/fonts/im-fell-english-latin-400-normal.woff2",
+        "/assets/fonts/im-fell-english-latin-400-italic.woff2",
+        "/assets/fonts/crimson-text-latin-400-normal.woff2",
+        "/assets/fonts/crimson-text-latin-400-italic.woff2",
+        "/assets/fonts/crimson-text-latin-600-normal.woff2",
+        "/assets/icons/tabler-icons.min.css",
+        "/assets/js/sortable.min.js",
+        "/assets/icons/tabler-icons.woff2",
+        "/__ldc_update_compat__.json"
+      ],
+      "otherCaches": [
+        "ldc-le-livre-du-ciel-a6e91b95-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+        "ldc-le-livre-du-ciel-offline-persistent-v3-a6e91b95"
+      ],
       "version": "142.18",
       "sw_expected": "ldc-v2.19.142.18-R1B-reader-semantic-integration-wip",
-      "offline_count": null,
-      "binding": null,
-      "app_manifest_version": null,
-      "controller": false,
-      "boot_stage": "POST_INIT",
-      "origin": "http://127.0.0.1:8899",
-      "secure_context": true,
-      "register_probe_error": null,
-      "registrations": [],
-      "requests_count": 0
+      "offline_count": 204,
+      "binding": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+      "app_manifest_version": "v2.19.142.18-R1B-READER-SEMANTIC-INTEGRATION-WIP",
+      "controller": true,
+      "requests_count": 39
     },
     "sw_bootstrap_trace": [
       {
-        "at": 1791441811979,
+        "at": 1791441897235,
         "phase": "register-instrumented",
         "info": true
       },
       {
-        "at": 1791441812334,
+        "at": 1791441897348,
         "phase": "register-called",
         "info": [
           "./sw.js",
@@ -46,7 +86,7 @@
         ]
       },
       {
-        "at": 1791441812691,
+        "at": 1791441897520,
         "phase": "register-resolved",
         "info": {
           "scope": "http://127.0.0.1:8899/",
@@ -55,27 +95,27 @@
         }
       },
       {
-        "at": 1791441815274,
+        "at": 1791441900329,
         "phase": "register-called",
         "info": [
           "./sw.js"
         ]
       },
       {
-        "at": 1791441815325,
+        "at": 1791441900332,
         "phase": "register-resolved",
         "info": {
           "scope": "http://127.0.0.1:8899/",
-          "active": null,
-          "installing": "installing"
+          "active": "activated",
+          "installing": null
         }
       }
     ],
-    "registered_worker_active": null,
-    "shell_14218_cache_created": null,
+    "registered_worker_active": "http://127.0.0.1:8899/",
+    "shell_14218_cache_created": "ldc-le-livre-du-ciel-a6e91b95-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
     "correct_v14218_app_and_offline_manifest": {
       "version": "142.18",
-      "offline_version": null
+      "offline_version": "v2.19.142.18-R1B-READER-SEMANTIC-INTEGRATION-WIP"
     },
     "qualified_small_runtime_scripts_cached": {
       "scripts": [
@@ -85,16 +125,10 @@
         "/search_semantic_pack_registry_r6.js",
         "/pls_v16/runtime_v1.mjs"
       ],
-      "missing": [
-        "/search_semantic_pack_guard_r4.js",
-        "/search_semantic_v3_core_r4.js",
-        "/search_semantic_hybrid_r6.js",
-        "/search_semantic_pack_registry_r6.js",
-        "/pls_v16/runtime_v1.mjs"
-      ]
+      "missing": []
     },
     "no_heavy_model_in_shell": {
-      "shell_entries": 0
+      "shell_entries": 39
     }
   },
   "errors": [],
