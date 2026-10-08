@@ -1,0 +1,168 @@
+{
+  "schema": "ldc-v14218-exact-zip-nested-two-origin-adversarial-browser-v1",
+  "candidate_zip_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
+  "candidate_source_commit": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+  "tested_at": "2026-10-08T07:46:19.237Z",
+  "status": "FAIL",
+  "checks": {
+    "fixture_uses_exact_frozen_package_identity": true,
+    "neutral_root_not_a_PWA_and_no_DB": true,
+    "sibling_before_LDC_has_no_worker": true,
+    "nested_LDC_both_ports_boot_exact_version": true,
+    "worker_scopes_strictly_app_folder_both_origins": true,
+    "semantic_model_lazy_at_nested_boot": true,
+    "nested_worker_never_controls_sibling_24h": true,
+    "nested_worker_never_controls_neutral_root": true,
+    "origin_A_cannot_modify_B_db_or_local_or_cache": true,
+    "origin_B_cannot_modify_A_db_or_local_or_cache": true,
+    "nested_exact_zip_semantic_real_search": true,
+    "nested_reader_portrait_landscape_no_blank": true,
+    "nested_reader_return_retains_20_results": false,
+    "nested_sw_reports_exact_offline_asset_count": true,
+    "nested_exact_zip_all_204_offline_assets_cached": true,
+    "nested_offline_fresh_reload_and_3_tomes": true,
+    "offline_uncached_semantic_fails_closed_without_spinner": false,
+    "no_unhandled_pageerrors": true
+  },
+  "measurements": {
+    "fixture_uses_exact_frozen_package_identity": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+    "neutral_root_not_a_PWA_and_no_DB": {
+      "controller": false,
+      "regs": [],
+      "hasIndexedDB": false
+    },
+    "sibling_before_LDC_has_no_worker": {
+      "controller": false,
+      "title": "Sibling scope sentinel"
+    },
+    "nested_LDC_both_ports_boot_exact_version": {
+      "a": {
+        "version": "142.18",
+        "db": "ldc_user_v1",
+        "scope": [
+          "http://127.0.0.1:8992/ldc/"
+        ],
+        "controller": true,
+        "cacheKeys": [
+          "ldc-le-livre-du-ciel-aad6daf1-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-aad6daf1-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-offline-persistent-v3-aad6daf1"
+        ],
+        "semanticLazy": true
+      },
+      "b": {
+        "version": "142.18",
+        "db": "ldc_user_v1",
+        "scope": [
+          "http://127.0.0.1:8993/ldc/"
+        ],
+        "controller": true,
+        "cacheKeys": [
+          "ldc-le-livre-du-ciel-4d5c7da0-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-4d5c7da0-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+          "ldc-le-livre-du-ciel-offline-persistent-v3-4d5c7da0"
+        ],
+        "semanticLazy": true
+      }
+    },
+    "worker_scopes_strictly_app_folder_both_origins": {
+      "a": [
+        "http://127.0.0.1:8992/ldc/"
+      ],
+      "b": [
+        "http://127.0.0.1:8993/ldc/"
+      ]
+    },
+    "semantic_model_lazy_at_nested_boot": {
+      "a": true,
+      "b": true
+    },
+    "origin_A_cannot_modify_B_db_or_local_or_cache": {
+      "local": null,
+      "caches": [
+        "ldc-le-livre-du-ciel-4d5c7da0-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+        "ldc-le-livre-du-ciel-4d5c7da0-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+        "ldc-le-livre-du-ciel-offline-persistent-v3-4d5c7da0"
+      ]
+    },
+    "origin_B_cannot_modify_A_db_or_local_or_cache": {
+      "db": {
+        "key": "__r7_origin_probe",
+        "val": "ORIGIN_A_R7"
+      },
+      "local": "A",
+      "caches": [
+        "ldc-le-livre-du-ciel-aad6daf1-shell-v2.19.142.18-R1B-reader-semantic-integration-wip",
+        "ldc-le-livre-du-ciel-aad6daf1-runtime-v2.19.142.18-R1B-reader-semantic-integration-wip",
+        "ldc-le-livre-du-ciel-offline-persistent-v3-aad6daf1",
+        "__r7_origin_probe_A"
+      ]
+    },
+    "nested_exact_zip_semantic_real_search": {
+      "top": "ldc_t09_1909_11_02_e001",
+      "model": true,
+      "count": 20
+    },
+    "nested_reader_portrait_landscape_no_blank": {
+      "portrait": {
+        "entry": "ldc_t09_1909_11_02_e001",
+        "body": 567,
+        "scroll": 570
+      },
+      "landscape": {
+        "entry": "ldc_t09_1909_11_02_e001",
+        "body": 567,
+        "scroll": 130,
+        "visible": true
+      }
+    },
+    "nested_sw_reports_exact_offline_asset_count": {
+      "state": "NOT_PREPARED",
+      "total": 204
+    },
+    "nested_exact_zip_all_204_offline_assets_cached": {
+      "state": "READY",
+      "completed": 204,
+      "total": 204,
+      "failed": []
+    },
+    "nested_offline_fresh_reload_and_3_tomes": {
+      "state": "READY",
+      "total": 204,
+      "completed": 204,
+      "counts": [
+        {
+          "vol": 1,
+          "count": 124
+        },
+        {
+          "vol": 18,
+          "count": 26
+        },
+        {
+          "vol": 36,
+          "count": 46
+        }
+      ]
+    },
+    "offline_uncached_semantic_fails_closed_without_spinner": {
+      "busy": false,
+      "heading": "Recherche par le sens",
+      "cards": 20,
+      "notice": "Passages classés selon leur proximité avec votre description. Cette recherche ne confirme pas que votre formulation est exacte ou vraie.\nComment ça marche ?\nTome 36 · 17 mai 1938\nL’âme est la voix, le chant et les mains pour jouer (de l’instrument). Le corps est l’orgue. Le divin Vouloir veut les plus petits actes afin de faire lever son soleil. Ce que le soleil sème sur la terre - ce que la Divine Volonté sème. Le mariage que Dieu prépare avec ses Vérités.\ndes choses que tout le monde doit fair",
+      "ready": true
+    },
+    "no_unhandled_pageerrors": []
+  },
+  "errors": [],
+  "limits": [
+    "Ephemeral localhost:8992 vs :8993 only; NOT hosted E16/E19 closure",
+    "Chromium emulated viewport only; NOT physical iPhone/iPad Safari",
+    "No GitHub Pages or production origin visited",
+    "No permission to deploy"
+  ],
+  "hosted_e16": "OPEN",
+  "hosted_e19": "OPEN",
+  "physical_gate": "OPEN",
+  "deploy_authority": "NONE"
+}
