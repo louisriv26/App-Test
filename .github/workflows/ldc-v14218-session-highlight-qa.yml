@@ -5,6 +5,11 @@ on:
       - ldc-v142-18-reader-semantic-integration-wip-20261008
     paths:
       - '.github/workflows/ldc-v14218-session-highlight-qa.yml'
+      - '.github/ldc-v14218-session-highlight-qa.mjs'
+      - 'index.html'
+      - 'pls_v16/runtime_v1.mjs'
+      - 'version.json'
+      - 'offline_manifest.json'
 permissions:
   contents: write
 jobs:
