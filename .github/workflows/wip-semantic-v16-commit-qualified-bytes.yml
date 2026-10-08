@@ -1,0 +1,78 @@
+name: LDC WIP commit qualified PLS v16 bytes
+on:
+  push:
+    branches:
+      - ldc-v142-16-search-integrity-wip-20261007
+    paths:
+      - 'pls_v16/INTEGRATION_BYTES_REQUEST.json'
+permissions:
+  contents: write
+  actions: read
+jobs:
+  commit-qualified-bytes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ldc-v142-16-search-integrity-wip-20261007
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Download exact Guard-qualified engineering pack
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          REQ=pls_v16/INTEGRATION_BYTES_REQUEST.json
+          RUN_ID="$(jq -r '.qualified_pack.run_id' "$REQ")"
+          ARTIFACT="$(jq -r '.qualified_pack.artifact_name' "$REQ")"
+          SOURCE_HEAD="$(jq -r '.qualified_pack.source_head_sha' "$REQ")"
+          RUN_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/$RUN_ID")"
+          test "$(jq -r '.conclusion' <<<"$RUN_JSON")" = success
+          test "$(jq -r '.head_sha' <<<"$RUN_JSON")" = "$SOURCE_HEAD"
+          test "$(jq -r '.head_branch' <<<"$RUN_JSON")" = "ldc-v142-16-search-integrity-wip-20261007"
+          rm -rf /tmp/qualified-pack && mkdir -p /tmp/qualified-pack
+          gh run download "$RUN_ID" -n "$ARTIFACT" -D /tmp/qualified-pack
+          ROOT=/tmp/qualified-pack/wip-pls-v16-qualified-pack
+          test -f "$ROOT/pls_v16/semantic_pack_manifest.json"
+          test "$(sha256sum "$ROOT/pls_v16/semantic_pack_manifest.json"|awk '{print $1}')" = "$(jq -r '.qualified_pack.manifest_sha256' "$REQ")"
+          test "$(sha256sum "$ROOT/pls_v16/pack/vectors.i8"|awk '{print $1}')" = "$(jq -r '.qualified_pack.vector_sha256' "$REQ")"
+          test "$(sha256sum "$ROOT/pls_v16/pack/inverse_norms.f32le"|awk '{print $1}')" = "$(jq -r '.qualified_pack.inverse_norms_sha256' "$REQ")"
+          test "$(sha256sum "$ROOT/pls_v16/pack/metadata.jsonl"|awk '{print $1}')" = "$(jq -r '.qualified_pack.metadata_sha256' "$REQ")"
+          test "$(sha256sum "$ROOT/pls_v16/pack/jesus_mask.bits"|awk '{print $1}')" = "$(jq -r '.qualified_pack.jesus_mask_sha256' "$REQ")"
+          (cd /tmp/qualified-pack && sha256sum -c wip-pls-v16-qualified-pack/SHA256SUMS.txt)
+          PLS_V16_STAGE="$ROOT" node .github/wip-semantic-v16-qualified-pack-guard-qa.cjs
+          echo "QUALIFIED_ROOT=$ROOT" >> "$GITHUB_ENV"
+      - name: Stage exact qualified pack bytes into repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf pls_v16/pack pls_v16/evidence
+          mkdir -p pls_v16
+          cp -a "$QUALIFIED_ROOT/pls_v16/pack" pls_v16/
+          cp -a "$QUALIFIED_ROOT/pls_v16/evidence" pls_v16/
+          cp "$QUALIFIED_ROOT/pls_v16/semantic_pack_manifest.json" pls_v16/semantic_pack_manifest.json
+          cp "$QUALIFIED_ROOT/pls_v16/manifest_build_report.json" pls_v16/manifest_build_report.json
+          cp "$QUALIFIED_ROOT/pls_v16/guard_qa.json" pls_v16/guard_qa.json
+          cp "$QUALIFIED_ROOT/pls_v16/BINDING_CONTRACT.json" pls_v16/BINDING_CONTRACT.json
+          cp "$QUALIFIED_ROOT/pls_v16/METADATA_IDENTITY.json" pls_v16/METADATA_IDENTITY.json
+          cp "$QUALIFIED_ROOT/pls_v16/CALIBRATION_PROTOCOL_V2.json" pls_v16/CALIBRATION_PROTOCOL_V2.json
+          cp "$QUALIFIED_ROOT/pls_v16/CALIBRATION_V1_ADJUDICATION.md" pls_v16/CALIBRATION_V1_ADJUDICATION.md
+          cp "$QUALIFIED_ROOT/SHA256SUMS.txt" pls_v16/QUALIFIED_SHA256SUMS.txt
+          jq -n             --arg manifest "$(sha256sum pls_v16/semantic_pack_manifest.json|awk '{print $1}')"             --arg vectors "$(sha256sum pls_v16/pack/vectors.i8|awk '{print $1}')"             --arg norms "$(sha256sum pls_v16/pack/inverse_norms.f32le|awk '{print $1}')"             --arg metadata "$(sha256sum pls_v16/pack/metadata.jsonl|awk '{print $1}')"             --arg mask "$(sha256sum pls_v16/pack/jesus_mask.bits|awk '{print $1}')"             '{schema:"ldc-pls-v16-qualified-pack-identity-v1",status:"QUALIFIED_ENGINEERING_BYTES_STAGED__NOT_RUNTIME_WIRED__NOT_DEPLOYED",manifest_sha256:$manifest,vector_sha256:$vectors,inverse_norms_sha256:$norms,metadata_sha256:$metadata,jesus_mask_sha256:$mask,guard_status:"PASS",deployment_authorized:false,app_runtime_wired:false}'             > pls_v16/QUALIFIED_PACK_IDENTITY.json
+      - name: Commit only qualified pack surfaces
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pls_v16/pack pls_v16/evidence pls_v16/semantic_pack_manifest.json pls_v16/manifest_build_report.json pls_v16/guard_qa.json pls_v16/BINDING_CONTRACT.json pls_v16/METADATA_IDENTITY.json pls_v16/CALIBRATION_PROTOCOL_V2.json pls_v16/CALIBRATION_V1_ADJUDICATION.md pls_v16/QUALIFIED_SHA256SUMS.txt pls_v16/QUALIFIED_PACK_IDENTITY.json
+          test -n "$(git diff --cached --name-only)"
+          if git diff --cached --name-only | grep -Ev '^pls_v16/(pack/|evidence/|semantic_pack_manifest\.json$|manifest_build_report\.json$|guard_qa\.json$|BINDING_CONTRACT\.json$|METADATA_IDENTITY\.json$|CALIBRATION_PROTOCOL_V2\.json$|CALIBRATION_V1_ADJUDICATION\.md$|QUALIFIED_SHA256SUMS\.txt$|QUALIFIED_PACK_IDENTITY\.json$)' ; then
+            echo "UNAUTHORIZED_STAGED_PATH"; exit 1
+          fi
+          git commit -m "WIP E04 E06: stage exact Guard-qualified PLS v16 pack bytes"
+          git push origin HEAD:ldc-v142-16-search-integrity-wip-20261007
