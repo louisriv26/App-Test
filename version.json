@@ -1,10 +1,10 @@
 {
-  "app_version": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
+  "app_version": "v2.19.142.16-R1B-READER-PHYSICAL-GATE-REPAIR",
   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
-  "baseline_candidate_sha256": "f02098cf3432c0373c9fbd698b0551d79b3a024f739883a501293a6932ce24cd",
-  "baseline_candidate_version": "v2.19.142.14-R1B-BLIND-AUDIT-CLOSURE",
-  "build_date": "2026-10-07",
+  "baseline_candidate_sha256": "cca03c4a6e07cd7f25b4a6a8cc6caadaf912ede76354a0b71236c93d2dd728bc",
+  "baseline_candidate_version": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
+  "build_date": "2026-10-08",
   "collection_link_contract": "LOCAL_COLLECTION_ID_LINK_DOES_NOT_TRANSFER_USER_DATA",
   "collections_visibility": "VISIBLE_MON_ESPACE_WORKSPACE_AND_EXPLICIT_ENTRYPOINT",
   "context_action_contract": "SELECTION_OR_PARAGRAPH_SINGLE_CONTEXT_SURFACE",
@@ -51,8 +51,8 @@
     "state_recorded_status": "PRODUCTION_DEPLOYED_CLOSED_IMMUTABLE__EXACT_REPOSITORY_TREE_AND_SUCCESSFUL_DEPLOYMENT_BINDING_RECORDED",
     "technical_identity": "v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE"
   },
-  "current_release_authority": "OWNER_ONLY_V142_15_RELEASE_TRUTH_SCOPE_CLOSURE__EXACT_SUCCESSOR_REQUIRES_FRESH_APP_TEST_AND_PHYSICAL_QUALIFICATION__PRODUCTION_NOT_AUTHORIZED",
-  "current_runtime_browser_validation": "V142_14_HOSTED_APP_TEST_BROWSER_WASM_EVIDENCE_CARRIED_AS_PREDECESSOR_EVIDENCE_ONLY__V142_15_RUNTIME_DELTA_LIMITED_TO_E07_SCOPE_DISCLOSURE_E15_PUBLIC_WORDING_AND_RELEASE_IDENTITY__FRESH_EXACT_V142_15_HOSTED_RETEST_REQUIRED",
+  "current_release_authority": "OWNER_ONLY_V142_16_READER_PHYSICAL_GATE_REPAIR__SUCCESSOR_OF_FROZEN_V142_15_AFTER_IPHONE_PHYSICAL_GATE_FAILURES__PRODUCTION_NOT_AUTHORIZED",
+  "current_runtime_browser_validation": "V142_15_EXACT_APP_TEST_BINDING_309_OF_309_PASS_IS_PREDECESSOR_EVIDENCE_ONLY__V142_16_READER_SCROLL_AND_LOW_HEIGHT_RUNTIME_DELTA_REQUIRES_FRESH_MACHINE_BROWSER_AND_PHYSICAL_IPHONE_IPAD_RETEST",
   "dark_mode_v136_r9": {
     "corpus_changed": false,
     "date": "2026-10-02",
@@ -71,7 +71,7 @@
   "diagnostic_default_copy_contract": "ALLOWLIST_PUBLIC_TECHNICAL_METADATA__NO_RAW_QUERY__NO_RAW_ERROR_MESSAGE__NO_USER_AUTHORED_TEXT",
   "entry_start_contract": "V107__V106_ENTRY_START_SEMANTIC_FIXED_POINT_AND_USER_INTENT_LOCK_PRESERVED__DIRECT_TOME_LIST_OPEN_ADDS_SOURCE_SCROLL_HANDOFF_TRANSACTION__CAPTURE_BACK_CONTEXT_BEFORE_BLUR__BLUR_FOCUSED_LIST_BUTTON_BEFORE_FIRST_AWAIT__FREEZE_SOURCE_MOMENTUM__RENEW_READER_SCROLL_DOM_SURFACE__PIN_TOP_BEFORE_EXPOSURE_AND_FOR_TWO_SETTLING_FRAMES__PREVIOUS_NEXT_SEARCH_RESUME_NOTE_HIGHLIGHT_DEEP_LINK_TARGET_SEMANTICS_UNCHANGED",
   "external_decision_authority": "FINAL_DECISION_LOCK_EXTERNAL_TO_DEPLOY_ZIP__WRITTEN_LAST_AFTER_PRIMARY_AND_INDEPENDENT_REOPEN_AUDITS",
-  "external_validation_status": "V142_15_PRE_PHYSICAL__APP_TEST_HOSTED_BROWSER_INSTALLED_PWA_IPHONE_IPAD_AND_VOICEOVER_GATES_OPEN__OWNER_REPORTED_V142_14_APP_TEST_SMOKE_WITH_NO_OBVIOUS_DEFECT__PRODUCTION_NOT_AUTHORIZED",
+  "external_validation_status": "V142_15_IPHONE_PHYSICAL_READER_GATE_FAILED__MON_ESPACE_PARAGRAPH_TARGET_ROOT_SCROLL_CONTAMINATION_AND_SHORT_LANDSCAPE_READER_VIEWPORT_DISCOVERED__V142_16_REPAIR_CANDIDATE_NOT_YET_PHYSICALLY_QUALIFIED__PRODUCTION_NOT_AUTHORIZED",
   "f1_poisoned_http_cache_regression_gate": "REQUIRED_AND_EXTERNAL_EVIDENCE",
   "f7_release_metadata_generation": "CURRENT_RELEASE_COUNTS_AND_BINDINGS_GENERATED_AFTER_CORPUS_PAYLOAD_FREEZE__V32_VALUES_RETAINED_ONLY_UNDER_HISTORICAL_KEYS",
   "f8_android_nonfragment_highlight_targeting": {
@@ -4560,5 +4560,37 @@
     "independent_blind_challenge_status": "PASS_12_OF_12_PRE_PHYSICAL",
     "release_disposition": "FROZEN_READY_FOR_EXACT_BYTE_APP_TEST_AND_PHYSICAL_QUALIFICATION_ONLY__PRODUCTION_NOT_AUTHORIZED",
     "mutation_authority": "NONE_AFTER_FREEZE__ANY_MATERIAL_BYTE_CHANGE_CREATES_SUCCESSOR"
+  },
+  "reader_physical_gate_repair_v142_16": {
+    "date": "2026-10-08",
+    "direct_predecessor_public_version": "142.15",
+    "direct_predecessor_technical_identity": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
+    "direct_predecessor_package_sha256": "cca03c4a6e07cd7f25b4a6a8cc6caadaf912ede76354a0b71236c93d2dd728bc",
+    "direct_predecessor_commit": "572d9df7927765b575a76eaee98fd3cc9d455e74",
+    "trigger": [
+      "Physical iPhone: opening a paragraph-targeted highlight from Mon Espace could displace the root document and leave the Reader chrome apparently mid-screen with a large gap below.",
+      "Physical iPhone Safari: portrait-to-landscape could compress #reader-scroll to an unusably small height while fixed Reader chrome remained visible."
+    ],
+    "root_causes": [
+      "The generic pendingParaId path used Element.scrollIntoView(), which could scroll ancestors beyond #reader-scroll and violate the Reader root-scroll invariant.",
+      "The Reader flex contract allowed #reader-scroll (flex:1; min-height:0) to collapse almost to zero when Safari landscape left insufficient height for non-shrinking Reader chrome plus the global bottom navigation."
+    ],
+    "repair": [
+      "Unify paragraph/search target positioning through an internal #reader-scroll-only primitive; no scrollIntoView on the pending paragraph path.",
+      "Reset and re-check root scroll around programmatic Reader target positioning and viewport restoration.",
+      "Introduce measurement-driven low-height Reader mode with safe-area preservation, temporary global-nav yielding, compact Reader chrome and hysteresis.",
+      "Debounce/identity-bind viewport restoration and restore semantic position only after low-height layout settles.",
+      "Re-evaluate low-height mode before restoring the semantic anchor after text-size changes."
+    ],
+    "protected_surfaces": [
+      "corpus JSON payloads unchanged",
+      "Par les mots search payloads and ranking unchanged",
+      "Par le sens engine/index/pack/ranking unchanged",
+      "provenance records and wording unchanged",
+      "user-state schemas and IndexedDB semantics unchanged",
+      "offline content asset set and content binding unchanged"
+    ],
+    "mutation_authority": "OWNER_AUTHORIZED_SUCCESSOR_IMPLEMENTATION",
+    "deployment_authority": "NONE_UNTIL_FRESH_APP_TEST_AND_PHYSICAL_REQUALIFICATION"
   }
 }
