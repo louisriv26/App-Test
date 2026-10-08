@@ -184,7 +184,7 @@ html[data-theme="light"]{
 /* Semantic hidden must win over component display rules (notably Safari + flex buttons). */
 [hidden]{display:none!important;}
 html,body{height:100%;background:var(--ivory);font-family:var(--body);color:var(--ink);}
-html{overflow-x:hidden;max-width:100vw;height:-webkit-fill-available;}
+html{overflow-x:hidden;max-width:100vw;}
 body{overflow:hidden;overflow-x:hidden;max-width:100vw;min-height:100vh;min-height:100dvh;min-height:-webkit-fill-available;display:flex;flex-direction:column;padding-bottom:var(--nav-safe-h);}
 
 /* ═══ SCROLL ═══ */
@@ -2634,11 +2634,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.18-R1B-READER-SEMANTIC-INTEGRATION-WIP'; // WIP candidate, not deployed or authorized; preserves v142.17 Reader ownership and integrates qualified PLS v16
-const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.18'; // single authoritative public identity derived from APP_VERSION
+const APP_VERSION = 'v2.19.142.19-R1B-READER-GEOMETRY-CANDIDATE'; // WIP candidate, not deployed or authorized; preserves v142.17 Reader ownership and integrates qualified PLS v16
+const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-08';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.18-R1B-reader-semantic-integration-wip';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.19-R1B-reader-geometry-candidate';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
