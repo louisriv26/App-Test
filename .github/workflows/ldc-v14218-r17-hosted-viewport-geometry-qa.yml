@@ -1,0 +1,42 @@
+name: LDC R17 hosted MassFinder Beta Reader viewport geometry WebKit Chromium
+on:
+  push:
+    branches: [ldc-v142-18-reader-semantic-integration-wip-20261008]
+    paths:
+      - '.github/workflows/ldc-v14218-r17-hosted-viewport-geometry-qa.yml'
+      - '.github/ldc-v14218-r17-hosted-viewport-geometry-qa.mjs'
+permissions: {contents: write}
+jobs:
+  hosted-geometry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Chromium and Linux WebKit browser automations
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps webkit
+      - name: Independently inspect hosted Reader geometry and scrolling in 3 contexts
+        continue-on-error: true
+        run: node .github/ldc-v14218-r17-hosted-viewport-geometry-qa.mjs
+      - name: Preserve even FAIL evidence on engineering WIP only
+        if: always()
+        run: |
+          set -euo pipefail
+          if [ ! -f LDC_v142.18_R17_MASSFINDERBETA_READER_VIEWPORT_GEOMETRY_QA.json ]; then
+            printf '{"status":"FAIL","errors":["R17_NO_MACHINE_REPORT"],"checks":{}}\n' > LDC_v142.18_R17_MASSFINDERBETA_READER_VIEWPORT_GEOMETRY_QA.json
+          fi
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add LDC_v142.18_R17_MASSFINDERBETA_READER_VIEWPORT_GEOMETRY_QA.json
+          git commit -m 'test(ldc): actual hosted WebKit mobile/desktop and Chromium comparative Reader geometry'
+          git pull --rebase origin ldc-v142-18-reader-semantic-integration-wip-20261008
+          git push origin HEAD:ldc-v142-18-reader-semantic-integration-wip-20261008
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14218-r17-live-hosted-WebKit-Chromium-layout-evidence
+          path: LDC_v142.18_R17_MASSFINDERBETA_READER_VIEWPORT_GEOMETRY_QA.json
+          retention-days: 14
+      - name: Fail closed if overflow geometry is unresolved
+        run: python3 -c "import json;x=json.load(open('LDC_v142.18_R17_MASSFINDERBETA_READER_VIEWPORT_GEOMETRY_QA.json')); assert x.get('status')=='PASS_ALL_HOSTED_VIEWPORT_GEOMETRY_SCOPED',x.get('status')"
