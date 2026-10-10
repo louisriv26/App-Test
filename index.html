@@ -184,7 +184,7 @@ html[data-theme="light"]{
 /* Semantic hidden must win over component display rules (notably Safari + flex buttons). */
 [hidden]{display:none!important;}
 html,body{height:100%;background:var(--ivory);font-family:var(--body);color:var(--ink);}
-html{overflow-x:hidden;max-width:100vw;height:-webkit-fill-available;}
+html{overflow-x:hidden;max-width:100vw;}
 body{overflow:hidden;overflow-x:hidden;max-width:100vw;min-height:100vh;min-height:100dvh;min-height:-webkit-fill-available;display:flex;flex-direction:column;padding-bottom:var(--nav-safe-h);}
 
 /* ═══ SCROLL ═══ */
@@ -599,6 +599,22 @@ h2.dn-section-title{margin-bottom:0;}
 
 /* Prev/next nav */
 .entry-nav{display:flex;gap:8px;padding:12px 22px 20px;flex-shrink:0;border-top:0.5px solid var(--border);}
+/* v142.16 physical-gate repair: in a genuinely short Reader viewport, preserve
+   a useful reading window by yielding global chrome before text. Safe areas stay
+   reserved; the mode is measurement-driven, not orientation- or device-name-driven. */
+body.reader-low-height{padding-bottom:var(--sat-bot);}
+body.reader-low-height #nav{display:none;}
+/* Fixed Reader auxiliaries intentionally keep their existing var(--nav-safe-h)
+   bottom offset: with global nav yielded, that same band protects the in-flow
+   entry navigation from toast/selection-panel overlap. */
+body.reader-low-height #screen-reader .reader-top{padding-top:calc(var(--sat-top) + 4px);padding-bottom:4px;}
+body.reader-low-height #screen-reader .source-mode-bar.reader-context-bar{padding-top:4px;padding-bottom:4px;}
+body.reader-low-height #screen-reader .reader-context-back{min-height:44px;padding-top:6px;padding-bottom:6px;}
+body.reader-low-height #screen-reader .documentary-view-status.show{padding:4px 8px;gap:6px;align-items:center;flex-direction:row;}
+body.reader-low-height #screen-reader .documentary-view-status-actions{flex-wrap:nowrap;}
+body.reader-low-height #screen-reader .entry-nav{padding-top:4px;padding-bottom:4px;}
+body.reader-low-height #screen-reader .enav-btn{min-height:44px;padding:6px 8px;}
+body.reader-low-height #screen-reader .mark-read-btn{min-height:44px;}
 /* R18 R3: favourite state must change paint, never geometry.
    The bundled Tabler font has no ti-heart-filled glyph; the former Arial ♥ fallback
    was visibly smaller than the outline heart. Both states now use the same closed
@@ -1047,7 +1063,7 @@ html[data-theme="dark"] #update-banner { background: #0F1A2E; }
 .dp-isolated-dash { padding-left:14px; }
 
 /* Hidden anchor span injected when a merged paragraph is removed from the DOM.
-   Preserves the original p_<id> so getElementById / scrollIntoView still work. */
+   Preserves the original p_<id> for stable paragraph targeting and canonical navigation. */
 /* ── Flow-aware reader DOM (instruction v2 §6.4) ─────────────────────────
    A .dp-flow group is the visual paragraph. Its member .para-fragment spans
    keep separate identity and canonical text but must NOT create paragraph
@@ -1668,12 +1684,12 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
 <script src="speech_model.js"></script>
 <script src="search_normalizer.js"></script>
 <script src="interim_user_state_migration.js"></script>
-<script src="search_semantic_pack_guard_r3.js"></script>
+<script src="search_semantic_pack_guard_r4.js"></script>
 <script src="search_semantic_v3_core_r4.js"></script>
-<script src="search_semantic_pack_registry_r5.js"></script>
-<script src="search_semantic_pack_lifecycle_r5.js"></script>
-<script src="pls_v15/hybrid_core_v1_5.js"></script>
-<script type="module" src="pls_v15/owner_runtime_v1_5.mjs"></script>
+<script src="search_semantic_hybrid_r6.js"></script>
+<script src="search_semantic_pack_registry_r6.js"></script>
+<script src="search_structural_preflight_r88.js"></script>
+<script type="module" src="pls_v16/runtime_v1.mjs"></script>
 </head>
 <body class="app-state-boot">
 
@@ -2619,11 +2635,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE'; // bounded release-truth/scope successor of frozen v142.14; protected corpus, provenance records, retrieval runtime and ranking preserved
-const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.15'; // single authoritative public identity derived from APP_VERSION
+const APP_VERSION = 'v2.19.142.22-R1B-STRUCTURAL-REPAIR-R88-TEST'; // WIP candidate, not deployed or authorized; preserves v142.17 Reader ownership and integrates qualified PLS v16
+const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD = '2026-10-07';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.15-R1B-release-truth-scope-closure';
+const APP_BUILD = '2026-10-10';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.22-R1B-structural-repair-r88-test';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -2894,7 +2910,7 @@ function readerDiagSnapshot(kind,label,event=null,extra={}){
     visual_viewport:vv?{offset_top:readerDiagNum(vv.offsetTop),offset_left:readerDiagNum(vv.offsetLeft),page_top:readerDiagNum(vv.pageTop),page_left:readerDiagNum(vv.pageLeft),width:readerDiagNum(vv.width),height:readerDiagNum(vv.height),scale:readerDiagNum(vv.scale)}:null,
     geometry:{main_content:readerDiagRect(document.getElementById('main-content')),screen_entries:readerDiagRect(document.getElementById('screen-entries')),entries_list:readerDiagRect(list),source_button:readerDiagRect(source),screen_reader:readerDiagRect(screen),reader_top:readerDiagRect(document.querySelector('#screen-reader .reader-top')),reader_scroll:readerDiagRect(sc),reader_header:readerDiagRect(document.querySelector('#reader-scroll .reader-header')),reader_body:readerDiagRect(document.getElementById('reader-body')),first_fragment:readerDiagRect(sc&&sc.querySelector('.para-fragment')),first_nested_visible:readerDiagFirstVisible(sc,false),first_visual_visible:readerDiagFirstVisible(sc,true)},
     focus:{active_element:readerDiagElem(document.activeElement),source_button_focused:!!(source&&document.activeElement===source)},
-    shell:{html:readerDiagStyle(html),body:readerDiagStyle(body),main_content:readerDiagStyle(document.getElementById('main-content')),active_screen:readerDiagStyle(activeScreen),entries_list:readerDiagStyle(list),reader_scroll:readerDiagStyle(sc)}},extra||{});
+    shell:{html:readerDiagStyle(html),body:readerDiagStyle(body),main_content:readerDiagStyle(document.getElementById('main-content')),active_screen:readerDiagStyle(activeScreen),entries_list:readerDiagStyle(list),reader_scroll:readerDiagStyle(sc),reader_low_height:document.body.classList.contains('reader-low-height')}},extra||{});
 }
 function readerDiagAppend(kind,label,event=null,extra={}){const t=readerOpenTraceActive;if(!t)return null;if(t.samples.length>=650){t.dropped_samples=(t.dropped_samples||0)+1;return null;}const sample=readerDiagSnapshot(kind,label,event,extra);t.samples.push(sample);return sample;}
 function readerDiagFinalize(reason='complete'){const t=readerOpenTraceActive;if(!t)return null;t.status=reason;t.completed_wall_time=Date.now();t.completed_performance_time=readerDiagNum(performance.now());readerOpenTraceHistory.push(t);while(readerOpenTraceHistory.length>8)readerOpenTraceHistory.shift();readerOpenTraceActive=null;window.__ldcReaderOpenTrace=t;return t;}
@@ -3353,8 +3369,27 @@ function syncDocumentaryViewUI(){
 }
 function openDocumentaryView(){syncDocumentaryViewUI();openModalOverlay('documentary-view-overlay','closeDocumentaryView');}
 function closeDocumentaryView(){closeModalOverlay('documentary-view-overlay');}
-async function chooseDocumentaryView(mode){closeDocumentaryView();await setSupplementMode(mode,{persist:true,origin:'user'});}
-async function returnToNormalReading(){await setSupplementMode('enriched',{persist:true,origin:'user'});}
+function focusAfterDocumentaryViewChange(){
+  const cur=document.activeElement;
+  if(cur&&cur!==document.body&&cur.isConnected&&cur.getClientRects().length>0)return true;
+  const screen=document.querySelector('.screen.active');if(!screen)return false;
+  let target=null;
+  if(screen.id==='screen-search')target=document.getElementById(searchIntentMode==='meaning'?'search-input-meaning':'search-input');
+  else if(screen.id==='screen-reader')target=document.getElementById('reader-back-btn');
+  else target=screen.querySelector('.btn-back,button:not([disabled])');
+  if(!target||!target.isConnected||target.getClientRects().length===0)return false;
+  try{target.focus({preventScroll:true});}catch(_){target.focus();}
+  return document.activeElement===target;
+}
+async function chooseDocumentaryView(mode){
+  closeDocumentaryView();
+  await setSupplementMode(mode,{persist:true,origin:'user'});
+  requestAnimationFrame(focusAfterDocumentaryViewChange);
+}
+async function returnToNormalReading(){
+  await setSupplementMode('enriched',{persist:true,origin:'user'});
+  requestAnimationFrame(focusAfterDocumentaryViewChange);
+}
 
 async function loadSupplementRegistryData() {
   if (supplementRegistry && supplementManifest) return supplementRegistry;
@@ -3791,7 +3826,7 @@ function showScreen(id) {
   const leavingSearch=id!=='search'&&document.getElementById('screen-search')?.classList.contains('active');
   if(leavingSearch)resetRootHorizontalViewport('leave-search');
   if (id !== 'entries') { if(typeof releaseEntriesReturnLock==='function')releaseEntriesReturnLock('screen:'+id); if(typeof releaseTomeStartLock==='function')releaseTomeStartLock('screen:'+id); }
-  if (id !== 'reader') {clearEntryStartTargetLock('screen:'+id);resetReaderInteractionContext('screen:'+id);}
+  if (id !== 'reader') {invalidateReaderAsyncTransactions('screen:'+id);clearEntryStartTargetLock('screen:'+id);resetReaderInteractionContext('screen:'+id);clearReaderLowHeightMode('screen:'+id);}
   if (id !== 'search') cancelActiveSearch('navigation');
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-' + id).classList.add('active');
@@ -3803,7 +3838,7 @@ function showScreen(id) {
   if (ni) ni.classList.add('active');
   if(journeyPointSelectionGuide&&!['tomes','entries','reader'].includes(id))clearJourneyPointSelectionGuide();
   if(id==='reader'&&journeyPointSelectionGuide&&!journeyRecoverableReplacementIntent)clearJourneyPointSelectionGuide();else syncJourneySelectionGuide();
-  if(id==='reader')scheduleJourneyUiRefresh();
+  if(id==='reader'){scheduleJourneyUiRefresh();requestAnimationFrame(()=>updateReaderLowHeightMode('show-reader'));}
 }
 
 async function finishReaderForPermanentNavigation(destination){
@@ -4193,14 +4228,19 @@ function installEntryStartTargetLock(session=activeReaderSession){
 function enforceEntryStartTargetLock(reason='enforce'){
   if(!entryStartLockMatchesVisible())return false;
   const sc=document.getElementById('reader-scroll');if(!sc)return false;
+  const binding=visibleReaderIdentitySnapshot();if(!binding)return false;
   const before=Number(sc.scrollTop)||0;
-  semanticRestoreInProgress=true;
+  const owner=beginReaderProgrammaticScroll();
   sc.scrollTop=0;
   liveSemanticPosition=makeEntryStartSemanticPosition();
   entryStartTraceEvent('LOCK_ENFORCE',{reason,before});
   requestAnimationFrame(()=>{
-    if(entryStartLockMatchesVisible()){sc.scrollTop=0;liveSemanticPosition=makeEntryStartSemanticPosition();entryStartTraceEvent('LOCK_ENFORCE_RAF',{reason});}
-    semanticRestoreInProgress=false;
+    if(!ownsReaderProgrammaticScroll(owner)||!visibleReaderIdentityMatches(binding)||!entryStartLockMatchesVisible()){
+      endReaderProgrammaticScroll(owner);return;
+    }
+    sc.scrollTop=0;liveSemanticPosition=makeEntryStartSemanticPosition();
+    entryStartTraceEvent('LOCK_ENFORCE_RAF',{reason});
+    requestAnimationFrame(()=>endReaderProgrammaticScroll(owner));
   });
   return true;
 }
@@ -4263,10 +4303,48 @@ function semanticPositionMatchesVisibleEntry(pos){
   return Number(pos.vol)===Number(currentVolume)&&String(pos.entry_id||'')===String(currentEntry.id||'');
 }
 function visibleReaderIdentitySnapshot(){
-  return currentEntry&&currentVolume?{vol:Number(currentVolume),entry_id:String(currentEntry.id||'')}:null;
+  if(!readerScreenIsVisible()||!currentEntry||!currentVolume||!activeReaderSession)return null;
+  return {
+    vol:Number(currentVolume),
+    entry_id:String(currentEntry.id||''),
+    session_id:String(activeReaderSession.session_id||''),
+    supplement_id:String(visibleReaderSupplementId()||''),
+    source_mode:String(supplementMode||'')
+  };
 }
 function visibleReaderIdentityMatches(snapshot){
-  return !!(snapshot&&currentEntry&&Number(currentVolume)===Number(snapshot.vol)&&String(currentEntry.id||'')===String(snapshot.entry_id||''));
+  return !!(
+    snapshot&&readerScreenIsVisible()&&currentEntry&&activeReaderSession&&
+    Number(currentVolume)===Number(snapshot.vol)&&
+    String(currentEntry.id||'')===String(snapshot.entry_id||'')&&
+    String(activeReaderSession.session_id||'')===String(snapshot.session_id||'')&&
+    String(visibleReaderSupplementId()||'')===String(snapshot.supplement_id||'')&&
+    String(supplementMode||'')===String(snapshot.source_mode||'')
+  );
+}
+/* v142.17: every programmatic Reader scroll has one owning epoch.
+   Stale callbacks cannot clear suppression belonging to a successor. */
+let readerProgrammaticScrollEpoch=0;
+function beginReaderProgrammaticScroll(){
+  const owner=++readerProgrammaticScrollEpoch;
+  semanticRestoreInProgress=true;
+  return owner;
+}
+function ownsReaderProgrammaticScroll(owner){return owner===readerProgrammaticScrollEpoch;}
+function endReaderProgrammaticScroll(owner){
+  if(!ownsReaderProgrammaticScroll(owner))return false;
+  semanticRestoreInProgress=false;
+  return true;
+}
+/* Screen exit or a newly committed Reader session invalidates the three
+   Reader-only asynchronous channels together. It does not alter user storage. */
+function invalidateReaderAsyncTransactions(reason='reader-lifecycle'){
+  readerTargetPositionSeq++;
+  semanticLayoutRestoreSeq++;
+  clearTimeout(semanticResizeTimer);
+  semanticResizeTimer=null;
+  readerProgrammaticScrollEpoch++;
+  semanticRestoreInProgress=false;
 }
 function failClosedVisibleReaderToEntryStart(snapshot){
   if(!visibleReaderIdentityMatches(snapshot))return false;
@@ -4278,16 +4356,25 @@ function failClosedVisibleReaderToEntryStart(snapshot){
 }
 function restoreSemanticReadingPosition(pos){
   const sc=document.getElementById('reader-scroll');
-  if(!sc||!pos||!semanticPositionMatchesVisibleEntry(pos))return false;
-  semanticRestoreInProgress=true;
+  if(!sc||!pos||!readerScreenIsVisible()||!semanticPositionMatchesVisibleEntry(pos))return false;
+  const binding=visibleReaderIdentitySnapshot();if(!binding)return false;
+  const owner=beginReaderProgrammaticScroll();
   if(semanticPositionIsEntryStart(pos)){
     sc.scrollTop=0;
-    requestAnimationFrame(()=>{if(semanticPositionMatchesVisibleEntry(pos))sc.scrollTop=0;semanticRestoreInProgress=false;const locked=resumeLockedSemanticPosition();liveSemanticPosition=locked||makeEntryStartSemanticPosition()||pos;});
+    requestAnimationFrame(()=>{
+      if(!ownsReaderProgrammaticScroll(owner)||!visibleReaderIdentityMatches(binding)){
+        endReaderProgrammaticScroll(owner);return;
+      }
+      sc.scrollTop=0;
+      const locked=resumeLockedSemanticPosition();
+      liveSemanticPosition=locked||makeEntryStartSemanticPosition()||pos;
+      requestAnimationFrame(()=>endReaderProgrammaticScroll(owner));
+    });
     return 'entry-start';
   }
   let used='fallback';
   const frag=pos.para_id?fragmentEl(pos.para_id):null;
-  if(frag){
+  if(frag&&sc.contains(frag)){
     const sr=sc.getBoundingClientRect(),r=frag.getBoundingClientRect();
     const frac=clamp01(pos.fraction_within_paragraph);
     const delta=(r.top-sr.top)+(r.height*frac)-8;
@@ -4297,10 +4384,13 @@ function restoreSemanticReadingPosition(pos){
     sc.scrollTop=clamp01(pos.fallback_entry_fraction)*max;
   }
   requestAnimationFrame(()=>{
-    semanticRestoreInProgress=false;
+    if(!ownsReaderProgrammaticScroll(owner)||!visibleReaderIdentityMatches(binding)){
+      endReaderProgrammaticScroll(owner);return;
+    }
     const locked=resumeLockedSemanticPosition();
     if(locked)liveSemanticPosition=locked;
     else if(!(activeReaderSession&&activeReaderSession.persistence_suspended))liveSemanticPosition=captureSemanticReadingPosition()||pos;
+    requestAnimationFrame(()=>endReaderProgrammaticScroll(owner));
   });
   return used;
 }
@@ -4587,12 +4677,33 @@ async function restoreNavigationContext(ctx){
   if(ctx.screen==='home'){await goHome();return;}if(ctx.screen==='parcours'){goParcours();return;}if(ctx.screen==='tomes'){await finishReaderForPermanentNavigation('tomes');await restoreTomesNavigationContext(ctx);return;}await goTomes();
 }
 
+let semanticLayoutRestoreSeq=0;
 function scheduleSemanticLayoutRestore(){
-  if(!document.getElementById('screen-reader')?.classList.contains('active')||!liveSemanticPosition)return;
+  const reader=document.getElementById('screen-reader');
+  if(!reader?.classList.contains('active')){clearReaderLowHeightMode('reader-inactive');return;}
   clearTimeout(semanticResizeTimer);
-  if(entryStartLockMatchesVisible()){semanticResizeTimer=setTimeout(()=>enforceEntryStartTargetLock('semantic-layout-restore'),140);return;}
-  const pos=Object.assign({},liveSemanticPosition);
-  semanticResizeTimer=setTimeout(()=>restoreSemanticReadingPosition(pos),140);
+  const seq=++semanticLayoutRestoreSeq;
+  const identity=visibleReaderIdentitySnapshot();
+  const pos=(liveSemanticPosition&&semanticPositionMatchesVisibleEntry(liveSemanticPosition))
+    ? Object.assign({},liveSemanticPosition)
+    : captureSemanticReadingPosition();
+  const entryStartWasLocked=entryStartLockMatchesVisible();
+  semanticResizeTimer=setTimeout(()=>{
+    if(seq!==semanticLayoutRestoreSeq||!visibleReaderIdentityMatches(identity))return;
+    updateReaderLowHeightMode('viewport-settle');
+    resetRootScrollForReaderHandoff();
+    requestAnimationFrame(()=>{
+      if(seq!==semanticLayoutRestoreSeq||!visibleReaderIdentityMatches(identity))return;
+      if(entryStartWasLocked&&entryStartLockMatchesVisible())enforceEntryStartTargetLock('semantic-layout-restore');
+      else if(pos)restoreSemanticReadingPosition(pos);
+      resetRootScrollForReaderHandoff();
+      requestAnimationFrame(()=>{
+        if(seq!==semanticLayoutRestoreSeq||!visibleReaderIdentityMatches(identity))return;
+        resetRootScrollForReaderHandoff();
+        if(!entryStartLockMatchesVisible()&&!semanticRestoreInProgress)liveSemanticPosition=captureSemanticReadingPosition()||pos||liveSemanticPosition;
+      });
+    });
+  },180);
 }
 window.addEventListener('resize',scheduleSemanticLayoutRestore,{passive:true});
 window.addEventListener('orientationchange',scheduleSemanticLayoutRestore,{passive:true});
@@ -5189,6 +5300,73 @@ function beginEntriesToReaderHandoff(button,originContext){
 function resetRootScrollForReaderHandoff(){
   try{window.scrollTo(0,0);}catch(_){}const se=document.scrollingElement;if(se)se.scrollTop=0;if(document.documentElement)document.documentElement.scrollTop=0;if(document.body)document.body.scrollTop=0;
 }
+function readerMinimumUsefulHeightPx(){
+  const raw=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--reader-size'))||19;
+  return Math.max(110,Math.ceil(raw*1.85*3+18));
+}
+function readerNavHeightPx(){
+  const raw=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'));
+  return Number.isFinite(raw)?raw:58;
+}
+function readerLowHeightDecision(currentHeight,alreadyCompact,minHeight,navHeight){
+  const current=Math.max(0,Number(currentHeight)||0),min=Math.max(0,Number(minHeight)||0),nav=Math.max(0,Number(navHeight)||0);
+  if(!alreadyCompact)return current<min;
+  // Compact mode itself recovers the global nav plus roughly 40 px of Reader
+  // vertical padding. Exit only when the projected normal layout has headroom,
+  // preventing resize/orientation oscillation around the threshold.
+  const projectedNormal=Math.max(0,current-nav-40);
+  return projectedNormal<(min+36);
+}
+function clearReaderLowHeightMode(reason='clear'){
+  if(document.body.classList.contains('reader-low-height'))document.body.classList.remove('reader-low-height');
+}
+function updateReaderLowHeightMode(reason='layout'){
+  const reader=document.getElementById('screen-reader'),sc=document.getElementById('reader-scroll');
+  if(!reader?.classList.contains('active')||!sc){clearReaderLowHeightMode(reason);return {active:false,changed:false,reason};}
+  const was=document.body.classList.contains('reader-low-height');
+  const min=readerMinimumUsefulHeightPx(),current=sc.clientHeight,nav=readerNavHeightPx();
+  const next=readerLowHeightDecision(current,was,min,nav);
+  if(next!==was){
+    if(next){
+      const globalNav=document.getElementById('nav'),active=document.activeElement,back=document.getElementById('reader-back-btn');
+      if(globalNav&&active&&globalNav.contains(active)&&back&&typeof back.focus==='function'){try{back.focus({preventScroll:true});}catch(_){try{back.focus();}catch(__){}}}
+    }
+    document.body.classList.toggle('reader-low-height',next);
+  }
+  return {active:next,changed:next!==was,reason,current_height:current,min_height:min,nav_height:nav};
+}
+let readerTargetPositionSeq=0;
+function positionReaderElementInScroller(target,opts={}){
+  const sc=document.getElementById('reader-scroll'),identity=visibleReaderIdentitySnapshot();
+  if(!target||!sc||!sc.contains(target)||!identity||!readerScreenIsVisible())return false;
+  const seq=++readerTargetPositionSeq;
+  clearTimeout(semanticResizeTimer);semanticResizeTimer=null;semanticLayoutRestoreSeq++;
+  const offset=Math.max(0,Number(opts.offset)||0),max=Math.max(0,sc.scrollHeight-sc.clientHeight);
+  const sr=sc.getBoundingClientRect(),tr=target.getBoundingClientRect();
+  const desired=Math.max(0,Math.min(max,sc.scrollTop+(tr.top-sr.top)-offset));
+  const owner=beginReaderProgrammaticScroll();
+  const current=()=>seq===readerTargetPositionSeq&&ownsReaderProgrammaticScroll(owner)&&
+    visibleReaderIdentityMatches(identity)&&sc.contains(target);
+  resetRootScrollForReaderHandoff();
+  sc.scrollTop=desired;
+  requestAnimationFrame(()=>{
+    if(!current()){endReaderProgrammaticScroll(owner);return;}
+    resetRootScrollForReaderHandoff();
+    const sr2=sc.getBoundingClientRect(),tr2=target.getBoundingClientRect(),max2=Math.max(0,sc.scrollHeight-sc.clientHeight);
+    const correction=(tr2.top-sr2.top)-offset;
+    if(Math.abs(correction)>.5)sc.scrollTop=Math.max(0,Math.min(max2,sc.scrollTop+correction));
+    requestAnimationFrame(()=>{
+      if(!current()){endReaderProgrammaticScroll(owner);return;}
+      resetRootScrollForReaderHandoff();
+      liveSemanticPosition=captureSemanticReadingPosition()||liveSemanticPosition;
+      readerDiagStage('reader target positioned',{reason:opts.reason||'target',root_scroll_y:Number(window.scrollY)||0,reader_scroll_top:Number(sc.scrollTop)||0});
+      // Allow the second positioning scroll event to arrive before releasing
+      // suppression, while still bounded to one additional animation frame.
+      requestAnimationFrame(()=>endReaderProgrammaticScroll(owner));
+    });
+  });
+  return true;
+}
 async function isolateEntriesSourceBeforeReaderExposure(token){
   if(!token||token.source_isolated)return;const list=document.getElementById('entries-list');if(!list)return;
   readerDiagStage('before v110 source isolation',{handoff_id:token.id,source_scroll_top:token.source_scroll_top});
@@ -5528,7 +5706,9 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
   let focusedSupplement=opts.supplementId?supplementById(opts.supplementId):supplementForTarget(vol,entryId,requestedPara&&requestedPara.id);
   const targetIsSupplement=!!focusedSupplement;
   const effectiveSupplementMode=(targetIsSupplement&&supplementMode==='aflp')?'additions':((supplementMode==='additions'&&!targetIsSupplement)?'enriched':supplementMode);
-  const nextCurrentEntry=corpusCache[vol].byId[entryId] || (effectiveSupplementMode==='additions'&&focusedSupplement&&isInternalSupplementItem(focusedSupplement)?requestedEntry:null);
+  const nextCurrentEntry=corpusCache[vol].byId[entryId]
+    || (effectiveSupplementMode==='enriched'&&supplementMode==='additions'&&requestedEntry&&!requestedEntry.is_supplement?requestedEntry:null)
+    || (effectiveSupplementMode==='additions'&&focusedSupplement&&isInternalSupplementItem(focusedSupplement)?requestedEntry:null);
   if(!nextCurrentEntry)return;
 
   if(priorReaderSession&&!sameReaderRerender&&opts.skipSessionFlush!==true)await flushReaderForTransition('reader-navigation');
@@ -5541,6 +5721,7 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
     keepScrollTop=null;
     clearResumeSemanticTargetLock();
   }
+  invalidateReaderAsyncTransactions('open-entry-commit');
   readerOriginContext=stagedOriginContext;
   readerBack=backDest;
   currentVolume=vol;
@@ -5903,7 +6084,7 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
       const el   = document.getElementById('p_' + paraId);
       const frag = fragmentEl(paraId) || el;
       if (!el) { failClosedVisibleReaderToEntryStart(readerIdentity); return; }
-      el.scrollIntoView({ behavior: reduceMotionPreferred() ? 'auto' : 'smooth', block: 'start' });
+      if(!positionReaderElementInScroller(el,{offset:0,reason:'pending-paragraph'})){failClosedVisibleReaderToEntryStart(readerIdentity);return;}
       if (frag) {
         frag.classList.add('target');
         setTimeout(() => frag.classList.remove('target'), 2000);
@@ -7996,6 +8177,7 @@ let searchIntentMode = 'words'; // Search-V3 internal lab; explicit user intent
 const SEARCH_INTENT_MODE_KEY = 'ldc_search_intent_mode_v3';
 let searchPage = 1, searchMetadataPage = 1;
 let searchLastPayload = null;
+let searchLastPreflightR88 = null;
 let searchQueryPending = false; // manual input mutation awaits an explicit submit path
 let searchCommittedQuery = ''; // trimmed query most recently submitted; filters rerun only this committed query
 let pendingSearchReaderTarget = null;
@@ -8087,18 +8269,71 @@ function searchSemanticV3ParseStructural(raw){
   if(!out.date){m=residual.match(/\b((?:18|19|20)\d{2})\b/);if(m){out.year=Number(m[1]);residual=(residual.slice(0,m.index)+' '+residual.slice(m.index+m[0].length));}}
   out.residual=residual.replace(/\s+/g,' ').trim();out.hasStructural=!!(out.volume||out.date||out.year||out.ref);out.structuralOnly=out.hasStructural&&!out.residual;return out;
 }
+function renderSearchPreflightR88(plan){
+  searchLastPayload=null;searchLastPreflightR88=plan;
+  renderSearchIntentMode();renderSearchSpeakerAndVolumesR88();
+  const meta=document.getElementById('search-meta'),container=document.getElementById('search-results');
+  meta.style.display='block';meta.textContent=plan.status==='unsupported'?'Recherche à préciser':'Précisez les critères';
+  document.getElementById('trust-notice').style.display='none';container.replaceChildren();
+  const panel=document.createElement('div');panel.className='semantic-pack-panel';panel.setAttribute('role','group');
+  const msg=document.createElement('p');msg.textContent=String(plan.message||'Précisez la recherche.');panel.appendChild(msg);
+  if(plan.actions&&plan.actions.length){
+    const actions=document.createElement('div');actions.style.cssText='display:flex;flex-wrap:wrap;gap:9px;margin-top:12px';
+    for(const action of plan.actions){const b=document.createElement('button');b.type='button';b.className='btn-secondary';b.textContent=action.label;
+      b.onclick=()=>{
+        if(searchQueryDraftCanonical()!==plan.raw)return;
+        if(action.chip){searchVolFilter=Number(action.chip.min)||0;searchVolFilterMax=Number(action.chip.max)||0;}
+        const next=action.query;
+        setSearchQueryDraft(next,{mode:searchIntentMode,syncOther:true});
+        resetSearchPaging({resetOrder:true,resetLane:true});renderVolFilterRow();syncSearchQueryUI(next);
+        if(!next){const input=activeSearchQueryControl();input&&input.focus();return;}
+        runSearch({commitSource:'structural-clarification'});
+      };actions.appendChild(b);
+    }panel.appendChild(actions);
+  }
+  const assist=document.createElement('p');assist.style.cssText='font-size:.86em;opacity:.8;margin-top:11px';assist.textContent='Vous pouvez aussi corriger librement votre description. Aucun critère ne sera supprimé sans votre choix.';panel.appendChild(assist);
+  container.appendChild(panel);
+}
+function renderSearchSpeakerAndVolumesR88(){renderSpeakerFilterRow();renderVolFilterRow();}
+function renderSearchEffectiveScopeR88(plan,payload=null){
+  if(!plan||plan.status!=='ready')return;
+  const meta=document.getElementById('search-meta');if(!meta||meta.style.display==='none')return;
+  const parts=[];
+  if(payload){
+    // Worker result is the authoritative lexical interpretation; NEVER display the
+    // preflight's separate date or Tome guess as executed lexical filters.
+    const p=payload.parsed||{},w=payload.r88Request||{},o=w.options||{},foundation=payload.foundation||{};
+    if(p.ref)parts.push('Référence '+p.ref);
+    if(p.volume)parts.push('Tome '+p.volume);
+    if(Number(o.volMin))parts.push('Filtre sélectionné T'+o.volMin+'–'+o.volMax);
+    if(!p.volume&&!Number(o.volMin))parts.push('Tous les tomes');
+    if(p.date)parts.push((String(p.date).length===7?'Mois ':'Date ')+p.date);
+    else if(p.year)parts.push('Année '+p.year);
+    if(o.jesus)parts.push('Textes contenant des paroles de Jésus');
+    parts.push('Mode '+searchSourceModeLabel(foundation.mode||o.mode||supplementMode));
+  }else{
+    // Exact options supplied to the unchanged owner semantic runtime.
+    const o=plan.options||{};
+    if(o.stableRef)parts.push('Référence '+o.stableRef);
+    if(o.volMin&&o.volMin===o.volMax)parts.push('Tome '+o.volMin);
+    else if(o.volMin)parts.push('Tomes '+o.volMin+' à '+o.volMax);
+    else parts.push('Tous les tomes');
+    if(o.dateIso)parts.push('Date '+o.dateIso);else if(o.year)parts.push('Année '+o.year);
+    if(o.jesus)parts.push('Textes contenant des paroles de Jésus');
+    parts.push('Lecture normale / Enrichi');
+  }
+  const prior=meta.querySelector('.r88-effective-scope');if(prior)prior.remove();
+  const e=document.createElement('div');e.className='r88-effective-scope';e.style.cssText='font-size:.84em;line-height:1.5;margin-top:5px;opacity:.9';e.textContent='Critères réellement appliqués : '+parts.join(' · ');meta.appendChild(e);
+}
 async function semanticPackV3Status(){
-  if(window.LDCPLSOwnerPrototypeV15&&typeof window.LDCPLSOwnerPrototypeV15.status==='function'){const p=window.LDCPLSOwnerPrototypeV15.status();if(p&&p.available)return p;}
-  // LAB R3 is deliberately fail-closed. A future bound runtime can provide a status hook,
-  // but only a QUALIFIED status may ever make semantic execution available.
+  const runtime=window.LDCPLSV16Runtime;
+  if(!runtime||typeof runtime.status!=='function')return {available:false,ready:false,can_initialize:false,reason:'PLS_V16_RUNTIME_NOT_BOUND',schema:'ldc-semantic-pack-v3'};
   try{
-    if(window.LDCSemanticPackRegistryV5&&typeof window.LDCSemanticPackRegistryV5.status==='function'){
-      const s=await window.LDCSemanticPackRegistryV5.status(supplementMode);
-      if(s&&s.available===true&&s.calibration_status==='QUALIFIED')return s;
-      if(s)return {...s,available:false};
-    }
-  }catch(e){return {available:false,reason:'PACK_STATUS_ERROR',error:String(e&&e.message||e),schema:'ldc-semantic-pack-v3'};}
-  return {available:false,reason:'PACK_NOT_QUALIFIED_OR_INSTALLED',schema:'ldc-semantic-pack-v3'};
+    const s=runtime.status();
+    if(s&&s.available===true&&s.calibration_status==='QUALIFIED')return s;
+    if(s)return {...s,available:false};
+  }catch(e){return {available:false,ready:false,can_initialize:false,reason:'PACK_STATUS_ERROR',error:String(e&&e.message||e),schema:'ldc-semantic-pack-v3'};}
+  return {available:false,ready:false,can_initialize:false,reason:'PACK_NOT_QUALIFIED_OR_INSTALLED',schema:'ldc-semantic-pack-v3'};
 }
 function renderSemanticPackUnavailable(raw,structural,status){
   searchLastPayload=null;renderSearchIntentMode();renderSearchSourceModeRow();renderSpeakerFilterRow();renderVolFilterRow();
@@ -8117,7 +8352,7 @@ function renderSemanticResultsV4(payload,raw,structural){
   searchLastPayload={semantic:true,payload};renderSearchIntentMode();renderSearchSourceModeRow();renderSpeakerFilterRow();renderVolFilterRow();
   const meta=document.getElementById('search-meta');meta.style.display='block';meta.innerHTML='<span class="semantic-results-heading">Recherche par le sens</span>';
   document.getElementById('trust-notice').style.display='none';const container=document.getElementById('search-results');container.innerHTML='';
-  const intro=document.createElement('div');intro.className='semantic-results-intro';intro.innerHTML='Passages classés selon leur proximité avec votre description.<details class="semantic-how"><summary>Comment ça marche ?</summary><div class="semantic-how-body">La recherche compare votre description aux passages du Livre du Ciel et les classe selon leur proximité. Le premier passage n’est pas nécessairement celui que vous recherchez : ouvrez les résultats qui semblent correspondre et vérifiez leur contexte.</div></details>';container.appendChild(intro);
+  const intro=document.createElement('div');intro.className='semantic-results-intro';intro.innerHTML='Passages classés selon leur proximité avec votre description. Cette recherche ne confirme pas que votre formulation est exacte ou vraie.<details class="semantic-how"><summary>Comment ça marche ?</summary><div class="semantic-how-body">La recherche compare votre description aux passages du Livre du Ciel et les classe selon leur proximité. Elle peut aussi retrouver un passage qui corrige un souvenir imprécis. Le premier passage n’est pas nécessairement celui que vous recherchez : ouvrez les résultats qui semblent correspondre et vérifiez leur contexte.</div></details>';container.appendChild(intro);
   if(payload.confidence&&payload.confidence.state==='abstain'){const e=document.createElement('div');e.className='empty-state';e.innerHTML='<i class="ti ti-search-off"></i>Aucun passage suffisamment proche n’a été identifié.';container.appendChild(e);return;}
   for(const r of (payload.results||[])){
     const item=semanticResultToSearchTargetR4(r),card=document.createElement('button');card.type='button';card.className='result-card';card.dataset.resultKey='semantic:'+String(r.passage_id||r.entry_id||'');
@@ -8135,16 +8370,21 @@ function renderSemanticResultsV4(payload,raw,structural){
 }
 
 async function ensureOwnerSemanticPrepared(generation){
-  const runtime=window.LDCPLSOwnerPrototypeV15;if(!runtime||typeof runtime.init!=='function')return true;
-  if(ownerSemanticPrepared)return true;
+  const runtime=window.LDCPLSV16Runtime;
+  if(!runtime||typeof runtime.init!=='function')throw new Error('PLS_V16_RUNTIME_NOT_BOUND');
+  const current=runtime.status&&runtime.status();
+  if(ownerSemanticPrepared&&current&&current.available===true)return isSearchActive(generation);
   if(!ownerSemanticPreparationPromise){
-    ownerSemanticPreparationPromise=Promise.resolve().then(()=>runtime.init()).then(()=>{ownerSemanticPrepared=true;return true;}).catch(e=>{ownerSemanticPrepared=false;throw e;}).finally(()=>{ownerSemanticPreparationPromise=null;});
+    ownerSemanticPreparationPromise=Promise.resolve().then(()=>runtime.init()).then(s=>{
+      if(!s||s.available!==true||s.calibration_status!=='QUALIFIED')throw new Error('PLS_V16_RUNTIME_NOT_QUALIFIED');
+      ownerSemanticPrepared=true;return true;
+    }).catch(e=>{ownerSemanticPrepared=false;throw e;}).finally(()=>{ownerSemanticPreparationPromise=null;});
   }
   await ownerSemanticPreparationPromise;
   return isSearchActive(generation);
 }
 async function runOwnerSemanticInference(query,options,generation){
-  const runtime=window.LDCPLSOwnerPrototypeV15;if(!runtime||typeof runtime.search!=='function')throw new Error('SEARCH_V3_OWNER_RUNTIME_NOT_BOUND');
+  const runtime=window.LDCPLSV16Runtime;if(!runtime||typeof runtime.search!=='function')throw new Error('PLS_V16_RUNTIME_NOT_BOUND');
   while(ownerSemanticInferencePromise){
     const prior=ownerSemanticInferencePromise;try{await prior;}catch(_){ }
     if(!isSearchActive(generation))return null;
@@ -8154,31 +8394,33 @@ async function runOwnerSemanticInference(query,options,generation){
   const current=Promise.resolve().then(()=>runtime.search(query,options));ownerSemanticInferencePromise=current;
   try{return await current;}finally{if(ownerSemanticInferencePromise===current)ownerSemanticInferencePromise=null;}
 }
-async function runSemanticSearchV3(raw,generation){
-  const structural=searchSemanticV3ParseStructural(raw);
-  // Pure structural navigation is already governed and must not initialise semantic resources.
-  if(structural.structuralOnly){
+async function runSemanticSearchV3(raw,generation,preflight){
+  if(!preflight||preflight.status!=='ready')throw new Error('R88_PREFLIGHT_REQUIRED');
+  if(preflight.route==='semantic'&&!preflight.description)throw new Error('R88_EMPTY_SEMANTIC_DESCRIPTION_GUARD');
+  const structural=preflight.structural;
+  // Metadata-only queries must not initialise ONNX.
+  if(preflight.route==='structural'){
     setSearchProgressPhase('Recherche dans les références…',generation);
-    const payload=await searchV2Request(raw,generation);
-    if(isSearchActive(generation)&&searchQueryDraftCanonical()===raw)renderSearchV2Results(payload,raw);
+    const payload=await searchV2Request(preflight.engineQuery,generation);
+    if(isSearchActive(generation)&&searchQueryDraftCanonical()===raw){renderSearchV2Results(payload,raw);renderSearchEffectiveScopeR88(preflight,payload);}
     return;
   }
-  const status=await semanticPackV3Status();if(!isSearchActive(generation))return;
-  if(!status.available){renderSemanticPackUnavailable(raw,structural,status);return;}
-  let sem;
-  if(window.LDCPLSOwnerPrototypeV15&&typeof window.LDCPLSOwnerPrototypeV15.search==='function'){
-    if(!ownerSemanticPrepared){setSearchProgressPhase('Préparation de Par le sens…',generation);const prepared=await ensureOwnerSemanticPrepared(generation);if(!prepared)return;}
-    if(!isSearchActive(generation))return;
-    setSearchProgressPhase('Recherche des passages…',generation);
-    sem=await runOwnerSemanticInference(structural.residual||raw,{sourceMode:'enriched',volMin:structural.volume||searchVolFilter||0,volMax:structural.volume||searchVolFilterMax||0,dateIso:structural.date||null,year:structural.date?0:(structural.year||0),stableRef:structural.ref||null,jesus:!!searchSpeakerFilter,maxResults:20},generation);
-    if(sem==null)return;
-  }else{
-    if(!window.LDCSemanticPackRegistryV5||typeof window.LDCSemanticPackRegistryV5.search!=='function')throw new Error('SEARCH_V3_SEMANTIC_REGISTRY_NOT_BOUND');
-    setSearchProgressPhase('Recherche des passages…',generation);
-    sem=await window.LDCSemanticPackRegistryV5.search(structural.residual||raw,{sourceMode:supplementMode,volMin:structural.volume||searchVolFilter||0,volMax:structural.volume||searchVolFilterMax||0,dateIso:structural.date||null,year:structural.date?0:(structural.year||0),stableRef:structural.ref||null,jesus:!!searchSpeakerFilter,maxResults:20});
+  let status=await semanticPackV3Status();if(!isSearchActive(generation))return;
+  if(!status.available&&status.can_initialize){
+    setSearchProgressPhase('Préparation de Par le sens…',generation);
+    const prepared=await ensureOwnerSemanticPrepared(generation);if(!prepared)return;
+    status=await semanticPackV3Status();if(!isSearchActive(generation))return;
   }
-  if(!isSearchActive(generation)||searchQueryDraftCanonical()!==raw)return;
-  renderSemanticResultsV4(sem,raw,structural);
+  if(!status.available){renderSemanticPackUnavailable(raw,structural,status);return;}
+  if(!ownerSemanticPrepared){
+    setSearchProgressPhase('Préparation de Par le sens…',generation);
+    const prepared=await ensureOwnerSemanticPrepared(generation);if(!prepared)return;
+  }
+  if(!isSearchActive(generation))return;
+  setSearchProgressPhase('Recherche des passages…',generation);
+  const sem=await runOwnerSemanticInference(preflight.description,preflight.options,generation);
+  if(sem==null||!isSearchActive(generation)||searchQueryDraftCanonical()!==raw)return;
+  renderSemanticResultsV4(sem,raw,structural);renderSearchEffectiveScopeR88(preflight);
 }
 
 function resetSearchPaging({resetOrder=false,resetLane=false}={}) {
@@ -8208,7 +8450,7 @@ function appendSearchPager(container,kind,page,pageCount){
   const next=document.createElement('button');next.type='button';next.textContent='Suivant';next.disabled=page>=pageCount;next.onclick=()=>{if(kind==='body')searchPage=Math.min(pageCount,page+1);else searchMetadataPage=Math.min(pageCount,page+1);rerunCommittedSearchIfReady();};
   wrap.append(prev,lab,next);container.appendChild(wrap);
 }
-function renderStructuralChips(payload){const chips=payload&&payload.structuralChips||[];if(!chips.length)return'';return `<span class="search-structural-chips">${chips.map(c=>`<span class="search-structural-chip">${escapeHtml(c.label)}</span>`).join('')}</span>`;}
+function renderStructuralChips(payload){const chips=(payload&&payload.structuralChips||[]).filter(c=>c.kind!=='date'||(payload.parsed&&payload.parsed.date===c.value));if(!chips.length)return'';return `<span class="search-structural-chips">${chips.map(c=>`<span class="search-structural-chip">${escapeHtml(c.label)}</span>`).join('')}</span>`;}
 
 function renderSpeakerFilterRow() {
   const row = document.getElementById('speaker-filter-row');
@@ -8545,7 +8787,7 @@ function ensureSearchV2Worker() {
     const pending = searchV2Pending.get(msg.generation);
     if (!pending) return;
     searchV2Pending.delete(msg.generation);
-    if (msg.ok) pending.resolve(msg.result);
+    if (msg.ok) pending.resolve({...msg.result,r88Request:{query:pending.query,options:pending.options}});
     else pending.reject(new Error(msg.error || 'SEARCH-V2 indisponible'));
   };
   w.onerror = ev => {
@@ -8577,7 +8819,7 @@ function searchV2Request(query, generation, optionOverrides={}) {
     ...optionOverrides
   };
   return new Promise((resolve,reject) => {
-    searchV2Pending.set(generation,{resolve,reject});
+    searchV2Pending.set(generation,{resolve,reject,query,options});
     w.postMessage({type:'search',generation,query,options});
   });
 }
@@ -8674,15 +8916,25 @@ function renderSearchV2Results(payload, raw) {
   if(payload.structuralError){meta.textContent=payload.structuralError.message||'Recherche structurelle invalide.';document.getElementById('trust-notice').style.display='none';container.innerHTML='<div class="empty-state"><i class="ti ti-alert-triangle"></i>'+escapeHtml(payload.structuralError.message||'Recherche invalide')+'</div>';return;}
   const selectedTotal=Number(payload.totalMatches||0),totalBody=Number(payload.totalBodyMatches||0),metadataTotal=Number(payload.metadataTotalMatches||0),page=Number(f.page||1),pageCount=Number(f.pageCount||1),metaPage=Number(f.metadataPage||1),metaPageCount=Number(f.metadataPageCount||1);
   const laneLabel={exact:'Phrase exacte',words:'Tous les termes',partial:'Certains termes'}[f.lane]||'Passages';
+  const partialCount=Number(counts.partial||0),hasStrongLexical=Number(counts.exact||0)>0||Number(counts.words||0)>0,partialAvailable=!hasStrongLexical&&partialCount>0&&!searchPartialExpanded;
   const parts=[];if(selectedTotal)parts.push(`${laneLabel} : ${selectedTotal}`);if(searchPartialExpanded&&totalBody&&totalBody!==selectedTotal)parts.push(`${totalBody} passages lexicaux au total`);if(near&&near.eligible&&near.results&&near.results.length)parts.push(near.ambiguous?`Formulation proche : plusieurs possibilités`:`Formulation proche : ${near.totalAccepted}`);if(metadataTotal)parts.push(`${metadataTotal} entrées correspondantes`);
-  meta.innerHTML=`${escapeHtml(parts.join(' · ')||'0 résultat')} <span class="search-mode-badge">Recherche lexicale · ${escapeHtml(searchSourceModeLabel(f.mode||supplementMode))}</span>${renderStructuralChips(payload)}`;
+  const zeroSummary=partialAvailable?`Aucun passage avec tous les termes · ${partialCount} correspondance${partialCount===1?'':'s'} partielle${partialCount===1?'':'s'} disponible${partialCount===1?'':'s'}`:'0 résultat';
+  meta.innerHTML=`${escapeHtml(parts.join(' · ')||zeroSummary)} <span class="search-mode-badge">Recherche lexicale · ${escapeHtml(searchSourceModeLabel(f.mode||supplementMode))}</span>${renderStructuralChips(payload)}`;
   document.getElementById('trust-notice').style.display=f.lane==='partial'?'block':'none';
   const sug=document.getElementById('search-suggestions');if(sug)sug.style.display='none';const lexical=(payload.parsed&&payload.parsed.lexical)||raw;
   if(payload.suggestions&&payload.suggestions.length){const box=document.createElement('div');box.className='search-suggestion-box';const sg=payload.suggestions[0];box.innerHTML=`Vouliez-vous dire : <button type="button">${escapeHtml(sg.to)}</button> ?`;box.querySelector('button').onclick=()=>searchFor(sg.to);container.appendChild(box);}
   if(results.length){const h=document.createElement('div');h.className='sugg-label';h.textContent=`${laneLabel} — page ${page}/${pageCount}`;container.appendChild(h);for(const r of results)renderSearchV2Card(container,r,lexical,false);appendSearchPager(container,'body',page,pageCount);}
   renderSearchNearSection(container,payload);
   if(metadata.length){const h=document.createElement('div');h.className='sugg-label';h.textContent=`Entrées correspondantes — ${metadataTotal}`;container.appendChild(h);for(const r of metadata)renderSearchV2Card(container,r,lexical,true);appendSearchPager(container,'metadata',metaPage,metaPageCount);}
-  if(!results.length&&!metadata.length&&!(near&&near.eligible&&near.results&&near.results.length)&&!payload.suggestions?.length){const hasPartial=Number(counts.partial||0)>0&&!searchPartialExpanded;container.innerHTML=hasPartial?'<div class="empty-state"><i class="ti ti-search"></i>Aucun passage avec tous les termes. Utilisez « Élargir la recherche » pour voir les passages qui n’en contiennent qu’une partie.</div>':'<div class="empty-state"><i class="ti ti-search-off"></i>Aucun résultat. Essayez d’autres mots ou vérifiez les filtres.</div>';}
+  if(!results.length&&!metadata.length&&!(near&&near.eligible&&near.results&&near.results.length)&&!payload.suggestions?.length){
+    if(partialAvailable){
+      const empty=document.createElement('div');empty.className='empty-state';
+      const icon=document.createElement('i');icon.className='ti ti-search';empty.appendChild(icon);
+      const copy=document.createElement('div');copy.textContent=`Aucun passage ne contient tous les termes. ${partialCount} correspondance${partialCount===1?'':'s'} partielle${partialCount===1?'':'s'} ${partialCount===1?'est disponible':'sont disponibles'}.`;empty.appendChild(copy);
+      const action=document.createElement('button');action.type='button';action.className='btn-secondary';action.textContent='Voir les résultats élargis';action.onclick=()=>{searchPartialExpanded=true;searchResultLane='partial';searchPage=1;rerunCommittedSearchIfReady();};empty.appendChild(action);
+      container.replaceChildren(empty);
+    }else container.innerHTML='<div class="empty-state"><i class="ti ti-search-off"></i>Aucun résultat. Essayez d’autres mots ou vérifiez les filtres.</div>';
+  }
 }
 
 async function runSearch({navigation='reveal-output',commitSource='programmatic'}={}) {
@@ -8692,24 +8944,32 @@ async function runSearch({navigation='reveal-output',commitSource='programmatic'
   if(!normCheck){cancelActiveSearch('empty-normalised');const meta=document.getElementById('search-meta');meta.style.display='block';meta.textContent='Saisissez un mot ou une référence.';document.getElementById('search-results').innerHTML='';if(navigation==='reveal-output')revealSearchOutput();return;}
   if(searchBusyGeneration&&isSearchActive(searchBusyGeneration)&&!searchQueryPending&&raw===searchCommittedQuery)return;
   searchQueryPending=false;searchCommittedQuery=raw;
-  saveRecentSearch(raw).catch(()=>{});
+  // Analyse both intent modes before any request. R88 leaves the reader's raw text intact.
+  if(!window.LDCStructuralPreflightR88||typeof window.LDCStructuralPreflightR88.analyze!=='function'){
+    const msg=document.getElementById('search-meta');msg.style.display='block';msg.textContent='Recherche indisponible : le module de validation des critères n’a pas été chargé.';
+    document.getElementById('search-results').textContent='Aucune recherche partielle n’a été exécutée. Actualisez l’application et réessayez.';
+    return;
+  }
+  const preflight=window.LDCStructuralPreflightR88.analyze(raw,{mode:searchIntentMode,sourceMode:supplementMode,volMin:searchVolFilter,volMax:searchVolFilterMax,jesus:searchSpeakerFilter});
+  searchLastPreflightR88=preflight;
+  if(preflight.status==='ready')saveRecentSearch(raw).catch(()=>{});
   cancelActiveSearch('new-search');const generation=searchRunSeq;
   const metaEl=document.getElementById('search-meta');metaEl.style.display='none';metaEl.textContent='';document.getElementById('trust-notice').style.display='none';document.getElementById('search-results').innerHTML='';
-  const initialStructural=searchIntentMode==='meaning'?searchSemanticV3ParseStructural(raw):null;
-  const initialPhase=searchIntentMode==='meaning'?(initialStructural&&initialStructural.structuralOnly?'Recherche dans les références…':(ownerSemanticPrepared?'Recherche des passages…':'Préparation de Par le sens…')):'Recherche en cours…';
+  const initialPhase=searchIntentMode==='meaning'?(preflight.route==='structural'?'Recherche dans les références…':(ownerSemanticPrepared?'Recherche des passages…':'Préparation de Par le sens…')):'Recherche en cours…';
   setSearchBusy(true,{generation,phase:initialPhase});
   if(navigation==='reveal-output')revealSearchOutput();
   try{
+    if(preflight.status!=='ready'){renderSearchPreflightR88(preflight);return;}
     if(searchIntentMode==='meaning'){
       await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
       if(!isSearchActive(generation))return;
-      await runSemanticSearchV3(raw,generation);
+      await runSemanticSearchV3(raw,generation,preflight);
       if(navigation==='reveal-output'&&isSearchActive(generation))revealSearchOutput();
       return;
     }
-    const payload=await searchV2Request(raw,generation);
+    const payload=await searchV2Request(preflight.engineQuery,generation);
     if(!isSearchActive(generation)||searchQueryDraftCanonical()!==raw)return;
-    renderSearchV2Results(payload,raw);
+    renderSearchV2Results(payload,raw);renderSearchEffectiveScopeR88(preflight,payload);
     if(navigation==='reveal-output')revealSearchOutput();
   }catch(e){
     if(!isSearchActive(generation))return;
@@ -8735,8 +8995,9 @@ function paintTransientSearchTarget(target){
   setTimeout(removeTransientSearchMarks,5000);
 }
 function focusPendingSearchReaderTarget(target){
-  if(!target)return false;const first=(target.match_parts&&target.match_parts[0])||target.primary_target||target;const paraId=first.para_id||first.id;if(!paraId)return false;const frag=fragmentEl(paraId,Number(first.canonical_start));const sc=document.getElementById('reader-scroll');if(!frag||!sc)return false;
-  const sr=sc.getBoundingClientRect(),fr=frag.getBoundingClientRect(),rootY=window.scrollY;sc.scrollTop=Math.max(0,sc.scrollTop+(fr.top-sr.top)-24);requestAnimationFrame(()=>{if(window.scrollY!==rootY)window.scrollTo(window.scrollX,rootY);});paintTransientSearchTarget(target);return true;
+  if(!target)return false;const first=(target.match_parts&&target.match_parts[0])||target.primary_target||target;const paraId=first.para_id||first.id;if(!paraId)return false;const frag=fragmentEl(paraId,Number(first.canonical_start));if(!frag)return false;
+  if(!positionReaderElementInScroller(frag,{offset:24,reason:'search-target'}))return false;
+  paintTransientSearchTarget(target);return true;
 }
 async function openFromSearch(item) {
   const editorialNo=tome1EditorialNoteNumber(item&&item.entry_id);if(editorialNo)return openTome1EditorialAppendix('search',editorialNo);
@@ -9172,7 +9433,7 @@ async function diagnosticsText(){
   const off=await dbGet('settings','offline_completion').catch(()=>null);
   const deploymentBase=(()=>{try{return new URL('./',window.location.href).pathname;}catch(e){return window.location.pathname.replace(/[^/]*$/,'');}})();
   const publicRef=currentEntry?`${currentEntry.stable_ref||currentEntry.id||''}`:'aucun';
-  return ['Livre du Ciel — diagnostic public',`App : ${APP_VERSION} · ${APP_BUILD}`,`SW attendu : ${SW_CACHE_VERSION}`,`SW contrôleur : ${sw}`,`Caches LDC : ${cachesOwned.join(', ')||'aucun détecté'}`,`Corpus composite : ${CORPUS_GENERATION}`,`Corpus principal : ${BACKBONE_GENERATION}`,`Lecture : ${sourceModeLabel()}`,`Backbone manifest SHA-256 : ${CORPUS_MANIFEST_SHA256}`,`Résumé des tomes : ${volumeSummary?'chargé · 36 tomes':'non chargé'}`,`Recherche : Par les mots v142 préservée · Par le sens moteur v142.10 préservé · interface documentaire v142.15 · exposition utilisateur owner-acceptée en production depuis v142.10 · Dense96/72 + BM25 96/72 RRF60 inchangé · aucun niveau de confiance scientifique calibré n’est revendiqué`,`Stockage IndexedDB : ${db?'ouvert':'indisponible'}`,`Hors ligne : navigator.onLine=${navigator.onLine!==false} · completion=${off?JSON.stringify(off.val??off.value??off):'non préparé'}`,`Thème : ${theme}`,`Texte : ${tl}`,`Repères : ${showReperes?'ON':'OFF'}`,`Diagnostics locaux récents : ${localDiagnosticBuffer.length}`,...localDiagnosticBuffer.slice(-5).map(x=>`Erreur locale ${x.ts} · ${x.kind||'runtime'} · ${x.name||'Erreur'}`),`Base de déploiement : ${deploymentBase}`,`Passage public courant : ${publicRef}`,`Reader A/B diagnostic : ${window.__ldcReaderOpenTraceExport?window.__ldcReaderOpenTraceExport():'indisponible'}`,`Trace navigation récente (sanitisée) : ${JSON.stringify(window.__ldcNavigationPublicDiagnosticTrace?window.__ldcNavigationPublicDiagnosticTrace():{available:false})}`].join('\n');
+  return ['Livre du Ciel — diagnostic public',`App : ${APP_VERSION} · ${APP_BUILD}`,`SW attendu : ${SW_CACHE_VERSION}`,`SW contrôleur : ${sw}`,`Caches LDC : ${cachesOwned.join(', ')||'aucun détecté'}`,`Corpus composite : ${CORPUS_GENERATION}`,`Corpus principal : ${BACKBONE_GENERATION}`,`Lecture : ${sourceModeLabel()}`,`Backbone manifest SHA-256 : ${CORPUS_MANIFEST_SHA256}`,`Résumé des tomes : ${volumeSummary?'chargé · 36 tomes':'non chargé'}`,`Recherche : Par les mots v142 préservée · Par le sens moteur v142.10 préservé · interface documentaire v142.15 · exposition utilisateur owner-acceptée en production depuis v142.10 · Dense96/72 + BM25 96/72 RRF60 inchangé · aucun niveau de confiance scientifique calibré n’est revendiqué`,`Stockage IndexedDB : ${db?'ouvert':'indisponible'}`,`Hors ligne : navigator.onLine=${navigator.onLine!==false} · completion=${off?JSON.stringify(off.val??off.value??off):'non préparé'}`,`Thème : ${theme}`,`Texte : ${tl}`,`Repères : ${showReperes?'ON':'OFF'}`,`Lecteur compact basse hauteur : ${document.body.classList.contains('reader-low-height')?'ON':'OFF'}`,`Diagnostics locaux récents : ${localDiagnosticBuffer.length}`,...localDiagnosticBuffer.slice(-5).map(x=>`Erreur locale ${x.ts} · ${x.kind||'runtime'} · ${x.name||'Erreur'}`),`Base de déploiement : ${deploymentBase}`,`Passage public courant : ${publicRef}`,`Reader A/B diagnostic : ${window.__ldcReaderOpenTraceExport?window.__ldcReaderOpenTraceExport():'indisponible'}`,`Trace navigation récente (sanitisée) : ${JSON.stringify(window.__ldcNavigationPublicDiagnosticTrace?window.__ldcNavigationPublicDiagnosticTrace():{available:false})}`].join('\n');
 }
 async function copyDiagnostics(){const text=await diagnosticsText();const ok=await copyPlainText(text);showToast(ok?'Diagnostic copié':'Copie indisponible');return text;}
 async function routeFail(message,fallback){console.warn('LDC deep link:',message);showToast('Lien invalide ou cible introuvable');if(fallback==='search')goSearch();else if(fallback==='espace')goEspace();else goHome();return false;}
@@ -9676,7 +9937,10 @@ async function setTextLevel(level) {
   const context = captureTextSizeContext();
   applyTextLevel(level);
   await new Promise(requestAnimationFrame);
+  updateReaderLowHeightMode('text-level');
+  await new Promise(requestAnimationFrame);
   restoreTextSizeContext(context);
+  if(context&&context.kind==='reader')resetRootScrollForReaderHandoff();
   // Font-size changes rewrap the active reading/documentation surface without
   // necessarily emitting resize. Preserve the same semantic/visual place.
   if(contextOcclusionState.active)requestAnimationFrame(()=>refreshContextOcclusionCompensation());
