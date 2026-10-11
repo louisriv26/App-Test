@@ -2635,11 +2635,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.22-R1B-STRUCTURAL-REPAIR-R88-TEST'; // WIP candidate, not deployed or authorized; preserves v142.17 Reader ownership and integrates qualified PLS v16
+const APP_VERSION = 'v2.19.142.23-R1B-SW-MANIFEST-REPAIR-TEST'; // LOCAL TEST ONLY; not deployed or authorized; protected Reader and PLS retained
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-10';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.22-R1B-structural-repair-r88-test';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.23-R1B-sw-manifest-repair-test';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
