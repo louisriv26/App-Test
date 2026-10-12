@@ -1,6 +1,6 @@
 {
   "app": "Livre du Ciel",
-  "app_test_authority": "OWNER_REQUESTED_GITHUB_ZIP_FOR_APP_TEST_ONLY__OWNER_CONTROLS_UPLOAD",
+  "app_test_authority": "R139_LOCAL_BUILD_ONLY__NO_GITHUB_OR_DEPLOYMENT_AUTHORITY",
   "app_test_isolated_indexeddb_name": "ldc_user_v1__app_test",
   "files": [
     {
@@ -1154,9 +1154,9 @@
       "sha256": "4df3a82f5f2ee57a0b6913b6ca6b56758b2ab9e27f0d401e06a4ed0792639c06"
     },
     {
-      "bytes": 980011,
+      "bytes": 980600,
       "path": "index.html",
-      "sha256": "1c2423cd5982eb318f3016f20b48740f678f1d724220d7c768ac47a3a2b6f452"
+      "sha256": "7528fdf21855e101c98fe88ed28478eae14ab8d4cc93c8df8bb980eed454b4ed"
     },
     {
       "bytes": 17214,
@@ -1174,9 +1174,9 @@
       "sha256": "6f8c116ad7258f912c8f17c15a3afbfdafaa6e49a9156f477f1b6bd1512b4955"
     },
     {
-      "bytes": 60475,
+      "bytes": 60485,
       "path": "offline_manifest.json",
-      "sha256": "ac20e21e706ddb61a30235d6062e50fcee512edf72ce4434cfb0aa5b5f5eaeff"
+      "sha256": "0d4cef6175520f6ca09942c47fffb0b0475272fa15d6fff889a37d96c8b3a59d"
     },
     {
       "bytes": 658,
@@ -1364,21 +1364,21 @@
       "sha256": "0f7f5242f4960cb2d32ff3b6b632d142f86ab2fa5722f6b8328924c869b5b23a"
     },
     {
-      "bytes": 32226,
+      "bytes": 32250,
       "path": "sw.js",
-      "sha256": "64543d956c014404d309140dc2cc653ff3779d50485d6626c8633a79e4e6cc22"
+      "sha256": "24cc8dd354bc1d8aaf365ded7d8faf90cb96483fdc7652e90bf85acafe8bc0f2"
     },
     {
-      "bytes": 260672,
+      "bytes": 260679,
       "path": "version.json",
-      "sha256": "1e1e7a7dabdc5a64db6a32b360b56882a44b95d503cbf9144d4beb3b9ce406fa"
+      "sha256": "0284c79dacdc67381d33546d92c2bf4da8f9d1d9a1da3fc871375a97518fab6c"
     }
   ],
   "offline_corpus_assets": 204,
   "offline_corpus_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
   "packaged_file_count_excluding_manifest": 274,
   "production_authority": "NONE__EXPLICIT_NEW_APPROVAL_REQUIRED",
-  "public_version": "142.24",
+  "public_version": "142.25",
   "qualified_model_files": 20,
   "r88_structural_repair": {
     "approved_deployment": "NONE",
@@ -1391,6 +1391,6 @@
   },
   "schema": "ldc-curated-wip-package-manifest-v1",
   "semantic_manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
-  "source_commit": "DERIVED_FROM_PINNED_R134_SHA256_688d3a8e__NOT_A_GITHUB_COMMIT",
-  "usage": "APP_TEST_ONLY_OWNER_REQUESTED_PACKAGE_NOT_YET_DEPLOYED__PRODUCTION_PROHIBITED"
+  "source_commit": "DERIVED_FROM_EXACT_R136_SHA256_0dd5098c33f7fe08bb20f168a8ce498abe15297d2ac4845d9d0b1dc6a24cfaa3__LOCAL_R139_NOT_GITHUB_COMMIT",
+  "usage": "R139_LOCAL_APP_TEST_ONLY_CORRECTION_NOT_DEPLOYED__PRODUCTION_PROHIBITED"
 }

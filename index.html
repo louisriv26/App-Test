@@ -2636,11 +2636,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.24-R136-APP-TEST-ONLY'; // R136 APP TEST ONLY candidate; user-requested package, not yet hosted or iOS-qualified; never production-authorized; protected Reader and PLS retained
+const APP_VERSION = 'v2.19.142.25-R139-APP-TEST-ONLY'; // R139 LOCAL APP TEST ONLY corrective candidate; NOT hosted or iOS-qualified; NO GitHub or production authority; protected Reader and PLS retained
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-12';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.24-r136-app-test-only';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.25-r139-app-test-only';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -4152,7 +4152,7 @@ function finishOnboarding() {
   const overlay=document.getElementById('onboarding-overlay');
   overlay.style.display = 'none';
   setShellState('normal');
-  safeOnboardingStorageSet('ldc_onboarding_done', '1');
+  safeOnboardingStorageSet('ldc_app_test_onboarding_done', '1');
 }
 
 function obNext() {
@@ -8178,7 +8178,7 @@ let searchOrderMode = null; // null = automatic: one-token/book, multi-token/rel
 let searchResultLane = null; // null = strongest primary evidence class (exact/all terms); partial requires explicit expansion
 let searchPartialExpanded = false; // 'Certains termes' only after explicit expansion
 let searchIntentMode = 'words'; // Search-V3 internal lab; explicit user intent
-const SEARCH_INTENT_MODE_KEY = 'ldc_search_intent_mode_v3';
+const SEARCH_INTENT_MODE_KEY = 'ldc_app_test_search_intent_mode_v3';
 let searchPage = 1, searchMetadataPage = 1;
 let searchLastPayload = null;
 let searchLastPreflightR88 = null;
@@ -10994,7 +10994,7 @@ async function boot() {
   await applyInitialDeepLink();
 
   // Show onboarding on first launch
-  if (!safeOnboardingStorageGet('ldc_onboarding_done')) {
+  if (!safeOnboardingStorageGet('ldc_app_test_onboarding_done')) {
     showOnboarding();
   }
 
@@ -11529,10 +11529,17 @@ async function fetchPublishedVersion() {
   if(!res||!res.ok)throw new Error(`version HTTP ${res&&res.status}`);
   const meta=await res.json();
   const version=String(meta&&meta.app_version||'').trim();
-  if(!/^v\d+\.\d+\.\d+(?:\.\d+)?-R1B(?:-[A-Za-z0-9]+)*$/.test(version))throw new Error('version publiée invalide');
+  // Accept only the pinned legacy R1B family or explicitly marked App-Test-only successors.
+  // The active App Test publication must also bind its SW revision and isolated DB name.
+  const patchMatch=version.match(/^v2\.19\.(\d+(?:\.\d+)?)-(?:R1B(?:-[A-Za-z0-9]+)*|R\d{2,4}-APP-TEST-ONLY)$/);
+  if(!patchMatch)throw new Error('version publiée invalide');
+  if(version.endsWith('-APP-TEST-ONLY')){
+    const expectedWorkerRevision='ldc-'+version.toLowerCase();
+    if(String(meta&&meta.page_worker_revision||'')!==expectedWorkerRevision)throw new Error('révision du Service Worker publié incohérente');
+    if(String(meta&&meta.app_test_data_isolation&&meta.app_test_data_isolation.indexeddb_name||'')!==DB_NAME)throw new Error('espace IndexedDB App Test incohérent');
+  }
   const explicitPublic=String(meta&&meta.public_version||'').trim();
-  const patchMatch=version.match(/^v\d+\.\d+\.(\d+(?:\.\d+)?)-R1B(?:-|$)/);
-  const derivedPublic=patchMatch?patchMatch[1]:version;
+  const derivedPublic=patchMatch[1];
   if(/^\d+(?:\.\d+)?$/.test(explicitPublic)&&patchMatch&&explicitPublic!==derivedPublic)console.warn('LDC: public_version incohérent; version dérivée utilisée',explicitPublic,derivedPublic);
   const publicVersion=derivedPublic;
   return {version,publicVersion,meta};
