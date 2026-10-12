@@ -1,10 +1,16 @@
 {
-  "app_version": "v2.19.142.23-R1B-SW-MANIFEST-REPAIR-TEST",
+  "app_test_data_isolation": {
+    "historical_profile_migration": "SYNTHETIC_FIXTURES_ONLY__NO_REAL_PRODUCTION_DB_READ_OR_COPY",
+    "indexeddb_name": "ldc_user_v1__app_test",
+    "production_indexeddb_name": "ldc_user_v1",
+    "reason": "SAME_ORIGIN_GITHUB_PAGES_SUBPATHS__PREVENT_DBV5_UPGRADE_OF_PRODUCTION_DBV4"
+  },
+  "app_version": "v2.19.142.24-R136-APP-TEST-ONLY",
   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
   "baseline_candidate_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
   "baseline_candidate_version": "v2.19.142.18-R1B-READER-SEMANTIC-INTEGRATION-WIP",
-  "build_date": "2026-10-11",
+  "build_date": "2026-10-12",
   "collection_link_contract": "LOCAL_COLLECTION_ID_LINK_DOES_NOT_TRANSFER_USER_DATA",
   "collections_visibility": "VISIBLE_MON_ESPACE_WORKSPACE_AND_EXPLICIT_ENTRYPOINT",
   "context_action_contract": "SELECTION_OR_PARAGRAPH_SINGLE_CONTEXT_SURFACE",
@@ -51,8 +57,8 @@
     "state_recorded_status": "PRODUCTION_DEPLOYED_CLOSED_IMMUTABLE__EXACT_REPOSITORY_TREE_AND_SUCCESSFUL_DEPLOYMENT_BINDING_RECORDED",
     "technical_identity": "v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE"
   },
-  "current_release_authority": "V142_23_LOCAL_TEST_ONLY__APP_TEST_NONE__PRODUCTION_NONE__NO_DEPLOYMENT_AUTHORITY",
-  "current_runtime_browser_validation": "V142_23_LOCAL_TEST__REAL_BROWSER_G3_OPEN__IPHONE_IPAD_G4_OPEN__NO_HOSTED_CLAIMS",
+  "current_release_authority": "R136_APP_TEST_PACKAGE_USER_REQUESTED__NOT_DEPLOYED_BY_ASSISTANT__PRODUCTION_NOT_AUTHORIZED",
+  "current_runtime_browser_validation": "R134_EDGE155_11_OF_11_LOCAL_SCENARIOS_REVIEWED_R135__APP_TEST_HOSTED_AND_PHYSICAL_IOS_NOT_RUN",
   "dark_mode_v136_r9": {
     "corpus_changed": false,
     "date": "2026-10-02",
@@ -71,7 +77,7 @@
   "diagnostic_default_copy_contract": "ALLOWLIST_PUBLIC_TECHNICAL_METADATA__NO_RAW_QUERY__NO_RAW_ERROR_MESSAGE__NO_USER_AUTHORED_TEXT",
   "entry_start_contract": "V107__V106_ENTRY_START_SEMANTIC_FIXED_POINT_AND_USER_INTENT_LOCK_PRESERVED__DIRECT_TOME_LIST_OPEN_ADDS_SOURCE_SCROLL_HANDOFF_TRANSACTION__CAPTURE_BACK_CONTEXT_BEFORE_BLUR__BLUR_FOCUSED_LIST_BUTTON_BEFORE_FIRST_AWAIT__FREEZE_SOURCE_MOMENTUM__RENEW_READER_SCROLL_DOM_SURFACE__PIN_TOP_BEFORE_EXPOSURE_AND_FOR_TWO_SETTLING_FRAMES__PREVIOUS_NEXT_SEARCH_RESUME_NOTE_HIGHLIGHT_DEEP_LINK_TARGET_SEMANTICS_UNCHANGED",
   "external_decision_authority": "FINAL_DECISION_LOCK_EXTERNAL_TO_DEPLOY_ZIP__WRITTEN_LAST_AFTER_PRIMARY_AND_INDEPENDENT_REOPEN_AUDITS",
-  "external_validation_status": "V142_23_LOCAL_TEST_ONLY__G3_HOSTED_OPEN__G4_IPHONE_IPAD_OPEN__NOT_DEPLOYED",
+  "external_validation_status": "R134_EDGE_REAL_IDB_SCENARIOS_FAVOURABLE__R135_INDEPENDENT_FILE_REVIEW__NOT_HOSTED_OR_IOS",
   "f1_poisoned_http_cache_regression_gate": "REQUIRED_AND_EXTERNAL_EVIDENCE",
   "f7_release_metadata_generation": "CURRENT_RELEASE_COUNTS_AND_BINDINGS_GENERATED_AFTER_CORPUS_PAYLOAD_FREEZE__V32_VALUES_RETAINED_ONLY_UNDER_HISTORICAL_KEYS",
   "f8_android_nonfragment_highlight_targeting": {
@@ -570,7 +576,7 @@
   "offline_corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
   "offline_integrity_contract": "PERSISTENT_OFFLINE_REUSE_REQUIRES_CURRENT_SCOPE_URL_PLUS_EXACT_ASSET_SHA256_AND_BYTE_LENGTH_MARKERS__GLOBAL_PREDECESSOR_BINDING_NOT_REQUIRED__CHANGED_OR_INVALID_ASSETS_FAIL_CLOSED",
   "offline_manifest_schema": "ldc-offline-manifest-v3",
-  "offline_manifest_sha256": "6524f36fc98bc74e9593f13d463ca010146288e66892bd90ce236bd72741d469",
+  "offline_manifest_sha256": "1bd1c39318918e8fcf239d07dd1a0e70abee1a25d86f6975409fd95b445e4759",
   "offline_scope": "v142.17 direct successor of v142.16 frozen Reader physical repair: bounded reader transaction ownership, session and screen-lifecycle guards; offline content asset set and content binding unchanged. v142.16 not physically qualified. No App-Test or production authorization.",
   "offline_state_schema": "ldc-offline-state-v3",
   "offline_status_typography_v98_contract": "IMPORTANT_STATUS_TITLE_DETAIL_SCALE_12_13_16_19_AND_11_12_15_18_SMALL_NORMAL_LARGE_XLARGE",
@@ -589,10 +595,10 @@
   "owner_override_note": "v131 exists solely because the fresh adversarial recheck of exact v130 found stale v128 SHELL_CACHE/RUNTIME_CACHE namespaces and stale active current-status metadata. v131 rebinds those release surfaces to one current revision while preserving the exact v130 D-07/D-08/D-13/D-10 software behavior and all protected content/state surfaces.",
   "owner_stage_start_authorisation": "USER_EXPLICITLY_AUTHORIZED_FULL_BLIND_ADVERSARIAL_VERIFICATION_AND_ALL_NECESSARY_CORRECTIONS__2026_09_12",
   "owner_user_acceptance": "USER_EXPLICITLY_REQUESTED_CONTINUED_DEVELOPMENT_WITHOUT_IMMEDIATE_DEVICE_CHECKING__NO_PUBLIC_DEPLOYMENT_AUTHORITY__2026_09_14",
-  "package_predecessor_app_version": "v2.19.142.22-R1B-STRUCTURAL-REPAIR-R88-TEST",
-  "package_predecessor_zip_sha256": "2496837e553d186165648d8933b7d95fe2f55ac217994c4342d1da21185fad28",
+  "package_predecessor_app_version": "v2.19.142.23-R130-LOCAL-P11-CANDIDATE",
+  "package_predecessor_zip_sha256": "26fe15417b6b8367ecb44832af383529be3645363020c9668273c423bef73206",
   "package_state_at_freeze": "PREHOSTED_V142_17_QUALIFICATION_CANDIDATE__PENDING_FINAL_PACKAGE_MANIFEST__NOT_A_PRODUCTION_RELEASE",
-  "page_worker_revision": "ldc-v2.19.142.23-R1B-sw-manifest-repair-test",
+  "page_worker_revision": "ldc-v2.19.142.24-r136-app-test-only",
   "par_le_sens_current": {
     "compatible_passages": 20236,
     "excluded_stale_passages": 347,
@@ -1130,6 +1136,13 @@
     "existing_complement_replacements": 9,
     "semantic_fixed_point_sha256": "e4b950787dd3853991bea0513260c054ff3259ad4d660e4b13329e8932fc0a71",
     "semantic_operations": 169
+  },
+  "r88_structural_repair": {
+    "authoritative_source_archive_sha256": "3826f8abb1d87c82398fb6394dc17a7807ea552365e35b42d4e7789a09f4267a",
+    "git_and_deployment_authority": "NONE",
+    "model_corpus_ranking_preserved": true,
+    "r86_archive_sha256": "fccc8f2c4908022a60288c24bf655190717f27458a76b7417080d7775674bd9a",
+    "status": "LOCAL_TEST_ONLY_NOT_DEPLOYED"
   },
   "ra10_36t_paragraph_boundary_completion": {
     "affected_volumes": [
@@ -1765,6 +1778,38 @@
     "target": "BALANCED_P50_APPROX_75__P95_APPROX_80_FULL_LINES",
     "viewport_rule": "VIEWPORT_CONSTRAINS_MEASURE__NO_ORIENTATION_SPECIFIC_LAYOUT"
   },
+  "reader_physical_gate_repair_v142_16": {
+    "date": "2026-10-08",
+    "deployment_authority": "NONE_UNTIL_FRESH_APP_TEST_AND_PHYSICAL_REQUALIFICATION",
+    "direct_predecessor_commit": "572d9df7927765b575a76eaee98fd3cc9d455e74",
+    "direct_predecessor_package_sha256": "cca03c4a6e07cd7f25b4a6a8cc6caadaf912ede76354a0b71236c93d2dd728bc",
+    "direct_predecessor_public_version": "142.15",
+    "direct_predecessor_technical_identity": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
+    "mutation_authority": "OWNER_AUTHORIZED_SUCCESSOR_IMPLEMENTATION",
+    "protected_surfaces": [
+      "corpus JSON payloads unchanged",
+      "Par les mots search payloads and ranking unchanged",
+      "Par le sens engine/index/pack/ranking unchanged",
+      "provenance records and wording unchanged",
+      "user-state schemas and IndexedDB semantics unchanged",
+      "offline content asset set and content binding unchanged"
+    ],
+    "repair": [
+      "Unify paragraph/search target positioning through an internal #reader-scroll-only primitive; no scrollIntoView on the pending paragraph path.",
+      "Reset and re-check root scroll around programmatic Reader target positioning and viewport restoration.",
+      "Introduce measurement-driven low-height Reader mode with safe-area preservation, temporary global-nav yielding, compact Reader chrome and hysteresis.",
+      "Debounce/identity-bind viewport restoration and restore semantic position only after low-height layout settles.",
+      "Re-evaluate low-height mode before restoring the semantic anchor after text-size changes."
+    ],
+    "root_causes": [
+      "The generic pendingParaId path used Element.scrollIntoView(), which could scroll ancestors beyond #reader-scroll and violate the Reader root-scroll invariant.",
+      "The Reader flex contract allowed #reader-scroll (flex:1; min-height:0) to collapse almost to zero when Safari landscape left insufficient height for non-shrinking Reader chrome plus the global bottom navigation."
+    ],
+    "trigger": [
+      "Physical iPhone: opening a paragraph-targeted highlight from Mon Espace could displace the root document and leave the Reader chrome apparently mid-screen with a large gap below.",
+      "Physical iPhone Safari: portrait-to-landscape could compress #reader-scroll to an unusably small height while fixed Reader chrome remained visible."
+    ]
+  },
   "reader_provenance_fields_embedded": true,
   "reader_provenance_source_reference_distribution": {
     "FW_SOURCE_REF": 43,
@@ -1836,6 +1881,51 @@
       15
     ]
   },
+  "reader_transaction_repair_v142_17": {
+    "date": "2026-10-08",
+    "deployment_authority": "NONE",
+    "direct_predecessor_branch_head": "d1970a527bf94325c78c2c396adf4987d9001a3e",
+    "direct_predecessor_exact_frozen_runtime_commit": "15fb524cc8929c04d2e92f560374cdbe5404148c",
+    "direct_predecessor_public_version": "142.16",
+    "historical_v142_16_reader_repair": "reader_physical_gate_repair_v142_16",
+    "implementation": [
+      "Programmatic Reader scroll suppression now uses an owning epoch shared across target positioning, entry-start lock and semantic restore",
+      "Reader identity now binds visible screen, entry, volume, source mode, supplement and active session",
+      "Reader exit and newly committed Reader entry invalidate pending target/layout transaction callbacks",
+      "Target placement only accepts elements contained in the Reader scroller"
+    ],
+    "machine_qa_level": "SOURCE_EXTRACTED_AND_METADATA_ONLY__NOT_LIVE_BROWSER",
+    "mutation_authority": "OWNER_AUTHORIZED_BOUNDED_SUCCESSOR",
+    "offline_content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+    "production_authorized": false,
+    "protected_surfaces": [
+      "corpus",
+      "Par les mots",
+      "Par le sens",
+      "provenance",
+      "user-state schema",
+      "offline content assets"
+    ],
+    "public_version": "142.17",
+    "qualified_here": [
+      "14/14 fresh deterministic extracted-function test cases on exact branch index.html",
+      "19/19 structural/identity/syntax test cases except one false-positive regex initially reported and adjudicated",
+      "service worker version and offline manifest compatibility bound to v142.17",
+      "GitHub compare confirmed exactly four runtime mutations against v142.16; 308 baseline files Git blob-identical, no files missing"
+    ],
+    "remains_open": [
+      "hosted browser execution on exact candidate (not available without staging)",
+      "iPhone/iPad/PWA/VoiceOver physical qualification",
+      "candidate ZIP SHA if prepared",
+      "App-Test deployment and exact-byte served binding",
+      "full four-pass release QA after hosting"
+    ],
+    "trigger": [
+      "P1-A stale target RAF could clear global semanticRestoreInProgress while a newer scroll transaction remained active",
+      "P1-B stale target/viewport callbacks could reset root scroll or restore hidden Reader after leaving screen"
+    ],
+    "worker_identity_complete": true
+  },
   "reading_completion_contract": "EXPLICIT_USER_LU_ONLY__LEGACY_AUTO_OPEN_RECORDS_PRESERVED_BUT_NOT_COUNTED_AS_READ",
   "reading_journey_ux_r15": {
     "authority_contract": "R5/R13/R14 authority, Resume, queue-drain, epoch, atomic transfer and update-discovery mechanics preserved",
@@ -1871,7 +1961,7 @@
     "superseded v2.19.0 key-claim-only report audit with exhaustive active-report line/row audit and exact shipped-function tests"
   ],
   "reaudit_static_validator": "HISTORICAL_RA1_PRE_FINAL_TARGETED_TESTS__CURRENT_RA5C_FINAL_AUTHORITY_IN_EXTERNAL_DECISION_LOCK",
-  "rebuild_status": "V142_23_LOCAL_FIVE_FILE_SW_MANIFEST_IDENTITY_AND_METADATA_REPAIR__STATIC_G0_PENDING__HOSTED_AND_PHYSICAL_OPEN",
+  "rebuild_status": "R136_APP_TEST_ONLY_DB_NAMESPACE_ISOLATION_AND_METADATA_FROM_R134_FROZEN__NO_CORPUS_SEARCH_MODEL_STAGE8_ALGORITHM_CHANGE",
   "remembered_meaning_search_product_gate": "CLOSED_BY_OWNER_ACCEPTED_PRODUCTION_PAR_LE_SENS_V142_10__ACTIVE_USER_FUNCTION_PRESERVED__PLS_V15_RETRIEVAL_BYTES_UNCHANGED__NO_GENERAL_SCIENTIFIC_CALIBRATION_CLAIM",
   "reperes_dual_attribution": {
     "canonical_text_changed": false,
@@ -3666,9 +3756,13 @@
     "machine_qa_status": "PASS_TESTABLE_SCOPE_PRE_PHYSICAL",
     "migration_gate_metadata_changed": true,
     "migration_runtime_changed": false,
+    "owner_smoke_report_2026_10_07": "APP_TEST_TESTED__NO_OBVIOUS_DEFECT_REPORTED__DOES_NOT_CLOSE_SPECIFIC_VOICEOVER_OR_DEVICE_CLASS_GATES",
     "physical_ipad_gate": "OPEN",
     "physical_iphone_gate": "OPEN",
     "pls_v15_changed": false,
+    "post_freeze_app_test_commit": "bda9d1d8e9edc5c931b10d15caad22acff6b4173",
+    "post_freeze_app_test_deployment_executed": true,
+    "post_freeze_hosted_browser_wasm_status": "PASS_REPORTED_BY_V142_14_ADVERSARIAL_AUDIT",
     "production_authorized": false,
     "public_validation_copy_changed": true,
     "reading_session_or_backup_changed": false,
@@ -3682,11 +3776,85 @@
     "search_v2_changed": false,
     "standard_offline_asset_binding_changed": false,
     "supplement_provenance_records_changed": false,
+    "user_data_schema_changed": false
+  },
+  "v142_15_release_truth_scope_closure": {
+    "app_test_deployment_executed": false,
+    "authorized_user_facing_changes": [
+      "E15 remove unsupported 'qualifié séparément' claim",
+      "E07 disclose that Par le sens continues to search Lecture normale when a documentary view is selected"
+    ],
+    "classification": "BOUNDED_RELEASE_TRUTH_AND_SEARCH_SCOPE_DISCLOSURE_CLOSURE",
+    "corpus_changed": false,
+    "direct_predecessor_package_sha256": "f02098cf3432c0373c9fbd698b0551d79b3a024f739883a501293a6932ce24cd",
+    "direct_predecessor_public_version": "142.14",
+    "documentary_resolver_changed": false,
+    "independent_blind_challenge_status": "PASS_12_OF_12_PRE_PHYSICAL",
+    "installed_pwa_gate": "OPEN",
+    "machine_qa_status": "PASS_25_OF_25_PRE_PHYSICAL",
+    "mutation_authority": "NONE_AFTER_FREEZE__ANY_MATERIAL_BYTE_CHANGE_CREATES_SUCCESSOR",
+    "physical_ipad_gate": "OPEN",
+    "physical_iphone_gate": "OPEN",
+    "pls_v15_changed": false,
+    "production_authorized": false,
+    "reading_session_or_backup_changed": false,
+    "release_disposition": "FROZEN_READY_FOR_EXACT_BYTE_APP_TEST_AND_PHYSICAL_QUALIFICATION_ONLY__PRODUCTION_NOT_AUTHORIZED",
+    "runtime_mutation_universe": [
+      "index.html",
+      "offline_manifest.json",
+      "sw.js",
+      "version.json"
+    ],
+    "search_v2_changed": false,
+    "semantic_ranking_changed": false,
+    "supplement_provenance_records_changed": false,
     "user_data_schema_changed": false,
-    "post_freeze_app_test_deployment_executed": true,
-    "post_freeze_app_test_commit": "bda9d1d8e9edc5c931b10d15caad22acff6b4173",
-    "post_freeze_hosted_browser_wasm_status": "PASS_REPORTED_BY_V142_14_ADVERSARIAL_AUDIT",
-    "owner_smoke_report_2026_10_07": "APP_TEST_TESTED__NO_OBVIOUS_DEFECT_REPORTED__DOES_NOT_CLOSE_SPECIFIC_VOICEOVER_OR_DEVICE_CLASS_GATES"
+    "voiceover_gate": "OPEN"
+  },
+  "v142_18_controlled_integration": {
+    "app_test_deployment_authority": "NONE",
+    "corpus_payload_or_user_state_schema_changed": false,
+    "curated_release_zip": "NOT_CREATED",
+    "frozen_asset_total_bytes": 213290251,
+    "frozen_model_asset_count": 20,
+    "hosted_origin_isolation_e16_e19": "OPEN",
+    "immutable_qualified_engineering_manifest_flags_preserved": true,
+    "initial_integrated_repair_git_blob": "c4447294c30132cc0e07f4a966e4f2e05118e1a3",
+    "offline_content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+    "offline_corpus_assets": 204,
+    "positive_and_negative_and_reader_modes_chromium_qa": "19_OF_19_PASS_ON_PRIOR_WIP_INDEX__MUST_RETEST_VERSION_RECONCILIATION",
+    "production_deployment_authority": "NONE",
+    "qualified_semantic_parent_commit": "39b9ec90ab3b2199b1738e96b353cc6b27d9cac0",
+    "reader_parent_commit": "56a306997a37ab975a573774a97fa976a40ffe40",
+    "semantic_manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
+    "source_and_search_algorithms_ranking_changed": false,
+    "status": "WIP_POST_RECONCILIATION_UNRELEASED",
+    "web_kit_and_physical_device_gate": "OPEN"
+  },
+  "v142_19_reader_geometry_candidate": {
+    "app_test_deployment_authority": "NONE",
+    "authorised_scope": "User authorised prior bounded successor proposal on 2026-10-08; never production deployment",
+    "beta_deployment_authority": "NONE",
+    "changed_runtime_resources": [
+      "index.html",
+      "sw.js",
+      "version.json",
+      "offline_manifest.json"
+    ],
+    "governance": "APP-GOV-1.0",
+    "hosted_qa": "NOT_YET_RUN",
+    "legacy_sw_E16": "OPEN",
+    "offline_content_binding_preserved": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+    "origin_isolation_E19": "OPEN",
+    "parent_application_zip_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
+    "parent_source_commit": "7c292d6221bb350fac3aeaa83750b8784706d45c",
+    "physical_apple_gate": "OPEN",
+    "production_deployment_authority": "NONE",
+    "public_version": "142.19",
+    "semantic_manifest_sha256_preserved": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
+    "sole_functional_change": "Remove html root height:-webkit-fill-available; leave html,body height:100%, body flex, Reader and nav untouched",
+    "status": "ENGINEERING_UNRELEASED",
+    "sw_marker": "ldc-v2.19.142.19-R1B-reader-geometry-candidate"
   },
   "v142_4_reader_repair": {
     "app_test_baseline_head": "ecd5ac271c1b86315ebd0c2258531321c589d83b",
@@ -4527,167 +4695,5 @@
   "volume_lru_max": 4,
   "whole_collection_undo_contract": "TEN_SECOND_ATOMIC_PARENT_PLUS_ALL_CAPTURED_CHILDREN__FAIL_CLOSED_ON_PARENT_CHILD_OR_UNEXPECTED_ORPHAN_CONFLICT",
   "wide_public_release": "NOT_AUTHORIZED__ENGINEERING_CANDIDATE_ONLY__NO_PRODUCTION_PROMOTION",
-  "wide_public_release_gate": "NO_GO__CANDIDATE_PACKAGE_BROWSER_HOSTED_PHYSICAL_E16_E19_OPEN",
-  "v142_15_release_truth_scope_closure": {
-    "classification": "BOUNDED_RELEASE_TRUTH_AND_SEARCH_SCOPE_DISCLOSURE_CLOSURE",
-    "direct_predecessor_public_version": "142.14",
-    "direct_predecessor_package_sha256": "f02098cf3432c0373c9fbd698b0551d79b3a024f739883a501293a6932ce24cd",
-    "authorized_user_facing_changes": [
-      "E15 remove unsupported 'qualifié séparément' claim",
-      "E07 disclose that Par le sens continues to search Lecture normale when a documentary view is selected"
-    ],
-    "runtime_mutation_universe": [
-      "index.html",
-      "offline_manifest.json",
-      "sw.js",
-      "version.json"
-    ],
-    "corpus_changed": false,
-    "search_v2_changed": false,
-    "pls_v15_changed": false,
-    "semantic_ranking_changed": false,
-    "supplement_provenance_records_changed": false,
-    "documentary_resolver_changed": false,
-    "user_data_schema_changed": false,
-    "reading_session_or_backup_changed": false,
-    "app_test_deployment_executed": false,
-    "physical_iphone_gate": "OPEN",
-    "physical_ipad_gate": "OPEN",
-    "voiceover_gate": "OPEN",
-    "installed_pwa_gate": "OPEN",
-    "production_authorized": false,
-    "machine_qa_status": "PASS_25_OF_25_PRE_PHYSICAL",
-    "independent_blind_challenge_status": "PASS_12_OF_12_PRE_PHYSICAL",
-    "release_disposition": "FROZEN_READY_FOR_EXACT_BYTE_APP_TEST_AND_PHYSICAL_QUALIFICATION_ONLY__PRODUCTION_NOT_AUTHORIZED",
-    "mutation_authority": "NONE_AFTER_FREEZE__ANY_MATERIAL_BYTE_CHANGE_CREATES_SUCCESSOR"
-  },
-  "reader_physical_gate_repair_v142_16": {
-    "date": "2026-10-08",
-    "direct_predecessor_public_version": "142.15",
-    "direct_predecessor_technical_identity": "v2.19.142.15-R1B-RELEASE-TRUTH-SCOPE-CLOSURE",
-    "direct_predecessor_package_sha256": "cca03c4a6e07cd7f25b4a6a8cc6caadaf912ede76354a0b71236c93d2dd728bc",
-    "direct_predecessor_commit": "572d9df7927765b575a76eaee98fd3cc9d455e74",
-    "trigger": [
-      "Physical iPhone: opening a paragraph-targeted highlight from Mon Espace could displace the root document and leave the Reader chrome apparently mid-screen with a large gap below.",
-      "Physical iPhone Safari: portrait-to-landscape could compress #reader-scroll to an unusably small height while fixed Reader chrome remained visible."
-    ],
-    "root_causes": [
-      "The generic pendingParaId path used Element.scrollIntoView(), which could scroll ancestors beyond #reader-scroll and violate the Reader root-scroll invariant.",
-      "The Reader flex contract allowed #reader-scroll (flex:1; min-height:0) to collapse almost to zero when Safari landscape left insufficient height for non-shrinking Reader chrome plus the global bottom navigation."
-    ],
-    "repair": [
-      "Unify paragraph/search target positioning through an internal #reader-scroll-only primitive; no scrollIntoView on the pending paragraph path.",
-      "Reset and re-check root scroll around programmatic Reader target positioning and viewport restoration.",
-      "Introduce measurement-driven low-height Reader mode with safe-area preservation, temporary global-nav yielding, compact Reader chrome and hysteresis.",
-      "Debounce/identity-bind viewport restoration and restore semantic position only after low-height layout settles.",
-      "Re-evaluate low-height mode before restoring the semantic anchor after text-size changes."
-    ],
-    "protected_surfaces": [
-      "corpus JSON payloads unchanged",
-      "Par les mots search payloads and ranking unchanged",
-      "Par le sens engine/index/pack/ranking unchanged",
-      "provenance records and wording unchanged",
-      "user-state schemas and IndexedDB semantics unchanged",
-      "offline content asset set and content binding unchanged"
-    ],
-    "mutation_authority": "OWNER_AUTHORIZED_SUCCESSOR_IMPLEMENTATION",
-    "deployment_authority": "NONE_UNTIL_FRESH_APP_TEST_AND_PHYSICAL_REQUALIFICATION"
-  },
-  "reader_transaction_repair_v142_17": {
-    "date": "2026-10-08",
-    "public_version": "142.17",
-    "direct_predecessor_public_version": "142.16",
-    "direct_predecessor_exact_frozen_runtime_commit": "15fb524cc8929c04d2e92f560374cdbe5404148c",
-    "direct_predecessor_branch_head": "d1970a527bf94325c78c2c396adf4987d9001a3e",
-    "historical_v142_16_reader_repair": "reader_physical_gate_repair_v142_16",
-    "trigger": [
-      "P1-A stale target RAF could clear global semanticRestoreInProgress while a newer scroll transaction remained active",
-      "P1-B stale target/viewport callbacks could reset root scroll or restore hidden Reader after leaving screen"
-    ],
-    "implementation": [
-      "Programmatic Reader scroll suppression now uses an owning epoch shared across target positioning, entry-start lock and semantic restore",
-      "Reader identity now binds visible screen, entry, volume, source mode, supplement and active session",
-      "Reader exit and newly committed Reader entry invalidate pending target/layout transaction callbacks",
-      "Target placement only accepts elements contained in the Reader scroller"
-    ],
-    "qualified_here": [
-      "14/14 fresh deterministic extracted-function test cases on exact branch index.html",
-      "19/19 structural/identity/syntax test cases except one false-positive regex initially reported and adjudicated",
-      "service worker version and offline manifest compatibility bound to v142.17",
-      "GitHub compare confirmed exactly four runtime mutations against v142.16; 308 baseline files Git blob-identical, no files missing"
-    ],
-    "remains_open": [
-      "hosted browser execution on exact candidate (not available without staging)",
-      "iPhone/iPad/PWA/VoiceOver physical qualification",
-      "candidate ZIP SHA if prepared",
-      "App-Test deployment and exact-byte served binding",
-      "full four-pass release QA after hosting"
-    ],
-    "offline_content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
-    "protected_surfaces": [
-      "corpus",
-      "Par les mots",
-      "Par le sens",
-      "provenance",
-      "user-state schema",
-      "offline content assets"
-    ],
-    "mutation_authority": "OWNER_AUTHORIZED_BOUNDED_SUCCESSOR",
-    "deployment_authority": "NONE",
-    "production_authorized": false,
-    "worker_identity_complete": true,
-    "machine_qa_level": "SOURCE_EXTRACTED_AND_METADATA_ONLY__NOT_LIVE_BROWSER"
-  },
-  "v142_18_controlled_integration": {
-    "status": "WIP_POST_RECONCILIATION_UNRELEASED",
-    "reader_parent_commit": "56a306997a37ab975a573774a97fa976a40ffe40",
-    "qualified_semantic_parent_commit": "39b9ec90ab3b2199b1738e96b353cc6b27d9cac0",
-    "initial_integrated_repair_git_blob": "c4447294c30132cc0e07f4a966e4f2e05118e1a3",
-    "semantic_manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
-    "frozen_model_asset_count": 20,
-    "frozen_asset_total_bytes": 213290251,
-    "offline_corpus_assets": 204,
-    "offline_content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
-    "positive_and_negative_and_reader_modes_chromium_qa": "19_OF_19_PASS_ON_PRIOR_WIP_INDEX__MUST_RETEST_VERSION_RECONCILIATION",
-    "hosted_origin_isolation_e16_e19": "OPEN",
-    "web_kit_and_physical_device_gate": "OPEN",
-    "curated_release_zip": "NOT_CREATED",
-    "app_test_deployment_authority": "NONE",
-    "production_deployment_authority": "NONE",
-    "immutable_qualified_engineering_manifest_flags_preserved": true,
-    "source_and_search_algorithms_ranking_changed": false,
-    "corpus_payload_or_user_state_schema_changed": false
-  },
-  "v142_19_reader_geometry_candidate": {
-    "governance": "APP-GOV-1.0",
-    "status": "ENGINEERING_UNRELEASED",
-    "authorised_scope": "User authorised prior bounded successor proposal on 2026-10-08; never production deployment",
-    "parent_source_commit": "7c292d6221bb350fac3aeaa83750b8784706d45c",
-    "parent_application_zip_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
-    "sole_functional_change": "Remove html root height:-webkit-fill-available; leave html,body height:100%, body flex, Reader and nav untouched",
-    "changed_runtime_resources": [
-      "index.html",
-      "sw.js",
-      "version.json",
-      "offline_manifest.json"
-    ],
-    "sw_marker": "ldc-v2.19.142.19-R1B-reader-geometry-candidate",
-    "offline_content_binding_preserved": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
-    "semantic_manifest_sha256_preserved": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
-    "public_version": "142.19",
-    "app_test_deployment_authority": "NONE",
-    "beta_deployment_authority": "NONE",
-    "production_deployment_authority": "NONE",
-    "physical_apple_gate": "OPEN",
-    "hosted_qa": "NOT_YET_RUN",
-    "origin_isolation_E19": "OPEN",
-    "legacy_sw_E16": "OPEN"
-  },
-  "r88_structural_repair": {
-    "status": "LOCAL_TEST_ONLY_NOT_DEPLOYED",
-    "authoritative_source_archive_sha256": "3826f8abb1d87c82398fb6394dc17a7807ea552365e35b42d4e7789a09f4267a",
-    "r86_archive_sha256": "fccc8f2c4908022a60288c24bf655190717f27458a76b7417080d7775674bd9a",
-    "model_corpus_ranking_preserved": true,
-    "git_and_deployment_authority": "NONE"
-  }
+  "wide_public_release_gate": "NO_GO__CANDIDATE_PACKAGE_BROWSER_HOSTED_PHYSICAL_E16_E19_OPEN"
 }

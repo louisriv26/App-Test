@@ -10,9 +10,9 @@ const monYear=new RegExp('\\b('+rxMonths+')\\s+((?:18|19|20)\\d{2})\\b','gi');
 const isoDate=/\b((?:18|19|20)\d{2})[-/](\d{1,2})[-/](\d{1,2})\b/g;
 const slashDate=/\b([0-3]?\d)[/-]([01]?\d)[/-]((?:18|19|20)\d{2})\b/g;
 const refsRx=/\b(?:LDCSUP|LDC)\.[A-Za-z0-9][A-Za-z0-9._-]*/gi;
-const volumeRx=/\btomes?\s+([1-9]|[12]\d|3[0-6])\b/gi;
-const volumeAlts=/\btomes?\s+([1-9]|[12]\d|3[0-6])\s*(ou|et|,|;|\/|-|–|—|à)\s*(?:tomes?\s+)?([1-9]|[12]\d|3[0-6])\b/gi;
-const spacedAlts=/\btomes?\s+([1-9]|[12]\d|3[0-6])\s+ou\s+(?:dans\s+le\s+)?tomes?\s+([1-9]|[12]\d|3[0-6])\b/gi;
+const volumeRx=/\btomes?\s+(\d+)\b/gi;
+const volumeAlts=/\btomes?\s+(\d+)\s*(ou|et|,|;|\/|-|–|—|à)\s*(?:tomes?\s+)?(\d+)\b/gi;
+const spacedAlts=/\btomes?\s+(\d+)\s+ou\s+(?:dans\s+le\s+)?tomes?\s+(\d+)\b/gi;
 const yearRx=/\b(?:18|19|20)\d{2}\b/g;
 const yearAlts=/\b((?:18|19|20)\d{2})\s*(ou|et|,|;)\s*((?:18|19|20)\d{2})\b/gi;
 const span=(m,type,ext={})=>({type,start:m.index,end:m.index+m[0].length,text:m[0],...ext});
@@ -50,7 +50,14 @@ function analyze(input,flags={}){
  for(const m of raw.matchAll(monYear)){const a=span(m,'month',{year:+m[2],month:months[m[1].toLowerCase()]});if(!intersects(a,[...refs,...dates]))monthsFound.push({...a,iso:`${a.year}-${String(a.month).padStart(2,'0')}`});}
  const shield=[...refs,...dates,...monthsFound];
  for(const m of raw.matchAll(spacedAlts)){const a=span(m,'alternative-volume',{left:+m[1],right:+m[2],join:'ou'});if(!intersects(a,shield))alts.push(a);}
- for(const m of raw.matchAll(volumeAlts)){const a=span(m,'alternative-volume',{left:+m[1],right:+m[3],join:m[2].toLowerCase()});if(!intersects(a,[...shield,...alts]))alts.push(a);}
+ for(const m of raw.matchAll(volumeAlts)){
+   // R114-S: A four-digit year following comma/et/semicolon is not an implicit second Tome.
+   // An explicit second `Tome 1919` remains an invalid volume; `ou` remains ambiguous.
+   const secondIsExplicitTome=/\btomes?\s+\d+\s*$/i.test(m[0].slice(m[0].indexOf(m[2])+m[2].length));
+   if(/^(?:18|19|20)\d{2}$/.test(m[3])&&!secondIsExplicitTome&&/^(?:et|,|;)$/.test(m[2]))continue;
+   const a=span(m,'alternative-volume',{left:+m[1],right:+m[3],join:m[2].toLowerCase()});
+   if(!intersects(a,[...shield,...alts]))alts.push(a);
+ }
  for(const m of raw.matchAll(volumeRx)){const a=span(m,'volume',{value:+m[1]});if(!intersects(a,[...shield,...alts]))volumes.push(a);}
  for(const m of raw.matchAll(yearAlts)){const a=span(m,'alternative-year',{left:+m[1],right:+m[3],join:m[2].toLowerCase()});if(!intersects(a,[...shield,...alts,...volumes]))alts.push(a);}
  for(const m of raw.matchAll(yearRx)){const a=span(m,'year',{value:+m[0]});if(!intersects(a,[...shield,...alts,...volumes]))years.push(a);}
@@ -62,6 +69,91 @@ function analyze(input,flags={}){
  const unsupported=(reason,message)=>({...base,status:'unsupported',reason,message,actions:[],route:null});
  const clarify=(reason,message,actions)=>({...base,status:'clarify',reason,message,actions,route:null});
  const action=(a,label,replace='',chip=null)=>({label,query:replaceRange(raw,a.start,a.end,replace),chip});
+ // R111: complete validation BEFORE emitting any exact structural filter.
+ // This deliberately recognizes only a bounded set of French structural expressions;
+ // unknown constraints fail closed instead of being silently made positive/exact.
+ const tomeMentions=atoms.filter(a=>a.type==='volume'||a.type==='alternative-volume');
+ const invalidTome=tomeMentions.find(a=>{
+   const numeric=String(a.text.match(/\btomes?\s+(\d+)/i)?.[1]||'');
+   const first=a.type==='volume'?a.value:a.left,second=a.type==='alternative-volume'?a.right:null;
+   const longNumber=!!raw.slice(a.start,a.end).match(/\btomes?\s+\d{4,}|\b(?:ou|et)\s+\d{4,}/i);
+   return longNumber||numeric.length>3||first<1||first>36||(second!==null&&(second<1||second>36))||
+     (a.type==='alternative-volume'&&a.text.match(/\b(?:ou|et|,|;|\/|-|–|—|à)\s+(?:tomes?\s+)?(\d+)/i)?.[1]?.length>3);
+ });
+ if(invalidTome){
+   // Do not 'correct' 37 to 36, or discard an invalid half of an alternative.
+   const trimmed=stripArticle(raw,invalidTome.start,invalidTome.end);
+   return clarify('invalid-explicit-tome',`La mention « ${invalidTome.text} » contient un Tome inexistant ou mal formé (Tomes 1 à 36). Aucun filtre de Tome n’a été appliqué.`,
+     trimmed?[{label:'Retirer explicitement cette mention (sans deviner de Tome)',query:trimmed,chip:null}]:[]);
+ }
+ // R112: expressions that cannot denote a positive exact filter must not be
+ // stripped into one. Scope these guards to explicit structural atoms only.
+ const normalizedBefore=a=>raw.slice(Math.max(0,a.start-100),a.start)
+   .normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’‘]/g,"'").toLowerCase().replace(/\s+/g,' ');
+ const refIsExcluded=refs.some(a=>/(?:\b(?:pas|jamais)\s+dans\s+(?:(?:le|la)\s+)?|\b(?:sauf|hors|excepte|exclure|excluant)\s+(?:la\s+reference\s+|le\s+)?|\ben\s+dehors\s+de\s+|\ba\s+l'exclusion\s+de\s+(?:la\s+reference\s+)?|\bne\s+(?:se\s+trouve|figure)\s+pas\s+dans\s+|\bje\s+ne\s+pense\s+pas\s+que\s+(?:cela|ce)\s+soit\s+dans\s+)$/i.test(normalizedBefore(a)));
+ if(refIsExcluded)return clarify('negative-reference','Une référence semble exclue : elle ne peut pas devenir un filtre positif. Reformulez votre demande.',[]);
+ if(volumes.some(a=>/\b(?:je\s+)?ne\s+pense\s+pas\s+que\s+(?:cela|ce)\s+soit\s+dans\s+(?:(?:le|du)\s+)?$/i.test(normalizedBefore(a))))
+   return clarify('negative-volume-proposition','Une phrase indique que ce Tome ne contient probablement pas le passage : confirmez un Tome à inclure ou cherchez sans ce critère.',[]);
+ if(years.some(a=>/\b(?:avant|apres|depuis|pendant|jusqu'a|jusqu'en|dans|vers|entre|au\s+cours\s+de)\s+(?:(?:les|des)\s+)?annees\s*$/i.test(normalizedBefore(a))||/\b(?:les|des)\s+annees\s*$/i.test(normalizedBefore(a))))
+   return clarify('decade-or-period-not-exact','Une décennie ou une période ne peut pas être transformée en une année unique. Précisez une année exacte ou cherchez sans ce filtre.',[]);
+ if(volumes.some(a=>/^\s+(?:ou|et)\s+(?:(?:celui|celle)\s+de|(?:le|la)\s+)\s*\d{1,3}\b/i.test(raw.slice(a.end))))
+   return clarify('implicit-second-volume','Vous semblez citer plusieurs Tomes sans préciser la portée du second numéro. Indiquez un seul Tome avant la recherche.',[]);
+ // A zero-padded valid Tome must be normalized in the engine query in Words mode.
+ // R114-S: bounded, atom-scoped exclusions/periods/durations left ambiguous by R112.
+ // Guards act before the exact options are exposed to either words or meaning engine.
+ for(const a of atoms){
+   const before=normalizedBefore(a),after=raw.slice(a.end,a.end+72).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’‘]/g,"'").toLowerCase();
+   if(a.type==='volume'&&/\bne\s+doit\s+pas\s+etre\s+dans\s+(?:le\s+)?$/i.test(before))
+     return clarify('negative-volume-modal','Le Tome mentionné est exclu, non demandé comme filtre positif. Reformulez la demande.',[]);
+   if(a.type==='year'){
+     if(/\bje\s+ne\s+pense\s+pas\s+que\s+(?:ce|cela)\s+soit\s+(?:en\s+)?$/i.test(before))
+       return clarify('negative-year-proposition','L’année apparaît dans une phrase négative : aucun filtre positif ne peut être appliqué.',[]);
+     if(/\b(?:la\s+)?decennie\s+(?:de\s+|des\s+|en\s+)?$/i.test(before))
+       return clarify('decade-not-exact-year','Une décennie n’est pas une année unique. Précisez une date exacte.',[]);
+     if(/^\s+ans\b/i.test(after))
+       return clarify('duration-not-year','Un nombre d’années indique une durée, pas une année de publication. Reformulez.',[]);
+   }
+   if((a.type==='year'||a.type==='date'||a.type==='month')&&/^\s*[,;]?\s*approximativement\b/i.test(after))
+     return clarify('postposed-approximate-date','La date est approximative : aucune date exacte ne sera imposée.',[]);
+ }
+ const paddedTomes=volumes.filter(a=>/\btomes?\s+0\d+/i.test(a.text));
+ const allStructural=[...dates,...monthsFound,...years,...volumes];
+ const issue=(reason,message)=>clarify(reason,message,[]);
+ const canonical=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’‘]/g,"'").toLowerCase();
+ const scopeBefore=(a,n=85)=>canonical(raw.slice(Math.max(0,a.start-n),a.start)).replace(/\s+/g,' ');
+ const scopeAfter=(a,n=65)=>canonical(raw.slice(a.end,a.end+n)).replace(/\s+/g,' ');
+ for(const a of allStructural){
+   const before=scopeBefore(a),after=scopeAfter(a);
+   if(a.type==='volume'){
+     // Only a negation governing the Tome is relevant: 'Tome 12 pas dans le texte'
+     // describes the text and must NOT be classified as NOT Tome 12.
+     if(/(?:\bpas\s+(?:du\s+tout\s+)?(?:dans\s+(?:le\s+)?|le\s+|du\s+|en\s+)?|\bne\s+(?:se\s+trouve|figure|serait)\s+pas\s+dans\s+(?:le\s+)?|\bhors\s+(?:du\s+|le\s+)?|\bsauf\s+(?:le\s+|dans\s+le\s+)?|\ben\s+dehors\s+du\s+|\ba\s+l'exclusion\s+du\s+|\bexcepte\s+le\s+|\bnon\s+(?:le\s+)?|\bplutot\s+que\s+(?:le\s+)?)$/i.test(before))
+       return issue('negative-volume','Vous semblez exclure un Tome. Cette version ne prend pas en charge « sauf/pas dans le Tome ». Reformulez sans cette exclusion ou précisez un Tome à inclure.');
+     if(/^\s*(?:\?|pas\s*(?:$|[,;.!?]|le\b|du\b))/.test(after))
+       return issue('postposed-negative-volume','La mention du Tome est négative ou incertaine : précisez le Tome voulu avant de chercher.');
+   }
+   if(a.type==='volume'||a.type==='year'||a.type==='month'||a.type==='date'){
+     // Modalities relevant to a nearby structural criterion. Avoid treating ordinary
+     // prose containing "pas dans le texte" as an uncertainty about its Tome.
+     if(/(?:\b(?:peut-?etre|probablement|vraisemblablement|environ|approximativement|incertain|incertaine|vers|autour\s+de|je\s+crois|je\s+pense|il\s+me\s+semble|sans\s+certitude|a\s+peu\s+pres)\s*(?:(?:dans|en|le|la|du|de|des|l'|d'|que\s+c'est|que\s+ce\s+soit|il\s+s'agit\s+du)\s*){0,4})$/i.test(before)||
+        /^\s*[,;]?\s*(?:peut-?etre|probablement|environ|a\s+peu\s+pres|sans\s+certitude|je\s+crois|je\s+pense|incertain\w*|\?)\b/i.test(after))
+       return issue('uncertain-structural','Un Tome ou une date semble approximatif ou incertain. Aucun filtre exact n’est appliqué sans confirmation : retirez l’indice incertain ou rendez-le explicitement certain.');
+   }
+   if(a.type==='year'||a.type==='month'||a.type==='date'){
+     // Bounded date/year/time ranges are NOT equivalent to exact selection.
+     if(/(?:\b(?:avant|apres|depuis|jusqu'(?:en|a)|jusque\s+(?:en|au|le)|a\s+partir\s+(?:de|du)|entre|a\s+compter\s+de|au\s+plus\s+(?:tot|tard)|au\s+(?:moins|minimum|maximum)|pas\s+(?:avant|apres)|vers\s+la\s+fin\s+de|pas\s+(?:en|le|de)|hors\s+de)\s*(?:l'annee\s+|l'an\s+|en\s+|de\s+|du\s+|le\s+|la\s+|au\s+|d'\s*){0,3})$/i.test(before)||
+       /\b(?:dans\s+les\s+annees|pendant\s+les\s+annees|au\s+cours\s+des\s+annees)\s*$/i.test(before)||
+       /^\s*(?:ou\s+(?:avant|apres)|ou\s+plus\s+(?:tot|tard))\b/i.test(after))
+       return issue('temporal-range-not-exact','L’année ou la date exprime une borne ou une période. Cette version n’applique que les dates exactes ; précisez votre demande, ou retirez la restriction.');
+   }
+ }
+ // Other explicit Tome mentions must not be accidentally swallowed as ordinary prose.
+ // The atom regexes above cover the same full Tome-number syntax; fail closed if
+ // a mention remains unaccounted for (e.g. long, malformed or composite number).
+ for(const m of raw.matchAll(/\btomes?\s+(\d+)\b/gi)){
+   if(!atoms.some(a=>a.start<=m.index&&a.end>=m.index+m[0].length))
+     return issue('unaccounted-tome','Une mention explicite de Tome n’a pas pu être interprétée de manière sûre. Reformulez-la avant la recherche.');
+ }
  if(refs.length>1)return unsupported('multiple-references','Plusieurs références : conservez une référence précise.');
  if(dates.length>1||monthsFound.length>1||(dates.length&&monthsFound.length))return unsupported('multiple-dates','Dates ou mois multiples : précisez une seule période.');
  if(alts.length>1)return unsupported('multiple-alternatives','Plusieurs alternatives : précisez votre intention.');
@@ -71,7 +163,7 @@ function analyze(input,flags={}){
  const near=(a,expr,dist=26)=>expr.test(raw.slice(Math.max(0,a.start-dist),a.start));
  // Interposed range marker is not interchangeable with a date-introducing comma or `et`.
  if(volumes.length&&dates.length){const v=volumes[0],d=dates[0];if(d.start>=v.end&&/^(?:\s*à\s*|\s*[-–—/]\s*)$/.test(raw.slice(v.end,d.start)))return unsupported('ambiguous-tome-date-range','Le séparateur peut indiquer une plage de tomes ou une date. Reformulez explicitement le tome et la date.');}
- if(volumes.some(a=>near(a,/(?:\b(?:pas(?:\s+du\s+tout)?|non|jamais|hors|sauf|sans|excepté|vers|autour|probablement|peut[ -]?être|plutôt\s+que)\s+(?:(?:dans\s+)?(?:le|du)|de)?\s*|\bne\s+pense\s+pas\s+que\s+ce\s+soit\s+dans\s+le\s+)$/i,65)||/^\s*(?:pas|\?|plutôt\s+\d+)/i.test(raw.slice(a.end,a.end+19))))return unsupported('negated-or-tentative-volume','La restriction de tome semble négative ou incertaine : reformulez-la avant de la rendre obligatoire.');
+ if(volumes.some(a=>near(a,/(?:\b(?:pas(?:\s+du\s+tout)?|non|jamais|hors|sauf|sans|excepté|vers|autour|probablement|peut[ -]?être|plutôt\s+que)\s+(?:(?:dans\s+)?(?:le|du)|de)?\s*|\bne\s+pense\s+pas\s+que\s+ce\s+soit\s+dans\s+le\s+)$/i,65)||/^\s*(?:\?|pas\s*(?:$|[,;.!?]|le\b|du\b)|plutôt\s+\d+)/i.test(raw.slice(a.end,a.end+19))))return unsupported('negated-or-tentative-volume','La restriction de tome semble négative ou incertaine : reformulez-la avant de la rendre obligatoire.');
  if(dates.some(a=>near(a,/(?:\b(?:pas|non|vers|autour|avant|après|entre|environ|peut[ -]?être|ou)\s*(?:(?:le|du|de)\s*)?|\bdu\s+\d{1,2}\s+au\s*)$/i,30)))return unsupported('uncertain-or-negated-date','La date est incertaine ou relative : précisez-la avant application.');
  if(monthsFound.some(a=>near(a,/\b(?:pas|non|vers|autour|avant|après|entre|environ|peut[ -]?être)\s*$/i,24)))return unsupported('uncertain-or-negated-month','Le mois est présenté comme incertain. Précisez votre intention.');
  if(years.some(a=>near(a,/(?:\b(?:pas|non|vers|autour|avant|après|entre|environ|peut[ -]?être)\s*(?:(?:de|en)\s*)?|\b(?:date|ann[ée]e)\s+(?:approximati(?:ve|f)|incertain(?:e)?)\s*)$/i,32)))return unsupported('uncertain-or-negated-year','L’année est incertaine ou relative : précisez-la avant application.');
@@ -101,13 +193,32 @@ function analyze(input,flags={}){
  if(refs.length&&chipMin){const m=refs[0].value.match(/^(?:LDCSUP|LDC)\.T(\d+)(?:\.|$)/);if(m&&(+m[1]<chipMin||+m[1]>chipMax)){let g=group(+m[1]);return clarify('chip-reference-conflict',`La référence est hors du filtre T${chipMin}–${chipMax}.`,[{label:`Adapter le filtre à T${g.min}–${g.max}`,query:raw,chip:g},...(action(refs[0],'').query?[action(refs[0],'Retirer uniquement la référence et conserver le filtre')]:[])]);}}
  // Semantic model only implements EXACT dateIso, not a month prefix. Do not silently request a zero-result semantic month scope.
  if(mode==='meaning'&&monthsFound.length&&!pure)return unsupported('semantic-month-prefix-unsupported','La recherche par le sens ne peut pas appliquer un filtre de mois à un souvenir descriptif. Utilisez « Par les mots » ou précisez une date exacte / année.');
- // If the typed tome lies inside an active chip, the effective intersection is exactly the typed tome.
- if(pure){const bits=[];if(structural.ref)bits.push(structural.ref);if(structural.volume)bits.push(`Tome ${structural.volume}`);if(structural.date){if(structural.date.length===7){let m=+structural.date.slice(5);let mn=Object.keys(months).find(n=>months[n]===m&&!/[éû]/.test(n))||'janvier';bits.push(`${mn} ${structural.date.slice(0,4)}`);}else bits.push(structural.date);}else if(structural.year)bits.push(String(structural.year));base.engineQuery=bits.join(' ');
-  // A comma separates Tome number from a month so the frozen preprocessor cannot falsely treat Tome 29 as 29 February.
-  if(monthsFound.length&&structural.volume)base.engineQuery=base.engineQuery.replace(/(\bTome\s+\d+)\s+(?=[a-zéû]+\s+\d{4}\b)/i,'$1, ');
+ // Meaning-mode pure metadata and all Words-mode queries share the unchanged
+ // lexical worker. Therefore use a single canonical encoder for structural-only
+ // navigation; ISO YYYY-MM-DD is NOT a day filter in this worker.
+ const monthName=['','janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+ if(pure){
+   // This construction never uses offsets; harmless navigation boilerplate is
+   // removed only when the whole remaining description was judged non-semantic.
+   const bits=[];
+   if(structural.ref)bits.push(structural.ref);
+   if(structural.volume)bits.push(`Tome ${structural.volume}`);
+   if(dates.length){const d=dates[0];bits.push(`${d.day} ${monthName[d.month]} ${d.year}`);}
+   else if(monthsFound.length){const d=monthsFound[0];bits.push(`${monthName[d.month]} ${d.year}`);}
+   else if(structural.year)bits.push(String(structural.year));
+   base.engineQuery=bits.join(' ');
+ }else if(mode==='words'){
+   // Mixed lexical and structural phrases: retain every word outside proved
+   // structural atoms. Every replacement offset is relative to ORIGINAL raw;
+   // apply it in descending order to avoid the R111 double-offset corruption.
+   const replacements=[];
+   for(const a of paddedTomes)replacements.push({start:a.start,end:a.end,text:a.text.replace(/(tomes?\s+)0+(\d+)/i,(_,head,n)=>head+String(Number(n)))});
+   for(const a of dates)if(!new RegExp('^(?:1er|\\d{1,2})\\s+(?:'+rxMonths+')\\s+\\d{4}$','i').test(a.text))
+     replacements.push({start:a.start,end:a.end,text:`${a.day} ${monthName[a.month]} ${a.year}`});
+   let q=raw;
+   for(const r of replacements.sort((a,b)=>b.start-a.start))q=q.slice(0,r.start)+r.text+q.slice(r.end);
+   base.engineQuery=q;
  }
- // For words-mode non-pure queries, insert only the same lossless Tome/month separator.
- if(mode==='words'&&!pure&&monthsFound.length&&volumes.length)base.engineQuery=raw.replace(/(\btomes?\s+\d+)\s+(?=(?:janvier|f[ée]vrier|mars|avril|mai|juin|juillet|ao[uû]t|septembre|octobre|novembre|d[ée]cembre)\s+\d{4}\b)/i,'$1, ');
  // Empty or stopword-only semantic residue must not fall back to raw structural input and invoke ONNX.
  if(mode==='meaning'&&!pure&&atoms.length&&description&&!/[\p{L}\p{N}]{3,}/u.test(description))return unsupported('zero-lexical-semantic-residual','Précisez les termes mémorisés : aucun terme de passage exploitable ne subsiste.');
  return base;
