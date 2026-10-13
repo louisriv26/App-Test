@@ -1,7 +1,5 @@
 {
   "app": "Livre du Ciel",
-  "app_test_authority": "R163_OWNER_AUTHORISED_APP_TEST_ONLY__NATIVE_QA_PENDING__PRODUCTION_HOLD",
-  "app_test_isolated_indexeddb_name": "ldc_user_v1__app_test",
   "files": [
     {
       "bytes": 20988,
@@ -1154,9 +1152,9 @@
       "sha256": "4df3a82f5f2ee57a0b6913b6ca6b56758b2ab9e27f0d401e06a4ed0792639c06"
     },
     {
-      "bytes": 989594,
+      "bytes": 991117,
       "path": "index.html",
-      "sha256": "fdb4bb29fb3b2ef49936dc702a5b07fbe8f509e12a6bf3a5091be20f447a8e93"
+      "sha256": "344559f9576122c0446f4be492723dc0c4cc471a7d6af9467c8aeba360f75882"
     },
     {
       "bytes": 17214,
@@ -1174,9 +1172,9 @@
       "sha256": "6f8c116ad7258f912c8f17c15a3afbfdafaa6e49a9156f477f1b6bd1512b4955"
     },
     {
-      "bytes": 60458,
+      "bytes": 60584,
       "path": "offline_manifest.json",
-      "sha256": "7fbdfca58def7e199d598c67d2d2d02ab3b18bdb58848a474e8bab90d6ed6b9a"
+      "sha256": "c694b5e62745663f0b6caae350763f5ab88259ac596014c707099c0d6cc11743"
     },
     {
       "bytes": 658,
@@ -1364,21 +1362,21 @@
       "sha256": "0f7f5242f4960cb2d32ff3b6b632d142f86ab2fa5722f6b8328924c869b5b23a"
     },
     {
-      "bytes": 32250,
+      "bytes": 32226,
       "path": "sw.js",
-      "sha256": "e9cc66900284b136090291e6584e65d8bcaa42742b0190863c899415f3b9ea54"
+      "sha256": "e600183b22f5f8a245e0b5e5cf2f920ee83203b9159192d12a91bc3f63565de2"
     },
     {
-      "bytes": 260644,
+      "bytes": 261181,
       "path": "version.json",
-      "sha256": "2839c76e75999933f23e4922c2bcaf097b17d95ceab07e62cf86e96e72e461c4"
+      "sha256": "482c8a51092ab4ffb3555566ad4c3cc87e3b2a5fb83bcd50171407a3a5d5cdb5"
     }
   ],
   "offline_corpus_assets": 204,
   "offline_corpus_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
   "packaged_file_count_excluding_manifest": 274,
-  "production_authority": "NONE__PRODUCTION_HOLD",
-  "public_version": "142.27",
+  "production_authority": "NONE__MAIN_PRODUCTION_HOLD__APP_TEST_DEPLOYMENT_AUTHORIZED",
+  "public_version": "142.28",
   "qualified_model_files": 20,
   "r88_structural_repair": {
     "approved_deployment": "NONE",
@@ -1391,6 +1389,16 @@
   },
   "schema": "ldc-curated-wip-package-manifest-v1",
   "semantic_manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
-  "source_commit": "R152_FROZEN_SOURCE__R163_APP_TEST_4_FILES_PATCH",
-  "usage": "R163_APP_TEST_ONLY_DEPLOYMENT__NO_HISTORICAL_PRODUCTION_INDEXEDDB_ACCESS"
+  "source_commit": "R168_MAIN_CANDIDATE_SOURCE_270_UNMODIFIED_ASSETS_FROM_R163",
+  "usage": "R170_UNIFIED_SINGLE_BINARY__APP_TEST_AND_FUTURE_MAIN__NO_ENV_SPECIFIC_BUILDS",
+  "r170_unified_build": {
+    "release": "142.28",
+    "site_namespace_auto_selection": true,
+    "app_test": "ldc_user_v1__app_test",
+    "production": "ldc_user_v1",
+    "beta": "ldc_user_v1__massfinderbeta",
+    "same_files_on_every_site": true,
+    "main_authority": "NONE",
+    "main_baseline_commit": "99711c554b5c63c6fdbc16f2e7d11980e2567d1b"
+  }
 }

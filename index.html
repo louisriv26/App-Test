@@ -2636,11 +2636,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.27-R163-APP-TEST-ONLY'; // R139 LOCAL APP TEST ONLY corrective candidate; NOT hosted or iOS-qualified; NO GitHub or production authority; protected Reader and PLS retained
+const APP_VERSION = 'v2.19.142.28-R170-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-13';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.27-r163-app-test-only';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.28-r170-unified';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -2660,8 +2660,31 @@ const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
 /* ═══════════════════════════════════════════════════════
    STATE
 ═══════════════════════════════════════════════════════ */
-const DB_NAME = 'ldc_user_v1__app_test';
-const DB_VER  = 5; // R115-D2 local-only versionchange barrier for pre-v5 writers
+// R170: ONE byte-identical application at all paths. Data must still be scoped by
+// GitHub Pages project; IndexedDB and localStorage share the github.io ORIGIN.
+// Historical MAIN retains its canonical DB4->DB5 name. Testing never upgrades MAIN.
+const LDC_PROJECT_SCOPE = (()=>{
+  const path=window.location.pathname.toLowerCase();
+  const match=/^\/([^/]+)(?:\/|$)/.exec(path);
+  const project=match?match[1]:'';
+  const allowedHost=(window.location.protocol==='https:'&&window.location.hostname.toLowerCase()==='louisriv26.github.io')||
+    (window.location.protocol==='http:'&&['127.0.0.1','localhost','[::1]'].includes(window.location.hostname.toLowerCase()));
+  const rootOrIndex=(path==='/'+project||path==='/'+project+'/'||path==='/'+project+'/index.html');
+  if(!allowedHost||!rootOrIndex)return null;
+  if(project==='le-livre-du-ciel---github')return 'main';
+  if(project==='app-test')return 'app_test';
+  // Beta remains isolated; no historical-main DB4 versionchange from a test path.
+  if(project==='massfinderbeta'||project==='mauritius-mass-finder-beta')return 'massfinderbeta';
+  return null;
+})();
+const LDC_PROJECT_STORAGE=Object.freeze({
+  main:Object.freeze({db:'ldc_user_v1',onboarding:'ldc_onboarding_done',intent:'ldc_search_intent_mode_v3'}),
+  app_test:Object.freeze({db:'ldc_user_v1__app_test',onboarding:'ldc_app_test_onboarding_done',intent:'ldc_app_test_search_intent_mode_v3'}),
+  massfinderbeta:Object.freeze({db:'ldc_user_v1__massfinderbeta',onboarding:'ldc_massfinderbeta_onboarding_done',intent:'ldc_massfinderbeta_search_intent_mode_v3'})
+});
+const LDC_STORAGE=LDC_PROJECT_SCOPE?LDC_PROJECT_STORAGE[LDC_PROJECT_SCOPE]:null;
+const DB_NAME=LDC_STORAGE?LDC_STORAGE.db:'__LDC_UNAUTHORIZED_SCOPE_NO_USER_DB__';
+const DB_VER  = 5; // R115-D2 pre-v5 writer barrier; upgrading DB4 requires rollback-aware release governance
 let db = null;
 
 // RA5 two-tier volume cache. corpusCache is lightweight Tome metadata and may
@@ -4152,7 +4175,7 @@ function finishOnboarding() {
   const overlay=document.getElementById('onboarding-overlay');
   overlay.style.display = 'none';
   setShellState('normal');
-  safeOnboardingStorageSet('ldc_app_test_onboarding_done', '1');
+  safeOnboardingStorageSet(LDC_STORAGE.onboarding, '1');
 }
 
 function obNext() {
@@ -8178,7 +8201,7 @@ let searchOrderMode = null; // null = automatic: one-token/book, multi-token/rel
 let searchResultLane = null; // null = strongest primary evidence class (exact/all terms); partial requires explicit expansion
 let searchPartialExpanded = false; // 'Certains termes' only after explicit expansion
 let searchIntentMode = 'words'; // Search-V3 internal lab; explicit user intent
-const SEARCH_INTENT_MODE_KEY = 'ldc_app_test_search_intent_mode_v3';
+const SEARCH_INTENT_MODE_KEY = LDC_STORAGE.intent;
 let searchPage = 1, searchMetadataPage = 1;
 let searchLastPayload = null;
 let searchLastPreflightR88 = null;
@@ -9398,7 +9421,7 @@ async function migrateBackupStageToCurrent(parsed){const plan=portableBackupMigr
 /* STAGE11_BACKUP_PORTABILITY_END */
 async function validateBackupStage(parsed){const errors=[],warnings=[],counts=parsed.counts||{},collectionIds=new Set();if(parsed&&parsed.header&&parsed.header.app_version!==APP_VERSION)warnings.push(`Sauvegarde créée avec ${parsed.header.app_version}; le numéro de version de l’application est traité comme provenance et non comme clé de compatibilité.`);if(parsed&&parsed.migrationSummary&&parsed.migrationSummary.steps&&parsed.migrationSummary.steps.length)warnings.push(`Migration prudente vers le corpus actuel : ${parsed.migrationSummary.steps.join(' → ')}.`);let after=null;while(true){const b=await readBackupStageBatch(parsed.token,after,200);for(const rec of b.rows){if(rec.store==='collections')collectionIds.add(rec.row.id);}if(b.done)break;after=b.lastKey;}after=null;let targetWarnings=0;while(true){const b=await readBackupStageBatch(parsed.token,after,100);for(const rec of b.rows){const row=rec.row,store=rec.store;if(store==='col_items'&&!collectionIds.has(row.col_id))errors.push('Un passage de collection référence une collection absente.');if(store==='highlights'||store==='notes'||store==='col_items'){const vol=row.volume||volumeOfStableRef(row.stable_ref);if(vol&&row.entry_id&&row.para_id){const p=await currentParagraph(vol,row.entry_id,row.para_id);if(!p)targetWarnings++;else if(store==='highlights'&&Number.isInteger(row.end_char)&&row.end_char>p.text.length){const legacyOrStale=!!(parsed.migrationSummary&&parsed.migrationSummary.steps&&parsed.migrationSummary.steps.length)||!!row.needs_reanchor||!!(row.stale_status&&row.stale_status!=='active');if(legacyOrStale)targetWarnings++;else errors.push(`Surlignage hors limites : ${row.para_id}`);}}}}if(b.done)break;after=b.lastKey;}if(targetWarnings)warnings.push(`${targetWarnings} cible(s) devront être vérifiées après restauration.`);const meta=await getBackupStageMeta();if(!meta||meta.token!==parsed.token||!['PARSED','MIGRATED'].includes(meta.status))errors.push('État de préparation incohérent.');if(!errors.length)await putBackupStageMeta(Object.assign({},meta,{status:'READY',validated_at:new Date().toISOString(),warnings,migration_summary:parsed.migrationSummary||meta.migration_summary||null,target_generation:CORPUS_GENERATION}));return{ok:errors.length===0,errors:[...new Set(errors)],warnings:[...new Set(warnings)],counts};}
 
-async function collectUserDataEnvelope(){const state={};for(const store of USER_DATA_STORES)state[store]=await dbGetAll(store);const settings=state.settings||[],getSetting=key=>settings.find(x=>x.key===key)||null;return{schema:USER_DATA_ENVELOPE_SCHEMA,version:USER_DATA_ENVELOPE_VERSION,app_version:APP_VERSION,corpus_generation:CORPUS_GENERATION,exported_at:new Date().toISOString(),backup_metadata:{db_name:DB_NAME,db_version:DB_VER,authority:'IndexedDB ldc_user_v1__app_test is an isolated App Test database, not production; localStorage only stores onboarding acknowledgement; CacheStorage/service-worker caches are not restore data.',coverage:['highlights','notes','favorites','collections','col_items','reading_pos','read_entries','settings.theme','settings.textLevel','settings.showReperes','settings.supplement_mode','settings.offline_completion when present','backup metadata'],reading_position_schema:READING_POSITION_SCHEMA,theme:getSetting('theme'),text_level:getSetting('textLevel'),reperes:getSetting('showReperes'),offline_completion:getSetting('offline_completion')},state};}
+async function collectUserDataEnvelope(){const state={};for(const store of USER_DATA_STORES)state[store]=await dbGetAll(store);const settings=state.settings||[],getSetting=key=>settings.find(x=>x.key===key)||null;return{schema:USER_DATA_ENVELOPE_SCHEMA,version:USER_DATA_ENVELOPE_VERSION,app_version:APP_VERSION,corpus_generation:CORPUS_GENERATION,exported_at:new Date().toISOString(),backup_metadata:{db_name:DB_NAME,db_version:DB_VER,authority:'Chaque chemin GitHub Pages utilise son espace IndexedDB choisi par le même binaire; MAIN conserve ldc_user_v1 et ses données historiques. Les caches ne restaurent pas les données personnelles.',coverage:['highlights','notes','favorites','collections','col_items','reading_pos','read_entries','settings.theme','settings.textLevel','settings.showReperes','settings.supplement_mode','settings.offline_completion when present','backup metadata'],reading_position_schema:READING_POSITION_SCHEMA,theme:getSetting('theme'),text_level:getSetting('textLevel'),reperes:getSetting('showReperes'),offline_completion:getSetting('offline_completion')},state};}
 function downloadBlob(name,type,text){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),0);}
 async function exportBackupJson(){return exportBackupStream();}
 async function exportJournalTxt(){const notes=await dbGetAll('notes'),cols=await dbGetAll('collections'),items=await dbGetAll('col_items'),lines=['Livre du Ciel — Journal de lecture','═'.repeat(40),''];for(const n of notes.sort((a,b)=>a.ts-b.ts)){lines.push(`${n.entry_title||''} · ${n.stable_ref||''}${n.supplement_id?' · COMPLÉMENT':''}`.trim(),new Date(n.ts).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}));if(n.quote)lines.push('',`« ${n.quote} »`);lines.push('',n.text,'','─'.repeat(30),'');}for(const c of cols.sort((a,b)=>a.ts-b.ts)){lines.push('',`COLLECTION — ${c.name}`,'─'.repeat(30));for(const it of items.filter(i=>i.col_id===c.id).sort((a,b)=>a.order-b.order)){lines.push(`${it.stable_ref||''} · ${it.title||''}${it.supplement_id?' · COMPLÉMENT':''}`,`« ${it.text||''} »`);if(it.note)lines.push(`[Note : ${it.note}]`);lines.push('');}}downloadBlob(`ldc-journal-${new Date().toISOString().slice(0,10)}.txt`,'text/plain;charset=utf-8',lines.join('\n'));showToast('Journal lisible exporté');}
@@ -10399,8 +10422,8 @@ function setShellState(state){
 /* STAGE8_MIGRATION_STARTUP_BEGIN */
 const STAGE8_MIGRATION_LOCK='ldc-userdata-migration-db4-v1';
 const STAGE8_MIGRATION_MARKER='stage8_migration_startup_complete_v1';
-const STAGE8_MIGRATION_GATE_REV='gate4-R127-local';
-const STAGE8_MIGRATION_FIXED_POINT=`v2.19.142.25-R139-APP-TEST-ONLY|${CORPUS_GENERATION}|db${DB_VER}|${STAGE8_MIGRATION_GATE_REV}`; // R150: exact R139 pre-update marker; no gratuitous Stage8 replay
+const STAGE8_MIGRATION_GATE_REV='gate4-R170-unified';
+const STAGE8_MIGRATION_FIXED_POINT=`${APP_VERSION}|${CORPUS_GENERATION}|db${DB_VER}|${STAGE8_MIGRATION_GATE_REV}`; // R170: per-database fixed point; individual historical markers prevent unnecessary rewriting
 async function stage8MigrationAlreadyComplete(){const m=await dbGet('settings',STAGE8_MIGRATION_MARKER).catch(()=>null);return !!(m&&m.value===STAGE8_MIGRATION_FIXED_POINT);}
 async function stage8HistoricalMigrationNeeded(){
   if(await stage8MigrationAlreadyComplete())return false;
@@ -10428,7 +10451,7 @@ async function runStage8MigrationChain(){
   await migrateUserDataFast1Once();
   await migrateUserDataStage2221Once();
 }
-/* R115-D2 staging/CAS migration design, retained from R134 verified local candidate; App Test qualification only.
+/* R115-D2 staging/CAS migration design retained; R170 identical app bytes on App Test and eventual Main; DB runtime routing differs by path.
    A DB_VER 5 upgrade must complete *before* this gate: an old DB4 connection
    will otherwise hold versionchange blocked and prevent any commit.
    All migration writes happen on a private scratch DB; only a validated
@@ -11043,13 +11066,11 @@ function showBootFailure(err){
 /* M12_ATOMIC_BOOTSTRAP_END */
 
 async function boot() {
-  // R147: never open/upgrade shared-origin data when an App-Test-only build is copied to another project path.
-  // Accept the three canonical URL shapes; no other subpath is a valid App Test install.
-  const installationPath=new URL(window.location.href).pathname.toLowerCase();
-  const appTestPathAllowed=['/app-test','/app-test/','/app-test/index.html'].includes(installationPath);
-  if(APP_VERSION.includes('APP-TEST-ONLY')&&!appTestPathAllowed){
-    const wrongBuild=new Error('Package App Test uniquement : ce déploiement ne peut pas accéder au stockage de ce site.');
-    wrongBuild.name='LDCWrongDeploymentScopeError';throw wrongBuild;
+  // R170: one package, three deterministic site scopes, never share user DBs.
+  // The protection runs before any Service Worker registration or IndexedDB.open.
+  if(!LDC_STORAGE){
+    const err=new Error('Chemin non autorisé pour Livre du Ciel : aucun accès aux données locales.');
+    err.name='LDCWrongDeploymentScopeError';throw err;
   }
   setShellState('boot');
   const loadingSub=document.querySelector('#loading .l-sub');if(loadingSub)loadingSub.textContent='Vérification de la mise à jour…';
@@ -11112,7 +11133,7 @@ async function boot() {
   await applyInitialDeepLink();
 
   // Show onboarding on first launch
-  if (!safeOnboardingStorageGet('ldc_app_test_onboarding_done')) {
+  if (!safeOnboardingStorageGet(LDC_STORAGE.onboarding)) {
     showOnboarding();
   }
 
@@ -11640,14 +11661,16 @@ async function fetchPublishedVersion() {
   if(!res||!res.ok)throw new Error(`version HTTP ${res&&res.status}`);
   const meta=await res.json();
   const version=String(meta&&meta.app_version||'').trim();
-  // Accept only the pinned legacy R1B family or explicitly marked App-Test-only successors.
-  // The active App Test publication must also bind its SW revision and isolated DB name.
-  const patchMatch=version.match(/^v2\.19\.(\d+(?:\.\d+)?)-(?:R1B(?:-[A-Za-z0-9]+)*|R\d{2,4}-APP-TEST-ONLY)$/);
-  if(!patchMatch)throw new Error('version publiée invalide');
-  if(version.endsWith('-APP-TEST-ONLY')){
-    const expectedWorkerRevision='ldc-'+version.toLowerCase();
-    if(String(meta&&meta.page_worker_revision||'')!==expectedWorkerRevision)throw new Error('révision du Service Worker publié incohérente');
-    if(String(meta&&meta.app_test_data_isolation&&meta.app_test_data_isolation.indexeddb_name||'')!==DB_NAME)throw new Error('espace IndexedDB App Test incohérent');
+  // One identical release; binding is selected at runtime by project path.
+  const patchMatch=version.match(/^v2\.19\.(\d+(?:\.\d+)?)-(?:R1B(?:-[A-Za-z0-9]+)*|R170-UNIFIED)$/);
+  if(!patchMatch)throw new Error('identité de version publiée non reconnue');
+  if(version.endsWith('-R170-UNIFIED')){
+    if(String(meta&&meta.page_worker_revision||'')!==SW_CACHE_VERSION)
+      throw new Error('incohérence de révision Service Worker');
+    if(!LDC_STORAGE||String(meta&&meta.r170_unified_storage_contract&&meta.r170_unified_storage_contract.bindings&&meta.r170_unified_storage_contract.bindings[LDC_PROJECT_SCOPE]||'')!==DB_NAME)
+      throw new Error('incohérence de liaison IndexedDB du site');
+    if(String(meta&&meta.r170_unified_storage_contract&&meta.r170_unified_storage_contract.release_kind||'')!=='UNIFIED_SINGLE_BINARY')
+      throw new Error('métadonnées de publication non cohérentes');
   }
   const explicitPublic=String(meta&&meta.public_version||'').trim();
   const derivedPublic=patchMatch[1];

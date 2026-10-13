@@ -1,11 +1,5 @@
 {
-  "app_test_data_isolation": {
-    "historical_profile_migration": "SYNTHETIC_FIXTURES_ONLY__NO_REAL_PRODUCTION_DB_READ_OR_COPY",
-    "indexeddb_name": "ldc_user_v1__app_test",
-    "production_indexeddb_name": "ldc_user_v1",
-    "reason": "SAME_ORIGIN_GITHUB_PAGES_SUBPATHS__PREVENT_DBV5_UPGRADE_OF_PRODUCTION_DBV4"
-  },
-  "app_version": "v2.19.142.27-R163-APP-TEST-ONLY",
+  "app_version": "v2.19.142.28-R170-UNIFIED",
   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
   "baseline_candidate_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
@@ -57,8 +51,8 @@
     "state_recorded_status": "PRODUCTION_DEPLOYED_CLOSED_IMMUTABLE__EXACT_REPOSITORY_TREE_AND_SUCCESSFUL_DEPLOYMENT_BINDING_RECORDED",
     "technical_identity": "v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE"
   },
-  "current_release_authority": "R136_APP_TEST_PACKAGE_USER_REQUESTED__NOT_DEPLOYED_BY_ASSISTANT__PRODUCTION_NOT_AUTHORIZED",
-  "current_runtime_browser_validation": "R134_EDGE155_11_OF_11_LOCAL_SCENARIOS_REVIEWED_R135__APP_TEST_HOSTED_AND_PHYSICAL_IOS_NOT_RUN",
+  "current_release_authority": "R170_SINGLE_BINARY_DEPLOYED_APP_TEST_ONLY__MAIN_PRODUCTION_HOLD",
+  "current_runtime_browser_validation": "R170_NATIVE_BROWSER_QA_PENDING__HISTORIC_R164_ON_DERIVED_BASELINE_ONLY",
   "dark_mode_v136_r9": {
     "corpus_changed": false,
     "date": "2026-10-02",
@@ -598,7 +592,7 @@
   "package_predecessor_app_version": "v2.19.142.23-R130-LOCAL-P11-CANDIDATE",
   "package_predecessor_zip_sha256": "26fe15417b6b8367ecb44832af383529be3645363020c9668273c423bef73206",
   "package_state_at_freeze": "PREHOSTED_V142_17_QUALIFICATION_CANDIDATE__PENDING_FINAL_PACKAGE_MANIFEST__NOT_A_PRODUCTION_RELEASE",
-  "page_worker_revision": "ldc-v2.19.142.27-r163-app-test-only",
+  "page_worker_revision": "ldc-v2.19.142.28-r170-unified",
   "par_le_sens_current": {
     "compatible_passages": 20236,
     "excluded_stale_passages": 347,
@@ -822,7 +816,7 @@
   },
   "public_deployment_authorized": false,
   "public_release": "NOT_AUTHORIZED",
-  "public_version": "142.26",
+  "public_version": "142.28",
   "quote_display_contract": "CANONICAL_GUILLEMETS_PRESERVED_IN_CORPUS__ADJACENT_OUTER_DELIMITERS_HIDDEN__TWO_SOURCE_SPAN_GAP_OPENERS_WITH_EXPLICIT_JESUS_ATTRIBUTION_HIDDEN__SIX_PUNCTUATION_GAP_CLOSERS_HIDDEN__NESTED_AND_REPORTED_QUOTES_PRESERVED",
   "r16_authority_fencing_reaudit": {
     "corpus_changed": false,
@@ -4695,5 +4689,26 @@
   "volume_lru_max": 4,
   "whole_collection_undo_contract": "TEN_SECOND_ATOMIC_PARENT_PLUS_ALL_CAPTURED_CHILDREN__FAIL_CLOSED_ON_PARENT_CHILD_OR_UNEXPECTED_ORPHAN_CONFLICT",
   "wide_public_release": "NOT_AUTHORIZED__ENGINEERING_CANDIDATE_ONLY__NO_PRODUCTION_PROMOTION",
-  "wide_public_release_gate": "NO_GO__CANDIDATE_PACKAGE_BROWSER_HOSTED_PHYSICAL_E16_E19_OPEN"
+  "wide_public_release_gate": "NO_GO__CANDIDATE_PACKAGE_BROWSER_HOSTED_PHYSICAL_E16_E19_OPEN",
+  "r170_unified_storage_contract": {
+    "release_kind": "UNIFIED_SINGLE_BINARY",
+    "bindings": {
+      "main": "ldc_user_v1",
+      "app_test": "ldc_user_v1__app_test",
+      "massfinderbeta": "ldc_user_v1__massfinderbeta"
+    },
+    "db_internal_version": 5,
+    "onboarding_key_by_site": {
+      "main": "ldc_onboarding_done",
+      "app_test": "ldc_app_test_onboarding_done",
+      "massfinderbeta": "ldc_massfinderbeta_onboarding_done"
+    },
+    "main_historical_source": "v142.19 DB4",
+    "preserve_existing_main_without_live_test_upgrade": true,
+    "single_build_sha_same_across_paths": true,
+    "release_to_production": "HOLD_OWNER_APPROVAL_AND_DEVICE_GATE",
+    "rollback_to_DB4_after_upgrade": "NOT_SAFE",
+    "live_app_test_namespace": "ldc_user_v1__app_test",
+    "beta_historical_data_notice": "OLD BETA DB CAN_BE_ldc_user_v1_ON_SHARED_ORIGIN__NEVER_AUTOMATICALLY_IMPORT_INTO_NEW_BETA_NAMESPACE"
+  }
 }
