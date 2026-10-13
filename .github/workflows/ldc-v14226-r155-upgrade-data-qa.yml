@@ -44,7 +44,8 @@ jobs:
           PY
           nohup python3 "$RUNNER_TEMP/switchable.py" > "$RUNNER_TEMP/r155-server.log" 2>&1 &
           sleep 2
-          curl -fsS http://127.0.0.1:8998/App-Test/version.json | grep -q '142.25'
+          curl -fsS -o "$RUNNER_TEMP/r155-version-initial.json" http://127.0.0.1:8998/App-Test/version.json
+          grep -q '142.25' "$RUNNER_TEMP/r155-version-initial.json"
       - name: Real original-to-new update in same browser profile
         env:
           NODE_PATH: ${{ runner.temp }}/qa-upgrade-modules/node_modules
