@@ -45,7 +45,7 @@ jobs:
           verify=json.loads((new/'version.json').read_text())
           assert verify['app_version']=='v2.19.142.28-R170-UNIFIED'
           assert verify['r170_unified_storage_contract']['bindings']['main']=='ldc_user_v1'
-                    print('Historical index SHA',hashlib.sha256(oldidx.encode()).hexdigest(),'historical files',len(list(old.rglob('*'))))
+          print('Historical index SHA',hashlib.sha256(oldidx.encode()).hexdigest(),'historical files',len(list(old.rglob('*'))))
           print('QA only: historic v142.19 DB4 -> EXACT unchanged R170 unified v142.28 DB5 /Le-livre-du-Ciel---Github/')
           PY
           cat > "$RUNNER_TEMP/qa-r172-serve.py" <<'PY'
