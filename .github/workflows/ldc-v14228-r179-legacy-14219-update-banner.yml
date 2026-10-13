@@ -1,0 +1,121 @@
+name: "LDC R179 historical v142.19 still-open tab detects unified update"
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/ldc-v14228-r179-legacy-14219-update-banner.yml"
+permissions: {contents: read}
+jobs:
+  historical:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout exact frozen historical production source (read-only)
+        uses: actions/checkout@v4
+        with:
+          repository: louisriv26/Le-livre-du-Ciel---Github
+          ref: 99711c554b5c63c6fdbc16f2e7d11980e2567d1b
+          path: _qa_historical_14219
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install native browser engines
+        run: |
+          npm install --prefix "$RUNNER_TEMP/qa-r172-modules" --no-save playwright@1.55.0
+          "$RUNNER_TEMP/qa-r172-modules/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Prepare production-compatible local copy; never touch real origin
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os,shutil,json,hashlib,pathlib,http.server,urllib.parse
+          ws=pathlib.Path(os.environ['GITHUB_WORKSPACE']);root=pathlib.Path(os.environ['RUNNER_TEMP'])
+          old=ws/'_qa_historical_14219'
+          new=root/'qa-r172-new'
+          assert old.joinpath('index.html').exists()
+          shutil.copytree(ws,new,ignore=shutil.ignore_patterns('.git','_qa_historical_14219','qa_r*.json','qa_r*.cjs'))
+          oldidx=(old/'index.html').read_text()
+          assert "const DB_NAME = 'ldc_user_v1';" in oldidx and 'const DB_VER  = 4;' in oldidx
+          # The new application bytes MUST be EXACTLY the deployed R170 ZIP.
+          # Do not patch index.html, version.json or the database identity.
+          index=new/'index.html';published=index.read_bytes()
+          assert hashlib.sha256(published).hexdigest()=='2195bf1419312f48f80035ff15f9de0684c5b15782595c433971100e835bdb34'
+          assert "const DB_NAME=LDC_STORAGE?LDC_STORAGE.db" in published.decode()
+          assert "const DB_VER  = 5;" in published.decode()
+          verify=json.loads((new/'version.json').read_text())
+          assert verify['app_version']=='v2.19.142.28-R1B-UNIFIED'
+          assert verify['r170_unified_storage_contract']['bindings']['main']=='ldc_user_v1'
+          print('Historical index SHA',hashlib.sha256(oldidx.encode()).hexdigest(),'historical files',len(list(old.rglob('*'))))
+          print('QA only: historic v142.19 DB4 -> EXACT unchanged R170 unified v142.28 DB5 /Le-livre-du-Ciel---Github/')
+          PY
+          cat > "$RUNNER_TEMP/qa-r172-serve.py" <<'PY'
+          import http.server,os,pathlib,urllib.parse
+          ws=pathlib.Path(os.environ['GITHUB_WORKSPACE']);rt=pathlib.Path(os.environ['RUNNER_TEMP'])
+          old=ws/'_qa_historical_14219';new=rt/'qa-r172-new';marker=rt/'qa-r172-use-new'
+          class Handler(http.server.SimpleHTTPRequestHandler):
+            def translate_path(self,path):
+              p=urllib.parse.urlsplit(path).path
+              if not p.startswith('/Le-livre-du-Ciel---Github/'):return '/__invalid__'
+              rel=p[len('/Le-livre-du-Ciel---Github/'):].lstrip('/') or 'index.html'
+              if '..' in pathlib.PurePosixPath(rel).parts:return '/__invalid__'
+              return str((new if marker.exists() else old)/rel)
+            def end_headers(self):
+              self.send_header('Cache-Control','no-cache, no-store, must-revalidate')
+              super().end_headers()
+          http.server.ThreadingHTTPServer(('127.0.0.1',8984),Handler).serve_forever()
+          PY
+          nohup python3 "$RUNNER_TEMP/qa-r172-serve.py" > "$RUNNER_TEMP/qa-r172-server.log" 2>&1 &
+          sleep 2
+          curl --fail --silent -o "$RUNNER_TEMP/qa-r172-old-version.json" http://127.0.0.1:8984/Le-livre-du-Ciel---Github/version.json
+          grep -q '142.19' "$RUNNER_TEMP/qa-r172-old-version.json"
+      - name: Real v142.19 installed-page update notice (Chromium and WebKit)
+        shell: bash
+        env:
+          NODE_PATH: ${{ runner.temp }}/qa-r172-modules/node_modules
+        run: |
+          cat > qa_r179_notice.cjs <<'NODE'
+          const fs=require('fs'),{chromium,webkit}=require('playwright');
+          const url='http://127.0.0.1:8984/Le-livre-du-Ciel---Github/';
+          const marker=process.env.RUNNER_TEMP+'/qa-r172-use-new';
+          const out={origin:'same local test URL',historic:'exact v142.19 commit 99711c5',new:'exact unchanged v142.28 R1B-UNIFIED',tests:[],errors:[]};
+          const chk=(engine,what,pass,evidence)=>out.tests.push({engine,what,pass:!!pass,evidence:evidence||null});
+          async function run(engine,btype){
+            let browser,c,page;
+            try{
+              if(fs.existsSync(marker))fs.unlinkSync(marker);
+              browser=await btype.launch({headless:true});
+              c=await browser.newContext({serviceWorkers:'allow',viewport:{width:engine==='Chromium'?390:1024,height:engine==='Chromium'?844:768}});
+              page=await c.newPage();
+              const pageErrors=[];page.on('pageerror',e=>pageErrors.push(String(e).slice(0,240)));
+              await page.goto(url,{waitUntil:'domcontentloaded',timeout:60000});
+              await page.waitForTimeout(6000);
+              const old=await page.evaluate(()=>({v:APP_VERSION,db:DB_NAME,dbv:DB_VER,sw:!!navigator.serviceWorker.controller}));
+              chk(engine,'Authentic old v142.19 DB4 boot',old.v.includes('142.19')&&old.db==='ldc_user_v1'&&old.dbv===4,old);
+              if(!old.v.includes('142.19'))throw Error('not authentic historical app');
+              fs.writeFileSync(marker,'switch to new identical release');
+              await page.evaluate(async()=>{const reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update()}).catch(()=>{});
+              await page.waitForTimeout(6500);
+              const result=await page.evaluate(async()=>{
+                const v=await fetchPublishedVersion().then(x=>({version:x.version,publicVersion:x.publicVersion})).catch(e=>({error:String(e)}));
+                const reg=await navigator.serviceWorker.getRegistration();
+                try{await backgroundUpdateCheck(reg);}catch(e){}
+                return {published:v,notice:document.getElementById('update-banner')?.classList.contains('show'),noticeText:document.getElementById('update-banner')?.innerText?.slice(0,210),oldCurrent:APP_VERSION,swActive:!!reg?.active};
+              });
+              chk(engine,'Historical v142.19 parser recognizes new single R1B-UNIFIED',result.published.version==='v2.19.142.28-R1B-UNIFIED',result);
+              chk(engine,'Historical still-open page raises visible update notice',result.notice===true&&result.oldCurrent.includes('142.19'),result);
+              chk(engine,'No script errors during historical update detection',pageErrors.length===0,pageErrors);
+              await c.close();
+            }catch(e){out.errors.push({engine,message:String(e).slice(0,1000)});chk(engine,'Historical update notice test completed',false,String(e).slice(0,500));}
+            finally{if(browser)await browser.close();}
+          }
+          (async()=>{await run('Chromium',chromium);await run('WebKit',webkit);out.pass=out.errors.length===0&&out.tests.every(t=>t.pass);fs.writeFileSync('qa_r179_notice.json',JSON.stringify(out,null,2));console.log(JSON.stringify(out,null,2));if(!out.pass)process.exitCode=1})().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node qa_r179_notice.cjs
+      - name: Evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ldc-r179-historical-update-notice
+          path: |
+            qa_r179_notice.cjs
+            qa_r179_notice.json
