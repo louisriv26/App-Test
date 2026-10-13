@@ -1,0 +1,100 @@
+name: "LDC v142.26 R163 semantic QA and Reader navigation"
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/ldc-v14227-r163-search-reader-qa.yml"
+permissions: {contents: read}
+jobs:
+  search-reader:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Chromium and WebKit
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/qa-r163" --no-save playwright@1.55.0
+          "$RUNNER_TEMP/qa-r163/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Serve exact App Test branch
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/qa-www"
+          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/qa-www/App-Test"
+          nohup python3 -m http.server 8896 --bind 127.0.0.1 --directory "$RUNNER_TEMP/qa-www" > "$RUNNER_TEMP/r163-server.log" 2>&1 &
+          sleep 2
+      - name: Actual semantic diagnostics and Reader navigation on two browser engines
+        shell: bash
+        env:
+          NODE_PATH: ${{ runner.temp }}/qa-r163/node_modules
+        run: |
+          cat > qa_r163_search_reader.cjs <<'NODE'
+          const fs=require('fs'),{chromium,webkit}=require('playwright');
+          const cases=['la croix est un trésor','la croix a une très grande valeur','les souffrances nous rapprochent de Jésus','le cadeau précieux que représente la croix'];
+          const output={cases,tests:[],errors:[],important:'Semantic abstention and lexical-only results are explicitly NOT semantic retrieval PASS'};
+          function add(engine,name,pass,detail){output.tests.push({engine,name,pass,detail:detail||null})}
+          async function goSearch(page){await page.evaluate(async()=>{if(typeof finishOnboarding==='function')finishOnboarding();if(typeof goSearch==='function')await goSearch();if(typeof setSearchIntentMode==='function')setSearchIntentMode('meaning');});}
+          async function query(page,q){
+            await page.locator('#search-input-meaning').fill(q);
+            await page.locator('#search-submit').click({timeout:25000});
+            await page.waitForTimeout(22000);
+            return await page.evaluate(()=>({
+              semantic:!!searchLastPayload?.semantic,
+              confidence:searchLastPayload?.payload?.confidence||null,
+              diagnostics:searchLastPayload?.payload?.diagnostics||null,
+              cardCount:document.querySelectorAll('#search-results .result-card').length,
+              cardTypes:Array.from(document.querySelectorAll('#search-results .result-card')).slice(0,6).map(x=>x.dataset.resultKey),
+              excerpt:document.querySelector('#search-results')?.innerText.slice(0,600)||'',
+              progress:document.getElementById('search-progress')?.innerText.slice(0,120)||'',
+              worker:typeof ownerSemanticPrepared!=='undefined'?ownerSemanticPrepared:null
+            }));
+          }
+          (async()=>{for(const [engine,runner] of [['chromium-mobile',chromium],['webkit-tablet',webkit]]){
+            let browser;
+            try{
+              browser=await runner.launch({headless:true});
+              const cx=await browser.newContext({viewport:engine.includes('mobile')?{width:390,height:844}:{width:1024,height:768},serviceWorkers:'allow'});
+              const page=await cx.newPage();
+              page.on('pageerror',e=>output.errors.push({engine,error:String(e).slice(0,400)}));
+              await page.goto('http://127.0.0.1:8896/App-Test/',{waitUntil:'domcontentloaded',timeout:60000});
+              await page.waitForTimeout(6000);await goSearch(page);
+              const all=[];
+              for(const q of cases){
+                const d=await query(page,q);all.push(d);
+                add(engine,'Search visibly terminates: '+q,d.cardCount>0||d.excerpt.includes('indisponible')||d.excerpt.includes('Aucun passage'),d);
+              }
+              const final=all.at(-1);
+              add(engine,'Semantic/lexical origin evidence is explicit',all.every(x=>x.semantic===true),all.map(x=>({confidence:x.confidence?.state,cards:x.cardCount,first:x.cardTypes[0]})));
+              // Test result-card activation and a real Reader navigation.
+              const cards=page.locator('#search-results .result-card');
+              if(await cards.count()){
+                await cards.first().click({timeout:20000});
+                await page.waitForTimeout(3500);
+                const reader=await page.evaluate(()=>({active:document.querySelector('#screen-reader')?.classList.contains('active'),title:document.getElementById('reader-top-title')?.innerText,body:document.getElementById('reader-body')?.innerText.slice(0,160),currentVolume:typeof currentVolume!=='undefined'?currentVolume:null}));
+                add(engine,'Search result opens Reader',!!reader.active&&reader.body.length>20,reader);
+                await page.evaluate(async()=>{if(typeof backFromReader==='function')await backFromReader();});await page.waitForTimeout(700);
+                const back=await page.evaluate(()=>document.querySelector('#screen-search')?.classList.contains('active'));
+                add(engine,'Reader Back restores Search',!!back,{active:back});
+              }else add(engine,'Reader navigation NOT EXERCISED (no cards)',false);
+              await cx.close();
+            }catch(e){output.errors.push({engine,error:String(e).slice(0,1200)})}
+            finally{if(browser)await browser.close();}
+          }
+          output.functional_pass=output.errors.length===0&&output.tests.every(x=>x.pass);
+          output.semantic_confident_cases=output.tests.filter(x=>x.name.startsWith('Search visibly terminates')&&x.detail?.confidence?.state!=='abstain').length;
+          fs.writeFileSync('qa_r163_search_reader.json',JSON.stringify(output,null,2));
+          console.log(JSON.stringify(output,null,2));
+          if(!output.functional_pass)process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node qa_r163_search_reader.cjs
+      - name: Export independent evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ldc-v14227-r163-semantic-reader-evidence
+          path: |
+            qa_r163_search_reader.json
+            qa_r163_search_reader.cjs
