@@ -1,0 +1,97 @@
+name: "LDC v142.26 R158 live-tab update-notification QA"
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/ldc-v14226-r158-open-app-update-alert.yml"]
+permissions: {contents: read}
+jobs:
+  notification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 23
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 15}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Chromium
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/qa-r158" --no-save playwright@1.55.0
+          "$RUNNER_TEMP/qa-r158/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Same-origin R139-to-R152 switchable source
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/old-r139"
+          for f in index.html sw.js version.json offline_manifest.json search_semantic_pack_registry_r6.js PACKAGE_MANIFEST_SHA256.json; do
+            git show "84e0e866acc23a36c41d2e99fe8bb466abd7af5a:$f" > "$RUNNER_TEMP/old-r139/$f"
+          done
+          cat > "$RUNNER_TEMP/switchable-r158.py" <<'PY'
+          import http.server,os,urllib.parse
+          root=os.environ["GITHUB_WORKSPACE"];old=os.path.join(os.environ["RUNNER_TEMP"],"old-r139")
+          marker=os.path.join(os.environ["RUNNER_TEMP"],"r158-use-new")
+          changed=set("index.html sw.js version.json offline_manifest.json search_semantic_pack_registry_r6.js PACKAGE_MANIFEST_SHA256.json".split())
+          class H(http.server.SimpleHTTPRequestHandler):
+            def translate_path(self,path):
+              p=urllib.parse.urlsplit(path).path
+              if not p.startswith("/App-Test/"):return "/__forbidden__"
+              rel=p[len("/App-Test/"):].lstrip("/")
+              if not rel:rel="index.html"
+              if ".." in rel:return "/__forbidden__"
+              return os.path.join(old if rel in changed and not os.path.exists(marker) else root,rel)
+          http.server.ThreadingHTTPServer(("127.0.0.1",8895),H).serve_forever()
+          PY
+          nohup python3 "$RUNNER_TEMP/switchable-r158.py" > "$RUNNER_TEMP/r158-server.log" 2>&1 &
+          sleep 2
+          curl -fsS -o "$RUNNER_TEMP/r158-version-initial.json" http://127.0.0.1:8895/App-Test/version.json
+          grep -q '142.25' "$RUNNER_TEMP/r158-version-initial.json"
+      - name: Observe update notice without closing app
+        shell: bash
+        env:
+          NODE_PATH: ${{ runner.temp }}/qa-r158/node_modules
+        run: |
+          cat > qa_r158_open_tab.cjs <<'NODE'
+          const fs=require('fs'),{chromium}=require('playwright');
+          const marker=process.env.RUNNER_TEMP+'/r158-use-new',url='http://127.0.0.1:8895/App-Test/';
+          (async()=>{
+            const result={steps:[],errors:[]};
+            let browser;
+            try{
+              browser=await chromium.launch({headless:true});
+              const cx=await browser.newContext({serviceWorkers:'allow',viewport:{width:390,height:844}});
+              const page=await cx.newPage();
+              page.on('pageerror',e=>result.errors.push(String(e).slice(0,400)));
+              await page.goto(url,{waitUntil:'domcontentloaded',timeout:60000});
+              await page.waitForTimeout(6500);
+              const base=await page.evaluate(()=>({version:APP_VERSION,controlled:!!navigator.serviceWorker.controller,notice:document.getElementById('update-banner')?.classList.contains('show')}));
+              result.steps.push({step:'Initial R139',...base,pass:base.version==='v2.19.142.25-R139-APP-TEST-ONLY'&&base.controlled});
+              await page.evaluate(()=>{if(typeof finishOnboarding==='function')finishOnboarding()});
+              fs.writeFileSync(marker,'new release published');
+              const updated=await page.evaluate(async()=>{
+                const r=await navigator.serviceWorker.getRegistration();await r.update();
+                return {waiting:!!r.waiting,installing:!!r.installing,active:!!r.active};
+              });
+              result.steps.push({step:'SW explicit update requested',...updated});
+              await page.waitForTimeout(11000);
+              const notice=await page.evaluate(async()=>{
+                const r=await navigator.serviceWorker.getRegistration();
+                return {visible:document.getElementById('update-banner')?.classList.contains('show'),
+                  text:document.getElementById('update-banner')?.innerText.slice(0,280),
+                  appVersion:APP_VERSION,waiting:!!r.waiting,active:!!r.active};
+              });
+              result.steps.push({step:'Update notice on still-open R139 tab',...notice,pass:notice.visible===true&&notice.appVersion.includes('142.25')});
+              await cx.close();
+            }catch(e){result.errors.push(String(e).slice(0,1200))}
+            finally{if(browser)await browser.close()}
+            result.pass=result.errors.length===0&&result.steps[0]?.pass&&result.steps[2]?.pass;
+            fs.writeFileSync('qa_r158_notice.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));
+            if(!result.pass)process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node qa_r158_open_tab.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14226-r158-open-tab-update-notification
+          path: |
+            qa_r158_notice.json
+            qa_r158_open_tab.cjs
