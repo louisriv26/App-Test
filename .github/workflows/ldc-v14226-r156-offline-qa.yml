@@ -58,12 +58,20 @@ jobs:
                 await pg.goto('http://127.0.0.1:8897/App-Test/',{waitUntil:'domcontentloaded',timeout:45000});
                 const version=await pg.evaluate(()=>typeof APP_VERSION==='string'?APP_VERSION:null);
                 log.steps.push({name:'Cold offline reload',version,pass:version==='v2.19.142.26-R152-APP-TEST-ONLY'});
+                await pg.waitForTimeout(4500);
+                await pg.evaluate(async()=>{if(typeof finishOnboarding==='function')finishOnboarding();if(typeof goSearch==='function')await goSearch();if(typeof setSearchIntentMode==='function')setSearchIntentMode('meaning')});
+                const searchInput=pg.locator('#search-input-meaning');
+                await searchInput.fill('le cadeau précieux que représente la croix',{timeout:18000});
+                await pg.locator('#search-submit').click({timeout:18000});
+                await pg.waitForTimeout(23000);
+                const offlineSearch=await pg.evaluate(()=>({semantic:typeof searchLastPayload!=='undefined'&&!!searchLastPayload?.semantic,confidence:typeof searchLastPayload!=='undefined'?searchLastPayload?.payload?.confidence?.state:null,prepared:typeof ownerSemanticPrepared!=='undefined'?ownerSemanticPrepared:false,cards:document.querySelectorAll('#search-results .result-card').length,head:document.getElementById('search-results')?.innerText?.slice(0,250)}));
+                log.steps.push({name:'Cold offline ONNX inference',...offlineSearch,pass:offlineSearch.semantic&&offlineSearch.prepared&&offlineSearch.cards>0});
                 await cx.setOffline(false);
               }
               await cx.close();
             }catch(e){log.errors.push(String(e).slice(0,1300))}
             finally{if(browser)await browser.close()}
-            log.pass=log.errors.length===0&&log.steps.some(x=>x.name==='Full offline job'&&x.state==='READY')&&log.steps.some(x=>x.name==='Cold offline reload'&&x.pass);
+            log.pass=log.errors.length===0&&log.steps.some(x=>x.name==='Full offline job'&&x.state==='READY')&&log.steps.some(x=>x.name==='Cold offline reload'&&x.pass)&&log.steps.some(x=>x.name==='Cold offline ONNX inference'&&x.pass);
             fs.writeFileSync('qa_r156_offline.json',JSON.stringify(log,null,2));console.log(JSON.stringify(log,null,2));
             if(!log.pass)process.exitCode=1;
           })().catch(e=>{console.error(e);process.exitCode=1});
