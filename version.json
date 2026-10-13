@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.142.28-R170-UNIFIED",
+  "app_version": "v2.19.142.28-R1B-UNIFIED",
   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
   "baseline_candidate_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
@@ -51,8 +51,8 @@
     "state_recorded_status": "PRODUCTION_DEPLOYED_CLOSED_IMMUTABLE__EXACT_REPOSITORY_TREE_AND_SUCCESSFUL_DEPLOYMENT_BINDING_RECORDED",
     "technical_identity": "v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE"
   },
-  "current_release_authority": "R170_SINGLE_BINARY_DEPLOYED_APP_TEST_ONLY__MAIN_PRODUCTION_HOLD",
-  "current_runtime_browser_validation": "R170_NATIVE_BROWSER_QA_PENDING__HISTORIC_R164_ON_DERIVED_BASELINE_ONLY",
+  "current_release_authority": "R175_SINGLE_BINARY_APP_TEST_ONLY__R1B_UPDATE_COMPAT_WITH_OLDER_READERS__MAIN_HOLD",
+  "current_runtime_browser_validation": "R175_QA_PENDING__R170_NATIVE_QA_SUCCESS_BUT_OLD_CLIENT_UPDATE_NOTICE_FAILED",
   "dark_mode_v136_r9": {
     "corpus_changed": false,
     "date": "2026-10-02",
@@ -592,7 +592,7 @@
   "package_predecessor_app_version": "v2.19.142.23-R130-LOCAL-P11-CANDIDATE",
   "package_predecessor_zip_sha256": "26fe15417b6b8367ecb44832af383529be3645363020c9668273c423bef73206",
   "package_state_at_freeze": "PREHOSTED_V142_17_QUALIFICATION_CANDIDATE__PENDING_FINAL_PACKAGE_MANIFEST__NOT_A_PRODUCTION_RELEASE",
-  "page_worker_revision": "ldc-v2.19.142.28-r170-unified",
+  "page_worker_revision": "ldc-v2.19.142.28-r1b-unified",
   "par_le_sens_current": {
     "compatible_passages": 20236,
     "excluded_stale_passages": 347,
@@ -4710,5 +4710,13 @@
     "rollback_to_DB4_after_upgrade": "NOT_SAFE",
     "live_app_test_namespace": "ldc_user_v1__app_test",
     "beta_historical_data_notice": "OLD BETA DB CAN_BE_ldc_user_v1_ON_SHARED_ORIGIN__NEVER_AUTOMATICALLY_IMPORT_INTO_NEW_BETA_NAMESPACE"
+  },
+  "r175_legacy_update_notice_compatibility": {
+    "reason": "v142.27-R163 old clients only recognize R1B-family or App-Test suffix in version.json",
+    "solution": "R1B-UNIFIED is accepted by old clients and preserves one identical app across deployment paths",
+    "current_release_suffix": "R1B-UNIFIED",
+    "same_on_main": true,
+    "storage_bindings_unchanged": true,
+    "prior_fail_evidence": "https://github.com/louisriv26/App-Test/actions/runs/38387084508"
   }
 }

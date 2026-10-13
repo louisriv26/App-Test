@@ -2636,11 +2636,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.28-R170-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
+const APP_VERSION = 'v2.19.142.28-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-13';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.28-r170-unified';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.28-r1b-unified';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -11662,9 +11662,9 @@ async function fetchPublishedVersion() {
   const meta=await res.json();
   const version=String(meta&&meta.app_version||'').trim();
   // One identical release; binding is selected at runtime by project path.
-  const patchMatch=version.match(/^v2\.19\.(\d+(?:\.\d+)?)-(?:R1B(?:-[A-Za-z0-9]+)*|R170-UNIFIED)$/);
+  const patchMatch=version.match(/^v2\.19\.(\d+(?:\.\d+)?)-(?:R1B(?:-[A-Za-z0-9]+)*|R1B-UNIFIED)$/);
   if(!patchMatch)throw new Error('identité de version publiée non reconnue');
-  if(version.endsWith('-R170-UNIFIED')){
+  if(version.endsWith('-R1B-UNIFIED')){
     if(String(meta&&meta.page_worker_revision||'')!==SW_CACHE_VERSION)
       throw new Error('incohérence de révision Service Worker');
     if(!LDC_STORAGE||String(meta&&meta.r170_unified_storage_contract&&meta.r170_unified_storage_contract.bindings&&meta.r170_unified_storage_contract.bindings[LDC_PROJECT_SCOPE]||'')!==DB_NAME)

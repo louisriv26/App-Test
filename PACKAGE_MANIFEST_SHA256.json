@@ -1152,9 +1152,9 @@
       "sha256": "4df3a82f5f2ee57a0b6913b6ca6b56758b2ab9e27f0d401e06a4ed0792639c06"
     },
     {
-      "bytes": 991117,
+      "bytes": 991113,
       "path": "index.html",
-      "sha256": "344559f9576122c0446f4be492723dc0c4cc471a7d6af9467c8aeba360f75882"
+      "sha256": "2195bf1419312f48f80035ff15f9de0684c5b15782595c433971100e835bdb34"
     },
     {
       "bytes": 17214,
@@ -1172,9 +1172,9 @@
       "sha256": "6f8c116ad7258f912c8f17c15a3afbfdafaa6e49a9156f477f1b6bd1512b4955"
     },
     {
-      "bytes": 60584,
+      "bytes": 60595,
       "path": "offline_manifest.json",
-      "sha256": "c694b5e62745663f0b6caae350763f5ab88259ac596014c707099c0d6cc11743"
+      "sha256": "8a64afdefefa573564ac91ac45b494725c14a0f4a29a9c29d10aa2d73715f460"
     },
     {
       "bytes": 658,
@@ -1362,14 +1362,14 @@
       "sha256": "0f7f5242f4960cb2d32ff3b6b632d142f86ab2fa5722f6b8328924c869b5b23a"
     },
     {
-      "bytes": 32226,
+      "bytes": 32222,
       "path": "sw.js",
-      "sha256": "e600183b22f5f8a245e0b5e5cf2f920ee83203b9159192d12a91bc3f63565de2"
+      "sha256": "be6bcf37d4c4335c6236b29bf1004da99f257fb50d1d59f1b4974fa7289b17eb"
     },
     {
-      "bytes": 261181,
+      "bytes": 261675,
       "path": "version.json",
-      "sha256": "482c8a51092ab4ffb3555566ad4c3cc87e3b2a5fb83bcd50171407a3a5d5cdb5"
+      "sha256": "7b60421aac3a1c420edb0688f391064271717b90bcb7a7f558e3561d3dab8c26"
     }
   ],
   "offline_corpus_assets": 204,
@@ -1389,7 +1389,7 @@
   },
   "schema": "ldc-curated-wip-package-manifest-v1",
   "semantic_manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
-  "source_commit": "R168_MAIN_CANDIDATE_SOURCE_270_UNMODIFIED_ASSETS_FROM_R163",
+  "source_commit": "R170_UNIFIED_SINGLE_BINARY__R175_LEGACY_UPDATE_NOTIFICATION_COMPATIBILITY",
   "usage": "R170_UNIFIED_SINGLE_BINARY__APP_TEST_AND_FUTURE_MAIN__NO_ENV_SPECIFIC_BUILDS",
   "r170_unified_build": {
     "release": "142.28",
@@ -1400,5 +1400,12 @@
     "same_files_on_every_site": true,
     "main_authority": "NONE",
     "main_baseline_commit": "99711c554b5c63c6fdbc16f2e7d11980e2567d1b"
+  },
+  "r175_revision": {
+    "app_version": "v2.19.142.28-R1B-UNIFIED",
+    "single_build": "R1B-UNIFIED",
+    "older_version_manifest_regex_compatible": true,
+    "main_deployed": false,
+    "app_test_authorised": true
   }
 }
