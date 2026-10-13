@@ -105,7 +105,7 @@ jobs:
                 check('Isolated App Test DB name',state.db==='ldc_user_v1__app_test',state.db);
                 check('Search UI present',state.search);
                 try{
-                  await page.evaluate(async()=>{if(typeof goSearch==='function')await goSearch();if(typeof setSearchIntentMode==='function')setSearchIntentMode('meaning');});
+                  await page.evaluate(async()=>{if(typeof finishOnboarding==='function')finishOnboarding();if(typeof goSearch==='function')await goSearch();if(typeof setSearchIntentMode==='function')setSearchIntentMode('meaning');});
                   const t=page.locator('#search-input-meaning');
                   for(const q of ['la croix est un trésor','la croix a une très grande valeur']){
                     await t.fill(q);
