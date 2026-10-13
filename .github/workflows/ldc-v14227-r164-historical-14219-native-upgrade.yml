@@ -110,7 +110,8 @@ jobs:
               const en='ldc_t07_1906_01_30_e001',pa='ldc_t07_1906_01_30_e001_p001',mark='R164-PRESERVE';
               const entries=[
                 ['settings',{key:'__r164_sentinel__',value:'v142.19-user-setting',qa_marker:mark}],
-                ['reading_pos',{key:'qa-r164-position',entry_id:en,para_id:pa,volume:7,schema:'ldc-reading-position-v3',qa_marker:mark}],
+                ['reading_pos',{key:'qa-r164-position',entry_id:en,para_id:pa,volume:7,schema:'ldc-reading-position-v3',source_mode:'enriched',qa_marker:mark}],
+                ['reading_pos',{key:'qa-r164-position-legacy',entry_id:en,para_id:pa,volume:7,schema:'ldc-reading-position-v3',qa_marker:'R164-NORMALIZE'}],
                 ['highlights',{id:997164,entry_id:en,para_id:pa,volume:7,stable_ref:en,start_char:0,end_char:6,text:'Preuve historique',qa_marker:mark}],
                 ['notes',{id:997165,entry_id:en,para_id:pa,volume:7,stable_ref:en,text:'Note personnelle R164 à conserver',qa_marker:mark}],
                 ['favorites',{entry_id:en,stable_ref:en,qa_marker:mark}],
@@ -166,6 +167,10 @@ jobs:
                 const old=before.stores[st]?.find(o=>o.qa_marker==='R164-PRESERVE'),nw=after.stores[st]?.find(o=>o.qa_marker==='R164-PRESERVE');
                 add(name,'Historical record unchanged: '+st,!!old&&JSON.stringify(old)===JSON.stringify(nw),{found:!!nw,...(st==='reading_pos'?{before:old,after:nw}:{} )});
               }
+              const lb=before.stores.reading_pos.find(x=>x.qa_marker==='R164-NORMALIZE'),la=after.stores.reading_pos.find(x=>x.qa_marker==='R164-NORMALIZE');
+              const preservesLegacy=!!lb&&!!la&&Object.keys(lb).every(k=>JSON.stringify(lb[k])===JSON.stringify(la[k]));
+              const added=la?Object.keys(la).filter(k=>!(k in lb)):[];
+              add(name,'Legacy position normalized non-destructively',preservesLegacy&&added.length===1&&added[0]==='source_mode'&&['aflp','additions','enriched'].includes(la.source_mode),{added,before:lb,after:la});
               add(name,'Historical onboarding survives',last.onboarding==='1',last.onboarding);
               await page.reload({waitUntil:'domcontentloaded'});
               await page.waitForTimeout(3500);
