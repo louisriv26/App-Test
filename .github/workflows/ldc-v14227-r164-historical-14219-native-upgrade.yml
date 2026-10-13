@@ -164,7 +164,7 @@ jobs:
               add(name,'v4 upgraded in place to DB5 (same name)',after.version===5&&last.db==='ldc_user_v1',{old:before.version,new:after.version,db:last.db});
               for(const st of names){
                 const old=before.stores[st]?.find(o=>o.qa_marker==='R164-PRESERVE'),nw=after.stores[st]?.find(o=>o.qa_marker==='R164-PRESERVE');
-                add(name,'Historical record unchanged: '+st,!!old&&JSON.stringify(old)===JSON.stringify(nw),{found:!!nw});
+                add(name,'Historical record unchanged: '+st,!!old&&JSON.stringify(old)===JSON.stringify(nw),{found:!!nw,...(st==='reading_pos'?{before:old,after:nw}:{} )});
               }
               add(name,'Historical onboarding survives',last.onboarding==='1',last.onboarding);
               await page.reload({waitUntil:'domcontentloaded'});
