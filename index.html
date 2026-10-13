@@ -2636,11 +2636,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.26-R152-APP-TEST-ONLY'; // R139 LOCAL APP TEST ONLY corrective candidate; NOT hosted or iOS-qualified; NO GitHub or production authority; protected Reader and PLS retained
+const APP_VERSION = 'v2.19.142.27-R163-APP-TEST-ONLY'; // R139 LOCAL APP TEST ONLY corrective candidate; NOT hosted or iOS-qualified; NO GitHub or production authority; protected Reader and PLS retained
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-13';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.26-r152-app-test-only';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.27-r163-app-test-only';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -10866,12 +10866,20 @@ async function r115D2RunTransformingMigration(){
 }
 async function runStage8StartupMigrationGate(){
   if(await stage8MigrationAlreadyComplete())return {skipped:true,reason:'aggregate marker'};
-  const sensitive=await stage8ProfileHasMigrationSensitiveData();
   if(!(navigator.locks&&typeof navigator.locks.request==='function')){
-    const needed=sensitive?await stage8HistoricalMigrationNeeded():false;
-    if(needed){const e=new Error('Impossible de migrer sans verrou. Vos données restent conservées.');e.name='LDCMigrationLockUnavailableError';throw e;}
+    const needed=await stage8HistoricalMigrationNeeded();
+    if(needed){
+      // A new empty profile contains nothing that needs rewriting. A nonempty
+      // historical profile without complete migration markers must fail CLOSED.
+      const counts=await Promise.all(USER_DATA_STORES.map(store=>dbGetAll(store)));
+      const trulyEmpty=counts.every(rows=>rows.length===0);
+      if(!trulyEmpty){
+        const e=new Error('Migration historique nécessaire : navigateur sans Web Locks. Données conservées, aucune transformation effectuée.');
+        e.name='LDCMigrationLockUnavailableError';throw e;
+      }
+    }
     await dbPut('settings',{key:STAGE8_MIGRATION_MARKER,value:STAGE8_MIGRATION_FIXED_POINT,ts:Date.now(),verified_without_mutation:true});
-    return {skipped:true,reason:'no historical migration required'};
+    return {skipped:true,reason:needed?'truly empty new profile':'individual markers complete'};
   }
   return navigator.locks.request(STAGE8_MIGRATION_LOCK,{mode:'exclusive'},async()=>{
     if(await stage8MigrationAlreadyComplete())return {skipped:true,reason:'aggregate marker after lock'};

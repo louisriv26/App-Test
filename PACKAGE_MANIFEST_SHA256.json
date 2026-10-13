@@ -1,6 +1,6 @@
 {
   "app": "Livre du Ciel",
-  "app_test_authority": "R152_LOCAL_BUILD_ONLY__NO_GITHUB_OR_DEPLOYMENT_AUTHORITY",
+  "app_test_authority": "R163_OWNER_AUTHORISED_APP_TEST_ONLY__NATIVE_QA_PENDING__PRODUCTION_HOLD",
   "app_test_isolated_indexeddb_name": "ldc_user_v1__app_test",
   "files": [
     {
@@ -1154,9 +1154,9 @@
       "sha256": "4df3a82f5f2ee57a0b6913b6ca6b56758b2ab9e27f0d401e06a4ed0792639c06"
     },
     {
-      "bytes": 989240,
+      "bytes": 989594,
       "path": "index.html",
-      "sha256": "ddbe516fbb4bbe20a51e96147a61f730842ef53e2612895a79f8eded78d37ef5"
+      "sha256": "fdb4bb29fb3b2ef49936dc702a5b07fbe8f509e12a6bf3a5091be20f447a8e93"
     },
     {
       "bytes": 17214,
@@ -1176,7 +1176,7 @@
     {
       "bytes": 60458,
       "path": "offline_manifest.json",
-      "sha256": "924dac9dce4c4952b51ac7bfc3b76ec2d17df8c3a4561cb21c33825c8c4be812"
+      "sha256": "7fbdfca58def7e199d598c67d2d2d02ab3b18bdb58848a474e8bab90d6ed6b9a"
     },
     {
       "bytes": 658,
@@ -1366,19 +1366,19 @@
     {
       "bytes": 32250,
       "path": "sw.js",
-      "sha256": "d23c7d9e364a2f356325ff1a22e1c3b445bdf90355e0a3f9f83bff2c92b5b846"
+      "sha256": "e9cc66900284b136090291e6584e65d8bcaa42742b0190863c899415f3b9ea54"
     },
     {
       "bytes": 260644,
       "path": "version.json",
-      "sha256": "672585f12f2c51d55186372d770a81319522b745518d5dae7f56eb36d9518998"
+      "sha256": "2839c76e75999933f23e4922c2bcaf097b17d95ceab07e62cf86e96e72e461c4"
     }
   ],
   "offline_corpus_assets": 204,
   "offline_corpus_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
   "packaged_file_count_excluding_manifest": 274,
-  "production_authority": "NONE__EXPLICIT_NEW_APPROVAL_REQUIRED",
-  "public_version": "142.26",
+  "production_authority": "NONE__PRODUCTION_HOLD",
+  "public_version": "142.27",
   "qualified_model_files": 20,
   "r88_structural_repair": {
     "approved_deployment": "NONE",
@@ -1391,6 +1391,6 @@
   },
   "schema": "ldc-curated-wip-package-manifest-v1",
   "semantic_manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
-  "source_commit": "DERIVED_FROM_R139_LOCAL_ARCHIVE_SHA256_e4c99abe5934faa3135c7724c00bcef81045e40478bce80bd6fcc501737f5b60",
-  "usage": "R152_LOCAL_APP_TEST_ONLY_VALIDATION_NOT_DEPLOYED__PRODUCTION_PROHIBITED"
+  "source_commit": "R152_FROZEN_SOURCE__R163_APP_TEST_4_FILES_PATCH",
+  "usage": "R163_APP_TEST_ONLY_DEPLOYMENT__NO_HISTORICAL_PRODUCTION_INDEXEDDB_ACCESS"
 }

@@ -1,5 +1,5 @@
-const VERSION = 'ldc-v2.19.142.26-r152-app-test-only';
-const APP_VERSION = 'v2.19.142.26-R152-APP-TEST-ONLY';
+const VERSION = 'ldc-v2.19.142.27-r163-app-test-only';
+const APP_VERSION = 'v2.19.142.27-R163-APP-TEST-ONLY';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
