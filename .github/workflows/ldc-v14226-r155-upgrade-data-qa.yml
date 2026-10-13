@@ -1,0 +1,146 @@
+name: "LDC v142.26 R155 real upgrade and data preservation"
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/ldc-v14226-r155-upgrade-data-qa.yml"
+permissions: {contents: read}
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 8}
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Playwright Chromium and WebKit
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/qa-upgrade-modules" --no-save playwright@1.55.0
+          "$RUNNER_TEMP/qa-upgrade-modules/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Prepare exact R139 baseline and same-origin switchable server
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/old-r139"
+          for f in index.html sw.js version.json offline_manifest.json search_semantic_pack_registry_r6.js PACKAGE_MANIFEST_SHA256.json; do
+            git show "84e0e866acc23a36c41d2e99fe8bb466abd7af5a:$f" > "$RUNNER_TEMP/old-r139/$f"
+          done
+          cat > "$RUNNER_TEMP/switchable.py" <<'PY'
+          import http.server,os,urllib.parse
+          root=os.environ["GITHUB_WORKSPACE"]; old=os.path.join(os.environ["RUNNER_TEMP"],"old-r139")
+          marker=os.path.join(os.environ["RUNNER_TEMP"],"r155-use-new")
+          changed=set("index.html sw.js version.json offline_manifest.json search_semantic_pack_registry_r6.js PACKAGE_MANIFEST_SHA256.json".split())
+          class H(http.server.SimpleHTTPRequestHandler):
+            def translate_path(self, path):
+              p=urllib.parse.urlsplit(path).path
+              if not p.startswith("/App-Test/"):return "/__forbidden__"
+              relative=p[len("/App-Test/"):].lstrip("/")
+              if not relative:relative="index.html"
+              if relative.startswith("../") or "/../" in relative:return "/__forbidden__"
+              if relative in changed and not os.path.isfile(marker):return os.path.join(old,relative)
+              return os.path.join(root,relative)
+          http.server.ThreadingHTTPServer(("127.0.0.1",8998),H).serve_forever()
+          PY
+          nohup python3 "$RUNNER_TEMP/switchable.py" > "$RUNNER_TEMP/r155-server.log" 2>&1 &
+          sleep 2
+          curl -fsS http://127.0.0.1:8998/App-Test/version.json | grep -q '142.25'
+      - name: Real original-to-new update in same browser profile
+        env:
+          NODE_PATH: ${{ runner.temp }}/qa-upgrade-modules/node_modules
+        shell: bash
+        run: |
+          cat > qa_r155_upgrade.cjs <<'NODE'
+          const fs=require('fs'),{chromium,webkit}=require('playwright');
+          const marker=process.env.RUNNER_TEMP+'/r155-use-new',url='http://127.0.0.1:8998/App-Test/';
+          const stores=['reading_pos','highlights','notes','favorites','collections','col_items','settings','read_entries'];
+          const r={tests:[],stage:'old-r139-to-r152',errors:[]};
+          function report(engine,test,pass,data){r.tests.push({engine,test,pass,data:data||null});}
+          async function snapshot(page){
+            return page.evaluate(async stores=>{
+              const req=indexedDB.open('ldc_user_v1__app_test');
+              const db=await new Promise((yes,no)=>{req.onsuccess=()=>yes(req.result);req.onerror=()=>no(req.error)});
+              const result={version:db.version,stores:{}};
+              for(const name of stores){
+                if(!db.objectStoreNames.contains(name)){result.stores[name]='MISSING';continue}
+                result.stores[name]=await new Promise((yes,no)=>{const tx=db.transaction(name,'readonly');const q=tx.objectStore(name).getAll();q.onsuccess=()=>yes(q.result);q.onerror=()=>no(q.error)});
+              }
+              db.close();return result;
+            },stores);
+          }
+          async function fixture(page){
+            return page.evaluate(async()=>{
+              const req=indexedDB.open('ldc_user_v1__app_test');
+              const db=await new Promise((yes,no)=>{req.onsuccess=()=>yes(req.result);req.onerror=()=>no(req.error)});
+              const fixtures=[
+                ['settings',{key:'__R155_TEST_IN_CI_ONLY__',value:'retained-through-upgrade'}],
+                ['favorites',{entry_id:'ldc_t07_1906_08_11_e001',qa_marker:'R155-RETAIN'}],
+                ['notes',{id:999001,entry_id:'ldc_t07_1906_08_11_e001',text:'R155 retention sentinel',qa_marker:'R155-RETAIN'}],
+                ['highlights',{id:999002,entry_id:'ldc_t07_1906_08_11_e001',text:'R155 highlight sentinel',qa_marker:'R155-RETAIN'}],
+                ['collections',{id:999003,name:'R155 QA collection',qa_marker:'R155-RETAIN'}],
+                ['col_items',{id:999004,collection_id:999003,entry_id:'ldc_t07_1906_08_11_e001',qa_marker:'R155-RETAIN'}],
+                ['read_entries',{key:'qa:retention-r155',entry_id:'ldc_t07_1906_08_11_e001',qa_marker:'R155-RETAIN'}]
+              ];
+              const inserted=[];
+              for(const [name,row] of fixtures){
+                await new Promise((yes,no)=>{const tx=db.transaction(name,'readwrite');tx.objectStore(name).put(row);tx.oncomplete=()=>yes();tx.onerror=()=>no(tx.error)});
+                inserted.push(name);
+              }
+              db.close();return inserted;
+            });
+          }
+          async function run(kind,engine){
+            let b;
+            try{
+              b=await engine.launch({headless:true});
+              const cx=await b.newContext({viewport:kind==='chromium-mobile'?{width:390,height:844}:{width:1024,height:768},serviceWorkers:'allow'});
+              let page=await cx.newPage();
+              page.on('pageerror',e=>r.errors.push({engine:kind,message:String(e).slice(0,240)}));
+              await page.goto(url,{waitUntil:'domcontentloaded',timeout:60000});
+              await page.waitForTimeout(6500);
+              const prev=await page.evaluate(()=>({version:APP_VERSION,db:DB_NAME,sw:!!navigator.serviceWorker.controller}));
+              report(kind,'R139 boot',prev.version==='v2.19.142.25-R139-APP-TEST-ONLY',prev);
+              await page.evaluate(()=>{if(typeof finishOnboarding==='function')finishOnboarding()});
+              await fixture(page);
+              const oldData=await snapshot(page);
+              report(kind,'Fixtures populated in protected stores',oldData.stores.settings.some(x=>x.key==='__R155_TEST_IN_CI_ONLY__')&&oldData.stores.favorites.some(x=>x.qa_marker==='R155-RETAIN'),{sizes:Object.fromEntries(Object.entries(oldData.stores).map(([k,v])=>[k,v.length]))});
+              fs.writeFileSync(marker,'new');
+              // Notify the active SW and exercise the supported upgrade/reopen path.
+              try{await page.evaluate(async()=>{const reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update()})}catch(e){r.errors.push({engine:kind,message:'SW update '+e.message})}
+              await page.close();
+              let found=false,last=null;
+              for(let attempt=0;attempt<6;attempt++){
+                page=await cx.newPage();
+                await page.goto(url,{waitUntil:'domcontentloaded',timeout:60000});
+                await page.waitForTimeout(4500);
+                last=await page.evaluate(()=>({version:typeof APP_VERSION==='string'?APP_VERSION:null,db:typeof DB_NAME==='string'?DB_NAME:null,onboarding:document.getElementById('onboarding-overlay')?.style.display}));
+                if(last.version==='v2.19.142.26-R152-APP-TEST-ONLY'){found=true;break}
+                try{await page.evaluate(async()=>{const reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update()})}catch(e){}
+                await page.close();
+              }
+              report(kind,'R152 reached after update/reopen',found,last);
+              const newData=await snapshot(page);
+              const survive=oldData.stores.settings.some(x=>x.key==='__R155_TEST_IN_CI_ONLY__')&&newData.stores.settings.some(x=>x.key==='__R155_TEST_IN_CI_ONLY__')&&
+              ['favorites','notes','highlights','collections','col_items','read_entries'].every(name=>newData.stores[name].some(x=>x.qa_marker==='R155-RETAIN'));
+              report(kind,'All seven app data fixtures survive version transition',survive,{dbVersion:newData.version,sizes:Object.fromEntries(Object.entries(newData.stores).map(([k,v])=>[k,v.length]))});
+              report(kind,'App DB version unchanged',oldData.version===newData.version,{old:oldData.version,new:newData.version});
+              await cx.close();
+            }catch(e){r.errors.push({engine:kind,message:String(e).slice(0,900)});report(kind,'End-to-end flow completed',false,String(e).slice(0,400))}
+            finally{if(b)await b.close()}
+          }
+          (async()=>{
+            await run('chromium-mobile',chromium);
+            // Keep the second engine on new version; don't mislabel a cold boot as an R139 migration.
+            fs.writeFileSync('qa_r155_upgrade.json',JSON.stringify(r,null,2));console.log(JSON.stringify(r,null,2));
+            if(r.tests.some(x=>!x.pass)||r.errors.length)process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node qa_r155_upgrade.cjs
+      - name: Upload upgrade evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ldc-v14226-r155-upgrade-preservation
+          path: |
+            qa_r155_upgrade.json
+            qa_r155_upgrade.cjs
