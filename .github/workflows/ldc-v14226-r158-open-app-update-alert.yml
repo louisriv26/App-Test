@@ -72,6 +72,15 @@ jobs:
               });
               result.steps.push({step:'SW explicit update requested',...updated});
               await page.waitForTimeout(11000);
+              const updateProbe=await page.evaluate(async()=>{
+                const reg=await navigator.serviceWorker.getRegistration();
+                const diagnostics={timerMs:typeof UPDATE_POLL_INTERVAL_MS!=='undefined'?UPDATE_POLL_INTERVAL_MS:null};
+                try{diagnostics.direct=await fetchPublishedVersion()}catch(e){diagnostics.fetchError=String(e)}
+                try{diagnostics.periodicCheck=await backgroundUpdateCheck(reg)}catch(e){diagnostics.checkError=String(e)}
+                diagnostics.activeSW=!!reg.active;diagnostics.waiting=!!reg.waiting;
+                return diagnostics;
+              });
+              result.steps.push({step:'Simulated periodic/focus check',details:updateProbe});
               const notice=await page.evaluate(async()=>{
                 const r=await navigator.serviceWorker.getRegistration();
                 return {visible:document.getElementById('update-banner')?.classList.contains('show'),
@@ -82,7 +91,7 @@ jobs:
               await cx.close();
             }catch(e){result.errors.push(String(e).slice(0,1200))}
             finally{if(browser)await browser.close()}
-            result.pass=result.errors.length===0&&result.steps[0]?.pass&&result.steps[2]?.pass;
+            result.pass=result.errors.length===0&&result.steps[0]?.pass&&result.steps.find(x=>x.step==='Update notice on still-open R139 tab')?.pass;
             fs.writeFileSync('qa_r158_notice.json',JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));
             if(!result.pass)process.exitCode=1;
           })().catch(e=>{console.error(e);process.exitCode=1});
