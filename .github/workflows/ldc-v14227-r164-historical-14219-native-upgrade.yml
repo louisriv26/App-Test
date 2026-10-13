@@ -78,7 +78,8 @@ jobs:
           PY
           nohup python3 "$RUNNER_TEMP/qa-r164-serve.py" > "$RUNNER_TEMP/qa-r164-server.log" 2>&1 &
           sleep 2
-          curl --fail --silent http://127.0.0.1:8984/LDC/version.json | grep -q '142.19'
+          curl --fail --silent -o "$RUNNER_TEMP/qa-r164-old-version.json" http://127.0.0.1:8984/LDC/version.json
+          grep -q '142.19' "$RUNNER_TEMP/qa-r164-old-version.json"
       - name: Genuine same-origin DB4-to-DB5 browser update with all ten stores
         shell: bash
         env:
