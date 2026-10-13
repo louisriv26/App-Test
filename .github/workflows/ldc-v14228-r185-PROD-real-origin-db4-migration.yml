@@ -1,0 +1,109 @@
+name: "LDC R185 ACTUAL MAIN origin live DB4-to-DB5 migration across 10 stores"
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/ldc-v14228-r185-PROD-real-origin-db4-migration.yml"]
+permissions: {contents: read}
+jobs:
+  live_migration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Chromium and WebKit real engines
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/qa-r185" --no-save playwright@1.55.0
+          "$RUNNER_TEMP/qa-r185/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Seed historical DB4 at REAL published MAIN origin, then navigate to UNMODIFIED live app
+        shell: bash
+        env:
+          NODE_PATH: ${{ runner.temp }}/qa-r185/node_modules
+        run: |
+          cat > qa_r185_live.cjs <<'NODE'
+          const fs=require('fs'),{chromium,webkit}=require('playwright');
+          const url='https://louisriv26.github.io/Le-livre-du-Ciel---Github/';
+          const seedUrl=url+'__r185_disposable_seed_not_on_server__.html';
+          const names=['reading_pos','highlights','notes','favorites','collections','col_items','settings','read_entries','backup_stage','backup_stage_meta'];
+          const output={source:'REAL LIVE MAIN HTTPS origin with intercepted dummy seed HTML in disposable Playwright profile; no server write; no real user data',tests:[],errors:[]};
+          const check=(engine,name,pass,detail)=>output.tests.push({engine,name,pass:!!pass,detail:detail??null});
+          const mark='R185-REAL-PROD-ORIGIN-SENTINEL';
+          async function read(page){
+            return page.evaluate(async names=>{
+              const req=indexedDB.open('ldc_user_v1');
+              const db=await new Promise((yes,no)=>{req.onsuccess=()=>yes(req.result);req.onerror=()=>no(req.error)});
+              const result={dbVersion:db.version,records:{},stores:[...db.objectStoreNames]};
+              for(const store of names){const t=db.transaction(store,'readonly');result.records[store]=await new Promise((yes,no)=>{const r=t.objectStore(store).getAll();r.onsuccess=()=>yes(r.result);r.onerror=()=>no(r.error)});}
+              db.close();return result;
+            },names);
+          }
+          async function run(engine,playwright){
+            let browser,context,page;let pageErrors=[];
+            try{
+              browser=await playwright.launch({headless:true});
+              context=await browser.newContext({serviceWorkers:'allow',viewport:engine==='chromium-mobile'?{width:390,height:844}:{width:1024,height:768}});
+              page=await context.newPage();page.on('pageerror',e=>pageErrors.push(String(e).slice(0,320)));
+              // Seed fixture delivered by Playwright routing, never deployed to production.
+              await page.route(seedUrl,route=>route.fulfill({status:200,contentType:'text/html',body:'<!doctype html><title>R185 disposable historic DB4 profile</title>'}));
+              await page.goto(seedUrl,{waitUntil:'domcontentloaded',timeout:45000});
+              const fixture=await page.evaluate(async({names,mark})=>{
+                const req=indexedDB.open('ldc_user_v1',4);
+                req.onupgradeneeded=()=>{const db=req.result;const schema={
+                  reading_pos:['key',false],highlights:['id',true],notes:['id',true],favorites:['entry_id',false],collections:['id',true],
+                  col_items:['id',true],settings:['key',false],read_entries:['key',false],backup_stage:['stage_key',false],backup_stage_meta:['key',false]
+                };for(const [name,[keyPath,autoIncrement]] of Object.entries(schema))db.createObjectStore(name,{keyPath,autoIncrement});};
+                const db=await new Promise((yes,no)=>{req.onsuccess=()=>yes(req.result);req.onerror=()=>no(req.error)});
+                const en='ldc_t07_1906_01_30_e001',pa=en+'_p001';
+                const entries=[
+                  ['settings',{key:'__r185_live_sentinel__',value:'real-production-migration-qa',qa_marker:mark}],
+                  ['reading_pos',{key:'qa-r185-position',entry_id:en,para_id:pa,volume:7,schema:'ldc-reading-position-v3',source_mode:'enriched',qa_marker:mark}],
+                  ['highlights',{id:995185,entry_id:en,para_id:pa,volume:7,stable_ref:en,start_char:0,end_char:8,text:'R185 surlignage réel navigateur',qa_marker:mark}],
+                  ['notes',{id:995186,entry_id:en,para_id:pa,volume:7,stable_ref:en,text:'R185 note historique à préserver',qa_marker:mark}],
+                  ['favorites',{entry_id:en,stable_ref:en,qa_marker:mark}],
+                  ['collections',{id:995187,name:'R185 Collection',qa_marker:mark}],
+                  ['col_items',{id:995188,col_id:995187,entry_id:en,para_id:pa,stable_ref:en,qa_marker:mark}],
+                  ['read_entries',{key:'qa-r185-read',entry_id:en,qa_marker:mark}],
+                  ['backup_stage',{stage_key:'qa-r185-stage',qa_marker:mark}],
+                  ['backup_stage_meta',{key:'qa-r185-meta',qa_marker:mark}]
+                ];
+                for(const [store,record] of entries){
+                  await new Promise((yes,no)=>{const tx=db.transaction(store,'readwrite');tx.objectStore(store).put(record);tx.oncomplete=yes;tx.onerror=()=>no(tx.error)});
+                }
+                db.close();localStorage.setItem('ldc_onboarding_done','1');
+                return {name:'ldc_user_v1',version:4,stores:names.length,sentinels:entries.length,origin:location.origin};
+              },{names,mark});
+              check(engine,'Real MAIN origin synthetic historical DB4 seeded without touching server',fixture.origin==='https://louisriv26.github.io'&&fixture.stores===10,fixture);
+              const prior=await read(page);
+              check(engine,'Pre-upgrade stores v4 and 10 records',prior.dbVersion===4&&names.every(n=>prior.records[n].some(v=>v.qa_marker===mark)),{version:prior.dbVersion,counts:Object.fromEntries(names.map(n=>[n,prior.records[n].length]))});
+              await page.unroute(seedUrl);
+              const response=await page.goto(url,{waitUntil:'domcontentloaded',timeout:60000});
+              await page.waitForTimeout(9000);
+              const state=await page.evaluate(()=>({version:APP_VERSION,db:DB_NAME,db_version:DB_VER,scope:LDC_PROJECT_SCOPE,bootStage:typeof bootStage==='string'?bootStage:null}));
+              check(engine,'ACTUAL MAIN v142.28 loaded and selected original ldc_user_v1',response.status()===200&&state.version==='v2.19.142.28-R1B-UNIFIED'&&state.db==='ldc_user_v1'&&state.db_version===5&&state.scope==='main',state);
+              const after=await read(page);
+              check(engine,'Native live-origin database upgraded from v4 to v5',after.dbVersion===5&&after.stores.length===10,{old:prior.dbVersion,now:after.dbVersion,stores:after.stores});
+              for(const n of names){
+                const original=prior.records[n].find(x=>x.qa_marker===mark);
+                const upgraded=after.records[n].find(x=>x.qa_marker===mark);
+                check(engine,'Historical record preserved in '+n,!!original&&JSON.stringify(original)===JSON.stringify(upgraded),{present:!!upgraded});
+              }
+              await page.reload({waitUntil:'domcontentloaded',timeout:60000});await page.waitForTimeout(5500);
+              const afterReload=await read(page);
+              check(engine,'Reload retains all 10 original user stores',afterReload.dbVersion===5&&names.every(n=>afterReload.records[n].some(x=>x.qa_marker===mark)),{version:afterReload.dbVersion});
+              check(engine,'No runtime script errors',pageErrors.length===0,pageErrors);
+            }catch(e){output.errors.push({engine,error:String(e).slice(0,1100)});check(engine,'Complete exact LIVE production migration test',false,String(e).slice(0,400));}
+            finally{if(context)await context.close();if(browser)await browser.close();}
+          }
+          (async()=>{await run('chromium-mobile',chromium);await run('webkit-tablet',webkit);output.pass=output.errors.length===0&&output.tests.length>25&&output.tests.every(t=>t.pass);fs.writeFileSync('qa_r185_live.json',JSON.stringify(output,null,2));console.log(JSON.stringify(output,null,2));if(!output.pass)process.exitCode=1;})().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node qa_r185_live.cjs
+      - name: Preserve QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ldc-r185-main-real-origin-db4-to-db5
+          path: |
+            qa_r185_live.cjs
+            qa_r185_live.json
