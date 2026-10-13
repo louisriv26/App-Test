@@ -20,6 +20,52 @@ async function bindPackSet(specByMode,opts={}){const p=await preparePackSet(spec
 async function bindModePack(mode,spec){const p=await preparePackSet({[mode]:spec},{requireCompatible:false});if(!p.ok)return p.detail||unavailable(normMode(mode),'PACK_NOT_QUALIFIED');commitPreparedSet(p,{replaceAll:false});return status(normMode(mode));}
 function unbindMode(mode){const m=normMode(mode);if(m)slots.delete(m);return status(m);}function unbindAll(){slots=new Map();return status();}
 function status(mode){const m=mode==null?null:normMode(mode);if(mode!=null&&!m)return unavailable(null,'INVALID_SOURCE_MODE',mode);if(m){const e=slots.get(m);if(!e)return unavailable(m,'PACK_NOT_INSTALLED_OR_QUALIFIED');return {schema:'ldc-semantic-pack-registry-v6',version:VERSION,mode:m,label:LABELS[m],available:true,calibration_status:'QUALIFIED',pack_id:e.manifest.pack_id||null,model_id:e.manifest.model&&e.manifest.model.model_id||null,chunker_id:e.manifest.chunker&&e.manifest.chunker.policy_id||null,retrieval_id:e.manifest.retrieval&&e.manifest.retrieval.id||null,calibration_policy_id:e.manifest.calibration&&e.manifest.calibration.hybrid_policy&&e.manifest.calibration.hybrid_policy.policy_id||null,jesus_filter_bound:true,verified_files:e.verification.verified_files||0};}const modes={};for(const x of['aflp','additions','enriched'])modes[x]=status(x);return {schema:'ldc-semantic-pack-registry-v6',version:VERSION,available_modes:[...slots.keys()],modes};}
-async function search(query,options={}){const m=normMode(options.sourceMode);if(m!=='enriched')throw new Error('SEMANTIC_CURRENT_PACK_REQUIRES_ENRICHED_MODE');const e=slots.get(m);if(!e)throw new Error('SEMANTIC_PACK_NOT_AVAILABLE_FOR_MODE');const q=String(query||'').trim();if(!q)throw new Error('SEMANTIC_QUERY_EMPTY');const vec=await e.encodeQuery(q,e.manifest.model),r=e.manifest.retrieval,opt={sourceMode:m,volMin:options.volMin||0,volMax:options.volMax||0,dateIso:options.dateIso||null,year:options.year||0,stableRef:options.stableRef||null,jesus:!!options.jesus};const dense=e.index.denseSearch(vec,{...opt,candidatePool:r.dense_candidate_depth,maxResults:r.dense_candidate_depth,collapseThreshold:.5}),sparse=root.LDCSemanticHybridR6.bm25Search(e.bm25,q,{...opt,maxCandidates:r.bm25_candidate_depth}),fused=root.LDCSemanticHybridR6.fuse(dense.dense_candidates,sparse.results,{maxResults:r.output_depth}),confidence=root.LDCSemanticHybridR6.classify(fused,e.manifest.calibration.hybrid_policy),enriched=fused.map(x=>Object.assign({},e.passageById.get(String(x.passage_id))||{},x));return {schema:'ldc-search-v3-hybrid-result-r6',version:VERSION,query:q,source_mode:m,candidate_population:'DENSE_96_72_PLUS_BM25_96_72_RRF60',filters:dense.filters,confidence,results:confidence.state==='abstain'?[]:enriched,diagnostics:{dense_candidates:dense.dense_candidates.length,bm25_candidates:sparse.results.length,hybrid_features:confidence.features},pack_id:e.manifest.pack_id||null};}
+/* R147 targeted non-ONNX lexical-evidence disclosure. Scores do NOT become semantic confidence. */
+const R147_STOPWORDS=new Set('la le les de des du d au aux un une est et que qui quel quelle quels quelles a à tres très grande grand dans sur pour avec je ma mon ton sa notre comme vous nous aujourd hui'.split(/\s+/));
+function independentLexicalEvidence(q,rows,index=null){
+  const H=root.LDCSemanticHybridR6;
+  const normalized=H.normalise(q);
+  const informative=[...new Set(H.terms(q).filter(t=>!R147_STOPWORDS.has(t)))];
+  const exact=[],leads=[],exactPassages=new Set(),leadPassages=new Set();
+  if(!normalized||informative.length<1)return {exact_text:exact,lexical_leads:leads};
+  // Suppress weak topical noise where multiple discriminating query terms
+  // never occur anywhere in this corpus (e.g. "cuivre à Londres").
+  const absent=index&&index.postings?informative.filter(t=>!index.postings.has(t)):[];
+  if(absent.length>=2&&absent.length*2>=informative.length)return {exact_text:exact,lexical_leads:leads};
+  for(const r of rows||[]){
+    const text=H.normalise(r.text||'');
+    if(!text)continue;
+    const passage=String(r.passage_id||'');if(!passage)continue;
+    const exactQuote=text.includes(normalized);
+    if(exactQuote){if(!exactPassages.has(passage)&&exact.length<5){exactPassages.add(passage);exact.push({...r,r150_evidence:'normalized_contiguous_source_quote'});}continue;}
+    const have=new Set(H.terms(r.text));
+    const overlaps=informative.filter(t=>have.has(t));
+    // Weak lexical overlap is NOT a sufficient semantic claim.
+    if(informative.length>=2&&overlaps.length>=2&&!leadPassages.has(passage)&&leads.length<8){
+      leadPassages.add(passage);leads.push({...r,r150_evidence:'unverified_lexical_overlap',r150_overlap_terms:overlaps.length});
+    }
+  }
+  return {exact_text:exact,lexical_leads:leads.filter(r=>!exactPassages.has(String(r.passage_id)))};
+}
+function lexicalSearch(query,options={}){
+  const m=normMode(options.sourceMode);
+  if(m!=='enriched')throw new Error('SEMANTIC_CURRENT_PACK_REQUIRES_ENRICHED_MODE');
+  const e=slots.get(m);if(!e)throw new Error('SEMANTIC_PACK_NOT_AVAILABLE_FOR_MODE');
+  const q=String(query||'').trim();if(!q)throw new Error('SEMANTIC_QUERY_EMPTY');
+  const r=e.manifest.retrieval;
+  const opt={sourceMode:m,volMin:options.volMin||0,volMax:options.volMax||0,dateIso:options.dateIso||null,year:options.year||0,stableRef:options.stableRef||null,jesus:!!options.jesus};
+  const sparse=root.LDCSemanticHybridR6.bm25Search(e.bm25,q,{...opt,maxCandidates:r.bm25_candidate_depth});
+  return {q,m,e,r,opt,sparse,independent_evidence:independentLexicalEvidence(q,sparse.results,e.bm25)};
+}
+async function search(query,options={}){
+  // BM25 and traceable quotes are computed before the ONNX query encoder is awaited.
+  const {q,m,e,r,opt,sparse,independent_evidence}=lexicalSearch(query,options);
+  const vec=await e.encodeQuery(q,e.manifest.model);
+  const dense=e.index.denseSearch(vec,{...opt,candidatePool:r.dense_candidate_depth,maxResults:r.dense_candidate_depth,collapseThreshold:.5});
+  const fused=root.LDCSemanticHybridR6.fuse(dense.dense_candidates,sparse.results,{maxResults:r.output_depth});
+  const confidence=root.LDCSemanticHybridR6.classify(fused,e.manifest.calibration.hybrid_policy);
+  const enriched=fused.map(x=>Object.assign({},e.passageById.get(String(x.passage_id))||{},x));
+  return {schema:'ldc-search-v3-hybrid-result-r6',version:VERSION,query:q,source_mode:m,candidate_population:'DENSE_96_72_PLUS_BM25_96_72_RRF60',filters:dense.filters,confidence,results:confidence.state==='abstain'?[]:enriched,independent_evidence,diagnostics:{dense_candidates:dense.dense_candidates.length,bm25_candidates:sparse.results.length,hybrid_features:confidence.features},pack_id:e.manifest.pack_id||null};
+}
 root.LDCSemanticPackRegistryR6=Object.freeze({VERSION,normMode,buildVerifiedPayload,preparePackSet,commitPreparedSet,bindModePack,bindPackSet,unbindMode,unbindAll,status,search});
 })(typeof globalThis!=='undefined'?globalThis:this);

@@ -2636,11 +2636,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.25-R139-APP-TEST-ONLY'; // R139 LOCAL APP TEST ONLY corrective candidate; NOT hosted or iOS-qualified; NO GitHub or production authority; protected Reader and PLS retained
+const APP_VERSION = 'v2.19.142.26-R152-APP-TEST-ONLY'; // R139 LOCAL APP TEST ONLY corrective candidate; NOT hosted or iOS-qualified; NO GitHub or production authority; protected Reader and PLS retained
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD = '2026-10-12';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.25-r139-app-test-only';
+const APP_BUILD = '2026-10-13';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.26-r152-app-test-only';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -8357,8 +8357,34 @@ function renderSemanticResultsV4(payload,raw,structural){
   const meta=document.getElementById('search-meta');meta.style.display='block';meta.innerHTML='<span class="semantic-results-heading">Recherche par le sens</span>';
   document.getElementById('trust-notice').style.display='none';const container=document.getElementById('search-results');container.innerHTML='';
   const intro=document.createElement('div');intro.className='semantic-results-intro';intro.innerHTML='Passages classés selon leur proximité avec votre description. Cette recherche ne confirme pas que votre formulation est exacte ou vraie.<details class="semantic-how"><summary>Comment ça marche ?</summary><div class="semantic-how-body">La recherche compare votre description aux passages du Livre du Ciel et les classe selon leur proximité. Elle peut aussi retrouver un passage qui corrige un souvenir imprécis. Le premier passage n’est pas nécessairement celui que vous recherchez : ouvrez les résultats qui semblent correspondre et vérifiez leur contexte.</div></details>';container.appendChild(intro);
-  if(payload.confidence&&payload.confidence.state==='abstain'){const e=document.createElement('div');e.className='empty-state';e.innerHTML='<i class="ti ti-search-off"></i>Aucun passage suffisamment proche n’a été identifié.';container.appendChild(e);return;}
-  for(const r of (payload.results||[])){
+  const evidence=payload.independent_evidence||{exact_text:[],lexical_leads:[]};
+  const exact=evidence.exact_text||[],leads=evidence.lexical_leads||[];
+  const abstain=payload.confidence&&payload.confidence.state==='abstain';
+  // Keep dense abstention strict; independently surface actual quote evidence and cautious lexical leads.
+  if(exact.length||(abstain&&leads.length)){
+    const explain=document.createElement('div');explain.className='search-suggestion-box';
+    explain.textContent=abstain?'Le classement par le sens ne permet pas de conclure. Les passages ci-dessous sont des correspondances textuelles à vérifier, pas des résultats sémantiques confirmés.':'Des citations textuelles distinctes du classement sémantique figurent aussi dans les résultats.';
+    container.appendChild(explain);
+  }
+  // R150: deduplicate by original passage identity, never by entry_id.
+  const usedPassages=new Set();
+  function passageKey(r){return String(r&&r.passage_id||'')||String(r&&r.entry_id||'')+':'+String(r&&r.source_spans&&r.source_spans[0]&&r.source_spans[0].para_id||'');}
+  function appendSemanticSourceCard(r,label){
+    if(!r||usedPassages.has(passageKey(r)))return;
+    usedPassages.add(passageKey(r));
+    const item=semanticResultToSearchTargetR4(r),card=document.createElement('button');card.type='button';card.className='result-card';
+    card.dataset.resultKey='semantic-evidence:'+String(r.passage_id||r.entry_id||'');
+    const ref=item.stable_ref||item.entry_id||'';
+    const h=document.createElement('div');h.className='rc-semantic-meta';h.textContent=label+' · Tome '+r.volume+(r.date_display?' · '+r.date_display:'');card.appendChild(h);
+    if(r.title){const title=document.createElement('div');title.className='rc-title';title.textContent=r.title;card.appendChild(title);}
+    const body=document.createElement('div');body.className='rc-body-text';body.textContent=r.text||'';card.appendChild(body);
+    if(ref){const footer=document.createElement('div');footer.className='rc-reference';footer.textContent='Référence : '+ref;card.appendChild(footer);}
+    card.onclick=()=>openFromSearch(item);container.appendChild(card);
+  }
+  // A qualified semantic match has priority over a textual duplicate, not over another passage.
+  if(!abstain)for(const r of (payload.results||[])){
+    if(usedPassages.has(passageKey(r)))continue;
+    usedPassages.add(passageKey(r));
     const item=semanticResultToSearchTargetR4(r),card=document.createElement('button');card.type='button';card.className='result-card';card.dataset.resultKey='semantic:'+String(r.passage_id||r.entry_id||'');
     const speechTag=searchSpeakerFilter?'<span class="rc-tag"><i class="ti ti-message-circle" style="font-size:10px;"></i> Passages contenant des paroles de Jésus</span>':'';
     const supplementTag=r.supplement_id?'<span class="rc-tag exact">COMPLÉMENT</span>':'';
@@ -8370,7 +8396,9 @@ function renderSemanticResultsV4(payload,raw,structural){
     card.innerHTML=`${primaryMeta?`<div class="rc-semantic-meta">${escapeHtml(primaryMeta)}</div>`:''}${r.title?`<div class="rc-title">${escapeHtml(r.title)}</div>`:''}<div class="rc-body-text">${escapeHtml(r.text||'')}</div>${contextTags?`<div class="rc-tags">${contextTags}</div>`:''}${stable?`<div class="rc-reference">Référence : ${escapeHtml(stable)}</div>`:''}`;
     card.onclick=()=>openFromSearch(item);container.appendChild(card);
   }
-  if(!(payload.results||[]).length){const e=document.createElement('div');e.className='empty-state';e.textContent='Aucun passage suffisamment proche n’a été identifié.';container.appendChild(e);}
+  for(const r of exact)appendSemanticSourceCard(r,'Correspondance textuelle vérifiée');
+  if(abstain)for(const r of leads)appendSemanticSourceCard(r,'Piste lexicale — pertinence à vérifier');
+  if(!usedPassages.size){const e=document.createElement('div');e.className='empty-state';e.textContent='Aucun passage suffisamment proche n’a été identifié, ni correspondance textuelle vérifiée.';container.appendChild(e);}
 }
 
 async function ensureOwnerSemanticPrepared(generation){
@@ -8390,7 +8418,9 @@ async function ensureOwnerSemanticPrepared(generation){
 async function runOwnerSemanticInference(query,options,generation){
   const runtime=window.LDCPLSV16Runtime;if(!runtime||typeof runtime.search!=='function')throw new Error('PLS_V16_RUNTIME_NOT_BOUND');
   while(ownerSemanticInferencePromise){
-    const prior=ownerSemanticInferencePromise;try{await prior;}catch(_){ }
+    const prior=ownerSemanticInferencePromise;
+    const completed=await Promise.race([prior.then(()=>true,()=>true),new Promise(resolve=>setTimeout(()=>resolve(false),1250))]);
+    if(!completed)throw new Error('SEMANTIC_PREVIOUS_INFERENCE_STALLED');
     if(!isSearchActive(generation))return null;
     if(ownerSemanticInferencePromise===prior)ownerSemanticInferencePromise=null;
   }
@@ -8398,33 +8428,103 @@ async function runOwnerSemanticInference(query,options,generation){
   const current=Promise.resolve().then(()=>runtime.search(query,options));ownerSemanticInferencePromise=current;
   try{return await current;}finally{if(ownerSemanticInferencePromise===current)ownerSemanticInferencePromise=null;}
 }
+/* R150: independent textual lane starts BEFORE model preparation/ONNX. The lexical lane
+   is not semantic validation; slow/failed ONNX is not allowed to hide the textual match.
+   The generation + draft guards prevent a late old query overwriting the next query. */
+let r152LexicalRenderedGeneration=null;
+function r150SemanticLive(raw,generation){return isSearchActive(generation)&&searchQueryDraftCanonical()===raw;}
+function r150RenderTextualOnly(payload,raw,generation,preflight,reason){
+  if(!payload||!r150SemanticLive(raw,generation))return false;
+  renderSearchV2Results(payload,raw);renderSearchIntentMode();
+  const box=document.createElement('div');box.className='search-suggestion-box';
+  box.textContent='Par le sens : moteur non concluant ou lent ('+String(reason||'attente')+'). Correspondances PAR LES MOTS seulement : vérifier les citations. Aucune pertinence sémantique confirmée.';
+  document.getElementById('search-results').prepend(box);
+  const meta=document.getElementById('search-meta');if(meta)meta.insertAdjacentText('afterbegin','Pistes textuelles — ');
+  renderSearchEffectiveScopeR88(preflight,payload);
+  r152LexicalRenderedGeneration=generation;
+  return true;
+}
+function r151RenderUnavailableIfLive(raw,generation,structural,status){
+  // Every async terminal branch is generation-gated, including timeouts and errors.
+  if(r150SemanticLive(raw,generation))renderSemanticPackUnavailable(raw,structural,status);
+}
+function r150Deadline(promise,ms){
+  let timer;
+  return Promise.race([Promise.resolve(promise).then(value=>({ok:true,value}),error=>({ok:false,error})),new Promise(resolve=>{timer=setTimeout(()=>resolve({ok:false,error:new Error('SEMANTIC_TIMEOUT_'+ms)}),ms);})]).finally(()=>clearTimeout(timer));
+}
 async function runSemanticSearchV3(raw,generation,preflight){
   if(!preflight||preflight.status!=='ready')throw new Error('R88_PREFLIGHT_REQUIRED');
   if(preflight.route==='semantic'&&!preflight.description)throw new Error('R88_EMPTY_SEMANTIC_DESCRIPTION_GUARD');
   const structural=preflight.structural;
-  // Metadata-only queries must not initialise ONNX.
   if(preflight.route==='structural'){
     setSearchProgressPhase('Recherche dans les références…',generation);
     const payload=await searchV2Request(preflight.engineQuery,generation);
-    if(isSearchActive(generation)&&searchQueryDraftCanonical()===raw){renderSearchV2Results(payload,raw);renderSearchEffectiveScopeR88(preflight,payload);}
+    if(r150SemanticLive(raw,generation)){renderSearchV2Results(payload,raw);renderSearchEffectiveScopeR88(preflight,payload);}
     return;
   }
-  let status=await semanticPackV3Status();if(!isSearchActive(generation))return;
-  if(!status.available&&status.can_initialize){
-    setSearchProgressPhase('Préparation de Par le sens…',generation);
-    const prepared=await ensureOwnerSemanticPrepared(generation);if(!prepared)return;
-    status=await semanticPackV3Status();if(!isSearchActive(generation))return;
+  // The existing legacy lexical worker is launched immediately, not after ONNX.
+  // In this diagnostic candidate it is text-only and must not be represented as semantic output.
+  let semanticDone=false,lexicalShown=false;
+  let lexical;
+  try {
+    // The worker is attempted immediately, but its synchronous constructor failures
+    // must not prevent the independent semantic lane from running.
+    lexical=Promise.resolve(searchV2Request(preflight.engineQuery||raw,generation,{mode:'enriched',volMin:preflight.options.volMin||0,volMax:preflight.options.volMax||0,jesus:!!preflight.options.jesus}));
+  } catch(e) {
+    console.warn('R152 lexical worker startup failed',String(e&&e.message||e));
+    lexical=Promise.resolve(null);
   }
-  if(!status.available){renderSemanticPackUnavailable(raw,structural,status);return;}
-  if(!ownerSemanticPrepared){
-    setSearchProgressPhase('Préparation de Par le sens…',generation);
-    const prepared=await ensureOwnerSemanticPrepared(generation);if(!prepared)return;
-  }
-  if(!isSearchActive(generation))return;
-  setSearchProgressPhase('Recherche des passages…',generation);
-  const sem=await runOwnerSemanticInference(preflight.description,preflight.options,generation);
-  if(sem==null||!isSearchActive(generation)||searchQueryDraftCanonical()!==raw)return;
-  renderSemanticResultsV4(sem,raw,structural);renderSearchEffectiveScopeR88(preflight);
+  lexical=lexical.catch(e=>{console.warn('R152 lexical worker unavailable',String(e&&e.message||e));return null;});
+  const displayLexical=async why=>{
+    if(lexicalShown)return true;
+    if(semanticDone||!r150SemanticLive(raw,generation))return false;
+    const checked=await r150Deadline(lexical,6500);
+    if(!checked.ok||!checked.value||semanticDone||!r150SemanticLive(raw,generation))return false;
+    if(lexicalShown)return true; // another in-flight displayLexical callback already rendered
+    lexicalShown=r150RenderTextualOnly(checked.value,raw,generation,preflight,why);
+    return lexicalShown;
+  };
+  const timer=setTimeout(()=>{displayLexical('calcul sémantique en cours').catch(()=>{});},2000);
+  try{
+    let status=await semanticPackV3Status();if(!r150SemanticLive(raw,generation))return;
+    if(!status.available&&status.can_initialize){
+      setSearchProgressPhase('Préparation de Par le sens…',generation);
+      const prep=await r150Deadline(ensureOwnerSemanticPrepared(generation),10000);
+      if(!prep.ok){if(!await displayLexical('préparation sémantique indisponible'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:String(prep.error)});return;}
+      if(!r150SemanticLive(raw,generation))return;
+      if(!prep.value){if(!await displayLexical('préparation sémantique non effectuée'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:'SEMANTIC_PREPARATION_FALSE'});return;}
+      status=await semanticPackV3Status();if(!r150SemanticLive(raw,generation))return;
+    }
+    if(!status.available){if(!await displayLexical(status.reason||'moteur indisponible'))r151RenderUnavailableIfLive(raw,generation,structural,status);return;}
+    if(!ownerSemanticPrepared){
+      const prep=await r150Deadline(ensureOwnerSemanticPrepared(generation),10000);
+      if(!prep.ok){if(!await displayLexical('préparation sémantique indisponible'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:String(prep.error)});return;}
+      if(!r150SemanticLive(raw,generation))return;
+      if(!prep.value){if(!await displayLexical('préparation sémantique non effectuée'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:'SEMANTIC_PREPARATION_FALSE'});return;}
+    }
+    if(!r150SemanticLive(raw,generation))return;
+    setSearchProgressPhase('Recherche des passages…',generation);
+    const result=await r150Deadline(runOwnerSemanticInference(preflight.description,preflight.options,generation),10000);
+    if(!result.ok){if(!await displayLexical('calcul sémantique indisponible'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:String(result.error)});return;}
+    if(!r150SemanticLive(raw,generation))return;
+    if(result.value==null){if(!await displayLexical('aucune réponse sémantique'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:'SEMANTIC_RESULT_NULL'});return;}
+    const semanticPayload=result.value, ev=semanticPayload.independent_evidence||{};
+    const noPackEvidence=!(ev.exact_text&&ev.exact_text.length)&&!(ev.lexical_leads&&ev.lexical_leads.length);
+    // A dense abstention with no indexed evidence must not erase a worker quote
+    // previously shown as textual, or a freshly retrieved textual fallback.
+    if(semanticPayload.confidence&&semanticPayload.confidence.state==='abstain'&&noPackEvidence){
+      if(await displayLexical('abstention sémantique')){semanticDone=true;return;}
+    }
+    if(!r150SemanticLive(raw,generation))return; // recheck after awaited lexical abstention
+    renderSemanticResultsV4(semanticPayload,raw,structural);renderSearchEffectiveScopeR88(preflight);
+    semanticDone=true; // Renderer completed. If it throws, rescue with lexical lane.
+  }catch(e){
+    if(!r150SemanticLive(raw,generation))return;
+    console.error('R152 semantic search failed',e);
+    // The lexical Worker can still be healthy when ONNX or status handling fails.
+    try{if(await displayLexical('erreur du moteur sémantique'))return;}catch(fallbackError){console.warn('R152 textual fallback failed',fallbackError);}
+    r151RenderUnavailableIfLive(raw,generation,structural,{reason:String(e&&e.message||e)});
+  }finally{clearTimeout(timer);}
 }
 
 function resetSearchPaging({resetOrder=false,resetLane=false}={}) {
@@ -8977,6 +9077,8 @@ async function runSearch({navigation='reveal-output',commitSource='programmatic'
     if(navigation==='reveal-output')revealSearchOutput();
   }catch(e){
     if(!isSearchActive(generation))return;
+    // A prior textual result is an explicit fallback, not a blank search.
+    if(searchIntentMode==='meaning'&&preflight.status==='ready'&&preflight.route==='semantic'&&typeof r152LexicalRenderedGeneration==='number'&&r152LexicalRenderedGeneration===generation)return;
     console.error('LDC search failed',e);metaEl.style.display='block';metaEl.textContent='Recherche indisponible pour le moment.';document.getElementById('trust-notice').style.display='none';document.getElementById('search-results').innerHTML='<div class="empty-state"><i class="ti ti-alert-triangle"></i>Le moteur de recherche n’a pas pu être vérifié. Aucun résultat partiel n’est affiché.</div>';
     if(navigation==='reveal-output')revealSearchOutput();
   }finally{
@@ -10298,7 +10400,7 @@ function setShellState(state){
 const STAGE8_MIGRATION_LOCK='ldc-userdata-migration-db4-v1';
 const STAGE8_MIGRATION_MARKER='stage8_migration_startup_complete_v1';
 const STAGE8_MIGRATION_GATE_REV='gate4-R127-local';
-const STAGE8_MIGRATION_FIXED_POINT=`${APP_VERSION}|${CORPUS_GENERATION}|db${DB_VER}|${STAGE8_MIGRATION_GATE_REV}`;
+const STAGE8_MIGRATION_FIXED_POINT=`v2.19.142.25-R139-APP-TEST-ONLY|${CORPUS_GENERATION}|db${DB_VER}|${STAGE8_MIGRATION_GATE_REV}`; // R150: exact R139 pre-update marker; no gratuitous Stage8 replay
 async function stage8MigrationAlreadyComplete(){const m=await dbGet('settings',STAGE8_MIGRATION_MARKER).catch(()=>null);return !!(m&&m.value===STAGE8_MIGRATION_FIXED_POINT);}
 async function stage8HistoricalMigrationNeeded(){
   if(await stage8MigrationAlreadyComplete())return false;
@@ -10933,6 +11035,14 @@ function showBootFailure(err){
 /* M12_ATOMIC_BOOTSTRAP_END */
 
 async function boot() {
+  // R147: never open/upgrade shared-origin data when an App-Test-only build is copied to another project path.
+  // Accept the three canonical URL shapes; no other subpath is a valid App Test install.
+  const installationPath=new URL(window.location.href).pathname.toLowerCase();
+  const appTestPathAllowed=['/app-test','/app-test/','/app-test/index.html'].includes(installationPath);
+  if(APP_VERSION.includes('APP-TEST-ONLY')&&!appTestPathAllowed){
+    const wrongBuild=new Error('Package App Test uniquement : ce déploiement ne peut pas accéder au stockage de ce site.');
+    wrongBuild.name='LDCWrongDeploymentScopeError';throw wrongBuild;
+  }
   setShellState('boot');
   const loadingSub=document.querySelector('#loading .l-sub');if(loadingSub)loadingSub.textContent='Vérification de la mise à jour…';
   bootStage='SW_SYNC';
@@ -11429,17 +11539,10 @@ async function requestOfflineStatus(timeoutMs=15000){
   });
 }
 async function ensureOfflineStorageCapacity(){
-  const requiredBytes=114483048;
-  try{
-    if(navigator.storage&&typeof navigator.storage.persist==='function') await navigator.storage.persist();
-    if(navigator.storage&&typeof navigator.storage.estimate==='function'){
-      const est=await navigator.storage.estimate(), quota=Number(est.quota||0), usage=Number(est.usage||0), available=Math.max(0,quota-usage);
-      if(quota>0 && available < requiredBytes*1.10){
-        offlineUiState={...offlineUiState,state:'ERROR',message:`Espace de stockage insuffisant : environ ${offlineMb(requiredBytes)} requis, ${offlineMb(available)} disponibles.`};
-        renderOfflineUi(); scheduleOfflinePersist(); return false;
-      }
-    }
-  }catch(_){ /* estimate/persist are advisory; SW verification remains authoritative */ }
+  // R150: do not reject 203/204 (or READY) caches against full 114 MB quota.
+  // SW OFFLINE_PREPARE first checks cached assets; actual Cache.put quota errors
+  // are handled per remaining asset. No cache purge, no DB schema change.
+  try{if(navigator.storage&&typeof navigator.storage.persist==='function')await navigator.storage.persist();}catch(_){}
   return true;
 }
 async function startOfflinePreparation(){
