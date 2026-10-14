@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.142.28-R1B-UNIFIED",
+  "app_version": "v2.19.142.30-R1B-UNIFIED",
   "asset_count": 204,
   "assets": [
     {
@@ -18,9 +18,9 @@
       "sha256": "8157821949fbf32564efb158a6ca6f3100940c0e3b17e279789139eeed3b99da"
     },
     {
-      "bytes": 2544,
+      "bytes": 3565,
       "path": "corpus/display_03.json",
-      "sha256": "e5cc1a9e8960cb00cd05c0557f01b088b3ab350895aac57fa6066cab4d16f2ce"
+      "sha256": "1a57c478f4bd420c9fb7b711c1a3fba471569f1b88d7b69be44ffe8a571c405e"
     },
     {
       "bytes": 10621,
@@ -38,9 +38,9 @@
       "sha256": "c2c87b3755f78466fbf99bc7b58f5b301eceb037b73999e7c7ee1419f1e5fc37"
     },
     {
-      "bytes": 1098,
+      "bytes": 7733,
       "path": "corpus/display_07.json",
-      "sha256": "5ef91cfbcc6aaec59a9ddd0a9257b9e7b7b90334cb050f3a1b45f7cd9df04800"
+      "sha256": "41550c30469acd16894838ead46c37c3fefea9e053f13f0043c26a8bc4070ec2"
     },
     {
       "bytes": 1604,
@@ -173,9 +173,9 @@
       "sha256": "1e107ddc8270e8af20970650bbaa9021d963876c10d6dd9f7f2cfcd0ddb31fb8"
     },
     {
-      "bytes": 2626,
+      "bytes": 3323,
       "path": "corpus/display_34.json",
-      "sha256": "24e13178755553f30d29645dffc3cfaacf35592681e195640eca35790137c8a1"
+      "sha256": "3bb99d2fc5655a90e2b5b875ce430edb3caf88cf3d5d87b5925390901f5c3465"
     },
     {
       "bytes": 39476,
@@ -568,9 +568,9 @@
       "sha256": "9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f"
     },
     {
-      "bytes": 13417678,
+      "bytes": 17815440,
       "path": "corpus/search_v2_documents.json",
-      "sha256": "65cfeb954ce9ecaa02c761024f2802436c9fcd07982e20438486d1a793fc195a"
+      "sha256": "04d63a58977fd70ec11b726c160fc45115ad5c2fae16374f54a95c228ee4a2ec"
     },
     {
       "bytes": 561247,
@@ -578,9 +578,9 @@
       "sha256": "ae74aceaa596c72afa5727f1dceb39b4e349ceffbb07e926a6aab30c70a5c54c"
     },
     {
-      "bytes": 3590192,
+      "bytes": 3846595,
       "path": "corpus/search_v2_index.json",
-      "sha256": "5b12b6c52dd0633ae2bf2318cd7959b04bbdd886e0adfbdef8862b41d2575b99"
+      "sha256": "6ef91b5c1c4f165536e726fa0f54f10d5c956e011de744c20c5e86d3863126b5"
     },
     {
       "bytes": 12680,
@@ -588,9 +588,9 @@
       "sha256": "67bd9e80c8ed1702c95072adff9859e7a25a521df14fd1be6efb496aa0ddf31d"
     },
     {
-      "bytes": 12837,
+      "bytes": 13364,
       "path": "corpus/search_v2_manifest.json",
-      "sha256": "e87da88a709a1b81f6e76e1afe119a8ad946df602977a88c45c8b0d6e35dc250"
+      "sha256": "92207841aadaeb5c4371298876e39c8a0ba568f39dd21fe315d41ff2b5426216"
     },
     {
       "bytes": 195129,
@@ -783,9 +783,9 @@
       "sha256": "29be363a2b5a20e0c020bfee2863ba7d291a018b226b80ec6daf03404704ab30"
     },
     {
-      "bytes": 1115190,
+      "bytes": 1116707,
       "path": "corpus/supplements.json",
-      "sha256": "9261a61a9dc58e72a1e3b529a92b24aee88d14be0e9546f7695692f9c64aa1ba"
+      "sha256": "4b2fed31fbf779f15979ac6e34532c205a6f6b4ceb927bd4a331e2726e3b86fc"
     },
     {
       "bytes": 50570,
@@ -1025,7 +1025,7 @@
   ],
   "authorized_runtime_ledger_sha256": "f77fb79ab016c933d6b7cfcb830b2db52fd4f42e03d032988c5ac50c2a38cd35",
   "content_binding_schema": "ldc-offline-content-binding-v2",
-  "content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+  "content_binding_sha256": "f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d",
   "corpus_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
   "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
   "families": {
@@ -1539,5 +1539,18 @@
     "search_v2_algorithm_changed": false,
     "semantic_algorithm_changed": false
   },
-  "r170_release_scope": "One byte-identical app build for App Test and Main; runtime scopes select separate IndexedDB namespaces. Offline corpus assets unchanged."
+  "r170_release_scope": "One byte-identical app build for App Test and Main; runtime scopes select separate IndexedDB namespaces. Offline corpus assets unchanged.",
+  "r189_editorial_corpus_binding": {
+    "based_on": "R175 v142.28",
+    "base_sha256": "7cdbbdfe4d12af5175d38bd68b9e98bef51cafde55f08c298bd9e52d30045cbe",
+    "scope": "local candidate; G5/physical pending"
+  },
+  "r193_placement_revision": {
+    "source": "R175+R189",
+    "E01_utf16": 158,
+    "E06_utf16": 316,
+    "supplement_witnesses": "preserved",
+    "qualified": "NO",
+    "iOS": "NOT_RUN"
+  }
 }

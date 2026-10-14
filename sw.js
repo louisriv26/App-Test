@@ -1,5 +1,5 @@
-const VERSION = 'ldc-v2.19.142.28-r1b-unified';
-const APP_VERSION = 'v2.19.142.28-R1B-UNIFIED';
+const VERSION = 'ldc-v2.19.142.30-r1b-unified';
+const APP_VERSION = 'v2.19.142.30-R1B-UNIFIED';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
@@ -11,15 +11,15 @@ function scopeFingerprint(scope) {
 }
 const OFFLINE_SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
 const SCOPE_CACHE_PREFIX = `${CACHE_PREFIX}${OFFLINE_SCOPE_FINGERPRINT}-`;
-const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.142.28-r1b-unified`;
-const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.142.28-r1b-unified`;
+const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.142.30-r1b-unified`;
+const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.142.30-r1b-unified`;
 const LEGACY_V76_WORKER_VERSION = 'ldc-v2.19.76-R1B-report-r2';
 const UPDATE_COMPAT_META_PATH = '__ldc_update_compat__.json';
 const INSTALL_FETCH_NONCE = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
 const OFFLINE_CACHE = `${CACHE_PREFIX}offline-persistent-v3-${OFFLINE_SCOPE_FINGERPRINT}`;
 const OFFLINE_MANIFEST_URL = './offline_manifest.json';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v3';
-const OFFLINE_CONTENT_BINDING = '1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384';
+const OFFLINE_CONTENT_BINDING = 'f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d';
 const OFFLINE_CORPUS_MANIFEST_SHA256 = '92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b';
 const OFFLINE_META_PATH = '__ldc_offline_meta__.json';
 const RUNTIME_META_PATH = '__ldc_runtime_meta__.json';
