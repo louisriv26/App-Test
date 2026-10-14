@@ -1,0 +1,67 @@
+name: R196 build exact v142.30 App-Test candidate
+on:
+  push:
+    branches: [r196-app-test-build-20261014]
+    paths:
+      - '.github/workflows/r196-rebuild-exact.yml'
+      - 'qa/r196_candidate_delta.tar'
+permissions:
+  contents: write
+jobs:
+  exact-rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout immutable R175 base and delta
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: Verify and reconstruct 12 exact changed files
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v zstd >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq zstd; }
+          python3 - <<'PY'
+          import os,sys,tarfile,json,hashlib,pathlib,subprocess
+          root=pathlib.Path('.').resolve()
+          archive=root/'qa/r196_candidate_delta.tar'
+          work=pathlib.Path('/tmp/r196_patch_data')
+          work.mkdir(exist_ok=True)
+          with tarfile.open(archive) as t:
+              for member in t.getmembers():
+                  n=member.name
+                  if n.startswith('/') or '..' in pathlib.PurePosixPath(n).parts:
+                      raise RuntimeError('Unsafe tar path')
+              t.extractall(work,filter='data')
+          meta=json.loads((work/'R196_PATCH_MANIFEST.json').read_text())
+          assert meta['schema']=='r196-exact-delta-v1'
+          assert len(meta['files'])==12
+          for e in meta['files']:
+              rel=e['path'];base=root/rel;patch=work/'patches'/e['patch'];out=base.parent/(base.name+'.R196_NEW')
+              assert base.is_file() and patch.is_file(),rel
+              sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+              assert sha(base)==e['base_sha256'],f'R175 source mismatch: {rel}'
+              subprocess.run(['zstd','--quiet','-d',f'--patch-from={base}',str(patch),'-o',str(out)],check=True)
+              assert out.stat().st_size==e['size'] and sha(out)==e['target_sha256'],f'R193 target mismatch: {rel}'
+              os.replace(out,base)
+              print('EXACT PASS',rel)
+          p=json.loads((root/'PACKAGE_MANIFEST_SHA256.json').read_text())
+          o=json.loads((root/'offline_manifest.json').read_text())
+          assert o['app_version']=='v2.19.142.30-R1B-UNIFIED'
+          assert len(o['assets'])==204
+          assert '142.30' in (root/'version.json').read_text()
+          print('EXACT REBUILD 12/12 PASS; offline rows',len(o['assets']))
+          with open('/tmp/r196_paths.txt','w') as f:
+              f.write('\n'.join(e['path'] for e in meta['files'])+'\n')
+          PY
+      - name: Commit rebuilt files on temporary build branch only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          while IFS= read -r path; do git add -- "$path"; done < /tmp/r196_paths.txt
+          git diff --cached --quiet && { echo 'No changed files' >&2; exit 1; }
+          git commit -m "R196: reconstruct exact R193 v142.30 candidate for App-Test verification"
+          git push origin HEAD:refs/heads/r196-app-test-built-20261014
