@@ -1,6 +1,6 @@
 {
-  "app_version": "v2.19.142.30-R1B-UNIFIED",
-  "asset_count": 204,
+  "app_version": "v2.19.142.33-R1B-UNIFIED",
+  "asset_count": 205,
   "assets": [
     {
       "bytes": 7519,
@@ -558,14 +558,14 @@
       "sha256": "e4f72408be0d8d2766fca21ec8dcb6120690eab1dd53ab77f3098202fa0f90f4"
     },
     {
-      "bytes": 4958,
+      "bytes": 5521,
       "path": "corpus/search_v21_manifest.json",
-      "sha256": "86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996"
+      "sha256": "0e931c03ee8d2d91c6b310dcf0f450774caca5b020e5303d6b986e8cf2d9a3d1"
     },
     {
-      "bytes": 1480896,
+      "bytes": 1481533,
       "path": "corpus/search_v21_topology.json",
-      "sha256": "9d939051a8eca6929c208dcefeb1b2f41cb794fb175762dbfe18b645a9ed497f"
+      "sha256": "d8ff54a7f8aefaa19bb508aab79c2ec0757f2ef780af8db4e604d1c155f308d3"
     },
     {
       "bytes": 17815440,
@@ -588,9 +588,9 @@
       "sha256": "67bd9e80c8ed1702c95072adff9859e7a25a521df14fd1be6efb496aa0ddf31d"
     },
     {
-      "bytes": 13364,
+      "bytes": 13622,
       "path": "corpus/search_v2_manifest.json",
-      "sha256": "92207841aadaeb5c4371298876e39c8a0ba568f39dd21fe315d41ff2b5426216"
+      "sha256": "13581de3453aaef84eb15a856c9d31dffc5d854863cd88f92ef9641824d0c5ee"
     },
     {
       "bytes": 195129,
@@ -1021,11 +1021,16 @@
       "bytes": 6568,
       "path": "corpus/volume_summary.json",
       "sha256": "8d422e692c8d4c7d230bd270ec8f9d455e1949043ebe5bed75f5746b3d40b60a"
+    },
+    {
+      "path": "pls_v16/patch_r198.json",
+      "bytes": 95208,
+      "sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908"
     }
   ],
   "authorized_runtime_ledger_sha256": "f77fb79ab016c933d6b7cfcb830b2db52fd4f42e03d032988c5ac50c2a38cd35",
   "content_binding_schema": "ldc-offline-content-binding-v2",
-  "content_binding_sha256": "f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d",
+  "content_binding_sha256": "38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee",
   "corpus_generation": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
   "corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
   "families": {
@@ -1084,7 +1089,7 @@
   },
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.142.28-r1b-unified",
+  "page_worker_revision": "ldc-v2.19.142.33-r1b-unified",
   "par_le_sens_current": {
     "general_scientific_confidence_calibration_claimed": false,
     "internal_prototype_lineage_labels_preserved": true,
@@ -1321,7 +1326,7 @@
     "predecessor_candidate_sha256": "d5341cd079a6c50bee148c497108a40f924a70f50f840702884a457fb88abe4b",
     "volume_summary_sha256": "8d422e692c8d4c7d230bd270ec8f9d455e1949043ebe5bed75f5746b3d40b60a"
   },
-  "total_bytes": 114483048,
+  "total_bytes": 119244276,
   "ux_access_v127_r1": {
     "classification": "BOUNDED_UX_ACCESSIBILITY_AND_RELEASE_IDENTITY_SUCCESSOR",
     "closed_findings": [
@@ -1552,5 +1557,17 @@
     "supplement_witnesses": "preserved",
     "qualified": "NO",
     "iOS": "NOT_RUN"
+  },
+  "r197_search_reconciliation": {
+    "search_v2_manifest_sha256": "13581de3453aaef84eb15a856c9d31dffc5d854863cd88f92ef9641824d0c5ee",
+    "search_v21_manifest_sha256": "0e931c03ee8d2d91c6b310dcf0f450774caca5b020e5303d6b986e8cf2d9a3d1",
+    "semantic_embeddings": "FROZEN_PRE_R189_COMPATIBILITY_NOT_NEWLY_EMBEDDED",
+    "canonical_corpus": "UNCHANGED",
+    "offline_binding_recomputed_atomically": true
+  },
+  "r198_overlay": {
+    "exact_sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908",
+    "added_offline_asset": true,
+    "unchanged_canonical_documents": true
   }
 }

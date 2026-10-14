@@ -1,10 +1,10 @@
 {
-  "app_version": "v2.19.142.30-R1B-UNIFIED",
+  "app_version": "v2.19.142.33-R1B-UNIFIED",
   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
   "baseline_candidate_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
   "baseline_candidate_version": "v2.19.142.18-R1B-READER-SEMANTIC-INTEGRATION-WIP",
-  "build_date": "2026-10-13",
+  "build_date": "2026-10-14",
   "collection_link_contract": "LOCAL_COLLECTION_ID_LINK_DOES_NOT_TRANSFER_USER_DATA",
   "collections_visibility": "VISIBLE_MON_ESPACE_WORKSPACE_AND_EXPLICIT_ENTRYPOINT",
   "context_action_contract": "SELECTION_OR_PARAGRAPH_SINGLE_CONTEXT_SURFACE",
@@ -51,8 +51,8 @@
     "state_recorded_status": "PRODUCTION_DEPLOYED_CLOSED_IMMUTABLE__EXACT_REPOSITORY_TREE_AND_SUCCESSFUL_DEPLOYMENT_BINDING_RECORDED",
     "technical_identity": "v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE"
   },
-  "current_release_authority": "R193_LOCAL_CANDIDATE_NO_GITHUB_NO_APP_TEST_BETA_MAIN",
-  "current_runtime_browser_validation": "R193_STATIC_LOCAL_QA_PASS__BROWSER_BLOCKED_BY_ADMINISTRATOR__PHYSICAL_IOS_NOT_RUN",
+  "current_release_authority": "R198_LOCAL_CANDIDATE_NO_GITHUB_MAIN_PRODUCTION_AUTHORITY",
+  "current_runtime_browser_validation": "R198_STATIC_REGISTRY_AND_ONNX_CPU_LOCAL__BROWSER_AND_IOS_PENDING",
   "dark_mode_v136_r9": {
     "corpus_changed": false,
     "date": "2026-10-02",
@@ -566,11 +566,11 @@
   "offline_cache_version": "DEPRECATED_VERSION_IDENTITY__PHYSICAL_PERSISTENT_CACHE_NAME_IS_SCOPE_DERIVED_NOT_APP_VERSION_IDENTITY",
   "offline_completion_record_contract": "STORAGE_SCHEMA_PLUS_CONTENT_BINDING_SCHEMA_AND_DIGEST_PLUS_CORPUS_GENERATION_AND_MANIFEST_SCHEMA__NO_APP_VERSION_CACHE_NAME_INVARIANT",
   "offline_content_binding_schema": "ldc-offline-content-binding-v2",
-  "offline_content_binding_sha256": "f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d",
+  "offline_content_binding_sha256": "38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee",
   "offline_corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
   "offline_integrity_contract": "PERSISTENT_OFFLINE_REUSE_REQUIRES_CURRENT_SCOPE_URL_PLUS_EXACT_ASSET_SHA256_AND_BYTE_LENGTH_MARKERS__GLOBAL_PREDECESSOR_BINDING_NOT_REQUIRED__CHANGED_OR_INVALID_ASSETS_FAIL_CLOSED",
   "offline_manifest_schema": "ldc-offline-manifest-v3",
-  "offline_manifest_sha256": "924dac9dce4c4952b51ac7bfc3b76ec2d17df8c3a4561cb21c33825c8c4be812",
+  "offline_manifest_sha256": "2a2b6ef07a11cc1fa4b074e6a939ee831cbd4529b0c2f5c23f629ba603271267",
   "offline_scope": "v142.17 direct successor of v142.16 frozen Reader physical repair: bounded reader transaction ownership, session and screen-lifecycle guards; offline content asset set and content binding unchanged. v142.16 not physically qualified. No App-Test or production authorization.",
   "offline_state_schema": "ldc-offline-state-v3",
   "offline_status_typography_v98_contract": "IMPORTANT_STATUS_TITLE_DETAIL_SCALE_12_13_16_19_AND_11_12_15_18_SMALL_NORMAL_LARGE_XLARGE",
@@ -592,7 +592,7 @@
   "package_predecessor_app_version": "v2.19.142.23-R130-LOCAL-P11-CANDIDATE",
   "package_predecessor_zip_sha256": "26fe15417b6b8367ecb44832af383529be3645363020c9668273c423bef73206",
   "package_state_at_freeze": "PREHOSTED_V142_17_QUALIFICATION_CANDIDATE__PENDING_FINAL_PACKAGE_MANIFEST__NOT_A_PRODUCTION_RELEASE",
-  "page_worker_revision": "ldc-v2.19.142.28-r1b-unified",
+  "page_worker_revision": "ldc-v2.19.142.33-r1b-unified",
   "par_le_sens_current": {
     "compatible_passages": 20236,
     "excluded_stale_passages": 347,
@@ -816,7 +816,7 @@
   },
   "public_deployment_authorized": false,
   "public_release": "NOT_AUTHORIZED",
-  "public_version": "142.30",
+  "public_version": "142.33",
   "quote_display_contract": "CANONICAL_GUILLEMETS_PRESERVED_IN_CORPUS__ADJACENT_OUTER_DELIMITERS_HIDDEN__TWO_SOURCE_SPAN_GAP_OPENERS_WITH_EXPLICIT_JESUS_ATTRIBUTION_HIDDEN__SIX_PUNCTUATION_GAP_CLOSERS_HIDDEN__NESTED_AND_REPORTED_QUOTES_PRESERVED",
   "r16_authority_fencing_reaudit": {
     "corpus_changed": false,
@@ -4748,5 +4748,41 @@
   },
   "r193_inherited_current_release_authority_r175": "R175_SINGLE_BINARY_APP_TEST_ONLY__R1B_UPDATE_COMPAT_WITH_OLDER_READERS__MAIN_HOLD",
   "r193_inherited_browser_validation_r175": "R175_QA_PENDING__R170_NATIVE_QA_SUCCESS_BUT_OLD_CLIENT_UPDATE_NOTICE_FAILED",
-  "r193_inherited_user_data_db_internal_version_stale": 4
+  "r193_inherited_user_data_db_internal_version_stale": 4,
+  "r197_search_engine_reconciliation": {
+    "lexical_v2_manifest_sha256": "13581de3453aaef84eb15a856c9d31dffc5d854863cd88f92ef9641824d0c5ee",
+    "lexical_v21_manifest_sha256": "0e931c03ee8d2d91c6b310dcf0f450774caca5b020e5303d6b986e8cf2d9a3d1",
+    "reindexed_documents_count": 6,
+    "lexical_index_postings": 903352,
+    "topology_tokens": {
+      "aflp": 1466902,
+      "additions": 14337,
+      "enriched": 1480967
+    },
+    "semantic_status": "FROZEN_PLS_V16_PRE_R189_SIX_DOCS_DIFF__MUST_NOT_BE_MISREPRESENTED_AS_REEMBEDDED",
+    "canon_paragraphs_changed": false,
+    "user_storage_changed": false,
+    "status": "CANDIDATE_LOCAL_QA_PENDING",
+    "semantic_old_window_ui_guard": 15
+  },
+  "r198_semantic_overlay": {
+    "base_pack_unchanged": true,
+    "rows_remapped": 44,
+    "model_reembedded_rows": 11,
+    "overlay_sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908",
+    "no_new_canonical_edit": true,
+    "historical_semantic_mismatches_outside_four_changed_units": "PRE_EXISTING_FROM_V14228_NOT_CLAIMED_RESOLVED"
+  },
+  "r199_sw_install_identity_repair": {
+    "date": "2026-10-14",
+    "base_candidate": "R198 v142.32 (immutable)",
+    "scope": "DELIVERY_METADATA_AND_ATOMIC_PWA_UPDATE_ONLY",
+    "reproduced": "R198 upgrade install aborts at verifyPublishedRevisionMarker because version.json and offline_manifest.json still claim v142.28",
+    "repair": "ALIGN_HTML_SW_VERSION_VERSION_JSON_OFFLINE_MANIFEST_PAGE_WORKER_REVISION_AND_GENERATION_SCOPED_CACHE_NAMES",
+    "historical_user_db": "UNCHANGED_LDC_USER_V1_DB5_WITHOUT_ANY_USER_DATA_WRITE",
+    "r198_semantic_patch": "UNCHANGED",
+    "lexical_and_canonical_corpus": "UNCHANGED",
+    "release": "LOCAL_CANDIDATE_NON_DEPLOYED_NO_MAIN_AUTHORITY",
+    "future_browsers_physical_qa": "NOT_RUN"
+  }
 }

@@ -1,8 +1,8 @@
 'use strict';
 importScripts('./search_engine_v2.js','./search_exact_v21.js','./search_foundation_v21b.js','./search_near_v22.js');
 const EXPECTED_PREDECESSOR='295c5361c70a8d150985cee888e96a7bee8bd46c4d5197b4f3c1c6996d8dafbd';
-const EXPECTED_MANIFEST_SHA256='e87da88a709a1b81f6e76e1afe119a8ad946df602977a88c45c8b0d6e35dc250';
-const EXPECTED_V21_MANIFEST_SHA256='86baf5f7a74c2840b9c1a48c504c402d050d59fa85526b87081f068d403ee996';
+const EXPECTED_MANIFEST_SHA256='13581de3453aaef84eb15a856c9d31dffc5d854863cd88f92ef9641824d0c5ee';
+const EXPECTED_V21_MANIFEST_SHA256='0e931c03ee8d2d91c6b310dcf0f450774caca5b020e5303d6b986e8cf2d9a3d1';
 const CV='LDC-V139-STAGE2-221-SEARCH-V21A-RECERT';
 let enginePromise=null;
 function hex(buf){return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');}

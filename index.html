@@ -2669,11 +2669,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.30-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
+const APP_VERSION = 'v2.19.142.33-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-13';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.30-r1b-unified';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.33-r1b-unified';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -8417,10 +8417,24 @@ function renderSemanticPackUnavailable(raw,structural,status){
   if(structural&&structural.hasStructural&&structural.residual){const n=document.createElement('div');n.className='search-suggestion-box';n.textContent='Les critères Tome/date/référence ont bien été reconnus, mais la recherche par le sens reste indisponible.';container.appendChild(n);}
   if(status&&status.reason)console.warn('Par le sens indisponible :',String(status.reason));
 }
+/* R198: PLS v16 R197-historical guard intentionally inactive after verified overlay.
+   Original R197 note:
+   The 15 old semantic windows containing six G1-corrected paragraphs must NEVER be
+   displayed as current text or used as old-offset selections. This explicit
+   compatibility bridge changes no embeddings, IDs, database or canonical text. */
+const R197_SEMANTIC_STALE_WINDOWS = new Set([]);
+const R197_SEMANTIC_CHANGED_IDS = new Set(["ldc_t07_1906_01_30_e001_p001", "ldc_t07_1906_01_30_e001_p007", "ldc_t07_1906_08_11_e001_p004", "ldcsup_t03_1900_04_25_supt2_m2_0023_f02_p001", "ldcsup_t34_1937_06_18_supt2_m2_0109_f01_p003", "ldcsup_t34_1937_06_18_supt2_m2_0109_f01_p008"]);
+function r197SemanticHistoricalWindow(r){return !!(r && R197_SEMANTIC_STALE_WINDOWS.has(String(r.passage_id || '')));}
+function r197SemanticPreview(r){return r197SemanticHistoricalWindow(r)
+  ? 'Ce passage comprend un texte corrigé depuis la création de l’index sémantique. Ouvrez-le pour lire sa version actuelle ; son classement sémantique provient encore de l’ancienne formulation.'
+  : String(r && r.text || '');}
 function semanticResultToSearchTargetR4(r){
-  const parts=(r.source_spans||[]).filter(x=>x&&x.para_id).map(x=>({para_id:x.para_id,id:x.para_id,canonical_start:Number(x.canonical_start)||0,canonical_end:Number(x.canonical_end)||0}));
-  const first=parts[0]||{};
-  return {...r,id:first.para_id||r.entry_id,stable_ref:(r.source_spans&&r.source_spans[0]&&r.source_spans[0].stable_ref)||r.entry_id,primary_target:{volume:r.volume,entry_id:r.entry_id,id:first.para_id||r.entry_id,supplement_id:r.supplement_id||null},match_parts:parts};
+  const historical=r197SemanticHistoricalWindow(r);
+  const spans=(r.source_spans||[]).filter(x=>x&&x.para_id);
+  // Never trust pre-R189 character offsets for six rewritten paragraphs.
+  const parts=historical?[]:spans.map(x=>({para_id:x.para_id,id:x.para_id,canonical_start:Number(x.canonical_start)||0,canonical_end:Number(x.canonical_end)||0}));
+  const primary=historical?(spans.find(x=>R197_SEMANTIC_CHANGED_IDS.has(String(x.para_id)))||spans[0]||{}):(spans[0]||{});
+  return {...r,id:primary.para_id||r.entry_id,stable_ref:primary.stable_ref||r.entry_id,primary_target:{volume:r.volume,entry_id:r.entry_id,id:primary.para_id||r.entry_id,supplement_id:r.supplement_id||null},match_parts:parts,r197_historical_embedding_window:historical};
 }
 function renderSemanticResultsV4(payload,raw,structural){
   searchLastPayload={semantic:true,payload};renderSearchIntentMode();renderSearchSourceModeRow();renderSpeakerFilterRow();renderVolFilterRow();
@@ -8428,7 +8442,7 @@ function renderSemanticResultsV4(payload,raw,structural){
   document.getElementById('trust-notice').style.display='none';const container=document.getElementById('search-results');container.innerHTML='';
   const intro=document.createElement('div');intro.className='semantic-results-intro';intro.innerHTML='Passages classés selon leur proximité avec votre description. Cette recherche ne confirme pas que votre formulation est exacte ou vraie.<details class="semantic-how"><summary>Comment ça marche ?</summary><div class="semantic-how-body">La recherche compare votre description aux passages du Livre du Ciel et les classe selon leur proximité. Elle peut aussi retrouver un passage qui corrige un souvenir imprécis. Le premier passage n’est pas nécessairement celui que vous recherchez : ouvrez les résultats qui semblent correspondre et vérifiez leur contexte.</div></details>';container.appendChild(intro);
   const evidence=payload.independent_evidence||{exact_text:[],lexical_leads:[]};
-  const exact=evidence.exact_text||[],leads=evidence.lexical_leads||[];
+  const exact=(evidence.exact_text||[]).filter(r=>!r197SemanticHistoricalWindow(r)),leads=(evidence.lexical_leads||[]).filter(r=>!r197SemanticHistoricalWindow(r));
   const abstain=payload.confidence&&payload.confidence.state==='abstain';
   // Keep dense abstention strict; independently surface actual quote evidence and cautious lexical leads.
   if(exact.length||(abstain&&leads.length)){
@@ -8447,7 +8461,7 @@ function renderSemanticResultsV4(payload,raw,structural){
     const ref=item.stable_ref||item.entry_id||'';
     const h=document.createElement('div');h.className='rc-semantic-meta';h.textContent=label+' · Tome '+r.volume+(r.date_display?' · '+r.date_display:'');card.appendChild(h);
     if(r.title){const title=document.createElement('div');title.className='rc-title';title.textContent=r.title;card.appendChild(title);}
-    const body=document.createElement('div');body.className='rc-body-text';body.textContent=r.text||'';card.appendChild(body);
+    const body=document.createElement('div');body.className='rc-body-text';body.textContent=r197SemanticPreview(r);card.appendChild(body);
     if(ref){const footer=document.createElement('div');footer.className='rc-reference';footer.textContent='Référence : '+ref;card.appendChild(footer);}
     card.onclick=()=>openFromSearch(item);container.appendChild(card);
   }
@@ -8463,7 +8477,7 @@ function renderSemanticResultsV4(payload,raw,structural){
     const dateLabel=r.date_display?String(r.date_display):'';
     const primaryMeta=[volumeLabel,dateLabel].filter(Boolean).join(' · ');
     const contextTags=`${supplementTag}${speechTag}`;
-    card.innerHTML=`${primaryMeta?`<div class="rc-semantic-meta">${escapeHtml(primaryMeta)}</div>`:''}${r.title?`<div class="rc-title">${escapeHtml(r.title)}</div>`:''}<div class="rc-body-text">${escapeHtml(r.text||'')}</div>${contextTags?`<div class="rc-tags">${contextTags}</div>`:''}${stable?`<div class="rc-reference">Référence : ${escapeHtml(stable)}</div>`:''}`;
+    card.innerHTML=`${primaryMeta?`<div class="rc-semantic-meta">${escapeHtml(primaryMeta)}</div>`:''}${r.title?`<div class="rc-title">${escapeHtml(r.title)}</div>`:''}<div class="rc-body-text">${escapeHtml(r197SemanticPreview(r))}</div>${contextTags?`<div class="rc-tags">${contextTags}</div>`:''}${stable?`<div class="rc-reference">Référence : ${escapeHtml(stable)}</div>`:''}`;
     card.onclick=()=>openFromSearch(item);container.appendChild(card);
   }
   for(const r of exact)appendSemanticSourceCard(r,'Correspondance textuelle vérifiée');
@@ -11484,7 +11498,7 @@ function renderDnResultCard() {
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
-const OFFLINE_CONTENT_BINDING = 'f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d';
+const OFFLINE_CONTENT_BINDING = '38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee';
 const OFFLINE_CORPUS_MANIFEST_SHA256 = '92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b';
 const OFFLINE_STATES = Object.freeze(['NOT_PREPARED','CHECKING','DOWNLOADING','READY','PARTIAL','ERROR','CANCELLED']);
 let offlineUiState = {state:'NOT_PREPARED',completed:0,total:0,failed:[],total_bytes:0,job_id:null,message:'',content_binding_sha256:OFFLINE_CONTENT_BINDING,corpus_manifest_sha256:OFFLINE_CORPUS_MANIFEST_SHA256};
