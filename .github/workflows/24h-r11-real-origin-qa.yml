@@ -1,0 +1,111 @@
+name: 24H R11 actual origin SW and IDB qualification
+on:
+  push:
+    paths:
+      - .github/workflows/24h-r11-real-origin-qa.yml
+permissions:
+  contents: read
+jobs:
+  real_origin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium for actual secure localhost origin
+        run: |
+          mkdir -p "$RUNNER_TEMP/qa"
+          npm install --prefix "$RUNNER_TEMP/qa" playwright@1.56.0
+          "$RUNNER_TEMP/qa/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Get exact read-only production baseline
+        run: |
+          git clone --depth 1 https://github.com/louisriv26/Les-24-Heures-de-la-Passion.git "$RUNNER_TEMP/24h-baseline"
+          test "$(git -C "$RUNNER_TEMP/24h-baseline" rev-parse HEAD)" = "7c394c704d65e53adede20dc95de68e34046026b"
+      - name: Test genuine predecessor to successor update without clearing browser data
+        env:
+          NODE_PATH: ${{ runner.temp }}/qa/node_modules
+        run: |
+          cat > "$RUNNER_TEMP/r11-test.js" <<'JS_TEST'
+          const fs=require('fs'),path=require('path'),http=require('http'),crypto=require('crypto'),assert=require('assert');
+          const {chromium}=require('playwright');
+          const origin=process.env.RUNNER_TEMP+'/24h-origin',base=process.env.RUNNER_TEMP+'/24h-baseline',dest=process.env.GITHUB_WORKSPACE+'/24h-v120-6-b2-r11-qa';
+          const files=['.nojekyll','apple-touch-icon.png','favicon-16.png','favicon-32.png','favicon.ico','icon-120.png','icon-192.png','icon-512.png','icon-60.png','icon-maskable-512.png','index.html','luisa_24_heures.html','manifest.json','sw.js','version.json'];
+          const result={candidate:'v120.6/B2',candidate_zip_sha256:'b60c2f86e7aaa5287e404886f052ea062693530cdeb5a264116c78b5af02b982',tests:[],errors:[]};
+          function mark(name,ok,extra){result.tests.push({name,ok,...(extra||{})});if(!ok)throw Error(name+' FAILED '+JSON.stringify(extra||{}));}
+          const sha=x=>crypto.createHash('sha256').update(x).digest('hex');
+          const htmlPath='/luisa_24_heures.html',url='http://127.0.0.1:8765'+htmlPath;
+          (async()=>{
+           fs.mkdirSync(origin,{recursive:true});
+           for(const f of files)fs.copyFileSync(path.join(base,f),path.join(origin,f));
+           const srv=http.createServer((req,res)=>{const name=decodeURIComponent(new URL(req.url,'http://127.0.0.1').pathname).replace(/^\//,'')||'index.html';if(!files.includes(name)){res.writeHead(404);res.end('not found');return;}const ext=path.extname(name),type=ext==='.html'?'text/html; charset=utf-8':ext==='.js'?'text/javascript':ext==='.json'?'application/json':'application/octet-stream';res.writeHead(200,{'Content-Type':type,'Cache-Control':'no-store'});res.end(fs.readFileSync(path.join(origin,name)));});
+           await new Promise(ok=>srv.listen(8765,'127.0.0.1',ok));
+           const ctx=await chromium.launchPersistentContext(process.env.RUNNER_TEMP+'/24h-profile',{headless:true,viewport:{width:390,height:844}});
+           const page=await ctx.newPage();page.on('pageerror',e=>result.errors.push('page:'+e.message));
+           try{
+            await page.goto(url,{waitUntil:'domcontentloaded',timeout:45000});
+            await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
+            mark('baseline_loaded',await page.evaluate(()=>APP_VERSION==='v120.5'));
+            await page.waitForFunction(async()=>{const r=await navigator.serviceWorker.getRegistration();return !!(r&&r.active)},null,{timeout:60000});
+            await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
+            const before=await page.evaluate(async()=>{
+             const prev=buildPersonalSnapshotFromState();
+             state.lastHour=2;state.readHours.add(2);
+             const k='PASSION24.HOUR.24.DESOL.P081';
+             state.notes[k]=[{id:'r11_qa_note',text:'R11 persistent real IDB note canary',ts:Math.floor(Date.now()/1000)}];
+             const w=await commitDurableChange(prev,'R11 test write',{quiet:true});
+             await setThemePreference('dark');
+             const db=await readPersonalCanonicalRecordStrong();
+             return {writeOk:w.ok,dbRaw:db&&db.raw,backup:buildPersonalDataExport(),sw:(await navigator.serviceWorker.getRegistration()).active?.state};
+            });
+            mark('predecessor_actual_IDB_write',!!before.writeOk&&!!before.dbRaw);
+            mark('predecessor_backup_note',JSON.stringify(before.backup).includes('R11 persistent real IDB note canary'));
+            mark('predecessor_theme_dark',before.backup.themePreference==='dark');
+            const oldShellHash=sha(fs.readFileSync(path.join(origin,'index.html')));
+            mark('predecessor_shell_identity',oldShellHash==='5ed7131dd1ee684aa77efe5c69550d65cab07c836cc25771ff09a7e5300e637c');
+            for(const f of files)fs.copyFileSync(path.join(dest,f),path.join(origin,f));
+            mark('successor_shell_exact_hash',sha(fs.readFileSync(path.join(origin,'index.html')))==='e1467ff9891250f9fbc36a7687c352188de59b64887dc64c43f1a944d1afb099');
+            await page.evaluate(async()=>{const r=await navigator.serviceWorker.getRegistration();await r.update();});
+            await page.waitForFunction(async()=>{const r=await navigator.serviceWorker.getRegistration();return !!(r&&r.waiting)},null,{timeout:60000});
+            mark('real_worker_installed_waiting',true);
+            const peer=await ctx.newPage();await peer.goto(url,{waitUntil:'domcontentloaded'});
+            const request=async()=>page.evaluate(async()=>{const reg=await navigator.serviceWorker.getRegistration(),w=reg.waiting; if(!w)return {type:'NO_WAITING'};const ch=new MessageChannel(),rid='r11-'+Date.now();return await Promise.race([new Promise(resolve=>{ch.port1.onmessage=e=>resolve(e.data);w.postMessage({type:'ACTIVATE_UPDATE_V2',request_id:rid,expected_release_id:'24h-v120-6-b2-annotation-integrity-metadata',expected_release_sequence:120006002},[ch.port2]);}),new Promise(resolve=>setTimeout(()=>resolve({type:'TIMEOUT'}),15000))]);});
+            const rejected=await request();
+            mark('two_client_fail_closed',rejected.type==='ACTIVATE_UPDATE_REJECTED_V2',{observed:rejected.type,reason:rejected.reason});
+            await peer.close();
+            const accepted=await request();
+            mark('single_client_explicit_activation',accepted.type==='ACTIVATE_UPDATE_ACCEPTED_V2',{observed:accepted.type,reason:accepted.reason});
+            await page.waitForFunction(async()=>{const r=await navigator.serviceWorker.getRegistration();return !!(r&&r.active&&!r.waiting)},null,{timeout:30000});
+            await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
+            mark('new_app_version',await page.evaluate(()=>APP_VERSION==='v120.6'));
+            const after=await page.evaluate(async()=>({record:await readPersonalCanonicalRecordStrong(),backup:buildPersonalDataExport(),theme:state.themePreference}));
+            mark('IDB_survives_exact_successor',!!after.record?.raw);
+            mark('note_survives_update',JSON.stringify(after.backup).includes('R11 persistent real IDB note canary'));
+            mark('reading_position_survives_update',after.backup.lastHour===2);
+            mark('read_hours_survive_update',after.backup.readHours.includes(2));
+            mark('theme_survives_update',after.theme==='dark');
+            mark('JSON_backup_roundtrip',JSON.stringify(JSON.parse(JSON.stringify(after.backup)))===JSON.stringify(after.backup));
+            await ctx.setOffline(true);
+            await page.reload({waitUntil:'domcontentloaded',timeout:30000});
+            await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:30000});
+            mark('offline_reopen_real_SW',await page.evaluate(()=>APP_VERSION==='v120.6'));
+            await ctx.setOffline(false);
+            await page.reload({waitUntil:'domcontentloaded'});
+            mark('online_recovery_real_SW',await page.evaluate(()=>APP_VERSION==='v120.6'));
+            for(const width of [320,390,430,768,1024]){
+             await page.setViewportSize({width,height:850});await page.waitForTimeout(150);
+             const d=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth+3,loaded:window.__lp24Init==='done'}));
+             mark('responsive_'+width,d.loaded&&!d.overflow,d);
+            }
+           }finally{await ctx.close();await new Promise(ok=>srv.close(ok))}
+          })().then(()=>{fs.writeFileSync(process.env.RUNNER_TEMP+'/r11-real-origin-results.json',JSON.stringify(result,null,2));console.log('R11_REAL_ORIGIN_PASS',result.tests.length)}).catch(e=>{result.failure=String(e.stack||e);fs.writeFileSync(process.env.RUNNER_TEMP+'/r11-real-origin-results.json',JSON.stringify(result,null,2));console.error('R11_REAL_ORIGIN_HOLD',result.failure);process.exitCode=1});
+          JS_TEST
+          node "$RUNNER_TEMP/r11-test.js"
+      - name: Preserve raw test results even when a gate fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 24h-r11-real-origin-qa
+          path: ${{ runner.temp }}/r11-real-origin-results.json
+          if-no-files-found: warn
