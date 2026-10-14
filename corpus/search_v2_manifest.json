@@ -1,16 +1,16 @@
 {
   "assets": {
     "corpus/search_v2_documents.json": {
-      "bytes": 13417678,
-      "sha256": "65cfeb954ce9ecaa02c761024f2802436c9fcd07982e20438486d1a793fc195a"
+      "bytes": 17815440,
+      "sha256": "04d63a58977fd70ec11b726c160fc45115ad5c2fae16374f54a95c228ee4a2ec"
     },
     "corpus/search_v2_entries.json": {
       "bytes": 561247,
       "sha256": "ae74aceaa596c72afa5727f1dceb39b4e349ceffbb07e926a6aab30c70a5c54c"
     },
     "corpus/search_v2_index.json": {
-      "bytes": 3590192,
-      "sha256": "5b12b6c52dd0633ae2bf2318cd7959b04bbdd886e0adfbdef8862b41d2575b99"
+      "bytes": 3846595,
+      "sha256": "6ef91b5c1c4f165536e726fa0f54f10d5c956e011de744c20c5e86d3863126b5"
     },
     "corpus/search_v2_jesus_filter.json": {
       "bytes": 12680,
@@ -154,6 +154,18 @@
   "token_min_length": 3,
   "fast_mode_mutation_authority_sha256": "09590abe803b99dadf696fbecd64fb88b4fee9a05b38280549b4abcb920e0c78",
   "terminal_mutation_ledger_sha256": "afc351c02ee954583f663ca42615e48c5450893560f052d7da3c8a3caebfc879",
-  "current_binding_app_version": "v2.19.124-R1B-PROVENANCE-R12-INTEGRITY-R1",
-  "binding_note": "v124 R12 metadata-integrity successor: SEARCH-V2 payload/tokenisation/matching/ranking bytes and generation source-hash lineage are unchanged; current release binding updated only."
+  "current_binding_app_version": "v2.19.142.30-R1B-UNIFIED",
+  "binding_note": "R189 successor: six approved visible paragraphs and their Search-V2 documents/BM25 postings revised; normalized tokenization and ranking algorithms unchanged; dense ONNX vectors inherited from R175 without regeneration; full browser qualification pending.",
+  "r189_editorial_lexical_revision": {
+    "source_ledger": "R165_EXPLICIT_APPROVAL",
+    "corrected_document_count": 6,
+    "dense_vectors": "NOT_REBUILT",
+    "verified_scope": "LOCAL_CANDIDATE_ONLY"
+  },
+  "r193_successor": {
+    "source": "R189 six editorial visible projections",
+    "post_R189_change": "E01/E06 supplement placement offsets only; lexical documents unchanged",
+    "dense_vectors": "NOT_REBUILT",
+    "full_live_browser_QA": "NOT_YET_PROVEN"
+  }
 }
