@@ -1152,9 +1152,9 @@
       "sha256": "4df3a82f5f2ee57a0b6913b6ca6b56758b2ab9e27f0d401e06a4ed0792639c06"
     },
     {
-      "bytes": 1002268,
+      "bytes": 1004748,
       "path": "index.html",
-      "sha256": "4da193d25b0938137914fb1d546ed3a76e63822a2b8c861a750d1429535f21e8"
+      "sha256": "c85a6678c1e3df5b037e122154b85ba10445bfeff94d147343c3f4a77b10f71a"
     },
     {
       "bytes": 17214,
@@ -1172,9 +1172,9 @@
       "sha256": "6f8c116ad7258f912c8f17c15a3afbfdafaa6e49a9156f477f1b6bd1512b4955"
     },
     {
-      "bytes": 61755,
+      "bytes": 61936,
       "path": "offline_manifest.json",
-      "sha256": "2a2b6ef07a11cc1fa4b074e6a939ee831cbd4529b0c2f5c23f629ba603271267"
+      "sha256": "da7feb9f9b535f81b531d42adedee1614ad7375404acf2f603e4777dcd9c666c"
     },
     {
       "bytes": 658,
@@ -1369,19 +1369,19 @@
     {
       "bytes": 32222,
       "path": "sw.js",
-      "sha256": "e3dc432916673e82b414eb5d58ed73635f7fc04a44d6b70dfc108bec57cb436d"
+      "sha256": "32a425ced3d5ce8cd2535335d1449d47912b6159c7f4251765df5471c1baa9c4"
     },
     {
-      "bytes": 265080,
+      "bytes": 266687,
       "path": "version.json",
-      "sha256": "450b26dc9cd2e3d65f6fc6249094189005020457e26c21b464cbb3273cca0b52"
+      "sha256": "315b08776880f410d32505f93bf9bcced5ae87f825e25fefc8b19e986ead1f3c"
     }
   ],
   "offline_corpus_assets": 204,
   "offline_corpus_binding_sha256": "f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d",
   "packaged_file_count_excluding_manifest": 275,
-  "production_authority": "NONE__R198_LOCAL_QA_CANDIDATE",
-  "public_version": "142.33",
+  "production_authority": "NONE__R203_DOC_PROVENANCE_LOCAL_QA_CANDIDATE__MAIN_HOLD",
+  "public_version": "142.34",
   "qualified_model_files": 20,
   "r88_structural_repair": {
     "approved_deployment": "NONE",
@@ -1460,5 +1460,21 @@
     "runtime_cache_version": "runtime-v2.19.142.33-r1b-unified",
     "semantic_overlay_pinned_unchanged": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908",
     "authorization": "LOCAL_ONLY_NON_DEPLOYED"
+  },
+  "r203_documentation_update": {
+    "date": "2026-10-14",
+    "changed_payload_files": [
+      "index.html",
+      "sw.js",
+      "offline_manifest.json",
+      "version.json"
+    ],
+    "baseline_app_test_public_version": "142.33",
+    "notes": "APP_TEST_14233_OWNER_PHYSICAL_NAVIGATION_PASS; R203_LOCAL_ONLY",
+    "corpus_search_user_storage_assets_unchanged": true,
+    "offline_binding_unchanged": true,
+    "page_worker_revision": "ldc-v2.19.142.34-r1b-unified",
+    "shell_cache": "shell-v2.19.142.34-r1b-unified",
+    "runtime_cache": "runtime-v2.19.142.34-r1b-unified"
   }
 }
