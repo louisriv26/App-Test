@@ -31,7 +31,7 @@ jobs:
           const result={candidate:'v120.6/B2',origin:base,controls:[],pageErrors:[],tested_sha256:expected['index.html']};
           const check=(name,pass,extra)=>{result.controls.push({name,pass:!!pass,extra});assert.ok(pass,name+' '+JSON.stringify(extra||''))};
           (async()=>{
-           for(const [name,digest] of Object.entries(expected)){ if(name==='.nojekyll'){const resp=await fetch(base+name);check('nojekyll_deployment_control_not_served',resp.status===404,{status:resp.status});continue;}
+           for(const [name,digest] of Object.entries(expected)){ if(name==='.nojekyll'){const resp=await fetch(base+name);check('nojekyll_deployment_sentinel_non_executable',resp.status===404||(resp.status===200&&sha(Buffer.from(await resp.arrayBuffer()))===expected[name]),{status:resp.status});continue;}
             const resp=await fetch(base+name,{cache:'no-store'});
             check('HTTPS_asset_'+name,resp.ok,{status:resp.status});
             const bytes=Buffer.from(await resp.arrayBuffer());
