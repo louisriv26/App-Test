@@ -1,0 +1,107 @@
+name: "LDC R173 native Mon Espace, backup export and shared-origin isolation"
+on:
+  push:
+    branches: [main]
+    paths: [".github/workflows/ldc-v14228-r173-mon-espace-backup-isolation.yml"]
+permissions: {contents: read}
+jobs:
+  workspace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Native Chromium and WebKit
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/qa-r173-modules" --no-save playwright@1.55.0
+          "$RUNNER_TEMP/qa-r173-modules/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Serve untouched production candidate at isolated App-Test path
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/qa-r173-www"
+          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/qa-r173-www/App-Test"
+          nohup python3 -m http.server 8873 --bind 127.0.0.1 --directory "$RUNNER_TEMP/qa-r173-www" > "$RUNNER_TEMP/qa-r173-http.log" 2>&1 &
+          sleep 2
+          curl -fsS -o /dev/null http://127.0.0.1:8873/App-Test/version.json
+      - name: Exercise real UI, persistence, and downloaded backup in two native engines
+        shell: bash
+        env:
+          NODE_PATH: ${{ runner.temp }}/qa-r173-modules/node_modules
+        run: |
+          cat > qa_r173_workspace.cjs <<'NODE'
+          const fs=require('fs'),{chromium,webkit}=require('playwright');
+          const root='http://127.0.0.1:8873/App-Test/';
+          const out={tests:[],errors:[],build:'v2.19.142.28-R170-UNIFIED',source:'exact GitHub checkout',note:'disposable synthetic test browser profiles; no real user data'};
+          const check=(engine,desc,pass,data)=>out.tests.push({engine,desc,pass:!!pass,data:data||null});
+          async function engineRun(type,driver){
+            let b,c,p;const errors=[];
+            try{
+              b=await driver.launch({headless:true});
+              c=await b.newContext({serviceWorkers:'allow',acceptDownloads:true,viewport:type==='Chromium'?{width:390,height:844}:{width:1024,height:768}});
+              p=await c.newPage();p.on('pageerror',e=>errors.push(String(e).slice(0,300)));
+              await p.goto(root,{waitUntil:'domcontentloaded',timeout:60000});await p.waitForTimeout(6000);
+              const boot=await p.evaluate(()=>({v:APP_VERSION,scope:LDC_PROJECT_SCOPE,db:DB_NAME,dbv:DB_VER}));
+              check(type,'Unified app App-Test isolated bootstrap',boot.v==='v2.19.142.28-R170-UNIFIED'&&boot.scope==='app_test'&&boot.db==='ldc_user_v1__app_test'&&boot.dbv===5,boot);
+              await p.evaluate(()=>{if(typeof finishOnboarding==='function')finishOnboarding()});
+              const seeded=await p.evaluate(async()=>{
+                const req=indexedDB.open('ldc_user_v1',4);
+                const main=await new Promise((yes,no)=>{req.onsuccess=()=>yes(req.result);req.onerror=()=>no(req.error)});
+                // For this test, a separate untouched origin-wide historic store must stay version 4.
+                const mainVersion=main.version;main.close();
+                const a=await new Promise((yes,no)=>{const r=indexedDB.open('ldc_user_v1__app_test');r.onsuccess=()=>yes(r.result);r.onerror=()=>no(r.error)});
+                const en='ldc_t07_1906_01_30_e001',pa=en+'_p001',ts=Date.now();
+                const items=[
+                  ['highlights',{id:79173,entry_id:en,para_id:pa,stable_ref:'T7 QA R173',text:'R173 surlignage personnel à conserver',color:'yellow',ts}],
+                  ['notes',{id:79174,entry_id:en,para_id:pa,stable_ref:'T7 QA R173',text:'R173 note personnelle à conserver',ts}],
+                  ['favorites',{entry_id:en,stable_ref:'T7 QA R173',ts}],
+                  ['collections',{id:79175,name:'R173 Collection QA',ts}],
+                  ['col_items',{id:79176,col_id:79175,entry_id:en,para_id:pa,stable_ref:'T7 QA R173',text:'R173 passage de collection',order:0,ts}]
+                ];
+                for(const [store,item] of items){
+                  await new Promise((yes,no)=>{const t=a.transaction(store,'readwrite');t.objectStore(store).put(item);t.oncomplete=yes;t.onerror=()=>no(t.error)});
+                }
+                a.close();return {mainVersion,stores:items.map(x=>x[0])};
+              });
+              check(type,'Native 5 user stores seeded, historical DB stays DB4',seeded.mainVersion===4&&seeded.stores.length===5,seeded);
+              await p.evaluate(async()=>{await goEspace();showEspaceTab('highlights')});
+              const highlights=await p.locator('#ep-highlights .espace-item').allTextContents();
+              check(type,'Visible Mon Espace surlignage',highlights.some(t=>t.includes('R173 surlignage personnel')),highlights.slice(0,3));
+              await p.locator('#es-tab-notes').click();const notes=await p.locator('#ep-notes .espace-item').allTextContents();
+              check(type,'Visible Mon Espace note',notes.some(t=>t.includes('R173 note personnelle')),notes.slice(0,3));
+              await p.locator('#es-tab-collections').click();const collections=await p.locator('#ep-collections').innerText();
+              check(type,'Visible Mon Espace collection',collections.includes('R173 Collection QA'),collections.slice(0,240));
+              const downloading=p.waitForEvent('download',{timeout:55000});
+              await p.getByRole('button',{name:'Sauvegarder les données'}).click();
+              const download=await downloading;
+              const save=process.env.RUNNER_TEMP+'/qa-r173-'+type+'.ldcbackup';
+              await download.saveAs(save);
+              const size=fs.statSync(save).size;
+              check(type,'Native streaming backup downloads nonempty file',size>150,{name:download.suggestedFilename(),bytes:size});
+              await p.reload({waitUntil:'domcontentloaded',timeout:60000});await p.waitForTimeout(5000);
+              const state=await p.evaluate(async()=>{
+                if(typeof finishOnboarding==='function')finishOnboarding();
+                await goEspace();showEspaceTab('highlights');
+                const ar=indexedDB.open('ldc_user_v1');
+                const db=await new Promise((yes,no)=>{ar.onsuccess=()=>yes(ar.result);ar.onerror=()=>no(ar.error)});
+                const mainVersion=db.version;db.close();
+                return {highlight:document.querySelector('#ep-highlights')?.innerText,mainVersion,scope:LDC_PROJECT_SCOPE,db:DB_NAME};
+              });
+              check(type,'Post-reopen Mon Espace retains seeded highlight',state.highlight.includes('R173 surlignage personnel'),state);
+              check(type,'Historical main DB4 unchanged by App-Test run',state.mainVersion===4&&state.scope==='app_test'&&state.db==='ldc_user_v1__app_test',state);
+              check(type,'Uncaught page errors absent',errors.length===0,errors);
+            }catch(e){out.errors.push({engine:type,err:String(e).slice(0,1100)});check(type,'Full workspace + backup scenario completed',false,String(e).slice(0,300));}
+            finally{if(c)await c.close();if(b)await b.close();}
+          }
+          (async()=>{await engineRun('Chromium',chromium);await engineRun('WebKit',webkit);out.pass=out.errors.length===0&&out.tests.every(x=>x.pass);fs.writeFileSync('qa_r173_workspace.json',JSON.stringify(out,null,2));console.log(JSON.stringify(out,null,2));if(!out.pass)process.exitCode=1})().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node qa_r173_workspace.cjs
+      - name: Export QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ldc-r173-native-workspace-export-qa
+          path: |
+            qa_r173_workspace.json
+            qa_r173_workspace.cjs

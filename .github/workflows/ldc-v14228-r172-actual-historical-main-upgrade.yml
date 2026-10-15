@@ -1,0 +1,187 @@
+name: "LDC R172 disposable native v142.19 DB4 to v142.28 DB5 compatibility"
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/ldc-v14228-r172-actual-historical-main-upgrade.yml"
+permissions: {contents: read}
+jobs:
+  historical:
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout exact frozen historical production source (read-only)
+        uses: actions/checkout@v4
+        with:
+          repository: louisriv26/Le-livre-du-Ciel---Github
+          ref: 99711c554b5c63c6fdbc16f2e7d11980e2567d1b
+          path: _qa_historical_14219
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install native browser engines
+        run: |
+          npm install --prefix "$RUNNER_TEMP/qa-r172-modules" --no-save playwright@1.55.0
+          "$RUNNER_TEMP/qa-r172-modules/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Prepare production-compatible local copy; never touch real origin
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os,shutil,json,hashlib,pathlib,http.server,urllib.parse
+          ws=pathlib.Path(os.environ['GITHUB_WORKSPACE']);root=pathlib.Path(os.environ['RUNNER_TEMP'])
+          old=ws/'_qa_historical_14219'
+          new=root/'qa-r172-new'
+          assert old.joinpath('index.html').exists()
+          shutil.copytree(ws,new,ignore=shutil.ignore_patterns('.git','_qa_historical_14219','qa_r*.json','qa_r*.cjs'))
+          oldidx=(old/'index.html').read_text()
+          assert "const DB_NAME = 'ldc_user_v1';" in oldidx and 'const DB_VER  = 4;' in oldidx
+          # The new application bytes MUST be EXACTLY the deployed R170 ZIP.
+          # Do not patch index.html, version.json or the database identity.
+          index=new/'index.html';published=index.read_bytes()
+          assert hashlib.sha256(published).hexdigest()=='344559f9576122c0446f4be492723dc0c4cc471a7d6af9467c8aeba360f75882'
+          assert "const DB_NAME=LDC_STORAGE?LDC_STORAGE.db" in published.decode()
+          assert "const DB_VER  = 5;" in published.decode()
+          verify=json.loads((new/'version.json').read_text())
+          assert verify['app_version']=='v2.19.142.28-R170-UNIFIED'
+          assert verify['r170_unified_storage_contract']['bindings']['main']=='ldc_user_v1'
+          print('Historical index SHA',hashlib.sha256(oldidx.encode()).hexdigest(),'historical files',len(list(old.rglob('*'))))
+          print('QA only: historic v142.19 DB4 -> EXACT unchanged R170 unified v142.28 DB5 /Le-livre-du-Ciel---Github/')
+          PY
+          cat > "$RUNNER_TEMP/qa-r172-serve.py" <<'PY'
+          import http.server,os,pathlib,urllib.parse
+          ws=pathlib.Path(os.environ['GITHUB_WORKSPACE']);rt=pathlib.Path(os.environ['RUNNER_TEMP'])
+          old=ws/'_qa_historical_14219';new=rt/'qa-r172-new';marker=rt/'qa-r172-use-new'
+          class Handler(http.server.SimpleHTTPRequestHandler):
+            def translate_path(self,path):
+              p=urllib.parse.urlsplit(path).path
+              if not p.startswith('/Le-livre-du-Ciel---Github/'):return '/__invalid__'
+              rel=p[len('/Le-livre-du-Ciel---Github/'):].lstrip('/') or 'index.html'
+              if '..' in pathlib.PurePosixPath(rel).parts:return '/__invalid__'
+              return str((new if marker.exists() else old)/rel)
+            def end_headers(self):
+              self.send_header('Cache-Control','no-cache, no-store, must-revalidate')
+              super().end_headers()
+          http.server.ThreadingHTTPServer(('127.0.0.1',8984),Handler).serve_forever()
+          PY
+          nohup python3 "$RUNNER_TEMP/qa-r172-serve.py" > "$RUNNER_TEMP/qa-r172-server.log" 2>&1 &
+          sleep 2
+          curl --fail --silent -o "$RUNNER_TEMP/qa-r172-old-version.json" http://127.0.0.1:8984/Le-livre-du-Ciel---Github/version.json
+          grep -q '142.19' "$RUNNER_TEMP/qa-r172-old-version.json"
+      - name: Genuine same-origin DB4-to-DB5 browser update with all ten stores
+        shell: bash
+        env:
+          NODE_PATH: ${{ runner.temp }}/qa-r172-modules/node_modules
+        run: |
+          cat > qa_r172_native.cjs <<'NODE'
+          const fs=require('fs'),{chromium,webkit}=require('playwright');
+          const uri='http://127.0.0.1:8984/Le-livre-du-Ciel---Github/',marker=process.env.RUNNER_TEMP+'/qa-r172-use-new';
+          const names=['reading_pos','highlights','notes','favorites','collections','col_items','settings','read_entries','backup_stage','backup_stage_meta'];
+          const record={method:'v142.19 immutable source -> EXACT_R170_UNIFIED_BINARY_UNMODIFIED; no real user data or production deployment',tests:[],errors:[]};
+          const add=(engine,name,pass,info)=>record.tests.push({engine,name,pass,info:info||null});
+          async function read(page){
+            return page.evaluate(async names=>{
+              const q=indexedDB.open('ldc_user_v1');
+              const db=await new Promise((ok,no)=>{q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error);q.onblocked=()=>no(new Error('blocked'));});
+              const output={version:db.version,stores:{}};
+              for(const name of names){
+                if(!db.objectStoreNames.contains(name)){output.stores[name]=null;continue;}
+                output.stores[name]=await new Promise((ok,no)=>{const t=db.transaction(name,'readonly');const k=t.objectStore(name).getAll();k.onsuccess=()=>ok(k.result);k.onerror=()=>no(k.error)});
+              }
+              db.close();return output;
+            },names);
+          }
+          async function seed(page){
+            return page.evaluate(async names=>{
+              const q=indexedDB.open('ldc_user_v1');
+              const db=await new Promise((ok,no)=>{q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)});
+              const en='ldc_t07_1906_01_30_e001',pa='ldc_t07_1906_01_30_e001_p001',mark='R172-PRESERVE';
+              const entries=[
+                ['settings',{key:'__r172_sentinel__',value:'v142.19-user-setting',qa_marker:mark}],
+                ['reading_pos',{key:'qa-r172-position',entry_id:en,para_id:pa,volume:7,schema:'ldc-reading-position-v3',source_mode:'enriched',qa_marker:mark}],
+                ['reading_pos',{key:'qa-r172-position-legacy',entry_id:en,para_id:pa,volume:7,schema:'ldc-reading-position-v3',qa_marker:'R172-NORMALIZE'}],
+                ['highlights',{id:997164,entry_id:en,para_id:pa,volume:7,stable_ref:en,start_char:0,end_char:6,text:'Preuve historique',qa_marker:mark}],
+                ['notes',{id:997165,entry_id:en,para_id:pa,volume:7,stable_ref:en,text:'Note personnelle R172 à conserver',qa_marker:mark}],
+                ['favorites',{entry_id:en,stable_ref:en,qa_marker:mark}],
+                ['collections',{id:997166,name:'Collection R172',qa_marker:mark}],
+                ['col_items',{id:997167,col_id:997166,entry_id:en,para_id:pa,stable_ref:en,qa_marker:mark}],
+                ['read_entries',{key:'qa-r172-read',entry_id:en,qa_marker:mark}],
+                ['backup_stage',{stage_key:'qa-r172-technical-stage',qa_marker:mark}],
+                ['backup_stage_meta',{key:'qa-r172-technical-meta',qa_marker:mark}]
+              ];
+              for(const [name,obj] of entries){
+                if(!names.includes(name)||!db.objectStoreNames.contains(name))throw Error('Missing '+name);
+                await new Promise((ok,no)=>{const t=db.transaction(name,'readwrite');t.objectStore(name).put(obj);t.oncomplete=ok;t.onerror=()=>no(t.error)});
+              }
+              localStorage.setItem('ldc_onboarding_done','1');
+              db.close();
+              return entries.map(x=>x[0]);
+            },names);
+          }
+          async function run(engine,name){
+            let browser,context,page;
+            try{
+              if(fs.existsSync(marker))fs.unlinkSync(marker);
+              browser=await engine.launch({headless:true});
+              context=await browser.newContext({serviceWorkers:'allow',viewport:{width:name==='Chromium'?390:1024,height:name==='Chromium'?844:768}});
+              page=await context.newPage();
+              const errors=[];page.on('pageerror',e=>errors.push(String(e).slice(0,220)));
+              await page.goto(uri,{waitUntil:'domcontentloaded',timeout:60000});
+              await page.waitForTimeout(8000);
+              const initial=await page.evaluate(()=>({v:APP_VERSION,db:DB_NAME,dbver:DB_VER}));
+              add(name,'Exactly v142.19 DB4 source started',initial.v.includes('142.19')&&initial.db==='ldc_user_v1'&&initial.dbver===4,initial);
+              if(!initial.v.includes('142.19'))throw Error('wrong baseline');
+              await page.evaluate(()=>{if(typeof finishOnboarding==='function')finishOnboarding()});
+              const populated=await seed(page);
+              const before=await read(page);
+              add(name,'All ten stores available and seeded',before.version===4&&names.every(x=>before.stores[x]?.some(o=>o.qa_marker==='R172-PRESERVE')),Object.fromEntries(names.map(x=>[x,before.stores[x]?.length])));
+              fs.writeFileSync(marker,'new');
+              try{await page.evaluate(async()=>{const reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update()})}catch(e){}
+              await page.close();
+              let reached=false,last=null;
+              for(let attempt=0;attempt<8;attempt++){
+                page=await context.newPage();await page.goto(uri,{waitUntil:'domcontentloaded',timeout:60000});
+                await page.waitForTimeout(4000);
+                last=await page.evaluate(()=>({v:typeof APP_VERSION!=='undefined'?APP_VERSION:null,db:typeof DB_NAME!=='undefined'?DB_NAME:null,onboarding:localStorage.getItem('ldc_onboarding_done')}));
+                if(last.v==='v2.19.142.28-R170-UNIFIED'){reached=true;break;}
+                try{await page.evaluate(async()=>{const reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update()})}catch(e){}
+                await page.close();
+              }
+              add(name,'Version v142.28 reached on same URL/profile',reached,last);
+              if(!reached)throw Error('SW update not reaching v142.28');
+              const after=await read(page);
+              add(name,'v4 upgraded in place to DB5 (same name)',after.version===5&&last.db==='ldc_user_v1',{old:before.version,new:after.version,db:last.db});
+              for(const st of names){
+                const old=before.stores[st]?.find(o=>o.qa_marker==='R172-PRESERVE'),nw=after.stores[st]?.find(o=>o.qa_marker==='R172-PRESERVE');
+                add(name,'Historical record unchanged: '+st,!!old&&JSON.stringify(old)===JSON.stringify(nw),{found:!!nw,...(st==='reading_pos'?{before:old,after:nw}:{} )});
+              }
+              const lb=before.stores.reading_pos.find(x=>x.qa_marker==='R172-NORMALIZE'),la=after.stores.reading_pos.find(x=>x.qa_marker==='R172-NORMALIZE');
+              const preservesLegacy=!!lb&&!!la&&Object.keys(lb).every(k=>JSON.stringify(lb[k])===JSON.stringify(la[k]));
+              const added=la?Object.keys(la).filter(k=>!(k in lb)):[];
+              add(name,'Legacy position normalized non-destructively',preservesLegacy&&added.length===1&&added[0]==='source_mode'&&['aflp','additions','enriched'].includes(la.source_mode),{added,before:lb,after:la});
+              add(name,'Historical onboarding survives',last.onboarding==='1',last.onboarding);
+              await page.reload({waitUntil:'domcontentloaded'});
+              await page.waitForTimeout(3500);
+              const reload=await read(page);
+              add(name,'Post-reload all ten stores intact',reload.version===5&&names.every(st=>reload.stores[st]?.some(x=>x.qa_marker==='R172-PRESERVE')));
+              add(name,'Unexpected page errors',errors.length===0,errors);
+            }catch(e){record.errors.push({engine:name,error:String(e).slice(0,1000)});add(name,'Completed no-loss native upgrade',false,String(e).slice(0,300))}
+            finally{if(context)await context.close();if(browser)await browser.close()}
+          }
+          (async()=>{
+            await run(chromium,'Chromium');
+            await run(webkit,'WebKit');
+            record.pass=record.errors.length===0&&record.tests.every(x=>x.pass);
+            fs.writeFileSync('qa_r172_native.json',JSON.stringify(record,null,2));console.log(JSON.stringify(record,null,2));
+            if(!record.pass)process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node qa_r172_native.cjs
+      - name: Evidence artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ldc-r172-historical-real-native-upgrade-evidence
+          path: |
+            qa_r172_native.cjs
+            qa_r172_native.json

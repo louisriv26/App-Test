@@ -1,21 +1,15 @@
 {
-  "app_test_data_isolation": {
-    "historical_profile_migration": "SYNTHETIC_FIXTURES_ONLY__NO_REAL_PRODUCTION_DB_READ_OR_COPY",
-    "indexeddb_name": "ldc_user_v1__app_test",
-    "production_indexeddb_name": "ldc_user_v1",
-    "reason": "SAME_ORIGIN_GITHUB_PAGES_SUBPATHS__PREVENT_DBV5_UPGRADE_OF_PRODUCTION_DBV4"
-  },
-  "app_version": "v2.19.142.25-R139-APP-TEST-ONLY",
+  "app_version": "v2.19.142.35-R1B-UNIFIED",
   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
   "baseline_candidate_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
   "baseline_candidate_version": "v2.19.142.18-R1B-READER-SEMANTIC-INTEGRATION-WIP",
-  "build_date": "2026-10-12",
+  "build_date": "2026-10-15",
   "collection_link_contract": "LOCAL_COLLECTION_ID_LINK_DOES_NOT_TRANSFER_USER_DATA",
   "collections_visibility": "VISIBLE_MON_ESPACE_WORKSPACE_AND_EXPLICIT_ENTRYPOINT",
   "context_action_contract": "SELECTION_OR_PARAGRAPH_SINGLE_CONTEXT_SURFACE",
   "controllerchange_reload_contract": "NO_AUTOMATIC_RELOAD__MARK_READY_AND_REQUIRE_EXPLICIT_ACTUALISER",
-  "corpus_cache_epoch": "cm-92426c8aaac6fc7c",
+  "corpus_cache_epoch": "cm-r193-88605d37702c45ea",
   "corpus_cache_integrity_contract": "CORPUS_CACHE_EPOCH_DERIVED_FROM_CORPUS_MANIFEST_SHA256__RUNTIME_MISS_FETCH_CACHE_RELOAD__BYTES_AND_SHA256_VERIFIED_AGAINST_FROZEN_OFFLINE_MANIFEST_BEFORE_RUNTIME_CACHE_ADOPTION",
   "corpus_version": "G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221",
   "current_counts": {
@@ -57,8 +51,8 @@
     "state_recorded_status": "PRODUCTION_DEPLOYED_CLOSED_IMMUTABLE__EXACT_REPOSITORY_TREE_AND_SUCCESSFUL_DEPLOYMENT_BINDING_RECORDED",
     "technical_identity": "v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE"
   },
-  "current_release_authority": "R136_APP_TEST_PACKAGE_USER_REQUESTED__NOT_DEPLOYED_BY_ASSISTANT__PRODUCTION_NOT_AUTHORIZED",
-  "current_runtime_browser_validation": "R134_EDGE155_11_OF_11_LOCAL_SCENARIOS_REVIEWED_R135__APP_TEST_HOSTED_AND_PHYSICAL_IOS_NOT_RUN",
+  "current_release_authority": "R220_LOCAL_HOLD__NO_GITHUB_OR_STAGING_OR_PRODUCTION_WRITE",
+  "current_runtime_browser_validation": "R219_CHROMIUM_FILEFREE_COMPONENT_PASS__R220_RELEASE_COHERENCE_TEST_PENDING__HOSTED_PWA_AND_NATIVE_IOS_NOT_RUN",
   "dark_mode_v136_r9": {
     "corpus_changed": false,
     "date": "2026-10-02",
@@ -572,11 +566,11 @@
   "offline_cache_version": "DEPRECATED_VERSION_IDENTITY__PHYSICAL_PERSISTENT_CACHE_NAME_IS_SCOPE_DERIVED_NOT_APP_VERSION_IDENTITY",
   "offline_completion_record_contract": "STORAGE_SCHEMA_PLUS_CONTENT_BINDING_SCHEMA_AND_DIGEST_PLUS_CORPUS_GENERATION_AND_MANIFEST_SCHEMA__NO_APP_VERSION_CACHE_NAME_INVARIANT",
   "offline_content_binding_schema": "ldc-offline-content-binding-v2",
-  "offline_content_binding_sha256": "1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384",
+  "offline_content_binding_sha256": "38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee",
   "offline_corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
   "offline_integrity_contract": "PERSISTENT_OFFLINE_REUSE_REQUIRES_CURRENT_SCOPE_URL_PLUS_EXACT_ASSET_SHA256_AND_BYTE_LENGTH_MARKERS__GLOBAL_PREDECESSOR_BINDING_NOT_REQUIRED__CHANGED_OR_INVALID_ASSETS_FAIL_CLOSED",
   "offline_manifest_schema": "ldc-offline-manifest-v3",
-  "offline_manifest_sha256": "1bd1c39318918e8fcf239d07dd1a0e70abee1a25d86f6975409fd95b445e4759",
+  "offline_manifest_sha256": "cbb9018df43d3c8781bddb9b4e9593034b1b8a9b4987860fb705e0729a017124",
   "offline_scope": "v142.17 direct successor of v142.16 frozen Reader physical repair: bounded reader transaction ownership, session and screen-lifecycle guards; offline content asset set and content binding unchanged. v142.16 not physically qualified. No App-Test or production authorization.",
   "offline_state_schema": "ldc-offline-state-v3",
   "offline_status_typography_v98_contract": "IMPORTANT_STATUS_TITLE_DETAIL_SCALE_12_13_16_19_AND_11_12_15_18_SMALL_NORMAL_LARGE_XLARGE",
@@ -598,7 +592,7 @@
   "package_predecessor_app_version": "v2.19.142.23-R130-LOCAL-P11-CANDIDATE",
   "package_predecessor_zip_sha256": "26fe15417b6b8367ecb44832af383529be3645363020c9668273c423bef73206",
   "package_state_at_freeze": "PREHOSTED_V142_17_QUALIFICATION_CANDIDATE__PENDING_FINAL_PACKAGE_MANIFEST__NOT_A_PRODUCTION_RELEASE",
-  "page_worker_revision": "ldc-v2.19.142.25-r139-app-test-only",
+  "page_worker_revision": "ldc-v2.19.142.35-r1b-unified",
   "par_le_sens_current": {
     "compatible_passages": 20236,
     "excluded_stale_passages": 347,
@@ -822,7 +816,7 @@
   },
   "public_deployment_authorized": false,
   "public_release": "NOT_AUTHORIZED",
-  "public_version": "142.25",
+  "public_version": "142.35",
   "quote_display_contract": "CANONICAL_GUILLEMETS_PRESERVED_IN_CORPUS__ADJACENT_OUTER_DELIMITERS_HIDDEN__TWO_SOURCE_SPAN_GAP_OPENERS_WITH_EXPLICIT_JESUS_ATTRIBUTION_HIDDEN__SIX_PUNCTUATION_GAP_CLOSERS_HIDDEN__NESTED_AND_REPORTED_QUOTES_PRESERVED",
   "r16_authority_fencing_reaudit": {
     "corpus_changed": false,
@@ -1961,7 +1955,7 @@
     "superseded v2.19.0 key-claim-only report audit with exhaustive active-report line/row audit and exact shipped-function tests"
   ],
   "reaudit_static_validator": "HISTORICAL_RA1_PRE_FINAL_TARGETED_TESTS__CURRENT_RA5C_FINAL_AUTHORITY_IN_EXTERNAL_DECISION_LOCK",
-  "rebuild_status": "R139_LOCAL_APP_TEST_ONLY_OFFLINE_SW_AND_VERSION_DETECTION_REPAIR__NO_CORPUS_SEARCH_MODEL_STAGE8_ALGORITHM_CHANGE__NOT_DEPLOYED",
+  "rebuild_status": "R220_LOCAL_HOLD__INTEGRATED_MANIFESTS_GENERATED__NATIVE_BROWSER_AND_DB_GATES_OPEN",
   "remembered_meaning_search_product_gate": "CLOSED_BY_OWNER_ACCEPTED_PRODUCTION_PAR_LE_SENS_V142_10__ACTIVE_USER_FUNCTION_PRESERVED__PLS_V15_RETRIEVAL_BYTES_UNCHANGED__NO_GENERAL_SCIENTIFIC_CALIBRATION_CLAIM",
   "reperes_dual_attribution": {
     "canonical_text_changed": false,
@@ -3110,7 +3104,7 @@
     "backup_stage",
     "backup_stage_meta"
   ],
-  "user_data_db_internal_version": 4,
+  "user_data_db_internal_version": 5,
   "user_data_envelope": "ldc-user-data-envelope-v4",
   "user_data_envelope_schema": "ldc-user-data-envelope",
   "user_data_envelope_version": 4,
@@ -4694,6 +4688,171 @@
   "vector_search_subsystem": "LEGACY_SEMANTIC_V3_VECTOR_SUBSYSTEM_RETIRED_IN_RA3__CURRENT_PAR_LE_SENS_USER_FUNCTION_USES_SEPARATE_PROTECTED_PLS_V15_OWNER_RUNTIME",
   "volume_lru_max": 4,
   "whole_collection_undo_contract": "TEN_SECOND_ATOMIC_PARENT_PLUS_ALL_CAPTURED_CHILDREN__FAIL_CLOSED_ON_PARENT_CHILD_OR_UNEXPECTED_ORPHAN_CONFLICT",
-  "wide_public_release": "NOT_AUTHORIZED__ENGINEERING_CANDIDATE_ONLY__NO_PRODUCTION_PROMOTION",
-  "wide_public_release_gate": "NO_GO__CANDIDATE_PACKAGE_BROWSER_HOSTED_PHYSICAL_E16_E19_OPEN"
+  "wide_public_release": "NOT_AUTHORIZED__R220_LOCAL_HOLD",
+  "wide_public_release_gate": "NO_GO__CANDIDATE_PACKAGE_BROWSER_HOSTED_PHYSICAL_E16_E19_OPEN",
+  "r170_unified_storage_contract": {
+    "release_kind": "UNIFIED_SINGLE_BINARY",
+    "bindings": {
+      "main": "ldc_user_v1",
+      "app_test": "ldc_user_v1__app_test",
+      "massfinderbeta": "ldc_user_v1__massfinderbeta"
+    },
+    "db_internal_version": 5,
+    "onboarding_key_by_site": {
+      "main": "ldc_onboarding_done",
+      "app_test": "ldc_app_test_onboarding_done",
+      "massfinderbeta": "ldc_massfinderbeta_onboarding_done"
+    },
+    "main_historical_source": "v142.19 DB4",
+    "preserve_existing_main_without_live_test_upgrade": true,
+    "single_build_sha_same_across_paths": true,
+    "release_to_production": "HOLD_OWNER_APPROVAL_AND_DEVICE_GATE",
+    "rollback_to_DB4_after_upgrade": "NOT_SAFE",
+    "live_app_test_namespace": "ldc_user_v1__app_test",
+    "beta_historical_data_notice": "OLD BETA DB CAN_BE_ldc_user_v1_ON_SHARED_ORIGIN__NEVER_AUTOMATICALLY_IMPORT_INTO_NEW_BETA_NAMESPACE"
+  },
+  "r175_legacy_update_notice_compatibility": {
+    "reason": "v142.27-R163 old clients only recognize R1B-family or App-Test suffix in version.json",
+    "solution": "R1B-UNIFIED is accepted by old clients and preserves one identical app across deployment paths",
+    "current_release_suffix": "R1B-UNIFIED",
+    "same_on_main": true,
+    "storage_bindings_unchanged": true,
+    "prior_fail_evidence": "https://github.com/louisriv26/App-Test/actions/runs/38387084508"
+  },
+  "r189_editorial_integration": {
+    "based_on": "v2.19.142.28-R1B-UNIFIED",
+    "approval": "R165 five decisions",
+    "format": "canonical-preserving display projection, lexical docs revised",
+    "source_paragraph_text": "unchanged",
+    "legacy_highlight_offsets": "unchanged",
+    "physical_iOS": "NOT_TESTED",
+    "publication": "NOT_AUTHORIZED",
+    "semantic_vectors": "NOT_REBUILT"
+  },
+  "r193_full_inventory_integration": {
+    "source_R175_zip_sha256": "7cdbbdfe4d12af5175d38bd68b9e98bef51cafde55f08c298bd9e52d30045cbe",
+    "source_R189_zip_sha256": "390dc3c322ecb45e2d97cc5577bf7c6f9ffb82240ed35de37a55a0e514481415",
+    "five_G1_six_visible_paragraphs": "R189_APPROVED_DISPLAY_PROJECTIONS_INHERITED",
+    "R6_169": "EXISTING_IDENTITY_RECONCILED_NOT_REPLAYED",
+    "v64_40": "EXISTING_IDENTITY_RECONCILED_NOT_REPLAYED",
+    "supplements_75_177": "PRESERVED",
+    "placements_76": "PRESERVED_WITH_E01_E06_CORRECTED",
+    "protected_E07": "PRESERVED",
+    "unapproved_texts": "NOT_PROMOTED",
+    "canonical_paragraphs": "UNCHANGED",
+    "current_storage": "ldc_user_v1; DB5; existing directory-isolation implementation unchanged",
+    "iPhone_iPad": "NOT_RUN",
+    "production_release": "NOT_AUTHORIZED",
+    "dense_embeddings": "NOT_REGENERATED",
+    "hosted_browser": "BLOCKED_BY_ADMINISTRATOR_NOT_PASS"
+  },
+  "r193_inherited_current_release_authority_r175": "R175_SINGLE_BINARY_APP_TEST_ONLY__R1B_UPDATE_COMPAT_WITH_OLDER_READERS__MAIN_HOLD",
+  "r193_inherited_browser_validation_r175": "R175_QA_PENDING__R170_NATIVE_QA_SUCCESS_BUT_OLD_CLIENT_UPDATE_NOTICE_FAILED",
+  "r193_inherited_user_data_db_internal_version_stale": 4,
+  "r197_search_engine_reconciliation": {
+    "lexical_v2_manifest_sha256": "13581de3453aaef84eb15a856c9d31dffc5d854863cd88f92ef9641824d0c5ee",
+    "lexical_v21_manifest_sha256": "0e931c03ee8d2d91c6b310dcf0f450774caca5b020e5303d6b986e8cf2d9a3d1",
+    "reindexed_documents_count": 6,
+    "lexical_index_postings": 903352,
+    "topology_tokens": {
+      "aflp": 1466902,
+      "additions": 14337,
+      "enriched": 1480967
+    },
+    "semantic_status": "FROZEN_PLS_V16_PRE_R189_SIX_DOCS_DIFF__MUST_NOT_BE_MISREPRESENTED_AS_REEMBEDDED",
+    "canon_paragraphs_changed": false,
+    "user_storage_changed": false,
+    "status": "CANDIDATE_LOCAL_QA_PENDING",
+    "semantic_old_window_ui_guard": 15
+  },
+  "r198_semantic_overlay": {
+    "base_pack_unchanged": true,
+    "rows_remapped": 44,
+    "model_reembedded_rows": 11,
+    "overlay_sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908",
+    "no_new_canonical_edit": true,
+    "historical_semantic_mismatches_outside_four_changed_units": "PRE_EXISTING_FROM_V14228_NOT_CLAIMED_RESOLVED"
+  },
+  "r199_sw_install_identity_repair": {
+    "date": "2026-10-14",
+    "base_candidate": "R198 v142.32 (immutable)",
+    "scope": "DELIVERY_METADATA_AND_ATOMIC_PWA_UPDATE_ONLY",
+    "reproduced": "R198 upgrade install aborts at verifyPublishedRevisionMarker because version.json and offline_manifest.json still claim v142.28",
+    "repair": "ALIGN_HTML_SW_VERSION_VERSION_JSON_OFFLINE_MANIFEST_PAGE_WORKER_REVISION_AND_GENERATION_SCOPED_CACHE_NAMES",
+    "historical_user_db": "UNCHANGED_LDC_USER_V1_DB5_WITHOUT_ANY_USER_DATA_WRITE",
+    "r198_semantic_patch": "UNCHANGED",
+    "lexical_and_canonical_corpus": "UNCHANGED",
+    "release": "LOCAL_CANDIDATE_NON_DEPLOYED_NO_MAIN_AUTHORITY",
+    "future_browsers_physical_qa": "NOT_RUN"
+  },
+  "r203_provenance_validation_update": {
+    "date": "2026-10-14",
+    "classification": "BOUNDED_DOCUMENTARY_CORRECTION_AFTER_R202",
+    "predecessor_public_version": "142.33",
+    "predecessor_app_test_git_commit": "95e3761a99f4ea532ac6bcb049422ab202e6602c",
+    "build_status_at_freeze": "LOCAL_142_34_NOT_YET_DEPLOYED__APP_TEST_ONLY_TARGET",
+    "approved_editorial_decisions": [
+      "E05",
+      "E10",
+      "E13",
+      "T34-P003",
+      "T34-P008"
+    ],
+    "approved_visible_projection_paragraphs": 6,
+    "supplement_objects": 75,
+    "supplement_paragraphs": 177,
+    "anchor_repair": {
+      "E01": {
+        "from": 138,
+        "to": 158
+      },
+      "E06": {
+        "from": 215,
+        "to": 316
+      }
+    },
+    "lexical_documents_reconciled_by": "R197",
+    "semantic_window_reconciliation": {
+      "campaign": "R198",
+      "windows": 44,
+      "new_vectors": 11,
+      "older_non_target_windows_not_claimed_revalidated": true
+    },
+    "historical_source_families": [
+      "FR",
+      "IT",
+      "ES",
+      "EN"
+    ],
+    "main_deployment_authority": "NONE",
+    "user_database_schema_changed": false,
+    "corpus_and_search_assets_changed": false,
+    "not_run": [
+      "native historical DB4-DB5",
+      "real backup restore",
+      "cold offline ONNX Safari",
+      "full physical iOS regression suite"
+    ],
+    "historical_metadata_records_preserved": "PREVIOUS_CAMPAIGN_KEYS_UNCHANGED",
+    "note": "APP_TEST_V14233_NAVIGATION_CONFIRMED_BY_OWNER__DOES_NOT_QUALIFY_ALL_SURFACES"
+  },
+  "r220_local_hold": {
+    "based_on_v14234_exact_sha256": "5d2810a2b119a539bf14527d31f05069f235eed6a80e06c419888e0648238acb",
+    "based_on_r219_lab_index_sha256": "587de87773ab7687b4f9d2ca224644632b6149101284f348f82254b9f9dbf9a1",
+    "release_authority": "NONE",
+    "reader_only_rendering_patch": true,
+    "semantic_index_and_model_unchanged": true,
+    "storage_schema_unchanged": true,
+    "cache_names_per_scope_unique": true,
+    "source_code_changed": [
+      "index.html",
+      "version.json",
+      "sw.js",
+      "offline_manifest.json",
+      "PACKAGE_MANIFEST_SHA256.json"
+    ],
+    "iOS": "NOT_RUN",
+    "DB4_DB5": "NOT_RUN",
+    "full_hosted_browser_PWA": "NOT_RUN"
+  }
 }

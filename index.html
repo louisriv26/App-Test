@@ -1425,6 +1425,12 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
 .dtok-suppressed{display:inline;}
 .dtok-replaced{display:inline;}
 
+.ldc-r216-terminal-unit{display:block;margin:.3em 0 .1em 0;padding:2px 0;}
+.ldc-r216-terminal-unit>.speech-run.speech-block{display:inline;margin:0;padding:0;}
+
+/* R219 LAB: bounded, independently reviewable syntactic continuity, not a voice/text edit. */
+.speech-run.speech-block.ldc-r219-context-inline{display:inline;margin:0;padding:0;}
+.ldc-r216-terminal-unit.ldc-r219-inline-wrapper{display:inline;margin:0;padding:0;}
 /* LDC-E support/deep-link UI */
 .support-preview{white-space:pre-wrap;word-break:break-word;max-height:220px;overflow:auto;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;line-height:1.5;color:var(--ink);margin-top:10px;}
 .support-check{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--ink);line-height:1.4;margin:4px 0 10px;}
@@ -2304,7 +2310,8 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
     <div class="help-section" id="help-sources-verification">
       <div class="help-section-head"><div class="help-section-icon hsi-amber"><i class="ti ti-file-description"></i></div><h2 class="help-section-title">Sources et vérification des textes</h2></div>
       <div class="help-card">
-        <div class="help-text" style="padding:2px 0 10px;">Le texte français PRINCIPAL a une base historique principalement liée à la famille <b>GE/Lumen Luminis</b>. Des contrôles ciblés ont ensuite été menés lorsque des questions de texte, de date, de titre, de locuteur, de structure ou de provenance avaient été identifiées, en utilisant les témoins effectivement disponibles. Lorsque la documentation justifiait une correction, elle a été intégrée ; lorsqu’elle ne permettait pas de trancher avec suffisamment de sécurité, l’incertitude a été conservée et documentée.</div>
+        <div class="help-text" style="padding:2px 0 10px;">Le texte français <b>PRINCIPAL</b> repose historiquement surtout sur la famille <b>GE/Lumen Luminis</b>. Des questions identifiées ont été vérifiées par comparaison de témoins français, italiens, espagnols et anglais effectivement disponibles, en examinant leur origine, leurs dépendances et la portée de leurs preuves. Les campagnes historiques de correction ont été documentées et contrôlées.</div>
+        <div class="help-text" style="padding:0 0 10px;"><b>Mise à jour éditoriale du 13 octobre 2026 :</b> cinq décisions sont approuvées (E13, T34-P003, T34-P008, E10 et E05). <b>Les cinq décisions sont intégrées à la lecture comme six projections d’affichage vérifiées, sans réécriture des paragraphes canoniques.</b> Les deux repositionnements E01 et E06 sont appliqués et les 75 COMPLÉMENTS conservés. La recherche textuelle utilise les textes corrigés ; 44 fenêtres de recherche Par le sens ont été réalignées, dont 11 avec recalcul de vecteurs. La version v142.33 a été publiée et la navigation sur iPhone et iPad confirmée ; les tests de migration réelle, de restauration et d’usage hors connexion restent à compléter. Aucune promotion sur MAIN n’est autorisée. Les variantes et propositions non retenues demeurent documentées.</div>
         <div class="help-text" style="padding:0 0 10px;"><b>Ce travail ne correspond pas à une collation exhaustive des 74 351 paragraphes PRINCIPAL avec tous les témoins possibles ni directement avec les autographes. L’application n’est pas l’édition typique et critique officielle.</b></div>
         <button class="btn-secondary provenance-cta" id="help-provenance-cta" type="button" onclick="openProvenanceDetails('help')"><i class="ti ti-file-description" aria-hidden="true"></i> Voir les sources, les contrôles et leurs limites →</button>
         <div class="help-divider"></div>
@@ -2426,13 +2433,13 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
   </div>
   <div class="scroll provenance-scroll" id="provenance-scroll">
     <div class="provenance-wrap">
-      <div class="provenance-meta"><strong>Notice documentaire : état au 26 septembre 2026</strong></div>
+      <div class="provenance-meta"><strong>Notice documentaire : campagnes historiques · actualisation éditoriale et technique au 14 octobre 2026 (R202–R203)</strong></div>
       <div class="provenance-meta"><strong>36 Tomes · Lecture normale · PRINCIPAL · COMPLÉMENTS</strong></div>
-      <div class="provenance-lead">Cette notice explique d’où vient le texte français de l’application, quels contrôles ont été menés sur les questions identifiées, comment les divergences entre sources ont été traitées, et quelles sont les limites de cette revue documentaire.</div>
+      <div class="provenance-lead">Cette notice distingue l’origine des textes, les vérifications historiques, les décisions éditoriales du 13 octobre 2026 et leur intégration technique. Les corrections approuvées d’octobre 2026 sont désormais incorporées dans la lecture de cette application. L’état de leurs essais et la portée de leur validation sont présentés séparément : une validation éditoriale, un contrôle de fichiers et une qualification sur appareil ne sont pas équivalents.</div>
 
       <div class="provenance-static-summary" aria-labelledby="provenance-en-bref-title">
         <h2 class="provenance-section-heading" id="provenance-en-bref-title" style="margin-top:0;">En bref</h2>
-        <p>Le <strong>PRINCIPAL</strong> est un corpus français de lecture et d’étude dont la base historique est principalement liée à la famille <strong>GE/Lumen Luminis</strong>. Des contrôles ciblés ont été menés sur les questions identifiées à l’aide des témoins effectivement disponibles. Les corrections retenues ont été intégrées ; lorsqu’une modification n’était pas suffisamment justifiée, le texte a été conservé et l’incertitude documentée.</p>
+        <p>Le <strong>PRINCIPAL</strong> est un corpus français de lecture et d’étude dont la base historique est principalement liée à la famille <strong>GE/Lumen Luminis</strong>. Des campagnes de correction anciennes ont été intégrées et documentées. Une revue plus récente a abouti à <strong>cinq approbations éditoriales le 13 octobre 2026</strong> : elles sont <strong>incorporées sous forme de six lectures d’affichage contrôlées</strong>, avec conservation du texte canonique source. Les deux corrections de placement E01/E06 sont aussi présentes. Les variantes et les témoins originaux demeurent traçables ; certaines qualifications fonctionnelles restent ouvertes.</p>
         <p><strong>Cette revue ne signifie pas que chacun des 74 351 paragraphes a été collationné avec tous les témoins disponibles ou directement avec les autographes. L’application n’est pas l’édition typique et critique officielle.</strong></p>
       </div>
 
@@ -2447,7 +2454,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
       </div></details>
 
       <details class="provenance-details"><summary>D’où vient le texte français ?</summary><div class="provenance-details-body">
-        <p>La base française historique du corpus appartient principalement à la famille <strong>GE/Lumen Luminis</strong>. Selon les Tomes et les difficultés rencontrées, le texte a ensuite été rapproché d’autres témoins français — notamment AFLP lorsque cela était pertinent — et comparé à des témoins italiens ou à d’autres sources contrôlées pour examiner des omissions, des divergences de traduction, des dates, des titres, des locuteurs ou des questions de structure.</p>
+        <p>La base française historique du corpus appartient principalement à la famille <strong>GE/Lumen Luminis</strong>. Selon les Tomes et les questions examinées, elle a été rapprochée d’autres témoins français (notamment AFLP) et confrontée à des éditions ou transcriptions italiennes, ainsi qu’aux témoins espagnols et anglais disponibles. Pour établir le contenu d’origine, l’italien est généralement plus proche de la langue de rédaction qu’une traduction française ; toutefois, <strong>l’origine, la filiation et la qualité du témoin</strong> priment sur sa seule langue. Plusieurs traductions peuvent dépendre d’un même intermédiaire et ne constituent pas des confirmations indépendantes.</p>
         <p>Le résultat est un <strong>corpus français établi, corrigé et documenté selon la méthode éditoriale du projet</strong>. Il ne doit pas être confondu avec la reproduction intégrale d’une seule édition française, une traduction entièrement refaite depuis l’italien, une transcription diplomatique des manuscrits autographes ou l’édition typique et critique officielle.</p>
         <p>Plusieurs éditions peuvent transmettre le même texte parce qu’elles dérivent d’une source commune. Leur accord ne constitue donc pas automatiquement plusieurs confirmations indépendantes. Le projet distingue la <strong>concordance</strong>, l’<strong>indépendance</strong> et la <strong>valeur probante</strong> pour la question précise examinée.</p>
         <p>La valeur d’un témoin dépend toujours de la question examinée : <strong>d’où vient-il, de quoi dépend-il, est-il réellement indépendant, et que permet-il de prouver ?</strong></p>
@@ -2464,7 +2471,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
           <li><strong>la correction minimale réellement justifiée</strong> ;</li>
           <li><strong>ce qui doit être conservé</strong> pour ne pas perdre une lecture ou une information pertinente.</li>
         </ol>
-        <p>Lorsqu’une correction était suffisamment justifiée, elle a été appliquée et revérifiée à sa cible. Lorsqu’elle ne l’était pas, le texte a été conservé plutôt que modifié par supposition.</p>
+        <p>Les corrections des <strong>campagnes historiques</strong> ont été appliquées et revérifiées aux cibles concernées lorsqu’elles étaient suffisamment justifiées ; sinon, la lecture a été conservée avec son incertitude. Les <strong>décisions approuvées en octobre 2026</strong> suivent des étapes distinctes : décision sur le texte, intégration sur une base identifiée, vérification des ancres et des index, puis qualification du Reader et des appareils. L’approbation seule ne franchit pas ces étapes.</p>
       </div></details>
 
       <details class="provenance-details"><summary>Comment les divergences ont-elles été traitées ?</summary><div class="provenance-details-body">
@@ -2474,8 +2481,41 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
         <p>Une décision peut être réexaminée si un témoin réellement plus fort devient disponible.</p>
       </div></details>
 
+      <!-- R203_CURRENT_EDITORIAL_INTEGRATION_AND_QUALIFICATION_NOTICE -->
+      <details class="provenance-details"><summary>Intégration éditoriale actuelle, recherches et qualification</summary><div class="provenance-details-body">
+        <p><strong>État incorporé.</strong> Sur la base unifiée v142.28, les cinq décisions éditoriales approuvées le 13 octobre 2026 (E05, E10, E13, T34-P003, T34-P008) produisent <strong>six paragraphes de lecture corrigés</strong> par projection d’affichage. La source canonique conservée dans les fichiers de paragraphes n’a pas été remplacée. Les deux corrections de placement E01 (Tome 2, 8 août 1899 : 138 → 158) et E06 (Tome 7, 4 octobre 1906 : 215 → 316) sont incorporées. Les <strong>75 COMPLÉMENTS / 177 paragraphes</strong> restent distincts du PRINCIPAL ; leurs identifiants et leurs témoins documentaires sont préservés.</p>
+        <p><strong>Recherches.</strong> Le contenu lexical a été réconcilié avec les six lectures corrigées (R197). Pour <strong>Par le sens</strong>, la réconciliation R198 a réaligné <strong>44 fenêtres</strong> concernées, dont <strong>11 représentations vectorielles recalculées</strong> avec le modèle ONNX d’origine. Cela ne démontre pas l’exhaustivité des variantes ni la pertinence de toutes les requêtes : certaines réponses peuvent encore faire l’objet d’une abstention de confiance malgré un passage pertinent classé en tête (R201).</p>
+        <p><strong>État de validation au 14 octobre 2026.</strong> Les correspondances de textes approuvés, la présence des compléments et des ancres, les manifestes et des tests lexicaux et techniques locaux ont été contrôlés (R193–R202). La version v142.33 a été publiée sur <strong>App Test</strong> et la navigation redevenue fonctionnelle sur <strong>iPhone et iPad</strong> a été confirmée par le propriétaire. Cette confirmation ne constitue pas une qualification de chaque fonctionnalité. La migration native des données historiques, la sauvegarde/restauration réelle, le premier lancement ONNX hors connexion sur Safari et certains scénarios de mise à jour restent à qualifier avant une décision de production.</p>
+        <p><strong>Limites.</strong> Aucun essai ne doit être présenté comme effectué sur un appareil lorsqu’il provient d’un banc local ou d’un profil synthétique. Les autres propositions éditoriales non approuvées ne sont pas publiées comme corrections. Les notes, favoris et surlignages sont conservés dans le stockage local propre à chaque répertoire et appareil ; aucune suppression de données n’est demandée. <strong>MAIN : publication non autorisée.</strong> Cette application est une édition documentaire du projet, non l’édition typique et critique officielle ni une homologation ecclésiale.</p>
+      </div></details>
+      <!-- R203_R189_HISTORICAL_APPROVALS_WITH_CURRENT_STATUS -->
+      <details class="provenance-details"><summary>Actualisation d’octobre 2026 : décisions approuvées</summary><div class="provenance-details-body">
+        <p><strong>Le 13 octobre 2026, le responsable du projet a approuvé cinq décisions éditoriales</strong> après analyse documentaire et comparaison de témoins. Cette approbation porte sur les textes et reconstructions précisément retenus ; elle ne certifie ni leur présence dans une version déjà publiée, ni une collation avec les manuscrits autographes.</p>
+        <ul>
+          <li><strong>E13 — Tome 3 (25 avril 1900)</strong> : clarifier l’attribution des larmes à Luisa et de la compassion à Jésus.</li>
+          <li><strong>T34-P003 — Tome 34 (18 juin 1937)</strong> : retenir « le Bien » au lieu de « les Biens ».</li>
+          <li><strong>T34-P008 — Tome 34 (18 juin 1937)</strong> : retenir « de te brûler » au lieu de « de brûler ».</li>
+          <li><strong>E10 — Tome 7 (11 août 1906)</strong> : retenir la formulation française validée autour de « clés » et « trésor », au lieu de l’ancien rapprochement « verrous » et « âme ».</li>
+          <li><strong>E05 — Tome 7 (30 janvier 1906)</strong> : approuver une lecture française continue cohérente, reconstituée à partir de huit paragraphes PRINCIPAL, en traitant atomiquement quatre fragments complémentaires historiques F01–F04 sans les écraser ni les reproduire deux fois. La formulation choisie ne prétend pas trancher un référent grammatical indécidable dans les témoins italiens examinés.</li>
+        </ul>
+        <p><strong>État actuel :</strong> les cinq décisions sont <strong>approuvées et intégrées comme six projections de lecture</strong> ; les empreintes des textes affichés ont été vérifiées dans v142.33 (R202). La distribution sur App Test et le retour favorable sur la navigation iPhone/iPad sont établis, mais ne valent pas qualification exhaustive de tous les usages ou autorisation de diffusion sur MAIN.</p>
+      </div></details>
+
+      <details class="provenance-details"><summary>Autres arbitrages et limites des tests récents</summary><div class="provenance-details-body">
+        <p>La revue complémentaire d’octobre 2026 a examiné <strong>22 dossiers ciblés</strong> en réutilisant les archives et les preuves historiques, sans réouvrir une nouvelle collation générale des 75 COMPLÉMENTS. Le niveau de preuve varie selon les dossiers ; les décisions approuvées et les corrections effectivement présentes dans les fichiers de l’application ne se confondent pas.</p>
+        <p><strong>E14 — Tome 17</strong> : examen documentaire terminé sans modification nécessaire. Pour <strong>E09, T34-P004 et T34-P009</strong>, des propositions étayées ont été établies mais demeurent des <strong>candidats non approuvés et non intégrés</strong> dans le dossier de cette notice. Il serait inexact de les présenter comme corrigées dans l’application.</p>
+        <p>Des essais isolés historiques de présentation, de locuteurs et d’ancrage ont également été effectués sur <strong>E01, E06, E15, S01 et S02</strong>, avec des résultats favorables dans le périmètre <strong>G2</strong> ; E01 et E06 ont depuis été intégrés puis vérifiés dans le Reader ciblé. Les campagnes R194–R201 ont ajouté des contrôles locaux de recherche, de sélection et de mise à jour. Ces essais ne remplacent pas une qualification complète des notes, surlignages, sauvegardes, usages hors connexion ou migrations sur les appareils physiques.</p>
+        <p>Les contrôles historiques de <strong>Stage-2</strong> et les nombres cités plus bas restent datés de leur campagne ; ils ne doivent pas être réinterprétés comme une validation automatique de ces nouvelles propositions ou de la version installée. Les contrôles fonctionnels restant ouverts doivent être menés sur le candidat réellement livré avant une éventuelle promotion sur MAIN. Une décision peut rester conservatoire si la preuve ne permet pas de choisir entre des leçons concurrentes.</p>
+      </div></details>
+
+      <details class="provenance-details"><summary>Ce que signifie « vérifié » pour un passage</summary><div class="provenance-details-body">
+        <p><strong>Une source identifiée</strong> précise la provenance d’un témoin, pas une approbation générale de toutes ses lectures. <strong>Une comparaison éditoriale</strong> porte sur une question et des témoins précis. <strong>Une décision approuvée</strong> autorise une formulation déterminée ; <strong>une correction intégrée</strong> requiert ensuite une correspondance exacte avec les fichiers livrés ; <strong>une validation applicative</strong> nécessite des essais sur le Reader, les ancres, les annotations, la recherche et les données enregistrées.</p>
+        <p>La présence d’un statut ou d’une référence dans <strong>Infos et source</strong> ne signifie pas que le passage a été comparé directement à l’autographe. Pour les six lectures corrigées d’octobre 2026, la distribution sur App Test est attestée ; cela ne transforme pas leur provenance en certification indépendante de chaque témoin. La provenance du <strong>PRINCIPAL</strong> et celle des <strong>COMPLÉMENTS</strong> doivent rester distinguées, même lorsque la lecture normale les réunit.</p>
+        <p><strong>Portée institutionnelle :</strong> ni ces vérifications ni les décisions internes au projet ne valent approbation ecclésiastique. L’application n’est pas l’édition typique et critique officielle.</p>
+      </div></details>
+
       <details class="provenance-details"><summary>Ce que cette revue permet d’affirmer — et ses limites</summary><div class="provenance-details-body">
-        <p>Pour l’état textuel actuel, le programme de correction défini par le projet est <strong>clôturé</strong> : les corrections autorisées ont été intégrées et les incertitudes qui ne permettent pas une modification sûre restent documentées.</p>
+        <p>La <strong>campagne historique Stage-2</strong> décrite ci-dessous est clôturée dans son périmètre et ses chiffres restent historiques. Les <strong>cinq corrections approuvées en octobre 2026 sont maintenant incorporées</strong> ; R202 en a vérifié les cibles exactes. Cette intégration ne clôt pas, par elle-même, les questions de variantes restantes ni toutes les qualifications fonctionnelles. <strong>La validation technique complète de la version destinée à MAIN reste ouverte.</strong></p>
         <p>Cette conclusion porte sur les questions et campagnes effectivement examinées. Elle ne signifie pas que chacun des <strong>74 351 paragraphes PRINCIPAL</strong> a été collationné directement avec l’autographe, que toutes les branches de transmission sont connues, que toutes les variantes historiques sont définitivement résolues, ni qu’aucun défaut encore inconnu ne puisse subsister.</p>
         <p>Ce travail vise un corpus français aussi fidèle, prudent, traçable et cohérent que possible avec les témoins effectivement disponibles. Il ne constitue ni une édition officielle ni une approbation ecclésiastique.</p>
         <p>Dans sa communication du <strong>10 août 2024</strong>, le Postulateur de la Cause, Mgr Paolo Rizzi, indique que la poursuite du parcours canonique doit être accompagnée de la publication d’une <strong>édition typique et critique</strong> des écrits sous la supervision de l’Archevêque de Trani‑Barletta‑Bisceglie et que cette édition sera celle officiellement reconnue par l’autorité ecclésiastique. Une communication officielle publiée en <strong>2026</strong> indique encore que le travail sur cette <strong>Critical and Standard Edition</strong> est en cours.</p>
@@ -2500,7 +2540,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
       </div></details>
 
       <details class="provenance-details"><summary>Programme de correction — périmètre, chiffres et étapes</summary><div class="provenance-details-body">
-        <p>La campagne Stage‑2 a parcouru la totalité de son univers de correction :</p>
+        <p>La <strong>campagne historique Stage-2</strong> (périmètre distinct de l’addendum d’octobre 2026) a parcouru la totalité de son univers de correction :</p>
         <ul>
           <li><strong>161 / 161 unités de défaut confirmées traversées</strong> ;</li>
           <li><strong>244 / 244 décisions adjudiquées</strong> ;</li>
@@ -2518,9 +2558,9 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
       </div></details>
 
       <details class="provenance-details"><summary>Contrôles après implémentation et état du corpus</summary><div class="provenance-details-body">
-        <p>Après les corrections autorisées, des contrôles ont vérifié notamment leur présence aux cibles prévues, l’absence d’opérations exclues ou de modifications parasites, les insertions/suppressions/changements de titre, les locuteurs, l’affichage et les flux, Search‑V2 et ses liaisons de source, la continuité des notes/favoris/surlignages/sauvegardes, ainsi que les manifestes, empreintes et dépendances du paquet final.</p>
-        <p>Pour l’état textuel actuel, les <strong>36 fichiers de Tome</strong> ont été recomptés et leurs empreintes comparées aux métadonnées actives. La finalisation du Tome 1 n’a pas réécrit silencieusement les corrections déjà intégrées dans les autres Tomes.</p>
-        <h3>État chiffré</h3>
+        <p>Au terme de la <strong>campagne historique de correction</strong>, des contrôles avaient vérifié notamment la présence des changements à leurs cibles, l’absence de modifications parasites, les insertions/suppressions/changements de titre, les locuteurs, l’affichage et les flux, Search‑V2 et les liaisons de source, ainsi que les manifestes, empreintes et dépendances du paquet. <strong>Ces résultats historiques ne sont pas un PASS des intégrations éditoriales approuvées en octobre 2026.</strong></p>
+        <p>Dans le <strong>périmètre de référence historique</strong>, les <strong>36 fichiers de Tome</strong> avaient été recomptés et leurs empreintes comparées aux métadonnées alors actives. La finalisation du Tome 1 n’avait pas réécrit silencieusement les corrections des autres Tomes. Ce contrôle ne constitue pas une attestation du contenu servi après un déploiement ultérieur.</p>
+        <h3>État chiffré du corpus (référence historique, contrôles d’intégration R202)</h3>
         <ul>
           <li><strong>36 Tomes</strong></li>
           <li><strong>2 312 enregistrements techniques PRINCIPAL</strong>, dont <strong>16 éléments d’appendice éditorial du Tome 1</strong></li>
@@ -2531,7 +2571,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
           <li><strong>75 COMPLÉMENTS / 177 paragraphes</strong></li>
           <li><strong>74 528 documents textuels</strong> dans l’index Search‑V2 de la lecture normale</li>
         </ul>
-        <p>Search‑V2 reste la recherche textuelle active. <strong>« Par le sens »</strong> utilise un moteur de recherche distinct, que la campagne de correction textuelle décrite ici ne couvre pas. Les chiffres de validation ci-dessus concernent la qualité et la traçabilité des textes ; ils ne constituent pas une mesure de la qualité du classement des résultats de « Par le sens ».</p>
+        <p>Dans le périmètre décrit, Search-V2 était la recherche textuelle qualifiée et <strong>« Par le sens »</strong> utilisait un moteur distinct, non évalué par la campagne de correction textuelle Stage-2. Les chiffres ci-dessus concernent les textes et leur traçabilité, <strong>pas</strong> la qualité de classement de « Par le sens ». Les index lexicaux ont été réconciliés en R197 et les 44 fenêtres sémantiques affectées par les révisions récentes en R198 (dont 11 nouveaux vecteurs), sans prétendre résoudre toute divergence historique hors du périmètre corrigé.</p>
       </div></details>
 
       <details class="provenance-details"><summary>Traçabilité interne et codes de traitement</summary><div class="provenance-details-body">
@@ -2636,11 +2676,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.25-R139-APP-TEST-ONLY'; // R139 LOCAL APP TEST ONLY corrective candidate; NOT hosted or iOS-qualified; NO GitHub or production authority; protected Reader and PLS retained
+const APP_VERSION = 'v2.19.142.35-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD = '2026-10-12';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.25-r139-app-test-only';
+const APP_BUILD = '2026-10-15';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.35-r1b-unified';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -2660,8 +2700,31 @@ const READING_POSITION_SCHEMA = 'ldc-reading-position-v3';
 /* ═══════════════════════════════════════════════════════
    STATE
 ═══════════════════════════════════════════════════════ */
-const DB_NAME = 'ldc_user_v1__app_test';
-const DB_VER  = 5; // R115-D2 local-only versionchange barrier for pre-v5 writers
+// R170: ONE byte-identical application at all paths. Data must still be scoped by
+// GitHub Pages project; IndexedDB and localStorage share the github.io ORIGIN.
+// Historical MAIN retains its canonical DB4->DB5 name. Testing never upgrades MAIN.
+const LDC_PROJECT_SCOPE = (()=>{
+  const path=window.location.pathname.toLowerCase();
+  const match=/^\/([^/]+)(?:\/|$)/.exec(path);
+  const project=match?match[1]:'';
+  const allowedHost=(window.location.protocol==='https:'&&window.location.hostname.toLowerCase()==='louisriv26.github.io')||
+    (window.location.protocol==='http:'&&['127.0.0.1','localhost','[::1]'].includes(window.location.hostname.toLowerCase()));
+  const rootOrIndex=(path==='/'+project||path==='/'+project+'/'||path==='/'+project+'/index.html');
+  if(!allowedHost||!rootOrIndex)return null;
+  if(project==='le-livre-du-ciel---github')return 'main';
+  if(project==='app-test')return 'app_test';
+  // Beta remains isolated; no historical-main DB4 versionchange from a test path.
+  if(project==='massfinderbeta'||project==='mauritius-mass-finder-beta')return 'massfinderbeta';
+  return null;
+})();
+const LDC_PROJECT_STORAGE=Object.freeze({
+  main:Object.freeze({db:'ldc_user_v1',onboarding:'ldc_onboarding_done',intent:'ldc_search_intent_mode_v3'}),
+  app_test:Object.freeze({db:'ldc_user_v1__app_test',onboarding:'ldc_app_test_onboarding_done',intent:'ldc_app_test_search_intent_mode_v3'}),
+  massfinderbeta:Object.freeze({db:'ldc_user_v1__massfinderbeta',onboarding:'ldc_massfinderbeta_onboarding_done',intent:'ldc_massfinderbeta_search_intent_mode_v3'})
+});
+const LDC_STORAGE=LDC_PROJECT_SCOPE?LDC_PROJECT_STORAGE[LDC_PROJECT_SCOPE]:null;
+const DB_NAME=LDC_STORAGE?LDC_STORAGE.db:'__LDC_UNAUTHORIZED_SCOPE_NO_USER_DB__';
+const DB_VER  = 5; // R115-D2 pre-v5 writer barrier; upgrading DB4 requires rollback-aware release governance
 let db = null;
 
 // RA5 two-tier volume cache. corpusCache is lightweight Tome metadata and may
@@ -3346,7 +3409,7 @@ function isStaleRecord(r) {
 /* ═══════════════════════════════════════════════════════
    CORPUS LOADING
 ═══════════════════════════════════════════════════════ */
-const CORPUS_CV = 'cv=cm-92426c8aaac6fc7c'; // derived from corpus/manifest.json SHA-256
+const CORPUS_CV = 'cv=cm-r193-88605d37702c45ea'; // derived from corpus/manifest.json SHA-256
 
 function sourceModeShowsBackbone() { return supplementMode !== 'additions'; }
 function sourceModeShowsSupplements() { return supplementMode !== 'aflp'; }
@@ -4152,7 +4215,7 @@ function finishOnboarding() {
   const overlay=document.getElementById('onboarding-overlay');
   overlay.style.display = 'none';
   setShellState('normal');
-  safeOnboardingStorageSet('ldc_app_test_onboarding_done', '1');
+  safeOnboardingStorageSet(LDC_STORAGE.onboarding, '1');
 }
 
 function obNext() {
@@ -5582,6 +5645,13 @@ function buildInternalSupplementPlacementIndex(vol, entryId) {
       continue;
     }
     for(const placement of placements){
+      // R189 G1 E05: original F01/F02/F04 witnesses remain intact in the
+      // supplementary documentary registry; in normal reading their substance
+      // has already been integrated by the approved, anchor-safe projection.
+      // F03 is intentionally retained as its own unit between P006 and P007.
+      if(supplementMode==='enriched' && entryId==='ldc_t07_1906_01_30_e001' &&
+         s.supplement_id==='LDCSUP.T07.1906-01-30.SUPT2.M2-0086' &&
+         ['M2-0086.F01','M2-0086.F02','M2-0086.F04'].includes(String(placement.fragment_id||'')))continue;
       const paras=supplementPlacementParagraphs(vol,s,placement);
       if(!paras.length)throw new Error('LDC_SUPPLEMENT_PLACEMENT_PARAGRAPHS_MISSING:'+s.supplement_id+':'+String(placement.fragment_id||''));
       const obj={supplement:s,placement,paragraphs:paras};
@@ -5677,6 +5747,108 @@ function rebaseSpeechSegmentsForSlice(segments,start,end){
     out.push({...s,start_char:ns-start,end_char:ne-start,segment_id:String(s.segment_id||'')+'::slice:'+start+'-'+end,_crosses_slice_start:s.start_char<start&&s.end_char>start});
   }
   return out;
+}
+
+// R216 LAB ONLY — sentence-terminal punctuation presentation group.
+// No corpus, voice, run offset or IndexedDB mutation. NOT a released build.
+function ldcR216JoinTerminalPunctuation(frag){
+  const children=Array.from(frag.childNodes);
+  const run=children.findLast(n=>n.nodeType===1&&n.matches('.speech-run.speech-block'));
+  if(!run)return false;
+  // Conservative release gate: leave multi-turn paragraphs to contextual review.
+  // R217 laboratory trial: allow multiple block runs if the LAST run has ONLY terminal punctuation following it.
+  // For any other suffix, the established guard checks below still reject the transformation.
+  const at=children.indexOf(run), tail=children.slice(at+1);
+  if(!tail.length)return false;
+  // Negative controls: no dialogue transition, explicit paragraph break,
+  // flow break, other styled run or editorial ornament can enter the group.
+  if(tail.some(n=>n.nodeType===1&&(n.matches('.speech-run,.speech-paragraph-break,.speech-quoted-voice,.flow-joiner-action-break,.flow-joiner-action-list-break')||n.querySelector('.speech-run,.speech-paragraph-break,.flow-joiner-action-break,.flow-joiner-action-list-break'))))return false;
+  const raw=tail.map(n=>n.textContent||'').join('');
+  if(!/^[\s\u00a0\u202f\u2009\u2007.,;:!?…«»“”„'‘’"()\[\]{}–—-]+$/u.test(raw)||/[\p{L}\p{N}*•★]/u.test(raw))return false;
+  const visibleText=n=>{
+    if(n.nodeType===3)return n.nodeValue||'';
+    if(n.nodeType!==1)return '';
+    if(n.getAttribute('aria-hidden')==='true'||getComputedStyle(n).display==='none')return '';
+    const walk=document.createTreeWalker(n,NodeFilter.SHOW_TEXT);let t='',q;
+    while(q=walk.nextNode()){
+      let a=q.parentElement,visible=true;
+      while(a&&a!==n.parentElement){if(a.getAttribute('aria-hidden')==='true'||getComputedStyle(a).display==='none'){visible=false;break;}a=a.parentElement;}
+      if(visible)t+=q.nodeValue;
+    }return t;
+  };
+  if(!tail.map(visibleText).join('').trim())return false;
+  const unit=document.createElement('span');unit.className='ldc-r216-terminal-unit';
+  frag.insertBefore(unit,run);unit.appendChild(run);tail.forEach(n=>unit.appendChild(n));
+  return true;
+}
+
+
+// R219 LOCAL LAB — allowlisted contextual display corrections only; no edits to voices or text.
+// For each canonical paragraph, require identity, length, prefix/suffix, and exact run offsets.
+const LDC_R219_CONTEXT_CASES = Object.freeze({"ldc_t01_sec080_p003":{"canonical_len":106,"run_ranges":[[52,72]],"expected_prefix":"Mais je me souvenais de ce que Jésus","expected_suffix":"it». Et je ne désirais rien d'autre.","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Mais je me souvenais de ce que Jésus m'avait dit : «Fais ce qu'on te dit». Et je ne désirais rien d'autre."},"ldc_t01_sec103_p014":{"canonical_len":146,"run_ranges":[[26,63]],"expected_prefix":"En entendant les paroles «Je t'ai qu","expected_suffix":" suis sentie sur le point de mourir.","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"En entendant les paroles «Je t'ai quand même aimée et préservée», je fus saisie de fortes souffrances et je me suis sentie sur le point de mourir."},"ldc_t02_undated_e004_p019":{"canonical_len":283,"run_ranges":[[221,239]],"expected_prefix":"Bref, Dieu sème des reflets de Lui-m","expected_suffix":"i ai demandé : «Jésus, m'aimes-Tu ?»","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Bref, Dieu sème des reflets de Lui-même dans toute la création. Cela crée en nous l'impression de Le voir et de Le toucher. Ainsi, nous sommes continuellement rejoints par Lui. Après que le Seigneur m'eut dit les mots : «La Foi, c'est Dieu», je Lui ai demandé : «Jésus, m'aimes-Tu ?»"},"ldc_t02_1899_04_21_e001_p011":{"canonical_len":72,"run_ranges":[[59,62]],"expected_prefix":"Je repris : «As-Tu appris à faire le","expected_suffix":" signe de la croix ?» «Oui», dit-il.","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Je repris : «As-Tu appris à faire le signe de la croix ?» «Oui», dit-il."},"ldc_t12_1921_02_22_e001_p008":{"canonical_len":100,"run_ranges":[[18,22]],"expected_prefix":"Il répéta encore \"Fiat\". Et, cette f","expected_suffix":"e Jésus se multiplièrent à l'infini.","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Il répéta encore \"Fiat\". Et, cette fois, le Sang et les Plaies de Jésus se multiplièrent à l'infini."},"LDC.T14.E0042.P027":{"canonical_len":334,"run_ranges":[[298,302]],"expected_prefix":"Je n'arrive pas à trouver les mots p","expected_suffix":"fiat». Autrement, Il m'annihilerait.","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Je n'arrive pas à trouver les mots pour expliquer. C'est seulement par obéissance que j'ai écrit ce qui précède, avec une grande peine d'âme et par peur de déplaire à Jésus. Il est tolérant quand je ne suis pas sous l'obéissance. Mais si l'obéissance le requiert, alors ma seule réponse doit être «fiat». Autrement, Il m'annihilerait."},"LDC.T16.E0022.P098":{"canonical_len":103,"run_ranges":[[1,53]],"expected_prefix":"\"Que ta Volonté soit faite sur la te","expected_suffix":"it dire ce qui arriva par la suite ?","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"\"Que ta Volonté soit faite sur la terre comme au Ciel\".» Qui pourrait dire ce qui arriva par la suite ?"},"LDC.T17.E0052.P026":{"canonical_len":482,"run_ranges":[[1,10]],"expected_prefix":"\"Je t'aime\".» Par après, un soleil s","expected_suffix":"s remplissaient le Ciel et la terre.","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"\"Je t'aime\".» Par après, un soleil situé à un point extrêmement élevé apparut dans mon esprit. Sa lumière était inaccessible. De son Centre s'échappaient continuellement de petites flammes, chacune contenant un \"Je t'aime\". En sortant, ces flammes se déployaient autour de la Lumière inaccessible. Elles étaient reliées par un fil de lumière à cette Lumière inaccessible qui nourrissait leur vie. Ces petites flammes étaient si nombreuses qu'elles remplissaient le Ciel et la terre."},"LDC.T20.E0004.P003":{"canonical_len":52,"run_ranges":[[2,32]],"expected_prefix":"« Ma fille, la simple expression « V","expected_suffix":"imple expression « Volonté de Dieu »","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"« Ma fille, la simple expression « Volonté de Dieu »"},"LDC.T20.E0026.P023":{"canonical_len":143,"run_ranges":[[57,72]],"expected_prefix":"Puis, après L’avoir entendu dire en ","expected_suffix":", me serrant contre Lui, Il me dit :","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Puis, après L’avoir entendu dire en chaque chose créée « Qui M’appelle ? », mon doux Jésus sortit de moi et, me serrant contre Lui, Il me dit :"},"LDC.T20.E0051.P016":{"canonical_len":110,"run_ranges":[[29,33]],"expected_prefix":"Ainsi celle qui respire le « Tout »,","expected_suffix":" rend le « Tout » qu’elle a respiré.","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Ainsi celle qui respire le « Tout », qui est Dieu, en rendant son souffle, rend le « Tout » qu’elle a respiré."},"LDC.T23.E0008.P057":{"canonical_len":19,"run_ranges":[[0,7]],"expected_prefix":"Ce « un », qui peut","expected_suffix":"Ce « un », qui peut","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Ce « un », qui peut"},"LDC.T23.E0013.P045":{"canonical_len":109,"run_ranges":[[51,57],[93,107]],"expected_prefix":"C’est ainsi que celui qui vit dans m","expected_suffix":"”, et je lui dis : “Tout est à toi.”","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":true,"expected_text":"C’est ainsi que celui qui vit dans ma Volonté peut dire : “Tout est à moi”, et je lui dis : “Tout est à toi.”"},"LDC.T23.E0029.P086":{"canonical_len":123,"run_ranges":[[71,88]],"expected_prefix":"- les Promesses de tant de Biens que","expected_suffix":"a » (« Que Ta Volonté soit faite »).","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"- les Promesses de tant de Biens que je veux accorder aux enfants du « Fiat Voluntas Tua » (« Que Ta Volonté soit faite »)."},"LDC.T24.E0003.P034":{"canonical_len":96,"run_ranges":[[24,58]],"expected_prefix":"Mais lorsque Je dis : « Hors d’ici, ","expected_suffix":", toutes les portes restent fermées.","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Mais lorsque Je dis : « Hors d’ici, il n’y a pas de sortie », toutes les portes restent fermées."},"LDC.T24.E0008.P035":{"canonical_len":39,"run_ranges":[[9,13]],"expected_prefix":"Car ce « Fiat », qui, à peine pronon","expected_suffix":" ce « Fiat », qui, à peine prononcé,","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Car ce « Fiat », qui, à peine prononcé,"},"LDC.T24.E0015.P086":{"canonical_len":174,"run_ranges":[[0,135]],"expected_prefix":"Ah, non ! L’aube a été la dernière h","expected_suffix":"Je suis celle qui appelle le jour. »","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Ah, non ! L’aube a été la dernière heure, mais si elle n’avait pas été précédée par les autres heures, l’aube n’aurait jamais pu dire : « Je suis celle qui appelle le jour. »"},"LDC.T25.E0005.P065":{"canonical_len":79,"run_ranges":[[0,29]],"expected_prefix":"Alors, oui, Je pourrai dire : « J’ai","expected_suffix":"uple, mon Fiat l’a formé pour moi. »","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Alors, oui, Je pourrai dire : « J’ai mon peuple, mon Fiat l’a formé pour moi. »"},"LDC.T25.E0018.P029":{"canonical_len":29,"run_ranges":[[0,6]],"expected_prefix":"- pour « l’homme qui parle ».","expected_suffix":"- pour « l’homme qui parle ».","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"- pour « l’homme qui parle »."},"LDC.T25.E0018.P033":{"canonical_len":39,"run_ranges":[[0,28]],"expected_prefix":"Mais notre Amour n’a pas dit « Assez","expected_suffix":"s notre Amour n’a pas dit « Assez ».","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Mais notre Amour n’a pas dit « Assez »."},"LDC.T27.E0011.P019":{"canonical_len":130,"run_ranges":[[94,103]],"expected_prefix":"Il n’y a aucun acte de Ma Création o","expected_suffix":"Je t’aime », un « je T’adore », etc.","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Il n’y a aucun acte de Ma Création où la créature ne place pas son acte, ne serait-ce qu’un « Je t’aime », un « je T’adore », etc."},"LDC.T29.E0025.P005":{"canonical_len":112,"run_ranges":[[2,18]],"expected_prefix":"« Mes deux Mamans ! » Me rappelant c","expected_suffix":"ngt-quatre, je pensais en moi-même :","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"« Mes deux Mamans ! » Me rappelant cela et ce qui est écrit dans le livre vingt-quatre, je pensais en moi-même :"},"ldc_t11_11_2_p017":{"canonical_len":98,"run_ranges":[[53,56]],"expected_prefix":"Tu me promets, ô Jésus ? Il me sembl","expected_suffix":"ntenant, bénis-moi, bénis-nous tous.","show_space_after_hidden_delimiter":false,"remove_t23_internal_break":false,"expected_text":"Tu me promets, ô Jésus ? Il me semble que Tu me dis «oui». Maintenant, bénis-moi, bénis-nous tous."},"LDC.T34.E0019.P011":{"canonical_len":164,"run_ranges":[[141,150],[152,164]],"expected_prefix":"Elle demanda au soleil de revêtir de","expected_suffix":" lumière le «Je T’aime» de sa Maman.","show_space_after_hidden_delimiter":true,"remove_t23_internal_break":false,"expected_text":"Elle demanda au soleil de revêtir de sa lumière son Créateur et de Le réchauffer afin qu'Il puisse ressentir en chaque goutte de lumière le «Je T’aime» de sa Maman."},"LDC.T34.E0019.P014":{"canonical_len":874,"run_ranges":[[171,180],[182,874]],"expected_prefix":"C'est pourquoi les gazouillis, les t","expected_suffix":" et comme Mes chers frères et sœurs.","show_space_after_hidden_delimiter":true,"remove_t23_internal_break":false,"expected_text":"C'est pourquoi les gazouillis, les trilles et les pépiements des oiseaux, même chaque atome de la terre étaient revêtus de son Amour. Le souffle des bêtes venait avec le «Je T’aime» de Ma Mère, le foin était revêtu de son Amour. Il n'y avait rien que Je puisse voir ou toucher sans ressentir la douceur de son Amour. Elle Me préparait ainsi la plus belle des Fêtes dans Ma Naissance, la Fête de l'Amour et de l’échange de Mon grand Amour que M'a fait trouver Ma douce Mère. Et c’est son Amour qui calmait Mes pleurs, qui Me réchauffait dans la mangeoire où J'étais transi de froid. Je trouvais dans son Amour celui de toutes les créatures. Et elle M'embrassait, Me pressait contre son Cœur et M’aimait avec l'Amour d'une Mère pour tous ses enfants. Et Moi, Je sentais en chaque créature son Amour maternel. Je les aimais comme ses enfants et comme Mes chers frères et sœurs."}});
+function ldcR219JoinContextualQuote(frag, canonicalText){
+  if(!frag || !canonicalText || frag.dataset.canonicalStart!=='0' ||
+     frag.dataset.canonicalEnd!==String(canonicalText.length))return 0;
+  const spec=LDC_R219_CONTEXT_CASES[frag.dataset.paraId];
+  if(!spec || canonicalText.length!==spec.canonical_len ||
+     !canonicalText.startsWith(spec.expected_prefix) ||
+     !canonicalText.endsWith(spec.expected_suffix) ||
+     canonicalText!==spec.expected_text)return 0; // R220: exact-full-text identity guard
+  const runs=Array.from(frag.querySelectorAll('.speech-run.speech-block'));
+  const targets=[];
+  for(const [start,end] of spec.run_ranges){
+    const hits=runs.filter(el=>el.dataset.runStart===String(start)&&el.dataset.runEnd===String(end));
+    if(hits.length!==1)return 0;
+    targets.push(hits[0]);
+  }
+  // A formerly block-separated embedded quote can expose a source space that
+  // the baseline hid together with the guillemet. Validate before any mutation.
+  const quoteBridges=[];
+  if(spec.show_space_after_hidden_delimiter){
+    for(const run of targets.filter(el=>el.classList.contains('speech-marie'))){
+      const marker=run.nextSibling;
+      if(!marker || marker.nodeType!==1 ||
+         !marker.classList.contains('speech-outer-delimiter') ||
+         marker.getAttribute('aria-hidden')!=='true' ||
+         !/^»[ ]$/.test(marker.textContent||''))return 0;
+      quoteBridges.push(marker);
+    }
+    if(quoteBridges.length!==1)return 0;
+  }
+  let t23Break=null;
+  if(spec.remove_t23_internal_break){
+    const candidates=Array.from(frag.querySelectorAll('.speech-paragraph-break'));
+    const matched=candidates.filter(b=>{
+      const p=b.previousSibling,n=b.nextSibling;
+      return b.getAttribute('aria-hidden')==='true' && !(b.textContent||'') &&
+        p && p.nodeType===3 && /”\s*$/.test(p.textContent||'') &&
+        n && n.nodeType===1 && n.classList.contains('speech-post-narrative') &&
+        /^,\s*et je lui dis\s*:/.test(n.textContent||'');
+    });
+    if(matched.length!==1)return 0;
+    t23Break=matched[0];
+  }
+  for(const marker of quoteBridges){
+    // Same canonical characters and same order: only display the existing
+    // whitespace, rather than hiding it with the closing guillemet.
+    marker.textContent='»'; marker.after(document.createTextNode(' '));
+  }
+  if(t23Break)t23Break.remove();
+  for(const run of targets){
+    run.classList.add('ldc-r219-context-inline');
+    // R217 wraps terminal-only punctuation in a block. Here the second, source-
+    // identified citation belongs INSIDE a single T23 sentence, not a new block.
+    if(spec.remove_t23_internal_break && run.parentElement &&
+       run.parentElement.classList.contains('ldc-r216-terminal-unit'))
+      run.parentElement.classList.add('ldc-r219-inline-wrapper');
+    // The speech renderer may insert a visual paragraph break before resumed prose;
+    // only remove that synthetic, aria-hidden zero-text break on these reviewed loci.
+    let node=run.nextSibling;
+    while(node && node.nodeType===3 && !node.textContent.trim())node=node.nextSibling;
+    if(node && node.nodeType===1 && node.classList.contains('speech-paragraph-break') &&
+       node.getAttribute('aria-hidden')==='true' && !(node.textContent||''))node.remove();
+  }
+  return targets.length;
 }
 
 async function openEntryCore(vol, entryId, backDest, opts={}) {
@@ -5891,7 +6063,7 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
       const sliceEnd=Number.isFinite(m.slice_end)?m.slice_end:p.text.length;
       const isSlice=sliceStart!==0||sliceEnd!==p.text.length;
       const sliceText=p.text.slice(sliceStart,sliceEnd);
-      const ops=(displayCache[vol]||{})[p.id]||[];
+      const ops=r189DisplayOpsForSourceMode((displayCache[vol]||{})[p.id]||[],p.id);
       let atoms=null,anchorAtoms=null;
       if(window.LDCDisplayMap){
         if(isSlice){
@@ -5950,6 +6122,8 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
             paraId: m.paraId, atoms: m.atoms, flowMemberIndex: i })
         : escapeHtml(m.text);
       div.appendChild(frag);
+      ldcR216JoinTerminalPunctuation(frag); // before anchor index / highlighting
+      ldcR219JoinContextualQuote(frag, m.canonicalText); // reviewed per-paragraph run offsets
       // §8.1 explicit canonical map: visible slice -> full unsplit canonical text.
       if (window.LDCAnchor) LDCAnchor.indexFragment(frag, m.paraId, m.canonicalText, m.anchorAtoms, {canonicalStart:m.sliceStart,canonicalEnd:m.sliceEnd});
 
@@ -7959,6 +8133,13 @@ async function shareCitation(){
    Marie speech → purple left border block.
    Luisa/narrative → normal inline text.
 ═══════════════════════════════════════════════════════ */
+function r189DisplayOpsForSourceMode(ops, paraId){
+  if(supplementMode==='enriched'||![
+    'ldc_t07_1906_01_30_e001_p001',
+    'ldc_t07_1906_01_30_e001_p007'
+  ].includes(String(paraId||'')))return ops||[];
+  return (ops||[]).filter(op=>!String(op.d||'').startsWith('R189-G1-E05'));
+}
 function buildSpeechHTML(text, segments, highlights, paraId, vol) {
   if (!window.LDCSpeechModel) return escapeHtml(text);
   var model = LDCSpeechModel.buildParagraphSpeechModel(text, segments || []);
@@ -7968,7 +8149,7 @@ function buildSpeechHTML(text, segments, highlights, paraId, vol) {
   // sole authority for which glyphs are source layout and which are semantic —
   // no regex here makes an editorial punctuation decision.
   var atoms = null;
-  var ops = (displayCache[vol] || {})[paraId];
+  var ops = r189DisplayOpsForSourceMode((displayCache[vol] || {})[paraId],paraId);
   if (ops && window.LDCDisplayMap) {
     var proj = LDCDisplayMap.projectParagraph(text, ops);
     if (proj.ok) atoms = proj.atoms;
@@ -8178,7 +8359,7 @@ let searchOrderMode = null; // null = automatic: one-token/book, multi-token/rel
 let searchResultLane = null; // null = strongest primary evidence class (exact/all terms); partial requires explicit expansion
 let searchPartialExpanded = false; // 'Certains termes' only after explicit expansion
 let searchIntentMode = 'words'; // Search-V3 internal lab; explicit user intent
-const SEARCH_INTENT_MODE_KEY = 'ldc_app_test_search_intent_mode_v3';
+const SEARCH_INTENT_MODE_KEY = LDC_STORAGE.intent;
 let searchPage = 1, searchMetadataPage = 1;
 let searchLastPayload = null;
 let searchLastPreflightR88 = null;
@@ -8347,18 +8528,58 @@ function renderSemanticPackUnavailable(raw,structural,status){
   if(structural&&structural.hasStructural&&structural.residual){const n=document.createElement('div');n.className='search-suggestion-box';n.textContent='Les critères Tome/date/référence ont bien été reconnus, mais la recherche par le sens reste indisponible.';container.appendChild(n);}
   if(status&&status.reason)console.warn('Par le sens indisponible :',String(status.reason));
 }
+/* R198: PLS v16 R197-historical guard intentionally inactive after verified overlay.
+   Original R197 note:
+   The 15 old semantic windows containing six G1-corrected paragraphs must NEVER be
+   displayed as current text or used as old-offset selections. This explicit
+   compatibility bridge changes no embeddings, IDs, database or canonical text. */
+const R197_SEMANTIC_STALE_WINDOWS = new Set([]);
+const R197_SEMANTIC_CHANGED_IDS = new Set(["ldc_t07_1906_01_30_e001_p001", "ldc_t07_1906_01_30_e001_p007", "ldc_t07_1906_08_11_e001_p004", "ldcsup_t03_1900_04_25_supt2_m2_0023_f02_p001", "ldcsup_t34_1937_06_18_supt2_m2_0109_f01_p003", "ldcsup_t34_1937_06_18_supt2_m2_0109_f01_p008"]);
+function r197SemanticHistoricalWindow(r){return !!(r && R197_SEMANTIC_STALE_WINDOWS.has(String(r.passage_id || '')));}
+function r197SemanticPreview(r){return r197SemanticHistoricalWindow(r)
+  ? 'Ce passage comprend un texte corrigé depuis la création de l’index sémantique. Ouvrez-le pour lire sa version actuelle ; son classement sémantique provient encore de l’ancienne formulation.'
+  : String(r && r.text || '');}
 function semanticResultToSearchTargetR4(r){
-  const parts=(r.source_spans||[]).filter(x=>x&&x.para_id).map(x=>({para_id:x.para_id,id:x.para_id,canonical_start:Number(x.canonical_start)||0,canonical_end:Number(x.canonical_end)||0}));
-  const first=parts[0]||{};
-  return {...r,id:first.para_id||r.entry_id,stable_ref:(r.source_spans&&r.source_spans[0]&&r.source_spans[0].stable_ref)||r.entry_id,primary_target:{volume:r.volume,entry_id:r.entry_id,id:first.para_id||r.entry_id,supplement_id:r.supplement_id||null},match_parts:parts};
+  const historical=r197SemanticHistoricalWindow(r);
+  const spans=(r.source_spans||[]).filter(x=>x&&x.para_id);
+  // Never trust pre-R189 character offsets for six rewritten paragraphs.
+  const parts=historical?[]:spans.map(x=>({para_id:x.para_id,id:x.para_id,canonical_start:Number(x.canonical_start)||0,canonical_end:Number(x.canonical_end)||0}));
+  const primary=historical?(spans.find(x=>R197_SEMANTIC_CHANGED_IDS.has(String(x.para_id)))||spans[0]||{}):(spans[0]||{});
+  return {...r,id:primary.para_id||r.entry_id,stable_ref:primary.stable_ref||r.entry_id,primary_target:{volume:r.volume,entry_id:r.entry_id,id:primary.para_id||r.entry_id,supplement_id:r.supplement_id||null},match_parts:parts,r197_historical_embedding_window:historical};
 }
 function renderSemanticResultsV4(payload,raw,structural){
   searchLastPayload={semantic:true,payload};renderSearchIntentMode();renderSearchSourceModeRow();renderSpeakerFilterRow();renderVolFilterRow();
   const meta=document.getElementById('search-meta');meta.style.display='block';meta.innerHTML='<span class="semantic-results-heading">Recherche par le sens</span>';
   document.getElementById('trust-notice').style.display='none';const container=document.getElementById('search-results');container.innerHTML='';
   const intro=document.createElement('div');intro.className='semantic-results-intro';intro.innerHTML='Passages classés selon leur proximité avec votre description. Cette recherche ne confirme pas que votre formulation est exacte ou vraie.<details class="semantic-how"><summary>Comment ça marche ?</summary><div class="semantic-how-body">La recherche compare votre description aux passages du Livre du Ciel et les classe selon leur proximité. Elle peut aussi retrouver un passage qui corrige un souvenir imprécis. Le premier passage n’est pas nécessairement celui que vous recherchez : ouvrez les résultats qui semblent correspondre et vérifiez leur contexte.</div></details>';container.appendChild(intro);
-  if(payload.confidence&&payload.confidence.state==='abstain'){const e=document.createElement('div');e.className='empty-state';e.innerHTML='<i class="ti ti-search-off"></i>Aucun passage suffisamment proche n’a été identifié.';container.appendChild(e);return;}
-  for(const r of (payload.results||[])){
+  const evidence=payload.independent_evidence||{exact_text:[],lexical_leads:[]};
+  const exact=(evidence.exact_text||[]).filter(r=>!r197SemanticHistoricalWindow(r)),leads=(evidence.lexical_leads||[]).filter(r=>!r197SemanticHistoricalWindow(r));
+  const abstain=payload.confidence&&payload.confidence.state==='abstain';
+  // Keep dense abstention strict; independently surface actual quote evidence and cautious lexical leads.
+  if(exact.length||(abstain&&leads.length)){
+    const explain=document.createElement('div');explain.className='search-suggestion-box';
+    explain.textContent=abstain?'Le classement par le sens ne permet pas de conclure. Les passages ci-dessous sont des correspondances textuelles à vérifier, pas des résultats sémantiques confirmés.':'Des citations textuelles distinctes du classement sémantique figurent aussi dans les résultats.';
+    container.appendChild(explain);
+  }
+  // R150: deduplicate by original passage identity, never by entry_id.
+  const usedPassages=new Set();
+  function passageKey(r){return String(r&&r.passage_id||'')||String(r&&r.entry_id||'')+':'+String(r&&r.source_spans&&r.source_spans[0]&&r.source_spans[0].para_id||'');}
+  function appendSemanticSourceCard(r,label){
+    if(!r||usedPassages.has(passageKey(r)))return;
+    usedPassages.add(passageKey(r));
+    const item=semanticResultToSearchTargetR4(r),card=document.createElement('button');card.type='button';card.className='result-card';
+    card.dataset.resultKey='semantic-evidence:'+String(r.passage_id||r.entry_id||'');
+    const ref=item.stable_ref||item.entry_id||'';
+    const h=document.createElement('div');h.className='rc-semantic-meta';h.textContent=label+' · Tome '+r.volume+(r.date_display?' · '+r.date_display:'');card.appendChild(h);
+    if(r.title){const title=document.createElement('div');title.className='rc-title';title.textContent=r.title;card.appendChild(title);}
+    const body=document.createElement('div');body.className='rc-body-text';body.textContent=r197SemanticPreview(r);card.appendChild(body);
+    if(ref){const footer=document.createElement('div');footer.className='rc-reference';footer.textContent='Référence : '+ref;card.appendChild(footer);}
+    card.onclick=()=>openFromSearch(item);container.appendChild(card);
+  }
+  // A qualified semantic match has priority over a textual duplicate, not over another passage.
+  if(!abstain)for(const r of (payload.results||[])){
+    if(usedPassages.has(passageKey(r)))continue;
+    usedPassages.add(passageKey(r));
     const item=semanticResultToSearchTargetR4(r),card=document.createElement('button');card.type='button';card.className='result-card';card.dataset.resultKey='semantic:'+String(r.passage_id||r.entry_id||'');
     const speechTag=searchSpeakerFilter?'<span class="rc-tag"><i class="ti ti-message-circle" style="font-size:10px;"></i> Passages contenant des paroles de Jésus</span>':'';
     const supplementTag=r.supplement_id?'<span class="rc-tag exact">COMPLÉMENT</span>':'';
@@ -8367,10 +8588,12 @@ function renderSemanticResultsV4(payload,raw,structural){
     const dateLabel=r.date_display?String(r.date_display):'';
     const primaryMeta=[volumeLabel,dateLabel].filter(Boolean).join(' · ');
     const contextTags=`${supplementTag}${speechTag}`;
-    card.innerHTML=`${primaryMeta?`<div class="rc-semantic-meta">${escapeHtml(primaryMeta)}</div>`:''}${r.title?`<div class="rc-title">${escapeHtml(r.title)}</div>`:''}<div class="rc-body-text">${escapeHtml(r.text||'')}</div>${contextTags?`<div class="rc-tags">${contextTags}</div>`:''}${stable?`<div class="rc-reference">Référence : ${escapeHtml(stable)}</div>`:''}`;
+    card.innerHTML=`${primaryMeta?`<div class="rc-semantic-meta">${escapeHtml(primaryMeta)}</div>`:''}${r.title?`<div class="rc-title">${escapeHtml(r.title)}</div>`:''}<div class="rc-body-text">${escapeHtml(r197SemanticPreview(r))}</div>${contextTags?`<div class="rc-tags">${contextTags}</div>`:''}${stable?`<div class="rc-reference">Référence : ${escapeHtml(stable)}</div>`:''}`;
     card.onclick=()=>openFromSearch(item);container.appendChild(card);
   }
-  if(!(payload.results||[]).length){const e=document.createElement('div');e.className='empty-state';e.textContent='Aucun passage suffisamment proche n’a été identifié.';container.appendChild(e);}
+  for(const r of exact)appendSemanticSourceCard(r,'Correspondance textuelle vérifiée');
+  if(abstain)for(const r of leads)appendSemanticSourceCard(r,'Piste lexicale — pertinence à vérifier');
+  if(!usedPassages.size){const e=document.createElement('div');e.className='empty-state';e.textContent='Aucun passage suffisamment proche n’a été identifié, ni correspondance textuelle vérifiée.';container.appendChild(e);}
 }
 
 async function ensureOwnerSemanticPrepared(generation){
@@ -8390,7 +8613,9 @@ async function ensureOwnerSemanticPrepared(generation){
 async function runOwnerSemanticInference(query,options,generation){
   const runtime=window.LDCPLSV16Runtime;if(!runtime||typeof runtime.search!=='function')throw new Error('PLS_V16_RUNTIME_NOT_BOUND');
   while(ownerSemanticInferencePromise){
-    const prior=ownerSemanticInferencePromise;try{await prior;}catch(_){ }
+    const prior=ownerSemanticInferencePromise;
+    const completed=await Promise.race([prior.then(()=>true,()=>true),new Promise(resolve=>setTimeout(()=>resolve(false),1250))]);
+    if(!completed)throw new Error('SEMANTIC_PREVIOUS_INFERENCE_STALLED');
     if(!isSearchActive(generation))return null;
     if(ownerSemanticInferencePromise===prior)ownerSemanticInferencePromise=null;
   }
@@ -8398,33 +8623,103 @@ async function runOwnerSemanticInference(query,options,generation){
   const current=Promise.resolve().then(()=>runtime.search(query,options));ownerSemanticInferencePromise=current;
   try{return await current;}finally{if(ownerSemanticInferencePromise===current)ownerSemanticInferencePromise=null;}
 }
+/* R150: independent textual lane starts BEFORE model preparation/ONNX. The lexical lane
+   is not semantic validation; slow/failed ONNX is not allowed to hide the textual match.
+   The generation + draft guards prevent a late old query overwriting the next query. */
+let r152LexicalRenderedGeneration=null;
+function r150SemanticLive(raw,generation){return isSearchActive(generation)&&searchQueryDraftCanonical()===raw;}
+function r150RenderTextualOnly(payload,raw,generation,preflight,reason){
+  if(!payload||!r150SemanticLive(raw,generation))return false;
+  renderSearchV2Results(payload,raw);renderSearchIntentMode();
+  const box=document.createElement('div');box.className='search-suggestion-box';
+  box.textContent='Par le sens : moteur non concluant ou lent ('+String(reason||'attente')+'). Correspondances PAR LES MOTS seulement : vérifier les citations. Aucune pertinence sémantique confirmée.';
+  document.getElementById('search-results').prepend(box);
+  const meta=document.getElementById('search-meta');if(meta)meta.insertAdjacentText('afterbegin','Pistes textuelles — ');
+  renderSearchEffectiveScopeR88(preflight,payload);
+  r152LexicalRenderedGeneration=generation;
+  return true;
+}
+function r151RenderUnavailableIfLive(raw,generation,structural,status){
+  // Every async terminal branch is generation-gated, including timeouts and errors.
+  if(r150SemanticLive(raw,generation))renderSemanticPackUnavailable(raw,structural,status);
+}
+function r150Deadline(promise,ms){
+  let timer;
+  return Promise.race([Promise.resolve(promise).then(value=>({ok:true,value}),error=>({ok:false,error})),new Promise(resolve=>{timer=setTimeout(()=>resolve({ok:false,error:new Error('SEMANTIC_TIMEOUT_'+ms)}),ms);})]).finally(()=>clearTimeout(timer));
+}
 async function runSemanticSearchV3(raw,generation,preflight){
   if(!preflight||preflight.status!=='ready')throw new Error('R88_PREFLIGHT_REQUIRED');
   if(preflight.route==='semantic'&&!preflight.description)throw new Error('R88_EMPTY_SEMANTIC_DESCRIPTION_GUARD');
   const structural=preflight.structural;
-  // Metadata-only queries must not initialise ONNX.
   if(preflight.route==='structural'){
     setSearchProgressPhase('Recherche dans les références…',generation);
     const payload=await searchV2Request(preflight.engineQuery,generation);
-    if(isSearchActive(generation)&&searchQueryDraftCanonical()===raw){renderSearchV2Results(payload,raw);renderSearchEffectiveScopeR88(preflight,payload);}
+    if(r150SemanticLive(raw,generation)){renderSearchV2Results(payload,raw);renderSearchEffectiveScopeR88(preflight,payload);}
     return;
   }
-  let status=await semanticPackV3Status();if(!isSearchActive(generation))return;
-  if(!status.available&&status.can_initialize){
-    setSearchProgressPhase('Préparation de Par le sens…',generation);
-    const prepared=await ensureOwnerSemanticPrepared(generation);if(!prepared)return;
-    status=await semanticPackV3Status();if(!isSearchActive(generation))return;
+  // The existing legacy lexical worker is launched immediately, not after ONNX.
+  // In this diagnostic candidate it is text-only and must not be represented as semantic output.
+  let semanticDone=false,lexicalShown=false;
+  let lexical;
+  try {
+    // The worker is attempted immediately, but its synchronous constructor failures
+    // must not prevent the independent semantic lane from running.
+    lexical=Promise.resolve(searchV2Request(preflight.engineQuery||raw,generation,{mode:'enriched',volMin:preflight.options.volMin||0,volMax:preflight.options.volMax||0,jesus:!!preflight.options.jesus}));
+  } catch(e) {
+    console.warn('R152 lexical worker startup failed',String(e&&e.message||e));
+    lexical=Promise.resolve(null);
   }
-  if(!status.available){renderSemanticPackUnavailable(raw,structural,status);return;}
-  if(!ownerSemanticPrepared){
-    setSearchProgressPhase('Préparation de Par le sens…',generation);
-    const prepared=await ensureOwnerSemanticPrepared(generation);if(!prepared)return;
-  }
-  if(!isSearchActive(generation))return;
-  setSearchProgressPhase('Recherche des passages…',generation);
-  const sem=await runOwnerSemanticInference(preflight.description,preflight.options,generation);
-  if(sem==null||!isSearchActive(generation)||searchQueryDraftCanonical()!==raw)return;
-  renderSemanticResultsV4(sem,raw,structural);renderSearchEffectiveScopeR88(preflight);
+  lexical=lexical.catch(e=>{console.warn('R152 lexical worker unavailable',String(e&&e.message||e));return null;});
+  const displayLexical=async why=>{
+    if(lexicalShown)return true;
+    if(semanticDone||!r150SemanticLive(raw,generation))return false;
+    const checked=await r150Deadline(lexical,6500);
+    if(!checked.ok||!checked.value||semanticDone||!r150SemanticLive(raw,generation))return false;
+    if(lexicalShown)return true; // another in-flight displayLexical callback already rendered
+    lexicalShown=r150RenderTextualOnly(checked.value,raw,generation,preflight,why);
+    return lexicalShown;
+  };
+  const timer=setTimeout(()=>{displayLexical('calcul sémantique en cours').catch(()=>{});},2000);
+  try{
+    let status=await semanticPackV3Status();if(!r150SemanticLive(raw,generation))return;
+    if(!status.available&&status.can_initialize){
+      setSearchProgressPhase('Préparation de Par le sens…',generation);
+      const prep=await r150Deadline(ensureOwnerSemanticPrepared(generation),10000);
+      if(!prep.ok){if(!await displayLexical('préparation sémantique indisponible'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:String(prep.error)});return;}
+      if(!r150SemanticLive(raw,generation))return;
+      if(!prep.value){if(!await displayLexical('préparation sémantique non effectuée'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:'SEMANTIC_PREPARATION_FALSE'});return;}
+      status=await semanticPackV3Status();if(!r150SemanticLive(raw,generation))return;
+    }
+    if(!status.available){if(!await displayLexical(status.reason||'moteur indisponible'))r151RenderUnavailableIfLive(raw,generation,structural,status);return;}
+    if(!ownerSemanticPrepared){
+      const prep=await r150Deadline(ensureOwnerSemanticPrepared(generation),10000);
+      if(!prep.ok){if(!await displayLexical('préparation sémantique indisponible'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:String(prep.error)});return;}
+      if(!r150SemanticLive(raw,generation))return;
+      if(!prep.value){if(!await displayLexical('préparation sémantique non effectuée'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:'SEMANTIC_PREPARATION_FALSE'});return;}
+    }
+    if(!r150SemanticLive(raw,generation))return;
+    setSearchProgressPhase('Recherche des passages…',generation);
+    const result=await r150Deadline(runOwnerSemanticInference(preflight.description,preflight.options,generation),10000);
+    if(!result.ok){if(!await displayLexical('calcul sémantique indisponible'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:String(result.error)});return;}
+    if(!r150SemanticLive(raw,generation))return;
+    if(result.value==null){if(!await displayLexical('aucune réponse sémantique'))r151RenderUnavailableIfLive(raw,generation,structural,{reason:'SEMANTIC_RESULT_NULL'});return;}
+    const semanticPayload=result.value, ev=semanticPayload.independent_evidence||{};
+    const noPackEvidence=!(ev.exact_text&&ev.exact_text.length)&&!(ev.lexical_leads&&ev.lexical_leads.length);
+    // A dense abstention with no indexed evidence must not erase a worker quote
+    // previously shown as textual, or a freshly retrieved textual fallback.
+    if(semanticPayload.confidence&&semanticPayload.confidence.state==='abstain'&&noPackEvidence){
+      if(await displayLexical('abstention sémantique')){semanticDone=true;return;}
+    }
+    if(!r150SemanticLive(raw,generation))return; // recheck after awaited lexical abstention
+    renderSemanticResultsV4(semanticPayload,raw,structural);renderSearchEffectiveScopeR88(preflight);
+    semanticDone=true; // Renderer completed. If it throws, rescue with lexical lane.
+  }catch(e){
+    if(!r150SemanticLive(raw,generation))return;
+    console.error('R152 semantic search failed',e);
+    // The lexical Worker can still be healthy when ONNX or status handling fails.
+    try{if(await displayLexical('erreur du moteur sémantique'))return;}catch(fallbackError){console.warn('R152 textual fallback failed',fallbackError);}
+    r151RenderUnavailableIfLive(raw,generation,structural,{reason:String(e&&e.message||e)});
+  }finally{clearTimeout(timer);}
 }
 
 function resetSearchPaging({resetOrder=false,resetLane=false}={}) {
@@ -8977,6 +9272,8 @@ async function runSearch({navigation='reveal-output',commitSource='programmatic'
     if(navigation==='reveal-output')revealSearchOutput();
   }catch(e){
     if(!isSearchActive(generation))return;
+    // A prior textual result is an explicit fallback, not a blank search.
+    if(searchIntentMode==='meaning'&&preflight.status==='ready'&&preflight.route==='semantic'&&typeof r152LexicalRenderedGeneration==='number'&&r152LexicalRenderedGeneration===generation)return;
     console.error('LDC search failed',e);metaEl.style.display='block';metaEl.textContent='Recherche indisponible pour le moment.';document.getElementById('trust-notice').style.display='none';document.getElementById('search-results').innerHTML='<div class="empty-state"><i class="ti ti-alert-triangle"></i>Le moteur de recherche n’a pas pu être vérifié. Aucun résultat partiel n’est affiché.</div>';
     if(navigation==='reveal-output')revealSearchOutput();
   }finally{
@@ -9296,7 +9593,7 @@ async function migrateBackupStageToCurrent(parsed){const plan=portableBackupMigr
 /* STAGE11_BACKUP_PORTABILITY_END */
 async function validateBackupStage(parsed){const errors=[],warnings=[],counts=parsed.counts||{},collectionIds=new Set();if(parsed&&parsed.header&&parsed.header.app_version!==APP_VERSION)warnings.push(`Sauvegarde créée avec ${parsed.header.app_version}; le numéro de version de l’application est traité comme provenance et non comme clé de compatibilité.`);if(parsed&&parsed.migrationSummary&&parsed.migrationSummary.steps&&parsed.migrationSummary.steps.length)warnings.push(`Migration prudente vers le corpus actuel : ${parsed.migrationSummary.steps.join(' → ')}.`);let after=null;while(true){const b=await readBackupStageBatch(parsed.token,after,200);for(const rec of b.rows){if(rec.store==='collections')collectionIds.add(rec.row.id);}if(b.done)break;after=b.lastKey;}after=null;let targetWarnings=0;while(true){const b=await readBackupStageBatch(parsed.token,after,100);for(const rec of b.rows){const row=rec.row,store=rec.store;if(store==='col_items'&&!collectionIds.has(row.col_id))errors.push('Un passage de collection référence une collection absente.');if(store==='highlights'||store==='notes'||store==='col_items'){const vol=row.volume||volumeOfStableRef(row.stable_ref);if(vol&&row.entry_id&&row.para_id){const p=await currentParagraph(vol,row.entry_id,row.para_id);if(!p)targetWarnings++;else if(store==='highlights'&&Number.isInteger(row.end_char)&&row.end_char>p.text.length){const legacyOrStale=!!(parsed.migrationSummary&&parsed.migrationSummary.steps&&parsed.migrationSummary.steps.length)||!!row.needs_reanchor||!!(row.stale_status&&row.stale_status!=='active');if(legacyOrStale)targetWarnings++;else errors.push(`Surlignage hors limites : ${row.para_id}`);}}}}if(b.done)break;after=b.lastKey;}if(targetWarnings)warnings.push(`${targetWarnings} cible(s) devront être vérifiées après restauration.`);const meta=await getBackupStageMeta();if(!meta||meta.token!==parsed.token||!['PARSED','MIGRATED'].includes(meta.status))errors.push('État de préparation incohérent.');if(!errors.length)await putBackupStageMeta(Object.assign({},meta,{status:'READY',validated_at:new Date().toISOString(),warnings,migration_summary:parsed.migrationSummary||meta.migration_summary||null,target_generation:CORPUS_GENERATION}));return{ok:errors.length===0,errors:[...new Set(errors)],warnings:[...new Set(warnings)],counts};}
 
-async function collectUserDataEnvelope(){const state={};for(const store of USER_DATA_STORES)state[store]=await dbGetAll(store);const settings=state.settings||[],getSetting=key=>settings.find(x=>x.key===key)||null;return{schema:USER_DATA_ENVELOPE_SCHEMA,version:USER_DATA_ENVELOPE_VERSION,app_version:APP_VERSION,corpus_generation:CORPUS_GENERATION,exported_at:new Date().toISOString(),backup_metadata:{db_name:DB_NAME,db_version:DB_VER,authority:'IndexedDB ldc_user_v1__app_test is an isolated App Test database, not production; localStorage only stores onboarding acknowledgement; CacheStorage/service-worker caches are not restore data.',coverage:['highlights','notes','favorites','collections','col_items','reading_pos','read_entries','settings.theme','settings.textLevel','settings.showReperes','settings.supplement_mode','settings.offline_completion when present','backup metadata'],reading_position_schema:READING_POSITION_SCHEMA,theme:getSetting('theme'),text_level:getSetting('textLevel'),reperes:getSetting('showReperes'),offline_completion:getSetting('offline_completion')},state};}
+async function collectUserDataEnvelope(){const state={};for(const store of USER_DATA_STORES)state[store]=await dbGetAll(store);const settings=state.settings||[],getSetting=key=>settings.find(x=>x.key===key)||null;return{schema:USER_DATA_ENVELOPE_SCHEMA,version:USER_DATA_ENVELOPE_VERSION,app_version:APP_VERSION,corpus_generation:CORPUS_GENERATION,exported_at:new Date().toISOString(),backup_metadata:{db_name:DB_NAME,db_version:DB_VER,authority:'Chaque chemin GitHub Pages utilise son espace IndexedDB choisi par le même binaire; MAIN conserve ldc_user_v1 et ses données historiques. Les caches ne restaurent pas les données personnelles.',coverage:['highlights','notes','favorites','collections','col_items','reading_pos','read_entries','settings.theme','settings.textLevel','settings.showReperes','settings.supplement_mode','settings.offline_completion when present','backup metadata'],reading_position_schema:READING_POSITION_SCHEMA,theme:getSetting('theme'),text_level:getSetting('textLevel'),reperes:getSetting('showReperes'),offline_completion:getSetting('offline_completion')},state};}
 function downloadBlob(name,type,text){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),0);}
 async function exportBackupJson(){return exportBackupStream();}
 async function exportJournalTxt(){const notes=await dbGetAll('notes'),cols=await dbGetAll('collections'),items=await dbGetAll('col_items'),lines=['Livre du Ciel — Journal de lecture','═'.repeat(40),''];for(const n of notes.sort((a,b)=>a.ts-b.ts)){lines.push(`${n.entry_title||''} · ${n.stable_ref||''}${n.supplement_id?' · COMPLÉMENT':''}`.trim(),new Date(n.ts).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}));if(n.quote)lines.push('',`« ${n.quote} »`);lines.push('',n.text,'','─'.repeat(30),'');}for(const c of cols.sort((a,b)=>a.ts-b.ts)){lines.push('',`COLLECTION — ${c.name}`,'─'.repeat(30));for(const it of items.filter(i=>i.col_id===c.id).sort((a,b)=>a.order-b.order)){lines.push(`${it.stable_ref||''} · ${it.title||''}${it.supplement_id?' · COMPLÉMENT':''}`,`« ${it.text||''} »`);if(it.note)lines.push(`[Note : ${it.note}]`);lines.push('');}}downloadBlob(`ldc-journal-${new Date().toISOString().slice(0,10)}.txt`,'text/plain;charset=utf-8',lines.join('\n'));showToast('Journal lisible exporté');}
@@ -10297,8 +10594,8 @@ function setShellState(state){
 /* STAGE8_MIGRATION_STARTUP_BEGIN */
 const STAGE8_MIGRATION_LOCK='ldc-userdata-migration-db4-v1';
 const STAGE8_MIGRATION_MARKER='stage8_migration_startup_complete_v1';
-const STAGE8_MIGRATION_GATE_REV='gate4-R127-local';
-const STAGE8_MIGRATION_FIXED_POINT=`${APP_VERSION}|${CORPUS_GENERATION}|db${DB_VER}|${STAGE8_MIGRATION_GATE_REV}`;
+const STAGE8_MIGRATION_GATE_REV='gate4-R170-unified';
+const STAGE8_MIGRATION_FIXED_POINT=`${APP_VERSION}|${CORPUS_GENERATION}|db${DB_VER}|${STAGE8_MIGRATION_GATE_REV}`; // R170: per-database fixed point; individual historical markers prevent unnecessary rewriting
 async function stage8MigrationAlreadyComplete(){const m=await dbGet('settings',STAGE8_MIGRATION_MARKER).catch(()=>null);return !!(m&&m.value===STAGE8_MIGRATION_FIXED_POINT);}
 async function stage8HistoricalMigrationNeeded(){
   if(await stage8MigrationAlreadyComplete())return false;
@@ -10326,7 +10623,7 @@ async function runStage8MigrationChain(){
   await migrateUserDataFast1Once();
   await migrateUserDataStage2221Once();
 }
-/* R115-D2 staging/CAS migration design, retained from R134 verified local candidate; App Test qualification only.
+/* R115-D2 staging/CAS migration design retained; R170 identical app bytes on App Test and eventual Main; DB runtime routing differs by path.
    A DB_VER 5 upgrade must complete *before* this gate: an old DB4 connection
    will otherwise hold versionchange blocked and prevent any commit.
    All migration writes happen on a private scratch DB; only a validated
@@ -10764,12 +11061,20 @@ async function r115D2RunTransformingMigration(){
 }
 async function runStage8StartupMigrationGate(){
   if(await stage8MigrationAlreadyComplete())return {skipped:true,reason:'aggregate marker'};
-  const sensitive=await stage8ProfileHasMigrationSensitiveData();
   if(!(navigator.locks&&typeof navigator.locks.request==='function')){
-    const needed=sensitive?await stage8HistoricalMigrationNeeded():false;
-    if(needed){const e=new Error('Impossible de migrer sans verrou. Vos données restent conservées.');e.name='LDCMigrationLockUnavailableError';throw e;}
+    const needed=await stage8HistoricalMigrationNeeded();
+    if(needed){
+      // A new empty profile contains nothing that needs rewriting. A nonempty
+      // historical profile without complete migration markers must fail CLOSED.
+      const counts=await Promise.all(USER_DATA_STORES.map(store=>dbGetAll(store)));
+      const trulyEmpty=counts.every(rows=>rows.length===0);
+      if(!trulyEmpty){
+        const e=new Error('Migration historique nécessaire : navigateur sans Web Locks. Données conservées, aucune transformation effectuée.');
+        e.name='LDCMigrationLockUnavailableError';throw e;
+      }
+    }
     await dbPut('settings',{key:STAGE8_MIGRATION_MARKER,value:STAGE8_MIGRATION_FIXED_POINT,ts:Date.now(),verified_without_mutation:true});
-    return {skipped:true,reason:'no historical migration required'};
+    return {skipped:true,reason:needed?'truly empty new profile':'individual markers complete'};
   }
   return navigator.locks.request(STAGE8_MIGRATION_LOCK,{mode:'exclusive'},async()=>{
     if(await stage8MigrationAlreadyComplete())return {skipped:true,reason:'aggregate marker after lock'};
@@ -10933,6 +11238,12 @@ function showBootFailure(err){
 /* M12_ATOMIC_BOOTSTRAP_END */
 
 async function boot() {
+  // R170: one package, three deterministic site scopes, never share user DBs.
+  // The protection runs before any Service Worker registration or IndexedDB.open.
+  if(!LDC_STORAGE){
+    const err=new Error('Chemin non autorisé pour Livre du Ciel : aucun accès aux données locales.');
+    err.name='LDCWrongDeploymentScopeError';throw err;
+  }
   setShellState('boot');
   const loadingSub=document.querySelector('#loading .l-sub');if(loadingSub)loadingSub.textContent='Vérification de la mise à jour…';
   bootStage='SW_SYNC';
@@ -10994,7 +11305,7 @@ async function boot() {
   await applyInitialDeepLink();
 
   // Show onboarding on first launch
-  if (!safeOnboardingStorageGet('ldc_app_test_onboarding_done')) {
+  if (!safeOnboardingStorageGet(LDC_STORAGE.onboarding)) {
     showOnboarding();
   }
 
@@ -11298,7 +11609,7 @@ function renderDnResultCard() {
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
-const OFFLINE_CONTENT_BINDING = '1fb8d6d8a532806ad6a25b32250091deed174ddb54130f1b05d3da2233a05384';
+const OFFLINE_CONTENT_BINDING = '38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee';
 const OFFLINE_CORPUS_MANIFEST_SHA256 = '92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b';
 const OFFLINE_STATES = Object.freeze(['NOT_PREPARED','CHECKING','DOWNLOADING','READY','PARTIAL','ERROR','CANCELLED']);
 let offlineUiState = {state:'NOT_PREPARED',completed:0,total:0,failed:[],total_bytes:0,job_id:null,message:'',content_binding_sha256:OFFLINE_CONTENT_BINDING,corpus_manifest_sha256:OFFLINE_CORPUS_MANIFEST_SHA256};
@@ -11429,17 +11740,10 @@ async function requestOfflineStatus(timeoutMs=15000){
   });
 }
 async function ensureOfflineStorageCapacity(){
-  const requiredBytes=114483048;
-  try{
-    if(navigator.storage&&typeof navigator.storage.persist==='function') await navigator.storage.persist();
-    if(navigator.storage&&typeof navigator.storage.estimate==='function'){
-      const est=await navigator.storage.estimate(), quota=Number(est.quota||0), usage=Number(est.usage||0), available=Math.max(0,quota-usage);
-      if(quota>0 && available < requiredBytes*1.10){
-        offlineUiState={...offlineUiState,state:'ERROR',message:`Espace de stockage insuffisant : environ ${offlineMb(requiredBytes)} requis, ${offlineMb(available)} disponibles.`};
-        renderOfflineUi(); scheduleOfflinePersist(); return false;
-      }
-    }
-  }catch(_){ /* estimate/persist are advisory; SW verification remains authoritative */ }
+  // R150: do not reject 203/204 (or READY) caches against full 114 MB quota.
+  // SW OFFLINE_PREPARE first checks cached assets; actual Cache.put quota errors
+  // are handled per remaining asset. No cache purge, no DB schema change.
+  try{if(navigator.storage&&typeof navigator.storage.persist==='function')await navigator.storage.persist();}catch(_){}
   return true;
 }
 async function startOfflinePreparation(){
@@ -11529,14 +11833,16 @@ async function fetchPublishedVersion() {
   if(!res||!res.ok)throw new Error(`version HTTP ${res&&res.status}`);
   const meta=await res.json();
   const version=String(meta&&meta.app_version||'').trim();
-  // Accept only the pinned legacy R1B family or explicitly marked App-Test-only successors.
-  // The active App Test publication must also bind its SW revision and isolated DB name.
-  const patchMatch=version.match(/^v2\.19\.(\d+(?:\.\d+)?)-(?:R1B(?:-[A-Za-z0-9]+)*|R\d{2,4}-APP-TEST-ONLY)$/);
-  if(!patchMatch)throw new Error('version publiée invalide');
-  if(version.endsWith('-APP-TEST-ONLY')){
-    const expectedWorkerRevision='ldc-'+version.toLowerCase();
-    if(String(meta&&meta.page_worker_revision||'')!==expectedWorkerRevision)throw new Error('révision du Service Worker publié incohérente');
-    if(String(meta&&meta.app_test_data_isolation&&meta.app_test_data_isolation.indexeddb_name||'')!==DB_NAME)throw new Error('espace IndexedDB App Test incohérent');
+  // One identical release; binding is selected at runtime by project path.
+  const patchMatch=version.match(/^v2\.19\.(\d+(?:\.\d+)?)-(?:R1B(?:-[A-Za-z0-9]+)*|R1B-UNIFIED)$/);
+  if(!patchMatch)throw new Error('identité de version publiée non reconnue');
+  if(version.endsWith('-R1B-UNIFIED')){
+    if(String(meta&&meta.page_worker_revision||'')!==SW_CACHE_VERSION)
+      throw new Error('incohérence de révision Service Worker');
+    if(!LDC_STORAGE||String(meta&&meta.r170_unified_storage_contract&&meta.r170_unified_storage_contract.bindings&&meta.r170_unified_storage_contract.bindings[LDC_PROJECT_SCOPE]||'')!==DB_NAME)
+      throw new Error('incohérence de liaison IndexedDB du site');
+    if(String(meta&&meta.r170_unified_storage_contract&&meta.r170_unified_storage_contract.release_kind||'')!=='UNIFIED_SINGLE_BINARY')
+      throw new Error('métadonnées de publication non cohérentes');
   }
   const explicitPublic=String(meta&&meta.public_version||'').trim();
   const derivedPublic=patchMatch[1];

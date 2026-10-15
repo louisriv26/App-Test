@@ -1,0 +1,150 @@
+name: "LDC v142.28 R171 actual App-Test postdeploy QA"
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/ldc-v14228-r171-postdeploy-qa.yml"
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact candidate and all manifest assets
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          root=pathlib.Path(".")
+          want={"index.html":"344559f9576122c0446f4be492723dc0c4cc471a7d6af9467c8aeba360f75882","search_semantic_pack_registry_r6.js":"d2d0d40f39969494004cd70b1fa45036082f62631ad9dfba85ce6ed8e2a0eb63","offline_manifest.json":"c694b5e62745663f0b6caae350763f5ab88259ac596014c707099c0d6cc11743"}
+          for p,h in want.items():assert hashlib.sha256((root/p).read_bytes()).hexdigest()==h,p
+          manifest=json.loads((root/"PACKAGE_MANIFEST_SHA256.json").read_text())
+          files=manifest.get("files")
+          if isinstance(files,dict): records=[{"path":k,**v} for k,v in files.items()]
+          elif isinstance(files,list):records=files
+          else: records=[]
+          for v in records:
+            b=(root/v["path"]).read_bytes()
+            assert len(b)==int(v["bytes"]) and hashlib.sha256(b).hexdigest()==v["sha256"],v["path"]
+          o=json.loads((root/"offline_manifest.json").read_text())
+          for v in o["assets"]:
+            b=(root/v["path"]).read_bytes()
+            assert len(b)==int(v["bytes"]) and hashlib.sha256(b).hexdigest()==v["sha256"],v["path"]
+          assert len(o["assets"])==204
+          print("LOCAL_INTEGRITY_PASS",len(records),len(o["assets"]))
+          PY
+      - name: GitHub Pages exact-byte verification
+        id: live
+        continue-on-error: true
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request,hashlib,json,time,pathlib
+          base="https://louisriv26.github.io/App-Test/"
+          files=["index.html","sw.js","version.json","offline_manifest.json","search_semantic_pack_registry_r6.js","PACKAGE_MANIFEST_SHA256.json"]
+          expected={p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest() for p in files}
+          result={"page":"App-Test root","files":{},"index_ready":False}
+          for n in range(24):
+            try:
+              with urllib.request.urlopen(base+"index.html?qa-r171="+str(n),timeout=20) as f: raw=f.read()
+              if hashlib.sha256(raw).hexdigest()==expected["index.html"]:result["index_ready"]=True;break
+            except Exception as ex:result["last_error"]=str(ex)
+            time.sleep(8)
+          if result["index_ready"]:
+            for p in files:
+              try:
+                with urllib.request.urlopen(base+p+"?qa-r171="+str(time.time_ns()),timeout=45) as f:data=f.read()
+                result["files"][p]={"http":200,"bytes":len(data),"sha256":hashlib.sha256(data).hexdigest(),"exact":hashlib.sha256(data).hexdigest()==expected[p]}
+              except Exception as e:result["files"][p]={"error":str(e),"exact":False}
+          pathlib.Path("qa_r171_live.json").write_text(json.dumps(result,indent=2))
+          print(json.dumps(result,indent=2))
+          assert result["index_ready"] and all(x.get("exact") for x in result["files"].values()) and len(result["files"])==6,"Live deployment parity not qualified"
+          PY
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit engines
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/qa-modules" --no-save playwright@1.55.0
+          "$RUNNER_TEMP/qa-modules/node_modules/.bin/playwright" install --with-deps chromium webkit
+      - name: Serve exact branch under canonical /App-Test/ path
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/qa-www"
+          ln -s "$GITHUB_WORKSPACE" "$RUNNER_TEMP/qa-www/App-Test"
+          nohup python3 -m http.server 8899 --bind 127.0.0.1 --directory "$RUNNER_TEMP/qa-www" > "$RUNNER_TEMP/r171-server.log" 2>&1 &
+          sleep 2
+          curl -fsS -o /dev/null http://127.0.0.1:8899/App-Test/index.html
+      - name: Independent real-browser functional smoke
+        shell: bash
+        env:
+          NODE_PATH: ${{ runner.temp }}/qa-modules/node_modules
+        run: |
+          cat > qa_r171_runtime.cjs <<'NODE'
+          const fs=require('fs'),{chromium,webkit}=require('playwright');
+          (async()=>{
+            const output={source:'EXACT_GITHUB_CHECKOUT_ON_RUNNER',engines:[],errors:[]};
+            for(const entry of [{kind:'chromium-mobile',engine:chromium,viewport:{width:390,height:844}},{kind:'webkit-tablet',engine:webkit,viewport:{width:1024,height:768}}]){
+              const result={engine:entry.kind,checks:[],errors:[]};output.engines.push(result);
+              let browser;
+              function check(name,pass,detail){result.checks.push({name,pass,detail:detail||null})}
+              try{
+                browser=await entry.engine.launch({headless:true});
+                const context=await browser.newContext({viewport:entry.viewport,serviceWorkers:'allow'});
+                const page=await context.newPage();
+                page.on('pageerror',e=>result.errors.push(String(e).slice(0,240)));
+                const response=await page.goto('http://127.0.0.1:8899/App-Test/',{waitUntil:'domcontentloaded',timeout:60000});
+                check('HTTP load',response.status()===200,'HTTP '+response.status());
+                await page.waitForTimeout(8000);
+                const state=await page.evaluate(()=>({version:typeof APP_VERSION==='string'?APP_VERSION:null,db:typeof DB_NAME==='string'?DB_NAME:null,stage:typeof bootStage!=='undefined'?bootStage:null,search:!!document.getElementById('search-input-meaning'),sw:!!navigator.serviceWorker.controller}));
+                result.boot=state;
+                check('Exact version',state.version==='v2.19.142.28-R170-UNIFIED',state.version);
+                check('Isolated App Test DB name',state.db==='ldc_user_v1__app_test',state.db);
+                check('Search UI present',state.search);
+                try{
+                  await page.evaluate(async()=>{if(typeof finishOnboarding==='function')finishOnboarding();if(typeof goSearch==='function')await goSearch();if(typeof setSearchIntentMode==='function')setSearchIntentMode('meaning');});
+                  const t=page.locator('#search-input-meaning');
+                  for(const q of ['la croix est un trésor','la croix a une très grande valeur']){
+                    await t.fill(q);
+                    await page.locator('#search-submit').click({timeout:15000});
+                    await page.waitForTimeout(25000);
+                    const info=await page.evaluate(()=>({count:document.querySelectorAll('#search-results .result-card').length,meta:document.getElementById('search-meta')?.innerText?.slice(0,300),excerpt:document.getElementById('search-results')?.innerText?.slice(0,400)}));
+                    check('Search: '+q,info.count>0,info);
+                  }
+                }catch(e){check('End-to-end semantic search',false,String(e).slice(0,380))}
+                const data=await page.evaluate(async()=>{
+                  if(!indexedDB.databases)return {supported:false};
+                  const before=(await indexedDB.databases()).map(x=>x.name);
+                  const name='ldc_user_v1__app_test';
+                  if(!before.includes(name))return {supported:true,db_exists:false,databases:before};
+                  const db=await new Promise((ok,no)=>{let req=indexedDB.open(name);req.onsuccess=()=>ok(req.result);req.onerror=()=>no(req.error)});
+                  const stores=[...db.objectStoreNames];db.close();
+                  return {supported:true,db_exists:true,stores};
+                });
+                result.indexedDb=data;
+                check('App database present and expected stores',data.db_exists===true && ['favorites','highlights','notes','settings'].every(s=>data.stores.includes(s)),data);
+                await page.reload({waitUntil:'domcontentloaded',timeout:60000});await page.waitForTimeout(4000);
+                const after=await page.evaluate(()=>({version:typeof APP_VERSION==='string'?APP_VERSION:null,db:typeof DB_NAME==='string'?DB_NAME:null}));
+                check('Reload retains app identity',after.version===state.version&&after.db===state.db,after);
+                await context.close();
+              }catch(e){result.errors.push(String(e).slice(0,1000))}
+              finally{if(browser)await browser.close()}
+            }
+            fs.writeFileSync('qa_r171_runtime.json',JSON.stringify(output,null,2));
+            console.log(JSON.stringify(output,null,2));
+            if(output.engines.some(e=>e.checks.some(c=>!c.pass)||e.errors.length))process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node qa_r171_runtime.cjs
+      - name: Export independent QA artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ldc-v14228-r171-postdeploy-evidence
+          path: |
+            qa_r171_live.json
+            qa_r171_runtime.json
+            qa_r171_runtime.cjs

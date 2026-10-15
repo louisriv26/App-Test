@@ -1,0 +1,98 @@
+name: "LDC R187 MAIN full offline cached reopening plus cold/warm semantic recovery"
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/ldc-v14228-r187-PROD-offline-semantic-recovery.yml"
+permissions: {contents: read}
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Chromium
+        shell: bash
+        run: |
+          npm install --prefix "$RUNNER_TEMP/qa-offline" --no-save playwright@1.55.0
+          "$RUNNER_TEMP/qa-offline/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Confirm live production origin
+        shell: bash
+        run: |
+          curl --fail --silent --show-error --location -o /dev/null "https://louisriv26.github.io/Le-livre-du-Ciel---Github/version.json"
+      - name: Prepare full offline assets then cold-reopen without network
+        shell: bash
+        env:
+          NODE_PATH: ${{ runner.temp }}/qa-offline/node_modules
+        run: |
+          cat > qa_r187_prod_offline.cjs <<'NODE'
+          const {chromium}=require('playwright'),fs=require('fs');
+          (async()=>{
+            const log={test:'R187 ACTUAL live MAIN offline: cold ONNX timeout vs warm retry',steps:[],messages:[],errors:[]};
+            let browser;
+            try{
+              browser=await chromium.launch({headless:true});
+              const cx=await browser.newContext({serviceWorkers:'allow',viewport:{width:390,height:844}});
+              let pg=await cx.newPage();
+              pg.on('pageerror',e=>log.errors.push(String(e).slice(0,350)));
+              await pg.goto('https://louisriv26.github.io/Le-livre-du-Ciel---Github/',{waitUntil:'domcontentloaded',timeout:60000});
+              await pg.waitForTimeout(8000);
+              await pg.evaluate(()=>{if(typeof finishOnboarding==='function')finishOnboarding();window.__r171_msgs=[];navigator.serviceWorker.addEventListener('message',e=>{if(e.data?.type==='LDC_OFFLINE_STATUS')window.__r171_msgs.push(e.data)});});
+              const readiness=await pg.evaluate(async()=>{const reg=await navigator.serviceWorker.ready;return {controller:!!navigator.serviceWorker.controller,scope:reg.scope,cacheNames:await caches.keys()}});
+              log.steps.push({name:'SW scope',...readiness,pass:readiness.scope==='https://louisriv26.github.io/Le-livre-du-Ciel---Github/' });
+              await pg.evaluate(()=>navigator.serviceWorker.controller.postMessage({type:'OFFLINE_PREPARE',job_id:'R184-PROD-QA-ISOLATED'}));
+              await pg.waitForFunction(()=>window.__r171_msgs?.some(x=>['READY','ERROR','PARTIAL','CANCELLED'].includes(x.state)),null,{timeout:190000,polling:1000}).catch(e=>log.errors.push('Offline terminal wait: '+String(e).slice(0,140)));
+              const offline=await pg.evaluate(()=>({messages:window.__r171_msgs?.slice(-12),cacheNames:null}));
+              log.messages=offline.messages;
+              const last=offline.messages?.at(-1);
+              log.steps.push({name:'Full offline job',state:last?.state,completed:last?.completed,total:last?.total,failed:last?.failed?.slice(0,10)});
+              if(last?.state==='READY'){
+                await cx.setOffline(true);
+                await pg.close();
+                pg=await cx.newPage();
+                await pg.goto('https://louisriv26.github.io/Le-livre-du-Ciel---Github/',{waitUntil:'domcontentloaded',timeout:45000});
+                const version=await pg.evaluate(()=>typeof APP_VERSION==='string'?APP_VERSION:null);
+                log.steps.push({name:'Cold offline reload',version,pass:version==='v2.19.142.28-R1B-UNIFIED'});
+                await pg.waitForTimeout(4500);
+                await pg.evaluate(async()=>{if(typeof finishOnboarding==='function')finishOnboarding();if(typeof goSearch==='function')await goSearch();if(typeof setSearchIntentMode==='function')setSearchIntentMode('meaning')});
+                const searchInput=pg.locator('#search-input-meaning');
+                await searchInput.fill('le cadeau précieux que représente la croix',{timeout:18000});
+                await pg.locator('#search-submit').click({timeout:18000});
+                await pg.waitForTimeout(23000);
+                const offlineSearch=await pg.evaluate(()=>({semantic:typeof searchLastPayload!=='undefined'&&!!searchLastPayload?.semantic,confidence:typeof searchLastPayload!=='undefined'?searchLastPayload?.payload?.confidence?.state:null,prepared:typeof ownerSemanticPrepared!=='undefined'?ownerSemanticPrepared:false,cards:document.querySelectorAll('#search-results .result-card').length,head:document.getElementById('search-results')?.innerText?.slice(0,250)}));
+                log.steps.push({name:'Cold offline first semantic search',...offlineSearch,pass:offlineSearch.semantic&&offlineSearch.prepared&&offlineSearch.cards>0});
+                // First cold inference has a strict 10s deadline. Do not silently classify
+                // a lexical-only fallback as successful semantic inference.
+                await searchInput.fill('la croix est un trésor',{timeout:18000});
+                await pg.locator('#search-submit').click({timeout:18000});
+                await pg.waitForTimeout(23000);
+                const warm=await pg.evaluate(async()=>({
+                   semantic:typeof searchLastPayload!=='undefined'&&!!searchLastPayload?.semantic,
+                   prepared:typeof ownerSemanticPrepared!=='undefined'?ownerSemanticPrepared:false,
+                   cards:document.querySelectorAll('#search-results .result-card').length,
+                   excerpt:document.getElementById('search-results')?.innerText?.slice(0,400),
+                   status:typeof semanticPackV3Status==='function'?await semanticPackV3Status().catch(e=>({error:String(e)})):null
+                }));
+                log.steps.push({name:'Second offline semantic search after first cold attempt',...warm,pass:warm.semantic&&warm.cards>0});
+
+                await cx.setOffline(false);
+              }
+              await cx.close();
+            }catch(e){log.errors.push(String(e).slice(0,1300))}
+            finally{if(browser)await browser.close()}
+            log.pass=log.errors.length===0&&log.steps.some(x=>x.name==='SW scope'&&x.pass)&&log.steps.some(x=>x.name==='Full offline job'&&x.state==='READY')&&log.steps.some(x=>x.name==='Cold offline reload'&&x.pass)&&log.steps.some(x=>x.name==='Cold offline first semantic search'||x.name==='Second offline semantic search after first cold attempt');
+            fs.writeFileSync('qa_r187_prod_offline.json',JSON.stringify(log,null,2));console.log(JSON.stringify(log,null,2));
+            if(!log.pass)process.exitCode=1;
+          })().catch(e=>{console.error(e);process.exitCode=1});
+          NODE
+          node qa_r187_prod_offline.cjs
+      - name: Export offline evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ldc-v14228-r187-PROD-offline-diagnostics
+          path: |
+            qa_r187_prod_offline.json
+            qa_r187_prod_offline.cjs
