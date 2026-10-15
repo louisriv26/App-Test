@@ -1431,6 +1431,12 @@ html[data-theme="dark"] .st-luisa{color:#D4A843;}
 /* R219 LAB: bounded, independently reviewable syntactic continuity, not a voice/text edit. */
 .speech-run.speech-block.ldc-r219-context-inline{display:inline;margin:0;padding:0;}
 .ldc-r216-terminal-unit.ldc-r219-inline-wrapper{display:inline;margin:0;padding:0;}
+/* R226 laboratory only — owner-observed same-sentence continuation across P037→P038.
+   Syntactic display topology only; no modification to text, run offsets or IDs. */
+.ldc-r216-terminal-unit.ldc-r226-continuous-terminal{display:inline;margin:0;padding:0;}
+.speech-paragraph-break.ldc-r226-synthetic-break-suppressed{display:none !important;margin:0 !important;padding:0 !important;}
+.speech-run.speech-block.ldc-r226-final-reply-inline{display:inline;margin:0;padding:0;}
+
 /* LDC-E support/deep-link UI */
 .support-preview{white-space:pre-wrap;word-break:break-word;max-height:220px;overflow:auto;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:10px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;line-height:1.5;color:var(--ink);margin-top:10px;}
 .support-check{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--ink);line-height:1.4;margin:4px 0 10px;}
@@ -2676,11 +2682,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.35-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
+const APP_VERSION = 'v2.19.142.36-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-15';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.35-r1b-unified';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.36-r1b-unified';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -5851,6 +5857,72 @@ function ldcR219JoinContextualQuote(frag, canonicalText){
   return targets.length;
 }
 
+// R226 LOCAL REVIEW: cross-paragraph syntax continuation explicitly confirmed
+// from owner iPad screenshot, T30 14 December 1931. Independent from R216's
+// within-paragraph terminal punctuation rule. No source/flow/speaker/anchor edits.
+const LDC_R226_CROSS_BOUNDARY = Object.freeze({
+  flow_id:'FLOW.T30.P037-P040..E0007',
+  from:'LDC.T30.E0007.P037', to:'LDC.T30.E0007.P038',
+  from_text:"En créant les choses, Il a placé un ‘ça suffit’,",
+  to_text:"- de sorte qu’elles ne peuvent ni croître ni diminuer, bien qu’il ait mis en elles toute la somptuosité, la beauté et la magnificence des Œuvres sorties de nos mains créatrices. Au contraire, en créant l’homme, comme Nous devions avoir en lui"
+});
+function ldcR226JoinConfirmedCrossParagraphSentence(div, unit, mem){
+  const c=LDC_R226_CROSS_BOUNDARY;
+  if(!div || !unit || unit.flowId!==c.flow_id || !Array.isArray(mem))return false;
+  const ix=mem.findIndex(m=>m.paraId===c.from);
+  if(ix<0 || ix+1>=mem.length)return false;
+  const left=mem[ix],right=mem[ix+1];
+  if(right.paraId!==c.to || left.isSlice || right.isSlice ||
+    left.canonicalText!==c.from_text || right.canonicalText!==c.to_text ||
+    left.text!==c.from_text || right.text!==c.to_text)return false;
+  const boundary=left.boundaryAfter || {};
+  if(boundary.speech_run_policy!=='terminate_run_at_boundary' ||
+    boundary.display_joiner!=='space' ||
+    JSON.stringify(boundary.suppress_next_leading_ranges||[])!=='[[0,2]]')return false;
+  const L=left.model,R=right.model;
+  if(!L || !L.ok || !R || !R.ok ||
+    L.runs.length!==2 || !L.runs[0].styled || L.runs[0].speaker!=='JESUS' ||
+    L.runs[0].start!==0 || L.runs[0].end!==46 ||
+    L.runs[1].styled || L.runs[1].start!==46 || L.runs[1].end!==48 ||
+    R.runs.length!==1 || !R.runs[0].styled || R.runs[0].speaker!=='JESUS' ||
+    R.runs[0].start!==0 || R.runs[0].end!==242)return false;
+  const from=Array.from(div.querySelectorAll('.para-fragment')).filter(f=>f.dataset.paraId===c.from);
+  const to=Array.from(div.querySelectorAll('.para-fragment')).filter(f=>f.dataset.paraId===c.to);
+  if(from.length!==1 || to.length!==1)return false;
+  const tail=from[0].querySelectorAll('.ldc-r216-terminal-unit');
+  const head=to[0].querySelectorAll('.speech-run');
+  const breaks=Array.from(to[0].querySelectorAll('.speech-paragraph-break'));
+  if(tail.length!==1 || head.length!==1 || breaks.length!==1 ||
+     breaks[0]!==to[0].firstElementChild ||
+     breaks[0].getAttribute('aria-hidden')!=='true' ||
+     breaks[0].textContent!=='' ||
+     head[0].dataset.runStart!=='0' ||
+     !head[0].classList.contains('speech-run-flow-head'))return false;
+  // DOM-order evidence: only zero-length anchors can separate a single joiner
+  // from the next fragment; never remove unrelated interstitial content.
+  const between=[];
+  let node=from[0].nextSibling;
+  while(node && node!==to[0]){between.push(node);node=node.nextSibling;}
+  if(node!==to[0] || between.filter(n=>n.nodeType===1&&n.classList.contains('flow-joiner')).length!==1 ||
+    between.some(n=>n.nodeType===3 ? !!n.textContent.trim() :
+      n.nodeType===1 && !n.classList.contains('flow-joiner') && !n.classList.contains('para-anchor')))return false;
+  tail[0].classList.add('ldc-r226-continuous-terminal');
+  breaks[0].classList.add('ldc-r226-synthetic-break-suppressed');
+  // Same four-fragment flow contains a second non-sentence boundary introduced
+  // by run styling after a quotation: keep the final Jesus reply `. Non.`
+  // inline. Separate exact-text and run-offset guard; never rewrite speaker.
+  const tailRec=mem.find(m=>m.paraId==='LDC.T30.E0007.P040');
+  const tailFrag=Array.from(div.querySelectorAll('.para-fragment')).find(f=>f.dataset.paraId==='LDC.T30.E0007.P040');
+  if(tailRec && tailFrag && tailRec.text==="- donc notre Volonté dominante et à l’œuvre, notre Être suprême n’a pas dit ‘ça suffit’. Non." &&
+     tailRec.model && tailRec.model.ok &&
+     tailRec.model.runs.some(r=>r.styled && r.speaker==='JESUS' && r.start===87 && r.end===93) &&
+     tailFrag.querySelectorAll('.speech-run.speech-block[data-run-start="87"][data-run-end="93"]').length===1 &&
+     !tailFrag.querySelector('.speech-paragraph-break')){
+    tailFrag.querySelector('.speech-run.speech-block[data-run-start="87"][data-run-end="93"]').classList.add('ldc-r226-final-reply-inline');
+  }
+  return true;
+}
+
 async function openEntryCore(vol, entryId, backDest, opts={}) {
   readerDiagEnsure('OTHER',vol,entryId,currentEntry&&currentEntry.id||null,'openEntryCore');
   readerDiagStage('openEntryCore BEGIN',{back_dest:backDest||null,navigation_target:opts.navigationTarget||null});
@@ -6157,6 +6229,7 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
       }
     });
 
+    ldcR226JoinConfirmedCrossParagraphSentence(div, unit, mem); // R226: owner-confirmed visual continuity only
     div.addEventListener('click', onParaClick);
     body.appendChild(div);
 

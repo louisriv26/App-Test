@@ -1152,9 +1152,9 @@
       "sha256": "4df3a82f5f2ee57a0b6913b6ca6b56758b2ab9e27f0d401e06a4ed0792639c06"
     },
     {
-      "bytes": 1022320,
+      "bytes": 1027282,
       "path": "index.html",
-      "sha256": "44a4feb60230252931569f7ccca84eed1602c726ade092cb625d4a40f3d93495"
+      "sha256": "a68f45bb3b8bcdffb41a7984922d59be0aca41dc294d0a9eb71c0e07a8d42362"
     },
     {
       "bytes": 17214,
@@ -1172,9 +1172,9 @@
       "sha256": "6f8c116ad7258f912c8f17c15a3afbfdafaa6e49a9156f477f1b6bd1512b4955"
     },
     {
-      "bytes": 62133,
+      "bytes": 62542,
       "path": "offline_manifest.json",
-      "sha256": "cbb9018df43d3c8781bddb9b4e9593034b1b8a9b4987860fb705e0729a017124"
+      "sha256": "422c46f71584107f43e88bd4d9f9c570434d96a3abf8e8981aaa6447fcc982e6"
     },
     {
       "bytes": 658,
@@ -1369,19 +1369,19 @@
     {
       "bytes": 32222,
       "path": "sw.js",
-      "sha256": "2010c89d482e12577ad33ebc8e737a73207e86f7c68e1790daf35df1f9e0cb7d"
+      "sha256": "d3e9cd71aba68556509cdcdaf483c635a28ea91b7e056d2ce3367dbae8cf893d"
     },
     {
-      "bytes": 267294,
+      "bytes": 267745,
       "path": "version.json",
-      "sha256": "6404286aa7eb2f19799bb605ce021489bf2432115c63dce8174276068982a30d"
+      "sha256": "860ba12ede023b595746887dba2c7eee7384e01739aabbd5b86f519354a0a05c"
     }
   ],
   "offline_corpus_assets": 204,
   "offline_corpus_binding_sha256": "f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d",
   "packaged_file_count_excluding_manifest": 275,
-  "production_authority": "NONE__R220_LOCAL_HOLD__NO_DEPLOYMENT_OR_QUALIFICATION",
-  "public_version": "142.35",
+  "production_authority": "NONE__R226_LAB_APP_TEST_PROPOSAL_ONLY",
+  "public_version": "142.36",
   "qualified_model_files": 20,
   "r88_structural_repair": {
     "approved_deployment": "NONE",
@@ -1395,7 +1395,7 @@
   "schema": "ldc-curated-wip-package-manifest-v1",
   "semantic_manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
   "source_commit": "R218_EXACT_V14234_PLUS_R219_LOCAL_RENDERING_PLUS_R220_FULL_CANONICAL_GUARD__NO_REMOTE_COMMIT",
-  "usage": "LOCAL_REVIEW_ONLY__NOT_A_DEPLOYABLE_RELEASE__ORIGIN_INDEPENDENCE_MODEL_PRESERVED",
+  "usage": "LOCAL_REVIEW_ONLY__NOT_APPROVED_FOR_MAIN",
   "r170_unified_build": {
     "release": "142.28",
     "site_namespace_auto_selection": true,
@@ -1491,5 +1491,13 @@
       "physical_safari_iphone_ipad"
     ],
     "full_text_guard": "exact_canonical_text"
+  },
+  "r226_local_candidate": {
+    "source_app": "v142.35",
+    "scope": "Reader-only owner-confirmed T30 continuity",
+    "supersedes": "R220 v142.35 pending tests",
+    "full_PWA": "NOT_RUN",
+    "native_iOS": "NOT_RUN",
+    "release_authority": "NONE"
   }
 }
