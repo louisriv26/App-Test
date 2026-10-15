@@ -1,0 +1,95 @@
+name: 24H R12 public origin backup restore
+on:
+  push:
+    paths:
+      - .github/workflows/24h-r12-public-restore.yml
+permissions:
+  contents: read
+jobs:
+  real_restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install real Chromium
+        run: |
+          npm install --prefix "$RUNNER_TEMP/r12node" playwright@1.56.0
+          "$RUNNER_TEMP/r12node/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Exercise public HTTPS origin and real JSON import UI
+        env:
+          NODE_PATH: ${{ runner.temp }}/r12node/node_modules
+        run: |
+          cat > "$RUNNER_TEMP/r12-test.js" <<'R12_JS'
+          const fs=require('fs'),assert=require('assert'),{chromium}=require('playwright');
+          const URL='https://louisriv26.github.io/App-Test/24h-v120-6-b2-r11-qa/luisa_24_heures.html';
+          const results={url:URL,browser:'chromium',checks:[],errors:[]};
+          function ok(name,pass,detail){results.checks.push({name,pass:!!pass,detail});assert.ok(pass,name+' '+JSON.stringify(detail));}
+          (async()=>{
+          const b=await chromium.launch({headless:true});
+          const c=await b.newContext({acceptDownloads:true,viewport:{width:390,height:844}});
+          const p=await c.newPage();results.browser_version=b.version();p.on('pageerror',e=>results.errors.push(e.message));
+          try{
+           const response=await p.goto(URL,{waitUntil:'domcontentloaded',timeout:45000});
+           ok('served_exact_public_HTTPS_origin',response.status()===200,response.status());
+           await p.waitForFunction(()=>window.__lp24Init==='done',{timeout:55000});
+           ok('app_exact_v120.6',await p.evaluate(()=>APP_VERSION==='v120.6'));
+           await p.waitForFunction(async()=>!!(await navigator.serviceWorker.getRegistration())?.active,null,{timeout:50000});
+           ok('real_public_HTTPS_origin_service_worker',true);
+           const seeded=await p.evaluate(async()=>{
+            const pre=buildPersonalSnapshotFromState(),k='PASSION24.HOUR.24.DESOL.P081';
+            state.lastHour='17';state.readHours.add(17);
+            state.notes[k]=[{id:'r12test',text:'R12 original note preserved',ts:Math.floor(Date.now()/1000)}];
+            const r=await commitDurableChange(pre,'R12 seed',{quiet:true});
+            return {ok:r.ok,db:!!(await readPersonalCanonicalRecordStrong())?.raw};
+           });
+           ok('real_IndexedDB_seed',seeded.ok&&seeded.db,seeded);
+           await p.reload({waitUntil:'domcontentloaded'});
+           await p.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
+           ok('seed_survives_reload',await p.evaluate(()=>buildPersonalDataExport().lastHour==='17'&&JSON.stringify(buildPersonalDataExport().notes).includes('R12 original note')));
+           const event=p.waitForEvent('download',{timeout:25000});
+           await p.evaluate(()=>exportUserData());
+           const download=await event;
+           const bytes=fs.readFileSync(await download.path()),original=JSON.parse(bytes.toString());
+           ok('actual_UI_JSON_export',download.suggestedFilename().endsWith('.json')&&original.app_id==='passion24'&&original.schema_version===8);
+           const changed=await p.evaluate(async()=>{
+            const pre=buildPersonalSnapshotFromState(),k='PASSION24.HOUR.24.DESOL.P081';
+            state.lastHour='18';state.readHours.delete(17);state.readHours.add(18);
+            state.notes[k]=[{id:'r12changed',text:'R12 modified note',ts:Math.floor(Date.now()/1000)}];
+            return (await commitDurableChange(pre,'R12 modify',{quiet:true})).ok;
+           });
+           ok('mutated_second_state',changed);
+           const inp=p.locator('#importFileInput');
+           async function imp(data,decision){
+            let dialogs=0;const handler=async d=>{dialogs++;if(decision==='accept')await d.accept();else await d.dismiss();};
+            p.on('dialog',handler);
+            try{await inp.setInputFiles({name:'r12-test.json',mimeType:'application/json',buffer:Buffer.isBuffer(data)?data:Buffer.from(JSON.stringify(data))});await p.waitForTimeout(900);}
+            finally{p.off('dialog',handler)}
+            return dialogs;
+           }
+           await imp({...original,schema_version:0});
+           ok('invalid_schema_rejected_without_mutation',await p.evaluate(()=>buildPersonalDataExport().lastHour==='18'));
+           await imp({...original,app_id:'wrong'});
+           ok('wrong_app_rejected_without_mutation',await p.evaluate(()=>buildPersonalDataExport().lastHour==='18'));
+           const dismissed=await imp(bytes,'dismiss');
+           ok('cancelled_import_preserves_state',dismissed===1&&await p.evaluate(()=>buildPersonalDataExport().lastHour==='18'));
+           const accepted=await imp(bytes,'accept');
+           await p.waitForFunction(()=>buildPersonalDataExport().lastHour==='17',{timeout:25000});
+           ok('confirmed_import_restores_note_and_progress',accepted===1&&await p.evaluate(()=>{const s=buildPersonalDataExport();return s.lastHour==='17'&&s.readHours.includes(17)&&!s.readHours.includes(18)&&JSON.stringify(s.notes).includes('R12 original note')&&!JSON.stringify(s.notes).includes('R12 modified note')}));
+           await p.reload({waitUntil:'domcontentloaded'});
+           await p.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
+           ok('import_persisted_in_real_IndexedDB_after_reload',await p.evaluate(async()=>{const s=buildPersonalDataExport();return s.lastHour==='17'&&s.readHours.includes(17)&&JSON.stringify(s.notes).includes('R12 original note')&&!!(await readPersonalCanonicalRecordStrong())?.raw}));
+           ok('no_uncaught_page_errors',results.errors.length===0,results.errors);
+          }finally{await c.close();await b.close();}
+          })().then(()=>{results.result='PASS';console.log('R12_PUBLIC_ORIGIN_BACKUP_PASS',results.checks.length)}).catch(e=>{results.result='HOLD';results.failure=String(e.stack||e);console.error('R12_PUBLIC_ORIGIN_BACKUP_HOLD',results.failure);process.exitCode=1}).finally(()=>fs.writeFileSync(process.env.RUNNER_TEMP+'/r12-result.json',JSON.stringify(results,null,2)));
+          R12_JS
+          node "$RUNNER_TEMP/r12-test.js"
+      - name: Preserve complete results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 24h-r12-public-origin-import-results
+          path: ${{ runner.temp }}/r12-result.json
+          if-no-files-found: warn
