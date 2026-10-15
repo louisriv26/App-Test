@@ -1,0 +1,112 @@
+name: 24H R15 PRODUCTION three-browser deep matrix
+on:
+  push:
+    paths:
+      - .github/workflows/24h-r15-main-matrix.yml
+permissions:
+  contents: read
+jobs:
+  real_public_matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium, WebKit, Firefox engines
+        run: |
+          npm install --prefix "$RUNNER_TEMP/r15node" playwright@1.56.0
+          "$RUNNER_TEMP/r15node/node_modules/.bin/playwright" install --with-deps chromium webkit firefox
+      - name: 24 Hours x 3 views; search; responsive; three browser engines; practice and prayers
+        env:
+          NODE_PATH: ${{ runner.temp }}/r15node/node_modules
+        run: |
+          cat > "$RUNNER_TEMP/r15-matrix.js" <<'R15_JS'
+          
+          const fs=require('fs'),assert=require('assert'),{chromium,webkit,firefox}=require('playwright');
+          const origin='https://louisriv26.github.io/Les-24-Heures-de-la-Passion/luisa_24_heures.html';
+          const report={candidate:'v120.6/B2',test_origin:origin,checked:{},failures:[],page_errors:[],browsers:{}};
+          function eq(k,good,detail){report.checked[k]=(report.checked[k]||0)+1;if(!good){report.failures.push({k,detail});if(report.failures.length<=10)console.error('CASE_FAIL',k,JSON.stringify(detail||{}));}}
+          (async()=>{
+           for(const [browserName,browserType] of Object.entries({chromium,webkit,firefox})){
+            let browser,ctx;
+            try {
+             browser=await browserType.launch({headless:true});
+             ctx=await browser.newContext({viewport:{width:390,height:844}});
+             let pg=await ctx.newPage();pg.on('pageerror',e=>report.page_errors.push({browser:browserName,error:e.message}));
+             let response=await pg.goto(origin,{waitUntil:'domcontentloaded',timeout:60000});
+             await pg.waitForFunction(()=>window.__lp24Init==='done',{timeout:60000});
+             const id=await pg.evaluate(()=>({version:APP_VERSION,build:BUILD_REVISION,seq:RELEASE_SEQUENCE,view:state.view,storage:STORAGE_SCHEMA_VERSION}));
+             eq(browserName+'_identity',response.status()===200&&id.version==='v120.6'&&id.build==='B2'&&id.seq===120006002&&id.storage===8,id);
+             let routes=[];
+             for(let n=1;n<=24;n++){
+              for(const tab of ['meditation','reflections','linked']){
+               const o=await pg.evaluate(([n,tab])=>{openHour(n,false);switchTab(tab);const el=document.getElementById(tab==='meditation'?'meditationContent':tab==='reflections'?'reflectionsContent':'linkedTextsContent');return {hour:state.currentHour,view:state.view,tab:state.activeTab,exists:!!el,visible:!!el&&el.style.display!=='none',length:el?.textContent.length||0}},[n,tab]);
+               eq(browserName+'_72_hour_routes',o.hour===n&&o.view==='reader'&&o.tab===tab&&o.exists&&o.visible,o);
+               routes.push(o);
+              }
+             }
+             const qs=['Jésus','couronne d’épines','Maman','la… (préciser) Heure','Jésus Jésus','gibberish_000000','la croix','solitude','Marie','cette Heure','la 24e Heure'];
+             for(const q of qs){
+              const o=await pg.evaluate(q=>{showSearchView(false);const m=searchFindMatches(q,'all');performSearch(q);return {count:m.length,view:state.view,visible:!!document.getElementById('searchStatus'),status:document.getElementById('searchStatus')?.textContent}},q);
+              eq(browserName+'_11_search_paths',Number.isInteger(o.count)&&o.view==='search'&&o.visible,{q,o});
+             }
+             const sizes=browserName==='chromium'?[320,340,359,360,374,375,390,430,767,768,769,1024,1280]:[320,390,768,1024];
+             const fonts=browserName==='chromium'?['small','normal','large','xlarge']:['normal','xlarge'];
+             const themes=['light','dark'];
+             const views=browserName==='chromium'?['home','meditation','reflections','linked','library','search','espace']:['home','meditation','linked','library','search'];
+             for(const w of sizes){await pg.setViewportSize({width:w,height:w>767?950:844});
+              for(const f of fonts)for(const theme of themes){
+               await pg.evaluate(([f,t])=>{document.documentElement.dataset.fontLevel=f;document.documentElement.dataset.theme=t;state.fontLevel=f;state.theme=t;},[f,theme]);
+               for(const view of views){
+                const result=await pg.evaluate(v=>{
+                 try{
+                  if(v==='home')showHome();
+                  else if(v==='meditation')openHour(3,false);
+                  else if(v==='reflections'){openHour(3,false);switchTab('reflections')}
+                  else if(v==='linked'){openHour(3,false);switchTab('linked')}
+                  else if(v==='library')openLibraryText('PASSION24.TEXT.HOW_TO_PRACTICE',false);
+                  else if(v==='search')showSearchView(false);
+                  else if(v==='espace')showEspaceView(false);
+                  return {view:state.view,overflow:document.documentElement.scrollWidth-innerWidth,loaded:window.__lp24Init,error:null};
+                 }catch(e){return {error:String(e),stack:String(e.stack).slice(0,300)}}
+                },view);
+                eq(browserName+'_responsive_actual_live',!result.error&&result.overflow<=3&&result.loaded==='done',{w,f,theme,view,...result});
+               }
+              }
+             }
+             const practice=await pg.evaluate(()=>{openLibraryText('PASSION24.TEXT.HOW_TO_PRACTICE',false);const id='PASSION24.TEXT.HOW_TO_PRACTICE.PRACTICE_OPTION.P001';const root=document.getElementById(id);const info=getTargetInfo(id);return {prefix:!!root?.textContent.includes('Flux par défaut de l’app :'),canonical:info?.text.slice(0,29),display:!!root?.querySelector('.para-text')}});
+             eq(browserName+'_practice_prefix_not_canonical',practice.prefix&&practice.display&&!practice.canonical?.startsWith('Flux par défaut de l’app :'),practice);
+             const projection=await pg.evaluate(()=>{
+              const pid='PASSION24.PRAYER.BEFORE_EACH_HOUR.P002';
+              const info=getTargetInfo(pid);let counts=0,incorrect=0;
+              for(const h of [...Array(24).keys()].map(x=>x+1).concat(['search-neutral'])){
+               const shown=getPrayerParagraphDisplayText({t:info.text},h);
+               const map=getAnnotationDisplayProjection(pid,shown);
+               for(let p=0;p<=shown.length;p+=Math.max(1,Math.floor(shown.length/17))){
+                const c=map?.toCanonical(p);if(!Number.isInteger(c)||map.toDisplay(c)!==p)incorrect++;counts++;
+               }
+              }
+              return {counts,incorrect};
+             });
+             eq(browserName+'_prayer_context_boundary_projection',projection.counts>300&&projection.incorrect===0,projection);
+             report.browsers[browserName]={version:browser.version(),route_count:routes.length,query_count:qs.length,responsive_states:sizes.length*fonts.length*2*views.length};
+            } catch(e) {report.failures.push({browser:browserName,fatal:String(e.stack||e)});report.browsers[browserName]={fatal:String(e).slice(0,400)}}
+            finally{if(ctx)await ctx.close();if(browser)await browser.close()}
+           }
+           eq('zero_page_errors',report.page_errors.length===0,report.page_errors.slice(0,10));
+           report.ok=report.failures.length===0;
+          })().then(()=>{console.log('R15_MAIN_CROSS_BROWSER',report.ok?'PASS':'FAIL',JSON.stringify(report.browsers), 'total',Object.values(report.checked).reduce((a,b)=>a+b,0),'failures',report.failures.length)})
+          .catch(e=>{report.ok=false;report.failures.push({uncaught:String(e)});console.error(e)})
+          .finally(()=>{fs.writeFileSync(process.env.RUNNER_TEMP+'/r15-matrix.json',JSON.stringify(report,null,2));if(!report.ok)process.exitCode=1});
+          
+          R15_JS
+          node "$RUNNER_TEMP/r15-matrix.js"
+      - name: Preserve detailed report even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 24h-r15-production-three-browser-matrix
+          path: ${{ runner.temp }}/r15-matrix.json
+          if-no-files-found: warn
