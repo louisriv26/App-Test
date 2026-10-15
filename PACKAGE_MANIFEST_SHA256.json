@@ -1154,7 +1154,7 @@
     {
       "bytes": 1027282,
       "path": "index.html",
-      "sha256": "a68f45bb3b8bcdffb41a7984922d59be0aca41dc294d0a9eb71c0e07a8d42362"
+      "sha256": "ca821643217630d583b339a7eefac5283e48866cbdccd28c226b9bf9d4761883"
     },
     {
       "bytes": 17214,
@@ -1172,9 +1172,9 @@
       "sha256": "6f8c116ad7258f912c8f17c15a3afbfdafaa6e49a9156f477f1b6bd1512b4955"
     },
     {
-      "bytes": 62542,
+      "bytes": 62941,
       "path": "offline_manifest.json",
-      "sha256": "422c46f71584107f43e88bd4d9f9c570434d96a3abf8e8981aaa6447fcc982e6"
+      "sha256": "134308ad693ef8319e318e636a874954c018da53b4127d614c5666d15254072b"
     },
     {
       "bytes": 658,
@@ -1367,21 +1367,21 @@
       "sha256": "0f7f5242f4960cb2d32ff3b6b632d142f86ab2fa5722f6b8328924c869b5b23a"
     },
     {
-      "bytes": 32222,
+      "bytes": 33382,
       "path": "sw.js",
-      "sha256": "d3e9cd71aba68556509cdcdaf483c635a28ea91b7e056d2ce3367dbae8cf893d"
+      "sha256": "4d1960f7ecb23223c7316b85c7cb51646109c13030152f53c0af1ca771976bad"
     },
     {
-      "bytes": 267745,
+      "bytes": 268119,
       "path": "version.json",
-      "sha256": "860ba12ede023b595746887dba2c7eee7384e01739aabbd5b86f519354a0a05c"
+      "sha256": "d6de4434985627aee4e0f68519bd54cc7c969a0c94bf3fa1d4c02d085d5c0ad8"
     }
   ],
   "offline_corpus_assets": 204,
   "offline_corpus_binding_sha256": "f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d",
   "packaged_file_count_excluding_manifest": 275,
-  "production_authority": "NONE__R226_LAB_APP_TEST_PROPOSAL_ONLY",
-  "public_version": "142.36",
+  "production_authority": "NONE__R230_LOCAL_HOLD__NO_DEPLOYMENT_AUTHORITY",
+  "public_version": "142.37",
   "qualified_model_files": 20,
   "r88_structural_repair": {
     "approved_deployment": "NONE",
@@ -1395,7 +1395,7 @@
   "schema": "ldc-curated-wip-package-manifest-v1",
   "semantic_manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
   "source_commit": "R218_EXACT_V14234_PLUS_R219_LOCAL_RENDERING_PLUS_R220_FULL_CANONICAL_GUARD__NO_REMOTE_COMMIT",
-  "usage": "LOCAL_REVIEW_ONLY__NOT_APPROVED_FOR_MAIN",
+  "usage": "R230_LOCAL_CANDIDATE_ONLY__NOT_APPROVED_FOR_APP_TEST_OR_MAIN",
   "r170_unified_build": {
     "release": "142.28",
     "site_namespace_auto_selection": true,
@@ -1499,5 +1499,12 @@
     "full_PWA": "NOT_RUN",
     "native_iOS": "NOT_RUN",
     "release_authority": "NONE"
+  },
+  "r230_local_candidate": {
+    "parent": "v142.36 R229",
+    "scope": "service worker cache version isolation and rollback protection",
+    "release_authority": "NONE",
+    "full_PWA": "NOT_RUN",
+    "native_iOS": "NOT_RUN"
   }
 }

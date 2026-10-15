@@ -1,5 +1,5 @@
-const VERSION = 'ldc-v2.19.142.36-r1b-unified';
-const APP_VERSION = 'v2.19.142.36-R1B-UNIFIED';
+const VERSION = 'ldc-v2.19.142.37-r1b-unified';
+const APP_VERSION = 'v2.19.142.37-R1B-UNIFIED';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
@@ -11,8 +11,9 @@ function scopeFingerprint(scope) {
 }
 const OFFLINE_SCOPE_FINGERPRINT = scopeFingerprint(self.registration.scope);
 const SCOPE_CACHE_PREFIX = `${CACHE_PREFIX}${OFFLINE_SCOPE_FINGERPRINT}-`;
-const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-v2.19.142.35-r1b-unified`;
-const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-v2.19.142.35-r1b-unified`;
+// R230: cache identity is bound to the installing worker revision, not its predecessor.
+const SHELL_CACHE = `${SCOPE_CACHE_PREFIX}shell-${VERSION.slice(4)}`;
+const RUNTIME_CACHE = `${SCOPE_CACHE_PREFIX}runtime-${VERSION.slice(4)}`;
 const LEGACY_V76_WORKER_VERSION = 'ldc-v2.19.76-R1B-report-r2';
 const UPDATE_COMPAT_META_PATH = '__ldc_update_compat__.json';
 const INSTALL_FETCH_NONCE = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
@@ -38,7 +39,8 @@ const FILE_TIMEOUT_MS = 30000;
 const DOWNLOAD_CONCURRENCY = 3;
 
 function isCurrentScopeShellRuntimeCacheName(name) {
-  return name.startsWith(SCOPE_CACHE_PREFIX);
+  // Only application shell/runtime cache families belong to SW version pruning.
+  return name.startsWith(`${SCOPE_CACHE_PREFIX}shell-`) || name.startsWith(`${SCOPE_CACHE_PREFIX}runtime-`);
 }
 function isOfflineFamilyCacheName(name) { return name.startsWith(`${CACHE_PREFIX}offline-`); }
 function isLegacyOfflineCacheName(name) { return name.startsWith(LEGACY_OFFLINE_CACHE_PREFIX); }
@@ -367,18 +369,22 @@ async function verifyShellRevisionResponse(rel,response){
 async function installFreshShell() {
   const predecessorVersion=await queryPredecessorWorkerVersion();
   const directV76=predecessorVersion===LEGACY_V76_WORKER_VERSION;
+  // An installation may be retried after a partially filled *new-revision* cache.
+  // This name cannot alias the predecessor because VERSION is new on every release.
   await caches.delete(SHELL_CACHE);
   const c=await caches.open(SHELL_CACHE);
-  try{
-    await Promise.all(SHELL.map(async rel=>{
+  const outcomes=await Promise.allSettled(SHELL.map(async rel=>{
       const canonical=new URL(rel,self.registration.scope).href;
       const response=await fetch(new Request(revisionBoundUrl(rel),{cache:'no-store'}));
       if(!response||!response.ok)throw new Error(`shell asset HTTP ${response&&response.status}: ${rel}`);
       await verifyShellRevisionResponse(rel,response);
       await c.put(canonical,response.clone());
     }));
-    await writeUpdateCompatMeta({schema:'ldc-update-compat-v1',direct_v76_upgrade:directV76,legacy_v76_alias_active:directV76,installed_revision:VERSION,predecessor_worker_version:predecessorVersion,created_at:new Date().toISOString()});
-  }catch(e){await caches.delete(SHELL_CACHE);throw e;}
+  // Wait for *all* parallel puts before any possible rollback deletion.
+  // Promise.all would reject early and leave late writes racing with cleanup.
+  const firstFailure=outcomes.find(outcome=>outcome.status==='rejected');
+  if(firstFailure)throw firstFailure.reason;
+  await writeUpdateCompatMeta({schema:'ldc-update-compat-v1',direct_v76_upgrade:directV76,legacy_v76_alias_active:directV76,installed_revision:VERSION,predecessor_worker_version:predecessorVersion,created_at:new Date().toISOString()});
 }
 async function installVerifiedBootCorpus() {
   const m=await loadOfflineManifest();
@@ -396,7 +402,12 @@ async function installVerifiedBootCorpus() {
 }
 async function installCurrentRevisionAtomically(){
   try{await verifyPublishedRevisionMarker();await installFreshShell();await installVerifiedBootCorpus();await verifyPublishedRevisionMarker();}
-  catch(e){await Promise.all([caches.delete(SHELL_CACHE),caches.delete(RUNTIME_CACHE)]);throw e;}
+  catch(e){
+    // Roll back exclusively the unfinished new revision. Never touch any
+    // predecessor cache, sibling scope, persistent offline content or IDB.
+    await Promise.allSettled([caches.delete(SHELL_CACHE),caches.delete(RUNTIME_CACHE)]);
+    throw e;
+  }
 }
 self.addEventListener('install',e=>{e.waitUntil(installCurrentRevisionAtomically());});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{
@@ -404,8 +415,13 @@ self.addEventListener('activate',e=>{e.waitUntil((async()=>{
   const keys=await caches.keys();
   // Offline corpus caches are persistent data. Preserve the offline family across
   // shell updates and across sibling service-worker scopes on the same origin.
-  await Promise.all(keys.filter(k=>isCurrentScopeShellRuntimeCacheName(k)&&!keep.has(k)).map(k=>caches.delete(k)));
+  // Claim only after successful install. If activation/claim fails, the
+  // previous working revision's caches must not be pruned. Cleanup is best-effort
+  // and is limited to this registration's shell/runtime families.
   await self.clients.claim();
+  const prunable=keys.filter(k=>isCurrentScopeShellRuntimeCacheName(k)&&!keep.has(k));
+  const results=await Promise.allSettled(prunable.map(k=>caches.delete(k)));
+  if(results.some(x=>x.status==='rejected'))console.warn('LDC: deferred SW cache prune incomplete');
 })());});
 
 function corpusAssetPath(request) {
