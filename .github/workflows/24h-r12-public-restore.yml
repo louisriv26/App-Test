@@ -70,17 +70,17 @@ jobs:
             return dialogs;
            }
            await imp({...original,schema_version:0});
-           ok('invalid_schema_rejected_without_mutation',await p.evaluate(()=>buildPersonalDataExport().lastHour==='18'));
+           ok('invalid_schema_rejected_without_mutation',await p.evaluate(()=>buildPersonalDataExport().lastHour==18));
            await imp({...original,app_id:'wrong'});
-           ok('wrong_app_rejected_without_mutation',await p.evaluate(()=>buildPersonalDataExport().lastHour==='18'));
+           ok('wrong_app_rejected_without_mutation',await p.evaluate(()=>buildPersonalDataExport().lastHour==18));
            const dismissed=await imp(bytes,'dismiss');
-           ok('cancelled_import_preserves_state',dismissed===1&&await p.evaluate(()=>buildPersonalDataExport().lastHour==='18'));
+           ok('cancelled_import_preserves_state',dismissed===1&&await p.evaluate(()=>buildPersonalDataExport().lastHour==18));
            const accepted=await imp(bytes,'accept');
-           await p.waitForFunction(()=>buildPersonalDataExport().lastHour==='17',{timeout:25000});
-           ok('confirmed_import_restores_note_and_progress',accepted===1&&await p.evaluate(()=>{const s=buildPersonalDataExport();return s.lastHour==='17'&&s.readHours.includes(17)&&!s.readHours.includes(18)&&JSON.stringify(s.notes).includes('R12 original note')&&!JSON.stringify(s.notes).includes('R12 modified note')}));
+           await p.waitForFunction(()=>buildPersonalDataExport().lastHour==17,{timeout:25000});
+           ok('confirmed_import_restores_note_and_progress',accepted===1&&await p.evaluate(()=>{const s=buildPersonalDataExport();return s.lastHour==17&&s.readHours.includes(17)&&!s.readHours.includes(18)&&JSON.stringify(s.notes).includes('R12 original note')&&!JSON.stringify(s.notes).includes('R12 modified note')}));
            await p.reload({waitUntil:'domcontentloaded'});
            await p.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
-           ok('import_persisted_in_real_IndexedDB_after_reload',await p.evaluate(async()=>{const s=buildPersonalDataExport();return s.lastHour==='17'&&s.readHours.includes(17)&&JSON.stringify(s.notes).includes('R12 original note')&&!!(await readPersonalCanonicalRecordStrong())?.raw}));
+           ok('import_persisted_in_real_IndexedDB_after_reload',await p.evaluate(async()=>{const s=buildPersonalDataExport();return s.lastHour==17&&s.readHours.includes(17)&&JSON.stringify(s.notes).includes('R12 original note')&&!!(await readPersonalCanonicalRecordStrong())?.raw}));
            ok('no_uncaught_page_errors',results.errors.length===0,results.errors);
           }finally{await c.close();await b.close();}
           })().then(()=>{results.result='PASS';console.log('R12_PUBLIC_ORIGIN_BACKUP_PASS',results.checks.length)}).catch(e=>{results.result='HOLD';results.failure=String(e.stack||e);console.error('R12_PUBLIC_ORIGIN_BACKUP_HOLD',results.failure);process.exitCode=1}).finally(()=>fs.writeFileSync(process.env.RUNNER_TEMP+'/r12-result.json',JSON.stringify(results,null,2)));
