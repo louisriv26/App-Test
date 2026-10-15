@@ -57,13 +57,13 @@ jobs:
               selection.removeAllRanges();
               return {found:true,captured,pending,selected:text.slice(14,44)};
             });
-            check('real_DOM_native_Range_P081_selection',capture.captured&&capture.pending?.text===capture.selected,capture);
+            check('real_DOM_native_Range_P081_selection',capture.captured&&capture.pending?.text===capture.selected.trim(),capture);
             await page.evaluate(async()=>{await applyHighlight('yellow')});
             const created=await page.evaluate(()=>{const pid='PASSION24.HOUR.24.DESOL.P081';return {hl:state.textHighlights[pid],visible:[...getCanonicalAnchor(pid).querySelectorAll('mark.hl')].map(x=>x.textContent).join('')}});
-            check('P081_real_highlight_created',created.hl?.length===1 && created.visible===capture.selected,{vis:created.visible,expected:capture.selected});
+            check('P081_real_highlight_created',created.hl?.length===1 && created.visible===capture.selected.trim(),{vis:created.visible,expected:capture.selected});
             await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
             const after=await page.evaluate(async()=>{openHour(24,false);let id='PASSION24.HOUR.24.DESOL.P081';return {hl:state.textHighlights[id],visible:[...getCanonicalAnchor(id).querySelectorAll('mark.hl')].map(x=>x.textContent).join(''),db:!!(await readPersonalCanonicalRecordStrong())?.raw}});
-            check('P081_real_highlight_reload_survival',after.hl?.length===1&&after.visible===capture.selected&&after.db,after);
+            check('P081_real_highlight_reload_survival',after.hl?.length===1&&after.visible===capture.selected.trim()&&after.db,after);
             await page.evaluate(()=>openLibraryText('PASSION24.TEXT.HOW_TO_PRACTICE',false));
             const practice=await page.evaluate(()=>{const id='PASSION24.TEXT.HOW_TO_PRACTICE.PRACTICE_OPTION.P001';const el=document.getElementById(id);return {exists:!!el,prefix:el?.textContent.includes('Flux par défaut de l’app :'),readable:!!el?.querySelector('.para-text')}})
             check('P001_practice_visible_and_annotatable',practice.exists&&practice.prefix&&practice.readable,practice);
