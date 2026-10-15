@@ -67,6 +67,10 @@ jobs:
             await page.evaluate(()=>openLibraryText('PASSION24.TEXT.HOW_TO_PRACTICE',false));
             const practice=await page.evaluate(()=>{const id='PASSION24.TEXT.HOW_TO_PRACTICE.PRACTICE_OPTION.P001';const el=document.getElementById(id);return {exists:!!el,prefix:el?.textContent.includes('Flux par défaut de l’app :'),readable:!!el?.querySelector('.para-text')}})
             check('P001_practice_visible_and_annotatable',practice.exists&&practice.prefix&&practice.readable,practice);
+            await page.reload({waitUntil:'domcontentloaded'});
+            await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
+            await page.waitForFunction(()=>!!navigator.serviceWorker.controller,{timeout:30000});
+            check('public_origin_controlling_service_worker_before_offline',await page.evaluate(()=>!!navigator.serviceWorker.controller));
             await ctx.setOffline(true);
             await page.reload({waitUntil:'domcontentloaded',timeout:30000});
             await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:30000});
