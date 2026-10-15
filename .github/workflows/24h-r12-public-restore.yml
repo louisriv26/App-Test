@@ -48,7 +48,7 @@ jobs:
            ok('real_IndexedDB_seed',seeded.ok&&seeded.db,seeded);
            await p.reload({waitUntil:'domcontentloaded'});
            await p.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
-           ok('seed_survives_reload',await p.evaluate(()=>buildPersonalDataExport().lastHour==='17'&&JSON.stringify(buildPersonalDataExport().notes).includes('R12 original note')));
+           const seedBack=await p.evaluate(async()=>({lastHour:buildPersonalDataExport().lastHour,readHours:buildPersonalDataExport().readHours,notes:buildPersonalDataExport().notes,db:!!(await readPersonalCanonicalRecordStrong())?.raw}));console.log('R12_SEED_BACK',JSON.stringify(seedBack));ok('seed_survives_reload',String(seedBack.lastHour)==='17'&&JSON.stringify(seedBack.notes).includes('R12 original note'),seedBack);
            const event=p.waitForEvent('download',{timeout:25000});
            await p.evaluate(()=>exportUserData());
            const download=await event;
