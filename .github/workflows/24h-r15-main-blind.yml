@@ -69,7 +69,8 @@ jobs:
             check('P001_practice_visible_and_annotatable',practice.exists&&practice.prefix&&practice.readable,practice);
             await page.reload({waitUntil:'domcontentloaded'});
             await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
-            await page.waitForFunction(()=>!!navigator.serviceWorker.controller,{timeout:30000});
+            const controllerDiag=await page.evaluate(async()=>{const reg=await navigator.serviceWorker.getRegistration();const keys=await caches.keys();return {url:location.href,scope:reg?.scope,reg_active:reg?.active?.scriptURL,active_state:reg?.active?.state,reg_waiting:reg?.waiting?.scriptURL,controller:navigator.serviceWorker.controller?.scriptURL,cache_keys:keys,standalone:matchMedia('(display-mode: standalone)').matches}});console.log('R15_MAIN_SW_DIAGNOSTIC',JSON.stringify(controllerDiag));
+            await page.waitForFunction(()=>!!navigator.serviceWorker.controller,null,{timeout:15000});
             check('public_origin_controlling_service_worker_before_offline',await page.evaluate(()=>!!navigator.serviceWorker.controller));
             await ctx.setOffline(true);
             await page.reload({waitUntil:'domcontentloaded',timeout:30000});
