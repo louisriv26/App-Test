@@ -37,7 +37,7 @@ jobs:
              let pg=await ctx.newPage();pg.on('pageerror',e=>report.page_errors.push({browser:browserName,error:e.message}));
              let response=await pg.goto(origin,{waitUntil:'domcontentloaded',timeout:60000});
              await pg.waitForFunction(()=>window.__lp24Init==='done',{timeout:60000});
-             const id=await pg.evaluate(()=>({version:APP_VERSION,build:BUILD_REVISION,seq:RELEASE_SEQUENCE,view:state.view,storage:STORAGE_SCHEMA_VERSION}));
+             const id=await pg.evaluate(()=>({version:APP_VERSION,build:BUILD_REVISION,seq:APP_RELEASE_SEQUENCE,view:state.view,storage:STORAGE_SCHEMA_VERSION}));
              eq(browserName+'_identity',response.status()===200&&id.version==='v120.6'&&id.build==='B2'&&id.seq===120006002&&id.storage===8,id);
              let routes=[];
              for(let n=1;n<=24;n++){
