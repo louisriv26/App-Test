@@ -1,0 +1,96 @@
+name: 24H R15 PRODUCTION exact public blind
+on:
+  push:
+    paths:
+      - .github/workflows/24h-r15-main-blind.yml
+permissions:
+  contents: read
+jobs:
+  blind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install independent Playwright Chromium
+        run: |
+          npm install --prefix "$RUNNER_TEMP/r15node" playwright@1.56.0
+          "$RUNNER_TEMP/r15node/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Verify all 15 HTTP assets and native DOM/real IndexedDB/offline challenge
+        env:
+          NODE_PATH: ${{ runner.temp }}/r15node/node_modules
+        run: |
+          cat > "$RUNNER_TEMP/r15-test.js" <<'R15_JS'
+          
+          const fs=require('fs'),crypto=require('crypto'),assert=require('assert'),{chromium}=require('playwright');
+          const base='https://louisriv26.github.io/Les-24-Heures-de-la-Passion/';
+          const expected={".nojekyll":"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","apple-touch-icon.png":"dd8efc8111a51b98c4c93dcab7357ecc4c2d5448b8a08aa97da7381dc0b56864","favicon-16.png":"18ea7f82b0a52d3ab2e5f89eb294fb06f0057b72f890aa66ada9e0f3ff4beaa8","favicon-32.png":"49d3cd0fdf71b21076d3117b352422730ebc0d0e99749ed4e3b1d230c71ed008","favicon.ico":"d0b29e153e5783bfd36522c1dc9cabff9817275553b9a2db80db477a1fca53ec","icon-120.png":"12151620d8cf4ff5f9e8b8c4e2ecf5bdb739142613f7d41dc3d8e22d10f43f17","icon-192.png":"6c3f6c4771a505d06efc5f8d9f3da877bb599ec14c45509b185d0749fd83bff4","icon-512.png":"a0c9e8ab677750ca096adfb2748a4f4de8707b01a914faeafbf2ae94ec7da4f7","icon-60.png":"303a69b4d594ca2a22df35bce029cbdb8a143cbda41bbf83199b0f9ac0ea2fb4","icon-maskable-512.png":"2c15d684b3c37e62b342f8a2041daa0038fa2280a3c3dafea02ccd10bec4716a","index.html":"e1467ff9891250f9fbc36a7687c352188de59b64887dc64c43f1a944d1afb099","luisa_24_heures.html":"e1467ff9891250f9fbc36a7687c352188de59b64887dc64c43f1a944d1afb099","manifest.json":"c53a0c3d7664661a32222082886b67130cf0fc2dab7de7efb35fbc7a96ca7827","sw.js":"b04cdd1b778eda35e630e83bf9127369d08a81f58f392cbee259cb3add4006cb","version.json":"4e3570b27a27da89f91de5f8e6d244e34ec3d2fa1d5513ba2a88075df0c618a6"};
+          const sha=b=>crypto.createHash('sha256').update(b).digest('hex');
+          const result={candidate:'v120.6/B2',origin:base,controls:[],pageErrors:[],tested_sha256:expected['index.html']};
+          const check=(name,pass,extra)=>{result.controls.push({name,pass:!!pass,extra});assert.ok(pass,name+' '+JSON.stringify(extra||''))};
+          (async()=>{
+           for(const [name,digest] of Object.entries(expected)){ if(name==='.nojekyll'){const resp=await fetch(base+name);check('nojekyll_deployment_sentinel_non_executable',resp.status===404||(resp.status===200&&sha(Buffer.from(await resp.arrayBuffer()))===expected[name]),{status:resp.status});continue;}
+            const resp=await fetch(base+name,{cache:'no-store'});
+            check('HTTPS_asset_'+name,resp.ok,{status:resp.status});
+            const bytes=Buffer.from(await resp.arrayBuffer());
+            check('asset_SHA256_'+name,sha(bytes)===digest,{actual:sha(bytes)});
+           }
+           const browser=await chromium.launch({headless:true}),ctx=await browser.newContext({viewport:{width:820,height:1024}}),page=await ctx.newPage();
+           result.browser_version=browser.version();page.on('pageerror',e=>result.pageErrors.push(e.message));
+           try{
+            await page.goto(base+'luisa_24_heures.html',{waitUntil:'domcontentloaded',timeout:50000});
+            await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:50000});
+            check('real_public_runtime_identity',await page.evaluate(()=>APP_VERSION==='v120.6'&&BUILD_REVISION==='B2'));
+            await page.waitForFunction(async()=>!!(await navigator.serviceWorker.getRegistration())?.active,{timeout:40000});
+            check('genuine_public_origin_worker_installed',true);
+            const capture=await page.evaluate(()=>{
+              openHour(24,false);
+              const pid='PASSION24.HOUR.24.DESOL.P081';
+              const el=getCanonicalAnchor(pid)?.querySelector('.para-text .para-seg');
+              if(!el||!el.firstChild||el.firstChild.nodeType!==3)return {found:false};
+              const text=el.firstChild.textContent;
+              const range=document.createRange();range.setStart(el.firstChild,14);range.setEnd(el.firstChild,44);
+              const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);
+              const captured=tryCaptureCurrentSelection(false),pending=state._pending;
+              selection.removeAllRanges();
+              return {found:true,captured,pending,selected:text.slice(14,44)};
+            });
+            check('real_DOM_native_Range_P081_selection',capture.captured&&capture.pending?.text===capture.selected.trim(),capture);
+            await page.evaluate(async()=>{await applyHighlight('yellow')});
+            const created=await page.evaluate(()=>{const pid='PASSION24.HOUR.24.DESOL.P081';return {hl:state.textHighlights[pid],visible:[...getCanonicalAnchor(pid).querySelectorAll('mark.hl')].map(x=>x.textContent).join('')}});
+            check('P081_real_highlight_created',created.hl?.length===1 && created.visible===capture.selected.trim(),{vis:created.visible,expected:capture.selected});
+            await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
+            const after=await page.evaluate(async()=>{openHour(24,false);let id='PASSION24.HOUR.24.DESOL.P081';return {hl:state.textHighlights[id],visible:[...getCanonicalAnchor(id).querySelectorAll('mark.hl')].map(x=>x.textContent).join(''),db:!!(await readPersonalCanonicalRecordStrong())?.raw}});
+            check('P081_real_highlight_reload_survival',after.hl?.length===1&&after.visible===capture.selected.trim()&&after.db,after);
+            await page.evaluate(()=>openLibraryText('PASSION24.TEXT.HOW_TO_PRACTICE',false));
+            const practice=await page.evaluate(()=>{const id='PASSION24.TEXT.HOW_TO_PRACTICE.PRACTICE_OPTION.P001';const el=document.getElementById(id);return {exists:!!el,prefix:el?.textContent.includes('Flux par défaut de l’app :'),readable:!!el?.querySelector('.para-text')}})
+            check('P001_practice_visible_and_annotatable',practice.exists&&practice.prefix&&practice.readable,practice);
+            await page.reload({waitUntil:'domcontentloaded'});
+            await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:40000});
+            const controllerDiag=await page.evaluate(async()=>{const reg=await navigator.serviceWorker.getRegistration();const keys=await caches.keys();return {url:location.href,scope:reg?.scope,reg_active:reg?.active?.scriptURL,active_state:reg?.active?.state,reg_installing:reg?.installing?.scriptURL,installing_state:reg?.installing?.state,reg_waiting:reg?.waiting?.scriptURL,controller:navigator.serviceWorker.controller?.scriptURL,cache_keys:keys,standalone:matchMedia('(display-mode: standalone)').matches}});console.log('R15_MAIN_SW_DIAGNOSTIC',JSON.stringify(controllerDiag));
+            await page.waitForTimeout(25000);console.log('R15_MAIN_SW_DIAGNOSTIC_AFTER_25S',JSON.stringify(await page.evaluate(async()=>{const r=await navigator.serviceWorker.getRegistration();return {active:r?.active?.scriptURL,active_state:r?.active?.state,installing:r?.installing?.scriptURL,installing_state:r?.installing?.state,waiting:r?.waiting?.scriptURL,controller:navigator.serviceWorker.controller?.scriptURL,caches:await caches.keys()}})));await page.waitForFunction(async()=>!!(await navigator.serviceWorker.getRegistration())?.active,null,{timeout:100000});await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>window.__lp24Init==='done',null,{timeout:45000});await page.waitForFunction(()=>!!navigator.serviceWorker.controller,null,{timeout:30000});
+            check('public_origin_controlling_service_worker_before_offline',await page.evaluate(()=>!!navigator.serviceWorker.controller));
+            await ctx.setOffline(true);
+            await page.reload({waitUntil:'domcontentloaded',timeout:30000});
+            await page.waitForFunction(()=>window.__lp24Init==='done',{timeout:30000});
+            check('public_origin_offline_reopen',await page.evaluate(()=>APP_VERSION==='v120.6'));
+            await ctx.setOffline(false);
+            await page.reload({waitUntil:'domcontentloaded',timeout:30000});
+            check('public_origin_online_recovery',await page.evaluate(()=>APP_VERSION==='v120.6'));
+            check('no_uncaught_browser_errors',result.pageErrors.length===0,result.pageErrors);
+           }finally{await ctx.close();await browser.close()}
+          })().then(()=>{result.status='PASS';console.log('R15_BLIND_PUBLIC_PASS',result.controls.length)})
+          .catch(e=>{result.status='HOLD';result.error=String(e.stack||e);console.error('R15_BLIND_PUBLIC_HOLD',result.error);process.exitCode=1})
+          .finally(()=>fs.writeFileSync(process.env.RUNNER_TEMP+'/r15-blind-public.json',JSON.stringify(result,null,2)));
+          
+          R15_JS
+          node "$RUNNER_TEMP/r15-test.js"
+      - name: Preserve failures and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 24h-r15-independent-public-origin
+          path: ${{ runner.temp }}/r15-blind-public.json
+          if-no-files-found: warn

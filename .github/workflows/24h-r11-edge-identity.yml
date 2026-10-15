@@ -1,0 +1,32 @@
+name: 24H R11 public App-Test edge identity
+on:
+  push:
+    paths:
+      - .github/workflows/24h-r11-edge-identity.yml
+permissions:
+  contents: read
+jobs:
+  edge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Verify published website matches exact frozen 24H candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          u=https://louisriv26.github.io/App-Test/24h-v120-6-b2-r11-qa
+          mkdir -p /tmp/edge
+          good=0
+          for i in $(seq 1 12); do
+            if curl -fsSL --retry 2 --max-time 20 "$u/index.html" -o /tmp/edge/index.html && test "$(sha256sum /tmp/edge/index.html | cut -d' ' -f1)" = "e1467ff9891250f9fbc36a7687c352188de59b64887dc64c43f1a944d1afb099"; then good=1; break; fi
+            sleep 5
+          done
+          test "$good" = 1
+          for f in luisa_24_heures.html manifest.json sw.js version.json; do curl -fsSL --max-time 30 "$u/$f" -o "/tmp/edge/$f"; done
+          printf '%s  %s\n' "e1467ff9891250f9fbc36a7687c352188de59b64887dc64c43f1a944d1afb099" /tmp/edge/luisa_24_heures.html "c53a0c3d7664661a32222082886b67130cf0fc2dab7de7efb35fbc7a96ca7827" /tmp/edge/manifest.json "b04cdd1b778eda35e630e83bf9127369d08a81f58f392cbee259cb3add4006cb" /tmp/edge/sw.js "4e3570b27a27da89f91de5f8e6d244e34ec3d2fa1d5513ba2a88075df0c618a6" /tmp/edge/version.json | sha256sum -c
+          python3 - <<'PY'
+          import json
+          d=json.load(open('/tmp/edge/version.json'))
+          assert d['app_version']=='v120.6' and d['build_revision']=='B2' and d['release_sequence']==120006002
+          print('EXACT_PUBLIC_APP_TEST_EDGE_5_FILES_PASS',d['release_id'])
+          PY

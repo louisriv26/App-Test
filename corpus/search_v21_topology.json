@@ -92854,11 +92854,11 @@
     "display_files_sha256": {
       "display_01.json": "9774ad6430982a15b1b0321e5967052d8b22cb4effcdfa6c2723fa80c2c70b93",
       "display_02.json": "8157821949fbf32564efb158a6ca6f3100940c0e3b17e279789139eeed3b99da",
-      "display_03.json": "e5cc1a9e8960cb00cd05c0557f01b088b3ab350895aac57fa6066cab4d16f2ce",
+      "display_03.json": "1a57c478f4bd420c9fb7b711c1a3fba471569f1b88d7b69be44ffe8a571c405e",
       "display_04.json": "e8545d4639ad766a1a42392a65ee946dd6adf65a290c471c4ca37a1ba716987f",
       "display_05.json": "cbc4196ccc2d718dec3b565fbb0f416d7e66fd181cc21d15a4337244a5d05b64",
       "display_06.json": "c2c87b3755f78466fbf99bc7b58f5b301eceb037b73999e7c7ee1419f1e5fc37",
-      "display_07.json": "5ef91cfbcc6aaec59a9ddd0a9257b9e7b7b90334cb050f3a1b45f7cd9df04800",
+      "display_07.json": "41550c30469acd16894838ead46c37c3fefea9e053f13f0043c26a8bc4070ec2",
       "display_08.json": "248bc391b86de189fd368d2d19279a0bda94939249d2f66d7bb68777d6c5f489",
       "display_09.json": "5dc64b419109b89f92072d61c53606a1c5478270f48ad064c2ef0499941a3b7b",
       "display_10.json": "e0c4d2e7037c55053de91e881af02a0a08bd0c8b71dccc73b86f86a935d6fc42",
@@ -92885,16 +92885,16 @@
       "display_31.json": "b6d555afa76ff7bdb8c8fdc8f28cf310f40de36dce7e4360fd19bb340112f253",
       "display_32.json": "694b6467b3ccbefda1587b6c59ce5a75627da21990d79181a4f694675391d65b",
       "display_33.json": "1e107ddc8270e8af20970650bbaa9021d963876c10d6dd9f7f2cfcd0ddb31fb8",
-      "display_34.json": "24e13178755553f30d29645dffc3cfaacf35592681e195640eca35790137c8a1",
+      "display_34.json": "3bb99d2fc5655a90e2b5b875ce430edb3caf88cf3d5d87b5925390901f5c3465",
       "display_35.json": "c781dc77c9d018d7a6af236b27fac5dd8173f1601f4d61b867aa6d3aa559fa18",
       "display_36.json": "1d0964b9be10df85bfb56a23a4669d1bb45a2b9326db619ca39865d022132beb"
     },
     "normalizer": "NFC+SEARCH_V2_NORMALISE_V1_ALL_NONEMPTY_TOKENS",
-    "search_v2_documents_sha256": "65cfeb954ce9ecaa02c761024f2802436c9fcd07982e20438486d1a793fc195a",
+    "search_v2_documents_sha256": "04d63a58977fd70ec11b726c160fc45115ad5c2fae16374f54a95c228ee4a2ec",
     "search_v2_entries_sha256": "ae74aceaa596c72afa5727f1dceb39b4e349ceffbb07e926a6aab30c70a5c54c",
-    "search_v2_index_sha256": "5b12b6c52dd0633ae2bf2318cd7959b04bbdd886e0adfbdef8862b41d2575b99",
+    "search_v2_index_sha256": "6ef91b5c1c4f165536e726fa0f54f10d5c956e011de744c20c5e86d3863126b5",
     "search_v2_jesus_filter_sha256": "67bd9e80c8ed1702c95072adff9859e7a25a521df14fd1be6efb496aa0ddf31d",
-    "supplements_sha256": "da16a9d3a04105dcecd51519e3b18dc9a5a986bc9e5ab64fb7e9073c0d131348"
+    "supplements_sha256": "4b2fed31fbf779f15979ac6e34532c205a6f6b4ceb927bd4a331e2726e3b86fc"
   },
   "complement_units": [
     [
@@ -106220,20 +106220,30 @@
   ],
   "reference": {
     "additions": {
-      "digest": "029c8f53c9a20cae460ff2ef8e76c82cbc50bba4aa518b357eabe1019f4c2c16",
-      "tokens": 14333,
-      "units": 75
+      "digest": "1a4ade10b0920cfab9ce59440bee07e8881a441bdb7d6b41fc10e9558549b701",
+      "tokens": 14337,
+      "units": 75,
+      "historical_digest_pre_r197": "029c8f53c9a20cae460ff2ef8e76c82cbc50bba4aa518b357eabe1019f4c2c16"
     },
     "aflp": {
-      "digest": "6bc37d012a23154af2d669cddb3f84078de606fadb43da3ab1dba516639a6c0f",
-      "tokens": 1466870,
-      "units": 2312
+      "digest": "57dcaf99473d3441b50561b94953a9dd402162398efa6179e52e051922a48952",
+      "tokens": 1466902,
+      "units": 2312,
+      "historical_digest_pre_r197": "6bc37d012a23154af2d669cddb3f84078de606fadb43da3ab1dba516639a6c0f"
     },
     "enriched": {
-      "digest": "49bc61ea97e2218da594a713748da0f21beefabef4762516cdb14b4af42b1544",
-      "tokens": 1480956,
-      "units": 2325
+      "digest": "7f68bb9c9f7c1faf6c39e713e114b91fe267f020a910b2b5db67475182f06486",
+      "tokens": 1480967,
+      "units": 2325,
+      "historical_digest_pre_r197": "49bc61ea97e2218da594a713748da0f21beefabef4762516cdb14b4af42b1544"
     }
   },
-  "schema": "ldc-search-v21-topology-r1"
+  "schema": "ldc-search-v21-topology-r1",
+  "r197_reconciliation": {
+    "scope": "R193_SIX_APPROVED_DOCUMENTS_ONLY",
+    "reference_digest_algorithm": "sha256(utf8(logical_unit_normalised_streams_joined_by_newline))",
+    "historical_digest_pre_r197_preserved": true,
+    "unit_ids_or_anchors_changed": false,
+    "topology_atoms_or_lexical_ops_changed": false
+  }
 }

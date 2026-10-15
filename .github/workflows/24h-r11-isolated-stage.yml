@@ -1,0 +1,51 @@
+name: 24H R11 isolated App-Test deployment
+on:
+  push:
+    paths:
+      - .github/workflows/24h-r11-isolated-stage.yml
+permissions:
+  contents: write
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Exact B2 candidate content hash gate and isolated staging
+        shell: bash
+        run: |
+          python3 - <<'PY_STAGE'
+          import pathlib,subprocess,hashlib,base64,lzma,json,os
+          repo=pathlib.Path(os.environ["GITHUB_WORKSPACE"])
+          base=pathlib.Path("/tmp/24h-prod-baseline")
+          subprocess.run(["git","clone","--depth","1","https://github.com/louisriv26/Les-24-Heures-de-la-Passion.git",str(base)],check=True)
+          assert subprocess.check_output(["git","-C",str(base),"rev-parse","HEAD"],text=True).strip()=="7c394c704d65e53adede20dc95de68e34046026b","production source mismatch"
+          patch=json.loads(lzma.decompress(base64.urlsafe_b64decode("_Td6WFoAAATm1rRGAgAhARwAAAAQz1jM4EGtFUldAD2IiScjrOfe3e7rHTN4lJkslWFdZWzTWlaMjuou36JU-GJb-CPnNU96OZ2RmljeJh0rJIE4KfwnUY0C8quLGbbO2Kq9iz-grxPSUxDsh_2UWtCSsaH-Sc-kfbHBuaNhSvvP04UPCJ71ku78nS2HlCCp9GaIQa8Or076WSn0nvth586AK9_iv7OF6LH_zWNeP1zmgqZ3oruxP8fjrDZhO3cCuFxBPKReln1LphyYCRXpywAu5PwZiIV3Ke7OY4NTBQKcQEy87IzOhlOiDUu97q3gxBJ1SWmFzAssldlYVKHSIMUeyXcLe02kYyWDx5vSD8u27ckyrliDlO3YP-fk-M7dLvyaxUZjCwcZVu2ErS6PxKeFWyG6PCp24bLxf0gPaPXe3hFXk46A9q7TdH4sMrvpBS8ViAVh_fBYTcva9SE8omy_r8EJtEQTSD-4Ij-poCM63Kx6r_ZfTYEwcyq8GoY5yaJtuUFY0Kv1Sj4C-rXzaw1KY-Rgg_vVArwXivErsfdMgGF8M-lwGznVbmMcDRk0XRF2p4wW4T2g5B5vVYEZn6d1ARijoxb46WDMW5Hc6PV7MqTlkJ4h3VLF1bxa4gN03-5r4hYJe4ItdCD1KCCn7VF7odWWFfVXktFSePoTMv_ZfGpdFGHoAvhUlkNkh8XTKCx2o_Pq86c0CW5nZOStt02gACg7KeazhEzul-dbgKQapdCw0D9l_nw96I8GZp1qiDBvrQ3M2dY5SZFewBWuOK8XKOZuozg0Hpiu4OOeFgFDZ7ubXS5tX051XKi2S-PSkzrvtZqKXjCThhm1z4y7J5sLVXBxVAAdVan-5od_OTdaBfmn7ehCPSj5cAQaxobaphgd04Hc4UK_oTJjyEpyPVdmt9z1MJqQunp8lypQ_KP4apb2avs3G2QSfT-9Fxzi7VBqDM3QbSimWCOT4F4iXByMgy6MO4QULKIOWIjZ1fNPKo_7MMfFxEoZEZ0UqVnPLqWL41YbMLEfxal7mO_Vv0cc0k-KiBbdsWu_KhMXrJuDo7ufJMTXyN9Q2QK6CC7ahb5aTe_7yIWcjz6lmN0Dc59bFnXGgkDDaZME0e92jVjdFjBuRszwO4fGcx80rrRI8Egmd42t-CxCDYiCeghwK57aEh_V1lQdHgeTgLKQurkIdezPPknc_XOgtu3MTBWZF5OepfAAUlQtz0esB27nQEks7zeRgLKLEYKnW2VhicK2ewtUxVeXttElkqUTNR3v1RZ0rKZCA-7hzuAzNYA4Gs6xV0c3AbIcQUXi4lekS31Eq0RqMXktLNyRktLsp7GROrElJKC-sjYOQxV5Cm_WQ-YbHZ8xkYVJOZa-Z-_fbRGq4Hj4OsBiw3fZPPCZAev333LFZ4mmsrn7cYWdUgZTbPXGp2zzI67VJXlta1w3Q0NvhKhe3l6_DQO8q-A0HyOoRcLfU-0A_o0t_BM3uXuAVjvfP3_gLVQcbknizp6TheGGQbAr2_5Q-1_P1Zn4Ft0Eg_IoJ6LzHjdbhLYGD82heL83eATxvLlnyQYzMLVnCkqzoOKI7B-1Z-WUGD0OHIZ3mobxC1Cv7px7e66i5TE0WxFNIT-Z3ILCPIvnKAUn-RFc__Z6t6BSv_fQkOlurm6-X9V1Ecp4PAdl87yNOj2xLGhE2JPdqMlVU0Ht5xTHbyjD_KX-IlrL-AtO4Uj5HClbNGQcM258xY14Y_RYbu7FTCPGuPA28shASqaN53hZFq8JT3Zs6Z04UdZXMlXP16UEKK6H1QQF7oC60oFtTaMwAgcam0icbBzKfHyZXst07_YjDRp11q9ohTMw6a81FZJ-PhLJ8OFvdg7MIfkcyBNzOPbNfFHBFuJgEcM0VeGZvgfarLUZlA_BxHzMeKc3VZpx2Qn53e6bhmJpuPCLYrWi2N0NKflxLppz_erNYcWhZ9QLtZiWrCHyvMn2t_YTOG5tUtAKtO-V7MKDZotIcs3fI3AwsYlnnPXm5IZVLHvfheoEuhplrQHn69hDFFCefRSeyt-tW_klCuoRq5a1fvP6gst7IITcyQtRxx9xR2zanQqgnw6FwTzrIybBK2rUGLTcQln-NXMpxYZ8ibxQtoAA2o8u1Yca-CKhkUeChXtgWGU2inki6DBRHpJ4VWqU7hYZBPTTLMyPvPy0P3UfYXcWmA0m0b7cp4_2ttmE1OlhKpQl97-2ynLjpr4z2QYX-V1srngWALvk4LYXvAlly3yhuwEJ4QC8-BlPQycAxRs2Zk0AnoaMXMDYreOOFF-A27dCL1zAMyGCc5-gAbgXEnPHBmAsxRbqyIujr7vGRQu6MxDLi4IQVQn54ZZh7cUHrI9lV2DoOPDAdgekI1A8nwD5aHTn3ayztQVjWEQj_VttJFaQi7Nj117gbrEU-c74Gdvxb8tFPB8K9UwwPXUoCUW65LeUmrjhnEz7zIMBl5o-6q5wOsDICZceCgH4W8_xsFFOMY6R0NjpFAj0Mv_EZtFocuWPntG4iMvD8MYC2gKwwelrCkOCpHE658IjHPELhsd02Cf5H5KzoYAwSEhXq-TfQSkkbHUAwkl-rjWWsZbjf4Wete7kD_8-m7Bmb1zjsQQ-x6o24pk8Ato3SRuELbHOJffxmqX1sAqOrBNS-yLmLe1jeDrSQY7WwcqbzT_ODubhOU5sB4LwrBJ6XATD0mhxozfyWTWCHWMc5DBuL1yfhw2KOhJhBKEAbfpoFtrki6Xlow9jpHfYBtNVrOCpUJqzNfsHNz_sbVsbxR0iJzHCCTihudP1zjVOt0WHv5FISffdieNwaa1ybF1phgJVyF5mhzWrKicD6pLbMoN_a4rC0M9P1V9PF5qzLwbJVwpOw7_d1fTgQ4Aw-NelJeQD0pFWmk6LiL12dcXwkT6XCieka-ZlmUf0XxkJBC5q-j9kjiveAt4BaZaJHrjHPJGslGgl2pUXyi1-KdaKMvprFJ1so2KX-W71S7JszAXbuETXxTTMkEtKw92wgk-p8VvdPdVJ8i0nx8_j2o9Pxa3rZhy0Dlm1wb9IxeSC6HK_ZaHMVo00SyE8Nk0-W3bpx59SXLMXw4CrMZdbv4Cpc_Cf1g0KQbu-IAKy61I83xCBL4xLM0YutxQ7cNh4cPZ2qHz7pIQit-R1AUoRQ6JBjCuqq6d9QCM0fWfhT7kmRbTOKPo8C_gQCr7AuZnW7QyChLXCpzlHwStfS4qpRm8k-uOInc21bh_RK4hEtzJB5RnJ5dUxUE5xBxNh8dl9tjQ66mxrWQaCuf9GwJnaMX1p0SyhBLdeDqKnlQkuLL5UM6VVF5ZihEJnJR-oL6VIdQhzIdz4SmlPS1opxBmkkKUe-INKOm3rLCXe99BOgrFFyuitySe4jaonXMr27CinHqYC7UKCkUKnPGzCwGMIuAJ1XukDAWKMJ1pZIKFquUdD76mdutyxAWhuQkrYdrf-zkSXEhmFbCCyJE7NLm6ARgdK073v9AHL2uY9Z1LRoUmQtyFMY0rcgtH6KQa9xN-fFzZtqaQS-tY7p2HC8FCg0_zYiGqGtswnvIA3zi9WHgV4efLzXB6nbWNeNO4TxUIKsGt81u2RSyVq2FjEnrjSXOBZSAF4L--wzR6l881gsBYCwiBC71U3IgYOnTp7bbC_tdID3XzMWumqJPZkkobxmeHnl1xg4YKeONqWoK28ALOTp3-5w5R05r6fblwYJmf6IKjURNNsDmjjTTVOxQLMo7hiqOYMcjRBlK7GXBZf-0ziNzvDjrdp2XHlxsqji6irMtatne8lsnpXdCSSJ4uFzQrIM08MF33my6LXR4-E1lZY-_mhx90zkFPWfzYcvirucZD6ulwReLX4ctQHOrVIiKTH5glYXf_fJ1yUZjTCuWTpJLjLEc7HSZp7UmYvgQIuxn5d3ey828vdVWAFa2heZEIoEbHwcb1WkzAPZ955B5DOkvAGNC6SWtCWCecmrciTSuAF4voVr6CdnaybZIOmOKMNEG6Xkt9emDJsQ_W9mEn4o9qFzHZAb5j__hjaPdGmcuxpLsTyCpTI4vbAbDcfAbMiZNGaKvGlGjiDa95rnwQfEg4ezfPK1s-dvbbXy4pvsOyDXpGgyCF7p4RSYYVlj_SFfpM7VAUID7Cb7YoSoHA9pAfsmSmiJfSZ9yBp1fPRuGnZoJXOjJHGbQoUq2kE7Grluebd-RJ8GhmDMDmXSWRP6Kd2IgaZ_NwockD94vjV5cYF8RHpudJLOaEzhSqMBfFUr16DTRfHGhJfeXO8ANEJtvWcJIdfRe3iuCrVUU5Q_fe-EcpxvdxPO4n-70kXc21VQfrqSUjkMlpABwe3VhdVjXcJqwFAKC-HGufGEJ4TM76Q1u6tGb_O5dD6gENcJAN4kd8Si5wE-9CYgAW6Fgn8JLzOB3DJvdgPq8rdGLMR_ZJ6mP1ezQp3EvWeEZAhNV_BafUGqucB2H5rVK3-BQsNTnxcFlYGEA633-qdacoGLAQoi94Q2H9ruKWf7k4N5KLMdkd62OYj3vT6FjNd2BUHLfWQEkp6YN-vDgtmSbR8XDgdgcClPaC43OiXNp7jTVbHsoPgW42OnIHMFMtfzTMfwgqIP05xIDkuHVFRTwoUeamMipzBPz6pWH_1XGdvd2duEV6t-FVxQeLcKvnePWfKzytoVVhTR-8xlTmuhZ9Rwc0m4kxoDezxE7yQfBzdkIrM8jMFmA_aOEi6TMHpCDndoipZ8LiP5DiSV70y-6HAl9dr4W-1QGMt125y-ube87y2dlS_miL2MxHFLfIzNCjtb582CCCBM7hghNlpzcWWsxugBqrSzN5WO3ujtlf0SjTFBR_cXa4bmgI-snqWJUwfq2Lnc0PJDq_7MNo2R9J1QxCzzQ2nh0BxaYGI9ITm_JIOm7m_uhQ-6nT8tKgiaknp-iPXOYkz7vDhwNlE0GiAoq4cGkUq5_CRmSY63k406Qhk0lSicF4PF4lgNBCCb--YjwAnH62Sw1HxxvPUX7accahWvLbbIgWkVdqIPshvjAk3IwJcx94WBesIiVRC8znUGcKpDqsQ8VTHJVwlV6NuKwKo2RVwQ5uXYmwyVF-KZ5nqVV8zt1LLtx3Db0n1CNhC1TgxxHkSOoKouBYzmbvnovGeSRn4AaRxh4-WiEVxysXN7Nu4pdaT9FEHBIayAUBFKXiZRZSFX2UY8qbg6pKPgOca0_DGhR7pmpUK5nYe2d2rZJE2a6y33OiFfHVdcFHNsfulT4g_cPZua4Z5Jb_xSsHHpJ6-Dl97TXAHEWHuRztzFOs589_9WdNTf50oQX4o3r6SHsbAzB9_OFM9gbn8COLPcIsIzdMXP0qu20QCH6pk5p39TGq-jOrOKT4kUicTBMSR0aswfsXaBVBMVoZX-9aH-T5IU7zoaaZ7UrE-TF2yfDzcVBY57bY5XwiikkQUVtX4CFOZ0R3Zk8Z_4enhTRTDrMY27X3jDAIm0ywejCvc7l1akVKAvVYkeZ9Cw86Hi12W3P9GxMgj69LKAXLbdQaCprcmJhTb0svnkemOiG5v5QzyRLY-bxj5Zgcg6pTArncm880BVhcUCdhIGd4Lc5EZpB2yBupC9VAQ9zOM9YTkp31TyYTHSqtP5X2GATMePc8udSRyyt8TqNjoud_3y1Ee6K4zg_ZOeWCFPoFyd5vg4XGO1QrEoMMu5B4BPMSjPf7Yb9pOfomIiOm0APyK0i7dacZvYrPvTO-C1zgrAHuST99V2DtbjldIs45cGgJ6BUVj3jN1irafFOC8SV2ll-XQ1NASBTF4x6wUZC2FIkzPI6o8gRhTjt_jVvyF4woz4QxSrt7GK6Eg9NzwgkqLWIheckIgX-OGLJfoLRocY9gdsNnhRjwncaMMylXFUWij-2S1qdiBnpzPRPjzZ6-XlC2_S_RIOe7DALenCJTgiKvf1JIV15yas96ViK6AngrU-hjdAiCxns3_U9fcCcv0kf-UtHRKlDVIHan1KPITJTkmjlKc2XEy807w_fbgbin7yVn8ibqI-BteeK1Jb06tlbZ9ohf5oH3cLzJM8qRn3EEvRCjKhs6jLwKy9QzSzwb45akVNrryylXHIWibKiQv-oV1n1uHqcKfgfA44uLmqKycpXUTqspq2bwtQeV1adrIkI-qpByBeuPkSyUbGPVvey0ikie0t98UggORxIJwnLXq93niQlhPtOmNz8hqaYbo_C9J27AbR_ICFEH6HOpaSR_Pgk20X7bwFovhzpBuznxSr8uHeO9gnsZ3PR3tF1qsx2OCa27UX0DAlhOW8Ihm-W0KRx2cO3_kkJyIvuMmEVLqH0-4Hq3Z_YnMlcRmpEvGT4gHzAxHtILmYZyxJQOXPKf4V-R6PG2raFVjRD3y2-LHO5s4N3GxYYIR3huWV3XQyhaymqyhauiYLeqrVpBRfdbRhmfSARlsVDdsOm7rfsQiQXQp22XfPN2BeWRS0brDSUbQsNlUVC3EWQnd8qRxtORjX1KWR4mOEO7SeliMyfcnT8Ev87tD3iGbM40JOzBYjjM25_Oa2UIAnaxqD-ySXEpxj7Jt-ew8XrRrM9Kupvi-sA5kxg7dLKrBghQ1Oc3t9AQo0vsGL3dvUB4AwQLTmy1HEdbgdd7Eu18QpZIaXzMAvzZ44hMvyThEnbbgxe6guIQqer5MR5rRlXTHVDDtY34jaui-gv_XIKNq-E11fL1_NqmorzKTMJJqxHP0yaNgAM0fawBZwjBFokprCn3grMvKr95sofsl8_hIdRRizIJf1apBKzdvsAwAug7OBK10xrl6RCRw9Z55YU4ntbUwHCFC0if3kY7-c4oateGFbzxJVM09v69aBHDG_HW4BM4LeZd0Obc_PVk93ZwnSVtGc0Xd1UDr83EylxzoIl_q1J321OeLrZvXwsIDhBsyNr3BhN37dGQtivRXKJl3fivxFrzSuUw5yTMjeqN85pBzZiWuKLTbpzrQk_lgRyBBJK6xHHbgtj2OQpFa8Ycp6FQ6xXEERUo4m-e-muKE7v7sWUkVg0HygC0njgqsG7enm2XgwkTJpdyJZXkaUpjszxi9PJ4WYCcN72zTCnQaPhnFHPs-ShT28G3yh4Ki6OWOoCzgc4_36Srs9qPNUj6MiQBMfyoj4z8SMc04iljdkxxodDRDQQHvbYHUKpYGYZ6maasbCO9RLQowWZL00dHPsX98Rd6drhyXiUUSOXclW1nvWhr_5ZuSWfeo70YkC1pWcLpb-fP00sBna3AFBKflhOG339lT-vvKaI5FoDG-79shOrwXOFatmZ8mB_FUANnDc0wI93-THrBvXdap6A8SjApK5HwAAAAAatU1ukJiJHMAAeUqroMBAOeTcVmxxGf7AgAAAAAEWVo=")).decode())
+          files=[".nojekyll","apple-touch-icon.png","favicon-16.png","favicon-32.png","favicon.ico","icon-120.png","icon-192.png","icon-512.png","icon-60.png","icon-maskable-512.png","index.html","luisa_24_heures.html","manifest.json","sw.js","version.json"]
+          target=repo/"24h-v120-6-b2-r11-qa"
+          assert not target.exists(),"already staged; refusing overwrite"
+          target.mkdir()
+          combined=hashlib.sha256()
+          for name in sorted(files):
+           data=(base/name).read_bytes()
+           key="index.html" if name=="luisa_24_heures.html" else name
+           if key in patch:
+            lines=data.decode("utf8").splitlines(keepends=True)
+            parts=[]; cur=0
+            for i,j,replacement in patch[key]:
+             assert cur<=i<=j<=len(lines)
+             parts.extend(lines[cur:i]);parts.append(replacement);cur=j
+            parts.extend(lines[cur:]);data="".join(parts).encode("utf8")
+           (target/name).write_bytes(data)
+           combined.update(name.encode()+b"\0"+len(data).to_bytes(8,"big")+hashlib.sha256(data).digest())
+          assert combined.hexdigest()=="74d15d864126154a820eb5db49b962953131cffabcd8dd6b885f9bc14d671942","candidate bytes mismatch"
+          assert (target/"index.html").read_bytes()==(target/"luisa_24_heures.html").read_bytes()
+          print("EXACT_15_MEMBER_RELEASE_PARITY_PASS",combined.hexdigest())
+          subprocess.run(["git","config","user.name","github-actions[bot]"],check=True,cwd=repo)
+          subprocess.run(["git","config","user.email","41898282+github-actions[bot]@users.noreply.github.com"],check=True,cwd=repo)
+          subprocess.run(["git","add","--",target.name],check=True,cwd=repo)
+          subprocess.run(["git","commit","-m","App-Test only: 24H v120.6 B2 exact R11 candidate"],check=True,cwd=repo)
+          subprocess.run(["git","push","origin","HEAD:main"],check=True,cwd=repo)
+          print("APP_TEST_STAGED",target.name)
+          
+          PY_STAGE

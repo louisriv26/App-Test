@@ -8,6 +8,9 @@ const APP_ROOT=new URL('../',BASE);
 const MANIFEST_URL=new URL('semantic_pack_manifest.json',BASE);
 const MODEL_ROOT=new URL('../pls_v15/',BASE);
 const MODEL_ID='model';
+const R198_PATCH_SHA256='db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908';
+const R198_PATCH_URL=new URL('./patch_r198.json',BASE);
+
 
 let phase='idle',lastError=null,initPromise=null,manifest=null,tokenizer=null,model=null;
 let verifiedAssetCache=new Map();
@@ -61,6 +64,20 @@ async function fetchVerified(path){
   assert(u.byteLength===Number(d.bytes),'PLS_V16_MODEL_ASSET_SIZE:'+path);
   assert(await sha256(u)===d.sha256,'PLS_V16_MODEL_ASSET_HASH:'+path);
   return u;
+}
+async function verifyR198Patch(){
+  const resp=await fetch(R198_PATCH_URL,{cache:'no-store'});
+  if(!resp.ok)throw Error('R198_PATCH_HTTP_'+resp.status);
+  const bytes=new Uint8Array(await resp.arrayBuffer());
+  if(await sha256(bytes)!==R198_PATCH_SHA256)throw Error('R198_PATCH_HASH_MISMATCH');
+  const patch=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
+  if(patch.original_manifest_sha256!==EXPECTED_MANIFEST_SHA256||patch.base_pack_id!==PACK_ID)throw Error('R198_PATCH_PACK_BINDING');
+  for(const [name,digest] of [['corpus/search_v2_manifest.json',patch.source_search_v2_manifest_sha256],['corpus/search_v21_manifest.json',patch.source_search_v21_manifest_sha256]]){
+    const resp=await fetch(urlFor(name),{cache:'no-store'});
+    if(!resp.ok)throw Error('R198_LEXICAL_BINDING_HTTP_'+name);
+    if(await sha256(new Uint8Array(await resp.arrayBuffer()))!==digest)throw Error('R198_LEXICAL_BINDING_SHA_'+name);
+  }
+  return patch;
 }
 async function ensureModel(){
   if(tokenizer&&model)return true;
@@ -125,6 +142,8 @@ function status(){
     available:!!ready,ready:!!ready,loading:phase==='loading',can_initialize:phase==='idle'||phase==='loading'||phase==='failed',
     calibration_status:ready?'QUALIFIED':(phase==='failed'?'UNAVAILABLE':'PENDING_VERIFICATION'),
     model_ready:!!(tokenizer&&model),persistent_semantic_storage:false,
+    r198_overlay_status:'SCOPED_11_NEW_VECTORS_LOCAL_QA__FROZEN_BASE_CALIBRATION_ONLY__BLIND_REQUALIFICATION_AND_BROWSER_PENDING',
+    r198_overlay_rows:44,r198_reembedded_vectors:11,
     error:lastError,registry
   };
 }
@@ -136,7 +155,7 @@ async function init(){
     try{
       const R=globals();
       manifest=await fetchManifest();
-      const bind=await R.bindModePack('enriched',{manifest,getBytes:p=>fetchBytes(p),encodeQuery});
+      const overlay=await verifyR198Patch();const bind=await R.bindModePack('enriched',{manifest,getBytes:p=>fetchBytes(p),encodeQuery,overlay});
       assert(bind&&bind.available===true&&bind.calibration_status==='QUALIFIED','PLS_V16_REGISTRY_BIND_FAILED');
       // The verified semantic bytes have been copied into the bound index/BM25 structures.
       // Drop raw verification buffers before loading the model to bound mobile peak memory.
