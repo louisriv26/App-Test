@@ -1,0 +1,101 @@
+name: "R249 App Test storage, search and offline smoke"
+on:
+  push:
+    branches:
+      - qa/r248-hosted-20261016
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integrated:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm --prefix /tmp/r249-more install --no-audit --no-fund playwright@1.56.1
+          /tmp/r249-more/node_modules/.bin/playwright install chromium --with-deps
+      - name: Test hosted App Test new profile
+        run: |
+          NODE_PATH=/tmp/r249-more/node_modules node <<'JS'
+          const {chromium}=require('playwright'),fs=require('node:fs');
+          const target='https://louisriv26.github.io/App-Test/';
+          const findings=[];
+          const add=(name,pass,data={})=>{findings.push({name,status:pass?'PASS':'FAIL',data});console.log((pass?'PASS ':'FAIL ')+name,JSON.stringify(data).slice(0,350))};
+          const ready=async p=>{
+            await p.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:60000});
+            await p.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding();});
+          };
+          (async()=>{
+            let browser;
+            try{
+              browser=await chromium.launch({headless:true});
+              const ctx=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'allow'});
+              const page=await ctx.newPage(),errs=[];
+              page.on('pageerror',e=>errs.push(String(e).slice(0,380)));
+              await page.goto(target,{waitUntil:'domcontentloaded',timeout:70000});await ready(page);
+              await page.evaluate(()=>openEntry(23,'LDC.T23.E0013','entries'));
+              await page.waitForFunction(()=>document.querySelectorAll('#reader-body .para-fragment').length===104,null,{timeout:30000});
+              let state=await page.evaluate(()=>{
+                const sc=document.getElementById('reader-scroll'),a=document.querySelector('.para-fragment[data-para-id="LDC.T23.E0013.P049"]'),b=document.querySelector('.para-fragment[data-para-id="LDC.T23.E0013.P052"]');
+                const first=[...(a.querySelector('.speech-run')||a).childNodes].find(n=>n.nodeType===3),last=[...(b.querySelector('.speech-run')||b).childNodes].find(n=>n.nodeType===3);
+                sc.scrollTop=450;const r=document.createRange();r.setStart(first,5);r.setEnd(last,25);const s=getSelection();s.removeAllRanges();s.addRange(r);document.dispatchEvent(new Event('selectionchange'));
+                return {selected:String(s).length,parts:LDCAnchor.selectionParts(r).length};
+              });
+              await page.waitForTimeout(750);
+              const noteOpen=await page.evaluate(()=>{contextNote();return document.getElementById('note-overlay')?.classList.contains('show')});
+              add('note_panel_open',noteOpen,{selection:state});
+              if(noteOpen){
+                await page.locator('#note-input').fill('R249 qualification synthétique : note temporaire.');
+                await page.locator('#note-overlay .btn-primary').click();
+                await page.waitForTimeout(800);
+                const notes=await page.evaluate(()=>dbGetAll('notes').then(x=>x.filter(r=>r.entry_id==='LDC.T23.E0013')));
+                add('note_persisted',notes.length===1,{count:notes.length});
+              }
+              await page.evaluate(()=>toggleFav());
+              await page.waitForTimeout(500);
+              const favs=await page.evaluate(()=>dbGetAll('favorites').then(x=>x.filter(r=>r.entry_id==='LDC.T23.E0013'||r.volume===23)));
+              add('favorite_persisted',favs.length>0,{count:favs.length});
+              await page.reload({waitUntil:'domcontentloaded',timeout:60000});await ready(page);
+              const reloaded=await page.evaluate(async()=>({notes:(await dbGetAll('notes')).filter(r=>r.entry_id==='LDC.T23.E0013').length,favorites:(await dbGetAll('favorites')).length}));
+              add('notes_after_reload',reloaded.notes===1,reloaded);
+              add('favorites_after_reload',reloaded.favorites>0,reloaded);
+              await page.evaluate(()=>goEspace());
+              await page.waitForTimeout(500);
+              const espace=await page.evaluate(()=>({screen:document.getElementById('screen-espace')?.classList.contains('active'),notes:(document.getElementById('screen-espace')?.innerText||'').includes('Notes')}));
+              add('mon_espace_open',espace.screen,espace);
+              await page.evaluate(()=>{showScreen('search');searchIntentMode='words';let el=document.getElementById('search-input');el.value='connaissance';onSearchInput('words');});
+              await page.evaluate(()=>runSearch({navigation:'reveal-output',commitSource:'programmatic'}));
+              await page.waitForTimeout(1800);
+              const query=await page.evaluate(()=>({results:document.getElementById('search-results')?.innerText?.length||0,meta:document.getElementById('search-meta')?.innerText?.slice(0,180)||'',busy:!!searchBusyGeneration}));
+              add('word_search_executes',query.results>0||query.meta.length>0,query);
+              const service=await page.evaluate(async()=>{
+                const r=await Promise.race([navigator.serviceWorker.ready,new Promise(ok=>setTimeout(()=>ok(null),10000))]);
+                return {active:!!r?.active,controller:!!navigator.serviceWorker.controller};
+              });
+              add('SW_active_before_offline',service.active&&service.controller,service);
+              await ctx.setOffline(true);
+              let offline={};try{
+                let response=await page.reload({waitUntil:'domcontentloaded',timeout:22000});
+                offline={status:response?.status()??null,url:page.url()};
+              }catch(e){offline={error:String(e).slice(0,250)}}
+              add('offline_shell_navigation',offline.status===200,offline);
+              await ctx.setOffline(false);
+              add('no_uncaught_page_error',!errs.length,{errors:errs.slice(0,6)});
+              await ctx.close();
+            }catch(e){add('qa_harness_or_boot_failure',false,{error:String(e)});}
+            finally{if(browser)await browser.close();}
+            const summary={PASS:findings.filter(x=>x.status==='PASS').length,FAIL:findings.filter(x=>x.status==='FAIL').length};
+            fs.writeFileSync('r249-appstate-qa.json',JSON.stringify({target,summary,findings},null,2));
+            console.log('R249_APPSTATE_SUMMARY',JSON.stringify(summary));process.exit(summary.FAIL?1:0);
+          })();
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r249-appstate-and-offline
+          path: r249-appstate-qa.json
+          if-no-files-found: warn
