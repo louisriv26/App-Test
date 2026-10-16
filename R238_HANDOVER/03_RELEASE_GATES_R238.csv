@@ -1,0 +1,20 @@
+gate_id,priority,topic,status,evidence,required_before_go
+G01,P0,App Test main protected,PASS,main commit 8c036b4 unchanged,confirm unchanged before deployment
+G02,P0,MAIN protected,PASS,prod commit 6f66f8c unchanged,confirm unchanged before deployment
+G03,P0,Canonical corpus immutable,PASS_STATIC,Git diff shows 0 corpus edits,recheck exact package hashes
+G04,P0,Seven T34 visual pilot,PASS_MODULE,97 module assertions passed,real Reader QA
+G05,P1,Five nested close guillemets,PASS_MODULE,5 of 5 derived HTML restores,real Reader and CSS geometry
+G06,P1,Negative speech controls,PASS_MODULE,2 unaffected plus standalone Mary cases,broad speaker QA
+G07,P0,R237 full 28/21 adapter merged,FAIL_ABSENT,dev branch contains only seven-case pilot,integrate and retest
+G08,P1,Package manifest sort,PASS_STATIC,277 entries codepoint lexical current HEAD,independent reopen
+G09,P0,Correct standalone ZIP,NOT_BUILT,Git branch archive contains thousands historic files,assemble only manifest files
+G10,P0,Selection native and anchor persistence,NOT_RUN,no real Reader+Safari run,run real devices
+G11,P0,Historic IndexedDB and Mon espace,NOT_RUN,schema unchanged only,upgrade from previous versions
+G12,P0,Highlights and notes backup restore,NOT_RUN,no user-state execution,full fidelity replay
+G13,P0,Service worker atomic update,NOT_RUN,SHELL declaration checked only,real upgrade/offline
+G14,P0,Search lexical and semantic,NOT_RUN,modules not edited,no-regression suite
+G15,P1,T34 P018 semantic attribution,REVIEW,source label MARY retained,collate Italian Spanish French
+G16,P0,Physical iPhone and iPad,NOT_RUN,owner has not tested candidate,physical acceptance
+G17,P0,Independent blind adversarial QA,NOT_RUN,not run on packaged candidate,run on final bytes
+G18,P0,App Test deployment authority,HOLD,no GO given,explicit permission
+G19,P0,MAIN deployment authority,HOLD,no GO given,separate permission and physical PASS
