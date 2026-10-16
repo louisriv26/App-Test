@@ -1694,6 +1694,7 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
   <script src="display_map.js"></script>
 <script src="interaction_anchor.js"></script>
 <script src="speech_model.js"></script>
+<script src="ldc_r237_t34_visual_pilot.js"></script>
 <script src="search_normalizer.js"></script>
 <script src="interim_user_state_migration.js"></script>
 <script src="search_semantic_pack_guard_r4.js"></script>
@@ -2682,11 +2683,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.37-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
+const APP_VERSION = 'v2.19.142.38-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD = '2026-10-15';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.37-r1b-unified';
+const APP_BUILD = '2026-10-16';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.38-r1b-unified';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -6148,7 +6149,8 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
         }
       }
       const fullSegs=segsByPara[p.id]||[];
-      const renderSegs=isSlice?rebaseSpeechSegmentsForSlice(fullSegs,sliceStart,sliceEnd):fullSegs;
+      const renderSegsBase=isSlice?rebaseSpeechSegmentsForSlice(fullSegs,sliceStart,sliceEnd):fullSegs;
+      const renderSegs=window.LDCAppOnlyVoicePilot?LDCAppOnlyVoicePilot.adapt(p.id,p.text,sliceStart,sliceEnd,renderSegsBase):renderSegsBase;
       const model=window.LDCSpeechModel?LDCSpeechModel.buildParagraphSpeechModel(sliceText,renderSegs):null;
       if(model&&model.ok&&isSlice&&renderSegs.some(x=>x._crosses_slice_start)&&model.runs.length){
         const firstStyled=model.runs.find(r=>r.styled&&r.start===0);if(firstStyled){firstStyled.isContinuation=true;firstStyled.presentation='inline';}

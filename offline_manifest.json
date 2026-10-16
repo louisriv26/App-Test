@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.142.37-R1B-UNIFIED",
+  "app_version": "v2.19.142.38-R1B-UNIFIED",
   "asset_count": 205,
   "assets": [
     {
@@ -1089,7 +1089,7 @@
   },
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.142.37-r1b-unified",
+  "page_worker_revision": "ldc-v2.19.142.38-r1b-unified",
   "par_le_sens_current": {
     "general_scientific_confidence_calibration_claimed": false,
     "internal_prototype_lineage_labels_preserved": true,
@@ -1612,5 +1612,15 @@
     "user_data_unchanged": true,
     "on_device_safari": "NOT_RUN",
     "full_hosted_pwa": "NOT_RUN"
+  },
+  "r237_app_only_pilot": {
+    "kind": "APPLICATION_ONLY_DEVELOPMENT_BRANCH",
+    "release_authority": "NONE",
+    "corpus_change": false,
+    "seven_t34_visual_authorities": true,
+    "requires_complete_r237_adapter_integration": true,
+    "qualified_reader": false,
+    "qualified_safari": false,
+    "qualified_offline_upgrade": false
   }
 }

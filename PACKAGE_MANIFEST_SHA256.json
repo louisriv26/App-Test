@@ -77,11 +77,6 @@
       "sha256": "ca68430703c4f5960e90735867c6e94d29b5a3de37107d8100e5a301007e9e6e"
     },
     {
-      "bytes": 830,
-      "path": "corpus/M2_INDEPENDENT_INDEX_VERIFICATION.json",
-      "sha256": "9a8da5d065ce69cd22cd4f6478f16e8e4da045030ff2f4af879bc5cc5261cdd5"
-    },
-    {
       "bytes": 7519,
       "path": "corpus/date_id_reconciliation_r7.json",
       "sha256": "8c7f5e6620a4eba719a2ea272a8809b4ea6af29350046958206eaf982baa7162"
@@ -452,6 +447,11 @@
       "sha256": "86bba85833289220cb6d475a86f5efd455c0e4eb5b58b904b0f1cbea6666fead"
     },
     {
+      "bytes": 830,
+      "path": "corpus/M2_INDEPENDENT_INDEX_VERIFICATION.json",
+      "sha256": "9a8da5d065ce69cd22cd4f6478f16e8e4da045030ff2f4af879bc5cc5261cdd5"
+    },
+    {
       "bytes": 84428,
       "path": "corpus/manifest.json",
       "sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b"
@@ -637,16 +637,6 @@
       "sha256": "e4f72408be0d8d2766fca21ec8dcb6120690eab1dd53ab77f3098202fa0f90f4"
     },
     {
-      "bytes": 5521,
-      "path": "corpus/search_v21_manifest.json",
-      "sha256": "0e931c03ee8d2d91c6b310dcf0f450774caca5b020e5303d6b986e8cf2d9a3d1"
-    },
-    {
-      "bytes": 1481533,
-      "path": "corpus/search_v21_topology.json",
-      "sha256": "d8ff54a7f8aefaa19bb508aab79c2ec0757f2ef780af8db4e604d1c155f308d3"
-    },
-    {
       "bytes": 17815440,
       "path": "corpus/search_v2_documents.json",
       "sha256": "04d63a58977fd70ec11b726c160fc45115ad5c2fae16374f54a95c228ee4a2ec"
@@ -670,6 +660,16 @@
       "bytes": 13622,
       "path": "corpus/search_v2_manifest.json",
       "sha256": "13581de3453aaef84eb15a856c9d31dffc5d854863cd88f92ef9641824d0c5ee"
+    },
+    {
+      "bytes": 5521,
+      "path": "corpus/search_v21_manifest.json",
+      "sha256": "0e931c03ee8d2d91c6b310dcf0f450774caca5b020e5303d6b986e8cf2d9a3d1"
+    },
+    {
+      "bytes": 1481533,
+      "path": "corpus/search_v21_topology.json",
+      "sha256": "d8ff54a7f8aefaa19bb508aab79c2ec0757f2ef780af8db4e604d1c155f308d3"
     },
     {
       "bytes": 195129,
@@ -1152,9 +1152,9 @@
       "sha256": "4df3a82f5f2ee57a0b6913b6ca6b56758b2ab9e27f0d401e06a4ed0792639c06"
     },
     {
-      "bytes": 1027282,
       "path": "index.html",
-      "sha256": "ca821643217630d583b339a7eefac5283e48866cbdccd28c226b9bf9d4761883"
+      "bytes": 1027481,
+      "sha256": "af23e73358b9ef25e8a45cef3352d2f2ea57bfda3cb483b77474b73b7c196a93"
     },
     {
       "bytes": 17214,
@@ -1167,14 +1167,19 @@
       "sha256": "a0a65e316ce4330e9c7159d1e5781c79e6c6b2ed68114ce21828882446ad3a97"
     },
     {
+      "path": "ldc_r237_t34_visual_pilot.js",
+      "bytes": 6024,
+      "sha256": "d1ab169ae2a51595722c3bd49bcfb8cdca55933946048266bfcaaba9749b5c5d"
+    },
+    {
       "bytes": 673,
       "path": "manifest.json",
       "sha256": "6f8c116ad7258f912c8f17c15a3afbfdafaa6e49a9156f477f1b6bd1512b4955"
     },
     {
-      "bytes": 62941,
       "path": "offline_manifest.json",
-      "sha256": "134308ad693ef8319e318e636a874954c018da53b4127d614c5666d15254072b"
+      "bytes": 63284,
+      "sha256": "31f69bf6587da64fc977713bc35d10c6fd8a5dd7302a42c413fd543434bb0676"
     },
     {
       "bytes": 658,
@@ -1217,14 +1222,14 @@
       "sha256": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7"
     },
     {
-      "bytes": 17082730,
-      "path": "pls_v15/model/tokenizer.json",
-      "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
-    },
-    {
       "bytes": 443,
       "path": "pls_v15/model/tokenizer_config.json",
       "sha256": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+    },
+    {
+      "bytes": 17082730,
+      "path": "pls_v15/model/tokenizer.json",
+      "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
     },
     {
       "bytes": 44484,
@@ -1245,16 +1250,6 @@
       "bytes": 6932,
       "path": "pls_v16/BINDING_CONTRACT.json",
       "sha256": "6e8558b4545c1084b3a8342eb2f66611de97dc2e78db46f60919666313164140"
-    },
-    {
-      "bytes": 680,
-      "path": "pls_v16/QUALIFIED_PACK_IDENTITY.json",
-      "sha256": "c00c57c9def60011dda2ebc24e4953d180d086fd53b31bda34ef3fe22ffd5744"
-    },
-    {
-      "bytes": 615,
-      "path": "pls_v16/QUALIFIED_SHA256SUMS.txt",
-      "sha256": "197e599d2f19b9e5a5bf70cc21879c5cba6e46298b4f19ae231630195f1f90b8"
     },
     {
       "bytes": 35166,
@@ -1297,6 +1292,16 @@
       "sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908"
     },
     {
+      "bytes": 680,
+      "path": "pls_v16/QUALIFIED_PACK_IDENTITY.json",
+      "sha256": "c00c57c9def60011dda2ebc24e4953d180d086fd53b31bda34ef3fe22ffd5744"
+    },
+    {
+      "bytes": 615,
+      "path": "pls_v16/QUALIFIED_SHA256SUMS.txt",
+      "sha256": "197e599d2f19b9e5a5bf70cc21879c5cba6e46298b4f19ae231630195f1f90b8"
+    },
+    {
       "bytes": 9686,
       "path": "pls_v16/runtime_v1.mjs",
       "sha256": "efc3bc827838b2ddc259b6fbb48437649026bd020ecde2e342dccb6d27a945ca"
@@ -1305,6 +1310,11 @@
       "bytes": 11263,
       "path": "pls_v16/semantic_pack_manifest.json",
       "sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0"
+    },
+    {
+      "path": "R237_APP_ONLY_DEV_SCOPE.md",
+      "bytes": 1727,
+      "sha256": "0d0ec9646da6227c40fe8498abe6877d2a6dca7ba7a85f759714d33742683db3"
     },
     {
       "bytes": 11303,
@@ -1367,21 +1377,21 @@
       "sha256": "0f7f5242f4960cb2d32ff3b6b632d142f86ab2fa5722f6b8328924c869b5b23a"
     },
     {
-      "bytes": 33382,
       "path": "sw.js",
-      "sha256": "4d1960f7ecb23223c7316b85c7cb51646109c13030152f53c0af1ca771976bad"
+      "bytes": 33416,
+      "sha256": "7e21da9e1e1fd6fe188b25e24b06c76d963889d058f7674573db3ebb9d35a2ed"
     },
     {
-      "bytes": 268119,
       "path": "version.json",
-      "sha256": "d6de4434985627aee4e0f68519bd54cc7c969a0c94bf3fa1d4c02d085d5c0ad8"
+      "bytes": 268930,
+      "sha256": "31ffb20cc6ee35fe62067603352e12749ab34aafc01e3d38a4292ad19c737031"
     }
   ],
   "offline_corpus_assets": 204,
   "offline_corpus_binding_sha256": "f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d",
-  "packaged_file_count_excluding_manifest": 275,
-  "production_authority": "NONE__R230_LOCAL_HOLD__NO_DEPLOYMENT_AUTHORITY",
-  "public_version": "142.37",
+  "packaged_file_count_excluding_manifest": 277,
+  "production_authority": "NONE__DEVELOPMENT_BRANCH_HOLD__NO_APP_TEST_MAIN_DEPLOYMENT",
+  "public_version": "142.38",
   "qualified_model_files": 20,
   "r88_structural_repair": {
     "approved_deployment": "NONE",
@@ -1394,7 +1404,7 @@
   },
   "schema": "ldc-curated-wip-package-manifest-v1",
   "semantic_manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
-  "source_commit": "R218_EXACT_V14234_PLUS_R219_LOCAL_RENDERING_PLUS_R220_FULL_CANONICAL_GUARD__NO_REMOTE_COMMIT",
+  "source_commit": "8c036b4736d3ebde5bc816e772c29f05da54126d",
   "usage": "R230_LOCAL_CANDIDATE_ONLY__NOT_APPROVED_FOR_APP_TEST_OR_MAIN",
   "r170_unified_build": {
     "release": "142.28",
@@ -1506,5 +1516,21 @@
     "release_authority": "NONE",
     "full_PWA": "NOT_RUN",
     "native_iOS": "NOT_RUN"
+  },
+  "r237_app_only_pilot": {
+    "origin_commit": "8c036b4736d3ebde5bc816e772c29f05da54126d",
+    "qualifying_status": "UNQUALIFIED_DEV_ONLY",
+    "mutated_application_paths": [
+      "R237_APP_ONLY_DEV_SCOPE.md",
+      "index.html",
+      "ldc_r237_t34_visual_pilot.js",
+      "offline_manifest.json",
+      "sw.js",
+      "version.json"
+    ],
+    "corpus_modified": false,
+    "corpus_generation_unchanged": true,
+    "offline_content_binding_unchanged": "38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee",
+    "original_r237_adapter_integrated": false
   }
 }
