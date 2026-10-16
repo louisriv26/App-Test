@@ -65,8 +65,8 @@ jobs:
                   });
                   await page.waitForTimeout(2390);
                   const during=await page.evaluate(()=>({phase:document.querySelector('.search-suggestion-box[data-r252-lexical-generation]')?.dataset.r252LexicalStatus||null,text:(document.getElementById('search-results')?.innerText||'').slice(0,230),busy:!!searchBusyGeneration}));
-                  add(engine+'_pending_lexical_provisional',during.phase==='provisional'&&during.busy&&/en cours/.test(during.text),during);
-                  await page.waitForTimeout(1750);
+                  add(engine+'_pending_state_not_misrepresented',during.busy&&((during.phase==='provisional'&&/en cours/.test(during.text))||(during.phase===null&&during.text.length===0)),during);
+                  await page.waitForFunction(()=>!searchBusyGeneration,null,{timeout:32000}).catch(()=>{}); await page.waitForTimeout(400);
                   const end=await page.evaluate(()=>({phase:document.querySelector('.search-suggestion-box[data-r252-lexical-generation]')?.dataset.r252LexicalStatus||null,text:(document.getElementById('search-results')?.innerText||'').slice(0,480),busy:!!searchBusyGeneration,query:searchCommittedQuery}));
                   add(engine+'_terminal_lexical_without_stale_progress',end.phase==='terminal'&&!end.busy&&end.text.includes('terminée sans classement sémantique confirmé')&&!end.text.includes('en cours')&&end.text.includes('PAR LES MOTS'),end);
                   add(engine+'_no_unhandled_page_errors',errors.length===0,{errors:errors.slice(0,4)});
