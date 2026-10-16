@@ -1,0 +1,91 @@
+name: R251 full-route old-generation backup restore
+on:
+  push:
+    branches: [qa/r251-historical-20261016]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  legacy-backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 21
+    steps:
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Chromium
+        run: |
+          npm --prefix /tmp/r251backup install --no-audit --no-fund playwright@1.56.1
+          /tmp/r251backup/node_modules/.bin/playwright install chromium --with-deps
+      - name: Synthetic R1B source anchors through complete migration chain
+        run: |
+          NODE_PATH=/tmp/r251backup/node_modules node <<'JS'
+          const {chromium}=require('playwright'),fs=require('node:fs');
+          const base='https://louisriv26.github.io/App-Test/',results=[];
+          const log=(name,ok,detail={})=>{results.push({name,pass:ok,detail});console.log((ok?'PASS ':'FAIL ')+name+' '+JSON.stringify(detail).slice(0,800));};
+          (async()=>{
+            let browser=null;
+            try{
+              browser=await chromium.launch({headless:true});
+              const ctx=await browser.newContext({serviceWorkers:'allow',viewport:{width:390,height:844}});
+              const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(String(e).slice(0,400)));
+              await page.goto(base,{waitUntil:'domcontentloaded',timeout:65000});
+              await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:65000});
+              await page.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding()});
+              const out=await page.evaluate(async()=>{
+                const result={};
+                try{
+                  const oldGeneration='G036-AFLP-R1B-SUP-T1';
+                  const m=await loadUserStateMigrationV4Map();
+                  const p=m.paragraphs[0],oldText=p.old_text;
+                  const text='Je fais couler sur elle',start=oldText.indexOf(text);
+                  if(start<0)throw new Error('source witness did not contain selection');
+                  result.fixture={paragraph:p.paragraph_id,oldGeneration,oldText:oldText.slice(0,160),selected:text};
+                  await dbPut('notes',{id:95002,volume:p.volume,entry_id:p.entry_id,para_id:p.paragraph_id,text:'PERSONAL R251 LEGACY NOTE UNCHANGED',quote:'Je fais couler sur elle',corpus_generation:oldGeneration,ts:1620000000});
+                  await dbPut('highlights',{id:95001,volume:p.volume,entry_id:p.entry_id,para_id:p.paragraph_id,start_char:start,end_char:start+text.length,text,selected_text_snapshot:text,color:'yellow',corpus_generation:oldGeneration,anchor_schema:3});
+                  await dbPut('collections',{id:95003,name:'R251 old set',ts:1620000000});
+                  await dbPut('col_items',{id:95004,col_id:95003,volume:p.volume,entry_id:p.entry_id,para_id:p.paragraph_id,text:'Je fais couler sur elle',corpus_generation:oldGeneration});
+                  await dbPut('favorites',{entry_id:p.entry_id,volume:p.volume,corpus_generation:oldGeneration});
+                  const built=await buildUserDataStreamBackup(),lines=built.parts.join('').trimEnd().split('\n');
+                  const header=JSON.parse(lines[0]);header.corpus_generation=oldGeneration;header.app_version='v2.19.64-LEGACY-SYNTHETIC';lines[0]=JSON.stringify(header);
+                  const trailer=JSON.parse(lines[lines.length-1]);let crc=0xFFFFFFFF;
+                  for(const line of lines.slice(0,-1))crc=ldcBackupCrcUpdate(crc,line+'\n');
+                  trailer.crc32=ldcBackupCrcHex(crc);lines[lines.length-1]=JSON.stringify(trailer);
+                  const backup=new File([lines.join('\n')+'\n'],'r251-synthetic-r1b.ldcbackup',{type:USER_DATA_STREAM_MIME});
+                  result.export={bytes:backup.size,totalRecords:trailer.total_records,crc:trailer.crc32};
+                  const parsed=await parseBackupStreamToStage(backup);
+                  result.parsed={total:parsed.totalRecords,source:parsed.header.corpus_generation};
+                  const migrated=await migrateBackupStageToCurrent(parsed);
+                  result.migration={steps:migrated.steps,changed:migrated.changed,stale:migrated.stale,unresolved:migrated.unresolved,reanchored:migrated.reanchored,split_highlights:migrated.split_highlights,counts:migrated.final_counts};
+                  const validity=await validateBackupStage(parsed);
+                  result.validation=validity;
+                  if(!validity.ok)throw new Error('VALIDATION_FAILED '+JSON.stringify(validity.errors));
+                  const baseline=await r115D2ReadSnapshot(db);
+                  await atomicSwapBackupStage(parsed.token,baseline);
+                  const notes=await dbGetAll('notes'),highlights=await dbGetAll('highlights'),collections=await dbGetAll('collections'),items=await dbGetAll('col_items');
+                  result.after={note:notes.find(x=>x.id===95002)||null,highlights:highlights.filter(x=>x.id===95001||String(x.highlight_group_id||'').includes('95001')).slice(0,4),hlCount:highlights.length,collection:collections.find(x=>x.id===95003)||null,item:items.find(x=>x.id===95004)||null};
+                  result.notePreserved=result.after.note?.text==='PERSONAL R251 LEGACY NOTE UNCHANGED';
+                  result.userCollectionsPreserved=!!result.after.collection&&!!result.after.item;
+                  result.highlightNotSilentlyDropped=result.after.highlights.length>0||highlights.some(x=>String(x.migrated_reason||'').length>0);
+                  result.ok=result.notePreserved&&result.userCollectionsPreserved&&result.highlightNotSilentlyDropped&&result.validation.ok&&result.migration.steps.length>=7;
+                }catch(e){result.error=String(e).slice(0,1400);}
+                return result;
+              });
+              log('historical_synthetic_r1b_full_pipeline',!!out.ok,out);
+              log('personal_note_preserved',!!out.notePreserved,{note:out.after?.note?.text});
+              log('collection_preserved',!!out.userCollectionsPreserved,{collection:out.after?.collection,item:out.after?.item});
+              log('highlight_preserved_or_explicitly_migrated',!!out.highlightNotSilentlyDropped,{hls:out.after?.highlights,migration:out.migration});
+              log('no_page_errors',errors.length===0,{errors:errors.slice(0,6)});
+              await ctx.close();
+            }catch(e){log('harness_exception',false,{error:String(e).slice(0,1000)})}
+            finally{if(browser)await browser.close()}
+            const summary={pass:results.filter(x=>x.pass).length,fail:results.filter(x=>!x.pass).length};
+            fs.writeFileSync('r251-historical-r1b-stream.json',JSON.stringify({base,summary,results},null,2));
+            console.log('R251_R1B_BACKUP_SUMMARY',JSON.stringify(summary));process.exit(summary.fail?1:0);
+          })();
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r251-r1b-migration-route
+          path: r251-historical-r1b-stream.json
+          if-no-files-found: warn
