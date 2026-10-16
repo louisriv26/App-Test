@@ -56,7 +56,11 @@ jobs:
                 try{
                   const res=await page.goto(base,{waitUntil:'domcontentloaded',timeout:70000});
                   add(label+'_HTTP200',res&&res.status()===200,{status:res&&res.status()});
-                  await page.waitForFunction(()=>typeof window.openEntry==='function',{timeout:60000});
+                  await page.waitForFunction(()=>typeof window.openEntry==='function',null,{timeout:60000});
+                  await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:60000});
+                  const init=await page.evaluate(()=>({body:document.body.className,onboarding:document.getElementById('onboarding-overlay')?.style.display}));
+                  await page.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding();});
+                  add(label+'_BOOTSTRAP_AND_ONBOARDING_CLOSED',true,init);
                   add(label+'_APP_SCRIPT_BOOT',true,{title:await page.title()});
                   let opened=await page.evaluate(async()=>{try{await openEntry(23,'LDC.T23.E0013','entries');return {ok:true}}catch(e){return {ok:false,error:String(e)}}});
                   await page.waitForTimeout(2200);
@@ -82,7 +86,7 @@ jobs:
                       range.setStart(aNode,Math.min(5,aNode.length));range.setEnd(bNode,Math.min(25,bNode.length));
                       const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);
                       document.dispatchEvent(new Event('selectionchange'));
-                      return {before,selected:String(sel).length,partCount:window.LDCAnchor?.selectionParts?.(range)?.length||0};
+                      return {before,selected:String(sel).length,rangeText:String(range).length,rangeCount:sel.rangeCount,isCollapsed:sel.isCollapsed,readerInert:!!document.getElementById('screen-reader')?.closest('[inert]'),partCount:window.LDCAnchor?.selectionParts?.(range)?.length||0};
                     });
                     await page.waitForTimeout(800);
                     const after=await page.evaluate(()=>({top:document.getElementById('reader-scroll').scrollTop,panel:document.getElementById('seltext-panel')?.classList.contains('show'),selection:String(getSelection()).length}));
