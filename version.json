@@ -1,10 +1,10 @@
 {
-  "app_version": "v2.19.142.37-R1B-UNIFIED",
+  "app_version": "v2.19.142.39-R1B-UNIFIED",
   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
   "baseline_candidate_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
   "baseline_candidate_version": "v2.19.142.18-R1B-READER-SEMANTIC-INTEGRATION-WIP",
-  "build_date": "2026-10-15",
+  "build_date": "2026-10-16",
   "collection_link_contract": "LOCAL_COLLECTION_ID_LINK_DOES_NOT_TRANSFER_USER_DATA",
   "collections_visibility": "VISIBLE_MON_ESPACE_WORKSPACE_AND_EXPLICIT_ENTRYPOINT",
   "context_action_contract": "SELECTION_OR_PARAGRAPH_SINGLE_CONTEXT_SURFACE",
@@ -51,7 +51,7 @@
     "state_recorded_status": "PRODUCTION_DEPLOYED_CLOSED_IMMUTABLE__EXACT_REPOSITORY_TREE_AND_SUCCESSFUL_DEPLOYMENT_BINDING_RECORDED",
     "technical_identity": "v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE"
   },
-  "current_release_authority": "R230_LOCAL_HOLD__NO_GITHUB_APP_TEST_BETA_MAIN_WRITE",
+  "current_release_authority": "R239_LOCAL_HOLD__NO_GITHUB_APP_TEST_BETA_MAIN_WRITE",
   "current_runtime_browser_validation": "R219_CHROMIUM_FILEFREE_COMPONENT_PASS__R220_RELEASE_COHERENCE_TEST_PENDING__HOSTED_PWA_AND_NATIVE_IOS_NOT_RUN",
   "dark_mode_v136_r9": {
     "corpus_changed": false,
@@ -562,7 +562,7 @@
   ],
   "migration_concurrency_residual": "CLOSED_BY_STAGE8_STARTUP_MIGRATION_GATE__EXCLUSIVE_NAVIGATOR_LOCK_WHEN_HISTORICAL_MIGRATION_REQUIRED__FAIL_CLOSED_IF_REQUIRED_MIGRATION_CANNOT_BE_LOCKED__ATOMIC_SNAPSHOT_ROLLBACK_ON_FAILURE__CONTROLLED_MIGRATION_EVIDENCE_RECORDED__HOSTED_PWA_AND_PHYSICAL_MIGRATION_REPLAY_REMAINS_EXTERNAL_GATE_FOR_EXACT_V142_15_BYTES",
   "navigation_origin_contract": "STRUCTURED_CONTEXT_FOR_BACK_NAVIGATION_ONLY__NEVER_MAIN_READING_AUTHORITY__EXPLICIT_SEQUENTIAL_OR_CONSULTATION_SESSION_INTENT",
-  "offline_asset_count": 204,
+  "offline_asset_count": 205,
   "offline_cache_version": "DEPRECATED_VERSION_IDENTITY__PHYSICAL_PERSISTENT_CACHE_NAME_IS_SCOPE_DERIVED_NOT_APP_VERSION_IDENTITY",
   "offline_completion_record_contract": "STORAGE_SCHEMA_PLUS_CONTENT_BINDING_SCHEMA_AND_DIGEST_PLUS_CORPUS_GENERATION_AND_MANIFEST_SCHEMA__NO_APP_VERSION_CACHE_NAME_INVARIANT",
   "offline_content_binding_schema": "ldc-offline-content-binding-v2",
@@ -570,13 +570,13 @@
   "offline_corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
   "offline_integrity_contract": "PERSISTENT_OFFLINE_REUSE_REQUIRES_CURRENT_SCOPE_URL_PLUS_EXACT_ASSET_SHA256_AND_BYTE_LENGTH_MARKERS__GLOBAL_PREDECESSOR_BINDING_NOT_REQUIRED__CHANGED_OR_INVALID_ASSETS_FAIL_CLOSED",
   "offline_manifest_schema": "ldc-offline-manifest-v3",
-  "offline_manifest_sha256": "134308ad693ef8319e318e636a874954c018da53b4127d614c5666d15254072b",
+  "offline_manifest_sha256": "5ee9cff17b82779ad2e74df1f73a606b608c749b48bf5979f95088ccc30538cd",
   "offline_scope": "v142.17 direct successor of v142.16 frozen Reader physical repair: bounded reader transaction ownership, session and screen-lifecycle guards; offline content asset set and content binding unchanged. v142.16 not physically qualified. No App-Test or production authorization.",
   "offline_state_schema": "ldc-offline-state-v3",
   "offline_status_typography_v98_contract": "IMPORTANT_STATUS_TITLE_DETAIL_SCALE_12_13_16_19_AND_11_12_15_18_SMALL_NORMAL_LARGE_XLARGE",
   "offline_storage_cache_name_contract": "ldc-le-livre-du-ciel-offline-persistent-v3-<fnv1a32(service-worker-scope)>",
   "offline_storage_schema": "ldc-offline-storage-v3",
-  "offline_total_bytes": 114483048,
+  "offline_total_bytes": 119244276,
   "offline_zero_wording_contract": "EXACT_NUMERIC_ZERO_DISPLAYS_0_MO__OTHER_PREDECESSOR_FORMATTING_AND_UNAVAILABLE_WORDING_UNCHANGED",
   "owner_acceptance_findings_2026_08_12": [
     "existing-highlight palette inconsistent with original highlight palette",
@@ -592,7 +592,7 @@
   "package_predecessor_app_version": "v2.19.142.23-R130-LOCAL-P11-CANDIDATE",
   "package_predecessor_zip_sha256": "26fe15417b6b8367ecb44832af383529be3645363020c9668273c423bef73206",
   "package_state_at_freeze": "PREHOSTED_V142_17_QUALIFICATION_CANDIDATE__PENDING_FINAL_PACKAGE_MANIFEST__NOT_A_PRODUCTION_RELEASE",
-  "page_worker_revision": "ldc-v2.19.142.37-r1b-unified",
+  "page_worker_revision": "ldc-v2.19.142.39-r1b-unified",
   "par_le_sens_current": {
     "compatible_passages": 20236,
     "excluded_stale_passages": 347,
@@ -4879,5 +4879,24 @@
     "preserves_offline_content_assets": true,
     "full_pwa_browser": "NOT_RUN",
     "native_ios": "NOT_RUN"
+  },
+  "r239_local_candidate": {
+    "date": "2026-10-16",
+    "current_status": "HOLD_UNDEPLOYED__HOSTED_AND_IOS_NOT_RUN",
+    "kind": "APP_ONLY",
+    "app_version": "v2.19.142.39-R1B-UNIFIED",
+    "corpus_changed": false,
+    "search_changed": false,
+    "user_db_schema_changed": false,
+    "r237_exact_source": "R237_LOCAL_CANDIDATE_v14237_NOT_DEPLOYABLE.zip",
+    "r237_intervention_authorities": 28,
+    "r237_boundaries": 21,
+    "additional_T34_paragraphs": 7,
+    "T34_P018_quoted_voice_accessibility": "OPEN_SOURCE_ADJUDICATION_IT_ES_FR",
+    "T23_P058_059": "PRESERVE_SEPARATE",
+    "T30_P037_040": "NOOP",
+    "offline_binding": "38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee",
+    "offline_assets": 205,
+    "offline_total_bytes": 119244276
   }
 }

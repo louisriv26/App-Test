@@ -1152,9 +1152,9 @@
       "sha256": "4df3a82f5f2ee57a0b6913b6ca6b56758b2ab9e27f0d401e06a4ed0792639c06"
     },
     {
-      "bytes": 1027282,
+      "bytes": 1030421,
       "path": "index.html",
-      "sha256": "ca821643217630d583b339a7eefac5283e48866cbdccd28c226b9bf9d4761883"
+      "sha256": "bfc36d7196fde94364701d3af96e3e2984691586ec024a388bfc5cf18adf65ab"
     },
     {
       "bytes": 17214,
@@ -1167,14 +1167,24 @@
       "sha256": "a0a65e316ce4330e9c7159d1e5781c79e6c6b2ed68114ce21828882446ad3a97"
     },
     {
+      "bytes": 8450,
+      "path": "ldc_intervention_adapter_r237_local.js",
+      "sha256": "c020700a46934bd3a786306e868b1f4ca31ee3f6780b56ec9045a3371fac7d30"
+    },
+    {
+      "bytes": 5900,
+      "path": "ldc_r237_t34_visual_pilot.js",
+      "sha256": "9dbec48eb96ce38ecb1af5fdb939e8261d4da083faffa3431b6ac9262226ea94"
+    },
+    {
       "bytes": 673,
       "path": "manifest.json",
       "sha256": "6f8c116ad7258f912c8f17c15a3afbfdafaa6e49a9156f477f1b6bd1512b4955"
     },
     {
-      "bytes": 62941,
+      "bytes": 63353,
       "path": "offline_manifest.json",
-      "sha256": "134308ad693ef8319e318e636a874954c018da53b4127d614c5666d15254072b"
+      "sha256": "5ee9cff17b82779ad2e74df1f73a606b608c749b48bf5979f95088ccc30538cd"
     },
     {
       "bytes": 658,
@@ -1292,8 +1302,8 @@
       "sha256": "e7c252118ad8b867737da54c9dcfba36932f54f67f036d6240380140e8c05708"
     },
     {
-      "path": "pls_v16/patch_r198.json",
       "bytes": 95208,
+      "path": "pls_v16/patch_r198.json",
       "sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908"
     },
     {
@@ -1305,6 +1315,11 @@
       "bytes": 11263,
       "path": "pls_v16/semantic_pack_manifest.json",
       "sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0"
+    },
+    {
+      "bytes": 13984,
+      "path": "r237_authorities_local.js",
+      "sha256": "3a37c8d99162e2032e0c2c7efd42193c576a75e7d165e1107d7d33a3f66d7ccf"
     },
     {
       "bytes": 11303,
@@ -1367,21 +1382,21 @@
       "sha256": "0f7f5242f4960cb2d32ff3b6b632d142f86ab2fa5722f6b8328924c869b5b23a"
     },
     {
-      "bytes": 33382,
+      "bytes": 33491,
       "path": "sw.js",
-      "sha256": "4d1960f7ecb23223c7316b85c7cb51646109c13030152f53c0af1ca771976bad"
+      "sha256": "9d91bf4023ec7b44a4656925e49faa389bb7fae58d14e01bba1c9a34584e80e8"
     },
     {
-      "bytes": 268119,
+      "bytes": 268892,
       "path": "version.json",
-      "sha256": "d6de4434985627aee4e0f68519bd54cc7c969a0c94bf3fa1d4c02d085d5c0ad8"
+      "sha256": "08e93a97cdb3198708650f6fd0b6709ad1ae842f35d8db16b3a6ce069cc9b0e7"
     }
   ],
   "offline_corpus_assets": 204,
   "offline_corpus_binding_sha256": "f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d",
-  "packaged_file_count_excluding_manifest": 275,
-  "production_authority": "NONE__R230_LOCAL_HOLD__NO_DEPLOYMENT_AUTHORITY",
-  "public_version": "142.37",
+  "packaged_file_count_excluding_manifest": 278,
+  "production_authority": "NOT_AUTHORIZED__R239_LOCAL_HOLD",
+  "public_version": "142.39",
   "qualified_model_files": 20,
   "r88_structural_repair": {
     "approved_deployment": "NONE",
@@ -1394,7 +1409,7 @@
   },
   "schema": "ldc-curated-wip-package-manifest-v1",
   "semantic_manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
-  "source_commit": "R218_EXACT_V14234_PLUS_R219_LOCAL_RENDERING_PLUS_R220_FULL_CANONICAL_GUARD__NO_REMOTE_COMMIT",
+  "source_commit": "R238_VERIFIED__GITHUB_PARENT_APPTEST_8c036b47__PLUS_R237_LOCAL_AND_T34_PINNED_5555cd06__LOCAL_INTEGRATION_ONLY",
   "usage": "R230_LOCAL_CANDIDATE_ONLY__NOT_APPROVED_FOR_APP_TEST_OR_MAIN",
   "r170_unified_build": {
     "release": "142.28",
@@ -1506,5 +1521,18 @@
     "release_authority": "NONE",
     "full_PWA": "NOT_RUN",
     "native_iOS": "NOT_RUN"
+  },
+  "r239_local_candidate": {
+    "date": "2026-10-16",
+    "status": "HOLD_LOCAL_UNDEPLOYED",
+    "source": "VERIFIED_R237_CANDIDATE_BASED_ON_APP_TEST_142_37",
+    "corpus_binary_changes": 0,
+    "reviewed_paragraphs_R237": 28,
+    "reviewed_boundaries_R237": 21,
+    "t34_exact_visual_overrides": 7,
+    "offline_manifest_sha256": "5ee9cff17b82779ad2e74df1f73a606b608c749b48bf5979f95088ccc30538cd",
+    "offline_content_binding_sha256": "38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee",
+    "package_sort": "unicode-codepoint-lexical",
+    "candidate_release_authorization": "NONE"
   }
 }

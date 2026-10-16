@@ -1,5 +1,5 @@
-const VERSION = 'ldc-v2.19.142.37-r1b-unified';
-const APP_VERSION = 'v2.19.142.37-R1B-UNIFIED';
+const VERSION = 'ldc-v2.19.142.39-r1b-unified';
+const APP_VERSION = 'v2.19.142.39-R1B-UNIFIED';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
@@ -31,7 +31,7 @@ let runtimeMutationQueue = Promise.resolve();
 // Keep install small and atomic. If any shell/index resource cannot be cached, the
 // installation fails and the previous active worker remains in control.
 const SHELL = [
-  './', './index.html', './manifest.json', './offline_manifest.json', './sw.js', './speech_model.js', './display_map.js', './interaction_anchor.js', './search_normalizer.js', './search_engine_v2.js', './search_exact_v21.js', './search_foundation_v21b.js', './search_near_v22.js', './search_worker_v2.js', './interim_user_state_migration.js', './search_semantic_pack_guard_r4.js', './search_semantic_v3_core_r4.js', './search_semantic_hybrid_r6.js', './search_semantic_pack_registry_r6.js', './search_structural_preflight_r88.js', './pls_v16/runtime_v1.mjs', './icons/favicon-16.png', './icons/favicon-32.png', './icons/favicon.ico', './icons/icon-60.png', './icons/icon-120.png', './icons/apple-touch-icon.png', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './assets/fonts/fonts.css', './assets/fonts/im-fell-english-latin-400-normal.woff2', './assets/fonts/im-fell-english-latin-400-italic.woff2', './assets/fonts/crimson-text-latin-400-normal.woff2', './assets/fonts/crimson-text-latin-400-italic.woff2', './assets/fonts/crimson-text-latin-600-normal.woff2', './assets/icons/tabler-icons.min.css', './assets/icons/tabler-icons.woff2', './assets/js/sortable.min.js'
+  './', './index.html', './manifest.json', './offline_manifest.json', './sw.js', './speech_model.js', './r237_authorities_local.js', './ldc_intervention_adapter_r237_local.js', './ldc_r237_t34_visual_pilot.js', './display_map.js', './interaction_anchor.js', './search_normalizer.js', './search_engine_v2.js', './search_exact_v21.js', './search_foundation_v21b.js', './search_near_v22.js', './search_worker_v2.js', './interim_user_state_migration.js', './search_semantic_pack_guard_r4.js', './search_semantic_v3_core_r4.js', './search_semantic_hybrid_r6.js', './search_semantic_pack_registry_r6.js', './search_structural_preflight_r88.js', './pls_v16/runtime_v1.mjs', './icons/favicon-16.png', './icons/favicon-32.png', './icons/favicon.ico', './icons/icon-60.png', './icons/icon-120.png', './icons/apple-touch-icon.png', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png', './assets/fonts/fonts.css', './assets/fonts/im-fell-english-latin-400-normal.woff2', './assets/fonts/im-fell-english-latin-400-italic.woff2', './assets/fonts/crimson-text-latin-400-normal.woff2', './assets/fonts/crimson-text-latin-400-italic.woff2', './assets/fonts/crimson-text-latin-600-normal.woff2', './assets/icons/tabler-icons.min.css', './assets/icons/tabler-icons.woff2', './assets/js/sortable.min.js'
 ];
 
 let offlineJob = null;

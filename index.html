@@ -1690,10 +1690,46 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
 .reader-info-methodology{margin-top:10px;}
 .provenance-meta strong{font-weight:600;}
 @media(max-width:430px){.provenance-cta{white-space:normal;text-align:center}.reader-info-tech>summary{font-size:var(--sem-strong-13)}}
+
+/* R237 LOCAL ONLY — explicitly governed 28-paragraph pilot; NOT a release. */
+.para-fragment.r237-visual-inline .speech-run,
+.para-fragment.r237-visual-inline .speech-run.speech-block,
+.para-fragment.r237-visual-inline .speech-run.speech-inline,
+.para-fragment.r237-visual-inline .ldc-r216-terminal-unit {
+  display:inline!important;margin:0!important;padding:0!important;line-height:inherit!important;
+}
+.para-fragment.r237-visual-inline .speech-paragraph-break{display:none!important;margin:0!important;padding:0!important;}
+.para-fragment.r237-governed-jesus{color:#5C3A10;font-style:italic;font-weight:600;}
+.para-fragment.r237-governed-neutral{color:var(--ink);font-style:normal;font-weight:400;}
+.para-fragment.r237-governed-jesus .speech-run {color:#5C3A10!important;font-style:italic!important;font-weight:600!important;}
+.para-fragment.r237-governed-neutral .speech-run{color:var(--ink)!important;font-style:normal!important;font-weight:400!important;}
+@media(prefers-color-scheme:dark){
+ :root:not([data-theme="light"]) .para-fragment.r237-governed-jesus,
+ :root:not([data-theme="light"]) .para-fragment.r237-governed-jesus .speech-run{color:#D4A060!important;}
+}
+html[data-theme="dark"] .para-fragment.r237-governed-jesus,
+html[data-theme="dark"] .para-fragment.r237-governed-jesus .speech-run{color:#D4A060!important;}
+.para-fragment.r237-mixed .r237-autonomous-jesus{color:#5C3A10!important;font-style:italic!important;}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .para-fragment.r237-mixed .r237-autonomous-jesus{color:#D4A060!important;}}
+html[data-theme="dark"] .para-fragment.r237-mixed .r237-autonomous-jesus{color:#D4A060!important;}
+/* Continuations within one original flow preserve source text and DOM markers. */
+#reader-body .r237-inline-joiner{display:inline!important;white-space:pre!important;}
+#reader-body .r237-separate-joiner{display:block!important;height:0;white-space:normal!important;}
+/* Joining two previously distinct units is strictly restricted to exact authorized
+   neighbouring source paragraphs. Repères uses existing block topology so study
+   labels and provenance stay readable and navigable. */
+#reader-scroll:not(.reperes-on) #reader-body > .dp.r237-crossunit-inline {display:inline;margin:0;padding:0;}
+#reader-scroll:not(.reperes-on) #reader-body > .r237-crossunit-derived-space{display:inline;white-space:pre;}
+#reader-scroll.reperes-on #reader-body > .r237-crossunit-derived-space{display:none;}
+#reader-body > .r237-crossunit-explicit-break{display:block!important;height:0;min-height:0;margin:0;padding:0;}
+
 </style>
   <script src="display_map.js"></script>
 <script src="interaction_anchor.js"></script>
 <script src="speech_model.js"></script>
+<script src="r237_authorities_local.js"></script>
+<script src="ldc_intervention_adapter_r237_local.js"></script>
+<script src="ldc_r237_t34_visual_pilot.js"></script>
 <script src="search_normalizer.js"></script>
 <script src="interim_user_state_migration.js"></script>
 <script src="search_semantic_pack_guard_r4.js"></script>
@@ -2682,11 +2718,11 @@ html[data-text-level="xlarge"]{--reader-measure:823px;--home-offline-title-size:
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.37-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
+const APP_VERSION = 'v2.19.142.39-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD = '2026-10-15';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.37-r1b-unified';
+const APP_BUILD = '2026-10-16';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.39-r1b-unified';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -6148,7 +6184,8 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
         }
       }
       const fullSegs=segsByPara[p.id]||[];
-      const renderSegs=isSlice?rebaseSpeechSegmentsForSlice(fullSegs,sliceStart,sliceEnd):fullSegs;
+      const renderSegsBase=isSlice?rebaseSpeechSegmentsForSlice(fullSegs,sliceStart,sliceEnd):fullSegs;
+      const renderSegs=window.LDCAppOnlyVoicePilot?LDCAppOnlyVoicePilot.adapt(p.id,p.text,sliceStart,sliceEnd,renderSegsBase):renderSegsBase;
       const model=window.LDCSpeechModel?LDCSpeechModel.buildParagraphSpeechModel(sliceText,renderSegs):null;
       if(model&&model.ok&&isSlice&&renderSegs.some(x=>x._crosses_slice_start)&&model.runs.length){
         const firstStyled=model.runs.find(r=>r.styled&&r.start===0);if(firstStyled){firstStyled.isContinuation=true;firstStyled.presentation='inline';}
@@ -6196,6 +6233,7 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
       div.appendChild(frag);
       ldcR216JoinTerminalPunctuation(frag); // before anchor index / highlighting
       ldcR219JoinContextualQuote(frag, m.canonicalText); // reviewed per-paragraph run offsets
+      if(window.LDCR237LocalAdapter) LDCR237LocalAdapter.applyFragment(frag,m,vol); // R237 local, non-destructive
       // §8.1 explicit canonical map: visible slice -> full unsplit canonical text.
       if (window.LDCAnchor) LDCAnchor.indexFragment(frag, m.paraId, m.canonicalText, m.anchorAtoms, {canonicalStart:m.sliceStart,canonicalEnd:m.sliceEnd});
 
@@ -6250,6 +6288,7 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
     });
   });
 
+  if(window.LDCR237LocalAdapter) LDCR237LocalAdapter.finalizeReader(body,vol,entryId); // R237 local structural authority
   appendInlineSupplementContext('after');
   readerDiagStage('after Reader body render');
   if(supplementMode==='additions'&&renderFocusSupplement&&isInternalSupplementItem(renderFocusSupplement)){
