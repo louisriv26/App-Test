@@ -54,11 +54,11 @@ jobs:
                 record('offline_http_shell',response?.status()===200,{status:response?.status(),err});
                 await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:25000}).catch(()=>{});
                 await page.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding()});
-                for(const [v,entry] of [[23,'LDC.T23.E0013'],[7,'LDC.T07.E0001']]){
+                for(const [v,entry] of [[23,'LDC.T23.E0013'],[7,'ldc_t07_1906_01_30_e001']]){
                   let result;try{
-                    result=await page.evaluate(async({v,entry})=>{await openEntry(v,entry,'entries');return {count:document.querySelectorAll('#reader-body .para-fragment').length,entry:currentEntry?.id}}, {v,entry});
+                    result=await page.evaluate(async({v,entry})=>{await openEntry(v,entry,'entries');return {count:document.querySelectorAll('#reader-body .para-fragment').length,entry:currentEntry?.id,volume:currentVolume,target:entry}}, {v,entry});
                   }catch(e){result={error:String(e)}}
-                  record('offline_reader_tome_'+v,result.count>0,{result});
+                  record('offline_reader_tome_'+v,result.count>0&&result.entry===entry&&result.volume===v,{result});
                 }
                 await ctx.setOffline(false);
               }else record('offline_reader_not_attempted',false,{reason:'offline not ready'});
