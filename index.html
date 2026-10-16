@@ -1723,6 +1723,13 @@ html[data-theme="dark"] .para-fragment.r237-mixed .r237-autonomous-jesus{color:#
 #reader-scroll.reperes-on #reader-body > .r237-crossunit-derived-space{display:none;}
 #reader-body > .r237-crossunit-explicit-break{display:block!important;height:0;min-height:0;margin:0;padding:0;}
 
+/* R245: exact T23 P050->P051 continuation only; canonical fragments and offsets untouched. */
+#reader-scroll:not(.reperes-on) #reader-body > .dp.r245-inline-continuation{display:inline;margin:0;padding:0;}
+#reader-scroll:not(.reperes-on) #reader-body > .r245-derived-space{display:inline;white-space:pre;}
+#reader-scroll:not(.reperes-on) #reader-body > .dp.r245-inline-continuation .speech-run.speech-block,
+#reader-scroll:not(.reperes-on) #reader-body > .dp.r245-inline-continuation .speech-run.speech-inline{display:inline!important;margin:0!important;padding:0!important;line-height:inherit!important;}
+#reader-scroll:not(.reperes-on) #reader-body > .dp.r245-inline-continuation .speech-paragraph-break{display:none!important;}
+#reader-scroll.reperes-on #reader-body > .r245-derived-space{display:none;}
 </style>
   <script src="display_map.js"></script>
 <script src="interaction_anchor.js"></script>
@@ -2718,11 +2725,11 @@ html[data-theme="dark"] .para-fragment.r237-mixed .r237-autonomous-jesus{color:#
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.39-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
+const APP_VERSION = 'v2.19.142.43-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-16';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.39-r1b-unified';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.43-r1b-unified';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -5960,6 +5967,7 @@ function ldcR226JoinConfirmedCrossParagraphSentence(div, unit, mem){
 }
 
 async function openEntryCore(vol, entryId, backDest, opts={}) {
+  r246CancelDeferredTailCleanup(); // invalidate callbacks from previous Reader entry
   readerDiagEnsure('OTHER',vol,entryId,currentEntry&&currentEntry.id||null,'openEntryCore');
   readerDiagStage('openEntryCore BEGIN',{back_dest:backDest||null,navigation_target:opts.navigationTarget||null});
   const editorialNoteNo=Number(vol)===1?tome1EditorialNoteNumber(entryId):null;
@@ -6288,7 +6296,50 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
     });
   });
 
+// R245 guarded, view-only exception. The rest of the 103 boundaries remain governed
+// by existing flow rules until reviewed one-by-one. No source text or offset edits.
+function r245JoinT23P050P051(body,vol,entryId){
+ const diag={entry:String(entryId||''),vol:Number(vol),status:'NOT_TARGET'};
+ window.__ldcR245Boundary=diag;
+ if(Number(vol)!==23||String(entryId)!=='LDC.T23.E0013')return;
+ const ids=['LDC.T23.E0013.P050','LDC.T23.E0013.P051','LDC.T23.E0013.P052'];
+ const expected=[
+  'Et en vertu de cet Acte Unique et Incessant,',
+  'Ma Volonté élève tous les actes accomplis en Elle, au rang d’Acte premier, de sorte que tous ceux qui vivent dans Ma Volonté',
+  '- se trouveront dans cet Acte unique.'
+ ];
+ const fs=ids.map(id=>[...body.querySelectorAll('.para-fragment[data-para-id="'+id+'"]')]);
+ if(fs.some(x=>x.length!==1)){diag.status='REVIEW_FRAGMENT_MULTIPLICITY';return;}
+ const f=fs.map(x=>x[0]);
+ if(!f.every((node,i)=>{
+   const rec=window.LDCAnchor&&LDCAnchor.recordFor(node);
+   const meta=paragraphRecordById(vol,ids[i]);
+   return !!(rec&&meta&&meta.entry_id===entryId&&rec.text===expected[i]&&meta.text===expected[i]&&
+     Number(node.dataset.canonicalStart)===0&&Number(node.dataset.canonicalEnd)===expected[i].length&&
+     node.querySelectorAll('.speech-run').length===1&&
+     node.querySelector('.speech-run.speech-jesus[data-run-start="0"][data-run-end="'+expected[i].length+'"]'));
+ })){diag.status='REVIEW_CANONICAL_OR_SPEAKER_SIGNATURE';return;}
+ const fragments=[...body.querySelectorAll('.para-fragment[data-para-id]')];
+ const ix=fragments.indexOf(f[0]);
+ if(ix<0||fragments[ix+1]!==f[1]||fragments[ix+2]!==f[2]){
+   diag.status='REVIEW_NONADJACENT';return;
+ }
+ const left=f[0].closest('.dp'),right=f[1].closest('.dp');
+ if(!left||!right||left===right||left.parentElement!==body||right.parentElement!==body||
+    left.nextElementSibling!==right||left.classList.contains('supplement-inline-block')||
+    right.classList.contains('supplement-inline-block')||
+    left.classList.contains('canonical-slice-unit')||right.classList.contains('canonical-slice-unit')||
+    left.querySelectorAll('.para-fragment').length!==1||
+    right.querySelectorAll('.para-fragment').length!==2){diag.status='REVIEW_RENDER_TOPOLOGY';return;}
+ const bridge=document.createElement('span');bridge.className='r245-derived-space';
+ bridge.dataset.visualAction='R245_T23_P050_P051_JOIN_INLINE';
+ bridge.setAttribute('aria-hidden','true');bridge.textContent=' ';
+ left.classList.add('r245-inline-continuation');right.classList.add('r245-inline-continuation');
+ left.after(bridge);diag.status='APPLIED_GUARDED_VIEW_ONLY';
+}
+
   if(window.LDCR237LocalAdapter) LDCR237LocalAdapter.finalizeReader(body,vol,entryId); // R237 local structural authority
+  r245JoinT23P050P051(body,vol,entryId);
   appendInlineSupplementContext('after');
   readerDiagStage('after Reader body render');
   if(supplementMode==='additions'&&renderFocusSupplement&&isInternalSupplementItem(renderFocusSupplement)){
@@ -6465,6 +6516,7 @@ async function navEntry(dir) {
 let scrollTimer = null;
 async function onReaderScroll() {
   if (semanticRestoreInProgress) return;
+  if(r245NativeSelection.active||Date.now()<r245NativeSelection.until)return; // R245: native edge-scroll belongs to the browser
   if (Date.now() < contextOcclusionProgrammaticUntil) return;
   if(contextOcclusionState.active && contextOcclusionUserIntentAt && (Date.now()-contextOcclusionUserIntentAt)<900) contextOcclusionState.userAdjusted=true;
   if(entryStartTargetLock){
@@ -6676,21 +6728,138 @@ function onParaClick(e) {
 // canonical reader fragments. A range that escapes the reader is rejected rather
 // than being snapped to a distant paragraph.
 let _selChangeTimer = null, _selUnsafeRetryTimer = null;
+// R247: independent native-Range guard, including system-managed handle gestures
+// without pointer/touch down inside #reader-body. Do not read/edit annotation data.
+function r247NativeReaderRangeActive(){
+  try{
+    const selection=window.getSelection(),reader=document.getElementById('reader-body');
+    if(!reader||!selection||selection.isCollapsed||!selection.rangeCount)return false;
+    const range=selection.getRangeAt(0);
+    return reader.contains(range.startContainer)&&reader.contains(range.endContainer)&&
+      !!String(selection.toString()).trim();
+  }catch(_){return false;}
+}
+// R245 local: distinguish a native selection gesture from a settled selection.
+// Never move Reader scroll or resize the trailing spacer during native handle drag.
+const r245NativeSelection={active:false,until:0,generation:0,changedDuringGesture:false};
+// Removing a stale tail near the end of an entry would itself clamp scrollTop.
+// Defer reclamation until it can happen without moving any visible text.
+function r245SafeReleaseTail(){
+ const sc=document.getElementById('reader-scroll'),sp=contextOcclusionSpacer();
+ if(!sc||!sp)return true;
+ const height=sp.getBoundingClientRect().height;
+ if(height<=0){delete sp.dataset.r245Deferred;return true;}
+ // No geometry edits while native selection handles are moving (even if pointer events are absent).
+ if(r247NativeReaderRangeActive()){sp.dataset.r245Deferred='true';return false;}
+ const nextMaximum=Math.max(0,sc.scrollHeight-sc.clientHeight-height);
+ if(sc.scrollTop>nextMaximum-8){sp.dataset.r245Deferred='true';return false;}
+ sp.style.height='0px';delete sp.dataset.r245Deferred;return true;
+}
+function r245CancelOcclusionWithoutScroll(){
+  const s=contextOcclusionState, sp=contextOcclusionSpacer();
+  s.generation++;s.active=false;s.baselineSemantic=null;s.userAdjusted=false;s.autoAdjusted=false;
+  contextOcclusionUserIntentAt=0;contextOcclusionProgrammaticUntil=0;
+  r245SafeReleaseTail();
+  const panel=document.getElementById('seltext-panel');
+  if(panel)panel.classList.remove('show');
+  // R246-A1: the prior context outline must not survive a cancelled panel.
+  clearContextTargetVisual();
+  contextTarget=null;selectionBinding=null;
+  r246ScheduleDeferredTailCleanup();
+}
+function r245GestureStart(e){
+  if(isAndroidHighlightPlatform()||!e.target.closest||!e.target.closest('#reader-body'))return;
+  r246CancelDeferredTailCleanup();
+  r245NativeSelection.active=true;r245NativeSelection.until=0;r245NativeSelection.changedDuringGesture=false;r245NativeSelection.generation++;
+  clearTimeout(_selChangeTimer);clearTimeout(_selUnsafeRetryTimer);
+  // Paragraph panel may have left 204px of tail clearance and pending RAFs.
+  // Remove BEFORE the gesture, never by restoring a semantic scroll anchor mid-drag.
+  if(contextOcclusionState.active||parseFloat(contextOcclusionSpacer()?.style.height||'0')>0)
+    r245CancelOcclusionWithoutScroll();
+}
+function r245QueueSettledSelection(){
+  clearTimeout(_selChangeTimer);
+  const epoch=r245NativeSelection.generation;
+  _selChangeTimer=setTimeout(()=>{
+    if(r245NativeSelection.active||epoch!==r245NativeSelection.generation)return;
+    if(Date.now()<r245NativeSelection.until){r245QueueSettledSelection();return;}
+    const sel=window.getSelection();
+    if(!sel||sel.isCollapsed||!sel.rangeCount||!sel.toString().trim())return;
+    const range=sel.getRangeAt(0),reader=document.getElementById('reader-body');
+    if(!reader||!reader.contains(range.startContainer)||!reader.contains(range.endContainer))return;
+    const a=window.LDCAnchor&&LDCAnchor.fragmentOf(range.startContainer);
+    const b=window.LDCAnchor&&LDCAnchor.fragmentOf(range.endContainer);
+    if(a&&b)checkAndShowHighlightPopup(a);
+  },300);
+}
+function r245GestureEnd(){
+  if(!r245NativeSelection.active)return;
+  r245NativeSelection.active=false;
+  r245NativeSelection.until=Date.now()+270;
+  if(r245NativeSelection.changedDuringGesture)r245QueueSettledSelection();
+  r246ScheduleDeferredTailCleanup(300);
+}
+document.addEventListener('pointerdown',r245GestureStart,true);
+document.addEventListener('pointerup',r245GestureEnd,true);
+document.addEventListener('pointercancel',r245GestureEnd,true);
+document.addEventListener('touchstart',r245GestureStart,{capture:true,passive:true});
+document.addEventListener('touchend',r245GestureEnd,{capture:true,passive:true});
+document.addEventListener('touchcancel',r245GestureEnd,{capture:true,passive:true});
+// A pointer that ends outside the Reader must not leave it in selection-active mode.
+window.addEventListener('blur',r245GestureEnd);
+// R246-A1: reclaim an earlier paragraph-panel clearance only after native gestures
+// have settled and a safe upward scroll creates enough clearance. No scrollTop
+// writes, no mutation of corpus/selection anchors, and no polling without a tail.
+const r246DeferredCleanup={timer:0,frame:0,epoch:0};
+function r246CancelDeferredTailCleanup(){
+  r246DeferredCleanup.epoch++;
+  if(r246DeferredCleanup.timer){clearTimeout(r246DeferredCleanup.timer);r246DeferredCleanup.timer=0;}
+  if(r246DeferredCleanup.frame){cancelAnimationFrame(r246DeferredCleanup.frame);r246DeferredCleanup.frame=0;}
+}
+function r246ScheduleDeferredTailCleanup(delay=32){
+  const sp=contextOcclusionSpacer();
+  if(!sp||sp.dataset.r245Deferred!=='true')return;
+  r246CancelDeferredTailCleanup();
+  const epoch=r246DeferredCleanup.epoch;
+  r246DeferredCleanup.timer=setTimeout(()=>{
+    r246DeferredCleanup.timer=0;
+    if(epoch!==r246DeferredCleanup.epoch)return;
+    r246DeferredCleanup.frame=requestAnimationFrame(()=>{
+      r246DeferredCleanup.frame=0;
+      if(epoch!==r246DeferredCleanup.epoch)return;
+      const sc=document.getElementById('reader-scroll'),tail=contextOcclusionSpacer();
+      if(!sc||!tail||tail.dataset.r245Deferred!=='true')return;
+      if(r245NativeSelection.active||r247NativeReaderRangeActive()||contextOcclusionState.active||contextTarget?.kind==='paragraph')return;
+      if(Date.now()<r245NativeSelection.until){
+        r246ScheduleDeferredTailCleanup(r245NativeSelection.until-Date.now()+20);return;
+      }
+      r245SafeReleaseTail(); // refuses any removal which would clamp the viewport
+    });
+  },Math.max(0,delay));
+}
+// #reader-scroll is already in the DOM when the embedded application script runs.
+// The listener survives Reader re-renders but checks the current DOM each time.
+document.getElementById('reader-scroll')?.addEventListener('scroll',()=>{
+  r246ScheduleDeferredTailCleanup();
+},{passive:true});
+window.addEventListener('resize',()=>{
+  r246CancelDeferredTailCleanup();
+  r246ScheduleDeferredTailCleanup(220);
+},{passive:true});
+
 document.addEventListener('selectionchange', () => {
   if (isAndroidHighlightPlatform()) return;
-  clearTimeout(_selChangeTimer);
+  // A system-managed native handle gesture may never emit a pointerdown in the Reader.
+  // Cancel any earlier paragraph compensation immediately, without restoring scroll.
+  if(r247NativeReaderRangeActive()){
+    r246CancelDeferredTailCleanup();
+    if(contextOcclusionState.active||contextTarget?.kind==='paragraph')r245CancelOcclusionWithoutScroll();
+  }else{
+    r246ScheduleDeferredTailCleanup(100);
+  }
   clearTimeout(_selUnsafeRetryTimer);
-  _selChangeTimer = setTimeout(() => {
-    const sel = window.getSelection();
-    if (!sel || sel.isCollapsed || !sel.rangeCount || sel.toString().trim().length <= 0) return;
-    const range = sel.getRangeAt(0);
-    const reader = document.getElementById('reader-body');
-    if (!reader || !reader.contains(range.startContainer) || !reader.contains(range.endContainer)) return;
-    const startFrag = window.LDCAnchor ? LDCAnchor.fragmentOf(range.startContainer) : null;
-    const endFrag = window.LDCAnchor ? LDCAnchor.fragmentOf(range.endContainer) : null;
-    if (!startFrag || !endFrag) return;
-    checkAndShowHighlightPopup(startFrag);
-  }, 180);
+  if(r245NativeSelection.active)r245NativeSelection.changedDuringGesture=true;
+  else r245QueueSettledSelection();
 });
 
 function selectionSnapshotStillMatches(snapshot) {
@@ -6713,6 +6882,7 @@ function scheduleSelectionSafetyRetry(paraEl, range, foldedText) {
 function checkAndShowHighlightPopup(paraEl, opts) {
   opts=opts||{};
   if (isAndroidHighlightPlatform()) return;
+  if(r245NativeSelection.active||Date.now()<r245NativeSelection.until){r245QueueSettledSelection();return;}
   const sel = window.getSelection();
   if (!sel || sel.isCollapsed || !sel.rangeCount || sel.toString().trim().length <= 0) return;
   try {
@@ -6838,16 +7008,31 @@ function contextTargetViewportBottom(){
 }
 
 function releaseContextOcclusionCompensation(){
+  // Selection supersedes old compensation, but DO NOT discard the reader binding:
+  // note/collection/highlight actions rely on it after closeContextPanel({keepAnchor:true}).
+  if(r247NativeReaderRangeActive()||r245NativeSelection.active){
+    const st=contextOcclusionState;st.generation++;st.active=false;st.baselineSemantic=null;
+    st.userAdjusted=false;st.autoAdjusted=false;
+    contextOcclusionUserIntentAt=0;contextOcclusionProgrammaticUntil=0;
+    r245SafeReleaseTail();return;
+  }
   const state=contextOcclusionState;
   const sc=document.getElementById('reader-scroll'),sp=contextOcclusionSpacer();
-  if(!state.active){if(sp)sp.style.height='0px';return;}
+  if(!state.active){
+    if(!r245SafeReleaseTail())r246ScheduleDeferredTailCleanup(120);
+    return;
+  }
   const userAdjusted=!!state.userAdjusted;
   const userScrollTop=userAdjusted&&sc?sc.scrollTop:null;
   const preserve=userAdjusted?null:state.baselineSemantic;
   state.active=false; state.generation++; state.baselineSemantic=null; state.userAdjusted=false; state.autoAdjusted=false;
   contextOcclusionUserIntentAt=0; contextOcclusionProgrammaticUntil=0;
-  if(sp)sp.style.height='0px';
+  // R248: never remove a compensating spacer if the browser would clamp scrollTop.
+  // The former unconditional removal could jump 204px at the end of an entry.
+  const tailReleased=r245SafeReleaseTail();
+  if(!tailReleased)r246ScheduleDeferredTailCleanup(120);
   if(sc&&userAdjusted&&Number.isFinite(userScrollTop)){
+    if(!tailReleased)return; // keep the user's pixel position while temporary tail remains
     // The reader deliberately scrolled while the panel was open. The natural layout
     // is unchanged except for removal of the temporary tail, so preserve the exact
     // viewport pixel position (clamped only if the user had entered temporary space).
@@ -6863,17 +7048,26 @@ function releaseContextOcclusionCompensation(){
 function refreshContextOcclusionCompensation(){
   const panel=document.getElementById('seltext-panel'),sc=document.getElementById('reader-scroll'),sp=contextOcclusionSpacer();
   if(!panel||!sc||!sp||!panel.classList.contains('show')||!contextTarget)return;
+  if(r247NativeReaderRangeActive()&&contextTarget.kind==='paragraph'){r245CancelOcclusionWithoutScroll();return;}
+  // Selection is non-compensating: never add a spacer or scroll to chase handles.
+  if(contextTarget.kind==='selection'||r245NativeSelection.active){
+    const st=contextOcclusionState,tail=contextOcclusionSpacer();
+    st.generation++;st.active=false;st.baselineSemantic=null;st.userAdjusted=false;st.autoAdjusted=false;
+    contextOcclusionProgrammaticUntil=0;r245SafeReleaseTail();return;
+  }
   const state=contextOcclusionState;
   if(!state.active){state.active=true;state.baselineSemantic=captureSemanticReadingPosition();state.userAdjusted=false;state.autoAdjusted=false;contextOcclusionUserIntentAt=0;}
   const token=++state.generation;
   requestAnimationFrame(()=>{
     if(!state.active||state.generation!==token||!panel.classList.contains('show'))return;
+    if(r247NativeReaderRangeActive()){r245CancelOcclusionWithoutScroll();return;}
     const sr=sc.getBoundingClientRect(),pr=panel.getBoundingClientRect();
     const clearance=24;
     const occluded=Math.max(0,sr.bottom-pr.top);
     sp.style.height=(occluded>0?Math.ceil(occluded+clearance):0)+'px';
     requestAnimationFrame(()=>{
       if(!state.active||state.generation!==token||!panel.classList.contains('show'))return;
+      if(r247NativeReaderRangeActive()){r245CancelOcclusionWithoutScroll();return;}
       const sr2=sc.getBoundingClientRect(),pr2=panel.getBoundingClientRect();
       const usableBottom=Math.min(sr2.bottom,pr2.top)-clearance;
       const targetBottom=contextTargetViewportBottom();
@@ -6929,8 +7123,13 @@ function showContextPanel(target) {
   if (contextTarget.kind === 'paragraph') fragmentEls(contextTarget.paraId).forEach(el=>el.classList.add('context-target'));
   const hlBtn = document.getElementById('ctx-highlight');
   if (hlBtn) hlBtn.style.display = (isAndroidHighlightPlatform() && contextTarget.kind === 'paragraph' && !androidParagraphHighlightMode) ? 'none' : '';
+  if(contextTarget.kind==='selection'){
+    // A selection action panel may cover text, but must never move the native Range.
+    const st=contextOcclusionState;st.generation++;st.active=false;st.baselineSemantic=null;
+    st.userAdjusted=false;st.autoAdjusted=false;r245SafeReleaseTail();
+  }
   el.classList.add('show');
-  refreshContextOcclusionCompensation();
+  if(contextTarget.kind!=='selection')refreshContextOcclusionCompensation();
 }
 
 function showSelectionContext() {
@@ -7329,14 +7528,11 @@ async function applyHighlight(color, frozenParts, viewport) {
     }
   }
 
-  // Marks have zero padding, so line metrics should not change. Still pin the
-  // exact pre-picker viewport twice to defeat Safari's delayed selection scroll.
+  // R245: restore only an observed application-induced post-paint drift; never
+  // force scrollTop during an active native gesture or unconditionally every RAF.
   const sc = document.getElementById('reader-scroll');
-  if (sc && viewport && Number.isFinite(viewport.scrollTop)) {
-    const top = viewport.scrollTop;
-    sc.scrollTop = top;
-    requestAnimationFrame(()=>{ sc.scrollTop = top; });
-  }
+  if(sc&&viewport&&Number.isFinite(viewport.scrollTop)&&!r245NativeSelection.active&&
+     Math.abs(sc.scrollTop-viewport.scrollTop)>1){sc.scrollTop=viewport.scrollTop;}
   showToast(parts.length > 1 ? 'Surlignage enregistré (' + parts.length + ' fragments)' : 'Surlignage enregistré');
 }
 

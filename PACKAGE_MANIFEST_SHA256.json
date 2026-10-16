@@ -1152,9 +1152,9 @@
       "sha256": "4df3a82f5f2ee57a0b6913b6ca6b56758b2ab9e27f0d401e06a4ed0792639c06"
     },
     {
-      "bytes": 1030421,
+      "bytes": 1042551,
       "path": "index.html",
-      "sha256": "bfc36d7196fde94364701d3af96e3e2984691586ec024a388bfc5cf18adf65ab"
+      "sha256": "74be57189fde12c8b39a24aa318570340c52abeaf51bf8ab514c7a321991674d"
     },
     {
       "bytes": 17214,
@@ -1184,7 +1184,7 @@
     {
       "bytes": 63353,
       "path": "offline_manifest.json",
-      "sha256": "5ee9cff17b82779ad2e74df1f73a606b608c749b48bf5979f95088ccc30538cd"
+      "sha256": "c6796512d2adfadc19e6e6fabd8b31b139e0cae57751e7cf40f691daabb357ea"
     },
     {
       "bytes": 658,
@@ -1384,20 +1384,193 @@
     {
       "bytes": 33491,
       "path": "sw.js",
-      "sha256": "9d91bf4023ec7b44a4656925e49faa389bb7fae58d14e01bba1c9a34584e80e8"
+      "sha256": "299bdcf40b2f99a1db303aa23e24d9d2a138e5497662565972e19169a017849a"
     },
     {
-      "bytes": 268892,
+      "bytes": 270154,
       "path": "version.json",
-      "sha256": "08e93a97cdb3198708650f6fd0b6709ad1ae842f35d8db16b3a6ce069cc9b0e7"
+      "sha256": "7bb47e8001d544f102a359548bd4a3d00d932d60a2feba84ab6a9c38f764df7d"
     }
   ],
   "offline_corpus_assets": 204,
   "offline_corpus_binding_sha256": "f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d",
   "packaged_file_count_excluding_manifest": 278,
-  "production_authority": "NOT_AUTHORIZED__R239_LOCAL_HOLD",
-  "public_version": "142.39",
+  "production_authority": "NOT_AUTHORIZED__R248_LOCAL_HOLD",
+  "public_version": "142.43",
   "qualified_model_files": 20,
+  "r170_unified_build": {
+    "app_test": "ldc_user_v1__app_test",
+    "beta": "ldc_user_v1__massfinderbeta",
+    "main_authority": "NONE",
+    "main_baseline_commit": "99711c554b5c63c6fdbc16f2e7d11980e2567d1b",
+    "production": "ldc_user_v1",
+    "release": "142.28",
+    "same_files_on_every_site": true,
+    "site_namespace_auto_selection": true
+  },
+  "r175_revision": {
+    "app_test_authorised": true,
+    "app_version": "v2.19.142.28-R1B-UNIFIED",
+    "main_deployed": false,
+    "older_version_manifest_regex_compatible": true,
+    "single_build": "R1B-UNIFIED"
+  },
+  "r189_editorial": {
+    "approved_cases": [
+      "E13",
+      "T34-P003",
+      "T34-P008",
+      "E10",
+      "E05"
+    ],
+    "changed_visible_paragraphs": 6,
+    "is_production": "NO",
+    "original_zip_sha256": "7cdbbdfe4d12af5175d38bd68b9e98bef51cafde55f08c298bd9e52d30045cbe"
+  },
+  "r193_full_integration": {
+    "built_from_R175_and_R189": "R175 is the immutable app; R189 contains approved R165 projections",
+    "canonical_source_texts": "UNCHANGED",
+    "deployment": "NOT_AUTHORIZED",
+    "iOS": "NOT_RUN",
+    "new_patch": [
+      "E01",
+      "E06"
+    ],
+    "other_historical_actions": "reconciled without replay, see operational crosswalk"
+  },
+  "r197_search_reconciliation": {
+    "scope": "SIX_R189_EDITORIAL_PROJECTIONS_AND_SEARCH_BINDING_RECERTIFICATION",
+    "semantic_embeddings_status": "FROZEN_OLD_TEXT_FOR_SIX_PARA__NOT_FULLY_REGENERATED",
+    "semantic_old_window_ui_guard": 15,
+    "storage_and_db_schemas_changed": false,
+    "v21_sha256": "0e931c03ee8d2d91c6b310dcf0f450774caca5b020e5303d6b986e8cf2d9a3d1",
+    "v2_sha256": "13581de3453aaef84eb15a856c9d31dffc5d854863cd88f92ef9641824d0c5ee"
+  },
+  "r198_semantic_overlay": {
+    "fresh_vectors": 11,
+    "legacy_pack_frozen": true,
+    "no_new_canon_text": true,
+    "patch_sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908",
+    "patched_metadata_rows": 44,
+    "status": "LOCAL_QA__NOT_PRODUCT_RELEASE"
+  },
+  "r199_sw_install_identity_repair": {
+    "active_page_worker_revision": "ldc-v2.19.142.33-r1b-unified",
+    "authorization": "LOCAL_ONLY_NON_DEPLOYED",
+    "operation": "FOUR_ACTIVE_DELIVERY_FILES_AND_PACKAGE_MANIFEST_RECOMPUTE",
+    "runtime_cache_version": "runtime-v2.19.142.33-r1b-unified",
+    "semantic_overlay_pinned_unchanged": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908",
+    "shell_cache_version": "shell-v2.19.142.33-r1b-unified",
+    "source": "R198 immutable v142.32"
+  },
+  "r203_documentation_update": {
+    "baseline_app_test_public_version": "142.33",
+    "changed_payload_files": [
+      "index.html",
+      "sw.js",
+      "offline_manifest.json",
+      "version.json"
+    ],
+    "corpus_search_user_storage_assets_unchanged": true,
+    "date": "2026-10-14",
+    "notes": "APP_TEST_14233_OWNER_PHYSICAL_NAVIGATION_PASS; R203_LOCAL_ONLY",
+    "offline_binding_unchanged": true,
+    "page_worker_revision": "ldc-v2.19.142.34-r1b-unified",
+    "runtime_cache": "runtime-v2.19.142.34-r1b-unified",
+    "shell_cache": "shell-v2.19.142.34-r1b-unified"
+  },
+  "r220_local_hold": {
+    "app_version": "v2.19.142.35-R1B-UNIFIED",
+    "build_date": "2026-10-15",
+    "core_text_diff": 0,
+    "full_text_guard": "exact_canonical_text",
+    "page_worker_revision": "ldc-v2.19.142.35-r1b-unified",
+    "protected_offline_binding_sha256": "38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee",
+    "status": "ENGINEERING_HOLD",
+    "unverified_gates": [
+      "real_idb",
+      "real_backup_restore",
+      "hosted_offline",
+      "physical_safari_iphone_ipad"
+    ]
+  },
+  "r226_local_candidate": {
+    "full_PWA": "NOT_RUN",
+    "native_iOS": "NOT_RUN",
+    "release_authority": "NONE",
+    "scope": "Reader-only owner-confirmed T30 continuity",
+    "source_app": "v142.35",
+    "supersedes": "R220 v142.35 pending tests"
+  },
+  "r230_local_candidate": {
+    "full_PWA": "NOT_RUN",
+    "native_iOS": "NOT_RUN",
+    "parent": "v142.36 R229",
+    "release_authority": "NONE",
+    "scope": "service worker cache version isolation and rollback protection"
+  },
+  "r239_local_candidate": {
+    "candidate_release_authorization": "NONE",
+    "corpus_binary_changes": 0,
+    "date": "2026-10-16",
+    "offline_content_binding_sha256": "38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee",
+    "offline_manifest_sha256": "5ee9cff17b82779ad2e74df1f73a606b608c749b48bf5979f95088ccc30538cd",
+    "package_sort": "unicode-codepoint-lexical",
+    "reviewed_boundaries_R237": 21,
+    "reviewed_paragraphs_R237": 28,
+    "source": "VERIFIED_R237_CANDIDATE_BASED_ON_APP_TEST_142_37",
+    "status": "HOLD_LOCAL_UNDEPLOYED",
+    "t34_exact_visual_overrides": 7
+  },
+  "r245_local_candidate": {
+    "baseline_sha256": "a862fdda9044aa119bcda4bbea2912c017f777756c28cef5d1f92b829a4fe6f2",
+    "corpus_file_count": 205,
+    "corpus_file_sha256_map_unchanged": true,
+    "date": "2026-10-16",
+    "offline_assets_unchanged": 205,
+    "offline_manifest_sha256": "1cb41ff0581c764f146cd618ecbfcc817e1084f9154b29c96a0f1d2bc712bc47",
+    "physical_iOS": "NOT_RUN",
+    "status": "LOCAL_HOLD_NOT_DEPLOYED",
+    "user_schema_unchanged": true
+  },
+  "r246_local_candidate": {
+    "changed_paths": [
+      "index.html",
+      "sw.js",
+      "version.json",
+      "offline_manifest.json",
+      "PACKAGE_MANIFEST_SHA256.json"
+    ],
+    "offline_assets_unchanged": 205,
+    "physical_iOS": "NOT_RUN",
+    "predecessor_sha256": "30537afdaffe482e9a2b9865b574af5f07e89b0ca5afe9995189b9050afa17dc",
+    "r245_a1_fixed": [
+      "DEFERRED_TAIL",
+      "CONTEXT_OUTLINE"
+    ],
+    "status": "LOCAL_HOLD_NOT_DEPLOYED",
+    "user_schema_unchanged": true
+  },
+  "r247_local_candidate": {
+    "base_sha256": "43995cb4aae93113d96246367d205c2c3c22e78f2c8ca75bcb80c879040818a3",
+    "current_source": [
+      "index.html",
+      "sw.js",
+      "version.json",
+      "offline_manifest.json",
+      "PACKAGE_MANIFEST_SHA256.json"
+    ],
+    "physical_ios": "NOT_RUN",
+    "protected_assets_unchanged": 205,
+    "status": "LOCAL_HOLD"
+  },
+  "r248_local_candidate": {
+    "base_sha256": "15974099d2ff843364b4ad0bfb63b3e11905405cde452c1efc14246f70829af0",
+    "issue": "R247 still removed 204px spacer unconditionally when releasing context near end",
+    "physical_ios": "NOT_RUN",
+    "protected_assets_unchanged": 205,
+    "status": "LOCAL_HOLD"
+  },
   "r88_structural_repair": {
     "approved_deployment": "NONE",
     "candidate": "v2.19.142.22-R1B-STRUCTURAL-REPAIR-R88-TEST",
@@ -1409,130 +1582,6 @@
   },
   "schema": "ldc-curated-wip-package-manifest-v1",
   "semantic_manifest_sha256": "37dc813c06c4358eb66c0e0c5d6f4fa4c7b8f7e2d775b66c957df68c5f171ef0",
-  "source_commit": "R238_VERIFIED__GITHUB_PARENT_APPTEST_8c036b47__PLUS_R237_LOCAL_AND_T34_PINNED_5555cd06__LOCAL_INTEGRATION_ONLY",
-  "usage": "R230_LOCAL_CANDIDATE_ONLY__NOT_APPROVED_FOR_APP_TEST_OR_MAIN",
-  "r170_unified_build": {
-    "release": "142.28",
-    "site_namespace_auto_selection": true,
-    "app_test": "ldc_user_v1__app_test",
-    "production": "ldc_user_v1",
-    "beta": "ldc_user_v1__massfinderbeta",
-    "same_files_on_every_site": true,
-    "main_authority": "NONE",
-    "main_baseline_commit": "99711c554b5c63c6fdbc16f2e7d11980e2567d1b"
-  },
-  "r175_revision": {
-    "app_version": "v2.19.142.28-R1B-UNIFIED",
-    "single_build": "R1B-UNIFIED",
-    "older_version_manifest_regex_compatible": true,
-    "main_deployed": false,
-    "app_test_authorised": true
-  },
-  "r189_editorial": {
-    "original_zip_sha256": "7cdbbdfe4d12af5175d38bd68b9e98bef51cafde55f08c298bd9e52d30045cbe",
-    "approved_cases": [
-      "E13",
-      "T34-P003",
-      "T34-P008",
-      "E10",
-      "E05"
-    ],
-    "changed_visible_paragraphs": 6,
-    "is_production": "NO"
-  },
-  "r193_full_integration": {
-    "built_from_R175_and_R189": "R175 is the immutable app; R189 contains approved R165 projections",
-    "new_patch": [
-      "E01",
-      "E06"
-    ],
-    "other_historical_actions": "reconciled without replay, see operational crosswalk",
-    "canonical_source_texts": "UNCHANGED",
-    "iOS": "NOT_RUN",
-    "deployment": "NOT_AUTHORIZED"
-  },
-  "r197_search_reconciliation": {
-    "scope": "SIX_R189_EDITORIAL_PROJECTIONS_AND_SEARCH_BINDING_RECERTIFICATION",
-    "v2_sha256": "13581de3453aaef84eb15a856c9d31dffc5d854863cd88f92ef9641824d0c5ee",
-    "v21_sha256": "0e931c03ee8d2d91c6b310dcf0f450774caca5b020e5303d6b986e8cf2d9a3d1",
-    "semantic_embeddings_status": "FROZEN_OLD_TEXT_FOR_SIX_PARA__NOT_FULLY_REGENERATED",
-    "storage_and_db_schemas_changed": false,
-    "semantic_old_window_ui_guard": 15
-  },
-  "r198_semantic_overlay": {
-    "status": "LOCAL_QA__NOT_PRODUCT_RELEASE",
-    "patch_sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908",
-    "patched_metadata_rows": 44,
-    "fresh_vectors": 11,
-    "legacy_pack_frozen": true,
-    "no_new_canon_text": true
-  },
-  "r199_sw_install_identity_repair": {
-    "source": "R198 immutable v142.32",
-    "operation": "FOUR_ACTIVE_DELIVERY_FILES_AND_PACKAGE_MANIFEST_RECOMPUTE",
-    "active_page_worker_revision": "ldc-v2.19.142.33-r1b-unified",
-    "shell_cache_version": "shell-v2.19.142.33-r1b-unified",
-    "runtime_cache_version": "runtime-v2.19.142.33-r1b-unified",
-    "semantic_overlay_pinned_unchanged": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908",
-    "authorization": "LOCAL_ONLY_NON_DEPLOYED"
-  },
-  "r203_documentation_update": {
-    "date": "2026-10-14",
-    "changed_payload_files": [
-      "index.html",
-      "sw.js",
-      "offline_manifest.json",
-      "version.json"
-    ],
-    "baseline_app_test_public_version": "142.33",
-    "notes": "APP_TEST_14233_OWNER_PHYSICAL_NAVIGATION_PASS; R203_LOCAL_ONLY",
-    "corpus_search_user_storage_assets_unchanged": true,
-    "offline_binding_unchanged": true,
-    "page_worker_revision": "ldc-v2.19.142.34-r1b-unified",
-    "shell_cache": "shell-v2.19.142.34-r1b-unified",
-    "runtime_cache": "runtime-v2.19.142.34-r1b-unified"
-  },
-  "r220_local_hold": {
-    "build_date": "2026-10-15",
-    "status": "ENGINEERING_HOLD",
-    "app_version": "v2.19.142.35-R1B-UNIFIED",
-    "page_worker_revision": "ldc-v2.19.142.35-r1b-unified",
-    "core_text_diff": 0,
-    "protected_offline_binding_sha256": "38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee",
-    "unverified_gates": [
-      "real_idb",
-      "real_backup_restore",
-      "hosted_offline",
-      "physical_safari_iphone_ipad"
-    ],
-    "full_text_guard": "exact_canonical_text"
-  },
-  "r226_local_candidate": {
-    "source_app": "v142.35",
-    "scope": "Reader-only owner-confirmed T30 continuity",
-    "supersedes": "R220 v142.35 pending tests",
-    "full_PWA": "NOT_RUN",
-    "native_iOS": "NOT_RUN",
-    "release_authority": "NONE"
-  },
-  "r230_local_candidate": {
-    "parent": "v142.36 R229",
-    "scope": "service worker cache version isolation and rollback protection",
-    "release_authority": "NONE",
-    "full_PWA": "NOT_RUN",
-    "native_iOS": "NOT_RUN"
-  },
-  "r239_local_candidate": {
-    "date": "2026-10-16",
-    "status": "HOLD_LOCAL_UNDEPLOYED",
-    "source": "VERIFIED_R237_CANDIDATE_BASED_ON_APP_TEST_142_37",
-    "corpus_binary_changes": 0,
-    "reviewed_paragraphs_R237": 28,
-    "reviewed_boundaries_R237": 21,
-    "t34_exact_visual_overrides": 7,
-    "offline_manifest_sha256": "5ee9cff17b82779ad2e74df1f73a606b608c749b48bf5979f95088ccc30538cd",
-    "offline_content_binding_sha256": "38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee",
-    "package_sort": "unicode-codepoint-lexical",
-    "candidate_release_authorization": "NONE"
-  }
+  "source_commit": "R239_EXACT_SHA256_a862fdda9044aa119bcda4bbea2912c017f777756c28cef5d1f92b829a4fe6f2__APPTEST_PARENT_f7fb4db70892__LOCAL_APP_ONLY",
+  "usage": "R248_LOCAL_ONLY__DO_NOT_DEPLOY_WITHOUT_NEW_GO"
 }

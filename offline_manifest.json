@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.142.39-R1B-UNIFIED",
+  "app_version": "v2.19.142.43-R1B-UNIFIED",
   "asset_count": 205,
   "assets": [
     {
@@ -1023,8 +1023,8 @@
       "sha256": "8d422e692c8d4c7d230bd270ec8f9d455e1949043ebe5bed75f5746b3d40b60a"
     },
     {
-      "path": "pls_v16/patch_r198.json",
       "bytes": 95208,
+      "path": "pls_v16/patch_r198.json",
       "sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908"
     }
   ],
@@ -1089,7 +1089,7 @@
   },
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.142.39-r1b-unified",
+  "page_worker_revision": "ldc-v2.19.142.43-r1b-unified",
   "par_le_sens_current": {
     "general_scientific_confidence_calibration_claimed": false,
     "internal_prototype_lineage_labels_preserved": true,
@@ -1190,6 +1190,87 @@
     "search_assets_changed": false,
     "trigger": "INDEPENDENT_POST_BUILD_REAUDIT__ACTUAL_R3_DOM_SHOWED_STALE_PROVENANCE_SCROLL_FOR_TWO_ANIMATION_FRAMES_BEFORE_VERIFIED_ZERO",
     "user_state_semantics_changed": false
+  },
+  "r170_release_scope": "One byte-identical app build for App Test and Main; runtime scopes select separate IndexedDB namespaces. Offline corpus assets unchanged.",
+  "r189_editorial_corpus_binding": {
+    "base_sha256": "7cdbbdfe4d12af5175d38bd68b9e98bef51cafde55f08c298bd9e52d30045cbe",
+    "based_on": "R175 v142.28",
+    "scope": "local candidate; G5/physical pending"
+  },
+  "r193_placement_revision": {
+    "E01_utf16": 158,
+    "E06_utf16": 316,
+    "iOS": "NOT_RUN",
+    "qualified": "NO",
+    "source": "R175+R189",
+    "supplement_witnesses": "preserved"
+  },
+  "r197_search_reconciliation": {
+    "canonical_corpus": "UNCHANGED",
+    "offline_binding_recomputed_atomically": true,
+    "search_v21_manifest_sha256": "0e931c03ee8d2d91c6b310dcf0f450774caca5b020e5303d6b986e8cf2d9a3d1",
+    "search_v2_manifest_sha256": "13581de3453aaef84eb15a856c9d31dffc5d854863cd88f92ef9641824d0c5ee",
+    "semantic_embeddings": "FROZEN_PRE_R189_COMPATIBILITY_NOT_NEWLY_EMBEDDED"
+  },
+  "r198_overlay": {
+    "added_offline_asset": true,
+    "exact_sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908",
+    "unchanged_canonical_documents": true
+  },
+  "r203_documentary_release": {
+    "build_time_status": "LOCAL_CANDIDATE_AT_FREEZE__NO_DEPLOYMENT_CLAIM",
+    "complement_mutations": 0,
+    "corpus_mutations": 0,
+    "date": "2026-10-14",
+    "offline_asset_mutations": 0,
+    "production": "HOLD",
+    "scope": "HELP_PROVENANCE_AND_VALIDATION_TRUTH_ONLY",
+    "storage_migrations": 0
+  },
+  "r220_local_hold": {
+    "build_date": "2026-10-15",
+    "canonical_text_changed": false,
+    "full_PWA_on_host": "NOT_RUN",
+    "native_iOS": "NOT_RUN",
+    "offline_content_binding_changed": false,
+    "r219_guard_falsification": "INTERIOR_SAME_LENGTH_MUTATION_REJECTED_AFTER_R220",
+    "release_authority": "NONE",
+    "review_status": "HOLD_NOT_DEPLOYABLE"
+  },
+  "r226_local_candidate": {
+    "changes": "presentation only T30 E0007 P037–P040",
+    "corpus_changed": false,
+    "integrated_browser": "NOT_RUN",
+    "offline_payload_changed": false,
+    "physical_iOS": "NOT_RUN",
+    "release_authority": "NONE_MAIN__NO_GITHUB_WRITE",
+    "search_changed": false,
+    "source": "v142.35 exact App Test package",
+    "speaker_metadata_changed": false,
+    "user_data_changed": false
+  },
+  "r230_local_candidate": {
+    "full_hosted_pwa": "NOT_RUN",
+    "github_deployment": "NOT_AUTHORIZED",
+    "offline_content_binding_unchanged": true,
+    "on_device_safari": "NOT_RUN",
+    "public_version": "142.37",
+    "release_authority": "NONE",
+    "scope": "Service Worker install/activate rollback protection only",
+    "source": "v142.36 exact R229",
+    "user_data_unchanged": true
+  },
+  "r239_local_candidate": {
+    "baseline_app": "142.37",
+    "content_binding": "UNCHANGED",
+    "corpus_and_semantic_payload": "BYTE_IDENTICAL_TO_142_37",
+    "date": "2026-10-16",
+    "intervention_authorities_r237": 28,
+    "kind": "APPLICATION_ONLY",
+    "reviewed_boundaries_r237": 21,
+    "status": "HOLD_LOCAL_NOT_DEPLOYED",
+    "t34_additional_visual_pilot": 7,
+    "user_data_schema": "UNCHANGED"
   },
   "r88_structural_repair": {
     "deploy_authority": "NONE",
@@ -1543,86 +1624,5 @@
     "promotion_source_zip_sha256": "5697412951bef15ec7c49c17a13e0e9e05d57ccf228b1d9150505bc930d53160",
     "search_v2_algorithm_changed": false,
     "semantic_algorithm_changed": false
-  },
-  "r170_release_scope": "One byte-identical app build for App Test and Main; runtime scopes select separate IndexedDB namespaces. Offline corpus assets unchanged.",
-  "r189_editorial_corpus_binding": {
-    "based_on": "R175 v142.28",
-    "base_sha256": "7cdbbdfe4d12af5175d38bd68b9e98bef51cafde55f08c298bd9e52d30045cbe",
-    "scope": "local candidate; G5/physical pending"
-  },
-  "r193_placement_revision": {
-    "source": "R175+R189",
-    "E01_utf16": 158,
-    "E06_utf16": 316,
-    "supplement_witnesses": "preserved",
-    "qualified": "NO",
-    "iOS": "NOT_RUN"
-  },
-  "r197_search_reconciliation": {
-    "search_v2_manifest_sha256": "13581de3453aaef84eb15a856c9d31dffc5d854863cd88f92ef9641824d0c5ee",
-    "search_v21_manifest_sha256": "0e931c03ee8d2d91c6b310dcf0f450774caca5b020e5303d6b986e8cf2d9a3d1",
-    "semantic_embeddings": "FROZEN_PRE_R189_COMPATIBILITY_NOT_NEWLY_EMBEDDED",
-    "canonical_corpus": "UNCHANGED",
-    "offline_binding_recomputed_atomically": true
-  },
-  "r198_overlay": {
-    "exact_sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908",
-    "added_offline_asset": true,
-    "unchanged_canonical_documents": true
-  },
-  "r203_documentary_release": {
-    "date": "2026-10-14",
-    "scope": "HELP_PROVENANCE_AND_VALIDATION_TRUTH_ONLY",
-    "corpus_mutations": 0,
-    "complement_mutations": 0,
-    "offline_asset_mutations": 0,
-    "storage_migrations": 0,
-    "build_time_status": "LOCAL_CANDIDATE_AT_FREEZE__NO_DEPLOYMENT_CLAIM",
-    "production": "HOLD"
-  },
-  "r220_local_hold": {
-    "review_status": "HOLD_NOT_DEPLOYABLE",
-    "build_date": "2026-10-15",
-    "release_authority": "NONE",
-    "canonical_text_changed": false,
-    "offline_content_binding_changed": false,
-    "r219_guard_falsification": "INTERIOR_SAME_LENGTH_MUTATION_REJECTED_AFTER_R220",
-    "full_PWA_on_host": "NOT_RUN",
-    "native_iOS": "NOT_RUN"
-  },
-  "r226_local_candidate": {
-    "release_authority": "NONE_MAIN__NO_GITHUB_WRITE",
-    "source": "v142.35 exact App Test package",
-    "corpus_changed": false,
-    "speaker_metadata_changed": false,
-    "search_changed": false,
-    "offline_payload_changed": false,
-    "user_data_changed": false,
-    "changes": "presentation only T30 E0007 P037–P040",
-    "integrated_browser": "NOT_RUN",
-    "physical_iOS": "NOT_RUN"
-  },
-  "r230_local_candidate": {
-    "source": "v142.36 exact R229",
-    "scope": "Service Worker install/activate rollback protection only",
-    "release_authority": "NONE",
-    "public_version": "142.37",
-    "github_deployment": "NOT_AUTHORIZED",
-    "offline_content_binding_unchanged": true,
-    "user_data_unchanged": true,
-    "on_device_safari": "NOT_RUN",
-    "full_hosted_pwa": "NOT_RUN"
-  },
-  "r239_local_candidate": {
-    "date": "2026-10-16",
-    "status": "HOLD_LOCAL_NOT_DEPLOYED",
-    "kind": "APPLICATION_ONLY",
-    "baseline_app": "142.37",
-    "intervention_authorities_r237": 28,
-    "reviewed_boundaries_r237": 21,
-    "t34_additional_visual_pilot": 7,
-    "corpus_and_semantic_payload": "BYTE_IDENTICAL_TO_142_37",
-    "user_data_schema": "UNCHANGED",
-    "content_binding": "UNCHANGED"
   }
 }
