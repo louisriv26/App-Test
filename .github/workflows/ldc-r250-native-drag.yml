@@ -20,7 +20,7 @@ jobs:
         run: |
           NODE_PATH=/tmp/r250gesture/node_modules node <<'JS'
           const {chromium,webkit}=require('playwright'),fs=require('node:fs');
-          const URL='https://louisriv26.github.io/App-Test/';const tests=[];
+          const TARGET_URL='https://louisriv26.github.io/App-Test/';const tests=[];
           const add=(name,ok,info={})=>{tests.push({name,status:ok?'PASS':'FAIL',info});console.log((ok?'PASS ':'FAIL ')+name+' '+JSON.stringify(info).slice(0,650));};
           (async()=>{
             for(const [engine,launcher] of [['chromium',chromium],['webkit',webkit]]){
@@ -29,7 +29,7 @@ jobs:
                 browser=await launcher.launch({headless:true});
                 const ctx=await browser.newContext({viewport:{width:820,height:890},serviceWorkers:'allow'});
                 const page=await ctx.newPage();let errors=[];page.on('pageerror',e=>errors.push(String(e).slice(0,250)));
-                await page.goto(URL,{waitUntil:'domcontentloaded',timeout:65000});
+                await page.goto(TARGET_URL,{waitUntil:'domcontentloaded',timeout:65000});
                 await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:60000});
                 await page.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding()});
                 await page.evaluate(async()=>await openEntry(23,'LDC.T23.E0013','entries'));
@@ -66,7 +66,7 @@ jobs:
               finally{if(browser)await browser.close()}
             }
             const summary={PASS:tests.filter(x=>x.status==='PASS').length,FAIL:tests.filter(x=>x.status==='FAIL').length};
-            fs.writeFileSync('r250-native-drag.json',JSON.stringify({URL,summary,tests},null,2));console.log('R250_DRAG_SUMMARY',JSON.stringify(summary));process.exit(summary.FAIL?1:0);
+            fs.writeFileSync('r250-native-drag.json',JSON.stringify({TARGET_URL,summary,tests},null,2));console.log('R250_DRAG_SUMMARY',JSON.stringify(summary));process.exit(summary.FAIL?1:0);
           })();
           JS
       - uses: actions/upload-artifact@v4
