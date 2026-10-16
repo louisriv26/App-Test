@@ -1,1 +1,87 @@
-The requested file reference is not currently visible. Use files.search or files.list to rediscover the file, then retry with a returned ref_id or file_id.
+name: "R252 candidate semantic finality QA — virtual HTML, no deploy"
+on:
+  push:
+    branches: [qa/r252-ui-semantic-20261016]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  virtual-candidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Chromium and WebKit
+        run: |
+          npm --prefix /tmp/r252qa install --no-audit --no-fund playwright@1.56.1
+          /tmp/r252qa/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Validate exact virtual candidate against live origin
+        run: |
+          NODE_PATH=/tmp/r252qa/node_modules node <<'JS'
+          const {chromium,webkit}=require('playwright'),fs=require('node:fs'),crypto=require('node:crypto');
+          const URL='https://louisriv26.github.io/App-Test/';
+          const patch=JSON.parse(fs.readFileSync('qa/r252_hosted_html_patch.json','utf8'));
+          const hash=s=>crypto.createHash('sha256').update(Buffer.from(s,'utf8')).digest('hex');
+          const split=s=>s.match(/[^\n]*\n|[^\n]+$/g)||[];
+          const observations=[];const add=(name,pass,data={})=>{observations.push({name,status:pass?'PASS':'FAIL',data});console.log((pass?'PASS ':'FAIL ')+name+' '+JSON.stringify(data).slice(0,650))};
+          (async()=>{
+            let html;
+            try{
+              const resp=await fetch(URL+'?r252q='+Date.now(),{cache:'no-store'});
+              const original=await resp.text();
+              add('live_app_test_index_http200',resp.status===200,{http:resp.status});
+              add('live_app_test_exact_baseline_sha',hash(original)===patch.source_sha256,{actual:hash(original),expected:patch.source_sha256});
+              if(hash(original)!==patch.source_sha256)throw Error('SOURCE_BYTES_CHANGED_ABORT');
+              const arr=split(original);
+              for(const op of [...patch.edits].reverse()){
+                const old=split(op.old),replacement=split(op.new),at=op.line-1;
+                if(arr.slice(at,at+old.length).join('')!==op.old)throw Error('PATCH_CONTEXT_MISMATCH_LINE_'+op.line);
+                arr.splice(at,old.length,...replacement);
+              }
+              html=arr.join('');
+              add('virtual_candidate_exact_sha',hash(html)===patch.target_sha256,{actual:hash(html),expected:patch.target_sha256});
+              if(hash(html)!==patch.target_sha256)throw Error('CANDIDATE_BYTES_MISMATCH_ABORT');
+              for(const [engine,launcher] of [['chromium',chromium],['webkit',webkit]]){
+                const browser=await launcher.launch({headless:true});
+                const ctx=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+                const page=await ctx.newPage();let errors=[];page.on('pageerror',e=>errors.push(String(e).slice(0,450)));
+                await page.route('**/App-Test/',async route=>{await route.fulfill({status:200,contentType:'text/html; charset=utf-8',body:html});});
+                try{
+                  const start=await page.goto(URL,{waitUntil:'domcontentloaded',timeout:70000});
+                  await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:60000});
+                  await page.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding();});
+                  const ver=await page.evaluate(()=>APP_VERSION);
+                  add(engine+'_virtual_candidate_loaded',start.status()===200&&ver==='v2.19.142.44-R1B-UNIFIED',{ver});
+                  await page.evaluate(()=>{
+                    showScreen('search');
+                    setSearchIntentMode('meaning',{rerun:false,persist:false});
+                    setSearchQueryDraft('La constance est une chaîne qui lie toutes les vertus',{mode:'meaning',syncOther:false});
+                    ownerSemanticPrepared=true;
+                    semanticPackV3Status=async()=>({available:true,ready:true});
+                    runOwnerSemanticInference=()=>new Promise((resolve,reject)=>setTimeout(()=>reject(new Error('R252_TEST_INFERENCE_FAILURE')),2950));
+                    runSearch({navigation:'reveal-output',commitSource:'programmatic'});
+                  });
+                  await page.waitForTimeout(2390);
+                  const during=await page.evaluate(()=>({phase:document.querySelector('.search-suggestion-box[data-r252-lexical-generation]')?.dataset.r252LexicalStatus||null,text:(document.getElementById('search-results')?.innerText||'').slice(0,230),busy:!!searchBusyGeneration}));
+                  add(engine+'_pending_lexical_provisional',during.phase==='provisional'&&during.busy&&/en cours/.test(during.text),during);
+                  await page.waitForTimeout(1750);
+                  const end=await page.evaluate(()=>({phase:document.querySelector('.search-suggestion-box[data-r252-lexical-generation]')?.dataset.r252LexicalStatus||null,text:(document.getElementById('search-results')?.innerText||'').slice(0,480),busy:!!searchBusyGeneration,query:searchCommittedQuery}));
+                  add(engine+'_terminal_lexical_without_stale_progress',end.phase==='terminal'&&!end.busy&&end.text.includes('terminée sans classement sémantique confirmé')&&!end.text.includes('en cours')&&end.text.includes('PAR LES MOTS'),end);
+                  add(engine+'_no_unhandled_page_errors',errors.length===0,{errors:errors.slice(0,4)});
+                }catch(e){add(engine+'_virtual_hosted_exception',false,{error:String(e),errors:errors.slice(0,4)});}
+                await ctx.close();await browser.close();
+              }
+            }catch(e){add('qa_harness_failed',false,{error:String(e)});}
+            const summary={pass:observations.filter(x=>x.status==='PASS').length,fail:observations.filter(x=>x.status==='FAIL').length};
+            fs.writeFileSync('r252-virtual-hosted.json',JSON.stringify({scope:'v142.44 index route override for QA only; all assets real App Test v142.43, not deployed candidate; iOS physical not run',patch,summary,observations},null,2));
+            console.log('R252_VIRTUAL_HOSTED_SUMMARY',JSON.stringify(summary));process.exit(summary.fail?1:0);
+          })();
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r252-virtual-hosted-semantic
+          path: r252-virtual-hosted.json
+          if-no-files-found: warn
