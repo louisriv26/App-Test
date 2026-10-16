@@ -1,0 +1,79 @@
+name: "R250 full offline assets and Reader"
+on:
+  push:
+    branches: [qa/r248-hosted-20261016]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Chromium
+        run: |
+          npm --prefix /tmp/r250offline install --no-audit --no-fund playwright@1.56.1
+          /tmp/r250offline/node_modules/.bin/playwright install chromium --with-deps
+      - name: Full offline preparation and offline Reader
+        run: |
+          NODE_PATH=/tmp/r250offline/node_modules node <<'JS'
+          const {chromium}=require('playwright'),fs=require('node:fs');
+          const url='https://louisriv26.github.io/App-Test/';
+          const records=[];const record=(n,ok,d={})=>{records.push({name:n,status:ok?'PASS':'FAIL',details:d});console.log((ok?'PASS ':'FAIL ')+n+' '+JSON.stringify(d).slice(0,500))};
+          (async()=>{
+            let browser;
+            try{
+              browser=await chromium.launch();
+              const ctx=await browser.newContext({serviceWorkers:'allow',viewport:{width:1024,height:768}});
+              const page=await ctx.newPage();let errors=[];page.on('pageerror',e=>errors.push(String(e).slice(0,300)));
+              await page.goto(url,{waitUntil:'domcontentloaded',timeout:70000});
+              await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:60000});
+              await page.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding()});
+              await page.waitForFunction(()=>!!navigator.serviceWorker.controller,null,{timeout:25000});
+              const start=await page.evaluate(async()=>{
+                await requestOfflineStatus().catch(()=>{});
+                const before=JSON.parse(JSON.stringify(offlineUiState));
+                await startOfflinePreparation();
+                return {before,after:JSON.parse(JSON.stringify(offlineUiState))};
+              });
+              record('offline_preparation_started',start.after.state==='CHECKING'||start.after.state==='DOWNLOADING'||start.after.state==='READY',start);
+              await page.waitForFunction(()=>['READY','ERROR','PARTIAL','CANCELLED'].includes(offlineUiState.state),null,{timeout:540000,polling:3000}).catch(()=>{});
+              const status=await page.evaluate(async()=>{await requestOfflineStatus().catch(()=>{});return JSON.parse(JSON.stringify(offlineUiState))});
+              record('offline_prepare_ready_all',status.state==='READY'&&status.total>=200&&status.completed===status.total&&(!status.failed||!status.failed.length),status);
+              const cached=await page.evaluate(async()=>{
+                const names=await caches.keys(),info=[];
+                for(const n of names){let cache=await caches.open(n);info.push({name:n,size:(await cache.keys()).length});}
+                return info;
+              });
+              record('offline_cache_populated',cached.some(x=>x.size>=200),{cacheCounts:cached});
+              if(status.state==='READY'){
+                await ctx.setOffline(true);
+                let response,err;try{response=await page.reload({waitUntil:'domcontentloaded',timeout:35000})}catch(e){err=String(e)}
+                record('offline_http_shell',response?.status()===200,{status:response?.status(),err});
+                await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:25000}).catch(()=>{});
+                await page.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding()});
+                for(const [v,entry] of [[23,'LDC.T23.E0013'],[7,'LDC.T07.E0001']]){
+                  let result;try{
+                    result=await page.evaluate(async({v,entry})=>{await openEntry(v,entry,'entries');return {count:document.querySelectorAll('#reader-body .para-fragment').length,entry:currentEntry?.id}}, {v,entry});
+                  }catch(e){result={error:String(e)}}
+                  record('offline_reader_tome_'+v,result.count>0,{result});
+                }
+                await ctx.setOffline(false);
+              }else record('offline_reader_not_attempted',false,{reason:'offline not ready'});
+              record('no_page_errors',errors.length===0,{errors:errors.slice(0,8)});
+              await ctx.close();
+            }catch(e){record('harness_or_startup_error',false,{error:String(e)})}
+            finally{if(browser)await browser.close()}
+            const summary={pass:records.filter(x=>x.status==='PASS').length,fail:records.filter(x=>x.status==='FAIL').length};
+            fs.writeFileSync('r250-full-offline.json',JSON.stringify({target:url,summary,records},null,2));
+            console.log('R250_OFFLINE_SUMMARY',JSON.stringify(summary));process.exit(summary.fail?1:0);
+          })();
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r250-full-offline
+          path: r250-full-offline.json
+          if-no-files-found: warn
