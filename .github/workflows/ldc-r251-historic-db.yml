@@ -1,0 +1,138 @@
+name: R251 synthetic historic DB v4 to v5
+on:
+  push:
+    branches: [qa/r251-historical-20261016]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  legacy-upgrade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install test browsers
+        run: |
+          npm --prefix /tmp/r251 install --no-audit --no-fund playwright@1.56.1
+          /tmp/r251/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Run historic seeded database upgrade
+        run: |
+          NODE_PATH=/tmp/r251/node_modules node <<'JS'
+          const {chromium,webkit}=require('playwright'),fs=require('node:fs');
+          const URL_APP='https://louisriv26.github.io/App-Test/';
+          const results=[];
+          const record=(name,ok,details={})=>{results.push({name,pass:!!ok,details});console.log((ok?'PASS ':'FAIL ')+name+' '+JSON.stringify(details).slice(0,850))};
+          const boot=async p=>{
+            const r=await p.goto(URL_APP,{waitUntil:'domcontentloaded',timeout:65000});
+            await p.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:60000});
+            await p.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding()});
+            return r.status();
+          };
+          (async()=>{
+            for (const [name,launcher] of [['chromium',chromium],['webkit',webkit]]){
+              let browser;
+              try{
+                browser=await launcher.launch({headless:true});
+                const context=await browser.newContext({serviceWorkers:'allow',viewport:{width:390,height:844}});
+                const page=await context.newPage(),jsErrors=[];
+                page.on('pageerror',e=>jsErrors.push(String(e).slice(0,450)));
+                await boot(page);
+                const fixture=await page.evaluate(async()=>{
+                  const name=DB_NAME;
+                  if(db){db.close();db=null;}
+                  const deletion=await new Promise(resolve=>{
+                    const req=indexedDB.deleteDatabase(name);
+                    req.onsuccess=()=>resolve({ok:true});
+                    req.onerror=()=>resolve({ok:false,error:String(req.error)});
+                    req.onblocked=()=>resolve({ok:false,error:'deletion blocked'});
+                  });
+                  if(!deletion.ok)return {error:'delete '+JSON.stringify(deletion)};
+                  const stores={
+                    reading_pos:{keyPath:'key'},highlights:{keyPath:'id',autoIncrement:true},
+                    notes:{keyPath:'id',autoIncrement:true},favorites:{keyPath:'entry_id'},
+                    collections:{keyPath:'id',autoIncrement:true},col_items:{keyPath:'id',autoIncrement:true},
+                    settings:{keyPath:'key'},read_entries:{keyPath:'key'}
+                  };
+                  const upgrade=await new Promise(resolve=>{
+                    const req=indexedDB.open(name,4);
+                    req.onupgradeneeded=()=>{
+                      for(const [name,opts] of Object.entries(stores))req.result.createObjectStore(name,opts);
+                    };
+                    req.onsuccess=()=>resolve({db:req.result});
+                    req.onerror=()=>resolve({error:String(req.error)});
+                  });
+                  if(upgrade.error)return {error:upgrade.error};
+                  const legacy=upgrade.db;
+                  const paraId='LDC.T23.E0013.P050',entry='LDC.T23.E0013',sentence='Et en vertu de cet Acte Unique et Incessant,';
+                  const dataset={
+                    reading_pos:[{key:'entry:23:'+entry,vol:23,entry_id:entry,para_id:paraId,fraction_within_paragraph:0.2}],
+                    highlights:[{id:721,volume:23,entry_id:entry,para_id:paraId,start_char:0,end_char:9,text:sentence.slice(0,9),color:'yellow',corpus_generation:CORPUS_GENERATION}],
+                    notes:[{id:722,volume:23,entry_id:entry,para_id:paraId,text:'R251 PERSONAL NOTE — DO NOT REPLACE',quote:'Et en vertu'}],
+                    favorites:[{entry_id:entry,volume:23,added_at:'2020-01-01T00:00:00Z'}],
+                    collections:[{id:723,name:'R251 legacy list',created_at:'2020-01-01'}],
+                    col_items:[{id:724,col_id:723,volume:23,entry_id:entry,para_id:paraId,text:sentence}],
+                    settings:[{key:'R251_legacy_marker',value:'v4-owner-data',ts:1},{key:'user_data_schema_version',value:4,ts:1}],
+                    read_entries:[{key:'23:'+entry,vol:23,entry_id:entry,read:true}]
+                  };
+                  const write=await new Promise(resolve=>{
+                    const tx=legacy.transaction(Object.keys(dataset),'readwrite');
+                    for(const [n,rows] of Object.entries(dataset))for(const row of rows)tx.objectStore(n).put(row);
+                    tx.oncomplete=()=>resolve({ok:true});
+                    tx.onerror=()=>resolve({error:String(tx.error)});
+                    tx.onabort=()=>resolve({error:'aborted'});
+                  });
+                  legacy.close();
+                  return {dbName:name,version:4,write,expectedCounts:Object.fromEntries(Object.entries(dataset).map(([k,v])=>[k,v.length])),fixture:{note:dataset.notes[0].text,highlightText:dataset.highlights[0].text,marker:dataset.settings[0].value}};
+                });
+                record(name+'_seeded_v4',!fixture.error&&fixture.write?.ok,fixture);
+                if(!fixture.error){
+                  await page.reload({waitUntil:'domcontentloaded',timeout:65000});
+                  await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:65000});
+                  await page.waitForTimeout(1900);
+                  const after=await page.evaluate(async()=>{
+                    const names=['reading_pos','highlights','notes','favorites','collections','col_items','settings','read_entries'];
+                    const data={version:db?.version??null,stores:db?[...db.objectStoreNames]:[],counts:{},rows:{}};
+                    if(!db)return data;
+                    for(const n of names){const rows=await dbGetAll(n);data.counts[n]=rows.length;
+                      data.rows[n]=rows.filter(x=>[721,722,723,724].includes(x.id)||x.key==='R251_legacy_marker'||x.entry_id==='LDC.T23.E0013').slice(0,8);}
+                    data.noteText=data.rows.notes?.find(x=>x.id===722)?.text||null;
+                    data.marker=data.rows.settings?.find(x=>x.key==='R251_legacy_marker')?.value||null;
+                    data.highlight=data.rows.highlights?.find(x=>x.id===721)||null;
+                    data.fav=data.rows.favorites?.find(x=>x.entry_id==='LDC.T23.E0013')||null;
+                    data.legacyCollection=data.rows.collections?.find(x=>x.id===723)||null;
+                    data.legacyCollectionItem=data.rows.col_items?.find(x=>x.id===724)||null;
+                    data.stageStores=data.stores.includes('backup_stage')&&data.stores.includes('backup_stage_meta');
+                    return data;
+                  });
+                  record(name+'_db_upgraded_v5',after.version===5&&after.stageStores,{version:after.version,stageStores:after.stageStores});
+                  record(name+'_historic_user_records_survived',after.noteText===fixture.fixture.note&&!!after.highlight&&!!after.fav&&!!after.legacyCollection&&!!after.legacyCollectionItem&&after.marker===fixture.fixture.marker,{
+                    counts:after.counts,noteText:after.noteText,highlightText:after.highlight?.text,marker:after.marker,fav:!!after.fav,collection:!!after.legacyCollection,item:!!after.legacyCollectionItem
+                  });
+                  record(name+'_no_deletion_eight_stores',Object.entries(fixture.expectedCounts).every(([n,c])=>(after.counts[n]||0)>=c),{expected:fixture.expectedCounts,actual:after.counts});
+                  if(after.version===5){
+                    await page.evaluate(async()=>await openEntry(23,'LDC.T23.E0013','entries'));
+                    await page.waitForFunction(()=>document.querySelectorAll('#reader-body .para-fragment').length===104,null,{timeout:30000});
+                    const rendered=await page.evaluate(()=>({
+                      highlighted:document.querySelectorAll('#reader-body mark').length,
+                      notes:(document.getElementById('reader-body')?.textContent||'').includes('Et en vertu')
+                    }));
+                    record(name+'_legacy_reader_reopen',rendered.notes,rendered);
+                  }
+                }
+                record(name+'_no_pageerrors',jsErrors.length===0,{errors:jsErrors.slice(0,5)});
+                await context.close();
+              }catch(e){record(name+'_exception',false,{error:String(e).slice(0,900)})}
+              finally{if(browser)await browser.close()}
+            }
+            const summary={pass:results.filter(x=>x.pass).length,fail:results.filter(x=>!x.pass).length};
+            fs.writeFileSync('r251-legacy-db-upgrade.json',JSON.stringify({target:URL_APP,summary,results},null,2));
+            console.log('R251_LEGACY_SUMMARY',JSON.stringify(summary));process.exit(summary.fail?1:0);
+          })();
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r251-historic-db-upgrade
+          path: r251-legacy-db-upgrade.json
+          if-no-files-found: warn
