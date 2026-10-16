@@ -1,0 +1,79 @@
+name: "R250 native mouse drag Reader highlight"
+on:
+  push:
+    branches: [qa/r248-hosted-20261016]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  gestures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 19
+    steps:
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install Chromium and WebKit
+        run: |
+          npm --prefix /tmp/r250gesture install --no-audit --no-fund playwright@1.56.1
+          /tmp/r250gesture/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Hosted pointer-drag Reader QA
+        run: |
+          NODE_PATH=/tmp/r250gesture/node_modules node <<'JS'
+          const {chromium,webkit}=require('playwright'),fs=require('node:fs');
+          const URL='https://louisriv26.github.io/App-Test/';const tests=[];
+          const add=(name,ok,info={})=>{tests.push({name,status:ok?'PASS':'FAIL',info});console.log((ok?'PASS ':'FAIL ')+name+' '+JSON.stringify(info).slice(0,650));};
+          (async()=>{
+            for(const [engine,launcher] of [['chromium',chromium],['webkit',webkit]]){
+              let browser;
+              try{
+                browser=await launcher.launch({headless:true});
+                const ctx=await browser.newContext({viewport:{width:820,height:890},serviceWorkers:'allow'});
+                const page=await ctx.newPage();let errors=[];page.on('pageerror',e=>errors.push(String(e).slice(0,250)));
+                await page.goto(URL,{waitUntil:'domcontentloaded',timeout:65000});
+                await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:60000});
+                await page.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding()});
+                await page.evaluate(async()=>await openEntry(23,'LDC.T23.E0013','entries'));
+                await page.waitForFunction(()=>document.querySelectorAll('#reader-body .para-fragment').length>=104);
+                const coords=await page.evaluate(()=>{
+                  const a=document.querySelector('.para-fragment[data-para-id="LDC.T23.E0013.P050"]'),b=document.querySelector('.para-fragment[data-para-id="LDC.T23.E0013.P052"]'),sc=document.getElementById('reader-scroll');
+                  a.scrollIntoView({block:'center'});
+                  const get=(el,end=false)=>{
+                    const txt=[...el.querySelectorAll('.speech-run')].flatMap(x=>[...x.childNodes]).find(x=>x.nodeType===3&&x.length>3)||[...el.childNodes].find(x=>x.nodeType===3&&x.length>3);
+                    if(!txt)return null;
+                    const r=document.createRange();
+                    if(end){r.setStart(txt,Math.max(1,txt.length-8));r.setEnd(txt,Math.max(2,txt.length-7));}
+                    else {r.setStart(txt,1);r.setEnd(txt,2);}
+                    const rect=r.getBoundingClientRect();return {x:rect.left+Math.max(1,rect.width/2),y:rect.top+rect.height/2};
+                  };
+                  return {from:get(a,false),to:get(b,true),rect:sc.getBoundingClientRect().toJSON(),scroll:sc.scrollTop};
+                });
+                if(!coords.from||!coords.to||coords.to.y<coords.rect.top||coords.to.y>coords.rect.bottom){
+                  add(engine+'_POINTS_ON_SCREEN',false,coords);
+                }else{
+                  add(engine+'_POINTS_ON_SCREEN',true,coords);
+                  await page.mouse.move(coords.from.x,coords.from.y);await page.mouse.down();
+                  await page.mouse.move(coords.to.x,coords.to.y,{steps:22});await page.mouse.up();
+                  const immediately=await page.evaluate(()=>({top:document.getElementById('reader-scroll').scrollTop,sel:String(getSelection()).length,parts:getSelection().rangeCount?LDCAnchor.selectionParts(getSelection().getRangeAt(0))?.length:0}));
+                  await page.waitForTimeout(800);
+                  const settled=await page.evaluate(()=>({top:document.getElementById('reader-scroll').scrollTop,sel:String(getSelection()).length,parts:getSelection().rangeCount?LDCAnchor.selectionParts(getSelection().getRangeAt(0))?.length:0,panel:document.getElementById('seltext-panel')?.classList.contains('show')}));
+                  add(engine+'_ACTUAL_POINTER_DRAG_SELECTION',immediately.sel>10&&immediately.parts>=2&&settled.sel>10&&settled.parts>=2,{immediately,settled});
+                  add(engine+'_POST_DRAG_SCROLL_STABILITY',Math.abs(settled.top-immediately.top)<=8&&settled.panel,{immediately,settled});
+                  await page.screenshot({path:'r250-'+engine+'-drag.png'});
+                }
+                add(engine+'_NO_UNCAUGHT_ERRORS',errors.length===0,{errors:errors.slice(0,7)});
+                await ctx.close();
+              }catch(e){add(engine+'_HARNESS_OR_APP',false,{error:String(e)})}
+              finally{if(browser)await browser.close()}
+            }
+            const summary={PASS:tests.filter(x=>x.status==='PASS').length,FAIL:tests.filter(x=>x.status==='FAIL').length};
+            fs.writeFileSync('r250-native-drag.json',JSON.stringify({URL,summary,tests},null,2));console.log('R250_DRAG_SUMMARY',JSON.stringify(summary));process.exit(summary.FAIL?1:0);
+          })();
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r250-native-drag-evidence
+          path: |
+            r250-native-drag.json
+            r250-*-drag.png
+          if-no-files-found: warn
