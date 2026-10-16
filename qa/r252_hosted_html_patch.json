@@ -1,0 +1,52 @@
+{
+  "schema": "R252-live-dom-network-interception",
+  "source_sha256": "74be57189fde12c8b39a24aa318570340c52abeaf51bf8ab514c7a321991674d",
+  "target_sha256": "ab6d0e8b3170d0c5042fec65512f22591573aafbab166a485c3b6c563ac1d0a6",
+  "edits": [
+    {
+      "old": "const APP_VERSION = 'v2.19.142.43-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet\n",
+      "new": "const APP_VERSION = 'v2.19.142.44-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet\n",
+      "line": 2728
+    },
+    {
+      "old": "const SW_CACHE_VERSION = 'ldc-v2.19.142.43-r1b-unified';\n",
+      "new": "const SW_CACHE_VERSION = 'ldc-v2.19.142.44-r1b-unified';\n",
+      "line": 2732
+    },
+    {
+      "old": "",
+      "new": "  // R252: distinguish a provisional textual lead from a finished semantic attempt.\n  // Identifiers are local to the displayed search generation, never stored as user data.\n",
+      "line": 8942
+    },
+    {
+      "old": "  box.textContent='Par le sens : moteur non concluant ou lent ('+String(reason||'attente')+'). Correspondances PAR LES MOTS seulement : vérifier les citations. Aucune pertinence sémantique confirmée.';\n",
+      "new": "  const provisional=reason==='calcul sémantique en cours';\n  box.dataset.r252LexicalGeneration=String(generation);\n  box.dataset.r252LexicalStatus=provisional?'provisional':'terminal';\n  box.textContent=provisional\n    ?'Par le sens : recherche sémantique en cours. En attendant, pistes PAR LES MOTS uniquement : vérifiez les citations. Aucune pertinence sémantique confirmée.'\n    :'Par le sens : aucun classement sémantique confirmé ('+String(reason||'recherche non concluante')+'). Pistes PAR LES MOTS uniquement : vérifiez les citations. Aucune pertinence sémantique confirmée.';\n",
+      "line": 8943
+    },
+    {
+      "old": "",
+      "new": "  return true;\n}\n// R252: a settled search cannot continue displaying an obsolete 'in progress'\n// caption. Never rewrite the semantic result, a newer query or another UI panel.\nfunction r252FinalizeProvisionalLexical(raw,generation){\n  if(!r150SemanticLive(raw,generation))return false;\n  const results=document.getElementById('search-results');\n  if(!results)return false;\n  const banner=results.querySelector('.search-suggestion-box[data-r252-lexical-generation=\"'+String(generation)+'\"]');\n  if(!banner||banner.dataset.r252LexicalStatus!=='provisional')return false;\n  banner.dataset.r252LexicalStatus='terminal';\n  banner.textContent='Par le sens : la recherche est terminée sans classement sémantique confirmé. Pistes PAR LES MOTS uniquement : vérifiez les citations. Aucune pertinence sémantique confirmée.';\n",
+      "line": 8948
+    },
+    {
+      "old": "  let semanticDone=false,lexicalShown=false;\n",
+      "new": "  let semanticDone=false,lexicalShown=false,semanticSettled=false;\n",
+      "line": 8970
+    },
+    {
+      "old": "    if(semanticDone||!r150SemanticLive(raw,generation))return false;\n",
+      "new": "    if(semanticSettled||semanticDone||!r150SemanticLive(raw,generation))return false;\n",
+      "line": 8983
+    },
+    {
+      "old": "    if(!checked.ok||!checked.value||semanticDone||!r150SemanticLive(raw,generation))return false;\n",
+      "new": "    // A timer callback can complete AFTER the semantic function has returned.\n    // Such a callback must never publish a late provisional banner.\n    if(!checked.ok||!checked.value||semanticSettled||semanticDone||!r150SemanticLive(raw,generation))return false;\n",
+      "line": 8985
+    },
+    {
+      "old": "  }finally{clearTimeout(timer);}\n",
+      "new": "  }finally{\n    semanticSettled=true;\n    clearTimeout(timer);\n    r252FinalizeProvisionalLexical(raw,generation);\n  }\n",
+      "line": 9030
+    }
+  ]
+}
