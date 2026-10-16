@@ -1,0 +1,90 @@
+name: R251 semantic status lifecycle diagnosis
+on:
+  push:
+    branches: [qa/r251-historical-20261016]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    steps:
+      - uses: actions/setup-node@v4
+        with: {node-version: '22'}
+      - name: Install browsers
+        run: |
+          npm --prefix /tmp/r251sem install --no-audit --no-fund playwright@1.56.1
+          /tmp/r251sem/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Observe semantic runtime and final UI without changing application
+        run: |
+          NODE_PATH=/tmp/r251sem/node_modules node <<'JS'
+          const {chromium,webkit}=require('playwright'),fs=require('fs');
+          const url='https://louisriv26.github.io/App-Test/';
+          const observations=[];
+          (async()=>{
+            for(const [name,engine] of [['chromium',chromium],['webkit',webkit]]){
+              let browser;
+              try{
+                browser=await engine.launch({headless:true});
+                const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'allow'});
+                const page=await context.newPage(),consoleErrors=[],badResponses=[],badRequests=[];
+                page.on('console',m=>{if(['error','warning'].includes(m.type()))consoleErrors.push(m.type()+': '+m.text().slice(0,280))});
+                page.on('response',r=>{if(r.status()>=400&&/pls|semant|onnx|wasm|pack/i.test(r.url()))badResponses.push({http:r.status(),url:r.url().split('?')[0].slice(0,180)})});
+                page.on('requestfailed',r=>{if(/pls|semant|onnx|wasm|pack/i.test(r.url()))badRequests.push({url:r.url().split('?')[0].slice(0,180),error:r.failure()?.errorText})});
+                await page.goto(url,{waitUntil:'domcontentloaded',timeout:70000});
+                await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:60000});
+                await page.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding()});
+                const stat=async()=>{
+                  return await page.evaluate(async()=>{
+                    let report={};
+                    try{report.public=await semanticPackV3Status()}catch(e){report.statusError=String(e)}
+                    try{report.runtime=window.LDCPLSV16Runtime?.status?.()??null}catch(e){report.runtimeError=String(e)}
+                    report.prepared=ownerSemanticPrepared;
+                    report.inferencePending=!!ownerSemanticInferencePromise;
+                    report.preparationPending=!!ownerSemanticPreparationPromise;
+                    report.busy=!!searchBusyGeneration;
+                    report.mode=searchIntentMode;
+                    report.meta=(document.getElementById('search-meta')?.innerText||'').slice(0,800);
+                    report.result=(document.getElementById('search-results')?.innerText||'').slice(0,1200);
+                    return report;
+                  });
+                };
+                const initial=await stat();observations.push({engine:name,phase:'initial',status:initial});
+                for(const q of ['La constance est une chaîne qui lie toutes les vertus','la croix est un trésor']){
+                  let detail;const started=Date.now();
+                  try{
+                    const query=await page.evaluate(async(q)=>{
+                      showScreen('search');
+                      setSearchIntentMode('meaning',{rerun:false,persist:false});
+                      setSearchQueryDraft(q,{mode:'meaning',syncOther:false});
+                      await runSearch({navigation:'reveal-output',commitSource:'programmatic'});
+                      return {committed:searchCommittedQuery,preflight:searchLastPreflightR88&&{status:searchLastPreflightR88.status,route:searchLastPreflightR88.route}};
+                    },q);
+                    await page.waitForTimeout(2400);
+                    detail={query,elapsedMs:Date.now()-started,final:await stat()};
+                  }catch(e){detail={error:String(e).slice(0,1000),elapsedMs:Date.now()-started}}
+                  const terminal=detail.final||{};
+                  detail.hasStaleProgressCaption=!terminal.busy&&/calcul sémantique en cours/i.test(terminal.result||'');
+                  detail.qualifiedSemanticShown=/Passages classés selon leur proximité/.test(terminal.result||'')&&!/ne permet pas de conclure|correspondances PAR LES MOTS seulement/i.test(terminal.result||'');
+                  observations.push({engine:name,phase:'query',q,details:detail});
+                  console.log('OBSERVE '+name+' '+q+' '+JSON.stringify(detail).slice(0,2500));
+                }
+                observations.push({engine:name,phase:'diagnostic',consoleErrors:consoleErrors.slice(0,12),badResponses:badResponses.slice(0,12),badRequests:badRequests.slice(0,12)});
+                console.log('DIAGNOSTIC '+name+' '+JSON.stringify(observations[observations.length-1]).slice(0,2500));
+                await context.close();
+              }catch(e){observations.push({engine:name,phase:'error',error:String(e)});console.log('HARNESS_ERROR '+name+' '+e)}
+              finally{if(browser)await browser.close()}
+            }
+            const report={url,observations,semanticQualification:'OBSERVATIONAL_ONLY_NOT_A_PASS'};
+            fs.writeFileSync('r251-semantic-lifecycle.json',JSON.stringify(report,null,2));
+            console.log('R251_SEMANTIC_OBSERVATIONS',observations.length);
+            process.exit(observations.some(x=>x.phase==='error')?1:0);
+          })();
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r251-semantic-lifecycle
+          path: r251-semantic-lifecycle.json
+          if-no-files-found: warn
