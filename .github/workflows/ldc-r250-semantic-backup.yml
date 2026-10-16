@@ -1,0 +1,115 @@
+name: "R250 semantic and backup real-origin"
+on:
+  push:
+    branches: [qa/r248-hosted-20261016]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  semantic-backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright Chromium
+        run: |
+          npm --prefix /tmp/r250 install --no-audit --no-fund playwright@1.56.1
+          /tmp/r250/node_modules/.bin/playwright install chromium --with-deps
+      - name: Hosted tests with isolated browser profiles
+        run: |
+          NODE_PATH=/tmp/r250/node_modules node <<'JS'
+          const {chromium}=require('playwright'),fs=require('node:fs');
+          const base='https://louisriv26.github.io/App-Test/';
+          const results=[];let browser=null;
+          const rec=(name,status,details={})=>{results.push({name,status,details});console.log(status+' '+name+' '+JSON.stringify(details).slice(0,950))};
+          const boot=async(page)=>{
+            const r=await page.goto(base,{waitUntil:'domcontentloaded',timeout:65000});
+            await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:60000});
+            await page.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding();});
+            return r.status();
+          };
+          const shorten=s=>String(s??'').slice(0,800);
+          (async()=>{
+            try{
+              browser=await chromium.launch({headless:true});
+              // Semantic search: capture displayed evidence and actual mode; no false PASS for lexical fallback.
+              {
+                const ctx=await browser.newContext({serviceWorkers:'allow',viewport:{width:390,height:844}});
+                const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(String(e)));
+                const http=await boot(page);rec('semantic_boot',http===200?'PASS':'FAIL',{http});
+                for(const [num,query] of [
+                  ['constance','La constance est une chaîne qui lie toutes les vertus'],
+                  ['croix','la croix est un trésor']
+                ]){
+                  try{
+                    await page.evaluate(q=>{showScreen('search');setSearchIntentMode('meaning',{rerun:false,persist:false});setSearchQueryDraft(q,{mode:'meaning',syncOther:false});runSearch({navigation:'reveal-output',commitSource:'programmatic'});},query);
+                    await page.waitForFunction(()=>{const meta=document.getElementById('search-meta')?.innerText||'',res=document.getElementById('search-results')?.innerText||'';return !searchBusyGeneration&&(res.length>0||meta.length>20)},{timeout:145000}).catch(()=>{});
+                    const outcome=await page.evaluate(()=>({
+                      mode:searchIntentMode,committed:searchCommittedQuery,
+                      busy:!!searchBusyGeneration,preflight:searchLastPreflightR88?.status,route:searchLastPreflightR88?.route,
+                      meta:(document.getElementById('search-meta')?.innerText||'').slice(0,1000),
+                      results:(document.getElementById('search-results')?.innerText||'').slice(0,1200),
+                      semanticAvailable:typeof window.LDCSemanticSearchV3!=='undefined'
+                    }));
+                    rec('semantic_'+num,outcome.preflight==='ready'&&!outcome.busy&&outcome.mode==='meaning'&&outcome.results.length>0?'PASS':'FAIL',outcome);
+                  }catch(e){rec('semantic_'+num,'FAIL',{error:shorten(e)});}
+                }
+                rec('semantic_js_errors',errors.length?'FAIL':'PASS',{errors:errors.slice(0,8)});
+                await ctx.close();
+              }
+              // Backup and restore to same isolated origin only, never user profile.
+              {
+                const ctx=await browser.newContext({serviceWorkers:'allow',viewport:{width:390,height:844}});
+                const page=await ctx.newPage(),errors=[];page.on('pageerror',e=>errors.push(String(e)));
+                await boot(page);
+                const test=await page.evaluate(async()=>{
+                  const output={};try{
+                    if(!db)throw new Error('db unavailable');
+                    const key='qa_r250_roundtrip_'+Date.now();
+                    await dbPut('settings',{key,val:'before-export',ts:Date.now()});
+                    const built=await buildUserDataStreamBackup();
+                    const lines=built.parts.join('');
+                    output.export={parts:built.parts.length,records:built.totalRecords,crc:built.crc32,hasSentinel:lines.includes(key)};
+                    const validFile=new File(built.parts,['test','.ldcbackup'].join(''),{type:USER_DATA_STREAM_MIME});
+                    // First assert corrupted stream fails closed and leaves canonical stores untouched
+                    const altered=lines.replace('"before-export"','"other-export"');
+                    const corrupt=new File([altered],'tampered.ldcbackup',{type:USER_DATA_STREAM_MIME});
+                    try{await parseBackupStreamToStage(corrupt);output.corruption={rejected:false};}
+                    catch(e){const row=await dbGet('settings',key);output.corruption={rejected:true,error:String(e).slice(0,190),canonicalUnchanged:row?.val==='before-export'};}
+                    // Exact valid export -> staged validation -> atomic commit
+                    const parsed=await parseBackupStreamToStage(validFile);
+                    output.stage={records:parsed.total||parsed.totalRecords||0,counts:parsed.counts,token:!!parsed.token};
+                    const migration=await migrateBackupStageToCurrent(parsed);
+                    output.migration={steps:migration?.steps?.length||0};
+                    const check=await validateBackupStage(parsed);
+                    output.validation={ok:check?.ok,errors:check?.errors,warnings:check?.warnings};
+                    // Tamper check should be no-write; normal stage must be checked before commit
+                    if(!check?.ok)throw new Error('STAGED_VALIDATION_NOT_OK');
+                    const baseline=await r115D2ReadSnapshot(db);
+                    await atomicSwapBackupStage(parsed.token,baseline);
+                    const restored=await dbGet('settings',key);
+                    output.restore={canonical:restored?.val,success:restored?.val==='before-export'};
+                    output.ok=output.export.hasSentinel&&output.corruption.rejected&&output.corruption.canonicalUnchanged&&output.restore.success;
+                    return output;
+                  }catch(e){output.error=String(e);return output;}
+                });
+                rec('backup_stream_crc_corruption_and_atomic_restore',test.ok?'PASS':'FAIL',test);
+                rec('backup_js_errors',errors.length?'FAIL':'PASS',{errors:errors.slice(0,8)});
+                await ctx.close();
+              }
+            }catch(e){rec('harness_fatal','FAIL',{error:shorten(e)})}
+            finally{if(browser)await browser.close()}
+            const summary={pass:results.filter(x=>x.status==='PASS').length,fail:results.filter(x=>x.status==='FAIL').length};
+            fs.writeFileSync('r250-semantic-backup.json',JSON.stringify({target:base,summary,results},null,2));
+            console.log('R250_SEMANTIC_BACKUP_SUMMARY',JSON.stringify(summary));
+            process.exit(summary.fail?1:0);
+          })();
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r250-semantic-backup
+          path: r250-semantic-backup.json
+          if-no-files-found: warn
