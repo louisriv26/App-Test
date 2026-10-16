@@ -1,0 +1,103 @@
+name: "R249 WebKit and stored-highlight QA (App Test only)"
+on:
+  push:
+    branches:
+      - qa/r248-hosted-20261016
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  webkit-persistence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser engines
+        run: |
+          npm --prefix /tmp/r249-more install --no-audit --no-fund playwright@1.56.1
+          /tmp/r249-more/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Hosted real-origin tests
+        run: |
+          NODE_PATH=/tmp/r249-more/node_modules node <<'JS'
+          const {webkit,chromium}=require('playwright');
+          const fs=require('node:fs');
+          const base='https://louisriv26.github.io/App-Test/';
+          const out=[];const add=(n,ok,d={})=>{out.push({test:n,status:ok?'PASS':'FAIL',details:d});console.log((ok?'PASS ':'FAIL ')+n,JSON.stringify(d).slice(0,400));};
+          const boot=async p=>{
+            const resp=await p.goto(base,{waitUntil:'domcontentloaded',timeout:75000});
+            await p.waitForFunction(()=>document.querySelector('#loading')?.style.display==='none',null,{timeout:65000});
+            await p.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding();});
+            return resp;
+          };
+          const open=async p=>{await p.evaluate(async()=>await openEntry(23,'LDC.T23.E0013','entries'));await p.waitForFunction(()=>document.querySelectorAll('#reader-body .para-fragment').length>=104,null,{timeout:30000})};
+          const select=async p=>{
+            return await p.evaluate(()=>{
+              const body=document.getElementById('reader-body'),sc=document.getElementById('reader-scroll');
+              let a=body.querySelector('.para-fragment[data-para-id="LDC.T23.E0013.P049"]');
+              let b=body.querySelector('.para-fragment[data-para-id="LDC.T23.E0013.P052"]');
+              if(!a||!b)return {error:'missing fragments'};
+              let x=a.querySelector('.speech-run')||a,y=b.querySelector('.speech-run')||b;
+              const n=[...x.childNodes].find(n=>n.nodeType===3),m=[...y.childNodes].find(n=>n.nodeType===3);
+              if(!n||!m)return {error:'missing text nodes'};
+              sc.scrollTop=450;const before=sc.scrollTop;
+              const range=document.createRange();range.setStart(n,Math.min(5,n.length));range.setEnd(m,Math.min(25,m.length));
+              const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);
+              document.dispatchEvent(new Event('selectionchange'));
+              return {before,parts:LDCAnchor.selectionParts(range)?.length||0,selection:String(sel).length};
+            });
+          };
+          (async()=>{
+            let browser=null;
+            try{
+              for(const engine of ['webkit','chromium']){
+                browser=await ({webkit,chromium}[engine].launch({headless:true}));
+                const ctx=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'allow'});
+                const p=await ctx.newPage();let errors=[];p.on('pageerror',e=>errors.push(String(e).slice(0,500)));
+                try{
+                  const resp=await boot(p);add(engine+'_HOST_BOOT',resp.status()===200,{status:resp.status()});
+                  await open(p);
+                  const reader=await p.evaluate(()=>({n:document.querySelectorAll('#reader-body .para-fragment').length,join:window.__ldcR245Boundary?.status,version:typeof APP_VERSION==='string'?APP_VERSION:null}));
+                  add(engine+'_READER_T23',reader.n===104&&reader.join==='APPLIED_GUARDED_VIEW_ONLY',reader);
+                  const first=await select(p);await p.waitForTimeout(850);
+                  const state=await p.evaluate(()=>({scrollTop:document.getElementById('reader-scroll').scrollTop,panel:document.getElementById('seltext-panel').classList.contains('show'),contextKind:typeof contextTarget!=='undefined'?contextTarget?.kind:null,selection:String(window.getSelection()).length}));
+                  add(engine+'_FOUR_PARAGRAPH_RANGE',!first.error&&first.parts===4&&state.selection>0,{first,state});
+                  add(engine+'_NO_SCROLL_JUMP',state.scrollTop===first.before&&state.panel,{before:first.before,after:state.scrollTop,panel:state.panel});
+                  const picker=await p.evaluate(()=>{contextHighlight();return {shown:document.getElementById('cp-overlay')?.classList.contains('show'),parts:cpSavedParts?.length||0}});
+                  add(engine+'_PICKER_FROZEN_PARTS',picker.shown&&picker.parts===4,picker);
+                  if(picker.shown){
+                    await p.locator('.cp-swatch.cp-yellow').click({timeout:15000});
+                    await p.waitForTimeout(1500);
+                    const persisted=await p.evaluate(async()=>({rows:(await dbGetAll('highlights')).filter(x=>x.entry_id==='LDC.T23.E0013').length,marks:document.querySelectorAll('#reader-body mark').length,top:document.getElementById('reader-scroll').scrollTop}));
+                    add(engine+'_HIGHLIGHT_SAVED',persisted.rows===4,persisted);
+                    await p.reload({waitUntil:'domcontentloaded',timeout:65000});
+                    await p.waitForFunction(()=>document.querySelector('#loading')?.style.display==='none',null,{timeout:65000});
+                    await p.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding();});
+                    await open(p);
+                    const restored=await p.evaluate(async()=>({rows:(await dbGetAll('highlights')).filter(x=>x.entry_id==='LDC.T23.E0013').length,marks:document.querySelectorAll('#reader-body mark').length}));
+                    add(engine+'_HIGHLIGHT_RESTORED',restored.rows===4,restored);
+                  }
+                  const sw=await p.evaluate(async()=>{
+                    if(!('serviceWorker' in navigator))return {supported:false};
+                    let reg=await Promise.race([navigator.serviceWorker.ready,new Promise(resolve=>setTimeout(()=>resolve(null),12000))]);
+                    return {supported:true,ready:!!reg,active:!!reg?.active,controlled:!!navigator.serviceWorker.controller};
+                  });
+                  add(engine+'_SW_REGISTRATION',sw.supported&&sw.ready&&sw.active,sw);
+                  add(engine+'_NO_PAGE_ERRORS',!errors.length,{errors:errors.slice(0,6)});
+                }catch(e){add(engine+'_HOSTED_CASE',false,{error:String(e),errors:errors.slice(0,6)});}
+                await ctx.close();await browser.close();browser=null;
+              }
+            }catch(e){add('RUN_FATAL',false,{error:String(e)});}finally{if(browser)await browser.close();}
+            const summary={PASS:out.filter(x=>x.status==='PASS').length,FAIL:out.filter(x=>x.status==='FAIL').length};
+            fs.writeFileSync('r249-webkit-persist.json',JSON.stringify({base,summary,tests:out},null,2));
+            console.log('R249_WEBKIT_PERSIST_SUMMARY',JSON.stringify(summary));process.exit(summary.FAIL?1:0);
+          })();
+          JS
+      - name: Upload QA results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r249-webkit-persistence
+          path: r249-webkit-persist.json
+          if-no-files-found: warn
