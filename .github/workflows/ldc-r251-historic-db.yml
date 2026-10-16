@@ -37,17 +37,10 @@ jobs:
                 const context=await browser.newContext({serviceWorkers:'allow',viewport:{width:390,height:844}});
                 const page=await context.newPage(),jsErrors=[];
                 page.on('pageerror',e=>jsErrors.push(String(e).slice(0,450)));
-                await boot(page);
+                // Prepare version 4 on the SAME ORIGIN before any app JS can open a version 5 handle.
+                await page.goto(URL_APP+'version.json',{waitUntil:'domcontentloaded',timeout:65000});
                 const fixture=await page.evaluate(async()=>{
-                  const name=DB_NAME;
-                  if(db){db.close();db=null;}
-                  const deletion=await new Promise(resolve=>{
-                    const req=indexedDB.deleteDatabase(name);
-                    req.onsuccess=()=>resolve({ok:true});
-                    req.onerror=()=>resolve({ok:false,error:String(req.error)});
-                    req.onblocked=()=>resolve({ok:false,error:'deletion blocked'});
-                  });
-                  if(!deletion.ok)return {error:'delete '+JSON.stringify(deletion)};
+                  const name='ldc_user_v1__app_test';
                   const stores={
                     reading_pos:{keyPath:'key'},highlights:{keyPath:'id',autoIncrement:true},
                     notes:{keyPath:'id',autoIncrement:true},favorites:{keyPath:'entry_id'},
@@ -67,7 +60,7 @@ jobs:
                   const paraId='LDC.T23.E0013.P050',entry='LDC.T23.E0013',sentence='Et en vertu de cet Acte Unique et Incessant,';
                   const dataset={
                     reading_pos:[{key:'entry:23:'+entry,vol:23,entry_id:entry,para_id:paraId,fraction_within_paragraph:0.2}],
-                    highlights:[{id:721,volume:23,entry_id:entry,para_id:paraId,start_char:0,end_char:9,text:sentence.slice(0,9),color:'yellow',corpus_generation:CORPUS_GENERATION}],
+                    highlights:[{id:721,volume:23,entry_id:entry,para_id:paraId,start_char:0,end_char:9,text:sentence.slice(0,9),color:'yellow',corpus_generation:'G036-AFLP-R8-SUP-T5-FAST1-STAGE2-221'}],
                     notes:[{id:722,volume:23,entry_id:entry,para_id:paraId,text:'R251 PERSONAL NOTE — DO NOT REPLACE',quote:'Et en vertu'}],
                     favorites:[{entry_id:entry,volume:23,added_at:'2020-01-01T00:00:00Z'}],
                     collections:[{id:723,name:'R251 legacy list',created_at:'2020-01-01'}],
@@ -87,8 +80,7 @@ jobs:
                 });
                 record(name+'_seeded_v4',!fixture.error&&fixture.write?.ok,fixture);
                 if(!fixture.error){
-                  await page.reload({waitUntil:'domcontentloaded',timeout:65000});
-                  await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:65000});
+                  await boot(page);
                   await page.waitForTimeout(1900);
                   const after=await page.evaluate(async()=>{
                     const names=['reading_pos','highlights','notes','favorites','collections','col_items','settings','read_entries'];
