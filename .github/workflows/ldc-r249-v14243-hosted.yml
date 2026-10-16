@@ -1,0 +1,121 @@
+name: "R249 App Test hosted Reader qualification"
+on:
+  push:
+    branches:
+      - qa/r248-hosted-20261016
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  hosted-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright Chromium
+        run: |
+          npm --prefix /tmp/r249 install --no-audit --no-fund playwright@1.56.1
+          /tmp/r249/node_modules/.bin/playwright install chromium --with-deps
+      - name: Verify hosted exact bytes and Reader with Chromium
+        run: |
+          NODE_PATH=/tmp/r249/node_modules node <<'JS'
+          const {chromium}=require('playwright');
+          const crypto=require('node:crypto');
+          const fs=require('node:fs');
+          const base='https://louisriv26.github.io/App-Test/';
+          const expected={
+            'index.html':'74be57189fde12c8b39a24aa318570340c52abeaf51bf8ab514c7a321991674d',
+            'version.json':'7bb47e8001d544f102a359548bd4a3d00d932d60a2feba84ab6a9c38f764df7d',
+            'sw.js':'299bdcf40b2f99a1db303aa23e24d9d2a138e5497662565972e19169a017849a',
+            'PACKAGE_MANIFEST_SHA256.json':'a4a08ad928572e618e123bf98127ee89922ec272e43b567b8e2493849bb349a7',
+            'offline_manifest.json':'c6796512d2adfadc19e6e6fabd8b31b139e0cae57751e7cf40f691daabb357ea'
+          };
+          const results=[];const add=(name,pass,details={})=>{results.push({name,status:pass?'PASS':'FAIL',details});console.log((pass?'PASS ':'FAIL ')+name,JSON.stringify(details).slice(0,450))};
+          const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+          (async()=>{
+            let browser=null;
+            try{
+              for(const [path,sha] of Object.entries(expected)){
+                let actual='',status=0,error='';
+                for(let attempt=0;attempt<7;attempt++){
+                  try{
+                    const res=await fetch(base+path+'?qa_r249='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(18000)});
+                    status=res.status;actual=crypto.createHash('sha256').update(Buffer.from(await res.arrayBuffer())).digest('hex');
+                    if(res.ok&&actual===sha)break;
+                  }catch(e){error=String(e)}
+                  await sleep(6000);
+                }
+                add('HOST_SHA256_'+path,actual===sha&&status===200,{status,actual,expected:sha,error});
+              }
+              browser=await chromium.launch({headless:true});
+              for(const [label,viewport] of [['iphone_like',{width:390,height:844}],['ipad_like',{width:1024,height:768}]]){
+                const context=await browser.newContext({viewport,serviceWorkers:'allow',reducedMotion:'reduce'});
+                const page=await context.newPage();let errors=[];page.on('pageerror',e=>errors.push(String(e).slice(0,300)));
+                try{
+                  const res=await page.goto(base,{waitUntil:'domcontentloaded',timeout:70000});
+                  add(label+'_HTTP200',res&&res.status()===200,{status:res&&res.status()});
+                  await page.waitForFunction(()=>typeof window.openEntry==='function',{timeout:60000});
+                  add(label+'_APP_SCRIPT_BOOT',true,{title:await page.title()});
+                  let opened=await page.evaluate(async()=>{try{await openEntry(23,'LDC.T23.E0013','entries');return {ok:true}}catch(e){return {ok:false,error:String(e)}}});
+                  await page.waitForTimeout(2200);
+                  const rd=await page.evaluate(()=>({
+                    p:document.querySelectorAll('#reader-body .para-fragment').length,
+                    ready:!!document.querySelector('#reader-scroll'),
+                    diag:window.__ldcR245Boundary?.status||null,
+                    first:document.querySelector('#reader-body')?.textContent?.slice(0,120)
+                  }));
+                  add(label+'_T23_READER_LOADED',opened.ok&&rd.p>50,{opened,reader:rd});
+                  add(label+'_T23_P050_P051_GUARDED_JOIN',rd.diag==='APPLIED_GUARDED_VIEW_ONLY',{diag:rd.diag});
+                  if(rd.p>50){
+                    const q=await page.evaluate(()=>{
+                      const sc=document.getElementById('reader-scroll'),body=document.getElementById('reader-body');
+                      const frag=[...body.querySelectorAll('.para-fragment')];
+                      const a=frag.find(x=>x.dataset.paraId==='LDC.T23.E0013.P049'),b=frag.find(x=>x.dataset.paraId==='LDC.T23.E0013.P052');
+                      if(!a||!b)return {error:'missing fragments'};
+                      let first=a.querySelector('.speech-run')||a,last=b.querySelector('.speech-run')||b;
+                      const aNode=[...first.childNodes].find(n=>n.nodeType===3),bNode=[...last.childNodes].find(n=>n.nodeType===3);
+                      if(!aNode||!bNode)return {error:'missing text nodes'};
+                      sc.scrollTop=Math.min(450,Math.max(0,sc.scrollHeight-sc.clientHeight));
+                      const before=sc.scrollTop;let range=document.createRange();
+                      range.setStart(aNode,Math.min(5,aNode.length));range.setEnd(bNode,Math.min(25,bNode.length));
+                      const sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);
+                      document.dispatchEvent(new Event('selectionchange'));
+                      return {before,selected:String(sel).length,partCount:window.LDCAnchor?.selectionParts?.(range)?.length||0};
+                    });
+                    await page.waitForTimeout(800);
+                    const after=await page.evaluate(()=>({top:document.getElementById('reader-scroll').scrollTop,panel:document.getElementById('seltext-panel')?.classList.contains('show'),selection:String(getSelection()).length}));
+                    add(label+'_CROSS_PARAGRAPH_SELECTION',!q.error&&q.partCount>=2&&after.selection>0,{before:q,after});
+                    add(label+'_NO_AUTOMATIC_SCROLL_JUMP',!q.error&&Math.abs((after.top??0)-(q.before??0))<=10,{before:q.before,after:after.top});
+                  }
+                  const modes=await page.evaluate(()=>{
+                    const before=document.documentElement.getAttribute('data-theme');
+                    document.documentElement.setAttribute('data-theme','dark');
+                    const a=!!document.querySelector('#reader-body');
+                    document.documentElement.setAttribute('data-theme','light');
+                    const b=!!document.querySelector('#reader-body');
+                    if(before===null)document.documentElement.removeAttribute('data-theme');
+                    else document.documentElement.setAttribute('data-theme',before);
+                    return {a,b};
+                  });
+                  add(label+'_THEME_DOM_STABILITY',modes.a&&modes.b,modes);
+                  add(label+'_UNCATCHED_ERRORS',errors.length===0,{errors:errors.slice(0,6)});
+                }catch(e){add(label+'_HOSTED_BROWSER_CASE',false,{error:String(e),errors:errors.slice(0,6)});}
+                await context.close();
+              }
+            }catch(e){add('HARNESS_FATAL',false,{error:String(e)});}
+            finally{if(browser)await browser.close();}
+            const summary={PASS:results.filter(x=>x.status==='PASS').length,FAIL:results.filter(x=>x.status==='FAIL').length};
+            fs.writeFileSync('r249-hosted-qa.json',JSON.stringify({base,summary,results},null,2));
+            console.log('R249_HOSTED_SUMMARY',JSON.stringify(summary));
+            process.exit(summary.FAIL?1:0);
+          })();
+          JS
+      - name: Upload hosted QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: r249-hosted-app-test
+          path: r249-hosted-qa.json
+          if-no-files-found: warn
