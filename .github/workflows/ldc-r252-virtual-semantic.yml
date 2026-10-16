@@ -21,7 +21,7 @@ jobs:
         run: |
           NODE_PATH=/tmp/r252qa/node_modules node <<'JS'
           const {chromium,webkit}=require('playwright'),fs=require('node:fs'),crypto=require('node:crypto');
-          const URL='https://louisriv26.github.io/App-Test/';
+          const TARGET_URL='https://louisriv26.github.io/App-Test/';
           const patch=JSON.parse(fs.readFileSync('qa/r252_hosted_html_patch.json','utf8'));
           const hash=s=>crypto.createHash('sha256').update(Buffer.from(s,'utf8')).digest('hex');
           const split=s=>s.match(/[^\n]*\n|[^\n]+$/g)||[];
@@ -29,7 +29,7 @@ jobs:
           (async()=>{
             let html;
             try{
-              const resp=await fetch(URL+'?r252q='+Date.now(),{cache:'no-store'});
+              const resp=await fetch(TARGET_URL+'?r252q='+Date.now(),{cache:'no-store'});
               const original=await resp.text();
               add('live_app_test_index_http200',resp.status===200,{http:resp.status});
               add('live_app_test_exact_baseline_sha',hash(original)===patch.source_sha256,{actual:hash(original),expected:patch.source_sha256});
@@ -49,7 +49,7 @@ jobs:
                 const page=await ctx.newPage();let errors=[];page.on('pageerror',e=>errors.push(String(e).slice(0,450)));
                 await page.route('**/App-Test/',async route=>{await route.fulfill({status:200,contentType:'text/html; charset=utf-8',body:html});});
                 try{
-                  const start=await page.goto(URL,{waitUntil:'domcontentloaded',timeout:70000});
+                  const start=await page.goto(TARGET_URL,{waitUntil:'domcontentloaded',timeout:70000});
                   await page.waitForFunction(()=>document.getElementById('loading')?.style.display==='none',null,{timeout:60000});
                   await page.evaluate(()=>{if(document.body.classList.contains('app-state-onboarding'))finishOnboarding();});
                   const ver=await page.evaluate(()=>APP_VERSION);
