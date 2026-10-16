@@ -9,3 +9,10 @@ This staging extension adds **seven narrowly guarded visual presentation cases**
 **Critical limitation:** the full local R237 corrective adapter (28 paragraphs, 21 boundaries, T23 and T30 controls) resides in an earlier nondeployable ZIP and **is NOT included** here. This branch is an application-only integration *staging substrate*, not the full R237 corrected release. Preserve the sole R237 correction program, integrate the original adapter and the seven-case additions before any candidate qualification. No App Test/MAIN deployment authority is implied.
 
 **Required gates:** full Reader render, CSS & Repères, historical selection/anchors/highlight persistence, IndexedDB migration and backup/restore, offline/SW update compatibility, iPhone/iPad Safari, independent package-integrity reopen, and distinct user GO.
+
+## Independent follow-up audit and local repair (2026-10-16)
+The first published development commit passed exact semantic/color tests but revealed an untested **visible-guillemet regression**: five of the seven adjusted paragraphs (T34 E0016 P009; E0018 P019; E0019 P010/P012/P018) had an embedded *closing* French quotation mark hidden by the inherited outer-dialogue CSS/renderer. In two other passages (E0019 P011/P014) the internal closing marks remained visible. A bounded pre-index derived-DOM repair now restores only the five confirmed nested closers; no canonical text bytes or user offsets change. Negative controls include real standalone Mary speech, tampered paragraph text, and slices.
+
+The package inventory was also normalized to inherited **codepoint lexical order** after the initial development commit accidentally applied locale-sensitive ordering, which remained hash-consistent but violated established deterministic serialization.
+
+**Release status remains HOLD.** This branch is still a seven-paragraph limited visual pilot, not the full R237 28-paragraph/21-boundary reader fix. No full browser, WebKit, offline activation, IDB upgrade, long-text selection or backup/restore success is asserted.

@@ -6190,11 +6190,16 @@ async function openEntryCore(vol, entryId, backDest, opts={}) {
       frag.dataset.canonicalLength = String(m.canonicalText.length);
       frag.dataset.canonicalStart = String(m.sliceStart);
       frag.dataset.canonicalEnd = String(m.sliceEnd);
-      frag.innerHTML = (m.model && m.model.ok)
+      const rawFragHtml = (m.model && m.model.ok)
         ? LDCSpeechModel.renderSpeechModel(m.model, {
             showLabels: true, hideOuterDelimiters: true,
             paraId: m.paraId, atoms: m.atoms, flowMemberIndex: i })
         : escapeHtml(m.text);
+      // R237 visual pilot: restore only explicitly verified INNER quotation closers.
+      // This changes a derived aria-hidden presentation span, never canonical text or offsets.
+      frag.innerHTML=(m.model && m.model.ok && window.LDCAppOnlyVoicePilot)
+        ? LDCAppOnlyVoicePilot.restoreNestedClosingQuote(m.paraId, m.canonicalText, m.sliceStart, m.sliceEnd, m.model, rawFragHtml)
+        : rawFragHtml;
       div.appendChild(frag);
       ldcR216JoinTerminalPunctuation(frag); // before anchor index / highlighting
       ldcR219JoinContextualQuote(frag, m.canonicalText); // reviewed per-paragraph run offsets

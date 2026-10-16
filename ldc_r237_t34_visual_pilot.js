@@ -18,5 +18,26 @@ function adapt(paraId,fullText,start,end,sourceSegments){
     return Object.assign({},s,{display_speaker:'JESUS'});
   });
 }
-root.LDCAppOnlyVoicePilot=Object.freeze({adapt,authoritiesCount:Object.keys(AUTHORITIES).length});
+function restoreNestedClosingQuote(paraId,canonicalText,start,end,model,html){
+  const authority=AUTHORITIES[paraId];
+  if(!authority || typeof html!=='string' || canonicalText!==authority.text ||
+     start!==0 || end!==canonicalText.length || !model || !model.ok ||
+     !Array.isArray(model.runs) || !Array.isArray(model.intervals) ||
+     model.intervals.map(iv=>iv.text).join('')!==canonicalText)return html;
+  // Only a genuinely embedded final close-quote after one governing JESUS run
+  // can be restored. A standalone direct-speech outer delimiter remains hidden.
+  if(!/»\.?$/.test(canonicalText))return html;
+  const styled=model.runs.filter(r=>r.styled);
+  if(styled.length!==1 || styled[0].speaker!=='JESUS' ||
+     !Array.isArray(styled[0].semantic_voices) ||
+     !styled[0].semantic_voices.some(v=>v.speaker==='MARY'))return html;
+  const close=/<span class="speech-outer-delimiter" aria-hidden="true">(\s*»)<\/span>(\.?)$/;
+  const match=html.match(close);
+  if(!match)return html;
+  // The closing glyph is already present as canonical text. Only its derived
+  // visibility/accessibility attributes change; do not append or remove text.
+  return html.replace(close,(whole,quote,period)=>
+    '<span class="speech-outer-delimiter" data-r237-nested-close="1">'+quote+'</span>'+period);
+}
+root.LDCAppOnlyVoicePilot=Object.freeze({adapt,restoreNestedClosingQuote,authoritiesCount:Object.keys(AUTHORITIES).length});
 })(typeof window!=='undefined'?window:globalThis);
