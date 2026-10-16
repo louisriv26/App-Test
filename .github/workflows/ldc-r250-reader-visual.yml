@@ -37,13 +37,16 @@ jobs:
                   const ids=['P050','P051','P052','P058','P059'].map(x=>'LDC.T23.E0013.'+x);
                   const els=ids.map(id=>document.querySelector('.para-fragment[data-para-id="'+id+'"]'));
                   const dp=els.map(x=>x?.closest('.dp'));
-                  return {ids,allFound:els.every(Boolean),classes:dp.map(x=>x?.className),
+                  const separator=dp[3]?.nextElementSibling;
+                  const boundary={marker:separator?.className, action:separator?.dataset?.visualAction, display:separator?getComputedStyle(separator).display:null,
+                    between:!!(separator?.classList?.contains('r237-crossunit-explicit-break')&&separator?.nextElementSibling===dp[4])};
+                  return {ids,allFound:els.every(Boolean),classes:dp.map(x=>x?.className),boundary,
                     p58inline:!!dp[3]?.classList.contains('r245-inline-continuation'),
                     p59inline:!!dp[4]?.classList.contains('r245-inline-continuation'),
                     count:document.querySelectorAll('#reader-body .para-fragment').length,
                     showReperes:typeof showReperes==='boolean'?showReperes:null};
                 });
-                add(engine+'_SPEAKER_BREAK_NEGATIVE',original.allFound&&!original.p58inline&&!original.p59inline,original);
+                add(engine+'_SPEAKER_BREAK_NEGATIVE',original.allFound&&original.boundary?.between&&original.boundary?.display==='block'&&!original.p58inline&&!original.p59inline,original);
                 const state=await page.evaluate(async()=>{
                   const sc=document.getElementById('reader-scroll'),f=document.querySelector('.para-fragment[data-para-id="LDC.T23.E0013.P050"]');
                   f.scrollIntoView({block:'center'});
