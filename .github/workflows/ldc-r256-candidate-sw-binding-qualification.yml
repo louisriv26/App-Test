@@ -30,7 +30,7 @@ jobs:
           /tmp/r256deps/node_modules/.bin/playwright install chromium webkit --with-deps
       - name: Browser and SW experiments, no changes to published App Test
         run: |
-          NODE_PATH=/tmp/r256deps/node_modules node qa/r256/sw_lifecycle.cjs
+          R256_ONLY_LOCAL=1 NODE_PATH=/tmp/r256deps/node_modules node qa/r256/sw_lifecycle.cjs
       - name: Independent gate assertions
         run: |
           python3 - <<'PY'
