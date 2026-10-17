@@ -85,7 +85,13 @@ async function run(){
     log('actualiser_result',{outcome,...(await state(upgrade))});
     let ready=await awaitMatch(upgrade,s=>s.sw?.includes('142.46'),14000);
     log('update_controller',{...ready});
-    if(!ready.sw?.includes('142.46'))throw Error('Actualiser did not activate new SW');
+    if(!ready.sw?.includes('142.46')){
+      const diag=await upgrade.evaluate(async()=>{const r=await navigator.serviceWorker.getRegistration();const w=r?.waiting||null;const ctl=navigator.serviceWorker.controller||null;let waitingVersion=null;if(w){waitingVersion=await new Promise(resolve=>{const ch=new MessageChannel();const timer=setTimeout(()=>resolve('NO_REPLY'),1500);ch.port1.onmessage=e=>{clearTimeout(timer);resolve(e.data?.version||null)};w.postMessage({type:'LDC_GET_VERSION'},[ch.port2])});w.postMessage({type:'SKIP_WAITING'})}return {waiting:w?.state||null,waitingVersion,controller:ctl?.state||null}});
+      log('actualiser_nonactivation_diagnostic',{diag});
+      const retry=await awaitMatch(upgrade,s=>s.sw?.includes('142.46'),6000);
+      log('activation_second_request',{...retry});
+      throw Error('Actualiser did not activate new SW on first request');
+    }
     await upgrade.reload({waitUntil:'domcontentloaded',timeout:20000});
     let boot=await awaitMatch(upgrade,s=>s.app===newVersion&&!s.visibleLoading||!!s.err,18000);
     log('upgrade_final',{...boot});
