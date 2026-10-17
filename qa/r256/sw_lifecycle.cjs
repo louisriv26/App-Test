@@ -106,23 +106,43 @@ async function testUpgrade(){
   }else{
    const outcome=await page.evaluate(async()=>typeof reloadForUpdate==='function'?await reloadForUpdate():{error:'NO_FN'});note('upgrade_direct_actualiser',{outcome});
   }
-  await delay(15000);
+  await delay(3500);
   note('upgrade_after_actualiser',{...(await snapshot(page))});
-  resp=await page.reload({waitUntil:'domcontentloaded',timeout:90000});
-  note('upgrade_after_reload',{http:resp?.status(),...(await waitBoot(page,70000))});
-  await page.waitForFunction(async()=>{const r=await navigator.serviceWorker.getRegistration();return r?.active?.state==='activated';},null,{timeout:45000}).catch(()=>{});
+  const waitingAt=await page.evaluate(async()=>{const r=await navigator.serviceWorker.getRegistration();return r?.waiting?.state||null}).catch(()=>null);
+  note('upgrade_waiting_after_actualiser',{waitingAt});
+  if(waitingAt){
+   const sent=await page.evaluate(async()=>{const r=await navigator.serviceWorker.getRegistration();if(r?.waiting){r.waiting.postMessage({type:'SKIP_WAITING'});return true}return false});
+   note('upgrade_direct_skipwaiting',{sent});
+  }
+  await delay(4500);note('upgrade_after_direct_skipwaiting',{...(await snapshot(page))});
+  try{
+   resp=await page.reload({waitUntil:'domcontentloaded',timeout:20000});
+   note('upgrade_after_reload',{http:resp?.status(),...(await waitBoot(page,22000))});
+  }catch(e){note('upgrade_reload_failed',{error:String(e).slice(0,650),snapshot:await snapshot(page)})}
   note('upgrade_final_registration',{...(await snapshot(page))});
+  // Independent fresh context must execute even if an old-tab reload remains blocked.
   const clean=await browser.newContext({serviceWorkers:'allow'});
-  try{const q=await clean.newPage();await q.goto(origin+'?r256_new_cold=1',{waitUntil:'domcontentloaded',timeout:65000});note('candidate_v14246_fresh',{...(await waitBoot(q,35000))});await q.waitForFunction(async()=>{let r=await navigator.serviceWorker.getRegistration();return r?.active?.state==='activated'},null,{timeout:45000}).catch(()=>{});note('candidate_v14246_fresh_sw_state',{...(await snapshot(q))});await q.close();}finally{await clean.close()}
+  try{
+   const q=await clean.newPage();
+   await q.goto(origin+'?r256_new_cold=1',{waitUntil:'domcontentloaded',timeout:45000});
+   note('candidate_v14246_fresh',{...(await waitBoot(q,35000))});
+   await q.waitForFunction(async()=>{let r=await navigator.serviceWorker.getRegistration();return r?.active?.state==='activated'},null,{timeout:25000}).catch(()=>{});
+   note('candidate_v14246_fresh_sw_state',{...(await snapshot(q))});
+   const status=await q.evaluate(async()=>{const r=await navigator.serviceWorker.getRegistration();const sw=navigator.serviceWorker.controller||r?.active;if(!sw)return 'NO_ACTIVE';return await new Promise(resolve=>{const timer=setTimeout(()=>resolve('NO_RESPONSE'),6000);const handler=e=>{if(e.data?.type!=='LDC_OFFLINE_STATUS')return;clearTimeout(timer);navigator.serviceWorker.removeEventListener('message',handler);resolve(e.data.state)};navigator.serviceWorker.addEventListener('message',handler);sw.postMessage({type:'OFFLINE_STATUS',request_id:'r256-local-smoke'})})});
+   note('candidate_v14246_offline_sw_status',{status});
+   await q.close();
+  }finally{await clean.close()}
   errs();
  }catch(e){note('upgrade_exception',{error:String(e).slice(0,1200)})}
  finally{await ctx.close();await browser.close();await new Promise(resolve=>server.close(resolve))}
 }
 (async()=>{
  try{
+  if(process.env.R256_ONLY_LOCAL!=='1'){
   await inspectPublishedShell();
   await testLive('chromium',chromium);
   await testLive('webkit',webkit);
+  }
   if(fs.existsSync(OLD+'/sw.js'))await testUpgrade();else note('upgrade_skipped',{reason:'historical checkout unavailable'});
  }catch(e){note('harness_exception',{error:String(e)})}
  fs.writeFileSync('r256-sw-diagnostics.json',JSON.stringify({scope:'QA isolated temporary browser context; no modification of live App-Test; local upgrade 142.43->142.45',results},null,2));
