@@ -89,6 +89,7 @@ async function testUpgrade(){
  try{
   serveOld=true;
   const page=await ctx.newPage();const errs=track(page,'upgrade');
+  try{let cd=await ctx.newCDPSession(page);await cd.send('ServiceWorker.enable');cd.on('ServiceWorker.workerErrorReported',evt=>note('local_sw_error',{data:evt.errorMessage||evt}));cd.on('ServiceWorker.workerVersionUpdated',evt=>note('local_sw_versions',{versions:evt.versions?.map(v=>({status:v.status,script:v.scriptURL,running:v.runningStatus}))}));}catch(e){note('local_cdp_error',{e:String(e)})}
   let resp=await page.goto(origin,{waitUntil:'domcontentloaded',timeout:90000});
   note('upgrade_v14243_first',{http:resp?.status(),...(await waitBoot(page,80000))});
   await page.evaluate(()=>{try{if(typeof finishOnboarding==='function')finishOnboarding()}catch(e){}}).catch(()=>{});
@@ -98,7 +99,7 @@ async function testUpgrade(){
   const update=await page.evaluate(async()=>{const r=await navigator.serviceWorker.getRegistration();if(!r)return 'NO_REGISTRATION';try{await r.update();return 'REG_UPDATE_OK'}catch(e){return String(e)}})
   note('upgrade_requested',{update,...(await snapshot(page))});
   await delay(10000);
-  note('upgrade_after_delay',{...(await snapshot(page))});
+  note('upgrade_after_delay',{...(await snapshot(page)),updateUi:await page.evaluate(()=>({blocked:typeof ldcUnsafeReloadState==='function'?ldcUnsafeReloadState():null,banner:document.querySelector('.ub-text')?.innerText,pending:typeof updateControllerChangedPending!=='undefined'?updateControllerChangedPending:null}))});
   let button=await page.$('.ub-refresh');if(button&&await button.isVisible().catch(()=>false)){
    await button.click({timeout:20000});
    note('upgrade_clicked_actualiser',{...(await snapshot(page))});
