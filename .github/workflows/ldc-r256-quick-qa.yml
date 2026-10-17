@@ -1,0 +1,40 @@
+name: "R256 independent 142.46 cold and upgrade gate"
+on:
+  push:
+    branches: [qa/ldc-r256-sw-lifecycle-20261017]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cold-upgrade:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Old version fixture
+        run: |
+          git fetch --no-tags origin d64d7b59c9c20b8b9437287224c7c39b804505c0
+          git worktree add --detach /tmp/ldc_r256_old d64d7b59c9c20b8b9437287224c7c39b804505c0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build exact local v142.46 package
+        run: python3 qa/r256/build_r256.py
+      - name: Independently recompute JS offline digest
+        run: node qa/r256/check_offline_binding.cjs
+      - name: Install Chromium
+        run: |
+          npm install --prefix /tmp/r256deps --no-audit --no-fund playwright@1.56.1
+          /tmp/r256deps/node_modules/.bin/playwright install chromium --with-deps
+      - name: Fail-closed SW and Actualiser tests
+        run: NODE_PATH=/tmp/r256deps/node_modules node qa/r256/quick_qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: R256-quick-evidence
+          path: |
+            r256-candidate-build.json
+            r256-quick-results.json
+          if-no-files-found: warn
