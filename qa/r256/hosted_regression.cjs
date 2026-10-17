@@ -43,6 +43,13 @@ async function runBrowser(browser,name,size){
   const boot=await page.evaluate(()=>({version:APP_VERSION,screen:currentScreenName(),home:document.querySelector('#screen-home')?.classList.contains('active'),verticalScroll:document.documentElement.scrollHeight,viewport:innerHeight,errors:document.querySelector('#boot-error-code')?.textContent||''}));
   log('boot',{tag,boot});
   if(boot.version!=='v2.19.142.46-R1B-UNIFIED'||boot.errors)throw Error('boot wrong version/error');
+  const onboarding=await page.evaluate(async()=>{
+    const wasOnboarding=document.body.classList.contains('app-state-onboarding');
+    if(wasOnboarding&&typeof finishOnboarding==='function')await finishOnboarding();
+    return {wasOnboarding,after:document.body.className,screen:currentScreenName()};
+  });
+  log('first_use_onboarding',{tag,onboarding});
+  await page.waitForFunction(()=>!document.body.classList.contains('app-state-onboarding'),null,{timeout:10000});
   await page.evaluate(async()=>{await goTomes();await openTome(7)});
   await page.waitForFunction(()=>document.getElementById('screen-entries')?.classList.contains('active')&&document.querySelectorAll('#entries-list .entry-item').length>5,null,{timeout:40000});
   const dates=await page.evaluate(()=>[...document.querySelectorAll('#entries-list .entry-item')].map(x=>x.dataset.entryDate).filter(Boolean).slice(0,8));
