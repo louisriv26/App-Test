@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.142.43-R1B-UNIFIED",
+  "app_version": "v2.19.142.45-R1B-UNIFIED",
   "asset_count": 205,
   "assets": [
     {
@@ -1023,9 +1023,9 @@
       "sha256": "8d422e692c8d4c7d230bd270ec8f9d455e1949043ebe5bed75f5746b3d40b60a"
     },
     {
-      "bytes": 95208,
-      "path": "pls_v16/patch_r198.json",
-      "sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908"
+      "bytes": 96523,
+      "path": "pls_v16/patch_r255.json",
+      "sha256": "c84b7325779441c8600adb744e0576ce610934f31e82aa230f4e9b9a35575790"
     }
   ],
   "authorized_runtime_ledger_sha256": "f77fb79ab016c933d6b7cfcb830b2db52fd4f42e03d032988c5ac50c2a38cd35",
@@ -1089,7 +1089,7 @@
   },
   "legacy_cache_family_prefix": "ldc-le-livre-du-ciel-offline-v",
   "m7rc_fixed_point": true,
-  "page_worker_revision": "ldc-v2.19.142.43-r1b-unified",
+  "page_worker_revision": "ldc-v2.19.142.45-r1b-unified",
   "par_le_sens_current": {
     "general_scientific_confidence_calibration_claimed": false,
     "internal_prototype_lineage_labels_preserved": true,
@@ -1215,7 +1215,8 @@
   "r198_overlay": {
     "added_offline_asset": true,
     "exact_sha256": "db0e7027573220682d4ba3ca1e7cb2a12fdad5345d67867e11274ef1e8830908",
-    "unchanged_canonical_documents": true
+    "unchanged_canonical_documents": true,
+    "superseded_by": "R255_CORRECTED_ASSEMBLY_LOCAL_HOLD"
   },
   "r203_documentary_release": {
     "build_time_status": "LOCAL_CANDIDATE_AT_FREEZE__NO_DEPLOYMENT_CLAIM",
@@ -1407,7 +1408,7 @@
     "predecessor_candidate_sha256": "d5341cd079a6c50bee148c497108a40f924a70f50f840702884a457fb88abe4b",
     "volume_summary_sha256": "8d422e692c8d4c7d230bd270ec8f9d455e1949043ebe5bed75f5746b3d40b60a"
   },
-  "total_bytes": 119244276,
+  "total_bytes": 119245591,
   "ux_access_v127_r1": {
     "classification": "BOUNDED_UX_ACCESSIBILITY_AND_RELEASE_IDENTITY_SUCCESSOR",
     "closed_findings": [
@@ -1624,5 +1625,15 @@
     "promotion_source_zip_sha256": "5697412951bef15ec7c49c17a13e0e9e05d57ccf228b1d9150505bc930d53160",
     "search_v2_algorithm_changed": false,
     "semantic_algorithm_changed": false
+  },
+  "r255_overlay": {
+    "asset": "pls_v16/patch_r255.json",
+    "exact_sha256": "c84b7325779441c8600adb744e0576ce610934f31e82aa230f4e9b9a35575790",
+    "fresh_embeddings": 12,
+    "patched_metadata_rows": 44,
+    "reader_equivalence_reconstruction": "PASS_STATIC_TWO_TOME7_ENTRIES",
+    "native_ios": "NOT_RUN",
+    "semantic_ranking": "NOT_QUALIFIED",
+    "release": "LOCAL_HOLD"
   }
 }

@@ -2533,7 +2533,7 @@ html[data-theme="dark"] .para-fragment.r237-mixed .r237-autonomous-jesus{color:#
       <!-- R203_CURRENT_EDITORIAL_INTEGRATION_AND_QUALIFICATION_NOTICE -->
       <details class="provenance-details"><summary>Intégration éditoriale actuelle, recherches et qualification</summary><div class="provenance-details-body">
         <p><strong>État incorporé.</strong> Sur la base unifiée v142.28, les cinq décisions éditoriales approuvées le 13 octobre 2026 (E05, E10, E13, T34-P003, T34-P008) produisent <strong>six paragraphes de lecture corrigés</strong> par projection d’affichage. La source canonique conservée dans les fichiers de paragraphes n’a pas été remplacée. Les deux corrections de placement E01 (Tome 2, 8 août 1899 : 138 → 158) et E06 (Tome 7, 4 octobre 1906 : 215 → 316) sont incorporées. Les <strong>75 COMPLÉMENTS / 177 paragraphes</strong> restent distincts du PRINCIPAL ; leurs identifiants et leurs témoins documentaires sont préservés.</p>
-        <p><strong>Recherches.</strong> Le contenu lexical a été réconcilié avec les six lectures corrigées (R197). Pour <strong>Par le sens</strong>, la réconciliation R198 a réaligné <strong>44 fenêtres</strong> concernées, dont <strong>11 représentations vectorielles recalculées</strong> avec le modèle ONNX d’origine. Cela ne démontre pas l’exhaustivité des variantes ni la pertinence de toutes les requêtes : certaines réponses peuvent encore faire l’objet d’une abstention de confiance malgré un passage pertinent classé en tête (R201).</p>
+        <p><strong>Recherches.</strong> Le contenu lexical a été réconcilié avec les six lectures corrigées (R197). Pour <strong>Par le sens</strong>, La réconciliation initiale R198 a réaligné <strong>44 fenêtres</strong> (11 vecteurs), mais a révélé des raccords erronés. Le correctif R255 recalcule <strong>12 vecteurs</strong> sur les fenêtres concernées en respectant le texte de lecture ; la qualité du classement et les essais iOS restent à qualifier. Cela ne démontre pas l’exhaustivité des variantes ni la pertinence de toutes les requêtes : certaines réponses peuvent encore faire l’objet d’une abstention de confiance malgré un passage pertinent classé en tête (R201).</p>
         <p><strong>État de validation au 14 octobre 2026.</strong> Les correspondances de textes approuvés, la présence des compléments et des ancres, les manifestes et des tests lexicaux et techniques locaux ont été contrôlés (R193–R202). La version v142.33 a été publiée sur <strong>App Test</strong> et la navigation redevenue fonctionnelle sur <strong>iPhone et iPad</strong> a été confirmée par le propriétaire. Cette confirmation ne constitue pas une qualification de chaque fonctionnalité. La migration native des données historiques, la sauvegarde/restauration réelle, le premier lancement ONNX hors connexion sur Safari et certains scénarios de mise à jour restent à qualifier avant une décision de production.</p>
         <p><strong>Limites.</strong> Aucun essai ne doit être présenté comme effectué sur un appareil lorsqu’il provient d’un banc local ou d’un profil synthétique. Les autres propositions éditoriales non approuvées ne sont pas publiées comme corrections. Les notes, favoris et surlignages sont conservés dans le stockage local propre à chaque répertoire et appareil ; aucune suppression de données n’est demandée. <strong>MAIN : publication non autorisée.</strong> Cette application est une édition documentaire du projet, non l’édition typique et critique officielle ni une homologation ecclésiale.</p>
       </div></details>
@@ -2620,7 +2620,7 @@ html[data-theme="dark"] .para-fragment.r237-mixed .r237-autonomous-jesus{color:#
           <li><strong>75 COMPLÉMENTS / 177 paragraphes</strong></li>
           <li><strong>74 528 documents textuels</strong> dans l’index Search‑V2 de la lecture normale</li>
         </ul>
-        <p>Dans le périmètre décrit, Search-V2 était la recherche textuelle qualifiée et <strong>« Par le sens »</strong> utilisait un moteur distinct, non évalué par la campagne de correction textuelle Stage-2. Les chiffres ci-dessus concernent les textes et leur traçabilité, <strong>pas</strong> la qualité de classement de « Par le sens ». Les index lexicaux ont été réconciliés en R197 et les 44 fenêtres sémantiques affectées par les révisions récentes en R198 (dont 11 nouveaux vecteurs), sans prétendre résoudre toute divergence historique hors du périmètre corrigé.</p>
+        <p>Dans le périmètre décrit, Search-V2 était la recherche textuelle qualifiée et <strong>« Par le sens »</strong> utilisait un moteur distinct, non évalué par la campagne de correction textuelle Stage-2. Les chiffres ci-dessus concernent les textes et leur traçabilité, <strong>pas</strong> la qualité de classement de « Par le sens ». Les index lexicaux ont été réconciliés en R197 et les 44 fenêtres sémantiques concernées, corrigées en R255 (dont 12 vecteurs recalculés, qualification de recherche et Safari encore ouverte), sans prétendre résoudre toute divergence historique hors du périmètre corrigé.</p>
       </div></details>
 
       <details class="provenance-details"><summary>Traçabilité interne et codes de traitement</summary><div class="provenance-details-body">
@@ -2725,11 +2725,11 @@ html[data-theme="dark"] .para-fragment.r237-mixed .r237-autonomous-jesus{color:#
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.43-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
+const APP_VERSION = 'v2.19.142.45-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
 const APP_BUILD = '2026-10-16';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.43-r1b-unified';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.45-r1b-unified';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -8836,7 +8836,7 @@ function renderSemanticPackUnavailable(raw,structural,status){
   if(structural&&structural.hasStructural&&structural.residual){const n=document.createElement('div');n.className='search-suggestion-box';n.textContent='Les critères Tome/date/référence ont bien été reconnus, mais la recherche par le sens reste indisponible.';container.appendChild(n);}
   if(status&&status.reason)console.warn('Par le sens indisponible :',String(status.reason));
 }
-/* R198: PLS v16 R197-historical guard intentionally inactive after verified overlay.
+/* R255: PLS v16 historic R197 guard remains inactive only while verified, locally corrected overlay is bound.
    Original R197 note:
    The 15 old semantic windows containing six G1-corrected paragraphs must NEVER be
    displayed as current text or used as old-offset selections. This explicit
@@ -8939,12 +8939,31 @@ function r150SemanticLive(raw,generation){return isSearchActive(generation)&&sea
 function r150RenderTextualOnly(payload,raw,generation,preflight,reason){
   if(!payload||!r150SemanticLive(raw,generation))return false;
   renderSearchV2Results(payload,raw);renderSearchIntentMode();
+  // R252: distinguish a provisional textual lead from a finished semantic attempt.
+  // Identifiers are local to the displayed search generation, never stored as user data.
   const box=document.createElement('div');box.className='search-suggestion-box';
-  box.textContent='Par le sens : moteur non concluant ou lent ('+String(reason||'attente')+'). Correspondances PAR LES MOTS seulement : vérifier les citations. Aucune pertinence sémantique confirmée.';
+  const provisional=reason==='calcul sémantique en cours';
+  box.dataset.r252LexicalGeneration=String(generation);
+  box.dataset.r252LexicalStatus=provisional?'provisional':'terminal';
+  box.textContent=provisional
+    ?'Par le sens : recherche sémantique en cours. En attendant, pistes PAR LES MOTS uniquement : vérifiez les citations. Aucune pertinence sémantique confirmée.'
+    :'Par le sens : aucun classement sémantique confirmé ('+String(reason||'recherche non concluante')+'). Pistes PAR LES MOTS uniquement : vérifiez les citations. Aucune pertinence sémantique confirmée.';
   document.getElementById('search-results').prepend(box);
   const meta=document.getElementById('search-meta');if(meta)meta.insertAdjacentText('afterbegin','Pistes textuelles — ');
   renderSearchEffectiveScopeR88(preflight,payload);
   r152LexicalRenderedGeneration=generation;
+  return true;
+}
+// R252: a settled search cannot continue displaying an obsolete 'in progress'
+// caption. Never rewrite the semantic result, a newer query or another UI panel.
+function r252FinalizeProvisionalLexical(raw,generation){
+  if(!r150SemanticLive(raw,generation))return false;
+  const results=document.getElementById('search-results');
+  if(!results)return false;
+  const banner=results.querySelector('.search-suggestion-box[data-r252-lexical-generation="'+String(generation)+'"]');
+  if(!banner||banner.dataset.r252LexicalStatus!=='provisional')return false;
+  banner.dataset.r252LexicalStatus='terminal';
+  banner.textContent='Par le sens : la recherche est terminée sans classement sémantique confirmé. Pistes PAR LES MOTS uniquement : vérifiez les citations. Aucune pertinence sémantique confirmée.';
   return true;
 }
 function r151RenderUnavailableIfLive(raw,generation,structural,status){
@@ -8967,7 +8986,7 @@ async function runSemanticSearchV3(raw,generation,preflight){
   }
   // The existing legacy lexical worker is launched immediately, not after ONNX.
   // In this diagnostic candidate it is text-only and must not be represented as semantic output.
-  let semanticDone=false,lexicalShown=false;
+  let semanticDone=false,lexicalShown=false,semanticSettled=false;
   let lexical;
   try {
     // The worker is attempted immediately, but its synchronous constructor failures
@@ -8980,9 +8999,11 @@ async function runSemanticSearchV3(raw,generation,preflight){
   lexical=lexical.catch(e=>{console.warn('R152 lexical worker unavailable',String(e&&e.message||e));return null;});
   const displayLexical=async why=>{
     if(lexicalShown)return true;
-    if(semanticDone||!r150SemanticLive(raw,generation))return false;
+    if(semanticSettled||semanticDone||!r150SemanticLive(raw,generation))return false;
     const checked=await r150Deadline(lexical,6500);
-    if(!checked.ok||!checked.value||semanticDone||!r150SemanticLive(raw,generation))return false;
+    // A timer callback can complete AFTER the semantic function has returned.
+    // Such a callback must never publish a late provisional banner.
+    if(!checked.ok||!checked.value||semanticSettled||semanticDone||!r150SemanticLive(raw,generation))return false;
     if(lexicalShown)return true; // another in-flight displayLexical callback already rendered
     lexicalShown=r150RenderTextualOnly(checked.value,raw,generation,preflight,why);
     return lexicalShown;
@@ -9027,7 +9048,11 @@ async function runSemanticSearchV3(raw,generation,preflight){
     // The lexical Worker can still be healthy when ONNX or status handling fails.
     try{if(await displayLexical('erreur du moteur sémantique'))return;}catch(fallbackError){console.warn('R152 textual fallback failed',fallbackError);}
     r151RenderUnavailableIfLive(raw,generation,structural,{reason:String(e&&e.message||e)});
-  }finally{clearTimeout(timer);}
+  }finally{
+    semanticSettled=true;
+    clearTimeout(timer);
+    r252FinalizeProvisionalLexical(raw,generation);
+  }
 }
 
 function resetSearchPaging({resetOrder=false,resetLane=false}={}) {

@@ -1,10 +1,10 @@
 {
-  "app_version": "v2.19.142.43-R1B-UNIFIED",
+  "app_version": "v2.19.142.45-R1B-UNIFIED",
   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
   "baseline_candidate_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
   "baseline_candidate_version": "v2.19.142.18-R1B-READER-SEMANTIC-INTEGRATION-WIP",
-  "build_date": "2026-10-16",
+  "build_date": "2026-10-17",
   "collection_link_contract": "LOCAL_COLLECTION_ID_LINK_DOES_NOT_TRANSFER_USER_DATA",
   "collections_visibility": "VISIBLE_MON_ESPACE_WORKSPACE_AND_EXPLICIT_ENTRYPOINT",
   "context_action_contract": "SELECTION_OR_PARAGRAPH_SINGLE_CONTEXT_SURFACE",
@@ -51,8 +51,8 @@
     "state_recorded_status": "PRODUCTION_DEPLOYED_CLOSED_IMMUTABLE__EXACT_REPOSITORY_TREE_AND_SUCCESSFUL_DEPLOYMENT_BINDING_RECORDED",
     "technical_identity": "v2.19.142.10-R1B-PLS-RESULTS-UX-CLOSURE"
   },
-  "current_release_authority": "R248_LOCAL_HOLD_NO_DEPLOYMENT",
-  "current_runtime_browser_validation": "CHROMIUM_COMPONENT_QA_ONLY__HOSTED_AND_PHYSICAL_IOS_NOT_QUALIFIED",
+  "current_release_authority": "R252_LOCAL_HOLD_NO_DEPLOYMENT",
+  "current_runtime_browser_validation": "COMPONENT_QA_ONLY__INTEGRATED_CANDIDATE_NOT_YET_QUALIFIED__PHYSICAL_IOS_NOT_RUN",
   "dark_mode_v136_r9": {
     "corpus_changed": false,
     "date": "2026-10-02",
@@ -290,7 +290,7 @@
   "highlight_existing_edit_contract": "ALL_PLATFORMS_USE_VIEWPORT_CLAMPED_FLOATING_5_COLOUR_PICKER_PLUS_DELETE__ACTUAL_OFFSET_DIMENSIONS__VISUALVIEWPORT__8PX_MARGIN__ABOVE_BELOW_PLACEMENT__FRENCH_LABELS__ESCAPE_CLOSES_ONLY_PICKER__HIGHLIGHT_MARKS_KEYBOARD_FOCUSABLE",
   "highlight_palette_contract": "ONE_SHARED_ACTIVE_PALETTE_CREATE_AND_EDIT__YELLOW_BLUE_GREEN_PURPLE_PINK__LEGACY_GOLD_IMPORT_RENDER_ONLY",
   "highlight_platform_contract": "IPHONE_IPAD_DESKTOP_EXACT_SELECTED_TEXT__ANDROID_SAMSUNG_EXPLICIT_PARAGRAPHE_WHOLE_PARAGRAPH_MODE",
-  "highlight_stability_contract": "R248_RELEASE_TAIL_CLAMP_GUARD_AND_NATIVE_GESTURE_GUARD__NO_SCHEMA_CHANGE",
+  "highlight_stability_contract": "R248_READER_STABILIZATION_INHERITED_UNCHANGED__R252_LEXICAL_STATUS_UI_ONLY",
   "historical_backbone_generation": "G036-AFLP-R1B-UWR2",
   "historical_deployed_baseline_v29": {
     "note": "Historical Version 29 physical Samsung failure that triggered later mobile-shell repairs. It is not the gate status of the current v50 candidate.",
@@ -570,7 +570,7 @@
   "offline_corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
   "offline_integrity_contract": "PERSISTENT_OFFLINE_REUSE_REQUIRES_CURRENT_SCOPE_URL_PLUS_EXACT_ASSET_SHA256_AND_BYTE_LENGTH_MARKERS__GLOBAL_PREDECESSOR_BINDING_NOT_REQUIRED__CHANGED_OR_INVALID_ASSETS_FAIL_CLOSED",
   "offline_manifest_schema": "ldc-offline-manifest-v3",
-  "offline_manifest_sha256": "c6796512d2adfadc19e6e6fabd8b31b139e0cae57751e7cf40f691daabb357ea",
+  "offline_manifest_sha256": "64212971f463220d5efc357ab85fafaab6c7c18005985e5b09720cfd0a472d92",
   "offline_scope": "v142.17 direct successor of v142.16 frozen Reader physical repair: bounded reader transaction ownership, session and screen-lifecycle guards; offline content asset set and content binding unchanged. v142.16 not physically qualified. No App-Test or production authorization.",
   "offline_state_schema": "ldc-offline-state-v3",
   "offline_status_typography_v98_contract": "IMPORTANT_STATUS_TITLE_DETAIL_SCALE_12_13_16_19_AND_11_12_15_18_SMALL_NORMAL_LARGE_XLARGE",
@@ -592,7 +592,7 @@
   "package_predecessor_app_version": "v2.19.142.23-R130-LOCAL-P11-CANDIDATE",
   "package_predecessor_zip_sha256": "26fe15417b6b8367ecb44832af383529be3645363020c9668273c423bef73206",
   "package_state_at_freeze": "PREHOSTED_V142_17_QUALIFICATION_CANDIDATE__PENDING_FINAL_PACKAGE_MANIFEST__NOT_A_PRODUCTION_RELEASE",
-  "page_worker_revision": "ldc-v2.19.142.43-r1b-unified",
+  "page_worker_revision": "ldc-v2.19.142.45-r1b-unified",
   "par_le_sens_current": {
     "compatible_passages": 20236,
     "excluded_stale_passages": 347,
@@ -816,7 +816,7 @@
   },
   "public_deployment_authorized": false,
   "public_release": "NOT_AUTHORIZED",
-  "public_version": "142.43",
+  "public_version": "142.44",
   "quote_display_contract": "CANONICAL_GUILLEMETS_PRESERVED_IN_CORPUS__ADJACENT_OUTER_DELIMITERS_HIDDEN__TWO_SOURCE_SPAN_GAP_OPENERS_WITH_EXPLICIT_JESUS_ATTRIBUTION_HIDDEN__SIX_PUNCTUATION_GAP_CLOSERS_HIDDEN__NESTED_AND_REPORTED_QUOTES_PRESERVED",
   "r16_authority_fencing_reaudit": {
     "corpus_changed": false,
@@ -1310,6 +1310,19 @@
     "nature": "APP_ONLY_LOCAL_HOLD",
     "physical_ios": "NOT_RUN",
     "release_authority": "NONE"
+  },
+  "r252_semantic_status_local_candidate": {
+    "base_sha256": "9a26234188177c9ed71a4ab44b2a043531ef3714cd9e0a2a3df6a7d446710ae1",
+    "date": "2026-10-16",
+    "engine_changed": false,
+    "full_browser_qa": "OPEN",
+    "model_assets_changed": false,
+    "nature": "APP_ONLY_LOCAL_HOLD",
+    "physical_ios": "NOT_RUN",
+    "reader_selection_code_changed": false,
+    "release_authority": "NONE",
+    "scope": "SEMANTIC_LEXICAL_FALLBACK_STATUS_FINALIZATION_ONLY",
+    "semantic_thresholds_changed": false
   },
   "r4_dual_successor_phase_a": {
     "blocked_operation": "OP-L17-218-01",
@@ -4941,5 +4954,17 @@
   "volume_lru_max": 4,
   "whole_collection_undo_contract": "TEN_SECOND_ATOMIC_PARENT_PLUS_ALL_CAPTURED_CHILDREN__FAIL_CLOSED_ON_PARENT_CHILD_OR_UNEXPECTED_ORPHAN_CONFLICT",
   "wide_public_release": "NOT_AUTHORIZED__R220_LOCAL_HOLD",
-  "wide_public_release_gate": "NO_GO__CANDIDATE_PACKAGE_BROWSER_HOSTED_PHYSICAL_E16_E19_OPEN"
+  "wide_public_release_gate": "NO_GO__CANDIDATE_PACKAGE_BROWSER_HOSTED_PHYSICAL_E16_E19_OPEN",
+  "r255_local_candidate": {
+    "status": "LOCAL_HOLD_NON_DEPLOYABLE",
+    "source_archive_sha256": "1b6f9000c9dbec11c8decfedf2edf2ca1bde35c2b6b3e743da285cfeaf2a238c",
+    "semantic_overlay_path": "pls_v16/patch_r255.json",
+    "semantic_overlay_sha256": "c84b7325779441c8600adb744e0576ce610934f31e82aa230f4e9b9a35575790",
+    "vector_count": 12,
+    "source": "R254_AUTHORITATIVE_READER_EQUIVALENCE",
+    "publish_authority": "NONE",
+    "iOS": "NOT_RUN",
+    "search_relevance": "NOT_QUALIFIED",
+    "corpus_and_user_storage_changes": false
+  }
 }
