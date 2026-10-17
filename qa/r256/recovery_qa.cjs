@@ -53,6 +53,9 @@ async function main(){
   st=await until(page,s=>s.normal||!!s.bootError,20000);
   log('cold_offline_reopen',{st});
   if(!st.normal||!st.version?.includes('142.46'))throw Error('offline reopen failed');
+  st=await until(page,s=>s.offline?.state==='READY'||s.offline?.state==='ERROR'||s.offline?.state==='PARTIAL',20000);
+  log('cold_offline_preparation_verified',{st});
+  if(st.offline?.state!=='READY'||st.offline?.completed!==205)throw Error('offline cache not restored as READY after restart');
   const m2=await page.evaluate(async()=>await dbGet('settings','r256_synthetic_marker'));
   log('offline_user_state',{marker:m2,errors:problems.slice(0,6)});
   if(m2?.val?.marker!=='PRESERVED_R256')throw Error('offline user marker missing');
