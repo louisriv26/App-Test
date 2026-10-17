@@ -1,0 +1,36 @@
+name: "R256 LDC SW update/recovery isolated QA"
+on:
+  push:
+    branches: [qa/ldc-r256-sw-lifecycle-20261017]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  sw-lifecycle-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+      - name: Prepare exact previous App Test tree
+        run: |
+          git worktree add --detach /tmp/ldc_r256_old d64d7b59c9c20b8b9437287224c7c39b804505c0
+          test -f /tmp/ldc_r256_old/sw.js
+          node -e "console.log('current version',require('./version.json').app_version,'previous version',require('/tmp/ldc_r256_old/version.json').app_version)"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install real Chromium and WebKit browsers
+        run: |
+          npm install --prefix /tmp/r256deps --no-audit --no-fund playwright@1.56.1
+          /tmp/r256deps/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Run SW diagnostics without modifying published website
+        run: |
+          NODE_PATH=/tmp/r256deps/node_modules node qa/r256/sw_lifecycle.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r256-sw-recovery-diagnostics
+          path: r256-sw-diagnostics.json
+          if-no-files-found: warn
