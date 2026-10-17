@@ -1,0 +1,70 @@
+name: "R257 Reproducible Recovery Gate Chromium and WebKit"
+on:
+  push:
+    branches: [qa/ldc-r256-isolated-webkit-activation-20261017]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Historical v142.43 and broken v142.45 fixtures
+        run: |
+          git fetch --no-tags origin d64d7b59c9c20b8b9437287224c7c39b804505c0 f025be8b8c8ff34f2ae439afb20de3bf293395c9
+          git worktree add --detach /tmp/ldc_r256_old d64d7b59c9c20b8b9437287224c7c39b804505c0
+          git worktree add --detach /tmp/ldc_r256_bad f025be8b8c8ff34f2ae439afb20de3bf293395c9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build deterministic v142.46 candidate and check contract
+        run: |
+          python3 qa/r256/build_r256.py
+          node qa/r256/check_offline_binding.cjs
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --prefix /tmp/r256deps --no-audit --no-fund playwright@1.56.1
+          /tmp/r256deps/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Independently qualify previous-to-broken-to-repaired Chromium
+        run: |
+          R256_BROWSER=chromium NODE_PATH=/tmp/r256deps/node_modules node qa/r256/recovery_qa.cjs
+          cp r256-recovery-results.json r257-chromium-recovery.json
+      - name: Independently qualify previous-to-broken-to-repaired WebKit
+        run: |
+          R256_BROWSER=webkit NODE_PATH=/tmp/r256deps/node_modules node qa/r256/recovery_qa.cjs
+          cp r256-recovery-results.json r257-webkit-recovery.json
+      - name: Evaluate mandatory gates
+        run: |
+          python3 - <<'PY'
+          import json
+          p=json.load(open('r256-candidate-build.json'))
+          assert p['zip_files']==279 and p['offline_assets']==205
+          assert p['other_274_files']=='BYTE_IDENTICAL_TO_R255'
+          for browser in ('chromium','webkit'):
+              d=json.load(open('r257-'+browser+'-recovery.json'))
+              assert d['ok'] is True,browser
+              rows={x['name']:x for x in d['records']}
+              assert 'SW_SYNC' in rows['broken_r255_reproduction']['st']['bootError'],browser
+              assert rows['repaired_from_failure']['st']['revision']=='ldc-v2.19.142.46-r1b-unified',browser
+              assert rows['cold_offline_preparation_verified']['st']['offline']['state']=='READY',browser
+              assert rows['cold_offline_preparation_verified']['st']['offline']['completed']==205,browser
+              assert rows['offline_user_state']['marker']['val']['marker']=='PRESERVED_R256',browser
+          print('R257_QUALIFICATION_PASS_CHROMIUM_WEBKIT_RECOVERY_IDB_OFFLINE')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r257-cross-browser-recovery-evidence
+          path: |
+            r256-candidate-build.json
+            r257-chromium-recovery.json
+            r257-webkit-recovery.json
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: LDC_R257_V14246_MINIMAL_REPAIR_LOCAL_HOLD
+          path: /tmp/LDC_R256_v14246_SW_OFFLINE_BINDING_QA_LOCAL_HOLD.zip
+          if-no-files-found: warn
