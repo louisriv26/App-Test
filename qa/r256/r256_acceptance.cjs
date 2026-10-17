@@ -78,8 +78,9 @@ async function testUpgrade(site){
   if(waiting){
    const before=await page.evaluate(async()=>{
     let r=await navigator.serviceWorker.getRegistration();
-    let old=await new Promise(resolve=>{let w=navigator.serviceWorker.controller,ch=new MessageChannel(),timer=setTimeout(()=>resolve(null),1000);ch.port1.onmessage=e=>{clearTimeout(timer);resolve(e.data?.version)};w.postMessage({type:'LDC_GET_VERSION'},[ch.port2])});
-    r.waiting.postMessage({type:'SKIP_WAITING'});return {old}
+    let old=await new Promise(resolve=>{let w=navigator.serviceWorker.controller;if(!w)return resolve(null);let ch=new MessageChannel(),timer=setTimeout(()=>resolve(null),1000);ch.port1.onmessage=e=>{clearTimeout(timer);resolve(e.data?.version)};try{w.postMessage({type:'LDC_GET_VERSION'},[ch.port2])}catch(e){clearTimeout(timer);resolve(null)}});
+    // The prior version may have auto-activated between polling and this execution.
+    let pending=r?.waiting;if(pending){pending.postMessage({type:'SKIP_WAITING'});return {old,posted:true}}return {old,posted:false,active:r?.active?.state||null}
    });
    const adopted=await waitCondition(page,async()=>{let r=await navigator.serviceWorker.getRegistration();return r?.active?.state==='activated'&&r.active===navigator.serviceWorker.controller},20000);
    result('upgrade_controller_change',adopted?'PASS':'FAIL',{before,now:await remoteVersion(page)});
