@@ -117,3 +117,47 @@ Le candidat minimal retient le gestionnaire historique `SKIP_WAITING` sans le ch
 - Construction exacte du candidat v142.46 : https://github.com/louisriv26/App-Test/actions/runs/39006866182
 
 **Décision R257 :** cause de panne v142.45 prouvée et réparation R256 confirmée sur les tests de récupération et hors ligne. Synchronisation instantanée du processus `Actualiser` **non qualifiée à ce stade**. Préserver APP TEST/MAIN et toutes les données, maintenir LOCAL HOLD jusqu’à décision contraire fondée sur des preuves.
+
+## 9. R257 — Contrôle causal supplémentaire : WebKit hors ligne
+
+Run de comparaison A/B `39008420616`, à environnement, navigateur et procédure identiques :
+
+| Moteur | Ancienne v142.43 | R256 v142.46 | Constat |
+|---|---|---|---|
+| Chromium — téléchargement | 205/205 READY | 205/205 READY | PASS pour les deux |
+| Chromium — reload hors ligne | PASS | PASS | PASS pour les deux |
+| Chromium — nouvelle fenêtre hors ligne | PASS | PASS | PASS pour les deux |
+| WebKit — téléchargement | 205/205 READY | 205/205 READY | PASS pour les deux |
+| WebKit — reload hors ligne | Erreur interne Playwright WebKit | Même erreur interne | **Blocage identique dans le témoin antérieur** |
+| WebKit — nouvelle fenêtre hors ligne | Erreur interne Playwright WebKit | Même erreur interne | **Blocage identique dans le témoin antérieur** |
+
+**Inférence limitée mais importante :** le même échec WebKit hors ligne étant observable en v142.43, il ne constitue pas une preuve d'une régression propre au correctif R256. Il ne faut pas, pour autant, interpréter les tests WebKit comme un PASS sur le redémarrage hors ligne réel; le contrôle reste **NOT QUALIFIED sur le banc Playwright** et nécessite une vérification physique Safari/iOS et, si utile, un environnement WebKit différent.
+
+La récupération v142.45 cassée → v142.46 et le maintien du marqueur de test ont réussi sur Chromium et WebKit avant ce redémarrage hors ligne.
+
+## 10. Reproductibilité effective du package R257
+
+Deux constructions indépendantes de la même source QA ont obtenu **exactement le même SHA-256 ZIP** et la même taille :
+
+- Run `39008183625` : `715999543b73c9b9a8068cbb0fc945ccbe57f0a5af5b2d2d99f222f2271bd750`, 126 519 653 octets.
+- Run `39008420616` : même SHA-256, même taille.
+
+Le ZIP comprend 279 entrées ; le manifeste recense 278 fichiers, dont 274 conservés au bit près depuis R255. L'empreinte canonique hors ligne concorde avec le Service Worker et `version.json`.
+
+La construction est reproductible en fixant ordre, métadonnées et dates des entrées ZIP. Ne pas confondre le SHA-256 du **ZIP de déploiement intérieur** avec celui de l'archive externe publiée par GitHub Actions.
+
+**Artefact candidat R257 :** https://github.com/louisriv26/App-Test/actions/runs/39008183625, section « Artifacts », `LDC_R257_V14246_MINIMAL_REPAIR_LOCAL_HOLD`.
+
+## 11. Décision de clôture de cette séquence
+
+- Cause déterministe de l'échec d'installation de R255 : **confirmée**.
+- Correction minimale du contrat hors ligne R256 : **implémentée, reproductible et testée**.
+- Réparation et préservation d'un marqueur de données : **PASS** en Chromium et WebKit.
+- Préparation complète hors ligne et réouverture : **PASS Chromium**, WebKit `NOT QUALIFIED` mais échec identique au témoin v142.43.
+- Activation instantanée `Actualiser` : **non déterministe sur banc d'essai**, conserver le contrôle et ne pas promettre la réussite en un clic.
+- Surlignages et Reader : mécanismes inchangés par le correctif; la vérification physique utilisateur et la régression complète restent nécessaires.
+- **APP TEST main et MAIN production inchangées. LOCAL HOLD maintenu.**
+
+Les conclusions plus fortes que celles autorisées par ces preuves (par ex. « Safari hors ligne fonctionne », « tous les anciens clients migrent », « aucun surlignage n'est affecté en pratique ») sont expressément exclues.
+
+**Sources nouvelles :** https://github.com/louisriv26/App-Test/actions/runs/39008420616 et https://github.com/louisriv26/App-Test/actions/runs/39008183625.
