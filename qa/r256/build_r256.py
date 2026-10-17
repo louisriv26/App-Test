@@ -106,7 +106,10 @@ for record in pkg["files"]:
 out="/tmp/LDC_R256_v14246_SW_OFFLINE_BINDING_QA_LOCAL_HOLD.zip"
 with zipfile.ZipFile(out,"w",compression=zipfile.ZIP_DEFLATED,compresslevel=5) as z:
  for path in ["PACKAGE_MANIFEST_SHA256.json"]+sorted(expected):
-    z.write(P/path,path)
+    info=zipfile.ZipInfo(path,date_time=(2026,10,17,0,0,0))
+    info.compress_type=zipfile.ZIP_DEFLATED
+    info.external_attr=(0o100644 << 16)
+    z.writestr(info,(P/path).read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=5)
 with zipfile.ZipFile(out) as z:
  assert z.testzip() is None and len(z.namelist())==279
 report={
