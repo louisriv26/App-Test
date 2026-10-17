@@ -1,5 +1,5 @@
-const VERSION = 'ldc-v2.19.142.45-r1b-unified';
-const APP_VERSION = 'v2.19.142.45-R1B-UNIFIED';
+const VERSION = 'ldc-v2.19.142.46-r1b-unified';
+const APP_VERSION = 'v2.19.142.46-R1B-UNIFIED';
 const CACHE_PREFIX = 'ldc-le-livre-du-ciel-';
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
@@ -20,7 +20,7 @@ const INSTALL_FETCH_NONCE = `${Date.now().toString(36)}-${Math.random().toString
 const OFFLINE_CACHE = `${CACHE_PREFIX}offline-persistent-v3-${OFFLINE_SCOPE_FINGERPRINT}`;
 const OFFLINE_MANIFEST_URL = './offline_manifest.json';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v3';
-const OFFLINE_CONTENT_BINDING = '38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee';
+const OFFLINE_CONTENT_BINDING = 'c6d295844181613e12fb121a9d803e5b8d801e63a084ebd790439b914cde14fd';
 const OFFLINE_CORPUS_MANIFEST_SHA256 = '92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b';
 const OFFLINE_META_PATH = '__ldc_offline_meta__.json';
 const RUNTIME_META_PATH = '__ldc_runtime_meta__.json';

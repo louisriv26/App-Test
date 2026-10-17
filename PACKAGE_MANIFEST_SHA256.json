@@ -1154,7 +1154,7 @@
     {
       "path": "index.html",
       "bytes": 1044429,
-      "sha256": "e4d93abb1b960db57f2533cacf8df4eedb5fa50517c136c626e499173bae261f"
+      "sha256": "8aaf3459529c96560b634c72bf3147fd155deaa226c9b357fa90d31aa1400f55"
     },
     {
       "path": "interaction_anchor.js",
@@ -1183,8 +1183,8 @@
     },
     {
       "path": "offline_manifest.json",
-      "bytes": 63798,
-      "sha256": "e7269996b581620c22044411429cf31feb86e3d30e771b1d99ce7d2942d72b75"
+      "bytes": 64468,
+      "sha256": "043a499b7bdcac4736ddf5cb4dc5cef7b72026dc9dff9bdaf5c23996e93b8b5f"
     },
     {
       "path": "pls_v15/model/config.json",
@@ -1384,19 +1384,19 @@
     {
       "path": "sw.js",
       "bytes": 33491,
-      "sha256": "ab8181ab0be336e07c25332bcfb0bf627397c1dd58a371216d6f88b2df4796cd"
+      "sha256": "b0bcec49ec84018f5a64af79d7fcb4cd822b25cf990756b7762a96608f9a6dfd"
     },
     {
       "path": "version.json",
-      "bytes": 271228,
-      "sha256": "9f86f5bb55ba8d3b31f0ac335e3bd2016549f43f665d6f82d7931ae498033cab"
+      "bytes": 271813,
+      "sha256": "ca71270c990ef6afaf863a09bad7dfc48329440081e586cd6553fc6df949d111"
     }
   ],
   "offline_corpus_assets": 204,
   "offline_corpus_binding_sha256": "f9095a2dda838af53460877fc58398b45fe299c70c6a58ca3331f9a3223afa1d",
   "packaged_file_count_excluding_manifest": 278,
   "production_authority": "NOT_AUTHORIZED__R255_LOCAL_HOLD",
-  "public_version": "142.45",
+  "public_version": "142.46",
   "qualified_model_files": 20,
   "r170_unified_build": {
     "app_test": "ldc_user_v1__app_test",
@@ -1604,5 +1604,21 @@
     "storage_schema_changes": 0,
     "status": "QA_INCOMPLETE__LOCAL_HOLD",
     "native_ios": "NOT_RUN"
+  },
+  "r256_sw_binding_repair": {
+    "scope": "LOCAL_HOLD_QA_ONLY",
+    "proven": [
+      "SW install at v142.45 fails: offline manifest content binding invalide",
+      "no changes to 205 offline asset entries or any corpus file"
+    ],
+    "actual_binding_sha256": "c6d295844181613e12fb121a9d803e5b8d801e63a084ebd790439b914cde14fd",
+    "new_version": "v2.19.142.46-R1B-UNIFIED",
+    "changed_paths": [
+      "index.html",
+      "offline_manifest.json",
+      "sw.js",
+      "version.json"
+    ],
+    "no_deployment_authority": true
   }
 }

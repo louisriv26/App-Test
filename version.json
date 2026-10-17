@@ -1,5 +1,5 @@
 {
-  "app_version": "v2.19.142.45-R1B-UNIFIED",
+  "app_version": "v2.19.142.46-R1B-UNIFIED",
   "backbone_corpus_version": "G036-AFLP-R8-UWR2-FAST1-STAGE2-221",
   "backup_help_current_format_contract": "HELP_NORMAL_BACKUP_DESCRIBES_STREAMING_LDCBACKUP__SUPPORTED_HISTORICAL_GENERATIONS_MIGRATE_PRUDENTLY_BEFORE_VALIDATION__UNRESOLVED_ANCHORS_REMAIN_FOR_REVIEW__LEGACY_JSON_COMPATIBILITY_RETAINED",
   "baseline_candidate_sha256": "954085cc54cbc401d49512811276b5c633c72b9f48e8963881792f176b20d7eb",
@@ -566,7 +566,7 @@
   "offline_cache_version": "DEPRECATED_VERSION_IDENTITY__PHYSICAL_PERSISTENT_CACHE_NAME_IS_SCOPE_DERIVED_NOT_APP_VERSION_IDENTITY",
   "offline_completion_record_contract": "STORAGE_SCHEMA_PLUS_CONTENT_BINDING_SCHEMA_AND_DIGEST_PLUS_CORPUS_GENERATION_AND_MANIFEST_SCHEMA__NO_APP_VERSION_CACHE_NAME_INVARIANT",
   "offline_content_binding_schema": "ldc-offline-content-binding-v2",
-  "offline_content_binding_sha256": "38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee",
+  "offline_content_binding_sha256": "c6d295844181613e12fb121a9d803e5b8d801e63a084ebd790439b914cde14fd",
   "offline_corpus_manifest_sha256": "92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b",
   "offline_integrity_contract": "PERSISTENT_OFFLINE_REUSE_REQUIRES_CURRENT_SCOPE_URL_PLUS_EXACT_ASSET_SHA256_AND_BYTE_LENGTH_MARKERS__GLOBAL_PREDECESSOR_BINDING_NOT_REQUIRED__CHANGED_OR_INVALID_ASSETS_FAIL_CLOSED",
   "offline_manifest_schema": "ldc-offline-manifest-v3",
@@ -592,7 +592,7 @@
   "package_predecessor_app_version": "v2.19.142.23-R130-LOCAL-P11-CANDIDATE",
   "package_predecessor_zip_sha256": "26fe15417b6b8367ecb44832af383529be3645363020c9668273c423bef73206",
   "package_state_at_freeze": "PREHOSTED_V142_17_QUALIFICATION_CANDIDATE__PENDING_FINAL_PACKAGE_MANIFEST__NOT_A_PRODUCTION_RELEASE",
-  "page_worker_revision": "ldc-v2.19.142.45-r1b-unified",
+  "page_worker_revision": "ldc-v2.19.142.46-r1b-unified",
   "par_le_sens_current": {
     "compatible_passages": 20236,
     "excluded_stale_passages": 347,
@@ -816,7 +816,7 @@
   },
   "public_deployment_authorized": false,
   "public_release": "NOT_AUTHORIZED",
-  "public_version": "142.44",
+  "public_version": "142.46",
   "quote_display_contract": "CANONICAL_GUILLEMETS_PRESERVED_IN_CORPUS__ADJACENT_OUTER_DELIMITERS_HIDDEN__TWO_SOURCE_SPAN_GAP_OPENERS_WITH_EXPLICIT_JESUS_ATTRIBUTION_HIDDEN__SIX_PUNCTUATION_GAP_CLOSERS_HIDDEN__NESTED_AND_REPORTED_QUOTES_PRESERVED",
   "r16_authority_fencing_reaudit": {
     "corpus_changed": false,
@@ -4966,5 +4966,16 @@
     "iOS": "NOT_RUN",
     "search_relevance": "NOT_QUALIFIED",
     "corpus_and_user_storage_changes": false
+  },
+  "r256_local_qa_candidate": {
+    "status": "LOCAL_HOLD_DO_NOT_DEPLOY",
+    "introduced_on": "2026-10-17",
+    "parent_version": "v2.19.142.45-R1B-UNIFIED",
+    "root_cause": "R255 offline_manifest canonical SHA mismatch prevented service worker installation",
+    "asset_integrity": "205 records unchanged; only binding digest recalculated",
+    "user_storage_schema": "UNCHANGED",
+    "application_runtime": "Reader, corpus, semantic indices and selection byte-identical apart from published version metadata",
+    "physical_ios": "NOT_RUN",
+    "main_deployment": "FORBIDDEN"
   }
 }

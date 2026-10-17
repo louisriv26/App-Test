@@ -2725,11 +2725,11 @@ html[data-theme="dark"] .para-fragment.r237-mixed .r237-autonomous-jesus{color:#
    VERSION — single source of truth
    Update this string on every release.
 ═══════════════════════════════════════════════════════ */
-const APP_VERSION = 'v2.19.142.45-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
+const APP_VERSION = 'v2.19.142.46-R1B-UNIFIED'; // R170 SINGLE unified release: identical application bytes on staging and eventual main; no production authority yet
 const PUBLIC_VERSION = (APP_VERSION.match(/v2\.19\.(\d+(?:\.\d+)?)/)||[])[1] || '142.19'; // single authoritative public identity derived from APP_VERSION
 const APP_VERSION_LABEL = `Version ${PUBLIC_VERSION}`;
-const APP_BUILD = '2026-10-16';
-const SW_CACHE_VERSION = 'ldc-v2.19.142.45-r1b-unified';
+const APP_BUILD = '2026-10-17';
+const SW_CACHE_VERSION = 'ldc-v2.19.142.46-r1b-unified';
 const LDC_PROVENANCE_PUBLIC_COPY = Object.freeze({
   methodologyCta:'Voir les sources, les contrôles et leurs limites →',
   neutralSource:'Source détaillée dans la notice documentaire',
@@ -11942,7 +11942,7 @@ function renderDnResultCard() {
 const OFFLINE_STORAGE_SCHEMA = 'ldc-offline-storage-v3';
 const OFFLINE_MANIFEST_SCHEMA = 'ldc-offline-manifest-v3';
 const OFFLINE_CONTENT_BINDING_SCHEMA = 'ldc-offline-content-binding-v2';
-const OFFLINE_CONTENT_BINDING = '38833ef76d248a6b55c1a09d460939781c30e081a2d7bbd27ed47aa7d9ed12ee';
+const OFFLINE_CONTENT_BINDING = 'c6d295844181613e12fb121a9d803e5b8d801e63a084ebd790439b914cde14fd';
 const OFFLINE_CORPUS_MANIFEST_SHA256 = '92426c8aaac6fc7c6b8a02b0a7e00cd5870e80b805b411ae64c55e59bec1ad8b';
 const OFFLINE_STATES = Object.freeze(['NOT_PREPARED','CHECKING','DOWNLOADING','READY','PARTIAL','ERROR','CANCELLED']);
 let offlineUiState = {state:'NOT_PREPARED',completed:0,total:0,failed:[],total_bytes:0,job_id:null,message:'',content_binding_sha256:OFFLINE_CONTENT_BINDING,corpus_manifest_sha256:OFFLINE_CORPUS_MANIFEST_SHA256};
