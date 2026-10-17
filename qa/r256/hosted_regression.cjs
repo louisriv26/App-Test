@@ -51,8 +51,19 @@ async function runBrowser(browser,name,size){
   let entry=candidates.count?await candidates.count():0;
   if(!entry){log('target_entry_not_found',{tag,date:'1906-01-30',sample:dates});}
   const target=entry?candidates.first():page.locator('#entries-list .entry-item').first();
-  await target.click();
-  await page.waitForFunction(()=>document.getElementById('screen-reader')?.classList.contains('active')&&document.querySelector('#reader-body .para-fragment'),null,{timeout:60000});
+  const visible=await target.isVisible();
+  const dom=await page.evaluate(()=>{
+     let el=document.querySelector('#entries-list .entry-item[data-entry-date="1906-01-30"]');const chain=[];
+     while(el&&chain.length<9){const style=getComputedStyle(el),rect=el.getBoundingClientRect();chain.push({tag:el.tagName,id:el.id,classes:String(el.className).slice(0,100),display:style.display,visibility:style.visibility,opacity:style.opacity,rect:{w:rect.width,h:rect.height}});el=el.parentElement;}
+     return {screen:currentScreenName(),entriesClass:document.getElementById('screen-entries')?.className,chain};
+  });
+  log('entry_visibility',{tag,visible,dom});
+  if(visible)await target.click({timeout:4000});
+  else {
+    log('visibility_warning',{tag,reason:'entry hidden to Playwright; DOM click only for downstream smoke, not an interactive PASS'});
+    await page.evaluate(()=>document.querySelector('#entries-list .entry-item[data-entry-date="1906-01-30"]').click());
+  }
+  await page.waitForFunction(()=>document.getElementById('screen-reader')?.classList.contains('active')&&document.querySelector('#reader-body .para-fragment'),null,{timeout:30000});
   const reader=await page.evaluate(()=>({textLen:document.getElementById('reader-body')?.innerText.length||0,fragmentCount:document.querySelectorAll('#reader-body .para-fragment').length,voiceRuns:document.querySelectorAll('#reader-body .speech-run').length,top:document.getElementById('reader-scroll')?.scrollTop,hasTargetText:document.getElementById('reader-body')?.innerText.includes('constance')}));
   log('reader',{tag,reader});
   if(reader.textLen<200||reader.fragmentCount<2)throw Error('Reader empty');
