@@ -1,0 +1,38 @@
+name: "R256 Isolated WebKit Activation Differential"
+on:
+  push:
+    branches: [qa/ldc-r256-isolated-webkit-activation-20261017]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  differential:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Old R243 previous fixture
+        run: |
+          git fetch --no-tags origin d64d7b59c9c20b8b9437287224c7c39b804505c0
+          git worktree add --detach /tmp/ldc_r256_old d64d7b59c9c20b8b9437287224c7c39b804505c0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build R256 candidate and verify independent content binding
+        run: |
+          python3 qa/r256/build_r256.py
+          node qa/r256/check_offline_binding.cjs
+      - name: Install browsers
+        run: |
+          npm install --prefix /tmp/r256deps --no-audit --no-fund playwright@1.56.1
+          /tmp/r256deps/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Compare minimal and actual application worker behavior in both engines
+        run: NODE_PATH=/tmp/r256deps/node_modules node qa/r256/isolated_browser_sw_test.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r256-minimal-vs-app-webkit-sw
+          path: |
+            r256-isolated-webkit-results.json
+            r256-candidate-build.json
+          if-no-files-found: warn
