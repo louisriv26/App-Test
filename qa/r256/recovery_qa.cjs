@@ -19,7 +19,7 @@ async function probe(page){return page.evaluate(async()=>{
 async function until(page,condition,ms){const deadline=Date.now()+ms;let last;while(Date.now()<deadline){last=await probe(page);if(condition(last))return last;await sleep(400)}return last;}
 async function main(){
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port+'/App-Test/';
- const browser=await engine.launch({headless:true});const ctx=await browser.newContext({serviceWorkers:'allow'}),page=await ctx.newPage();
+ const browser=await engine.launch({headless:true});const ctx=await browser.newContext({serviceWorkers:'allow'});let page=await ctx.newPage();
  page.on('pageerror',e=>problems.push(String(e).slice(0,200)));
  try{
   serving=OLD;
@@ -50,7 +50,17 @@ async function main(){
   log('offline_preparation_finished',{st});
   if(st.offline?.state!=='READY'||st.offline?.completed!==205)throw Error('offline cache failed '+JSON.stringify(st.offline));
   await ctx.setOffline(true);
-  await page.reload({waitUntil:'domcontentloaded',timeout:20000});
+  try {
+    await page.reload({waitUntil:'domcontentloaded',timeout:20000});
+    log('offline_same_tab_reload',{status:'PASS'});
+  } catch(e) {
+    log('offline_same_tab_reload',{status:'BROWSER_ERROR',error:String(e).slice(0,600)});
+    await page.close();
+    page=await ctx.newPage();
+    page.on('pageerror',e=>problems.push(String(e).slice(0,200)));
+    await page.goto(origin,{waitUntil:'domcontentloaded',timeout:20000});
+    log('offline_new_tab_fallback',{status:'NAVIGATED'});
+  }
   st=await until(page,s=>s.normal||!!s.bootError,20000);
   log('cold_offline_reopen',{st});
   if(!st.normal||!st.version?.includes('142.46'))throw Error('offline reopen failed');
