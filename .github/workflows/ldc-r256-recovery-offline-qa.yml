@@ -1,0 +1,39 @@
+name: "R256 exact broken-to-fixed recovery and offline resilience"
+on:
+  push:
+    branches: [qa/ldc-r256-sw-lifecycle-20261017]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 3}
+      - name: Historical app and broken R255 fixtures
+        run: |
+          git fetch --no-tags origin d64d7b59c9c20b8b9437287224c7c39b804505c0
+          git fetch --no-tags origin f025be8b8c8ff34f2ae439afb20de3bf293395c9
+          git worktree add --detach /tmp/ldc_r256_old d64d7b59c9c20b8b9437287224c7c39b804505c0
+          git worktree add --detach /tmp/ldc_r256_bad f025be8b8c8ff34f2ae439afb20de3bf293395c9
+      - uses: actions/setup-node@v4
+        with: {node-version: "22"}
+      - name: Build corrected R256 local candidate
+        run: python3 qa/r256/build_r256.py
+      - name: Install Chromium
+        run: |
+          npm install --prefix /tmp/r256deps --no-audit --no-fund playwright@1.56.1
+          /tmp/r256deps/node_modules/.bin/playwright install chromium --with-deps
+      - name: Test real profile recovery and full 205-asset offline preparation
+        run: |
+          timeout 420s env NODE_PATH=/tmp/r256deps/node_modules node qa/r256/recovery_qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: R256-broken-upgrade-repair-offline-results
+          path: |
+            r256-recovery-results.json
+            r256-candidate-build.json
+          if-no-files-found: warn
