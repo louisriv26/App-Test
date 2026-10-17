@@ -90,6 +90,14 @@ async function run(){
       log('actualiser_nonactivation_diagnostic',{diag});
       const retry=await awaitMatch(upgrade,s=>s.sw?.includes('142.46'),6000);
       log('activation_second_request',{...retry});
+      const wk=existing.serviceWorkers();
+      const ev=await Promise.all(wk.map(async(w)=>{try{return {url:w.url(),state:await Promise.race([w.evaluate(()=>({version:typeof VERSION==='undefined'?null:VERSION,waiting:self.registration.waiting?.state,active:self.registration.active?.state})),new Promise(res=>setTimeout(()=>res({timeout:true}),2500))])}}catch(e){return {url:w.url(),error:String(e)}}}));
+      log('serviceworker_direct_eval',{workers:ev});
+      let direct=null;const tgt=wk.length?wk[wk.length-1]:null;
+      if(tgt)try{direct=await Promise.race([tgt.evaluate(async()=>{await self.skipWaiting();return {invoked:true}}),new Promise(res=>setTimeout(()=>res({timeout:true}),3000))])}catch(e){direct={error:String(e)}}
+      const afterDirect=await awaitMatch(upgrade,s=>s.sw?.includes('142.46'),5000);
+      log('serviceworker_direct_skipWaiting',{direct,state:afterDirect});
+
       throw Error('Actualiser did not activate new SW on first request');
     }
     await upgrade.reload({waitUntil:'domcontentloaded',timeout:20000});
