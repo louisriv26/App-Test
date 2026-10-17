@@ -1,0 +1,10 @@
+const fs=require('node:fs'), crypto=require('node:crypto');
+const m=JSON.parse(fs.readFileSync('offline_manifest.json','utf8'));
+const sw=fs.readFileSync('sw.js','utf8');
+const version=JSON.parse(fs.readFileSync('version.json','utf8'));
+const canonical=JSON.stringify({assets:m.assets.map(a=>({bytes:Number(a.bytes),path:String(a.path),sha256:String(a.sha256)})),corpus_generation:m.corpus_generation,corpus_manifest_sha256:m.corpus_manifest_sha256,schema:m.content_binding_schema});
+const hash=crypto.createHash('sha256').update(canonical).digest('hex');
+const expected=sw.match(/const OFFLINE_CONTENT_BINDING = '([^']+)'/)[1];
+const result={hash,reported:m.content_binding_sha256,workerExpected:expected,version:version.app_version,revision:m.page_worker_revision,assetCount:m.assets.length};
+console.log('R256_JS_BINDING_PROOF '+JSON.stringify(result));
+if(m.content_binding_sha256!==hash||expected!==hash||version.offline_content_binding_sha256!==hash)process.exit(1);
