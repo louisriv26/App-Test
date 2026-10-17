@@ -30,25 +30,18 @@ jobs:
           /tmp/r256deps/node_modules/.bin/playwright install chromium webkit --with-deps
       - name: Browser and SW experiments, no changes to published App Test
         run: |
-          R256_ONLY_LOCAL=1 NODE_PATH=/tmp/r256deps/node_modules node qa/r256/sw_lifecycle.cjs
+          timeout 165s env NODE_PATH=/tmp/r256deps/node_modules node qa/r256/r256_acceptance.cjs
       - name: Independent gate assertions
         run: |
           python3 - <<'PY'
           import json,sys
-          d=json.load(open('r256-sw-diagnostics.json'))
-          rows={x['tag']:x for x in d['results']}
-          for n in ['upgrade_v14243_first','candidate_v14246_fresh_sw_state','upgrade_after_reload','upgrade_final_registration']:
+          d=json.load(open('r256-acceptance.json'))
+          rows={x['name']:x for x in d['tests']}
+          for n in ['chromium_fresh_boot','chromium_fresh_sw','chromium_r256_version','chromium_offline_status','webkit_fresh_boot','webkit_fresh_sw','webkit_r256_version','upgrade_waiting','upgrade_controller_change','upgrade_new_tab']:
             assert n in rows, (n,'missing')
-          old=rows['upgrade_v14243_first']
-          new=rows['candidate_v14246_fresh_sw_state']
-          assert old.get('app')=='v2.19.142.43-R1B-UNIFIED',old
-          assert new.get('app')=='v2.19.142.46-R1B-UNIFIED',new
-          assert new.get('registration',{}).get('active')=='activated',new
-          assert new.get('controllerVersion')=='ldc-v2.19.142.46-r1b-unified',new
-          last=rows['upgrade_final_registration']
-          assert last.get('app')=='v2.19.142.46-R1B-UNIFIED',last
-          assert last.get('controllerVersion')=='ldc-v2.19.142.46-r1b-unified',last
-          assert not any(x['tag']=='upgrade_exception' for x in d['results'])
+          failed=[(x['name'],x['detail']) for x in d['tests'] if x['status']=='FAIL']
+          assert not failed,failed
+          assert all(rows[n]['status']=='PASS' for n in ['chromium_fresh_boot','chromium_fresh_sw','chromium_r256_version','chromium_offline_status','webkit_fresh_boot','webkit_fresh_sw','webkit_r256_version','upgrade_waiting','upgrade_controller_change','upgrade_new_tab'])
           print('R256_VALIDATED_LOCAL_CANDIDATE_COLD_INSTALL_AND_OLD_TO_NEW_UPGRADE')
           PY
       - uses: actions/upload-artifact@v4
