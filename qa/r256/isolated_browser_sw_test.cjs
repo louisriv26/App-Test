@@ -41,7 +41,7 @@ async function test(engine,kind,mode){
  const origin='http://127.0.0.1:'+server.address().port+'/'+(kind==='mini'?'mini':'App-Test')+'/';
  try{
   await page.goto(origin,{waitUntil:'domcontentloaded',timeout:30000});
-  let old=await poll(page,s=>s.active==='activated',20000,kind==='mini');
+  let old=await poll(page,s=>s.active==='activated'&&(kind==='mini'||s.stage==='POST_INIT'),20000,kind==='mini');
   emit('old',{engine:which,kind,mode,old});
   phase='new';
   await page.evaluate(async()=>{let r=await navigator.serviceWorker.getRegistration();await r.update()});
@@ -50,7 +50,7 @@ async function test(engine,kind,mode){
   if(waiting.waiting!=='installed')return;
   if(mode==='postMessage'){
    await page.evaluate(async()=>{let reg=await navigator.serviceWorker.getRegistration();reg.waiting.postMessage({type:'SKIP_WAITING'})});
-   const after=await poll(page,s=>s.v?.includes(kind==='mini'?'MINI_B':'142.46'),12000,kind==='mini');
+   const after=await poll(page,s=>s.v?.includes(kind==='mini'?'MINI_B':'142.46'),8000,kind==='mini');
    emit('post-message-result',{engine:which,kind,mode,after});
   }
   if(mode==='closeTab'){
@@ -67,9 +67,21 @@ async function test(engine,kind,mode){
  try{
    for(let engine of [chromium,webkit]){
      for(let kind of ['mini','app']){
-       for(let mode of ['postMessage','closeTab'])await test(engine,kind,mode);
+       for(let mode of ['postMessage','closeTab']){
+         const runs=(kind==='app'&&mode==='postMessage')?6:2;
+         for(let attempt=1;attempt<=runs;attempt++)await test(engine,kind,mode);
+       }
      }
    }
+   const groups={};for(const r of report){
+      if(r.name!=='post-message-result'&&r.name!=='after-close-reopen')continue;
+      const key=r.engine+'|'+r.kind+'|'+r.mode;
+      if(!groups[key])groups[key]={runs:0,activated:0};
+      groups[key].runs++;
+      const state=r.after||r.x;
+      if(state?.v?.includes(r.kind==='mini'?'MINI_B':'142.46'))groups[key].activated++;
+   }
+   emit('empirical_activation_rates',{groups});
  }finally{
   await new Promise(r=>server.close(r));
   fs.writeFileSync('r256-isolated-webkit-results.json',JSON.stringify(report,null,2));
