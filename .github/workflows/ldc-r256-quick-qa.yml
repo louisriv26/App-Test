@@ -1,4 +1,4 @@
-name: "R256 independent 142.46 cold and upgrade gate"
+name: "R256 independent Chromium/WebKit cold and upgrade gate"
 on:
   push:
     branches: [qa/ldc-r256-sw-lifecycle-20261017]
@@ -24,12 +24,16 @@ jobs:
         run: python3 qa/r256/build_r256.py
       - name: Independently recompute JS offline digest
         run: node qa/r256/check_offline_binding.cjs
-      - name: Install Chromium
+      - name: Install Chromium and WebKit
         run: |
           npm install --prefix /tmp/r256deps --no-audit --no-fund playwright@1.56.1
-          /tmp/r256deps/node_modules/.bin/playwright install chromium --with-deps
-      - name: Fail-closed SW and Actualiser tests
-        run: NODE_PATH=/tmp/r256deps/node_modules node qa/r256/quick_qa.cjs
+          /tmp/r256deps/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Fail-closed SW and Actualiser tests Chromium and WebKit
+        run: |
+          R256_BROWSER=chromium NODE_PATH=/tmp/r256deps/node_modules node qa/r256/quick_qa.cjs
+          cp r256-quick-results.json r256-chromium-results.json
+          R256_BROWSER=webkit NODE_PATH=/tmp/r256deps/node_modules node qa/r256/quick_qa.cjs
+          cp r256-quick-results.json r256-webkit-results.json
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -37,4 +41,6 @@ jobs:
           path: |
             r256-candidate-build.json
             r256-quick-results.json
+            r256-chromium-results.json
+            r256-webkit-results.json
           if-no-files-found: warn
