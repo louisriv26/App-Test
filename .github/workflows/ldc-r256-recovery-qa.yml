@@ -1,0 +1,39 @@
+name: "R256 adversarial historical recovery and offline QA"
+on:
+  push:
+    branches: [qa/ldc-r256-sw-lifecycle-20261017]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  historical-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare v142.43 and broken v142.45 independent fixtures
+        run: |
+          git fetch --no-tags origin d64d7b59c9c20b8b9437287224c7c39b804505c0 f025be8b8c8ff34f2ae439afb20de3bf293395c9
+          git worktree add --detach /tmp/ldc_r256_old d64d7b59c9c20b8b9437287224c7c39b804505c0
+          git worktree add --detach /tmp/ldc_r256_bad f025be8b8c8ff34f2ae439afb20de3bf293395c9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build candidate and assert hash
+        run: |
+          python3 qa/r256/build_r256.py
+          node qa/r256/check_offline_binding.cjs
+      - name: Install Chromium browser
+        run: |
+          npm install --prefix /tmp/r256deps --no-audit --no-fund playwright@1.56.1
+          /tmp/r256deps/node_modules/.bin/playwright install chromium --with-deps
+      - name: Reproduce broken update, recover on R256, exercise offline and data state
+        run: NODE_PATH=/tmp/r256deps/node_modules node qa/r256/recovery_qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r256-historical-recovery-offline-evidence
+          path: |
+            r256-recovery-results.json
+            r256-candidate-build.json
+          if-no-files-found: warn
