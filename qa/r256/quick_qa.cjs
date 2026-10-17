@@ -98,6 +98,15 @@ async function run(){
       const afterDirect=await awaitMatch(upgrade,s=>s.sw?.includes('142.46'),5000);
       log('serviceworker_direct_skipWaiting',{direct,state:afterDirect});
 
+      if(process.env.R256_BROWSER==='webkit'){
+        await upgrade.close();
+        await new Promise(r=>setTimeout(r,2000));
+        const reopened=await existing.newPage();
+        await reopened.goto(url,{waitUntil:'domcontentloaded',timeout:20000});
+        const afterClose=await awaitMatch(reopened,s=>s.sw?.includes('142.46')||!!s.err,14000);
+        log('webkit_after_close_all_clients',{...afterClose});
+        await reopened.close();
+      }
       throw Error('Actualiser did not activate new SW on first request');
     }
     await upgrade.reload({waitUntil:'domcontentloaded',timeout:20000});
