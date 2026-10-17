@@ -1,5 +1,6 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
-const {chromium}=require('playwright');
+const {chromium,webkit}=require('playwright');
+const engine=process.env.R256_BROWSER==='webkit'?webkit:chromium;
 const OLD='/tmp/ldc_r256_old', NEW=process.cwd();
 let currentRoot=OLD;
 const report=[];
@@ -44,7 +45,7 @@ async function run(){
  if(!newVersion.includes('142.46'))throw Error('incorrect QA candidate');
  await new Promise(r=>server.listen(0,'127.0.0.1',r));
  const url='http://127.0.0.1:'+server.address().port+'/App-Test/';
- const browser=await chromium.launch({headless:true});
+ const browser=await engine.launch({headless:true});
  try {
    const errors=[];
    const fresh=await browser.newContext({serviceWorkers:'allow'});
