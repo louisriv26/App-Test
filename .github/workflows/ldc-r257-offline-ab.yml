@@ -1,0 +1,38 @@
+name: "R257 Offline WebKit A/B Historical Baseline"
+on:
+  push:
+    branches: [qa/ldc-r256-isolated-webkit-activation-20261017]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - name: Obtain v142.43 comparison fixture
+        run: |
+          git fetch --no-tags origin d64d7b59c9c20b8b9437287224c7c39b804505c0
+          git worktree add --detach /tmp/ldc_r256_old d64d7b59c9c20b8b9437287224c7c39b804505c0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build minimal v142.46 and verify manifest
+        run: |
+          python3 qa/r256/build_r256.py
+          node qa/r256/check_offline_binding.cjs
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --prefix /tmp/r256deps --no-audit --no-fund playwright@1.56.1
+          /tmp/r256deps/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Diagnostic A/B offline resume with original v142.43 and repaired v142.46
+        run: NODE_PATH=/tmp/r256deps/node_modules node qa/r256/offline_ab_old_new.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r257-baseline-versus-repair-offline-comparison
+          path: |
+            r257-offline-ab-results.json
+            r256-candidate-build.json
+          if-no-files-found: warn
