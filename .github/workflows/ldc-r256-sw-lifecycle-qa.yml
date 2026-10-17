@@ -15,6 +15,7 @@ jobs:
           fetch-depth: 3
       - name: Prepare exact previous App Test tree
         run: |
+          git fetch --no-tags origin d64d7b59c9c20b8b9437287224c7c39b804505c0
           git worktree add --detach /tmp/ldc_r256_old d64d7b59c9c20b8b9437287224c7c39b804505c0
           test -f /tmp/ldc_r256_old/sw.js
           node -e "console.log('current version',require('./version.json').app_version,'previous version',require('/tmp/ldc_r256_old/version.json').app_version)"
