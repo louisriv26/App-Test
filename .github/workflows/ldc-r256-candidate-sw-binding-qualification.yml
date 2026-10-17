@@ -50,7 +50,7 @@ jobs:
           name: r256-sw-lifecycle-and-build-evidence
           path: |
             r256-candidate-build.json
-            r256-sw-diagnostics.json
+            r256-acceptance.json
           if-no-files-found: warn
       - uses: actions/upload-artifact@v4
         if: always()
