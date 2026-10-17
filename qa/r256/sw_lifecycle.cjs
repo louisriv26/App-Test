@@ -91,6 +91,7 @@ async function testUpgrade(){
   const page=await ctx.newPage();const errs=track(page,'upgrade');
   let resp=await page.goto(origin,{waitUntil:'domcontentloaded',timeout:90000});
   note('upgrade_v14243_first',{http:resp?.status(),...(await waitBoot(page,80000))});
+  await page.evaluate(()=>{try{if(typeof finishOnboarding==='function')finishOnboarding()}catch(e){}}).catch(()=>{});
   await page.waitForFunction(async()=>{let r=await navigator.serviceWorker.getRegistration();return r?.active?.state==='activated';},null,{timeout:80000}).catch(()=>{});
   note('upgrade_v14243_active',{...(await snapshot(page))});
   serveOld=false;
@@ -108,6 +109,10 @@ async function testUpgrade(){
   note('upgrade_after_actualiser',{...(await snapshot(page))});
   resp=await page.reload({waitUntil:'domcontentloaded',timeout:90000});
   note('upgrade_after_reload',{http:resp?.status(),...(await waitBoot(page,70000))});
+  await page.waitForFunction(async()=>{const r=await navigator.serviceWorker.getRegistration();return r?.active?.state==='activated';},null,{timeout:45000}).catch(()=>{});
+  note('upgrade_final_registration',{...(await snapshot(page))});
+  const clean=await browser.newContext({serviceWorkers:'allow'});
+  try{const q=await clean.newPage();await q.goto(origin+'?r256_new_cold=1',{waitUntil:'domcontentloaded',timeout:65000});note('candidate_v14246_fresh',{...(await waitBoot(q,35000))});await q.waitForFunction(async()=>{let r=await navigator.serviceWorker.getRegistration();return r?.active?.state==='activated'},null,{timeout:45000}).catch(()=>{});note('candidate_v14246_fresh_sw_state',{...(await snapshot(q))});await q.close();}finally{await clean.close()}
   errs();
  }catch(e){note('upgrade_exception',{error:String(e).slice(0,1200)})}
  finally{await ctx.close();await browser.close();await new Promise(resolve=>server.close(resolve))}
