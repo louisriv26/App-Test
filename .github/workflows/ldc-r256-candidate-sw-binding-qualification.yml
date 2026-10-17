@@ -1,0 +1,67 @@
+name: "R256 LOCAL HOLD binding repair, cold install and real upgrade"
+on:
+  push:
+    branches: [qa/ldc-r256-sw-lifecycle-20261017]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate-build-and-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+      - name: Prepare exact v142.43 historical fixture
+        run: |
+          git fetch --no-tags origin d64d7b59c9c20b8b9437287224c7c39b804505c0
+          git worktree add --detach /tmp/ldc_r256_old d64d7b59c9c20b8b9437287224c7c39b804505c0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build R256 local candidate (no repository writes)
+        run: |
+          python3 qa/r256/build_r256.py
+          grep -q '"app_version": "v2.19.142.46-R1B-UNIFIED"' version.json
+      - name: Install real browsers
+        run: |
+          npm install --prefix /tmp/r256deps --no-audit --no-fund playwright@1.56.1
+          /tmp/r256deps/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Browser and SW experiments, no changes to published App Test
+        run: |
+          NODE_PATH=/tmp/r256deps/node_modules node qa/r256/sw_lifecycle.cjs
+      - name: Independent gate assertions
+        run: |
+          python3 - <<'PY'
+          import json,sys
+          d=json.load(open('r256-sw-diagnostics.json'))
+          rows={x['tag']:x for x in d['results']}
+          for n in ['upgrade_v14243_first','candidate_v14246_fresh_sw_state','upgrade_after_reload','upgrade_final_registration']:
+            assert n in rows, (n,'missing')
+          old=rows['upgrade_v14243_first']
+          new=rows['candidate_v14246_fresh_sw_state']
+          assert old.get('app')=='v2.19.142.43-R1B-UNIFIED',old
+          assert new.get('app')=='v2.19.142.46-R1B-UNIFIED',new
+          assert new.get('registration',{}).get('active')=='activated',new
+          assert new.get('controllerVersion')=='ldc-v2.19.142.46-r1b-unified',new
+          last=rows['upgrade_final_registration']
+          assert last.get('app')=='v2.19.142.46-R1B-UNIFIED',last
+          assert last.get('controllerVersion')=='ldc-v2.19.142.46-r1b-unified',last
+          assert not any(x['tag']=='upgrade_exception' for x in d['results'])
+          print('R256_VALIDATED_LOCAL_CANDIDATE_COLD_INSTALL_AND_OLD_TO_NEW_UPGRADE')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r256-sw-lifecycle-and-build-evidence
+          path: |
+            r256-candidate-build.json
+            r256-sw-diagnostics.json
+          if-no-files-found: warn
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: LDC_R256_v14246_SW_OFFLINE_BINDING_QA_LOCAL_HOLD_DO_NOT_DEPLOY
+          path: /tmp/LDC_R256_v14246_SW_OFFLINE_BINDING_QA_LOCAL_HOLD.zip
+          if-no-files-found: warn
