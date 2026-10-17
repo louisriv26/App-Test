@@ -68,13 +68,13 @@ async function runBrowser(browser,name,size){
    const end=sc.scrollTop;
    const selected=sel.toString();
    sel.removeAllRanges();document.dispatchEvent(new Event('selectionchange'));
-   return {available:true,selected:clip(selected,60),scrollBefore:start,scrollAfter:end,delta:end-start,fragments:document.querySelectorAll('#reader-body .para-fragment').length};
+   return {available:true,selected:String(selected||'').slice(0,60),scrollBefore:start,scrollAfter:end,delta:end-start,fragments:document.querySelectorAll('#reader-body .para-fragment').length};
   });
   log('native_selection_geometry',{tag,geometry});
   if(!geometry.available||Math.abs(geometry.delta)>120)throw Error('unexpected reader selection jump');
   // Search word and meaning in real app; record separate lexical/semantic outcomes (fallback is not semantic PASS).
   await page.evaluate(async()=>{await goSearch();setSearchIntentMode('words',{rerun:false});const el=document.getElementById('search-input');el.value='constance';onSearchInput('words');await runSearch();});
-  const lexical=await page.evaluate(()=>({meta:clip(document.querySelector('#search-meta')?.innerText,500),results:document.querySelector('#search-results')?.children.length||0,extract:clip(document.querySelector('#search-results')?.innerText,450)}));
+  const lexical=await page.evaluate(()=>({meta:String(document.querySelector('#search-meta')?.innerText||'').slice(0,500),results:document.querySelector('#search-results')?.children.length||0,extract:String(document.querySelector('#search-results')?.innerText||'').slice(0,450)}));
   log('lexical_search',{tag,lexical});
   if(!lexical.results||/Aucun résultat/.test(lexical.extract))throw Error('lexical search has no results');
   await page.evaluate(async()=>{
@@ -84,7 +84,7 @@ async function runBrowser(browser,name,size){
     onSearchInput('meaning');
     await runSearch();
   });
-  const semantic=await page.evaluate(()=>({meta:clip(document.querySelector('#search-meta')?.innerText,550),resultCount:document.querySelector('#search-results')?.children.length||0,excerpt:clip(document.querySelector('#search-results')?.innerText,1200),progress:clip(document.querySelector('#search-progress')?.innerText,210)}));
+  const semantic=await page.evaluate(()=>({meta:String(document.querySelector('#search-meta')?.innerText||'').slice(0,550),resultCount:document.querySelector('#search-results')?.children.length||0,excerpt:String(document.querySelector('#search-results')?.innerText||'').slice(0,1200),progress:String(document.querySelector('#search-progress')?.innerText||'').slice(0,210)}));
   log('semantic_search',{tag,semantic});
   if(semantic.excerpt.includes('ni e Et si')||semantic.excerpt.includes('à l’i Il n’y')||semantic.excerpt.includes('de sorte  de telle sorte'))throw Error('malformed R198 semantic snippet surfaced');
   await page.evaluate(async()=>{await goHome()});
