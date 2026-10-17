@@ -17,7 +17,7 @@ async function snapshot(page){
   let version=null;
   if(ctl){version=await new Promise(resolve=>{const ch=new MessageChannel();const timer=setTimeout(()=>resolve(null),700);ch.port1.onmessage=e=>{clearTimeout(timer);resolve(e.data?.version||null)};try{ctl.postMessage({type:'LDC_GET_VERSION'},[ch.port2])}catch(e){clearTimeout(timer);resolve(null)}})}
   const visible=loading&&getComputedStyle(loading).display!=='none';
-  return {url:location.href,app:typeof APP_VERSION!=='undefined'?APP_VERSION:null,stage:typeof bootStage!=='undefined'?bootStage:null,visibleLoading:visible,diagnostic:error?.innerText||null,loadingText:visible?loading.innerText.slice(0,400):null,offlineState:typeof offlineUiState!=='undefined'?offlineUiState?.state:null,controllerVersion:version,controllerState:ctl?.state||null,registration:{active:reg?.active?.state||null,waiting:reg?.waiting?.state||null,installing:reg?.installing?.state||null},readyHome:document.getElementById('home-screen')?.offsetParent!==null}
+  return {url:location.href,app:typeof APP_VERSION!=='undefined'?APP_VERSION:null,stage:(()=>{try{return bootStage}catch(e){return 'not_initialized'}})(),visibleLoading:visible,diagnostic:error?.innerText||null,loadingText:visible?loading.innerText.slice(0,400):null,offlineState:typeof offlineUiState!=='undefined'?offlineUiState?.state:null,controllerVersion:version,controllerState:ctl?.state||null,registration:{active:reg?.active?.state||null,waiting:reg?.waiting?.state||null,installing:reg?.installing?.state||null},readyHome:document.getElementById('home-screen')?.offsetParent!==null}
  }).catch(e=>({snapshotError:String(e)}));
 }
 async function waitBoot(page,timeoutMs=75000){
@@ -30,10 +30,31 @@ function track(page,label){
  page.on('requestfailed',r=>{if(/sw\.js|index\.html|supplement|manifest|version/.test(r.url()))errors.push('FETCH: '+r.url()+' '+r.failure()?.errorText)});
  return ()=>{note(label+'_errors',{errors:errors.slice(0,35)});return errors};
 }
+async function inspectPublishedShell(){
+ try{
+  const swText=await (await fetch(TARGET+'sw.js',{cache:'no-store'})).text();
+  const m=swText.match(/const SHELL = \[([\s\S]*?)\];/);
+  if(!m){note('shell_cannot_parse',{});return}
+  const shell=[...m[1].matchAll(/'([^']+)'/g)].map(x=>x[1]);
+  const check=await Promise.all(shell.map(async rel=>{
+   const u=new URL(rel,TARGET);u.searchParams.set('ldc_sw_revision','r256probe-'+Date.now());
+   try{
+    const res=await fetch(u,{cache:'no-store'}),body=await res.arrayBuffer();
+    const txt=(rel==='./'||rel==='./index.html'||rel==='./sw.js'||rel==='./offline_manifest.json')?new TextDecoder().decode(body):'';
+    const marker=(rel==='./'||rel==='./index.html')?/const SW_CACHE_VERSION = 'ldc-v2\.19\.142\.45-r1b-unified';/.test(txt):(rel==='./sw.js'?txt.includes("const VERSION = 'ldc-v2.19.142.45-r1b-unified'"):(rel==='./offline_manifest.json'?txt.includes('"page_worker_revision": "ldc-v2.19.142.45-r1b-unified"'):true));
+    return {rel,http:res.status,bytes:body.byteLength,marker};
+   }catch(e){return {rel,error:String(e)}}
+  }));
+  note('live_shell_revision_verified',{tested:check.length,failures:check.filter(x=>x.http!==200||x.marker!==true).slice(0,25),samples:check.slice(0,8)});
+ }catch(e){note('shell_probe_exception',{error:String(e)})}
+}
+
 async function testLive(engine,launcher){
  const b=await launcher.launch({headless:true}),ctx=await b.newContext({serviceWorkers:'allow',viewport:{width:390,height:850}});
  try {
   const p=await ctx.newPage();const errs=track(p,engine+'_live');
+  ctx.on('serviceworker',w=>{note(engine+'_serviceworker_created',{url:w.url()});w.on('console',m=>note(engine+'_serviceworker_console',{type:m.type(),message:m.text().slice(0,650)}));w.on('close',()=>note(engine+'_serviceworker_closed',{}))});
+  if(engine==='chromium'){try{const cd=await ctx.newCDPSession(p);await cd.send('ServiceWorker.enable');cd.on('ServiceWorker.workerErrorReported',evt=>note('chromium_sw_install_error',{details:evt.errorMessage||evt}));cd.on('ServiceWorker.workerVersionUpdated',evt=>note('chromium_sw_versions',{versions:evt.versions?.map(v=>({id:v.versionId,status:v.status,running:v.runningStatus,script:v.scriptURL}))}));}catch(e){note('chromium_cdp_unavailable',{err:String(e)})}}
   const response=await p.goto(TARGET+'?ldc_r256_cold='+Date.now(),{waitUntil:'domcontentloaded',timeout:80000});
   note(engine+'_fresh',{http:response?.status(),...(await waitBoot(p))});
   await p.waitForTimeout(9500);note(engine+'_post_install',{...(await snapshot(p))});
@@ -52,7 +73,7 @@ const server=http.createServer(async(req,res)=>{
  try{
   const url=new URL(req.url,'http://127.0.0.1');
   if(url.pathname==='/qa-switch'){serveOld=url.searchParams.get('old')==='1';res.end(JSON.stringify({serveOld}));return;}
-  const rel=decodeURIComponent(url.pathname).replace(/^\/+/,'')||'index.html';
+  const rel=decodeURIComponent(url.pathname).replace(/^\/+/,'').replace(/^App-Test\//,'')||'index.html';
   const root=serveOld?OLD:NEW;
   const p=path.resolve(root,rel);
   if(!(p===root||p.startsWith(root+path.sep))){res.writeHead(403);res.end();return}
@@ -63,7 +84,7 @@ const server=http.createServer(async(req,res)=>{
 });
 async function testUpgrade(){
  await new Promise(ok=>server.listen(0,'127.0.0.1',ok));
- const port=server.address().port,origin='http://127.0.0.1:'+port+'/';
+ const port=server.address().port,origin='http://127.0.0.1:'+port+'/App-Test/';
  const browser=await chromium.launch({headless:true});const ctx=await browser.newContext({serviceWorkers:'allow',viewport:{width:390,height:850}});
  try{
   serveOld=true;
@@ -93,6 +114,7 @@ async function testUpgrade(){
 }
 (async()=>{
  try{
+  await inspectPublishedShell();
   await testLive('chromium',chromium);
   await testLive('webkit',webkit);
   if(fs.existsSync(OLD+'/sw.js'))await testUpgrade();else note('upgrade_skipped',{reason:'historical checkout unavailable'});
