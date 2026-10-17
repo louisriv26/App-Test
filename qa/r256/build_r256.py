@@ -51,7 +51,6 @@ change_exact("sw.js",f"const APP_VERSION = '{OLD_APP}';",f"const APP_VERSION = '
 change_exact("sw.js",f"const OFFLINE_CONTENT_BINDING = '{OLD_BIND}';",f"const OFFLINE_CONTENT_BINDING = '{newbind}';")
 # R256 adversarial browser QA: make message-event lifetime extend through skipWaiting promise.
 change_exact("sw.js", "if(e.data&&e.data.type==='SKIP_WAITING'){self.skipWaiting();return;}", "if(e.data&&e.data.type==='SKIP_WAITING'){e.waitUntil(self.skipWaiting());return;}")
-change_exact("sw.js","if(e.data&&e.data.type==='SKIP_WAITING'){self.skipWaiting();return;}","if(e.data&&e.data.type==='SKIP_WAITING'){e.waitUntil(self.skipWaiting());return;}")
 change_exact("index.html",f"const APP_VERSION = '{OLD_APP}';",f"const APP_VERSION = '{NEW_APP}';")
 change_exact("index.html",f"const SW_CACHE_VERSION = '{OLD_SW}';",f"const SW_CACHE_VERSION = '{NEW_SW}';")
 change_exact("index.html",f"const OFFLINE_CONTENT_BINDING = '{OLD_BIND}';",f"const OFFLINE_CONTENT_BINDING = '{newbind}';")
