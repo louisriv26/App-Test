@@ -1,0 +1,37 @@
+name: "R257 Online Deep Regression App-Test 278 SHA + Reader + Search"
+on:
+  push:
+    branches: [qa/ldc-r256-isolated-webkit-activation-20261017]
+    paths:
+      - ".github/workflows/ldc-r257-hosted-regression.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  deep-online:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Reconstitute candidate manifest for 278-file hosted parity verification
+        run: |
+          python3 qa/r256/build_r256.py
+          node qa/r256/check_offline_binding.cjs
+      - name: Install browsers
+        run: |
+          npm install --prefix /tmp/r257deps --no-audit --no-fund playwright@1.56.1
+          /tmp/r257deps/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Check all deployed files and exercise real hosted Reader/Search across 6 viewports
+        run: NODE_PATH=/tmp/r257deps/node_modules node qa/r256/hosted_regression.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r257-online-reader-search-regression-evidence
+          path: |
+            r257-hosted-regressions.json
+            r257-*.png
+            r256-candidate-build.json
+          if-no-files-found: warn
