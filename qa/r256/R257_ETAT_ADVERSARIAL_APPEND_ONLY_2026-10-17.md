@@ -16,7 +16,7 @@
 
 ## 2. Régression R255 démontrée
 
-Le remplacement de l’actif sémantique `pls_v16/patch_r198.json` par `pls_v16/patch_r255.json` a modifié l’ensemble des 205 actifs du manifeste hors ligne, sans recalcul de l’empreinte canonique correspondante.
+Le remplacement de l’actif sémantique `pls_v16/patch_r198.json` par `pls_v16/patch_r255.json` a remplacé une entrée au sein des 205 actifs du manifeste hors ligne, sans recalcul de l’empreinte canonique correspondante.
 
 Dans le Service Worker v142.45, la comparaison entre `sha256(JSON.stringify(bindingCanonicalString))` et `OFFLINE_CONTENT_BINDING` échoue :
 
@@ -55,7 +55,7 @@ Le candidat généré par la qualification `39006866182` a pour SHA-256 du ZIP `
 
 ### Reproduction de la panne réelle puis récupération
 
-Exécution `39005952937`, puis réexécution `39005952937`/reprises ultérieures :
+Exécution `39005952937`, corroborée par des exécutions ultérieures :
 
 1. v142.43 installée et application fonctionnelle;
 2. sauvegarde d’un marqueur synthétique dans IndexedDB;
@@ -96,7 +96,7 @@ Un test supplémentaire, `39007668563`, a comparé **48 opérations** sur des SW
 
 Un essai de `e.waitUntil(self.skipWaiting())`, un essai de temporisation bornée et un appel direct supplémentaire ont été explorés. Ils ne produisent pas un PASS reproductible sur toutes les exécutions.
 
-Le correctif standard de la branche principale de QA est conservé, sans promotion des variantes non qualifiées. L’absence de bénéfice robuste ne justifie pas d’ajouter une complexité au Service Worker.
+Le candidat minimal retient le gestionnaire historique `SKIP_WAITING` sans le changement expérimental `waitUntil`; seules les identités de version et de liaison hors ligne sont corrigées. Les essais non qualifiés ne sont pas promus. L’absence de bénéfice robuste ne justifie pas d’ajouter une complexité au Service Worker.
 
 ## 7. Portes restantes
 
