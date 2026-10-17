@@ -1,7 +1,8 @@
 // R256 read-only QA harness against isolated localhost /App-Test scope.
 // This simulates an old valid worker, broken R255 upgrade, and repaired R256 release.
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http');
-const {chromium}=require('playwright');
+const {chromium,webkit}=require('playwright');
+const engine=process.env.R256_BROWSER==='webkit'?webkit:chromium;
 const OLD='/tmp/ldc_r256_old',BAD='/tmp/ldc_r256_bad',GOOD=process.cwd();
 let serving=OLD;const records=[];let problems=[];
 function log(name,o={}){const item={name,stamp:new Date().toISOString(),...o};records.push(item);console.log("R256_RECOVERY "+JSON.stringify(item))}
@@ -18,7 +19,7 @@ async function probe(page){return page.evaluate(async()=>{
 async function until(page,condition,ms){const deadline=Date.now()+ms;let last;while(Date.now()<deadline){last=await probe(page);if(condition(last))return last;await sleep(400)}return last;}
 async function main(){
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port+'/App-Test/';
- const browser=await chromium.launch({headless:true});const ctx=await browser.newContext({serviceWorkers:'allow'}),page=await ctx.newPage();
+ const browser=await engine.launch({headless:true});const ctx=await browser.newContext({serviceWorkers:'allow'}),page=await ctx.newPage();
  page.on('pageerror',e=>problems.push(String(e).slice(0,200)));
  try{
   serving=OLD;
