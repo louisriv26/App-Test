@@ -1,0 +1,27 @@
+name: "R256 Minimal SkipWaiting Variant Bench"
+on:
+  push:
+    branches: [qa/ldc-r256-isolated-webkit-activation-20261017]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  minimal:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Chromium/WebKit
+        run: |
+          npm install --prefix /tmp/r256deps --no-audit --no-fund playwright@1.56.1
+          /tmp/r256deps/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Compare 4 skipWaiting strategies over 48 controlled attempts
+        run: NODE_PATH=/tmp/r256deps/node_modules node qa/r256/minimal_skipwaiting_variants.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r256-skipwaiting-variant-evidence
+          path: r256-skipwaiting-comparison.json
