@@ -1,0 +1,93 @@
+name: "R257 AUTHORIZED App-Test five-file v142.46 deploy and hosted QA"
+on:
+  push:
+    branches: [qa/ldc-r256-isolated-webkit-activation-20261017]
+    paths:
+      - ".github/workflows/ldc-r257-app-test-fivefile-deploy.yml"
+permissions:
+  contents: write
+concurrency:
+  group: "r257-five-file-app-test-publish"
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Rebuild deterministic complete candidate locally
+        run: |
+          python3 qa/r256/build_r256.py
+          node qa/r256/check_offline_binding.cjs
+          python3 - <<'PY'
+          import json
+          r=json.load(open('r256-candidate-build.json'))
+          assert r['candidate']=='v2.19.142.46-R1B-UNIFIED'
+          assert r['sha256']=='715999543b73c9b9a8068cbb0fc945ccbe57f0a5af5b2d2d99f222f2271bd750',r
+          assert r['changed_paths']==['index.html','offline_manifest.json','sw.js','version.json','PACKAGE_MANIFEST_SHA256.json'],r
+          assert r['zip_files']==279 and r['offline_assets']==205,r
+          print("R257_REPRODUCIBLE_CANDIDATE_VERIFIED",r['sha256'])
+          PY
+      - name: Construct isolated five-file App-Test commit on exact current baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="f025be8b8c8ff34f2ae439afb20de3bf293395c9"
+          git fetch --no-tags origin main
+          CURRENT="$(git rev-parse origin/main)"
+          test "$CURRENT" = "$BASE" || { echo "::error::App-Test main moved since R257 baseline ($CURRENT)"; exit 14; }
+          git worktree add --detach /tmp/r257_app_test_target "$BASE"
+          for name in index.html offline_manifest.json sw.js version.json PACKAGE_MANIFEST_SHA256.json; do
+            cp -- "$name" "/tmp/r257_app_test_target/$name"
+          done
+          python3 - <<'PY'
+          import subprocess,hashlib,json,pathlib
+          w=pathlib.Path('/tmp/r257_app_test_target')
+          expected={'index.html','offline_manifest.json','sw.js','version.json','PACKAGE_MANIFEST_SHA256.json'}
+          changed=set(subprocess.check_output(['git','-C',str(w),'diff','--name-only'],text=True).splitlines())
+          assert changed==expected, (changed,expected)
+          pkg=json.loads((w/'PACKAGE_MANIFEST_SHA256.json').read_text())
+          assert len(pkg['files'])==278
+          for item in pkg['files']:
+              b=(w/item['path']).read_bytes()
+              assert len(b)==item['bytes'] and hashlib.sha256(b).hexdigest()==item['sha256'],item['path']
+          m=json.loads((w/'offline_manifest.json').read_text())
+          assert m['asset_count']==205 and len(m['assets'])==205
+          assert m['content_binding_sha256']=='c6d295844181613e12fb121a9d803e5b8d801e63a084ebd790439b914cde14fd'
+          print("R257_EXACT_ONLY_FIVE_FILES_STAGED",sorted(changed))
+          PY
+          git -C /tmp/r257_app_test_target add -- index.html offline_manifest.json sw.js version.json PACKAGE_MANIFEST_SHA256.json
+          git -C /tmp/r257_app_test_target diff --cached --check
+          git -C /tmp/r257_app_test_target -c user.name="LDC QA" -c user.email="actions@users.noreply.github.com" commit -m "App-Test v142.46: minimal R257 Service Worker/offline binding repair (only five files)"
+          git -C /tmp/r257_app_test_target show --format=fuller --stat HEAD
+          git fetch --no-tags origin main
+          CURRENT="$(git rev-parse origin/main)"
+          test "$CURRENT" = "$BASE" || { echo "::error::App-Test main changed before atomic push"; exit 15; }
+          git -C /tmp/r257_app_test_target push origin HEAD:refs/heads/main
+          SHA="$(git -C /tmp/r257_app_test_target rev-parse HEAD)"
+          echo "APP_TEST_DEPLOY_SHA=$SHA" >> "$GITHUB_ENV"
+          python3 - <<'PY'
+          import json,subprocess
+          sha=subprocess.check_output(['git','-C','/tmp/r257_app_test_target','rev-parse','HEAD'],text=True).strip()
+          json.dump({'deployed':True,'target':'louisriv26/App-Test main','parent':'f025be8b8c8ff34f2ae439afb20de3bf293395c9','sha':sha,'version':'v142.46','paths':['index.html','offline_manifest.json','sw.js','version.json','PACKAGE_MANIFEST_SHA256.json'],'production_untouched':True},open('r257-deployment.json','w'),indent=2)
+          PY
+      - name: Install Chromium and WebKit for hosted QA
+        run: |
+          npm install --prefix /tmp/r257deps --no-audit --no-fund playwright@1.56.1
+          /tmp/r257deps/node_modules/.bin/playwright install chromium webkit --with-deps
+      - name: Verify actual GitHub Pages runtime, hashes, fresh browsers, storage and offline
+        run: NODE_PATH=/tmp/r257deps/node_modules node qa/r256/hosted_qa.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: R257-AppTest-deployment-and-hosted-QA
+          path: |
+            r257-deployment.json
+            r257-hosted-qa.json
+            r256-candidate-build.json
+          if-no-files-found: warn
